@@ -19,7 +19,7 @@ const calculators = [
     title: 'מחשבון מס רכישה',
     description: 'חישוב מס רכישה לפי מדרגות 2026 (דירה ראשונה / נוספת)',
     href: '/real-estate/purchase-tax',
-    available: false,
+    available: true,
   },
   {
     title: 'מחשבון מס שבח',

@@ -19,7 +19,7 @@ const calculators = [
     title: 'מחשבון נקודות זיכוי',
     description: 'בדוק כמה נקודות זיכוי מגיעות לך לפי מצב אישי',
     href: '/personal-tax/tax-credits',
-    available: false,
+    available: true,
   },
   {
     title: 'מחשבון החזר מס',
