@@ -59,6 +59,29 @@ export const allCalculators: CalculatorEntry[] = [
     icon: '🎯',
     keywords: ['זיכוי', 'נקודות', 'הנחה', 'החזר מס', 'טופס 101'],
   },
+  {
+    id: 'tax-refund',
+    title: 'מחשבון החזר מס לשכירים',
+    href: '/personal-tax/tax-refund',
+    category: 'מיסוי אישי',
+    categoryHref: '/personal-tax',
+    description: 'בדוק כמה מס מגיע לך בחזרה - עד 6 שנים אחורה',
+    icon: '💸',
+    keywords: [
+      'החזר מס',
+      'החזר',
+      'tax refund',
+      'תיאום מס',
+      'טופס 135',
+      'טופס 106',
+      'תרומות',
+      'סעיף 46',
+      'פנסיה',
+      'קרן השתלמות',
+      'פריפריה',
+      'אילת',
+    ],
+  },
 
   // נדל"ן ומשכנתא
   {

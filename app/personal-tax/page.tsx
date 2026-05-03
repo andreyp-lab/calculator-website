@@ -23,9 +23,9 @@ const calculators = [
   },
   {
     title: 'מחשבון החזר מס',
-    description: 'בדוק האם מגיע לך החזר מס משנים קודמות',
+    description: 'בדוק כמה מס מגיע לך בחזרה - תרומות, פנסיה, פריפריה, ועוד',
     href: '/personal-tax/tax-refund',
-    available: false,
+    available: true,
   },
 ];
 

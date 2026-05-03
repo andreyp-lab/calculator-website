@@ -38,6 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/recreation-pay', 'monthly', 0.9),
     make('/personal-tax/income-tax', 'monthly', 0.9),
     make('/personal-tax/tax-credits', 'monthly', 0.9),
+    make('/personal-tax/tax-refund', 'monthly', 0.95),
     make('/real-estate/mortgage', 'monthly', 0.9),
     make('/real-estate/purchase-tax', 'monthly', 0.9),
     make('/self-employed/vat', 'monthly', 0.9),
