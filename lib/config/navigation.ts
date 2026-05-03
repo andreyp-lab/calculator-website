@@ -1,44 +1,79 @@
 export const navigation = {
   main: [
     { label: 'זכויות עובדים', href: '/employee-rights' },
-    { label: 'מיסוי אישי', href: '/personal-tax' },
+    { label: 'מיסוי', href: '/personal-tax' },
     { label: 'משכנתא ונדל"ן', href: '/real-estate' },
-    { label: 'עצמאיים', href: '/self-employed' },
+    { label: 'השקעות', href: '/investments' },
+    { label: 'חיסכון', href: '/savings' },
+    { label: 'רכב', href: '/vehicles' },
+    { label: 'ביטוחים', href: '/insurance' },
     { label: '🚀 כלים מקצועיים', href: '/tools', highlight: true },
-    { label: 'בלוג', href: '/blog' },
-    { label: 'אודות', href: '/about' },
   ],
   footer: [
     { label: 'מדיניות פרטיות', href: '/privacy' },
     { label: 'תנאי שימוש', href: '/terms' },
     { label: 'יצירת קשר', href: '/contact' },
   ],
+  // קטגוריות לדף הבית - פיננסים אישיים
   categories: [
     {
       id: 'employee-rights',
       label: 'זכויות עובדים',
       href: '/employee-rights',
-      description: 'מחשבונים לזכויות עובדים בישראל',
+      description: 'פיצויי פיטורין, דמי הבראה, הודעה מוקדמת',
+      icon: '👥',
     },
     {
       id: 'personal-tax',
       label: 'מיסוי אישי',
       href: '/personal-tax',
-      description: 'מחשבונים למס הכנסה וסיוד משוער',
+      description: 'מס הכנסה, החזרי מס, נקודות זיכוי',
+      icon: '💰',
     },
     {
       id: 'real-estate',
       label: 'משכנתא ונדל"ן',
       href: '/real-estate',
-      description: 'מחשבונים למשכנתא ומס שבח',
+      description: 'משכנתא, מס רכישה, מס שבח',
+      icon: '🏠',
     },
     {
       id: 'self-employed',
       label: 'עצמאיים ועסקים',
       href: '/self-employed',
-      description: 'מחשבונים לעצמאיים ובעלי עסקים',
+      description: 'מע"מ, מקדמות מס, ביטוח לאומי',
+      icon: '💼',
+    },
+    {
+      id: 'investments',
+      label: 'השקעות וחיסכון',
+      href: '/investments',
+      description: 'ריבית דריבית, ROI, תכנון פרישה',
+      icon: '📈',
+    },
+    {
+      id: 'savings',
+      label: 'חיסכון וחובות',
+      href: '/savings',
+      description: 'תקציב משפחתי, החזרי הלוואה',
+      icon: '💳',
+    },
+    {
+      id: 'vehicles',
+      label: 'רכב ותחבורה',
+      href: '/vehicles',
+      description: 'עלות דלק, ליסינג vs קנייה',
+      icon: '🚗',
+    },
+    {
+      id: 'insurance',
+      label: 'ביטוחים',
+      href: '/insurance',
+      description: 'פנסיה צפויה, ביטוח חיים',
+      icon: '💼',
     },
   ],
+  // כלים מקצועיים B2B
   professionalTools: [
     {
       id: 'unified',

@@ -8,44 +8,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 mb-8">
           <div>
-            <h3 className="font-bold text-gray-900 mb-4">אודות</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>
-                <Link href="/about" className="hover:text-blue-600">
-                  אודות הרואה חשבון
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-blue-600">
-                  יצירת קשר
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-blue-600">
-                  בלוג
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-gray-900 mb-4">משפטי</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>
-                <Link href="/privacy" className="hover:text-blue-600">
-                  מדיניות פרטיות
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-blue-600">
-                  תנאי שימוש
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-gray-900 mb-4">קטגוריות</h3>
+            <h3 className="font-bold text-gray-900 mb-4">📐 פיננסי אישי</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
                 <Link href="/employee-rights" className="hover:text-blue-600">
@@ -65,6 +28,32 @@ export function Footer() {
               <li>
                 <Link href="/self-employed" className="hover:text-blue-600">
                   עצמאיים
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-gray-900 mb-4">💰 חיסכון וצמיחה</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>
+                <Link href="/investments" className="hover:text-blue-600">
+                  השקעות
+                </Link>
+              </li>
+              <li>
+                <Link href="/savings" className="hover:text-blue-600">
+                  חיסכון וחובות
+                </Link>
+              </li>
+              <li>
+                <Link href="/insurance" className="hover:text-blue-600">
+                  ביטוחים
+                </Link>
+              </li>
+              <li>
+                <Link href="/vehicles" className="hover:text-blue-600">
+                  רכב ותחבורה
                 </Link>
               </li>
             </ul>
@@ -97,17 +86,38 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bold text-gray-900 mb-4">עקוב</h3>
+            <h3 className="font-bold text-gray-900 mb-4">אודות</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
-                <a href="#" className="hover:text-blue-600">
-                  LinkedIn
-                </a>
+                <Link href="/about" className="hover:text-blue-600">
+                  אודותינו
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-600">
-                  Facebook
-                </a>
+                <Link href="/contact" className="hover:text-blue-600">
+                  יצירת קשר
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-blue-600">
+                  בלוג
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-gray-900 mb-4">משפטי</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>
+                <Link href="/privacy" className="hover:text-blue-600">
+                  מדיניות פרטיות
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="hover:text-blue-600">
+                  תנאי שימוש
+                </Link>
               </li>
             </ul>
           </div>
@@ -115,7 +125,9 @@ export function Footer() {
 
         <div className="border-t border-gray-200 pt-8 text-center text-sm text-gray-600">
           <p>© {currentYear} FinCalc. כל הזכויות שמורות.</p>
-          <p className="mt-2 text-xs">התוכן באתר זה אינו ייעוץ משפטי או מקצועי.</p>
+          <p className="mt-2 text-xs">
+            התוכן באתר זה אינו ייעוץ משפטי או מקצועי. כל המחשבונים מבוססים על החוק הישראלי 2026.
+          </p>
         </div>
       </div>
     </footer>

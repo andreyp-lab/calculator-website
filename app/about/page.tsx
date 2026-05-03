@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'אודות - FinCalc',
-  description: 'תכע עמוד אודות הרואה חשבון ויוצר האתר',
+  description: 'אודות אתר המחשבונים הפיננסיים והרואה חשבון מאחוריו',
 };
 
 export default function About() {

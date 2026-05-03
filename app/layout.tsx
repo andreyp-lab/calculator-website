@@ -16,8 +16,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FinCalc - מחשבוני זכויות פיננסיות בישראל",
-  description: "מחשבונים מקצועיים ומדויקים לחישוב פיצויי פיטורין, מס הכנסה, משכנתא וזכויות עובדים",
+  title: "FinCalc - כל המחשבונים הפיננסיים בעברית",
+  description: "מעל 15 מחשבונים מקצועיים: מס הכנסה, משכנתא, השקעות, רכב, ביטוחים, פנסיה, תקציב משפחתי ועוד. כולם בעברית, חינמיים ומעודכנים ל-2026.",
   metadataBase: new URL("https://fincalc.co.il"),
   openGraph: {
     type: "website",

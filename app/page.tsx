@@ -9,36 +9,46 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            מחשבוני זכויות פיננסיות בישראל
+            המקום אחד לכל המחשבונים הפיננסיים שלך
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            מחשבונים מקצועיים ודיוקים לחישוב פיצויי פיטורין, מס הכנסה, משכנתא וזכויות עובדים.
-            כל התוצאות מבוססות על החוק הישראלי העדכני.
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            מעל 15 מחשבונים מקצועיים בעברית - מס הכנסה, משכנתא, השקעות, רכב, ביטוחים ועוד.
+            כל החישובים מעודכנים לחוק הישראלי 2026 ובוצעו על ידי רואה חשבון מוסמך.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link
               href="#calculators"
               className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-medium inline-flex items-center gap-2"
             >
-              בואו נתחיל
+              עיין בכל המחשבונים
               <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/tools"
+              className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-medium inline-flex items-center gap-2"
+            >
+              🚀 כלים מקצועיים לעסקים
             </Link>
           </div>
         </div>
 
         {/* Trust Signals */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16 bg-white p-8 rounded-lg border border-gray-200">
+        <div className="grid md:grid-cols-4 gap-6 mb-16 bg-white p-8 rounded-lg border border-gray-200">
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">20+</div>
-            <p className="text-gray-600">מחשבונים מקצועיים</p>
+            <div className="text-3xl font-bold text-blue-600 mb-1">15+</div>
+            <p className="text-sm text-gray-600">מחשבונים מקצועיים</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">100%</div>
-            <p className="text-gray-600">דיוק חוקי</p>
+            <div className="text-3xl font-bold text-blue-600 mb-1">8</div>
+            <p className="text-sm text-gray-600">קטגוריות</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">עדכני</div>
-            <p className="text-gray-600">2026</p>
+            <div className="text-3xl font-bold text-blue-600 mb-1">100%</div>
+            <p className="text-sm text-gray-600">חינם ובעברית</p>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-blue-600 mb-1">2026</div>
+            <p className="text-sm text-gray-600">מעודכן ומאומת</p>
           </div>
         </div>
       </section>
@@ -124,22 +134,23 @@ export default function Home() {
 
       {/* Categories Grid */}
       <section id="calculators" className="max-w-6xl mx-auto px-4 py-12 scroll-mt-20">
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">📐 מחשבונים אישיים</h2>
-        <p className="text-gray-600 mb-8">חישובים מהירים לאזרחים: שכר, פיצויים, מס, משכנתא ועוד</p>
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <h2 className="text-3xl font-bold text-gray-900 mb-3">📐 כל המחשבונים</h2>
+        <p className="text-gray-600 mb-8">8 קטגוריות עם מחשבונים שמשתמשים בנתוני 2026 המעודכנים</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {navigation.categories.map((category) => (
             <Link
               key={category.id}
               href={category.href}
-              className="group bg-white p-8 rounded-lg border border-gray-200 hover:border-blue-400 hover:shadow-lg transition"
+              className="group bg-white p-5 rounded-lg border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition"
             >
-              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition">
+              <div className="text-3xl mb-2">{(category as { icon?: string }).icon || '📊'}</div>
+              <h3 className="font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition">
                 {category.label}
               </h3>
-              <p className="text-gray-600 text-sm">{category.description}</p>
-              <div className="flex items-center gap-2 mt-4 text-blue-600 opacity-0 group-hover:opacity-100 transition">
-                <span className="text-sm font-medium">עבור למחשבונים</span>
-                <ArrowLeft className="w-4 h-4" />
+              <p className="text-gray-600 text-xs">{category.description}</p>
+              <div className="flex items-center gap-1 mt-3 text-blue-600 opacity-0 group-hover:opacity-100 transition text-xs">
+                <span className="font-medium">פתח</span>
+                <ArrowLeft className="w-3 h-3" />
               </div>
             </Link>
           ))}

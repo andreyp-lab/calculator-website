@@ -5,67 +5,70 @@ const SITE_URL = 'https://calculator-website-eight.vercel.app';
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  // דפי בית וקטגוריות (priority גבוה)
-  const mainPages: MetadataRoute.Sitemap = [
-    { url: SITE_URL, lastModified, changeFrequency: 'weekly', priority: 1.0 },
-    { url: `${SITE_URL}/about`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/contact`, lastModified, changeFrequency: 'monthly', priority: 0.5 },
-  ];
+  // עזר ליצירת רשומות
+  const make = (
+    path: string,
+    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] = 'monthly',
+    priority: number = 0.8,
+  ) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified,
+    changeFrequency,
+    priority,
+  });
 
-  // דפי קטגוריה
-  const categoryPages: MetadataRoute.Sitemap = [
-    {
-      url: `${SITE_URL}/employee-rights`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/personal-tax`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-  ];
+  return [
+    // עמודי בית
+    make('', 'weekly', 1.0),
+    make('/about', 'monthly', 0.7),
+    make('/contact', 'monthly', 0.5),
 
-  // מחשבונים (priority גבוה - תוכן עיקרי)
-  const calculatorPages: MetadataRoute.Sitemap = [
-    {
-      url: `${SITE_URL}/employee-rights/severance`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/employee-rights/recreation-pay`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/personal-tax/income-tax`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-  ];
+    // ===== קטגוריות =====
+    make('/employee-rights', 'weekly', 0.9),
+    make('/personal-tax', 'weekly', 0.9),
+    make('/real-estate', 'weekly', 0.9),
+    make('/self-employed', 'weekly', 0.9),
+    make('/investments', 'weekly', 0.9),
+    make('/savings', 'weekly', 0.9),
+    make('/vehicles', 'weekly', 0.9),
+    make('/insurance', 'weekly', 0.9),
 
-  // בלוג ומאמרים
-  const blogPages: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/blog`, lastModified, changeFrequency: 'weekly', priority: 0.7 },
-    {
-      url: `${SITE_URL}/blog/tax-changes-2026`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-  ];
+    // ===== מחשבונים פיננסי אישי =====
+    make('/employee-rights/severance', 'monthly', 0.9),
+    make('/employee-rights/recreation-pay', 'monthly', 0.9),
+    make('/personal-tax/income-tax', 'monthly', 0.9),
+    make('/real-estate/mortgage', 'monthly', 0.9),
+    make('/self-employed/vat', 'monthly', 0.9),
 
-  // דפים משפטיים (priority נמוך)
-  const legalPages: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/privacy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${SITE_URL}/terms`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-  ];
+    // ===== מחשבוני השקעות =====
+    make('/investments/compound-interest', 'monthly', 0.9),
+    make('/investments/roi', 'monthly', 0.9),
+    make('/investments/retirement', 'monthly', 0.9),
 
-  return [...mainPages, ...categoryPages, ...calculatorPages, ...blogPages, ...legalPages];
+    // ===== מחשבוני חיסכון =====
+    make('/savings/family-budget', 'monthly', 0.9),
+    make('/savings/loan-repayment', 'monthly', 0.9),
+
+    // ===== מחשבוני רכב =====
+    make('/vehicles/fuel-cost', 'monthly', 0.9),
+    make('/vehicles/leasing-vs-buying', 'monthly', 0.9),
+
+    // ===== מחשבוני ביטוחים =====
+    make('/insurance/pension', 'monthly', 0.9),
+
+    // ===== כלים מקצועיים =====
+    make('/tools', 'weekly', 0.85),
+    make('/tools/unified', 'monthly', 0.9),
+    make('/tools/budget', 'monthly', 0.85),
+    make('/tools/cash-flow', 'monthly', 0.85),
+    make('/tools/financial-analysis', 'monthly', 0.85),
+
+    // ===== בלוג =====
+    make('/blog', 'weekly', 0.7),
+    make('/blog/tax-changes-2026', 'monthly', 0.7),
+
+    // ===== משפטי =====
+    make('/privacy', 'yearly', 0.3),
+    make('/terms', 'yearly', 0.3),
+  ];
 }
