@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { LayoutDashboard, TrendingUp, Wallet, BarChart3, ArrowLeft } from 'lucide-react';
+import { LayoutDashboard, TrendingUp, Wallet, BarChart3, Landmark, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'כלים פיננסיים מקצועיים | FinCalc Pro',
@@ -45,6 +45,19 @@ const tools = [
     icon: BarChart3,
     color: 'from-orange-500 to-orange-700',
     features: ['יחסי רווחיות + נזילות', 'Z-Score (Altman)', 'דירוג אשראי AAA-D', 'DSCR מתקדם'],
+  },
+  {
+    href: '/tools/loan-eligibility',
+    title: '🏦 הלוואות בערבות מדינה',
+    description: 'בדוק זכאות להלוואה בערבות המדינה - 6 מסלולים שונים',
+    icon: Landmark,
+    color: 'from-emerald-500 to-emerald-700',
+    features: [
+      'עסק בהקמה / קטן / בינוני',
+      'מסלול יצואן ותעשייה',
+      'מסלול חרבות ברזל',
+      'תוצאה תוך דקה',
+    ],
   },
 ];
 

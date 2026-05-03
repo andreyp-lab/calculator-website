@@ -66,6 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/tools/budget', 'monthly', 0.85),
     make('/tools/cash-flow', 'monthly', 0.85),
     make('/tools/financial-analysis', 'monthly', 0.85),
+    make('/tools/loan-eligibility', 'monthly', 0.85),
 
     // ===== בלוג =====
     make('/blog', 'weekly', 0.7),

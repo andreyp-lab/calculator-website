@@ -263,6 +263,27 @@ export const allCalculators: CalculatorEntry[] = [
     icon: '🔍',
     keywords: ['ניתוח', 'יחסים פיננסיים', 'Z-Score', 'אשראי', 'מאזן'],
   },
+  {
+    id: 'loan-eligibility',
+    title: 'בודק זכאות להלוואות בערבות המדינה',
+    href: '/tools/loan-eligibility',
+    category: 'כלים לעסקים',
+    categoryHref: '/tools',
+    description: 'בדיקת זכאות להלוואה בערבות מדינה - 6 מסלולים',
+    icon: '🏦',
+    keywords: [
+      'הלוואה',
+      'ערבות מדינה',
+      'הלוואות',
+      'אשראי',
+      'מימון',
+      'חשב כללי',
+      'חרבות ברזל',
+      'יצואן',
+      'תעשייה',
+      'קרן',
+    ],
+  },
 ];
 
 /**
