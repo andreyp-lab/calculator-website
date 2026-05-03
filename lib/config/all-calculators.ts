@@ -113,6 +113,26 @@ export const allCalculators: CalculatorEntry[] = [
       'freelancer',
     ],
   },
+  {
+    id: 'employer-cost',
+    title: 'מחשבון עלות מעסיק',
+    href: '/self-employed/employer-cost',
+    category: 'עצמאיים',
+    categoryHref: '/self-employed',
+    description: 'כמה עולה להעסיק עובד - שכר, ביטוח לאומי, פנסיה, הטבות',
+    icon: '👥',
+    keywords: [
+      'עלות מעסיק',
+      'העסקת עובד',
+      'מעסיק',
+      'ביטוח לאומי מעסיק',
+      'פנסיה חובה',
+      'דמי הבראה',
+      'פיצויים',
+      'עלות עובד',
+      'employer cost',
+    ],
+  },
 
   // השקעות
   {

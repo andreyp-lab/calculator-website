@@ -33,6 +33,12 @@ const calculators = [
     href: '/self-employed/hourly-rate',
     available: true,
   },
+  {
+    title: 'מחשבון עלות מעסיק',
+    description: 'כמה עולה להעסיק עובד - שכר + ביטוח לאומי + פנסיה + הטבות',
+    href: '/self-employed/employer-cost',
+    available: true,
+  },
 ];
 
 export default function SelfEmployedPage() {

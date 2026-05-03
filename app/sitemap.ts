@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate/purchase-tax', 'monthly', 0.9),
     make('/self-employed/vat', 'monthly', 0.9),
     make('/self-employed/hourly-rate', 'monthly', 0.9),
+    make('/self-employed/employer-cost', 'monthly', 0.9),
 
     // ===== מחשבוני השקעות =====
     make('/investments/compound-interest', 'monthly', 0.9),
