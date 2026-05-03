@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { navigation } from '@/lib/config/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, LayoutDashboard, TrendingUp, Wallet, BarChart3 } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -43,9 +43,89 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Professional Tools Section - חדש! */}
+      <section className="max-w-6xl mx-auto px-4 py-12">
+        <div className="bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
+          <div className="flex items-start gap-4 mb-6">
+            <div className="bg-white/20 backdrop-blur p-3 rounded-xl">
+              <LayoutDashboard className="w-8 h-8" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">
+                  ⭐ חדש
+                </span>
+                <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs">
+                  לעסקים
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                🚀 כלים פיננסיים מקצועיים
+              </h2>
+              <p className="text-white/90 text-lg">
+                מערכת מאוחדת לתכנון תקציב, ניהול תזרים מזומנים וניתוח דוחות כספיים
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
+            {navigation.professionalTools.map((tool) => {
+              const icons: Record<string, typeof LayoutDashboard> = {
+                unified: LayoutDashboard,
+                budget: TrendingUp,
+                'cash-flow': Wallet,
+                'financial-analysis': BarChart3,
+              };
+              const Icon = icons[tool.id] || LayoutDashboard;
+              const isFeatured = tool.id === 'unified';
+
+              return (
+                <Link
+                  key={tool.id}
+                  href={tool.href}
+                  className={`group flex items-start gap-3 p-4 rounded-lg border-2 transition hover:scale-[1.02] ${
+                    isFeatured
+                      ? 'bg-yellow-400/20 border-yellow-300 hover:bg-yellow-400/30'
+                      : 'bg-white/10 border-white/20 hover:bg-white/20'
+                  }`}
+                >
+                  <Icon className="w-6 h-6 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-bold">{tool.label}</h3>
+                      {(tool as { badge?: string }).badge && (
+                        <span className="bg-yellow-400 text-yellow-900 text-xs px-2 py-0.5 rounded-full font-bold">
+                          {(tool as { badge?: string }).badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm text-white/80">{tool.description}</p>
+                  </div>
+                  <ArrowLeft className="w-4 h-4 opacity-0 group-hover:opacity-100 transition flex-shrink-0 mt-2" />
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-white/20 flex items-center justify-between">
+            <div className="text-sm text-white/80">
+              ✨ פרטיות מלאה - הנתונים נשמרים מקומית
+            </div>
+            <Link
+              href="/tools"
+              className="bg-white text-purple-700 px-5 py-2.5 rounded-lg font-bold hover:bg-yellow-100 transition flex items-center gap-2"
+            >
+              פתח את כל הכלים
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Categories Grid */}
       <section id="calculators" className="max-w-6xl mx-auto px-4 py-12 scroll-mt-20">
-        <h2 className="text-3xl font-bold text-gray-900 mb-12">בחר קטגוריה</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-3">📐 מחשבונים אישיים</h2>
+        <p className="text-gray-600 mb-8">חישובים מהירים לאזרחים: שכר, פיצויים, מס, משכנתא ועוד</p>
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           {navigation.categories.map((category) => (
             <Link

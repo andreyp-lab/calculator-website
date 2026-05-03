@@ -4,6 +4,7 @@ export const navigation = {
     { label: 'מיסוי אישי', href: '/personal-tax' },
     { label: 'משכנתא ונדל"ן', href: '/real-estate' },
     { label: 'עצמאיים', href: '/self-employed' },
+    { label: '🚀 כלים מקצועיים', href: '/tools', highlight: true },
     { label: 'בלוג', href: '/blog' },
     { label: 'אודות', href: '/about' },
   ],
@@ -36,6 +37,33 @@ export const navigation = {
       label: 'עצמאיים ועסקים',
       href: '/self-employed',
       description: 'מחשבונים לעצמאיים ובעלי עסקים',
+    },
+  ],
+  professionalTools: [
+    {
+      id: 'unified',
+      label: 'מערכת מאוחדת',
+      href: '/tools/unified',
+      description: 'תקציב + תזרים + ניתוח דוחות',
+      badge: 'מומלץ',
+    },
+    {
+      id: 'budget',
+      label: 'תכנון תקציב',
+      href: '/tools/budget',
+      description: 'P&L, הכנסות, הוצאות, עובדים',
+    },
+    {
+      id: 'cash-flow',
+      label: 'תזרים מזומנים',
+      href: '/tools/cash-flow',
+      description: 'יתרות בנק ותחזיות',
+    },
+    {
+      id: 'financial-analysis',
+      label: 'ניתוח דוחות',
+      href: '/tools/financial-analysis',
+      description: 'יחסים, Z-Score, דירוג אשראי',
     },
   ],
 };

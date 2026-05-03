@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 mt-16">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 mb-8">
           <div>
             <h3 className="font-bold text-gray-900 mb-4">אודות</h3>
             <ul className="space-y-2 text-sm text-gray-600">
@@ -55,6 +55,42 @@ export function Footer() {
               <li>
                 <Link href="/personal-tax" className="hover:text-blue-600">
                   מיסוי אישי
+                </Link>
+              </li>
+              <li>
+                <Link href="/real-estate" className="hover:text-blue-600">
+                  משכנתא ונדל&quot;ן
+                </Link>
+              </li>
+              <li>
+                <Link href="/self-employed" className="hover:text-blue-600">
+                  עצמאיים
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-purple-700 mb-4">🚀 כלים מקצועיים</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>
+                <Link href="/tools/unified" className="hover:text-purple-600">
+                  מערכת מאוחדת
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/budget" className="hover:text-purple-600">
+                  תכנון תקציב
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/cash-flow" className="hover:text-purple-600">
+                  תזרים מזומנים
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/financial-analysis" className="hover:text-purple-600">
+                  ניתוח דוחות
                 </Link>
               </li>
             </ul>
