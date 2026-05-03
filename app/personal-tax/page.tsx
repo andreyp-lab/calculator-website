@@ -4,52 +4,42 @@ import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'זכויות עובדים - מחשבונים | FinCalc',
-  description: 'מחשבונים לחישוב זכויות עובדים בישראל: פיצויי פיטורין, דמי הבראה, חופשה ומחלה',
+  title: 'מיסוי אישי - מחשבונים | FinCalc',
+  description: 'מחשבונים לחישוב מס הכנסה, נקודות זיכוי, מס שולי והחזרי מס לעובדים שכירים בישראל',
 };
 
 const calculators = [
   {
-    title: 'מחשבון פיצויי פיטורין',
-    description: 'חישוב פיצויי פיטורין מדויק לפי חוק פיצויי פיטורים',
-    href: '/employee-rights/severance',
+    title: 'מחשבון מס הכנסה לשכיר',
+    description: 'חישוב מס הכנסה מדויק לפי מדרגות 2026 כולל נקודות זיכוי וב.ל.',
+    href: '/personal-tax/income-tax',
     available: true,
   },
   {
-    title: 'מחשבון דמי הבראה',
-    description: 'חישוב דמי הבראה לפי שנות ותק (תעריף 2026)',
-    href: '/employee-rights/recreation-pay',
-    available: true,
-  },
-  {
-    title: 'מחשבון חופשה ומחלה',
-    description: 'חישוב ימי חופשה שנתית וימי מחלה',
-    href: '/employee-rights/vacation-sick',
+    title: 'מחשבון נקודות זיכוי',
+    description: 'בדוק כמה נקודות זיכוי מגיעות לך לפי מצב אישי',
+    href: '/personal-tax/tax-credits',
     available: false,
   },
   {
-    title: 'מחשבון דמי לידה',
-    description: 'חישוב גובה דמי הלידה ותקופת הזכאות',
-    href: '/employee-rights/maternity',
+    title: 'מחשבון החזר מס',
+    description: 'בדוק האם מגיע לך החזר מס משנים קודמות',
+    href: '/personal-tax/tax-refund',
     available: false,
   },
 ];
 
-export default function EmployeeRightsPage() {
+export default function PersonalTaxPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6">
-          <Breadcrumbs
-            items={[{ label: 'דף הבית', href: '/' }, { label: 'זכויות עובדים' }]}
-          />
+          <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'מיסוי אישי' }]} />
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-          מחשבוני זכויות עובדים
-        </h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">מחשבוני מיסוי אישי</h1>
         <p className="text-lg text-gray-600 mb-12">
-          מחשבונים מקצועיים לבדיקת הזכויות שמגיעות לך כעובד שכיר בישראל
+          מחשבונים לחישוב מס הכנסה ועוד נושאי מיסוי אישי לפי החקיקה העדכנית
         </p>
 
         <div className="grid md:grid-cols-2 gap-4">
