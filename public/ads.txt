@@ -1,0 +1,2 @@
+# ads.txt for Google AdSense - to be filled when AdSense is approved
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
