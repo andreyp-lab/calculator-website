@@ -1,6 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { LayoutDashboard, TrendingUp, Wallet, BarChart3, Landmark, ArrowLeft } from 'lucide-react';
+import {
+  LayoutDashboard,
+  TrendingUp,
+  Wallet,
+  BarChart3,
+  Landmark,
+  Scale,
+  Gem,
+  Users,
+  ArrowLeft,
+} from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'כלים פיננסיים מקצועיים | FinCalc Pro',
@@ -58,6 +68,30 @@ const tools = [
       'מסלול חרבות ברזל',
       'תוצאה תוך דקה',
     ],
+  },
+  {
+    href: '/tools/break-even',
+    title: '⚖️ נקודת איזון',
+    description: 'כמה צריך למכור כדי לכסות הוצאות - חישוב מינימום מכירות',
+    icon: Scale,
+    color: 'from-cyan-500 to-cyan-700',
+    features: ['תרומה לכיסוי', 'מרווח ביטחון', 'יחידות לרווח מטרה', 'חישוב יומי + חודשי'],
+  },
+  {
+    href: '/tools/business-valuation',
+    title: '💎 הערכת שווי עסק',
+    description: 'שווי העסק שלך - DCF, מכפיל EBITDA, מכפיל הכנסות',
+    icon: Gem,
+    color: 'from-rose-500 to-rose-700',
+    features: ['3 שיטות הערכה', 'מכפילים ענפיים 2026', 'Terminal Value', 'טווח שווי'],
+  },
+  {
+    href: '/tools/customer-lifetime-value',
+    title: '👤 שווי לקוח (CLV/LTV)',
+    description: 'מדד מפתח ל-SaaS וE-commerce - LTV/CAC, Payback',
+    icon: Users,
+    color: 'from-indigo-500 to-indigo-700',
+    features: ['LTV/CAC ratio', 'Payback period', 'בנצ\'מארק לתעשיות', 'Churn-based calc'],
   },
 ];
 

@@ -39,6 +39,18 @@ const calculators = [
     href: '/self-employed/employer-cost',
     available: true,
   },
+  {
+    title: 'חברה בע"מ vs עוסק מורשה',
+    description: 'השוואת מס מצרפי - איזה מבנה עסקי משתלם יותר',
+    href: '/self-employed/corporation-vs-individual',
+    available: true,
+  },
+  {
+    title: 'דיבידנד vs משכורת',
+    description: 'אופטימיזציית מס לבעל חברה - מציאת המיקס האופטימלי',
+    href: '/self-employed/dividend-vs-salary',
+    available: true,
+  },
 ];
 
 export default function SelfEmployedPage() {

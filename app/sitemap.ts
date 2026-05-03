@@ -43,6 +43,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed/vat', 'monthly', 0.9),
     make('/self-employed/hourly-rate', 'monthly', 0.9),
     make('/self-employed/employer-cost', 'monthly', 0.9),
+    make('/self-employed/corporation-vs-individual', 'monthly', 0.9),
+    make('/self-employed/dividend-vs-salary', 'monthly', 0.9),
 
     // ===== מחשבוני השקעות =====
     make('/investments/compound-interest', 'monthly', 0.9),
@@ -67,6 +69,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/tools/cash-flow', 'monthly', 0.85),
     make('/tools/financial-analysis', 'monthly', 0.85),
     make('/tools/loan-eligibility', 'monthly', 0.85),
+    make('/tools/break-even', 'monthly', 0.85),
+    make('/tools/business-valuation', 'monthly', 0.85),
+    make('/tools/customer-lifetime-value', 'monthly', 0.85),
 
     // ===== בלוג =====
     make('/blog', 'weekly', 0.7),
