@@ -93,6 +93,26 @@ export const allCalculators: CalculatorEntry[] = [
     icon: '🧾',
     keywords: ['מע"מ', 'חשבונית', 'עוסק מורשה', 'עוסק פטור', 'מס ערך מוסף'],
   },
+  {
+    id: 'hourly-rate',
+    title: 'מחשבון תמחור שעת עבודה',
+    href: '/self-employed/hourly-rate',
+    category: 'עצמאיים',
+    categoryHref: '/self-employed',
+    description: 'תעריף שעתי לפרילנסר/יועץ - שכר רצוי + הוצאות + רווח',
+    icon: '⏱️',
+    keywords: [
+      'תמחור',
+      'תעריף שעתי',
+      'פרילנסר',
+      'יועץ',
+      'עצמאי',
+      'מחיר שעה',
+      'billable',
+      'hourly rate',
+      'freelancer',
+    ],
+  },
 
   // השקעות
   {

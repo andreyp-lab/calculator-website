@@ -29,9 +29,9 @@ const calculators = [
   },
   {
     title: 'מחשבון תמחור שעת עבודה',
-    description: 'חישוב מחיר שעה לפרילנסר/יועץ',
+    description: 'חישוב מחיר שעה לפרילנסר/יועץ - שכר רצוי + הוצאות + רווח',
     href: '/self-employed/hourly-rate',
-    available: false,
+    available: true,
   },
 ];
 
