@@ -7,7 +7,7 @@ export const navigation = {
     { label: 'חיסכון', href: '/savings' },
     { label: 'רכב', href: '/vehicles' },
     { label: 'ביטוחים', href: '/insurance' },
-    { label: '🚀 כלים מקצועיים', href: '/tools', highlight: true },
+    { label: '🚀 כלים לבעלי עסקים', href: '/tools', highlight: true },
   ],
   footer: [
     { label: 'מדיניות פרטיות', href: '/privacy' },

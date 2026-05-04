@@ -60,7 +60,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bold text-purple-700 mb-4">🚀 כלים מקצועיים</h3>
+            <h3 className="font-bold text-purple-700 mb-4">🚀 כלים לבעלי עסקים</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
                 <Link href="/tools/unified" className="hover:text-purple-600">

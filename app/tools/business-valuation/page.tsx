@@ -61,7 +61,7 @@ export default function BusinessValuationPage() {
         description="הערכת שווי מקצועית בשלוש שיטות - DCF (היוון תזרים), מכפיל EBITDA, ומכפיל הכנסות. עם מכפילים מותאמים לענפי תעשייה בישראל 2026."
         breadcrumbs={[
           { label: 'דף הבית', href: '/' },
-          { label: 'כלים מקצועיים', href: '/tools' },
+          { label: 'כלים לבעלי עסקים', href: '/tools' },
           { label: 'הערכת שווי' },
         ]}
         lastUpdated="2026-05-03"

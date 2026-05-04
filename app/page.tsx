@@ -27,7 +27,7 @@ export default function Home() {
               href="/tools"
               className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-medium inline-flex items-center gap-2"
             >
-              🚀 כלים מקצועיים לעסקים
+              🚀 כלים לבעלי עסקים
             </Link>
           </div>
         </div>

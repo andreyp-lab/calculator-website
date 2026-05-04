@@ -61,7 +61,7 @@ export default function BreakEvenPage() {
         description="חשב כמה יחידות / שירותים אתה חייב למכור בחודש כדי לכסות את כל ההוצאות. המדד הבסיסי ביותר לכל בעל עסק."
         breadcrumbs={[
           { label: 'דף הבית', href: '/' },
-          { label: 'כלים מקצועיים', href: '/tools' },
+          { label: 'כלים לבעלי עסקים', href: '/tools' },
           { label: 'נקודת איזון' },
         ]}
         lastUpdated="2026-05-03"

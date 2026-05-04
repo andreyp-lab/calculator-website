@@ -66,7 +66,7 @@ export default function LoanEligibilityPage() {
         description="בדוק בארבעה שלבים פשוטים אם העסק שלך זכאי להלוואה בערבות המדינה - כולל מסלולי עסק קטן, יצואן, תעשייה וחרבות ברזל."
         breadcrumbs={[
           { label: 'דף הבית', href: '/' },
-          { label: 'כלים מקצועיים', href: '/tools' },
+          { label: 'כלים לבעלי עסקים', href: '/tools' },
           { label: 'בודק זכאות להלוואות' },
         ]}
         lastUpdated="2026-05-03"

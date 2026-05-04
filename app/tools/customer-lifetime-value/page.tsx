@@ -61,7 +61,7 @@ export default function CLVPage() {
         description="חשב את שווי הלקוח לטווח ארוך - LTV/CAC, Payback Period, ועוד מדדים מרכזיים. כלי חיוני לעסקי SaaS, שירותים, Subscription ו-E-commerce."
         breadcrumbs={[
           { label: 'דף הבית', href: '/' },
-          { label: 'כלים מקצועיים', href: '/tools' },
+          { label: 'כלים לבעלי עסקים', href: '/tools' },
           { label: 'CLV / LTV' },
         ]}
         lastUpdated="2026-05-03"
