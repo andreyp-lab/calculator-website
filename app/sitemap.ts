@@ -39,16 +39,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/maternity-benefits', 'monthly', 0.9),
     make('/employee-rights/unemployment-benefits', 'monthly', 0.9),
     make('/employee-rights/reserve-duty-pay', 'monthly', 0.9),
+    make('/employee-rights/minimum-wage', 'weekly', 0.9),
+    make('/employee-rights/annual-leave', 'monthly', 0.85),
+    make('/employee-rights/sick-pay', 'monthly', 0.85),
+    make('/employee-rights/annual-bonus', 'monthly', 0.85),
+    make('/employee-rights/work-grant', 'monthly', 0.9),
     make('/personal-tax/income-tax', 'monthly', 0.9),
     make('/personal-tax/tax-credits', 'monthly', 0.9),
     make('/personal-tax/tax-refund', 'monthly', 0.95),
     make('/personal-tax/work-value', 'monthly', 0.85),
+    make('/personal-tax/salary-net-gross', 'weekly', 0.95),
     make('/real-estate/mortgage', 'monthly', 0.9),
     make('/real-estate/purchase-tax', 'monthly', 0.9),
     make('/real-estate/capital-gains-tax', 'monthly', 0.9),
     make('/self-employed/vat', 'monthly', 0.9),
     make('/self-employed/hourly-rate', 'monthly', 0.9),
     make('/self-employed/employer-cost', 'monthly', 0.9),
+    make('/self-employed/tax-advances', 'monthly', 0.9),
+    make('/self-employed/mandatory-pension', 'monthly', 0.9),
     make('/self-employed/corporation-vs-individual', 'monthly', 0.9),
     make('/self-employed/dividend-vs-salary', 'monthly', 0.9),
 
@@ -61,10 +69,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== מחשבוני חיסכון =====
     make('/savings/family-budget', 'monthly', 0.9),
     make('/savings/loan-repayment', 'monthly', 0.9),
+    make('/savings/personal-loan', 'monthly', 0.9),
 
     // ===== מחשבוני רכב =====
     make('/vehicles/fuel-cost', 'monthly', 0.9),
     make('/vehicles/leasing-vs-buying', 'monthly', 0.9),
+    make('/vehicles/company-car-benefit', 'monthly', 0.9),
 
     // ===== מחשבוני ביטוחים =====
     make('/insurance/pension', 'monthly', 0.9),
