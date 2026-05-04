@@ -93,6 +93,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== בלוג =====
     make('/blog', 'weekly', 0.7),
     make('/blog/tax-changes-2026', 'monthly', 0.7),
+    make('/blog/tax-refund-complete-guide-2026', 'weekly', 0.95),
+    make('/blog/company-vs-self-employed-ultimate-guide', 'weekly', 0.95),
+    make('/blog/vat-complete-guide-israel', 'weekly', 0.9),
+    make('/blog/employee-rights-israel-2026', 'weekly', 0.95),
+    make('/blog/tax-reduction-25-legal-ways', 'weekly', 0.95),
 
     // ===== דפי השוואה =====
     make('/compare', 'weekly', 0.85),
