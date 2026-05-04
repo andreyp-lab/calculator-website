@@ -27,6 +27,12 @@ const calculators = [
     href: '/personal-tax/tax-refund',
     available: true,
   },
+  {
+    title: 'מחשבון "מה שווה לי לעבוד?"',
+    description: 'השוואת שכר vs דמי לידה/אבטלה/קצבה - שווי אמיתי של עבודה',
+    href: '/personal-tax/work-value',
+    available: true,
+  },
 ];
 
 export default function PersonalTaxPage() {

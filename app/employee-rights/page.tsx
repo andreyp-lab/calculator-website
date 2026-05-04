@@ -22,16 +22,22 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון חופשה ומחלה',
-    description: 'חישוב ימי חופשה שנתית וימי מחלה',
-    href: '/employee-rights/vacation-sick',
-    available: false,
+    title: 'מחשבון דמי לידה',
+    description: 'חישוב גובה דמי לידה מהביטוח הלאומי + הארכות לתאומים',
+    href: '/employee-rights/maternity-benefits',
+    available: true,
   },
   {
-    title: 'מחשבון דמי לידה',
-    description: 'חישוב גובה דמי הלידה ותקופת הזכאות',
-    href: '/employee-rights/maternity',
-    available: false,
+    title: 'מחשבון דמי אבטלה',
+    description: 'חישוב גובה דמי אבטלה ותקופת הזכאות לפי גיל ושכר',
+    href: '/employee-rights/unemployment-benefits',
+    available: true,
+  },
+  {
+    title: 'מחשבון תגמולי מילואים',
+    description: 'תשלום בסיסי + מענקי חרבות ברזל (280 ₪/יום)',
+    href: '/employee-rights/reserve-duty-pay',
+    available: true,
   },
 ];
 

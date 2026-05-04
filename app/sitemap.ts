@@ -36,11 +36,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== מחשבונים פיננסי אישי =====
     make('/employee-rights/severance', 'monthly', 0.9),
     make('/employee-rights/recreation-pay', 'monthly', 0.9),
+    make('/employee-rights/maternity-benefits', 'monthly', 0.9),
+    make('/employee-rights/unemployment-benefits', 'monthly', 0.9),
+    make('/employee-rights/reserve-duty-pay', 'monthly', 0.9),
     make('/personal-tax/income-tax', 'monthly', 0.9),
     make('/personal-tax/tax-credits', 'monthly', 0.9),
     make('/personal-tax/tax-refund', 'monthly', 0.95),
+    make('/personal-tax/work-value', 'monthly', 0.85),
     make('/real-estate/mortgage', 'monthly', 0.9),
     make('/real-estate/purchase-tax', 'monthly', 0.9),
+    make('/real-estate/capital-gains-tax', 'monthly', 0.9),
     make('/self-employed/vat', 'monthly', 0.9),
     make('/self-employed/hourly-rate', 'monthly', 0.9),
     make('/self-employed/employer-cost', 'monthly', 0.9),
@@ -51,6 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/investments/compound-interest', 'monthly', 0.9),
     make('/investments/roi', 'monthly', 0.9),
     make('/investments/retirement', 'monthly', 0.9),
+    make('/investments/fire', 'monthly', 0.9),
 
     // ===== מחשבוני חיסכון =====
     make('/savings/family-budget', 'monthly', 0.9),
@@ -77,6 +83,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== בלוג =====
     make('/blog', 'weekly', 0.7),
     make('/blog/tax-changes-2026', 'monthly', 0.7),
+
+    // ===== דפי השוואה =====
+    make('/compare', 'weekly', 0.85),
+    make('/compare/employee-vs-self-employed', 'monthly', 0.9),
+    make('/compare/rent-vs-buy', 'monthly', 0.9),
+    make('/compare/leasing-vs-buying-comparison', 'monthly', 0.85),
 
     // ===== משפטי =====
     make('/privacy', 'yearly', 0.3),

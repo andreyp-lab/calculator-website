@@ -23,9 +23,9 @@ const calculators = [
   },
   {
     title: 'מחשבון מס שבח',
-    description: 'חישוב מס שבח על מכירת דירה',
+    description: 'מכירת דירה - פטור דירה יחידה + חישוב לינארי מוטב',
     href: '/real-estate/capital-gains-tax',
-    available: false,
+    available: true,
   },
 ];
 

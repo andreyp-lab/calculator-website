@@ -31,6 +31,13 @@ const calculators = [
     available: true,
     icon: '🏖️',
   },
+  {
+    title: 'מחשבון FIRE - פרישה מוקדמת',
+    description: 'תוך כמה שנים תוכל לפרוש בעצמאות כלכלית? כלל ה-4% וניתוח Lean/Regular/Fat',
+    href: '/investments/fire',
+    available: true,
+    icon: '🔥',
+  },
 ];
 
 export default function InvestmentsPage() {
