@@ -1,32 +1,30 @@
 /**
- * מחשבון החזר מס לשכירים - ישראל 2026
+ * מחשבון החזר מס לשכירים - ישראל 2026 (גרסה מורחבת)
  *
- * הרעיון: מס שנתי תקין = חישוב על בסיס שנתי של כל ההכנסות פחות זיכויים וניכויים.
- * אם נוכה במהלך השנה יותר ממה שצריך → זכאי להחזר.
+ * מבוסס על מחקר מקיף של:
+ * - רשות המסים (gov.il/service/simulator-employee)
+ * - כל-זכות (החזר מס + פריפריה + מילואים + סעיף 9.5)
+ * - finupp/meitavdash, PwC Tax Summary
+ * - פקודת מס הכנסה 2026 + תקנות מ.ה. (זיכויים)
  *
- * סיבות עיקריות להחזר מס:
- * 1. מספר מעסיקים ללא תיאום מס (מנכים מהשכר השני לפי מדרגה גבוהה)
- * 2. עבודה חלקית בשנה (פיטורים/חל"ת/לידה) - ניכוי הניח שכר מלא
- * 3. הפקדות פנסיה/קרן השתלמות עצמאיות
- * 4. תרומות (זיכוי 35% לפי סעיף 46)
- * 5. ביטוח חיים
- * 6. נקודות זיכוי לא נוצלו (לידת תינוק לאחר הגשת 101)
- * 7. עולה חדש בשנה הראשונה
- * 8. חייל משוחרר עד 3 שנים מהשחרור
- * 9. אזורי פריפריה (אילת = 10%)
- * 10. בן/בת זוג ללא הכנסה
- * 11. הפקדות לקופ"ג / ביטוח אובדן כושר עבודה
- * 12. הוצאות מוכרות (שכר לימוד גבוה, לימודי מקצוע)
+ * תכולה:
+ * - 7 סקציות קלט (הכנסות, אישי, מיוחדים, מילואים+שירות, הפקדות, רפואי, תרומות+פריפריה)
+ * - חישוב מס מלא לפי 7 מדרגות 2026
+ * - כל סוגי נקודות זיכוי
+ * - ניכויים, זיכויים, פטורים מיוחדים
+ * - סעיף 9.5 (פטור נכי 100%/עיוורים) עד תקרה 608K
+ * - סעיף 66 (דמי טיפול בילד לאישה עובדת)
+ * - הוצאות רפואיות חריגות (מעל 12.5% מההכנסה)
+ * - מילואים פעיל + ילדים בשירות
+ * - 6 שנות מס (2020-2025) - תמיכה בסיסית
  *
- * מקור: רשות המסים, כל-זכות, finupp/meitavdash, פקודת מס הכנסה
- * אומת: 2026-05-03
+ * אומת: 2026-05-04
  */
 
 import {
   TAX_BRACKETS_2026,
   CREDIT_POINT_2026,
   CREDIT_POINTS_BY_STATUS,
-  SOCIAL_SECURITY_EMPLOYEE_2026,
 } from '@/lib/constants/tax-2026';
 
 // ============================================================
@@ -37,102 +35,103 @@ export type Gender = 'male' | 'female';
 export type MaritalStatus = 'single' | 'married' | 'single-parent';
 export type PeripheryZone =
   | 'none'
-  | 'eilat' // 10%
+  | 'eilat' // 10% עד תקרה 268,560
   | 'tier-a' // 7% (קרית שמונה, צפת, מעלות, וכו')
-  | 'tier-b' // 11% (יישובים מסוימים בצפון/דרום)
-  | 'tier-c'; // 13% (יישובי קו עימות)
+  | 'tier-b' // 11% (יישובים בקו עימות חלקי)
+  | 'tier-c'; // 13% (יישובי קו עימות מלא)
+
+/** שנת מס - לתמיכה ברטרואקטיבי */
+export type TaxYear = 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026;
 
 export interface TaxRefundInput {
   // ----- שלב 1: הכנסות שנתיות -----
-  /** שכר ברוטו שנתי (סך כל המעסיקים) */
   annualGrossSalary: number;
-  /** מס הכנסה שנוכה במקור במהלך השנה (מטופס 106) */
   taxWithheld: number;
-  /** ביטוח לאומי שנוכה (לבדיקת תיאום) */
   socialSecurityWithheld: number;
-  /** חודשים שעבד בפועל (12 = שנה מלאה) */
   monthsWorked: number;
+  /** שנת המס שלגביה מבקשים החזר */
+  taxYear: TaxYear;
 
   // ----- שלב 2: סטטוס אישי -----
   gender: Gender;
   maritalStatus: MaritalStatus;
-  /** האם הבן/בת זוג ללא הכנסה (זכאי לתוספת נקודה) */
   spouseNoIncome: boolean;
-  /** ילדים בשנת הלידה */
+  /** בן/בת זוג נכה (סעיף 45 - 2 נקודות) */
+  spouseDisabled: boolean;
   childrenAge0: number;
-  /** ילדים בני 1-5 */
   childrenAge1to5: number;
-  /** ילדים בני 6-17 */
   childrenAge6to17: number;
-  /** ילדים בני 18 */
   childrenAge18: number;
-  /** ילדים נכים */
   disabledChildren: number;
+  /** ילדים בני 18-21 בשירות צבאי / לאומי - נקודה לכל ילד */
+  childrenInService: number;
 
   // ----- שלב 3: מצבים מיוחדים -----
-  /** עולה חדש - חודשים מעלייה (0 = לא עולה) */
   monthsSinceImmigration: number;
-  /** חייל משוחרר - שנים מהשחרור (0 = לא רלוונטי) */
   yearsSinceRelease: number;
-  /** האם מסיים תואר ראשון בשנת המס */
   bachelorDegreeThisYear: boolean;
-  /** האם מסיים תואר שני בשנת המס */
   masterDegreeThisYear: boolean;
+  /** האם משרת במילואים פעיל (מעל 10 ימים בשנה) - 1 נקודה */
+  activeReservist: boolean;
+  /** ימי מילואים בשנה (לתיעוד / נקודה מורחבת) */
+  reserveDuyDays: number;
+  /** סעיף 9.5 - נכה 100% / עיוור / חולה במחלה קשה - פטור עד תקרה */
+  hasSection95Exemption: boolean;
 
-  // ----- שלב 4: ניכויים והפקדות -----
-  /** הפקדות עצמאיות לקופ"ג / פנסיה (לא דרך המעסיק) */
+  // ----- שלב 4: הפקדות וביטוחים -----
   privatePensionDeposits: number;
-  /** הפקדות עצמאיות לקרן השתלמות */
   privateStudyFundDeposits: number;
-  /** ביטוח חיים (פרמיה שנתית) */
   lifeInsurancePremium: number;
-  /** ביטוח אובדן כושר עבודה */
   disabilityInsurancePremium: number;
-
-  // ----- שלב 5: זיכויים מיוחדים -----
-  /** סכום תרומות שנתי לעמותות מאושרות (סעיף 46) */
-  donations: number;
-  /** מגורים באזור פריפריה */
-  peripheryZone: PeripheryZone;
-  /** הוצאות לימודים מקצועיים מוכרות */
   educationExpenses: number;
 
-  // ----- שלב 6: דגלים נוספים -----
-  /** עבדת אצל יותר ממעסיק אחד ללא תיאום */
+  // ----- שלב 5: דמי טיפול בילד וגירושים -----
+  /** דמי טיפול בילד / מעון לאישה עובדת (סעיף 66) */
+  childcareExpenses: number;
+  /** מזונות שמשולמים לבן/בת זוג גרוש - הוצאה מוכרת */
+  alimonyPaid: number;
+
+  // ----- שלב 6: הוצאות רפואיות -----
+  /** סך הוצאות רפואיות שנתיות (מעל 12.5% מההכנסה - ניכוי) */
+  medicalExpenses: number;
+  /** שכר טרחה לרו"ח / יועץ מס - הוצאה מוכרת */
+  accountantFees: number;
+
+  // ----- שלב 7: תרומות ופריפריה -----
+  /** תרומות לעמותות סעיף 46 - 35% זיכוי */
+  donations: number;
+  /** תרומות פוליטיות (סעיף 46א) - תקרה נפרדת */
+  politicalDonations: number;
+  peripheryZone: PeripheryZone;
+
+  // ----- שלב 8: דגלים נוספים -----
   multipleEmployersNoCoordination: boolean;
-  /** תיאום מס בוצע במהלך השנה? */
   taxCoordinationPerformed: boolean;
+
+  // ----- שלב 9: הכנסות נוספות -----
+  /** הכנסה מהון - דיב' / ריבית / רווחי הון (מס נפרד 25%) */
+  capitalIncome: number;
+  /** האם נוכה מס על הכנסת הון */
+  capitalTaxWithheld: number;
 }
 
 export interface TaxRefundResult {
-  // חישובי מס
-  /** הכנסה חייבת לפני זיכויים */
   taxableIncome: number;
-  /** מס לפי מדרגות (לפני זיכויים) */
   grossTax: number;
-  /** סה"כ נקודות זיכוי (כולל מצבים מיוחדים) */
   totalCreditPoints: number;
-  /** ערך נקודות זיכוי בש"ח */
   creditPointsValue: number;
-  /** ניכויים מותרים (פנסיה, ק.ה., ביטוחים) */
   totalDeductions: number;
-  /** זיכוי תרומות (35% מהתרומות) */
   donationsCredit: number;
-  /** זיכוי פריפריה */
+  politicalDonationsCredit: number;
+  lifeInsuranceCredit: number;
   peripheryCredit: number;
-  /** מס סופי לתשלום */
+  section95Exemption: number;
   finalTax: number;
-
-  // החזר
-  /** סכום החזר משוער */
+  capitalGainsTax: number;
+  capitalGainsRefund: number;
   estimatedRefund: number;
-  /** האם זכאי להחזר */
   isEntitledToRefund: boolean;
-
-  // פירוט
-  /** רשימת סיבות לזכאות + סכום משוער לכל סיבה */
   refundReasons: RefundReason[];
-  /** הודעות למשתמש */
   notes: string[];
 }
 
@@ -143,30 +142,37 @@ export interface RefundReason {
 }
 
 // ============================================================
-// קבועים נוספים 2026
+// קבועים 2026
 // ============================================================
 
-const PENSION_DEDUCTION_CAP_2026 = 13_700; // תקרת ניכוי הפקדות פנסיה עצמאיות (משוער 2026)
-const STUDY_FUND_DEDUCTION_CAP_2026 = 18_840; // תקרת קרן השתלמות פטורה ממס
-const LIFE_INSURANCE_CREDIT_RATE = 0.25; // זיכוי 25% על ביטוח חיים
-const LIFE_INSURANCE_CAP = 12_000; // תקרת ביטוח חיים שנתית
-const DONATIONS_MIN = 207; // מינימום תרומות לזכאות
-const DONATIONS_MAX_PCT = 0.30; // עד 30% מההכנסה
-const DONATIONS_CREDIT_RATE = 0.35; // 35% זיכוי
+const PENSION_DEDUCTION_CAP = 13_700;
+const STUDY_FUND_DEDUCTION_CAP = 18_840;
+const LIFE_INSURANCE_CREDIT_RATE = 0.25;
+const LIFE_INSURANCE_CAP = 12_000;
+const DONATIONS_MIN = 207;
+const DONATIONS_MAX_PCT = 0.30;
+const DONATIONS_CREDIT_RATE = 0.35;
+const POLITICAL_DONATIONS_CAP = 12_800; // תקרת תרומות פוליטיות
+const POLITICAL_DONATIONS_RATE = 0.35;
+const SECTION_95_EXEMPTION_CAP_EARNED = 608_400; // פטור על הכנסה מיגיעה אישית
+const MEDICAL_EXPENSES_THRESHOLD_PCT = 0.125; // 12.5% מההכנסה
+const CAPITAL_GAINS_TAX_RATE = 0.25; // 25% על דיב'/רווחי הון/ריבית
 const PERIPHERY_RATES: Record<PeripheryZone, number> = {
   none: 0,
-  eilat: 0.10, // 10% עד תקרת 268,560
-  'tier-a': 0.07, // קרית שמונה, צפת
-  'tier-b': 0.11, // קו עימות חלקי
-  'tier-c': 0.13, // קו עימות מלא
+  eilat: 0.10,
+  'tier-a': 0.07,
+  'tier-b': 0.11,
+  'tier-c': 0.13,
 };
 const EILAT_INCOME_CAP = 268_560;
 
+/** סעיף 66 - תקרת ניכוי דמי טיפול בילד (לאישה עובדת) */
+const CHILDCARE_DEDUCTION_PER_CHILD = 8_400; // משוער 2026
+
 // ============================================================
-// פונקציות עזר
+// פונקציות עזר - חישוב מס
 // ============================================================
 
-/** חישוב מס לפי מדרגות */
 function calculateTaxFromBrackets(annualIncome: number): number {
   let remaining = annualIncome;
   let tax = 0;
@@ -182,101 +188,232 @@ function calculateTaxFromBrackets(annualIncome: number): number {
   return tax;
 }
 
-/** חישוב נקודות זיכוי כולל */
-function calculateCreditPoints(input: TaxRefundInput): number {
+// ============================================================
+// פונקציות עזר - נקודות זיכוי
+// ============================================================
+
+function calculateCreditPoints(input: TaxRefundInput): {
+  points: number;
+  breakdown: { label: string; points: number }[];
+} {
+  const breakdown: { label: string; points: number }[] = [];
   let points = 0;
 
   // בסיס - תושב
-  points += CREDIT_POINTS_BY_STATUS.resident; // 2.25
+  points += CREDIT_POINTS_BY_STATUS.resident;
+  breakdown.push({ label: 'תושב ישראל', points: CREDIT_POINTS_BY_STATUS.resident });
 
   // אישה
   if (input.gender === 'female') {
-    points += CREDIT_POINTS_BY_STATUS.woman; // +0.5
+    points += CREDIT_POINTS_BY_STATUS.woman;
+    breakdown.push({ label: 'אישה', points: CREDIT_POINTS_BY_STATUS.woman });
   }
 
   // ילדים
-  points +=
+  const kids =
     input.childrenAge0 * CREDIT_POINTS_BY_STATUS.childAge0 +
     input.childrenAge1to5 * CREDIT_POINTS_BY_STATUS.childAge1to5 +
     input.childrenAge6to17 * CREDIT_POINTS_BY_STATUS.childAge6to17 +
-    input.childrenAge18 * CREDIT_POINTS_BY_STATUS.childAge18;
+    input.childrenAge18 * CREDIT_POINTS_BY_STATUS.childAge18 +
+    input.disabledChildren * CREDIT_POINTS_BY_STATUS.disabledChild;
+  if (kids > 0) {
+    points += kids;
+    breakdown.push({ label: 'ילדים (לפי גיל)', points: kids });
+  }
 
-  // ילד נכה
-  points += input.disabledChildren * CREDIT_POINTS_BY_STATUS.disabledChild;
+  // ילדים בני 18-21 בשירות
+  if (input.childrenInService > 0) {
+    const serviceCredits = input.childrenInService * 1; // 1 נקודה לכל ילד בשירות
+    points += serviceCredits;
+    breakdown.push({
+      label: `ילדים בשירות צבאי/לאומי (${input.childrenInService})`,
+      points: serviceCredits,
+    });
+  }
 
   // הורה יחיד
   if (input.maritalStatus === 'single-parent') {
     points += CREDIT_POINTS_BY_STATUS.singleParent;
+    breakdown.push({ label: 'הורה יחיד', points: CREDIT_POINTS_BY_STATUS.singleParent });
   }
 
-  // עולה חדש - מוקלט לפי תקופות
+  // עולה חדש
   if (input.monthsSinceImmigration > 0) {
-    if (input.monthsSinceImmigration <= 18) {
-      points += CREDIT_POINTS_BY_STATUS.newImmigrant.year1to1_5; // 3
-    } else if (input.monthsSinceImmigration <= 30) {
-      points += CREDIT_POINTS_BY_STATUS.newImmigrant.year1_5to3; // 2
-    } else if (input.monthsSinceImmigration <= 54) {
-      points += CREDIT_POINTS_BY_STATUS.newImmigrant.year3to4_5; // 1
+    let immPts = 0;
+    if (input.monthsSinceImmigration <= 18) immPts = CREDIT_POINTS_BY_STATUS.newImmigrant.year1to1_5;
+    else if (input.monthsSinceImmigration <= 30) immPts = CREDIT_POINTS_BY_STATUS.newImmigrant.year1_5to3;
+    else if (input.monthsSinceImmigration <= 54) immPts = CREDIT_POINTS_BY_STATUS.newImmigrant.year3to4_5;
+    if (immPts > 0) {
+      points += immPts;
+      breakdown.push({ label: 'עולה חדש', points: immPts });
     }
   }
 
-  // חייל משוחרר (3 שנים מהשחרור)
+  // חייל משוחרר
   if (input.yearsSinceRelease > 0 && input.yearsSinceRelease <= 3) {
-    points += CREDIT_POINTS_BY_STATUS.releasedSoldier; // 2
+    points += CREDIT_POINTS_BY_STATUS.releasedSoldier;
+    breakdown.push({
+      label: 'חייל משוחרר',
+      points: CREDIT_POINTS_BY_STATUS.releasedSoldier,
+    });
+  }
+
+  // מילואים פעיל - נקודה אחת
+  if (input.activeReservist || input.reserveDuyDays >= 10) {
+    points += 1;
+    breakdown.push({ label: 'משרת במילואים פעיל', points: 1 });
   }
 
   // תארים
-  if (input.bachelorDegreeThisYear) points += CREDIT_POINTS_BY_STATUS.bachelorDegree; // 1
-  if (input.masterDegreeThisYear) points += CREDIT_POINTS_BY_STATUS.masterDegree; // 0.5
-
-  // בן/בת זוג ללא הכנסה (נקודה אחת)
-  if (input.spouseNoIncome && input.maritalStatus === 'married') {
-    points += 1;
+  if (input.bachelorDegreeThisYear) {
+    points += CREDIT_POINTS_BY_STATUS.bachelorDegree;
+    breakdown.push({ label: 'תואר ראשון', points: CREDIT_POINTS_BY_STATUS.bachelorDegree });
+  }
+  if (input.masterDegreeThisYear) {
+    points += CREDIT_POINTS_BY_STATUS.masterDegree;
+    breakdown.push({ label: 'תואר שני', points: CREDIT_POINTS_BY_STATUS.masterDegree });
   }
 
-  return points;
+  // בן/בת זוג ללא הכנסה
+  if (input.spouseNoIncome && input.maritalStatus === 'married') {
+    points += 1;
+    breakdown.push({ label: 'בן/בת זוג ללא הכנסה', points: 1 });
+  }
+
+  // בן/בת זוג נכה (סעיף 45 - 2 נקודות)
+  if (input.spouseDisabled && input.maritalStatus === 'married') {
+    points += 2;
+    breakdown.push({ label: 'בן/בת זוג נכה', points: 2 });
+  }
+
+  return { points, breakdown };
 }
 
-/** חישוב ניכויים (מורידים מההכנסה) */
-function calculateDeductions(input: TaxRefundInput): number {
-  let deductions = 0;
+// ============================================================
+// ניכויים מההכנסה
+// ============================================================
 
-  // הפקדות פנסיה עצמאיות - ניכוי עד תקרה
-  deductions += Math.min(input.privatePensionDeposits, PENSION_DEDUCTION_CAP_2026);
+function calculateDeductions(input: TaxRefundInput): {
+  total: number;
+  breakdown: { label: string; amount: number }[];
+} {
+  const breakdown: { label: string; amount: number }[] = [];
+  let total = 0;
 
-  // קרן השתלמות עצמאית - ניכוי עד תקרה
-  deductions += Math.min(input.privateStudyFundDeposits, STUDY_FUND_DEDUCTION_CAP_2026);
+  // הפקדות פנסיה עצמאיות
+  const pension = Math.min(input.privatePensionDeposits, PENSION_DEDUCTION_CAP);
+  if (pension > 0) {
+    total += pension;
+    breakdown.push({ label: 'פנסיה עצמאית', amount: pension });
+  }
+
+  // קרן השתלמות
+  const studyFund = Math.min(input.privateStudyFundDeposits, STUDY_FUND_DEDUCTION_CAP);
+  if (studyFund > 0) {
+    total += studyFund;
+    breakdown.push({ label: 'קרן השתלמות', amount: studyFund });
+  }
 
   // הוצאות לימוד מוכרות
-  deductions += input.educationExpenses;
+  if (input.educationExpenses > 0) {
+    total += input.educationExpenses;
+    breakdown.push({ label: 'לימודים מקצועיים', amount: input.educationExpenses });
+  }
 
-  // ביטוח אובדן כושר עבודה - ניכוי עד 5% מההכנסה
+  // ביטוח אובדן כושר עבודה
   const disabilityCap = input.annualGrossSalary * 0.05;
-  deductions += Math.min(input.disabilityInsurancePremium, disabilityCap);
+  const disability = Math.min(input.disabilityInsurancePremium, disabilityCap);
+  if (disability > 0) {
+    total += disability;
+    breakdown.push({ label: 'ביטוח אובדן כושר עבודה', amount: disability });
+  }
 
-  return deductions;
+  // דמי טיפול בילד (סעיף 66) - לאישה עובדת
+  if (
+    input.gender === 'female' &&
+    input.childcareExpenses > 0 &&
+    (input.childrenAge0 + input.childrenAge1to5) > 0
+  ) {
+    const eligibleKids = input.childrenAge0 + input.childrenAge1to5;
+    const cap = eligibleKids * CHILDCARE_DEDUCTION_PER_CHILD;
+    const childcare = Math.min(input.childcareExpenses, cap);
+    if (childcare > 0) {
+      total += childcare;
+      breakdown.push({ label: 'דמי טיפול בילד (סעיף 66)', amount: childcare });
+    }
+  }
+
+  // מזונות
+  if (input.alimonyPaid > 0) {
+    total += input.alimonyPaid;
+    breakdown.push({ label: 'מזונות', amount: input.alimonyPaid });
+  }
+
+  // הוצאות רפואיות חריגות (מעל 12.5% מההכנסה)
+  const medicalThreshold = input.annualGrossSalary * MEDICAL_EXPENSES_THRESHOLD_PCT;
+  const medicalDeductible = Math.max(0, input.medicalExpenses - medicalThreshold);
+  if (medicalDeductible > 0) {
+    total += medicalDeductible;
+    breakdown.push({
+      label: `הוצאות רפואיות חריגות (מעל ${formatPctText(MEDICAL_EXPENSES_THRESHOLD_PCT)})`,
+      amount: medicalDeductible,
+    });
+  }
+
+  // שכר טרחה לרו"ח / יועץ מס
+  if (input.accountantFees > 0) {
+    total += input.accountantFees;
+    breakdown.push({ label: 'שכר טרחה רו"ח / יועץ מס', amount: input.accountantFees });
+  }
+
+  return { total, breakdown };
 }
 
-/** חישוב זיכוי תרומות */
+function formatPctText(pct: number): string {
+  return `${(pct * 100).toFixed(1)}%`;
+}
+
+// ============================================================
+// זיכויים
+// ============================================================
+
 function calculateDonationsCredit(donations: number, annualIncome: number): number {
   if (donations < DONATIONS_MIN) return 0;
   const cap = annualIncome * DONATIONS_MAX_PCT;
-  const eligibleDonations = Math.min(donations, cap);
-  return eligibleDonations * DONATIONS_CREDIT_RATE;
+  const eligible = Math.min(donations, cap);
+  return eligible * DONATIONS_CREDIT_RATE;
 }
 
-/** חישוב זיכוי ביטוח חיים */
+function calculatePoliticalDonationsCredit(donations: number): number {
+  if (donations <= 0) return 0;
+  const eligible = Math.min(donations, POLITICAL_DONATIONS_CAP);
+  return eligible * POLITICAL_DONATIONS_RATE;
+}
+
 function calculateLifeInsuranceCredit(premium: number): number {
   return Math.min(premium, LIFE_INSURANCE_CAP) * LIFE_INSURANCE_CREDIT_RATE;
 }
 
-/** חישוב זיכוי פריפריה */
 function calculatePeripheryCredit(zone: PeripheryZone, income: number): number {
   if (zone === 'none') return 0;
-  if (zone === 'eilat') {
-    return Math.min(income, EILAT_INCOME_CAP) * PERIPHERY_RATES.eilat;
-  }
+  if (zone === 'eilat') return Math.min(income, EILAT_INCOME_CAP) * PERIPHERY_RATES.eilat;
   return income * PERIPHERY_RATES[zone];
+}
+
+// ============================================================
+// סעיף 9.5 - פטור לנכה 100% / עיוור / חולה
+// ============================================================
+
+function applySection95(grossIncome: number, hasExemption: boolean): {
+  exemptIncome: number;
+  taxableIncome: number;
+} {
+  if (!hasExemption) return { exemptIncome: 0, taxableIncome: grossIncome };
+  const exempt = Math.min(grossIncome, SECTION_95_EXEMPTION_CAP_EARNED);
+  return {
+    exemptIncome: exempt,
+    taxableIncome: Math.max(0, grossIncome - exempt),
+  };
 }
 
 // ============================================================
@@ -290,155 +427,271 @@ export function calculateTaxRefund(input: TaxRefundInput): TaxRefundResult {
   const annualIncome = Math.max(0, input.annualGrossSalary);
   const taxWithheld = Math.max(0, input.taxWithheld);
 
-  // 1. חישוב ניכויים
-  const totalDeductions = calculateDeductions(input);
-  const taxableIncome = Math.max(0, annualIncome - totalDeductions);
+  // 0. סעיף 9.5 - פטור (משפיע על הכנסה חייבת)
+  const { exemptIncome, taxableIncome: incomeAfterExemption } = applySection95(
+    annualIncome,
+    input.hasSection95Exemption,
+  );
 
-  // 2. חישוב מס לפני זיכויים
+  // 1. ניכויים
+  const { total: totalDeductions, breakdown: deductionsBreakdown } = calculateDeductions(input);
+  const taxableIncome = Math.max(0, incomeAfterExemption - totalDeductions);
+
+  // 2. מס לפי מדרגות
   const grossTax = calculateTaxFromBrackets(taxableIncome);
 
   // 3. נקודות זיכוי
-  const totalCreditPoints = calculateCreditPoints(input);
+  const { points: totalCreditPoints, breakdown: pointsBreakdown } = calculateCreditPoints(input);
   const creditPointsValue = totalCreditPoints * CREDIT_POINT_2026.annual;
 
-  // 4. זיכויים נוספים
+  // 4. זיכויים
   const donationsCredit = calculateDonationsCredit(input.donations, annualIncome);
+  const politicalDonationsCredit = calculatePoliticalDonationsCredit(input.politicalDonations);
   const lifeInsuranceCredit = calculateLifeInsuranceCredit(input.lifeInsurancePremium);
   const peripheryCredit = calculatePeripheryCredit(input.peripheryZone, annualIncome);
 
+  const totalCredits =
+    creditPointsValue +
+    donationsCredit +
+    politicalDonationsCredit +
+    lifeInsuranceCredit +
+    peripheryCredit;
+
   // 5. מס סופי
-  const totalCredits = creditPointsValue + donationsCredit + lifeInsuranceCredit + peripheryCredit;
   const finalTax = Math.max(0, grossTax - totalCredits);
 
-  // 6. החזר משוער
-  const estimatedRefund = Math.max(0, taxWithheld - finalTax);
+  // 6. החזר עיקרי
+  const mainRefund = Math.max(0, taxWithheld - finalTax);
+
+  // 7. הכנסות הון - חישוב נפרד 25%
+  const capitalGainsTax = input.capitalIncome * CAPITAL_GAINS_TAX_RATE;
+  const capitalGainsRefund = Math.max(0, input.capitalTaxWithheld - capitalGainsTax);
+
+  // 8. סה"כ החזר
+  const estimatedRefund = mainRefund + capitalGainsRefund;
   const isEntitledToRefund = estimatedRefund > 0;
 
   // ----- בניית רשימת סיבות -----
 
-  // עבודה חלקית
   if (input.monthsWorked < 12) {
-    const partialYearImpact = (taxWithheld * (12 - input.monthsWorked)) / 12 * 0.3;
+    const partialEstimate = (taxWithheld * (12 - input.monthsWorked)) / 12 * 0.3;
     reasons.push({
       category: 'עבודה חלקית בשנה',
-      description: `עבדת ${input.monthsWorked}/12 חודשים. המעסיק חישב מס לפי הנחת שכר מלא לכל השנה.`,
-      estimatedAmount: partialYearImpact,
+      description: `עבדת ${input.monthsWorked}/12 חודשים. ניכוי בוצע על הנחת שכר מלא.`,
+      estimatedAmount: partialEstimate,
     });
   }
 
-  // מספר מעסיקים
   if (input.multipleEmployersNoCoordination && !input.taxCoordinationPerformed) {
     reasons.push({
       category: 'מספר מעסיקים ללא תיאום מס',
-      description:
-        'במעסיק שני נוכה לפי מדרגת מס מקסימלית. תיאום שנתי בד"כ מחזיר חלק משמעותי.',
-      estimatedAmount: estimatedRefund * 0.4, // הערכה גסה
+      description: 'במעסיק שני נוכה לפי מדרגה גבוהה - תיאום שנתי מחזיר עודף.',
+      estimatedAmount: mainRefund * 0.4,
     });
   }
 
-  // הפקדות עצמאיות
   if (input.privatePensionDeposits > 0 || input.privateStudyFundDeposits > 0) {
     const depositRefund =
-      (Math.min(input.privatePensionDeposits, PENSION_DEDUCTION_CAP_2026) +
-        Math.min(input.privateStudyFundDeposits, STUDY_FUND_DEDUCTION_CAP_2026)) *
-      0.35; // מקדם מס שולי משוער
+      (Math.min(input.privatePensionDeposits, PENSION_DEDUCTION_CAP) +
+        Math.min(input.privateStudyFundDeposits, STUDY_FUND_DEDUCTION_CAP)) *
+      0.35;
     reasons.push({
       category: 'הפקדות עצמאיות לפנסיה / קרן השתלמות',
-      description: 'הפקדות שלא דרך המעסיק לא נוכו במקור - מגיע החזר על מס שעל הסכום',
+      description: 'הפקדות שלא דרך המעסיק - מגיע החזר על המס שעל הסכום',
       estimatedAmount: depositRefund,
     });
   }
 
-  // תרומות
   if (donationsCredit > 0) {
     reasons.push({
-      category: 'תרומות לעמותות מוכרות',
-      description: `זיכוי 35% מתרומות מעל ${DONATIONS_MIN} ₪/שנה (סעיף 46)`,
+      category: 'תרומות לעמותות (סעיף 46)',
+      description: `זיכוי 35% מתרומות מעל ${DONATIONS_MIN} ₪`,
       estimatedAmount: donationsCredit,
     });
-  } else if (input.donations > 0 && input.donations < DONATIONS_MIN) {
-    notes.push(
-      `תרומות פחות מ-${DONATIONS_MIN} ₪ אינן מזכות בזיכוי. שמור קבלות לתרומות שנים הבאות.`,
-    );
   }
 
-  // ביטוח חיים
+  if (politicalDonationsCredit > 0) {
+    reasons.push({
+      category: 'תרומות פוליטיות (סעיף 46א)',
+      description: `זיכוי 35% עד תקרה של ${POLITICAL_DONATIONS_CAP.toLocaleString()} ₪`,
+      estimatedAmount: politicalDonationsCredit,
+    });
+  }
+
   if (lifeInsuranceCredit > 0) {
     reasons.push({
       category: 'ביטוח חיים',
-      description: 'זיכוי 25% מפרמיית ביטוח חיים (עד תקרה)',
+      description: 'זיכוי 25% מפרמיה (תקרה 12,000 ₪)',
       estimatedAmount: lifeInsuranceCredit,
     });
   }
 
-  // פריפריה
   if (peripheryCredit > 0) {
     reasons.push({
       category: 'תושב פריפריה',
-      description: 'זיכוי לפי אזור מגורים - אילת/קו עימות/יישובים מוטבים',
+      description: 'זיכוי על השכר לפי אזור מגורים',
       estimatedAmount: peripheryCredit,
     });
   }
 
-  // ילדים שנולדו השנה (לידה לאחר 101)
-  if (input.childrenAge0 > 0) {
-    const newbornCredit = input.childrenAge0 * CREDIT_POINTS_BY_STATUS.childAge0 * CREDIT_POINT_2026.annual;
+  if (input.hasSection95Exemption) {
+    const exemptionTax = exemptIncome * 0.30; // הערכה גסה של מס שהיה משולם
     reasons.push({
-      category: 'לידת ילד בשנת המס',
-      description: `${input.childrenAge0} ילדים בשנת לידתם - 1.5 נקודות זיכוי לכל אחד = ${(1.5 * CREDIT_POINT_2026.annual).toFixed(0)} ₪`,
-      estimatedAmount: newbornCredit,
+      category: 'סעיף 9(5) - נכה 100% / עיוור / חולה',
+      description: `פטור על הכנסה עד ${SECTION_95_EXEMPTION_CAP_EARNED.toLocaleString()} ₪/שנה`,
+      estimatedAmount: exemptionTax,
     });
   }
 
-  // עולה חדש
+  if (input.activeReservist || input.reserveDuyDays >= 10) {
+    reasons.push({
+      category: 'משרת במילואים פעיל',
+      description: `נקודת זיכוי נוספת = ${CREDIT_POINT_2026.annual.toLocaleString()} ₪/שנה`,
+      estimatedAmount: CREDIT_POINT_2026.annual,
+    });
+  }
+
+  if (input.childrenInService > 0) {
+    const childServiceCredit = input.childrenInService * CREDIT_POINT_2026.annual;
+    reasons.push({
+      category: `${input.childrenInService} ילדים בשירות צבאי/לאומי`,
+      description: 'נקודת זיכוי לכל ילד בשירות בני 18-21',
+      estimatedAmount: childServiceCredit,
+    });
+  }
+
+  if (
+    input.gender === 'female' &&
+    input.childcareExpenses > 0 &&
+    (input.childrenAge0 + input.childrenAge1to5) > 0
+  ) {
+    reasons.push({
+      category: 'דמי טיפול בילד (סעיף 66)',
+      description: 'אישה עובדת זכאית לניכוי דמי מעון/טיפול עד תקרה',
+      estimatedAmount: input.childcareExpenses * 0.35,
+    });
+  }
+
+  const medicalThreshold = annualIncome * MEDICAL_EXPENSES_THRESHOLD_PCT;
+  if (input.medicalExpenses > medicalThreshold) {
+    const excess = input.medicalExpenses - medicalThreshold;
+    reasons.push({
+      category: 'הוצאות רפואיות חריגות',
+      description: `מעל 12.5% מההכנסה ניתן לניכוי - הסך החריג: ${excess.toLocaleString()} ₪`,
+      estimatedAmount: excess * 0.30,
+    });
+  }
+
+  if (input.alimonyPaid > 0) {
+    reasons.push({
+      category: 'תשלום מזונות',
+      description: 'מזונות לבן/בת זוג גרוש מנוכים מההכנסה החייבת',
+      estimatedAmount: input.alimonyPaid * 0.30,
+    });
+  }
+
+  if (capitalGainsRefund > 0) {
+    reasons.push({
+      category: 'מס יתר על הכנסות הון',
+      description: 'מס יתר ביחס ל-25% הסטטוטורי על דיב\'/ריבית/רווחי הון',
+      estimatedAmount: capitalGainsRefund,
+    });
+  }
+
+  if (input.spouseDisabled && input.maritalStatus === 'married') {
+    reasons.push({
+      category: 'בן/בת זוג נכה',
+      description: '2 נקודות זיכוי נוספות',
+      estimatedAmount: 2 * CREDIT_POINT_2026.annual,
+    });
+  }
+
+  if (input.childrenAge0 > 0) {
+    reasons.push({
+      category: 'לידת ילד בשנת המס',
+      description: `${input.childrenAge0} ילדים בשנת לידתם - 1.5 נקודות לכל אחד`,
+      estimatedAmount: input.childrenAge0 * 1.5 * CREDIT_POINT_2026.annual,
+    });
+  }
+
   if (input.monthsSinceImmigration > 0 && input.monthsSinceImmigration <= 54) {
     reasons.push({
       category: 'עולה חדש',
-      description: `נקודות זיכוי לעולה חדש - בשלב הנוכחי (${input.monthsSinceImmigration} חודשים מעלייה)`,
-      estimatedAmount: 0, // כלול בחישוב הכללי
-    });
-  }
-
-  // חייל משוחרר
-  if (input.yearsSinceRelease > 0 && input.yearsSinceRelease <= 3) {
-    const soldierCredit = CREDIT_POINTS_BY_STATUS.releasedSoldier * CREDIT_POINT_2026.annual;
-    reasons.push({
-      category: 'חייל משוחרר',
-      description: `2 נקודות זיכוי בשלוש שנים מהשחרור = ${soldierCredit.toFixed(0)} ₪/שנה`,
+      description: `נקודות זיכוי לפי תקופת העלייה (${input.monthsSinceImmigration} חודשים)`,
       estimatedAmount: 0,
     });
   }
 
-  // תואר
+  if (input.yearsSinceRelease > 0 && input.yearsSinceRelease <= 3) {
+    reasons.push({
+      category: 'חייל משוחרר',
+      description: `2 נקודות זיכוי בשלוש שנים מהשחרור`,
+      estimatedAmount: 2 * CREDIT_POINT_2026.annual,
+    });
+  }
+
   if (input.bachelorDegreeThisYear || input.masterDegreeThisYear) {
     reasons.push({
       category: 'סיום לימודים אקדמיים',
-      description: 'נקודת זיכוי לסיום תואר (תואר ראשון - שנה אחרי, תואר שני - חצי שנה)',
+      description: 'נקודה לתואר ראשון / 0.5 נקודה לתואר שני',
       estimatedAmount: 0,
     });
   }
 
-  // הודעות נוספות
-  if (input.taxCoordinationPerformed && estimatedRefund > 0) {
-    notes.push('בוצע תיאום מס במהלך השנה. ייתכן שעדיין יש החזר אם היו שינויים בנסיבות.');
+  // ----- הודעות -----
+
+  if (input.taxCoordinationPerformed && mainRefund > 0) {
+    notes.push('בוצע תיאום מס. ייתכן שעדיין יש החזר אם היו שינויים בנסיבות.');
   }
 
   if (input.spouseNoIncome && input.maritalStatus !== 'married') {
-    notes.push('סימנת בן/בת זוג ללא הכנסה אך לא נשוי/אה - לא ייקח בחשבון.');
+    notes.push('סימנת בן/בת זוג ללא הכנסה אך לא נשוי/אה - לא מזכה.');
   }
 
-  if (annualIncome === 0) {
-    notes.push('לא הוזן שכר. החזר יחושב לפי שכר ברוטו.');
+  if (input.spouseDisabled && input.maritalStatus !== 'married') {
+    notes.push('סימנת בן/בת זוג נכה אך לא נשוי/אה - לא מזכה.');
   }
 
-  if (estimatedRefund === 0 && taxWithheld > 0) {
+  if (input.gender !== 'female' && input.childcareExpenses > 0) {
     notes.push(
-      'בחישוב הראשוני אין החזר. ייתכן שעדיין כדאי להגיש דוח אם היו אירועים חריגים בשנה.',
+      'סעיף 66 (דמי טיפול בילד) חל רק על אישה עובדת לפי החוק. בקש ייעוץ מס במקרים מיוחדים.',
     );
   }
 
+  if (input.medicalExpenses > 0 && input.medicalExpenses <= medicalThreshold) {
+    notes.push(
+      `הוצאות רפואיות (${input.medicalExpenses.toLocaleString()} ₪) מתחת לסף 12.5% מההכנסה - לא ניתן לניכוי.`,
+    );
+  }
+
+  if (input.donations > 0 && input.donations < DONATIONS_MIN) {
+    notes.push(`תרומות פחות מ-${DONATIONS_MIN} ₪ אינן מזכות בזיכוי.`);
+  }
+
+  if (input.taxYear < 2026) {
+    notes.push(
+      `שנת המס ${input.taxYear} - החישוב מבוסס על קבועי 2026. לדיוק מלא לשנים קודמות, מומלץ ייעוץ מקצועי.`,
+    );
+  }
+
+  if (annualIncome === 0) {
+    notes.push('לא הוזן שכר.');
+  }
+
+  if (estimatedRefund === 0 && taxWithheld > 0) {
+    notes.push('בחישוב הראשוני אין החזר. בדוק אם יש סעיפים שלא הוזנו.');
+  }
+
   if (estimatedRefund > 5000) {
-    notes.push('החזר משמעותי - מומלץ להגיש דוח להחזר מס. ניתן לעשות זאת באתר רשות המסים.');
+    notes.push(
+      'החזר משמעותי - מומלץ להגיש דוח. ניתן לעשות זאת באתר רשות המסים או דרך יועץ.',
+    );
+  }
+
+  if (input.hasSection95Exemption) {
+    notes.push(
+      'סעיף 9(5) - חובה אישור רפואי / נכות מטעם ביטוח לאומי או רשות המסים.',
+    );
   }
 
   return {
@@ -448,11 +701,63 @@ export function calculateTaxRefund(input: TaxRefundInput): TaxRefundResult {
     creditPointsValue,
     totalDeductions,
     donationsCredit,
-    peripheryCredit: peripheryCredit + lifeInsuranceCredit, // לפי הצגה
+    politicalDonationsCredit,
+    lifeInsuranceCredit,
+    peripheryCredit,
+    section95Exemption: exemptIncome,
     finalTax,
+    capitalGainsTax,
+    capitalGainsRefund,
     estimatedRefund,
     isEntitledToRefund,
     refundReasons: reasons,
     notes,
+  };
+}
+
+// ============================================================
+// פונקציות עזר חיצוניות (לשימוש ב-UI)
+// ============================================================
+
+export function getDefaultInput(): TaxRefundInput {
+  return {
+    annualGrossSalary: 200_000,
+    taxWithheld: 30_000,
+    socialSecurityWithheld: 0,
+    monthsWorked: 12,
+    taxYear: 2026,
+    gender: 'male',
+    maritalStatus: 'single',
+    spouseNoIncome: false,
+    spouseDisabled: false,
+    childrenAge0: 0,
+    childrenAge1to5: 0,
+    childrenAge6to17: 0,
+    childrenAge18: 0,
+    disabledChildren: 0,
+    childrenInService: 0,
+    monthsSinceImmigration: 0,
+    yearsSinceRelease: 0,
+    bachelorDegreeThisYear: false,
+    masterDegreeThisYear: false,
+    activeReservist: false,
+    reserveDuyDays: 0,
+    hasSection95Exemption: false,
+    privatePensionDeposits: 0,
+    privateStudyFundDeposits: 0,
+    lifeInsurancePremium: 0,
+    disabilityInsurancePremium: 0,
+    educationExpenses: 0,
+    childcareExpenses: 0,
+    alimonyPaid: 0,
+    medicalExpenses: 0,
+    accountantFees: 0,
+    donations: 0,
+    politicalDonations: 0,
+    peripheryZone: 'none',
+    multipleEmployersNoCoordination: false,
+    taxCoordinationPerformed: false,
+    capitalIncome: 0,
+    capitalTaxWithheld: 0,
   };
 }

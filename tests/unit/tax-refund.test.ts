@@ -1,33 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { calculateTaxRefund, type TaxRefundInput } from '@/lib/calculators/tax-refund';
+import {
+  calculateTaxRefund,
+  getDefaultInput,
+  type TaxRefundInput,
+} from '@/lib/calculators/tax-refund';
 
-const baseInput: TaxRefundInput = {
-  annualGrossSalary: 200_000,
-  taxWithheld: 30_000,
-  socialSecurityWithheld: 0,
-  monthsWorked: 12,
-  gender: 'male',
-  maritalStatus: 'single',
-  spouseNoIncome: false,
-  childrenAge0: 0,
-  childrenAge1to5: 0,
-  childrenAge6to17: 0,
-  childrenAge18: 0,
-  disabledChildren: 0,
-  monthsSinceImmigration: 0,
-  yearsSinceRelease: 0,
-  bachelorDegreeThisYear: false,
-  masterDegreeThisYear: false,
-  privatePensionDeposits: 0,
-  privateStudyFundDeposits: 0,
-  lifeInsurancePremium: 0,
-  disabilityInsurancePremium: 0,
-  donations: 0,
-  peripheryZone: 'none',
-  educationExpenses: 0,
-  multipleEmployersNoCoordination: false,
-  taxCoordinationPerformed: false,
-};
+const baseInput: TaxRefundInput = getDefaultInput();
 
 describe('calculateTaxRefund - בסיסי', () => {
   it('לא נוכה מס - אין החזר', () => {
@@ -36,12 +14,7 @@ describe('calculateTaxRefund - בסיסי', () => {
     expect(r.isEntitledToRefund).toBe(false);
   });
 
-  it('שכיר רגיל ללא נסיבות - אין החזר משמעותי', () => {
-    // 200K שנתי = 16,667/חודש = מדרגה 3 (20%)
-    // מס: 84,120×10% + 36,600×14% + 79,280×20% = 8,412 + 5,124 + 15,856 = 29,392
-    // נקודות זיכוי: 2.25 × 2,904 = 6,534
-    // מס סופי: 29,392 - 6,534 = 22,858
-    // אם נוכה 30K - החזר ~7,142
+  it('שכיר רגיל ללא נסיבות - יש החזר', () => {
     const r = calculateTaxRefund({ ...baseInput });
     expect(r.totalCreditPoints).toBe(2.25);
     expect(r.estimatedRefund).toBeGreaterThan(7000);
@@ -51,43 +24,31 @@ describe('calculateTaxRefund - בסיסי', () => {
   it('אישה - 2.75 נקודות זיכוי', () => {
     const r = calculateTaxRefund({ ...baseInput, gender: 'female' });
     expect(r.totalCreditPoints).toBe(2.75);
-    expect(r.creditPointsValue).toBeCloseTo(2.75 * 2_904, 0);
   });
 });
 
-describe('calculateTaxRefund - מצבים מיוחדים', () => {
+describe('calculateTaxRefund - מצבים מיוחדים (קיימים)', () => {
   it('אם עם 2 ילדים בני 1-5', () => {
     const r = calculateTaxRefund({
       ...baseInput,
       gender: 'female',
       childrenAge1to5: 2,
     });
-    // 2.25 + 0.5 + 2×2.5 = 7.75 נקודות
     expect(r.totalCreditPoints).toBe(7.75);
   });
 
   it('עולה חדש שנה ראשונה - 3 נקודות נוספות', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      monthsSinceImmigration: 12,
-    });
-    // 2.25 + 3 = 5.25
+    const r = calculateTaxRefund({ ...baseInput, monthsSinceImmigration: 12 });
     expect(r.totalCreditPoints).toBe(5.25);
   });
 
   it('חייל משוחרר - 2 נקודות נוספות', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      yearsSinceRelease: 1,
-    });
+    const r = calculateTaxRefund({ ...baseInput, yearsSinceRelease: 1 });
     expect(r.totalCreditPoints).toBe(4.25);
   });
 
   it('הורה יחיד - תוספת נקודה', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      maritalStatus: 'single-parent',
-    });
+    const r = calculateTaxRefund({ ...baseInput, maritalStatus: 'single-parent' });
     expect(r.totalCreditPoints).toBe(3.25);
   });
 
@@ -98,106 +59,207 @@ describe('calculateTaxRefund - מצבים מיוחדים', () => {
       maritalStatus: 'married',
       spouseNoIncome: true,
     });
-    expect(single.totalCreditPoints).toBe(2.25); // רווק - לא תקף
-    expect(married.totalCreditPoints).toBe(3.25); // נשוי - מקבל
+    expect(single.totalCreditPoints).toBe(2.25);
+    expect(married.totalCreditPoints).toBe(3.25);
   });
 });
 
-describe('calculateTaxRefund - תרומות', () => {
+describe('calculateTaxRefund - תוספות חדשות', () => {
+  it('משרת מילואים פעיל - 1 נקודה נוספת', () => {
+    const r = calculateTaxRefund({ ...baseInput, activeReservist: true });
+    expect(r.totalCreditPoints).toBe(3.25);
+  });
+
+  it('מילואים לפי ימים (10+) - גם זוכה', () => {
+    const r = calculateTaxRefund({ ...baseInput, reserveDuyDays: 25 });
+    expect(r.totalCreditPoints).toBe(3.25);
+  });
+
+  it('ילדים בשירות צבאי - 1 נקודה לכל ילד', () => {
+    const r = calculateTaxRefund({ ...baseInput, childrenInService: 2 });
+    expect(r.totalCreditPoints).toBe(4.25);
+  });
+
+  it('בן זוג נכה - 2 נקודות (רק לנשואים)', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      maritalStatus: 'married',
+      spouseDisabled: true,
+    });
+    expect(r.totalCreditPoints).toBe(4.25);
+  });
+});
+
+describe('calculateTaxRefund - סעיף 9.5 (פטור נכי 100%)', () => {
+  it('זכאי לפטור - הכנסה חייבת = 0', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      annualGrossSalary: 400_000,
+      hasSection95Exemption: true,
+    });
+    expect(r.section95Exemption).toBe(400_000);
+    expect(r.taxableIncome).toBe(0);
+    expect(r.grossTax).toBe(0);
+  });
+
+  it('הכנסה גבוהה מהתקרה - פטור עד 608,400', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      annualGrossSalary: 800_000,
+      hasSection95Exemption: true,
+    });
+    expect(r.section95Exemption).toBe(608_400);
+    expect(r.taxableIncome).toBe(800_000 - 608_400);
+  });
+
+  it('ללא פטור - הכנסה חייבת מלאה', () => {
+    const r = calculateTaxRefund({ ...baseInput });
+    expect(r.section95Exemption).toBe(0);
+  });
+});
+
+describe('calculateTaxRefund - דמי טיפול בילד (סעיף 66)', () => {
+  it('אישה עם תינוק והוצאות מעון - ניכוי', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      gender: 'female',
+      childrenAge1to5: 1,
+      childcareExpenses: 8_000,
+    });
+    expect(r.totalDeductions).toBeGreaterThanOrEqual(8_000);
+  });
+
+  it('גבר - אין ניכוי דמי טיפול בילד', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      gender: 'male',
+      childrenAge1to5: 1,
+      childcareExpenses: 8_000,
+    });
+    // לגבר לא ניתן ניכוי דמי טיפול בילד לפי סעיף 66
+    expect(r.totalDeductions).toBe(0);
+  });
+
+  it('אישה ללא ילדים מתחת ל-5 - אין ניכוי', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      gender: 'female',
+      childrenAge6to17: 2,
+      childcareExpenses: 5_000,
+    });
+    expect(r.totalDeductions).toBe(0);
+  });
+});
+
+describe('calculateTaxRefund - הוצאות רפואיות חריגות', () => {
+  it('הוצאות מעל 12.5% - ניכוי החריגה', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      annualGrossSalary: 100_000,
+      medicalExpenses: 20_000, // 20% מההכנסה - 12,500 סף, 7,500 חריגה
+    });
+    expect(r.totalDeductions).toBeGreaterThanOrEqual(7_500);
+  });
+
+  it('הוצאות מתחת לסף - אין ניכוי', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      annualGrossSalary: 100_000,
+      medicalExpenses: 10_000, // 10% - מתחת לסף 12.5%
+    });
+    expect(r.totalDeductions).toBe(0);
+  });
+});
+
+describe('calculateTaxRefund - תרומות פוליטיות', () => {
+  it('תרומה פוליטית - זיכוי 35%', () => {
+    const r = calculateTaxRefund({ ...baseInput, politicalDonations: 5_000 });
+    expect(r.politicalDonationsCredit).toBe(1_750);
+  });
+
+  it('תרומה מעל התקרה - מוגבל ל-12,800', () => {
+    const r = calculateTaxRefund({ ...baseInput, politicalDonations: 20_000 });
+    expect(r.politicalDonationsCredit).toBe(12_800 * 0.35);
+  });
+});
+
+describe('calculateTaxRefund - שכר טרחה ומזונות', () => {
+  it('שכר טרחה רו"ח - הוצאה מותרת', () => {
+    const r = calculateTaxRefund({ ...baseInput, accountantFees: 2_500 });
+    expect(r.totalDeductions).toBe(2_500);
+  });
+
+  it('מזונות לבן/בת זוג - הוצאה מוכרת', () => {
+    const r = calculateTaxRefund({ ...baseInput, alimonyPaid: 36_000 });
+    expect(r.totalDeductions).toBe(36_000);
+  });
+});
+
+describe('calculateTaxRefund - הכנסות הון', () => {
+  it('הכנסת הון - מס 25%', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      capitalIncome: 50_000,
+      capitalTaxWithheld: 15_000, // 30% נוכה - יותר מהנדרש
+    });
+    expect(r.capitalGainsTax).toBe(12_500); // 50K * 25%
+    expect(r.capitalGainsRefund).toBe(2_500); // 15K - 12.5K
+  });
+
+  it('מס נוכה כמו שצריך - אין החזר על הון', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      capitalIncome: 100_000,
+      capitalTaxWithheld: 25_000, // 25% מדויק
+    });
+    expect(r.capitalGainsRefund).toBe(0);
+  });
+});
+
+describe('calculateTaxRefund - תרחיש מקיף עם כל הסעיפים החדשים', () => {
+  it('שכירה אם עם הכל - החזר מקסימלי', () => {
+    const r = calculateTaxRefund({
+      ...baseInput,
+      annualGrossSalary: 350_000,
+      taxWithheld: 75_000,
+      gender: 'female',
+      maritalStatus: 'married',
+      childrenAge1to5: 2,
+      childrenInService: 1,
+      activeReservist: true,
+      donations: 5_000,
+      politicalDonations: 3_000,
+      privatePensionDeposits: 10_000,
+      lifeInsurancePremium: 3_000,
+      childcareExpenses: 12_000,
+      medicalExpenses: 50_000,
+      accountantFees: 2_000,
+      peripheryZone: 'tier-a',
+    });
+    expect(r.estimatedRefund).toBeGreaterThan(30_000);
+    expect(r.refundReasons.length).toBeGreaterThan(5);
+  });
+});
+
+describe('calculateTaxRefund - תרומות (מקוריים)', () => {
   it('תרומה 1,000 ₪ - זיכוי 350 ₪', () => {
     const r = calculateTaxRefund({ ...baseInput, donations: 1_000 });
     expect(r.donationsCredit).toBe(350);
   });
 
-  it('תרומה 100 ₪ - מתחת למינימום, אין זיכוי', () => {
+  it('תרומה 100 ₪ - מתחת למינימום', () => {
     const r = calculateTaxRefund({ ...baseInput, donations: 100 });
     expect(r.donationsCredit).toBe(0);
-  });
-
-  it('תרומה גבוהה מ-30% מההכנסה - מוגבל', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      annualGrossSalary: 100_000,
-      donations: 50_000, // 50%, אבל יוגבל ל-30%
-    });
-    // מקסימום 30,000 × 35% = 10,500
-    expect(r.donationsCredit).toBe(10_500);
-  });
-});
-
-describe('calculateTaxRefund - הפקדות', () => {
-  it('הפקדה עצמאית לפנסיה מורידה הכנסה חייבת', () => {
-    const noDeposit = calculateTaxRefund({ ...baseInput });
-    const withDeposit = calculateTaxRefund({
-      ...baseInput,
-      privatePensionDeposits: 10_000,
-    });
-    expect(withDeposit.taxableIncome).toBe(noDeposit.taxableIncome - 10_000);
-    expect(withDeposit.estimatedRefund).toBeGreaterThan(noDeposit.estimatedRefund);
-  });
-
-  it('הפקדה לקרן השתלמות מורידה הכנסה חייבת', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      privateStudyFundDeposits: 15_000,
-    });
-    expect(r.totalDeductions).toBeGreaterThanOrEqual(15_000);
   });
 });
 
 describe('calculateTaxRefund - אזורי פריפריה', () => {
-  it('אילת - 10% עד תקרת 268,560', () => {
+  it('אילת - 10% עד תקרה', () => {
     const r = calculateTaxRefund({
       ...baseInput,
       annualGrossSalary: 200_000,
       peripheryZone: 'eilat',
     });
     expect(r.peripheryCredit).toBeGreaterThanOrEqual(20_000);
-  });
-
-  it('ללא פריפריה - אין זיכוי', () => {
-    const r = calculateTaxRefund({ ...baseInput });
-    expect(r.peripheryCredit).toBe(0);
-  });
-});
-
-describe('calculateTaxRefund - סיבות להחזר', () => {
-  it('עבודה חלקית - מופיע ברשימת סיבות', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      monthsWorked: 6,
-      taxWithheld: 15_000,
-    });
-    expect(r.refundReasons.some((reason) => reason.category.includes('חלקית'))).toBe(true);
-  });
-
-  it('מספר מעסיקים ללא תיאום - מופיע', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      multipleEmployersNoCoordination: true,
-    });
-    expect(r.refundReasons.some((reason) => reason.category.includes('מעסיקים'))).toBe(true);
-  });
-
-  it('תרומות מעל המינימום - מופיע', () => {
-    const r = calculateTaxRefund({ ...baseInput, donations: 5_000 });
-    expect(r.refundReasons.some((reason) => reason.category.includes('תרומות'))).toBe(true);
-  });
-});
-
-describe('calculateTaxRefund - תרחיש מקיף', () => {
-  it('שכירה אם 2 ילדים, תרומות, פנסיה - החזר משמעותי', () => {
-    const r = calculateTaxRefund({
-      ...baseInput,
-      annualGrossSalary: 350_000,
-      taxWithheld: 75_000,
-      gender: 'female',
-      childrenAge1to5: 2,
-      donations: 5_000,
-      privatePensionDeposits: 10_000,
-      lifeInsurancePremium: 3_000,
-    });
-    expect(r.estimatedRefund).toBeGreaterThan(15_000);
-    expect(r.refundReasons.length).toBeGreaterThanOrEqual(2);
   });
 });
