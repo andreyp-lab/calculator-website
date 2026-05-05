@@ -4,6 +4,7 @@ import { ScenarioBar } from '@/components/tools/ScenarioBar';
 import { SettingsCard } from '@/components/tools/SettingsCard';
 import { IncomeManager } from '@/components/tools/IncomeManager';
 import { ExpenseManager } from '@/components/tools/ExpenseManager';
+import { LoanManager } from '@/components/tools/LoanManager';
 import { PLSummary } from '@/components/tools/PLSummary';
 import { TrendingUp } from 'lucide-react';
 
@@ -29,6 +30,7 @@ export default function BudgetPage() {
         <div className="lg:col-span-2 space-y-4">
           <IncomeManager />
           <ExpenseManager />
+          <LoanManager />
         </div>
         <div className="lg:col-span-1">
           <div className="sticky top-4">
