@@ -128,3 +128,68 @@
     @apply font-sans;
   }
 }
+/* ============================================================
+   Print-Friendly Styles - PDF Export
+   ============================================================ */
+@media print {
+  /* hide non-essential UI */
+  nav, header, footer, button, .print\:hidden {
+    display: none !important;
+  }
+
+  /* white background for everything */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 10pt;
+  }
+
+  /* full width layouts */
+  .min-h-screen, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .container {
+    max-width: 100% !important;
+  }
+
+  /* no shadows / borders for print */
+  .shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl {
+    box-shadow: none !important;
+  }
+
+  /* tables: avoid breaking inside row */
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* charts and key sections */
+  .recharts-wrapper {
+    page-break-inside: avoid;
+  }
+
+  /* gradient backgrounds → white for print */
+  [class*="bg-gradient"] {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* hide all tab/interactive elements */
+  [role="tab"], [role="button"] {
+    display: none !important;
+  }
+
+  /* ensure content is visible */
+  .bg-blue-50, .bg-emerald-50, .bg-red-50, .bg-amber-50, .bg-gray-50 {
+    background: #f9fafb !important;
+  }
+
+  /* page break for major sections */
+  h1, h2 {
+    page-break-after: avoid;
+  }
+  h2 {
+    page-break-before: auto;
+  }
+
+  /* RTL preserved in print */
+  body {
+    direction: rtl !important;
+  }
+}

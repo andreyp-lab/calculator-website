@@ -9,6 +9,7 @@ import { BankAccountsManager } from '@/components/tools/BankAccountsManager';
 import { DelaysManager } from '@/components/tools/DelaysManager';
 import { CustomExpensesManager } from '@/components/tools/CustomExpensesManager';
 import { DebtRestructuring } from '@/components/tools/DebtRestructuring';
+import { ExportImportBar } from '@/components/tools/ExportImportBar';
 import { Wallet, Info } from 'lucide-react';
 import Link from 'next/link';
 import { useTools } from '@/lib/tools/ToolsContext';
@@ -30,16 +31,19 @@ export default function CashFlowPage() {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-4">
-        <div className="bg-blue-100 p-3 rounded-lg">
-          <Wallet className="w-6 h-6 text-blue-700" />
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex items-center gap-3">
+          <div className="bg-blue-100 p-3 rounded-lg">
+            <Wallet className="w-6 h-6 text-blue-700" />
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">תזרים מזומנים מקצועי</h2>
+            <p className="text-sm text-gray-600">
+              דשבורד KPI, גרפים, חשבונות בנק, עיכובי גביה, פריסת חוב ותשלומים חד-פעמיים
+            </p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">תזרים מזומנים מקצועי</h2>
-          <p className="text-sm text-gray-600">
-            דשבורד KPI, גרפים, חשבונות בנק, עיכובי גביה, פריסת חוב ותשלומים חד-פעמיים
-          </p>
-        </div>
+        <ExportImportBar />
       </div>
 
       <ScenarioBar />
