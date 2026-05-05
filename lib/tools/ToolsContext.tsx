@@ -39,6 +39,8 @@ interface ToolsContextValue {
   scenario: Scenario | null;
   scenarioId: string;
   scenariosList: Array<{ id: string; name: string }>;
+  /** Get any scenario by id (for comparison) */
+  getScenarioById: (id: string) => Scenario | null;
 
   // Quick access
   settings: PeriodSettings | null;
@@ -482,10 +484,16 @@ export function ToolsProvider({ children }: { children: ReactNode }) {
   // BUILD VALUE
   // ============================================================
 
+  const getScenarioById = useCallback(
+    (id: string): Scenario | null => state.scenarios[id] ?? null,
+    [state.scenarios],
+  );
+
   const value: ToolsContextValue = {
     scenario,
     scenarioId: state.currentScenarioId,
     scenariosList,
+    getScenarioById,
     settings: scenario?.settings ?? null,
     budget: scenario?.budget ?? null,
     cashFlow: scenario?.cashFlow ?? null,

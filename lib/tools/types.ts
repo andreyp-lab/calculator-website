@@ -124,6 +124,8 @@ export interface BankAccount {
   asOfDate: string; // YYYY-MM-DD
 }
 
+export type ExpenseFrequency = 'once' | 'monthly' | 'quarterly' | 'yearly';
+
 export interface CashFlowExpense {
   id: string;
   category: 'supplier' | 'employee' | 'authority' | 'check' | 'creditcard' | 'loan' | 'other';
@@ -132,7 +134,14 @@ export interface CashFlowExpense {
   date: string; // תאריך חיוב
   paymentTerms: number; // ימי דחייה
   status: 'pending' | 'approved' | 'paid' | 'cleared' | 'bounced';
+  /** תכיפות (חד-פעמי / חודשי / רבעוני / שנתי) */
+  frequency?: ExpenseFrequency;
   // פרטים נוספים לפי קטגוריה:
+  // ספק: status (pending/approved/paid)
+  // רשות: type (tax/insurance/license/vat), priority (low/medium/high/critical)
+  // שיק: number, payee, bank, status (issued/pending/cleared/bounced)
+  // אשראי: company (visa/mc/amex/cal/diners), last4, payments (1-12)
+  // אחר: subcategory
   details?: Record<string, string | number>;
 }
 

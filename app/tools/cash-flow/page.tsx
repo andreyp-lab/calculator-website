@@ -5,17 +5,19 @@ import { SettingsCard } from '@/components/tools/SettingsCard';
 import { CashFlowDashboard } from '@/components/tools/CashFlowDashboard';
 import { CashFlowChart } from '@/components/tools/CashFlowChart';
 import { CashFlowTable } from '@/components/tools/CashFlowTable';
+import { CashFlowDistributionCharts } from '@/components/tools/CashFlowDistributionCharts';
 import { BankAccountsManager } from '@/components/tools/BankAccountsManager';
 import { DelaysManager } from '@/components/tools/DelaysManager';
 import { CustomExpensesManager } from '@/components/tools/CustomExpensesManager';
 import { DebtRestructuring } from '@/components/tools/DebtRestructuring';
+import { ScenarioCompare } from '@/components/tools/ScenarioCompare';
 import { ExportImportBar } from '@/components/tools/ExportImportBar';
 import { Wallet, Info } from 'lucide-react';
 import Link from 'next/link';
 import { useTools } from '@/lib/tools/ToolsContext';
 import { useState } from 'react';
 
-type Tab = 'dashboard' | 'manage' | 'restructure';
+type Tab = 'dashboard' | 'manage' | 'restructure' | 'compare';
 
 export default function CashFlowPage() {
   const { budget, cashFlow } = useTools();
@@ -100,13 +102,24 @@ export default function CashFlowPage() {
             >
               🔄 פריסת חוב
             </button>
+            <button
+              onClick={() => setTab('compare')}
+              className={`px-4 py-2 text-sm font-medium transition ${
+                tab === 'compare'
+                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              🔀 השוואת תרחישים
+            </button>
           </div>
 
           <div className="mt-4">
             {tab === 'dashboard' && (
-              <div className="space-y-4">
+              <div className="space-y-4" id="cashflow-dashboard-content">
                 <CashFlowDashboard />
                 <CashFlowChart />
+                <CashFlowDistributionCharts />
                 <CashFlowTable />
               </div>
             )}
@@ -122,6 +135,12 @@ export default function CashFlowPage() {
             {tab === 'restructure' && (
               <div className="space-y-4">
                 <DebtRestructuring />
+              </div>
+            )}
+
+            {tab === 'compare' && (
+              <div className="space-y-4">
+                <ScenarioCompare />
               </div>
             )}
           </div>

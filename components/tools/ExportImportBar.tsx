@@ -8,6 +8,8 @@ import {
   downloadTemplate,
   type ImportResult,
 } from '@/lib/tools/excel-io';
+import { exportCashFlowPDF } from '@/lib/tools/pdf-export';
+import { calculateCashFlow } from '@/lib/tools/cashflow-engine';
 import {
   Download,
   Upload,
@@ -63,6 +65,31 @@ export function ExportImportBar() {
   function handlePrint() {
     window.print();
     setMenuOpen(false);
+  }
+
+  async function handleExportPDF() {
+    if (!budget || !cashFlow || !settings) {
+      setImportMessage({ type: 'error', text: 'אין נתונים לייצוא' });
+      return;
+    }
+    setMenuOpen(false);
+    setImportMessage({ type: 'success', text: 'מייצר PDF...' });
+    try {
+      const monthlyData = calculateCashFlow(budget, cashFlow, settings);
+      await exportCashFlowPDF({
+        title: 'Cash Flow Report | דוח תזרים מזומנים',
+        subtitle: 'FinCalc Pro',
+        scenarioName: scenario?.name,
+        monthlyData,
+        currency: settings.currency,
+        chartSelectors: ['#cashflow-dashboard-content'],
+      });
+      setImportMessage({ type: 'success', text: 'PDF נוצר בהצלחה!' });
+      setTimeout(() => setImportMessage(null), 3000);
+    } catch (e) {
+      console.error(e);
+      setImportMessage({ type: 'error', text: 'שגיאה ביצירת PDF' });
+    }
   }
 
   function handleImportClick() {
@@ -173,13 +200,23 @@ export function ExportImportBar() {
                   </div>
                 </button>
                 <button
+                  onClick={handleExportPDF}
+                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-blue-50 text-sm"
+                >
+                  <FileDown className="w-4 h-4 text-rose-600" />
+                  <div className="flex-1">
+                    <div className="font-medium">ייצוא ל-PDF (מקצועי)</div>
+                    <div className="text-xs text-gray-500">דוח עם KPI + טבלאות + גרפים</div>
+                  </div>
+                </button>
+                <button
                   onClick={handlePrint}
                   className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-blue-50 text-sm"
                 >
                   <Printer className="w-4 h-4 text-blue-600" />
                   <div className="flex-1">
-                    <div className="font-medium">ייצוא ל-PDF</div>
-                    <div className="text-xs text-gray-500">דרך הדפסה (Ctrl+P)</div>
+                    <div className="font-medium">הדפסה (PDF דרך הדפדפן)</div>
+                    <div className="text-xs text-gray-500">חלופה - Ctrl+P</div>
                   </div>
                 </button>
 
