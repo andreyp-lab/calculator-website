@@ -2,15 +2,31 @@
 
 import { ScenarioBar } from '@/components/tools/ScenarioBar';
 import { SettingsCard } from '@/components/tools/SettingsCard';
+import { CashFlowDashboard } from '@/components/tools/CashFlowDashboard';
+import { CashFlowChart } from '@/components/tools/CashFlowChart';
 import { CashFlowTable } from '@/components/tools/CashFlowTable';
+import { BankAccountsManager } from '@/components/tools/BankAccountsManager';
+import { DelaysManager } from '@/components/tools/DelaysManager';
+import { CustomExpensesManager } from '@/components/tools/CustomExpensesManager';
+import { DebtRestructuring } from '@/components/tools/DebtRestructuring';
 import { Wallet, Info } from 'lucide-react';
 import Link from 'next/link';
 import { useTools } from '@/lib/tools/ToolsContext';
+import { useState } from 'react';
+
+type Tab = 'dashboard' | 'manage' | 'restructure';
 
 export default function CashFlowPage() {
-  const { budget } = useTools();
+  const { budget, cashFlow } = useTools();
+  const [tab, setTab] = useState<Tab>('dashboard');
+
   const hasBudgetData =
     budget && (budget.income.length > 0 || budget.expenses.length > 0 || budget.loans.length > 0);
+  const hasCashFlowData =
+    cashFlow &&
+    (cashFlow.accounts.length > 0 ||
+      cashFlow.delays.length > 0 ||
+      cashFlow.customExpenses.length > 0);
 
   return (
     <div>
@@ -19,9 +35,9 @@ export default function CashFlowPage() {
           <Wallet className="w-6 h-6 text-blue-700" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">תזרים מזומנים</h2>
+          <h2 className="text-2xl font-bold text-gray-900">תזרים מזומנים מקצועי</h2>
           <p className="text-sm text-gray-600">
-            ניתוח יתרות בנק ותחזיות תזרים על בסיס נתוני התקציב
+            דשבורד KPI, גרפים, חשבונות בנק, עיכובי גביה, פריסת חוב ותשלומים חד-פעמיים
           </p>
         </div>
       </div>
@@ -29,13 +45,14 @@ export default function CashFlowPage() {
       <ScenarioBar />
       <SettingsCard />
 
-      {!hasBudgetData ? (
+      {!hasBudgetData && !hasCashFlowData ? (
         <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-6 mt-4 flex items-start gap-3">
           <Info className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
           <div>
-            <h3 className="font-bold text-amber-900 mb-1">אין נתוני תקציב עדיין</h3>
+            <h3 className="font-bold text-amber-900 mb-1">אין נתונים עדיין</h3>
             <p className="text-amber-800 text-sm mb-3">
-              התזרים מבוסס על נתוני התקציב שלך. עבור תחילה לדף התקציב והזן הכנסות והוצאות.
+              התזרים מבוסס על נתוני התקציב שלך. עבור לדף התקציב והזן הכנסות והוצאות, או הוסף
+              חשבונות בנק כאן.
             </p>
             <Link
               href="/tools/budget"
@@ -46,9 +63,65 @@ export default function CashFlowPage() {
           </div>
         </div>
       ) : (
-        <div className="mt-4">
-          <CashFlowTable />
-        </div>
+        <>
+          {/* Tabs */}
+          <div className="flex gap-1 mt-4 border-b-2 border-gray-200">
+            <button
+              onClick={() => setTab('dashboard')}
+              className={`px-4 py-2 text-sm font-medium transition ${
+                tab === 'dashboard'
+                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              📊 דשבורד וגרפים
+            </button>
+            <button
+              onClick={() => setTab('manage')}
+              className={`px-4 py-2 text-sm font-medium transition ${
+                tab === 'manage'
+                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              ⚙️ ניהול תזרים
+            </button>
+            <button
+              onClick={() => setTab('restructure')}
+              className={`px-4 py-2 text-sm font-medium transition ${
+                tab === 'restructure'
+                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              🔄 פריסת חוב
+            </button>
+          </div>
+
+          <div className="mt-4">
+            {tab === 'dashboard' && (
+              <div className="space-y-4">
+                <CashFlowDashboard />
+                <CashFlowChart />
+                <CashFlowTable />
+              </div>
+            )}
+
+            {tab === 'manage' && (
+              <div className="space-y-4">
+                <BankAccountsManager />
+                <DelaysManager />
+                <CustomExpensesManager />
+              </div>
+            )}
+
+            {tab === 'restructure' && (
+              <div className="space-y-4">
+                <DebtRestructuring />
+              </div>
+            )}
+          </div>
+        </>
       )}
     </div>
   );

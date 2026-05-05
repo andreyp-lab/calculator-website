@@ -323,3 +323,140 @@ export function createEmptyCashFlow(): CashFlowData {
     delays: [],
   };
 }
+
+// ============================================================
+// KPI METRICS
+// ============================================================
+
+export interface CashFlowKPIs {
+  currentCash: number; // יתרה נוכחית (חודש 0)
+  totalInflow: number; // סך תקבולים בתקופה
+  totalOutflow: number; // סך תשלומים בתקופה
+  netCashFlow: number; // תזרים נטו בתקופה
+  minBalance: number; // יתרה מינימלית
+  maxBalance: number; // יתרה מקסימלית
+  avgBalance: number; // יתרה ממוצעת
+  closingBalance: number; // יתרת סיום
+  burnRate: number; // קצב שחיקה חודשי (אם תזרים שלילי)
+  runwayMonths: number; // חודשים עד אזילת המזומן (אם burn rate)
+  negativeMonths: number; // מספר חודשים עם יתרה שלילית
+  positiveMonths: number; // מספר חודשים עם תזרים חיובי
+  monthsToBreakeven: number | null; // חודשים עד תזרים חיובי
+  cashAtRiskMonth: number | null; // החודש הראשון עם יתרה שלילית
+}
+
+export function calculateCashFlowKPIs(monthly: MonthlyCashFlow[]): CashFlowKPIs {
+  if (monthly.length === 0) {
+    return {
+      currentCash: 0,
+      totalInflow: 0,
+      totalOutflow: 0,
+      netCashFlow: 0,
+      minBalance: 0,
+      maxBalance: 0,
+      avgBalance: 0,
+      closingBalance: 0,
+      burnRate: 0,
+      runwayMonths: 0,
+      negativeMonths: 0,
+      positiveMonths: 0,
+      monthsToBreakeven: null,
+      cashAtRiskMonth: null,
+    };
+  }
+
+  const totalInflow = monthly.reduce((s, m) => s + m.incomeReceived, 0);
+  const totalOutflow = monthly.reduce((s, m) => s + m.expensesPaid, 0);
+  const netCashFlow = totalInflow - totalOutflow;
+  const closingBalance = monthly[monthly.length - 1].closingBalance;
+  const balances = monthly.map((m) => m.closingBalance);
+  const minBalance = Math.min(...balances);
+  const maxBalance = Math.max(...balances);
+  const avgBalance = balances.reduce((s, b) => s + b, 0) / balances.length;
+
+  // Burn rate - קצב שחיקה (תזרים נטו שלילי ממוצע)
+  const negFlows = monthly.filter((m) => m.netCashFlow < 0).map((m) => m.netCashFlow);
+  const burnRate =
+    negFlows.length > 0 ? Math.abs(negFlows.reduce((s, n) => s + n, 0) / negFlows.length) : 0;
+
+  // Runway - חודשים עד 0 בקצב הנוכחי
+  const currentCash = monthly[0].openingBalance;
+  const runwayMonths = burnRate > 0 ? currentCash / burnRate : Infinity;
+
+  // ניתוחים נוספים
+  const negativeMonths = monthly.filter((m) => m.closingBalance < 0).length;
+  const positiveMonths = monthly.filter((m) => m.netCashFlow > 0).length;
+
+  const breakeven = monthly.findIndex((m) => m.netCashFlow > 0);
+  const monthsToBreakeven = breakeven >= 0 ? breakeven : null;
+
+  const firstNegative = monthly.findIndex((m) => m.closingBalance < 0);
+  const cashAtRiskMonth = firstNegative >= 0 ? firstNegative : null;
+
+  return {
+    currentCash,
+    totalInflow,
+    totalOutflow,
+    netCashFlow,
+    minBalance,
+    maxBalance,
+    avgBalance,
+    closingBalance,
+    burnRate,
+    runwayMonths: Number.isFinite(runwayMonths) ? runwayMonths : Infinity,
+    negativeMonths,
+    positiveMonths,
+    monthsToBreakeven,
+    cashAtRiskMonth,
+  };
+}
+
+// ============================================================
+// DEBT RESTRUCTURING - פריסת חוב
+// ============================================================
+
+export interface DebtRestructureResult {
+  originalMonthlyPayment: number;
+  newMonthlyPayment: number;
+  monthlyDifference: number;
+  originalTotalInterest: number;
+  newTotalInterest: number;
+  additionalInterestCost: number;
+  cashFlowReliefMonthly: number;
+}
+
+/**
+ * חישוב פריסה מחדש של חוב - הארכת תקופה / שינוי ריבית
+ */
+export function restructureDebt(
+  originalAmount: number,
+  originalRate: number, // שנתי באחוזים
+  remainingMonths: number,
+  newTermMonths: number,
+  newRate?: number,
+): DebtRestructureResult {
+  const calcPmt = (P: number, r: number, n: number): number => {
+    if (P <= 0 || n <= 0) return 0;
+    if (r === 0) return P / n;
+    return (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  };
+
+  const origR = originalRate / 100 / 12;
+  const newR = (newRate ?? originalRate) / 100 / 12;
+
+  const originalMonthlyPayment = calcPmt(originalAmount, origR, remainingMonths);
+  const newMonthlyPayment = calcPmt(originalAmount, newR, newTermMonths);
+
+  const originalTotalInterest = originalMonthlyPayment * remainingMonths - originalAmount;
+  const newTotalInterest = newMonthlyPayment * newTermMonths - originalAmount;
+
+  return {
+    originalMonthlyPayment,
+    newMonthlyPayment,
+    monthlyDifference: originalMonthlyPayment - newMonthlyPayment,
+    originalTotalInterest,
+    newTotalInterest,
+    additionalInterestCost: newTotalInterest - originalTotalInterest,
+    cashFlowReliefMonthly: originalMonthlyPayment - newMonthlyPayment,
+  };
+}

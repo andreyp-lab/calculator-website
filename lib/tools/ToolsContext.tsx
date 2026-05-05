@@ -17,6 +17,9 @@ import {
   ExpenseItem,
   Loan,
   Employee,
+  BankAccount,
+  CashFlowDelay,
+  CashFlowExpense,
 } from './types';
 import {
   loadFromStorage,
@@ -62,6 +65,19 @@ interface ToolsContextValue {
   addEmployee: (employee: Omit<Employee, 'id'>) => void;
   updateEmployee: (id: string, updates: Partial<Employee>) => void;
   deleteEmployee: (id: string) => void;
+
+  // Cash Flow actions
+  addBankAccount: (account: Omit<BankAccount, 'id'>) => void;
+  updateBankAccount: (id: string, updates: Partial<BankAccount>) => void;
+  deleteBankAccount: (id: string) => void;
+
+  addDelay: (delay: Omit<CashFlowDelay, 'id'>) => void;
+  updateDelay: (id: string, updates: Partial<CashFlowDelay>) => void;
+  deleteDelay: (id: string) => void;
+
+  addCustomExpense: (expense: Omit<CashFlowExpense, 'id'>) => void;
+  updateCustomExpense: (id: string, updates: Partial<CashFlowExpense>) => void;
+  deleteCustomExpense: (id: string) => void;
 
   // Balance Sheet
   updateBalanceSheet: (updates: Partial<BalanceSheetData>) => void;
@@ -292,6 +308,134 @@ export function ToolsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // ============================================================
+  // CASH FLOW - Bank Accounts
+  // ============================================================
+
+  const addBankAccount = useCallback((account: Omit<BankAccount, 'id'>) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      const newItem: BankAccount = { ...account, id: newId() };
+      return updateCurrentScenario(prev, {
+        cashFlow: { ...current.cashFlow, accounts: [...current.cashFlow.accounts, newItem] },
+      });
+    });
+  }, []);
+
+  const updateBankAccount = useCallback((id: string, updates: Partial<BankAccount>) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      return updateCurrentScenario(prev, {
+        cashFlow: {
+          ...current.cashFlow,
+          accounts: current.cashFlow.accounts.map((a) => (a.id === id ? { ...a, ...updates } : a)),
+        },
+      });
+    });
+  }, []);
+
+  const deleteBankAccount = useCallback((id: string) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      return updateCurrentScenario(prev, {
+        cashFlow: {
+          ...current.cashFlow,
+          accounts: current.cashFlow.accounts.filter((a) => a.id !== id),
+        },
+      });
+    });
+  }, []);
+
+  // ============================================================
+  // CASH FLOW - Delays
+  // ============================================================
+
+  const addDelay = useCallback((delay: Omit<CashFlowDelay, 'id'>) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      const newItem: CashFlowDelay = { ...delay, id: newId() };
+      return updateCurrentScenario(prev, {
+        cashFlow: { ...current.cashFlow, delays: [...current.cashFlow.delays, newItem] },
+      });
+    });
+  }, []);
+
+  const updateDelay = useCallback((id: string, updates: Partial<CashFlowDelay>) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      return updateCurrentScenario(prev, {
+        cashFlow: {
+          ...current.cashFlow,
+          delays: current.cashFlow.delays.map((d) => (d.id === id ? { ...d, ...updates } : d)),
+        },
+      });
+    });
+  }, []);
+
+  const deleteDelay = useCallback((id: string) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      return updateCurrentScenario(prev, {
+        cashFlow: {
+          ...current.cashFlow,
+          delays: current.cashFlow.delays.filter((d) => d.id !== id),
+        },
+      });
+    });
+  }, []);
+
+  // ============================================================
+  // CASH FLOW - Custom Expenses (one-time)
+  // ============================================================
+
+  const addCustomExpense = useCallback((expense: Omit<CashFlowExpense, 'id'>) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      const newItem: CashFlowExpense = { ...expense, id: newId() };
+      return updateCurrentScenario(prev, {
+        cashFlow: {
+          ...current.cashFlow,
+          customExpenses: [...current.cashFlow.customExpenses, newItem],
+        },
+      });
+    });
+  }, []);
+
+  const updateCustomExpense = useCallback((id: string, updates: Partial<CashFlowExpense>) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      return updateCurrentScenario(prev, {
+        cashFlow: {
+          ...current.cashFlow,
+          customExpenses: current.cashFlow.customExpenses.map((e) =>
+            e.id === id ? { ...e, ...updates } : e,
+          ),
+        },
+      });
+    });
+  }, []);
+
+  const deleteCustomExpense = useCallback((id: string) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      return updateCurrentScenario(prev, {
+        cashFlow: {
+          ...current.cashFlow,
+          customExpenses: current.cashFlow.customExpenses.filter((e) => e.id !== id),
+        },
+      });
+    });
+  }, []);
+
+  // ============================================================
   // BALANCE SHEET
   // ============================================================
 
@@ -359,6 +503,15 @@ export function ToolsProvider({ children }: { children: ReactNode }) {
     addEmployee,
     updateEmployee,
     deleteEmployee,
+    addBankAccount,
+    updateBankAccount,
+    deleteBankAccount,
+    addDelay,
+    updateDelay,
+    deleteDelay,
+    addCustomExpense,
+    updateCustomExpense,
+    deleteCustomExpense,
     updateBalanceSheet,
     switchScenario,
     createNewScenario,
