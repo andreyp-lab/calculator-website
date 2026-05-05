@@ -68,6 +68,9 @@ interface ToolsContextValue {
   updateEmployee: (id: string, updates: Partial<Employee>) => void;
   deleteEmployee: (id: string) => void;
 
+  // Bulk operations
+  replaceBudget: (budget: BudgetData) => void;
+
   // Cash Flow actions
   addBankAccount: (account: Omit<BankAccount, 'id'>) => void;
   updateBankAccount: (id: string, updates: Partial<BankAccount>) => void;
@@ -310,6 +313,18 @@ export function ToolsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // ============================================================
+  // BULK - replace whole budget (used by templates)
+  // ============================================================
+
+  const replaceBudget = useCallback((newBudget: BudgetData) => {
+    setState((prev) => {
+      const current = getCurrentScenario(prev);
+      if (!current) return prev;
+      return updateCurrentScenario(prev, { budget: newBudget });
+    });
+  }, []);
+
+  // ============================================================
   // CASH FLOW - Bank Accounts
   // ============================================================
 
@@ -511,6 +526,7 @@ export function ToolsProvider({ children }: { children: ReactNode }) {
     addEmployee,
     updateEmployee,
     deleteEmployee,
+    replaceBudget,
     addBankAccount,
     updateBankAccount,
     deleteBankAccount,

@@ -10,6 +10,7 @@ import {
   Gem,
   Users,
   ArrowLeft,
+  LineChart,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -123,6 +124,21 @@ const CATEGORIES: Category[] = [
         icon: Users,
         color: 'from-indigo-500 to-indigo-700',
         features: ['LTV/CAC ratio', 'Payback period', 'בנצ\'מארק לתעשיות'],
+      },
+      {
+        href: '/tools/forecast',
+        title: 'חיזוי רב-שנתי',
+        emoji: '🔮',
+        description: 'מודל פיננסי 3-דוחות (P&L + מאזן + תזרים) ל-3-5 שנים, מונטה קרלו ו-LTV/CAC',
+        icon: LineChart,
+        badge: 'חדש',
+        color: 'from-violet-500 to-fuchsia-700',
+        features: [
+          'היסטוריה → תחזית 3-5 שנים',
+          'מודל מאזן ותזרים אינדירקטי',
+          'סימולציית מונטה קרלו',
+          'ניתוח קוהורט לפי חודש רכישה',
+        ],
       },
     ],
   },

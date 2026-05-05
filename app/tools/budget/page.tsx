@@ -12,14 +12,23 @@ import { ExportImportBar } from '@/components/tools/ExportImportBar';
 import { BudgetCharts } from '@/components/tools/BudgetCharts';
 import { EmployeeAnalysis } from '@/components/tools/EmployeeAnalysis';
 import { AdvancedAnalytics } from '@/components/tools/AdvancedAnalytics';
+import { IndustryBenchmarks } from '@/components/tools/IndustryBenchmarks';
+import { TemplatesLibrary } from '@/components/tools/TemplatesLibrary';
 import {
   TrendingUp,
   ChartBar,
   Users,
   Sparkles,
+  Trophy,
+  Layout,
 } from 'lucide-react';
 
-type AnalyticsTab = 'charts' | 'employees' | 'advanced';
+type AnalyticsTab =
+  | 'templates'
+  | 'charts'
+  | 'employees'
+  | 'advanced'
+  | 'benchmarks';
 
 export default function BudgetPage() {
   const [analyticsTab, setAnalyticsTab] = useState<AnalyticsTab>('charts');
@@ -62,45 +71,82 @@ export default function BudgetPage() {
       {/* Bottom: Analytics tabs */}
       <div className="mt-6">
         <div className="bg-white rounded-lg border-2 border-gray-200 p-2 shadow-sm flex flex-wrap gap-1 mb-4">
-          <button
+          <TabButton
+            active={analyticsTab === 'templates'}
+            onClick={() => setAnalyticsTab('templates')}
+            icon={Layout}
+            label="תבניות מוכנות"
+            color="violet"
+          />
+          <TabButton
+            active={analyticsTab === 'charts'}
             onClick={() => setAnalyticsTab('charts')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded text-sm transition ${
-              analyticsTab === 'charts'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <ChartBar className="w-4 h-4" />
-            גרפים פיננסיים
-          </button>
-          <button
+            icon={ChartBar}
+            label="גרפים פיננסיים"
+            color="blue"
+          />
+          <TabButton
+            active={analyticsTab === 'employees'}
             onClick={() => setAnalyticsTab('employees')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded text-sm transition ${
-              analyticsTab === 'employees'
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            ניתוח עובדים
-          </button>
-          <button
+            icon={Users}
+            label="ניתוח עובדים"
+            color="purple"
+          />
+          <TabButton
+            active={analyticsTab === 'advanced'}
             onClick={() => setAnalyticsTab('advanced')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded text-sm transition ${
-              analyticsTab === 'advanced'
-                ? 'bg-indigo-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <Sparkles className="w-4 h-4" />
-            אנליזה מתקדמת
-          </button>
+            icon={Sparkles}
+            label="אנליזה מתקדמת"
+            color="indigo"
+          />
+          <TabButton
+            active={analyticsTab === 'benchmarks'}
+            onClick={() => setAnalyticsTab('benchmarks')}
+            icon={Trophy}
+            label="בנצ'מרק ענפי"
+            color="emerald"
+          />
         </div>
 
+        {analyticsTab === 'templates' && <TemplatesLibrary />}
         {analyticsTab === 'charts' && <BudgetCharts />}
         {analyticsTab === 'employees' && <EmployeeAnalysis />}
         {analyticsTab === 'advanced' && <AdvancedAnalytics />}
+        {analyticsTab === 'benchmarks' && <IndustryBenchmarks />}
       </div>
     </div>
+  );
+}
+
+function TabButton({
+  active,
+  onClick,
+  icon: Icon,
+  label,
+  color,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: typeof Layout;
+  label: string;
+  color: 'blue' | 'purple' | 'indigo' | 'emerald' | 'violet';
+}) {
+  const colorMap: Record<string, string> = {
+    blue: 'bg-blue-600',
+    purple: 'bg-purple-600',
+    indigo: 'bg-indigo-600',
+    emerald: 'bg-emerald-600',
+    violet: 'bg-violet-600',
+  };
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-1.5 px-3 py-2 rounded text-sm transition ${
+        active ? `${colorMap[color]} text-white` : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+      }`}
+    >
+      <Icon className="w-4 h-4" />
+      {label}
+    </button>
   );
 }

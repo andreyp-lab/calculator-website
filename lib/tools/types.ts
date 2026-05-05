@@ -286,6 +286,286 @@ export interface Scenario {
 }
 
 // ============================================================
+// PAYMENT TERMS - תנאי תשלום מפוצלים
+// ============================================================
+
+/**
+ * תשלום בודד בתוך פיצול.
+ * לדוגמה: { percentage: 30, daysOffset: 30 } = 30% נטו 30
+ */
+export interface PaymentTermInstallment {
+  /** אחוז מהסכום הכולל (0-100) */
+  percentage: number;
+  /** ימים מתאריך החיוב/החשבונית */
+  daysOffset: number;
+  /** תיאור (לדוגמה: "מקדמה", "סופי") */
+  label?: string;
+}
+
+/**
+ * תנאי תשלום: או מספר ימים אחיד, או רשימת installments
+ * אם installments ריקה/לא קיימת → simpleNet משמש כברירת מחדל
+ */
+export interface PaymentTerms {
+  /** ברירת מחדל: ימי דחייה אחידים (תאימות לאחור) */
+  simpleNet: number;
+  /** פיצול לתשלומים (אופציונלי). סכום האחוזים חייב להיות 100. */
+  installments?: PaymentTermInstallment[];
+}
+
+// ============================================================
+// HISTORICAL DATA - נתוני עבר לחיזוי
+// ============================================================
+
+/** דוח רווח והפסד שנתי (מתומצת) */
+export interface AnnualPnL {
+  revenue: number;
+  cogs: number;
+  grossProfit: number;
+  rnd: number;
+  marketing: number;
+  operating: number;
+  ebitda: number;
+  depreciation: number;
+  ebit: number;
+  interest: number;
+  preTaxProfit: number;
+  tax: number;
+  netProfit: number;
+}
+
+/** מאזן שנתי (מתומצת) */
+export interface AnnualBalanceSheet {
+  // נכסים
+  cash: number;
+  accountsReceivable: number;
+  inventory: number;
+  otherCurrentAssets: number;
+  totalCurrentAssets: number;
+  fixedAssets: number;
+  intangibleAssets: number;
+  totalAssets: number;
+  // התחייבויות
+  accountsPayable: number;
+  shortTermDebt: number;
+  otherCurrentLiabilities: number;
+  totalCurrentLiabilities: number;
+  longTermDebt: number;
+  totalLiabilities: number;
+  // הון עצמי
+  shareCapital: number;
+  retainedEarnings: number;
+  totalEquity: number;
+}
+
+/** תזרים מזומנים שנתי (מתומצת) */
+export interface AnnualCashFlow {
+  // תפעולית
+  netIncome: number;
+  depreciation: number;
+  changeInWC: number;
+  cashFromOperations: number;
+  // השקעה
+  capex: number;
+  cashFromInvesting: number;
+  // מימון
+  debtIssuance: number;
+  debtRepayment: number;
+  equityIssuance: number;
+  dividends: number;
+  cashFromFinancing: number;
+  // נטו
+  netChangeInCash: number;
+  openingCash: number;
+  closingCash: number;
+}
+
+/** שנה היסטורית או מתוכננת מלאה */
+export interface AnnualStatements {
+  year: number;
+  isProjection: boolean;
+  pnl: AnnualPnL;
+  balanceSheet: AnnualBalanceSheet;
+  cashFlow: AnnualCashFlow;
+}
+
+/**
+ * הנחות תכנון לחיזוי שנים קדימה.
+ * המנוע משתמש בהנחות אלה כדי לבנות P&L, מאזן ותזרים עתידיים מהשנה הבסיס.
+ */
+export interface ForecastAssumptions {
+  /** צמיחת הכנסות שנתית (%) - יכול להיות מספר לכל שנה או יחיד לכולן */
+  revenueGrowthPct: number[];
+  /** מרווח גולמי יעד (%) - אם null, משמר את היחס מהשנה הקודמת */
+  grossMarginPct: number[] | null;
+  /** R&D כאחוז מהכנסות */
+  rndPctOfRevenue: number[] | null;
+  /** Marketing כאחוז מהכנסות */
+  marketingPctOfRevenue: number[] | null;
+  /** Operating כאחוז מהכנסות */
+  operatingPctOfRevenue: number[] | null;
+  /** הוצאות פחת שנתיות (קבוע) */
+  depreciationPerYear: number[];
+  /** ריבית אפקטיבית על חוב (%) */
+  effectiveInterestRate: number;
+  /** שיעור מס אפקטיבי (%) */
+  effectiveTaxRate: number;
+  /** ימי גבייה ממוצעים (DSO) */
+  dso: number;
+  /** ימי תשלום לספקים (DPO) */
+  dpo: number;
+  /** ימי מלאי (DIO) */
+  dio: number;
+  /** השקעה בנכסים קבועים שנתית (CapEx) */
+  capexPerYear: number[];
+  /** הנפקת חוב שנתית (אם בכלל) */
+  debtIssuancePerYear: number[];
+  /** החזר חוב שנתי */
+  debtRepaymentPerYear: number[];
+  /** דיבידנד שנתי */
+  dividendsPerYear: number[];
+  /** מספר שנים לחיזוי (3-5) */
+  yearsToProject: number;
+}
+
+/** תוצאת מודל שלוש-דוחות */
+export interface ThreeStatementModel {
+  historical: AnnualStatements[]; // שנים אחורה (1-3)
+  projected: AnnualStatements[]; // שנים קדימה (3-5)
+  assumptions: ForecastAssumptions;
+  /** מטא-דאטה: שנת בסיס ושיטת חיזוי */
+  baseYear: number;
+  modelDate: string;
+}
+
+// ============================================================
+// INDUSTRY BENCHMARKS - השוואות ענף
+// ============================================================
+
+export interface BenchmarkValue {
+  /** מינימום (אחוזון 25 / "צד תחתון") */
+  low: number;
+  /** חציון / "ממוצע ענף" */
+  median: number;
+  /** מקסימום (אחוזון 75 / "צד עליון") */
+  high: number;
+  /** יחידת מידה (% / יחס / ימים) */
+  unit: 'pct' | 'ratio' | 'days';
+}
+
+export interface IndustryBenchmarks {
+  industry: Industry;
+  industryLabel: string;
+  source: string;
+  asOfYear: number;
+  // רווחיות
+  grossMargin: BenchmarkValue;
+  operatingMargin: BenchmarkValue;
+  netMargin: BenchmarkValue;
+  ebitdaMargin: BenchmarkValue;
+  // יעילות
+  rndPctOfRevenue: BenchmarkValue;
+  marketingPctOfRevenue: BenchmarkValue;
+  operatingPctOfRevenue: BenchmarkValue;
+  // הון חוזר
+  dso: BenchmarkValue;
+  dpo: BenchmarkValue;
+  dio: BenchmarkValue;
+  // פיננסי
+  currentRatio: BenchmarkValue;
+  quickRatio: BenchmarkValue;
+  debtToEquity: BenchmarkValue;
+  interestCoverage: BenchmarkValue;
+  // צמיחה
+  revenueGrowthPct: BenchmarkValue;
+}
+
+// ============================================================
+// MONTE CARLO - סימולציה הסתברותית
+// ============================================================
+
+export type DistributionType = 'normal' | 'triangular' | 'uniform';
+
+export interface InputDistribution {
+  variable: 'revenueGrowth' | 'grossMargin' | 'opex' | 'capex';
+  distribution: DistributionType;
+  /** עבור normal: mean, stdDev. עבור triangular: min, mode, max. עבור uniform: min, max */
+  params: { mean?: number; stdDev?: number; min?: number; mode?: number; max?: number };
+}
+
+export interface MonteCarloResult {
+  iterations: number;
+  metric: 'netProfit' | 'cashRunway' | 'closingCash' | 'irr';
+  /** התפלגות תוצאות */
+  histogram: { bucket: number; count: number }[];
+  /** סטטיסטיקות */
+  stats: {
+    mean: number;
+    median: number;
+    stdDev: number;
+    p5: number; // אחוזון 5
+    p25: number;
+    p75: number;
+    p95: number;
+    min: number;
+    max: number;
+  };
+  /** סיכויים */
+  probabilityPositive: number;
+  probabilityAboveTarget?: number;
+}
+
+// ============================================================
+// COHORT ANALYSIS - ניתוח קוהורט
+// ============================================================
+
+export interface CustomerCohort {
+  /** תקופת רכישה (YYYY-MM) */
+  acquisitionMonth: string;
+  /** מספר לקוחות שנרכשו */
+  newCustomers: number;
+  /** ARPU (Average Revenue Per User) חודשי */
+  arpu: number;
+  /** Churn rate חודשי (%) */
+  monthlyChurnPct: number;
+  /** עלות רכישה לכל לקוח (CAC) */
+  cac: number;
+}
+
+export interface CohortAnalysisResult {
+  cohorts: CustomerCohort[];
+  /** ערכי הקוהורט לכל חודש - revenue, retained customers */
+  cohortMatrix: number[][];
+  /** מצרפי */
+  totals: {
+    avgLtv: number;
+    avgCac: number;
+    ltvToCacRatio: number;
+    paybackMonths: number;
+    netRevenueRetention: number; // %
+  };
+}
+
+// ============================================================
+// TEMPLATES - תבניות לפי ענף
+// ============================================================
+
+export interface BudgetTemplate {
+  id: string;
+  name: string;
+  industry: Industry;
+  description: string;
+  /** איקון Lucide name */
+  icon: string;
+  /** תקציב לדוגמה */
+  budget: BudgetData;
+  /** הנחות חיזוי דיפולט */
+  assumptions: Partial<ForecastAssumptions>;
+  /** הערות מיוחדות לענף */
+  notes: string[];
+}
+
+// ============================================================
 // HELPERS - עזרים
 // ============================================================
 
