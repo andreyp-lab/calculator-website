@@ -31,6 +31,10 @@ export interface PeriodSettings {
   openingBalance: number;
   industry: Industry;
   companyName: string;
+  /** אינפלציה שנתית (%) - מוחל על פריטים עם applyInflation=true */
+  annualInflationPct?: number;
+  /** שערי המרה למטבע התקציב (key = currency code, value = שער) */
+  fxRates?: Partial<Record<Currency, number>>;
 }
 
 // ============================================================
@@ -53,8 +57,12 @@ export interface IncomeItem {
   startMonth: number; // 0-11 (חודש בשנה)
   duration: number; // מספר חודשים
   growthPct: number; // אחוז צמיחה חודשי (0 = קבוע)
-  paymentTerms: number; // ימי אשראי (0/30/60/90)
+  paymentTerms: number; // ימי אשראי (0/30/60/90) - תאימות לאחור
+  /** פיצול תשלומים (אופציונלי). אם קיים, גובר על paymentTerms. */
+  paymentSplit?: PaymentTermInstallment[];
   status: IncomeStatus;
+  /** מטבע ספציפי לפריט (אופציונלי - אם לא, משמש מטבע התקציב) */
+  currency?: Currency;
 }
 
 export interface ExpenseItem {
@@ -69,13 +77,19 @@ export interface ExpenseItem {
   // פרטים:
   startMonth: number;
   duration: number;
-  paymentTerms: number; // ימי תשלום
+  paymentTerms: number; // ימי תשלום - תאימות לאחור
+  /** פיצול תשלומים (אופציונלי). אם קיים, גובר על paymentTerms. */
+  paymentSplit?: PaymentTermInstallment[];
   // עובדים:
   isEmployeeExpense?: boolean;
   department?: Department;
   employeeCount?: number;
   // אוטומטי (כמו ריבית הלוואה):
   isAuto?: boolean;
+  /** מטבע ספציפי לפריט (אופציונלי) */
+  currency?: Currency;
+  /** האם להחיל אינפלציה שנתית */
+  applyInflation?: boolean;
 }
 
 export interface Loan {
@@ -563,6 +577,209 @@ export interface BudgetTemplate {
   assumptions: Partial<ForecastAssumptions>;
   /** הערות מיוחדות לענף */
   notes: string[];
+}
+
+// ============================================================
+// DCF VALUATION
+// ============================================================
+
+export interface DCFInput {
+  /** תזרימים חופשיים שנתיים (FCF) - מהמודל או ידני */
+  freeCashFlows: number[];
+  /** WACC - שיעור ניכיון (%) */
+  wacc: number;
+  /** קצב צמיחה תמידי (%) - Gordon Growth */
+  terminalGrowthRate: number;
+  /** מכפיל יציאה (לחישוב Terminal Value אלטרנטיבי) */
+  exitMultiple?: number;
+  /** EBITDA של השנה האחרונה (לחישוב Terminal Value עם מכפיל) */
+  finalEbitda?: number;
+  /** חוב נקי (חוב - מזומן) להמרה מ-EV ל-Equity */
+  netDebt: number;
+  /** מספר מניות (לחישוב מחיר למניה) */
+  sharesOutstanding?: number;
+  /** שיטת Terminal Value */
+  terminalMethod: 'gordon' | 'exit_multiple';
+}
+
+export interface DCFResult {
+  /** ערך נוכחי של תזרימים מפורשים */
+  pvOfExplicitCashFlows: number[];
+  /** סכום ה-PV של התזרימים המפורשים */
+  sumOfExplicitPV: number;
+  /** Terminal Value בסוף תקופת התחזית */
+  terminalValue: number;
+  /** PV של ה-Terminal Value */
+  pvOfTerminalValue: number;
+  /** Enterprise Value */
+  enterpriseValue: number;
+  /** Equity Value (EV - Net Debt) */
+  equityValue: number;
+  /** מחיר למניה (אם sharesOutstanding) */
+  pricePerShare?: number;
+  /** % מהשווי שמגיע מ-Terminal */
+  terminalValueShare: number;
+}
+
+export interface WACCInput {
+  /** משקל החוב (%) */
+  debtWeight: number;
+  /** משקל ההון העצמי (%) */
+  equityWeight: number;
+  /** עלות חוב לפני מס (%) */
+  costOfDebt: number;
+  /** שיעור מס אפקטיבי (%) */
+  taxRate: number;
+  /** Risk-free rate (%) - אג"ח מ-10 שנים */
+  riskFreeRate: number;
+  /** Beta של החברה */
+  beta: number;
+  /** Equity Risk Premium (%) */
+  equityRiskPremium: number;
+}
+
+// ============================================================
+// CAP TABLE & FUNDING ROUNDS
+// ============================================================
+
+export type ShareClass = 'common' | 'preferred_a' | 'preferred_b' | 'preferred_c' | 'preferred_seed' | 'esop';
+
+export interface Shareholder {
+  id: string;
+  name: string;
+  shareClass: ShareClass;
+  /** מספר מניות לפני סבב הנוכחי (יתעדכן אחרי כל סבב) */
+  shares: number;
+  /** האם מייסד (לסיווג) */
+  isFounder?: boolean;
+}
+
+export interface FundingRound {
+  id: string;
+  name: string; // "Pre-Seed", "Seed", "Series A"
+  /** סוג מניות שנוצרו */
+  shareClass: ShareClass;
+  /** Pre-money valuation */
+  preMoneyValuation: number;
+  /** השקעה בסבב */
+  investmentAmount: number;
+  /** מי השקיע (שם המשקיע) */
+  investorName: string;
+  /** ESOP pool שנפתח עם הסבב (% מ-post-money) */
+  esopPoolPct?: number;
+  /** האם ה-ESOP נפתח לפני או אחרי המוני (Pre-money pool מדלל יותר את המייסדים) */
+  esopPrePostMoney?: 'pre' | 'post';
+  /** Liquidation preference (1x, 2x...) */
+  liquidationPreference?: number;
+  /** Participating preferred? */
+  participating?: boolean;
+  /** Date */
+  date?: string;
+}
+
+export interface CapTableSnapshot {
+  /** מצב Pre-funding (לפני אף סבב) */
+  initialShareholders: Shareholder[];
+  /** הסבבים בסדר כרונולוגי */
+  rounds: FundingRound[];
+}
+
+export interface CapTableState {
+  /** Snapshot אחרי כל סבב */
+  perRound: Array<{
+    afterRound: string;
+    shareholders: Array<Shareholder & { ownershipPct: number }>;
+    totalShares: number;
+    postMoneyValuation: number;
+    pricePerShare: number;
+  }>;
+}
+
+export interface ExitWaterfall {
+  /** ערך יציאה */
+  exitValue: number;
+  /** סכום שמגיע לכל בעל מניות לפי הסדר */
+  payouts: Array<{
+    shareholderId: string;
+    shareholderName: string;
+    preferenceAmount: number; // liquidation preference
+    proRataAmount: number;
+    totalAmount: number;
+    sharePct: number;
+  }>;
+}
+
+// ============================================================
+// GOALS & BURN RATE
+// ============================================================
+
+export type GoalType =
+  | 'revenue'
+  | 'arr'
+  | 'profit'
+  | 'ebitda'
+  | 'customers'
+  | 'cashBalance'
+  | 'runway'
+  | 'custom';
+
+export interface Goal {
+  id: string;
+  name: string;
+  type: GoalType;
+  targetValue: number;
+  /** תאריך יעד YYYY-MM-DD */
+  targetDate: string;
+  createdAt: string;
+  notes?: string;
+}
+
+export interface GoalProgress {
+  goal: Goal;
+  currentValue: number;
+  projectedValue: number;
+  pctComplete: number;
+  /** האם בקצב להגיע ליעד */
+  onTrack: boolean;
+  /** סטטוס */
+  status: 'ahead' | 'on_track' | 'at_risk' | 'behind' | 'achieved';
+  /** ההפרש מול היעד הנוכחי הצפוי */
+  gap: number;
+}
+
+export interface BurnRateMetrics {
+  /** מזומן נוכחי */
+  currentCash: number;
+  /** Burn ממוצע ב-3 חודשים אחרונים */
+  avg3MonthBurn: number;
+  /** Burn ממוצע ב-6 חודשים אחרונים */
+  avg6MonthBurn: number;
+  /** Net Burn (negative cash flow אם קיים) */
+  netBurn: number;
+  /** Cash runway בחודשים */
+  runwayMonths: number;
+  /** סטטוס */
+  status: 'profitable' | 'healthy' | 'caution' | 'critical';
+  /** התאריך הצפוי לאזילת מזומן */
+  projectedZeroDate?: string;
+  /** המלצה */
+  recommendation: string;
+}
+
+// ============================================================
+// WORKING CAPITAL OPTIMIZATION
+// ============================================================
+
+export interface WorkingCapitalScenario {
+  dso: number;
+  dpo: number;
+  dio: number;
+  /** מזומן ש"משוחרר" / נדרש לעומת המצב הנוכחי */
+  cashImpact: number;
+  /** Cash Conversion Cycle */
+  ccc: number;
+  /** הון חוזר נטו */
+  netWorkingCapital: number;
 }
 
 // ============================================================

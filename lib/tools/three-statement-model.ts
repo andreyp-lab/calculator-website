@@ -24,7 +24,11 @@ import type {
   AnnualStatements,
   ForecastAssumptions,
   ThreeStatementModel,
+  BudgetData,
+  PeriodSettings,
+  BalanceSheetData,
 } from './types';
+import { calculateAllMonths, calculateBudgetTotals } from './budget-engine';
 
 // ============================================================
 // HELPERS
@@ -462,6 +466,121 @@ export function suggestAssumptions(
     debtRepaymentPerYear: Array(yearsToProject).fill(0),
     dividendsPerYear: Array(yearsToProject).fill(0),
     yearsToProject,
+  };
+}
+
+// ============================================================
+// CONVERT BUDGET → BASE YEAR
+// ============================================================
+
+/**
+ * המרת תקציב חודשי + מאזן (אופציונלי) לשנת בסיס.
+ * משמש לטעינת המודל ישירות מהתקציב הקיים.
+ */
+export function convertBudgetToBaseYear(
+  budget: BudgetData,
+  settings: PeriodSettings,
+  balanceSheet?: BalanceSheetData | null,
+  customDepreciation: number = 0,
+): AnnualStatements {
+  const monthly = calculateAllMonths(budget, settings);
+  const totals = calculateBudgetTotals(monthly);
+  const year = settings.fiscalYear;
+
+  // P&L מהתקציב
+  const pnl: AnnualPnL = {
+    revenue: totals.income,
+    cogs: totals.cogs,
+    grossProfit: totals.grossProfit,
+    rnd: totals.rnd,
+    marketing: totals.marketing,
+    operating: totals.operating,
+    ebitda: totals.ebitda,
+    depreciation: customDepreciation,
+    ebit: totals.ebitda - customDepreciation,
+    interest: totals.financial,
+    preTaxProfit: totals.ebitda - customDepreciation - totals.financial,
+    tax: totals.tax,
+    netProfit: totals.netProfit,
+  };
+
+  // מאזן: אם מאזן קיים נשתמש בו, אחרת ננסה להעריך
+  let bs: AnnualBalanceSheet;
+  if (balanceSheet) {
+    bs = recomputeBalanceSheet({
+      cash: balanceSheet.cashAndEquivalents,
+      accountsReceivable: balanceSheet.accountsReceivable,
+      inventory: balanceSheet.inventory,
+      otherCurrentAssets: 0,
+      totalCurrentAssets: balanceSheet.currentAssets,
+      fixedAssets: balanceSheet.fixedAssets,
+      intangibleAssets: 0,
+      totalAssets: balanceSheet.totalAssets,
+      accountsPayable: balanceSheet.accountsPayable,
+      shortTermDebt: balanceSheet.shortTermDebt,
+      otherCurrentLiabilities: 0,
+      totalCurrentLiabilities: balanceSheet.currentLiabilities,
+      longTermDebt: balanceSheet.longTermDebt,
+      totalLiabilities: balanceSheet.totalLiabilities,
+      shareCapital: 0,
+      retainedEarnings: balanceSheet.retainedEarnings ?? balanceSheet.totalEquity,
+      totalEquity: balanceSheet.totalEquity,
+    });
+  } else {
+    // הערכה: מבוסס יחסים סטנדרטיים מההכנסות
+    const ar = totals.income > 0 ? (totals.income / 12) * 1.5 : 0; // ~45 days DSO
+    const inv = totals.cogs > 0 ? (totals.cogs / 12) * 1 : 0; // ~30 days DIO
+    const ap = totals.cogs > 0 ? (totals.cogs / 12) * 2 : 0; // ~60 days DPO
+    const cash = settings.openingBalance;
+    const totalAssets = cash + ar + inv + (totals.income * 0.2);
+    const fixedAssets = totals.income * 0.2;
+    const totalLoans = budget.loans.reduce((s, l) => s + l.amount, 0);
+
+    bs = recomputeBalanceSheet({
+      cash,
+      accountsReceivable: ar,
+      inventory: inv,
+      otherCurrentAssets: 0,
+      totalCurrentAssets: 0,
+      fixedAssets,
+      intangibleAssets: 0,
+      totalAssets: 0,
+      accountsPayable: ap,
+      shortTermDebt: 0,
+      otherCurrentLiabilities: 0,
+      totalCurrentLiabilities: 0,
+      longTermDebt: totalLoans,
+      totalLiabilities: 0,
+      shareCapital: Math.max(0, totalAssets - ap - totalLoans - totals.netProfit),
+      retainedEarnings: totals.netProfit,
+      totalEquity: 0,
+    });
+  }
+
+  // תזרים פשוט (יחושב מחדש בחיזוי)
+  const cashFlow: AnnualCashFlow = {
+    netIncome: pnl.netProfit,
+    depreciation: pnl.depreciation,
+    changeInWC: 0,
+    cashFromOperations: pnl.netProfit + pnl.depreciation,
+    capex: 0,
+    cashFromInvesting: 0,
+    debtIssuance: 0,
+    debtRepayment: 0,
+    equityIssuance: 0,
+    dividends: 0,
+    cashFromFinancing: 0,
+    netChangeInCash: pnl.netProfit + pnl.depreciation,
+    openingCash: bs.cash - (pnl.netProfit + pnl.depreciation),
+    closingCash: bs.cash,
+  };
+
+  return {
+    year,
+    isProjection: false,
+    pnl,
+    balanceSheet: bs,
+    cashFlow,
   };
 }
 

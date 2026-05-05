@@ -12,12 +12,13 @@ import { CustomExpensesManager } from '@/components/tools/CustomExpensesManager'
 import { DebtRestructuring } from '@/components/tools/DebtRestructuring';
 import { ScenarioCompare } from '@/components/tools/ScenarioCompare';
 import { ExportImportBar } from '@/components/tools/ExportImportBar';
-import { Wallet, Info } from 'lucide-react';
+import { BurnRateDashboard } from '@/components/tools/BurnRateDashboard';
+import { Wallet, Info, Flame } from 'lucide-react';
 import Link from 'next/link';
 import { useTools } from '@/lib/tools/ToolsContext';
 import { useState } from 'react';
 
-type Tab = 'dashboard' | 'manage' | 'restructure' | 'compare';
+type Tab = 'dashboard' | 'manage' | 'restructure' | 'compare' | 'burn';
 
 export default function CashFlowPage() {
   const { budget, cashFlow } = useTools();
@@ -112,6 +113,16 @@ export default function CashFlowPage() {
             >
               🔀 השוואת תרחישים
             </button>
+            <button
+              onClick={() => setTab('burn')}
+              className={`px-4 py-2 text-sm font-medium transition ${
+                tab === 'burn'
+                  ? 'border-b-2 border-orange-600 text-orange-600 -mb-0.5'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              🔥 Burn Rate / Runway
+            </button>
           </div>
 
           <div className="mt-4">
@@ -141,6 +152,12 @@ export default function CashFlowPage() {
             {tab === 'compare' && (
               <div className="space-y-4">
                 <ScenarioCompare />
+              </div>
+            )}
+
+            {tab === 'burn' && (
+              <div className="space-y-4">
+                <BurnRateDashboard />
               </div>
             )}
           </div>

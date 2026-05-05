@@ -59,28 +59,49 @@ export function getIncomeForMonth(income: IncomeItem, monthIdx: number): number 
 
 /**
  * חישוב הוצאה לחודש ספציפי
+ *
+ * @param annualInflationPct - אינפלציה שנתית (%) להחיל אם expense.applyInflation=true
  */
 export function getExpenseForMonth(
   expense: ExpenseItem,
   monthIdx: number,
   income: IncomeItem[],
+  annualInflationPct: number = 0,
 ): number {
   const offset = monthIdx - expense.startMonth;
   if (offset < 0 || offset >= expense.duration) return 0;
+
+  let value: number;
 
   if (expense.isPct) {
     if (expense.linkedIncomeId) {
       const linked = income.find((i) => i.id === expense.linkedIncomeId);
       if (linked) {
-        return getIncomeForMonth(linked, monthIdx) * (expense.percentage / 100);
+        value = getIncomeForMonth(linked, monthIdx) * (expense.percentage / 100);
+      } else {
+        value = 0;
       }
-      return 0;
+    } else {
+      // אחוז מסך כל ההכנסה החודשית
+      const totalIncomeMonth = income.reduce(
+        (sum, inc) => sum + getIncomeForMonth(inc, monthIdx),
+        0,
+      );
+      value = totalIncomeMonth * (expense.percentage / 100);
     }
-    // אחוז מסך כל ההכנסה החודשית
-    const totalIncomeMonth = income.reduce((sum, inc) => sum + getIncomeForMonth(inc, monthIdx), 0);
-    return totalIncomeMonth * (expense.percentage / 100);
+  } else {
+    value = expense.amount;
   }
-  return expense.amount;
+
+  // החל אינפלציה (לפי שנים מההתחלה, לא חודשים)
+  if (expense.applyInflation && annualInflationPct > 0) {
+    const yearsFromStart = Math.floor(offset / 12);
+    if (yearsFromStart > 0) {
+      value *= Math.pow(1 + annualInflationPct / 100, yearsFromStart);
+    }
+  }
+
+  return value;
 }
 
 /**
@@ -90,10 +111,11 @@ export function calculateExpenseTotal(
   expense: ExpenseItem,
   income: IncomeItem[],
   totalMonths: number,
+  annualInflationPct: number = 0,
 ): number {
   let total = 0;
   for (let m = 0; m < totalMonths; m++) {
-    total += getExpenseForMonth(expense, m, income);
+    total += getExpenseForMonth(expense, m, income, annualInflationPct);
   }
   return total;
 }
@@ -250,6 +272,7 @@ export function calculateMonth(
   monthIdx: number,
   taxRate: number,
   startMonthOfYear: number = 0,
+  annualInflationPct: number = 0,
 ): MonthlyBudget {
   const calendarMonth = (startMonthOfYear + monthIdx) % 12;
   const year = Math.floor((startMonthOfYear + monthIdx) / 12);
@@ -262,31 +285,31 @@ export function calculateMonth(
   const cogs =
     budget.expenses
       .filter((e) => e.category === 'cogs')
-      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income), 0) +
+      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income, annualInflationPct), 0) +
     getEmployeeCostByCategory(budget.employees, 'cogs', monthIdx);
 
   const rnd =
     budget.expenses
       .filter((e) => e.category === 'rnd')
-      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income), 0) +
+      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income, annualInflationPct), 0) +
     getEmployeeCostByCategory(budget.employees, 'rnd', monthIdx);
 
   const marketing =
     budget.expenses
       .filter((e) => e.category === 'marketing')
-      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income), 0) +
+      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income, annualInflationPct), 0) +
     getEmployeeCostByCategory(budget.employees, 'marketing', monthIdx);
 
   const operating =
     budget.expenses
       .filter((e) => e.category === 'operating')
-      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income), 0) +
+      .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income, annualInflationPct), 0) +
     getEmployeeCostByCategory(budget.employees, 'operating', monthIdx);
 
   // הוצאות מימון: ריבית הלוואות + הוצאות מימון ידניות
   const financialManual = budget.expenses
     .filter((e) => e.category === 'financial' && !e.isAuto)
-    .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income), 0);
+    .reduce((sum, exp) => sum + getExpenseForMonth(exp, monthIdx, budget.income, annualInflationPct), 0);
   const loanInterest = getLoanInterestForMonth(budget.loans, monthIdx);
   const financial = financialManual + loanInterest;
 
@@ -323,9 +346,10 @@ export function calculateMonth(
 export function calculateAllMonths(budget: BudgetData, settings: PeriodSettings): MonthlyBudget[] {
   const results: MonthlyBudget[] = [];
   const startMonthOfYear = parseInt(settings.startMonth.split('-')[1] ?? '1', 10) - 1;
+  const inflation = settings.annualInflationPct ?? 0;
 
   for (let m = 0; m < settings.monthsToShow; m++) {
-    results.push(calculateMonth(budget, m, settings.taxRate, startMonthOfYear));
+    results.push(calculateMonth(budget, m, settings.taxRate, startMonthOfYear, inflation));
   }
 
   return results;

@@ -19,13 +19,20 @@ import {
   suggestAssumptions,
   defaultAssumptions,
   validateBalanceSheet,
+  convertBudgetToBaseYear,
 } from '@/lib/tools/three-statement-model';
+import { useTools } from '@/lib/tools/ToolsContext';
+import {
+  INDUSTRY_BENCHMARKS,
+} from '@/lib/tools/industry-benchmarks';
+import { exportForecastPDF, exportForecastExcel } from '@/lib/tools/forecast-export';
 import type {
   AnnualStatements,
   ForecastAssumptions,
   ThreeStatementModel as Model,
   AnnualPnL,
   AnnualBalanceSheet,
+  Industry,
 } from '@/lib/tools/types';
 import { formatCurrency } from '@/lib/tools/format';
 import {
@@ -50,6 +57,8 @@ import {
   TrendingUp,
   Sparkles,
   AlertCircle,
+  Download,
+  Upload,
 } from 'lucide-react';
 
 type Tab = 'historical' | 'assumptions' | 'pnl' | 'balance';
@@ -57,6 +66,7 @@ type Tab = 'historical' | 'assumptions' | 'pnl' | 'balance';
 const STORAGE_KEY = 'three-statement-model-v1';
 
 export function ThreeStatementModelUI() {
+  const { budget, settings, balanceSheet } = useTools();
   const [historical, setHistorical] = useState<AnnualStatements[]>(() => {
     if (typeof window === 'undefined') return [createEmptyAnnualStatements(new Date().getFullYear() - 1)];
     try {
@@ -102,6 +112,14 @@ export function ThreeStatementModelUI() {
     }
   }
 
+  function loadFromBudget() {
+    if (!budget || !settings) return;
+    const baseYear = convertBudgetToBaseYear(budget, settings, balanceSheet);
+    setHistorical([baseYear]);
+    setAssumptions(suggestAssumptions([baseYear], assumptions.yearsToProject));
+    setTab('pnl');
+  }
+
   function addHistoricalYear() {
     const earliestYear = Math.min(...historical.map((h) => h.year));
     setHistorical([createEmptyAnnualStatements(earliestYear - 1), ...historical]);
@@ -119,13 +137,42 @@ export function ThreeStatementModelUI() {
     <div className="space-y-4">
       {/* Header + tabs */}
       <div className="bg-white rounded-lg border-2 border-gray-200 p-3 shadow-sm">
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-3 gap-2 flex-wrap">
           <h3 className="font-bold text-gray-900 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-indigo-600" />
             מודל תלת-דוחות (P&L + מאזן + תזרים)
           </h3>
-          <div className="text-xs text-gray-500">
-            {historical.length} שנות היסטוריה ← {assumptions.yearsToProject} שנות חיזוי
+          <div className="flex items-center gap-2 flex-wrap">
+            {budget && settings && (
+              <button
+                onClick={loadFromBudget}
+                className="flex items-center gap-1 px-2.5 py-1.5 bg-emerald-600 text-white rounded text-xs hover:bg-emerald-700"
+              >
+                <Upload className="w-3.5 h-3.5" />
+                טען מהתקציב הנוכחי
+              </button>
+            )}
+            {model && (
+              <>
+                <button
+                  onClick={() => exportForecastPDF(model, settings?.companyName ?? 'Forecast')}
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-red-600 text-white rounded text-xs hover:bg-red-700"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  PDF
+                </button>
+                <button
+                  onClick={() => exportForecastExcel(model, settings?.companyName ?? 'Forecast')}
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-green-600 text-white rounded text-xs hover:bg-green-700"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Excel
+                </button>
+              </>
+            )}
+            <div className="text-xs text-gray-500">
+              {historical.length} שנות היסטוריה ← {assumptions.yearsToProject} שנות חיזוי
+            </div>
           </div>
         </div>
 
@@ -172,6 +219,7 @@ export function ThreeStatementModelUI() {
           onChange={setAssumptions}
           onAutoSuggest={autoSuggest}
           hasHistorical={historical.length > 0 && historical[0].pnl.revenue > 0}
+          industry={settings?.industry ?? 'services'}
         />
       )}
 
@@ -391,9 +439,17 @@ interface AssumptionsProps {
   onChange: (a: ForecastAssumptions) => void;
   onAutoSuggest: () => void;
   hasHistorical: boolean;
+  industry: Industry;
 }
 
-function AssumptionsTab({ assumptions, onChange, onAutoSuggest, hasHistorical }: AssumptionsProps) {
+function AssumptionsTab({
+  assumptions,
+  onChange,
+  onAutoSuggest,
+  hasHistorical,
+  industry,
+}: AssumptionsProps) {
+  const bench = INDUSTRY_BENCHMARKS[industry];
   function update(patch: Partial<ForecastAssumptions>) {
     onChange({ ...assumptions, ...patch });
   }
@@ -441,37 +497,47 @@ function AssumptionsTab({ assumptions, onChange, onAutoSuggest, hasHistorical }:
 
       {/* Growth & Margins */}
       <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-        <h4 className="font-semibold text-gray-900 mb-3">צמיחה ומרווחים (% לשנה)</h4>
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="font-semibold text-gray-900">צמיחה ומרווחים (% לשנה)</h4>
+          <span className="text-xs text-gray-500">
+            השוואה לענף: {bench.industryLabel}
+          </span>
+        </div>
         <div className="space-y-3">
           <ArrayField
             label="צמיחת הכנסות"
             values={assumptions.revenueGrowthPct}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('revenueGrowthPct', idx, v)}
+            benchmark={bench.revenueGrowthPct}
           />
           <ArrayField
             label="מרווח גולמי"
             values={assumptions.grossMarginPct ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('grossMarginPct', idx, v)}
+            benchmark={bench.grossMargin}
           />
           <ArrayField
             label="R&D מהכנסות"
             values={assumptions.rndPctOfRevenue ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('rndPctOfRevenue', idx, v)}
+            benchmark={bench.rndPctOfRevenue}
           />
           <ArrayField
             label="שיווק מהכנסות"
             values={assumptions.marketingPctOfRevenue ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('marketingPctOfRevenue', idx, v)}
+            benchmark={bench.marketingPctOfRevenue}
           />
           <ArrayField
             label="תפעול מהכנסות"
             values={assumptions.operatingPctOfRevenue ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('operatingPctOfRevenue', idx, v)}
+            benchmark={bench.operatingPctOfRevenue}
           />
         </div>
       </div>
@@ -480,9 +546,24 @@ function AssumptionsTab({ assumptions, onChange, onAutoSuggest, hasHistorical }:
       <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
         <h4 className="font-semibold text-gray-900 mb-3">הון חוזר (ימים)</h4>
         <div className="grid md:grid-cols-3 gap-3">
-          <SimpleField label="DSO - ימי גבייה" value={assumptions.dso} onChange={(v) => update({ dso: v })} />
-          <SimpleField label="DPO - ימי תשלום" value={assumptions.dpo} onChange={(v) => update({ dpo: v })} />
-          <SimpleField label="DIO - ימי מלאי" value={assumptions.dio} onChange={(v) => update({ dio: v })} />
+          <SimpleField
+            label="DSO - ימי גבייה"
+            value={assumptions.dso}
+            onChange={(v) => update({ dso: v })}
+            benchHint={`ענף: ${Math.round(bench.dso.median)} ימים (Q1-Q3: ${Math.round(bench.dso.low)}-${Math.round(bench.dso.high)})`}
+          />
+          <SimpleField
+            label="DPO - ימי תשלום"
+            value={assumptions.dpo}
+            onChange={(v) => update({ dpo: v })}
+            benchHint={`ענף: ${Math.round(bench.dpo.median)} ימים`}
+          />
+          <SimpleField
+            label="DIO - ימי מלאי"
+            value={assumptions.dio}
+            onChange={(v) => update({ dio: v })}
+            benchHint={`ענף: ${Math.round(bench.dio.median)} ימים`}
+          />
         </div>
       </div>
 
@@ -535,7 +616,17 @@ function AssumptionsTab({ assumptions, onChange, onAutoSuggest, hasHistorical }:
   );
 }
 
-function SimpleField({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
+function SimpleField({
+  label,
+  value,
+  onChange,
+  benchHint,
+}: {
+  label: string;
+  value: number;
+  onChange: (v: number) => void;
+  benchHint?: string;
+}) {
   return (
     <div>
       <label className="block text-xs text-gray-700 mb-1">{label}</label>
@@ -545,6 +636,7 @@ function SimpleField({ label, value, onChange }: { label: string; value: number;
         onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
         className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
       />
+      {benchHint && <div className="text-[10px] text-emerald-700 mt-0.5">📊 {benchHint}</div>}
     </div>
   );
 }
@@ -555,16 +647,36 @@ function ArrayField({
   years,
   onChange,
   isCurrency,
+  benchmark,
 }: {
   label: string;
   values: number[];
   years: number;
   onChange: (idx: number, v: number) => void;
   isCurrency?: boolean;
+  benchmark?: { low: number; median: number; high: number };
 }) {
+  // הצג הערכת מיקום ביחס ל-benchmark
+  const firstValue = values[0];
+  let positionLabel = '';
+  if (benchmark && firstValue !== undefined && !isCurrency) {
+    if (firstValue < benchmark.low) positionLabel = '⚠️ מתחת לטווח הענפי';
+    else if (firstValue < benchmark.median) positionLabel = '🟡 מתחת לחציון';
+    else if (firstValue < benchmark.high) positionLabel = '🟢 מעל החציון';
+    else positionLabel = '✨ מעל אחוזון 75';
+  }
+
   return (
     <div>
-      <label className="block text-xs text-gray-700 mb-1">{label}</label>
+      <div className="flex items-baseline justify-between mb-1">
+        <label className="text-xs text-gray-700">{label}</label>
+        {benchmark && !isCurrency && (
+          <span className="text-[10px] text-emerald-700">
+            ענף: {benchmark.low.toFixed(0)}–{benchmark.high.toFixed(0)}% (חציון{' '}
+            {benchmark.median.toFixed(0)}%) {positionLabel}
+          </span>
+        )}
+      </div>
       <div className="grid grid-cols-5 gap-1">
         {Array.from({ length: years }, (_, i) => (
           <div key={i}>

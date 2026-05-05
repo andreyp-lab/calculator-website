@@ -78,13 +78,24 @@ export function getCashInForMonth(
 
     // עוברים על כל החודשים שההכנסה פעילה
     for (let m = income.startMonth; m < income.startMonth + income.duration; m++) {
-      const actualMonth = getActualPaymentMonth(m, income.paymentTerms, delayDays);
-      if (actualMonth === monthIdx) {
-        let amount = getIncomeForMonth(income, m);
-        if (amountImpact !== 0) {
-          amount *= 1 + amountImpact / 100;
+      let amount = getIncomeForMonth(income, m);
+      if (amountImpact !== 0) {
+        amount *= 1 + amountImpact / 100;
+      }
+
+      // אם יש פיצול תשלומים - חלק לפי האחוזים
+      if (income.paymentSplit && income.paymentSplit.length > 0) {
+        for (const inst of income.paymentSplit) {
+          const monthsOffset = Math.floor((inst.daysOffset + delayDays) / 30);
+          if (m + monthsOffset === monthIdx) {
+            total += amount * (inst.percentage / 100);
+          }
         }
-        total += amount;
+      } else {
+        const actualMonth = getActualPaymentMonth(m, income.paymentTerms, delayDays);
+        if (actualMonth === monthIdx) {
+          total += amount;
+        }
       }
     }
   }
@@ -126,8 +137,17 @@ export function getCashOutForMonth(
       const baseAmount = getExpenseForMonth(expense, m, budget.income);
       if (baseAmount === 0) continue;
 
-      // אם יש פיצול - חלק את הסכום על פני N חודשים
-      if (splitCount > 1) {
+      // עדיפות 1: פיצול תשלומים אמיתי (paymentSplit)
+      if (expense.paymentSplit && expense.paymentSplit.length > 0) {
+        for (const inst of expense.paymentSplit) {
+          const monthsOffset = Math.floor((inst.daysOffset + delayDays) / 30);
+          if (m + monthsOffset === monthIdx) {
+            total += baseAmount * (inst.percentage / 100);
+          }
+        }
+      }
+      // עדיפות 2: פיצול ע"י עיכוב (legacy)
+      else if (splitCount > 1) {
         const perPayment = baseAmount / splitCount;
         for (let p = 0; p < splitCount; p++) {
           const actualMonth = getActualPaymentMonth(m, expense.paymentTerms, delayDays + p * 30);
@@ -135,7 +155,9 @@ export function getCashOutForMonth(
             total += perPayment;
           }
         }
-      } else {
+      }
+      // ברירת מחדל: תשלום אחיד
+      else {
         const actualMonth = getActualPaymentMonth(m, expense.paymentTerms, delayDays);
         if (actualMonth === monthIdx) {
           total += baseAmount;

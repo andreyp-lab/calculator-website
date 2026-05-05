@@ -14,6 +14,8 @@ import { EmployeeAnalysis } from '@/components/tools/EmployeeAnalysis';
 import { AdvancedAnalytics } from '@/components/tools/AdvancedAnalytics';
 import { IndustryBenchmarks } from '@/components/tools/IndustryBenchmarks';
 import { TemplatesLibrary } from '@/components/tools/TemplatesLibrary';
+import { WorkingCapitalOptimizer } from '@/components/tools/WorkingCapitalOptimizer';
+import { GoalsTracker } from '@/components/tools/GoalsTracker';
 import {
   TrendingUp,
   ChartBar,
@@ -21,6 +23,8 @@ import {
   Sparkles,
   Trophy,
   Layout,
+  Settings as SettingsIcon,
+  Target,
 } from 'lucide-react';
 
 type AnalyticsTab =
@@ -28,7 +32,9 @@ type AnalyticsTab =
   | 'charts'
   | 'employees'
   | 'advanced'
-  | 'benchmarks';
+  | 'benchmarks'
+  | 'wc'
+  | 'goals';
 
 export default function BudgetPage() {
   const [analyticsTab, setAnalyticsTab] = useState<AnalyticsTab>('charts');
@@ -106,6 +112,20 @@ export default function BudgetPage() {
             label="בנצ'מרק ענפי"
             color="emerald"
           />
+          <TabButton
+            active={analyticsTab === 'wc'}
+            onClick={() => setAnalyticsTab('wc')}
+            icon={SettingsIcon}
+            label="הון חוזר"
+            color="cyan"
+          />
+          <TabButton
+            active={analyticsTab === 'goals'}
+            onClick={() => setAnalyticsTab('goals')}
+            icon={Target}
+            label="יעדים"
+            color="rose"
+          />
         </div>
 
         {analyticsTab === 'templates' && <TemplatesLibrary />}
@@ -113,6 +133,8 @@ export default function BudgetPage() {
         {analyticsTab === 'employees' && <EmployeeAnalysis />}
         {analyticsTab === 'advanced' && <AdvancedAnalytics />}
         {analyticsTab === 'benchmarks' && <IndustryBenchmarks />}
+        {analyticsTab === 'wc' && <WorkingCapitalOptimizer />}
+        {analyticsTab === 'goals' && <GoalsTracker />}
       </div>
     </div>
   );
@@ -129,7 +151,7 @@ function TabButton({
   onClick: () => void;
   icon: typeof Layout;
   label: string;
-  color: 'blue' | 'purple' | 'indigo' | 'emerald' | 'violet';
+  color: 'blue' | 'purple' | 'indigo' | 'emerald' | 'violet' | 'cyan' | 'rose';
 }) {
   const colorMap: Record<string, string> = {
     blue: 'bg-blue-600',
@@ -137,6 +159,8 @@ function TabButton({
     indigo: 'bg-indigo-600',
     emerald: 'bg-emerald-600',
     violet: 'bg-violet-600',
+    cyan: 'bg-cyan-600',
+    rose: 'bg-rose-600',
   };
   return (
     <button

@@ -140,6 +140,21 @@ const CATEGORIES: Category[] = [
           'ניתוח קוהורט לפי חודש רכישה',
         ],
       },
+      {
+        href: '/tools/capital',
+        title: 'הון, שווי ודילול',
+        emoji: '💎',
+        description: 'DCF Valuation מלא + Cap Table עם סבבי גיוס, ESOP ו-Exit Waterfall',
+        icon: Gem,
+        badge: 'חדש',
+        color: 'from-rose-500 to-pink-700',
+        features: [
+          'WACC + DCF + Sensitivity',
+          'Cap Table 5+ סבבים',
+          'Liquidation Preferences',
+          'Exit Waterfall',
+        ],
+      },
     ],
   },
 

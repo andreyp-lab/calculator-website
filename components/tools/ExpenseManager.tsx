@@ -10,6 +10,8 @@ import {
   EXPENSE_CATEGORY_LABELS,
 } from '@/lib/tools/types';
 import { Plus, Trash2, TrendingDown } from 'lucide-react';
+import { PaymentTermsEditor } from './PaymentTermsEditor';
+import type { PaymentTermInstallment } from '@/lib/tools/types';
 
 const CATEGORY_COLORS: Record<ExpenseCategory, string> = {
   cogs: 'border-red-200 bg-red-50',
@@ -32,6 +34,8 @@ export function ExpenseManager() {
     startMonth: 0,
     duration: 12,
     paymentTerms: 0,
+    paymentSplit: undefined as PaymentTermInstallment[] | undefined,
+    applyInflation: false,
   });
 
   if (!budget || !settings) return null;
@@ -51,6 +55,8 @@ export function ExpenseManager() {
       startMonth: form.startMonth,
       duration: form.duration,
       paymentTerms: form.paymentTerms,
+      paymentSplit: form.paymentSplit,
+      applyInflation: form.applyInflation,
     });
 
     setForm({
@@ -62,6 +68,8 @@ export function ExpenseManager() {
       startMonth: 0,
       duration: 12,
       paymentTerms: 0,
+      paymentSplit: undefined,
+      applyInflation: false,
     });
     setShowForm(false);
   }
@@ -218,20 +226,33 @@ export function ExpenseManager() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
               />
             </div>
-            <div>
-              <label className="block text-xs text-gray-700 mb-1">תנאי תשלום</label>
-              <select
-                value={form.paymentTerms}
-                onChange={(e) =>
-                  setForm({ ...form, paymentTerms: parseInt(e.target.value) })
+            <div className="md:col-span-2">
+              <PaymentTermsEditor
+                label="תנאי תשלום"
+                value={
+                  form.paymentSplit && form.paymentSplit.length > 0
+                    ? { simpleNet: form.paymentTerms, installments: form.paymentSplit }
+                    : { simpleNet: form.paymentTerms }
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-              >
-                <option value={0}>מיידי</option>
-                <option value={30}>שוטף + 30</option>
-                <option value={60}>שוטף + 60</option>
-                <option value={90}>שוטף + 90</option>
-              </select>
+                onChange={(t) =>
+                  setForm({
+                    ...form,
+                    paymentTerms: t.simpleNet,
+                    paymentSplit: t.installments,
+                  })
+                }
+              />
+            </div>
+            <div>
+              <label className="flex items-center gap-2 cursor-pointer mt-2">
+                <input
+                  type="checkbox"
+                  checked={form.applyInflation}
+                  onChange={(e) => setForm({ ...form, applyInflation: e.target.checked })}
+                  className="w-4 h-4"
+                />
+                <span className="text-xs text-gray-700">החל אינפלציה שנתית (מהגדרות)</span>
+              </label>
             </div>
           </div>
           <div className="flex gap-2 mt-3">

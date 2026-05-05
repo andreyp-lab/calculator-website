@@ -10,6 +10,8 @@ import {
   EXPENSE_CATEGORY_LABELS,
 } from '@/lib/tools/types';
 import { Plus, Trash2, TrendingUp, Link2 } from 'lucide-react';
+import { PaymentTermsEditor } from './PaymentTermsEditor';
+import type { PaymentTermInstallment } from '@/lib/tools/types';
 
 const initialForm = {
   name: '',
@@ -18,6 +20,7 @@ const initialForm = {
   duration: 12,
   growthPct: 0,
   paymentTerms: 0,
+  paymentSplit: undefined as PaymentTermInstallment[] | undefined,
   status: 'expected' as const,
 };
 
@@ -158,18 +161,22 @@ export function IncomeManager() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
               />
             </div>
-            <div>
-              <label className="block text-xs text-gray-700 mb-1">תנאי תשלום (ימים)</label>
-              <select
-                value={form.paymentTerms}
-                onChange={(e) => setForm({ ...form, paymentTerms: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-              >
-                <option value={0}>מיידי</option>
-                <option value={30}>שוטף + 30</option>
-                <option value={60}>שוטף + 60</option>
-                <option value={90}>שוטף + 90</option>
-              </select>
+            <div className="md:col-span-2">
+              <PaymentTermsEditor
+                label="תנאי תשלום"
+                value={
+                  form.paymentSplit && form.paymentSplit.length > 0
+                    ? { simpleNet: form.paymentTerms, installments: form.paymentSplit }
+                    : { simpleNet: form.paymentTerms }
+                }
+                onChange={(t) =>
+                  setForm({
+                    ...form,
+                    paymentTerms: t.simpleNet,
+                    paymentSplit: t.installments,
+                  })
+                }
+              />
             </div>
           </div>
 
