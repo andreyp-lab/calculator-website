@@ -1,419 +1,418 @@
 'use client';
 
-import { useMemo } from 'react';
-import Link from 'next/link';
-import { useTools } from '@/lib/tools/ToolsContext';
+import { useState } from 'react';
 import { ScenarioBar } from '@/components/tools/ScenarioBar';
 import { SettingsCard } from '@/components/tools/SettingsCard';
-import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
-import { calculateCashFlow, generateCashFlowInsights } from '@/lib/tools/cashflow-engine';
-import {
-  calculateRatios,
-  calculateZScore,
-  calculateHealthScore,
-  calculateCreditRating,
-  RatioInputData,
-} from '@/lib/tools/financial-analyzer';
-import { formatCurrency, formatPercent, formatRatio } from '@/lib/tools/format';
+import { ExportImportBar } from '@/components/tools/ExportImportBar';
+import { UnifiedKPIBar } from '@/components/tools/UnifiedKPIBar';
+import { UnifiedOverview } from '@/components/tools/UnifiedOverview';
+
+// Budget components
+import { IncomeManager } from '@/components/tools/IncomeManager';
+import { ExpenseManager } from '@/components/tools/ExpenseManager';
+import { LoanManager } from '@/components/tools/LoanManager';
+import { EmployeeManager } from '@/components/tools/EmployeeManager';
+import { PLSummary } from '@/components/tools/PLSummary';
+import { BudgetCharts } from '@/components/tools/BudgetCharts';
+import { EmployeeAnalysis } from '@/components/tools/EmployeeAnalysis';
+import { AdvancedAnalytics } from '@/components/tools/AdvancedAnalytics';
+import { TemplatesLibrary } from '@/components/tools/TemplatesLibrary';
+import { WorkingCapitalOptimizer } from '@/components/tools/WorkingCapitalOptimizer';
+import { GoalsTracker } from '@/components/tools/GoalsTracker';
+
+// Cash Flow components
+import { CashFlowDashboard } from '@/components/tools/CashFlowDashboard';
+import { CashFlowChart } from '@/components/tools/CashFlowChart';
+import { CashFlowTable } from '@/components/tools/CashFlowTable';
+import { CashFlowDistributionCharts } from '@/components/tools/CashFlowDistributionCharts';
+import { BankAccountsManager } from '@/components/tools/BankAccountsManager';
+import { DelaysManager } from '@/components/tools/DelaysManager';
+import { CustomExpensesManager } from '@/components/tools/CustomExpensesManager';
+import { DebtRestructuring } from '@/components/tools/DebtRestructuring';
+import { ScenarioCompare } from '@/components/tools/ScenarioCompare';
+import { BurnRateDashboard } from '@/components/tools/BurnRateDashboard';
+
+// Analysis components
+import { BalanceSheetForm } from '@/components/tools/BalanceSheetForm';
+import { RatiosDisplay } from '@/components/tools/RatiosDisplay';
+import { DuPontDisplay } from '@/components/tools/DuPontDisplay';
+import { AdvancedDSCRDisplay } from '@/components/tools/AdvancedDSCRDisplay';
+import { BreakEvenDisplay } from '@/components/tools/BreakEvenDisplay';
+import { RiskAssessmentDisplay } from '@/components/tools/RiskAssessmentDisplay';
+import { BankCreditAdvice } from '@/components/tools/BankCreditAdvice';
+import { CashFlowQualityDisplay } from '@/components/tools/CashFlowQualityDisplay';
+import { FinancialSensitivity } from '@/components/tools/FinancialSensitivity';
+import { MultiMethodForecastDisplay } from '@/components/tools/MultiMethodForecastDisplay';
+import { PeriodComparisonDisplay } from '@/components/tools/PeriodComparisonDisplay';
+import { IndustryBenchmarks } from '@/components/tools/IndustryBenchmarks';
+
+// Forecast & Capital
+import { ThreeStatementModelUI } from '@/components/tools/ThreeStatementModel';
+import { MonteCarloAnalysis } from '@/components/tools/MonteCarloAnalysis';
+import { CohortAnalysis } from '@/components/tools/CohortAnalysis';
+import { DCFValuation } from '@/components/tools/DCFValuation';
+import { CapTable } from '@/components/tools/CapTable';
+
 import {
   LayoutDashboard,
   TrendingUp,
   Wallet,
   BarChart3,
-  ArrowLeft,
-  AlertCircle,
-  CheckCircle2,
+  Sparkles,
+  Briefcase,
+  // Budget sub-icons
+  Layout,
+  Users,
+  Trophy,
+  Target,
+  Settings as SettingsIcon,
+  // Cashflow sub-icons
   Activity,
+  RefreshCw,
+  GitCompare,
+  Flame,
+  // Analysis sub-icons
+  Banknote,
+  Scale,
+  Shield,
+  University,
+  Droplets,
+  Gem,
 } from 'lucide-react';
 
-export default function UnifiedDashboard() {
-  const { budget, settings, balanceSheet, cashFlow } = useTools();
+// ============================================================
+// TYPES
+// ============================================================
 
-  const data = useMemo(() => {
-    if (!budget || !settings || !cashFlow) return null;
+type MasterTab = 'overview' | 'budget' | 'cashflow' | 'analysis' | 'forecast';
 
-    const monthly = calculateAllMonths(budget, settings);
-    const totals = calculateBudgetTotals(monthly);
-    const cashFlowMonthly = calculateCashFlow(budget, cashFlow, settings);
-    const cashInsights = generateCashFlowInsights(cashFlowMonthly);
+type BudgetSubTab =
+  | 'inputs'
+  | 'templates'
+  | 'charts'
+  | 'employees'
+  | 'advanced'
+  | 'benchmarks'
+  | 'wc'
+  | 'goals';
 
-    let analysis = null;
-    if (balanceSheet && balanceSheet.totalAssets > 0) {
-      const annualDebtPayment = budget.loans.reduce((sum, loan) => {
-        const r = loan.annualRate / 100 / 12;
-        const n = loan.termMonths;
-        const pmt =
-          r === 0 ? loan.amount / n : (loan.amount * (r * Math.pow(1 + r, n))) / (Math.pow(1 + r, n) - 1);
-        return sum + pmt * 12;
-      }, 0);
+type CashFlowSubTab = 'dashboard' | 'manage' | 'restructure' | 'compare' | 'burn';
 
-      const input: RatioInputData = {
-        revenue: totals.income,
-        cogs: totals.cogs,
-        grossProfit: totals.grossProfit,
-        operatingExpenses: totals.rnd + totals.marketing + totals.operating,
-        operatingProfit: totals.operatingProfit,
-        ebitda: totals.ebitda,
-        netProfit: totals.netProfit,
-        interestExpense: totals.financial,
-        balance: balanceSheet,
-        annualDebtPayment,
-      };
+type AnalysisSubTab =
+  | 'data'
+  | 'dupont'
+  | 'dscr'
+  | 'breakeven'
+  | 'risk'
+  | 'bank'
+  | 'cashflow'
+  | 'sensitivity'
+  | 'forecast'
+  | 'comparison'
+  | 'benchmark';
 
-      const ratios = calculateRatios(input);
-      const health = calculateHealthScore(ratios);
-      const credit = calculateCreditRating(ratios, health);
-      const zScore = calculateZScore(input, 'private');
-      analysis = { ratios, health, credit, zScore };
-    }
+type ForecastSubTab = 'three-statement' | 'monte-carlo' | 'cohort' | 'dcf' | 'captable';
 
-    return { monthly, totals, cashFlowMonthly, cashInsights, analysis };
-  }, [budget, settings, balanceSheet, cashFlow]);
+// ============================================================
+// MAIN PAGE
+// ============================================================
 
-  if (!data || !settings) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-gray-600">טוען נתונים...</p>
-      </div>
-    );
-  }
-
-  const { totals, cashFlowMonthly, cashInsights, analysis } = data;
-  const fmt = (v: number) => formatCurrency(v, settings.currency);
-
-  // Stage 1: Budget data?
-  const hasBudget = budget && (budget.income.length > 0 || budget.expenses.length > 0);
-  // Stage 2: Cash flow valid?
-  const hasCashFlow = hasBudget && cashFlowMonthly.length > 0;
-  // Stage 3: Analysis valid?
-  const hasAnalysis = analysis !== null;
-
-  // Calc closing balance trend
-  const finalBalance =
-    cashFlowMonthly.length > 0 ? cashFlowMonthly[cashFlowMonthly.length - 1].closingBalance : 0;
-  const minBalance =
-    cashFlowMonthly.length > 0
-      ? Math.min(...cashFlowMonthly.map((m) => m.closingBalance))
-      : 0;
-  const hasNegativeMonths = cashFlowMonthly.some((m) => m.closingBalance < 0);
+export default function UnifiedToolPage() {
+  const [masterTab, setMasterTab] = useState<MasterTab>('overview');
+  const [budgetTab, setBudgetTab] = useState<BudgetSubTab>('inputs');
+  const [cashflowTab, setCashflowTab] = useState<CashFlowSubTab>('dashboard');
+  const [analysisTab, setAnalysisTab] = useState<AnalysisSubTab>('data');
+  const [forecastTab, setForecastTab] = useState<ForecastSubTab>('three-statement');
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-4">
-        <div className="bg-purple-100 p-3 rounded-lg">
-          <LayoutDashboard className="w-6 h-6 text-purple-700" />
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">מערכת מאוחדת</h2>
-          <p className="text-sm text-gray-600">
-            תקציב + תזרים + ניתוח דוחות במקום אחד - תמונה מלאה של המצב הפיננסי
-          </p>
-        </div>
-      </div>
-
-      <ScenarioBar />
-      <SettingsCard />
-
-      {/* Workflow Indicator */}
-      <div className="bg-white border-2 border-gray-200 rounded-lg p-4 mb-4 mt-4 shadow-sm">
-        <div className="flex items-center gap-2 mb-3">
-          <Activity className="w-5 h-5 text-blue-600" />
-          <h3 className="font-bold text-gray-900">סטטוס המערכת</h3>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <WorkflowStep
-            num={1}
-            label="תקציב"
-            sublabel="הכנסות + הוצאות"
-            done={!!hasBudget}
-            href="/tools/budget"
-          />
-          <WorkflowStep
-            num={2}
-            label="תזרים מזומנים"
-            sublabel="יתרות חודשיות"
-            done={!!hasCashFlow}
-            href="/tools/cash-flow"
-          />
-          <WorkflowStep
-            num={3}
-            label="ניתוח דוחות"
-            sublabel="יחסים + Z-Score"
-            done={hasAnalysis}
-            href="/tools/financial-analysis"
-          />
-        </div>
-      </div>
-
-      {/* KPI Dashboard */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-        {/* רווח נקי */}
-        <KPICard
-          label="רווח נקי"
-          value={fmt(totals.netProfit)}
-          subValue={formatPercent(totals.netMargin)}
-          color={totals.netProfit > 0 ? 'green' : 'red'}
-          icon={TrendingUp}
-        />
-
-        {/* יתרה צפויה */}
-        <KPICard
-          label="יתרה בסוף תקופה"
-          value={fmt(finalBalance)}
-          subValue={hasNegativeMonths ? '⚠️ יתרה שלילית בדרך' : '✓ יציב'}
-          color={hasNegativeMonths ? 'red' : finalBalance > 0 ? 'green' : 'gray'}
-          icon={Wallet}
-        />
-
-        {/* דירוג אשראי */}
-        <KPICard
-          label="דירוג אשראי"
-          value={analysis?.credit.rating ?? 'N/A'}
-          subValue={analysis?.credit.outlook ?? 'מלא מאזן לחישוב'}
-          color={
-            !analysis ? 'gray' : analysis.credit.investmentGrade ? 'green' : 'amber'
-          }
-          icon={BarChart3}
-        />
-
-        {/* DSCR */}
-        <KPICard
-          label="DSCR"
-          value={
-            !analysis
-              ? 'N/A'
-              : analysis.ratios.dscr > 99
-                ? '∞'
-                : formatRatio(analysis.ratios.dscr)
-          }
-          subValue="יכולת החזר חוב"
-          color={
-            !analysis
-              ? 'gray'
-              : analysis.ratios.dscr >= 1.5
-                ? 'green'
-                : analysis.ratios.dscr >= 1.0
-                  ? 'amber'
-                  : 'red'
-          }
-          icon={Activity}
-        />
-      </div>
-
-      {/* Insights Panel */}
-      {cashInsights.length > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-lg p-4 mb-4 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <AlertCircle className="w-5 h-5 text-amber-600" />
-            תובנות אוטומטיות
-          </h3>
-          <div className="space-y-2">
-            {cashInsights.map((insight, i) => {
-              const colors = {
-                critical: 'bg-red-50 text-red-900 border-red-300',
-                warning: 'bg-amber-50 text-amber-900 border-amber-300',
-                success: 'bg-green-50 text-green-900 border-green-300',
-                info: 'bg-blue-50 text-blue-900 border-blue-300',
-              };
-              return (
-                <div
-                  key={i}
-                  className={`border rounded-lg p-3 text-sm ${colors[insight.type]}`}
-                >
-                  <div className="font-medium">{insight.title}</div>
-                  <div className="text-xs opacity-80">{insight.description}</div>
-                </div>
-              );
-            })}
+      {/* Header */}
+      <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
+        <div className="flex items-center gap-3">
+          <div className="bg-purple-100 p-3 rounded-lg">
+            <LayoutDashboard className="w-6 h-6 text-purple-700" />
           </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">מערכת פיננסית מאוחדת</h2>
+            <p className="text-sm text-gray-600">
+              תקציב + תזרים + ניתוח דוחות + חיזוי - הכל במקום אחד, מסונכרן בזמן אמת
+            </p>
+          </div>
+        </div>
+        <ExportImportBar />
+      </div>
+
+      {/* Sticky Top: Settings + Scenario + KPIs */}
+      <div className="space-y-3 mb-4">
+        <ScenarioBar />
+        <SettingsCard />
+        <UnifiedKPIBar />
+      </div>
+
+      {/* Master Tabs */}
+      <div className="bg-white rounded-lg border-2 border-gray-200 p-2 shadow-sm flex flex-wrap gap-1 mb-4">
+        <MasterTabButton
+          active={masterTab === 'overview'}
+          onClick={() => setMasterTab('overview')}
+          icon={LayoutDashboard}
+          label="סקירה כללית"
+          color="purple"
+        />
+        <MasterTabButton
+          active={masterTab === 'budget'}
+          onClick={() => setMasterTab('budget')}
+          icon={TrendingUp}
+          label="תקציב"
+          color="green"
+        />
+        <MasterTabButton
+          active={masterTab === 'cashflow'}
+          onClick={() => setMasterTab('cashflow')}
+          icon={Wallet}
+          label="תזרים מזומנים"
+          color="blue"
+        />
+        <MasterTabButton
+          active={masterTab === 'analysis'}
+          onClick={() => setMasterTab('analysis')}
+          icon={BarChart3}
+          label="ניתוח דוחות"
+          color="orange"
+        />
+        <MasterTabButton
+          active={masterTab === 'forecast'}
+          onClick={() => setMasterTab('forecast')}
+          icon={Sparkles}
+          label="חיזוי + הון"
+          color="indigo"
+        />
+      </div>
+
+      {/* === OVERVIEW === */}
+      {masterTab === 'overview' && (
+        <UnifiedOverview
+          onNavigate={(target) => {
+            setMasterTab(target.master);
+            if (target.budget) setBudgetTab(target.budget);
+            if (target.cashflow) setCashflowTab(target.cashflow);
+            if (target.analysis) setAnalysisTab(target.analysis);
+            if (target.forecast) setForecastTab(target.forecast);
+          }}
+        />
+      )}
+
+      {/* === BUDGET === */}
+      {masterTab === 'budget' && (
+        <div>
+          <SubTabNav>
+            <SubTab active={budgetTab === 'inputs'} onClick={() => setBudgetTab('inputs')} icon={TrendingUp} label="הכנסות / הוצאות / הלוואות / עובדים" color="green" />
+            <SubTab active={budgetTab === 'templates'} onClick={() => setBudgetTab('templates')} icon={Layout} label="תבניות" color="violet" />
+            <SubTab active={budgetTab === 'charts'} onClick={() => setBudgetTab('charts')} icon={BarChart3} label="גרפים" color="blue" />
+            <SubTab active={budgetTab === 'employees'} onClick={() => setBudgetTab('employees')} icon={Users} label="ניתוח עובדים" color="purple" />
+            <SubTab active={budgetTab === 'advanced'} onClick={() => setBudgetTab('advanced')} icon={Sparkles} label="אנליזה מתקדמת" color="indigo" />
+            <SubTab active={budgetTab === 'benchmarks'} onClick={() => setBudgetTab('benchmarks')} icon={Trophy} label="בנצ'מרק" color="emerald" />
+            <SubTab active={budgetTab === 'wc'} onClick={() => setBudgetTab('wc')} icon={SettingsIcon} label="הון חוזר" color="cyan" />
+            <SubTab active={budgetTab === 'goals'} onClick={() => setBudgetTab('goals')} icon={Target} label="יעדים" color="rose" />
+          </SubTabNav>
+
+          {budgetTab === 'inputs' && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div className="lg:col-span-2 space-y-4">
+                <IncomeManager />
+                <ExpenseManager />
+                <EmployeeManager />
+                <LoanManager />
+              </div>
+              <div className="lg:col-span-1">
+                <div className="sticky top-4">
+                  <PLSummary />
+                </div>
+              </div>
+            </div>
+          )}
+          {budgetTab === 'templates' && <TemplatesLibrary />}
+          {budgetTab === 'charts' && <BudgetCharts />}
+          {budgetTab === 'employees' && <EmployeeAnalysis />}
+          {budgetTab === 'advanced' && <AdvancedAnalytics />}
+          {budgetTab === 'benchmarks' && <IndustryBenchmarks />}
+          {budgetTab === 'wc' && <WorkingCapitalOptimizer />}
+          {budgetTab === 'goals' && <GoalsTracker />}
         </div>
       )}
 
-      {/* Quick Stats Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* תקציב */}
-        <div className="bg-white border-2 border-gray-200 rounded-lg p-4 shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <h4 className="font-bold text-gray-900 flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-green-600" />
-              תקציב
-            </h4>
-            <Link
-              href="/tools/budget"
-              className="text-xs text-blue-600 hover:underline flex items-center gap-1"
-            >
-              פתח <ArrowLeft className="w-3 h-3" />
-            </Link>
-          </div>
-          <div className="space-y-1 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">הכנסות:</span>
-              <span className="font-medium">{fmt(totals.income)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">הוצאות:</span>
-              <span className="font-medium">{fmt(totals.totalExpenses)}</span>
-            </div>
-            <div className="flex justify-between border-t pt-1">
-              <span className="font-bold">רווח נקי:</span>
-              <span
-                className={`font-bold ${
-                  totals.netProfit > 0 ? 'text-green-700' : 'text-red-700'
-                }`}
-              >
-                {fmt(totals.netProfit)}
-              </span>
-            </div>
-          </div>
-        </div>
+      {/* === CASH FLOW === */}
+      {masterTab === 'cashflow' && (
+        <div>
+          <SubTabNav>
+            <SubTab active={cashflowTab === 'dashboard'} onClick={() => setCashflowTab('dashboard')} icon={LayoutDashboard} label="דשבורד וגרפים" color="blue" />
+            <SubTab active={cashflowTab === 'manage'} onClick={() => setCashflowTab('manage')} icon={Activity} label="ניהול תזרים" color="cyan" />
+            <SubTab active={cashflowTab === 'restructure'} onClick={() => setCashflowTab('restructure')} icon={RefreshCw} label="פריסת חוב" color="purple" />
+            <SubTab active={cashflowTab === 'compare'} onClick={() => setCashflowTab('compare')} icon={GitCompare} label="השוואת תרחישים" color="violet" />
+            <SubTab active={cashflowTab === 'burn'} onClick={() => setCashflowTab('burn')} icon={Flame} label="Burn Rate" color="orange" />
+          </SubTabNav>
 
-        {/* תזרים */}
-        <div className="bg-white border-2 border-gray-200 rounded-lg p-4 shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <h4 className="font-bold text-gray-900 flex items-center gap-2">
-              <Wallet className="w-4 h-4 text-blue-600" />
-              תזרים
-            </h4>
-            <Link
-              href="/tools/cash-flow"
-              className="text-xs text-blue-600 hover:underline flex items-center gap-1"
-            >
-              פתח <ArrowLeft className="w-3 h-3" />
-            </Link>
-          </div>
-          <div className="space-y-1 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">יתרת פתיחה:</span>
-              <span className="font-medium">{fmt(settings.openingBalance)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">יתרה מינימלית:</span>
-              <span
-                className={`font-medium ${minBalance < 0 ? 'text-red-700' : ''}`}
-              >
-                {fmt(minBalance)}
-              </span>
-            </div>
-            <div className="flex justify-between border-t pt-1">
-              <span className="font-bold">יתרת סיום:</span>
-              <span
-                className={`font-bold ${
-                  finalBalance > 0 ? 'text-blue-700' : 'text-red-700'
-                }`}
-              >
-                {fmt(finalBalance)}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* ניתוח */}
-        <div className="bg-white border-2 border-gray-200 rounded-lg p-4 shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <h4 className="font-bold text-gray-900 flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-orange-600" />
-              ניתוח
-            </h4>
-            <Link
-              href="/tools/financial-analysis"
-              className="text-xs text-blue-600 hover:underline flex items-center gap-1"
-            >
-              פתח <ArrowLeft className="w-3 h-3" />
-            </Link>
-          </div>
-          {analysis ? (
-            <div className="space-y-1 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-600">דירוג:</span>
-                <span className="font-bold">{analysis.credit.rating}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">בריאות:</span>
-                <span className="font-bold">{analysis.health.totalScore}/100</span>
-              </div>
-              <div className="flex justify-between border-t pt-1">
-                <span className="font-bold">Z-Score:</span>
-                <span className="font-bold">{formatRatio(analysis.zScore.score)}</span>
-              </div>
-            </div>
-          ) : (
-            <div className="text-sm text-gray-500">
-              <p>מלא נתוני מאזן כדי לקבל ניתוח מלא</p>
+          {cashflowTab === 'dashboard' && (
+            <div className="space-y-4">
+              <CashFlowDashboard />
+              <CashFlowChart />
+              <CashFlowDistributionCharts />
+              <CashFlowTable />
             </div>
           )}
+          {cashflowTab === 'manage' && (
+            <div className="space-y-4">
+              <BankAccountsManager />
+              <DelaysManager />
+              <CustomExpensesManager />
+            </div>
+          )}
+          {cashflowTab === 'restructure' && <DebtRestructuring />}
+          {cashflowTab === 'compare' && <ScenarioCompare />}
+          {cashflowTab === 'burn' && <BurnRateDashboard />}
         </div>
-      </div>
+      )}
+
+      {/* === ANALYSIS === */}
+      {masterTab === 'analysis' && (
+        <div>
+          <SubTabNav>
+            <SubTab active={analysisTab === 'data'} onClick={() => setAnalysisTab('data')} icon={BarChart3} label="מאזן + יחסים" color="orange" />
+            <SubTab active={analysisTab === 'dupont'} onClick={() => setAnalysisTab('dupont')} icon={Sparkles} label="DuPont" color="indigo" />
+            <SubTab active={analysisTab === 'dscr'} onClick={() => setAnalysisTab('dscr')} icon={Banknote} label="DSCR מתקדם" color="cyan" />
+            <SubTab active={analysisTab === 'breakeven'} onClick={() => setAnalysisTab('breakeven')} icon={Scale} label="נקודת איזון" color="teal" />
+            <SubTab active={analysisTab === 'risk'} onClick={() => setAnalysisTab('risk')} icon={Shield} label="סיכונים" color="rose" />
+            <SubTab active={analysisTab === 'bank'} onClick={() => setAnalysisTab('bank')} icon={University} label="אשראי בנקאי" color="blue" />
+            <SubTab active={analysisTab === 'cashflow'} onClick={() => setAnalysisTab('cashflow')} icon={Droplets} label="איכות תזרים" color="cyan" />
+            <SubTab active={analysisTab === 'sensitivity'} onClick={() => setAnalysisTab('sensitivity')} icon={Activity} label="רגישות" color="purple" />
+            <SubTab active={analysisTab === 'forecast'} onClick={() => setAnalysisTab('forecast')} icon={Sparkles} label="חיזוי" color="amber" />
+            <SubTab active={analysisTab === 'comparison'} onClick={() => setAnalysisTab('comparison')} icon={GitCompare} label="השוואת תקופות" color="violet" />
+            <SubTab active={analysisTab === 'benchmark'} onClick={() => setAnalysisTab('benchmark')} icon={Trophy} label="בנצ'מרק ענפי" color="emerald" />
+          </SubTabNav>
+
+          {analysisTab === 'data' && (
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+              <BalanceSheetForm />
+              <RatiosDisplay />
+            </div>
+          )}
+          {analysisTab === 'dupont' && <DuPontDisplay />}
+          {analysisTab === 'dscr' && <AdvancedDSCRDisplay />}
+          {analysisTab === 'breakeven' && <BreakEvenDisplay />}
+          {analysisTab === 'risk' && <RiskAssessmentDisplay />}
+          {analysisTab === 'bank' && <BankCreditAdvice />}
+          {analysisTab === 'cashflow' && <CashFlowQualityDisplay />}
+          {analysisTab === 'sensitivity' && <FinancialSensitivity />}
+          {analysisTab === 'forecast' && <MultiMethodForecastDisplay />}
+          {analysisTab === 'comparison' && <PeriodComparisonDisplay />}
+          {analysisTab === 'benchmark' && <IndustryBenchmarks />}
+        </div>
+      )}
+
+      {/* === FORECAST + CAPITAL === */}
+      {masterTab === 'forecast' && (
+        <div>
+          <SubTabNav>
+            <SubTab active={forecastTab === 'three-statement'} onClick={() => setForecastTab('three-statement')} icon={Sparkles} label="מודל 3-דוחות" color="indigo" />
+            <SubTab active={forecastTab === 'monte-carlo'} onClick={() => setForecastTab('monte-carlo')} icon={Activity} label="מונטה קרלו" color="purple" />
+            <SubTab active={forecastTab === 'cohort'} onClick={() => setForecastTab('cohort')} icon={Users} label="קוהורט (LTV/CAC)" color="pink" />
+            <SubTab active={forecastTab === 'dcf'} onClick={() => setForecastTab('dcf')} icon={Gem} label="הערכת שווי DCF" color="rose" />
+            <SubTab active={forecastTab === 'captable'} onClick={() => setForecastTab('captable')} icon={Briefcase} label="Cap Table" color="violet" />
+          </SubTabNav>
+
+          {forecastTab === 'three-statement' && <ThreeStatementModelUI />}
+          {forecastTab === 'monte-carlo' && <MonteCarloAnalysis />}
+          {forecastTab === 'cohort' && <CohortAnalysis />}
+          {forecastTab === 'dcf' && <DCFValuation />}
+          {forecastTab === 'captable' && <CapTable />}
+        </div>
+      )}
     </div>
   );
 }
 
-function WorkflowStep({
-  num,
+// ============================================================
+// HELPER COMPONENTS
+// ============================================================
+
+function MasterTabButton({
+  active,
+  onClick,
+  icon: Icon,
   label,
-  sublabel,
-  done,
-  href,
+  color,
 }: {
-  num: number;
+  active: boolean;
+  onClick: () => void;
+  icon: typeof LayoutDashboard;
   label: string;
-  sublabel: string;
-  done: boolean;
-  href: string;
+  color: string;
 }) {
+  const colorMap: Record<string, string> = {
+    purple: 'bg-purple-600',
+    green: 'bg-emerald-600',
+    blue: 'bg-blue-600',
+    orange: 'bg-orange-600',
+    indigo: 'bg-indigo-600',
+  };
   return (
-    <Link
-      href={href}
-      className={`flex items-center gap-3 p-3 border-2 rounded-lg transition hover:shadow-md ${
-        done
-          ? 'bg-green-50 border-green-300'
-          : 'bg-gray-50 border-gray-200 opacity-75'
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-2 px-4 py-2.5 rounded text-sm font-semibold transition ${
+        active
+          ? `${colorMap[color]} text-white shadow-md`
+          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
       }`}
     >
-      <div
-        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
-          done ? 'bg-green-600 text-white' : 'bg-gray-400 text-white'
-        }`}
-      >
-        {done ? <CheckCircle2 className="w-5 h-5" /> : num}
-      </div>
-      <div className="flex-1">
-        <div className="font-medium text-gray-900">{label}</div>
-        <div className="text-xs text-gray-600">{sublabel}</div>
-      </div>
-      <ArrowLeft className="w-4 h-4 text-gray-400" />
-    </Link>
+      <Icon className="w-4 h-4" />
+      {label}
+    </button>
   );
 }
 
-function KPICard({
-  label,
-  value,
-  subValue,
-  color,
-  icon: Icon,
-}: {
-  label: string;
-  value: string;
-  subValue: string;
-  color: 'green' | 'red' | 'amber' | 'blue' | 'gray';
-  icon: typeof TrendingUp;
-}) {
-  const colorClasses = {
-    green: 'bg-green-50 border-green-300 text-green-700',
-    red: 'bg-red-50 border-red-300 text-red-700',
-    amber: 'bg-amber-50 border-amber-300 text-amber-700',
-    blue: 'bg-blue-50 border-blue-300 text-blue-700',
-    gray: 'bg-gray-50 border-gray-300 text-gray-700',
-  };
-
+function SubTabNav({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`border-2 rounded-lg p-4 ${colorClasses[color]}`}>
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-xs">{label}</span>
-        <Icon className="w-4 h-4 opacity-60" />
-      </div>
-      <div className="text-2xl font-bold">{value}</div>
-      <div className="text-xs mt-1 opacity-75">{subValue}</div>
+    <div className="bg-white rounded-lg border-2 border-gray-200 p-2 shadow-sm flex flex-wrap gap-1 mb-4">
+      {children}
     </div>
+  );
+}
+
+function SubTab({
+  active,
+  onClick,
+  icon: Icon,
+  label,
+  color,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: typeof LayoutDashboard;
+  label: string;
+  color: string;
+}) {
+  const colorMap: Record<string, string> = {
+    blue: 'bg-blue-600',
+    purple: 'bg-purple-600',
+    indigo: 'bg-indigo-600',
+    cyan: 'bg-cyan-600',
+    teal: 'bg-teal-600',
+    rose: 'bg-rose-600',
+    violet: 'bg-violet-600',
+    emerald: 'bg-emerald-600',
+    amber: 'bg-amber-600',
+    orange: 'bg-orange-600',
+    green: 'bg-emerald-600',
+    pink: 'bg-pink-600',
+  };
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs transition ${
+        active ? `${colorMap[color]} text-white` : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+      }`}
+    >
+      <Icon className="w-3.5 h-3.5" />
+      {label}
+    </button>
   );
 }

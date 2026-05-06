@@ -51,17 +51,22 @@ const CATEGORIES: Category[] = [
     tools: [
       {
         href: '/tools/unified',
-        title: 'מערכת מאוחדת',
+        title: 'מערכת פיננסית מאוחדת',
         emoji: '🎯',
-        description: 'דשבורד מרכזי שמשלב תקציב + תזרים + ניתוח דוחות',
+        description: 'תקציב + תזרים + ניתוח + חיזוי במקום אחד - הכי מומלץ',
         icon: LayoutDashboard,
-        badge: 'מומלץ',
-        color: 'from-purple-500 to-purple-700',
-        features: ['KPIs בזמן אמת', 'תובנות אוטומטיות', 'workflow מלא'],
+        badge: '⭐ ראשי',
+        color: 'from-purple-500 via-indigo-600 to-blue-700',
+        features: [
+          '5 מודולים בדף אחד',
+          'KPIs חיים מתעדכנים',
+          'תובנות חוצות-מערכת',
+          'סינכרון אוטומטי בין כל הנתונים',
+        ],
       },
       {
         href: '/tools/budget',
-        title: 'תכנון תקציב',
+        title: 'תכנון תקציב (כניסה ישירה)',
         emoji: '💰',
         description: 'תקציב שנתי מלא: הכנסות, הוצאות, עובדים והלוואות',
         icon: TrendingUp,
@@ -70,7 +75,7 @@ const CATEGORIES: Category[] = [
       },
       {
         href: '/tools/cash-flow',
-        title: 'תזרים מזומנים',
+        title: 'תזרים מזומנים (כניסה ישירה)',
         emoji: '💸',
         description: 'יתרות בנק חודשיות, תחזיות ותקופות תזרים שלילי',
         icon: Wallet,
