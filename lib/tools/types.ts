@@ -300,6 +300,70 @@ export interface Scenario {
 }
 
 // ============================================================
+// SOLO CASH FLOW - תזרים עצמאי (ללא תקציב)
+// ============================================================
+
+export type SoloItemType = 'in' | 'out';
+
+export type SoloRecurringFrequency =
+  | 'once'
+  | 'weekly'
+  | 'monthly'
+  | 'quarterly'
+  | 'yearly';
+
+export type SoloIncomeCategory =
+  | 'sales'
+  | 'service'
+  | 'investment'
+  | 'loan_received'
+  | 'refund'
+  | 'other_income';
+
+export type SoloExpenseCategory =
+  | 'rent'
+  | 'salary'
+  | 'supplier'
+  | 'tax'
+  | 'utilities'
+  | 'marketing'
+  | 'equipment'
+  | 'insurance'
+  | 'professional'
+  | 'loan_payment'
+  | 'other_expense';
+
+export interface SoloCashFlowItem {
+  id: string;
+  /** ISO date YYYY-MM-DD */
+  date: string;
+  type: SoloItemType;
+  amount: number;
+  category: SoloIncomeCategory | SoloExpenseCategory;
+  description: string;
+  recurring: SoloRecurringFrequency;
+  /** ISO date - end of recurring */
+  recurringEnd?: string;
+  /** Bank account ID this relates to (optional) */
+  accountId?: string;
+  /** Status of the item */
+  status?: 'expected' | 'confirmed' | 'paid' | 'received';
+  /** Tags for analysis */
+  tags?: string[];
+}
+
+export interface SoloCashFlowData {
+  items: SoloCashFlowItem[];
+  accounts: BankAccount[];
+  /** Months to project from start date */
+  monthsToProject: number;
+  /** Start date for projection (ISO date) */
+  startDate: string;
+  /** Currency for display */
+  currency: Currency;
+}
+
+// ============================================================
 // PAYMENT TERMS - תנאי תשלום מפוצלים
 // ============================================================
 
