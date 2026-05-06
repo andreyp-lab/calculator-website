@@ -11,23 +11,28 @@ export function Footer() {
             <h3 className="font-bold text-gray-900 mb-4">📐 פיננסי אישי</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
-                <Link href="/employee-rights" className="hover:text-blue-600">
-                  זכויות עובדים
+                <Link href="/salaried" className="hover:text-blue-600 font-semibold">
+                  👤 שכירים
                 </Link>
               </li>
               <li>
-                <Link href="/personal-tax" className="hover:text-blue-600">
-                  מיסוי אישי
+                <Link href="/self-employed" className="hover:text-blue-600 font-semibold">
+                  💼 עצמאיים
+                </Link>
+              </li>
+              <li>
+                <Link href="/personal-tax" className="hover:text-blue-600 text-xs">
+                  → מיסוי אישי
+                </Link>
+              </li>
+              <li>
+                <Link href="/employee-rights" className="hover:text-blue-600 text-xs">
+                  → זכויות עובדים
                 </Link>
               </li>
               <li>
                 <Link href="/real-estate" className="hover:text-blue-600">
                   משכנתא ונדל&quot;ן
-                </Link>
-              </li>
-              <li>
-                <Link href="/self-employed" className="hover:text-blue-600">
-                  עצמאיים
                 </Link>
               </li>
             </ul>

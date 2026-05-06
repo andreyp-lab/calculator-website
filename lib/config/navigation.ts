@@ -1,7 +1,7 @@
 export const navigation = {
   main: [
-    { label: 'זכויות עובדים', href: '/employee-rights' },
-    { label: 'מיסוי', href: '/personal-tax' },
+    { label: '👤 שכירים', href: '/salaried' },
+    { label: '💼 עצמאיים', href: '/self-employed' },
     { label: 'משכנתא ונדל"ן', href: '/real-estate' },
     { label: 'השקעות', href: '/investments' },
     { label: 'חיסכון', href: '/savings' },
@@ -17,25 +17,11 @@ export const navigation = {
   // קטגוריות לדף הבית - פיננסים אישיים
   categories: [
     {
-      id: 'employee-rights',
-      label: 'זכויות עובדים',
-      href: '/employee-rights',
-      description: 'פיצויי פיטורין, דמי הבראה, הודעה מוקדמת',
-      icon: '👥',
-    },
-    {
-      id: 'personal-tax',
-      label: 'מיסוי אישי',
-      href: '/personal-tax',
-      description: 'מס הכנסה, החזרי מס, נקודות זיכוי',
-      icon: '💰',
-    },
-    {
-      id: 'real-estate',
-      label: 'משכנתא ונדל"ן',
-      href: '/real-estate',
-      description: 'משכנתא, מס רכישה, מס שבח',
-      icon: '🏠',
+      id: 'salaried',
+      label: 'שכירים',
+      href: '/salaried',
+      description: 'החזר מס, נטו/ברוטו, פיצויים, דמי הבראה, דמי לידה',
+      icon: '👤',
     },
     {
       id: 'self-employed',
@@ -43,6 +29,13 @@ export const navigation = {
       href: '/self-employed',
       description: 'מע"מ, מקדמות מס, ביטוח לאומי',
       icon: '💼',
+    },
+    {
+      id: 'real-estate',
+      label: 'משכנתא ונדל"ן',
+      href: '/real-estate',
+      description: 'משכנתא, מס רכישה, מס שבח',
+      icon: '🏠',
     },
     {
       id: 'investments',
