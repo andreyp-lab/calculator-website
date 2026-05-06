@@ -17,6 +17,36 @@ import type {
 } from './types';
 import { INDUSTRY_BENCHMARKS } from './industry-benchmarks';
 
+// ============================================================
+// DETAILED ENTRY ITEMS (for individual entry mode)
+// ============================================================
+
+export interface IncomeStreamDetail {
+  name: string;
+  monthlyAmount: number;
+  paymentTermsDays: number;
+  growthPctMonthly: number;
+}
+
+export interface EmployeeDetail {
+  name: string;
+  position: string;
+  department: Department;
+  monthlySalary: number;
+}
+
+export interface SupplierExpenseDetail {
+  name: string;
+  category: 'cogs' | 'rnd' | 'marketing' | 'operating' | 'financial';
+  monthlyAmount: number;
+  isPctOfRevenue: boolean;
+  percentageOfRevenue?: number;
+}
+
+// ============================================================
+// MAIN ANSWERS
+// ============================================================
+
 export interface WizardAnswers {
   // Step 1: Industry & Stage
   industry: Industry;
@@ -24,22 +54,31 @@ export interface WizardAnswers {
   companyName: string;
 
   // Step 2: Revenue
-  monthlyRevenue: number;
-  numIncomeStreams: number;
+  /** Mode: simple (just total) or detailed (list streams) */
+  incomeMode: 'simple' | 'detailed';
+  monthlyRevenue: number; // simple mode
+  numIncomeStreams: number; // simple mode
   expectedGrowthPct: number;
+  incomeStreams: IncomeStreamDetail[]; // detailed mode
 
   // Step 3: COGS
   cogsPct: number; // % of revenue
 
   // Step 4: Employees
-  numEmployees: number;
-  totalMonthlySalary: number;
-  /** Distribution by department (auto from industry if empty) */
+  /** Mode: simple (count + total) or detailed (list per employee) */
+  employeesMode: 'simple' | 'detailed';
+  numEmployees: number; // simple
+  totalMonthlySalary: number; // simple
+  employees: EmployeeDetail[]; // detailed
+  /** Distribution by department (used in simple mode) */
   employeeDistribution?: Record<Department, number>;
 
-  // Step 5: Operating
-  monthlyRent: number;
-  monthlyOperating: number; // utilities, software, etc.
+  // Step 5: Operating - now supports detailed suppliers
+  /** Mode: simple (rent + operating total) or detailed (suppliers list) */
+  expensesMode: 'simple' | 'detailed';
+  monthlyRent: number; // simple
+  monthlyOperating: number; // simple
+  suppliers: SupplierExpenseDetail[]; // detailed
 
   // Step 6: Marketing
   marketingPct: number; // % of revenue OR fixed amount
@@ -108,24 +147,38 @@ export function generateBudgetFromWizard(answers: WizardAnswers): BudgetData {
 }
 
 function generateIncome(answers: WizardAnswers): IncomeItem[] {
-  const { monthlyRevenue, numIncomeStreams, expectedGrowthPct, industry } = answers;
+  const { incomeMode, expectedGrowthPct, industry } = answers;
 
+  // === DETAILED MODE: use the streams list as-is ===
+  if (incomeMode === 'detailed' && answers.incomeStreams.length > 0) {
+    return answers.incomeStreams.map((stream) => ({
+      id: id(),
+      name: stream.name || getDefaultIncomeName(industry, 0),
+      amount: stream.monthlyAmount,
+      startMonth: 0,
+      duration: 12,
+      growthPct: stream.growthPctMonthly,
+      paymentTerms: stream.paymentTermsDays,
+      status: 'expected' as const,
+    }));
+  }
+
+  // === SIMPLE MODE: split total by weights ===
+  const { monthlyRevenue, numIncomeStreams } = answers;
   const items: IncomeItem[] = [];
 
   if (numIncomeStreams === 1) {
-    // Single stream
     items.push({
       id: id(),
       name: getDefaultIncomeName(industry, 0),
       amount: monthlyRevenue,
       startMonth: 0,
       duration: 12,
-      growthPct: expectedGrowthPct / 12, // monthly growth rate
+      growthPct: expectedGrowthPct / 12,
       paymentTerms: getDefaultPaymentTerms(industry),
       status: 'expected',
     });
   } else {
-    // Multiple streams - split with weights
     const weights = getIncomeStreamWeights(numIncomeStreams);
     for (let i = 0; i < numIncomeStreams; i++) {
       items.push({
@@ -189,6 +242,20 @@ function getIncomeStreamWeights(count: number): number[] {
 }
 
 function generateEmployees(answers: WizardAnswers): Employee[] {
+  // === DETAILED MODE: use the list as-is ===
+  if (answers.employeesMode === 'detailed' && answers.employees.length > 0) {
+    return answers.employees.map((e) => ({
+      id: id(),
+      name: e.name,
+      position: e.position,
+      department: e.department,
+      monthlySalary: e.monthlySalary,
+      startMonth: 0,
+      endMonth: null,
+    }));
+  }
+
+  // === SIMPLE MODE: distribute by industry ===
   const { numEmployees, totalMonthlySalary, industry } = answers;
   if (numEmployees === 0 || totalMonthlySalary === 0) return [];
 
@@ -304,35 +371,51 @@ function generateExpenses(answers: WizardAnswers): ExpenseItem[] {
     });
   }
 
-  // Rent - operating
-  if (answers.monthlyRent > 0) {
-    expenses.push({
-      id: id(),
-      category: 'operating',
-      name: 'שכירות',
-      amount: answers.monthlyRent,
-      isPct: false,
-      percentage: 0,
-      startMonth: 0,
-      duration: 12,
-      paymentTerms: 0,
-      applyInflation: true,
-    });
-  }
+  // === DETAILED MODE: add each supplier as separate expense ===
+  if (answers.expensesMode === 'detailed' && answers.suppliers.length > 0) {
+    for (const sup of answers.suppliers) {
+      expenses.push({
+        id: id(),
+        category: sup.category,
+        name: sup.name,
+        amount: sup.isPctOfRevenue ? 0 : sup.monthlyAmount,
+        isPct: sup.isPctOfRevenue,
+        percentage: sup.isPctOfRevenue ? sup.percentageOfRevenue ?? 0 : 0,
+        startMonth: 0,
+        duration: 12,
+        paymentTerms: 30,
+      });
+    }
+  } else {
+    // === SIMPLE MODE: rent + operating as 2 line items ===
+    if (answers.monthlyRent > 0) {
+      expenses.push({
+        id: id(),
+        category: 'operating',
+        name: 'שכירות',
+        amount: answers.monthlyRent,
+        isPct: false,
+        percentage: 0,
+        startMonth: 0,
+        duration: 12,
+        paymentTerms: 0,
+        applyInflation: true,
+      });
+    }
 
-  // Operating expenses (utilities, software, etc.)
-  if (answers.monthlyOperating > 0) {
-    expenses.push({
-      id: id(),
-      category: 'operating',
-      name: 'תפעול שוטף',
-      amount: answers.monthlyOperating,
-      isPct: false,
-      percentage: 0,
-      startMonth: 0,
-      duration: 12,
-      paymentTerms: 30,
-    });
+    if (answers.monthlyOperating > 0) {
+      expenses.push({
+        id: id(),
+        category: 'operating',
+        name: 'תפעול שוטף',
+        amount: answers.monthlyOperating,
+        isPct: false,
+        percentage: 0,
+        startMonth: 0,
+        duration: 12,
+        paymentTerms: 30,
+      });
+    }
   }
 
   // Marketing
@@ -489,22 +572,36 @@ export function createDefaultAnswers(): WizardAnswers {
     industry: 'services',
     stage: 'growth',
     companyName: '',
+    // Income
+    incomeMode: 'simple',
     monthlyRevenue: 100000,
     numIncomeStreams: 1,
     expectedGrowthPct: 5,
+    incomeStreams: [],
+    // COGS
     cogsPct: 35,
+    // Employees
+    employeesMode: 'simple',
     numEmployees: 3,
     totalMonthlySalary: 45000,
+    employees: [],
+    // Operating
+    expensesMode: 'simple',
     monthlyRent: 8000,
     monthlyOperating: 5000,
+    suppliers: [],
+    // Marketing
     marketingPct: 5,
     marketingType: 'pct',
     marketingAmount: 5000,
+    // R&D
     rndPct: 0,
+    // Loans
     hasLoans: false,
     loanAmount: 0,
     loanRatePct: 7,
     loanTermMonths: 60,
+    // Settings
     fiscalYear: new Date().getFullYear(),
     taxRatePct: 23,
   };

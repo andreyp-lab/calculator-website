@@ -1,23 +1,24 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import {
-  LayoutDashboard,
-  TrendingUp,
-  Wallet,
-  BarChart3,
+  Sparkles,
+  ArrowLeft,
   Landmark,
   Scale,
   Gem,
   Users,
-  ArrowLeft,
-  LineChart,
+  CheckCircle2,
+  Zap,
+  TrendingUp,
+  Wallet,
+  BarChart3,
   type LucideIcon,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'כלים לבעלי עסקים | FinCalc Pro',
+  title: 'FinCalc Pro - מערכת פיננסית לבעלי עסקים',
   description:
-    'מערכת מקיפה לבעלי עסקים: תכנון תקציב, תזרים מזומנים, ניתוח דוחות, הערכת שווי, נקודת איזון, מימון ועוד. מסודר בקטגוריות לפי תחום שימוש.',
+    'המערכת המקיפה ביותר בישראל לתכנון פיננסי: תקציב, תזרים, ניתוח דוחות, חיזוי 5 שנים, הערכת שווי DCF, Cap Table. עברית מלאה, ללא הרשמה.',
 };
 
 interface Tool {
@@ -26,362 +27,265 @@ interface Tool {
   emoji: string;
   description: string;
   icon: LucideIcon;
-  badge?: string;
   color: string;
   features: string[];
 }
 
-interface Category {
-  id: string;
-  title: string;
-  emoji: string;
-  description: string;
-  tools: Tool[];
-}
-
-const CATEGORIES: Category[] = [
-  // ==================================================
-  // 1. תכנון תפעולי
-  // ==================================================
+const STANDALONE_CALCULATORS: Tool[] = [
   {
-    id: 'operational',
-    title: 'תכנון תפעולי',
-    emoji: '📋',
-    description: 'כלים לניהול שוטף - תקציב, תזרים ומערכת מאוחדת',
-    tools: [
-      {
-        href: '/tools/start',
-        title: '🚀 התחל כאן',
-        emoji: '🎬',
-        description: 'בחר מצב התחלה: אשף תקציב / מערכת מלאה / תזרים סולו',
-        icon: LayoutDashboard,
-        badge: '✨ נקודת כניסה',
-        color: 'from-violet-500 via-purple-600 to-fuchsia-600',
-        features: [
-          '🧙 אשף תקציב חכם (10 שאלות)',
-          '🎯 מערכת מאוחדת (תקציב+תזרים+ניתוח)',
-          '⚡ תזרים סולו (ללא תקציב)',
-          'בחירת מסלול לפי הצרכים שלך',
-        ],
-      },
-      {
-        href: '/tools/unified',
-        title: 'מערכת פיננסית מאוחדת',
-        emoji: '🎯',
-        description: 'תקציב + תזרים + ניתוח + חיזוי במקום אחד',
-        icon: LayoutDashboard,
-        badge: '⭐ הכל ביחד',
-        color: 'from-purple-500 via-indigo-600 to-blue-700',
-        features: [
-          '5 מודולים בדף אחד',
-          'KPIs חיים מתעדכנים',
-          'תובנות חוצות-מערכת',
-          'סינכרון אוטומטי',
-        ],
-      },
-      {
-        href: '/tools/cashflow-solo',
-        title: 'תזרים סולו',
-        emoji: '💸',
-        description: 'תזרים מזומנים ללא תקציב - הזנה ישירה של פריטים',
-        icon: Wallet,
-        badge: '⚡ מהיר',
-        color: 'from-emerald-500 via-teal-600 to-cyan-700',
-        features: [
-          'הזנת תקבולים ותשלומים לפי תאריך',
-          'פריטים חוזרים אוטומטית',
-          'דשבורד מלא + גרפים',
-          'מתאים אם יש לך נתונים מהבנק',
-        ],
-      },
-      {
-        href: '/tools/budget',
-        title: 'תכנון תקציב (כניסה ישירה)',
-        emoji: '💰',
-        description: 'תקציב שנתי מלא: הכנסות, הוצאות, עובדים והלוואות',
-        icon: TrendingUp,
-        color: 'from-green-500 to-green-700',
-        features: ['P&L Statement', 'הכנסות עם צמיחה', '5 קטגוריות הוצאות'],
-      },
-      {
-        href: '/tools/cash-flow',
-        title: 'תזרים מזומנים (כניסה ישירה)',
-        emoji: '💸',
-        description: 'יתרות בנק חודשיות, תחזיות ותקופות תזרים שלילי',
-        icon: Wallet,
-        color: 'from-blue-500 to-blue-700',
-        features: ['תחזיות חודשיות', 'תנאי אשראי', 'התראות אוטומטיות'],
-      },
-    ],
-  },
-
-  // ==================================================
-  // 2. אנליטיקה ומדדים
-  // ==================================================
-  {
-    id: 'analytics',
-    title: 'אנליטיקה ומדדים',
-    emoji: '📊',
-    description: 'ניתוח ביצועים וקבלת החלטות מבוססת נתונים',
-    tools: [
-      {
-        href: '/tools/financial-analysis',
-        title: 'ניתוח דוחות כספיים',
-        emoji: '🔍',
-        description: '20+ יחסים פיננסיים, Z-Score, דירוג אשראי וציון בריאות',
-        icon: BarChart3,
-        color: 'from-orange-500 to-orange-700',
-        features: ['רווחיות + נזילות', 'Z-Score (Altman)', 'דירוג AAA-D', 'DSCR'],
-      },
-      {
-        href: '/tools/break-even',
-        title: 'נקודת איזון',
-        emoji: '⚖️',
-        description: 'כמה צריך למכור כדי לכסות הוצאות - מינימום פעילות',
-        icon: Scale,
-        color: 'from-cyan-500 to-cyan-700',
-        features: ['תרומה לכיסוי', 'מרווח ביטחון', 'יחידות לרווח מטרה'],
-      },
-      {
-        href: '/tools/business-valuation',
-        title: 'הערכת שווי עסק',
-        emoji: '💎',
-        description: '3 שיטות: DCF, מכפיל EBITDA, מכפיל הכנסות',
-        icon: Gem,
-        color: 'from-rose-500 to-rose-700',
-        features: ['מכפילים ענפיים 2026', 'Terminal Value', 'טווח שווי'],
-      },
-      {
-        href: '/tools/customer-lifetime-value',
-        title: 'שווי לקוח (CLV/LTV)',
-        emoji: '👤',
-        description: 'מדד מפתח ל-SaaS וE-commerce - LTV/CAC, Payback',
-        icon: Users,
-        color: 'from-indigo-500 to-indigo-700',
-        features: ['LTV/CAC ratio', 'Payback period', 'בנצ\'מארק לתעשיות'],
-      },
-      {
-        href: '/tools/forecast',
-        title: 'חיזוי רב-שנתי',
-        emoji: '🔮',
-        description: 'מודל פיננסי 3-דוחות (P&L + מאזן + תזרים) ל-3-5 שנים, מונטה קרלו ו-LTV/CAC',
-        icon: LineChart,
-        badge: 'חדש',
-        color: 'from-violet-500 to-fuchsia-700',
-        features: [
-          'היסטוריה → תחזית 3-5 שנים',
-          'מודל מאזן ותזרים אינדירקטי',
-          'סימולציית מונטה קרלו',
-          'ניתוח קוהורט לפי חודש רכישה',
-        ],
-      },
-      {
-        href: '/tools/capital',
-        title: 'הון, שווי ודילול',
-        emoji: '💎',
-        description: 'DCF Valuation מלא + Cap Table עם סבבי גיוס, ESOP ו-Exit Waterfall',
-        icon: Gem,
-        badge: 'חדש',
-        color: 'from-rose-500 to-pink-700',
-        features: [
-          'WACC + DCF + Sensitivity',
-          'Cap Table 5+ סבבים',
-          'Liquidation Preferences',
-          'Exit Waterfall',
-        ],
-      },
-    ],
-  },
-
-  // ==================================================
-  // 3. מימון ואשראי
-  // ==================================================
-  {
-    id: 'financing',
-    title: 'מימון ואשראי',
+    href: '/tools/loan-eligibility',
+    title: 'הלוואות בערבות מדינה',
     emoji: '🏦',
-    description: 'בדיקת זכאות והתאמת מסלולי מימון לעסק',
-    tools: [
-      {
-        href: '/tools/loan-eligibility',
-        title: 'הלוואות בערבות מדינה',
-        emoji: '🏦',
-        description: 'בדוק זכאות תוך דקה - 6 מסלולים שונים כולל חרבות ברזל',
-        icon: Landmark,
-        color: 'from-emerald-500 to-emerald-700',
-        features: ['עסק בהקמה / קטן / בינוני', 'מסלול יצואן ותעשייה', 'מסלול חרבות ברזל'],
-      },
-    ],
+    description: 'בדוק זכאות תוך דקה - 6 מסלולים שונים כולל חרבות ברזל',
+    icon: Landmark,
+    color: 'from-emerald-500 to-emerald-700',
+    features: ['עסק בהקמה / קטן / בינוני', 'מסלול יצואן ותעשייה', 'מסלול חרבות ברזל'],
+  },
+  {
+    href: '/tools/break-even',
+    title: 'נקודת איזון מהירה',
+    emoji: '⚖️',
+    description: 'חישוב נקודת איזון פשוטה לפי מחיר ועלות יחידה',
+    icon: Scale,
+    color: 'from-cyan-500 to-cyan-700',
+    features: ['חישוב מינימום מכירות', 'מרווח ביטחון', 'מתאים לבדיקה מהירה'],
+  },
+  {
+    href: '/tools/business-valuation',
+    title: 'הערכת שווי עסק (פשוט)',
+    emoji: '💎',
+    description: '3 שיטות מהירות: DCF, מכפיל EBITDA, מכפיל הכנסות',
+    icon: Gem,
+    color: 'from-rose-500 to-rose-700',
+    features: ['מכפילים ענפיים 2026', 'Terminal Value', 'טווח שווי'],
+  },
+  {
+    href: '/tools/customer-lifetime-value',
+    title: 'שווי לקוח (CLV/LTV)',
+    emoji: '👤',
+    description: 'מדד מפתח ל-SaaS וE-commerce - LTV/CAC, Payback',
+    icon: Users,
+    color: 'from-indigo-500 to-indigo-700',
+    features: ['LTV/CAC ratio', 'Payback period', 'בנצ\'מארק לתעשיות'],
   },
 ];
 
 export default function ToolsLandingPage() {
-  const totalTools = CATEGORIES.reduce((sum, cat) => sum + cat.tools.length, 0);
-
   return (
     <div>
-      {/* Hero */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-          🚀 כלים לבעלי עסקים
-        </h1>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
-          מערכת מקיפה לעסקים קטנים ובינוניים בישראל. {totalTools} כלים לבעלי עסקים מסודרים
-          לפי תחום שימוש.
-        </p>
-        <div className="flex flex-wrap justify-center gap-2 text-sm">
-          <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">
-            פרטיות מלאה - הנתונים נשמרים מקומית
-          </span>
-          <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full">
-            ללא צורך בהרשמה
-          </span>
-          <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
-            עברית מלאה - RTL
-          </span>
+      {/* HERO - Single primary CTA */}
+      <div className="relative overflow-hidden rounded-2xl mb-10">
+        <div className="bg-gradient-to-br from-purple-600 via-indigo-700 to-blue-800 text-white p-8 md:p-12 relative">
+          {/* Decorative pattern */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 80%, white 1px, transparent 1px)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+
+          <div className="relative z-10 max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+              <Sparkles className="w-4 h-4" />
+              FinCalc Pro
+            </div>
+
+            <h1 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
+              המערכת הפיננסית המקיפה ביותר
+              <br />
+              <span className="bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">
+                לעסקים בישראל
+              </span>
+            </h1>
+
+            <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              תקציב + תזרים + ניתוח דוחות + חיזוי 5 שנים + הערכת שווי DCF —{' '}
+              <strong>הכל במקום אחד</strong>, ללא הרשמה, בעברית מלאה.
+            </p>
+
+            <Link
+              href="/tools/start"
+              className="inline-flex items-center gap-2 bg-white text-purple-700 px-8 py-4 rounded-xl text-lg font-bold shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all"
+            >
+              <Zap className="w-5 h-5 text-amber-500" />
+              <span>התחל כאן</span>
+              <ArrowLeft className="w-5 h-5" />
+            </Link>
+
+            <p className="text-xs text-blue-200 mt-4">
+              4 מסלולי כניסה לבחירה • הנתונים נשמרים מקומית • חינם לחלוטין
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Quick navigation */}
-      <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-8">
-        <p className="text-xs text-gray-600 mb-2 font-medium">קפיצה לקטגוריה:</p>
-        <div className="flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
-            <a
-              key={cat.id}
-              href={`#${cat.id}`}
-              className="bg-white border border-gray-300 hover:border-blue-400 px-3 py-1.5 rounded-lg text-sm transition flex items-center gap-1.5"
-            >
-              <span>{cat.emoji}</span>
-              <span>{cat.title}</span>
-              <span className="text-xs text-gray-500">({cat.tools.length})</span>
-            </a>
+      {/* Why FinCalc - 3 columns */}
+      <div className="grid md:grid-cols-3 gap-4 mb-10">
+        <FeatureCard
+          icon={TrendingUp}
+          title="60+ כלי ניתוח"
+          description="תקציב, תזרים, יחסים פיננסיים, DSCR, DuPont, Z-Score, Break-Even, סיכונים, אשראי בנקאי, Three-Statement Model, DCF, Cap Table — הכל מסונכרן."
+          color="emerald"
+        />
+        <FeatureCard
+          icon={Wallet}
+          title="גמישות מלאה"
+          description="יש לך מצב נפרד? תזרים סולו ללא תקציב. רוצה אשף? 10 שאלות → תקציב מוכן. רוצה הכל ביחד? המערכת המאוחדת. אתה בוחר."
+          color="blue"
+        />
+        <FeatureCard
+          icon={BarChart3}
+          title="בנצ'מרק ענפי"
+          description="10 ענפים × 15 מדדים. רואה את עצמך מול הממוצע (Q1/חציון/Q3). מבוסס על דוחות בורסה, Damodaran, ו-D&B 2024."
+          color="purple"
+        />
+      </div>
+
+      {/* What's Inside - quick preview */}
+      <div className="bg-white rounded-2xl border-2 border-gray-200 p-6 mb-10 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-purple-600" />
+          מה כלול במערכת?
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-sm">
+          {[
+            'תקציב שנתי מלא (P&L)',
+            'תזרים מזומנים חודשי',
+            'ניהול עובדים לפי מחלקה',
+            'ניהול הלוואות + Spitzer',
+            '20+ יחסים פיננסיים',
+            'Altman Z-Score',
+            'דירוג אשראי AAA-D',
+            'DSCR מתקדם (5 שיטות)',
+            'DuPont Analysis 3F+5F',
+            'Break-Even + Margin of Safety',
+            'ניתוח רגישות + תרחישים',
+            'איכות תזרים (FCF)',
+            'Three-Statement Model',
+            'Monte Carlo Simulation',
+            'DCF Valuation',
+            'Cap Table + Dilution',
+            'Cohort Analysis (LTV/CAC)',
+            'Burn Rate / Runway',
+            'Working Capital Optimizer',
+            'Goals Tracking',
+            'Industry Benchmarks',
+            '6 תבניות מוכנות לפי ענף',
+            'Excel + PDF Export',
+            'תרחישים מרובים',
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-1.5 text-gray-700">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+              <span className="text-xs">{item}</span>
+            </div>
           ))}
         </div>
-      </div>
-
-      {/* Categories */}
-      <div className="space-y-12">
-        {CATEGORIES.map((category) => (
-          <section key={category.id} id={category.id} className="scroll-mt-20">
-            {/* Category header */}
-            <div className="mb-6 pb-4 border-b-2 border-gray-200">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 flex items-center gap-2">
-                <span>{category.emoji}</span>
-                <span>{category.title}</span>
-                <span className="text-sm font-normal text-gray-500 mr-2">
-                  ({category.tools.length} כלים)
-                </span>
-              </h2>
-              <p className="text-gray-600">{category.description}</p>
-            </div>
-
-            {/* Tools grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {category.tools.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <Link
-                    key={tool.href}
-                    href={tool.href}
-                    className="group bg-white rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-xl transition-all overflow-hidden flex flex-col"
-                  >
-                    <div className={`bg-gradient-to-br ${tool.color} p-5 text-white`}>
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <Icon className="w-7 h-7" />
-                          <span className="text-2xl">{tool.emoji}</span>
-                        </div>
-                        {tool.badge && (
-                          <span className="bg-white/25 backdrop-blur px-2.5 py-0.5 rounded-full text-xs font-medium">
-                            {tool.badge}
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="text-xl font-bold mb-1">{tool.title}</h3>
-                      <p className="text-xs opacity-90">{tool.description}</p>
-                    </div>
-                    <div className="p-4 flex-1 flex flex-col">
-                      <ul className="space-y-1 flex-1">
-                        {tool.features.map((f, i) => (
-                          <li
-                            key={i}
-                            className="flex items-center gap-1.5 text-xs text-gray-700"
-                          >
-                            <span className="text-green-600 flex-shrink-0">✓</span>
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-3 pt-3 border-t border-gray-200 flex items-center justify-between text-blue-600 group-hover:text-blue-800 text-sm">
-                        <span className="font-medium">פתח כלי</span>
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition" />
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        ))}
-      </div>
-
-      {/* How it works */}
-      <div className="mt-16 bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200 rounded-xl p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">💡 איך עובדת המערכת?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-          <div className="bg-white rounded-lg p-4 border border-blue-100">
-            <div className="font-bold text-blue-700 mb-2 flex items-center gap-2">
-              <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">
-                1
-              </span>
-              תכנון
-            </div>
-            <p className="text-gray-700">
-              בנה תקציב שנתי ותחזית תזרים. המערכת מחשבת אוטומטית P&L ויתרות בנק חודשיות.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg p-4 border border-blue-100">
-            <div className="font-bold text-blue-700 mb-2 flex items-center gap-2">
-              <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">
-                2
-              </span>
-              ניתוח
-            </div>
-            <p className="text-gray-700">
-              נתח את הנתונים: יחסים פיננסיים, נקודת איזון, שווי עסק ושווי לקוח. זהה הזדמנויות
-              ובעיות.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg p-4 border border-blue-100">
-            <div className="font-bold text-blue-700 mb-2 flex items-center gap-2">
-              <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">
-                3
-              </span>
-              צמיחה
-            </div>
-            <p className="text-gray-700">
-              גייס הון - בדוק זכאות להלוואות בערבות מדינה. נצל את כל הכלים יחד לקבלת החלטות
-              חכמות.
-            </p>
-          </div>
+        <div className="text-center mt-5">
+          <Link
+            href="/tools/start"
+            className="inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-purple-700"
+          >
+            פתח את המערכת
+            <ArrowLeft className="w-4 h-4" />
+          </Link>
         </div>
       </div>
 
-      {/* Bottom CTA */}
-      <div className="mt-8 text-center">
-        <p className="text-sm text-gray-600">
-          חסר לך כלי? יש לי גם מחשבונים ל
-          <Link href="/self-employed" className="text-blue-600 hover:underline mx-1">
-            עצמאיים
+      {/* Other standalone calculators */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-gray-900">
+            מחשבונים נוספים (עצמאיים)
+          </h2>
+          <span className="text-xs text-gray-500">לא חלק מהמערכת המאוחדת</span>
+        </div>
+        <p className="text-sm text-gray-600 mb-5">
+          מחשבונים מהירים לבדיקות נקודתיות — מתאימים אם אתה לא רוצה לפתוח פרויקט שלם.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {STANDALONE_CALCULATORS.map((tool) => {
+            const Icon = tool.icon;
+            return (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="group bg-white rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all overflow-hidden"
+              >
+                <div className={`bg-gradient-to-br ${tool.color} p-4 text-white`}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Icon className="w-5 h-5" />
+                    <span className="text-xl">{tool.emoji}</span>
+                  </div>
+                  <h3 className="font-bold text-base">{tool.title}</h3>
+                </div>
+                <div className="p-3">
+                  <p className="text-xs text-gray-600 mb-2 line-clamp-2">{tool.description}</p>
+                  <div className="text-blue-600 group-hover:text-blue-800 text-xs flex items-center gap-1">
+                    <span>פתח</span>
+                    <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition" />
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Categories cross-link */}
+      <div className="text-center bg-gray-50 rounded-xl p-5 border border-gray-200">
+        <p className="text-sm text-gray-700 mb-2">
+          חסר לך מחשבון? יש לי גם:
+        </p>
+        <div className="flex flex-wrap justify-center gap-2 text-sm">
+          <Link href="/self-employed" className="text-blue-600 hover:underline">
+            מחשבונים לעצמאיים
           </Link>
-          ול
-          <Link href="/personal-tax" className="text-blue-600 hover:underline mx-1">
+          <span className="text-gray-400">•</span>
+          <Link href="/personal-tax" className="text-blue-600 hover:underline">
             מיסוי אישי
           </Link>
-          .
-        </p>
+          <span className="text-gray-400">•</span>
+          <Link href="/real-estate" className="text-blue-600 hover:underline">
+            נדל״ן ומשכנתא
+          </Link>
+          <span className="text-gray-400">•</span>
+          <Link href="/savings" className="text-blue-600 hover:underline">
+            חיסכון והשקעות
+          </Link>
+          <span className="text-gray-400">•</span>
+          <Link href="/vehicles" className="text-blue-600 hover:underline">
+            רכבים
+          </Link>
+        </div>
       </div>
+    </div>
+  );
+}
+
+function FeatureCard({
+  icon: Icon,
+  title,
+  description,
+  color,
+}: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  color: string;
+}) {
+  const colorMap: Record<string, { bg: string; text: string; border: string }> = {
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
+    blue: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
+    purple: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
+  };
+  const c = colorMap[color];
+  return (
+    <div className={`${c.bg} ${c.border} border-2 rounded-xl p-5`}>
+      <Icon className={`w-8 h-8 ${c.text} mb-3`} />
+      <h3 className="font-bold text-gray-900 text-lg mb-2">{title}</h3>
+      <p className="text-sm text-gray-700 leading-relaxed">{description}</p>
     </div>
   );
 }

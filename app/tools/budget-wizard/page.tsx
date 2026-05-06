@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { useTools } from '@/lib/tools/ToolsContext';
 import {
   type WizardAnswers,
+  type IncomeStreamDetail,
+  type EmployeeDetail,
+  type SupplierExpenseDetail,
   createDefaultAnswers,
   generateBudgetFromWizard,
   summarizeWizard,
@@ -13,7 +16,7 @@ import {
 } from '@/lib/tools/budget-wizard-engine';
 import { INDUSTRY_BENCHMARKS } from '@/lib/tools/industry-benchmarks';
 import { formatCurrency } from '@/lib/tools/format';
-import type { Industry } from '@/lib/tools/types';
+import type { Industry, Department } from '@/lib/tools/types';
 import {
   Sparkles,
   ChevronLeft,
@@ -30,6 +33,8 @@ import {
   Banknote,
   ClipboardCheck,
   Rocket,
+  Plus,
+  Trash2,
 } from 'lucide-react';
 
 const STORAGE_KEY = 'wizard-progress-v1';
@@ -340,69 +345,205 @@ function RevenueStep({
   onUpdate: (u: Partial<WizardAnswers>) => void;
   benchmark: { revenueGrowthPct: { median: number; low: number; high: number } };
 }) {
+  function addStream() {
+    onUpdate({
+      incomeStreams: [
+        ...answers.incomeStreams,
+        {
+          name: `מקור הכנסה ${answers.incomeStreams.length + 1}`,
+          monthlyAmount: 0,
+          paymentTermsDays: 30,
+          growthPctMonthly: 0,
+        },
+      ],
+    });
+  }
+
+  function updateStream(idx: number, patch: Partial<IncomeStreamDetail>) {
+    const streams = [...answers.incomeStreams];
+    streams[idx] = { ...streams[idx], ...patch };
+    onUpdate({ incomeStreams: streams });
+  }
+
+  function removeStream(idx: number) {
+    onUpdate({ incomeStreams: answers.incomeStreams.filter((_, i) => i !== idx) });
+  }
+
+  const detailedTotal = answers.incomeStreams.reduce((s, x) => s + x.monthlyAmount, 0);
+
   return (
     <div className="space-y-4">
-      <p className="text-gray-600 text-sm">בוא נדבר על הכנסות. תזין סכום חודשי ממוצע.</p>
+      <p className="text-gray-600 text-sm">איך תרצה להזין את ההכנסות?</p>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          הכנסה חודשית ממוצעת (₪)
-        </label>
-        <input
-          type="number"
-          value={answers.monthlyRevenue || ''}
-          onChange={(e) => onUpdate({ monthlyRevenue: parseFloat(e.target.value) || 0 })}
-          placeholder="100000"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
-        />
-        <p className="text-xs text-gray-500 mt-1">
-          זה ה-ARR שלך חלקי 12, או ממוצע חודשי. שנתית: ₪
-          {(answers.monthlyRevenue * 12).toLocaleString('he-IL')}
-        </p>
-      </div>
+      <ModeToggle
+        mode={answers.incomeMode}
+        onChange={(m) => onUpdate({ incomeMode: m })}
+        simpleLabel="פשוט - סכום כולל"
+        detailedLabel="מפורט - מקור-מקור"
+      />
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">מספר מקורות הכנסה</label>
-        <div className="grid grid-cols-5 gap-2">
-          {[1, 2, 3, 4, 5].map((n) => (
-            <button
-              key={n}
-              onClick={() => onUpdate({ numIncomeStreams: n })}
-              className={`p-3 rounded-lg border-2 transition ${
-                answers.numIncomeStreams === n
-                  ? 'border-violet-500 bg-violet-50 text-violet-900 font-bold'
-                  : 'border-gray-200 bg-white hover:border-violet-300'
-              }`}
-            >
-              {n}
-            </button>
-          ))}
+      {answers.incomeMode === 'simple' ? (
+        <>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              הכנסה חודשית ממוצעת (₪)
+            </label>
+            <input
+              type="number"
+              value={answers.monthlyRevenue || ''}
+              onChange={(e) => onUpdate({ monthlyRevenue: parseFloat(e.target.value) || 0 })}
+              placeholder="100000"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              שנתית: ₪{(answers.monthlyRevenue * 12).toLocaleString('he-IL')}
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              מספר מקורות הכנסה
+            </label>
+            <div className="grid grid-cols-5 gap-2">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button
+                  key={n}
+                  onClick={() => onUpdate({ numIncomeStreams: n })}
+                  className={`p-3 rounded-lg border-2 transition ${
+                    answers.numIncomeStreams === n
+                      ? 'border-violet-500 bg-violet-50 text-violet-900 font-bold'
+                      : 'border-gray-200 bg-white hover:border-violet-300'
+                  }`}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              נחלק את הסכום בין המקורות אוטומטית. לחלוקה מדויקת השתמש ב"מפורט".
+            </p>
+          </div>
+        </>
+      ) : (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium">מקורות הכנסה ({answers.incomeStreams.length})</span>
+            <span className="text-sm text-gray-500">
+              סה"כ חודשי: ₪{detailedTotal.toLocaleString('he-IL')}
+            </span>
+          </div>
+
+          {answers.incomeStreams.length === 0 ? (
+            <div className="text-center py-6 bg-gray-50 rounded-lg border-2 border-dashed">
+              <p className="text-sm text-gray-500 mb-2">עוד לא הוספת מקור הכנסה</p>
+              <button
+                onClick={addStream}
+                className="px-3 py-1.5 bg-violet-600 text-white rounded text-sm flex items-center gap-1 mx-auto"
+              >
+                <Plus className="w-4 h-4" />
+                הוסף מקור ראשון
+              </button>
+            </div>
+          ) : (
+            <>
+              {answers.incomeStreams.map((stream, idx) => (
+                <div key={idx} className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-1">
+                    <div className="md:col-span-2">
+                      <label className="block text-xs text-gray-600 mb-0.5">שם המקור</label>
+                      <input
+                        type="text"
+                        value={stream.name}
+                        onChange={(e) => updateStream(idx, { name: e.target.value })}
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-0.5">סכום חודשי</label>
+                      <input
+                        type="number"
+                        value={stream.monthlyAmount || ''}
+                        onChange={(e) =>
+                          updateStream(idx, { monthlyAmount: parseFloat(e.target.value) || 0 })
+                        }
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-0.5">ימי תשלום</label>
+                      <select
+                        value={stream.paymentTermsDays}
+                        onChange={(e) =>
+                          updateStream(idx, { paymentTermsDays: parseInt(e.target.value) })
+                        }
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      >
+                        <option value={0}>מיידי</option>
+                        <option value={30}>נטו 30</option>
+                        <option value={45}>נטו 45</option>
+                        <option value={60}>נטו 60</option>
+                        <option value={90}>נטו 90</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2 text-xs">
+                      <span className="text-gray-600">צמיחה חודשית:</span>
+                      <input
+                        type="number"
+                        step="0.1"
+                        value={stream.growthPctMonthly}
+                        onChange={(e) =>
+                          updateStream(idx, { growthPctMonthly: parseFloat(e.target.value) || 0 })
+                        }
+                        className="w-16 px-1 py-0.5 border border-gray-300 rounded text-center"
+                      />
+                      <span className="text-gray-600">%</span>
+                    </div>
+                    <button
+                      onClick={() => removeStream(idx)}
+                      className="p-1 text-red-600 hover:bg-red-50 rounded"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <button
+                onClick={addStream}
+                className="w-full p-2 border-2 border-dashed border-violet-300 rounded text-sm text-violet-700 hover:bg-violet-50 flex items-center justify-center gap-1"
+              >
+                <Plus className="w-4 h-4" />
+                הוסף מקור הכנסה
+              </button>
+            </>
+          )}
         </div>
-        <p className="text-xs text-gray-500 mt-1">
-          לדוגמה: SaaS עם מנויי חודשי + מנוי שנתי + שירותים מקצועיים = 3
-        </p>
-      </div>
+      )}
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          צמיחה צפויה (% שנתי)
-        </label>
-        <input
-          type="number"
-          step="0.5"
-          value={answers.expectedGrowthPct}
-          onChange={(e) => onUpdate({ expectedGrowthPct: parseFloat(e.target.value) || 0 })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-        />
-        <BenchmarkHint
-          label="צמיחה ענפית"
-          low={benchmark.revenueGrowthPct.low}
-          median={benchmark.revenueGrowthPct.median}
-          high={benchmark.revenueGrowthPct.high}
-          unit="%"
-          value={answers.expectedGrowthPct}
-        />
-      </div>
+      {/* Growth */}
+      {answers.incomeMode === 'simple' && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            צמיחה צפויה (% שנתי)
+          </label>
+          <input
+            type="number"
+            step="0.5"
+            value={answers.expectedGrowthPct}
+            onChange={(e) => onUpdate({ expectedGrowthPct: parseFloat(e.target.value) || 0 })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+          />
+          <BenchmarkHint
+            label="צמיחה ענפית"
+            low={benchmark.revenueGrowthPct.low}
+            median={benchmark.revenueGrowthPct.median}
+            high={benchmark.revenueGrowthPct.high}
+            unit="%"
+            value={answers.expectedGrowthPct}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -464,6 +605,14 @@ function CogsStep({
   );
 }
 
+const DEPARTMENT_LABELS: Record<Department, string> = {
+  sales: 'מכירות',
+  marketing: 'שיווק',
+  development: 'פיתוח (R&D)',
+  operations: 'תפעול',
+  administration: 'אדמין',
+};
+
 function EmployeesStep({
   answers,
   onUpdate,
@@ -471,53 +620,189 @@ function EmployeesStep({
   answers: WizardAnswers;
   onUpdate: (u: Partial<WizardAnswers>) => void;
 }) {
+  function addEmployee() {
+    onUpdate({
+      employees: [
+        ...answers.employees,
+        {
+          name: `עובד ${answers.employees.length + 1}`,
+          position: '',
+          department: 'operations',
+          monthlySalary: 10000,
+        },
+      ],
+    });
+  }
+
+  function updateEmployee(idx: number, patch: Partial<EmployeeDetail>) {
+    const list = [...answers.employees];
+    list[idx] = { ...list[idx], ...patch };
+    onUpdate({ employees: list });
+  }
+
+  function removeEmployee(idx: number) {
+    onUpdate({ employees: answers.employees.filter((_, i) => i !== idx) });
+  }
+
+  const detailedTotal = answers.employees.reduce((s, e) => s + e.monthlySalary, 0);
   const avgSalary =
     answers.numEmployees > 0 ? answers.totalMonthlySalary / answers.numEmployees : 0;
 
   return (
     <div className="space-y-4">
-      <p className="text-gray-600 text-sm">
-        כמה עובדים יש לך וכמה אתה משלם להם בסך הכל בחודש?
-      </p>
+      <p className="text-gray-600 text-sm">איך תרצה להזין את העובדים?</p>
 
-      <div className="grid md:grid-cols-2 gap-3">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">מספר עובדים</label>
-          <input
-            type="number"
-            value={answers.numEmployees || ''}
-            onChange={(e) => onUpdate({ numEmployees: parseInt(e.target.value) || 0 })}
-            placeholder="0 אם אין"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            סך כל השכר החודשי (₪)
-          </label>
-          <input
-            type="number"
-            value={answers.totalMonthlySalary || ''}
-            onChange={(e) => onUpdate({ totalMonthlySalary: parseFloat(e.target.value) || 0 })}
-            placeholder="לדוגמה: 60000"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-      </div>
+      <ModeToggle
+        mode={answers.employeesMode}
+        onChange={(m) => onUpdate({ employeesMode: m })}
+        simpleLabel="פשוט - מספר וסכום כולל"
+        detailedLabel="מפורט - עובד-עובד"
+      />
 
-      {answers.numEmployees > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded p-3">
-          <div className="text-sm text-blue-900">
-            שכר ממוצע לעובד: ₪{avgSalary.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
+      {answers.employeesMode === 'simple' ? (
+        <>
+          <div className="grid md:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">מספר עובדים</label>
+              <input
+                type="number"
+                value={answers.numEmployees || ''}
+                onChange={(e) => onUpdate({ numEmployees: parseInt(e.target.value) || 0 })}
+                placeholder="0 אם אין"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                סך כל השכר החודשי (₪)
+              </label>
+              <input
+                type="number"
+                value={answers.totalMonthlySalary || ''}
+                onChange={(e) =>
+                  onUpdate({ totalMonthlySalary: parseFloat(e.target.value) || 0 })
+                }
+                placeholder="לדוגמה: 60000"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              />
+            </div>
           </div>
-          <div className="text-xs text-blue-700 mt-1">
-            נחלק את העובדים אוטומטית למחלקות לפי הענף שבחרת. תוכל לערוך זאת אחר כך.
+
+          {answers.numEmployees > 0 && (
+            <div className="bg-blue-50 border border-blue-200 rounded p-3">
+              <div className="text-sm text-blue-900">
+                שכר ממוצע לעובד: ₪{avgSalary.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
+              </div>
+              <div className="text-xs text-blue-700 mt-1">
+                נחלק את העובדים אוטומטית למחלקות לפי הענף. עבור למצב מפורט לשליטה מדויקת.
+              </div>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium">עובדים ({answers.employees.length})</span>
+            <span className="text-sm text-gray-500">
+              סה"כ שכר חודשי: ₪{detailedTotal.toLocaleString('he-IL')}
+            </span>
           </div>
+
+          {answers.employees.length === 0 ? (
+            <div className="text-center py-6 bg-gray-50 rounded-lg border-2 border-dashed">
+              <p className="text-sm text-gray-500 mb-2">עוד לא הוספת עובדים</p>
+              <button
+                onClick={addEmployee}
+                className="px-3 py-1.5 bg-violet-600 text-white rounded text-sm flex items-center gap-1 mx-auto"
+              >
+                <Plus className="w-4 h-4" />
+                הוסף עובד ראשון
+              </button>
+            </div>
+          ) : (
+            <>
+              {answers.employees.map((emp, idx) => (
+                <div key={idx} className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-0.5">שם</label>
+                      <input
+                        type="text"
+                        value={emp.name}
+                        onChange={(e) => updateEmployee(idx, { name: e.target.value })}
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-0.5">תפקיד</label>
+                      <input
+                        type="text"
+                        value={emp.position}
+                        onChange={(e) => updateEmployee(idx, { position: e.target.value })}
+                        placeholder="מנהל פרויקטים"
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-0.5">מחלקה</label>
+                      <select
+                        value={emp.department}
+                        onChange={(e) =>
+                          updateEmployee(idx, { department: e.target.value as Department })
+                        }
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      >
+                        {(Object.keys(DEPARTMENT_LABELS) as Department[]).map((d) => (
+                          <option key={d} value={d}>
+                            {DEPARTMENT_LABELS[d]}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-0.5">שכר חודשי</label>
+                      <input
+                        type="number"
+                        value={emp.monthlySalary || ''}
+                        onChange={(e) =>
+                          updateEmployee(idx, { monthlySalary: parseFloat(e.target.value) || 0 })
+                        }
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                    <div className="flex items-end">
+                      <button
+                        onClick={() => removeEmployee(idx)}
+                        className="p-1.5 text-red-600 hover:bg-red-50 rounded w-full flex items-center justify-center"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <button
+                onClick={addEmployee}
+                className="w-full p-2 border-2 border-dashed border-violet-300 rounded text-sm text-violet-700 hover:bg-violet-50 flex items-center justify-center gap-1"
+              >
+                <Plus className="w-4 h-4" />
+                הוסף עובד
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>
   );
 }
+
+const SUPPLIER_CATEGORY_LABELS: Record<SupplierExpenseDetail['category'], string> = {
+  cogs: 'עלות מכר (COGS)',
+  rnd: 'מחקר ופיתוח',
+  marketing: 'שיווק',
+  operating: 'תפעול',
+  financial: 'מימון',
+};
 
 function OperatingStep({
   answers,
@@ -526,41 +811,250 @@ function OperatingStep({
   answers: WizardAnswers;
   onUpdate: (u: Partial<WizardAnswers>) => void;
 }) {
+  function addSupplier() {
+    onUpdate({
+      suppliers: [
+        ...answers.suppliers,
+        {
+          name: `ספק ${answers.suppliers.length + 1}`,
+          category: 'operating',
+          monthlyAmount: 1000,
+          isPctOfRevenue: false,
+          percentageOfRevenue: 0,
+        },
+      ],
+    });
+  }
+
+  function updateSupplier(idx: number, patch: Partial<SupplierExpenseDetail>) {
+    const list = [...answers.suppliers];
+    list[idx] = { ...list[idx], ...patch };
+    onUpdate({ suppliers: list });
+  }
+
+  function removeSupplier(idx: number) {
+    onUpdate({ suppliers: answers.suppliers.filter((_, i) => i !== idx) });
+  }
+
+  const detailedTotal = answers.suppliers.reduce((s, x) => {
+    if (x.isPctOfRevenue) {
+      return s + ((x.percentageOfRevenue ?? 0) / 100) * answers.monthlyRevenue;
+    }
+    return s + x.monthlyAmount;
+  }, 0);
+
   return (
     <div className="space-y-4">
-      <p className="text-gray-600 text-sm">
-        הוצאות תפעול קבועות - שכירות, חשבונות, תוכנות, וכו'.
-      </p>
+      <p className="text-gray-600 text-sm">איך תרצה להזין הוצאות תפעול?</p>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">שכירות חודשית (₪)</label>
-        <input
-          type="number"
-          value={answers.monthlyRent || ''}
-          onChange={(e) => onUpdate({ monthlyRent: parseFloat(e.target.value) || 0 })}
-          placeholder="0 אם אין"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-        />
-        <p className="text-xs text-gray-500 mt-1">
-          ✨ סומן אוטומטית להחלת אינפלציה (חוזה שכ״ד מתעדכן)
-        </p>
-      </div>
+      <ModeToggle
+        mode={answers.expensesMode}
+        onChange={(m) => onUpdate({ expensesMode: m })}
+        simpleLabel="פשוט - שכירות + תפעול כולל"
+        detailedLabel="מפורט - ספק/הוצאה ספציפית"
+      />
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          הוצאות תפעול אחרות (₪/חודש)
-        </label>
-        <input
-          type="number"
-          value={answers.monthlyOperating || ''}
-          onChange={(e) => onUpdate({ monthlyOperating: parseFloat(e.target.value) || 0 })}
-          placeholder="לדוגמה: 5000"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-        />
-        <p className="text-xs text-gray-500 mt-1">
-          חשמל, תקשורת, תוכנות SaaS, רואה חשבון, ביטוחים, וכו'
-        </p>
-      </div>
+      {answers.expensesMode === 'simple' ? (
+        <>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">שכירות חודשית (₪)</label>
+            <input
+              type="number"
+              value={answers.monthlyRent || ''}
+              onChange={(e) => onUpdate({ monthlyRent: parseFloat(e.target.value) || 0 })}
+              placeholder="0 אם אין"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              ✨ סומן אוטומטית להחלת אינפלציה (חוזה שכ״ד מתעדכן)
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              הוצאות תפעול אחרות (₪/חודש)
+            </label>
+            <input
+              type="number"
+              value={answers.monthlyOperating || ''}
+              onChange={(e) => onUpdate({ monthlyOperating: parseFloat(e.target.value) || 0 })}
+              placeholder="לדוגמה: 5000"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              חשמל, תקשורת, תוכנות SaaS, רואה חשבון, ביטוחים, וכו'
+            </p>
+          </div>
+        </>
+      ) : (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium">ספקים והוצאות ({answers.suppliers.length})</span>
+            <span className="text-sm text-gray-500">
+              סה"כ חודשי: ₪{detailedTotal.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
+            </span>
+          </div>
+
+          {answers.suppliers.length === 0 ? (
+            <div className="text-center py-6 bg-gray-50 rounded-lg border-2 border-dashed">
+              <p className="text-sm text-gray-500 mb-2">עוד לא הוספת ספק/הוצאה</p>
+              <button
+                onClick={addSupplier}
+                className="px-3 py-1.5 bg-violet-600 text-white rounded text-sm flex items-center gap-1 mx-auto"
+              >
+                <Plus className="w-4 h-4" />
+                הוסף ספק/הוצאה
+              </button>
+            </div>
+          ) : (
+            <>
+              {answers.suppliers.map((sup, idx) => (
+                <div key={idx} className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2">
+                    <div className="md:col-span-2">
+                      <label className="block text-xs text-gray-600 mb-0.5">שם הספק/הוצאה</label>
+                      <input
+                        type="text"
+                        value={sup.name}
+                        onChange={(e) => updateSupplier(idx, { name: e.target.value })}
+                        placeholder="שכירות / חשמל / תוכנת CRM"
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-0.5">קטגוריה</label>
+                      <select
+                        value={sup.category}
+                        onChange={(e) =>
+                          updateSupplier(idx, {
+                            category: e.target.value as SupplierExpenseDetail['category'],
+                          })
+                        }
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                      >
+                        {(Object.keys(SUPPLIER_CATEGORY_LABELS) as Array<
+                          SupplierExpenseDetail['category']
+                        >).map((c) => (
+                          <option key={c} value={c}>
+                            {SUPPLIER_CATEGORY_LABELS[c]}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="flex items-end">
+                      <button
+                        onClick={() => removeSupplier(idx)}
+                        className="p-1.5 text-red-600 hover:bg-red-50 rounded w-full flex items-center justify-center"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <label className="flex items-center gap-1 text-xs text-gray-700">
+                      <input
+                        type="checkbox"
+                        checked={sup.isPctOfRevenue}
+                        onChange={(e) =>
+                          updateSupplier(idx, { isPctOfRevenue: e.target.checked })
+                        }
+                        className="w-3.5 h-3.5"
+                      />
+                      <span>אחוז מהכנסות</span>
+                    </label>
+                    {sup.isPctOfRevenue ? (
+                      <div className="flex items-center gap-1 flex-1">
+                        <input
+                          type="number"
+                          step="0.5"
+                          value={sup.percentageOfRevenue ?? 0}
+                          onChange={(e) =>
+                            updateSupplier(idx, {
+                              percentageOfRevenue: parseFloat(e.target.value) || 0,
+                            })
+                          }
+                          className="w-20 px-2 py-1 border border-gray-300 rounded text-sm"
+                        />
+                        <span className="text-xs text-gray-600">%</span>
+                        <span className="text-xs text-gray-500 mr-2">
+                          (≈ ₪
+                          {Math.round(
+                            ((sup.percentageOfRevenue ?? 0) / 100) * answers.monthlyRevenue,
+                          ).toLocaleString('he-IL')}
+                          /חודש)
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1 flex-1">
+                        <span className="text-xs text-gray-600">סכום חודשי:</span>
+                        <input
+                          type="number"
+                          value={sup.monthlyAmount || ''}
+                          onChange={(e) =>
+                            updateSupplier(idx, {
+                              monthlyAmount: parseFloat(e.target.value) || 0,
+                            })
+                          }
+                          className="w-32 px-2 py-1 border border-gray-300 rounded text-sm"
+                        />
+                        <span className="text-xs text-gray-600">₪</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+              <button
+                onClick={addSupplier}
+                className="w-full p-2 border-2 border-dashed border-violet-300 rounded text-sm text-violet-700 hover:bg-violet-50 flex items-center justify-center gap-1"
+              >
+                <Plus className="w-4 h-4" />
+                הוסף ספק/הוצאה
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// SHARED HELPER: Mode Toggle
+// ============================================================
+
+function ModeToggle({
+  mode,
+  onChange,
+  simpleLabel,
+  detailedLabel,
+}: {
+  mode: 'simple' | 'detailed';
+  onChange: (mode: 'simple' | 'detailed') => void;
+  simpleLabel: string;
+  detailedLabel: string;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-2 p-1 bg-gray-100 rounded-lg">
+      <button
+        onClick={() => onChange('simple')}
+        className={`p-2 rounded transition text-sm ${
+          mode === 'simple'
+            ? 'bg-white shadow text-violet-700 font-bold'
+            : 'text-gray-600 hover:text-gray-900'
+        }`}
+      >
+        ⚡ {simpleLabel}
+      </button>
+      <button
+        onClick={() => onChange('detailed')}
+        className={`p-2 rounded transition text-sm ${
+          mode === 'detailed'
+            ? 'bg-white shadow text-violet-700 font-bold'
+            : 'text-gray-600 hover:text-gray-900'
+        }`}
+      >
+        📋 {detailedLabel}
+      </button>
     </div>
   );
 }
