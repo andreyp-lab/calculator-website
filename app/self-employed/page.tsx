@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 
 const calculators = [
   {
+    title: '⭐ סימולטור הערכת מס לסוף שנה',
+    description: 'הכלי המקיף ביותר: הכנסות + הוצאות + פנסיה + ב.ל. + מקדמות - הערכת חבות מס מלאה לסוף השנה',
+    href: '/self-employed/year-end-tax-simulator',
+    available: true,
+  },
+  {
     title: 'מחשבון מע"מ',
     description: 'הוספת או חילוץ מע"מ (18% ב-2026)',
     href: '/self-employed/vat',
