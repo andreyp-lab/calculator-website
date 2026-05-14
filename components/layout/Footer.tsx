@@ -49,6 +49,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/self-employed/net" className="hover:text-blue-600">
+                  💰 נטו לעצמאי
+                </Link>
+              </li>
+              <li>
                 <Link href="/self-employed/vat" className="hover:text-blue-600">
                   מחשבון מע"מ
                 </Link>

@@ -16,6 +16,12 @@ const calculators = [
     available: true,
   },
   {
+    title: '💰 מחשבון נטו לעצמאי',
+    description: 'כמה כסף נשאר ביד בסוף החודש? המרה מהירה ממחזור לנטו אחרי מס, ב.ל., מע"מ ופנסיה',
+    href: '/self-employed/net',
+    available: true,
+  },
+  {
     title: 'מחשבון מע"מ',
     description: 'הוספת או חילוץ מע"מ (18% ב-2026)',
     href: '/self-employed/vat',
