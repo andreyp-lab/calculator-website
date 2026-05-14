@@ -16,7 +16,7 @@ export default function BlogPostLayout({ children }: { children: ReactNode }) {
           />
         </div>
 
-        <div>{children}</div>
+        <div className="prose prose-lg max-w-none">{children}</div>
 
         <div className="mt-12 pt-8 border-t border-gray-200">
           <AuthorBox />
