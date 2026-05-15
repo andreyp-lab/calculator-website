@@ -486,3 +486,509 @@ export function calculateRetirement(input: RetirementInput): RetirementResult {
     yearlyProjection,
   };
 }
+
+// ============================================================
+// 6. COMPREHENSIVE RETIREMENT PLANNING - תכנון פרישה מקיף
+// ============================================================
+
+/**
+ * מקורות הכנסה בפרישה
+ */
+export interface RetirementIncomeSources {
+  pensionMonthly: number;        // קצבת פנסיה חודשית (ש"ח)
+  socialSecurityMonthly: number; // קצבת זקנה - ביטוח לאומי (ש"ח)
+  rentalIncome: number;          // הכנסה מדמי שכירות (ש"ח/חודש)
+  partTimeWork: number;          // עבודה חלקית בפרישה (ש"ח/חודש)
+  investmentPortfolio: number;   // שווי תיק השקעות (ש"ח) - ייצור drawdown
+}
+
+/**
+ * קלט מקיף לתכנון פרישה
+ */
+export interface ComprehensiveRetirementInput {
+  // אישי
+  currentAge: number;
+  retirementAge: number;
+  yearsInRetirement: number;   // תוחלת חיים אחרי פרישה
+
+  // חיסכון נוכחי
+  currentSavings: number;        // חיסכון קיים (פנסיה + כל שאר)
+  monthlyContribution: number;   // הפקדה חודשית כוללת
+  expectedReturn: number;        // % תשואה שנתית בצמיחה
+
+  // יעדי פרישה
+  desiredMonthlyIncome: number;  // הכנסה רצויה (בערכי היום)
+  inflationRate: number;         // % אינפלציה שנתי
+
+  // מקורות הכנסה בפרישה
+  incomeSources: RetirementIncomeSources;
+
+  // אסטרטגיית משיכה
+  withdrawalRate: number;        // % משיכה שנתי מתיק ההשקעות (ברירת מחדל: 4%)
+
+  // מיסוי
+  pensionTaxRate: number;        // % מס על קצבת פנסיה (בד"כ 0-17% בגלל פטורים)
+  capitalGainsTaxRate: number;   // % מס רווחי הון על תיק השקעות
+
+  // תרחישים להשוואה
+  scenarios: Array<{
+    label: string;
+    returnRate: number;   // % תשואה שנתית
+    color: string;
+    retirementAge?: number;
+  }>;
+}
+
+/**
+ * תוצאה שנתית בתקופת הצמיחה
+ */
+export interface RetirementAccumulationRow {
+  age: number;
+  year: number;
+  balance: number;           // יתרה נומינלית
+  realBalance: number;       // ערך ריאלי
+  yearlyContribution: number;
+  yearlyGrowth: number;      // ריבית שנצברה השנה
+}
+
+/**
+ * תוצאה שנתית בתקופת הפרישה (drawdown)
+ */
+export interface RetirementDrawdownRow {
+  age: number;
+  year: number;              // שנה בפרישה (1, 2, ...)
+  balance: number;           // יתרה בתחילת שנה
+  totalIncome: number;       // סה"כ הכנסה חודשית
+  portfolioDrawdown: number; // משיכה מתיק השקעות
+  nominalDesiredIncome: number; // הכנסה רצויה נומינלית (מותאמת אינפלציה)
+}
+
+/**
+ * תוצאה מקיפה לתכנון פרישה
+ */
+export interface ComprehensiveRetirementResult {
+  // תקופת צמיחה
+  yearsUntilRetirement: number;
+  projectedSavings: number;        // חיסכון צפוי בפרישה (נומינלי)
+  realProjectedSavings: number;    // חיסכון צפוי בפרישה (ריאלי)
+  totalContributions: number;      // סה"כ הפקדות
+  totalGrowth: number;             // סה"כ צמיחה (ריבית)
+
+  // יעד ומצב
+  requiredSavings: number;         // חיסכון נדרש
+  shortfall: number;               // פער
+  surplus: number;                 // עודף
+  isOnTrack: boolean;
+  fundingRatio: number;            // יחס כיסוי (projected/required)
+
+  // הכנסה בפרישה
+  totalMonthlyIncomeAtRetirement: number;   // סה"כ הכנסה חודשית בפרישה (נומינלי)
+  totalMonthlyIncomeReal: number;           // אותו דבר בערכי היום
+  portfolioMonthlyDrawdown: number;         // משיכה חודשית מהתיק בשנת פרישה ראשונה
+  incomeGap: number;                        // פער בין הכנסה רצויה להכנסה צפויה
+
+  // תוחלת כסף
+  yearsMoneyWillLast: number;               // כמה שנים הכסף יחזיק
+  portfolioDepletionAge: number;            // גיל שבו הכסף נגמר
+
+  // חיפוש יעד (goal-seeking)
+  requiredMonthlyContributionForGoal: number; // הפקדה חודשית נדרשת לעמוד ביעד
+
+  // מיסוי
+  estimatedPensionTax: number;     // מס משוער שנתי על פנסיה
+  estimatedPortfolioTax: number;   // מס משוער שנתי על תיק
+
+  // נתוני גרפים
+  accumulationData: RetirementAccumulationRow[];  // נתוני צמיחה
+  drawdownData: RetirementDrawdownRow[];          // נתוני פרישה (drawdown)
+
+  // השוואת תרחישים
+  scenarioResults: Array<{
+    label: string;
+    color: string;
+    returnRate: number;
+    retirementAge: number;
+    projectedSavings: number;
+    realProjectedSavings: number;
+    isOnTrack: boolean;
+    yearsMoneyWillLast: number;
+  }>;
+}
+
+/**
+ * חישוב תכנון פרישה מקיף
+ *
+ * כולל:
+ * - ריבית דריבית בתקופת הצמיחה
+ * - מקורות הכנסה מרובים בפרישה
+ * - אסטרטגיית drawdown (משיכה מתיק)
+ * - מיסוי על פנסיה ורווחי הון
+ * - goal-seeking
+ * - השוואת תרחישים
+ */
+export function calculateComprehensiveRetirement(
+  input: ComprehensiveRetirementInput,
+): ComprehensiveRetirementResult {
+  const {
+    currentAge,
+    retirementAge,
+    yearsInRetirement,
+    currentSavings,
+    monthlyContribution,
+    expectedReturn,
+    desiredMonthlyIncome,
+    inflationRate,
+    incomeSources,
+    withdrawalRate,
+    pensionTaxRate,
+    capitalGainsTaxRate,
+    scenarios,
+  } = input;
+
+  const yearsUntilRetirement = Math.max(0, retirementAge - currentAge);
+  const annualR = expectedReturn / 100;
+  const monthlyR = annualR / 12;
+  const inflR = inflationRate / 100;
+
+  // ============================================================
+  // שלב 1: תקופת צמיחה - בנה את החיסכון
+  // ============================================================
+  const accumulationData: RetirementAccumulationRow[] = [];
+  let balance = currentSavings;
+  let totalContributions = currentSavings;
+
+  for (let year = 1; year <= yearsUntilRetirement; year++) {
+    const startBalance = balance;
+    // חישוב חודשי מדויק
+    for (let m = 0; m < 12; m++) {
+      balance = balance * (1 + monthlyR) + monthlyContribution;
+      totalContributions += monthlyContribution;
+    }
+    const yearlyGrowth = balance - startBalance - monthlyContribution * 12;
+    const realBalance = balance / Math.pow(1 + inflR, year);
+
+    accumulationData.push({
+      age: currentAge + year,
+      year,
+      balance,
+      realBalance,
+      yearlyContribution: monthlyContribution * 12,
+      yearlyGrowth,
+    });
+  }
+
+  const projectedSavings = balance;
+  const realProjectedSavings = yearsUntilRetirement > 0
+    ? projectedSavings / Math.pow(1 + inflR, yearsUntilRetirement)
+    : projectedSavings;
+  const totalGrowth = projectedSavings - totalContributions;
+
+  // ============================================================
+  // שלב 2: הכנסה בפרישה
+  // ============================================================
+
+  // הכנסה בפרישה - כל מקורות ההכנסה הנומינליים בשנת פרישה ראשונה
+  const inflationFactorAtRetirement = Math.pow(1 + inflR, yearsUntilRetirement);
+
+  // פנסיה (אחרי מס)
+  const pensionNet = incomeSources.pensionMonthly * (1 - pensionTaxRate / 100);
+  // ביטוח לאומי (פטור ממס)
+  const socialSecurity = incomeSources.socialSecurityMonthly;
+  // שכירות + עבודה חלקית
+  const otherIncome = incomeSources.rentalIncome + incomeSources.partTimeWork;
+
+  const fixedMonthlyIncomeToday = pensionNet + socialSecurity + otherIncome;
+
+  // כמה עוד צריך מהתיק (בערכי היום)
+  const desiredIncomeReal = desiredMonthlyIncome; // זה כבר בערכי היום
+  const portfolioNeededMonthly = Math.max(0, desiredIncomeReal - fixedMonthlyIncomeToday);
+
+  // בשנת פרישה ראשונה - נומינלי
+  const nominalDesiredIncome = desiredMonthlyIncome * inflationFactorAtRetirement;
+  const fixedMonthlyIncomeNominal = fixedMonthlyIncomeToday * inflationFactorAtRetirement;
+  const portfolioMonthlyDrawdown = Math.max(0, nominalDesiredIncome - fixedMonthlyIncomeNominal);
+
+  const totalMonthlyIncomeAtRetirement = fixedMonthlyIncomeNominal + portfolioMonthlyDrawdown;
+  const totalMonthlyIncomeReal = totalMonthlyIncomeAtRetirement / inflationFactorAtRetirement;
+
+  // פער הכנסה (האם הכנסה צפויה מכסה את הרצויה)
+  const incomeGap = Math.max(0, nominalDesiredIncome - totalMonthlyIncomeAtRetirement);
+
+  // ============================================================
+  // שלב 3: drawdown - כמה זמן הכסף מחזיק
+  // ============================================================
+
+  // תיק ההשקעות בפרישה - נניח תשואה מתונה יותר (60/40)
+  const portfolioReturnInRetirement = Math.max(0, (expectedReturn - 2) / 100); // מתון יותר
+  const portfolioMonthlyReturn = portfolioReturnInRetirement / 12;
+
+  // שיעור משיכה שנתי מהתיק
+  const annualWithdrawalRate = withdrawalRate / 100;
+
+  const drawdownData: RetirementDrawdownRow[] = [];
+  let portfolioBalance = projectedSavings;
+
+  // עלות הזדמנות: מס רווחי הון על תיק ההשקעות בפרישה
+  const portfolioProfit = Math.max(0, projectedSavings - totalContributions);
+  const estimatedPortfolioTax = portfolioProfit * (capitalGainsTaxRate / 100) * 0.3; // 30% מהרווח ממוסה בשנה ראשונה (הערכה)
+
+  let yearsMoneyWillLast = 0;
+  let portfolioDepletionAge = retirementAge;
+
+  for (let year = 1; year <= Math.max(yearsInRetirement, 40); year++) {
+    if (portfolioBalance <= 0) break;
+
+    // הכנסה רצויה מותאמת אינפלציה בשנה זו
+    const yearNominalDesiredIncome = nominalDesiredIncome * Math.pow(1 + inflR, year - 1);
+
+    // הכנסה קבועה מותאמת אינפלציה
+    const yearFixedIncome = fixedMonthlyIncomeNominal * Math.pow(1 + inflR, year - 1);
+
+    // משיכה מהתיק
+    const yearPortfolioDrawdown = Math.max(0, yearNominalDesiredIncome - yearFixedIncome);
+    const startBalance = portfolioBalance;
+
+    // גדל בתשואה
+    for (let m = 0; m < 12; m++) {
+      portfolioBalance = portfolioBalance * (1 + portfolioMonthlyReturn);
+      portfolioBalance -= yearPortfolioDrawdown / 12;
+    }
+
+    if (year <= yearsInRetirement) {
+      drawdownData.push({
+        age: retirementAge + year,
+        year,
+        balance: Math.max(0, startBalance),
+        totalIncome: yearFixedIncome + Math.min(yearPortfolioDrawdown, yearPortfolioDrawdown),
+        portfolioDrawdown: yearPortfolioDrawdown,
+        nominalDesiredIncome: yearNominalDesiredIncome,
+      });
+    }
+
+    if (portfolioBalance > 0) {
+      yearsMoneyWillLast = year;
+      portfolioDepletionAge = retirementAge + year;
+    }
+  }
+
+  // עדכן yearsMoneyWillLast אם הכסף מחזיק יותר מ-40 שנה
+  if (portfolioBalance > 0) {
+    yearsMoneyWillLast = 40;
+    portfolioDepletionAge = retirementAge + 40;
+  }
+
+  // ============================================================
+  // שלב 4: חיסכון נדרש
+  // ============================================================
+
+  // חיסכון נדרש כדי לייצר את הdrawdown הדרוש
+  const monthlyDrawdownNeeded = portfolioMonthlyDrawdown;
+  // PV של annuity: כמה צריך היום כדי לייצר cashflow לאורך yearsInRetirement
+  const retirementMonthlyR = portfolioMonthlyReturn;
+  const retirementMonths = yearsInRetirement * 12;
+  const requiredSavings =
+    monthlyDrawdownNeeded <= 0
+      ? 0
+      : retirementMonthlyR === 0
+        ? monthlyDrawdownNeeded * retirementMonths
+        : (monthlyDrawdownNeeded * (1 - Math.pow(1 + retirementMonthlyR, -retirementMonths))) /
+          retirementMonthlyR;
+
+  const shortfall = Math.max(0, requiredSavings - projectedSavings);
+  const surplus = Math.max(0, projectedSavings - requiredSavings);
+  const isOnTrack = projectedSavings >= requiredSavings;
+  const fundingRatio = requiredSavings > 0 ? projectedSavings / requiredSavings : 1;
+
+  // ============================================================
+  // שלב 5: goal-seeking — כמה להפקיד כדי לעמוד ביעד
+  // ============================================================
+  let requiredMonthlyContributionForGoal = monthlyContribution;
+
+  if (shortfall > 0 && yearsUntilRetirement > 0) {
+    const months = yearsUntilRetirement * 12;
+    const fvFactor =
+      monthlyR === 0
+        ? months
+        : (Math.pow(1 + monthlyR, months) - 1) / monthlyR;
+    const existingSavingsFV = currentSavings * Math.pow(1 + monthlyR, months);
+    const neededFV = requiredSavings - existingSavingsFV;
+    requiredMonthlyContributionForGoal = neededFV > 0 ? neededFV / fvFactor : 0;
+  }
+
+  // ============================================================
+  // שלב 6: מיסוי
+  // ============================================================
+  const estimatedPensionTax =
+    incomeSources.pensionMonthly * 12 * (pensionTaxRate / 100);
+
+  // ============================================================
+  // שלב 7: השוואת תרחישים
+  // ============================================================
+  const scenarioResults = scenarios.map((scenario) => {
+    const scenarioRetirementAge = scenario.retirementAge ?? retirementAge;
+    const scenarioYears = Math.max(0, scenarioRetirementAge - currentAge);
+    const scenarioR = scenario.returnRate / 100;
+    const scenarioMonthlyR = scenarioR / 12;
+
+    let scenarioBalance = currentSavings;
+    for (let year = 0; year < scenarioYears; year++) {
+      for (let m = 0; m < 12; m++) {
+        scenarioBalance = scenarioBalance * (1 + scenarioMonthlyR) + monthlyContribution;
+      }
+    }
+
+    const scenarioRealBalance =
+      scenarioYears > 0
+        ? scenarioBalance / Math.pow(1 + inflR, scenarioYears)
+        : scenarioBalance;
+
+    // האם התרחיש מכסה את הdrawdown הדרוש
+    const scenarioOnTrack = scenarioBalance >= requiredSavings;
+
+    // כמה שנים הכסף מחזיק בתרחיש זה
+    const scenarioPortfolioReturn = Math.max(0, (scenario.returnRate - 2) / 100);
+    const scenarioPortfolioMonthlyR = scenarioPortfolioReturn / 12;
+    let scenarioPortfolioBalance = scenarioBalance;
+    let scenarioYearsLast = 0;
+    for (let year = 1; year <= 40; year++) {
+      if (scenarioPortfolioBalance <= 0) break;
+      const yearNominalDesiredIncome =
+        nominalDesiredIncome * Math.pow(1 + inflR, year - 1);
+      const yearFixedIncome = fixedMonthlyIncomeNominal * Math.pow(1 + inflR, year - 1);
+      const yearDrawdown = Math.max(0, yearNominalDesiredIncome - yearFixedIncome);
+      for (let m = 0; m < 12; m++) {
+        scenarioPortfolioBalance *= 1 + scenarioPortfolioMonthlyR;
+        scenarioPortfolioBalance -= yearDrawdown / 12;
+      }
+      if (scenarioPortfolioBalance > 0) scenarioYearsLast = year;
+    }
+    if (scenarioPortfolioBalance > 0) scenarioYearsLast = 40;
+
+    return {
+      label: scenario.label,
+      color: scenario.color,
+      returnRate: scenario.returnRate,
+      retirementAge: scenarioRetirementAge,
+      projectedSavings: scenarioBalance,
+      realProjectedSavings: scenarioRealBalance,
+      isOnTrack: scenarioOnTrack,
+      yearsMoneyWillLast: scenarioYearsLast,
+    };
+  });
+
+  return {
+    yearsUntilRetirement,
+    projectedSavings,
+    realProjectedSavings,
+    totalContributions,
+    totalGrowth,
+    requiredSavings,
+    shortfall,
+    surplus,
+    isOnTrack,
+    fundingRatio,
+    totalMonthlyIncomeAtRetirement,
+    totalMonthlyIncomeReal,
+    portfolioMonthlyDrawdown,
+    incomeGap,
+    yearsMoneyWillLast,
+    portfolioDepletionAge,
+    requiredMonthlyContributionForGoal,
+    estimatedPensionTax,
+    estimatedPortfolioTax,
+    accumulationData,
+    drawdownData,
+    scenarioResults,
+  };
+}
+
+/**
+ * חישוב קצבת ביטוח לאומי מוערכת לפי גיל ומשכורת
+ * מבוסס על מחשבון ב.ל. 2026
+ * קצבת בסיס: כ-3,500 ₪/חודש לאחד, 4,900 ₪ לזוג
+ */
+export function estimateSocialSecurityBenefit(options: {
+  retirementAge: number;
+  yearsContributed: number; // שנות עבודה בהן שולם ביטוח לאומי
+  averageSalary: number;    // שכר ממוצע ב-5 שנים אחרונות
+  isCouple: boolean;
+}): number {
+  const BASE_SINGLE = 3_500;  // ₪/חודש
+  const BASE_COUPLE = 4_900;  // ₪/חודש
+  const EARLY_RETIREMENT_DEDUCTION = 0.5; // 0.5% לכל חודש לפני גיל הפרישה
+
+  const base = options.isCouple ? BASE_COUPLE : BASE_SINGLE;
+  const standardRetirementAge = 67;
+
+  let benefit = base;
+
+  // הפחתה לפרישה מוקדמת
+  if (options.retirementAge < standardRetirementAge) {
+    const monthsEarly = (standardRetirementAge - options.retirementAge) * 12;
+    benefit = benefit * (1 - EARLY_RETIREMENT_DEDUCTION * monthsEarly / 100);
+  }
+
+  return Math.max(0, Math.round(benefit));
+}
+
+/**
+ * חישוב קצבת פנסיה מוערכת
+ * מבוסס על: שכר × שנות ותק × מקדם (בד"כ 1.75%-2% לשנה)
+ */
+export function estimatePensionBenefit(options: {
+  averageSalary: number;      // שכר ממוצע (ש"ח/חודש)
+  yearsOfContribution: number; // שנות הפקדה לפנסיה
+  pensionCoefficient?: number; // מקדם (/100) - ברירת מחדל: 1.75%
+}): {
+  monthlyPension: number;
+  replacementRate: number;  // % מהשכר
+} {
+  const { averageSalary, yearsOfContribution, pensionCoefficient = 1.75 } = options;
+  const monthlyPension = averageSalary * (yearsOfContribution * pensionCoefficient) / 100;
+  const replacementRate = (monthlyPension / averageSalary) * 100;
+  return { monthlyPension: Math.round(monthlyPension), replacementRate };
+}
+
+/**
+ * חישוב כמה שנים כסף מחזיק לפי תרחיש משיכה
+ */
+export function calculatePortfolioLongevity(options: {
+  initialBalance: number;
+  monthlyWithdrawal: number;   // משיכה חודשית קבועה (ריאלית)
+  annualReturn: number;        // % תשואה שנתית בפרישה
+  inflationRate: number;       // % אינפלציה - מגדיל משיכה כל שנה
+  maxYears?: number;
+}): {
+  yearsItLasts: number;
+  depletionAge?: number;
+  endBalance: number;
+  yearlyData: Array<{ year: number; balance: number; withdrawal: number }>;
+} {
+  const { initialBalance, monthlyWithdrawal, annualReturn, inflationRate, maxYears = 50 } = options;
+  const monthlyR = annualReturn / 100 / 12;
+  const inflR = inflationRate / 100;
+
+  let balance = initialBalance;
+  let yearsItLasts = 0;
+  const yearlyData: Array<{ year: number; balance: number; withdrawal: number }> = [];
+
+  for (let year = 1; year <= maxYears; year++) {
+    if (balance <= 0) break;
+    const yearlyWithdrawal = monthlyWithdrawal * 12 * Math.pow(1 + inflR, year - 1);
+
+    for (let m = 0; m < 12; m++) {
+      balance = balance * (1 + monthlyR) - yearlyWithdrawal / 12;
+    }
+
+    yearlyData.push({
+      year,
+      balance: Math.max(0, balance),
+      withdrawal: yearlyWithdrawal / 12,
+    });
+
+    if (balance > 0) yearsItLasts = year;
+  }
+  if (balance > 0) yearsItLasts = maxYears;
+
+  return { yearsItLasts, endBalance: Math.max(0, balance), yearlyData };
+}

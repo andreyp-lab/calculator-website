@@ -5,7 +5,12 @@ import {
   calculateRetirement,
   calculateRequiredMonthlyContribution,
   compareScenarios,
+  calculateComprehensiveRetirement,
+  estimateSocialSecurityBenefit,
+  estimatePensionBenefit,
+  calculatePortfolioLongevity,
   INVESTMENT_CONSTANTS_2026,
+  type ComprehensiveRetirementInput,
 } from '@/lib/calculators/investments';
 
 // ============================================================
@@ -436,5 +441,270 @@ describe('calculateRetirement', () => {
     });
     expect(result.yearsUntilRetirement).toBe(0);
     expect(result.projectedSavings).toBe(1_000_000);
+  });
+});
+
+// ============================================================
+// COMPREHENSIVE RETIREMENT TESTS - תכנון פרישה מקיף
+// ============================================================
+
+const baseComprehensiveInput: ComprehensiveRetirementInput = {
+  currentAge: 35,
+  retirementAge: 67,
+  yearsInRetirement: 25,
+  currentSavings: 200_000,
+  monthlyContribution: 3_000,
+  expectedReturn: 6,
+  desiredMonthlyIncome: 15_000,
+  inflationRate: 3,
+  incomeSources: {
+    pensionMonthly: 5_000,
+    socialSecurityMonthly: 3_500,
+    rentalIncome: 0,
+    partTimeWork: 0,
+    investmentPortfolio: 0,
+  },
+  withdrawalRate: 4,
+  pensionTaxRate: 10,
+  capitalGainsTaxRate: 25,
+  scenarios: [
+    { label: 'שמרני (3%)', returnRate: 3, color: '#6b7280', retirementAge: 67 },
+    { label: 'מתון (6%)', returnRate: 6, color: '#3b82f6', retirementAge: 67 },
+    { label: 'אגרסיבי (8%)', returnRate: 8, color: '#10b981', retirementAge: 67 },
+  ],
+};
+
+describe('calculateComprehensiveRetirement', () => {
+  it('מחזיר ערכים בסיסיים נכונים', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    expect(result.yearsUntilRetirement).toBe(32);
+    expect(result.projectedSavings).toBeGreaterThan(200_000);
+    expect(result.requiredSavings).toBeGreaterThan(0);
+    expect(result.fundingRatio).toBeGreaterThan(0);
+  });
+
+  it('חיסכון ריאלי קטן מנומינלי', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    expect(result.realProjectedSavings).toBeLessThan(result.projectedSavings);
+    // ריאלי = נומינלי / (1.03^32)
+    const expectedReal = result.projectedSavings / Math.pow(1.03, 32);
+    expect(result.realProjectedSavings).toBeCloseTo(expectedReal, -3);
+  });
+
+  it('תשואה גבוהה = חיסכון גבוה יותר', () => {
+    const low = calculateComprehensiveRetirement({ ...baseComprehensiveInput, expectedReturn: 3 });
+    const high = calculateComprehensiveRetirement({ ...baseComprehensiveInput, expectedReturn: 8 });
+    expect(high.projectedSavings).toBeGreaterThan(low.projectedSavings);
+  });
+
+  it('accumulationData מכיל 32 שנים', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    expect(result.accumulationData).toHaveLength(32);
+    expect(result.accumulationData[0].age).toBe(36);
+    expect(result.accumulationData[31].age).toBe(67);
+  });
+
+  it('drawdownData לא ריק כאשר יש drawdown', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    expect(result.drawdownData.length).toBeGreaterThan(0);
+    expect(result.drawdownData.length).toBeLessThanOrEqual(25);
+  });
+
+  it('תרחישים — ריבית גבוהה = חיסכון גבוה', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    expect(result.scenarioResults).toHaveLength(3);
+    // שמרני < מתון < אגרסיבי
+    expect(result.scenarioResults[0].projectedSavings).toBeLessThan(result.scenarioResults[1].projectedSavings);
+    expect(result.scenarioResults[1].projectedSavings).toBeLessThan(result.scenarioResults[2].projectedSavings);
+  });
+
+  it('הכנסות קבועות מפחיתות את הdrawdown מהתיק', () => {
+    const noFixed = calculateComprehensiveRetirement({
+      ...baseComprehensiveInput,
+      incomeSources: { pensionMonthly: 0, socialSecurityMonthly: 0, rentalIncome: 0, partTimeWork: 0, investmentPortfolio: 0 },
+    });
+    const withFixed = calculateComprehensiveRetirement(baseComprehensiveInput);
+    expect(withFixed.portfolioMonthlyDrawdown).toBeLessThan(noFixed.portfolioMonthlyDrawdown);
+  });
+
+  it('פרישה מוקדמת יותר = חיסכון קטן יותר (פחות שנות חיסכון)', () => {
+    const early = calculateComprehensiveRetirement({ ...baseComprehensiveInput, retirementAge: 62 });
+    const late = calculateComprehensiveRetirement({ ...baseComprehensiveInput, retirementAge: 67 });
+    expect(early.projectedSavings).toBeLessThan(late.projectedSavings);
+    expect(early.yearsUntilRetirement).toBe(27);
+    expect(late.yearsUntilRetirement).toBe(32);
+  });
+
+  it('goal-seeking: הפקדה נדרשת > 0 כאשר יש פער', () => {
+    const lowSavings = calculateComprehensiveRetirement({
+      ...baseComprehensiveInput,
+      currentSavings: 0,
+      monthlyContribution: 500,
+      desiredMonthlyIncome: 30_000,
+      incomeSources: { pensionMonthly: 0, socialSecurityMonthly: 0, rentalIncome: 0, partTimeWork: 0, investmentPortfolio: 0 },
+    });
+    expect(lowSavings.requiredMonthlyContributionForGoal).toBeGreaterThan(500);
+  });
+
+  it('goal-seeking: הפקדה נוכחית מספיקה = לא נדרשת תוספת גדולה', () => {
+    const richSavings = calculateComprehensiveRetirement({
+      ...baseComprehensiveInput,
+      currentSavings: 5_000_000,
+      monthlyContribution: 5_000,
+      desiredMonthlyIncome: 10_000,
+    });
+    // הפקדה נדרשת צריכה להיות קטנה (תיק קיים גדול מכסה את הכל)
+    expect(richSavings.requiredMonthlyContributionForGoal).toBeLessThanOrEqual(richSavings.shortfall > 0 ? 99999 : 5_000);
+    expect(richSavings.isOnTrack).toBe(true);
+  });
+
+  it('סה"כ הפקדות = חיסכון ראשוני + הפקדות חודשיות × חודשים', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    const expectedContribs = 200_000 + 3_000 * 32 * 12;
+    expect(result.totalContributions).toBeCloseTo(expectedContribs, -2);
+  });
+
+  it('totalGrowth = projectedSavings - totalContributions', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    expect(result.totalGrowth).toBeCloseTo(result.projectedSavings - result.totalContributions, 0);
+  });
+
+  it('גיל פרישה = גיל נוכחי — yearsUntilRetirement = 0', () => {
+    const result = calculateComprehensiveRetirement({
+      ...baseComprehensiveInput,
+      currentAge: 67,
+      retirementAge: 67,
+    });
+    expect(result.yearsUntilRetirement).toBe(0);
+    expect(result.projectedSavings).toBe(200_000);
+    expect(result.accumulationData).toHaveLength(0);
+  });
+
+  it('מס פנסיה מחושב נכון', () => {
+    const result = calculateComprehensiveRetirement(baseComprehensiveInput);
+    // 5,000 * 12 * 10% = 6,000
+    expect(result.estimatedPensionTax).toBeCloseTo(6_000, 0);
+  });
+});
+
+// ============================================================
+// SOCIAL SECURITY & PENSION ESTIMATE TESTS
+// ============================================================
+
+describe('estimateSocialSecurityBenefit', () => {
+  it('גיל פרישה תקני 67 — קצבת בסיס', () => {
+    const benefit = estimateSocialSecurityBenefit({
+      retirementAge: 67,
+      yearsContributed: 30,
+      averageSalary: 15_000,
+      isCouple: false,
+    });
+    expect(benefit).toBe(3_500); // קצבת בסיס
+  });
+
+  it('לזוג — יותר מליחיד', () => {
+    const single = estimateSocialSecurityBenefit({ retirementAge: 67, yearsContributed: 30, averageSalary: 15_000, isCouple: false });
+    const couple = estimateSocialSecurityBenefit({ retirementAge: 67, yearsContributed: 30, averageSalary: 15_000, isCouple: true });
+    expect(couple).toBeGreaterThan(single);
+    expect(couple).toBe(4_900);
+  });
+
+  it('פרישה מוקדמת — קצבה קטנה יותר', () => {
+    const early = estimateSocialSecurityBenefit({ retirementAge: 62, yearsContributed: 30, averageSalary: 15_000, isCouple: false });
+    const standard = estimateSocialSecurityBenefit({ retirementAge: 67, yearsContributed: 30, averageSalary: 15_000, isCouple: false });
+    expect(early).toBeLessThan(standard);
+    // 5 שנות פרישה מוקדמת = 5*12*0.5% = 30% הפחתה
+    expect(early).toBeCloseTo(3_500 * 0.70, 0);
+  });
+
+  it('קצבה לא שלילית', () => {
+    const veryEarly = estimateSocialSecurityBenefit({ retirementAge: 50, yearsContributed: 30, averageSalary: 15_000, isCouple: false });
+    expect(veryEarly).toBeGreaterThanOrEqual(0);
+  });
+});
+
+describe('estimatePensionBenefit', () => {
+  it('40 שנה × 1.75% = 70% מהשכר', () => {
+    const result = estimatePensionBenefit({ averageSalary: 10_000, yearsOfContribution: 40 });
+    expect(result.monthlyPension).toBeCloseTo(7_000, 0);
+    expect(result.replacementRate).toBeCloseTo(70, 0);
+  });
+
+  it('30 שנה × 1.75% = 52.5% מהשכר', () => {
+    const result = estimatePensionBenefit({ averageSalary: 20_000, yearsOfContribution: 30 });
+    expect(result.monthlyPension).toBeCloseTo(10_500, 0);
+    expect(result.replacementRate).toBeCloseTo(52.5, 0);
+  });
+
+  it('מקדם מותאם אישית', () => {
+    const result = estimatePensionBenefit({ averageSalary: 10_000, yearsOfContribution: 40, pensionCoefficient: 2.0 });
+    // 10,000 * 40 * 2% = 8,000
+    expect(result.monthlyPension).toBeCloseTo(8_000, 0);
+    expect(result.replacementRate).toBeCloseTo(80, 0);
+  });
+});
+
+// ============================================================
+// PORTFOLIO LONGEVITY TESTS
+// ============================================================
+
+describe('calculatePortfolioLongevity', () => {
+  it('תיק גדול עם משיכה קטנה — מחזיק לאורך זמן', () => {
+    const result = calculatePortfolioLongevity({
+      initialBalance: 3_000_000,
+      monthlyWithdrawal: 8_000,
+      annualReturn: 5,
+      inflationRate: 3,
+      maxYears: 40,
+    });
+    expect(result.yearsItLasts).toBe(40); // אמור להחזיק את כל התקופה
+  });
+
+  it('תיק קטן עם משיכה גדולה — נגמר מהר', () => {
+    const result = calculatePortfolioLongevity({
+      initialBalance: 500_000,
+      monthlyWithdrawal: 15_000,
+      annualReturn: 3,
+      inflationRate: 3,
+    });
+    expect(result.yearsItLasts).toBeLessThan(20);
+  });
+
+  it('yearlyData מכיל נתונים', () => {
+    const result = calculatePortfolioLongevity({
+      initialBalance: 1_000_000,
+      monthlyWithdrawal: 5_000,
+      annualReturn: 5,
+      inflationRate: 3,
+    });
+    expect(result.yearlyData.length).toBeGreaterThan(0);
+    expect(result.yearlyData[0].year).toBe(1);
+    expect(result.yearlyData[0].balance).toBeGreaterThan(0);
+  });
+
+  it('ריבית 0 — הכסף נגמר לפי קצב ידוע', () => {
+    // 720,000 ÷ 5,000/ח = 12 שנים בלי ריבית ואינפלציה
+    // הפונקציה מחשבת שנה שלמה: עד שהיתרה > 0
+    const result = calculatePortfolioLongevity({
+      initialBalance: 720_000,
+      monthlyWithdrawal: 5_000,
+      annualReturn: 0,
+      inflationRate: 0,
+      maxYears: 15,
+    });
+    // לאחר 12 שנים: 720,000 - 60,000*12 = 0 (בסיום שנה 12 = אפס, אז yearsItLasts=11)
+    // לכן הפונקציה מחזירה 11 (מחשיבה רק שנים בהן יתרה > 0)
+    expect(result.yearsItLasts).toBeGreaterThanOrEqual(10);
+    expect(result.yearsItLasts).toBeLessThanOrEqual(12);
+  });
+
+  it('endBalance >= 0 תמיד', () => {
+    const result = calculatePortfolioLongevity({
+      initialBalance: 100_000,
+      monthlyWithdrawal: 10_000,
+      annualReturn: 0,
+      inflationRate: 0,
+    });
+    expect(result.endBalance).toBeGreaterThanOrEqual(0);
   });
 });
