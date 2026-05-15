@@ -35,9 +35,9 @@ const calculators = [
   },
   {
     title: 'מחשבון מקדמות מס',
-    description: 'חישוב מקדמות מס הכנסה לעצמאי',
+    description: 'מקדמות מס הכנסה + ב.ל. + מע"מ - חישוב מלא, תזרים מזומנים, תיאום אמצע שנה',
     href: '/self-employed/tax-advances',
-    available: false,
+    available: true,
   },
   {
     title: 'מחשבון תמחור שעת עבודה',
