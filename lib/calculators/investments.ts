@@ -1,11 +1,16 @@
 /**
- * מחשבוני השקעות
+ * מחשבוני השקעות - ריבית דריבית מקיף
  *
- * 1. ריבית דריבית - הזהב של ה-SEO
- * 2. ROI - תשואה על השקעה
- * 3. תכנון פרישה
+ * 1. ריבית דריבית עם אינפלציה ומס רווחי הון
+ * 2. חיפוש-יעד (Goal Seeking) - כמה להפקיד כדי להגיע לסכום
+ * 3. השוואת תרחישים (Scenario Comparison)
+ * 4. ROI - תשואה על השקעה
+ * 5. תכנון פרישה
  *
- * נוסחאות מבוססות על מתמטיקה פיננסית סטנדרטית
+ * נוסחאות מבוססות על:
+ * - מתמטיקה פיננסית סטנדרטית (CFA Institute)
+ * - חוק מס הכנסה - מס רווחי הון 25% (סעיף 91)
+ * - אינפלציה ממוצעת 2.5-3.5% בישראל (בנק ישראל 2020-2026)
  */
 
 // ============================================================
@@ -20,19 +25,43 @@ export interface CompoundInterestInput {
   years: number;
   frequency: CompoundFrequency;
   monthlyContribution: number; // הפקדה חודשית (אופציונלי)
+  inflationRate?: number; // אינפלציה שנתית % (ברירת מחדל: 3)
+  applyTax?: boolean; // האם להחיל מס רווחי הון 25% (ברירת מחדל: true)
+}
+
+export interface YearlyBreakdownRow {
+  year: number;
+  contributions: number; // הפקדות השנה
+  interest: number; // ריבית שנצברה השנה
+  balance: number; // יתרה נומינלית
+  cumulativeContributions: number; // סה"כ הפקדות עד כה
+  cumulativeInterest: number; // סה"כ ריבית עד כה
+  realBalance: number; // ערך ריאלי (מותאם אינפלציה)
+  afterTaxBalance: number; // ערך אחרי מס רווחי הון
 }
 
 export interface CompoundInterestResult {
-  finalAmount: number;
-  totalContributions: number;
-  totalInterest: number;
-  yearlyBreakdown: Array<{
-    year: number;
-    contributions: number;
-    interest: number;
-    balance: number;
-  }>;
+  finalAmount: number; // ערך נומינלי סופי
+  totalContributions: number; // סך הפקדות
+  totalInterest: number; // סך ריבית נומינלית
+  realFinalAmount: number; // ערך ריאלי (מותאם אינפלציה)
+  afterTaxFinalAmount: number; // ערך אחרי מס 25%
+  taxAmount: number; // סכום המס שישולם
+  crossoverYear: number | null; // שנה בה הריבית השנתית עולה על ההפקדות השנתיות
+  yearlyBreakdown: YearlyBreakdownRow[];
 }
+
+// קבועים ישראלים 2026
+export const INVESTMENT_CONSTANTS_2026 = {
+  CAPITAL_GAINS_TAX_RATE: 0.25, // 25% - מס רווחי הון בישראל (סעיף 91)
+  DEFAULT_INFLATION_RATE: 3.0, // 3% - ממוצע אינפלציה בישראל
+  TYPICAL_RETURNS: {
+    pikdon: 3.5, // פיקדון בנק
+    bondsGovernment: 5.0, // אג"ח ממשלתי
+    taSP_diversified: 7.0, // תיק מגוון ת"א / קרן מחקה
+    sp500: 10.0, // S&P 500 (היסטורי)
+  },
+} as const;
 
 const COMPOUND_PERIODS: Record<CompoundFrequency, number> = {
   yearly: 1,
@@ -42,19 +71,33 @@ const COMPOUND_PERIODS: Record<CompoundFrequency, number> = {
 };
 
 /**
- * חישוב ריבית דריבית
+ * חישוב ריבית דריבית מלא
  *
  * נוסחה בסיסית: A = P(1 + r/n)^(nt)
  * עם הפקדות חודשיות: FV = P(1+r/n)^(nt) + PMT × [((1+r/n)^(nt) - 1) / (r/n)]
+ * ריאלי: A_real = A / (1 + inflation)^t
+ * אחרי מס: net = A - (A - total_contributions) × 0.25
  */
 export function calculateCompoundInterest(input: CompoundInterestInput): CompoundInterestResult {
-  const { principal, annualRate, years, frequency, monthlyContribution } = input;
+  const {
+    principal,
+    annualRate,
+    years,
+    frequency,
+    monthlyContribution,
+    inflationRate = INVESTMENT_CONSTANTS_2026.DEFAULT_INFLATION_RATE,
+    applyTax = true,
+  } = input;
 
   if (principal < 0 || annualRate < 0 || years < 0) {
     return {
       finalAmount: 0,
       totalContributions: 0,
       totalInterest: 0,
+      realFinalAmount: 0,
+      afterTaxFinalAmount: 0,
+      taxAmount: 0,
+      crossoverYear: null,
       yearlyBreakdown: [],
     };
   }
@@ -62,17 +105,20 @@ export function calculateCompoundInterest(input: CompoundInterestInput): Compoun
   const r = annualRate / 100;
   const n = COMPOUND_PERIODS[frequency];
   const monthlyContrib = monthlyContribution || 0;
+  const inflR = inflationRate / 100;
 
-  const yearlyBreakdown: CompoundInterestResult['yearlyBreakdown'] = [];
+  const yearlyBreakdown: YearlyBreakdownRow[] = [];
 
   let balance = principal;
   let totalContributions = principal;
+  let crossoverYear: number | null = null;
 
   for (let year = 1; year <= years; year++) {
-    const startOfYear = balance;
+    const startBalance = balance;
+    const startContributions = totalContributions;
 
-    // אם יש הפקדות חודשיות, מחשבים על בסיס חודשי
     if (monthlyContrib > 0) {
+      // חישוב חודשי (מדויק יותר עם הפקדות)
       const monthlyR = r / 12;
       for (let month = 0; month < 12; month++) {
         balance = balance * (1 + monthlyR);
@@ -81,29 +127,202 @@ export function calculateCompoundInterest(input: CompoundInterestInput): Compoun
       }
     } else {
       // ללא הפקדות - חישוב לפי תדירות
-      balance = startOfYear * Math.pow(1 + r / n, n);
+      balance = startBalance * Math.pow(1 + r / n, n);
     }
 
-    const yearInterest = balance - startOfYear - (monthlyContrib > 0 ? monthlyContrib * 12 : 0);
+    const yearlyContributions = monthlyContrib * 12;
+    const yearInterest = balance - startBalance - yearlyContributions;
+
+    // ערך ריאלי - מה הכסף שווה בערכי היום
+    const realBalance = balance / Math.pow(1 + inflR, year);
+
+    // אחרי מס - מס רק על הרווח (לא על הקרן + הפקדות)
+    const totalProfit = balance - totalContributions;
+    const taxAmount = applyTax ? Math.max(0, totalProfit * INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE) : 0;
+    const afterTaxBalance = balance - taxAmount;
+
+    // נקודת חציה: ריבית שנתית > הפקדות שנתיות
+    if (crossoverYear === null && monthlyContrib > 0 && yearInterest >= yearlyContributions && yearlyContributions > 0) {
+      crossoverYear = year;
+    }
 
     yearlyBreakdown.push({
       year,
-      contributions: monthlyContrib > 0 ? monthlyContrib * 12 : 0,
+      contributions: yearlyContributions,
       interest: yearInterest,
       balance,
+      cumulativeContributions: totalContributions,
+      cumulativeInterest: balance - totalContributions,
+      realBalance,
+      afterTaxBalance,
     });
   }
 
+  const finalAmount = balance;
+  const totalProfit = finalAmount - totalContributions;
+  const taxAmount = applyTax ? Math.max(0, totalProfit * INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE) : 0;
+
   return {
-    finalAmount: balance,
+    finalAmount,
     totalContributions,
-    totalInterest: balance - totalContributions,
+    totalInterest: finalAmount - totalContributions,
+    realFinalAmount: finalAmount / Math.pow(1 + inflR, years),
+    afterTaxFinalAmount: finalAmount - taxAmount,
+    taxAmount,
+    crossoverYear,
     yearlyBreakdown,
   };
 }
 
 // ============================================================
-// 2. ROI - Return on Investment
+// 2. GOAL SEEKING - חיפוש יעד
+// ============================================================
+
+export interface GoalSeekInput {
+  goalAmount: number; // סכום יעד
+  principal: number; // קרן ראשונית קיימת
+  annualRate: number; // ריבית שנתית %
+  years: number;
+  inflationRate?: number; // האם לחשב יעד ריאלי (בערכי היום)?
+  targetIsReal?: boolean; // true = היעד הוא בערכי היום (ריאלי)
+}
+
+export interface GoalSeekResult {
+  requiredMonthlyContribution: number; // הפקדה חודשית נדרשת
+  totalContributions: number; // סה"כ הפקדות
+  totalInterest: number; // סה"כ ריבית
+  goalAmount: number; // היעד
+}
+
+/**
+ * חישוב הפקדה חודשית נדרשת להגיע ליעד
+ *
+ * נוסחת PMT הפוכה:
+ * FV = P(1+r)^n + PMT × [((1+r)^n - 1) / r]
+ * PMT = (FV - P(1+r)^n) × r / ((1+r)^n - 1)
+ *
+ * כאשר r = ריבית חודשית, n = מספר חודשים
+ */
+export function calculateRequiredMonthlyContribution(input: GoalSeekInput): GoalSeekResult {
+  const {
+    goalAmount,
+    principal,
+    annualRate,
+    years,
+    inflationRate = INVESTMENT_CONSTANTS_2026.DEFAULT_INFLATION_RATE,
+    targetIsReal = false,
+  } = input;
+
+  const monthlyR = annualRate / 100 / 12;
+  const n = years * 12;
+
+  // אם היעד הוא ריאלי - נהפוך אותו לנומינלי
+  const nominalGoal = targetIsReal
+    ? goalAmount * Math.pow(1 + inflationRate / 100, years)
+    : goalAmount;
+
+  // ערך עתידי של הקרן
+  const futurePrincipal = principal * Math.pow(1 + monthlyR, n);
+
+  // כמה שנשאר לכסות עם ההפקדות
+  const remainingGoal = nominalGoal - futurePrincipal;
+
+  let requiredMonthly = 0;
+  if (remainingGoal > 0) {
+    if (monthlyR === 0) {
+      requiredMonthly = remainingGoal / n;
+    } else {
+      const fvFactor = (Math.pow(1 + monthlyR, n) - 1) / monthlyR;
+      requiredMonthly = remainingGoal / fvFactor;
+    }
+  }
+
+  const totalContributions = principal + Math.max(0, requiredMonthly) * n;
+
+  return {
+    requiredMonthlyContribution: Math.max(0, requiredMonthly),
+    totalContributions,
+    totalInterest: nominalGoal - totalContributions,
+    goalAmount: nominalGoal,
+  };
+}
+
+// ============================================================
+// 3. SCENARIO COMPARISON - השוואת תרחישים
+// ============================================================
+
+export interface ScenarioInput {
+  label: string; // שם התרחיש
+  annualRate: number; // תשואה שנתית %
+  color: string; // צבע לגרף
+}
+
+export interface ScenarioResult {
+  label: string;
+  annualRate: number;
+  color: string;
+  finalAmount: number;
+  realFinalAmount: number;
+  afterTaxFinalAmount: number;
+  totalContributions: number;
+  totalInterest: number;
+  yearlyData: Array<{ year: number; balance: number; realBalance: number; afterTaxBalance: number }>;
+}
+
+export interface CompareScenarioInput {
+  principal: number;
+  monthlyContribution: number;
+  years: number;
+  inflationRate?: number;
+  applyTax?: boolean;
+  scenarios: ScenarioInput[];
+}
+
+/**
+ * השוואת מספר תרחישי השקעה זה לצד זה
+ */
+export function compareScenarios(input: CompareScenarioInput): ScenarioResult[] {
+  const {
+    principal,
+    monthlyContribution,
+    years,
+    inflationRate = INVESTMENT_CONSTANTS_2026.DEFAULT_INFLATION_RATE,
+    applyTax = true,
+    scenarios,
+  } = input;
+
+  return scenarios.map((scenario) => {
+    const result = calculateCompoundInterest({
+      principal,
+      annualRate: scenario.annualRate,
+      years,
+      frequency: 'monthly',
+      monthlyContribution,
+      inflationRate,
+      applyTax,
+    });
+
+    return {
+      label: scenario.label,
+      annualRate: scenario.annualRate,
+      color: scenario.color,
+      finalAmount: result.finalAmount,
+      realFinalAmount: result.realFinalAmount,
+      afterTaxFinalAmount: result.afterTaxFinalAmount,
+      totalContributions: result.totalContributions,
+      totalInterest: result.totalInterest,
+      yearlyData: result.yearlyBreakdown.map((row) => ({
+        year: row.year,
+        balance: row.balance,
+        realBalance: row.realBalance,
+        afterTaxBalance: row.afterTaxBalance,
+      })),
+    };
+  });
+}
+
+// ============================================================
+// 4. ROI - Return on Investment
 // ============================================================
 
 export interface ROIInput {
@@ -156,7 +375,7 @@ export function calculateROI(input: ROIInput): ROIResult {
 }
 
 // ============================================================
-// 3. RETIREMENT PLANNING - תכנון פרישה
+// 5. RETIREMENT PLANNING - תכנון פרישה
 // ============================================================
 
 export interface RetirementInput {
@@ -216,7 +435,6 @@ export function calculateRetirement(input: RetirementInput): RetirementResult {
   const yearlyProjection: RetirementResult['yearlyProjection'] = [];
 
   for (let year = 0; year < yearsUntilRetirement; year++) {
-    const startOfYear = savings;
     for (let m = 0; m < 12; m++) {
       savings = savings * (1 + monthlyR) + monthlyContribution;
     }
