@@ -12,7 +12,9 @@ export type BlogCategory =
   | 'עצמאיים'
   | 'זכויות עובדים'
   | 'נדל"ן ומשכנתאות'
-  | 'תקציב וחיסכון';
+  | 'תקציב וחיסכון'
+  | 'השקעות'
+  | 'רכב';
 
 export interface BlogPost {
   slug: string;
@@ -214,6 +216,83 @@ export const blogPosts: BlogPost[] = [
       label: 'מחשבון דמי הבראה',
     },
     related: ['severance-pay-complete-guide', 'employee-rights-israel-2026'],
+  },
+
+  // ===== מאמרים חדשים מאי 2026 =====
+  {
+    slug: 'inflation-and-investments',
+    title: 'אינפלציה והשקעות 2026 - איך לא לאבד 30% מהכסף שלך',
+    description:
+      'אינפלציה שוחקת את ערך הכסף בשקט. מדריך מעמיק על הגנת החסכונות, ריבית דריבית ריאלית, ואסטרטגיות השקעה שמנצחות את האינפלציה.',
+    category: 'השקעות',
+    readTime: '10 דקות',
+    date: '2026-05-15',
+    featured: false,
+    relatedCalculator: {
+      href: '/investments/compound-interest',
+      label: 'מחשבון ריבית דריבית',
+    },
+    related: ['study-fund-self-employed-strategy', 'pension-deduction-self-employed-2026'],
+  },
+  {
+    slug: 'mortgage-tracks-guide-2026',
+    title: 'מסלולי משכנתא 2026 - פריים, קל"צ, צמוד מדד: מה לבחור?',
+    description:
+      'מדריך מקיף לכל 5 מסלולי המשכנתא בישראל. מתי כדאי פריים? מתי קל"צ? דוגמאות מספריות, השוואות וטיפים לחיסכון עשרות אלפי שקלים.',
+    category: 'נדל"ן ומשכנתאות',
+    readTime: '15 דקות',
+    date: '2026-05-15',
+    featured: false,
+    relatedCalculator: {
+      href: '/real-estate/mortgage',
+      label: 'מחשבון משכנתא',
+    },
+    related: ['tax-changes-2026'],
+  },
+  {
+    slug: 'salary-net-2026-complete-guide',
+    title: 'המדריך המלא לשכר נטו 2026 - מדרגות מס חדשות, נטו → ברוטו',
+    description:
+      'מדרגות מס הכנסה 2026 המעודכנות, חישוב שכר נטו מברוטו ובכיוון הפוך, השפעת הפנסיה ודמי הבריאות. מדריך מלא עם דוגמאות מספריות.',
+    category: 'מיסוי אישי',
+    readTime: '12 דקות',
+    date: '2026-05-15',
+    featured: false,
+    relatedCalculator: {
+      href: '/personal-tax/salary-net-gross',
+      label: 'מחשבון שכר נטו-ברוטו',
+    },
+    related: ['tax-refund-complete-guide-2026', 'tax-changes-2026'],
+  },
+  {
+    slug: 'vacation-redemption-guide',
+    title: 'פדיון חופשה - איך לחשב כמה כסף מגיע לך',
+    description:
+      'מדריך מלא לפדיון ימי חופשה בישראל. מתי מגיע פדיון, איך מחשבים את הסכום, מה ההבדל בין פיטורים להתפטרות, ואיך לא לפספס אלפי שקלים.',
+    category: 'זכויות עובדים',
+    readTime: '8 דקות',
+    date: '2026-05-15',
+    featured: false,
+    relatedCalculator: {
+      href: '/employee-rights/annual-leave',
+      label: 'מחשבון חופשה שנתית',
+    },
+    related: ['severance-pay-complete-guide', 'recreation-pay-2026'],
+  },
+  {
+    slug: 'vehicle-tco-guide',
+    title: 'כמה רכב באמת עולה לכם? המדריך השלם לעלות בעלות אמיתית',
+    description:
+      'TCO (Total Cost of Ownership) - הדרך הנכונה לחשוב על עלות רכב. השוואה בין מזומן, הלוואה וליסינג, עם כל העלויות הנסתרות ועלות הזדמנות.',
+    category: 'רכב',
+    readTime: '12 דקות',
+    date: '2026-05-15',
+    featured: false,
+    relatedCalculator: {
+      href: '/vehicles/leasing-vs-buying',
+      label: 'מחשבון ליסינג vs קנייה',
+    },
+    related: ['mortgage-tracks-guide-2026'],
   },
 ];
 
