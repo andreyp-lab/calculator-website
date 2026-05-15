@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 mt-16">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* 1. שכירים */}
           <div>
             <h3 className="font-bold text-gray-900 mb-4">👤 שכירים</h3>
@@ -76,7 +76,39 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 3. כלים לבעלי עסקים */}
+          {/* 3. הלוואות */}
+          <div>
+            <h3 className="font-bold text-gray-900 mb-4">🏠 הלוואות</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>
+                <Link href="/loans" className="hover:text-blue-600 font-semibold">
+                  כל המחשבונים
+                </Link>
+              </li>
+              <li>
+                <Link href="/real-estate/mortgage" className="hover:text-blue-600">
+                  מחשבון משכנתא
+                </Link>
+              </li>
+              <li>
+                <Link href="/real-estate/mortgage-optimizer" className="hover:text-blue-600">
+                  🆕 אופטימייזר תמהיל
+                </Link>
+              </li>
+              <li>
+                <Link href="/savings/personal-loan" className="hover:text-blue-600">
+                  הלוואה אישית
+                </Link>
+              </li>
+              <li>
+                <Link href="/savings/loan-repayment" className="hover:text-blue-600">
+                  השוואת הלוואות
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* 4. כלים לבעלי עסקים */}
           <div>
             <h3 className="font-bold text-purple-700 mb-4">🚀 כלים לבעלי עסקים</h3>
             <ul className="space-y-2 text-sm text-gray-600">
@@ -108,7 +140,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 4. נושאים אחרים + אודות */}
+          {/* 5. נושאים אחרים + אודות */}
           <div>
             <h3 className="font-bold text-gray-900 mb-4">📂 נושאים אחרים</h3>
             <ul className="space-y-2 text-sm text-gray-600">

@@ -135,8 +135,8 @@ export default function Home() {
       {/* Categories Grid */}
       <section id="calculators" className="max-w-6xl mx-auto px-4 py-12 scroll-mt-20">
         <h2 className="text-3xl font-bold text-gray-900 mb-3">📐 כל המחשבונים</h2>
-        <p className="text-gray-600 mb-8">8 קטגוריות עם מחשבונים שמשתמשים בנתוני 2026 המעודכנים</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <p className="text-gray-600 mb-8">5 קטגוריות ראשיות עם 27+ מחשבוני 2026 מעודכנים</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
           {navigation.categories.map((category) => (
             <Link
               key={category.id}

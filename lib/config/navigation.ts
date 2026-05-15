@@ -2,6 +2,7 @@ export const navigation = {
   main: [
     { label: '👤 שכירים', href: '/salaried' },
     { label: '💼 עצמאיים', href: '/self-employed' },
+    { label: '🏠 הלוואות', href: '/loans' },
     { label: '📂 נושאים אחרים', href: '/topics' },
     { label: '🚀 כלים לבעלי עסקים', href: '/tools', highlight: true },
   ],
@@ -10,7 +11,7 @@ export const navigation = {
     { label: 'תנאי שימוש', href: '/terms' },
     { label: 'יצירת קשר', href: '/contact' },
   ],
-  // קטגוריות לדף הבית - 4 קטגוריות עיקריות
+  // קטגוריות לדף הבית - 5 קטגוריות עיקריות
   categories: [
     {
       id: 'salaried',
@@ -27,6 +28,13 @@ export const navigation = {
       icon: '💼',
     },
     {
+      id: 'loans',
+      label: 'הלוואות',
+      href: '/loans',
+      description: 'משכנתא + אופטימייזר תמהיל, הלוואה אישית, השוואת הצעות, כושר החזר',
+      icon: '🏠',
+    },
+    {
       id: 'tools',
       label: 'כלים לבעלי עסקים',
       href: '/tools',
@@ -37,7 +45,7 @@ export const navigation = {
       id: 'topics',
       label: 'נושאים אחרים',
       href: '/topics',
-      description: 'משכנתא ונדל"ן, חיסכון והשקעות, ביטוחים, רכב',
+      description: 'מס שבח, מס רכישה, חיסכון והשקעות, ביטוחים, רכב',
       icon: '📂',
     },
   ],

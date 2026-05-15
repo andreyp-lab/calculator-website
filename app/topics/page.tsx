@@ -87,16 +87,16 @@ const GROUPS: Group[] = [
 
 const POPULAR: Array<{ href: string; label: string; description: string; emoji: string }> = [
   {
-    href: '/real-estate/mortgage',
-    label: 'מחשבון משכנתא',
-    description: 'תכנון תשלומים והחזר שנתי',
-    emoji: '🏠',
-  },
-  {
     href: '/real-estate/purchase-tax',
     label: 'מחשבון מס רכישה',
     description: 'דירה ראשונה / משקיעים / חו"ל',
     emoji: '📑',
+  },
+  {
+    href: '/real-estate/capital-gains-tax',
+    label: 'מחשבון מס שבח',
+    description: 'מכירת דירה - חישוב מס',
+    emoji: '💰',
   },
   {
     href: '/savings/family-budget',
@@ -105,10 +105,10 @@ const POPULAR: Array<{ href: string; label: string; description: string; emoji: 
     emoji: '👪',
   },
   {
-    href: '/savings/loan-repayment',
-    label: 'מחשבון החזרי הלוואה',
-    description: 'תכנון תשלומים ופירעון מוקדם',
-    emoji: '🏦',
+    href: '/investments/compound-interest',
+    label: 'ריבית דריבית',
+    description: 'תכנון השקעות + אינפלציה',
+    emoji: '📈',
   },
   {
     href: '/vehicles/leasing-vs-buying',

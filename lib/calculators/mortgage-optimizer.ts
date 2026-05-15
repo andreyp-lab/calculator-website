@@ -1,0 +1,1069 @@
+/**
+ * אופטימייזר תמהיל משכנתא - Solver Style Optimization
+ *
+ * מוצא את החלוקה האופטימלית בין מסלולי משכנתא למזעור:
+ * 1. עלות כוללת (סה"כ ריבית)
+ * 2. תשלום חודשי
+ * 3. סיכון (שילוב עלות + שונות בתרחישים)
+ * 4. Pareto frontier (מאוזן)
+ *
+ * אלגוריתם: Grid Search עם צמצום אדפטיבי
+ * - 3 מסלולים: ~10K iterations (צעד 1%)
+ * - 4 מסלולים: ~15K iterations (צעד 2% + צמצום ל-1%)
+ * - 5 מסלולים: ~10K iterations (צעד 5% + צמצום ל-1%)
+ *
+ * מקורות:
+ * - בנק ישראל: הוראת ניהול בנקאי תקין 329 (חלוקת מסלולים)
+ * - נתוני ריבית: אפריל 2026
+ */
+
+// ============================================================
+// קבועים
+// ============================================================
+
+export const BANK_OF_ISRAEL_PRIME_2026 = 5.5;
+export const BOI_BASE_RATE_2026 = 4.0;
+export const AVG_INFLATION_ISRAEL = 2.5;
+export const MIN_FIXED_PERCENT_BOI = 0.33; // לפחות 33% קבוע (בנק ישראל)
+export const MAX_VARIABLE_PERCENT_BOI = 0.67;
+
+// ============================================================
+// טיפוסים
+// ============================================================
+
+export type OptimizerTrackType =
+  | 'prime'
+  | 'fixed_unlinked'
+  | 'fixed_linked'
+  | 'variable_5y'
+  | 'variable_unlinked';
+
+export type OptimizationObjective =
+  | 'minimize_total_cost'
+  | 'minimize_monthly_payment'
+  | 'minimize_risk'
+  | 'balanced';
+
+export interface OptimizerTrack {
+  id: string;
+  name: string;
+  type: OptimizerTrackType;
+  rate: number; // ריבית שנתית (%)
+  termYears: number;
+  isLinked?: boolean; // הצמדה למדד
+  rateVolatility?: number; // סטיית תקן של שינויי ריבית (%)
+  inflationExposure?: number; // 0-1, עד כמה נחשף לאינפלציה
+}
+
+export interface OptimizerConstraints {
+  // רגולציה בנק ישראל (חובה)
+  minFixedPercent: number; // ברירת מחדל: 0.33
+  maxVariablePercent: number; // ברירת מחדל: 0.67
+
+  // אילוצי משתמש (אופציונלי)
+  maxPerTrackPercent?: number; // מקסימום % למסלול בודד (ברירת מחדל: 1.0)
+  maxIndexedPercent?: number; // מקסימום % צמוד מדד (ברירת מחדל: 1.0)
+  minPerTrackPercent?: number; // מינימום % למסלול (אם נבחר, ברירת מחדל: 0)
+
+  // תרחישים לחישוב סיכון
+  inflationScenarios?: number[]; // % (ברירת מחדל: [1, 2.5, 4])
+  primeShockScenarios?: number[]; // שינוי % (ברירת מחדל: [-2, 0, +2])
+}
+
+export interface OptimizerInput {
+  totalAmount: number; // סה"כ משכנתא (₪)
+  tracks: OptimizerTrack[];
+  objective: OptimizationObjective;
+  constraints: OptimizerConstraints;
+  riskAversion?: number; // 0-1, ברירת מחדל: 0.5 (עבור 'balanced')
+  // הצעת הבנק (לשוואה)
+  bankProposalPercents?: number[]; // % לפי סדר המסלולים
+}
+
+export interface TrackAllocation {
+  trackId: string;
+  trackName: string;
+  amount: number;
+  percent: number;
+  monthlyPayment: number;
+  totalInterest: number;
+  totalPayments: number;
+}
+
+export interface AllocationResult {
+  allocation: TrackAllocation[];
+  totalCost: number; // סה"כ ריבית
+  totalPayments: number; // סה"כ תשלומים
+  monthlyPayment: number; // תשלום חודשי ראשון
+  weightedAvgRate: number; // ריבית ממוצעת משוקללת
+  riskScore: number; // 0-100 (גבוה = מסוכן יותר)
+  fixedPercent: number; // % מסלולים קבועים
+  indexedPercent: number; // % צמוד מדד
+  isRegulationCompliant: boolean; // עמידה בדרישות בנק ישראל
+
+  // ביצועים בתרחישים
+  scenarios: {
+    name: string;
+    totalCost: number;
+    monthlyPaymentYear1: number;
+    deltaFromBase: number; // ₪ שינוי מתרחיש הבסיס
+  }[];
+
+  // ציון האופטימיזציה
+  objectiveScore: number;
+}
+
+export interface OptimizerResult {
+  optimal: AllocationResult;
+  alternatives: AllocationResult[]; // 4 חלופות טובות
+  bankProposal?: AllocationResult; // הצעת הבנק (אם סופקה)
+  savingsVsBank?: number; // חיסכון vs. הצעת הבנק
+  savingsVsDefault?: number; // חיסכון vs. תמהיל 1/3+1/3+1/3
+  paretoFrontier?: AllocationResult[]; // קיצה של פארטו (עבור 'balanced')
+  defaultMixResult?: AllocationResult; // תמהיל 1/3+1/3+1/3 לשוואה
+  recommendation: string; // המלצה בעברית
+  optimizationStats: {
+    iterationsChecked: number;
+    timeMs: number;
+    feasibleSolutions: number;
+  };
+}
+
+// ============================================================
+// מסלולי ברירת מחדל 2026
+// ============================================================
+
+export const DEFAULT_TRACKS_2026: OptimizerTrack[] = [
+  {
+    id: 'prime',
+    name: 'פריים',
+    type: 'prime',
+    rate: BANK_OF_ISRAEL_PRIME_2026 - 0.5, // 5.0%
+    termYears: 25,
+    isLinked: false,
+    rateVolatility: 2.0, // ±2% שינוי אפשרי
+    inflationExposure: 0,
+  },
+  {
+    id: 'kalatz',
+    name: 'קל"צ',
+    type: 'fixed_unlinked',
+    rate: 4.2,
+    termYears: 25,
+    isLinked: false,
+    rateVolatility: 0, // קבוע
+    inflationExposure: 0,
+  },
+  {
+    id: 'indexed',
+    name: 'צמוד מדד',
+    type: 'fixed_linked',
+    rate: 3.0,
+    termYears: 25,
+    isLinked: true,
+    rateVolatility: 0,
+    inflationExposure: 1.0, // חשיפה מלאה לאינפלציה
+  },
+];
+
+export const PRESET_TRACKS_2026 = {
+  standard: DEFAULT_TRACKS_2026,
+  conservative: [
+    {
+      id: 'kalatz_long',
+      name: 'קל"צ ארוך',
+      type: 'fixed_unlinked' as OptimizerTrackType,
+      rate: 4.4,
+      termYears: 30,
+      isLinked: false,
+      rateVolatility: 0,
+      inflationExposure: 0,
+    },
+    {
+      id: 'kalatz_short',
+      name: 'קל"צ קצר',
+      type: 'fixed_unlinked' as OptimizerTrackType,
+      rate: 3.9,
+      termYears: 15,
+      isLinked: false,
+      rateVolatility: 0,
+      inflationExposure: 0,
+    },
+    {
+      id: 'prime_min',
+      name: 'פריים (מינימום)',
+      type: 'prime' as OptimizerTrackType,
+      rate: BANK_OF_ISRAEL_PRIME_2026 - 0.5,
+      termYears: 25,
+      isLinked: false,
+      rateVolatility: 2.0,
+      inflationExposure: 0,
+    },
+  ],
+  aggressive: [
+    {
+      id: 'prime_main',
+      name: 'פריים ראשי',
+      type: 'prime' as OptimizerTrackType,
+      rate: BANK_OF_ISRAEL_PRIME_2026 - 0.7,
+      termYears: 20,
+      isLinked: false,
+      rateVolatility: 2.5,
+      inflationExposure: 0,
+    },
+    {
+      id: 'variable5y',
+      name: 'משתנה כל 5 שנים',
+      type: 'variable_5y' as OptimizerTrackType,
+      rate: 3.8,
+      termYears: 25,
+      isLinked: false,
+      rateVolatility: 1.5,
+      inflationExposure: 0,
+    },
+    {
+      id: 'kalatz_min',
+      name: 'קל"צ (מינימום)',
+      type: 'fixed_unlinked' as OptimizerTrackType,
+      rate: 4.0,
+      termYears: 25,
+      isLinked: false,
+      rateVolatility: 0,
+      inflationExposure: 0,
+    },
+  ],
+} as const;
+
+// ============================================================
+// חישובי עזר
+// ============================================================
+
+/**
+ * חישוב תשלום חודשי (שפיצר)
+ * M = P × [r(1+r)^n] / [(1+r)^n - 1]
+ */
+export function calculateMonthlyPayment(
+  amount: number,
+  annualRate: number,
+  termYears: number,
+): number {
+  if (amount <= 0 || termYears <= 0) return 0;
+  const r = annualRate / 100 / 12;
+  const n = termYears * 12;
+  if (r === 0) return amount / n;
+  return (amount * (r * Math.pow(1 + r, n))) / (Math.pow(1 + r, n) - 1);
+}
+
+/**
+ * חישוב סה"כ ריבית לאורך חיי המסלול
+ */
+export function calculateTotalInterest(
+  amount: number,
+  annualRate: number,
+  termYears: number,
+): number {
+  if (amount <= 0) return 0;
+  const monthly = calculateMonthlyPayment(amount, annualRate, termYears);
+  const totalPayments = monthly * termYears * 12;
+  return totalPayments - amount;
+}
+
+/**
+ * בדיקת ציות לאילוצים
+ */
+export function checkConstraints(
+  percents: number[],
+  tracks: OptimizerTrack[],
+  constraints: OptimizerConstraints,
+): boolean {
+  if (percents.length !== tracks.length) return false;
+  // בדיקת ערכים שליליים
+  if (percents.some((p) => p < -0.001)) return false;
+  const total = percents.reduce((s, p) => s + p, 0);
+  if (Math.abs(total - 1.0) > 0.001) return false;
+
+  // אחוז מינימלי קבוע (בנק ישראל)
+  const fixedTypes: OptimizerTrackType[] = ['fixed_unlinked', 'fixed_linked'];
+  const fixedPercent = percents
+    .filter((_, i) => fixedTypes.includes(tracks[i].type))
+    .reduce((s, p) => s + p, 0);
+
+  if (fixedPercent < constraints.minFixedPercent - 0.001) return false;
+
+  // אחוז מקסימלי משתנה
+  const variableTypes: OptimizerTrackType[] = ['prime', 'variable_5y', 'variable_unlinked'];
+  const variablePercent = percents
+    .filter((_, i) => variableTypes.includes(tracks[i].type))
+    .reduce((s, p) => s + p, 0);
+
+  if (variablePercent > constraints.maxVariablePercent + 0.001) return false;
+
+  // אחוז מקסימלי למסלול בודד
+  const maxPerTrack = constraints.maxPerTrackPercent ?? 1.0;
+  if (percents.some((p) => p > maxPerTrack + 0.001)) return false;
+
+  // אחוז מקסימלי צמוד מדד
+  if (constraints.maxIndexedPercent !== undefined) {
+    const indexedPercent = percents
+      .filter((_, i) => tracks[i].isLinked)
+      .reduce((s, p) => s + p, 0);
+    if (indexedPercent > constraints.maxIndexedPercent + 0.001) return false;
+  }
+
+  // אחוז מינימלי למסלול
+  const minPerTrack = constraints.minPerTrackPercent ?? 0;
+  if (percents.some((p) => p > 0.001 && p < minPerTrack - 0.001)) return false;
+
+  return true;
+}
+
+/**
+ * חישוב ציון סיכון (0-100)
+ * מבוסס על שונות תשלומים בתרחישים שונים
+ */
+export function computeRiskScore(
+  allocation: TrackAllocation[],
+  tracks: OptimizerTrack[],
+  totalAmount: number,
+  inflationScenarios: number[],
+  primeShockScenarios: number[],
+): number {
+  if (totalAmount <= 0) return 0;
+
+  const baseMonthly = allocation.reduce((s, a) => s + a.monthlyPayment, 0);
+  let maxDeviation = 0;
+  let totalVariance = 0;
+
+  for (const inflation of inflationScenarios) {
+    for (const primeShock of primeShockScenarios) {
+      let scenarioMonthly = 0;
+
+      for (let i = 0; i < tracks.length; i++) {
+        const track = tracks[i];
+        const alloc = allocation[i];
+        if (!alloc || alloc.amount <= 0) continue;
+
+        let effectiveRate = track.rate;
+
+        // שוק ריביות: פריים מגיב לשוק
+        if (track.type === 'prime' || track.type === 'variable_unlinked') {
+          effectiveRate += primeShock;
+        } else if (track.type === 'variable_5y') {
+          // משתנה כל 5 שנים: חשוף לחצי מהשוק
+          effectiveRate += primeShock * 0.5;
+        }
+
+        // הצמדה: מסלולים צמודים מגיבים לאינפלציה
+        // הריבית נומינלית עולה כדי לשמר ריאלי
+        if (track.isLinked && track.inflationExposure) {
+          effectiveRate += inflation * track.inflationExposure;
+        }
+
+        effectiveRate = Math.max(0.5, effectiveRate); // ריבית מינימלית
+        scenarioMonthly += calculateMonthlyPayment(alloc.amount, effectiveRate, track.termYears);
+      }
+
+      const deviation = Math.abs(scenarioMonthly - baseMonthly);
+      maxDeviation = Math.max(maxDeviation, deviation);
+      totalVariance += deviation * deviation;
+    }
+  }
+
+  // נרמול: 0-100 על בסיס % שינוי מהתשלום הבסיסי
+  // 0% שינוי = 0 סיכון, 50%+ שינוי = 100 סיכון
+  const avgVariance = Math.sqrt(totalVariance / (inflationScenarios.length * primeShockScenarios.length));
+  const relativeVariance = baseMonthly > 0 ? avgVariance / baseMonthly : 0;
+  return Math.min(100, Math.round(relativeVariance * 200));
+}
+
+/**
+ * חישוב AllocationResult מלא מאחוזים
+ */
+export function evaluateAllocation(
+  percents: number[],
+  input: OptimizerInput,
+): AllocationResult {
+  const { totalAmount, tracks } = input;
+  const inflationScenarios = input.constraints.inflationScenarios ?? [1.0, 2.5, 4.0];
+  const primeShockScenarios = input.constraints.primeShockScenarios ?? [-2.0, 0, 2.0];
+
+  const allocation: TrackAllocation[] = tracks.map((track, i) => {
+    const percent = percents[i] ?? 0;
+    const amount = percent * totalAmount;
+    const monthlyPayment = calculateMonthlyPayment(amount, track.rate, track.termYears);
+    const totalInterest = calculateTotalInterest(amount, track.rate, track.termYears);
+    const totalPay = monthlyPayment * track.termYears * 12;
+
+    return {
+      trackId: track.id,
+      trackName: track.name,
+      amount,
+      percent,
+      monthlyPayment,
+      totalInterest,
+      totalPayments: totalPay,
+    };
+  });
+
+  const totalCost = allocation.reduce((s, a) => s + a.totalInterest, 0);
+  const totalPayments = allocation.reduce((s, a) => s + a.totalPayments, 0);
+  const monthlyPayment = allocation.reduce((s, a) => s + a.monthlyPayment, 0);
+
+  // ריבית ממוצעת משוקללת
+  const weightedAvgRate =
+    totalAmount > 0
+      ? tracks.reduce((s, t, i) => s + t.rate * (percents[i] ?? 0), 0)
+      : 0;
+
+  // בדיקת ציות
+  const fixedTypes: OptimizerTrackType[] = ['fixed_unlinked', 'fixed_linked'];
+  const fixedPercent = percents
+    .filter((_, i) => fixedTypes.includes(tracks[i].type))
+    .reduce((s, p) => s + p, 0);
+
+  const indexedPercent = percents
+    .filter((_, i) => tracks[i].isLinked)
+    .reduce((s, p) => s + p, 0);
+
+  const isRegulationCompliant = fixedPercent >= MIN_FIXED_PERCENT_BOI - 0.001;
+
+  // ציון סיכון
+  const riskScore = computeRiskScore(
+    allocation,
+    tracks,
+    totalAmount,
+    inflationScenarios,
+    primeShockScenarios,
+  );
+
+  // תרחישים
+  const baseMonthly = monthlyPayment;
+  const scenarios: AllocationResult['scenarios'] = [];
+
+  for (const inflation of inflationScenarios) {
+    for (const primeShock of primeShockScenarios) {
+      let scenarioMonthly = 0;
+      let scenarioCost = 0;
+
+      for (let i = 0; i < tracks.length; i++) {
+        const track = tracks[i];
+        const alloc = allocation[i];
+        if (!alloc || alloc.amount <= 0) continue;
+
+        let effectiveRate = track.rate;
+        if (track.type === 'prime' || track.type === 'variable_unlinked') {
+          effectiveRate += primeShock;
+        } else if (track.type === 'variable_5y') {
+          effectiveRate += primeShock * 0.5;
+        }
+        if (track.isLinked && track.inflationExposure) {
+          effectiveRate += inflation * (track.inflationExposure ?? 0);
+        }
+        effectiveRate = Math.max(0.5, effectiveRate);
+
+        const sMonthly = calculateMonthlyPayment(alloc.amount, effectiveRate, track.termYears);
+        scenarioMonthly += sMonthly;
+        scenarioCost += sMonthly * track.termYears * 12 - alloc.amount;
+      }
+
+      const primeLabel = primeShock === 0 ? '' : primeShock > 0 ? ` + פריים +${primeShock}%` : ` + פריים ${primeShock}%`;
+      const name = `אינפלציה ${inflation}%${primeLabel}`;
+
+      scenarios.push({
+        name,
+        totalCost: scenarioCost,
+        monthlyPaymentYear1: scenarioMonthly,
+        deltaFromBase: scenarioMonthly - baseMonthly,
+      });
+    }
+  }
+
+  // ציון האופטימיזציה (נמוך יותר = טוב יותר)
+  let objectiveScore: number;
+  const riskAversion = input.riskAversion ?? 0.5;
+  switch (input.objective) {
+    case 'minimize_total_cost':
+      objectiveScore = totalCost;
+      break;
+    case 'minimize_monthly_payment':
+      objectiveScore = monthlyPayment;
+      break;
+    case 'minimize_risk':
+      objectiveScore = riskScore * totalAmount * 0.01 + totalCost * 0.1;
+      break;
+    case 'balanced':
+      // שילוב עלות + סיכון לפי risk aversion
+      objectiveScore =
+        totalCost * (1 - riskAversion) + riskScore * totalAmount * 0.01 * riskAversion;
+      break;
+  }
+
+  return {
+    allocation,
+    totalCost,
+    totalPayments,
+    monthlyPayment,
+    weightedAvgRate,
+    riskScore,
+    fixedPercent,
+    indexedPercent,
+    isRegulationCompliant,
+    scenarios,
+    objectiveScore,
+  };
+}
+
+// ============================================================
+// אלגוריתם Grid Search אדפטיבי
+// ============================================================
+
+/**
+ * מחולל כל הצירופים של percents עבור T מסלולים
+ * עם צעד נתון
+ */
+function* generateCombinations(
+  numTracks: number,
+  step: number,
+): Generator<number[]> {
+  const steps = Math.round(1 / step);
+
+  if (numTracks === 1) {
+    yield [1.0];
+    return;
+  }
+
+  if (numTracks === 2) {
+    for (let i = 0; i <= steps; i++) {
+      const p1 = i * step;
+      const p2 = 1 - p1;
+      if (p2 >= -0.001) yield [p1, Math.max(0, p2)];
+    }
+    return;
+  }
+
+  if (numTracks === 3) {
+    for (let i = 0; i <= steps; i++) {
+      const p1 = i * step;
+      for (let j = 0; j <= steps - i; j++) {
+        const p2 = j * step;
+        const p3 = 1 - p1 - p2;
+        if (p3 >= -0.001) yield [p1, p2, Math.max(0, p3)];
+      }
+    }
+    return;
+  }
+
+  if (numTracks === 4) {
+    for (let i = 0; i <= steps; i++) {
+      const p1 = i * step;
+      for (let j = 0; j <= steps - i; j++) {
+        const p2 = j * step;
+        for (let k = 0; k <= steps - i - j; k++) {
+          const p3 = k * step;
+          const p4 = 1 - p1 - p2 - p3;
+          if (p4 >= -0.001) yield [p1, p2, p3, Math.max(0, p4)];
+        }
+      }
+    }
+    return;
+  }
+
+  // 5 מסלולים
+  for (let i = 0; i <= steps; i++) {
+    const p1 = i * step;
+    for (let j = 0; j <= steps - i; j++) {
+      const p2 = j * step;
+      for (let k = 0; k <= steps - i - j; k++) {
+        const p3 = k * step;
+        for (let l = 0; l <= steps - i - j - k; l++) {
+          const p4 = l * step;
+          const p5 = 1 - p1 - p2 - p3 - p4;
+          if (p5 >= -0.001) yield [p1, p2, p3, p4, Math.max(0, p5)];
+        }
+      }
+    }
+  }
+}
+
+/**
+ * חיפוש Grid ראשוני עם צעד גס
+ * מחזיר topN אחוזות הטובות ביותר
+ */
+function gridSearchCoarse(
+  input: OptimizerInput,
+  step: number,
+  topN: number,
+): { percents: number[]; score: number }[] {
+  const { tracks, constraints } = input;
+  const candidates: { percents: number[]; score: number }[] = [];
+
+  for (const percents of generateCombinations(tracks.length, step)) {
+    if (!checkConstraints(percents, tracks, constraints)) continue;
+
+    const result = evaluateAllocation(percents, input);
+    candidates.push({ percents: [...percents], score: result.objectiveScore });
+  }
+
+  // מיין לפי ציון (נמוך = טוב) ואחזר topN
+  candidates.sort((a, b) => a.score - b.score);
+  return candidates.slice(0, topN);
+}
+
+/**
+ * צמצום סביב נקודה: חיפוש 1% בתוך ±5% מכל ערך
+ */
+function gridSearchRefine(
+  input: OptimizerInput,
+  coarsePercents: number[],
+  fineStep: number,
+): { percents: number[]; score: number } | null {
+  const { tracks, constraints } = input;
+  const window = 0.10; // חלון חיפוש ±10%
+
+  let bestScore = Infinity;
+  let bestPercents: number[] | null = null;
+
+  // יצירת טווח לכל מסלול
+  const ranges = coarsePercents.map((p) => ({
+    min: Math.max(0, p - window),
+    max: Math.min(1, p + window),
+  }));
+
+  const steps = Math.round(window * 2 / fineStep) + 1;
+
+  // 3 מסלולים: חיפוש מלא בחלון
+  if (tracks.length <= 3) {
+    const r0 = ranges[0];
+    for (let i = 0; i <= steps; i++) {
+      const p1 = Math.round((r0.min + i * fineStep) * 100) / 100;
+      if (p1 > r0.max + 0.001) break;
+      const r1 = ranges[1];
+      const maxP2 = Math.min(r1.max, 1 - p1);
+      for (let j = 0; j <= steps; j++) {
+        const p2 = Math.round((r1.min + j * fineStep) * 100) / 100;
+        if (p2 > maxP2 + 0.001) break;
+        const p3 = 1 - p1 - p2;
+        if (p3 < -0.001 || p3 > 1 + 0.001) continue;
+
+        const percents = [p1, p2, Math.max(0, p3)];
+        if (!checkConstraints(percents, tracks, constraints)) continue;
+        const result = evaluateAllocation(percents, input);
+        if (result.objectiveScore < bestScore) {
+          bestScore = result.objectiveScore;
+          bestPercents = percents;
+        }
+      }
+    }
+  } else {
+    // 4+ מסלולים: שימוש ב-generateCombinations עם fineStep
+    for (const percents of generateCombinations(tracks.length, fineStep)) {
+      // בדוק שהאחוזות בתוך החלון
+      const inWindow = percents.every(
+        (p, i) => p >= ranges[i].min - 0.001 && p <= ranges[i].max + 0.001,
+      );
+      if (!inWindow) continue;
+      if (!checkConstraints(percents, tracks, constraints)) continue;
+      const result = evaluateAllocation(percents, input);
+      if (result.objectiveScore < bestScore) {
+        bestScore = result.objectiveScore;
+        bestPercents = [...percents];
+      }
+    }
+  }
+
+  return bestPercents ? { percents: bestPercents, score: bestScore } : null;
+}
+
+// ============================================================
+// פונקציה ראשית: אופטימיזציה
+// ============================================================
+
+export function optimizeMortgage(input: OptimizerInput): OptimizerResult {
+  const startTime = Date.now();
+  const { tracks, totalAmount } = input;
+
+  if (!tracks || tracks.length === 0 || totalAmount <= 0) {
+    return createEmptyResult(input);
+  }
+
+  const numTracks = tracks.length;
+
+  // שלב 1: חיפוש גס
+  let coarseStep: number;
+  let topN: number;
+
+  if (numTracks <= 3) {
+    coarseStep = 0.01; // 1% - מדויק
+    topN = 20;
+  } else if (numTracks === 4) {
+    coarseStep = 0.02; // 2%
+    topN = 15;
+  } else {
+    coarseStep = 0.05; // 5%
+    topN = 10;
+  }
+
+  const coarseCandidates = gridSearchCoarse(input, coarseStep, topN);
+  let iterationsChecked = 0;
+
+  // ספירת iterations
+  const stepsCount = Math.round(1 / coarseStep);
+  if (numTracks === 3) iterationsChecked = (stepsCount + 1) * (stepsCount + 2) / 2;
+  else if (numTracks === 4) iterationsChecked = Math.pow(stepsCount + 1, 3) / 6;
+  else if (numTracks === 5) iterationsChecked = Math.pow(stepsCount + 1, 4) / 24;
+  else iterationsChecked = stepsCount + 1;
+
+  // שלב 2: צמצום אדפטיבי (רק אם הצעד הגס לא היה 1%)
+  let allCandidates = coarseCandidates;
+
+  if (coarseStep > 0.01 && coarseCandidates.length > 0) {
+    const refinedCandidates: { percents: number[]; score: number }[] = [];
+    for (const coarse of coarseCandidates.slice(0, 5)) {
+      const refined = gridSearchRefine(input, coarse.percents, 0.01);
+      if (refined) refinedCandidates.push(refined);
+    }
+    allCandidates = [...coarseCandidates, ...refinedCandidates];
+    allCandidates.sort((a, b) => a.score - b.score);
+    iterationsChecked += refinedCandidates.length * 400;
+  }
+
+  const feasibleSolutions = coarseCandidates.length;
+
+  if (allCandidates.length === 0) {
+    // אין פתרון פיזיבלי — השתמש בברירת מחדל
+    return createFallbackResult(input, startTime, iterationsChecked);
+  }
+
+  // שלב 3: חישוב תוצאות מלאות
+  const optimalPercents = allCandidates[0].percents;
+  const optimal = evaluateAllocation(optimalPercents, input);
+
+  // 4 חלופות - אחוזות שונות מבין המובילות
+  const alternativePercents = selectDiverseAlternatives(allCandidates.slice(1), 4, tracks.length);
+  const alternatives = alternativePercents.map((a) => evaluateAllocation(a.percents, input));
+
+  // Pareto Frontier (עבור 'balanced')
+  let paretoFrontier: AllocationResult[] | undefined;
+  if (input.objective === 'balanced' && allCandidates.length >= 5) {
+    paretoFrontier = buildParetoFrontier(allCandidates.slice(0, 20), input);
+  }
+
+  // הצעת הבנק (אם סופקה)
+  let bankProposal: AllocationResult | undefined;
+  let savingsVsBank: number | undefined;
+  if (input.bankProposalPercents && input.bankProposalPercents.length === tracks.length) {
+    const bankPercentsNorm = normalizePercents(input.bankProposalPercents);
+    if (checkConstraints(bankPercentsNorm, tracks, input.constraints)) {
+      bankProposal = evaluateAllocation(bankPercentsNorm, input);
+      savingsVsBank = bankProposal.totalCost - optimal.totalCost;
+    }
+  }
+
+  // תמהיל 1/3+1/3+1/3 לשוואה
+  let defaultMixResult: AllocationResult | undefined;
+  let savingsVsDefault: number | undefined;
+  if (tracks.length >= 3) {
+    const defaultPercents = tracks.map((_, i) => (i < tracks.length ? 1 / tracks.length : 0));
+    if (checkConstraints(defaultPercents, tracks, input.constraints)) {
+      defaultMixResult = evaluateAllocation(defaultPercents, input);
+      savingsVsDefault = defaultMixResult.totalCost - optimal.totalCost;
+    }
+  }
+
+  // המלצה בעברית
+  const recommendation = buildRecommendation(optimal, input, savingsVsDefault);
+
+  const timeMs = Date.now() - startTime;
+
+  return {
+    optimal,
+    alternatives,
+    bankProposal,
+    savingsVsBank,
+    savingsVsDefault,
+    defaultMixResult,
+    paretoFrontier,
+    recommendation,
+    optimizationStats: {
+      iterationsChecked,
+      timeMs,
+      feasibleSolutions,
+    },
+  };
+}
+
+// ============================================================
+// עזרים פנימיים
+// ============================================================
+
+function normalizePercents(percents: number[]): number[] {
+  const total = percents.reduce((s, p) => s + p, 0);
+  if (total <= 0) return percents;
+  return percents.map((p) => p / total);
+}
+
+/**
+ * בחירת חלופות מגוונות (מרוחקות אחת מהשנייה)
+ */
+function selectDiverseAlternatives(
+  candidates: { percents: number[]; score: number }[],
+  n: number,
+  numTracks: number,
+): { percents: number[]; score: number }[] {
+  if (candidates.length <= n) return candidates;
+
+  const selected: { percents: number[]; score: number }[] = [];
+  const remaining = [...candidates];
+
+  // בחר את הטוב ביותר
+  selected.push(remaining.shift()!);
+
+  while (selected.length < n && remaining.length > 0) {
+    // מצא את המרוחק ביותר מהנבחרים
+    let maxMinDist = -1;
+    let maxIdx = 0;
+
+    for (let i = 0; i < remaining.length; i++) {
+      let minDist = Infinity;
+      for (const sel of selected) {
+        let dist = 0;
+        for (let j = 0; j < numTracks; j++) {
+          dist += Math.pow((remaining[i].percents[j] ?? 0) - (sel.percents[j] ?? 0), 2);
+        }
+        minDist = Math.min(minDist, dist);
+      }
+      if (minDist > maxMinDist) {
+        maxMinDist = minDist;
+        maxIdx = i;
+      }
+    }
+
+    selected.push(remaining[maxIdx]);
+    remaining.splice(maxIdx, 1);
+  }
+
+  return selected;
+}
+
+/**
+ * בניית קיצה Pareto: עלות vs. סיכון
+ */
+function buildParetoFrontier(
+  candidates: { percents: number[]; score: number }[],
+  input: OptimizerInput,
+): AllocationResult[] {
+  const results = candidates.map((c) => evaluateAllocation(c.percents, input));
+
+  // מיין לפי עלות
+  results.sort((a, b) => a.totalCost - b.totalCost);
+
+  // פארטו: רק פתרונות שאינם "dominated" (עלות נמוכה + סיכון נמוך)
+  const pareto: AllocationResult[] = [];
+  let minRisk = Infinity;
+
+  for (const r of results) {
+    if (r.riskScore <= minRisk) {
+      pareto.push(r);
+      minRisk = r.riskScore;
+    }
+  }
+
+  // החזר עד 5 נקודות מגוונות
+  return pareto.slice(0, 5);
+}
+
+/**
+ * בניית המלצה בעברית
+ */
+function buildRecommendation(
+  optimal: AllocationResult,
+  input: OptimizerInput,
+  savingsVsDefault?: number,
+): string {
+  const { tracks, objective, totalAmount } = input;
+
+  // מצא את המסלול הדומיננטי
+  const dominantAlloc = [...optimal.allocation].sort((a, b) => b.percent - a.percent)[0];
+  const dominantTrack = tracks.find((t) => t.id === dominantAlloc?.trackId);
+
+  const objectiveLabels: Record<OptimizationObjective, string> = {
+    minimize_total_cost: 'מזעור עלות כוללת',
+    minimize_monthly_payment: 'מזעור תשלום חודשי',
+    minimize_risk: 'מזעור סיכון',
+    balanced: 'איזון עלות-סיכון',
+  };
+
+  let rec = `לפי מטרת ${objectiveLabels[objective]}, `;
+
+  if (dominantTrack) {
+    const pct = Math.round((dominantAlloc.percent ?? 0) * 100);
+    rec += `התמהיל האופטימלי כולל ${pct}% ב${dominantTrack.name}. `;
+  }
+
+  if (savingsVsDefault && savingsVsDefault > 0) {
+    const savings = Math.round(savingsVsDefault).toLocaleString('he-IL');
+    rec += `תמהיל זה חוסך ₪${savings} לעומת חלוקה שווה (1/3+1/3+1/3). `;
+  }
+
+  if (optimal.riskScore > 60) {
+    rec += 'שים לב: הסיכון גבוה יחסית — וודא שיש לך רזרבה לעלייה בתשלומים. ';
+  } else if (optimal.riskScore < 30) {
+    rec += 'התמהיל שמרני עם חשיפה מינימלית לשינויי ריבית ואינפלציה. ';
+  }
+
+  if (!optimal.isRegulationCompliant) {
+    rec += '⚠️ שים לב: התמהיל אינו עומד בדרישות בנק ישראל (33% קבוע). ';
+  }
+
+  const avgRate = optimal.weightedAvgRate.toFixed(2);
+  rec += `ריבית ממוצעת משוקללת: ${avgRate}%.`;
+
+  return rec;
+}
+
+/**
+ * תוצאה ריקה כשאין קלט
+ */
+function createEmptyResult(input: OptimizerInput): OptimizerResult {
+  const emptyAlloc: AllocationResult = {
+    allocation: [],
+    totalCost: 0,
+    totalPayments: 0,
+    monthlyPayment: 0,
+    weightedAvgRate: 0,
+    riskScore: 0,
+    fixedPercent: 0,
+    indexedPercent: 0,
+    isRegulationCompliant: false,
+    scenarios: [],
+    objectiveScore: 0,
+  };
+  return {
+    optimal: emptyAlloc,
+    alternatives: [],
+    recommendation: 'אנא הזן נתוני משכנתא לאופטימיזציה.',
+    optimizationStats: { iterationsChecked: 0, timeMs: 0, feasibleSolutions: 0 },
+  };
+}
+
+/**
+ * תוצאה fallback כשאין פתרון פיזיבלי
+ */
+function createFallbackResult(
+  input: OptimizerInput,
+  startTime: number,
+  iterations: number,
+): OptimizerResult {
+  // נסה חלוקה שווה
+  const { tracks, constraints } = input;
+  const equalPercents = tracks.map(() => 1 / tracks.length);
+
+  // אם גם שווה לא עובד — חלוקה עם 33% קבוע
+  let percents = equalPercents;
+  if (!checkConstraints(equalPercents, tracks, constraints)) {
+    percents = buildFallbackPercents(tracks, constraints);
+  }
+
+  const fallback = evaluateAllocation(percents, input);
+  return {
+    optimal: fallback,
+    alternatives: [],
+    recommendation: 'לא נמצא תמהיל הממלא את כל האילוצים. מוצג תמהיל ברירת מחדל.',
+    optimizationStats: {
+      iterationsChecked: iterations,
+      timeMs: Date.now() - startTime,
+      feasibleSolutions: 0,
+    },
+  };
+}
+
+/**
+ * בניית אחוזות fallback שעומדות באילוצים בסיסיים
+ */
+function buildFallbackPercents(
+  tracks: OptimizerTrack[],
+  constraints: OptimizerConstraints,
+): number[] {
+  const fixedTypes: OptimizerTrackType[] = ['fixed_unlinked', 'fixed_linked'];
+  const fixedIndices = tracks.map((t, i) => (fixedTypes.includes(t.type) ? i : -1)).filter((i) => i >= 0);
+  const variableIndices = tracks.map((t, i) => (!fixedTypes.includes(t.type) ? i : -1)).filter((i) => i >= 0);
+
+  const percents = new Array(tracks.length).fill(0);
+  const minFixed = constraints.minFixedPercent;
+
+  if (fixedIndices.length === 0) {
+    // אין מסלולים קבועים - חלוקה שווה
+    return tracks.map(() => 1 / tracks.length);
+  }
+
+  // חלק שווה בין קבועים ל-minFixed%, השאר לרשות משתנים
+  const fixedPerTrack = minFixed / fixedIndices.length;
+  const varPerTrack = variableIndices.length > 0 ? (1 - minFixed) / variableIndices.length : 0;
+
+  for (const i of fixedIndices) percents[i] = fixedPerTrack;
+  for (const i of variableIndices) percents[i] = varPerTrack;
+
+  return percents;
+}
+
+// ============================================================
+// חישוב תמהיל ברירת מחדל (1/3+1/3+1/3) לשוואה
+// ============================================================
+
+export function calculateDefaultMix(input: OptimizerInput): AllocationResult {
+  const percents = input.tracks.map(() => 1 / input.tracks.length);
+  return evaluateAllocation(percents, input);
+}
+
+// ============================================================
+// ייצוא נוסף
+// ============================================================
+
+export const DEFAULT_CONSTRAINTS: OptimizerConstraints = {
+  minFixedPercent: MIN_FIXED_PERCENT_BOI,
+  maxVariablePercent: MAX_VARIABLE_PERCENT_BOI,
+  maxPerTrackPercent: 0.80,
+  maxIndexedPercent: 0.60,
+  inflationScenarios: [1.0, 2.5, 4.0],
+  primeShockScenarios: [-2.0, 0, 2.0],
+};
+
+export const TRACK_TYPE_LABELS: Record<OptimizerTrackType, string> = {
+  prime: 'פריים',
+  fixed_unlinked: 'קבועה לא צמודה (קל"צ)',
+  fixed_linked: 'קבועה צמודה (צמ"ק)',
+  variable_5y: 'משתנה כל 5 שנים',
+  variable_unlinked: 'משתנה לא צמודה',
+};
+
+export const TRACK_DEFAULT_RATES: Record<OptimizerTrackType, number> = {
+  prime: BANK_OF_ISRAEL_PRIME_2026 - 0.5,
+  fixed_unlinked: 4.2,
+  fixed_linked: 3.0,
+  variable_5y: 3.8,
+  variable_unlinked: 4.5,
+};
+
+export const TRACK_DEFAULT_VOLATILITY: Record<OptimizerTrackType, number> = {
+  prime: 2.0,
+  fixed_unlinked: 0,
+  fixed_linked: 0,
+  variable_5y: 1.5,
+  variable_unlinked: 1.8,
+};
+
+export const TRACK_COLORS: Record<OptimizerTrackType, string> = {
+  prime: '#f97316', // כתום (משתנה, מסוכן)
+  fixed_unlinked: '#2563eb', // כחול (יציב)
+  fixed_linked: '#f59e0b', // ענבר (צמוד מדד)
+  variable_5y: '#8b5cf6', // סגול (משתנה)
+  variable_unlinked: '#ec4899', // ורוד
+};
+
+export const TRACK_RISK_LABELS: Record<OptimizerTrackType, string> = {
+  prime: 'גבוה',
+  fixed_unlinked: 'נמוך',
+  fixed_linked: 'בינוני',
+  variable_5y: 'בינוני',
+  variable_unlinked: 'בינוני-גבוה',
+};

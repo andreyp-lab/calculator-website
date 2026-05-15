@@ -14,18 +14,28 @@ const calculators = [
     description: 'חישוב תשלום חודשי, לוח סילוקין שפיצר/קרן שווה, גרף שנתי',
     href: '/real-estate/mortgage',
     available: true,
+    badge: undefined as string | undefined,
+  },
+  {
+    title: 'אופטימייזר תמהיל משכנתא',
+    description: 'Solver-style: מוצא את החלוקה האופטימלית בין מסלולים למזעור עלות, סיכון, או תשלום חודשי',
+    href: '/real-estate/mortgage-optimizer',
+    available: true,
+    badge: 'חדש' as string | undefined,
   },
   {
     title: 'מחשבון מס רכישה',
     description: 'חישוב מס רכישה לפי מדרגות 2026 (דירה ראשונה / נוספת)',
     href: '/real-estate/purchase-tax',
     available: true,
+    badge: undefined as string | undefined,
   },
   {
     title: 'מחשבון מס שבח',
     description: 'מכירת דירה - פטור דירה יחידה + חישוב לינארי מוטב',
     href: '/real-estate/capital-gains-tax',
     available: true,
+    badge: undefined as string | undefined,
   },
 ];
 
@@ -54,9 +64,16 @@ export default function RealEstatePage() {
               >
                 <Calculator className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                 <div className="flex-1">
-                  <h3 className="font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition">
-                    {calc.title}
-                  </h3>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition">
+                      {calc.title}
+                    </h3>
+                    {calc.badge && (
+                      <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium">
+                        {calc.badge}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm text-gray-600">{calc.description}</p>
                 </div>
                 <ArrowLeft className="w-4 h-4 text-blue-600 mt-2 opacity-0 group-hover:opacity-100 transition" />
