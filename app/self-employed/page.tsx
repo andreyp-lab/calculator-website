@@ -29,9 +29,9 @@ const calculators = [
   },
   {
     title: 'מחשבון ביטוח לאומי לעצמאי',
-    description: 'חישוב דמי ב.ל. + בריאות לעצמאי לפי הכנסה',
+    description: 'חישוב ב.ל. + בריאות, השוואה לשכיר, הטבת מס 52%, תיאום שנתי וזכויות',
     href: '/self-employed/social-security',
-    available: false,
+    available: true,
   },
   {
     title: 'מחשבון מקדמות מס',
