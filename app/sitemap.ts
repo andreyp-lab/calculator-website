@@ -126,6 +126,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/compare/rent-vs-buy', 'monthly', 0.85),
     make('/compare/leasing-vs-buying-comparison', 'monthly', 0.85),
 
+    // ===== עמודי Pillar (מדריכים מקיפים) =====
+    make('/guides/mortgage-complete-guide-2026', 'monthly', 0.98),
+    make('/guides/taxes-complete-guide-2026', 'monthly', 0.98),
+    make('/guides/employee-rights-complete-guide', 'monthly', 0.98),
+
+    // ===== מילון מונחים =====
+    make('/glossary', 'monthly', 0.92),
+
     // ===== משפטי =====
     make('/privacy', 'yearly', 0.3),
     make('/terms', 'yearly', 0.3),
