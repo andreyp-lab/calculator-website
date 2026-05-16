@@ -20,6 +20,7 @@ import {
 import {
   optimizeMortgage,
   calculateMonthlyPayment,
+  calculateMonthlyPaymentWithGrace,
   checkConstraints,
   evaluateAllocation,
   DEFAULT_TRACKS_2026,
@@ -38,6 +39,17 @@ import {
   calculateStagedPayoffForMix,
   calculateThreeOptions,
   meetsBudgetConstraint,
+  calculateBankGradeAffordability,
+  runIncomeStressTest,
+  compareBankOffers,
+  calculateTimeline,
+  getLTVRateAdjustment,
+  getLTVBandLabel,
+  calculateSavingsFromHigherDownPayment,
+  applyLTVAdjustmentToTracks,
+  MORTGAGE_TIMELINE_STAGES,
+  DEFAULT_STRESS_SCENARIOS,
+  LTV_RATE_ADJUSTMENTS_2026,
   type OptimizerTrack,
   type OptimizerTrackType,
   type OptimizationObjective,
@@ -49,6 +61,12 @@ import {
   type DTIInfo,
   type ClosingCosts,
   type ThreeOptionsResult,
+  type BankOffer,
+  type RankedOffer,
+  type AffordabilityProfile,
+  type BankAffordabilityResult,
+  type StressTestResult,
+  type FamilyStatus,
 } from '@/lib/calculators/mortgage-optimizer';
 import { formatCurrency } from '@/lib/utils/formatters';
 import { ResultCard } from '@/components/calculator/ResultCard';
@@ -58,7 +76,7 @@ import { Breakdown } from '@/components/calculator/Breakdown';
 // קבועים ועזרים
 // ============================================================
 
-type TabId = 'setup' | 'tracks' | 'objective' | 'results' | 'scenarios';
+type TabId = 'setup' | 'tracks' | 'objective' | 'results' | 'scenarios' | 'stress' | 'bankcomp' | 'timeline';
 
 let trackIdCounter = 100;
 function newTrackId() {
@@ -76,6 +94,9 @@ const TAB_LABELS: Record<TabId, string> = {
   objective: 'מטרה ואילוצים',
   results: 'תוצאות',
   scenarios: 'תרחישים',
+  stress: 'מבחן עמידות',
+  bankcomp: 'השוואת בנקים',
+  timeline: 'לוח זמנים',
 };
 
 const OBJECTIVE_OPTIONS: { id: OptimizationObjective; label: string; desc: string; emoji: string }[] = [
@@ -431,6 +452,15 @@ interface SetupState {
   bankOpeningFeePercent: number;
   lifeInsurancePercent: number;
   buildingInsuranceAnnual: number;
+  // V3: LTV
+  propertyValue: number;
+  applyLTVAdjustment: boolean;
+  // V3: Bank-grade affordability
+  familyStatus: FamilyStatus;
+  numChildren: number;
+  otherLoanPayments: number;
+  monthlyInsurance: number;
+  showAffordability: boolean;
 }
 
 interface SetupTabProps {
@@ -458,11 +488,16 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
     <div className="space-y-6">
       {/* כותרת */}
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-        <h3 className="font-bold text-blue-900 text-lg mb-1">אופטימייזר תמהיל המשכנתא — V2</h3>
+        <h3 className="font-bold text-blue-900 text-lg mb-1">אופטימייזר תמהיל המשכנתא — V3</h3>
         <p className="text-sm text-blue-700">
           כמו Excel Solver — מוצא את החלוקה המתמטית האופטימלית בין מסלולי המשכנתא למזעור העלות,
-          הסיכון, או התשלום החודשי. חדש: 3 אפשרויות להשוואה, פירעונות מוקדמים, בדיקת תקציב, DTI.
+          הסיכון, או התשלום החודשי.
         </p>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {['כשירות בנקאית', 'ריביות LTV', 'תקופת גרייס', 'מבחן עמידות', 'השוואת בנקים', 'לוח זמנים'].map((f) => (
+            <span key={f} className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full font-medium">{f}</span>
+          ))}
+        </div>
       </div>
 
       {/* סכום */}
@@ -544,6 +579,72 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
         )}
       </div>
 
+      {/* V3: LTV */}
+      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
+        <h3 className="font-bold text-gray-900 mb-1">שווי הנכס ו-LTV</h3>
+        <p className="text-xs text-gray-500 mb-4">
+          הזן שווי הנכס לחישוב LTV ולקבלת ריביות מותאמות אוטומטית
+        </p>
+        <NumericInput
+          label="שווי הנכס (₪)"
+          value={state.propertyValue}
+          onChange={(v) => onChange({ ...state, propertyValue: v })}
+          min={0}
+          step={50_000}
+          placeholder="לדוגמה: 2,500,000"
+        />
+
+        {state.propertyValue > 0 && state.totalAmount > 0 && (() => {
+          const ltv = state.totalAmount / state.propertyValue;
+          const adj = getLTVRateAdjustment(ltv);
+          const bandLabel = getLTVBandLabel(ltv);
+          const adjColor = adj < 0 ? 'text-green-700' : adj > 0 ? 'text-red-700' : 'text-gray-700';
+          const bandBg = adj < -0.25 ? 'bg-green-50 border-green-200' : adj < 0 ? 'bg-blue-50 border-blue-200' : adj === 0 ? 'bg-gray-50 border-gray-200' : 'bg-orange-50 border-orange-200';
+          return (
+            <div className={`mt-3 border rounded-xl p-4 ${bandBg}`}>
+              <div className="flex items-center justify-between mb-1">
+                <span className="font-bold text-sm text-gray-800">LTV: {(ltv * 100).toFixed(1)}%</span>
+                <span className={`text-sm font-bold ${adjColor}`}>
+                  {adj > 0 ? '+' : ''}{adj.toFixed(2)}% לריבית
+                </span>
+              </div>
+              <p className="text-xs text-gray-600">{bandLabel}</p>
+              <div className="mt-2 flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="applyLTV"
+                  checked={state.applyLTVAdjustment}
+                  onChange={(e) => onChange({ ...state, applyLTVAdjustment: e.target.checked })}
+                  className="accent-blue-600"
+                />
+                <label htmlFor="applyLTV" className="text-xs text-gray-700 cursor-pointer">
+                  החל התאמת LTV אוטומטית על כל המסלולים
+                </label>
+              </div>
+
+              {/* הצעת הון עצמי נוסף */}
+              {ltv > 0.45 && (
+                (() => {
+                  const extra = 200_000;
+                  const savings = calculateSavingsFromHigherDownPayment(
+                    state.totalAmount, state.propertyValue, extra,
+                    DEFAULT_TRACKS_2026, 25
+                  );
+                  if (savings.estimatedSavings > 0) {
+                    return (
+                      <div className="mt-2 bg-green-50 border border-green-200 rounded-lg p-3 text-xs text-green-800">
+                        <strong>טיפ:</strong> הוספת {formatCurrency(extra)} הון עצמי (LTV יורד ל-{(savings.newLtv * 100).toFixed(0)}%) תחסוך כ-{formatCurrency(savings.estimatedSavings)} לאורך חיי המשכנתא.
+                      </div>
+                    );
+                  }
+                  return null;
+                })()
+              )}
+            </div>
+          );
+        })()}
+      </div>
+
       {/* DTI */}
       <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
         <h3 className="font-bold text-gray-900 mb-1">בדיקת יחס החזר-הכנסה (DTI)</h3>
@@ -559,6 +660,132 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
         {dti && dti.netIncome > 0 && (
           <div className="mt-3">
             <DTIBadge dti={dti} />
+          </div>
+        )}
+      </div>
+
+      {/* V3: Bank-Grade Affordability */}
+      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
+        <button
+          type="button"
+          onClick={() => onChange({ ...state, showAffordability: !state.showAffordability })}
+          className="flex items-center justify-between w-full"
+        >
+          <div>
+            <h3 className="font-bold text-gray-900">כשירות בנקאית מלאה</h3>
+            <p className="text-xs text-gray-500">חישוב מדויק כפי שהבנק מחשב — לפי הרכב משפחה וחובות</p>
+          </div>
+          <span className="text-gray-400 text-lg">{state.showAffordability ? '▲' : '▼'}</span>
+        </button>
+
+        {state.showAffordability && (
+          <div className="mt-4 space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">מצב משפחתי</label>
+                <select
+                  value={state.familyStatus}
+                  onChange={(e) => onChange({ ...state, familyStatus: e.target.value as FamilyStatus })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="single">יחיד/ה</option>
+                  <option value="couple">זוג</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">מספר ילדים</label>
+                <input
+                  type="number"
+                  min={0} max={10}
+                  value={state.numChildren}
+                  onChange={(e) => onChange({ ...state, numChildren: Number(e.target.value) })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                />
+              </div>
+              <NumericInput
+                label="תשלומי חובות אחרים (₪/חודש)"
+                value={state.otherLoanPayments}
+                onChange={(v) => onChange({ ...state, otherLoanPayments: v })}
+                min={0}
+                step={500}
+                placeholder="0"
+                note="הלוואות רכב, הלוואות אישיות וכו'"
+              />
+              <NumericInput
+                label="ביטוחים חודשיים (₪/חודש)"
+                value={state.monthlyInsurance}
+                onChange={(v) => onChange({ ...state, monthlyInsurance: v })}
+                min={0}
+                step={100}
+                placeholder="0"
+                note="ביטוח חיים, בריאות וכו'"
+              />
+            </div>
+
+            {state.netIncome > 0 && (() => {
+              const profile: AffordabilityProfile = {
+                netIncome: state.netIncome,
+                familyStatus: state.familyStatus,
+                numChildren: state.numChildren,
+                otherLoanPayments: state.otherLoanPayments,
+                monthlyInsurance: state.monthlyInsurance,
+                loanAmount: state.totalAmount,
+                propertyValue: state.propertyValue,
+              };
+              const estimated = calculateMonthlyPayment(state.totalAmount, 4.0, state.defaultTermYears);
+              const aff = calculateBankGradeAffordability(profile, estimated);
+
+              const bgColor = aff.profileColor === 'green' ? 'bg-green-50 border-green-200' :
+                              aff.profileColor === 'red' ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200';
+              const textColor = aff.profileColor === 'green' ? 'text-green-800' :
+                                aff.profileColor === 'red' ? 'text-red-800' : 'text-amber-800';
+
+              return (
+                <div className={`border rounded-xl p-4 ${bgColor}`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`font-bold text-sm ${textColor}`}>{aff.profileLabel}</span>
+                    <span className={`text-xl font-bold ${textColor}`}>
+                      כשירות: {formatCurrency(aff.maxMonthlyPayment)}/חודש
+                    </span>
+                  </div>
+                  <div className="space-y-1 text-xs text-gray-700">
+                    <div className="flex justify-between">
+                      <span>הכנסה נטו</span>
+                      <span className="font-medium">{formatCurrency(aff.breakdown.netIncome)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>פחות הוצאות מחייה</span>
+                      <span className="font-medium text-red-600">-{formatCurrency(aff.breakdown.minusLivingExpenses)}</span>
+                    </div>
+                    {aff.breakdown.minusOtherLoans > 0 && (
+                      <div className="flex justify-between">
+                        <span>פחות חובות אחרים</span>
+                        <span className="font-medium text-red-600">-{formatCurrency(aff.breakdown.minusOtherLoans)}</span>
+                      </div>
+                    )}
+                    {aff.breakdown.minusInsurance > 0 && (
+                      <div className="flex justify-between">
+                        <span>פחות ביטוחים</span>
+                        <span className="font-medium text-red-600">-{formatCurrency(aff.breakdown.minusInsurance)}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between border-t pt-1">
+                      <span className="font-medium">זמין למשכנתא</span>
+                      <span className="font-bold">{formatCurrency(aff.breakdown.availableForMortgage)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>גבול DTI ({aff.breakdown.dtiLimitPercent.toFixed(0)}%)</span>
+                      <span className="font-bold text-blue-700">{formatCurrency(aff.maxMonthlyPayment)}/חודש</span>
+                    </div>
+                  </div>
+                  {aff.warningMessage && (
+                    <div className="mt-2 bg-red-100 border border-red-300 rounded-lg p-2 text-xs text-red-800 font-medium">
+                      {aff.warningMessage}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         )}
       </div>
@@ -856,6 +1083,33 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
                 step={1}
                 error={maxTermYears && maxTermYears > 0 && track.termYears > maxTermYears ? `מעל מגבלת ${maxTermYears} שנים` : undefined}
               />
+            </div>
+
+            {/* V3: גרייס */}
+            <div className="pt-2 border-t border-gray-100">
+              <label className="block text-xs font-medium text-gray-600 mb-1">
+                תקופת גרייס (חודשים): <strong>{track.gracePeriodMonths ?? 0}</strong>
+              </label>
+              <input
+                type="range"
+                min={0}
+                max={60}
+                step={1}
+                value={track.gracePeriodMonths ?? 0}
+                onChange={(e) => updateTrack(track.id, 'gracePeriodMonths', Number(e.target.value))}
+                className="w-full accent-blue-600"
+              />
+              {(track.gracePeriodMonths ?? 0) > 0 && (() => {
+                const grace = calculateMonthlyPaymentWithGrace(1_000_000, track.rate, effectiveTerm, track.gracePeriodMonths ?? 0);
+                return (
+                  <p className="text-xs text-blue-700 mt-1">
+                    בגרייס: {formatCurrency(grace.duringGrace)}/חודש | אחרי גרייס: {formatCurrency(grace.afterGrace)}/חודש (ל-1M ₪)
+                  </p>
+                );
+              })()}
+              {(track.gracePeriodMonths ?? 0) === 0 && (
+                <p className="text-xs text-gray-400 mt-1">0 = ללא גרייס (שפיצר רגיל)</p>
+              )}
             </div>
 
             <div className="flex items-center justify-between text-xs text-gray-500 pt-1 border-t border-gray-100">
@@ -1823,6 +2077,450 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
 }
 
 // ============================================================
+// V3: טאב מבחן עמידות
+// ============================================================
+
+interface StressTestTabProps {
+  monthlyIncome: number;
+  monthlyPayment: number;
+}
+
+function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
+  if (monthlyIncome <= 0 || monthlyPayment <= 0) {
+    return (
+      <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center">
+        <p className="text-gray-500 text-lg mb-2">הזן הכנסה חודשית בטאב הגדרות</p>
+        <p className="text-gray-400 text-sm">ואחרי הרצת האופטימייזר תראה את מבחן העמידות</p>
+      </div>
+    );
+  }
+
+  const results = runIncomeStressTest(monthlyIncome, monthlyPayment);
+
+  const chartData = results.map((r) => ({
+    name: r.label,
+    dti: Math.round(r.newDTIPercent),
+    income: Math.round(r.newMonthlyIncome),
+  }));
+
+  return (
+    <div className="space-y-6" dir="rtl">
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+        <h3 className="font-bold text-blue-900 text-lg mb-1">מבחן עמידות — Income Stress Test</h3>
+        <p className="text-sm text-blue-700">
+          מדמה 4 תרחישי ירידה בהכנסה. הבנק בוחן תרחישים דומים לפני אישור משכנתא.
+          DTI מעל 55% בתרחיש קיצוני = אזהרה אדומה.
+        </p>
+      </div>
+
+      {/* Bar Chart */}
+      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
+        <h3 className="text-lg font-bold text-gray-900 mb-4">יחס החזר לפי תרחיש (%)</h3>
+        <div className="h-64">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" domain={[0, 80]} tickFormatter={(v) => `${v}%`} tick={{ fontSize: 11 }} />
+              <YAxis type="category" dataKey="name" tick={{ fontSize: 10 }} width={120} />
+              <Tooltip formatter={(v) => `${v}%`} />
+              <ReferenceLine x={40} stroke="#f59e0b" strokeDasharray="5 5" label={{ value: '40%', position: 'top', fontSize: 10 }} />
+              <ReferenceLine x={55} stroke="#ef4444" strokeDasharray="5 5" label={{ value: '55%', position: 'top', fontSize: 10 }} />
+              <Bar dataKey="dti" name="DTI (%)" radius={[0, 4, 4, 0]}>
+                {results.map((r, idx) => (
+                  <Cell
+                    key={idx}
+                    fill={r.status === 'green' ? '#10b981' : r.status === 'amber' ? '#f59e0b' : '#ef4444'}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+          <div className="flex items-center gap-1"><div className="w-3 h-3 bg-green-500 rounded" />עד 40% — נוח</div>
+          <div className="flex items-center gap-1"><div className="w-3 h-3 bg-amber-500 rounded" />40%-55% — מאתגר</div>
+          <div className="flex items-center gap-1"><div className="w-3 h-3 bg-red-500 rounded" />מעל 55% — בעייתי</div>
+        </div>
+      </div>
+
+      {/* כרטיסי תרחישים */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        {results.map((r) => {
+          const cardBg = r.status === 'green' ? 'bg-green-50 border-green-200' :
+                         r.status === 'amber' ? 'bg-amber-50 border-amber-200' : 'bg-red-50 border-red-200';
+          const textColor = r.status === 'green' ? 'text-green-800' :
+                            r.status === 'amber' ? 'text-amber-800' : 'text-red-800';
+          return (
+            <div key={r.scenarioId} className={`border-2 rounded-xl p-4 ${cardBg}`}>
+              <div className="flex items-start justify-between mb-2">
+                <div>
+                  <h4 className={`font-bold text-sm ${textColor}`}>{r.label}</h4>
+                  <p className="text-xs text-gray-500 mt-0.5">{r.description}</p>
+                </div>
+                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                  r.status === 'green' ? 'bg-green-200 text-green-800' :
+                  r.status === 'amber' ? 'bg-amber-200 text-amber-800' : 'bg-red-200 text-red-800'
+                }`}>{r.statusLabel}</span>
+              </div>
+              <div className="space-y-1 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">הכנסה חדשה</span>
+                  <span className="font-medium">{formatCurrency(r.newMonthlyIncome)}/חודש</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">תשלום משכנתא</span>
+                  <span className="font-medium">{formatCurrency(r.monthlyPayment)}/חודש</span>
+                </div>
+                <div className="flex justify-between border-t pt-1">
+                  <span className="font-medium text-gray-700">DTI</span>
+                  <span className={`font-bold text-lg ${textColor}`}>{r.newDTIPercent.toFixed(0)}%</span>
+                </div>
+              </div>
+              <p className="mt-2 text-xs text-gray-700 leading-relaxed">{r.recommendation}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* המלצה */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+        <h4 className="font-bold text-blue-900 mb-2">איך להתכונן לתרחישי קיצון?</h4>
+        <ul className="text-sm text-blue-800 space-y-1">
+          <li>• שמור רזרבה של 6 חודשי תשלומים בפיקדון נזיל</li>
+          <li>• שקול ביטוח חיים ו/או ביטוח אובדן כושר עבודה</li>
+          <li>• אם DTI מעל 45% בבסיס — שקול הקטנת הסכום או הארכת התקופה</li>
+          <li>• פריים + ריבית קבועה מגן חלקי: אם פריים יורד, התשלום יורד</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// V3: טאב השוואת בנקים
+// ============================================================
+
+let offerIdCounter = 0;
+function newOfferId() { return `offer-${++offerIdCounter}`; }
+
+interface BankCompTabProps {
+  loanAmount: number;
+  baseTracks: OptimizerTrack[];
+  defaultTermYears: number;
+  constraints: OptimizerConstraints;
+}
+
+function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: BankCompTabProps) {
+  const [offers, setOffers] = useState<(BankOffer & { id: string })[]>([
+    {
+      id: newOfferId(),
+      bankName: 'בנק א\'',
+      rates: baseTracks.map((t) => ({ trackType: t.type, rate: t.rate })),
+      openingFee: 3_750,
+      openingFeeIsPercent: false,
+      notes: '',
+    },
+  ]);
+
+  function addOffer() {
+    if (offers.length >= 5) return;
+    setOffers([...offers, {
+      id: newOfferId(),
+      bankName: `בנק ${String.fromCharCode(0x05D0 + offers.length)}`,
+      rates: baseTracks.map((t) => ({ trackType: t.type, rate: t.rate })),
+      openingFee: 3_750,
+      openingFeeIsPercent: false,
+      notes: '',
+    }]);
+  }
+
+  function removeOffer(id: string) {
+    setOffers(offers.filter((o) => o.id !== id));
+  }
+
+  function updateOffer(id: string, field: keyof BankOffer, value: unknown) {
+    setOffers(offers.map((o) => o.id === id ? { ...o, [field]: value } : o));
+  }
+
+  function updateOfferRate(id: string, trackType: OptimizerTrackType, rate: number) {
+    setOffers(offers.map((o) => {
+      if (o.id !== id) return o;
+      const rates = o.rates.map((r) => r.trackType === trackType ? { ...r, rate } : r);
+      return { ...o, rates };
+    }));
+  }
+
+  const ranked: RankedOffer[] = useMemo(() => {
+    if (offers.length === 0 || loanAmount <= 0) return [];
+    try {
+      return compareBankOffers(offers, loanAmount, baseTracks, defaultTermYears, constraints);
+    } catch {
+      return [];
+    }
+  }, [offers, loanAmount, baseTracks, defaultTermYears, constraints]);
+
+  const chartData = ranked.map((r) => ({
+    name: r.offer.bankName,
+    'ריבית כוללת': Math.round(r.totalInterest),
+    'אגרת פתיחה': Math.round(r.openingFeeAmount),
+    'עלות ALL-IN': Math.round(r.totalAllInCost),
+  }));
+
+  return (
+    <div className="space-y-6" dir="rtl">
+      <div className="bg-purple-50 border border-purple-200 rounded-xl p-5">
+        <h3 className="font-bold text-purple-900 text-lg mb-1">השוואת הצעות בנקים</h3>
+        <p className="text-sm text-purple-700">
+          הזן עד 5 הצעות מבנקים שונים עם הריביות שקיבלת. המחשבון ימצא את התמהיל האופטימלי לכל בנק ויציג השוואה מלאה.
+        </p>
+      </div>
+
+      {/* הצעות */}
+      <div className="space-y-4">
+        {offers.map((offer, idx) => (
+          <div key={offer.id} className={`bg-white border-2 rounded-xl p-5 ${
+            ranked.find((r) => r.offer.bankName === offer.bankName)?.isBest ? 'border-green-400' : 'border-gray-200'
+          }`}>
+            <div className="flex items-center justify-between mb-4">
+              <input
+                type="text"
+                value={offer.bankName}
+                onChange={(e) => updateOffer(offer.id, 'bankName', e.target.value)}
+                className="font-bold text-gray-900 bg-transparent border-b border-dashed border-gray-300 focus:border-blue-500 focus:outline-none text-base"
+                placeholder="שם הבנק"
+              />
+              <div className="flex items-center gap-2">
+                {ranked.find((r) => r.offer.bankName === offer.bankName)?.isBest && (
+                  <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-bold">הטוב ביותר</span>
+                )}
+                {offers.length > 1 && (
+                  <button type="button" onClick={() => removeOffer(offer.id)} className="text-red-500 text-xs hover:text-red-700">הסר</button>
+                )}
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-3">
+              {baseTracks.map((track) => {
+                const offerRate = offer.rates.find((r) => r.trackType === track.type);
+                return (
+                  <div key={track.type}>
+                    <label className="block text-xs font-medium text-gray-600 mb-1">
+                      ריבית {TRACK_TYPE_LABELS[track.type]} (%)
+                    </label>
+                    <input
+                      type="number"
+                      step={0.1}
+                      min={0}
+                      max={15}
+                      value={offerRate?.rate ?? track.rate}
+                      onChange={(e) => updateOfferRate(offer.id, track.type, Number(e.target.value))}
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                    />
+                  </div>
+                );
+              })}
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">אגרת פתיחה (₪)</label>
+                <input
+                  type="number"
+                  step={500}
+                  min={0}
+                  value={offer.openingFee}
+                  onChange={(e) => updateOffer(offer.id, 'openingFee', Number(e.target.value))}
+                  className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {offers.length < 5 && (
+        <button
+          type="button"
+          onClick={addOffer}
+          className="w-full py-3 border-2 border-dashed border-purple-300 rounded-xl text-purple-600 hover:border-purple-500 hover:bg-purple-50 transition font-medium"
+        >
+          + הוסף הצעת בנק (עד 5)
+        </button>
+      )}
+
+      {/* תוצאות */}
+      {ranked.length > 0 && (
+        <>
+          <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">השוואה גרפית — עלות ALL-IN</h3>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                  <YAxis tickFormatter={(v) => `${Math.round(v / 1000)}K`} tick={{ fontSize: 11 }} />
+                  <Tooltip formatter={(v) => formatCurrency(Number(v))} />
+                  <Legend />
+                  <Bar dataKey="ריבית כוללת" fill="#ef4444" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="אגרת פתיחה" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* טבלת דירוג */}
+          <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b">
+                  <th className="text-right py-2 px-3 font-medium text-gray-600">דירוג</th>
+                  <th className="text-right py-2 px-3 font-medium text-gray-600">בנק</th>
+                  <th className="text-center py-2 px-2 font-medium text-gray-600">ריבית כוללת</th>
+                  <th className="text-center py-2 px-2 font-medium text-gray-600">אגרת פתיחה</th>
+                  <th className="text-center py-2 px-2 font-medium text-gray-600">ALL-IN</th>
+                  <th className="text-center py-2 px-2 font-medium text-gray-600">יקר יותר ב-</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ranked.map((r, idx) => (
+                  <tr key={idx} className={`border-b ${r.isBest ? 'bg-green-50' : idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <td className="py-2 px-3 text-center">
+                      {r.isBest ? (
+                        <span className="bg-green-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">1</span>
+                      ) : r.rank}
+                    </td>
+                    <td className="py-2 px-3 font-medium text-gray-900">{r.offer.bankName}</td>
+                    <td className="py-2 px-2 text-center text-amber-700">{formatCurrency(r.totalInterest)}</td>
+                    <td className="py-2 px-2 text-center text-gray-600">{formatCurrency(r.openingFeeAmount)}</td>
+                    <td className="py-2 px-2 text-center font-bold text-red-700">{formatCurrency(r.totalAllInCost)}</td>
+                    <td className="py-2 px-2 text-center">
+                      {r.isBest ? (
+                        <span className="text-green-700 font-bold">הכי זול</span>
+                      ) : (
+                        <span className="text-red-600">+{formatCurrency(r.savingsVsBest ?? 0)}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// V3: טאב לוח זמנים
+// ============================================================
+
+function TimelineTab() {
+  const [keysDateStr, setKeysDateStr] = useState(() => {
+    const d = new Date();
+    d.setMonth(d.getMonth() + 3);
+    return d.toISOString().split('T')[0];
+  });
+
+  const timeline = useMemo(() => {
+    const keysDate = new Date(keysDateStr);
+    if (isNaN(keysDate.getTime())) return null;
+    return calculateTimeline(keysDate);
+  }, [keysDateStr]);
+
+  return (
+    <div className="space-y-6" dir="rtl">
+      <div className="bg-teal-50 border border-teal-200 rounded-xl p-5">
+        <h3 className="font-bold text-teal-900 text-lg mb-1">לוח זמנים — מ"אני רוצה" עד "יש לי מפתח"</h3>
+        <p className="text-sm text-teal-700">
+          תהליך המשכנתא לוקח בממוצע 10-12 שבועות. הזן את תאריך קבלת המפתח המתוכנן ונחשב לך את תאריך ההתחלה.
+        </p>
+      </div>
+
+      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          תאריך קבלת מפתח מתוכנן
+        </label>
+        <input
+          type="date"
+          value={keysDateStr}
+          onChange={(e) => setKeysDateStr(e.target.value)}
+          className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
+          dir="ltr"
+        />
+        {timeline && (
+          <p className="mt-2 text-sm text-gray-600">
+            כדי לעמוד בלוח הזמנים הזה, צריך להתחיל ב-{' '}
+            <strong className="text-blue-700">{timeline.startDate.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })}</strong>
+          </p>
+        )}
+      </div>
+
+      {timeline && (
+        <div className="relative">
+          {/* קו ציר */}
+          <div className="absolute right-8 top-0 bottom-0 w-0.5 bg-gray-200" />
+
+          <div className="space-y-6">
+            {timeline.stages.map((stage, idx) => {
+              const isLast = idx === timeline.stages.length - 1;
+              const stageColors = [
+                'bg-blue-500', 'bg-purple-500', 'bg-indigo-500', 'bg-teal-500',
+                'bg-orange-500', 'bg-red-500', 'bg-green-600',
+              ];
+              const color = stageColors[idx % stageColors.length];
+
+              return (
+                <div key={stage.stageNumber} className="flex gap-4 relative">
+                  {/* נקודת ציר */}
+                  <div className={`w-8 h-8 rounded-full ${color} flex-shrink-0 flex items-center justify-center text-white text-xs font-bold z-10 mt-1`}>
+                    {stage.stageNumber}
+                  </div>
+
+                  <div className="flex-1 bg-white border-2 border-gray-200 rounded-xl p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <span className="text-xs font-medium text-gray-500">{stage.weekRange}</span>
+                        <h4 className="font-bold text-gray-900 text-base">{stage.title}</h4>
+                      </div>
+                      <div className="text-left text-xs text-gray-500">
+                        <div>{stage.formattedStart}</div>
+                        {!isLast && <div className="text-gray-400">– {stage.formattedEnd}</div>}
+                      </div>
+                    </div>
+                    <ul className="space-y-1">
+                      {stage.tasks.map((task, ti) => (
+                        <li key={ti} className="text-sm text-gray-700 flex items-start gap-1.5">
+                          <span className={`mt-0.5 w-1.5 h-1.5 rounded-full ${color} flex-shrink-0`} />
+                          {task}
+                        </li>
+                      ))}
+                    </ul>
+                    {isLast && (
+                      <div className="mt-3 bg-green-50 border border-green-200 rounded-lg p-2 text-sm font-bold text-green-800 text-center">
+                        קבלת מפתח — {timeline.keysDate.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* טיפים */}
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+        <h4 className="font-bold text-amber-900 mb-2">טיפים חשובים לתהליך</h4>
+        <ul className="text-sm text-amber-800 space-y-1">
+          <li>• קבל לפחות 3 הצעות מבנקים שונים — זה הכי חשוב לחיסכון</li>
+          <li>• אל תחתום על שום דבר לפני שיש לך לפחות 2 הצעות</li>
+          <li>• יועץ משכנתאות עצמאי עולה 2,000-5,000 ₪ ויכול לחסוך עשרות אלפי ₪</li>
+          <li>• תהליך הטאבו לוקח 30-90 יום — תכנן בהתאם</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
 // קומפוננטה ראשית
 // ============================================================
 
@@ -1846,6 +2544,14 @@ export function MortgageOptimizerCalculator() {
     bankOpeningFeePercent: 0.375,
     lifeInsurancePercent: 0.08,
     buildingInsuranceAnnual: 900,
+    // V3
+    propertyValue: 0,
+    applyLTVAdjustment: false,
+    familyStatus: 'couple',
+    numChildren: 0,
+    otherLoanPayments: 0,
+    monthlyInsurance: 0,
+    showAffordability: false,
   });
 
   const [tracks, setTracks] = useState<OptimizerTrack[]>(
@@ -1889,13 +2595,29 @@ export function MortgageOptimizerCalculator() {
     { id: 'objective', label: TAB_LABELS.objective, description: 'מה לאופטם?' },
     { id: 'results', label: TAB_LABELS.results, description: 'תמהיל אופטימלי' },
     { id: 'scenarios', label: TAB_LABELS.scenarios, description: 'ניתוח סיכון' },
+    { id: 'stress', label: TAB_LABELS.stress, description: 'מבחן עמידות' },
+    { id: 'bankcomp', label: TAB_LABELS.bankcomp, description: 'השוואת בנקים' },
+    { id: 'timeline', label: TAB_LABELS.timeline, description: 'תהליך מ-A ל-Z' },
   ];
 
-  // הגבלת תקופת מסלולים לפי maxTermYears
+  // V3: LTV
+  const ltv = useMemo(() => {
+    if (!setupState.propertyValue || setupState.propertyValue <= 0) return undefined;
+    return setupState.totalAmount / setupState.propertyValue;
+  }, [setupState.totalAmount, setupState.propertyValue]);
+
+  // הגבלת תקופת מסלולים לפי maxTermYears + LTV adjustment
   const effectiveTracks = useMemo(() => {
-    if (!setupState.maxTermYears || setupState.maxTermYears <= 0) return tracks;
-    return tracks.map((t) => ({ ...t, termYears: Math.min(t.termYears, setupState.maxTermYears) }));
-  }, [tracks, setupState.maxTermYears]);
+    let t = tracks;
+    if (setupState.maxTermYears && setupState.maxTermYears > 0) {
+      t = t.map((tr) => ({ ...tr, termYears: Math.min(tr.termYears, setupState.maxTermYears) }));
+    }
+    // V3: החלת LTV
+    if (setupState.applyLTVAdjustment && ltv !== undefined) {
+      t = applyLTVAdjustmentToTracks(t, ltv);
+    }
+    return t;
+  }, [tracks, setupState.maxTermYears, setupState.applyLTVAdjustment, ltv]);
 
   const runOptimizer = useCallback(() => {
     setIsRunning(true);
@@ -2040,6 +2762,26 @@ export function MortgageOptimizerCalculator() {
             </div>
           )}
         </>
+      )}
+
+      {activeTab === 'stress' && (
+        <StressTestTab
+          monthlyIncome={setupState.netIncome}
+          monthlyPayment={result?.optimal.monthlyPayment ?? 0}
+        />
+      )}
+
+      {activeTab === 'bankcomp' && (
+        <BankCompTab
+          loanAmount={setupState.totalAmount}
+          baseTracks={effectiveTracks}
+          defaultTermYears={setupState.defaultTermYears}
+          constraints={constraints}
+        />
+      )}
+
+      {activeTab === 'timeline' && (
+        <TimelineTab />
       )}
     </div>
   );

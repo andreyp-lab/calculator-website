@@ -13,6 +13,18 @@ import {
   calculateStagedPayoffForMix,
   meetsBudgetConstraint,
   calculateThreeOptions,
+  calculateBankGradeAffordability,
+  calculateMonthlyPaymentWithGrace,
+  calculateTotalInterestWithGrace,
+  runIncomeStressTest,
+  compareBankOffers,
+  calculateTimeline,
+  getLTVRateAdjustment,
+  getLTVBandLabel,
+  calculateSavingsFromHigherDownPayment,
+  applyLTVAdjustmentToTracks,
+  DEFAULT_STRESS_SCENARIOS,
+  LTV_RATE_ADJUSTMENTS_2026,
   DEFAULT_TRACKS_2026,
   DEFAULT_CONSTRAINTS,
   BANK_OF_ISRAEL_PRIME_2026,
@@ -21,6 +33,8 @@ import {
   type OptimizerInput,
   type OptimizerConstraints,
   type PrepaymentPlan,
+  type AffordabilityProfile,
+  type BankOffer,
 } from '@/lib/calculators/mortgage-optimizer';
 
 // ============================================================
@@ -862,5 +876,456 @@ describe('ניתוח אינפלציה עם/ללא מסלולים צמודים', 
     };
     const result = optimizeMortgage(input);
     expect(result.optimal.indexedPercent).toBe(0);
+  });
+});
+
+// ============================================================
+// V3: Feature 1 — calculateBankGradeAffordability
+// ============================================================
+
+describe('calculateBankGradeAffordability', () => {
+  it('זוג + 2 ילדים, הכנסה 25K — כשירות בין 4,800-5,500 ₪', () => {
+    const profile: AffordabilityProfile = {
+      netIncome: 25_000,
+      familyStatus: 'couple',
+      numChildren: 2,
+      otherLoanPayments: 0,
+      monthlyInsurance: 0,
+    };
+    const result = calculateBankGradeAffordability(profile);
+    // זוג+2 ילדים: הוצאות מחייה 11,500 ₪
+    // זמין: 25,000 - 11,500 = 13,500
+    // DTI: 25K+LTV<40% → 45%, אחרת 35%
+    expect(result.maxMonthlyPayment).toBeGreaterThanOrEqual(4_500);
+    expect(result.maxMonthlyPayment).toBeLessThanOrEqual(6_500);
+  });
+
+  it('יחיד, הכנסה 12K — פרופיל חלש, DTI 30%', () => {
+    const profile: AffordabilityProfile = {
+      netIncome: 12_000,
+      familyStatus: 'single',
+      numChildren: 0,
+      otherLoanPayments: 0,
+      monthlyInsurance: 0,
+    };
+    const result = calculateBankGradeAffordability(profile);
+    // הכנסה 12K = borderline weak profile
+    // יחיד: 12,000 - 4,500 = 7,500 זמין
+    expect(result.breakdown.availableForMortgage).toBeCloseTo(7_500, 0);
+    expect(result.dtiLimit).toBeLessThanOrEqual(0.35);
+  });
+
+  it('הכנסה גבוהה (30K) + LTV נמוך — פרופיל חזק, DTI 45%', () => {
+    const profile: AffordabilityProfile = {
+      netIncome: 30_000,
+      familyStatus: 'couple',
+      numChildren: 0,
+      otherLoanPayments: 0,
+      monthlyInsurance: 0,
+      loanAmount: 500_000,
+      propertyValue: 2_000_000, // LTV = 25%
+    };
+    const result = calculateBankGradeAffordability(profile);
+    expect(result.dtiLimit).toBe(0.45);
+    expect(result.profileColor).toBe('green');
+  });
+
+  it('חובות אחרים מורידים את הכשירות', () => {
+    const baseProfile: AffordabilityProfile = {
+      netIncome: 20_000,
+      familyStatus: 'couple',
+      numChildren: 1,
+      otherLoanPayments: 0,
+      monthlyInsurance: 0,
+    };
+    const withDebts: AffordabilityProfile = {
+      ...baseProfile,
+      otherLoanPayments: 2_000,
+    };
+    const base = calculateBankGradeAffordability(baseProfile);
+    const withD = calculateBankGradeAffordability(withDebts);
+    expect(withD.maxMonthlyPayment).toBeLessThan(base.maxMonthlyPayment);
+  });
+
+  it('אזהרה כשהתשלום הרצוי גבוה מהמאושר', () => {
+    const profile: AffordabilityProfile = {
+      netIncome: 10_000,
+      familyStatus: 'couple',
+      numChildren: 3,
+      otherLoanPayments: 1_000,
+      monthlyInsurance: 500,
+    };
+    const result = calculateBankGradeAffordability(profile, 5_000);
+    // הכנסה 10K, הוצאות מחייה 13K → available = שלילי → 0
+    expect(result.warningMessage).toBeDefined();
+  });
+
+  it('ילד נוסף מעל 3 מוסיף 1,200 ₪ הוצאות', () => {
+    const with3Kids: AffordabilityProfile = {
+      netIncome: 25_000,
+      familyStatus: 'couple',
+      numChildren: 3,
+      otherLoanPayments: 0,
+      monthlyInsurance: 0,
+    };
+    const with4Kids: AffordabilityProfile = { ...with3Kids, numChildren: 4 };
+    const r3 = calculateBankGradeAffordability(with3Kids);
+    const r4 = calculateBankGradeAffordability(with4Kids);
+    expect(r3.livingExpenses + 1_200).toBeCloseTo(r4.livingExpenses, 0);
+  });
+
+  it('breakdown מחושב נכון', () => {
+    const profile: AffordabilityProfile = {
+      netIncome: 20_000,
+      familyStatus: 'couple',
+      numChildren: 1,
+      otherLoanPayments: 1_000,
+      monthlyInsurance: 200,
+    };
+    const result = calculateBankGradeAffordability(profile);
+    const expected = 20_000 - 9_500 - 1_000 - 200; // = 9,300
+    expect(result.breakdown.availableForMortgage).toBeCloseTo(expected, 0);
+  });
+});
+
+// ============================================================
+// V3: Feature 2 — Grace Period
+// ============================================================
+
+describe('calculateMonthlyPaymentWithGrace', () => {
+  it('גרייס 0 = שפיצר רגיל', () => {
+    const regular = calculateMonthlyPayment(1_000_000, 5.0, 25);
+    const withGrace = calculateMonthlyPaymentWithGrace(1_000_000, 5.0, 25, 0);
+    expect(withGrace.afterGrace).toBeCloseTo(regular, 0);
+  });
+
+  it('גרייס 12 חודשים ב-5% על 1M = ריבית בלבד 4,166 ₪', () => {
+    const { duringGrace } = calculateMonthlyPaymentWithGrace(1_000_000, 5.0, 25, 12);
+    // 1,000,000 × 5% / 12 = 4,166.67
+    expect(duringGrace).toBeCloseTo(4_166.67, 0);
+  });
+
+  it('תשלום אחרי גרייס גבוה יותר מתשלום ללא גרייס', () => {
+    const regular = calculateMonthlyPayment(1_000_000, 5.0, 25);
+    const { afterGrace } = calculateMonthlyPaymentWithGrace(1_000_000, 5.0, 25, 12);
+    // אחרי גרייס: נשאר 24 שנה (288 חודשים), תשלום גבוה יותר
+    expect(afterGrace).toBeGreaterThan(regular);
+  });
+
+  it('סכום 0 = תשלומי גרייס 0', () => {
+    const result = calculateMonthlyPaymentWithGrace(0, 5.0, 25, 12);
+    expect(result.duringGrace).toBe(0);
+    expect(result.afterGrace).toBe(0);
+  });
+
+  it('ריבית 0% בגרייס = 0 תשלום גרייס', () => {
+    const result = calculateMonthlyPaymentWithGrace(1_000_000, 0, 25, 12);
+    expect(result.duringGrace).toBe(0);
+    expect(result.afterGrace).toBeCloseTo(1_000_000 / (24 * 12), 0);
+  });
+});
+
+describe('calculateTotalInterestWithGrace', () => {
+  it('ריבית כוללת עם גרייס גדולה יותר מבלי גרייס', () => {
+    const noGrace = calculateTotalInterest(1_000_000, 5.0, 25);
+    const withGrace = calculateTotalInterestWithGrace(1_000_000, 5.0, 25, 24);
+    expect(withGrace).toBeGreaterThan(noGrace);
+  });
+
+  it('גרייס 0 = ריבית רגילה', () => {
+    const noGrace = calculateTotalInterest(1_000_000, 5.0, 25);
+    const withGrace0 = calculateTotalInterestWithGrace(1_000_000, 5.0, 25, 0);
+    expect(withGrace0).toBeCloseTo(noGrace, 0);
+  });
+});
+
+// ============================================================
+// V3: Feature 3 — Income Stress Test
+// ============================================================
+
+describe('runIncomeStressTest', () => {
+  it('מחזיר 4 תרחישים כברירת מחדל', () => {
+    const results = runIncomeStressTest(20_000, 5_000);
+    expect(results.length).toBe(DEFAULT_STRESS_SCENARIOS.length);
+  });
+
+  it('DTI מחושב נכון בתרחיש 20%', () => {
+    const results = runIncomeStressTest(20_000, 5_000);
+    const drop20 = results.find((r) => r.scenarioId === 'salary_drop_20');
+    expect(drop20).toBeDefined();
+    // הכנסה חדשה = 20,000 × 0.80 = 16,000
+    // DTI = 5,000 / 16,000 = 31.25%
+    expect(drop20!.newDTIPercent).toBeCloseTo(31.25, 0);
+    expect(drop20!.status).toBe('green');
+  });
+
+  it('ירידה 35% — DTI גבוה יותר', () => {
+    const results = runIncomeStressTest(20_000, 5_000);
+    const drop20 = results.find((r) => r.scenarioId === 'salary_drop_20');
+    const drop35 = results.find((r) => r.scenarioId === 'salary_drop_35');
+    expect(drop35!.newDTIPercent).toBeGreaterThan(drop20!.newDTIPercent);
+  });
+
+  it('מצב קיצוני עם הכנסה נמוכה — DTI אדום', () => {
+    // 10,000 ₪ הכנסה, 5,000 תשלום — ירידה של 50% = 5,000 הכנסה → DTI = 100%
+    const results = runIncomeStressTest(10_000, 5_000);
+    const oneEarner = results.find((r) => r.scenarioId === 'one_earner_5y');
+    expect(oneEarner!.status).toBe('red');
+  });
+
+  it('תרחיש מותאם אישית', () => {
+    const customScenarios = [{ id: 'custom', label: 'בדיקה', description: 'test', incomeMultiplier: 0.70 }];
+    const results = runIncomeStressTest(20_000, 4_000, customScenarios);
+    expect(results.length).toBe(1);
+    expect(results[0].scenarioId).toBe('custom');
+    // 20,000 × 0.70 = 14,000; DTI = 4,000/14,000 = 28.6%
+    expect(results[0].newDTIPercent).toBeCloseTo(28.6, 0);
+  });
+
+  it('status green כש-DTI < 40%', () => {
+    const results = runIncomeStressTest(30_000, 5_000);
+    const drop20 = results.find((r) => r.scenarioId === 'salary_drop_20');
+    // 30,000 × 0.8 = 24,000; DTI = 5,000/24,000 = 20.8%
+    expect(drop20!.status).toBe('green');
+  });
+});
+
+// ============================================================
+// V3: Feature 4 — Bank Comparison
+// ============================================================
+
+describe('compareBankOffers', () => {
+  it('דירוג: הצעה זולה יותר מקבלת rank=1', () => {
+    const offers: BankOffer[] = [
+      {
+        bankName: 'בנק יקר',
+        rates: [
+          { trackType: 'fixed_unlinked', rate: 5.0 },
+          { trackType: 'prime', rate: 5.5 },
+          { trackType: 'fixed_linked', rate: 4.0 },
+        ],
+        openingFee: 3_000,
+      },
+      {
+        bankName: 'בנק זול',
+        rates: [
+          { trackType: 'fixed_unlinked', rate: 3.8 },
+          { trackType: 'prime', rate: 4.8 },
+          { trackType: 'fixed_linked', rate: 2.8 },
+        ],
+        openingFee: 3_000,
+      },
+    ];
+    const ranked = compareBankOffers(offers, 1_500_000, DEFAULT_TRACKS_2026, 25, DEFAULT_CONSTRAINTS);
+    expect(ranked[0].offer.bankName).toBe('בנק זול');
+    expect(ranked[0].isBest).toBe(true);
+    expect(ranked[0].rank).toBe(1);
+  });
+
+  it('savingsVsBest = 0 עבור הטוב ביותר', () => {
+    const offers: BankOffer[] = [
+      {
+        bankName: 'בנק א',
+        rates: DEFAULT_TRACKS_2026.map((t) => ({ trackType: t.type, rate: t.rate })),
+        openingFee: 3_000,
+      },
+      {
+        bankName: 'בנק ב',
+        rates: DEFAULT_TRACKS_2026.map((t) => ({ trackType: t.type, rate: t.rate + 0.5 })),
+        openingFee: 3_000,
+      },
+    ];
+    const ranked = compareBankOffers(offers, 1_500_000, DEFAULT_TRACKS_2026, 25, DEFAULT_CONSTRAINTS);
+    expect(ranked[0].savingsVsBest).toBe(0);
+    expect(ranked[1].savingsVsBest).toBeGreaterThan(0);
+  });
+
+  it('אגרת פתיחה נכללת ב-ALL-IN', () => {
+    const baseOffer: BankOffer = {
+      bankName: 'בנק א',
+      rates: DEFAULT_TRACKS_2026.map((t) => ({ trackType: t.type, rate: t.rate })),
+      openingFee: 10_000,
+    };
+    const lowFeeOffer: BankOffer = {
+      bankName: 'בנק ב',
+      rates: DEFAULT_TRACKS_2026.map((t) => ({ trackType: t.type, rate: t.rate })),
+      openingFee: 1_000,
+    };
+    const ranked = compareBankOffers([baseOffer, lowFeeOffer], 1_500_000, DEFAULT_TRACKS_2026, 25, DEFAULT_CONSTRAINTS);
+    const a = ranked.find((r) => r.offer.bankName === 'בנק א');
+    const b = ranked.find((r) => r.offer.bankName === 'בנק ב');
+    // אותן ריביות, הפרש אגרות = 9,000
+    expect(Math.abs(a!.totalAllInCost - b!.totalAllInCost)).toBeCloseTo(9_000, -2);
+    expect(b!.isBest).toBe(true);
+  });
+
+  it('הצעה אחת — rank=1 וisBest=true', () => {
+    const offers: BankOffer[] = [{
+      bankName: 'בנק יחיד',
+      rates: DEFAULT_TRACKS_2026.map((t) => ({ trackType: t.type, rate: t.rate })),
+      openingFee: 3_000,
+    }];
+    const ranked = compareBankOffers(offers, 1_500_000, DEFAULT_TRACKS_2026, 25, DEFAULT_CONSTRAINTS);
+    expect(ranked.length).toBe(1);
+    expect(ranked[0].rank).toBe(1);
+    expect(ranked[0].isBest).toBe(true);
+  });
+});
+
+// ============================================================
+// V3: Feature 5 — Timeline
+// ============================================================
+
+describe('calculateTimeline', () => {
+  it('7 שלבים', () => {
+    const keysDate = new Date('2026-09-01');
+    const timeline = calculateTimeline(keysDate);
+    expect(timeline.stages.length).toBe(7);
+  });
+
+  it('תאריך התחלה = 84 ימים לפני קבלת מפתח', () => {
+    const keysDate = new Date('2026-09-01');
+    const timeline = calculateTimeline(keysDate);
+    const diffDays = Math.round((keysDate.getTime() - timeline.startDate.getTime()) / (1000 * 60 * 60 * 24));
+    expect(diffDays).toBe(84);
+  });
+
+  it('שלב אחרון = קבלת מפתח', () => {
+    const keysDate = new Date('2026-09-01');
+    const timeline = calculateTimeline(keysDate);
+    const lastStage = timeline.stages[timeline.stages.length - 1];
+    expect(lastStage.daysFromEnd).toBe(0);
+    expect(lastStage.title).toContain('מפתח');
+  });
+
+  it('שלבים ממוינים לפי daysFromStart', () => {
+    const keysDate = new Date('2026-09-01');
+    const timeline = calculateTimeline(keysDate);
+    for (let i = 1; i < timeline.stages.length; i++) {
+      expect(timeline.stages[i].daysFromStart).toBeGreaterThanOrEqual(timeline.stages[i - 1].daysFromStart);
+    }
+  });
+
+  it('formattedStart מכיל שנה', () => {
+    const keysDate = new Date('2026-09-01');
+    const timeline = calculateTimeline(keysDate);
+    expect(timeline.stages[0].formattedStart).toContain('2026');
+  });
+});
+
+// ============================================================
+// V3: Feature 6 — LTV-Adjusted Rates
+// ============================================================
+
+describe('getLTVRateAdjustment', () => {
+  it('LTV 25% → -0.40%', () => {
+    expect(getLTVRateAdjustment(0.25)).toBe(-0.40);
+  });
+
+  it('LTV 30% — על הגבול → -0.40%', () => {
+    expect(getLTVRateAdjustment(0.30)).toBe(-0.40);
+  });
+
+  it('LTV 35% → -0.30%', () => {
+    expect(getLTVRateAdjustment(0.35)).toBe(-0.30);
+  });
+
+  it('LTV 50% → -0.15%', () => {
+    expect(getLTVRateAdjustment(0.50)).toBe(-0.15);
+  });
+
+  it('LTV 65% → 0% (בסיס)', () => {
+    expect(getLTVRateAdjustment(0.65)).toBe(0.00);
+  });
+
+  it('LTV 73% → +0.10%', () => {
+    expect(getLTVRateAdjustment(0.73)).toBe(0.10);
+  });
+
+  it('LTV 0 → הנחה מקסימלית', () => {
+    expect(getLTVRateAdjustment(0)).toBe(-0.40);
+  });
+});
+
+describe('getLTVBandLabel', () => {
+  it('מחזיר תיאור בעברית', () => {
+    const label = getLTVBandLabel(0.50);
+    expect(label).toContain('%');
+  });
+
+  it('LTV 70% = ריבית בסיס', () => {
+    const label = getLTVBandLabel(0.65);
+    expect(label).toContain('בסיס');
+  });
+});
+
+describe('calculateSavingsFromHigherDownPayment', () => {
+  it('LTV 70% → LTV 60% חוסך ריבית', () => {
+    const result = calculateSavingsFromHigherDownPayment(
+      1_050_000, // 70% LTV
+      1_500_000, // שווי נכס
+      150_000,   // הון עצמי נוסף → LTV 60%
+      DEFAULT_TRACKS_2026,
+      25,
+    );
+    expect(result.currentLtv).toBeCloseTo(0.70, 2);
+    expect(result.newLtv).toBeCloseTo(0.60, 2);
+    expect(result.estimatedSavings).toBeGreaterThan(0);
+  });
+
+  it('LTV 50% → LTV 30% חוסך יותר מ-80K ₪', () => {
+    const result = calculateSavingsFromHigherDownPayment(
+      1_500_000, // LTV ~60%
+      2_500_000,
+      750_000,   // LTV ירד ל-30%
+      DEFAULT_TRACKS_2026,
+      25,
+    );
+    expect(result.estimatedSavings).toBeGreaterThan(80_000);
+  });
+
+  it('propertyValue 0 = LTV 0', () => {
+    const result = calculateSavingsFromHigherDownPayment(
+      1_000_000, 0, 200_000, DEFAULT_TRACKS_2026, 25
+    );
+    expect(result.currentLtv).toBe(0);
+  });
+});
+
+describe('applyLTVAdjustmentToTracks', () => {
+  it('LTV 25% מוריד ריבית ב-0.4%', () => {
+    const original = DEFAULT_TRACKS_2026.map((t) => ({ ...t }));
+    const adjusted = applyLTVAdjustmentToTracks(original, 0.25);
+    for (let i = 0; i < original.length; i++) {
+      expect(adjusted[i].rate).toBeCloseTo(Math.max(0.5, original[i].rate - 0.40), 2);
+    }
+  });
+
+  it('LTV 73% מעלה ריבית ב-0.1%', () => {
+    const original = DEFAULT_TRACKS_2026.map((t) => ({ ...t }));
+    const adjusted = applyLTVAdjustmentToTracks(original, 0.73);
+    for (let i = 0; i < original.length; i++) {
+      expect(adjusted[i].rate).toBeCloseTo(original[i].rate + 0.10, 2);
+    }
+  });
+
+  it('LTV 65% — ריבית ללא שינוי', () => {
+    const original = DEFAULT_TRACKS_2026.map((t) => ({ ...t }));
+    const adjusted = applyLTVAdjustmentToTracks(original, 0.65);
+    for (let i = 0; i < original.length; i++) {
+      expect(adjusted[i].rate).toBeCloseTo(original[i].rate, 2);
+    }
+  });
+
+  it('ריבית לא יורדת מתחת ל-0.5%', () => {
+    const lowRateTracks: OptimizerTrack[] = [{
+      id: 'test',
+      name: 'test',
+      type: 'fixed_unlinked',
+      rate: 0.3, // נמוכה מאוד
+      termYears: 25,
+    }];
+    const adjusted = applyLTVAdjustmentToTracks(lowRateTracks, 0.10);
+    expect(adjusted[0].rate).toBeGreaterThanOrEqual(0.5);
   });
 });

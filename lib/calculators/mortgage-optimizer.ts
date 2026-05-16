@@ -67,6 +67,7 @@ export interface OptimizerTrack {
   isLinked?: boolean; // הצמדה למדד
   rateVolatility?: number; // סטיית תקן של שינויי ריבית (%)
   inflationExposure?: number; // 0-1, עד כמה נחשף לאינפלציה
+  gracePeriodMonths?: number; // V3: תקופת גרייס (0-60 חודשים)
 }
 
 export interface OptimizerConstraints {
@@ -1470,3 +1471,609 @@ export const TRACK_RISK_LABELS: Record<OptimizerTrackType, string> = {
   variable_5y: 'בינוני',
   variable_unlinked: 'בינוני-גבוה',
 };
+
+// ============================================================
+// V3: Feature 1 — Bank-Grade Affordability
+// ============================================================
+
+/**
+ * טבלת הוצאות מחייה לפי הרכב משפחתי (2026, נחיית בנק ישראל)
+ * יחיד / זוג + מספר ילדים
+ */
+export const LIVING_EXPENSES_BY_FAMILY_2026: Record<string, number> = {
+  'single_0': 4_500,
+  'couple_0': 7_500,
+  'couple_1': 9_500,
+  'couple_2': 11_500,
+  'couple_3': 13_000,
+};
+export const LIVING_EXPENSES_EXTRA_CHILD_2026 = 1_200;
+
+export type FamilyStatus = 'single' | 'couple';
+
+export interface AffordabilityProfile {
+  netIncome: number;           // הכנסה נטו משפחתית (₪/חודש)
+  familyStatus: FamilyStatus;  // מצב משפחתי
+  numChildren: number;         // מספר ילדים (0-10)
+  otherLoanPayments: number;   // חובות אחרים (₪/חודש), ברירת מחדל: 0
+  monthlyInsurance: number;    // ביטוחים חודשיים (₪/חודש), ברירת מחדל: 0
+  loanAmount?: number;         // סכום המשכנתא (לחישוב LTV)
+  propertyValue?: number;      // שווי הנכס (לחישוב LTV)
+}
+
+export interface BankAffordabilityResult {
+  livingExpenses: number;          // הוצאות מחייה לפי הרכב משפחה
+  availableBeforeDTI: number;      // זמין לפני החלת גבול DTI
+  dtiLimit: number;                // גבול DTI שנקבע לפרופיל (35/40/45%)
+  maxMonthlyPayment: number;       // תשלום חודשי מקסימלי שהבנק יאשר
+  breakdown: {
+    netIncome: number;
+    minusLivingExpenses: number;
+    minusOtherLoans: number;
+    minusInsurance: number;
+    availableForMortgage: number;
+    dtiLimitPercent: number;
+    maxPayment: number;
+  };
+  profileLabel: string;            // תיאור הפרופיל (חזק/רגיל/חלש)
+  profileColor: 'green' | 'amber' | 'red';
+  warningMessage?: string;         // אזהרה אם התשלום הרצוי גבוה מהמאושר
+}
+
+/**
+ * חישוב כשירות בנק-גרייד
+ * מחשב את התשלום החודשי המקסימלי שהבנק יאשר לפי פרופיל הלווה
+ */
+export function calculateBankGradeAffordability(
+  profile: AffordabilityProfile,
+  wantedMonthlyPayment?: number,
+): BankAffordabilityResult {
+  const { netIncome, familyStatus, numChildren, otherLoanPayments, monthlyInsurance } = profile;
+
+  // הוצאות מחייה לפי הרכב משפחה
+  const key = numChildren <= 3
+    ? `${familyStatus}_${numChildren}`
+    : `${familyStatus}_3`;
+  const baseLivingExpenses = LIVING_EXPENSES_BY_FAMILY_2026[key] ?? LIVING_EXPENSES_BY_FAMILY_2026['couple_3'];
+  const extraKidsExpenses = numChildren > 3 ? (numChildren - 3) * LIVING_EXPENSES_EXTRA_CHILD_2026 : 0;
+  const livingExpenses = baseLivingExpenses + extraKidsExpenses;
+
+  // כסף זמין לפני DTI
+  const availableForMortgage = Math.max(0, netIncome - livingExpenses - otherLoanPayments - monthlyInsurance);
+
+  // קביעת גבול DTI לפי פרופיל
+  let dtiLimit = 0.35; // רגיל
+  let profileLabel = 'פרופיל רגיל';
+  let profileColor: 'green' | 'amber' | 'red' = 'amber';
+
+  // חישוב LTV אם יש
+  const ltv = profile.loanAmount && profile.propertyValue && profile.propertyValue > 0
+    ? profile.loanAmount / profile.propertyValue
+    : undefined;
+
+  if (netIncome > 25_000 && (!ltv || ltv < 0.40)) {
+    dtiLimit = 0.45;
+    profileLabel = 'פרופיל חזק';
+    profileColor = 'green';
+  } else if (netIncome < 12_000 || (ltv !== undefined && ltv > 0.70)) {
+    dtiLimit = 0.30;
+    profileLabel = 'פרופיל חלש';
+    profileColor = 'red';
+  }
+
+  const maxMonthlyPayment = Math.floor(availableForMortgage * dtiLimit);
+
+  const result: BankAffordabilityResult = {
+    livingExpenses,
+    availableBeforeDTI: availableForMortgage,
+    dtiLimit,
+    maxMonthlyPayment,
+    breakdown: {
+      netIncome,
+      minusLivingExpenses: livingExpenses,
+      minusOtherLoans: otherLoanPayments,
+      minusInsurance: monthlyInsurance,
+      availableForMortgage,
+      dtiLimitPercent: dtiLimit * 100,
+      maxPayment: maxMonthlyPayment,
+    },
+    profileLabel,
+    profileColor,
+  };
+
+  if (wantedMonthlyPayment !== undefined && wantedMonthlyPayment > maxMonthlyPayment) {
+    const gap = wantedMonthlyPayment - maxMonthlyPayment;
+    result.warningMessage = `התשלום הרצוי (${Math.round(wantedMonthlyPayment).toLocaleString('he-IL')} ₪) גבוה ב-${Math.round(gap).toLocaleString('he-IL')} ₪ ממה שהבנק יאשר.`;
+  }
+
+  return result;
+}
+
+// ============================================================
+// V3: Feature 2 — Grace Period (גרייס)
+// ============================================================
+
+/**
+ * חישוב תשלום עם תקופת גרייס
+ * בתקופת גרייס: ריבית בלבד על הקרן הקיימת
+ * לאחר גרייס: שפיצר על הקרן המלאה לתקופה שנשארה
+ */
+export function calculateMonthlyPaymentWithGrace(
+  amount: number,
+  annualRate: number,
+  termYears: number,
+  gracePeriodMonths: number,
+): { duringGrace: number; afterGrace: number } {
+  if (amount <= 0 || termYears <= 0) return { duringGrace: 0, afterGrace: 0 };
+
+  const r = annualRate / 100 / 12;
+  const graceDuringMonths = Math.max(0, Math.min(gracePeriodMonths, termYears * 12 - 1));
+
+  // במהלך גרייס: ריבית בלבד
+  const duringGrace = amount * r;
+
+  // לאחר גרייס: שפיצר על הקרן המלאה לתקופה שנשארה
+  const remainingMonths = termYears * 12 - graceDuringMonths;
+  let afterGrace = 0;
+  if (remainingMonths > 0) {
+    if (r === 0) {
+      afterGrace = amount / remainingMonths;
+    } else {
+      afterGrace = (amount * (r * Math.pow(1 + r, remainingMonths))) / (Math.pow(1 + r, remainingMonths) - 1);
+    }
+  }
+
+  return { duringGrace, afterGrace };
+}
+
+/**
+ * חישוב סה"כ ריבית עם תקופת גרייס
+ */
+export function calculateTotalInterestWithGrace(
+  amount: number,
+  annualRate: number,
+  termYears: number,
+  gracePeriodMonths: number,
+): number {
+  if (amount <= 0) return 0;
+  const { duringGrace, afterGrace } = calculateMonthlyPaymentWithGrace(amount, annualRate, termYears, gracePeriodMonths);
+  const grace = Math.max(0, Math.min(gracePeriodMonths, termYears * 12 - 1));
+  const remainingMonths = termYears * 12 - grace;
+  const totalPaid = duringGrace * grace + afterGrace * remainingMonths;
+  return totalPaid - amount;
+}
+
+// ============================================================
+// V3: Feature 3 — Income Stress Test
+// ============================================================
+
+export interface StressScenario {
+  id: string;
+  label: string;
+  description: string;
+  incomeMultiplier: number;  // 0-1, כמה מהכנסה נשאר
+  durationYears?: number;    // כמה שנים (אם רלוונטי)
+}
+
+export const DEFAULT_STRESS_SCENARIOS: StressScenario[] = [
+  {
+    id: 'salary_drop_20',
+    label: 'ירידה בשכר 20%',
+    description: 'תרחיש ריאליסטי — פיטורים חלקיים, מעבר תפקיד',
+    incomeMultiplier: 0.80,
+  },
+  {
+    id: 'salary_drop_35',
+    label: 'ירידה בשכר 35%',
+    description: 'מיתון קשה — ירידה משמעותית בהכנסה',
+    incomeMultiplier: 0.65,
+  },
+  {
+    id: 'one_earner_5y',
+    label: 'מפרנס אחד 5 שנים',
+    description: 'חופשת לידה, מחלה, פרישה של אחד מבני הזוג',
+    incomeMultiplier: 0.50,
+    durationYears: 5,
+  },
+  {
+    id: 'retirement_year20',
+    label: 'פרישה בשנה 20',
+    description: 'מה קורה כשממשיכים למשכנתא אחרי הפרישה',
+    incomeMultiplier: 0.60,
+    durationYears: undefined,
+  },
+];
+
+export interface StressTestResult {
+  scenarioId: string;
+  label: string;
+  description: string;
+  newMonthlyIncome: number;
+  monthlyPayment: number;
+  newDTIRatio: number;
+  newDTIPercent: number;
+  status: 'green' | 'amber' | 'red';
+  statusLabel: string;
+  recommendation: string;
+  incomeMultiplier: number;
+}
+
+/**
+ * הרצת מבחן עמידות להכנסה
+ */
+export function runIncomeStressTest(
+  monthlyIncome: number,
+  monthlyPayment: number,
+  scenarios: StressScenario[] = DEFAULT_STRESS_SCENARIOS,
+): StressTestResult[] {
+  return scenarios.map((sc) => {
+    const newIncome = monthlyIncome * sc.incomeMultiplier;
+    const dtiRatio = newIncome > 0 ? monthlyPayment / newIncome : 1;
+    const dtiPercent = dtiRatio * 100;
+
+    let status: 'green' | 'amber' | 'red';
+    let statusLabel: string;
+    let recommendation: string;
+
+    if (dtiRatio < 0.40) {
+      status = 'green';
+      statusLabel = 'עומד בנוחות';
+      recommendation = 'התשלום בר-השגה גם בתרחיש זה.';
+    } else if (dtiRatio < 0.55) {
+      status = 'amber';
+      statusLabel = 'מאתגר';
+      recommendation = 'רצוי לשמור רזרבה של 3-6 חודשי תשלומים.';
+    } else {
+      status = 'red';
+      statusLabel = 'בעייתי';
+      recommendation = 'שקול ביטוח חיים, רזרבה מוגדלת, או הקטנת ההלוואה.';
+    }
+
+    return {
+      scenarioId: sc.id,
+      label: sc.label,
+      description: sc.description,
+      newMonthlyIncome: Math.round(newIncome),
+      monthlyPayment,
+      newDTIRatio: dtiRatio,
+      newDTIPercent: dtiPercent,
+      status,
+      statusLabel,
+      recommendation,
+      incomeMultiplier: sc.incomeMultiplier,
+    };
+  });
+}
+
+// ============================================================
+// V3: Feature 4 — Bank Comparison Mode
+// ============================================================
+
+export type TrackType = OptimizerTrackType;
+
+export interface BankOffer {
+  bankName: string;
+  rates: { trackType: TrackType; rate: number }[];
+  openingFee: number;  // ₪ (סכום קבוע) או % אם < 5
+  openingFeeIsPercent?: boolean; // true = % מהקרן
+  notes?: string;
+}
+
+export interface RankedOffer {
+  rank: number;
+  offer: BankOffer;
+  totalInterest: number;
+  openingFeeAmount: number;
+  totalAllInCost: number;  // ריבית + אגרת פתיחה
+  monthlyPayment: number;
+  weightedRate: number;
+  savingsVsBest?: number;  // כמה יקר יותר מהטוב ביותר
+  isBest: boolean;
+}
+
+/**
+ * השוואת הצעות בנקים
+ * לכל הצעה מריץ אופטימייזר עם הריביות של אותו בנק
+ * ומחשב עלות ALL-IN
+ */
+export function compareBankOffers(
+  offers: BankOffer[],
+  loanAmount: number,
+  baseTracks: OptimizerTrack[],
+  termYears: number,
+  constraints: OptimizerConstraints,
+): RankedOffer[] {
+  const results: Omit<RankedOffer, 'rank' | 'savingsVsBest' | 'isBest'>[] = [];
+
+  for (const offer of offers) {
+    // עדכן ריביות לפי ההצעה
+    const offerTracks: OptimizerTrack[] = baseTracks.map((track) => {
+      const offerRate = offer.rates.find((r) => r.trackType === track.type);
+      return { ...track, rate: offerRate ? offerRate.rate : track.rate, termYears };
+    });
+
+    // הרץ אופטימייזר למציאת התמהיל האופטימלי עם ריביות אלו
+    const input: OptimizerInput = {
+      totalAmount: loanAmount,
+      tracks: offerTracks,
+      objective: 'minimize_total_cost',
+      constraints,
+    };
+    const optimized = optimizeMortgage(input);
+
+    const openingFeeAmount = offer.openingFeeIsPercent
+      ? (offer.openingFee / 100) * loanAmount
+      : offer.openingFee;
+
+    results.push({
+      offer,
+      totalInterest: optimized.optimal.totalCost,
+      openingFeeAmount,
+      totalAllInCost: optimized.optimal.totalCost + openingFeeAmount,
+      monthlyPayment: optimized.optimal.monthlyPayment,
+      weightedRate: optimized.optimal.weightedAvgRate,
+    });
+  }
+
+  // מיין לפי עלות ALL-IN
+  results.sort((a, b) => a.totalAllInCost - b.totalAllInCost);
+
+  const bestCost = results[0]?.totalAllInCost ?? 0;
+
+  return results.map((r, idx) => ({
+    ...r,
+    rank: idx + 1,
+    savingsVsBest: idx === 0 ? 0 : r.totalAllInCost - bestCost,
+    isBest: idx === 0,
+  }));
+}
+
+// ============================================================
+// V3: Feature 5 — Timeline Tool
+// ============================================================
+
+export interface TimelineStage {
+  stageNumber: number;
+  weekRange: string;      // למשל: "שבועות 1-2"
+  title: string;
+  tasks: string[];
+  daysFromStart: number;  // ימים מתחילת תהליך
+  daysFromEnd: number;    // ימים לפני קבלת מפתח
+}
+
+export const MORTGAGE_TIMELINE_STAGES: TimelineStage[] = [
+  {
+    stageNumber: 1,
+    weekRange: 'שבועות 1-2',
+    title: 'איסוף מסמכים',
+    tasks: [
+      'תלושי שכר 3 חודשים אחרונים',
+      'דפי בנק 3 חודשים',
+      'אישור יתרת חסכונות',
+      'תעודות זהות + חוזה נישואין',
+      'שומת מס אחרונה (עצמאי)',
+    ],
+    daysFromStart: 0,
+    daysFromEnd: 70,
+  },
+  {
+    stageNumber: 2,
+    weekRange: 'שבועות 3-4',
+    title: 'שמאות + 3 הצעות בנקים',
+    tasks: [
+      'הזמנת שמאי מוסמך לנכס',
+      'פנייה לפחות ל-3 בנקים להצעות',
+      'הגשת בקשות אישור עקרוני',
+      'בדיקת דוח BDI / נסח טאבו',
+    ],
+    daysFromStart: 14,
+    daysFromEnd: 56,
+  },
+  {
+    stageNumber: 3,
+    weekRange: 'שבועות 5-6',
+    title: 'מכרז ריבית בין בנקים',
+    tasks: [
+      'קבלת הצעות רשמיות מהבנקים',
+      'הצגת הצעת בנק א\' לבנק ב\' לשיפור',
+      'שימוש באופטימייזר להשוואת הצעות',
+      'ייעוץ עם יועץ משכנתאות עצמאי',
+    ],
+    daysFromStart: 28,
+    daysFromEnd: 42,
+  },
+  {
+    stageNumber: 4,
+    weekRange: 'שבוע 7',
+    title: 'בחירה + אישור עקרוני',
+    tasks: [
+      'בחירת הבנק הזוכה',
+      'קבלת אישור עקרוני (כפוף לשמאות)',
+      'חתימה על מסמכי הבנק הראשוניים',
+    ],
+    daysFromStart: 42,
+    daysFromEnd: 28,
+  },
+  {
+    stageNumber: 5,
+    weekRange: 'שבועות 8-10',
+    title: 'חתימה + עורך דין',
+    tasks: [
+      'בחירת עורך דין לענייני נדל"ן',
+      'חתימה על חוזה רכישה עם עו"ד',
+      'תשלום מקדמה (בדרך כלל 10%)',
+      'הגשת מסמכים מלאים לבנק',
+    ],
+    daysFromStart: 49,
+    daysFromEnd: 21,
+  },
+  {
+    stageNumber: 6,
+    weekRange: 'שבוע 11',
+    title: 'רישום בטאבו',
+    tasks: [
+      'רישום הערת אזהרה בטאבו',
+      'ביטוח חיים + ביטוח מבנה',
+      'אישור הבנק הסופי',
+    ],
+    daysFromStart: 70,
+    daysFromEnd: 14,
+  },
+  {
+    stageNumber: 7,
+    weekRange: 'שבוע 12',
+    title: 'העברת כסף → קבלת מפתח',
+    tasks: [
+      'העברת יתרת הסכום לקבלן/מוכר',
+      'רישום בעלות בטאבו',
+      'קבלת מפתח לדירה',
+      'ביצוע תשלום ראשון לבנק',
+    ],
+    daysFromStart: 77,
+    daysFromEnd: 0,
+  },
+];
+
+export interface TimelineWithDates {
+  stages: (TimelineStage & { startDate: Date; endDate: Date; formattedStart: string; formattedEnd: string })[];
+  keysDate: Date;
+  startDate: Date;
+  totalDays: number;
+}
+
+/**
+ * חישוב ציר זמן עם תאריכים
+ * @param keysDate - תאריך קבלת המפתח המתוכנן
+ */
+export function calculateTimeline(keysDate: Date): TimelineWithDates {
+  const totalDays = 84; // 12 שבועות
+  const startDate = new Date(keysDate);
+  startDate.setDate(startDate.getDate() - totalDays);
+
+  const stages = MORTGAGE_TIMELINE_STAGES.map((stage) => {
+    const stageStart = new Date(startDate);
+    stageStart.setDate(stageStart.getDate() + stage.daysFromStart);
+
+    const stageEnd = new Date(keysDate);
+    stageEnd.setDate(stageEnd.getDate() - stage.daysFromEnd);
+
+    const formatDate = (d: Date) =>
+      d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    return {
+      ...stage,
+      startDate: stageStart,
+      endDate: stageEnd,
+      formattedStart: formatDate(stageStart),
+      formattedEnd: formatDate(stageEnd),
+    };
+  });
+
+  return { stages, keysDate, startDate, totalDays };
+}
+
+// ============================================================
+// V3: Feature 6 — LTV-Adjusted Rates
+// ============================================================
+
+/**
+ * התאמת ריבית לפי LTV (Loan-to-Value)
+ * מבוסס על מדיניות בנקים ישראלית טיפוסית 2026
+ *
+ * LTV ≤ 30%: -0.4% הנחה
+ * LTV 30-45%: -0.3%
+ * LTV 45-60%: -0.15%
+ * LTV 60-70%: 0% (בסיס)
+ * LTV 70-75%: +0.1% פרמיה
+ */
+export const LTV_RATE_ADJUSTMENTS_2026: { maxLtv: number; adjustment: number; label: string }[] = [
+  { maxLtv: 0.30, adjustment: -0.40, label: 'עד 30% — הנחה מקסימלית' },
+  { maxLtv: 0.45, adjustment: -0.30, label: '30%-45% — הנחה גבוהה' },
+  { maxLtv: 0.60, adjustment: -0.15, label: '45%-60% — הנחה בינונית' },
+  { maxLtv: 0.70, adjustment: 0.00,  label: '60%-70% — ריבית בסיס' },
+  { maxLtv: 0.75, adjustment: 0.10,  label: '70%-75% — פרמיה' },
+];
+
+/**
+ * מחזיר את התאמת הריבית לפי LTV
+ */
+export function getLTVRateAdjustment(ltv: number): number {
+  if (ltv <= 0) return -0.40; // LTV 0% = הנחה מקסימלית
+  for (const band of LTV_RATE_ADJUSTMENTS_2026) {
+    if (ltv <= band.maxLtv) return band.adjustment;
+  }
+  return 0.10; // מעל 75% LTV = פרמיה (בדרך כלל לא מאושר)
+}
+
+/**
+ * מחזיר תיאור של רצועת ה-LTV
+ */
+export function getLTVBandLabel(ltv: number): string {
+  if (ltv <= 0) return 'LTV 0% — הון עצמי מלא';
+  for (const band of LTV_RATE_ADJUSTMENTS_2026) {
+    if (ltv <= band.maxLtv) return band.label;
+  }
+  return 'מעל 75% LTV — קרוב למקסימום';
+}
+
+/**
+ * חישוב חיסכון מהגדלת הון עצמי
+ * מחשב כמה ₪ נחסך לאורך חיי המשכנתא אם LTV יורד לרצועה נמוכה יותר
+ */
+export function calculateSavingsFromHigherDownPayment(
+  currentLoanAmount: number,
+  propertyValue: number,
+  additionalDownPayment: number,
+  baseTracks: OptimizerTrack[],
+  termYears: number,
+): {
+  currentLtv: number;
+  newLtv: number;
+  currentAdjustment: number;
+  newAdjustment: number;
+  rateReduction: number;
+  estimatedSavings: number;
+  newLoanAmount: number;
+} {
+  const currentLtv = propertyValue > 0 ? currentLoanAmount / propertyValue : 0;
+  const newLoanAmount = Math.max(0, currentLoanAmount - additionalDownPayment);
+  const newLtv = propertyValue > 0 ? newLoanAmount / propertyValue : 0;
+
+  const currentAdjustment = getLTVRateAdjustment(currentLtv);
+  const newAdjustment = getLTVRateAdjustment(newLtv);
+  const rateReduction = currentAdjustment - newAdjustment; // positive = saves money
+
+  // הערכת חיסכון: נחשב ריבית ממוצעת משוקללת ואז ממשמים לחיסכון
+  const avgRate = baseTracks.length > 0
+    ? baseTracks.reduce((s, t) => s + t.rate, 0) / baseTracks.length
+    : 4.5;
+
+  const currentInterest = calculateTotalInterest(currentLoanAmount, avgRate + currentAdjustment, termYears);
+  const newInterest = calculateTotalInterest(newLoanAmount, avgRate + newAdjustment, termYears);
+  const estimatedSavings = currentInterest - newInterest;
+
+  return {
+    currentLtv,
+    newLtv,
+    currentAdjustment,
+    newAdjustment,
+    rateReduction,
+    estimatedSavings,
+    newLoanAmount,
+  };
+}
+
+/**
+ * החלת התאמת LTV על מסלולים
+ * מוסיף/מוריד ריבית לפי ה-LTV
+ */
+export function applyLTVAdjustmentToTracks(
+  tracks: OptimizerTrack[],
+  ltv: number,
+): OptimizerTrack[] {
+  const adjustment = getLTVRateAdjustment(ltv);
+  return tracks.map((t) => ({
+    ...t,
+    rate: Math.max(0.5, t.rate + adjustment),
+  }));
+}
