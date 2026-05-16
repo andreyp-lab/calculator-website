@@ -6,6 +6,13 @@ import {
   checkConstraints,
   evaluateAllocation,
   computeRiskScore,
+  hasInflationRelevance,
+  calculateDTI,
+  calculateClosingCosts,
+  calculateStagedPayoff,
+  calculateStagedPayoffForMix,
+  meetsBudgetConstraint,
+  calculateThreeOptions,
   DEFAULT_TRACKS_2026,
   DEFAULT_CONSTRAINTS,
   BANK_OF_ISRAEL_PRIME_2026,
@@ -13,6 +20,7 @@ import {
   type OptimizerTrack,
   type OptimizerInput,
   type OptimizerConstraints,
+  type PrepaymentPlan,
 } from '@/lib/calculators/mortgage-optimizer';
 
 // ============================================================
@@ -510,5 +518,330 @@ describe('optimizeMortgage — correctness checks', () => {
     expect(result.optimal.scenarios.length).toBeGreaterThan(0);
     const firstScenario = result.optimal.scenarios[0];
     expect(firstScenario.name).toContain('אינפלציה');
+  });
+});
+
+// ============================================================
+// V2: hasInflationRelevance
+// ============================================================
+
+describe('hasInflationRelevance', () => {
+  it('מסלולים ללא צמוד = false', () => {
+    const tracks: OptimizerTrack[] = [
+      { id: 'p', name: 'פריים', type: 'prime', rate: 5.0, termYears: 25, isLinked: false },
+      { id: 'k', name: 'קל"צ', type: 'fixed_unlinked', rate: 4.2, termYears: 25, isLinked: false },
+    ];
+    expect(hasInflationRelevance(tracks)).toBe(false);
+  });
+
+  it('מסלול fixed_linked = true', () => {
+    const tracks: OptimizerTrack[] = [
+      { id: 'k', name: 'קל"צ', type: 'fixed_unlinked', rate: 4.2, termYears: 25, isLinked: false },
+      { id: 'i', name: 'צמוד', type: 'fixed_linked', rate: 3.0, termYears: 25, isLinked: true },
+    ];
+    expect(hasInflationRelevance(tracks)).toBe(true);
+  });
+
+  it('מסלול variable_unlinked = true (כי type matches)', () => {
+    const tracks: OptimizerTrack[] = [
+      { id: 'v', name: 'משתנה', type: 'variable_unlinked', rate: 4.5, termYears: 25, isLinked: false },
+    ];
+    // variable_unlinked = type matches the check
+    expect(hasInflationRelevance(tracks)).toBe(true);
+  });
+
+  it('isLinked=true גם ללא fixed_linked = true', () => {
+    const tracks: OptimizerTrack[] = [
+      { id: 'p', name: 'פריים', type: 'prime', rate: 5.0, termYears: 25, isLinked: true },
+    ];
+    expect(hasInflationRelevance(tracks)).toBe(true);
+  });
+
+  it('רשימה ריקה = false', () => {
+    expect(hasInflationRelevance([])).toBe(false);
+  });
+});
+
+// ============================================================
+// V2: calculateDTI
+// ============================================================
+
+describe('calculateDTI', () => {
+  it('DTI < 30% = safe', () => {
+    const result = calculateDTI(3000, 12000); // 25%
+    expect(result.status).toBe('safe');
+    expect(result.ratioPercent).toBeCloseTo(25, 0);
+  });
+
+  it('DTI 35% = good', () => {
+    const result = calculateDTI(4200, 12000); // 35%
+    expect(result.status).toBe('good');
+  });
+
+  it('DTI 44% = tight', () => {
+    const result = calculateDTI(5280, 12000); // 44%
+    expect(result.status).toBe('tight');
+  });
+
+  it('DTI 55% = risky', () => {
+    const result = calculateDTI(6600, 12000); // 55%
+    expect(result.status).toBe('risky');
+  });
+
+  it('DTI 40% על הגבול בין good ל-tight', () => {
+    const result = calculateDTI(4800, 12000); // 40%
+    // 40% זה הגבול: <0.40 = good, >=0.40 = tight
+    expect(result.status === 'good' || result.status === 'tight').toBe(true);
+  });
+
+  it('הכנסה 0 = status safe עם הודעת בקשת הכנסה', () => {
+    const result = calculateDTI(5000, 0);
+    expect(result.status).toBe('safe');
+    expect(result.netIncome).toBe(0);
+  });
+
+  it('ratio מחושב נכון', () => {
+    const result = calculateDTI(4800, 12000);
+    expect(result.ratio).toBeCloseTo(0.4, 2);
+    expect(result.ratioPercent).toBeCloseTo(40, 0);
+  });
+});
+
+// ============================================================
+// V2: calculateClosingCosts
+// ============================================================
+
+describe('calculateClosingCosts', () => {
+  it('חישוב נכון עם ברירות מחדל', () => {
+    const result = calculateClosingCosts(1_000_000);
+    expect(result.lawyerFeeAmount).toBeCloseTo(7500, 0); // 0.75%
+    expect(result.bankOpeningFeeAmount).toBeCloseTo(3750, 0); // 0.375%
+    expect(result.appraiserFee).toBe(3500);
+    expect(result.totalClosingCosts).toBeCloseTo(7500 + 3750 + 3500, 0);
+  });
+
+  it('biטוח שנתי מחושב נכון', () => {
+    const result = calculateClosingCosts(1_000_000);
+    expect(result.lifeInsuranceAnnual).toBeCloseTo(800, 0); // 0.08%
+    expect(result.buildingInsuranceAnnual).toBe(900);
+    expect(result.totalAnnualInsurance).toBeCloseTo(1700, 0);
+  });
+
+  it('פרמטרים מותאמים אישית', () => {
+    const result = calculateClosingCosts(2_000_000, {
+      lawyerFeePercent: 1.0,
+      appraiserFee: 4000,
+    });
+    expect(result.lawyerFeeAmount).toBeCloseTo(20000, 0);
+    expect(result.appraiserFee).toBe(4000);
+  });
+
+  it('totalClosingCosts = עו"ד + שמאי + פתיחה', () => {
+    const result = calculateClosingCosts(1_500_000, { lawyerFeePercent: 0.5, appraiserFee: 3500, bankOpeningFeePercent: 0.25 });
+    const expected = 7500 + 3500 + 3750;
+    expect(result.totalClosingCosts).toBeCloseTo(result.lawyerFeeAmount + result.appraiserFee + result.bankOpeningFeeAmount, 0);
+  });
+});
+
+// ============================================================
+// V2: calculateStagedPayoff
+// ============================================================
+
+describe('calculateStagedPayoff', () => {
+  it('ללא פירעונות — תוצאה זהה לחישוב רגיל', () => {
+    const amount = 1_000_000;
+    const rate = 5.0;
+    const termYears = 25;
+    const result = calculateStagedPayoff(amount, rate, termYears, []);
+    const expectedInterest = calculateTotalInterest(amount, rate, termYears);
+    // טולרנס: הסימולציה יכולה להיות שונה מעט מנוסחת סגור
+    expect(result.newTotalInterest).toBeGreaterThan(0);
+    expect(Math.abs(result.newTotalInterest - expectedInterest)).toBeLessThan(expectedInterest * 0.05);
+  });
+
+  it('פירעון מוקדם מפחית ריבית', () => {
+    const amount = 1_000_000;
+    const rate = 5.0;
+    const termYears = 25;
+    const withPrepayment = calculateStagedPayoff(amount, rate, termYears, [{ year: 5, amount: 100_000 }]);
+    const withoutPrepayment = calculateStagedPayoff(amount, rate, termYears, []);
+
+    expect(withPrepayment.newTotalInterest).toBeLessThan(withoutPrepayment.newTotalInterest);
+    expect(withPrepayment.interestSaved).toBeGreaterThan(50_000); // לפחות 50K חיסכון
+  });
+
+  it('פירעון מוקדם מקצר תקופה', () => {
+    const amount = 1_000_000;
+    const rate = 5.0;
+    const termYears = 25;
+    const withPrepayment = calculateStagedPayoff(amount, rate, termYears, [{ year: 5, amount: 200_000 }]);
+
+    expect(withPrepayment.newTermMonths).toBeLessThan(termYears * 12);
+    expect(withPrepayment.monthsSaved).toBeGreaterThan(0);
+  });
+
+  it('פירעון מוקדם גדול (80% מהקרן) מסיים מוקדם מאוד', () => {
+    const amount = 1_000_000;
+    const rate = 5.0;
+    const termYears = 25;
+    const result = calculateStagedPayoff(amount, rate, termYears, [{ year: 3, amount: 800_000 }]);
+    // אחרי פירעון 80% בשנה 3, אמור להסתיים הרבה לפני 25 שנה
+    expect(result.newTermMonths).toBeLessThan(termYears * 12 * 0.7);
+  });
+
+  it('prepaymentEvents מכיל את אירוע הפירעון', () => {
+    const result = calculateStagedPayoff(1_000_000, 5.0, 25, [{ year: 5, amount: 100_000 }]);
+    expect(result.prepaymentEvents.length).toBeGreaterThan(0);
+    const ev = result.prepaymentEvents[0];
+    expect(ev.year).toBe(5);
+    expect(ev.amount).toBeCloseTo(100_000, -3);
+  });
+
+  it('interestSaved = originalTotalInterest - newTotalInterest', () => {
+    const result = calculateStagedPayoff(1_000_000, 5.0, 25, [{ year: 5, amount: 100_000 }]);
+    expect(result.interestSaved).toBeCloseTo(result.originalTotalInterest - result.newTotalInterest, 0);
+  });
+});
+
+// ============================================================
+// V2: calculateStagedPayoffForMix
+// ============================================================
+
+describe('calculateStagedPayoffForMix', () => {
+  it('חיסכון כולל > 0 כשיש פירעון מוקדם', () => {
+    const input = makeInput();
+    const result = optimizeMortgage(input);
+    const prepayments: PrepaymentPlan[] = [
+      { id: 'pp1', yearNumber: 5, amount: 100_000, trackId: 'auto', description: 'קרן השתלמות' },
+    ];
+    const payoffResult = calculateStagedPayoffForMix(result.optimal, input.tracks, prepayments, true);
+    expect(payoffResult.totalInterestSaved).toBeGreaterThan(0);
+  });
+
+  it('comparisonSeries מכיל נתונים', () => {
+    const input = makeInput();
+    const result = optimizeMortgage(input);
+    const prepayments: PrepaymentPlan[] = [
+      { id: 'pp1', yearNumber: 3, amount: 50_000, trackId: 'auto', description: 'בונוס' },
+    ];
+    const payoffResult = calculateStagedPayoffForMix(result.optimal, input.tracks, prepayments, true);
+    expect(payoffResult.comparisonSeries.length).toBeGreaterThan(0);
+  });
+
+  it('totalOriginalInterest > totalNewInterest', () => {
+    const input = makeInput();
+    const result = optimizeMortgage(input);
+    const prepayments: PrepaymentPlan[] = [
+      { id: 'pp1', yearNumber: 7, amount: 200_000, trackId: 'auto', description: 'ירושה' },
+    ];
+    const payoffResult = calculateStagedPayoffForMix(result.optimal, input.tracks, prepayments, true);
+    expect(payoffResult.totalOriginalInterest).toBeGreaterThan(payoffResult.totalNewInterest);
+  });
+});
+
+// ============================================================
+// V2: meetsBudgetConstraint
+// ============================================================
+
+describe('meetsBudgetConstraint', () => {
+  it('ללא מגבלה (0) = תמיד עומד', () => {
+    const input = makeInput();
+    const result = optimizeMortgage(input);
+    expect(meetsBudgetConstraint(result.optimal, 0)).toBe(true);
+  });
+
+  it('מגבלה גבוהה מהתשלום = עומד', () => {
+    const input = makeInput();
+    const result = optimizeMortgage(input);
+    const highLimit = result.optimal.monthlyPayment + 5000;
+    expect(meetsBudgetConstraint(result.optimal, highLimit)).toBe(true);
+  });
+
+  it('מגבלה נמוכה מהתשלום = לא עומד', () => {
+    const input = makeInput();
+    const result = optimizeMortgage(input);
+    const lowLimit = result.optimal.monthlyPayment - 100;
+    expect(meetsBudgetConstraint(result.optimal, lowLimit)).toBe(false);
+  });
+});
+
+// ============================================================
+// V2: calculateThreeOptions
+// ============================================================
+
+describe('calculateThreeOptions', () => {
+  it('מחזיר 3 אפשרויות עם labels', () => {
+    const input = makeInput();
+    const result = calculateThreeOptions(input);
+    expect(result.lowestMonthly.label).toBeDefined();
+    expect(result.balanced.label).toBeDefined();
+    expect(result.lowestCost.label).toBeDefined();
+  });
+
+  it('lowestMonthly.monthlyPayment <= balanced.monthlyPayment (בסבלנות)', () => {
+    const input = makeInput();
+    const result = calculateThreeOptions(input);
+    // lowestMonthly אמור להיות <= balanced (עם סבלנות 200 ₪)
+    expect(result.lowestMonthly.monthlyPayment).toBeLessThanOrEqual(result.balanced.monthlyPayment + 200);
+  });
+
+  it('lowestCost.totalCost <= balanced.totalCost (בסבלנות)', () => {
+    const input = makeInput();
+    const result = calculateThreeOptions(input);
+    // lowestCost אמור להיות <= balanced בעלות כוללת (עם סבלנות)
+    expect(result.lowestCost.totalCost).toBeLessThanOrEqual(result.balanced.totalCost + 10_000);
+  });
+
+  it('כל 3 האפשרויות עומדות בדרישות בנק ישראל', () => {
+    const input = makeInput();
+    const result = calculateThreeOptions(input);
+    expect(result.lowestMonthly.isRegulationCompliant).toBe(true);
+    expect(result.balanced.isRegulationCompliant).toBe(true);
+    expect(result.lowestCost.isRegulationCompliant).toBe(true);
+  });
+
+  it('כל 3 האפשרויות עם תשלום > 0', () => {
+    const input = makeInput();
+    const result = calculateThreeOptions(input);
+    expect(result.lowestMonthly.monthlyPayment).toBeGreaterThan(0);
+    expect(result.balanced.monthlyPayment).toBeGreaterThan(0);
+    expect(result.lowestCost.monthlyPayment).toBeGreaterThan(0);
+  });
+});
+
+// ============================================================
+// V2: inflation hidden when no linked tracks
+// ============================================================
+
+describe('ניתוח אינפלציה עם/ללא מסלולים צמודים', () => {
+  it('תמהיל ללא צמוד: hasInflationRelevance = false', () => {
+    const tracks: OptimizerTrack[] = [
+      { id: 'p', name: 'פריים', type: 'prime', rate: 5.0, termYears: 25, isLinked: false },
+      { id: 'k', name: 'קל"צ', type: 'fixed_unlinked', rate: 4.2, termYears: 25, isLinked: false },
+    ];
+    expect(hasInflationRelevance(tracks)).toBe(false);
+  });
+
+  it('תמהיל עם fixed_linked: hasInflationRelevance = true', () => {
+    const tracks: OptimizerTrack[] = [
+      ...DEFAULT_TRACKS_2026.map((t) => ({ ...t })),
+    ];
+    expect(hasInflationRelevance(tracks)).toBe(true); // DEFAULT_TRACKS_2026 contains fixed_linked
+  });
+
+  it('indexedPercent = 0 כשאין מסלולים צמודים', () => {
+    const tracks: OptimizerTrack[] = [
+      { id: 'p', name: 'פריים', type: 'prime', rate: 5.0, termYears: 25, isLinked: false },
+      { id: 'k', name: 'קל"צ', type: 'fixed_unlinked', rate: 4.2, termYears: 25, isLinked: false },
+    ];
+    const constraints: OptimizerConstraints = { ...DEFAULT_CONSTRAINTS, minFixedPercent: 0.33 };
+    const input: OptimizerInput = {
+      totalAmount: 1_000_000,
+      tracks,
+      objective: 'minimize_total_cost',
+      constraints,
+    };
+    const result = optimizeMortgage(input);
+    expect(result.optimal.indexedPercent).toBe(0);
   });
 });

@@ -1016,6 +1016,383 @@ export function calculateDefaultMix(input: OptimizerInput): AllocationResult {
 }
 
 // ============================================================
+// V2: טיפוסים חדשים
+// ============================================================
+
+/** פירעון מוקדם מתוכנן */
+export interface PrepaymentPlan {
+  id: string;
+  yearNumber: number; // בשנה כמה (1-30)
+  amount: number; // סכום (₪)
+  trackId: string | 'auto'; // 'auto' = החל על המסלול עם הריבית הגבוהה ביותר
+  description: string; // "קרן השתלמות", "ירושה", וכו'
+}
+
+/** אילוצי תקציב משתמש */
+export interface MaxConstraints {
+  maxMonthlyPayment?: number; // תשלום חודשי מקסימלי (₪)
+  maxTermYears?: number; // תקופה מקסימלית (שנים)
+}
+
+/** מידע DTI (יחס חוב-הכנסה) */
+export interface DTIInfo {
+  ratio: number; // 0-1
+  ratioPercent: number; // 0-100
+  status: 'safe' | 'good' | 'tight' | 'risky';
+  statusLabel: string;
+  statusColor: string; // tailwind color class
+  message: string;
+  netIncome: number;
+  monthlyPayment: number;
+}
+
+/** עלויות נלוות */
+export interface ClosingCosts {
+  lawyerFeePercent: number; // % עו"ד
+  lawyerFeeAmount: number;
+  appraiserFee: number; // שמאי (₪)
+  bankOpeningFeePercent: number; // % אגרת פתיחה
+  bankOpeningFeeAmount: number;
+  lifeInsurancePercent: number; // % מהיתרה/שנה
+  lifeInsuranceAnnual: number;
+  buildingInsuranceAnnual: number; // ₪/שנה
+  totalClosingCosts: number;
+  totalAnnualInsurance: number;
+}
+
+/** תוצאת סימולציה עם פירעונות מוקדמים */
+export interface StagedPayoffResult {
+  trackId: string;
+  trackName: string;
+  originalAmount: number;
+  originalTotalInterest: number;
+  originalTermMonths: number;
+  newTotalInterest: number;
+  newTermMonths: number;
+  interestSaved: number;
+  monthsSaved: number;
+  prepaymentEvents: {
+    month: number;
+    year: number;
+    amount: number;
+    balanceBefore: number;
+    balanceAfter: number;
+    newMonthlyPayment: number;
+  }[];
+  monthlyBalanceSeries: { month: number; balance: number; payment: number }[];
+}
+
+/** 3 אפשרויות מוצגות */
+export interface ThreeOptionsResult {
+  lowestMonthly: AllocationResult & { label: string; description: string };
+  balanced: AllocationResult & { label: string; description: string };
+  lowestCost: AllocationResult & { label: string; description: string };
+}
+
+// ============================================================
+// V2: פונקציות חדשות
+// ============================================================
+
+/**
+ * בדיקה האם קיימים מסלולים צמודים בתמהיל
+ */
+export function hasInflationRelevance(tracks: OptimizerTrack[]): boolean {
+  return tracks.some((t) => t.type === 'fixed_linked' || t.type === 'variable_unlinked' || t.isLinked);
+}
+
+/**
+ * חישוב DTI (Debt-to-Income ratio)
+ */
+export function calculateDTI(monthlyPayment: number, netIncome: number): DTIInfo {
+  if (netIncome <= 0) {
+    return {
+      ratio: 0,
+      ratioPercent: 0,
+      status: 'safe',
+      statusLabel: 'לא הוזנה הכנסה',
+      statusColor: 'gray',
+      message: 'הזן הכנסה משפחתית נטו לחישוב יחס ההחזר',
+      netIncome,
+      monthlyPayment,
+    };
+  }
+  const ratio = monthlyPayment / netIncome;
+  const ratioPercent = ratio * 100;
+
+  if (ratio < 0.30) {
+    return {
+      ratio, ratioPercent, status: 'safe',
+      statusLabel: 'תזרים בטוח',
+      statusColor: 'green',
+      message: `החזר חודשי ${ratioPercent.toFixed(0)}% מההכנסה — תזרים בטוח ונוח. נשאר לך ${((1 - ratio) * 100).toFixed(0)}% להוצאות חיים.`,
+      netIncome, monthlyPayment,
+    };
+  } else if (ratio < 0.40) {
+    return {
+      ratio, ratioPercent, status: 'good',
+      statusLabel: 'שמרני',
+      statusColor: 'amber',
+      message: `החזר חודשי ${ratioPercent.toFixed(0)}% מההכנסה — בטווח המקובל. רצוי לשמור רזרבה חודשית.`,
+      netIncome, monthlyPayment,
+    };
+  } else if (ratio < 0.50) {
+    return {
+      ratio, ratioPercent, status: 'tight',
+      statusLabel: 'מתוח',
+      statusColor: 'orange',
+      message: `החזר חודשי ${ratioPercent.toFixed(0)}% מההכנסה — מתוח. שקול תקופה ארוכה יותר, סכום קטן יותר, או הכנסה נוספת.`,
+      netIncome, monthlyPayment,
+    };
+  } else {
+    return {
+      ratio, ratioPercent, status: 'risky',
+      statusLabel: 'לא מומלץ',
+      statusColor: 'red',
+      message: `החזר חודשי ${ratioPercent.toFixed(0)}% מההכנסה — גבוה מאוד. הבנקים בדרך כלל לא יאשרו מעל 50%. מומלץ לשקול מחדש.`,
+      netIncome, monthlyPayment,
+    };
+  }
+}
+
+/**
+ * חישוב עלויות נלוות
+ */
+export function calculateClosingCosts(
+  loanAmount: number,
+  params: {
+    lawyerFeePercent?: number; // ברירת מחדל: 0.75%
+    appraiserFee?: number; // ברירת מחדל: 3500
+    bankOpeningFeePercent?: number; // ברירת מחדל: 0.375%
+    lifeInsurancePercent?: number; // ברירת מחדל: 0.08%
+    buildingInsuranceAnnual?: number; // ברירת מחדל: 900
+  } = {},
+): ClosingCosts {
+  const lawyerFeePercent = params.lawyerFeePercent ?? 0.75;
+  const appraiserFee = params.appraiserFee ?? 3500;
+  const bankOpeningFeePercent = params.bankOpeningFeePercent ?? 0.375;
+  const lifeInsurancePercent = params.lifeInsurancePercent ?? 0.08;
+  const buildingInsuranceAnnual = params.buildingInsuranceAnnual ?? 900;
+
+  const lawyerFeeAmount = (lawyerFeePercent / 100) * loanAmount;
+  const bankOpeningFeeAmount = (bankOpeningFeePercent / 100) * loanAmount;
+  const lifeInsuranceAnnual = (lifeInsurancePercent / 100) * loanAmount;
+
+  return {
+    lawyerFeePercent,
+    lawyerFeeAmount,
+    appraiserFee,
+    bankOpeningFeePercent,
+    bankOpeningFeeAmount,
+    lifeInsurancePercent,
+    lifeInsuranceAnnual,
+    buildingInsuranceAnnual,
+    totalClosingCosts: lawyerFeeAmount + appraiserFee + bankOpeningFeeAmount,
+    totalAnnualInsurance: lifeInsuranceAnnual + buildingInsuranceAnnual,
+  };
+}
+
+/**
+ * סימולציית פירעון מוקדם לתמהיל אחד
+ * ברירת מחדל: שמור תשלום חודשי, קצר תקופה
+ */
+export function calculateStagedPayoff(
+  amount: number,
+  annualRate: number,
+  termYears: number,
+  prepayments: { year: number; amount: number }[],
+  keepPaymentConstant = true, // true = קצר תקופה, false = הפחת תשלום
+): StagedPayoffResult {
+  const r = annualRate / 100 / 12;
+  const n = termYears * 12;
+  const originalMonthly = calculateMonthlyPayment(amount, annualRate, termYears);
+  const originalTotalInterest = originalMonthly * n - amount;
+
+  // מיין פירעונות לפי שנה
+  const sortedPrepayments = [...prepayments].sort((a, b) => a.year - b.year);
+
+  let balance = amount;
+  let currentMonthly = originalMonthly;
+  let totalInterestPaid = 0;
+  const monthlyBalanceSeries: { month: number; balance: number; payment: number }[] = [];
+  const prepaymentEvents: StagedPayoffResult['prepaymentEvents'] = [];
+
+  let month = 0;
+  let maxMonths = n + 12; // מרווח בטיחות
+
+  while (balance > 1 && month < maxMonths) {
+    month++;
+    const currentYear = Math.ceil(month / 12);
+
+    // בדוק פירעונות מוקדמים בתחילת שנה זו
+    const yearPrepayments = sortedPrepayments.filter((p) => p.year === currentYear && month === (currentYear - 1) * 12 + 1);
+    for (const pp of yearPrepayments) {
+      const payAmt = Math.min(pp.amount, balance);
+      const balanceBefore = balance;
+      balance -= payAmt;
+      const remainingMonths = maxMonths - month;
+      const newMonthly = keepPaymentConstant
+        ? currentMonthly // שמור תשלום, קצר תקופה
+        : (balance > 0 && r > 0 ? calculateMonthlyPayment(balance, annualRate, Math.max(1, Math.ceil(remainingMonths / 12))) : 0);
+
+      if (!keepPaymentConstant) currentMonthly = newMonthly;
+
+      prepaymentEvents.push({
+        month,
+        year: currentYear,
+        amount: payAmt,
+        balanceBefore,
+        balanceAfter: balance,
+        newMonthlyPayment: currentMonthly,
+      });
+    }
+
+    if (balance <= 1) break;
+
+    // חישוב ריבית חודשית
+    const interestThisMonth = balance * r;
+    const principalThisMonth = Math.min(currentMonthly - interestThisMonth, balance);
+    totalInterestPaid += interestThisMonth;
+    balance -= principalThisMonth;
+    if (balance < 0) balance = 0;
+
+    monthlyBalanceSeries.push({ month, balance: Math.round(balance), payment: Math.round(currentMonthly) });
+  }
+
+  return {
+    trackId: '',
+    trackName: '',
+    originalAmount: amount,
+    originalTotalInterest: Math.round(originalTotalInterest),
+    originalTermMonths: n,
+    newTotalInterest: Math.round(totalInterestPaid),
+    newTermMonths: month,
+    interestSaved: Math.round(originalTotalInterest - totalInterestPaid),
+    monthsSaved: n - month,
+    prepaymentEvents,
+    monthlyBalanceSeries,
+  };
+}
+
+/**
+ * סימולציית פירעונות לכלל התמהיל
+ */
+export function calculateStagedPayoffForMix(
+  allocation: AllocationResult,
+  tracks: OptimizerTrack[],
+  prepayments: PrepaymentPlan[],
+  keepPaymentConstant = true,
+): {
+  trackResults: (StagedPayoffResult & { trackId: string; trackName: string })[];
+  totalInterestSaved: number;
+  totalOriginalInterest: number;
+  totalNewInterest: number;
+  newPayoffDateMonths: number; // החודש המקסימלי בו מסלול מסתיים
+  comparisonSeries: { year: number; withPrepayment: number; withoutPrepayment: number }[];
+} {
+  const trackResults = tracks.map((track, idx) => {
+    const alloc = allocation.allocation[idx];
+    if (!alloc || alloc.amount <= 0) {
+      const empty: StagedPayoffResult & { trackId: string; trackName: string } = {
+        trackId: track.id, trackName: track.name,
+        originalAmount: 0, originalTotalInterest: 0, originalTermMonths: 0,
+        newTotalInterest: 0, newTermMonths: 0, interestSaved: 0, monthsSaved: 0,
+        prepaymentEvents: [], monthlyBalanceSeries: [],
+      };
+      return empty;
+    }
+
+    // פירעונות למסלול זה: auto → לך למסלול עם הריבית הגבוהה ביותר
+    const highestRateTrackId = tracks.reduce((best, t, i) => {
+      const a = allocation.allocation[i];
+      if (!a || a.amount <= 0) return best;
+      if (!best || t.rate > tracks.find((x) => x.id === best)!.rate) return t.id;
+      return best;
+    }, '');
+
+    const trackPrepayments = prepayments
+      .filter((p) => p.trackId === track.id || (p.trackId === 'auto' && track.id === highestRateTrackId))
+      .map((p) => ({ year: p.yearNumber, amount: p.amount }));
+
+    const res = calculateStagedPayoff(alloc.amount, track.rate, track.termYears, trackPrepayments, keepPaymentConstant);
+    return { ...res, trackId: track.id, trackName: track.name };
+  });
+
+  const totalOriginalInterest = trackResults.reduce((s, r) => s + r.originalTotalInterest, 0);
+  const totalNewInterest = trackResults.reduce((s, r) => s + r.newTotalInterest, 0);
+  const newPayoffDateMonths = Math.max(...trackResults.map((r) => r.newTermMonths));
+
+  // סדרת השוואה שנתית
+  const maxYears = Math.ceil(Math.max(...trackResults.map((r) => r.originalTermMonths)) / 12);
+  const comparisonSeries: { year: number; withPrepayment: number; withoutPrepayment: number }[] = [];
+
+  for (let year = 1; year <= maxYears; year++) {
+    const month = year * 12;
+    let withPrepayment = 0;
+    let withoutPrepayment = 0;
+    for (let i = 0; i < tracks.length; i++) {
+      const res = trackResults[i];
+      const alloc = allocation.allocation[i];
+      if (!alloc || alloc.amount <= 0) continue;
+      const monthly = calculateMonthlyPayment(alloc.amount, tracks[i].rate, tracks[i].termYears);
+      // ללא פירעון: תשלום חודשי × חודש
+      if (month <= res.originalTermMonths) withoutPrepayment += monthly;
+      // עם פירעון: מתוך הסדרה
+      const entry = res.monthlyBalanceSeries.find((e) => e.month === month);
+      if (entry) withPrepayment += entry.payment;
+    }
+    comparisonSeries.push({ year, withPrepayment: Math.round(withPrepayment), withoutPrepayment: Math.round(withoutPrepayment) });
+  }
+
+  return {
+    trackResults,
+    totalInterestSaved: totalOriginalInterest - totalNewInterest,
+    totalOriginalInterest,
+    totalNewInterest,
+    newPayoffDateMonths,
+    comparisonSeries,
+  };
+}
+
+/**
+ * בדיקת אם הקצאה עומדת באילוץ תשלום מקסימלי
+ */
+export function meetsBudgetConstraint(result: AllocationResult, maxMonthlyPayment: number): boolean {
+  if (!maxMonthlyPayment || maxMonthlyPayment <= 0) return true;
+  return result.monthlyPayment <= maxMonthlyPayment;
+}
+
+/**
+ * ייצור 3 אפשרויות: lowest monthly / balanced / lowest cost
+ */
+export function calculateThreeOptions(input: OptimizerInput): ThreeOptionsResult {
+  const lowestMonthlyInput: OptimizerInput = { ...input, objective: 'minimize_monthly_payment' };
+  const balancedInput: OptimizerInput = { ...input, objective: 'balanced' };
+  const lowestCostInput: OptimizerInput = { ...input, objective: 'minimize_total_cost' };
+
+  const lowestMonthlyRes = optimizeMortgage(lowestMonthlyInput).optimal;
+  const balancedRes = optimizeMortgage(balancedInput).optimal;
+  const lowestCostRes = optimizeMortgage(lowestCostInput).optimal;
+
+  return {
+    lowestMonthly: {
+      ...lowestMonthlyRes,
+      label: 'תשלום חודשי מינימלי',
+      description: 'תקופה ארוכה, תשלום נמוך — מתאים לתזרים מצומצם',
+    },
+    balanced: {
+      ...balancedRes,
+      label: 'מאוזן',
+      description: 'איזון בין תשלום חודשי לעלות כוללת',
+    },
+    lowestCost: {
+      ...lowestCostRes,
+      label: 'עלות כוללת מינימלית',
+      description: 'פחות ריבית סה"כ — מתאים למי שמסוגל לשלם יותר כל חודש',
+    },
+  };
+}
+
+// ============================================================
 // ייצוא נוסף
 // ============================================================
 
