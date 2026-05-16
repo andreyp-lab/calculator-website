@@ -341,6 +341,53 @@ export const blogPosts: BlogPost[] = [
     },
     related: ['mortgage-tracks-guide-2026'],
   },
+
+  // ===== אשכול B - עצמאיים =====
+  {
+    slug: 'bituach-leumi-self-employed-deep-dive',
+    title: 'ביטוח לאומי לעצמאי 2026 - חישוב מקיף, השוואה לשכיר, והטבת מס 52%',
+    description:
+      'כל מה שעצמאי חייב לדעת על ב.ל.: 2 מדרגות (6.10%/18.00%), הטבת מס 52%, השוואה לשכיר, תשלומים רבעוניים, וזכויות. עדכני 2026.',
+    category: 'עצמאיים',
+    readTime: '14 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/self-employed/social-security',
+      label: 'מחשבון ביטוח לאומי לעצמאי',
+    },
+    related: ['pension-deduction-self-employed-2026', 'study-fund-self-employed-strategy', 'net-self-employed-explained'],
+  },
+  {
+    slug: 'pension-self-employed-11-percent',
+    title: 'פנסיה לעצמאי 2026 - 11% או 16.5%? המדריך המלא להטבת המס',
+    description:
+      'המדריך המעשי להפקדה לפנסיה לעצמאי: ניכוי 11%, זיכוי 5.5%, חובת הפקדה מינימלית, ושילוב עם קרן השתלמות. עדכני 2026 עם דוגמאות.',
+    category: 'עצמאיים',
+    readTime: '13 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/self-employed/year-end-tax-simulator',
+      label: 'סימולטור הערכת מס לסוף שנה',
+    },
+    related: ['bituach-leumi-self-employed-deep-dive', 'study-fund-self-employed-strategy', 'pension-deduction-self-employed-2026'],
+  },
+  {
+    slug: 'tax-advances-self-employed-survival',
+    title: 'מקדמות מס לעצמאי 2026 - איך לא לחיות בחרדה מסוף השנה',
+    description:
+      'המדריך המעשי למקדמות מס: חישוב נכון, תיאום אמצע שנה (טופס 1300), תזרים מזומנים, וריבית פיגורים. עדכני 2026 עם 4 תרחישים.',
+    category: 'עצמאיים',
+    readTime: '12 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/self-employed/tax-advances',
+      label: 'מחשבון מקדמות מס לעצמאי',
+    },
+    related: ['bituach-leumi-self-employed-deep-dive', 'pension-self-employed-11-percent', 'year-end-tax-planning-self-employed'],
+  },
 ];
 
 // ===== עזרים =====
