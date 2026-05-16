@@ -20,8 +20,43 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
 
   const related = getRelatedPosts(slug, 3);
 
+  // Schema.org Article JSON-LD - Google Rich Snippets
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    inLanguage: 'he-IL',
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Organization',
+      name: 'חשבונאי - FinCalc',
+      url: 'https://cheshbonai.co.il',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'חשבונאי - FinCalc',
+      url: 'https://cheshbonai.co.il',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://cheshbonai.co.il/og-default.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://cheshbonai.co.il/blog/${post.slug}`,
+    },
+    articleSection: post.category,
+    timeRequired: post.readTime,
+  };
+
   return (
     <div className="space-y-8 mt-12 not-prose">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* CTA למחשבון */}
       {post.relatedCalculator && (
         <div className="bg-gradient-to-br from-blue-50 to-emerald-50 border-2 border-blue-200 rounded-xl p-6">

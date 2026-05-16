@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
+import { blogPosts } from '@/content/blog/registry';
 
-const SITE_URL = 'https://calculator-website-eight.vercel.app';
+const SITE_URL = 'https://cheshbonai.co.il';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -10,99 +11,119 @@ export default function sitemap(): MetadataRoute.Sitemap {
     path: string,
     changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] = 'monthly',
     priority: number = 0.8,
+    lastMod: Date = lastModified,
   ) => ({
     url: `${SITE_URL}${path}`,
-    lastModified,
+    lastModified: lastMod,
     changeFrequency,
     priority,
   });
 
+  // אוטומטית מ-Registry
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) =>
+    make(`/blog/${post.slug}`, 'monthly', post.featured ? 0.85 : 0.75, new Date(post.date)),
+  );
+
   return [
-    // עמודי בית
+    // ===== עמודי בית =====
     make('', 'weekly', 1.0),
-    make('/about', 'monthly', 0.7),
+    make('/about', 'monthly', 0.6),
     make('/contact', 'monthly', 0.5),
 
-    // ===== קטגוריות =====
-    make('/employee-rights', 'weekly', 0.9),
-    make('/personal-tax', 'weekly', 0.9),
-    make('/real-estate', 'weekly', 0.9),
-    make('/self-employed', 'weekly', 0.9),
-    make('/investments', 'weekly', 0.9),
-    make('/savings', 'weekly', 0.9),
-    make('/vehicles', 'weekly', 0.9),
-    make('/insurance', 'weekly', 0.9),
+    // ===== Hubs קטגוריות =====
+    make('/salaried', 'weekly', 0.95),
+    make('/self-employed', 'weekly', 0.95),
+    make('/loans', 'weekly', 0.95),
+    make('/topics', 'weekly', 0.85),
+    make('/tools', 'weekly', 0.90),
 
-    // ===== מחשבונים פיננסי אישי =====
-    make('/employee-rights/severance', 'monthly', 0.9),
-    make('/employee-rights/recreation-pay', 'monthly', 0.9),
-    make('/employee-rights/maternity-benefits', 'monthly', 0.9),
-    make('/employee-rights/unemployment-benefits', 'monthly', 0.9),
-    make('/employee-rights/reserve-duty-pay', 'monthly', 0.9),
-    make('/employee-rights/minimum-wage', 'weekly', 0.9),
-    make('/employee-rights/annual-leave', 'monthly', 0.85),
-    make('/employee-rights/sick-pay', 'monthly', 0.85),
-    make('/employee-rights/annual-bonus', 'monthly', 0.85),
-    make('/employee-rights/work-grant', 'monthly', 0.9),
-    make('/personal-tax/income-tax', 'monthly', 0.9),
-    make('/personal-tax/tax-credits', 'monthly', 0.9),
-    make('/personal-tax/tax-refund', 'monthly', 0.95),
-    make('/personal-tax/work-value', 'monthly', 0.85),
+    // ===== קטגוריות משנה =====
+    make('/employee-rights', 'weekly', 0.90),
+    make('/personal-tax', 'weekly', 0.90),
+    make('/real-estate', 'weekly', 0.90),
+    make('/investments', 'weekly', 0.90),
+    make('/savings', 'weekly', 0.90),
+    make('/vehicles', 'weekly', 0.90),
+    make('/insurance', 'weekly', 0.85),
+
+    // ===== מחשבונים: שכירים / מסים =====
     make('/personal-tax/salary-net-gross', 'weekly', 0.95),
-    make('/real-estate/mortgage', 'monthly', 0.9),
-    make('/real-estate/purchase-tax', 'monthly', 0.9),
-    make('/real-estate/capital-gains-tax', 'monthly', 0.9),
-    make('/self-employed/vat', 'monthly', 0.9),
-    make('/self-employed/hourly-rate', 'monthly', 0.9),
-    make('/self-employed/employer-cost', 'monthly', 0.9),
-    make('/self-employed/tax-advances', 'monthly', 0.9),
-    make('/self-employed/mandatory-pension', 'monthly', 0.9),
-    make('/self-employed/corporation-vs-individual', 'monthly', 0.9),
-    make('/self-employed/dividend-vs-salary', 'monthly', 0.9),
+    make('/personal-tax/tax-refund', 'weekly', 0.95),
+    make('/personal-tax/income-tax', 'monthly', 0.90),
+    make('/personal-tax/tax-credits', 'monthly', 0.90),
+    make('/personal-tax/work-value', 'monthly', 0.85),
 
-    // ===== מחשבוני השקעות =====
-    make('/investments/compound-interest', 'monthly', 0.9),
-    make('/investments/roi', 'monthly', 0.9),
-    make('/investments/retirement', 'monthly', 0.9),
-    make('/investments/fire', 'monthly', 0.9),
+    // ===== מחשבונים: זכויות עובד =====
+    make('/employee-rights/severance', 'monthly', 0.95),
+    make('/employee-rights/maternity-benefits', 'monthly', 0.90),
+    make('/employee-rights/unemployment-benefits', 'monthly', 0.90),
+    make('/employee-rights/reserve-duty-pay', 'monthly', 0.90),
+    make('/employee-rights/minimum-wage', 'monthly', 0.90),
+    make('/employee-rights/recreation-pay', 'monthly', 0.90),
+    make('/employee-rights/annual-leave', 'monthly', 0.85),
+    make('/employee-rights/annual-bonus', 'monthly', 0.85),
+    make('/employee-rights/sick-pay', 'monthly', 0.85),
+    make('/employee-rights/work-grant', 'monthly', 0.90),
 
-    // ===== מחשבוני חיסכון =====
-    make('/savings/family-budget', 'monthly', 0.9),
-    make('/savings/loan-repayment', 'monthly', 0.9),
-    make('/savings/personal-loan', 'monthly', 0.9),
+    // ===== מחשבונים: עצמאיים =====
+    make('/self-employed/year-end-tax-simulator', 'weekly', 0.95),
+    make('/self-employed/net', 'weekly', 0.95),
+    make('/self-employed/social-security', 'monthly', 0.95),
+    make('/self-employed/vat', 'monthly', 0.90),
+    make('/self-employed/tax-advances', 'monthly', 0.90),
+    make('/self-employed/hourly-rate', 'monthly', 0.90),
+    make('/self-employed/employer-cost', 'monthly', 0.90),
+    make('/self-employed/mandatory-pension', 'monthly', 0.90),
+    make('/self-employed/corporation-vs-individual', 'monthly', 0.90),
+    make('/self-employed/dividend-vs-salary', 'monthly', 0.90),
 
-    // ===== מחשבוני רכב =====
-    make('/vehicles/fuel-cost', 'monthly', 0.9),
-    make('/vehicles/leasing-vs-buying', 'monthly', 0.9),
-    make('/vehicles/company-car-benefit', 'monthly', 0.9),
+    // ===== מחשבונים: נדל"ן =====
+    make('/real-estate/mortgage', 'weekly', 0.95),
+    make('/real-estate/mortgage-optimizer', 'weekly', 0.98), // הדגל
+    make('/real-estate/purchase-tax', 'monthly', 0.90),
+    make('/real-estate/capital-gains-tax', 'monthly', 0.90),
 
-    // ===== מחשבוני ביטוחים =====
-    make('/insurance/pension', 'monthly', 0.9),
+    // ===== מחשבונים: השקעות =====
+    make('/investments/compound-interest', 'monthly', 0.95),
+    make('/investments/retirement', 'monthly', 0.90),
+    make('/investments/fire', 'monthly', 0.90),
+    make('/investments/roi', 'monthly', 0.85),
+
+    // ===== מחשבונים: חיסכון / הלוואות =====
+    make('/savings/family-budget', 'monthly', 0.90),
+    make('/savings/loan-repayment', 'monthly', 0.90),
+    make('/savings/personal-loan', 'monthly', 0.90),
+
+    // ===== מחשבונים: רכב =====
+    make('/vehicles/leasing-vs-buying', 'monthly', 0.95),
+    make('/vehicles/fuel-cost', 'monthly', 0.90),
+    make('/vehicles/company-car-benefit', 'monthly', 0.90),
+
+    // ===== מחשבונים: ביטוחים =====
+    make('/insurance/pension', 'monthly', 0.90),
 
     // ===== כלים מקצועיים =====
-    make('/tools', 'weekly', 0.85),
-    make('/tools/unified', 'monthly', 0.9),
+    make('/tools/unified', 'monthly', 0.90),
+    make('/tools/start', 'monthly', 0.85),
     make('/tools/budget', 'monthly', 0.85),
+    make('/tools/budget-wizard', 'monthly', 0.85),
     make('/tools/cash-flow', 'monthly', 0.85),
+    make('/tools/cashflow-solo', 'monthly', 0.85),
+    make('/tools/forecast', 'monthly', 0.85),
     make('/tools/financial-analysis', 'monthly', 0.85),
     make('/tools/loan-eligibility', 'monthly', 0.85),
     make('/tools/break-even', 'monthly', 0.85),
     make('/tools/business-valuation', 'monthly', 0.85),
     make('/tools/customer-lifetime-value', 'monthly', 0.85),
+    make('/tools/capital', 'monthly', 0.85),
 
     // ===== בלוג =====
-    make('/blog', 'weekly', 0.7),
-    make('/blog/tax-changes-2026', 'monthly', 0.7),
-    make('/blog/tax-refund-complete-guide-2026', 'weekly', 0.95),
-    make('/blog/company-vs-self-employed-ultimate-guide', 'weekly', 0.95),
-    make('/blog/vat-complete-guide-israel', 'weekly', 0.9),
-    make('/blog/employee-rights-israel-2026', 'weekly', 0.95),
-    make('/blog/tax-reduction-25-legal-ways', 'weekly', 0.95),
+    make('/blog', 'daily', 0.85),
+    ...blogEntries, // 44 פוסטי בלוג מתוך registry
 
     // ===== דפי השוואה =====
-    make('/compare', 'weekly', 0.85),
-    make('/compare/employee-vs-self-employed', 'monthly', 0.9),
-    make('/compare/rent-vs-buy', 'monthly', 0.9),
+    make('/compare/employee-vs-self-employed', 'monthly', 0.85),
+    make('/compare/rent-vs-buy', 'monthly', 0.85),
     make('/compare/leasing-vs-buying-comparison', 'monthly', 0.85),
 
     // ===== משפטי =====
