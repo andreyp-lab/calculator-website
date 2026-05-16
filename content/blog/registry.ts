@@ -218,6 +218,53 @@ export const blogPosts: BlogPost[] = [
     related: ['severance-pay-complete-guide', 'employee-rights-israel-2026'],
   },
 
+  // ===== אשכול TAX 2026 =====
+  {
+    slug: 'income-tax-brackets-2026-complete-guide',
+    title: 'מדרגות מס הכנסה 2026 - המדריך המלא והשינויים מהשנים הקודמות',
+    description:
+      'כל מדרגות המס לשנת 2026: 7 מדרגות מ-10% עד 50%, השינויים לעומת 2024-2025, חישובים לפי שכר ונקודות זיכוי. עדכני ומאומת.',
+    category: 'מיסוי אישי',
+    readTime: '15 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/personal-tax/salary-net-gross',
+      label: 'חשב את המס שלך',
+    },
+    related: ['salary-net-2026-complete-guide', 'tax-changes-2026', 'tax-credit-points-2026'],
+  },
+  {
+    slug: 'surtax-yesef-2026-explained',
+    title: 'מס יסף 3% (2026) - מי משלם, כמה זה עולה, ואיך להפחית?',
+    description:
+      'מס יסף 3% הוא חבות מס נוספת על הכנסה שנתית מעל 721,560 ₪. מי חייב, חישוב מדויק, פטורים ואסטרטגיות הפחתה חוקיות.',
+    category: 'מיסוי אישי',
+    readTime: '10 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/personal-tax/salary-net-gross',
+      label: 'חשב את המס שלך',
+    },
+    related: ['income-tax-brackets-2026-complete-guide', 'tax-reduction-25-legal-ways', 'tax-changes-2026'],
+  },
+  {
+    slug: 'tax-credit-points-2026',
+    title: 'נקודות זיכוי 2026 - איך לחשב נכון ולא לאבד אלפי שקלים',
+    description:
+      'כל נקודות הזיכוי לשנת 2026: 2,904 ₪/שנה לנקודה, חישוב לפי מצב משפחתי, ילדים, עולה חדש, חייל משוחרר. כולל טעויות נפוצות שעולות כסף.',
+    category: 'מיסוי אישי',
+    readTime: '12 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/personal-tax/salary-net-gross',
+      label: 'חשב את המס שלך',
+    },
+    related: ['income-tax-brackets-2026-complete-guide', 'surtax-yesef-2026-explained', 'tax-refund-complete-guide-2026'],
+  },
+
   // ===== מאמרים חדשים מאי 2026 =====
   {
     slug: 'inflation-and-investments',
