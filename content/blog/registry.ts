@@ -389,6 +389,53 @@ export const blogPosts: BlogPost[] = [
     related: ['boi-directive-329-mortgage-rules', 'ltv-mortgage-rates-secret', 'mortgage-tracks-guide-2026'],
   },
 
+  // ===== אשכול D - זכויות עובד =====
+  {
+    slug: 'maternity-benefits-complete-guide-2026',
+    title: 'דמי לידה 2026 - חישוב מלא, זכויות הארכה, וחופשת אב',
+    description:
+      'המדריך המלא לדמי לידה 2026: 15 שבועות + הארכות לתאומים/פגות, חישוב לפי שכר, חופשת אב 7 ימים, ושעת הנקה. עם דוגמאות מספריות.',
+    category: 'זכויות עובדים',
+    readTime: '13 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/employee-rights/maternity-benefits',
+      label: 'מחשבון דמי לידה',
+    },
+    related: ['severance-pay-tax-strategies', 'recreation-pay-2026', 'employee-rights-israel-2026'],
+  },
+  {
+    slug: 'severance-pay-tax-strategies',
+    title: 'פיצויי פיטורין 2026 - 4 אסטרטגיות מס שיכולות לחסוך 100,000 ₪',
+    description:
+      'פיצויי פיטורין יכולים להגיע למאות אלפי שקלים, אבל מס יכול לקחת חצי. 4 אסטרטגיות מס חוקיות: פטור מיידי, רצף קצבה, פריסה, שילוב. עם דוגמאות.',
+    category: 'זכויות עובדים',
+    readTime: '14 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/employee-rights/severance',
+      label: 'מחשבון פיצויי פיטורין',
+    },
+    related: ['maternity-benefits-complete-guide-2026', 'recreation-pay-2026', 'vacation-redemption-guide', 'employee-rights-israel-2026'],
+  },
+  {
+    slug: 'reserve-duty-pay-iron-swords-2026',
+    title: 'תגמולי מילואים חרבות ברזל 2026 - 4 המענקים שמגיעים לך',
+    description:
+      'מילואים בתקופת חרבות ברזל: מענק כללי 5,000 ₪, מענק יומי 280 ₪, מענק חזרה לעבודה 5,000 ₪. במאמר: כל הזכויות, חישוב מדויק, ופטור ממס.',
+    category: 'זכויות עובדים',
+    readTime: '11 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/employee-rights/reserve-duty-pay',
+      label: 'מחשבון תגמולי מילואים',
+    },
+    related: ['severance-pay-tax-strategies', 'employee-rights-israel-2026', 'tax-refund-complete-guide-2026'],
+  },
+
   // ===== אשכול B - עצמאיים =====
   {
     slug: 'bituach-leumi-self-employed-deep-dive',
