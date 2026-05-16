@@ -342,6 +342,53 @@ export const blogPosts: BlogPost[] = [
     related: ['mortgage-tracks-guide-2026'],
   },
 
+  // ===== אשכול C - משכנתא =====
+  {
+    slug: 'boi-directive-329-mortgage-rules',
+    title: 'הוראת בנק ישראל 329 - 3 הכללים החבויים שכל לוקח משכנתא חייב להכיר',
+    description:
+      'הוראה 329 (מאי 2013) קובעת מה הבנק חייב לאשר ומה אסור: 1/3 קבוע, 2/3 משתנה, 1/3 פריים. במאמר: כל הכללים עם דוגמאות מספריות + טעויות נפוצות.',
+    category: 'נדל"ן ומשכנתאות',
+    readTime: '11 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/real-estate/mortgage-optimizer',
+      label: 'אופטימייזר תמהיל משכנתא',
+    },
+    related: ['ltv-mortgage-rates-secret', 'mortgage-tracks-guide-2026', 'mortgage-refinance-when-and-how'],
+  },
+  {
+    slug: 'ltv-mortgage-rates-secret',
+    title: 'LTV - הסוד שיכול לחסוך לך 100,000 ₪ במשכנתא',
+    description:
+      'LTV (Loan-to-Value) הוא היחס בין המשכנתא לשווי הנכס. ככל שיש לך יותר הון עצמי - הבנק מציע ריבית טובה יותר. במאמר: הטבלה המדויקת + חישוב חיסכון.',
+    category: 'נדל"ן ומשכנתאות',
+    readTime: '10 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/real-estate/mortgage-optimizer',
+      label: 'אופטימייזר תמהיל משכנתא',
+    },
+    related: ['boi-directive-329-mortgage-rules', 'mortgage-refinance-when-and-how', 'mortgage-tracks-guide-2026'],
+  },
+  {
+    slug: 'mortgage-refinance-when-and-how',
+    title: 'מחזור משכנתא 2026 - מתי, איך, וכמה אתה יכול לחסוך',
+    description:
+      'מחזור משכנתא יכול לחסוך עשרות אלפי שקלים, אבל עלויות 5-15K. במאמר: מתי שווה, חישוב breakeven מדויק, טעויות נפוצות, ואיך לבחור בנק חדש.',
+    category: 'נדל"ן ומשכנתאות',
+    readTime: '12 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/real-estate/mortgage-optimizer',
+      label: 'אופטימייזר תמהיל משכנתא',
+    },
+    related: ['boi-directive-329-mortgage-rules', 'ltv-mortgage-rates-secret', 'mortgage-tracks-guide-2026'],
+  },
+
   // ===== אשכול B - עצמאיים =====
   {
     slug: 'bituach-leumi-self-employed-deep-dive',
