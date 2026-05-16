@@ -436,6 +436,53 @@ export const blogPosts: BlogPost[] = [
     related: ['severance-pay-tax-strategies', 'employee-rights-israel-2026', 'tax-refund-complete-guide-2026'],
   },
 
+  // ===== אשכול E - השקעות =====
+  {
+    slug: 'compound-interest-and-time-magic',
+    title: 'ריבית דריבית: למה זמן חשוב יותר מסכום ההפקדה',
+    description:
+      'ריבית דריבית היא הכוח הפיננסי החזק ביותר. במאמר: דוגמאות מספריות שיהממו אותך, מה זה Rule of 72, ולמה להתחיל בגיל 25 שווה פי 2 מגיל 35.',
+    category: 'השקעות',
+    readTime: '12 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/investments/compound-interest',
+      label: 'מחשבון ריבית דריבית',
+    },
+    related: ['inflation-and-investments', 'fire-strategy-israel', 'pension-self-employed-11-percent'],
+  },
+  {
+    slug: 'fire-strategy-israel',
+    title: 'FIRE בישראל 2026 - איך לפרוש מוקדם ב-5 דרכים שונות',
+    description:
+      'תנועת FIRE (Financial Independence Retire Early) בישראל: 5 סוגי FIRE עם דוגמאות מספריות לישראלי ממוצע. כולל בידול חברתי ופיתרונות לביטוח לאומי.',
+    category: 'השקעות',
+    readTime: '15 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/investments/fire',
+      label: 'מחשבון FIRE',
+    },
+    related: ['compound-interest-and-time-magic', 'study-fund-self-employed-strategy', 'pension-self-employed-11-percent'],
+  },
+  {
+    slug: 'portfolio-allocation-by-age',
+    title: 'תיק השקעות לפי גיל - כלל "120 פחות גיל" והאמת מאחוריו',
+    description:
+      'איך לבנות תיק השקעות לפי הגיל שלך: 120 פחות גיל ל-מניות, ההמרה הריאלית בישראל, ו-5 תיקי השקעות לדוגמא ב-2026 לכל קבוצת גיל.',
+    category: 'השקעות',
+    readTime: '13 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/investments/compound-interest',
+      label: 'מחשבון ריבית דריבית',
+    },
+    related: ['compound-interest-and-time-magic', 'fire-strategy-israel', 'inflation-and-investments'],
+  },
+
   // ===== אשכול B - עצמאיים =====
   {
     slug: 'bituach-leumi-self-employed-deep-dive',
