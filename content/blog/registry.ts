@@ -530,6 +530,53 @@ export const blogPosts: BlogPost[] = [
     related: ['purchase-tax-2026-complete-guide', 'capital-gains-tax-property-2026', 'compound-interest-and-time-magic'],
   },
 
+  // ===== אשכול G - כלים לעסקים =====
+  {
+    slug: 'business-budget-planning-2026',
+    title: 'תקציב לעסק קטן 2026 - איך לבנות תקציב שמחזיק לכל השנה',
+    description:
+      'תכנון תקציב לעסק קטן: P&L, חזוי הוצאות, מודל גידול, וטיפים למניעת תרחישי חוסר בכסף. כולל תבנית מעשית וחישובי תזרים מזומנים.',
+    category: 'תקציב וחיסכון',
+    readTime: '12 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/tools/budget',
+      label: 'מחשבון תקציב ו-P&L',
+    },
+    related: ['cash-flow-forecast-business', 'business-valuation-methods', 'tax-advances-self-employed-survival'],
+  },
+  {
+    slug: 'cash-flow-forecast-business',
+    title: 'תזרים מזומנים לעסק - איך להימנע מקריסה תזרימית',
+    description:
+      'תזרים מזומנים הוא הגורם #1 לכישלון עסקי. במאמר: איך לבנות תחזית תזרים, לזהות איתותי אזהרה, וטכניקות תכנון. עם תבנית 12 חודשים.',
+    category: 'תקציב וחיסכון',
+    readTime: '13 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/tools/cash-flow',
+      label: 'מחשבון תזרים מזומנים',
+    },
+    related: ['business-budget-planning-2026', 'business-valuation-methods'],
+  },
+  {
+    slug: 'business-valuation-methods',
+    title: 'הערכת שווי עסק - 4 שיטות שכל בעל עסק חייב להכיר',
+    description:
+      'איך להעריך שווי של עסק לפני מכירה / שותפות / מיזוג: שיטת DCF, מכפילי שוק, NAV ושיטת ההכנסה. כולל דוגמאות לעסקים קטנים בישראל.',
+    category: 'תקציב וחיסכון',
+    readTime: '14 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/tools/business-valuation',
+      label: 'מחשבון הערכת שווי עסק',
+    },
+    related: ['business-budget-planning-2026', 'cash-flow-forecast-business', 'company-vs-self-employed-ultimate-guide'],
+  },
+
   // ===== אשכול B - עצמאיים =====
   {
     slug: 'bituach-leumi-self-employed-deep-dive',
