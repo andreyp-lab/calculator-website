@@ -132,15 +132,34 @@ describe('checkConstraints', () => {
     expect(checkConstraints(percents, tracks, constraints)).toBe(false);
   });
 
-  it('33% קבוע בדיוק — עומד', () => {
-    // prime=67%, kalatz=33%, indexed=0%
-    const percents = [0.67, 0.33, 0];
+  it('33% קבוע + 33% פריים + 34% צמוד — עומד (גבול הוראה 329)', () => {
+    // prime=33% (max!), kalatz=33% (min), indexed=34%
+    const percents = [0.33, 0.33, 0.34];
     expect(checkConstraints(percents, tracks, constraints)).toBe(true);
   });
 
-  it('32% קבוע — לא עומד', () => {
-    const percents = [0.68, 0.32, 0];
+  it('32% פריים (מעבר ל-1/3) — לא עומד (כלל 3)', () => {
+    // 32% kalatz + 35% indexed = 67% fixed (passes כלל 1), אבל פריים=33% עומד
+    // נשנה ל-34% פריים שעוצר על כלל 3
+    const percents = [0.34, 0.33, 0.33];
     expect(checkConstraints(percents, tracks, constraints)).toBe(false);
+  });
+
+  // הוראה 329 - כלל 3: פריים + משתנים תדירים ≤ 1/3
+  it('67% פריים — לא עומד (כלל 3 - פריים מעל 1/3)', () => {
+    // prime=67%, kalatz=33%, indexed=0% - היה עובר לפני התיקון
+    const percents = [0.67, 0.33, 0];
+    expect(checkConstraints(percents, tracks, constraints)).toBe(false);
+  });
+
+  it('50% פריים + 50% קל"צ — לא עומד (פריים מעל 33%)', () => {
+    const percents = [0.5, 0.5, 0];
+    expect(checkConstraints(percents, tracks, constraints)).toBe(false);
+  });
+
+  it('פריים בדיוק 33.3% — עומד (גבול הכלל)', () => {
+    const percents = [0.333, 0.333, 0.334];
+    expect(checkConstraints(percents, tracks, constraints)).toBe(true);
   });
 
   it('סכום < 100% — לא עומד', () => {

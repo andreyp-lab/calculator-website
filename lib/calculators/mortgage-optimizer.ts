@@ -24,8 +24,22 @@
 export const BANK_OF_ISRAEL_PRIME_2026 = 5.5;
 export const BOI_BASE_RATE_2026 = 4.0;
 export const AVG_INFLATION_ISRAEL = 2.5;
-export const MIN_FIXED_PERCENT_BOI = 0.33; // לפחות 33% קבוע (בנק ישראל)
-export const MAX_VARIABLE_PERCENT_BOI = 0.67;
+
+/**
+ * הוראת בנק ישראל מס' 329 (תקנת המשכנתאות, 2013)
+ *
+ * שלושת הכללים:
+ *   1. לפחות 33.3% במסלול ריבית קבועה (קל"צ או צמוד מדד קבועה)
+ *   2. לכל היותר 66.7% במסלולי ריבית משתנה (כלל המשתנים מצטברים)
+ *   3. לכל היותר 33.3% במסלולים שמשתנים בתדירות גבוהה מ-5 שנים
+ *      (פריים, משתנה לא צמוד שמשתנה כל שנה/רבעון/חודש)
+ *
+ * הכלל השלישי הוא הסיבה שאי-אפשר לקחת 50%+ פריים גם אם השאר קל"צ.
+ * מקור: הוראה 329 + תיקון מאי 2013.
+ */
+export const MIN_FIXED_PERCENT_BOI = 1 / 3; // לפחות 1/3 קבוע (33.33%)
+export const MAX_VARIABLE_PERCENT_BOI = 2 / 3; // עד 2/3 משתנה (66.67%)
+export const MAX_HIGH_FREQUENCY_VARIABLE_BOI = 1 / 3; // עד 1/3 פריים + משתנים תדירים
 
 // ============================================================
 // טיפוסים
@@ -56,9 +70,10 @@ export interface OptimizerTrack {
 }
 
 export interface OptimizerConstraints {
-  // רגולציה בנק ישראל (חובה)
-  minFixedPercent: number; // ברירת מחדל: 0.33
-  maxVariablePercent: number; // ברירת מחדל: 0.67
+  // רגולציה בנק ישראל (חובה) - הוראה 329
+  minFixedPercent: number; // ברירת מחדל: 0.33 - לפחות 1/3 קבוע
+  maxVariablePercent: number; // ברירת מחדל: 0.67 - עד 2/3 משתנה
+  maxHighFrequencyVariablePercent?: number; // ברירת מחדל: 0.33 - עד 1/3 פריים+משתנים תדירים
 
   // אילוצי משתמש (אופציונלי)
   maxPerTrackPercent?: number; // מקסימום % למסלול בודד (ברירת מחדל: 1.0)
@@ -290,13 +305,23 @@ export function checkConstraints(
 
   if (fixedPercent < constraints.minFixedPercent - 0.001) return false;
 
-  // אחוז מקסימלי משתנה
+  // אחוז מקסימלי משתנה (כלל 2 של הוראה 329)
   const variableTypes: OptimizerTrackType[] = ['prime', 'variable_5y', 'variable_unlinked'];
   const variablePercent = percents
     .filter((_, i) => variableTypes.includes(tracks[i].type))
     .reduce((s, p) => s + p, 0);
 
   if (variablePercent > constraints.maxVariablePercent + 0.001) return false;
+
+  // אחוז מקסימלי למשתנים בתדירות גבוהה (כלל 3 של הוראה 329)
+  // פריים + משתנה לא צמוד שמשתנה תכופות. משתנה 5y לא נכלל.
+  const highFreqVariableTypes: OptimizerTrackType[] = ['prime', 'variable_unlinked'];
+  const highFreqVariablePercent = percents
+    .filter((_, i) => highFreqVariableTypes.includes(tracks[i].type))
+    .reduce((s, p) => s + p, 0);
+
+  const maxHighFreq = constraints.maxHighFrequencyVariablePercent ?? MAX_HIGH_FREQUENCY_VARIABLE_BOI;
+  if (highFreqVariablePercent > maxHighFreq + 0.001) return false;
 
   // אחוז מקסימלי למסלול בודד
   const maxPerTrack = constraints.maxPerTrackPercent ?? 1.0;
@@ -1399,6 +1424,7 @@ export function calculateThreeOptions(input: OptimizerInput): ThreeOptionsResult
 export const DEFAULT_CONSTRAINTS: OptimizerConstraints = {
   minFixedPercent: MIN_FIXED_PERCENT_BOI,
   maxVariablePercent: MAX_VARIABLE_PERCENT_BOI,
+  maxHighFrequencyVariablePercent: MAX_HIGH_FREQUENCY_VARIABLE_BOI,
   maxPerTrackPercent: 0.80,
   maxIndexedPercent: 0.60,
   inflationScenarios: [1.0, 2.5, 4.0],
