@@ -483,6 +483,53 @@ export const blogPosts: BlogPost[] = [
     related: ['compound-interest-and-time-magic', 'fire-strategy-israel', 'inflation-and-investments'],
   },
 
+  // ===== אשכול F - נדל"ן מתקדם =====
+  {
+    slug: 'purchase-tax-2026-complete-guide',
+    title: 'מס רכישה 2026 - מדריך מלא ל-8 סוגי רוכשים',
+    description:
+      'מס רכישה 2026: מדרגות לדירה ראשונה (0% עד 1.98M ₪), משקיע (8% מהראשון), עולה חדש (0.5%), נכה - 8 סוגי רוכשים עם דוגמאות וטיפים.',
+    category: 'נדל"ן ומשכנתאות',
+    readTime: '13 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/real-estate/purchase-tax',
+      label: 'מחשבון מס רכישה',
+    },
+    related: ['capital-gains-tax-property-2026', 'real-estate-investment-strategy', 'boi-directive-329-mortgage-rules', 'ltv-mortgage-rates-secret'],
+  },
+  {
+    slug: 'capital-gains-tax-property-2026',
+    title: 'מס שבח 2026 - איך לחסוך עשרות אלפי שקלים בעת מכירת דירה',
+    description:
+      'מס שבח על מכירת דירה: מס לינארי לדירות לפני 2014 (חיסכון של עד 50%!), פטור דירה יחידה עד 5M, חישוב מדויק עם דוגמאות. עדכני 2026.',
+    category: 'נדל"ן ומשכנתאות',
+    readTime: '14 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/real-estate/capital-gains-tax',
+      label: 'מחשבון מס שבח',
+    },
+    related: ['purchase-tax-2026-complete-guide', 'real-estate-investment-strategy', 'inflation-and-investments'],
+  },
+  {
+    slug: 'real-estate-investment-strategy',
+    title: 'השקעה בנדל"ן בישראל 2026 - 5 אסטרטגיות + חישוב תשואה',
+    description:
+      'השקעה בנדל"ן בישראל: דירה להשכרה, פליפינג, REIT, נדל"ן מסחרי, בנייה. השוואה לשוק ההון, חישוב תשואה נטו אחרי מס וריבית.',
+    category: 'נדל"ן ומשכנתאות',
+    readTime: '15 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/real-estate/mortgage-optimizer',
+      label: 'אופטימייזר תמהיל משכנתא',
+    },
+    related: ['purchase-tax-2026-complete-guide', 'capital-gains-tax-property-2026', 'compound-interest-and-time-magic'],
+  },
+
   // ===== אשכול B - עצמאיים =====
   {
     slug: 'bituach-leumi-self-employed-deep-dive',
