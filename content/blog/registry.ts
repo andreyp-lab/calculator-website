@@ -577,6 +577,53 @@ export const blogPosts: BlogPost[] = [
     related: ['business-budget-planning-2026', 'cash-flow-forecast-business', 'company-vs-self-employed-ultimate-guide'],
   },
 
+  // ===== אשכול H - רכב =====
+  {
+    slug: 'leasing-vs-buying-vs-cash-decision',
+    title: 'ליסינג vs קנייה vs מימון עצמי - מה משתלם באמת ב-2026?',
+    description:
+      'השוואה מקיפה בין 3 דרכים לרכוש רכב: ליסינג, הלוואה, מימון עצמי. חישוב TCO מלא כולל עלות הזדמנות, ירידת ערך, ועלויות תפעול. עדכני 2026.',
+    category: 'רכב',
+    readTime: '14 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/vehicles/leasing-vs-buying',
+      label: 'מחשבון ליסינג vs קנייה',
+    },
+    related: ['company-car-tax-2026', 'electric-vs-gasoline-car', 'vehicle-tco-guide'],
+  },
+  {
+    slug: 'company-car-tax-2026',
+    title: 'שווי שימוש ברכב מעסיק 2026 - 8 קבוצות + הטבת חשמלי 50%',
+    description:
+      'שווי שימוש ברכב מעסיק 2026: 8 קבוצות (2.04%-5.14%), הטבת רכב חשמלי 50%, היברידי 70%, חישוב מס מלא. כולל השוואה לרכב פרטי.',
+    category: 'רכב',
+    readTime: '12 דקות',
+    date: '2026-05-16',
+    featured: true,
+    relatedCalculator: {
+      href: '/vehicles/company-car-benefit',
+      label: 'מחשבון שווי שימוש ברכב מעסיק',
+    },
+    related: ['leasing-vs-buying-vs-cash-decision', 'electric-vs-gasoline-car', 'salary-net-2026-complete-guide'],
+  },
+  {
+    slug: 'electric-vs-gasoline-car',
+    title: 'רכב חשמלי vs בנזין 2026 - השוואה מקיפה של עלות בעלות',
+    description:
+      'האם רכב חשמלי באמת זול יותר? השוואה מקיפה: מחיר רכישה, דלק/חשמל, תחזוקה, ירידת ערך, סוללה ושווי שימוש. כולל break-even analysis.',
+    category: 'רכב',
+    readTime: '13 דקות',
+    date: '2026-05-16',
+    featured: false,
+    relatedCalculator: {
+      href: '/vehicles/leasing-vs-buying',
+      label: 'מחשבון ליסינג vs קנייה',
+    },
+    related: ['leasing-vs-buying-vs-cash-decision', 'company-car-tax-2026', 'vehicle-tco-guide'],
+  },
+
   // ===== אשכול B - עצמאיים =====
   {
     slug: 'bituach-leumi-self-employed-deep-dive',
