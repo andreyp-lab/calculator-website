@@ -3,6 +3,9 @@ import { Heebo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { AccessibilityProvider } from "@/components/accessibility/AccessibilityProvider";
+import { AccessibilityWidget } from "@/components/accessibility/AccessibilityWidget";
+import { SkipToContent } from "@/components/accessibility/SkipToContent";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -130,9 +133,13 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-white text-gray-900">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <AccessibilityProvider>
+          <SkipToContent />
+          <Header />
+          <main id="main-content" className="flex-1">{children}</main>
+          <Footer />
+          <AccessibilityWidget />
+        </AccessibilityProvider>
       </body>
     </html>
   );

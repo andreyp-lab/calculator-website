@@ -198,6 +198,11 @@ export function Footer() {
                   תנאי שימוש
                 </Link>
               </li>
+              <li>
+                <Link href="/accessibility" className="hover:text-blue-600">
+                  נגישות
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

@@ -129,6 +129,139 @@
   }
 }
 /* ============================================================
+   Accessibility Widget Modes
+   Applied as classes on <html> element by AccessibilityProvider
+   ============================================================ */
+
+/* ── Text size ── */
+.a11y-text-lg { font-size: 112% !important; }
+.a11y-text-xl { font-size: 125% !important; }
+.a11y-text-2xl { font-size: 150% !important; }
+
+/* ── High contrast (black bg, yellow text) ── */
+.a11y-high-contrast,
+.a11y-high-contrast body {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+.a11y-high-contrast a { color: #00ffff !important; }
+.a11y-high-contrast button,
+.a11y-high-contrast [role="button"] {
+  background-color: #111 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+.a11y-high-contrast input,
+.a11y-high-contrast select,
+.a11y-high-contrast textarea {
+  background-color: #111 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+.a11y-high-contrast [class*="bg-"] {
+  background-color: #000 !important;
+}
+.a11y-high-contrast [class*="text-gray"],
+.a11y-high-contrast [class*="text-slate"],
+.a11y-high-contrast [class*="text-zinc"] {
+  color: #ffff00 !important;
+}
+
+/* ── Inverted contrast ── */
+.a11y-inverted,
+.a11y-inverted body {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+.a11y-inverted img,
+.a11y-inverted video,
+.a11y-inverted svg {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/* ── Highlight links ── */
+.a11y-highlight-links a,
+.a11y-highlight-links [role="link"] {
+  text-decoration: underline !important;
+  font-weight: bold !important;
+  text-decoration-thickness: 2px !important;
+}
+
+/* ── Highlight headings ── */
+.a11y-highlight-headings h1,
+.a11y-highlight-headings h2,
+.a11y-highlight-headings h3 {
+  font-weight: 900 !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+}
+
+/* ── Readable font (Arial / Verdana) ── */
+.a11y-readable-font,
+.a11y-readable-font body,
+.a11y-readable-font p,
+.a11y-readable-font span,
+.a11y-readable-font li,
+.a11y-readable-font a,
+.a11y-readable-font button,
+.a11y-readable-font input,
+.a11y-readable-font label {
+  font-family: Arial, Verdana, sans-serif !important;
+}
+
+/* ── Stop animations ── */
+.a11y-no-animations,
+.a11y-no-animations * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Large cursor ── */
+.a11y-large-cursor,
+.a11y-large-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M8 4 L8 44 L18 34 L28 48 L34 44 L24 30 L38 30 Z' fill='black' stroke='white' stroke-width='2'/%3E%3C/svg%3E") 0 0, auto !important;
+}
+
+/* ── Emphasized focus indicators ── */
+.a11y-focus-visible :focus,
+.a11y-focus-visible :focus-visible {
+  outline: 3px solid #0066cc !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px rgba(0, 102, 204, 0.25) !important;
+}
+
+/* ── Line spacing ── */
+.a11y-line-spacing,
+.a11y-line-spacing body,
+.a11y-line-spacing p,
+.a11y-line-spacing li,
+.a11y-line-spacing span,
+.a11y-line-spacing a,
+.a11y-line-spacing label {
+  line-height: 2 !important;
+}
+
+/* ── Skip-to-content link (sr-only with focus visible) ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================
    Print-Friendly Styles - PDF Export
    ============================================================ */
 @media print {
