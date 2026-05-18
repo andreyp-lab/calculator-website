@@ -10,12 +10,12 @@ export const SITE_INFO = {
   domain: 'cheshbonai.co.il',
   url: 'https://cheshbonai.co.il',
 
-  // למילוי על ידי בעל האתר:
+  // פרטי בעל האתר
   owner: {
-    name: '[יש למלא - שם פרטי + משפחה / שם חברה]',
+    name: 'אנדרי פלטונוב',
     type: 'private' as const, // 'private' | 'company'
-    address: '[יש למלא - כתובת]',
-    email: 'andrey.platonov28@gmail.com', // ברירת מחדל - לעדכן
+    address: 'נס ציונה',
+    email: 'andrey.platonov28@gmail.com',
   },
 
   legal: {
