@@ -17,15 +17,6 @@ export default function TermsPage() {
           תאריך עדכון אחרון: {SITE_INFO.legal.termsLastUpdated}
         </p>
 
-        {/* הערת תבנית */}
-        <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 mb-6 text-sm">
-          <p className="font-semibold text-amber-800">הערה: תבנית - מומלץ בדיקה משפטית</p>
-          <p className="text-amber-700 mt-1">
-            מסמך זה הוכן באמצעות תבנית. לפני שימוש מסחרי — בדיקה משפטית של עו&quot;ד מומלצת.
-            ל{SITE_INFO.name} אין אחריות לנכונות המשפטית של מסמך זה.
-          </p>
-        </div>
-
         {/* אזהרה פיננסית בולטת */}
         <div className="bg-red-50 border-2 border-red-400 rounded-lg p-5 mb-8">
           <h2 className="text-xl font-bold text-red-800 mb-3">אזהרה פיננסית חשובה</h2>

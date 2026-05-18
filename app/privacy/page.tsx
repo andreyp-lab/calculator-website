@@ -17,14 +17,6 @@ export default function PrivacyPage() {
           תאריך עדכון אחרון: {SITE_INFO.legal.privacyLastUpdated}
         </p>
 
-        {/* הערת תבנית */}
-        <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 mb-8 text-sm">
-          <p className="font-semibold text-amber-800">הערה: תבנית - מומלץ בדיקה משפטית</p>
-          <p className="text-amber-700 mt-1">
-            מסמך זה הוכן כתבנית. לפני שימוש מסחרי, מומלץ לבדוק עם עורך דין המתמחה בדיני פרטיות ישראליים ו-GDPR.
-          </p>
-        </div>
-
         {/* 1. מבוא */}
         <section className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
