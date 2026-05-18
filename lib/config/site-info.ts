@@ -15,7 +15,7 @@ export const SITE_INFO = {
     name: '[יש למלא - שם פרטי + משפחה / שם חברה]',
     type: 'private' as const, // 'private' | 'company'
     address: '[יש למלא - כתובת]',
-    email: 'contact@cheshbonai.co.il', // ברירת מחדל - לעדכן
+    email: 'andrey.platonov28@gmail.com', // ברירת מחדל - לעדכן
   },
 
   legal: {
@@ -26,8 +26,8 @@ export const SITE_INFO = {
   },
 
   contact: {
-    email: 'contact@cheshbonai.co.il',
-    accessibilityEmail: 'contact@cheshbonai.co.il', // אותו אימייל - אין רכז נדרש
+    email: 'andrey.platonov28@gmail.com',
+    accessibilityEmail: 'andrey.platonov28@gmail.com', // אותו אימייל - אין רכז נדרש
     contactPage: '/contact',
   },
 
