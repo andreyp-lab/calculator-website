@@ -243,23 +243,7 @@ export default function CorpVsIndividualPage() {
           </ul>
         }
       />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'מחשבון חברה בע"מ vs עוסק מורשה 2026',
-            applicationCategory: 'FinanceApplication',
-            operatingSystem: 'Any',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'ILS' },
-            inLanguage: 'he',
-            description:
-              'השוואה מלאה: מס חברות, דיבידנד, מיקס, נקודת איזון, תחזית רב-שנתית, עלויות חברה, אחריות אישית.',
-          }),
-        }}
-      />
+      {/* SoftwareApplication + BreadcrumbList schemas are injected automatically by CalculatorLayout */}
     </>
   );
 }

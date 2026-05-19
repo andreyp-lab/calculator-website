@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
+import { HowToSchema } from '@/components/seo/HowToSchema';
+import { FAQSchema } from '@/components/seo/FAQSchema';
 
 export const metadata: Metadata = {
   title: "המדריך השלם למשכנתא בישראל 2026 - מ-א' עד ת'",
@@ -35,9 +38,76 @@ const tocItems = [
   { id: 'faq', label: 'שאלות נפוצות' },
 ];
 
+const mortgageBreadcrumbs = [
+  { name: 'דף הבית', url: '/' },
+  { name: 'נדל"ן', url: '/real-estate' },
+  { name: 'המדריך השלם למשכנתא 2026', url: '/guides/mortgage-complete-guide-2026' },
+];
+
+const mortgageHowToSteps = [
+  {
+    name: 'בדוק יכולת החזר והון עצמי',
+    text: 'חשב את שכרך נטו והגדר החזר מקסימלי של 33%-40% ממנו. ודא שיש לך לפחות 25% הון עצמי לדירה ראשונה.',
+    url: 'https://cheshbonai.co.il/guides/mortgage-complete-guide-2026#five-questions',
+  },
+  {
+    name: 'הבן את הוראת בנק ישראל 329 ומסלולי המשכנתא',
+    text: 'למד את הכללים: שליש קבוע, שליש מקסימום פריים, ו-LTV לפי סוג. הכר את כל המסלולים: קל"צ, פריים, צמוד מדד, משתנה.',
+    url: 'https://cheshbonai.co.il/guides/mortgage-complete-guide-2026#directive-329',
+  },
+  {
+    name: 'בחר תמהיל אופטימלי לפרופיל שלך',
+    text: 'בחר תמהיל בהתאם לסיבולת הסיכון, גיל, ותכניות עתידיות. השתמש במחשבון האופטימייזר.',
+    url: 'https://cheshbonai.co.il/real-estate/mortgage-optimizer',
+  },
+  {
+    name: 'פנה ל-3 בנקים לפחות והתמקח',
+    text: 'אל תקבל הצעה ראשונה. פנה למספר בנקים, השווה הצעות, וחזור לכל בנק עם ההצעה המתחרה הטובה ביותר.',
+    url: 'https://cheshbonai.co.il/guides/mortgage-complete-guide-2026#negotiation',
+  },
+  {
+    name: 'חתום על החוזה וסיים את התהליך',
+    text: 'קבל אישור עקרוני, מצא דירה, בצע שמאות, חתום על חוזי המשכנתא וביצע ביטוחי חיים ומבנה.',
+    url: 'https://cheshbonai.co.il/guides/mortgage-complete-guide-2026#process',
+  },
+];
+
+const mortgageFaqItems = [
+  {
+    question: 'כמה זמן לוקח לקבל אישור עקרוני למשכנתא?',
+    answer: 'בדרך כלל 3–7 ימי עסקים לאחר הגשת כל המסמכים. לבנקים מסוימים (ב-pre-approval מקוון) – גם 24–48 שעות.',
+  },
+  {
+    question: 'האם אפשר לקבל משכנתא ללא הון עצמי?',
+    answer: 'לא. בנק ישראל קובע 25% הון עצמי מינימלי לדירה ראשונה. יש מסלולים כמו מחיר למשתכן שמשנים את התנאים, אך גם שם נדרש הון עצמי.',
+  },
+  {
+    question: 'האם כדאי לקחת יועץ משכנתא?',
+    answer: 'כמעט תמיד כן. עלות יועץ עצמאי: 2,000–5,000 ₪. ההנחה הממוצעת שמצליח להשיג: 0.3%. על משכנתא של 1.5M₪ ל-25 שנה = 120,000 ₪ חיסכון.',
+  },
+  {
+    question: 'מה ההבדל בין הצמדה למדד לבין ריבית קבועה?',
+    answer: 'ריבית קבועה = ה-% שמשלמים קבוע. הצמדה = הקרן עצמה גדלה לפי מדד המחירים לצרכן. גם קבועה צמודה – יש לה ריבית קבועה, אך הקרן גדלה.',
+  },
+  {
+    question: 'כמה עולה עמלת פירעון מוקדם?',
+    answer: 'תלוי במסלול. על פריים: אין עמלה. על מסלולים קבועים: מחושבת לפי הפרש הריביות × שנים × יתרה. יכולה להגיע לעשרות אלפי שקלים.',
+  },
+];
+
 export default function MortgageCompleteGuide() {
   return (
     <div className="min-h-screen bg-white" dir="rtl">
+      {/* SEO Schemas */}
+      <BreadcrumbSchema items={mortgageBreadcrumbs} />
+      <HowToSchema
+        name="איך לקחת משכנתא נכונה בישראל 2026"
+        description="מדריך שלב-אחר-שלב לתהליך לקיחת משכנתא בישראל: מבדיקת כדאיות עד חתימה על החוזה."
+        steps={mortgageHowToSteps}
+        totalTime="PT45M"
+      />
+      <FAQSchema items={mortgageFaqItems} />
+
       {/* Schema.org Article markup */}
       <script
         type="application/ld+json"

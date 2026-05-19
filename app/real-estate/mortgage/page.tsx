@@ -249,22 +249,7 @@ export default function MortgagePage() {
           </ul>
         }
       />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'מחשבון משכנתא מעורבת 2026',
-            applicationCategory: 'FinanceApplication',
-            operatingSystem: 'Any',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'ILS' },
-            inLanguage: 'he',
-            description: 'מחשבון משכנתא מקיף: תמהיל מעורב, מחזור, פירעון מוקדם, כושר החזר',
-          }),
-        }}
-      />
+      {/* SoftwareApplication + BreadcrumbList schemas are injected automatically by CalculatorLayout */}
     </>
   );
 }

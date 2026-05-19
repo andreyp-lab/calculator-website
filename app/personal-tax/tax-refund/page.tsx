@@ -294,20 +294,7 @@ export default function TaxRefundPage() {
         }
       />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'מחשבון החזר מס לשכירים 2026',
-            applicationCategory: 'FinanceApplication',
-            operatingSystem: 'Any',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'ILS' },
-            inLanguage: 'he',
-          }),
-        }}
-      />
+      {/* SoftwareApplication + BreadcrumbList schemas are injected automatically by CalculatorLayout */}
     </>
   );
 }

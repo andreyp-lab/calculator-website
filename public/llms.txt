@@ -1,0 +1,58 @@
+# חשבונאי - FinCalc
+
+> אתר מחשבונים פיננסיים בעברית, מעודכן 2026.
+> 30 מחשבונים מקצועיים + 44 מאמרי בלוג + מדריכי עומק + מילון מונחים.
+
+## חומר מרכזי
+
+### מחשבונים פיננסיים - מיסוי ושכר
+- [מחשבון שכר נטו/ברוטו 2026](https://cheshbonai.co.il/personal-tax/salary-net-gross)
+- [מחשבון מס הכנסה לשכיר 2026](https://cheshbonai.co.il/personal-tax/income-tax)
+- [מחשבון החזר מס](https://cheshbonai.co.il/personal-tax/tax-refund)
+- [מחשבון נקודות זיכוי](https://cheshbonai.co.il/personal-tax/tax-credits)
+- [מחשבון שווי עבודה](https://cheshbonai.co.il/personal-tax/work-value)
+
+### מחשבונים פיננסיים - זכויות עובד
+- [מחשבון פיצויי פיטורין](https://cheshbonai.co.il/employee-rights/severance)
+- [מחשבון דמי לידה ואמהות](https://cheshbonai.co.il/employee-rights/maternity-benefits)
+- [מחשבון דמי אבטלה](https://cheshbonai.co.il/employee-rights/unemployment-benefits)
+- [מחשבון שכר מילואים](https://cheshbonai.co.il/employee-rights/reserve-duty-pay)
+- [מחשבון שכר מינימום](https://cheshbonai.co.il/employee-rights/minimum-wage)
+- [מחשבון דמי הבראה](https://cheshbonai.co.il/employee-rights/recreation-pay)
+- [מחשבון מענק עבודה](https://cheshbonai.co.il/employee-rights/work-grant)
+
+### מחשבונים פיננסיים - עצמאיים
+- [סימולטור שנת מס לעצמאי](https://cheshbonai.co.il/self-employed/year-end-tax-simulator)
+- [מחשבון שכר נטו עצמאי](https://cheshbonai.co.il/self-employed/net)
+- [מחשבון ביטוח לאומי לעצמאי](https://cheshbonai.co.il/self-employed/social-security)
+- [מחשבון מע"מ](https://cheshbonai.co.il/self-employed/vat)
+- [מחשבון חברה מול עוסק מורשה](https://cheshbonai.co.il/self-employed/corporation-vs-individual)
+
+### מחשבונים פיננסיים - נדל"ן ומשכנתא
+- [מחשבון משכנתא](https://cheshbonai.co.il/real-estate/mortgage)
+- [אופטימייזר משכנתא Solver-Style](https://cheshbonai.co.il/real-estate/mortgage-optimizer)
+- [מחשבון מס רכישה 2026](https://cheshbonai.co.il/real-estate/purchase-tax)
+- [מחשבון מס שבח](https://cheshbonai.co.il/real-estate/capital-gains-tax)
+
+### מחשבונים פיננסיים - השקעות וחיסכון
+- [מחשבון ריבית דריבית](https://cheshbonai.co.il/investments/compound-interest)
+- [מחשבון FIRE](https://cheshbonai.co.il/investments/fire)
+- [מחשבון פרישה](https://cheshbonai.co.il/investments/retirement)
+- [מחשבון תשואה על השקעה (ROI)](https://cheshbonai.co.il/investments/roi)
+
+### מדריכים מקיפים (Pillar Content)
+- [המדריך השלם למשכנתא 2026](https://cheshbonai.co.il/guides/mortgage-complete-guide-2026)
+- [כל המסים בישראל 2026](https://cheshbonai.co.il/guides/taxes-complete-guide-2026)
+- [זכויות עובדים בישראל - האנציקלופדיה המלאה](https://cheshbonai.co.il/guides/employee-rights-complete-guide)
+
+### בלוג
+- [בלוג](https://cheshbonai.co.il/blog) - 44 מאמרי SEO על מיסים, משכנתא, השקעות וזכויות עובד
+
+## אופציונלי
+
+- [מילון מונחים](https://cheshbonai.co.il/glossary) - 82 מונחים פיננסיים
+- [השוואה: שכיר vs. עצמאי](https://cheshbonai.co.il/compare/employee-vs-self-employed)
+- [השוואה: שכירות vs. קנייה](https://cheshbonai.co.il/compare/rent-vs-buy)
+- [מדיניות פרטיות](https://cheshbonai.co.il/privacy)
+- [תנאי שימוש](https://cheshbonai.co.il/terms)
+- [נגישות](https://cheshbonai.co.il/accessibility)

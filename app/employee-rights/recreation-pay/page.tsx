@@ -225,23 +225,7 @@ export default function RecreationPayPage() {
           </ul>
         }
       />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'מחשבון דמי הבראה 2026',
-            applicationCategory: 'FinanceApplication',
-            operatingSystem: 'Any',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'ILS' },
-            inLanguage: 'he',
-            description:
-              'מחשבון דמי הבראה מקיף: ברוטו, נטו לאחר מס, תביעה רטרואקטיבית, עזיבת עבודה והשוואת מגזרים.',
-          }),
-        }}
-      />
+      {/* SoftwareApplication + BreadcrumbList schemas are injected automatically by CalculatorLayout */}
     </>
   );
 }

@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
+import { HowToSchema } from '@/components/seo/HowToSchema';
+import { FAQSchema } from '@/components/seo/FAQSchema';
 
 export const metadata: Metadata = {
   title: 'כל המסים בישראל 2026 - המדריך השלם',
@@ -35,9 +38,72 @@ const tocItems = [
   { id: 'faq', label: 'שאלות נפוצות' },
 ];
 
+const taxesBreadcrumbs = [
+  { name: 'דף הבית', url: '/' },
+  { name: 'מיסוי אישי', url: '/personal-tax' },
+  { name: 'כל המסים בישראל 2026', url: '/guides/taxes-complete-guide-2026' },
+];
+
+const taxesHowToSteps = [
+  {
+    name: 'הבן את מדרגות מס הכנסה לשכיר',
+    text: 'למד את שבע מדרגות המס 2026, חשב את שיעור המס האפקטיבי שלך, ובדוק לאיזו מדרגה אתה שייך.',
+    url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026#income-tax-employee',
+  },
+  {
+    name: 'בדוק מיסוי עצמאים ועוסקים',
+    text: 'עצמאי? למד על מקדמות מס, ב.ל. עצמאי, מע"מ, וסוגיית חברה מול עוסק מורשה.',
+    url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026#income-tax-self',
+  },
+  {
+    name: 'חשב ביטוח לאומי ודמי בריאות',
+    text: 'שני שיעורים לשכיר: מופחת (4.27%) ומלא (12.17%). עצמאי: שיעורים שונים. חשב את חלקך.',
+    url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026#bituach-leumi',
+  },
+  {
+    name: 'הבן מסי נדל"ן (שבח ורכישה)',
+    text: 'מוכר דירה? חשב מס שבח. קונה? חשב מס רכישה לפי סוג רוכש ומחיר הנכס.',
+    url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026#capital-gains',
+  },
+  {
+    name: 'תכנן מס שנתי ובדוק זכאות להחזר',
+    text: 'זהה ניכויים והטבות שמגיעים לך: קרן השתלמות, תרומות (35% החזר), נקודות זיכוי, ופנסיה.',
+    url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026#annual-planning',
+  },
+];
+
+const taxesFaqItems = [
+  {
+    question: 'מהן מדרגות המס לשכיר בישראל 2026?',
+    answer: '7 מדרגות: 10% (עד 7,010 ₪/חודש), 14% (עד 10,060), 20% (עד 19,000), 31% (עד 25,100), 35% (עד 46,690), 47% (עד 60,130), 50% מעבר.',
+  },
+  {
+    question: 'מה ההבדל בין מס שבח למס רכישה?',
+    answer: 'מס שבח משלם המוכר (על הרווח ממכירת הנכס). מס רכישה משלם הקונה (עפ"י מחיר הנכס וסוג הרוכש).',
+  },
+  {
+    question: 'מה זה מס יסף ומי משלם אותו?',
+    answer: 'מס יסף הוא 3% נוסף על הכנסה שנתית מעל 721,560 ₪ (כ-60,130 ₪/חודש). חל על שכר גבוה, דיבידנדים ורווחי הון.',
+  },
+  {
+    question: 'האם עצמאי יכול לבחור בין חברה לעוסק מורשה?',
+    answer: 'כן. פתיחת חברה בע"מ עדיפה בדרך כלל מהכנסה שנתית של כ-600,000 ₪ ומעלה בגלל שיעורי מס נמוכים יותר לחברות.',
+  },
+];
+
 export default function TaxesCompleteGuide() {
   return (
     <div className="min-h-screen bg-white" dir="rtl">
+      {/* SEO Schemas */}
+      <BreadcrumbSchema items={taxesBreadcrumbs} />
+      <HowToSchema
+        name="איך להבין ולתכנן את המסים שלך בישראל 2026"
+        description={'מדריך שלב-אחר-שלב לכל המסים בישראל: מס הכנסה, ביטוח לאומי, מע"מ, מס שבח ומס רכישה.'}
+        steps={taxesHowToSteps}
+        totalTime="PT40M"
+      />
+      <FAQSchema items={taxesFaqItems} />
+
       {/* Schema.org */}
       <script
         type="application/ld+json"

@@ -246,22 +246,7 @@ export default function HourlyRatePage() {
           </ul>
         }
       />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'מחשבון תמחור שעת עבודה 2026 — פרילנסר',
-            applicationCategory: 'FinanceApplication',
-            operatingSystem: 'Any',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'ILS' },
-            inLanguage: 'he',
-            description: 'מחשבון מקצועי לתמחור שעת עבודה — Cost-Plus, Value-Based, בנצ\'מארק שוק ישראל 2026',
-          }),
-        }}
-      />
+      {/* SoftwareApplication + BreadcrumbList schemas are injected automatically by CalculatorLayout */}
     </>
   );
 }

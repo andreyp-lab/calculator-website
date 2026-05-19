@@ -2,6 +2,10 @@ import { ReactNode } from 'react';
 import { Breadcrumbs, Breadcrumb } from './Breadcrumbs';
 import { DisclaimerBox } from './DisclaimerBox';
 import { AuthorBox } from './AuthorBox';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
+import { CalculatorSchema } from '@/components/seo/CalculatorSchema';
+
+const SITE_URL = 'https://cheshbonai.co.il';
 
 interface CalculatorLayoutProps {
   title: string;
@@ -12,6 +16,8 @@ interface CalculatorLayoutProps {
   content?: ReactNode;
   faq?: ReactNode;
   sources?: ReactNode;
+  /** URL עמוד המחשבון (נתיב יחסי כגון /personal-tax/income-tax). אם לא סופק – נגזר מ-breadcrumbs. */
+  pageUrl?: string;
 }
 
 export function CalculatorLayout({
@@ -23,7 +29,20 @@ export function CalculatorLayout({
   content,
   faq,
   sources,
+  pageUrl,
 }: CalculatorLayoutProps) {
+  // בנה BreadcrumbList items מה-breadcrumbs הקיימים
+  const breadcrumbSchemaItems = breadcrumbs.map((b) => ({
+    name: b.label,
+    url: b.href ?? SITE_URL,
+  }));
+
+  // קבע את ה-URL של הדף הנוכחי (breadcrumb אחרון עם href, או pageUrl)
+  const currentUrl =
+    pageUrl ??
+    [...breadcrumbs].reverse().find((b) => b.href)?.href ??
+    '/';
+
   return (
     <article className="bg-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
@@ -79,6 +98,14 @@ export function CalculatorLayout({
           <AuthorBox />
         </section>
       </div>
+
+      {/* SEO Schemas – BreadcrumbList + SoftwareApplication */}
+      <BreadcrumbSchema items={breadcrumbSchemaItems} />
+      <CalculatorSchema
+        name={title}
+        description={description}
+        url={currentUrl}
+      />
     </article>
   );
 }

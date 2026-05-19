@@ -342,23 +342,7 @@ export default function MortgageOptimizerPage() {
           </ul>
         }
       />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'אופטימייזר תמהיל משכנתא V3 2026',
-            applicationCategory: 'FinanceApplication',
-            operatingSystem: 'Any',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'ILS' },
-            inLanguage: 'he',
-            description:
-              'Solver-style mortgage portfolio optimizer V3: bank-grade affordability by family size, LTV-adjusted rates, bank comparison (up to 5 offers), income stress test, grace period, timeline tool, and more.',
-          }),
-        }}
-      />
+      {/* SoftwareApplication + BreadcrumbList schemas are injected automatically by CalculatorLayout */}
     </>
   );
 }

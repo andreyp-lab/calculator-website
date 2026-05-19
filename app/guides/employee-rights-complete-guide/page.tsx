@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
+import { HowToSchema } from '@/components/seo/HowToSchema';
+import { FAQSchema } from '@/components/seo/FAQSchema';
 
 export const metadata: Metadata = {
   title: 'זכויות עובדים בישראל 2026 – האנציקלופדיה המלאה',
@@ -32,9 +35,72 @@ const tocItems = [
   { id: 'faq', label: 'שאלות נפוצות' },
 ];
 
+const employeeBreadcrumbs = [
+  { name: 'דף הבית', url: '/' },
+  { name: 'זכויות עובד', url: '/employee-rights' },
+  { name: 'זכויות עובדים בישראל 2026', url: '/guides/employee-rights-complete-guide' },
+];
+
+const employeeHowToSteps = [
+  {
+    name: 'הבן את רכיבי השכר וחישוב שכר מינימום',
+    text: 'ודא שקיבלת שכר מינימום (כ-5,880 ₪/חודש ב-2026), שעות נוספות (25%-50%), ודמי הבראה.',
+    url: 'https://cheshbonai.co.il/guides/employee-rights-complete-guide#salary',
+  },
+  {
+    name: 'בדוק תנאים סוציאליים: פנסיה, קרן השתלמות ופיצויים',
+    text: 'המעסיק חייב להפריש לפנסיה חובה (6.5% לפחות). לאחר שנה זכאי לפיצויי פיטורין (שכר × שנות ותק).',
+    url: 'https://cheshbonai.co.il/guides/employee-rights-complete-guide#social',
+  },
+  {
+    name: 'הכר את ימי החופשה, מחלה ומילואים',
+    text: 'שנתית: 16-28 ימים לפי ותק. מחלה: 1.5 ימים לחודש. מילואים: שכר מלא מהמעסיק (מוחזר מב.ל.).',
+    url: 'https://cheshbonai.co.il/guides/employee-rights-complete-guide#leave',
+  },
+  {
+    name: 'הבן תהליך פיטורים: שימוע, הודעה מוקדמת, זכויות',
+    text: 'פיטורים מחייבים שימוע מראש. הודעה מוקדמת: חודש לאחר שנה. יש לקבל פיצויים תוך 15 יום מסיום.',
+    url: 'https://cheshbonai.co.il/guides/employee-rights-complete-guide#dismissal',
+  },
+  {
+    name: 'חשב את דמי האבטלה שמגיעים לך',
+    text: 'זכאות לדמי אבטלה לאחר 12 חודשי עבודה. גובה: 70%-80% מהשכר, עד 6 חודשים.',
+    url: 'https://cheshbonai.co.il/employee-rights/unemployment-benefits',
+  },
+];
+
+const employeeFaqItems = [
+  {
+    question: 'מהו שכר המינימום בישראל ב-2026?',
+    answer: 'שכר המינימום ב-2026 הוא כ-5,880 ₪ לחודש (32.31 ₪/שעה). מעסיק אינו יכול לשלם פחות מכך.',
+  },
+  {
+    question: 'כמה פיצויי פיטורין מגיעים לי?',
+    answer: 'שכר חודשי אחרון × שנות ותק. פוטרת אחרי 5 שנים בשכר 10,000 ₪? מגיעים לך 50,000 ₪. ניתן לחשב במחשבון הפיצויים.',
+  },
+  {
+    question: 'האם מגיעה לי הודעה מוקדמת לפני פיטורים?',
+    answer: 'כן. לאחר שנה: חודש הודעה מוקדמת. הודעה מוקדמת ניתן לקבל כשכר (חלף הודעה מוקדמת) ולא לעבוד.',
+  },
+  {
+    question: 'האם אפשר להתפטר ולקבל פיצויים?',
+    answer: 'כן, ב-9 מצבים מיוחדים: הרעת תנאים, מעבר עיר, בריאות, לידה ועוד. זו "התפטרות בדין מפוטר".',
+  },
+];
+
 export default function EmployeeRightsCompleteGuide() {
   return (
     <div className="min-h-screen bg-white" dir="rtl">
+      {/* SEO Schemas */}
+      <BreadcrumbSchema items={employeeBreadcrumbs} />
+      <HowToSchema
+        name="איך לבדוק ולממש את זכויות העובד שלך בישראל 2026"
+        description="מדריך שלב-אחר-שלב לכל זכויות העובד בישראל: שכר, פיצויים, חופשות, מחלה, מילואים ופיטורים."
+        steps={employeeHowToSteps}
+        totalTime="PT35M"
+      />
+      <FAQSchema items={employeeFaqItems} />
+
       {/* Schema.org */}
       <script
         type="application/ld+json"

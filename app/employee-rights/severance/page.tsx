@@ -240,26 +240,7 @@ export default function SeverancePage() {
           </ul>
         }
       />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'מחשבון פיצויי פיטורין 2026',
-            applicationCategory: 'FinanceApplication',
-            operatingSystem: 'Any',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'ILS',
-            },
-            inLanguage: 'he',
-            description: 'מחשבון פיצויי פיטורין מקיף: סעיף 14, 4 אפשרויות מיסוי, 13 תרחישי סיום עבודה, הלנת פיצויים',
-          }),
-        }}
-      />
+      {/* SoftwareApplication + BreadcrumbList schemas are injected automatically by CalculatorLayout */}
     </>
   );
 }

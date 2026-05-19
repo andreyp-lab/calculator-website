@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Heebo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AccessibilityProvider } from "@/components/accessibility/AccessibilityProvider";
 import { AccessibilityWidget } from "@/components/accessibility/AccessibilityWidget";
 import { SkipToContent } from "@/components/accessibility/SkipToContent";
+import { SEARCH_CONSOLE } from "@/lib/config/search-console";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -19,6 +20,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://cheshbonai.co.il";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#2563eb",
+  colorScheme: "light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -81,6 +89,14 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  verification: {
+    // ימולא לאחר רישום ב-Google Search Console + Bing Webmaster Tools
+    // ראה: lib/config/search-console.ts
+    google: SEARCH_CONSOLE.google || undefined,
+    other: SEARCH_CONSOLE.bing
+      ? { "msvalidate.01": SEARCH_CONSOLE.bing }
+      : undefined,
   },
 };
 
