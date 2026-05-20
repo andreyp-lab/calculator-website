@@ -7,6 +7,7 @@ import { AccessibilityProvider } from "@/components/accessibility/AccessibilityP
 import { AccessibilityWidget } from "@/components/accessibility/AccessibilityWidget";
 import { SkipToContent } from "@/components/accessibility/SkipToContent";
 import { SEARCH_CONSOLE } from "@/lib/config/search-console";
+import { Analytics } from "@vercel/analytics/next";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -156,6 +157,7 @@ export default function RootLayout({
           <Footer />
           <AccessibilityWidget />
         </AccessibilityProvider>
+        <Analytics />
       </body>
     </html>
   );
