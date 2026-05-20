@@ -17,7 +17,7 @@ export const SEARCH_CONSOLE = {
    * Example: 'abc123xyz456' (without "google-site-verification=" prefix)
    * Register at: https://search.google.com/search-console
    */
-  google: '',
+  google: 'Ec8f1CxhD0ZFZbsl7RWpCNIxYDWOtV5D7RpasmxX1uA',
 
   /**
    * Bing Webmaster Tools verification code.
