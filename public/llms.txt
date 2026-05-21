@@ -48,6 +48,14 @@
 ### בלוג
 - [בלוג](https://cheshbonai.co.il/blog) - 44 מאמרי SEO על מיסים, משכנתא, השקעות וזכויות עובד
 
+## עדכונים חיים — נתונים כלכליים (ISR, מתעדכן אוטומטית)
+
+- [עדכוני שוק ונתונים כלכליים](https://cheshbonai.co.il/news) — כל הנתונים במקום אחד
+- [ריבית פריים נוכחית](https://cheshbonai.co.il/news/prime-rate) — פריים 5.5%, ריבית ב"י 4.0%, גרף היסטורי
+- [מדד המחירים לצרכן](https://cheshbonai.co.il/news/cpi) — אינפלציה שנתית 2.8%, שינוי חודשי
+- [שכר ממוצע](https://cheshbonai.co.il/news/average-wage) — ₪13,200/חודש ברוטו (Q1 2026)
+- [מענקי חרבות ברזל](https://cheshbonai.co.il/news/iron-swords) — מענק כללי ₪5,000, יומי ₪280
+
 ## אופציונלי
 
 - [מילון מונחים](https://cheshbonai.co.il/glossary) - 82 מונחים פיננסיים

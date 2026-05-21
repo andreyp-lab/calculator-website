@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 mt-16">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
           {/* 1. שכירים */}
           <div>
             <h3 className="font-bold text-gray-900 mb-4">👤 שכירים</h3>
@@ -140,8 +140,37 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 5. נושאים אחרים + אודות */}
+          {/* 5. נושאים אחרים + עדכוני שוק + אודות */}
           <div>
+            <h3 className="font-bold text-gray-900 mb-4">📊 עדכוני שוק</h3>
+            <ul className="space-y-2 text-sm text-gray-600 mb-6">
+              <li>
+                <Link href="/news" className="hover:text-blue-600 font-semibold">
+                  כל הנתונים הכלכליים
+                </Link>
+              </li>
+              <li>
+                <Link href="/news/prime-rate" className="hover:text-blue-600">
+                  ריבית פריים עדכנית
+                </Link>
+              </li>
+              <li>
+                <Link href="/news/cpi" className="hover:text-orange-600">
+                  מדד המחירים לצרכן
+                </Link>
+              </li>
+              <li>
+                <Link href="/news/average-wage" className="hover:text-green-600">
+                  שכר ממוצע
+                </Link>
+              </li>
+              <li>
+                <Link href="/news/iron-swords" className="hover:text-red-600">
+                  מענקי חרבות ברזל
+                </Link>
+              </li>
+            </ul>
+
             <h3 className="font-bold text-gray-900 mb-4">📂 נושאים אחרים</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>

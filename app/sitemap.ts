@@ -117,6 +117,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/tools/customer-lifetime-value', 'monthly', 0.85),
     make('/tools/capital', 'monthly', 0.85),
 
+    // ===== עדכוני שוק (ISR) =====
+    make('/news', 'daily', 0.85),
+    make('/news/prime-rate', 'daily', 0.85),
+    make('/news/cpi', 'daily', 0.80),
+    make('/news/average-wage', 'monthly', 0.75),
+    make('/news/iron-swords', 'weekly', 0.80),
+
     // ===== בלוג =====
     make('/blog', 'daily', 0.85),
     ...blogEntries, // 44 פוסטי בלוג מתוך registry

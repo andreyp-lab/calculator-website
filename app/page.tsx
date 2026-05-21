@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { navigation } from '@/lib/config/navigation';
 import { ArrowLeft, LayoutDashboard, TrendingUp, Wallet, BarChart3 } from 'lucide-react';
+import { MacroDataWidget } from '@/components/widgets/MacroDataWidget';
 
 export default function Home() {
   return (
@@ -52,6 +53,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Macro Data Widget */}
+      <MacroDataWidget />
 
       {/* Professional Tools Section - חדש! */}
       <section className="max-w-6xl mx-auto px-4 py-12">
