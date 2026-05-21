@@ -6,7 +6,8 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 mt-16">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+        {/* Main grid - 4 balanced columns */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* 1. שכירים */}
           <div>
             <h3 className="font-bold text-gray-900 mb-4">👤 שכירים</h3>
@@ -31,11 +32,6 @@ export function Footer() {
                   פיצויי פיטורין
                 </Link>
               </li>
-              <li>
-                <Link href="/employee-rights/recreation-pay" className="hover:text-blue-600">
-                  דמי הבראה
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -55,7 +51,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/self-employed/vat" className="hover:text-blue-600">
-                  מחשבון מע"מ
+                  מחשבון מע&quot;מ
                 </Link>
               </li>
               <li>
@@ -63,22 +59,12 @@ export function Footer() {
                   תמחור שעת עבודה
                 </Link>
               </li>
-              <li>
-                <Link href="/self-employed/tax-advances" className="hover:text-blue-600">
-                  מקדמות מס
-                </Link>
-              </li>
-              <li>
-                <Link href="/self-employed/employer-cost" className="hover:text-blue-600">
-                  עלות מעסיק
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* 3. הלוואות */}
+          {/* 3. הלוואות + נדל"ן */}
           <div>
-            <h3 className="font-bold text-gray-900 mb-4">🏠 הלוואות</h3>
+            <h3 className="font-bold text-gray-900 mb-4">🏠 הלוואות ונדל&quot;ן</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
                 <Link href="/loans" className="hover:text-blue-600 font-semibold">
@@ -100,108 +86,13 @@ export function Footer() {
                   הלוואה אישית
                 </Link>
               </li>
-              <li>
-                <Link href="/savings/loan-repayment" className="hover:text-blue-600">
-                  השוואת הלוואות
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* 4. כלים לבעלי עסקים */}
+          {/* 4. אודות + משפטי */}
           <div>
-            <h3 className="font-bold text-purple-700 mb-4">🚀 כלים לבעלי עסקים</h3>
+            <h3 className="font-bold text-gray-900 mb-4">📂 על האתר</h3>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li>
-                <Link href="/tools" className="hover:text-purple-600 font-semibold">
-                  מרכז הכלים
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/start" className="hover:text-purple-600">
-                  התחל כאן
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/unified" className="hover:text-purple-600">
-                  מערכת מאוחדת
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/budget-wizard" className="hover:text-purple-600">
-                  אשף תקציב
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/cashflow-solo" className="hover:text-purple-600">
-                  תזרים סולו
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* 5. נושאים אחרים + עדכוני שוק + אודות */}
-          <div>
-            <h3 className="font-bold text-gray-900 mb-4">📊 עדכוני שוק</h3>
-            <ul className="space-y-2 text-sm text-gray-600 mb-6">
-              <li>
-                <Link href="/news" className="hover:text-blue-600 font-semibold">
-                  כל הנתונים הכלכליים
-                </Link>
-              </li>
-              <li>
-                <Link href="/news/prime-rate" className="hover:text-blue-600">
-                  ריבית פריים עדכנית
-                </Link>
-              </li>
-              <li>
-                <Link href="/news/cpi" className="hover:text-orange-600">
-                  מדד המחירים לצרכן
-                </Link>
-              </li>
-              <li>
-                <Link href="/news/average-wage" className="hover:text-green-600">
-                  שכר ממוצע
-                </Link>
-              </li>
-              <li>
-                <Link href="/news/iron-swords" className="hover:text-red-600">
-                  מענקי חרבות ברזל
-                </Link>
-              </li>
-            </ul>
-
-            <h3 className="font-bold text-gray-900 mb-4">📂 נושאים אחרים</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>
-                <Link href="/topics" className="hover:text-blue-600 font-semibold">
-                  כל הנושאים
-                </Link>
-              </li>
-              <li>
-                <Link href="/real-estate" className="hover:text-blue-600">
-                  משכנתא ונדל"ן
-                </Link>
-              </li>
-              <li>
-                <Link href="/savings" className="hover:text-blue-600">
-                  חיסכון והשקעות
-                </Link>
-              </li>
-              <li>
-                <Link href="/insurance" className="hover:text-blue-600">
-                  ביטוחים ופנסיה
-                </Link>
-              </li>
-              <li>
-                <Link href="/vehicles" className="hover:text-blue-600">
-                  רכב ותחבורה
-                </Link>
-              </li>
-            </ul>
-
-            <h3 className="font-bold text-gray-900 mt-6 mb-3 text-sm">אודות</h3>
-            <ul className="space-y-1.5 text-xs text-gray-600">
               <li>
                 <Link href="/about" className="hover:text-blue-600">
                   אודותינו
@@ -236,7 +127,50 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-200 pt-8 text-center text-sm text-gray-600">
+        {/* Secondary row - business tools + market data (compact) */}
+        <div className="border-t border-gray-200 pt-6 mb-6">
+          <div className="flex flex-wrap items-start gap-x-8 gap-y-4 text-sm">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-bold text-purple-700">🚀 כלים לעסקים:</span>
+              <Link href="/tools" className="text-gray-600 hover:text-purple-600">
+                מרכז הכלים
+              </Link>
+              <span className="text-gray-300">·</span>
+              <Link href="/tools/unified" className="text-gray-600 hover:text-purple-600">
+                מערכת מאוחדת
+              </Link>
+              <span className="text-gray-300">·</span>
+              <Link href="/tools/budget-wizard" className="text-gray-600 hover:text-purple-600">
+                אשף תקציב
+              </Link>
+              <span className="text-gray-300">·</span>
+              <Link href="/tools/cashflow-solo" className="text-gray-600 hover:text-purple-600">
+                תזרים סולו
+              </Link>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-bold text-gray-900">📊 עדכוני שוק:</span>
+              <Link href="/news/prime-rate" className="text-gray-600 hover:text-blue-600">
+                פריים
+              </Link>
+              <span className="text-gray-300">·</span>
+              <Link href="/news/cpi" className="text-gray-600 hover:text-orange-600">
+                מדד
+              </Link>
+              <span className="text-gray-300">·</span>
+              <Link href="/news/average-wage" className="text-gray-600 hover:text-green-600">
+                שכר ממוצע
+              </Link>
+              <span className="text-gray-300">·</span>
+              <Link href="/news" className="text-gray-600 hover:text-blue-600">
+                כל הנתונים
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="border-t border-gray-200 pt-6 text-center text-sm text-gray-600">
           <p>© {currentYear} FinCalc. כל הזכויות שמורות.</p>
           <p className="mt-2 text-xs">
             התוכן באתר זה אינו ייעוץ משפטי או מקצועי. כל המחשבונים מבוססים על החוק הישראלי 2026.
