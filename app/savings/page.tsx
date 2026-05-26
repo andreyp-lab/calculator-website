@@ -4,6 +4,7 @@ import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/savings' },
   title: 'מחשבוני חיסכון וחובות | FinCalc',
   description: 'מחשבונים לתקציב משפחתי, החזרי הלוואה, וניהול חובות',
 };

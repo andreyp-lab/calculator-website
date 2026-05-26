@@ -4,6 +4,7 @@ import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/personal-tax' },
   title: 'מיסוי אישי - מחשבונים | FinCalc',
   description: 'מחשבונים לחישוב מס הכנסה, נקודות זיכוי, מס שולי והחזרי מס לעובדים שכירים בישראל',
 };

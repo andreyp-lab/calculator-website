@@ -1,7 +1,13 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { navigation } from '@/lib/config/navigation';
 import { ArrowLeft, LayoutDashboard, TrendingUp, Wallet, BarChart3 } from 'lucide-react';
 import { MacroDataWidget } from '@/components/widgets/MacroDataWidget';
+import { AllCalculatorsGrid } from '@/components/home/AllCalculatorsGrid';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 export default function Home() {
   return (
@@ -160,6 +166,9 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* All Calculators Grid - direct internal links for SEO PageRank flow */}
+      <AllCalculatorsGrid />
 
       {/* Info Section */}
       <section className="bg-blue-50 py-12 border-t border-gray-200 mt-16">

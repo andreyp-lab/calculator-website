@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/compare' },
   title: 'דפי השוואה - שכיר vs עצמאי, שכירות vs קנייה | FinCalc',
   description:
     'דפי השוואה מקיפים לקבלת החלטות פיננסיות גדולות: שכיר מול עצמאי, שכירות מול קנייה, ליסינג מול קנייה.',

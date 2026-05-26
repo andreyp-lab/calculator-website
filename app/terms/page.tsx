@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { SITE_INFO } from '@/lib/config/site-info';
 
 export const metadata = {
+  alternates: { canonical: '/terms' },
   title: 'תנאי שימוש | חשבונאי',
   description: 'תנאי השימוש של cheshbonai.co.il - כתב ויתור פיננסי מקיף, הגבלת אחריות, קניין רוחני.',
 };

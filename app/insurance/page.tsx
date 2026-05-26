@@ -4,6 +4,7 @@ import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/insurance' },
   title: 'מחשבוני ביטוחים | FinCalc',
   description: 'מחשבוני פנסיה, ביטוח חיים, ביטוח רכב וביטוחים נוספים',
 };

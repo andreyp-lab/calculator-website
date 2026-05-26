@@ -4,6 +4,7 @@ import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/vehicles' },
   title: 'מחשבוני רכב ותחבורה | FinCalc',
   description: 'מחשבונים לרכב: עלות דלק, ליסינג vs קנייה, החזקת רכב',
 };

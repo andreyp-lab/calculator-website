@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { SITE_INFO } from '@/lib/config/site-info';
 
 export const metadata = {
+  alternates: { canonical: '/privacy' },
   title: 'מדיניות פרטיות | חשבונאי',
   description: 'מדיניות הפרטיות של cheshbonai.co.il - אנו לא אוספים נתונים אישיים. גילוי מלא לגבי שרתי Vercel.',
 };

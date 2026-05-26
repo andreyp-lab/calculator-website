@@ -18,6 +18,7 @@ import {
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/salaried' },
   title: 'שכירים - מחשבונים והחזר מס | FinCalc',
   description:
     'מרכז מקיף לעובדים שכירים בישראל: החזר מס, מחשבון נטו/ברוטו, פיצויי פיטורין, דמי הבראה, דמי לידה, מילואים, אבטלה ועוד. כל הזכויות שלך במקום אחד.',

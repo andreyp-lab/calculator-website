@@ -20,6 +20,8 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// Canonical domain is the apex (matches GSC property, sitemap.ts, robots.txt, site-info.ts).
+// Vercel must be configured so apex serves direct (no redirect) and www→apex redirects to it.
 const SITE_URL = "https://cheshbonai.co.il";
 
 export const viewport: Viewport = {
@@ -55,9 +57,10 @@ export const metadata: Metadata = {
   authors: [{ name: "חשבונאי - FinCalc" }],
   creator: "FinCalc",
   publisher: "FinCalc",
-  alternates: {
-    canonical: SITE_URL,
-  },
+  // NOTE: alternates.canonical is intentionally NOT set here. In Next.js App Router,
+  // any canonical declared at the root layout cascades to every child page that doesn't
+  // explicitly override it — which causes Google to see "I'm the homepage" on every
+  // sub-page and deindex all of them. Each page.tsx must declare its own canonical.
   openGraph: {
     type: "website",
     locale: "he_IL",

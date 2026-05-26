@@ -4,6 +4,7 @@ import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/employee-rights' },
   title: 'זכויות עובדים - מחשבונים | FinCalc',
   description: 'מחשבונים לחישוב זכויות עובדים בישראל: פיצויי פיטורין, דמי הבראה, חופשה ומחלה',
 };
