@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+import { BlogBreadcrumbs } from '@/components/blog/BlogBreadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
 
 export default function BlogPostLayout({ children }: { children: ReactNode }) {
@@ -7,13 +7,7 @@ export default function BlogPostLayout({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-white py-8">
       <article className="max-w-3xl mx-auto px-4">
         <div className="mb-6">
-          <Breadcrumbs
-            items={[
-              { label: 'דף הבית', href: '/' },
-              { label: 'בלוג', href: '/blog' },
-              { label: 'מאמר' },
-            ]}
-          />
+          <BlogBreadcrumbs />
         </div>
 
         <div className="prose prose-lg max-w-none">{children}</div>

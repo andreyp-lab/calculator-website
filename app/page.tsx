@@ -6,6 +6,9 @@ import { MacroDataWidget } from '@/components/widgets/MacroDataWidget';
 import { AllCalculatorsGrid } from '@/components/home/AllCalculatorsGrid';
 
 export const metadata: Metadata = {
+  title: 'חשבונאי - 30 מחשבונים פיננסיים בעברית | מעודכן 2026',
+  description:
+    '30 מחשבונים פיננסיים מקצועיים: מס הכנסה, משכנתא עם Solver, פיצויי פיטורין, ביטוח לאומי לעצמאי, FIRE, מס רכישה ועוד. עדכני 2026, בחינם.',
   alternates: { canonical: '/' },
 };
 

@@ -69,20 +69,17 @@ export const metadata: Metadata = {
     description:
       "30 מחשבונים פיננסיים מקצועיים: מס הכנסה, משכנתא עם אופטימייזר Solver-Style, השקעות, פיצויים, רכב ועוד. בחינם וב-2026.",
     siteName: "חשבונאי",
-    images: [
-      {
-        url: "/og-default.png",
-        width: 1200,
-        height: 630,
-        alt: "חשבונאי - מחשבונים פיננסיים בעברית",
-      },
-    ],
+    // NOTE: images is intentionally NOT set here.
+    // app/opengraph-image.tsx auto-generates the OG image and cascades to all child routes
+    // that don't have their own opengraph-image file.
+    // Explicitly setting images: ['/og-default.png'] would override the auto-generated image
+    // with a file that doesn't exist, breaking social sharing for every page.
   },
   twitter: {
     card: "summary_large_image",
     title: "חשבונאי - 30 מחשבונים פיננסיים בעברית",
     description: "מס הכנסה, משכנתא, השקעות, פיצויים ועוד 26 מחשבונים מעודכנים 2026",
-    images: ["/og-default.png"],
+    // NOTE: images is intentionally NOT set here — auto-cascades from app/opengraph-image.tsx
   },
   robots: {
     index: true,
@@ -129,6 +126,14 @@ const websiteSchema = {
   url: SITE_URL,
   description: "מחשבונים פיננסיים מקצועיים בעברית, מעודכנים 2026",
   inLanguage: "he-IL",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function RootLayout({
