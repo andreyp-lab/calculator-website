@@ -5,6 +5,8 @@ export const navigation = {
     { label: '🏠 הלוואות', href: '/loans' },
     { label: '📂 נושאים אחרים', href: '/topics' },
     { label: '🚀 כלים לבעלי עסקים', href: '/tools', highlight: true },
+    { label: '📝 בלוג', href: '/blog' },
+    { label: '📖 מדריכים', href: '/guides' },
   ],
   footer: [
     { label: 'מדיניות פרטיות', href: '/privacy' },

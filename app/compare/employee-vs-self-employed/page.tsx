@@ -10,8 +10,31 @@ export const metadata: Metadata = {
   alternates: { canonical: '/compare/employee-vs-self-employed' },
 };
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'שכיר vs עצמאי - השוואה מקיפה 2026',
+  description:
+    'ההחלטה הגדולה: לעבוד בתור שכיר עם הטבות וביטחון, או לפתוח עצמאי עם הכנסה גבוהה יותר ופחות מסים? השוואה מלאה.',
+  url: 'https://cheshbonai.co.il/compare/employee-vs-self-employed',
+  inLanguage: 'he-IL',
+  datePublished: '2026-05-04',
+  dateModified: '2026-05-04',
+  author: {
+    '@type': 'Organization',
+    name: 'חשבונאי',
+    url: 'https://cheshbonai.co.il',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'חשבונאי',
+    url: 'https://cheshbonai.co.il',
+  },
+};
+
 export default function EmployeeVsSelfEmployedComparePage() {
   return (
+    <>
     <CalculatorLayout
       title="שכיר vs עצמאי - השוואה מקיפה"
       description="ההחלטה הגדולה: לעבוד בתור שכיר עם הטבות וביטחון, או לפתוח עצמאי עם הכנסה גבוהה יותר ופחות מסים? השוואה מלאה."
@@ -174,5 +197,10 @@ export default function EmployeeVsSelfEmployedComparePage() {
         </>
       }
     />
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+    />
+    </>
   );
 }

@@ -2,18 +2,19 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ExternalLink, Users, ArrowLeft } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 import { WageChart } from './WageChart';
 
 export const revalidate = 2592000; // ISR: ~30 ימים (רבעוני)
 
 export const metadata: Metadata = {
-  title: 'שכר ממוצע במשק ישראל 2026 | FinCalc',
+  title: 'שכר ממוצע במשק ישראל 2026',
   description: `השכר הממוצע במשק: ₪${MACRO_DATA.averageWage.monthly.toLocaleString('he-IL')} לחודש (${MACRO_DATA.averageWage.reportPeriod}). גרף היסטורי, השוואת שכר ומחשבון שכר נטו.`,
   keywords: ['שכר ממוצע ישראל', 'שכר ממוצע 2026', 'ממוצע שכר במשק', 'שכר ברוטו ממוצע'],
   alternates: { canonical: 'https://cheshbonai.co.il/news/average-wage' },
   openGraph: {
-    title: `שכר ממוצע: ₪${MACRO_DATA.averageWage.monthly.toLocaleString('he-IL')}/חודש | FinCalc`,
+    title: `שכר ממוצע: ₪${MACRO_DATA.averageWage.monthly.toLocaleString('he-IL')}/חודש`,
     description: `${MACRO_DATA.averageWage.reportPeriod} | עודכן: ${formatHebrewDate(MACRO_DATA.averageWage.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/average-wage',
   },
@@ -26,7 +27,7 @@ const datasetSchema = {
   description: `שכר ממוצע חודשי: ₪${MACRO_DATA.averageWage.monthly.toLocaleString('he-IL')} (${MACRO_DATA.averageWage.reportPeriod})`,
   url: 'https://cheshbonai.co.il/news/average-wage',
   inLanguage: 'he-IL',
-  creator: { '@type': 'Organization', name: 'חשבונאי - FinCalc' },
+  creator: { '@type': 'Organization', name: 'חשבונאי' },
   publisher: { '@type': 'Organization', name: 'ביטוח לאומי', url: MACRO_DATA.averageWage.sourceUrl },
   dateModified: MACRO_DATA.averageWage.lastUpdated,
 };
@@ -60,7 +61,7 @@ export default function AverageWagePage() {
         <div className="bg-gradient-to-br from-green-500 to-emerald-700 text-white rounded-2xl p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
-              <p className="text-green-100 text-sm font-medium mb-2">שכר ממוצע חודשי — {reportPeriod}</p>
+              <h1 className="text-green-100 text-sm font-medium mb-2">שכר ממוצע חודשי — {reportPeriod}</h1>
               <div className="text-6xl font-bold mb-2">
                 ₪{monthly.toLocaleString('he-IL')}
               </div>
@@ -72,7 +73,9 @@ export default function AverageWagePage() {
             <div className="flex flex-col gap-3">
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-green-200 text-xs mb-1">עודכן</p>
-                <p className="font-semibold text-sm">{formatHebrewDate(lastUpdated)}</p>
+                <p className="font-semibold text-sm">
+                  <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
+                </p>
               </div>
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-green-200 text-xs mb-1">מקור</p>
@@ -187,13 +190,20 @@ export default function AverageWagePage() {
               className="text-green-500 hover:underline inline-flex items-center gap-1">
               ביטוח לאומי — נתונים אקטואריים <ExternalLink className="w-3 h-3" />
             </a>{' '}
-            | עודכן: {formatHebrewDate(lastUpdated)}
+            | עודכן: <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
           </p>
         </div>
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }}
+        />
+        <BreadcrumbSchema
+          items={[
+            { name: 'דף הבית', url: 'https://cheshbonai.co.il' },
+            { name: 'עדכוני שוק', url: 'https://cheshbonai.co.il/news' },
+            { name: 'שכר ממוצע', url: 'https://cheshbonai.co.il/news/average-wage' },
+          ]}
         />
       </div>
     </div>

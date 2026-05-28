@@ -4,7 +4,7 @@ import { ReserveDutyPayCalculator } from '@/components/calculators/ReserveDutyPa
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון תגמולי מילואים 2026 - חרבות ברזל | FinCalc',
+  title: 'מחשבון תגמולי מילואים 2026 - חרבות ברזל',
   description:
     'מחשבון תגמולי מילואים מקיף לשכירים, עצמאיים וחסרי תעסוקה. כולל מענקי חרבות ברזל (5,000 ₪ + 280 ₪/יום), החזר מעסיק, קצבות משפחה, הגנת הכנסה ונקודת זיכוי מס. מעודכן 2026.',
   alternates: { canonical: '/employee-rights/reserve-duty-pay' },

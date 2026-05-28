@@ -4,7 +4,7 @@ import { NITCalculator } from '@/components/calculators/NITCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מענק עבודה 2026 — מס הכנסה שלילי | FinCalc',
+  title: 'מחשבון מענק עבודה 2026 — מס הכנסה שלילי',
   description:
     'בדוק זכאות למענק עבודה (NIT) 2026 — תוכנית רשות המסים לעובדים בשכר נמוך. עד 14,000 ₪/שנה. גרף, השוואת שנים, בדיקת זכאות ו-10 שאלות נפוצות.',
   alternates: { canonical: '/employee-rights/work-grant' },

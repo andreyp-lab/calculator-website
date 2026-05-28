@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/savings' },
-  title: 'מחשבוני חיסכון וחובות | FinCalc',
+  title: 'מחשבוני חיסכון וחובות',
   description: 'מחשבונים לתקציב משפחתי, החזרי הלוואה, וניהול חובות',
 };
 

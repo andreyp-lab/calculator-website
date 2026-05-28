@@ -4,7 +4,7 @@ import { VehicleOwnershipCalculator } from '@/components/calculators/VehicleOwne
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון בעלות רכב מקיף 2026 - מזומן / הלוואה / ליסינג | FinCalc',
+  title: 'מחשבון בעלות רכב מקיף 2026 - מזומן / הלוואה / ליסינג',
   description:
     'השוואה מקיפה בין 3 דרכים לרכישת רכב: מימון עצמי (עם עלות הזדמנות), הלוואה, וליסינג. כולל ירידת ערך לא ליניארית, כל עלויות התפעול (דלק, ביטוח, רישוי, טיפולים, צמיגים) - 2026.',
   alternates: { canonical: '/vehicles/leasing-vs-buying' },

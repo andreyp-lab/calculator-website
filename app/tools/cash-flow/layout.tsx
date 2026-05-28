@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'תזרים מזומנים | חשבונאי',
-  description: 'מערכת ניהול תזרים מזומנים לעסקים - יתרות בנק, תחזיות, ניהול עיכובים, ותרחישים.',
+  title: 'תזרים מזומנים - ניהול והתחזית',
+  description: 'ניהול תזרים מזומנים לעסק: תחזית חודשית, ניתוח פערים בין תקציב לביצוע, זיהוי סיכוני נזילות ותכנון קדימה.',
   alternates: { canonical: '/tools/cash-flow' },
 };
 

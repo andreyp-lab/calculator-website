@@ -4,7 +4,7 @@ import { BituachLeumiSelfEmployedCalculator } from '@/components/calculators/Bit
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון ביטוח לאומי לעצמאי 2026 - חישוב מלא + הטבת מס | FinCalc',
+  title: 'מחשבון ביטוח לאומי לעצמאי 2026 - חישוב מלא + הטבת מס',
   description:
     'מחשבון ביטוח לאומי לעצמאי 2026: שתי המדרגות (6.10% / 18%), הטבת מס 52%, תיאום שנתי, השוואה לשכיר, זכויות ותחזית פנסיה. עדכני לשנת 2026.',
   alternates: { canonical: '/self-employed/social-security' },

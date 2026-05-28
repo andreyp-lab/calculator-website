@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/investments' },
-  title: 'מחשבוני השקעות וחיסכון | FinCalc',
+  title: 'מחשבוני השקעות וחיסכון',
   description:
     'מחשבונים להשקעות וחיסכון: ריבית דריבית, ROI, תכנון פרישה. תכנן את העתיד הפיננסי שלך.',
 };

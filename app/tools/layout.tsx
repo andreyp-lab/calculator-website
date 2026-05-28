@@ -5,7 +5,7 @@ import { ToolsProvider } from '@/lib/tools/ToolsContext';
 import { LayoutDashboard, TrendingUp, Wallet, BarChart3, Briefcase } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'כלים פיננסיים מקצועיים | FinCalc Pro',
+  title: 'כלים פיננסיים מקצועיים לבעלי עסקים',
   description: 'מערכת מאוחדת לתכנון תקציב, ניהול תזרים מזומנים וניתוח דוחות כספיים',
 };
 
@@ -49,7 +49,7 @@ export default function ToolsLayout({ children }: { children: ReactNode }) {
           <div className="max-w-7xl mx-auto px-4 py-4">
             <div className="flex items-center gap-2 mb-4">
               <Briefcase className="w-6 h-6 text-blue-600" />
-              <h1 className="text-2xl font-bold text-gray-900">כלים פיננסיים מקצועיים</h1>
+              <div className="text-2xl font-bold text-gray-900">כלים פיננסיים מקצועיים</div>
             </div>
             <nav className="flex gap-3 flex-wrap">
               {tools.map((tool) => {

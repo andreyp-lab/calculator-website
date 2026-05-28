@@ -19,10 +19,10 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            המקום אחד לכל המחשבונים הפיננסיים שלך
+            מחשבונים פיננסיים בעברית - 30 כלים מעודכנים 2026
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            מעל 15 מחשבונים מקצועיים בעברית - מס הכנסה, משכנתא, השקעות, רכב, ביטוחים ועוד.
+            מעל 30 מחשבונים מקצועיים בעברית - מס הכנסה, משכנתא, השקעות, רכב, ביטוחים ועוד.
             כל החישובים מעודכנים לחוק הישראלי 2026 ובוצעו על ידי רואה חשבון מוסמך.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">

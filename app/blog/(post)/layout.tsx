@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { BlogBreadcrumbs } from '@/components/blog/BlogBreadcrumbs';
+import { BlogArticleSchema } from '@/components/blog/BlogArticleSchema';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
 
 export default function BlogPostLayout({ children }: { children: ReactNode }) {
@@ -16,6 +17,9 @@ export default function BlogPostLayout({ children }: { children: ReactNode }) {
           <AuthorBox />
         </div>
       </article>
+
+      {/* Article JSON-LD schema – injected per-post via client component */}
+      <BlogArticleSchema />
     </div>
   );
 }

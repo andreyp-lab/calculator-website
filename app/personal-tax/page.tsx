@@ -5,11 +5,17 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/personal-tax' },
-  title: 'מיסוי אישי - מחשבונים | FinCalc',
+  title: 'מיסוי אישי - מחשבונים',
   description: 'מחשבונים לחישוב מס הכנסה, נקודות זיכוי, מס שולי והחזרי מס לעובדים שכירים בישראל',
 };
 
 const calculators = [
+  {
+    title: 'מחשבון שכר נטו ברוטו 2026',
+    description: 'חישוב מדויק של שכר נטו מברוטו - מס הכנסה, ביטוח לאומי, ביטוח בריאות ותוספות שכר',
+    href: '/personal-tax/salary-net-gross',
+    available: true,
+  },
   {
     title: 'מחשבון מס הכנסה לשכיר',
     description: 'חישוב מס הכנסה מדויק לפי מדרגות 2026 כולל נקודות זיכוי וב.ל.',

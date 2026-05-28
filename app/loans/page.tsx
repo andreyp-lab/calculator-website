@@ -4,7 +4,7 @@ import { ArrowLeft, Home, CreditCard, BarChart3, CheckCircle, Sparkles, Trending
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'הלוואות - כל המחשבונים במקום אחד 2026 | FinCalc',
+  title: 'הלוואות - כל המחשבונים במקום אחד 2026',
   description:
     'כל מחשבוני ההלוואות בישראל - משכנתא, אופטימייזר תמהיל, הלוואה אישית, השוואת הלוואות, כושר החזר. עדכני 2026.',
   alternates: { canonical: '/loans' },

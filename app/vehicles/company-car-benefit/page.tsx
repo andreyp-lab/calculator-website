@@ -4,7 +4,7 @@ import { CompanyCarBenefitCalculator } from '@/components/calculators/CompanyCar
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון שווי שימוש רכב חברה 2026 | FinCalc',
+  title: 'מחשבון שווי שימוש רכב חברה 2026',
   description:
     'מחשבון שווי שימוש ברכב מעסיק 2026: 8 קבוצות רכב מעודכנות, הנחה לרכב חשמלי (50%) והיברידי (70%), השוואה לרכב פרטי + החזר, ניתוח מדרגות מס, "שכר מקביל" ועוד.',
   alternates: { canonical: '/vehicles/company-car-benefit' },

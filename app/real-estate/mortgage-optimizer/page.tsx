@@ -4,7 +4,7 @@ import { MortgageOptimizerCalculator } from '@/components/calculators/MortgageOp
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'אופטימייזר תמהיל משכנתא V3 2026 — כשירות בנקאית, LTV, השוואת בנקים',
+  title: 'אופטימייזר תמהיל משכנתא V3 2026 — כשירות, LTV, בנקים',
   description:
     'אופטימייזר V3 לתמהיל משכנתא: כשירות בנקאית מלאה לפי הרכב משפחה, ריביות מותאמות LTV, השוואת עד 5 הצעות בנקים, מבחן עמידות להכנסה, תקופת גרייס, ולוח זמנים לתהליך. מוסדר בנק ישראל.',
   alternates: { canonical: '/real-estate/mortgage-optimizer' },

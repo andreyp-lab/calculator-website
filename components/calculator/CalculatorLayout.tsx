@@ -3,9 +3,9 @@ import { Breadcrumbs, Breadcrumb } from './Breadcrumbs';
 import { DisclaimerBox } from './DisclaimerBox';
 import { AuthorBox } from './AuthorBox';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
-import { CalculatorSchema } from '@/components/seo/CalculatorSchema';
+import { CalculatorSchemaClient } from '@/components/seo/CalculatorSchemaClient';
 
-const SITE_URL = 'https://cheshbonai.co.il';
+const SITE_URL = 'https://cheshbonai.co.il'; // used for breadcrumb schema fallback
 
 interface CalculatorLayoutProps {
   title: string;
@@ -36,12 +36,6 @@ export function CalculatorLayout({
     name: b.label,
     url: b.href ?? SITE_URL,
   }));
-
-  // קבע את ה-URL של הדף הנוכחי (breadcrumb אחרון עם href, או pageUrl)
-  const currentUrl =
-    pageUrl ??
-    [...breadcrumbs].reverse().find((b) => b.href)?.href ??
-    '/';
 
   return (
     <article className="bg-white">
@@ -101,10 +95,10 @@ export function CalculatorLayout({
 
       {/* SEO Schemas – BreadcrumbList + SoftwareApplication */}
       <BreadcrumbSchema items={breadcrumbSchemaItems} />
-      <CalculatorSchema
+      <CalculatorSchemaClient
         name={title}
         description={description}
-        url={currentUrl}
+        urlOverride={pageUrl}
       />
     </article>
   );

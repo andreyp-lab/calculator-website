@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'תכנון תקציב | חשבונאי',
-  description: 'תכנון תקציב עסקי מקיף - הכנסות, הוצאות, עובדים, P&L. עם הצגת תרחישים והשוואה.',
+  title: 'מתכנן תקציב עסקי',
+  description: 'תכנון תקציב שנתי לעסק: הכנסות, הוצאות, קו מטרה ומעקב ביצוע. כלי מקצועי לבעלי עסקים ועצמאיים.',
   alternates: { canonical: '/tools/budget' },
 };
 

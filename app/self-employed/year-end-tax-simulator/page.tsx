@@ -4,7 +4,7 @@ import { YearEndTaxSimulator } from '@/components/calculators/YearEndTaxSimulato
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'סימולטור הערכת מס לסוף שנה - עוסק פטור / מורשה | FinCalc',
+  title: 'סימולטור הערכת מס לסוף שנה - עוסק פטור / מורשה',
   description:
     'הערכת חבות המס לסוף שנת המס לעצמאיים: מס הכנסה + ביטוח לאומי + מע"מ, ניכויים לפנסיה וקרן השתלמות, השוואת מקדמות ששולמו, המלצות אופטימיזציה - 2026.',
   alternates: { canonical: '/self-employed/year-end-tax-simulator' },

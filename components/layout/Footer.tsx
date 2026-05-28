@@ -109,6 +109,26 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/guides" className="hover:text-blue-600">
+                  מדריכים
+                </Link>
+              </li>
+              <li>
+                <Link href="/glossary" className="hover:text-blue-600">
+                  מילון מונחים
+                </Link>
+              </li>
+              <li>
+                <Link href="/compare" className="hover:text-blue-600">
+                  השוואות
+                </Link>
+              </li>
+              <li>
+                <Link href="/news" className="hover:text-blue-600">
+                  עדכוני שוק
+                </Link>
+              </li>
+              <li>
                 <Link href="/privacy" className="hover:text-blue-600">
                   פרטיות
                 </Link>

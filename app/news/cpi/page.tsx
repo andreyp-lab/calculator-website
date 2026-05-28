@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ExternalLink, TrendingUp, Calculator, ArrowLeft } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 import { CpiChart } from './CpiChart';
 
 export const revalidate = 21600; // ISR: 6 שעות
 
 export const metadata: Metadata = {
-  title: 'מדד המחירים לצרכן (אינפלציה) 2026 | FinCalc',
+  title: 'מדד המחירים לצרכן (אינפלציה) 2026',
   description: `אינפלציה שנתית עדכנית: ${MACRO_DATA.inflation.annualRate}%. שינוי חודשי: ${MACRO_DATA.inflation.monthlyRate}%. גרף היסטורי, מדד CPI, ומשמעות לחיסכון ולמשכנתא.`,
   keywords: [
     'מדד המחירים לצרכן',
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     canonical: 'https://cheshbonai.co.il/news/cpi',
   },
   openGraph: {
-    title: `אינפלציה עדכנית: ${MACRO_DATA.inflation.annualRate}% | FinCalc`,
+    title: `אינפלציה עדכנית: ${MACRO_DATA.inflation.annualRate}%`,
     description: `מדד המחירים לצרכן — שינוי שנתי | עודכן: ${formatHebrewDate(MACRO_DATA.inflation.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/cpi',
   },
@@ -35,7 +36,7 @@ const datasetSchema = {
   url: 'https://cheshbonai.co.il/news/cpi',
   inLanguage: 'he-IL',
   temporalCoverage: '2025-06/2026-05',
-  creator: { '@type': 'Organization', name: 'חשבונאי - FinCalc' },
+  creator: { '@type': 'Organization', name: 'חשבונאי' },
   publisher: { '@type': 'Organization', name: 'הלשכה המרכזית לסטטיסטיקה', url: MACRO_DATA.inflation.sourceUrl },
   dateModified: MACRO_DATA.inflation.lastUpdated,
 };
@@ -65,7 +66,7 @@ export default function CpiPage() {
         <div className="bg-gradient-to-br from-orange-500 to-amber-600 text-white rounded-2xl p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
-              <p className="text-orange-100 text-sm font-medium mb-2">אינפלציה שנתית — 12 חודשים אחרונים</p>
+              <h1 className="text-orange-100 text-sm font-medium mb-2">אינפלציה שנתית — 12 חודשים אחרונים</h1>
               <div className="text-7xl font-bold mb-2">{annualRate}%</div>
               <p className="text-orange-100 text-lg">
                 שינוי חודשי אחרון:{' '}
@@ -80,7 +81,9 @@ export default function CpiPage() {
             <div className="flex flex-col gap-3">
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-orange-200 text-xs mb-1">עודכן</p>
-                <p className="font-semibold text-sm">{formatHebrewDate(lastUpdated)}</p>
+                <p className="font-semibold text-sm">
+                  <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
+                </p>
               </div>
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-orange-200 text-xs mb-1">מקור</p>
@@ -211,13 +214,20 @@ export default function CpiPage() {
             >
               הלשכה המרכזית לסטטיסטיקה <ExternalLink className="w-3 h-3" />
             </a>{' '}
-            | עודכן: {formatHebrewDate(lastUpdated)}
+            | עודכן: <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
           </p>
         </div>
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }}
+        />
+        <BreadcrumbSchema
+          items={[
+            { name: 'דף הבית', url: 'https://cheshbonai.co.il' },
+            { name: 'עדכוני שוק', url: 'https://cheshbonai.co.il/news' },
+            { name: 'מדד המחירים לצרכן', url: 'https://cheshbonai.co.il/news/cpi' },
+          ]}
         />
       </div>
     </div>

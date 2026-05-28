@@ -4,7 +4,7 @@ import { ROICalculator } from '@/components/calculators/ROICalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון ROI - תשואה על השקעה | FinCalc',
+  title: 'מחשבון ROI - תשואה על השקעה',
   description:
     'חשב את ROI (Return on Investment) על כל השקעה - מניות, נדל"ן, עסק. כולל ROI שנתי מנורמל.',
   alternates: { canonical: '/investments/roi' },

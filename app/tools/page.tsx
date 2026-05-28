@@ -17,7 +17,7 @@ import {
 
 export const metadata: Metadata = {
   alternates: { canonical: '/tools' },
-  title: 'FinCalc Pro - מערכת פיננסית לבעלי עסקים',
+  title: 'מערכת פיננסית לבעלי עסקים',
   description:
     'המערכת המקיפה ביותר בישראל לתכנון פיננסי: תקציב, תזרים, ניתוח דוחות, חיזוי 5 שנים, הערכת שווי DCF, Cap Table. עברית מלאה, ללא הרשמה.',
 };

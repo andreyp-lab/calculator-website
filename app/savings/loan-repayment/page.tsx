@@ -4,7 +4,7 @@ import { LoanRepaymentCalculator } from '@/components/calculators/LoanRepaymentC
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון החזרי הלוואה | השוואה, פירעון מוקדם, איחוד הלוואות | FinCalc',
+  title: 'מחשבון החזרי הלוואה | השוואה, פירעון מוקדם, איחוד הלוואות',
   description:
     'מחשבון הלוואה מקיף: חישוב תשלום חודשי, השוואת הצעות, איחוד הלוואות, פירעון מוקדם, APR אמיתי וכושר החזר. כולל לוח סילוקין ותרשימים.',
   alternates: { canonical: '/savings/loan-repayment' },

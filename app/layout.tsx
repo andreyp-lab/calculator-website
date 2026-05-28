@@ -54,13 +54,19 @@ export const metadata: Metadata = {
     "אופטימייזר משכנתא",
     "מדרגות מס 2026",
   ],
-  authors: [{ name: "חשבונאי - FinCalc" }],
-  creator: "FinCalc",
-  publisher: "FinCalc",
+  authors: [{ name: "חשבונאי" }],
+  creator: "חשבונאי",
+  publisher: "חשבונאי",
   // NOTE: alternates.canonical is intentionally NOT set here. In Next.js App Router,
   // any canonical declared at the root layout cascades to every child page that doesn't
   // explicitly override it — which causes Google to see "I'm the homepage" on every
   // sub-page and deindex all of them. Each page.tsx must declare its own canonical.
+  alternates: {
+    languages: {
+      "he-IL": "https://cheshbonai.co.il",
+      "x-default": "https://cheshbonai.co.il",
+    },
+  },
   openGraph: {
     type: "website",
     locale: "he_IL",
@@ -104,7 +110,7 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "חשבונאי - FinCalc",
+  name: "חשבונאי",
   url: SITE_URL,
   description: "30 מחשבונים פיננסיים מקצועיים בעברית עם נתונים מעודכנים ל-2026",
   inLanguage: "he-IL",

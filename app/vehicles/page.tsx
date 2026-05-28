@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/vehicles' },
-  title: 'מחשבוני רכב ותחבורה | FinCalc',
+  title: 'מחשבוני רכב ותחבורה',
   description: 'מחשבונים לרכב: עלות דלק, ליסינג vs קנייה, החזקת רכב',
 };
 

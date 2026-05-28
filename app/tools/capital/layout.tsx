@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'הון חוזר | חשבונאי',
-  description: 'חישוב והערכת הון חוזר עסקי - יחסי נזילות, מימון תפעולי, ואופטימיזציה.',
+  title: 'הון חוזר - ניהול ואופטימיזציה',
+  description: 'חישוב והערכת הון חוזר: יחסי נזילות, מחזור לקוחות וספקים, מימון תפעולי ואסטרטגיות לשיפור תזרים.',
   alternates: { canonical: '/tools/capital' },
 };
 

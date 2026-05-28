@@ -12,7 +12,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/topics' },
-  title: 'נושאים נוספים - כל המחשבונים | FinCalc',
+  title: 'נושאים נוספים - כל המחשבונים',
   description:
     'משכנתא ונדל"ן, חיסכון והשקעות, ביטוחים, רכב — כל הקטגוריות הנוספות במחשבונים פיננסיים בישראל.',
 };

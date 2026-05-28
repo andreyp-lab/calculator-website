@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ExternalLink, Shield, CheckCircle, ArrowLeft, AlertCircle } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 
 export const revalidate = 604800; // ISR: 7 ימים (שבועי)
 
 export const metadata: Metadata = {
-  title: 'מענקי חרבות ברזל 2026 — סכומים עדכניים | FinCalc',
+  title: 'מענקי חרבות ברזל 2026 — סכומים עדכניים',
   description: `מענק כללי ₪${MACRO_DATA.ironSwordsBonuses.generalGrant.toLocaleString('he-IL')}, מענק יומי ₪${MACRO_DATA.ironSwordsBonuses.dailyGrant}, מענק חזרה לעבודה ₪${MACRO_DATA.ironSwordsBonuses.returnToWorkGrant}. מעודכן ${formatHebrewDate(MACRO_DATA.ironSwordsBonuses.lastUpdated)}.`,
   keywords: [
     'מענק חרבות ברזל',
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: 'https://cheshbonai.co.il/news/iron-swords' },
   openGraph: {
-    title: `מענקי חרבות ברזל: ₪${MACRO_DATA.ironSwordsBonuses.generalGrant.toLocaleString('he-IL')} | FinCalc`,
+    title: `מענקי חרבות ברזל: ₪${MACRO_DATA.ironSwordsBonuses.generalGrant.toLocaleString('he-IL')}`,
     description: `מענק כללי, יומי וחזרה לעבודה — עודכן: ${formatHebrewDate(MACRO_DATA.ironSwordsBonuses.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/iron-swords',
   },
@@ -25,13 +26,15 @@ export const metadata: Metadata = {
 
 const articleSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': 'NewsArticle',
   headline: 'מענקי חרבות ברזל 2026 — סכומים עדכניים',
   description: `מענקי ביטוח לאומי במסגרת מלחמת חרבות ברזל. מענק כללי ₪${MACRO_DATA.ironSwordsBonuses.generalGrant}, מענק יומי ₪${MACRO_DATA.ironSwordsBonuses.dailyGrant}.`,
   url: 'https://cheshbonai.co.il/news/iron-swords',
   inLanguage: 'he-IL',
+  datePublished: '2023-10-07',
   dateModified: MACRO_DATA.ironSwordsBonuses.lastUpdated,
-  publisher: { '@type': 'Organization', name: 'חשבונאי - FinCalc', url: 'https://cheshbonai.co.il' },
+  author: { '@type': 'Organization', name: 'חשבונאי', url: 'https://cheshbonai.co.il' },
+  publisher: { '@type': 'Organization', name: 'חשבונאי', url: 'https://cheshbonai.co.il' },
 };
 
 const STATUS_LABELS = {
@@ -90,7 +93,7 @@ export default function IronSwordsPage() {
                   {statusInfo.label}
                 </span>
               </div>
-              <p className="text-red-100 text-sm font-medium mb-2">מענקי חרבות ברזל</p>
+              <h1 className="text-red-100 text-sm font-medium mb-2">מענקי חרבות ברזל</h1>
               <div className="text-6xl font-bold mb-2">
                 ₪{generalGrant.toLocaleString('he-IL')}
               </div>
@@ -103,7 +106,9 @@ export default function IronSwordsPage() {
             <div className="flex flex-col gap-3">
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-red-200 text-xs mb-1">עודכן</p>
-                <p className="font-semibold text-sm">{formatHebrewDate(lastUpdated)}</p>
+                <p className="font-semibold text-sm">
+                  <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
+                </p>
               </div>
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-red-200 text-xs mb-1">מקור</p>
@@ -217,13 +222,20 @@ export default function IronSwordsPage() {
               className="text-red-500 hover:underline inline-flex items-center gap-1">
               ביטוח לאומי — חרבות ברזל <ExternalLink className="w-3 h-3" />
             </a>{' '}
-            | עודכן: {formatHebrewDate(lastUpdated)}
+            | עודכן: <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
           </p>
         </div>
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <BreadcrumbSchema
+          items={[
+            { name: 'דף הבית', url: 'https://cheshbonai.co.il' },
+            { name: 'עדכוני שוק', url: 'https://cheshbonai.co.il/news' },
+            { name: 'מענקי חרבות ברזל', url: 'https://cheshbonai.co.il/news/iron-swords' },
+          ]}
         />
       </div>
     </div>

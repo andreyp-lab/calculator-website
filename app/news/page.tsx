@@ -7,14 +7,14 @@ import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 export const revalidate = 21600; // ISR: 6 שעות
 
 export const metadata: Metadata = {
-  title: 'עדכוני שוק ונתונים כלכליים | FinCalc',
+  title: 'עדכוני שוק ונתונים כלכליים',
   description:
     'ריבית פריים עדכנית, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — נתונים כלכליים מעודכנים אוטומטית.',
   alternates: {
     canonical: 'https://cheshbonai.co.il/news',
   },
   openGraph: {
-    title: 'עדכוני שוק ונתונים כלכליים | FinCalc',
+    title: 'עדכוני שוק ונתונים כלכליים',
     description: 'ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — מעודכן אוטומטית.',
     url: 'https://cheshbonai.co.il/news',
   },
@@ -193,7 +193,7 @@ export default function NewsPage() {
               inLanguage: 'he-IL',
               publisher: {
                 '@type': 'Organization',
-                name: 'חשבונאי - FinCalc',
+                name: 'חשבונאי',
                 url: 'https://cheshbonai.co.il',
               },
             }),

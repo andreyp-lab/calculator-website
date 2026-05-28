@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/self-employed' },
-  title: 'עצמאיים ועסקים - מחשבונים | FinCalc',
+  title: 'עצמאיים ועסקים - מחשבונים',
   description: 'מחשבונים לעצמאיים ובעלי עסקים: מע"מ, מקדמות מס, ביטוח לאומי לעצמאי ועוד',
 };
 

@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/employee-rights' },
-  title: 'זכויות עובדים - מחשבונים | FinCalc',
+  title: 'זכויות עובדים - מחשבונים',
   description: 'מחשבונים לחישוב זכויות עובדים בישראל: פיצויי פיטורין, דמי הבראה, חופשה ומחלה',
 };
 

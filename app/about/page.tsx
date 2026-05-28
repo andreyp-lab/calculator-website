@@ -1,6 +1,6 @@
 export const metadata = {
   alternates: { canonical: '/about' },
-  title: 'אודות - FinCalc',
+  title: 'אודות',
   description: 'אודות אתר המחשבונים הפיננסיים והרואה חשבון מאחוריו',
 };
 

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'יצירת קשר | חשבונאי',
-  description: 'יצירת קשר עם צוות חשבונאי - שאלות, הצעות, ושיתופי פעולה.',
+  title: 'צור קשר - חשבונאי',
+  description: 'פנייה לצוות חשבונאי: שאלות, הצעות לשיפור, דיווח על שגיאות או שיתוף פעולה. נשמח לשמוע ממך.',
   alternates: { canonical: '/contact' },
 };
 

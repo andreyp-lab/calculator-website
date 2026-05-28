@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ExternalLink, Calendar, TrendingDown, Home, ArrowLeft } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { MACRO_DATA, formatHebrewDate, daysUntilNextDecision } from '@/lib/data/macroeconomic-data';
 import { PrimeRateChart } from './PrimeRateChart';
 
 export const revalidate = 21600; // ISR: 6 שעות
 
 export const metadata: Metadata = {
-  title: 'ריבית פריים עדכנית 2026 | FinCalc',
+  title: 'ריבית פריים עדכנית 2026',
   description: `ריבית פריים נוכחית: ${MACRO_DATA.primeRate.value}%. ריבית בנק ישראל: ${MACRO_DATA.primeRate.boiBaseRate}%. גרף היסטורי, ההחלטה הבאה של בנק ישראל ומשמעות לנוטלי משכנתא.`,
   keywords: [
     'ריבית פריים',
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     canonical: 'https://cheshbonai.co.il/news/prime-rate',
   },
   openGraph: {
-    title: `ריבית פריים עדכנית: ${MACRO_DATA.primeRate.value}% | FinCalc`,
+    title: `ריבית פריים עדכנית: ${MACRO_DATA.primeRate.value}%`,
     description: `ריבית בנק ישראל: ${MACRO_DATA.primeRate.boiBaseRate}% | עודכן: ${formatHebrewDate(MACRO_DATA.primeRate.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/prime-rate',
   },
@@ -37,7 +38,7 @@ const datasetSchema = {
   temporalCoverage: '2025-06/2026-05',
   creator: {
     '@type': 'Organization',
-    name: 'חשבונאי - FinCalc',
+    name: 'חשבונאי',
   },
   publisher: {
     '@type': 'Organization',
@@ -74,7 +75,7 @@ export default function PrimeRatePage() {
         <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
-              <p className="text-blue-200 text-sm font-medium mb-2">ריבית פריים נוכחית</p>
+              <h1 className="text-blue-200 text-sm font-medium mb-2">ריבית פריים נוכחית</h1>
               <div className="text-7xl font-bold mb-2">{value}%</div>
               <p className="text-blue-100 text-lg">
                 ריבית בנק ישראל: <strong className="text-white">{boiBaseRate}%</strong> + מרווח{' '}
@@ -84,7 +85,9 @@ export default function PrimeRatePage() {
             <div className="flex flex-col gap-3 md:text-left">
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-blue-200 text-xs mb-1">עודכן</p>
-                <p className="font-semibold text-sm">{formatHebrewDate(lastUpdated)}</p>
+                <p className="font-semibold text-sm">
+                  <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
+                </p>
               </div>
               <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
                 <p className="text-blue-200 text-xs mb-1">החלטה הבאה</p>
@@ -220,13 +223,20 @@ export default function PrimeRatePage() {
             >
               בנק ישראל — ריביות <ExternalLink className="w-3 h-3" />
             </a>{' '}
-            | עודכן: {formatHebrewDate(lastUpdated)}
+            | עודכן: <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
           </p>
         </div>
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }}
+        />
+        <BreadcrumbSchema
+          items={[
+            { name: 'דף הבית', url: 'https://cheshbonai.co.il' },
+            { name: 'עדכוני שוק', url: 'https://cheshbonai.co.il/news' },
+            { name: 'ריבית פריים', url: 'https://cheshbonai.co.il/news/prime-rate' },
+          ]}
         />
       </div>
     </div>

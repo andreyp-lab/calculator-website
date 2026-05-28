@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'תזרים סולו - לעצמאיים | חשבונאי',
-  description: 'תזרים מזומנים מפושט לעצמאיים ובעלי עסקים קטנים. ניהול הכנסות, הוצאות, ומאזן בנק.',
+  title: 'תזרים מזומנים לעצמאים',
+  description: 'מעקב תזרים מזומנים לעצמאי: הכנסות, הוצאות, מקדמות מס, מע״מ וביטוח לאומי — הכל במקום אחד.',
   alternates: { canonical: '/tools/cashflow-solo' },
 };
 

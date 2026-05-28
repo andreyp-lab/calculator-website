@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'חיזוי פיננסי | חשבונאי',
-  description: 'מודלים פיננסיים מתקדמים - 3-Statement Model, Monte Carlo, ניתוח קוהורט.',
+  title: 'חיזוי פיננסי ומודלים עסקיים',
+  description: 'מודלים פיננסיים מתקדמים: 3-Statement Model, ניתוח Monte Carlo, תחזיות הכנסה וניתוח קוהורט לצמיחת עסק.',
   alternates: { canonical: '/tools/forecast' },
 };
 

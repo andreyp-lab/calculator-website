@@ -4,7 +4,7 @@ import { RetirementCalculator } from '@/components/calculators/RetirementCalcula
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון תכנון פרישה 2026 | קצבה, ב.ל., תיק השקעות | FinCalc',
+  title: 'מחשבון תכנון פרישה 2026 | קצבה, ב.ל., תיק השקעות',
   description:
     'מחשבון תכנון פרישה מקיף 2026: פנסיה, ביטוח לאומי, תיק השקעות, drawdown, מיסוי ותרחישים. בדוק כמה תחסוך ואם תספיק לחיות בכבוד.',
   alternates: { canonical: '/investments/retirement' },

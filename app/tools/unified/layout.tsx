@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'מערכת מאוחדת - תקציב + תזרים + ניתוח | חשבונאי',
-  description: 'מערכת ניהול פיננסי מקיפה - תקציב, תזרים מזומנים, וניתוח דוחות במקום אחד.',
+  title: 'מערכת ניהול פיננסי מאוחדת',
+  description: 'תקציב + תזרים + ניתוח כספי במערכת אחת: ניהול פיננסי מקיף לעסקים, צפייה ב-P&L ותכנון לטווח ארוך.',
   alternates: { canonical: '/tools/unified' },
 };
 

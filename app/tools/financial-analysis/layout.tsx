@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'ניתוח דוחות כספיים | חשבונאי',
-  description: 'ניתוח מקיף של דוחות כספיים - יחסים פיננסיים, Z-Score פשיטת רגל, דירוג אשראי.',
+  title: 'ניתוח דוחות כספיים',
+  description: 'ניתוח מעמיק של דוחות כספיים: יחסים פיננסיים, Z-Score פשיטת רגל, דירוג אשראי ועוד. לבעלי עסקים ורואי חשבון.',
   alternates: { canonical: '/tools/financial-analysis' },
 };
 

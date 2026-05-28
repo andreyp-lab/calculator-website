@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/real-estate' },
-  title: 'משכנתא ונדל"ן - מחשבונים | FinCalc',
+  title: 'משכנתא ונדל"ן - מחשבונים',
   description: 'מחשבוני משכנתא, מס רכישה, מס שבח ויכולת החזר לרוכשי דירות בישראל',
 };
 

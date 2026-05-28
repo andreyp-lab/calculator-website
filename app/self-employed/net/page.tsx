@@ -4,7 +4,7 @@ import { SelfEmployedNetCalculator } from '@/components/calculators/SelfEmployed
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון נטו לעצמאי 2026 - כמה כסף נשאר ביד? | FinCalc',
+  title: 'מחשבון נטו לעצמאי 2026 - כמה כסף נשאר ביד?',
   description:
     'מחשבון נטו מהיר לעצמאי: מה הסכום שאתה מקבל בפועל לחשבון הבנק אחרי מס הכנסה, ביטוח לאומי, מע"מ ופנסיה. עוסק פטור או מורשה. עדכני לשנת 2026.',
   alternates: { canonical: '/self-employed/net' },

@@ -6,7 +6,7 @@ import { blogPosts, getAllCategories } from '@/content/blog/registry';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/blog' },
-  title: 'בלוג FinCalc - מאמרי עומק על מיסוי וכלכלה אישית 2026',
+  title: 'בלוג - מאמרי עומק על מיסוי וכלכלה אישית 2026',
   description:
     'מאמרים מקצועיים מקיפים על מס הכנסה, החזרי מס, פיצויי פיטורין, חברה בע"מ vs עוסק, מע"מ, זכויות עובדים והפחתת מס - מעודכן 2026.',
 };
