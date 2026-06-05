@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
 import { CourseBanner } from '@/components/marketing/CourseBanner';
+import { LeadMagnet } from '@/components/marketing/LeadMagnet';
 import { COURSES } from '@/lib/config/courses';
 
 const PAGE_PATH = '/self-employed/recognized-expenses';
@@ -169,6 +170,17 @@ export default function RecognizedExpensesPage() {
             מוכרות. תיעוד שיטתי לאורך השנה יכול לחסוך אלפי שקלים במס. בקורס נכנסים לעומק לכל
             קטגוריה ומראים בדיוק איך לנהל את זה נכון.
           </p>
+        </div>
+
+        {/* Lead magnet */}
+        <div className="my-10">
+          <LeadMagnet
+            magnet="recognized-expenses-list"
+            title="20 הוצאות מוכרות שעצמאים מפספסים — חינם"
+            description="הרשימה המלאה להורדה. כל שורה יכולה להקטין את המס שלך."
+            bullets={['20 הוצאות מוכרות נפוצות', 'מה מוכר במלואו ומה חלקית', 'מוכן להדפסה ושמירה']}
+            page={PAGE_PATH}
+          />
         </div>
 
         {/* Course banner */}

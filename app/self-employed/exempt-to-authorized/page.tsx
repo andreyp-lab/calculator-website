@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
 import { CourseBanner } from '@/components/marketing/CourseBanner';
+import { LeadMagnet } from '@/components/marketing/LeadMagnet';
 import { COURSES } from '@/lib/config/courses';
 
 const PAGE_PATH = '/self-employed/exempt-to-authorized';
@@ -173,6 +174,17 @@ export default function ExemptToAuthorizedPage() {
             התקרה — מע"מ שלא גבית מהלקוחות וייצא מהכיס שלך. לכן חשוב לעקוב אחר המחזור לאורך כל
             השנה ולא רק בסופה.
           </p>
+        </div>
+
+        {/* Lead magnet */}
+        <div className="my-10">
+          <LeadMagnet
+            magnet="opening-business-checklist"
+            title="צ׳קליסט פתיחת עסק — חינם"
+            description="כל הצעדים לפתיחת עסק וניהול מול הרשויות, מסודרים לסימון ✓."
+            bullets={['רישום מול 3 הרשויות', 'מעקב מחזור מול תקרת 120,000 ₪', 'טעויות נפוצות']}
+            page={PAGE_PATH}
+          />
         </div>
 
         {/* Course banner */}
