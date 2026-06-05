@@ -19,6 +19,18 @@ const calculators = [
     available: true,
   },
   {
+    title: '📗 מעבר מעוסק פטור לעוסק מורשה',
+    description: 'עברת את תקרת 120,000 ₪? מתי חובה לעבור, איך עושים זאת נכון, ומה משתנה במע"מ ובדיווח',
+    href: '/self-employed/exempt-to-authorized',
+    available: true,
+  },
+  {
+    title: '📙 הוצאות מוכרות לעצמאי — חיסכון במס',
+    description: 'הרשימה המלאה של ההוצאות שמותר לנכות: רכב, משרד בבית, טלפון, פחת ועוד — וכמה כל אחת חוסכת לך',
+    href: '/self-employed/recognized-expenses',
+    available: true,
+  },
+  {
     title: '⭐ סימולטור הערכת מס לסוף שנה',
     description: 'הכלי המקיף ביותר: הכנסות + הוצאות + פנסיה + ב.ל. + מקדמות - הערכת חבות מס מלאה לסוף השנה',
     href: '/self-employed/year-end-tax-simulator',
