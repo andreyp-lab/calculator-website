@@ -2,9 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
-import { CourseBanner } from '@/components/marketing/CourseBanner';
-import { LeadMagnet } from '@/components/marketing/LeadMagnet';
-import { COURSES } from '@/lib/config/courses';
 
 const PAGE_PATH = '/self-employed/opening-business';
 const SITE_URL = 'https://cheshbonai.co.il';
@@ -197,22 +194,6 @@ export default function OpeningBusinessPage() {
             <li>הזנחת מקדמות מס — שמובילה ל"הפתעה" של חוב גדול בסוף השנה.</li>
             <li>ערבוב בין חשבון בנק פרטי לעסקי — שמקשה על ניהול וביקורת.</li>
           </ul>
-        </div>
-
-        {/* Lead magnet — free checklist in exchange for email (builds owned list) */}
-        <div className="my-10">
-          <LeadMagnet
-            magnet="opening-business-checklist"
-            title="צ׳קליסט פתיחת עסק — חינם"
-            description="כל הצעדים לפתיחת עסק נכון, מסודרים לסימון ✓. שמור והדפס."
-            bullets={['רישום מול 3 הרשויות', 'בחירת סיווג נכון', 'טעויות שעולות אלפי שקלים']}
-            page={PAGE_PATH}
-          />
-        </div>
-
-        {/* Course banner — perfect intent match */}
-        <div className="my-10">
-          <CourseBanner course={COURSES.selfEmployed} page={PAGE_PATH} variant="hero" />
         </div>
 
         {/* Related calculators */}

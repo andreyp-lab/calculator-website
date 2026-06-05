@@ -14,8 +14,6 @@ import {
   BarChart3,
   type LucideIcon,
 } from 'lucide-react';
-import { CourseBanner } from '@/components/marketing/CourseBanner';
-import { COURSES } from '@/lib/config/courses';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/tools' },
@@ -194,11 +192,6 @@ export default function ToolsLandingPage() {
             <ArrowLeft className="w-4 h-4" />
           </Link>
         </div>
-      </div>
-
-      {/* Course banner — business owners */}
-      <div className="mb-10">
-        <CourseBanner course={COURSES.business} page="tools" variant="hero" />
       </div>
 
       {/* Other standalone calculators */}

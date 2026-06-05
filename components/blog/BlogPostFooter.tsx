@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft, Calculator } from 'lucide-react';
 import { getRelatedPosts, getPostBySlug } from '@/content/blog/registry';
-import { CourseBanner } from '@/components/marketing/CourseBanner';
-import { getCourseForCategory } from '@/lib/config/courses';
 
 interface BlogPostFooterProps {
   slug: string;
@@ -21,7 +19,6 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
   if (!post) return null;
 
   const related = getRelatedPosts(slug, 3);
-  const course = getCourseForCategory(post.category);
 
   // Schema.org Article JSON-LD - Google Rich Snippets
   const articleSchema = {
@@ -83,9 +80,6 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
           </div>
         </div>
       )}
-
-      {/* באנר קורס — לפי קטגוריית המאמר */}
-      {course && <CourseBanner course={course} page={`blog/${post.slug}`} />}
 
       {/* מאמרים קשורים */}
       {related.length > 0 && (

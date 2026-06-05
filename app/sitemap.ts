@@ -72,8 +72,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: עצמאיים =====
     make('/self-employed/opening-business', 'monthly', 0.92), // מדריך פתיחת עסק (pillar)
-    make('/self-employed/exempt-to-authorized', 'monthly', 0.9), // מעבר לעוסק מורשה (pillar)
-    make('/self-employed/recognized-expenses', 'monthly', 0.9), // הוצאות מוכרות (pillar)
     make('/self-employed/year-end-tax-simulator', 'weekly', 0.95),
     make('/self-employed/net', 'weekly', 0.95),
     make('/self-employed/social-security', 'monthly', 0.95),

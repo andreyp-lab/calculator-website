@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
-import { CourseBanner } from '@/components/marketing/CourseBanner';
-import { COURSES } from '@/lib/config/courses';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/self-employed' },
@@ -16,18 +14,6 @@ const calculators = [
     title: '📘 מדריך פתיחת עסק — עוסק פטור או מורשה?',
     description: 'מתחילים עסק? המדריך המלא לבחירה בין עוסק פטור למורשה, רישום מול הרשויות, תקרת 120,000 ₪ וטעויות נפוצות',
     href: '/self-employed/opening-business',
-    available: true,
-  },
-  {
-    title: '📗 מעבר מעוסק פטור לעוסק מורשה',
-    description: 'עברת את תקרת 120,000 ₪? מתי חובה לעבור, איך עושים זאת נכון, ומה משתנה במע"מ ובדיווח',
-    href: '/self-employed/exempt-to-authorized',
-    available: true,
-  },
-  {
-    title: '📙 הוצאות מוכרות לעצמאי — חיסכון במס',
-    description: 'הרשימה המלאה של ההוצאות שמותר לנכות: רכב, משרד בבית, טלפון, פחת ועוד — וכמה כל אחת חוסכת לך',
-    href: '/self-employed/recognized-expenses',
     available: true,
   },
   {
@@ -98,10 +84,6 @@ export default function SelfEmployedPage() {
         <p className="text-lg text-gray-600 mb-8">
           מחשבונים מקצועיים לעצמאיים, פרילנסרים ובעלי עסקים קטנים
         </p>
-
-        <div className="mb-12">
-          <CourseBanner course={COURSES.selfEmployed} page="self-employed" variant="hero" />
-        </div>
 
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
