@@ -71,6 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/work-grant', 'monthly', 0.90),
 
     // ===== מחשבונים: עצמאיים =====
+    make('/self-employed/opening-business', 'monthly', 0.92), // מדריך פתיחת עסק (pillar)
     make('/self-employed/year-end-tax-simulator', 'weekly', 0.95),
     make('/self-employed/net', 'weekly', 0.95),
     make('/self-employed/social-security', 'monthly', 0.95),

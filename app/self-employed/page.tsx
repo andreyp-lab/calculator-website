@@ -13,6 +13,12 @@ export const metadata: Metadata = {
 
 const calculators = [
   {
+    title: '📘 מדריך פתיחת עסק — עוסק פטור או מורשה?',
+    description: 'מתחילים עסק? המדריך המלא לבחירה בין עוסק פטור למורשה, רישום מול הרשויות, תקרת 120,000 ₪ וטעויות נפוצות',
+    href: '/self-employed/opening-business',
+    available: true,
+  },
+  {
     title: '⭐ סימולטור הערכת מס לסוף שנה',
     description: 'הכלי המקיף ביותר: הכנסות + הוצאות + פנסיה + ב.ל. + מקדמות - הערכת חבות מס מלאה לסוף השנה',
     href: '/self-employed/year-end-tax-simulator',
