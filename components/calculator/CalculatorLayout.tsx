@@ -5,6 +5,7 @@ import { AuthorBox } from './AuthorBox';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { CalculatorSchemaClient } from '@/components/seo/CalculatorSchemaClient';
 import { RelatedCalculators } from './RelatedCalculators';
+import { ContextualCourseBanner } from '@/components/marketing/CourseBanner';
 
 const SITE_URL = 'https://cheshbonai.co.il'; // used for breadcrumb schema fallback
 
@@ -91,6 +92,11 @@ export function CalculatorLayout({
             {sources}
           </section>
         )}
+
+        {/* Course banner — contextual lead-gen (shows only on self-employed/tax/business pages) */}
+        <div className="mb-12">
+          <ContextualCourseBanner page={currentPath} />
+        </div>
 
         {/* Related calculators — internal linking */}
         <RelatedCalculators currentPath={currentPath} />

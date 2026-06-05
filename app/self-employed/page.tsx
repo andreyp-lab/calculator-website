@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+import { CourseBanner } from '@/components/marketing/CourseBanner';
+import { COURSES } from '@/lib/config/courses';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/self-employed' },
@@ -75,9 +77,13 @@ export default function SelfEmployedPage() {
         </div>
 
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">מחשבונים לעצמאיים</h1>
-        <p className="text-lg text-gray-600 mb-12">
+        <p className="text-lg text-gray-600 mb-8">
           מחשבונים מקצועיים לעצמאיים, פרילנסרים ובעלי עסקים קטנים
         </p>
+
+        <div className="mb-12">
+          <CourseBanner course={COURSES.selfEmployed} page="self-employed" variant="hero" />
+        </div>
 
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
