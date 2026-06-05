@@ -1,10 +1,15 @@
 import type { MetadataRoute } from 'next';
 import { blogPosts } from '@/content/blog/registry';
+import { ALL_TERMS } from '@/lib/data/glossary';
 
 const SITE_URL = 'https://cheshbonai.co.il';
 
+// תאריך עדכון תוכן יציב (anchored) — מונע מ-Google לראות את כל הדפים כאילו "עודכנו עכשיו"
+// בכל crawl (סיגנל freshness מזויף). מעדכנים ידנית כשמרעננים תוכן בפועל.
+const CONTENT_UPDATED = new Date('2026-06-01');
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const lastModified = CONTENT_UPDATED;
 
   // עזר ליצירת רשומות
   const make = (
@@ -132,7 +137,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/compare', 'monthly', 0.75),
     make('/compare/employee-vs-self-employed', 'monthly', 0.85),
     make('/compare/rent-vs-buy', 'monthly', 0.85),
-    make('/compare/leasing-vs-buying-comparison', 'monthly', 0.85),
 
     // ===== עמודי Pillar (מדריכים מקיפים) =====
     make('/guides/mortgage-complete-guide-2026', 'monthly', 0.98),
@@ -141,6 +145,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מילון מונחים =====
     make('/glossary', 'monthly', 0.92),
+    // עמודי מונח בודדים (long-tail) — אוטומטית מ-ALL_TERMS
+    ...ALL_TERMS.map((t) => make(`/glossary/${t.id}`, 'yearly', 0.5)),
 
     // ===== משפטי =====
     make('/privacy', 'yearly', 0.3),

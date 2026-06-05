@@ -21,8 +21,16 @@ export const SEARCH_CONSOLE = {
 
   /**
    * Bing Webmaster Tools verification code.
-   * Example: 'ABC123DEF456...'
-   * Register at: https://www.bing.com/webmasters
+   *
+   * הדרך המהירה ביותר (ללא token): https://www.bing.com/webmasters →
+   *   "Import from Google Search Console" → התחברות לחשבון Google → ייבוא בקליק אחד.
+   *   במסלול זה אין צורך למלא את השדה הזה כלל.
+   *
+   * לחלופין (meta tag): Bing Webmaster → הוסף אתר → "Meta Tag" → העתק את ה-content
+   *   לכאן, והערך ייכנס אוטומטית ל-<head> דרך app/layout.tsx (metadata.other['msvalidate.01']).
+   *
+   * הערה: זחילת Bing כבר מכוסה — /api/indexnow מגיש את כל ה-URLs ל-Bing/IndexNow.
+   * אימות ה-Webmaster נחוץ רק לצפייה בדוחות ביצועים, לא לאינדוקס עצמו.
    */
   bing: '',
 } as const;

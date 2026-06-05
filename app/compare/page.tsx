@@ -25,7 +25,7 @@ const COMPARISONS = [
     color: 'from-emerald-500 to-emerald-700',
   },
   {
-    href: '/compare/leasing-vs-buying-comparison',
+    href: '/vehicles/leasing-vs-buying',
     title: 'ליסינג vs קנייה (רכב)',
     icon: '🚗',
     description: 'איזה אופן רכישת רכב משתלם יותר? ליסינג, מימון או רכישה מלאה.',

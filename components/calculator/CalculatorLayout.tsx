@@ -4,6 +4,7 @@ import { DisclaimerBox } from './DisclaimerBox';
 import { AuthorBox } from './AuthorBox';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { CalculatorSchemaClient } from '@/components/seo/CalculatorSchemaClient';
+import { RelatedCalculators } from './RelatedCalculators';
 
 const SITE_URL = 'https://cheshbonai.co.il'; // used for breadcrumb schema fallback
 
@@ -36,6 +37,10 @@ export function CalculatorLayout({
     name: b.label,
     url: b.href ?? SITE_URL,
   }));
+
+  // נתיב הדף הנוכחי לצורך "מחשבונים קשורים": pageUrl, או ה-href האחרון ב-breadcrumbs
+  const currentPath =
+    pageUrl ?? [...breadcrumbs].reverse().find((b) => b.href)?.href ?? undefined;
 
   return (
     <article className="bg-white">
@@ -86,6 +91,9 @@ export function CalculatorLayout({
             {sources}
           </section>
         )}
+
+        {/* Related calculators — internal linking */}
+        <RelatedCalculators currentPath={currentPath} />
 
         {/* Author */}
         <section className="mb-8">

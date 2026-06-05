@@ -2,14 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import type { GlossaryTerm } from '@/lib/data/glossary';
 
-export interface GlossaryTerm {
-  id: string;
-  term: string;
-  letter: string;
-  definition: string;
-  seeAlso?: { label: string; href: string }[];
-}
+export type { GlossaryTerm };
 
 interface GlossaryClientProps {
   terms: GlossaryTerm[];
@@ -135,7 +130,14 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
                     id={t.id}
                     className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition"
                   >
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{t.term}</h3>
+                    <h3 className="text-lg font-bold mb-2">
+                      <Link
+                        href={`/glossary/${t.id}`}
+                        className="text-gray-900 hover:text-blue-700 transition"
+                      >
+                        {t.term}
+                      </Link>
+                    </h3>
                     <p className="text-gray-700 text-sm leading-relaxed mb-3">{t.definition}</p>
                     {t.seeAlso && t.seeAlso.length > 0 && (
                       <div className="flex flex-wrap gap-2 mt-2">

@@ -177,7 +177,7 @@ export const allCalculators: CalculatorEntry[] = [
   {
     id: 'compare-leasing-buying',
     title: 'ליסינג vs קנייה (רכב)',
-    href: '/compare/leasing-vs-buying-comparison',
+    href: '/vehicles/leasing-vs-buying',
     category: 'דפי השוואה',
     categoryHref: '/compare',
     description: 'רכב - איזה אופן רכישה משתלם',
