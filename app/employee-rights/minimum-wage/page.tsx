@@ -182,6 +182,40 @@ export default function Page() {
         </>
       }
       faq={<FAQ items={faqItems} />}
+      sources={
+        <ul className="space-y-2 text-blue-700">
+          <li>
+            <a
+              href="https://www.nevo.co.il/law_html/Law01/P218_001.htm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              נבו: חוק שכר מינימום, התשמ"ז-1987
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.economy.gov.il/labor/minimumwage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              משרד הכלכלה: שכר מינימום — הנחיות ותעריפים עדכניים
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.kolzchut.org.il/he/%D7%A9%D7%9B%D7%A8_%D7%9E%D7%99%D7%A0%D7%99%D7%9E%D7%95%D7%9D"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              כל-זכות: שכר מינימום — מדריך מקיף לעובדים
+            </a>
+          </li>
+        </ul>
+      }
     />
   );
 }

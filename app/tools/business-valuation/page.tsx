@@ -4,9 +4,9 @@ import { BusinessValuationCalculator } from '@/components/calculators/BusinessVa
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון שווי עסק 2026 - 3 שיטות הערכת שווי',
+  title: 'מחשבון שווי עסק 2026 – DCF, EBITDA ומכפיל הכנסות לישראל',
   description:
-    'הערך את שווי העסק שלך - DCF, מכפיל EBITDA, ומכפיל הכנסות. מכפילים מותאמים לענף בישראל 2026. כלי חיוני לפני מכירה / השקעה / מיזוג.',
+    'הערך את שווי העסק שלך בשלוש שיטות: DCF, מכפיל EBITDA ומכפיל הכנסות. מכפילים מותאמים לענפי ישראל 2026. כלי חיוני לפני מכירה, השקעה או מיזוג. חשב חינם עכשיו.',
   alternates: { canonical: '/tools/business-valuation' },
 };
 
@@ -157,6 +157,28 @@ export default function BusinessValuationPage() {
                 <strong>תיעוד מלא</strong> - מערכות, נהלים, תהליכים
               </li>
             </ol>
+
+            <h2>כלים קשורים</h2>
+            <ul>
+              <li>
+                <a href="/tools/break-even" className="text-blue-700 hover:underline">
+                  מחשבון נקודת איזון
+                </a>{' '}
+                — כמה למכור כדי לכסות הוצאות קבועות
+              </li>
+              <li>
+                <a href="/tools/cash-flow" className="text-blue-700 hover:underline">
+                  מחשבון תזרים מזומנים
+                </a>{' '}
+                — תכנון תזרים חודשי ושנתי
+              </li>
+              <li>
+                <a href="/tools/budget" className="text-blue-700 hover:underline">
+                  מחשבון תקציב עסקי
+                </a>{' '}
+                — בנה תקציב ועקוב אחר הוצאות
+              </li>
+            </ul>
           </>
         }
         faq={<FAQ items={faqItems} />}

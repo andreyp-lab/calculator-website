@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'הון חוזר - ניהול ואופטימיזציה',
-  description: 'חישוב והערכת הון חוזר: יחסי נזילות, מחזור לקוחות וספקים, מימון תפעולי ואסטרטגיות לשיפור תזרים.',
+  title: 'כלי הון, שווי וגיוס 2026 – DCF Valuation ו-Cap Table',
+  description: 'הערך את שווי החברה שלך בשיטת DCF ונהל את מבנה ההון עם Cap Table מקצועי. מחשב דילול מניות, סבבי גיוס ויציאות לחברות סטארטאפ ועסקים בישראל 2026.',
   alternates: { canonical: '/tools/capital' },
 };
 

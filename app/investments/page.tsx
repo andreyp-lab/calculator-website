@@ -5,9 +5,9 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/investments' },
-  title: 'מחשבוני השקעות וחיסכון',
+  title: 'מחשבוני השקעות וחיסכון 2026 — ריבית דריבית, ROI ופרישה',
   description:
-    'מחשבונים להשקעות וחיסכון: ריבית דריבית, ROI, תכנון פרישה. תכנן את העתיד הפיננסי שלך.',
+    'מחשבונים להשקעות וחיסכון לטווח ארוך: ריבית דריבית, ROI, תכנון פרישה ו-FIRE. גלה כמה הכסף שלך יגדל ומתי תוכל לפרוש בעצמאות כלכלית. חשב עכשיו בחינם.',
 };
 
 const calculators = [

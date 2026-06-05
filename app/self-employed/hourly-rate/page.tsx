@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { HourlyRateCalculator } from '@/components/calculators/HourlyRateCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון תמחור שעת עבודה 2026 - לפרילנסר ויועץ',
+  title: 'מחשבון תמחור שעת עבודה 2026 - לפרילנסר, יועץ ועצמאי',
   description:
     'מחשבון מקצועי לתמחור שעת עבודה לפרילנסר, יועץ ועצמאי. Cost-Plus, Value-Based, פירוט עלויות מלא, בנצ\'מארק שוק ישראל 2026, השוואה לשכיר.',
   alternates: { canonical: '/self-employed/hourly-rate' },
@@ -49,7 +50,7 @@ const faqItems = [
   {
     question: 'למה פרילנסר צריך לגבות הרבה יותר משכיר עם אותו שכר נטו?',
     answer:
-      'שכיר בשכר 20,000 ₪ ברוטו: מעסיק משלם עוד ~3,000 ₪ (ב.ל., פנסיה, פיצויים). עצמאי עם הכנסה 20,000 ₪: משלם ב.ל. עצמאי (גבוה יותר — עד 17.5%), אין ימי חופשה/מחלה, אין מענק 13, משלם רו"ח, ביטוחים, ציוד. לסיכום: כדי לקבל נטו שקול לשכיר 15,000 ₪, פרילנסר צריך לגבות 25,000–30,000 ₪ לחודש.',
+      'שכיר בשכר 20,000 ₪ ברוטו: מעסיק משלם עוד ~3,000 ₪ (ב.ל., פנסיה, פיצויים). עצמאי עם הכנסה 20,000 ₪: משלם ב.ל. עצמאי (גבוה יותר — עד 18%), אין ימי חופשה/מחלה, אין מענק 13, משלם רו"ח, ביטוחים, ציוד. לסיכום: כדי לקבל נטו שקול לשכיר 15,000 ₪, פרילנסר צריך לגבות 25,000–30,000 ₪ לחודש.',
   },
   {
     question: 'איך לתמחר לפי סוג לקוח?',
@@ -197,6 +198,19 @@ export default function HourlyRatePage() {
               <li>תקשורת: סלולרי, אינטרנט, שיחות בינלאומיות</li>
               <li>השתלמויות, קורסים, ספרות מקצועית</li>
               <li>ציוד: מחשב, מסכים, מצלמה, ריהוט משרד</li>
+            </ul>
+
+            <h2>מחשבונים קשורים לעצמאיים</h2>
+            <ul>
+              <li>
+                <Link href="/self-employed/net">מחשבון נטו לעצמאי</Link> — חשב כמה תישאר בכיס אחרי מסים וביטוח לאומי
+              </li>
+              <li>
+                <Link href="/self-employed/vat">מחשבון מע&quot;מ</Link> — חישוב מע&quot;מ (18%) לעוסק מורשה ועוסק פטור
+              </li>
+              <li>
+                <Link href="/self-employed/tax-advances">מחשבון מקדמות מס</Link> — תכנן את תשלומי המקדמות החודשיים שלך
+              </li>
             </ul>
           </>
         }

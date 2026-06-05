@@ -152,6 +152,19 @@ export default function Page() {
               <strong>חודשי</strong>: 12 תשלומים — כל 15 לחודש העוקב.
             </li>
           </ul>
+
+          <h2>מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <a href="/self-employed/net">מחשבון נטו לעצמאי</a> — הכנסה נטו אחרי ב.ל., מס ומע"מ
+            </li>
+            <li>
+              <a href="/self-employed/tax-advances">מחשבון מקדמות מס</a> — תכנון מקדמות מס הכנסה וב.ל. לאורך השנה
+            </li>
+            <li>
+              <a href="/self-employed/employer-cost">מחשבון עלות מעסיק</a> — השוואת עלות עצמאי מול שכיר
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}

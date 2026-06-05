@@ -5,8 +5,8 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/employee-rights' },
-  title: 'זכויות עובדים - מחשבונים',
-  description: 'מחשבונים לחישוב זכויות עובדים בישראל: פיצויי פיטורין, דמי הבראה, חופשה ומחלה',
+  title: 'מחשבוני זכויות עובדים 2026 — פיצויים, הבראה, אבטלה ומחלה',
+  description: 'מחשבונים לזכויות עובדים שכירים בישראל 2026: פיצויי פיטורין, דמי הבראה, חופשה שנתית, דמי לידה, דמי אבטלה, מחלה ומילואים. בדוק כמה מגיע לך עכשיו.',
 };
 
 const calculators = [
@@ -38,6 +38,36 @@ const calculators = [
     title: 'מחשבון תגמולי מילואים',
     description: 'תשלום בסיסי + מענקי חרבות ברזל (280 ₪/יום)',
     href: '/employee-rights/reserve-duty-pay',
+    available: true,
+  },
+  {
+    title: 'מחשבון חופשה שנתית',
+    description: 'חישוב ימי חופשה, פדיון חופשה וצבירה לפי שנות ותק',
+    href: '/employee-rights/annual-leave',
+    available: true,
+  },
+  {
+    title: 'מחשבון דמי מחלה',
+    description: 'חישוב דמי מחלה, ימים צבורים ומחלת בן משפחה',
+    href: '/employee-rights/sick-pay',
+    available: true,
+  },
+  {
+    title: 'מחשבון שכר מינימום',
+    description: 'בדיקת עמידה בשכר מינימום 2026: 6,443.85 ₪/חודש',
+    href: '/employee-rights/minimum-wage',
+    available: true,
+  },
+  {
+    title: 'מחשבון בונוס שנתי',
+    description: 'חישוב גובה הבונוס ומיסוי תשלום שנתי חד-פעמי',
+    href: '/employee-rights/annual-bonus',
+    available: true,
+  },
+  {
+    title: 'מחשבון מענק עבודה',
+    description: 'חישוב מענק עבודה (מס הכנסה שלילי) לשכירים',
+    href: '/employee-rights/work-grant',
     available: true,
   },
 ];

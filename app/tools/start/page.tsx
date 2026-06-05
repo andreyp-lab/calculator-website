@@ -40,7 +40,7 @@ export default function StartPage() {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-          איך תרצה להתחיל?
+          כלים פיננסיים לעסקים — מאיפה להתחיל?
         </h1>
         <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
           בחר את המסלול שמתאים למצב שלך. כל מסלול נותן גישה לכל הכלים — רק נקודת ההתחלה משתנה.

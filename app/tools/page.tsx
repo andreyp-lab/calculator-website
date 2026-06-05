@@ -17,9 +17,9 @@ import {
 
 export const metadata: Metadata = {
   alternates: { canonical: '/tools' },
-  title: 'מערכת פיננסית לבעלי עסקים',
+  title: 'מערכת פיננסית לבעלי עסקים 2026 - תקציב, תזרים, DCF ועוד',
   description:
-    'המערכת המקיפה ביותר בישראל לתכנון פיננסי: תקציב, תזרים, ניתוח דוחות, חיזוי 5 שנים, הערכת שווי DCF, Cap Table. עברית מלאה, ללא הרשמה.',
+    'המערכת המקיפה ביותר בישראל לתכנון פיננסי: תקציב, תזרים, ניתוח דוחות, חיזוי 5 שנים, הערכת שווי DCF, Cap Table. עברית מלאה, ללא הרשמה. | חינם.',
 };
 
 interface Tool {
@@ -90,7 +90,7 @@ export default function ToolsLandingPage() {
           <div className="relative z-10 max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
               <Sparkles className="w-4 h-4" />
-              FinCalc Pro
+              חשבונאי Pro
             </div>
 
             <h1 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
@@ -139,7 +139,7 @@ export default function ToolsLandingPage() {
         <FeatureCard
           icon={BarChart3}
           title="בנצ'מרק ענפי"
-          description="10 ענפים × 15 מדדים. רואה את עצמך מול הממוצע (Q1/חציון/Q3). מבוסס על דוחות בורסה, Damodaran, ו-D&B 2024."
+          description="10 ענפים × 15 מדדים. רואה את עצמך מול הממוצע (Q1/חציון/Q3). מבוסס על דוחות בורסה, Damodaran, ו-D&B 2025/2026."
           color="purple"
         />
       </div>

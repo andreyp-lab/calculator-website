@@ -4,9 +4,9 @@ import { CLVCalculator } from '@/components/calculators/CLVCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון CLV - שווי לקוח לטווח ארוך 2026',
+  title: 'מחשבון CLV / LTV – שווי לקוח לטווח ארוך לעסקים 2026',
   description:
-    'חשב את ה-Customer Lifetime Value (CLV/LTV) של הלקוחות שלך. כולל יחס LTV/CAC, Payback Period, ובנצ\'מארק לתעשיות שונות. מדד מפתח לעסקי SaaS, שירותים ו-E-commerce.',
+    'חשב את ה-Customer Lifetime Value (CLV/LTV) של הלקוחות שלך. כולל יחס LTV/CAC, Payback Period ובנצ\'מארק לתעשיות. מדד מפתח לעסקי SaaS, שירותים ו-E-commerce.',
   alternates: { canonical: '/tools/customer-lifetime-value' },
 };
 
@@ -163,6 +163,28 @@ export default function CLVPage() {
               <li>אוטומציה במכירות</li>
               <li>פוקוס על ICP (Ideal Customer Profile) במקום הרחבה</li>
             </ol>
+
+            <h2>כלים קשורים</h2>
+            <ul>
+              <li>
+                <a href="/tools/forecast" className="text-blue-700 hover:underline">
+                  מחשבון חיזוי הכנסות
+                </a>{' '}
+                — חזה הכנסות עתידיות לפי מגמות
+              </li>
+              <li>
+                <a href="/tools/financial-analysis" className="text-blue-700 hover:underline">
+                  ניתוח דוחות פיננסיים
+                </a>{' '}
+                — ניתוח מאזן, רווח והפסד ותזרים
+              </li>
+              <li>
+                <a href="/tools/unified" className="text-blue-700 hover:underline">
+                  מערכת ניהול פיננסית מאוחדת
+                </a>{' '}
+                — כל הכלים הפיננסיים במקום אחד
+              </li>
+            </ul>
           </>
         }
         faq={<FAQ items={faqItems} />}

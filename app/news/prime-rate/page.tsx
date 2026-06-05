@@ -9,7 +9,7 @@ import { PrimeRateChart } from './PrimeRateChart';
 export const revalidate = 21600; // ISR: 6 שעות
 
 export const metadata: Metadata = {
-  title: 'ריבית פריים עדכנית 2026',
+  title: 'ריבית פריים עדכנית 2026 — ריבית בנק ישראל ומשכנתא',
   description: `ריבית פריים נוכחית: ${MACRO_DATA.primeRate.value}%. ריבית בנק ישראל: ${MACRO_DATA.primeRate.boiBaseRate}%. גרף היסטורי, ההחלטה הבאה של בנק ישראל ומשמעות לנוטלי משכנתא.`,
   keywords: [
     'ריבית פריים',

@@ -4,9 +4,9 @@ import { BreakEvenCalculator } from '@/components/calculators/BreakEvenCalculato
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון נקודת איזון 2026 - Break-Even Analysis',
+  title: 'מחשבון נקודת איזון 2026 – כמה למכור כדי לכסות הוצאות',
   description:
-    'מחשבון נקודת איזון מקצועי - חשב כמה צריך למכור כדי לכסות הוצאות. כולל תרומה ליחידה, מרווח ביטחון ויחידות לרווח מטרה.',
+    'חשב כמה יחידות או שירותים אתה חייב למכור בחודש כדי לכסות הוצאות קבועות. כולל תרומה ליחידה, מרווח ביטחון ויחידות לרווח מטרה. כלי חינמי ומיידי לכל בעל עסק.',
   alternates: { canonical: '/tools/break-even' },
 };
 
@@ -132,6 +132,28 @@ export default function BreakEvenPage() {
                 </li>
               </ul>
             </div>
+
+            <h2>כלים קשורים</h2>
+            <ul>
+              <li>
+                <a href="/tools/business-valuation" className="text-blue-700 hover:underline">
+                  מחשבון שווי עסק
+                </a>{' '}
+                — הערכת שווי עסק לפי DCF, EBITDA ומכפיל הכנסות
+              </li>
+              <li>
+                <a href="/tools/cash-flow" className="text-blue-700 hover:underline">
+                  מחשבון תזרים מזומנים
+                </a>{' '}
+                — תכנון תזרים חודשי לעסק
+              </li>
+              <li>
+                <a href="/tools/budget" className="text-blue-700 hover:underline">
+                  מחשבון תקציב עסקי
+                </a>{' '}
+                — בנה תקציב שנתי ועקוב אחר הוצאות
+              </li>
+            </ul>
           </>
         }
         faq={<FAQ items={faqItems} />}

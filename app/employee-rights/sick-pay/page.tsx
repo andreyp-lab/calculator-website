@@ -6,8 +6,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון דמי מחלה 2026 - חישוב תשלום, יתרה ומחלת משפחה',
   description:
-    'מחשבון דמי מחלה מקיף: יום 1 ללא תשלום, ימים 2-3 ב-50%, יום 4+ ב-100%. ' +
-    'בדוק יתרת ימים, מחלת ילד/בן-זוג/הורה, ותרחיש מחלה ממושכת.',
+    'מחשבון דמי מחלה 2026 מקיף: יום 1 ללא תשלום, ימים 2-3 ב-50%, יום 4+ ב-100%. חשב יתרת ימים צבורים (עד 90), מחלת ילד/בן-זוג/הורה, ותרחיש מחלה ממושכת.',
   alternates: { canonical: '/employee-rights/sick-pay' },
 };
 
@@ -182,6 +181,19 @@ export default function Page() {
             <li><strong>הורה (גיל 65+)</strong>: עד 6 ימים לשנה</li>
           </ul>
           <p>הימים הללו נחשבים מתוך מכסת ה-18 ימים האישיים.</p>
+
+          <h2>מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <a href="/employee-rights/annual-leave">מחשבון חופשה שנתית</a> — פדיון חופשה וצבירה לפי שנות ותק
+            </li>
+            <li>
+              <a href="/employee-rights/recreation-pay">מחשבון דמי הבראה</a> — תעריף 2026 לפי וותק ומגזר
+            </li>
+            <li>
+              <a href="/salaried">מרכז שכירים</a> — כלים לחישוב שכר נטו, החזר מס ועוד
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}

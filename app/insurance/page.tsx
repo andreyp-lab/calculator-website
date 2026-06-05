@@ -5,8 +5,8 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/insurance' },
-  title: 'מחשבוני ביטוחים',
-  description: 'מחשבוני פנסיה, ביטוח חיים, ביטוח רכב וביטוחים נוספים',
+  title: 'מחשבוני ביטוחים ופנסיה 2026 – חישוב קצבה ועלות ביטוח',
+  description: 'חשב את הפנסיה הצפויה שלך לפי שכר וותק, סכום ביטוח החיים הנדרש למשפחה ועלות ביטוח רכב. מחשבונים מקצועיים לתכנון פיננסי, עדכניים ל-2026 — חינם ומיידי.',
 };
 
 const calculators = [

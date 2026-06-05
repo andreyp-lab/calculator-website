@@ -9,7 +9,7 @@ import { WageChart } from './WageChart';
 export const revalidate = 2592000; // ISR: ~30 ימים (רבעוני)
 
 export const metadata: Metadata = {
-  title: 'שכר ממוצע במשק ישראל 2026',
+  title: 'שכר ממוצע במשק ישראל 2026 — ברוטו, נטו ומגמות',
   description: `השכר הממוצע במשק: ₪${MACRO_DATA.averageWage.monthly.toLocaleString('he-IL')} לחודש (${MACRO_DATA.averageWage.reportPeriod}). גרף היסטורי, השוואת שכר ומחשבון שכר נטו.`,
   keywords: ['שכר ממוצע ישראל', 'שכר ממוצע 2026', 'ממוצע שכר במשק', 'שכר ברוטו ממוצע'],
   alternates: { canonical: 'https://cheshbonai.co.il/news/average-wage' },
@@ -41,7 +41,7 @@ export default function AverageWagePage() {
   const estimatedTax = monthly - estimatedNet;
 
   // שכר מינימום vs ממוצע
-  const minimumWage = 5_880; // ₪ שכר מינימום 2026
+  const minimumWage = 6_443.85; // ₪ שכר מינימום מ-1.4.2026
   const ratioToMin = (monthly / minimumWage).toFixed(1);
 
   return (
@@ -125,7 +125,7 @@ export default function AverageWagePage() {
             {[
               { label: 'שכר ברוטו', amount: monthly, isPositive: true },
               { label: 'מס הכנסה (משוער)', amount: -Math.round(monthly * 0.12), isPositive: false },
-              { label: 'ביטוח לאומי עובד (12%)', amount: -Math.round(monthly * 0.12), isPositive: false },
+              { label: 'ביטוח לאומי + בריאות (~12.17%)', amount: -Math.round(monthly * 0.1217), isPositive: false },
               { label: 'ניכויים אחרים', amount: -Math.round(monthly * 0.02), isPositive: false },
               { label: 'שכר נטו', amount: estimatedNet, isPositive: true, bold: true },
             ].map(({ label, amount, isPositive, bold }) => (

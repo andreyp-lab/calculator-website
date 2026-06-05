@@ -6,7 +6,7 @@ import { MacroDataWidget } from '@/components/widgets/MacroDataWidget';
 import { AllCalculatorsGrid } from '@/components/home/AllCalculatorsGrid';
 
 export const metadata: Metadata = {
-  title: 'חשבונאי - 30 מחשבונים פיננסיים בעברית | מעודכן 2026',
+  title: '30 מחשבונים פיננסיים חינם בעברית – כלים מעודכנים 2026',
   description:
     '30 מחשבונים פיננסיים מקצועיים: מס הכנסה, משכנתא עם Solver, פיצויי פיטורין, ביטוח לאומי לעצמאי, FIRE, מס רכישה ועוד. עדכני 2026, בחינם.',
   alternates: { canonical: '/' },
@@ -45,7 +45,7 @@ export default function Home() {
         {/* Trust Signals */}
         <div className="grid md:grid-cols-4 gap-6 mb-16 bg-white p-8 rounded-lg border border-gray-200">
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-1">15+</div>
+            <div className="text-3xl font-bold text-blue-600 mb-1">30+</div>
             <p className="text-sm text-gray-600">מחשבונים מקצועיים</p>
           </div>
           <div className="text-center">
@@ -178,7 +178,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">אודות האתר</h2>
           <p className="text-gray-600 max-w-3xl mb-4">
-            FinCalc הוא אתר מחשבונים פיננסיים בעברית, נבנה על ידי רואה חשבון מוסמך עם ניסיון רב בתחום.
+            חשבונאי הוא אתר מחשבונים פיננסיים בעברית, נבנה על ידי רואה חשבון מוסמך עם ניסיון רב בתחום.
             כל המחשבונים בנויים בהתאם לחוק ותקנות בישראל, ועדכנים לשנה הנוכחית.
           </p>
           <p className="text-gray-600">

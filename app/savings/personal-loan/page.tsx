@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { PersonalLoanCalculator } from '@/components/calculators/PersonalLoanCalculator';
@@ -6,7 +7,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון הלוואה אישית 2026 | כרטיס אשראי, Snowball, APR, כושר החזר',
   description:
-    'מחשבון הלוואה אישית מקיף: חישוב APR אמיתי, השוואת מקורות הלוואה ישראליים (קרן השתלמות, בנק, חוץ-בנקאי), אסטרטגיות Snowball/Avalanche לסילוק חובות, השוואת כרטיס אשראי מול הלוואה ובדיקת כושר החזר. ריביות עדכניות 2026.',
+    'מחשבון הלוואה אישית 2026: חישוב APR אמיתי, השוואת בנק/קרן השתלמות/חוץ-בנקאי, שיטות Snowball ו-Avalanche לסילוק חובות ובדיקת כושר החזר. נסה חינם.',
   alternates: { canonical: '/savings/personal-loan' },
 };
 
@@ -129,6 +130,16 @@ export default function Page() {
             <strong>Snowball</strong> עוזר לאנשים שמתקשים בהמשכיות - ניצחונות מהירים שומרים על
             מוטיבציה. המחקרים מראים שמי שבוחר Snowball יותר עקבי בסיום הסילוק.
           </p>
+
+          <h2>ראה גם — מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <Link href="/savings/loan-repayment">מחשבון החזרי הלוואה</Link> — חישוב תשלום חודשי וסילוק מואץ
+            </li>
+            <li>
+              <Link href="/insurance/pension">מחשבון פנסיה</Link> — תכנון חיסכון לפרישה
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}

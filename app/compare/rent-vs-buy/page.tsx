@@ -4,9 +4,9 @@ import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MortgageCalculator } from '@/components/calculators/MortgageCalculator';
 
 export const metadata: Metadata = {
-  title: 'שכירות vs קנייה - מה משתלם יותר? 2026',
+  title: 'שכירות מול קנייה - מה משתלם יותר בישראל 2026?',
   description:
-    'השוואה מתמטית בין שכירות לקנייה של דירה בישראל. כולל משכנתא, ארנונה, עליית שווי, וניתוח לטווח ארוך.',
+    'השוואה מתמטית בין שכירות לקנייה של דירה בישראל 2026. כולל משכנתא, ארנונה, מס רכישה, עליית שווי ועלויות נלוות. ניתוח לטווח ארוך. חשב עכשיו ובחר נכון.',
   alternates: { canonical: '/compare/rent-vs-buy' },
 };
 
@@ -155,6 +155,12 @@ export default function RentVsBuyComparePage() {
             השתמש ב<Link href="/real-estate/mortgage" className="text-blue-600 underline">מחשבון המשכנתא</Link>{' '}
             למטה כדי לחשב בדיוק כמה תשלם בקנייה. אחר כך השווה לשכר דירה שמתאים לאותה דירה
             באותה שכונה.
+          </p>
+          <p>
+            שים לב: בעת רכישת דירה חל גם <Link href="/real-estate/purchase-tax" className="text-blue-600 underline">מס רכישה</Link>{' '}
+            — לרוכשי דירה ראשונה הפטור עד 1,978,745 ₪, ולאחר מכן מדרגות עד 10%. השתמש ב
+            <Link href="/real-estate/purchase-tax" className="text-blue-600 underline">מחשבון מס הרכישה</Link>{' '}
+            לחישוב מדויק.
           </p>
         </>
       }

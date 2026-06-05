@@ -5,8 +5,8 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/vehicles' },
-  title: 'מחשבוני רכב ותחבורה',
-  description: 'מחשבונים לרכב: עלות דלק, ליסינג vs קנייה, החזקת רכב',
+  title: 'מחשבוני רכב ותחבורה 2026 - עלות דלק, ליסינג ורכישה',
+  description: 'חשב עלות דלק חודשית ושנתית, השווה בין ליסינג לקניית רכב ובדוק את כדאיות הרכב שלך. כלים מקצועיים לחישוב הוצאות רכב בעברית, עדכני 2026 — חינם לחלוטין.',
 };
 
 const calculators = [

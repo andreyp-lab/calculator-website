@@ -4,9 +4,9 @@ import { UnemploymentBenefitsCalculator } from '@/components/calculators/Unemplo
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון דמי אבטלה 2026 - חישוב מביטוח לאומי',
+  title: 'מחשבון דמי אבטלה 2026 — זכאות, תשלום יומי, גיל ומס',
   description:
-    'מחשבון דמי אבטלה מקצועי - בדוק זכאות, תשלום יומי, לוח תשלומים, עבודה חלקית ומס. נתונים עדכניים 2026.',
+    'מחשבון דמי אבטלה מקצועי לשנת 2026 — בדוק זכאות לפי גיל ומצב משפחתי, חשב תשלום יומי, ראה לוח תשלומים, עבודה חלקית והשפעת מס. נתוני ביטוח לאומי מעודכנים.',
   alternates: { canonical: '/employee-rights/unemployment-benefits' },
 };
 

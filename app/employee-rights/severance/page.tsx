@@ -6,7 +6,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון פיצויי פיטורין 2026 — סעיף 14, מיסוי ו-13 תרחישי סיום',
   description:
-    'מחשבון פיצויי פיטורין מקיף לשנת 2026: חישוב זכאות, סעיף 14 מלא/חלקי, השוואת 4 אפשרויות מיסוי (רצף קצבה / פריסה), זכויות ב-13 תרחישי סיום עבודה, הלנת פיצויים ועוד.',
+    'מחשבון פיצויי פיטורין 2026: חישוב זכאות וסעיף 14, השוואת 4 אפשרויות מיסוי (רצף קצבה / פריסה), זכויות ב-13 תרחישי סיום עבודה. חסוך אלפי שקלים במס.',
   alternates: {
     canonical: '/employee-rights/severance',
   },
@@ -192,6 +192,25 @@ export default function SeverancePage() {
               מעסיק שלא שילם את הפיצויים תוך 15 ימים חייב בפיצויי הלנה: 8% ראשוני על הסכום המלא,
               ו-1.5% לכל חודש נוסף של עיכוב. ניתן לתבוע זאת בבית הדין לעבודה, עם שיעור הצלחה גבוה מאוד.
             </p>
+
+            <h2>מחשבונים קשורים</h2>
+            <ul>
+              <li>
+                <a href="/employee-rights/unemployment-benefits">מחשבון דמי אבטלה</a> — זכאות, תשלום יומי ולוח תשלומים
+              </li>
+              <li>
+                <a href="/employee-rights/recreation-pay">מחשבון דמי הבראה</a> — תעריף 2026 לפי וותק ומגזר
+              </li>
+              <li>
+                <a href="/employee-rights/maternity-benefits">מחשבון דמי לידה</a> — חישוב מהביטוח הלאומי והארכות
+              </li>
+              <li>
+                <a href="/employee-rights/reserve-duty-pay">מחשבון תגמולי מילואים</a> — תשלום בסיסי ומענקים
+              </li>
+              <li>
+                <a href="/employee-rights/minimum-wage">מחשבון שכר מינימום</a> — בדיקת עמידה בשכר מינימום 2026
+              </li>
+            </ul>
           </>
         }
         faq={<FAQ items={faqItems} />}

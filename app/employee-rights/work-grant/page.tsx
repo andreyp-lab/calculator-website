@@ -1,12 +1,13 @@
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { NITCalculator } from '@/components/calculators/NITCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מענק עבודה 2026 — מס הכנסה שלילי',
+  title: 'מחשבון מענק עבודה 2026 — מס הכנסה שלילי, בדיקת זכאות',
   description:
-    'בדוק זכאות למענק עבודה (NIT) 2026 — תוכנית רשות המסים לעובדים בשכר נמוך. עד 14,000 ₪/שנה. גרף, השוואת שנים, בדיקת זכאות ו-10 שאלות נפוצות.',
+    'בדוק זכאות למענק עבודה (NIT) 2026 — תוכנית רשות המסים לעובדים בשכר נמוך. עד 13,100 ₪/שנה. גרף, השוואת שנים, בדיקת זכאות מלאה ו-10 שאלות נפוצות.',
   alternates: { canonical: '/employee-rights/work-grant' },
 };
 
@@ -85,7 +86,7 @@ export default function Page() {
           <h2>מענק עבודה — הזכות הפיננסית שרבים לא מכירים</h2>
           <p>
             מענק עבודה (Earned Income Tax Credit) הוא תוכנית של רשות המסים שמשלמת כסף לעובדים בשכר
-            נמוך, כדי לתמרץ עבודה על פני קבלת קצבאות. ב-2026, הסכום המקסימלי הוא כ-14,000 ₪/שנה
+            נמוך, כדי לתמרץ עבודה על פני קבלת קצבאות. ב-2026, הסכום המקסימלי הוא כ-13,100 ₪/שנה
             להורה יחיד עם ילדים.
           </p>
 
@@ -153,6 +154,22 @@ export default function Page() {
             ניתן להגיש מענק עבודה על שנות מס 2020–2025 (עד 6 שנים אחורה). אם לא הגשת, ייתכן
             שמגיע לך עשרות אלפי שקלים. בדוק באמצעות המחשבון למעלה.
           </p>
+
+          <h2>מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <Link href="/employee-rights/minimum-wage">מחשבון שכר מינימום 2026</Link> — בדוק אם השכר שלך עומד בדרישות החוק
+            </li>
+            <li>
+              <Link href="/personal-tax/salary-net-gross">מחשבון שכר נטו–ברוטו</Link> — חשב את השכר נטו לאחר מסים וביטוח לאומי
+            </li>
+            <li>
+              <Link href="/personal-tax/tax-credits">מחשבון נקודות זיכוי</Link> — גלה אילו נקודות זיכוי מגיעות לך
+            </li>
+            <li>
+              <Link href="/employee-rights/recreation-pay">מחשבון דמי הבראה</Link> — חשב את דמי ההבראה המגיעים לך
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}

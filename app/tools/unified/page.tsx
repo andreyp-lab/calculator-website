@@ -133,7 +133,7 @@ export default function UnifiedToolPage() {
             <LayoutDashboard className="w-6 h-6 text-purple-700" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">מערכת פיננסית מאוחדת</h2>
+            <h1 className="text-2xl font-bold text-gray-900">מערכת פיננסית מאוחדת</h1>
             <p className="text-sm text-gray-600">
               תקציב + תזרים + ניתוח דוחות + חיזוי - הכל במקום אחד, מסונכרן בזמן אמת
             </p>

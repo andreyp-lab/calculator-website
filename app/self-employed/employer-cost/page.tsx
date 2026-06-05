@@ -4,7 +4,7 @@ import { EmployerCostCalculator } from '@/components/calculators/EmployerCostCal
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון עלות מעסיק 2026 - כמה עולה להעסיק עובד',
+  title: 'מחשבון עלות מעסיק 2026 - כמה עולה להעסיק עובד בישראל?',
   description:
     'מחשבון מקיף לעלות העסקת עובד בישראל 2026. כולל שכר, ביטוח לאומי מעסיק, פנסיה, פיצויים, דמי הבראה, חופשה, מחלה והטבות. נתונים מאומתים מ-2026.',
   alternates: { canonical: '/self-employed/employer-cost' },
@@ -165,6 +165,16 @@ export default function EmployerCostPage() {
               </li>
               <li>
                 <strong>אוטומציה</strong> להגדלת תפוקת עובד קיים
+              </li>
+            </ul>
+
+            <h2>מחשבונים קשורים</h2>
+            <ul>
+              <li>
+                <a href="/self-employed/social-security">מחשבון ביטוח לאומי עצמאי</a> — שיעורי ב.ל. מעסיק ועצמאי בהשוואה
+              </li>
+              <li>
+                <a href="/self-employed/net">מחשבון נטו לעצמאי</a> — כמה נשאר ביד לאחר כל הניכויים
               </li>
             </ul>
           </>

@@ -4,7 +4,7 @@ import { CompoundInterestCalculator } from '@/components/calculators/CompoundInt
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון ריבית דריבית 2026 — עם אינפלציה, מס ויעדים',
+  title: 'מחשבון ריבית דריבית 2026 — אינפלציה, מס ויעדי חיסכון',
   description:
     'מחשבון ריבית דריבית מקצועי לישראל. חשב ערך נומינלי וריאלי, אחרי מס 25%, השוואת תרחישים, חישוב הפקדה חודשית נדרשת. כולל גרפים ופירוט שנתי.',
   alternates: { canonical: '/investments/compound-interest' },
@@ -148,6 +148,19 @@ export default function CompoundInterestPage() {
             </li>
             <li>
               <strong>אל תגע בכסף</strong> — כל פדיון מוקדם &quot;שובר&quot; את הריבית דריבית.
+            </li>
+          </ul>
+
+          <h2>מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <a href="/investments/retirement">מחשבון תכנון פרישה</a> — בדוק האם אתה חוסך מספיק לפרישה
+            </li>
+            <li>
+              <a href="/investments/fire">מחשבון FIRE — פרישה מוקדמת</a> — חשב מתי תגיע לעצמאות כלכלית
+            </li>
+            <li>
+              <a href="/investments/roi">מחשבון ROI</a> — חשב תשואה על השקעה ספציפית
             </li>
           </ul>
         </>

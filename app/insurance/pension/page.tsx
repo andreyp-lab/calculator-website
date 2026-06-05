@@ -6,7 +6,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון פנסיה מקיפה 2026 | קצבה חודשית, מקדם המרה, מיסוי',
   description:
-    'מחשב קצבת פנסיה חודשית צפויה לפי שכר, חיסכון, הפרשות וסוג קרן. כולל ריבוי מקורות, מקדם המרה, קצבת שאיר, מיסוי ויעד הכנסה.',
+    'מחשב קצבת פנסיה חודשית 2026 לפי שכר, חיסכון, הפרשות וסוג קרן. כולל מקדם המרה, קצבת שאיר, מיסוי סעיף 9א ויעד הכנסה לפרישה. נסה את המחשבון עכשיו בחינם.',
   alternates: { canonical: '/insurance/pension' },
 };
 
@@ -233,6 +233,16 @@ export default function PensionPage() {
               <strong>בדוק במסלקה</strong> — maslaka.org.il — חינם, 10 דקות
             </li>
           </ol>
+
+          <h2>כלים קשורים</h2>
+          <ul>
+            <li>
+              <a href="/savings/loan-repayment">מחשבון החזר הלוואה</a> — לתכנון הלוואה מקרן פנסיה
+            </li>
+            <li>
+              <a href="/savings/family-budget">מחשבון תקציב משפחתי</a> — לתכנון הוצאות לפני ובמהלך פרישה
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}

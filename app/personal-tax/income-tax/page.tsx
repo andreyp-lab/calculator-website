@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { IncomeTaxCalculator } from '@/components/calculators/IncomeTaxCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
@@ -6,7 +7,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון מס הכנסה לשכיר 2026 - חישוב נטו מדויק',
   description:
-    'מחשבון מס הכנסה מקצועי לשכירים. חשב את השכר נטו שלך לפי מדרגות 2026 (כולל ריווח), נקודות זיכוי, ביטוח לאומי ובריאות.',
+    'מחשבון מס הכנסה מקצועי לשכירים לפי מדרגות 2026 (כולל ריווח), נקודות זיכוי, ביטוח לאומי ובריאות. כולל חישוב מס יסף ודוגמאות מפורטות. חשב עכשיו בחינם.',
   alternates: { canonical: '/personal-tax/income-tax' },
 };
 
@@ -107,7 +108,11 @@ export default function IncomeTaxPage() {
             <h2>נקודות זיכוי</h2>
             <p>
               נקודת זיכוי היא הנחה ישירה ממס ההכנסה, בערך <strong>242 ₪/חודש</strong> או 2,904 ₪/שנה
-              ב-2026.
+              ב-2026. לחישוב מדויק של נקודות הזיכוי שלך, ראה את{' '}
+              <Link href="/personal-tax/tax-credits" className="text-blue-600 hover:underline">
+                מחשבון נקודות הזיכוי
+              </Link>
+              .
             </p>
             <p>הזכאות הבסיסית:</p>
             <ul>
@@ -155,7 +160,17 @@ export default function IncomeTaxPage() {
             </p>
 
             <h2>דוגמה מספרית</h2>
-            <p>עובד שכיר עם משכורת חודשית של 15,000 ₪ ו-2.25 נקודות זיכוי:</p>
+            <p>
+              עובד שכיר עם משכורת חודשית של 15,000 ₪ ו-2.25 נקודות זיכוי. לחישוב שכר נטו/ברוטו מלא, נסה את{' '}
+              <Link href="/personal-tax/salary-net-gross" className="text-blue-600 hover:underline">
+                מחשבון שכר נטו/ברוטו
+              </Link>
+              . לבדיקת החזר מס, ראה{' '}
+              <Link href="/personal-tax/tax-refund" className="text-blue-600 hover:underline">
+                מחשבון החזר מס
+              </Link>
+              :
+            </p>
             <ul>
               <li>מס הכנסה לפני זיכוי: ~2,116 ₪/חודש</li>
               <li>זיכוי 2.25 נקודות: -544.5 ₪</li>

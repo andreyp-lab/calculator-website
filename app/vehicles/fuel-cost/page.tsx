@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FuelCostCalculator } from '@/components/calculators/FuelCostCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
   title: 'מחשבון עלות דלק 2026 | חישוב חודשי ושנתי',
-  description: 'חשב את ההוצאה האמיתית על דלק - חודשי, שנתי, ועלות לקילומטר. כולל חשמלי.',
+  description:
+    'מחשבון עלות דלק 2026: חשב הוצאה חודשית ושנתית לבנזין 95 (7.45 ₪), סולר וחשמל. השוואת בנזין מול חשמלי לפי ק"מ חודשי ועלות לקילומטר. נסה חינם.',
   alternates: { canonical: '/vehicles/fuel-cost' },
 };
 
@@ -110,13 +112,27 @@ export default function FuelCostPage() {
               <strong>תכנון נסיעות:</strong> שלב מספר משימות בנסיעה אחת
             </li>
             <li>
-              <strong>השוואת תחנות:</strong> Pelephone, מקסחור, סדנא - מחירים נמוכים יותר
+              <strong>השוואת תחנות:</strong> פז, דור-אלון, סונול - כדאי להשוות מחירים בין הרשתות
             </li>
             <li>
               <strong>תחזוקה:</strong> צמיגים מנופחים, מסננים נקיים = 5-10% חיסכון
             </li>
             <li>
               <strong>משקל:</strong> כל 50 ק"ג נוספים מעלים צריכה ב-2%
+            </li>
+          </ul>
+
+          <h2>מחשבוני רכב נוספים</h2>
+          <ul>
+            <li>
+              <Link href="/vehicles/leasing-vs-buying" className="text-blue-700 hover:underline">
+                מחשבון בעלות רכב מקיף — השוואת מזומן, הלוואה וליסינג כולל TCO
+              </Link>
+            </li>
+            <li>
+              <Link href="/vehicles/company-car-benefit" className="text-blue-700 hover:underline">
+                מחשבון שווי שימוש ברכב — חישוב הטבת רכב צמוד לעובד ולמעביד
+              </Link>
             </li>
           </ul>
         </>

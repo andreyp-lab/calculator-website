@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { LoanEligibilityChecker } from '@/components/calculators/LoanEligibilityChecker';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'בודק זכאות להלוואות בערבות המדינה 2026',
+  title: 'בודק זכאות להלוואות בערבות המדינה 2026 — עסק קטן, יצואן, תעשייה',
   description:
-    'בדוק תוך דקה אם העסק שלך זכאי להלוואה בערבות המדינה. כולל מסלולי עסק קטן, יצואן, תעשייה וחרבות ברזל. סכומים, ביטחונות ותנאי החזר.',
+    'בדוק תוך דקה אם העסק שלך זכאי להלוואה בערבות המדינה. כולל מסלולי עסק קטן, יצואן, תעשייה וחרבות ברזל. סכומים, ביטחונות ותנאי החזר. השתמש במחשבון הזכאות שלנו — בחינם, ללא הרשמה.',
   alternates: { canonical: '/tools/loan-eligibility' },
 };
 
@@ -180,6 +181,25 @@ export default function LoanEligibilityPage() {
               </li>
               <li>
                 <strong>פניה לבנק לא מתאים</strong> - חלק מהבנקים מתמחים בענפים מסוימים
+              </li>
+            </ul>
+
+            <h2>כלים נוספים לבעלי עסקים</h2>
+            <ul>
+              <li>
+                <Link href="/tools/unified" className="text-blue-700 hover:underline">
+                  מערכת ניהול פיננסית מאוחדת — תקציב, תזרים וניתוח במקום אחד
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/cash-flow" className="text-blue-700 hover:underline">
+                  מחשבון תזרים מזומנים — חיזוי תקבולים ותשלומים לפי תאריכים
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/financial-analysis" className="text-blue-700 hover:underline">
+                  ניתוח דוחות כספיים — יחסים פיננסיים, מגמות ותובנות לעסק
+                </Link>
               </li>
             </ul>
           </>

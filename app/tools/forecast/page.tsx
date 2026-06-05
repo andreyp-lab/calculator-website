@@ -24,7 +24,7 @@ export default function ForecastPage() {
           <LineChart className="w-6 h-6 text-indigo-700" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">חיזוי רב-שנתי</h2>
+          <h1 className="text-2xl font-bold text-gray-900">חיזוי רב-שנתי</h1>
           <p className="text-sm text-gray-600">
             מודל פיננסי מקצועי: היסטוריה → תחזית 3-5 שנים, סימולציות, ו-LTV/CAC
           </p>

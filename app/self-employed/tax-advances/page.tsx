@@ -150,9 +150,65 @@ export default function Page() {
             <li>שמור קבלות כל תשלום — יידרש לדוח שנתי ולהלוואות עסקיות</li>
             <li>אל תדחה תשלום — ריבית פיגורים ממשיכה לצבור עד יום התשלום</li>
           </ul>
+
+          <h2>כלים קשורים</h2>
+          <ul>
+            <li>
+              <a href="/self-employed/social-security" className="text-blue-700 hover:underline">
+                מחשבון ביטוח לאומי לעצמאי
+              </a>{' '}
+              — חשב דמי ביטוח לאומי ובריאות לפי הכנסה
+            </li>
+            <li>
+              <a href="/self-employed/vat" className="text-blue-700 hover:underline">
+                מחשבון מע&quot;מ
+              </a>{' '}
+              — הוספה, חילוץ ודוח דו-חודשי לעוסק מורשה
+            </li>
+            <li>
+              <a href="/self-employed/net" className="text-blue-700 hover:underline">
+                מחשבון נטו לעצמאי
+              </a>{' '}
+              — חשב הכנסה נטו לאחר כל הניכויים
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}
+      sources={
+        <ul className="space-y-2 text-blue-700">
+          <li>
+            <a
+              href="https://www.gov.il/he/departments/israel_tax_authority"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              רשות המסים — מקדמות מס
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.btl.gov.il"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              ביטוח לאומי — דמי ביטוח לעצמאי
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.kolzchut.org.il/he/%D7%9E%D7%A7%D7%93%D7%9E%D7%95%D7%AA_%D7%9E%D7%A1_%D7%94%D7%9B%D7%A0%D7%A1%D7%94_%D7%9C%D7%A2%D7%A6%D7%9E%D7%90%D7%99"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              כל-זכות: מקדמות מס הכנסה לעצמאי
+            </a>
+          </li>
+        </ul>
+      }
     />
   );
 }

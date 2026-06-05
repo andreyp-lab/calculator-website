@@ -5,8 +5,8 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/self-employed' },
-  title: 'עצמאיים ועסקים - מחשבונים',
-  description: 'מחשבונים לעצמאיים ובעלי עסקים: מע"מ, מקדמות מס, ביטוח לאומי לעצמאי ועוד',
+  title: 'מחשבונים לעצמאים ועסקים 2026 - מע"מ, ב.ל., מס ונטו',
+  description: 'מחשבונים מקצועיים לעצמאיים ופרילנסרים 2026: מע"מ 18%, ביטוח לאומי, מקדמות מס הכנסה, נטו, תמחור שעה ועוד. גלה כמה נשאר לך ביד — חינמי ומדויק.',
 };
 
 const calculators = [

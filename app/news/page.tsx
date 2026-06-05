@@ -7,15 +7,15 @@ import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 export const revalidate = 21600; // ISR: 6 שעות
 
 export const metadata: Metadata = {
-  title: 'עדכוני שוק ונתונים כלכליים',
+  title: 'עדכוני שוק ונתונים כלכליים 2026 — ריבית, מדד ושכר',
   description:
-    'ריבית פריים עדכנית, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — נתונים כלכליים מעודכנים אוטומטית.',
+    'ריבית פריים עדכנית, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — נתונים כלכליים מעודכנים אוטומטית לשנת 2026.',
   alternates: {
     canonical: 'https://cheshbonai.co.il/news',
   },
   openGraph: {
-    title: 'עדכוני שוק ונתונים כלכליים',
-    description: 'ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — מעודכן אוטומטית.',
+    title: 'עדכוני שוק ונתונים כלכליים 2026 — ריבית, מדד ושכר',
+    description: 'ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — מעודכן אוטומטית לשנת 2026.',
     url: 'https://cheshbonai.co.il/news',
   },
 };
@@ -178,6 +178,34 @@ export default function NewsPage() {
             הדפים אוטומטית כל 6 שעות, ומשלב נתונים מעודכנים מהמקורות הרשמיים.
             לנתונים שמשתנים לעיתים רחוקות (כגון ריבית פריים), מתבצע גם עדכון ידני מאומת.
           </p>
+        </div>
+
+        {/* Related Tools */}
+        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+          <h2 className="text-lg font-bold text-gray-900 mb-4">כלים קשורים</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/real-estate/mortgage"
+              className="inline-flex items-center gap-1.5 bg-white border border-blue-300 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition"
+            >
+              מחשבון משכנתא
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/personal-tax/salary-net-gross"
+              className="inline-flex items-center gap-1.5 bg-white border border-blue-300 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition"
+            >
+              מחשבון שכר נטו/ברוטו
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/investments/compound-interest"
+              className="inline-flex items-center gap-1.5 bg-white border border-blue-300 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition"
+            >
+              מחשבון ריבית דריבית
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
         {/* Schema.org */}

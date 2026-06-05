@@ -9,7 +9,7 @@ export const revalidate = 604800; // ISR: 7 ימים (שבועי)
 
 export const metadata: Metadata = {
   title: 'מענקי חרבות ברזל 2026 — סכומים עדכניים',
-  description: `מענק כללי ₪${MACRO_DATA.ironSwordsBonuses.generalGrant.toLocaleString('he-IL')}, מענק יומי ₪${MACRO_DATA.ironSwordsBonuses.dailyGrant}, מענק חזרה לעבודה ₪${MACRO_DATA.ironSwordsBonuses.returnToWorkGrant}. מעודכן ${formatHebrewDate(MACRO_DATA.ironSwordsBonuses.lastUpdated)}.`,
+  description: `מענקי חרבות ברזל עדכניים לשנת 2026: מענק כללי ₪${MACRO_DATA.ironSwordsBonuses.generalGrant.toLocaleString('he-IL')}, מענק יומי ₪${MACRO_DATA.ironSwordsBonuses.dailyGrant}. תנאי זכאות ואיך מגישים תביעה בביטוח לאומי.`,
   keywords: [
     'מענק חרבות ברזל',
     'מענק מילואים',

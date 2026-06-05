@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { VehicleOwnershipCalculator } from '@/components/calculators/VehicleOwnershipCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
@@ -6,7 +7,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון בעלות רכב מקיף 2026 - מזומן / הלוואה / ליסינג',
   description:
-    'השוואה מקיפה בין 3 דרכים לרכישת רכב: מימון עצמי (עם עלות הזדמנות), הלוואה, וליסינג. כולל ירידת ערך לא ליניארית, כל עלויות התפעול (דלק, ביטוח, רישוי, טיפולים, צמיגים) - 2026.',
+    'השוואת עלות מלאה (TCO) בין מזומן, הלוואה וליסינג לרכב 2026 — כולל ירידת ערך, דלק, ביטוח ועלות הזדמנות. חשב עכשיו.',
   alternates: { canonical: '/vehicles/leasing-vs-buying' },
 };
 
@@ -207,6 +208,20 @@ export default function LeasingVsBuyingPage() {
               חודשי במקום הלוואה.
             </li>
           </ol>
+
+          <h2>מחשבוני רכב נוספים</h2>
+          <ul>
+            <li>
+              <Link href="/vehicles/fuel-cost" className="text-blue-700 hover:underline">
+                מחשבון עלות דלק 2026 — חישוב הוצאה חודשית ושנתית לבנזין, סולר וחשמל
+              </Link>
+            </li>
+            <li>
+              <Link href="/vehicles/company-car-benefit" className="text-blue-700 hover:underline">
+                מחשבון שווי שימוש ברכב — חישוב הטבת רכב צמוד לעובד ולמעביד
+              </Link>
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}

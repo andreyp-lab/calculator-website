@@ -1,12 +1,13 @@
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { WorkValueCalculator } from '@/components/calculators/WorkValueCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מה שווה לי לעבוד? - מחשבון ערך עבודה אמיתי',
+  title: 'מחשבון ערך עבודה 2026 — כמה שווה לי לעבוד באמת?',
   description:
-    'גלה אם משתלם לך לעבוד מול דמי לידה / אבטלה / קצבה. כולל הוצאות עבודה (מעון, נסיעות) והטבות מעסיק. שווי שעת עבודה אמיתי.',
+    'גלה אם משתלם לך לעבוד מול דמי לידה, אבטלה או קצבה. כולל חישוב הוצאות עבודה (מעון, נסיעות, ארוחות), הטבות מעסיק ושווי שעת עבודה אמיתי לשנת 2026.',
   alternates: { canonical: '/personal-tax/work-value' },
 };
 
@@ -98,6 +99,28 @@ export default function WorkValuePage() {
             </li>
             <li>
               <strong>אופן ההתפתחות האישית</strong> - למידה והעצמה
+            </li>
+          </ul>
+
+          <h2>מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <Link href="/personal-tax/salary-net-gross" className="text-blue-700 hover:underline">
+                מחשבון שכר נטו ברוטו 2026
+              </Link>{' '}
+              — חשב את השכר הנטו המדויק שלך לאחר מס וביטוח לאומי
+            </li>
+            <li>
+              <Link href="/personal-tax/income-tax" className="text-blue-700 hover:underline">
+                מחשבון מס הכנסה לשכיר
+              </Link>{' '}
+              — ראה את חישוב המס המלא לפי מדרגות 2026
+            </li>
+            <li>
+              <Link href="/compare/employee-vs-self-employed" className="text-blue-700 hover:underline">
+                השוואה: שכיר מול עצמאי
+              </Link>{' '}
+              — מחשבון מקיף להשוואת כדאיות מעבר לעצמאות
             </li>
           </ul>
 

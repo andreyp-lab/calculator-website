@@ -4,9 +4,9 @@ import { ArrowLeft, Home, CreditCard, BarChart3, CheckCircle, Sparkles, Trending
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'הלוואות - כל המחשבונים במקום אחד 2026',
+  title: 'מחשבוני הלוואות ומשכנתא בישראל 2026 - כל הכלים במקום אחד',
   description:
-    'כל מחשבוני ההלוואות בישראל - משכנתא, אופטימייזר תמהיל, הלוואה אישית, השוואת הלוואות, כושר החזר. עדכני 2026.',
+    'כל מחשבוני ההלוואות בישראל — משכנתא, אופטימייזר תמהיל, הלוואה אישית, השוואת הלוואות וכושר החזר. נתונים עדכניים 2026. השתמש עכשיו — ללא הרשמה, חינם.',
   alternates: { canonical: '/loans' },
 };
 

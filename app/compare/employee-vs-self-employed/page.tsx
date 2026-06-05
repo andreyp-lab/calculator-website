@@ -4,9 +4,9 @@ import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CorpVsIndividualCalculator } from '@/components/calculators/CorpVsIndividualCalculator';
 
 export const metadata: Metadata = {
-  title: 'שכיר vs עצמאי - השוואה מלאה 2026',
+  title: 'שכיר מול עצמאי - השוואה מקיפה, חישוב נטו ומחשבון 2026',
   description:
-    'איזה מסלול תעסוקה משתלם יותר? השוואה מלאה בין שכיר לעצמאי - מס הכנסה, ב.ל., יציבות, הטבות, פנסיה, חופשה ועוד.',
+    'השוואה מלאה בין שכיר לעצמאי לשנת 2026: מס הכנסה, ביטוח לאומי, פנסיה, קרן השתלמות, חופשה, פיצויים ופוטנציאל הכנסה. כולל מחשבון נטו אינטראקטיבי.',
   alternates: { canonical: '/compare/employee-vs-self-employed' },
 };
 
@@ -78,7 +78,7 @@ export default function EmployeeVsSelfEmployedComparePage() {
                 <tr className="bg-gray-50">
                   <td className="border border-gray-300 p-3 font-semibold">ביטוח לאומי</td>
                   <td className="border border-gray-300 p-3">~5% (עובד)</td>
-                  <td className="border border-gray-300 p-3">~16% (לבד)</td>
+                  <td className="border border-gray-300 p-3">מופחת 6.10% / מלא 18% (לבד)</td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 p-3 font-semibold">פנסיה חובה</td>
@@ -88,7 +88,7 @@ export default function EmployeeVsSelfEmployedComparePage() {
                 <tr className="bg-gray-50">
                   <td className="border border-gray-300 p-3 font-semibold">קרן השתלמות</td>
                   <td className="border border-gray-300 p-3">7.5% מהמעסיק (פטור ממס)</td>
-                  <td className="border border-gray-300 p-3">עצמאית - תקרה 18,840 ₪</td>
+                  <td className="border border-gray-300 p-3">עצמאית - תקרה 20,520 ₪</td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 p-3 font-semibold">פיצויי פיטורין</td>
@@ -102,7 +102,7 @@ export default function EmployeeVsSelfEmployedComparePage() {
                 </tr>
                 <tr>
                   <td className="border border-gray-300 p-3 font-semibold">חופשה</td>
-                  <td className="border border-gray-300 p-3">12-26 ימים בתשלום</td>
+                  <td className="border border-gray-300 p-3">14-28 ימים בתשלום (16 ברוטו / 14 נטו בשנים הראשונות, עד 28)</td>
                   <td className="border border-gray-300 p-3">חופשה ללא תשלום</td>
                 </tr>
                 <tr className="bg-gray-50">
@@ -174,6 +174,22 @@ export default function EmployeeVsSelfEmployedComparePage() {
             <li>הטבות מס - הוצאות מוכרות</li>
             <li>קריירה אישית - בניית מותג</li>
             <li>אפשרות לסיב את העסק (בנייה לטווח ארוך)</li>
+          </ul>
+
+          <h2>מחשבונים רלוונטיים לעצמאים</h2>
+          <ul>
+            <li>
+              <Link href="/self-employed/net" className="text-blue-600 underline">
+                מחשבון נטו לעצמאי
+              </Link>{' '}
+              - חשב את ההכנסה נטו לאחר מס הכנסה וב.ל.
+            </li>
+            <li>
+              <Link href="/self-employed/mandatory-pension" className="text-blue-600 underline">
+                מחשבון פנסיה חובה לעצמאי
+              </Link>{' '}
+              - חשב את ההפקדות המינימליות הנדרשות בחוק.
+            </li>
           </ul>
 
           <h2>מתי לעבור מעצמאי לחברה בע"מ?</h2>

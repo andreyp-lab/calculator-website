@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MortgageCalculator } from '@/components/calculators/MortgageCalculator';
@@ -6,7 +7,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון משכנתא 2026 - מעורבת, מחזור, פירעון מוקדם',
   description:
-    'מחשבון משכנתא מקיף: תמהיל מעורב (2-4 מסלולים), מחזור משכנתא עם נקודת איזון, פירעון מוקדם, כושר החזר וגרפים. כולל פריים, קל"צ, צמוד מדד.',
+    'מחשבון משכנתא מקיף: תמהיל מעורב (2-4 מסלולים), מחזור משכנתא עם נקודת איזון, פירעון מוקדם, כושר החזר וגרפים. כולל פריים, קל"צ, צמוד מדד. לרוכשי דירה ב-2026.',
   alternates: { canonical: '/real-estate/mortgage' },
 };
 
@@ -177,7 +178,7 @@ export default function MortgagePage() {
             <p>
               מחזור כדאי כאשר: (1) הריבית ירדה ב-0.5%-1% לפחות; (2) נשארו לפחות 8-10 שנים; (3)
               עמלות המחזור מכוסות תוך 2-3 שנים. חשוב לחשב את <strong>נקודת האיזון</strong> — שימוש
-              במחשבון המחזור שלנו.
+              ב<Link href="/real-estate/mortgage-optimizer" className="text-blue-700 hover:underline">אופטימייזר המשכנתא שלנו</Link>.
             </p>
 
             <h2>טיפים חשובים לרוכש משכנתא</h2>
@@ -199,6 +200,28 @@ export default function MortgagePage() {
               </li>
               <li>
                 <strong>שקול גרייס בבנייה</strong> — לא לשלם גם שכירות גם קרן לפני קבלת מפתח
+              </li>
+            </ul>
+
+            <h2>כלים נוספים בנושא נדל"ן</h2>
+            <ul>
+              <li>
+                <Link href="/real-estate/mortgage-optimizer" className="text-blue-700 hover:underline">
+                  אופטימייזר תמהיל משכנתא V3
+                </Link>{' '}
+                — מצא את החלוקה האופטימלית בין מסלולי המשכנתא ולקבלת כשירות בנקאית מלאה
+              </li>
+              <li>
+                <Link href="/real-estate/purchase-tax" className="text-blue-700 hover:underline">
+                  מחשבון מס רכישה 2026
+                </Link>{' '}
+                — חשב את מס הרכישה לפי מדרגות 2026 (פטור עד 1,978,745 ₪ לדירה ראשונה)
+              </li>
+              <li>
+                <Link href="/real-estate/capital-gains-tax" className="text-blue-700 hover:underline">
+                  מחשבון מס שבח
+                </Link>{' '}
+                — חשב את מס השבח על מכירת דירה
               </li>
             </ul>
           </>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { PurchaseTaxCalculator } from '@/components/calculators/PurchaseTaxCalculator';
@@ -6,7 +7,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון מס רכישה 2026 | חישוב מדויק לכל סוגי הרוכשים',
   description:
-    'חשב מס רכישה על דירה — דירה ראשונה, משפר דיור, משקיע, עולה חדש, נכה, רכישה משותפת. מדרגות 2024/2025/2026 מאומתות. השוואה, פירוט מדרגות וגרפים.',
+    'חשב מס רכישה על דירה — דירה ראשונה, משפר דיור, משקיע, עולה חדש, נכה, רכישה משותפת. מדרגות 2026 מאומתות ועדכניות. השוואת שנים, פירוט מדרגות וגרפים.',
   alternates: { canonical: '/real-estate/purchase-tax' },
 };
 
@@ -267,6 +268,19 @@ export default function PurchaseTaxPage() {
             <li>
               <strong>שנת עסקה:</strong> המדרגות מתעדכנות ב-15 בינואר. עסקה בינואר עלולה
               להיות כפופה למדרגות ישנות.
+            </li>
+          </ul>
+
+          <h2>מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <Link href="/real-estate/capital-gains-tax">מחשבון מס שבח</Link> — חישוב מס על רווח ממכירת דירה
+            </li>
+            <li>
+              <Link href="/real-estate/mortgage">מחשבון משכנתא</Link> — תשלום חודשי ולוח סילוקין
+            </li>
+            <li>
+              <Link href="/real-estate/mortgage-optimizer">אופטימייזר תמהיל משכנתא</Link> — מציאת החלוקה האופטימלית בין מסלולים
             </li>
           </ul>
         </>

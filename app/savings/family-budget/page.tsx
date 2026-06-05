@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FamilyBudgetCalculator } from '@/components/calculators/FamilyBudgetCalculator';
@@ -6,7 +7,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון תקציב משפחתי 2026 | ניהול הכנסות והוצאות',
   description:
-    'נהל את התקציב המשפחתי שלך - הכנסות, הוצאות וחיסכון. כולל ניתוח לפי כלל 50/30/20.',
+    'כלי לניהול תקציב משפחתי חודשי 2026 – הזן הכנסות, הוצאות קבועות ומשתנות וקבל ניתוח לפי כלל 50/30/20 עם המלצות לחיסכון. נסה עכשיו חינם.',
   alternates: { canonical: '/savings/family-budget' },
 };
 
@@ -115,6 +116,19 @@ export default function FamilyBudgetPage() {
               <strong>בדוק חודשית</strong> - 30 דק' בסוף כל חודש
             </li>
           </ol>
+
+          <h2>ראה גם — מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <Link href="/savings/loan-repayment">מחשבון החזרי הלוואה</Link> — חישוב תשלום חודשי וסילוק מואץ
+            </li>
+            <li>
+              <Link href="/savings/personal-loan">מחשבון הלוואה אישית</Link> — השוואת מקורות הלוואה ו-APR אמיתי
+            </li>
+            <li>
+              <Link href="/insurance/pension">מחשבון פנסיה</Link> — תכנון חיסכון לפרישה
+            </li>
+          </ul>
         </>
       }
       faq={<FAQ items={faqItems} />}

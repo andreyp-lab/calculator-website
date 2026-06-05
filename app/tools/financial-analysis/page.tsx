@@ -52,7 +52,7 @@ export default function FinancialAnalysisPage() {
           <BarChart3 className="w-6 h-6 text-orange-700" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">ניתוח דוחות כספיים מלא</h2>
+          <h1 className="text-2xl font-bold text-gray-900">ניתוח דוחות כספיים מלא</h1>
           <p className="text-sm text-gray-600">
             11 כלי ניתוח: יחסים, DuPont, DSCR מתקדם, Break-Even, סיכונים, אשראי בנקאי, ועוד
           </p>

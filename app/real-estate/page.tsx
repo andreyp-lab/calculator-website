@@ -5,8 +5,9 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/real-estate' },
-  title: 'משכנתא ונדל"ן - מחשבונים',
-  description: 'מחשבוני משכנתא, מס רכישה, מס שבח ויכולת החזר לרוכשי דירות בישראל',
+  title: 'מחשבוני משכנתא ומס רכישה 2026 - נדל"ן ישראל',
+  description:
+    'מחשבוני נדל"ן 2026: משכנתא, מס רכישה לפי מדרגות עדכניות, מס שבח ואופטימיזציה תמהיל משכנתא לרוכשי דירות בישראל. חשב את עלויות הרכישה עכשיו בחינם.',
 };
 
 const calculators = [

@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { ROICalculator } from '@/components/calculators/ROICalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון ROI - תשואה על השקעה',
+  title: 'מחשבון ROI 2026 — תשואה על השקעה | מניות, נדל"ן ועסק',
   description:
-    'חשב את ROI (Return on Investment) על כל השקעה - מניות, נדל"ן, עסק. כולל ROI שנתי מנורמל.',
+    'מחשבון ROI מקיף לישראל 2026: חשב תשואה על השקעה במניות, נדל"ן ועסק. ROI שנתי מנורמל, השוואה לאלטרנטיבות, השפעת מס רווחי הון 25%. כלי חינמי ומדויק.',
   alternates: { canonical: '/investments/roi' },
 };
 
@@ -41,13 +42,33 @@ const faqItems = [
     answer:
       'ROI חישוב פשוט. IRR (Internal Rate of Return) מתחשב בזרם תזרימים לאורך זמן (כמו תשלומי שכר דירה כל חודש). IRR מדויק יותר להשקעות מורכבות אבל קשה לחשב ידנית. ROI שנתי הוא קירוב סביר.',
   },
+  {
+    question: 'מה שיעור מס רווחי הון בישראל ב-2026?',
+    answer:
+      'בישראל 2026 מס רווחי הון על ניירות ערך הוא 25% לרוב המשקיעים. על רווחים ריאליים (מעל האינפלציה) חל מס 25%. מי שהכנסתו עולה על 721,560 ₪ בשנה חייב גם במס יסף של 2% (סה"כ 27%). חשוב לקחת את המס בחשבון בחישוב ה-ROI הנטו.',
+  },
+  {
+    question: 'כיצד מחשבים ROI על נדל"ן?',
+    answer:
+      'ROI נדל"ן = (הכנסות שכ"ד שנתיות + עליית ערך - עלויות תחזוקה, ארנונה ומס) / מחיר רכישה × 100. חשוב לכלול גם את עלויות הרכישה כגון מס רכישה, שכר טרחת עורך דין ועמלת תיווך. מינוף (משכנתא) מגדיל את ה-ROI על ההון העצמי אך מגדיל גם את הסיכון.',
+  },
+  {
+    question: 'מה הפרש בין ROI לתשואה (Yield)?',
+    answer:
+      'Yield (תשואה שוטפת) מודד הכנסה שוטפת ביחס לשווי הנכס — לדוגמה שכר דירה שנתי חלקי מחיר הדירה. ROI מודד את הרווח הכולל כולל עליית ערך הנכס לאורך התקופה. השימוש ב-ROI שנתי מנורמל מאפשר השוואה ישירה בין השקעות שונות.',
+  },
+  {
+    question: 'האם ריבית הפריים משפיעה על ROI?',
+    answer:
+      'בהחלט. ריבית פריים = ריבית בנק ישראל + 1.5%. כאשר הריבית גבוהה, עלות המימון עולה ו-ROI על השקעות ממונפות יורד. כמו כן פיקדונות מניבים תשואה גבוהה יותר, מה שמגביה את "רף הכניסה" שממנו השקעה נחשבת כדאית.',
+  },
 ];
 
 export default function ROIPage() {
   return (
     <CalculatorLayout
-      title="מחשבון ROI - תשואה על השקעה"
-      description="חשב את התשואה האמיתית על ההשקעה שלך, כולל ROI שנתי מנורמל."
+      title="מחשבון ROI 2026 - תשואה על השקעה"
+      description="חשב את התשואה האמיתית על ההשקעה שלך, כולל ROI שנתי מנורמל והשפעת מס רווחי הון."
       breadcrumbs={[
         { label: 'דף הבית', href: '/' },
         { label: 'השקעות', href: '/investments' },
@@ -98,6 +119,16 @@ export default function ROIPage() {
             </li>
           </ol>
 
+          <h2>מס רווחי הון בישראל 2026</h2>
+          <p>
+            ב-2026 חל מס רווחי הון של 25% על רווחים ריאליים ממניות ואגרות חוב. מי שהכנסתו השנתית
+            עולה על 721,560 ₪ מחויב גם במס יסף של 2%, ובסך הכל 27%. לכן חשוב לחשב את ה-ROI הנטו
+            לאחר מס. ניתן לקרוא עוד על{' '}
+            <Link href="/investments/compound-interest">ריבית דריבית</Link>,{' '}
+            <Link href="/investments/retirement">תכנון פרישה</Link> ו-
+            <Link href="/investments/fire">עצמאות כלכלית (FIRE)</Link>.
+          </p>
+
           <h2>הערכת התוצאה</h2>
           <p>השוואה לאלטרנטיבות:</p>
           <ul>
@@ -115,6 +146,34 @@ export default function ROIPage() {
             </li>
             <li>
               <strong>סטארטאפ:</strong> 15%+ אבל סיכון גבוה
+            </li>
+          </ul>
+
+          <h2>מקורות ומידע נוסף</h2>
+          <ul>
+            <li>
+              <a
+                href="https://www.gov.il/he/departments/topics/tax-on-capital-gains"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                רשות המסים — מס רווחי הון
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.boi.org.il/roles/monetary-policy/interest-rate/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                בנק ישראל — ריבית בנק ישראל
+              </a>
+            </li>
+            <li>
+              <Link href="/real-estate/purchase-tax">מחשבון מס רכישה לדירה</Link>
+            </li>
+            <li>
+              <Link href="/real-estate/mortgage">מחשבון משכנתא</Link>
             </li>
           </ul>
         </>

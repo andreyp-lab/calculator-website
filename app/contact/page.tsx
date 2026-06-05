@@ -23,8 +23,8 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">שלח לנו הודעה</h2>
 
             {submitted && (
-              <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded mb-6">
-                ✓ תודה! ההודעה נקבלה. נחזור אליך בקרוב.
+              <div className="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded mb-6">
+                ✓ תודה על פנייתך! לפנייה מהירה יותר, שלח הודעה ישירות לכתובת האימייל שלנו.
               </div>
             )}
 
@@ -43,7 +43,7 @@ export default function Contact() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  דוא"ל
+                  דוא&quot;ל
                 </label>
                 <input
                   type="email"
@@ -92,19 +92,10 @@ export default function Contact() {
 
             <div className="space-y-6">
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">טלפון</h3>
+                <h3 className="font-bold text-gray-900 mb-2">דוא&quot;ל</h3>
                 <p className="text-gray-600">
-                  <a href="tel:+972123456789" className="hover:text-blue-600">
-                    +972-1-234-5678
-                  </a>
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">דוא"ל</h3>
-                <p className="text-gray-600">
-                  <a href="mailto:info@fincalc.co.il" className="hover:text-blue-600">
-                    info@fincalc.co.il
+                  <a href="mailto:info@cheshbonai.co.il" className="hover:text-blue-600">
+                    info@cheshbonai.co.il
                   </a>
                 </p>
               </div>

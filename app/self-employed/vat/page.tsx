@@ -4,7 +4,7 @@ import { VatCalculator } from '@/components/calculators/VatCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מע"מ 2026 - הוספה, חילוץ, דוח דו-חודשי',
+  title: 'מחשבון מע"מ 2026 – הוספה, חילוץ ודוח דו-חודשי לעוסק מורשה',
   description:
     'מחשבון מע"מ מקצועי ב-18%. הוספת מע"מ, חילוץ, דוח דו-חודשי, מעקב חשבוניות, סוגי עוסקים, ענפים מיוחדים ויבוא. לעצמאיים ועוסקים מורשים.',
   alternates: { canonical: '/self-employed/vat' },
@@ -165,6 +165,28 @@ export default function VatPage() {
               ב-1 בינואר 2025 עלה שיעור המע&quot;מ מ-17% ל-18%. עסקאות שנסגרו לפני 1.1.2025 —
               לפי 17%; עסקאות מ-1.1.2025 ואילך — 18%. ב-2026 אין שינוי נוסף.
             </p>
+
+            <h2>כלים קשורים</h2>
+            <ul>
+              <li>
+                <a href="/self-employed/tax-advances" className="text-blue-700 hover:underline">
+                  מחשבון מקדמות מס
+                </a>{' '}
+                — חשב מקדמות מס הכנסה, ב.ל. ומע&quot;מ חודשיות
+              </li>
+              <li>
+                <a href="/self-employed/net" className="text-blue-700 hover:underline">
+                  מחשבון נטו לעצמאי
+                </a>{' '}
+                — הכנסה נטו לאחר מסים וביטוח לאומי
+              </li>
+              <li>
+                <a href="/self-employed/social-security" className="text-blue-700 hover:underline">
+                  מחשבון ביטוח לאומי לעצמאי
+                </a>{' '}
+                — דמי ביטוח לאומי ובריאות לפי הכנסה שנתית
+              </li>
+            </ul>
           </>
         }
         faq={<FAQ items={faqItems} />}

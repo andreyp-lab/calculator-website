@@ -5,8 +5,8 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/personal-tax' },
-  title: 'מיסוי אישי - מחשבונים',
-  description: 'מחשבונים לחישוב מס הכנסה, נקודות זיכוי, מס שולי והחזרי מס לעובדים שכירים בישראל',
+  title: 'מחשבוני מס הכנסה לשכיר 2026 - מיסוי אישי בישראל',
+  description: 'מחשבונים לחישוב מס הכנסה לפי מדרגות 2026, נקודות זיכוי ושוויין, מס שולי והחזר מס לשכירים בישראל. כולל שכר נטו-ברוטו ומה שווה לי לעבוד. חשב בחינם עכשיו.',
 };
 
 const calculators = [

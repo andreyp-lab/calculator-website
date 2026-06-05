@@ -7,7 +7,7 @@ import { FAQSchema } from '@/components/seo/FAQSchema';
 export const metadata: Metadata = {
   title: 'כל המסים בישראל 2026 - המדריך השלם',
   description:
-    'מדריך מקיף לכל המסים בישראל: מס הכנסה, ב.ל., מע"מ, מס שבח, מס רכישה, מס יסף, מס דיבידנד. מדרגות, פטורים, הטבות וכל מה שחייבים לדעת.',
+    'מדריך מקיף לכל המסים בישראל 2026: מס הכנסה, ב.ל., מע"מ, מס שבח, מס רכישה ומס יסף. מדרגות, פטורים, הטבות וניכויים לשכיר ועצמאי. חשב עכשיו עם המחשבונים.',
   alternates: { canonical: '/guides/taxes-complete-guide-2026' },
   openGraph: {
     title: 'כל המסים בישראל 2026 - המדריך השלם',
@@ -344,8 +344,8 @@ export default function TaxesCompleteGuide() {
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
                 <h3 className="font-bold text-blue-900 mb-3">שכיר</h3>
                 <ul className="space-y-2 text-sm text-blue-800">
-                  <li>• ב.ל. עובד: 3.5% (עד תקרה) + 12% (מעל)</li>
-                  <li>• ב.ל. מעסיק: 3.55% + 7.6%</li>
+                  <li>• ב.ל. עובד: 4.27% (עד 7,522 ₪) + 12.17% (מעל)</li>
+                  <li>• ב.ל. מעסיק: 4.51% + 7.6%</li>
                   <li>• ביטוח בריאות: 3.1% + 5%</li>
                   <li>• כל הניכויים אוטומטיים מהשכר</li>
                 </ul>
@@ -353,8 +353,8 @@ export default function TaxesCompleteGuide() {
               <div className="bg-orange-50 border border-orange-200 rounded-xl p-5">
                 <h3 className="font-bold text-orange-900 mb-3">עצמאי (עוסק)</h3>
                 <ul className="space-y-2 text-sm text-orange-800">
-                  <li>• ב.ל. (הכנסות עד 7,522 ₪): 5.97%</li>
-                  <li>• ב.ל. (הכנסות מעל): 17.83%</li>
+                  <li>• ב.ל. (הכנסות עד 7,522 ₪): 6.10%</li>
+                  <li>• ב.ל. (הכנסות מעל עד 51,910 ₪): 18%</li>
                   <li>• ביטוח בריאות: 3.1% + 5%</li>
                   <li>• תשלום דרך פנקס המקדמות</li>
                 </ul>
@@ -619,7 +619,7 @@ export default function TaxesCompleteGuide() {
 
             <h3 className="text-xl font-bold text-gray-800 mb-3">קרן השתלמות לעצמאי</h3>
             <p className="text-gray-700 mb-5">
-              עצמאי יכול להפקיד עד 4.5% מהרווח (עד 18,840 ₪ לשנה) ולקבל ניכוי ממס הכנסה.
+              עצמאי יכול להפקיד עד 4.5% מהרווח (עד ~20,520 ₪ לשנה) ולקבל ניכוי ממס הכנסה.
               כמו כן – הכנסות מהשקעות בקרן פטורות ממס רווחי הון לאחר 6 שנים.
             </p>
 

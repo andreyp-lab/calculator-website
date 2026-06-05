@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CorpVsIndividualCalculator } from '@/components/calculators/CorpVsIndividualCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'חברה בע"מ vs עוסק מורשה - מחשבון מקיף 2026',
+  title: 'חברה בע"מ vs עוסק מורשה — השוואה מלאה ומחשבון מס 2026',
   description:
     'השוואה מקצועית מלאה בין חברה בע"מ לעוסק מורשה: מס חברות, דיבידנד, מיקס אופטימלי, נקודת איזון, תחזית 5 שנים, עלויות נסתרות ואחריות אישית. גלה מה עדיף עבורך.',
   alternates: { canonical: '/self-employed/corporation-vs-individual' },
@@ -105,7 +106,7 @@ export default function CorpVsIndividualPage() {
             <h3>1. עוסק מורשה</h3>
             <ul>
               <li>מס הכנסה: 7 מדרגות פרוגרסיביות (10%-50%)</li>
-              <li>ביטוח לאומי + בריאות: 6.1% עד 90,264 ₪/שנה, 18% מעל (עד תקרת 622,920 ₪)</li>
+              <li>ביטוח לאומי + בריאות: 6.10% עד 7,522 ₪/חודש (90,264 ₪/שנה), 18% מ-7,523 עד 51,910 ₪/חודש (תקרה 622,920 ₪/שנה)</li>
               <li>נקודות זיכוי: 2.25 בסיס, עם תוספות לפי מצב משפחתי</li>
               <li>קרן השתלמות: ניכוי 4.5% מהרווח (עד 20,520 ₪)</li>
               <li>אחריות: אישית ומלאה על חובות העסק</li>
@@ -172,6 +173,22 @@ export default function CorpVsIndividualPage() {
               חברה קל יותר למכור — מניות הן נכס עצמאי. שווי החברה כולל רווחים צבורים, לקוחות,
               מוניטין. לעוסק מורשה אין נכס &quot;למכור&quot; באותו אופן.
             </p>
+
+            <h2>כלים קשורים</h2>
+            <ul>
+              <li>
+                <Link href="/self-employed/net">מחשבון נטו לעצמאי</Link> — חשב את ההכנסה נטו שלך כעוסק מורשה לאחר מיסים וביטוח לאומי
+              </li>
+              <li>
+                <Link href="/self-employed/tax-advances">מחשבון מקדמות מס לעצמאי</Link> — חשב את סכום המקדמות החודשיות לרשות המסים
+              </li>
+              <li>
+                <Link href="/self-employed/mandatory-pension">פנסיה חובה לעצמאי</Link> — חשב את שיעורי ההפקדה לפנסיה ולקרן השתלמות
+              </li>
+              <li>
+                <Link href="/personal-tax/income-tax">מחשבון מס הכנסה</Link> — חשב את חבות מס ההכנסה האישית שלך
+              </li>
+            </ul>
 
             <h2>כיצד לבצע את המעבר?</h2>
             <ol>

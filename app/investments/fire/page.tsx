@@ -4,7 +4,7 @@ import { FireCalculator } from '@/components/calculators/FireCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון FIRE 2026 - פרישה מוקדמת | Lean, Regular, Fat, Coast, Barista',
+  title: 'מחשבון FIRE 2026 — פרישה מוקדמת | 5 סוגי FIRE לישראלים',
   description:
     'מחשבון FIRE מקיף (Financial Independence, Retire Early) בהקשר ישראלי. 5 סוגי FIRE, כלל ה-4%, Coast FIRE, Barista FIRE, ניתוח SWR, ביטוח לאומי ונדל"ן. גלה מתי תוכל לפרוש.',
   alternates: { canonical: '/investments/fire' },
@@ -202,6 +202,16 @@ export default function FirePage() {
             <li>
               <strong>מס 25%</strong>: כל משיכה מתיק חופשי = מס. תכנן משיכות חכמות (פנסיה +
               תיק).
+            </li>
+          </ul>
+
+          <h2>מחשבונים קשורים</h2>
+          <ul>
+            <li>
+              <a href="/investments/compound-interest">מחשבון ריבית דריבית</a> — חשב כמה תיק ההשקעות שלך יגדל לאורך שנים
+            </li>
+            <li>
+              <a href="/investments/retirement">מחשבון תכנון פרישה</a> — בדוק האם החיסכון שלך מספיק לפרישה
             </li>
           </ul>
         </>

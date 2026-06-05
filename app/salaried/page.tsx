@@ -138,7 +138,7 @@ const RIGHTS: Calc[] = [
   },
   {
     title: 'שכר מינימום',
-    description: 'בדיקה אם השכר שלך עומד בשכר מינימום (2026: ₪6,247/חודש).',
+    description: 'בדיקה אם השכר שלך עומד בשכר מינימום (מ-1.4.2026: ₪6,443.85/חודש).',
     href: '/employee-rights/minimum-wage',
     icon: Shield,
   },

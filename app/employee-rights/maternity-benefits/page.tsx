@@ -4,7 +4,7 @@ import { MaternityBenefitsCalculator } from '@/components/calculators/MaternityB
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון דמי לידה 2026 - חישוב מביטוח לאומי',
+  title: 'מחשבון דמי לידה 2026 — זכאות, תשלום, הארכות וחופשת אב',
   description:
     'מחשבון דמי לידה מקצועי ומקיף. חישוב מדויק של תשלום ביטוח לאומי לחופשת לידה. כולל זכאות, הארכות לתאומים ואישפוז, חופשת אב, הגנת משרה ושעת הנקה.',
   alternates: { canonical: '/employee-rights/maternity-benefits' },
@@ -119,7 +119,7 @@ export default function MaternityBenefitsPage() {
             <li>תקרה יומית: 1,730.33 ₪</li>
             <li>תקרה חודשית: 51,910 ₪ (5 × שכר ממוצע)</li>
             <li>שכר ממוצע במשק: 13,769 ₪</li>
-            <li>שכר מינימום: 6,300 ₪/חודש</li>
+            <li>שכר מינימום: 6,443.85 ₪/חודש (מ-1.4.2026)</li>
           </ul>
 
           <h2>הגנת המשרה</h2>

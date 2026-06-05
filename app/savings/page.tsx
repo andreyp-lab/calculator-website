@@ -5,8 +5,9 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/savings' },
-  title: 'מחשבוני חיסכון וחובות',
-  description: 'מחשבונים לתקציב משפחתי, החזרי הלוואה, וניהול חובות',
+  title: 'מחשבוני חיסכון, תקציב וחובות 2026 - ניהול פיננסי',
+  description:
+    'מחשבונים לניהול כספים משפחתי 2026: תקציב לפי כלל 50/30/20, החזר הלוואה וסילוק מואץ לחיסכון בריבית, ומחשבון הלוואה אישית. קח שליטה על הכסף שלך עכשיו.',
 };
 
 const calculators = [
@@ -23,6 +24,13 @@ const calculators = [
     href: '/savings/loan-repayment',
     available: true,
     icon: '💳',
+  },
+  {
+    title: 'מחשבון הלוואה אישית',
+    description: 'APR אמיתי, השוואת בנק/קרן השתלמות/חוץ-בנקאי, שיטות Snowball ו-Avalanche',
+    href: '/savings/personal-loan',
+    available: true,
+    icon: '🏦',
   },
 ];
 

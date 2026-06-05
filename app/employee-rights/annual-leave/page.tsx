@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { AnnualLeaveCalculator } from '@/components/calculators/AnnualLeaveCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון חופשה שנתית 2026 - זכאות, פדיון וצבירה',
+  title: 'מחשבון חופשה שנתית 2026 — כמה ימים מגיעים לי? זכאות ופדיון',
   description:
-    'מחשבון חופשה שנתית מקיף: כמה ימי חופשה מגיעים לי לפי ותק, חישוב פדיון חופשה בעת עזיבה, צבירה ויתרה — לפי חוק חופשה שנתית תשי"א-1951 (2026).',
+    'מחשבון חופשה שנתית מקיף: כמה ימי חופשה מגיעים לי לפי ותק, חישוב פדיון חופשה בעת עזיבה, צבירה, יתרה ושנת 2026 — לפי חוק חופשה שנתית תשי"א-1951.',
   alternates: { canonical: '/employee-rights/annual-leave' },
 };
 
@@ -131,8 +132,13 @@ export default function Page() {
 
       <h2>זכויות נוספות בעת עזיבה</h2>
       <p>
-        מעבר לפדיון חופשה, בעת עזיבה ייתכן ותהיה זכאי גם לפיצויי פיטורים, הודעה מוקדמת,
-        דמי הבראה, וכספי פנסיה. השתמש במחשבונים האחרים באתר לחישוב מלא של הזכויות.
+        מעבר לפדיון חופשה, בעת עזיבה ייתכן ותהיה זכאי גם ל
+        <Link href="/employee-rights/severance" className="text-blue-600 underline">פיצויי פיטורים</Link>,
+        {' '}הודעה מוקדמת,{' '}
+        <Link href="/employee-rights/recreation-pay" className="text-blue-600 underline">דמי הבראה</Link>,
+        {' '}וכספי{' '}
+        <Link href="/insurance/pension" className="text-blue-600 underline">פנסיה</Link>.
+        {' '}השתמש במחשבונים האחרים באתר לחישוב מלא של הזכויות.
       </p>
     </>
   );

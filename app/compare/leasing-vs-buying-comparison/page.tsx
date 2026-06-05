@@ -50,7 +50,7 @@ export default function LeasingVsBuyingComparePage() {
               <tr className="bg-gray-50">
                 <td className="border border-gray-300 p-3 font-semibold">תשלום חודשי</td>
                 <td className="border border-gray-300 p-3">0 ₪ (אחרי הקנייה)</td>
-                <td className="border border-gray-300 p-3">החזר משכנתא</td>
+                <td className="border border-gray-300 p-3">החזר הלוואה</td>
                 <td className="border border-gray-300 p-3">דמי ליסינג קבועים</td>
               </tr>
               <tr>
@@ -155,6 +155,13 @@ export default function LeasingVsBuyingComparePage() {
           <p>
             השתמש ב<Link href="/vehicles/leasing-vs-buying" className="text-blue-600 underline">המחשבון המפורט</Link>{' '}
             למטה כדי להזין את הנתונים הספציפיים שלך ולקבל ניתוח מדויק.
+          </p>
+          <p className="mt-2">
+            כלים נוספים:{' '}
+            <Link href="/vehicles/company-car-benefit" className="text-blue-600 underline">מחשבון שווי רכב צמוד</Link>{' '}
+            לעצמאיים ושכירים עם רכב חברה,{' '}
+            <Link href="/vehicles/fuel-cost" className="text-blue-600 underline">מחשבון עלות דלק</Link>{' '}
+            לחישוב הוצאות דלק שנתיות.
           </p>
         </>
       }
