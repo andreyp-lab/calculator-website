@@ -79,6 +79,12 @@ const TAX_AND_SALARY: Calc[] = [
     href: '/personal-tax/work-value',
     icon: TrendingUp,
   },
+  {
+    title: '📘 איך קוראים תלוש משכורת',
+    description: 'מדריך מלא לתלוש 2026: ברוטו מול נטו, ניכויי חובה, נקודות זיכוי, הפרשות מעסיק ומה לבדוק.',
+    href: '/salaried/payslip-guide',
+    icon: Receipt,
+  },
 ];
 
 const RIGHTS: Calc[] = [

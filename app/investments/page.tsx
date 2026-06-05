@@ -39,6 +39,13 @@ const calculators = [
     available: true,
     icon: '🔥',
   },
+  {
+    title: '📘 מדריך מס רווח הון',
+    description: 'כמה מס על רווחים בבורסה? 25% על מניות, מס דיבידנד, קיזוז הפסדים ואפיקים פטורים',
+    href: '/investments/capital-gains-tax',
+    available: true,
+    icon: '🧾',
+  },
 ];
 
 export default function InvestmentsPage() {

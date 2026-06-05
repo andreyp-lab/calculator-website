@@ -37,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== Hubs קטגוריות =====
     make('/salaried', 'weekly', 0.95),
+    make('/salaried/payslip-guide', 'monthly', 0.9), // מדריך קריאת תלוש (pillar)
     make('/self-employed', 'weekly', 0.95),
     make('/loans', 'weekly', 0.95),
     make('/topics', 'weekly', 0.85),
@@ -88,12 +89,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate/mortgage-optimizer', 'weekly', 0.98), // הדגל
     make('/real-estate/purchase-tax', 'monthly', 0.90),
     make('/real-estate/capital-gains-tax', 'monthly', 0.90),
+    make('/real-estate/rental-income-tax', 'monthly', 0.9), // מדריך מיסוי שכר דירה (pillar)
 
     // ===== מחשבונים: השקעות =====
     make('/investments/compound-interest', 'monthly', 0.95),
     make('/investments/retirement', 'monthly', 0.90),
     make('/investments/fire', 'monthly', 0.90),
     make('/investments/roi', 'monthly', 0.85),
+    make('/investments/capital-gains-tax', 'monthly', 0.9), // מדריך מס רווח הון (pillar)
 
     // ===== מחשבונים: חיסכון / הלוואות =====
     make('/savings/family-budget', 'monthly', 0.90),

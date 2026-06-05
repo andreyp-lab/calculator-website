@@ -39,6 +39,13 @@ const calculators = [
     available: true,
     badge: undefined as string | undefined,
   },
+  {
+    title: '📘 מדריך מיסוי שכר דירה',
+    description: '3 מסלולי המס על הכנסה משכירות: פטור (עד 5,654 ₪), מסלול 10% ומדרגות — מתי כל אחד משתלם',
+    href: '/real-estate/rental-income-tax',
+    available: true,
+    badge: undefined as string | undefined,
+  },
 ];
 
 export default function RealEstatePage() {
