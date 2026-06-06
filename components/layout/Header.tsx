@@ -16,9 +16,9 @@ export function Header() {
         <div className="flex items-center justify-between gap-4 py-3">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">FC</span>
+              <span className="text-white font-bold text-sm">ח</span>
             </div>
-            <span className="font-bold text-gray-900 hidden sm:inline">FinCalc</span>
+            <span className="font-bold text-gray-900 hidden sm:inline">חשבונאי</span>
           </Link>
 
           {/* Search - desktop */}

@@ -191,7 +191,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-gray-200 pt-6 text-center text-sm text-gray-600">
-          <p>© {currentYear} FinCalc. כל הזכויות שמורות.</p>
+          <p>© {currentYear} חשבונאי. כל הזכויות שמורות.</p>
           <p className="mt-2 text-xs">
             התוכן באתר זה אינו ייעוץ משפטי או מקצועי. כל המחשבונים מבוססים על החוק הישראלי 2026.
           </p>

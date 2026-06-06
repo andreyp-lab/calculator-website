@@ -127,6 +127,30 @@
   html {
     @apply font-sans;
   }
+
+  /* ============================================================
+     Responsive guard — prevent any element from causing horizontal
+     scroll / overflow on mobile. `overflow-x: clip` does NOT create a
+     scroll container, so the sticky header keeps working.
+     ============================================================ */
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Media & tables never push past the viewport */
+  img,
+  svg,
+  video,
+  canvas,
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
+  table {
+    max-width: 100%;
+  }
 }
 /* ============================================================
    Accessibility Widget Modes
