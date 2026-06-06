@@ -133,16 +133,19 @@ describe('calculatePurchaseTaxByType — עולה חדש', () => {
 });
 
 describe('calculatePurchaseTaxByType — נכה', () => {
-  it('נכה עד 2.5M — פטור מלא', () => {
+  it('נכה עד 2.5M — פטור 0% עד 1,978,745, ו-0.5% על העודף', () => {
     const r = calculatePurchaseTaxByType({ propertyValue: 2_000_000, buyerType: 'disabled' });
-    expect(r.totalTax).toBe(0);
-    expect(r.fullExemption).toBe(true);
+    // 0 – 1,978,745: 0
+    // 1,978,745 – 2,000,000 (21,255 × 0.5%): 106.275
+    expect(r.totalTax).toBeCloseTo(106.275, 2);
+    expect(r.fullExemption).toBe(false);
+    expect(r.partialExemption).toBe(true);
   });
 
-  it('נכה מעל 2.5M — מדרגות דירה ראשונה', () => {
+  it('נכה מעל 2.5M — 0.5% מהשקל הראשון (ללא מדרגת פטור)', () => {
     const r = calculatePurchaseTaxByType({ propertyValue: 3_000_000, buyerType: 'disabled' });
-    const firstHome = calculatePurchaseTaxByType({ propertyValue: 3_000_000, buyerType: 'first-home' });
-    expect(r.totalTax).toBeCloseTo(firstHome.totalTax, 0);
+    // מעל 2.5M: 0.5% על מלוא השווי מהשקל הראשון = 3,000,000 × 0.5%
+    expect(r.totalTax).toBeCloseTo(15_000, 0);
   });
 });
 

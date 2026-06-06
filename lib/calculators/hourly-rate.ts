@@ -24,8 +24,8 @@
 export const WORKING_DAYS_PER_YEAR = 250;  // ~5 ימי עבודה × 50 שבועות
 export const WORKING_HOURS_PER_DAY = 8;
 
-/** עלות נקודת זיכוי 2026 (₪/שנה) */
-const CREDIT_POINT_VALUE_ANNUAL = 3_096;
+/** עלות נקודת זיכוי 2026 (₪/שנה) — 242 ₪/חודש × 12 */
+const CREDIT_POINT_VALUE_ANNUAL = 2_904;
 
 /** מדרגות מס הכנסה 2026 — להכנסה מיגיעה אישית */
 const TAX_BRACKETS_2026 = [
@@ -38,13 +38,12 @@ const TAX_BRACKETS_2026 = [
   { upTo: Infinity, rate: 0.50 },
 ];
 
-/** ביטוח לאומי + בריאות לעצמאי 2026 */
+/** ביטוח לאומי + בריאות לעצמאי 2026 (שיעורים מצרפיים: ב.ל.+בריאות) */
 const SOCIAL_SECURITY_SELF_EMPLOYED_2026 = {
   reducedThresholdMonthly: 7_522,
-  maxThresholdMonthly: 50_136,
-  reducedRate: 0.062,    // עד סף מופחת
-  fullRateNI: 0.125,     // ביטוח לאומי מלא
-  healthRate: 0.05,      // ביטוח בריאות
+  maxThresholdMonthly: 51_910,
+  reducedRate: 0.0610,   // עד הסף המופחת (2.87% ב.ל. + 3.23% בריאות)
+  fullRate: 0.18,        // מהסף המופחת ועד התקרה (12.83% ב.ל. + 5.17% בריאות)
 };
 
 /** שיעורי פנסיה מינימום לעצמאי 2026 */
@@ -685,9 +684,9 @@ function _calcSelfEmployedSocialSecurity(monthlyIncome: number): number {
   const belowReduced = Math.min(monthlyIncome, reducedThresh);
   const aboveReduced = Math.max(0, Math.min(monthlyIncome, maxThresh) - reducedThresh);
 
-  const reducedPortionNI = belowReduced * ss.reducedRate;
-  const fullPortionNI = aboveReduced * ss.fullRateNI;
-  const health = Math.min(monthlyIncome, maxThresh) * ss.healthRate;
+  // שיעורים מצרפיים (ב.ל. + בריאות): 6.10% עד הסף המופחת, 18% מעליו ועד התקרה
+  const reducedPortion = belowReduced * ss.reducedRate;
+  const fullPortion = aboveReduced * ss.fullRate;
 
-  return reducedPortionNI + fullPortionNI + health;
+  return reducedPortion + fullPortion;
 }

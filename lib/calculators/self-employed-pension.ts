@@ -216,11 +216,9 @@ export function calculateTaxBenefit(
   // ניכוי - כל ₪ שמופקד חוסך מס במלוא המס השולי
   const deductionSaving = annualContribution * marginalRate;
 
-  // זיכוי - 35% מחלק מההפקדה, מוגבל לתקרה
+  // זיכוי - 35% מבסיס ההפקדה המוטב, מוגבל לתקרה (פעם אחת בלבד)
   const creditBase = Math.min(annualContribution, TAX_CREDIT_CEILING_ANNUAL);
-  // זיכוי על 35% מהבסיס, בשיעור 35%
-  const creditAmount = creditBase * TAX_CREDIT_RATE;
-  const creditSaving = creditAmount * TAX_CREDIT_RATE;
+  const creditSaving = creditBase * TAX_CREDIT_RATE;
 
   const totalSaving = deductionSaving + creditSaving;
   const effectiveReturnRate = annualContribution > 0 ? totalSaving / annualContribution : 0;

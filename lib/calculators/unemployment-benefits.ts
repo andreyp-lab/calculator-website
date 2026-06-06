@@ -498,57 +498,36 @@ export function estimateTaxOnBenefits(
   note: string;
 } {
   const totalIncome = totalBenefits + otherIncomeThisYear;
-  // מדרגות מס 2026 (משוערות)
-  let tax = 0;
-  if (totalIncome > 698_280) {
-    tax += (totalIncome - 698_280) * 0.5;
-    totalIncome <= 0; // suppress lint — intentional cascade
-    tax += (698_280 - 502_920) * 0.47;
-    tax += (502_920 - 323_520) * 0.35;
-    tax += (323_520 - 240_840) * 0.31;
-    tax += (240_840 - 84_120) * 0.2;
-    tax += 84_120 * 0.1;
-  } else if (totalIncome > 502_920) {
-    tax += (totalIncome - 502_920) * 0.47;
-    tax += (502_920 - 323_520) * 0.35;
-    tax += (323_520 - 240_840) * 0.31;
-    tax += (240_840 - 84_120) * 0.2;
-    tax += 84_120 * 0.1;
-  } else if (totalIncome > 323_520) {
-    tax += (totalIncome - 323_520) * 0.35;
-    tax += (323_520 - 240_840) * 0.31;
-    tax += (240_840 - 84_120) * 0.2;
-    tax += 84_120 * 0.1;
-  } else if (totalIncome > 240_840) {
-    tax += (totalIncome - 240_840) * 0.31;
-    tax += (240_840 - 84_120) * 0.2;
-    tax += 84_120 * 0.1;
-  } else if (totalIncome > 84_120) {
-    tax += (totalIncome - 84_120) * 0.2;
-    tax += 84_120 * 0.1;
-  } else {
-    tax += totalIncome * 0.1;
-  }
 
-  // חישוב המס רק על ההכנסות האחרות (ללא דמי האבטלה) — ללא רקורסיה
-  let taxOnOtherOnly = 0;
-  if (otherIncomeThisYear > 0) {
-    const o = otherIncomeThisYear;
-    if (o > 698_280) {
-      taxOnOtherOnly += (o - 698_280) * 0.5 + (698_280 - 502_920) * 0.47 + (502_920 - 323_520) * 0.35 + (323_520 - 240_840) * 0.31 + (240_840 - 84_120) * 0.2 + 84_120 * 0.1;
-    } else if (o > 502_920) {
-      taxOnOtherOnly += (o - 502_920) * 0.47 + (502_920 - 323_520) * 0.35 + (323_520 - 240_840) * 0.31 + (240_840 - 84_120) * 0.2 + 84_120 * 0.1;
-    } else if (o > 323_520) {
-      taxOnOtherOnly += (o - 323_520) * 0.35 + (323_520 - 240_840) * 0.31 + (240_840 - 84_120) * 0.2 + 84_120 * 0.1;
-    } else if (o > 240_840) {
-      taxOnOtherOnly += (o - 240_840) * 0.31 + (240_840 - 84_120) * 0.2 + 84_120 * 0.1;
-    } else if (o > 84_120) {
-      taxOnOtherOnly += (o - 84_120) * 0.2 + 84_120 * 0.1;
-    } else {
-      taxOnOtherOnly += o * 0.1;
+  // מדרגות מס הכנסה שנתיות 2026.
+  // המדרגה העליונה כוללת 47% בסיס + 3% מס יסף = 50% על הפרוסה מעל 721,560.
+  const TAX_BRACKETS_2026: { upTo: number; rate: number }[] = [
+    { upTo: 84_120, rate: 0.1 },
+    { upTo: 120_720, rate: 0.14 },
+    { upTo: 228_000, rate: 0.2 },
+    { upTo: 301_200, rate: 0.31 },
+    { upTo: 560_280, rate: 0.35 },
+    { upTo: 721_560, rate: 0.47 },
+    { upTo: Infinity, rate: 0.5 },
+  ];
+
+  const annualTax = (income: number): number => {
+    if (income <= 0) return 0;
+    let tax = 0;
+    let prev = 0;
+    for (const { upTo, rate } of TAX_BRACKETS_2026) {
+      if (income <= prev) break;
+      const slice = Math.min(income, upTo) - prev;
+      tax += slice * rate;
+      prev = upTo;
     }
-  }
-  const taxOnBenefitsOnly = Math.max(0, tax - taxOnOtherOnly);
+    return tax;
+  };
+
+  // המס המיוחס לדמי האבטלה = מס על סך ההכנסה פחות המס על שאר ההכנסות בלבד.
+  const taxOnTotal = annualTax(totalIncome);
+  const taxOnOtherOnly = annualTax(otherIncomeThisYear);
+  const taxOnBenefitsOnly = Math.max(0, taxOnTotal - taxOnOtherOnly);
 
   return {
     taxableAmount: totalBenefits,

@@ -6,6 +6,11 @@
  * מקור: btl.gov.il, עדכון: 2026-05-15
  */
 
+import {
+  MINIMUM_WAGE_2026,
+  calculateEmployeeSocialSecurity,
+} from '../constants/tax-2026';
+
 // ============================================================
 // קבועים 2026
 // ============================================================
@@ -19,8 +24,8 @@ export const MATERNITY_MONTHLY_CAP_2026 = 51_910;
 /** שכר ממוצע במשק 2026 */
 export const AVERAGE_WAGE_2026 = 13_769;
 
-/** שכר מינימום חודשי 2026 */
-export const MIN_WAGE_2026 = 6_300;
+/** שכר מינימום חודשי 2026 (תקף מ-1.4.2026) — מקור יחיד: MINIMUM_WAGE_2026 */
+export const MIN_WAGE_2026 = MINIMUM_WAGE_2026.monthly;
 
 /** שבועות חופשת לידה בסיסית (עובדת שעבדה 10+ מ-14 חודשים) */
 export const FULL_LEAVE_WEEKS = 15;
@@ -362,14 +367,15 @@ export function calculateMaternityPay(input: PayInput): PayResult {
   // סה"כ תשלום לכל החופשה
   const totalBenefit = dailyBenefit * leaveDays;
 
-  // מס הכנסה — דמי לידה פטורים לפי פקודת מס הכנסה סעיף 9(5)
-  const incomeTaxExempt = true;
+  // מס הכנסה — דמי לידה חייבים במס הכנסה (אינם פטורים).
+  // הסימולטור אינו מחשב מס הכנסה בפועל (תלוי בנקודות זיכוי והכנסות נוספות בשנה).
+  const incomeTaxExempt = false;
 
-  // ביטוח לאומי — דמי לידה חייבים בדמי ביטוח לאומי (12%)
-  // שיעור עובד: 3.5% עד פעם וחצי שכר ממוצע + 5% על יתרה
-  // לצורך הערכה מהירה — 5% מקוצר
-  const niRate = totalBenefit <= AVERAGE_WAGE_2026 * 1.5 * (leaveDays / 30) ? 0.035 : 0.05;
-  const nationalInsuranceAmount = totalBenefit * niRate;
+  // ביטוח לאומי + בריאות — מנוכים מדמי הלידה בשיעורי עובד שכיר רגילים:
+  // 4.27% על החלק עד 7,522 ₪/חודש, 12.17% על החלק שמעל (עד התקרה 51,910 ₪/חודש).
+  // מחושב על הסכום החודשי בפועל ומוכפל בחלק היחסי של תקופת החופשה.
+  const monthlyNI = calculateEmployeeSocialSecurity(monthlyBenefit).total;
+  const nationalInsuranceAmount = monthlyNI * (leaveDays / 30);
 
   // נטו משוערך (ללא מס הכנסה, עם ב.ל.)
   const estimatedNetBenefit = totalBenefit - nationalInsuranceAmount;

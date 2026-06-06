@@ -50,20 +50,21 @@ describe('Company Car Benefit', () => {
       isElectric: false,
       marginalTaxRate: 35,
     });
-    // 200K × 3.36% (group 4 in 2026) ~ 6,720
-    expect(r.monthlyBenefit).toBeGreaterThan(5_000);
+    // שיטה לינארית 2026: 200K × 2.48% = 4,960 (מתחת לתקרת 596,860)
+    expect(r.monthlyBenefit).toBe(4_960);
     expect(r.taxableBenefit).toBeCloseTo(r.monthlyBenefit, 0);
   });
 
-  it('רכב חשמלי - מקבל הנחה 50%', () => {
+  it('רכב חשמלי - הפחתה קבועה 1,350 ₪', () => {
     const r = calculateCompanyCarBenefitLegacy({
       catalogPrice: 200_000,
       carGroup: 4,
       isElectric: true,
       marginalTaxRate: 35,
     });
-    expect(r.electricDiscount).toBeGreaterThan(0);
-    expect(r.taxableBenefit).toBeLessThan(r.monthlyBenefit);
+    // הפחתה חודשית קבועה (לא אחוז): חשמלי −1,350; שווי = 4,960 − 1,350 = 3,610
+    expect(r.electricDiscount).toBe(1_350);
+    expect(r.taxableBenefit).toBe(3_610);
   });
 });
 

@@ -245,9 +245,9 @@ describe('calculateMaternityPay', () => {
     expect(r.used6MonthCalc).toBe(false);
   });
 
-  it('פטור ממס הכנסה — תמיד true', () => {
+  it('דמי לידה חייבים במס הכנסה — incomeTaxExempt = false', () => {
     const r = calculateMaternityPay({ avgSalary3Months: 20_000, leaveDays: 105 });
-    expect(r.incomeTaxExempt).toBe(true);
+    expect(r.incomeTaxExempt).toBe(false);
   });
 
   it('ביטוח לאומי חיובי', () => {

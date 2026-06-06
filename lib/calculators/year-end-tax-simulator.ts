@@ -149,7 +149,7 @@ export const SIMULATOR_CONSTANTS_2026 = {
   // ביטוח לאומי לעצמאי - מדרגות חודשיות
   bituachLeumi: {
     reducedMonthlyCeiling: 7_522,
-    fullMonthlyCeiling: 50_695,
+    fullMonthlyCeiling: 51_910,
     deductibleAsExpense: 0.52, // 52% מהסכום ששולם מוכר כהוצאה
   },
   // תרומות
@@ -175,10 +175,11 @@ function calculateIncomeTaxByBrackets(taxableIncome: number): number {
 }
 
 /**
- * חישוב ביטוח לאומי + דמי בריאות לעצמאי על בסיס שנתי
- * מדרגות חודשיות לפי הקובץ:
- *   - עד 7,522 ש"ח/חודש: 4.47% ב.ל. + 3.23% בריאות = 7.70%
- *   - 7,522-50,695 ש"ח/חודש: 12.83% ב.ל. + 5.17% בריאות = 18.00%
+ * חישוב ביטוח לאומי + דמי בריאות לעצמאי על בסיס שנתי (2026)
+ * מדרגות חודשיות:
+ *   - עד 7,522 ש"ח/חודש: שיעור מופחת 6.10% (ב.ל. + דמי בריאות)
+ *   - 7,522-51,910 ש"ח/חודש: שיעור מלא 18.00% (ב.ל. + דמי בריאות)
+ *   - מעל תקרת החיוב (51,910 ש"ח/חודש): אין חיוב
  */
 export function calculateBituachLeumiAnnual(annualTaxableIncome: number): number {
   const monthlyIncome = annualTaxableIncome / 12;
@@ -194,8 +195,7 @@ export function calculateBituachLeumiAnnual(annualTaxableIncome: number): number
     SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total; // 6.10% - לשנת 2026 (לוקח את העדכון)
   const fullRate = SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.total; // 18.00%
 
-  // הקובץ המקורי השתמש ב-7.70% מופחת, ובוצעה התאמה ל-2026 לפי tax-2026.ts
-  // נשתמש בערכים מקובץ הקבועים 2026
+  // שיעור מופחת 6.10% ושיעור מלא 18.00% לפי קובץ הקבועים tax-2026.ts
   const monthlyAmount = reducedPart * reducedRate + fullPart * fullRate;
   return monthlyAmount * 12;
 }

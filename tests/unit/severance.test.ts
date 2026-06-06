@@ -276,10 +276,11 @@ describe('compareSeveranceTaxOptions', () => {
     expect(recommendedCount).toBe(1);
   });
 
-  it('מגיל 50 — פטור מוגדל', () => {
+  it('גיל 50 — אין הגדלת פטור אוטומטית', () => {
     // שכר 20,000 × 10 שנים = 200,000
-    // פטור רגיל: 13,750 × 10 = 137,500
-    // פטור מוגדל גיל 50: 137,500 × 1.5 = 206,250 > 200,000 → פטור מלא
+    // תקרת פטור: min(13,750 × 10, 20,000 × 1.5 × 10) = min(137,500, 300,000) = 137,500
+    // אין הגדלה אוטומטית של 150% מגיל 50 (זו שיקול דעת פקיד השומה, לא אוטומטי)
+    // חייב במס: 200,000 - 137,500 = 62,500
     const result50 = compareSeveranceTaxOptions({
       baseSeverance: 200_000,
       adjustedSalary: 20_000,
@@ -290,7 +291,7 @@ describe('compareSeveranceTaxOptions', () => {
     });
 
     const immediate50 = result50.options.find((o) => o.option === 'immediate_exemption');
-    expect(immediate50!.taxableAmount).toBe(0);
+    expect(immediate50!.taxableAmount).toBe(62_500);
   });
 });
 

@@ -240,11 +240,12 @@ function calculatePensionDeduction(annualIncome: number, annualPension: number):
 
 /**
  * מחשב ניכוי קרן השתלמות לעצמאי:
- * - עד 4.5% מהכנסה (מקסימום ~20,566 ₪/שנה)
+ * - עד 4.5% מהכנסה, עד תקרת ניכוי 13,203 ₪/שנה (= 4.5% × תקרת הכנסה קובעת 293,397)
+ *   (להבדיל מתקרת ה*הפקדה* המוטבת 20,566 ₪ = 7% מהתקרה)
  */
 function calculateStudyFundDeduction(annualIncome: number, annualStudyFund: number): number {
   const maxDeductionPct = 0.045;
-  const maxDeduction = Math.min(annualIncome * maxDeductionPct, 20_566);
+  const maxDeduction = Math.min(annualIncome * maxDeductionPct, 13_203);
   return Math.min(annualStudyFund, maxDeduction);
 }
 

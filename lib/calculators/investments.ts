@@ -362,7 +362,12 @@ export function calculateROI(input: ROIInput): ROIResult {
   // ROI שנתי (מנורמל)
   let annualizedROI = roi;
   if (years > 0 && years !== 1) {
-    annualizedROI = (Math.pow(totalReturn / totalCost, 1 / years) - 1) * 100;
+    if (totalReturn <= 0) {
+      // אובדן מלא או יותר - הערך הסופי אפס/שלילי, התשואה השנתית היא -100%
+      annualizedROI = -100;
+    } else {
+      annualizedROI = (Math.pow(totalReturn / totalCost, 1 / years) - 1) * 100;
+    }
   }
 
   return {

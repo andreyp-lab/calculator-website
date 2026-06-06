@@ -99,9 +99,10 @@ export const CREDIT_POINTS_BY_STATUS = {
   singleParent: 1, // הורה יחיד
   disabledChild: 1, // ילד נכה
   newImmigrant: {
-    year1to1_5: 3, // 18 חודשים ראשונים
-    year1_5to3: 2, // משם עד 30 חודשים
-    year3to4_5: 1, // משם עד 54 חודשים
+    // מבנה עולים ותיק (טרם רפורמת 2022): 18/18/18 חודשים
+    year1to1_5: 3, // חודשים 1-18 (18 חודשים ראשונים)
+    year1_5to3: 2, // חודשים 19-36
+    year3to4_5: 1, // חודשים 37-54
   },
   releasedSoldier: 2, // חייל משוחרר (3 שנים אחרי שחרור)
   bachelorDegree: 1, // תואר ראשון (עד שנה אחת)

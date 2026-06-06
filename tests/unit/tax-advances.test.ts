@@ -287,16 +287,17 @@ describe('calculateTaxAdvances', () => {
     expect(r.annualPensionDeduction).toBeLessThanOrEqual(11_000 + 1); // +1 floating
   });
 
-  it('ניכוי קרן השתלמות מוגבל ל-20,566 ₪', () => {
+  it('ניכוי קרן השתלמות מוגבל לתקרת הניכוי 13,203 ₪', () => {
     const r = calculateTaxAdvances({
       expectedAnnualIncome: 500_000,
       creditPoints: 2.25,
       isVatRegistered: false,
       frequency: 'bimonthly',
-      monthlyStudyFundDeposit: 5_000, // 60,000 שנתי > מקסימום
+      monthlyStudyFundDeposit: 5_000, // 60,000 שנתי > מקסימום הניכוי
     });
 
-    expect(r.annualStudyFundDeduction).toBeLessThanOrEqual(20_566 + 1);
+    // תקרת הניכוי לעצמאי = 4.5% × 293,397 ≈ 13,203 ₪ (לא תקרת ההפקדה 20,566)
+    expect(r.annualStudyFundDeduction).toBeLessThanOrEqual(13_203 + 1);
   });
 });
 

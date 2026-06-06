@@ -298,7 +298,7 @@ export function compareWithholdingMethods(input: ThreeMethodsInput): Withholding
     {
       method: 'annual_spread',
       label: 'פריסה שנתית (חלוקה ל-12)',
-      description: 'הבונוס נפרס על 12 חודשים — כל חודש מתווסף ${Math.round(monthlyBonus).toLocaleString()} ₪',
+      description: `הבונוס נפרס על 12 חודשים — כל חודש מתווסף ${Math.round(monthlyBonus).toLocaleString('he-IL')} ₪`,
       estimatedWithheld: withheldM2,
       estimatedActualTax: taxSpread,
       estimatedRefund: refundM2,

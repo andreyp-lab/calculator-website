@@ -381,8 +381,9 @@ export function calculateAsCorporationMix(
   const employerNI = calcEmployerNI(grossSalary);
   const employeeNI = calcEmployeeNI(grossSalary);
 
-  // קרן השתלמות לבעלים-עובד: 7.5% מהמשכורת, עד 188*12=2,256₪/חודש ≈ 27,072 פטור
-  const studyFundDeduction = includeStudyFund ? Math.min(grossSalary * 0.075, 27_072) : 0;
+  // קרן השתלמות לבעלים-עובד: הפקדת מעסיק פטורה 7.5% מהמשכורת,
+  // עד תקרת משכורת קובעת 15,712 ₪/חודש = 188,544 ₪/שנה → תקרת פטור 7.5%×188,544 = 14,140.8 ₪
+  const studyFundDeduction = includeStudyFund ? Math.min(grossSalary, 188_544) * 0.075 : 0;
 
   const taxableGross = Math.max(0, grossSalary - studyFundDeduction);
   const incomeTax = calcPersonalIncomeTax(taxableGross, creditPoints);
@@ -575,9 +576,10 @@ export function calculateCorpVsIndividual(
 
   const profit = Math.max(0, annualProfit);
 
-  // קרן השתלמות לעוסק: עד 4.5% מהרווח
+  // קרן השתלמות לעוסק: ניכוי עד 4.5% מהרווח, עד תקרת ניכוי 13,203 ₪
+  // (= 4.5% × תקרת הכנסה קובעת 293,397; להבדיל מתקרת הפקדה מוטבת 20,566)
   const studyFundDeductionInd = includeStudyFundIndividual
-    ? Math.min(profit * Math.min(studyFundRateIndividual, 0.045), 20_566)
+    ? Math.min(profit * Math.min(studyFundRateIndividual, 0.045), 13_203)
     : 0;
 
   // 4 תרחישים

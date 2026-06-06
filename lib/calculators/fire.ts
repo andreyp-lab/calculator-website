@@ -13,7 +13,7 @@
  * מקורות:
  * - Trinity Study (Cooley, Hubbard, Walz 1998 + עדכונים)
  * - ERE (Early Retirement Extreme) - Jacob Lund Fisker
- * - ב.ל. - ביטוח לאומי 2026: קצבה בסיסית ~1,754 ₪/חודש
+ * - ב.ל. - ביטוח לאומי 2026: קצבת זקנה בסיסית ליחיד 1,838 ₪/חודש (btl.gov.il)
  * - ממוצע אינפלציה ישראל 2020-2026: 3% (בנק ישראל)
  */
 
@@ -26,8 +26,8 @@ export const FIRE_CONSTANTS_2026 = {
   DEFAULT_INFLATION: 3.0,
   /** מס רווחי הון */
   CAPITAL_GAINS_TAX: 0.25,
-  /** קצבת זקנה בסיסית ב.ל. (₪/חודש) גיל 67 */
-  BITUACH_LEUMI_BASIC_MONTHLY: 1_754,
+  /** קצבת זקנה בסיסית ב.ל. ליחיד (₪/חודש) גיל פרישה, 2026 - btl.gov.il (לא דמי הביטוח!) */
+  BITUACH_LEUMI_BASIC_MONTHLY: 1_838,
   /** תשואה היסטורית S&P 500 נומינלי */
   SP500_NOMINAL_RETURN: 10.0,
   /** תשואה ריאלית S&P 500 */

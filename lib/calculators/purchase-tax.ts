@@ -47,7 +47,7 @@ export const BUYER_TYPE_DESCRIPTION: Record<BuyerType, string> = {
   oleh:
     'עולה חדש או תושב חוזר ב-7 שנות זכאות. מס מופחת מאוד: 0.5% עד 5M, 5% מעבר.',
   disabled:
-    'נכה בשיעור 50%+ אחוזי נכות רפואית, או נפגע פעולת איבה. פטור מוגבר עד 2.5M ₪.',
+    'נכה זכאי, עיוור, נפגע פעולת איבה או בן משפחה של חייל שנספה. עד 1,978,745 ₪ — 0%; על החלק שבין 1,978,745 ל-2,500,000 ₪ — 0.5%; מעל 2,500,000 ₪ — 0.5% מהשקל הראשון. ההטבה ניתנת פעמיים בחיים.',
   'large-family':
     'משפחה עם 3+ ילדים. הקלות מסוימות ייתכנו, אך בדרך כלל לפי מדרגות דירה ראשונה. פנה לרשות המסים.',
   gift:
@@ -204,10 +204,71 @@ function applyBrackets(
 }
 
 // ============================================================
-// חישוב הנחת נכה
+// חישוב הנחת נכה / נפגע פעולת איבה (תקנה 11)
 // ============================================================
+//
+// הכלל (מאומת מול כל-זכות, תקנות מס רכישה):
+//   • עד 1,978,745 ₪            → 0%
+//   • 1,978,745 – 2,500,000 ₪   → 0.5% על החלק שמעל 1,978,745 בלבד
+//   • מעל 2,500,000 ₪           → 0.5% מהשקל הראשון (ללא מדרגת פטור)
+// ההטבה לדירה יחידה למגורים, ניתנת פעמיים בחיים.
 
-const DISABLED_EXEMPTION_LIMIT = 2_500_000;
+const DISABLED_EXEMPTION_LIMIT = 1_978_745; // סף הפטור המלא (0%)
+const DISABLED_CAP = 2_500_000;             // מעליו 0.5% מהשקל הראשון
+
+/**
+ * מחשב את מס הרכישה לנכה זכאי / נפגע פעולת איבה לפי תקנה 11.
+ * ערכים מוחזרים כסכום מס + פירוט מדרגות.
+ */
+function applyDisabledBrackets(
+  value: number,
+): { totalTax: number; breakdown: PurchaseTaxBreakdown[] } {
+  const breakdown: PurchaseTaxBreakdown[] = [];
+
+  if (value <= 0) {
+    return { totalTax: 0, breakdown };
+  }
+
+  // מעל 2.5M — 0.5% מהשקל הראשון, ללא מדרגת פטור
+  if (value > DISABLED_CAP) {
+    const taxInBracket = value * 0.005;
+    breakdown.push({
+      bracket: '0.5%',
+      range: `0 - ${value.toLocaleString('he-IL')}`,
+      rate: 0.005,
+      amountInBracket: value,
+      taxInBracket,
+    });
+    return { totalTax: taxInBracket, breakdown };
+  }
+
+  // עד 1,978,745 — פטור מלא
+  const exemptAmount = Math.min(value, DISABLED_EXEMPTION_LIMIT);
+  breakdown.push({
+    bracket: '0.0%',
+    range: `0 - ${DISABLED_EXEMPTION_LIMIT.toLocaleString('he-IL')}`,
+    rate: 0,
+    amountInBracket: exemptAmount,
+    taxInBracket: 0,
+  });
+
+  // 1,978,745 – 2,500,000 — 0.5% על החלק שמעל הסף
+  let totalTax = 0;
+  if (value > DISABLED_EXEMPTION_LIMIT) {
+    const amountInBracket = value - DISABLED_EXEMPTION_LIMIT;
+    const taxInBracket = amountInBracket * 0.005;
+    totalTax += taxInBracket;
+    breakdown.push({
+      bracket: '0.5%',
+      range: `${DISABLED_EXEMPTION_LIMIT.toLocaleString('he-IL')} - ${value.toLocaleString('he-IL')}`,
+      rate: 0.005,
+      amountInBracket,
+      taxInBracket,
+    });
+  }
+
+  return { totalTax, breakdown };
+}
 
 // ============================================================
 // חישוב הנחת עולה חדש
@@ -395,21 +456,44 @@ export function calculatePurchaseTaxByType(
       break;
 
     case 'disabled': {
-      const exemptionLimit = DISABLED_EXEMPTION_LIMIT;
-      if (taxableValue <= exemptionLimit) {
-        return {
-          totalTax: 0,
-          effectiveRate: 0,
-          breakdown: [],
-          fullExemption: true,
-          partialExemption: false,
-          proportionalValue,
-          notes: [`נכה / נפגע פעולת איבה — פטור מלא עד ${exemptionLimit.toLocaleString('he-IL')} ₪.`],
-        };
+      // תקנה 11: 0% עד 1,978,745 | 0.5% עד 2,500,000 | 0.5% מהשקל הראשון מעל 2,500,000
+      const { totalTax: disabledTax, breakdown: disabledBreakdown } =
+        applyDisabledBrackets(taxableValue);
+
+      const disabledNotes: string[] = [];
+      if (taxableValue <= DISABLED_EXEMPTION_LIMIT) {
+        disabledNotes.push(
+          `נכה זכאי / נפגע פעולת איבה — פטור מלא עד ${DISABLED_EXEMPTION_LIMIT.toLocaleString('he-IL')} ₪.`,
+        );
+      } else if (taxableValue <= DISABLED_CAP) {
+        disabledNotes.push(
+          `נכה זכאי / נפגע פעולת איבה — 0% עד ${DISABLED_EXEMPTION_LIMIT.toLocaleString('he-IL')} ₪, ו-0.5% על החלק שמעליו.`,
+        );
+      } else {
+        disabledNotes.push(
+          `נכה זכאי / נפגע פעולת איבה — מעל ${DISABLED_CAP.toLocaleString('he-IL')} ₪ משולם 0.5% מהשקל הראשון (ללא מדרגת פטור).`,
+        );
       }
-      brackets = getBracketsForYear(year, 'first-home');
-      notes.push('נכה — מדרגות דירה ראשונה, ייתכנו הקלות נוספות. פנה לרשות המסים.');
-      break;
+      disabledNotes.push('ההטבה לדירה יחידה למגורים, ניתנת פעמיים בחיים. בדוק זכאות מול רשות המסים.');
+
+      if (ownershipPercent < 100) {
+        disabledNotes.push(
+          `רכישה משותפת — חושב על ${ownershipPercent}% בעלות (${proportionalValue.toLocaleString('he-IL')} ₪).`,
+        );
+      }
+
+      const disabledEffectiveRate =
+        proportionalValue > 0 ? (disabledTax / proportionalValue) * 100 : 0;
+
+      return {
+        totalTax: disabledTax,
+        effectiveRate: disabledEffectiveRate,
+        breakdown: disabledBreakdown,
+        fullExemption: disabledTax === 0,
+        partialExemption: disabledTax > 0 && disabledBreakdown.some((b) => b.rate === 0),
+        proportionalValue,
+        notes: disabledNotes,
+      };
     }
 
     case 'large-family':

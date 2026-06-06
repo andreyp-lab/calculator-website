@@ -1,22 +1,22 @@
 /**
  * מחשבון שווי שימוש ברכב חברה - 2026
  *
- * כשהמעסיק נותן רכב חברה, יש "שווי שימוש" שמחויב במס.
- * החישוב: מחיר רכב × אחוז קבוצת הרכב = שווי חודשי
+ * כשהמעסיק נותן רכב חברה, יש 'שווי שימוש' שמחויב במס.
  *
- * קבוצות רכב 2026 (לפי מחיר קטלוגי):
- * - קבוצה 1: עד 162,070 ₪   → 2.04%
- * - קבוצה 2: 162,070–188,900 → 2.48%
- * - קבוצה 3: 188,900–250,140 → 2.92%
- * - קבוצה 4: 250,140–322,210 → 3.36%
- * - קבוצה 5: 322,210–410,420 → 3.81%
- * - קבוצה 6: 410,420–506,490 → 4.25%
- * - קבוצה 7: 506,490–564,250 → 4.69%
- * - קבוצה 8: 564,250+         → 5.14%
+ * שיטת החישוב (רכב שנרשם מ-1.1.2010 ואילך — כמעט כל רכב רלוונטי):
+ * שיטה ליניארית: שווי שימוש חודשי = 2.48% × מחיר המחירון של הרכב,
+ * עד תקרת מחיר של 596,860 ₪ לשנת 2026 (חלק המחיר שמעל התקרה אינו מתווסף).
  *
- * רכב חשמלי: 50% הנחה על שווי השימוש
- * רכב היברידי: 70% מהשווי הרגיל
- * רכב ישן (5+ שנים): הפחתה על בסיס פחת
+ * הערה: שיטת קבוצות-המחיר הישנה (2.04%–5.14% לפי 7 קבוצות) רלוונטית
+ * אך ורק לרכב שנרשם לפני 1.1.2010, ואינה בשימוש לרכבים מודרניים.
+ *
+ * הפחתה לרכב ירוק (סכום קבוע בשקלים מהשווי, רצפה 0):
+ * - רכב חשמלי: 1,350 ₪/חודש
+ * - רכב פלאג-אין (היברידי נטען): 1,130 ₪/חודש
+ * - רכב היברידי רגיל: 560 ₪/חודש
+ * (זו הפחתה בסכום קבוע — לא הנחה באחוזים.)
+ *
+ * רכב ישן (5+ שנים): הפחתה על בסיס פחת על מחיר המחירון.
  *
  * מקור: רשות המסים, חוזר מס הכנסה 2026
  */
@@ -122,36 +122,56 @@ export interface TaxImpactResult {
 // Constants – 2026
 // ─────────────────────────────────────────────
 
+/**
+ * שיעור שווי שימוש ליניארי 2026 — רכב שנרשם מ-1.1.2010 ואילך.
+ * שווי שימוש חודשי = LINEAR_USAGE_RATE × מחיר המחירון (עד התקרה).
+ */
+export const LINEAR_USAGE_RATE_2026 = 0.0248;
+
+/** תקרת מחיר מחירון לחישוב שווי שימוש 2026 (₪). חלק מעל התקרה אינו מתווסף. */
+export const USAGE_VALUE_PRICE_CEILING_2026 = 596_860;
+
+/**
+ * טבלת קבוצות-המחיר ההיסטורית (רכב טרום-2010 בלבד).
+ * אינה בשימוש בחישוב המודרני — נשמרת להסבר/תאימות לאחור בלבד.
+ * @deprecated רלוונטי רק לרכב שנרשם לפני 1.1.2010.
+ */
 export const CAR_GROUPS_2026: CarGroupInfo[] = [
-  { group: 1, minPrice: 0,       maxPrice: 162_070,  percentage: 0.0204, label: 'קבוצה 1 – עד 162,070 ₪ (2.04%)' },
-  { group: 2, minPrice: 162_070, maxPrice: 188_900,  percentage: 0.0248, label: 'קבוצה 2 – 162,070–188,900 ₪ (2.48%)' },
-  { group: 3, minPrice: 188_900, maxPrice: 250_140,  percentage: 0.0292, label: 'קבוצה 3 – 188,900–250,140 ₪ (2.92%)' },
-  { group: 4, minPrice: 250_140, maxPrice: 322_210,  percentage: 0.0336, label: 'קבוצה 4 – 250,140–322,210 ₪ (3.36%)' },
-  { group: 5, minPrice: 322_210, maxPrice: 410_420,  percentage: 0.0381, label: 'קבוצה 5 – 322,210–410,420 ₪ (3.81%)' },
-  { group: 6, minPrice: 410_420, maxPrice: 506_490,  percentage: 0.0425, label: 'קבוצה 6 – 410,420–506,490 ₪ (4.25%)' },
-  { group: 7, minPrice: 506_490, maxPrice: 564_250,  percentage: 0.0469, label: 'קבוצה 7 – 506,490–564,250 ₪ (4.69%)' },
-  { group: 8, minPrice: 564_250, maxPrice: null,     percentage: 0.0514, label: 'קבוצה 8 – 564,250+ ₪ (5.14%)' },
+  { group: 1, minPrice: 0,       maxPrice: 162_070,  percentage: 0.0204, label: 'קבוצה 1 – עד 162,070 ₪ (2.04%) [טרום-2010]' },
+  { group: 2, minPrice: 162_070, maxPrice: 188_900,  percentage: 0.0248, label: 'קבוצה 2 – 162,070–188,900 ₪ (2.48%) [טרום-2010]' },
+  { group: 3, minPrice: 188_900, maxPrice: 250_140,  percentage: 0.0292, label: 'קבוצה 3 – 188,900–250,140 ₪ (2.92%) [טרום-2010]' },
+  { group: 4, minPrice: 250_140, maxPrice: 322_210,  percentage: 0.0336, label: 'קבוצה 4 – 250,140–322,210 ₪ (3.36%) [טרום-2010]' },
+  { group: 5, minPrice: 322_210, maxPrice: 410_420,  percentage: 0.0381, label: 'קבוצה 5 – 322,210–410,420 ₪ (3.81%) [טרום-2010]' },
+  { group: 6, minPrice: 410_420, maxPrice: 506_490,  percentage: 0.0425, label: 'קבוצה 6 – 410,420–506,490 ₪ (4.25%) [טרום-2010]' },
+  { group: 7, minPrice: 506_490, maxPrice: 564_250,  percentage: 0.0469, label: 'קבוצה 7 – 506,490–564,250 ₪ (4.69%) [טרום-2010]' },
+  { group: 8, minPrice: 564_250, maxPrice: null,     percentage: 0.0514, label: 'קבוצה 8 – 564,250+ ₪ (5.14%) [טרום-2010]' },
 ];
 
-/** מדרגות מס הכנסה 2026 (שנתי, ₪) */
+/** מדרגות מס הכנסה 2026 (שנתי, ₪). הרצועה העליונה היא 47%; מס יסף (3%) מטופל בנפרד. */
 const INCOME_TAX_BRACKETS_2026 = [
   { upTo: 84_120,  rate: 0.10 },
   { upTo: 120_720, rate: 0.14 },
-  { upTo: 193_800, rate: 0.20 },
-  { upTo: 269_280, rate: 0.31 },
-  { upTo: 558_240, rate: 0.35 },
+  { upTo: 228_000, rate: 0.20 },
+  { upTo: 301_200, rate: 0.31 },
+  { upTo: 560_280, rate: 0.35 },
   { upTo: 721_560, rate: 0.47 },
-  { upTo: Infinity, rate: 0.50 },
+  { upTo: Infinity, rate: 0.47 },
 ];
 
-/** עלות ק"מ לרכב פרטי ממוצע (₪/ק"מ) - כולל הכל פחת, ביטוח, דלק */
-const PERSONAL_CAR_COST_PER_KM = 1.71; // תקרת החזר נסיעות 2026
+/** סף מס יסף שנתי (₪) ושיעורו — תוספת מעל הרצועה העליונה. */
+const SURTAX_THRESHOLD_2026 = 721_560;
+const SURTAX_RATE = 0.03;
 
-/** מקדם הנחה לרכב חשמלי */
-const ELECTRIC_DISCOUNT_FACTOR = 0.5;
+/**
+ * הפחתת שווי שימוש לרכב ירוק — סכום קבוע חודשי בשקלים (לא אחוז), רצפה 0.
+ * 2026: חשמלי 1,350 ₪, פלאג-אין 1,130 ₪, היברידי רגיל 560 ₪.
+ */
+export const ELECTRIC_USAGE_REDUCTION = 1_350;
+export const PLUGIN_USAGE_REDUCTION = 1_130;
+export const HYBRID_USAGE_REDUCTION = 560;
 
-/** מקדם הנחה לרכב היברידי */
-const HYBRID_DISCOUNT_FACTOR = 0.7;
+/** עלות פחת+ביטוח לרכב פרטי (₪/ק"מ) — אומדן להשוואה בלבד. */
+const PERSONAL_CAR_DEPRECIATION_INSURANCE_PER_KM = 0.5;
 
 /** שיעור פחת שנתי לרכב בשימוש (לחישוב מחיר מקורי אפקטיבי) */
 const ANNUAL_DEPRECIATION_RATE = 0.12;
@@ -199,12 +219,23 @@ export function calculateEffectivePriceForUsed(
 }
 
 /**
- * מחשב שווי שימוש חודשי
+ * מחזיר את ההפחתה החודשית הקבועה (₪) לפי סוג הרכב הירוק.
+ */
+export function getGreenReduction(carType: CarType): number {
+  if (carType === 'electric') return ELECTRIC_USAGE_REDUCTION;
+  // ('plugin' אינו מודל קלט נפרד כיום; פלאג-אין = PLUGIN_USAGE_REDUCTION)
+  if (carType === 'hybrid') return HYBRID_USAGE_REDUCTION;
+  return 0;
+}
+
+/**
+ * מחשב שווי שימוש חודשי בשיטה הליניארית (רכב מ-2010 ואילך).
+ * raw = 2.48% × min(מחיר, תקרה). afterDiscount = raw פחות הפחתה קבועה (רצפה 0).
  */
 export function calculateUsageValue(
   catalogPrice: number,
   carType: CarType,
-  carGroup: CarGroup,
+  _carGroup: CarGroup,
   carAgeYears = 0,
 ): { raw: number; afterDiscount: number; effectivePrice: number } {
   const effectivePrice =
@@ -212,16 +243,17 @@ export function calculateUsageValue(
       ? calculateEffectivePriceForUsed(catalogPrice, carAgeYears)
       : catalogPrice;
 
-  const groupInfo = getCarGroupInfo(carGroup);
-  const raw = effectivePrice * groupInfo.percentage;
+  // תקרת מחיר: חלק המחיר שמעל התקרה אינו מתווסף לשווי השימוש.
+  const cappedPrice = Math.min(effectivePrice, USAGE_VALUE_PRICE_CEILING_2026);
+  const raw = cappedPrice * LINEAR_USAGE_RATE_2026;
 
-  let discountFactor = 1;
-  if (carType === 'electric') discountFactor = ELECTRIC_DISCOUNT_FACTOR;
-  else if (carType === 'hybrid') discountFactor = HYBRID_DISCOUNT_FACTOR;
+  // הפחתה לרכב ירוק: סכום קבוע בשקלים (לא אחוז), רצפה 0.
+  const reduction = getGreenReduction(carType);
+  const afterDiscount = Math.max(0, raw - reduction);
 
   return {
     raw,
-    afterDiscount: raw * discountFactor,
+    afterDiscount,
     effectivePrice,
   };
 }
@@ -237,6 +269,10 @@ export function calculateAnnualTax(annualGross: number): number {
     if (taxable <= 0) break;
     tax += taxable * bracket.rate;
     prev = bracket.upTo;
+  }
+  // מס יסף: 3% נוספים על חלק ההכנסה שמעל הסף (מתווסף ל-47% הבסיסי).
+  if (annualGross > SURTAX_THRESHOLD_2026) {
+    tax += (annualGross - SURTAX_THRESHOLD_2026) * SURTAX_RATE;
   }
   return tax;
 }
@@ -254,12 +290,13 @@ export function calculateTaxImpact(
   const taxBefore = calculateAnnualTax(annualSalary);
   const taxAfter = calculateAnnualTax(annualSalary + annualBenefit);
 
-  // מדרגה שולית לפני ואחרי
+  // מדרגה שולית לפני ואחרי (כולל מס יסף מעל הסף: 47% + 3% = 50%)
   const effectiveBracket = (annual: number) => {
+    const base = annual >= SURTAX_THRESHOLD_2026 ? SURTAX_RATE : 0;
     for (const b of INCOME_TAX_BRACKETS_2026) {
-      if (annual < b.upTo) return b.rate;
+      if (annual < b.upTo) return b.rate + base;
     }
-    return 0.5;
+    return 0.47 + base;
   };
 
   return {
@@ -272,19 +309,17 @@ export function calculateTaxImpact(
 }
 
 /**
- * מחשב "שכר מקביל" - כמה שכר ברוטו נוסף היה שווה את אותה הטבה נטו
+ * מחשב 'שכר מקביל' - כמה שכר ברוטו נוסף נותן את אותה הטבה נטו.
+ *
+ * שווי השימוש ברכב הוא הטבה חייבת במס (ממוסה בדיוק כמו שכר ברוטו),
+ * ולכן 'השכר הברוטו המקביל' שווה בדיוק לערך ההטבה עצמו —
+ * אין צורך בגריסת-אפ של 1/(1-מס) (זו תקפה רק להטבה פטורה ממס).
  */
 export function calculateSalaryEquivalent(
   monthlyBenefit: number,
-  marginalTaxRate: number,
+  _marginalTaxRate: number,
 ): number {
-  const rate = Math.max(0, Math.min(50, marginalTaxRate)) / 100;
-  if (rate >= 1) return 0;
-  // הטבה נטו = ערך הטבה × (1 - שיעור מס)
-  // שכר ברוטו שווה = הטבה נטו / (1 - שיעור מס) — אבל זה אותו הדבר
-  // הכוונה: כמה שכר ברוטו נוסף יתן לי אותה הטבה נטו
-  const benefitNetValue = monthlyBenefit; // הרכב שווה את מחירו, גם אם משלמים עליו מס
-  return benefitNetValue / (1 - rate);
+  return Math.max(0, monthlyBenefit);
 }
 
 /**
@@ -292,7 +327,7 @@ export function calculateSalaryEquivalent(
  */
 export function calculatePersonalCarCost(monthlyKm: number, fuelCostPer100km: number): number {
   const fuelMonthly = (monthlyKm / 100) * fuelCostPer100km;
-  const depreciationInsurance = monthlyKm * 0.5; // פחת + ביטוח בערך 0.5 ₪/ק"מ
+  const depreciationInsurance = monthlyKm * PERSONAL_CAR_DEPRECIATION_INSURANCE_PER_KM;
   return fuelMonthly + depreciationInsurance;
 }
 
@@ -360,12 +395,12 @@ export function calculateCompanyCarBenefit(input: CompanyCarInput): CompanyCarRe
 
   if (input.carType === 'electric') {
     recommendations.push(
-      `רכב חשמלי מקבל 50% הנחה על שווי שימוש – חיסכון של ${formatNum(Math.round(raw - afterDiscount))} ₪/חודש.`,
+      `רכב חשמלי מקבל הפחתה קבועה של ${formatNum(ELECTRIC_USAGE_REDUCTION)} ₪/חודש משווי השימוש (חיסכון של ${formatNum(Math.round(raw - afterDiscount))} ₪/חודש).`,
     );
   }
   if (input.carType === 'hybrid') {
     recommendations.push(
-      `רכב היברידי משלם 70% משווי שימוש רגיל – חיסכון של ${formatNum(Math.round(raw - afterDiscount))} ₪/חודש.`,
+      `רכב היברידי מקבל הפחתה קבועה של ${formatNum(HYBRID_USAGE_REDUCTION)} ₪/חודש משווי השימוש (חיסכון של ${formatNum(Math.round(raw - afterDiscount))} ₪/חודש).`,
     );
   }
   if (pushesToHigherBracket) {
@@ -380,7 +415,7 @@ export function calculateCompanyCarBenefit(input: CompanyCarInput): CompanyCarRe
   }
   if (!isCompanyCarWorthIt && input.monthlyKm < 1000) {
     recommendations.push(
-      'אתה נוסע פחות מ-1,000 ק"מ בחודש – ייתכן שהחזר נסיעות (1.71 ₪/ק"מ) משתלם לך יותר מרכב חברה.',
+      'אתה נוסע פחות מ-1,000 ק"מ בחודש – ייתכן שהחזר נסיעות/החזר רכב פרטי משתלם לך יותר מרכב חברה.',
     );
   }
   if (isCompanyCarWorthIt) {
@@ -401,7 +436,7 @@ export function calculateCompanyCarBenefit(input: CompanyCarInput): CompanyCarRe
 
   return {
     carGroup,
-    benefitPercentage: getCarGroupInfo(carGroup).percentage,
+    benefitPercentage: LINEAR_USAGE_RATE_2026,
     monthlyBenefitRaw: raw,
     monthlyBenefitAfterDiscount: afterDiscount,
     taxableBenefit,

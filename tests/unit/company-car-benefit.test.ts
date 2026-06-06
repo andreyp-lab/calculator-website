@@ -98,20 +98,20 @@ describe('getCarGroupInfo', () => {
 // ─────────────────────────────────────────────
 
 describe('calculateUsageValue', () => {
-  it('רכב רגיל: שווי גולמי = מחיר × אחוז', () => {
+  it('רכב רגיל: שווי גולמי = מחיר × 2.48% (שיטה ליניארית)', () => {
     const { raw } = calculateUsageValue(200_000, 'regular', 3);
-    // group 3: 2.92%
-    expect(raw).toBeCloseTo(200_000 * 0.0292, 0);
+    // שיטה ליניארית 2026: 2.48% מהמחיר
+    expect(raw).toBeCloseTo(200_000 * 0.0248, 0);
   });
 
-  it('רכב חשמלי: afterDiscount = 50% מהגולמי', () => {
+  it('רכב חשמלי: afterDiscount = גולמי פחות הפחתה קבועה 1,350 ₪', () => {
     const { raw, afterDiscount } = calculateUsageValue(200_000, 'electric', 3);
-    expect(afterDiscount).toBeCloseTo(raw * 0.5, 0);
+    expect(afterDiscount).toBeCloseTo(Math.max(0, raw - 1_350), 0);
   });
 
-  it('רכב היברידי: afterDiscount = 70% מהגולמי', () => {
+  it('רכב היברידי: afterDiscount = גולמי פחות הפחתה קבועה 560 ₪', () => {
     const { raw, afterDiscount } = calculateUsageValue(200_000, 'hybrid', 3);
-    expect(afterDiscount).toBeCloseTo(raw * 0.7, 0);
+    expect(afterDiscount).toBeCloseTo(Math.max(0, raw - 560), 0);
   });
 
   it('רכב ישן: effectivePrice נמוך מהמקורי', () => {
@@ -177,9 +177,10 @@ describe('calculateTaxImpact', () => {
 // ─────────────────────────────────────────────
 
 describe('calculateSalaryEquivalent', () => {
-  it('מדרגה 50% → שכר מקביל = 2x ההטבה', () => {
+  it('הטבת רכב כבר חייבת במס → שכר מקביל = ההטבה עצמה (מדרגה 50%)', () => {
+    // הטבת רכב היא שווי שחייב כבר במס, ולכן השכר המקביל שווה להטבה עצמה
     const eq = calculateSalaryEquivalent(5_000, 50);
-    expect(eq).toBeCloseTo(10_000, 0);
+    expect(eq).toBeCloseTo(5_000, 0);
   });
 
   it('מדרגה 0% → שכר מקביל = ההטבה', () => {
@@ -187,10 +188,9 @@ describe('calculateSalaryEquivalent', () => {
     expect(eq).toBeCloseTo(5_000, 0);
   });
 
-  it('מדרגה 35% → שכר מקביל > ההטבה', () => {
+  it('הטבת רכב כבר חייבת במס → שכר מקביל = ההטבה עצמה (מדרגה 35%)', () => {
     const eq = calculateSalaryEquivalent(5_000, 35);
-    expect(eq).toBeGreaterThan(5_000);
-    expect(eq).toBeCloseTo(5_000 / 0.65, 0);
+    expect(eq).toBeCloseTo(5_000, 0);
   });
 });
 
@@ -220,14 +220,14 @@ describe('calculateCompanyCarBenefit', () => {
     expect(r.annualCostToEmployee).toBeCloseTo(r.monthlyTax * 12, 0);
   });
 
-  it('רכב חשמלי: שווי אחרי הנחה = 50% מהגולמי', () => {
+  it('רכב חשמלי: שווי אחרי הפחתה קבועה = גולמי פחות 1,350 ₪', () => {
     const r = calculateCompanyCarBenefit({ ...baseInput, carType: 'electric' });
-    expect(r.monthlyBenefitAfterDiscount).toBeCloseTo(r.monthlyBenefitRaw * 0.5, 0);
+    expect(r.monthlyBenefitAfterDiscount).toBeCloseTo(Math.max(0, r.monthlyBenefitRaw - 1_350), 0);
   });
 
-  it('רכב היברידי: שווי אחרי הנחה = 70% מהגולמי', () => {
+  it('רכב היברידי: שווי אחרי הפחתה קבועה = גולמי פחות 560 ₪', () => {
     const r = calculateCompanyCarBenefit({ ...baseInput, carType: 'hybrid' });
-    expect(r.monthlyBenefitAfterDiscount).toBeCloseTo(r.monthlyBenefitRaw * 0.7, 0);
+    expect(r.monthlyBenefitAfterDiscount).toBeCloseTo(Math.max(0, r.monthlyBenefitRaw - 560), 0);
   });
 
   it('רכב רגיל: שווי לפני = שווי אחרי', () => {
@@ -256,16 +256,17 @@ describe('calculateCompanyCarBenefit', () => {
     expect(r.monthlyTax).toBeGreaterThanOrEqual(0);
   });
 
-  it('קבוצה 8 – מחיר 600,000 ₪ → אחוז 5.14%', () => {
+  it('קבוצה 8 – מחיר 600,000 ₪ → שיטה ליניארית 2.48% עם תקרת מחיר 596,860 ₪', () => {
     const r = calculateCompanyCarBenefit({ ...baseInput, catalogPrice: 600_000 });
     expect(r.carGroup).toBe(8);
-    expect(r.benefitPercentage).toBeCloseTo(0.0514, 4);
-    expect(r.monthlyBenefitRaw).toBeCloseTo(600_000 * 0.0514, 0);
+    expect(r.benefitPercentage).toBeCloseTo(0.0248, 4);
+    // המחיר נחתך לתקרה 596,860 ₪ לפני הכפלה ב-2.48%
+    expect(r.monthlyBenefitRaw).toBeCloseTo(596_860 * 0.0248, 0);
   });
 
-  it('salaryEquivalent > taxableBenefit כשמס > 0', () => {
+  it('salaryEquivalent = ההטבה עצמה (הטבת רכב כבר חייבת במס)', () => {
     const r = calculateCompanyCarBenefit({ ...baseInput, marginalTaxRate: 35 });
-    expect(r.salaryEquivalent).toBeGreaterThan(r.taxableBenefit);
+    expect(r.salaryEquivalent).toBeCloseTo(r.totalMonthlyBenefit, 0);
   });
 
   it('יש לפחות המלצה אחת', () => {

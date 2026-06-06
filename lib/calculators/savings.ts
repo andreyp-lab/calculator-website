@@ -212,7 +212,7 @@ export function calculateLoanRepayment(input: LoanRepaymentInput): LoanRepayment
     totalPayments: monthlyPayment * termMonths,
     totalInterest,
     acceleratedTermMonths: accMonth,
-    acceleratedTotalInterest: accTotalInterest + (oneTimePayment > 0 ? 0 : 0),
+    acceleratedTotalInterest: accTotalInterest,
     interestSaved: totalInterest - accTotalInterest,
     monthsSaved: termMonths - accMonth,
     schedule,

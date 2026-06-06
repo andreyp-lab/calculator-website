@@ -226,18 +226,19 @@ function calculateExemptionCeiling(
   years: number,
   age: number = 45,
 ): number {
+  // תקרת הפטור הסטטוטורית: הנמוך מבין
+  //   (א) שכר קובע × 1.5 × שנות ותק  [מקדם 1.5 = ''150% מהשכר הקובע'']
+  //   (ב) תקרה שנתית קבועה (13,750 ₪ ל-2026) × שנות ותק
+  // הערה: ''ה-150%'' הוא מקדם השכר (סעיף ב), ולא הכפלה של התקרה הקבועה.
   const byCeiling = SEVERANCE_COMPENSATION.annualExemptionCeiling * years;
   const bySalary = adjustedSalary * SEVERANCE_COMPENSATION.exemptionMultiplier * years;
 
-  let ceiling = Math.min(byCeiling, bySalary);
+  // אין מקדם 150% אוטומטי מגיל 50 על התקרה הקבועה. הגדלת פטור עד 150%
+  // מהשכר הקובע (החל מ-25.7.2010) היא בסמכות פקיד השומה ומותנית בתנאים —
+  // לכן אינה מחושבת כזכאות ודאית כאן (מוצגת כהערה בלבד).
+  void age;
 
-  // מגיל 50 - פטור מוגדל (חוזר מס הכנסה 11/2009)
-  // כפל מקדם עד 150% מהתקרה הרגילה, בתנאים מסוימים
-  if (age >= 50) {
-    ceiling = Math.min(byCeiling * 1.5, bySalary);
-  }
-
-  return ceiling;
+  return Math.min(byCeiling, bySalary);
 }
 
 // ============================================================
@@ -328,7 +329,9 @@ export function calculateSeverance(input: SeveranceInput): SeveranceResult {
 
   const taxableAmount = Math.max(0, baseSeverance - taxExemptAmount);
 
-  const estimatedTax = taxableAmount * 0.30;
+  // הסכום החייב במס ממוסה לפי מדרגות המס השוליות (לא שיעור אחיד).
+  // ללא הכנסה שנתית נוספת ידועה, מחושב מדרגות מהשקל הראשון.
+  const estimatedTax = calculateMarginalTaxOnSeverance(taxableAmount, 0);
 
   const netSeverance = baseSeverance - estimatedTax;
 
@@ -506,7 +509,7 @@ export function compareSeveranceTaxOptions(input: TaxComparisonInput): TaxCompar
       taxableBase > 0 ? `מס על ${Math.round(taxableBase).toLocaleString('he-IL')} ₪` : 'ללא חסרונות מהותיים',
       'לא מגדיל קצבת פנסיה עתידית',
     ],
-    note: age >= 50 ? 'מגיל 50: זכאי לפטור מוגדל (עד 150% מהתקרה הרגילה)' : '',
+    note: age >= 50 ? 'ייתכן פטור מוגדל בסמכות פקיד השומה (עד 150% מהשכר הקובע) — אינו אוטומטי ומותנה בתנאים' : '',
   };
 
   // ============================================================

@@ -58,9 +58,11 @@ export const PENSION_CONSTANTS_2026 = {
   } as Record<number, number>,
 
   // תקרת פטור ממס קצבה (סעיף 9א) - לפנסיונרים מגיל 67+
-  // ~52% מהקצבה פטורה עד תקרה
-  pensionTaxExemptionPct: 52, // %
-  pensionTaxExemptionCeiling: 9_430, // ₪/חודש (תקרת הפטור 2026)
+  // 57.5% מהקצבה פטורה עד תקרה (2026)
+  pensionTaxExemptionPct: 57.5, // %
+  pensionEligibleCeiling: 9_430, // ₪/חודש (תקרת קצבה מזכה 2026)
+  // תקרת הפטור החודשי = 57.5% × 9,430 ≈ 5,422 ₪/חודש
+  pensionTaxExemptionCeiling: 5_422, // ₪/חודש (תקרת הפטור החודשי 2026)
 
   // ניכוי ב.ל.ל לזכאי פנסיה
   nationalInsurancePension: {
@@ -302,7 +304,7 @@ export function calculatePensionTax(
 ): TaxAnalysis {
   const annualPension = monthlyPension * 12;
 
-  // פטור: 52% עד תקרה
+  // פטור: 57.5% מהקצבה עד תקרת הפטור החודשי (≈5,422 ₪)
   const exemptionCeilingMonthly = PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling;
   const exemptionPct =
     age >= 67 ? PENSION_CONSTANTS_2026.pensionTaxExemptionPct / 100 : 0;
@@ -319,8 +321,8 @@ export function calculatePensionTax(
   const brackets = [
     { up: 84_120, rate: 0.1 },
     { up: 120_720, rate: 0.14 },
-    { up: 193_800, rate: 0.2 },
-    { up: 269_280, rate: 0.31 },
+    { up: 228_000, rate: 0.2 },
+    { up: 301_200, rate: 0.31 },
     { up: 560_280, rate: 0.35 },
     { up: Infinity, rate: 0.47 },
   ];
@@ -575,9 +577,9 @@ export function calculateComprehensivePension(
       const months = Math.min(src.yearsContributing, yearsUntilRetirement) * 12;
       return sum + src.monthlySalary * (src.severanceContrib / 100) * months;
     }, 0);
-    // פיצויים עד 12,230 ₪/שנת ותק פטורים - קירוב פשוט
+    // פיצויים עד 13,750 ₪/שנת עבודה פטורים (2026) - קירוב פשוט
     const avgTenure = sources.length > 0 ? sources[0].yearsContributing : yearsUntilRetirement;
-    const exemptSeverance = Math.min(severanceLumpSum, 12_230 * avgTenure);
+    const exemptSeverance = Math.min(severanceLumpSum, 13_750 * avgTenure);
     const taxableSeverance = Math.max(0, severanceLumpSum - exemptSeverance);
     severanceLumpSumNet = severanceLumpSum - taxableSeverance * 0.2; // קירוב 20%
   }

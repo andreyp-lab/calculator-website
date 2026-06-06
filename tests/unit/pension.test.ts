@@ -141,11 +141,11 @@ describe('netEffectiveReturn', () => {
 // ============================================================
 
 describe('calculatePensionTax', () => {
-  it('קצבה 10,000 ₪ בגיל 67: פטור 52% עד תקרה', () => {
+  it('קצבה 10,000 ₪ בגיל 67: פטור 57.5% תחום בתקרת הפטור החודשי', () => {
     const r = calculatePensionTax(10_000, 67);
-    // 52% × 10,000 = 5,200 ≤ 9,430 → פטור 5,200
-    expect(r.taxExemptAmount).toBeCloseTo(5_200, 0);
-    expect(r.taxableAmount).toBeCloseTo(4_800, 0);
+    // 57.5% × 10,000 = 5,750 > תקרת הפטור החודשי 5,422 → פטור מוגבל ל-5,422
+    expect(r.taxExemptAmount).toBeCloseTo(5_422, 0);
+    expect(r.taxableAmount).toBeCloseTo(4_578, 0);
     // קצבה נטו ≤ קצבה ברוטו (יכולה להיות שווה אם אין מס בפועל)
     expect(r.netMonthlyPension).toBeLessThanOrEqual(10_000);
   });
@@ -157,7 +157,7 @@ describe('calculatePensionTax', () => {
   });
 
   it('קצבה גדולה מהתקרה: הפטור תחום', () => {
-    // 52% × 20,000 = 10,400 > תקרה 9,430 → פטור מוגבל ל-9,430
+    // 57.5% × 20,000 = 11,500 > תקרת הפטור החודשי → פטור מוגבל לתקרה
     const r = calculatePensionTax(20_000, 67);
     expect(r.taxExemptAmount).toBeLessThanOrEqual(PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling);
   });

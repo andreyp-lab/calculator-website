@@ -21,8 +21,8 @@
 // קבועים
 // ============================================================
 
-export const BANK_OF_ISRAEL_PRIME_2026 = 5.5;
-export const BOI_BASE_RATE_2026 = 4.0;
+export const BANK_OF_ISRAEL_PRIME_2026 = 5.25;
+export const BOI_BASE_RATE_2026 = 3.75;
 export const AVG_INFLATION_ISRAEL = 2.5;
 
 /**
@@ -154,7 +154,7 @@ export const DEFAULT_TRACKS_2026: OptimizerTrack[] = [
     id: 'prime',
     name: 'פריים',
     type: 'prime',
-    rate: BANK_OF_ISRAEL_PRIME_2026 - 0.5, // 5.0%
+    rate: BANK_OF_ISRAEL_PRIME_2026 - 0.5, // 4.75%
     termYears: 25,
     isLinked: false,
     rateVolatility: 2.0, // ±2% שינוי אפשרי
