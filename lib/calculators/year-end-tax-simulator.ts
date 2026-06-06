@@ -143,7 +143,7 @@ export const SIMULATOR_CONSTANTS_2026 = {
     eligibleIncomeCeiling: 293_397,
     deductionRate: 0.045,
     deductionCap: 13_203,
-    taxExemptCap: 20_520,
+    taxExemptCap: 20_566,
     monthlyExemptCap: 1_710,
   },
   // ביטוח לאומי לעצמאי - מדרגות חודשיות

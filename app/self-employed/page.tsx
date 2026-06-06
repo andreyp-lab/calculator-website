@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const calculators = [
   {
     title: '📘 מדריך פתיחת עסק — עוסק פטור או מורשה?',
-    description: 'מתחילים עסק? המדריך המלא לבחירה בין עוסק פטור למורשה, רישום מול הרשויות, תקרת 120,000 ₪ וטעויות נפוצות',
+    description: 'מתחילים עסק? המדריך המלא לבחירה בין עוסק פטור למורשה, רישום מול הרשויות, תקרת 122,833 ₪ וטעויות נפוצות',
     href: '/self-employed/opening-business',
     available: true,
   },

@@ -395,7 +395,7 @@ export default function TaxesCompleteGuide() {
               <div className="border border-gray-200 rounded-xl p-5">
                 <h3 className="font-bold text-gray-900 mb-3">עוסק פטור</h3>
                 <ul className="space-y-1 text-sm text-gray-700">
-                  <li>• מחזור עד 120,000 ₪ לשנה</li>
+                  <li>• מחזור עד 122,833 ₪ לשנה</li>
                   <li>• פטור מגביית מע&quot;מ מלקוחות</li>
                   <li>• אינו מחזיר מע&quot;מ תשומות</li>
                   <li>• דיווח שנתי בלבד</li>
@@ -405,7 +405,7 @@ export default function TaxesCompleteGuide() {
               <div className="border border-gray-200 rounded-xl p-5">
                 <h3 className="font-bold text-gray-900 mb-3">עוסק מורשה</h3>
                 <ul className="space-y-1 text-sm text-gray-700">
-                  <li>• מחזור מעל 120,000 ₪ לשנה (חובה)</li>
+                  <li>• מחזור מעל 122,833 ₪ לשנה (חובה)</li>
                   <li>• גובה 18% מע&quot;מ מלקוחות</li>
                   <li>• מחזיר מע&quot;מ על הוצאות עסק</li>
                   <li>• דיווח דו-חודשי / חודשי</li>
@@ -619,7 +619,7 @@ export default function TaxesCompleteGuide() {
 
             <h3 className="text-xl font-bold text-gray-800 mb-3">קרן השתלמות לעצמאי</h3>
             <p className="text-gray-700 mb-5">
-              עצמאי יכול להפקיד עד 4.5% מהרווח (עד ~20,520 ₪ לשנה) ולקבל ניכוי ממס הכנסה.
+              עצמאי יכול להפקיד עד 4.5% מהרווח (עד ~20,566 ₪ לשנה) ולקבל ניכוי ממס הכנסה.
               כמו כן – הכנסות מהשקעות בקרן פטורות ממס רווחי הון לאחר 6 שנים.
             </p>
 

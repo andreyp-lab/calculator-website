@@ -88,7 +88,7 @@ export default function EmployeeVsSelfEmployedComparePage() {
                 <tr className="bg-gray-50">
                   <td className="border border-gray-300 p-3 font-semibold">קרן השתלמות</td>
                   <td className="border border-gray-300 p-3">7.5% מהמעסיק (פטור ממס)</td>
-                  <td className="border border-gray-300 p-3">עצמאית - תקרה 20,520 ₪</td>
+                  <td className="border border-gray-300 p-3">עצמאית - תקרה 20,566 ₪</td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 p-3 font-semibold">פיצויי פיטורין</td>

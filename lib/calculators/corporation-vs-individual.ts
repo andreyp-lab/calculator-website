@@ -577,7 +577,7 @@ export function calculateCorpVsIndividual(
 
   // קרן השתלמות לעוסק: עד 4.5% מהרווח
   const studyFundDeductionInd = includeStudyFundIndividual
-    ? Math.min(profit * Math.min(studyFundRateIndividual, 0.045), 20_520)
+    ? Math.min(profit * Math.min(studyFundRateIndividual, 0.045), 20_566)
     : 0;
 
   // 4 תרחישים

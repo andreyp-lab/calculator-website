@@ -240,11 +240,11 @@ function calculatePensionDeduction(annualIncome: number, annualPension: number):
 
 /**
  * מחשב ניכוי קרן השתלמות לעצמאי:
- * - עד 4.5% מהכנסה (מקסימום ~20,520 ₪/שנה)
+ * - עד 4.5% מהכנסה (מקסימום ~20,566 ₪/שנה)
  */
 function calculateStudyFundDeduction(annualIncome: number, annualStudyFund: number): number {
   const maxDeductionPct = 0.045;
-  const maxDeduction = Math.min(annualIncome * maxDeductionPct, 20_520);
+  const maxDeduction = Math.min(annualIncome * maxDeductionPct, 20_566);
   return Math.min(annualStudyFund, maxDeduction);
 }
 
@@ -543,7 +543,7 @@ export function calculateTaxAdvances(input: TaxAdvancesInput): TaxAdvancesResult
 
   if (annualStudyFund === 0 && income > 80_000) {
     recommendations.push(
-      'אין קרן השתלמות - הפקד עד 20,520 ₪/שנה לניכוי מס + פטור עתידי',
+      'אין קרן השתלמות - הפקד עד 20,566 ₪/שנה לניכוי מס + פטור עתידי',
     );
   }
 

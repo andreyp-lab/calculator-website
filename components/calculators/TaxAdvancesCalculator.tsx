@@ -178,7 +178,7 @@ export function TaxAdvancesCalculator() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    ניכוי עד 4.5% (מקסימום 20,520 ₪/שנה)
+                    ניכוי עד 4.5% (מקסימום 20,566 ₪/שנה)
                   </p>
                 </div>
               </div>
@@ -507,7 +507,7 @@ export function TaxAdvancesCalculator() {
               </div>
             ) : (
               <p className="text-sm text-gray-500">
-                עוסק פטור — פטור מדיווח וגביית מע&quot;מ (עד {(120_000).toLocaleString('he-IL')}{' '}
+                עוסק פטור — פטור מדיווח וגביית מע&quot;מ (עד {(122_833).toLocaleString('he-IL')}{' '}
                 ₪/שנה)
               </p>
             )}

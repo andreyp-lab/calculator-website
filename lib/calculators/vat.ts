@@ -61,7 +61,7 @@ export function getOperatorRules(type: OperatorType): OperatorRules {
       return {
         type,
         label: 'עוסק מורשה',
-        description: 'עסק עם מחזור שנתי מעל 120,000 ₪ — מנפיק חשבוניות מס וגובה מע"מ',
+        description: 'עסק עם מחזור שנתי מעל 122,833 ₪ — מנפיק חשבוניות מס וגובה מע"מ',
         collectsVat: true,
         canDeductInputVat: true,
         mustReport: true,
@@ -88,7 +88,7 @@ export function getOperatorRules(type: OperatorType): OperatorRules {
       return {
         type,
         label: 'עוסק פטור',
-        description: 'עסק קטן עם מחזור שנתי עד 120,000 ₪ — לא גובה ולא מדווח מע"מ',
+        description: 'עסק קטן עם מחזור שנתי עד 122,833 ₪ — לא גובה ולא מדווח מע"מ',
         collectsVat: false,
         canDeductInputVat: false,
         mustReport: true,
@@ -98,7 +98,7 @@ export function getOperatorRules(type: OperatorType): OperatorRules {
           'לא גובה מע"מ מלקוחות',
           'לא מנפיק חשבונית מס (רק קבלה / חשבונית עסקה)',
           'לא מקזז מע"מ תשומות',
-          'תקרת מחזור שנתי: 120,000 ₪ לשנת 2026',
+          'תקרת מחזור שנתי: 122,833 ₪ לשנת 2026',
         ],
         advantages: [
           'פחות ניירת ובירוקרטיה',
@@ -647,7 +647,7 @@ export const INDUSTRY_VAT_RULES: Record<IndustryVatKey, IndustryVatRule> = {
     examples: ['מכירת פירות וירקות', 'גידול בהמות', 'דיג'],
     notes: [
       'חקלאי מורשה: חייב ב-18% כרגיל',
-      'חקלאי פטור: פטור מגביית מע"מ עד תקרת 120,000 ₪',
+      'חקלאי פטור: פטור מגביית מע"מ עד תקרת 122,833 ₪',
       'עסקאות בין חקלאים עשויות להיות פטורות ממע"מ',
     ],
   },
