@@ -28,7 +28,7 @@ export const VAT_RATES: { standard2025: number; standard2024: number; zero: numb
 };
 
 /** תקרת עוסק פטור לשנת 2026 */
-export const EXEMPT_THRESHOLD_2026 = 120_000;
+export const EXEMPT_THRESHOLD_2026 = 122_833;
 
 // ============================================================
 // סוגי עוסקים

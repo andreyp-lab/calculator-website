@@ -18,6 +18,13 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
+  options: {
+    // remark-gfm enables GitHub-Flavored Markdown — tables, strikethrough,
+    // task lists, autolinks. Without it, pipe-tables in .mdx render as raw text.
+    // NOTE: Next 16 uses Turbopack, which can't serialize imported plugin
+    // functions — the plugin MUST be passed as a string (package name).
+    remarkPlugins: [["remark-gfm"]],
+  },
 });
 
 export default withMDX(nextConfig);
