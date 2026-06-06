@@ -287,7 +287,7 @@ describe('calculateTaxAdvances', () => {
     expect(r.annualPensionDeduction).toBeLessThanOrEqual(11_000 + 1); // +1 floating
   });
 
-  it('ניכוי קרן השתלמות מוגבל ל-20,520 ₪', () => {
+  it('ניכוי קרן השתלמות מוגבל ל-20,566 ₪', () => {
     const r = calculateTaxAdvances({
       expectedAnnualIncome: 500_000,
       creditPoints: 2.25,
@@ -296,7 +296,7 @@ describe('calculateTaxAdvances', () => {
       monthlyStudyFundDeposit: 5_000, // 60,000 שנתי > מקסימום
     });
 
-    expect(r.annualStudyFundDeduction).toBeLessThanOrEqual(20_520 + 1);
+    expect(r.annualStudyFundDeduction).toBeLessThanOrEqual(20_566 + 1);
   });
 });
 

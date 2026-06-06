@@ -445,6 +445,6 @@ describe('VAT_RATES', () => {
   });
 
   it('תקרת עוסק פטור 2026', () => {
-    expect(EXEMPT_THRESHOLD_2026).toBe(120_000);
+    expect(EXEMPT_THRESHOLD_2026).toBe(122_833);
   });
 });
