@@ -656,6 +656,36 @@ export const blogPosts: BlogPost[] = [
     related: ['bituach-leumi-self-employed-deep-dive', 'study-fund-self-employed-strategy', 'pension-deduction-self-employed-2026'],
   },
   {
+    slug: 'tax-coordination-guide-2026',
+    title: 'תיאום מס 2026 — מי חייב, איך עושים אונליין, וכמה זה חוסך',
+    description:
+      'בלי תיאום מס המעסיק מנכה 47% מהמשכורת. מדריך מעשי: מי חייב לבצע תיאום מס, צעד אחר צעד בפורטל רשות המסים, ומתי הוא מתעדכן.',
+    category: 'עצמאיים',
+    readTime: '10 דקות',
+    date: '2026-06-12',
+    featured: false,
+    relatedCalculator: {
+      href: '/self-employed/employee-and-self-employed',
+      label: 'מחשבון שכיר + עצמאי',
+    },
+    related: ['net-self-employed-explained', 'tax-advances-self-employed-survival', 'annual-tax-report-1301'],
+  },
+  {
+    slug: 'annual-tax-report-1301',
+    title: 'דוח שנתי לעצמאי (טופס 1301) — מדריך הישרדות 2026',
+    description:
+      'מי חייב להגיש טופס 1301, מה מועד ההגשה (31.5.2027 למגיש מקוון), צ\'קליסט הכנה, שלבי ההגשה המקוונת, קנסות ומתי כדאי לקחת מיוצג — מדריך מלא.',
+    category: 'עצמאיים',
+    readTime: '11 דקות',
+    date: '2026-06-12',
+    featured: false,
+    relatedCalculator: {
+      href: '/self-employed/tax-advances',
+      label: 'מחשבון מקדמות מס לעצמאי',
+    },
+    related: ['tax-advances-self-employed-survival', 'year-end-tax-planning-self-employed', 'tax-coordination-guide-2026'],
+  },
+  {
     slug: 'tax-advances-self-employed-survival',
     title: 'מקדמות מס לעצמאי 2026 - איך לא לחיות בחרדה מסוף השנה',
     description:

@@ -33,6 +33,11 @@
 - [מחשבון דיבידנד מול משכורת](https://cheshbonai.co.il/self-employed/dividend-vs-salary)
 - [מחשבון עלות מעסיק](https://cheshbonai.co.il/self-employed/employer-cost)
 - [מחשבון חברה מול עוסק מורשה](https://cheshbonai.co.il/self-employed/corporation-vs-individual)
+- [מחשבון הוצאות מוכרות לעצמאי](https://cheshbonai.co.il/self-employed/allowed-expenses)
+- [מחשבון תקרת עוסק פטור](https://cheshbonai.co.il/self-employed/vat-threshold)
+- [מחשבון שכיר + עצמאי — הכנסה משולבת](https://cheshbonai.co.il/self-employed/employee-and-self-employed)
+- [כמה עולה לפתוח עסק? כל העלויות](https://cheshbonai.co.il/self-employed/business-setup-cost)
+- [חשבונית מס, חשבונית עסקה או קבלה? המדריך](https://cheshbonai.co.il/self-employed/invoices)
 
 ### מחשבונים פיננסיים - נדל"ן ומשכנתא
 - [מחשבון משכנתא](https://cheshbonai.co.il/real-estate/mortgage)
@@ -82,6 +87,10 @@
 **כמה חייב עצמאי להפקיד לפנסיה ב-2026?**
 4.45% מההכנסה עד 6,884 ₪/חודש (מחצית השכר הממוצע) + 12.55% מהחלק שמעל, עד השכר הממוצע (13,769 ₪/חודש).
 מחשבון: https://cheshbonai.co.il/self-employed/mandatory-pension
+
+**אילו הוצאות מוכרות לעצמאי?**
+הוצאה מוכרת רק אם הוצאה כולה לייצור הכנסה (סעיף 17 לפקודה). שיעורים עיקריים: רכב — 45% מההוצאות; כיבוד קל במקום העיסוק — 80%; טלפון נייד ואינטרנט — חלק יחסי לפי שימוש עסקי; חדר עבודה בבית — חלק יחסי לפי שטח. אירוח אורחים מהארץ אינו מוכר.
+מחשבון: https://cheshbonai.co.il/self-employed/allowed-expenses
 
 **מהי נקודת זיכוי ב-2026?**
 242 ₪ הנחה ממס בחודש (2,904 ₪ בשנה). תושב ישראל: 2.25 נקודות (גבר) / 2.75 (אישה).

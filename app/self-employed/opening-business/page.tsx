@@ -47,6 +47,21 @@ const faqItems = [
     answer:
       'כן. "פטור" מתייחס רק למע"מ — עוסק פטור פטור מגביית מע"מ בלבד. הוא עדיין חייב במס הכנסה לפי מדרגות המס ובדמי ביטוח לאומי ובריאות על הרווח שלו, ומגיש דוח שנתי למס הכנסה.',
   },
+  {
+    question: 'איזה טופס ממלאים כדי לפתוח תיק במע"מ?',
+    answer:
+      'ממלאים טופס 821 — "בקשה לרישום עוסק". ניתן להגיש אונליין דרך אתר רשות המסים או בסניף. המסמכים הנדרשים: תעודת זהות, אישור ניהול חשבון בנק, וחוזה שכירות או הוכחת בעלות על נכס העסק. הרישום עצמו חינמי — אין אגרת פתיחה לעוסק.',
+  },
+  {
+    question: 'כמה זמן לוקח לפתוח תיק ברשויות?',
+    answer:
+      'פתיחה אונליין — לרוב מיידית עד מספר ימי עסקים. פתיחה בסניף עשויה לקחת עד שבוע. מומלץ לפתוח את שלושת התיקים (מע"מ, מס הכנסה, ביטוח לאומי) באותו שבוע ולא לדחות את הביטוח הלאומי — כי מקדמות דמי הביטוח מחושבות מיום הרישום.',
+  },
+  {
+    question: 'האם חובה להגיש טופס 5329 גם לעוסק פטור?',
+    answer:
+      'כן. טופס 5329 — "דו"ח פרטים אישיים והצהרה על מקורות הכנסה" — נדרש לפתיחת תיק עצמאי במס הכנסה לכל סוגי העוסקים, פטור ומורשה כאחד. ניתן להגישו ידנית בפקיד השומה או דרך מייצג (רו"ח/שע"מ).',
+  },
 ];
 
 export default function OpeningBusinessPage() {
@@ -58,7 +73,7 @@ export default function OpeningBusinessPage() {
       'מדריך מעשי לפתיחת עסק בישראל 2026: עוסק פטור מול מורשה, תקרת 122,833 ₪, מע"מ ורישום מול הרשויות.',
     inLanguage: 'he-IL',
     datePublished: '2026-06-01',
-    dateModified: '2026-06-01',
+    dateModified: '2026-06-12',
     author: { '@type': 'Person', name: 'אנדרי פלטונוב', jobTitle: 'רואה חשבון' },
     publisher: {
       '@type': 'Organization',
@@ -132,7 +147,8 @@ export default function OpeningBusinessPage() {
             </li>
             <li>
               <strong>רישום בביטוח לאומי</strong> — כעצמאי אתה חייב בתשלום דמי ביטוח לאומי ובריאות,
-              ובתמורה צובר זכויות (דמי לידה, נפגעי עבודה, אבטלה מוגבלת ועוד).
+              ובתמורה צובר זכויות (דמי לידה, פגיעה בעבודה, נכות כללית, קצבת אזרח ותיק ועוד).{' '}
+              <strong>שימו לב: עצמאי אינו מבוטח בביטוח אבטלה.</strong>
             </li>
           </ol>
 
@@ -197,6 +213,148 @@ export default function OpeningBusinessPage() {
           </ul>
         </div>
 
+        {/* Step-by-step registration section */}
+        <section className="mb-10">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">פתיחת תיק ברשויות — צעד אחר צעד</h2>
+          <p className="text-gray-600 mb-6 leading-relaxed">
+            להלן שלושת הגופים שאליהם חייב כל עצמאי להירשם. הסדר המומלץ: מע"מ → מס הכנסה → ביטוח לאומי.
+          </p>
+
+          {/* Step 1: VAT */}
+          <div className="border border-blue-200 rounded-xl p-6 mb-4 bg-blue-50/40">
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-blue-600 text-white font-bold text-lg flex items-center justify-center">
+                1
+              </span>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">פתיחת תיק מע"מ</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-blue-100 rounded-lg overflow-hidden bg-white">
+                    <tbody className="text-gray-700">
+                      <tr className="border-b">
+                        <td className="p-3 font-medium text-gray-600 w-32">טופס</td>
+                        <td className="p-3 font-semibold">טופס 821 — בקשה לרישום עוסק</td>
+                      </tr>
+                      <tr className="border-b bg-gray-50/50">
+                        <td className="p-3 font-medium text-gray-600">מסמכים</td>
+                        <td className="p-3">תעודת זהות · אישור ניהול חשבון בנק · חוזה שכירות / הוכחת בעלות על נכס העסק · פרטי העסק</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="p-3 font-medium text-gray-600">איך</td>
+                        <td className="p-3">אונליין דרך אתר רשות המסים, או פיזית בסניף מע"מ הקרוב</td>
+                      </tr>
+                      <tr className="border-b bg-gray-50/50">
+                        <td className="p-3 font-medium text-gray-600">עלות</td>
+                        <td className="p-3 font-semibold text-green-700">חינם — אין אגרת פתיחה</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-medium text-gray-600">זמן טיפול</td>
+                        <td className="p-3">אונליין — לרוב מיידי עד ימים ספורים</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-sm text-gray-500 mt-3">
+                  כאן תבחרו: <strong>עוסק פטור</strong> (מחזור עד 122,833 ₪) או <strong>עוסק מורשה</strong>.
+                  ברגע שאתם מורשים — מתחייבים בדיווח מע"מ חודשי/דו-חודשי.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 2: Income Tax */}
+          <div className="border border-purple-200 rounded-xl p-6 mb-4 bg-purple-50/40">
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-purple-600 text-white font-bold text-lg flex items-center justify-center">
+                2
+              </span>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">פתיחת תיק מס הכנסה</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-purple-100 rounded-lg overflow-hidden bg-white">
+                    <tbody className="text-gray-700">
+                      <tr className="border-b">
+                        <td className="p-3 font-medium text-gray-600 w-32">טופס</td>
+                        <td className="p-3 font-semibold">טופס 5329 — דו"ח פרטים אישיים והצהרה על מקורות הכנסה</td>
+                      </tr>
+                      <tr className="border-b bg-gray-50/50">
+                        <td className="p-3 font-medium text-gray-600">מסמכים</td>
+                        <td className="p-3">תעודת זהות · פרטי בנק · אישור פתיחת תיק מע"מ</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="p-3 font-medium text-gray-600">איך</td>
+                        <td className="p-3">הגשה ידנית בפקיד השומה, או דרך מייצג (רו"ח / שע"מ). חל על עוסק פטור ועוסק מורשה כאחד.</td>
+                      </tr>
+                      <tr className="border-b bg-gray-50/50">
+                        <td className="p-3 font-medium text-gray-600">עלות</td>
+                        <td className="p-3 font-semibold text-green-700">חינם</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-medium text-gray-600">זמן טיפול</td>
+                        <td className="p-3">בדרך כלל עד שבוע ממועד ההגשה</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-sm text-gray-500 mt-3">
+                  לאחר הפתיחה, פקיד השומה יקבע <strong>מקדמות מס</strong> חודשיות. חשוב לכייל את המקדמות
+                  לפי ההכנסה הצפויה — מקדמה נמוכה מדי תגרור תשלום חוב + ריבית בסוף השנה.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 3: National Insurance */}
+          <div className="border border-emerald-200 rounded-xl p-6 mb-4 bg-emerald-50/40">
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-emerald-600 text-white font-bold text-lg flex items-center justify-center">
+                3
+              </span>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">רישום בביטוח לאומי כעצמאי</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-emerald-100 rounded-lg overflow-hidden bg-white">
+                    <tbody className="text-gray-700">
+                      <tr className="border-b">
+                        <td className="p-3 font-medium text-gray-600 w-32">טופס</td>
+                        <td className="p-3 font-semibold">טופס בל/6101 — דין וחשבון רב שנתי (מהדורה 03.2026)</td>
+                      </tr>
+                      <tr className="border-b bg-gray-50/50">
+                        <td className="p-3 font-medium text-gray-600">מסמכים</td>
+                        <td className="p-3">תעודת זהות · אישורי פתיחת תיק מע"מ ומס הכנסה · פרטי חשבון בנק לחיוב</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="p-3 font-medium text-gray-600">איך</td>
+                        <td className="p-3">אונליין דרך אתר ביטוח לאומי (btl.gov.il) או בסניף הקרוב</td>
+                      </tr>
+                      <tr className="border-b bg-gray-50/50">
+                        <td className="p-3 font-medium text-gray-600">עלות</td>
+                        <td className="p-3 font-semibold text-green-700">חינם — הרישום עצמו ללא אגרה</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-medium text-gray-600">זמן טיפול</td>
+                        <td className="p-3">לרוב ימים ספורים עד שבוע; מקדמות ב"ל מחושבות מיום הרישום</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-sm text-gray-500 mt-3">
+                  שיעורי דמי הביטוח לעצמאי (2026): <strong>6.1%</strong> על חלק ההכנסה עד 7,522 ₪/חודש,
+                  ו-<strong>18%</strong> על החלק שמעל (עד תקרה של 51,910 ₪/חודש). הרישום המוקדם חשוב —
+                  עיכוב עלול לגרור תשלום רטרואקטיבי.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Summary notice */}
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-2">
+            <p className="text-sm text-amber-800 leading-relaxed">
+              <strong>טיפ מעשי:</strong> ניתן לפתוח את שלושת התיקים באותו שבוע. אם עובדים עם רואה חשבון — רוב המשרדים מבצעים את הפתיחה במלואה. אם מטפלים לבד, כדאי להיעזר בשער הממשלתי המאוחד.
+            </p>
+          </div>
+        </section>
+
         {/* Related calculators */}
         <section className="mb-10">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">מחשבונים שיעזרו לך להתחיל</h2>
@@ -208,6 +366,8 @@ export default function OpeningBusinessPage() {
               { href: '/self-employed/tax-advances', label: 'מחשבון מקדמות מס' },
               { href: '/self-employed/hourly-rate', label: 'מחשבון תמחור שעת עבודה' },
               { href: '/self-employed/corporation-vs-individual', label: 'חברה בע"מ מול עוסק' },
+              { href: '/self-employed/business-setup-cost', label: 'כמה עולה לפתוח עסק?' },
+              { href: '/self-employed/invoices', label: 'חשבונית מס מול קבלה — המדריך' },
             ].map((c) => (
               <Link
                 key={c.href}

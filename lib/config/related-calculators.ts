@@ -42,6 +42,9 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/self-employed/corporation-vs-individual', label: 'חברה מול עוסק', group: 'self-employed' },
   { path: '/self-employed/dividend-vs-salary', label: 'דיבידנד מול שכר', group: 'self-employed' },
   { path: '/self-employed/year-end-tax-simulator', label: 'סימולטור מס סוף שנה', group: 'self-employed' },
+  { path: '/self-employed/allowed-expenses', label: 'הוצאות מוכרות לעצמאי', group: 'self-employed' },
+  { path: '/self-employed/vat-threshold', label: 'תקרת עוסק פטור', group: 'self-employed' },
+  { path: '/self-employed/employee-and-self-employed', label: 'שכיר + עצמאי', group: 'self-employed' },
   // נדל"ן ומשכנתאות
   { path: '/real-estate/mortgage', label: 'מחשבון משכנתא', group: 'real-estate' },
   { path: '/real-estate/mortgage-optimizer', label: 'אופטימייזר תמהיל', group: 'real-estate' },
@@ -65,9 +68,14 @@ export const CALCULATORS: CalcLink[] = [
 
 /** קשרים ידניים חוצי-קבוצה ברמת רלוונטיות גבוהה. */
 const CURATED: Record<string, string[]> = {
-  '/personal-tax/salary-net-gross': ['/personal-tax/income-tax', '/personal-tax/tax-refund', '/personal-tax/tax-credits', '/employee-rights/severance'],
+  '/personal-tax/salary-net-gross': ['/personal-tax/income-tax', '/personal-tax/tax-refund', '/self-employed/employee-and-self-employed', '/employee-rights/severance'],
   '/personal-tax/income-tax': ['/personal-tax/salary-net-gross', '/personal-tax/tax-credits', '/personal-tax/tax-refund', '/self-employed/net'],
-  '/self-employed/net': ['/self-employed/social-security', '/self-employed/vat', '/self-employed/tax-advances', '/self-employed/corporation-vs-individual'],
+  '/self-employed/net': ['/self-employed/social-security', '/self-employed/vat', '/self-employed/tax-advances', '/self-employed/employee-and-self-employed'],
+  '/self-employed/allowed-expenses': ['/self-employed/tax-advances', '/self-employed/year-end-tax-simulator', '/self-employed/net', '/self-employed/vat'],
+  '/self-employed/tax-advances': ['/self-employed/allowed-expenses', '/self-employed/year-end-tax-simulator', '/self-employed/social-security', '/self-employed/vat'],
+  '/self-employed/vat-threshold': ['/self-employed/vat', '/self-employed/allowed-expenses', '/self-employed/net', '/self-employed/social-security'],
+  '/self-employed/vat': ['/self-employed/vat-threshold', '/self-employed/tax-advances', '/self-employed/net', '/self-employed/social-security'],
+  '/self-employed/employee-and-self-employed': ['/personal-tax/salary-net-gross', '/self-employed/net', '/self-employed/social-security', '/self-employed/tax-advances'],
   '/real-estate/mortgage': ['/real-estate/mortgage-optimizer', '/real-estate/purchase-tax', '/savings/loan-repayment', '/real-estate/capital-gains-tax'],
   '/real-estate/purchase-tax': ['/real-estate/mortgage', '/real-estate/capital-gains-tax', '/real-estate/mortgage-optimizer'],
   '/employee-rights/severance': ['/employee-rights/recreation-pay', '/employee-rights/annual-leave', '/personal-tax/salary-net-gross', '/insurance/pension'],

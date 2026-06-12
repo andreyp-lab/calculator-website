@@ -35,6 +35,36 @@ const calculators = [
     available: true,
   },
   {
+    title: '🆕 מחשבון תקרת עוסק פטור',
+    description: 'בדוק אם חצית את תקרת 122,833 ₪ — מה קורה בחריגה ומתי חובה לעבור לעוסק מורשה',
+    href: '/self-employed/vat-threshold',
+    available: true,
+  },
+  {
+    title: '🆕 מחשבון הוצאות מוכרות לעצמאי',
+    description: 'אילו הוצאות מוכרות במס וכמה — רכב 45%, טלפון, חדר עבודה, כיבוד 80% ועוד',
+    href: '/self-employed/allowed-expenses',
+    available: true,
+  },
+  {
+    title: '🆕 מחשבון שכיר + עצמאי',
+    description: 'עובד גם כשכיר וגם כפרילנסר? כמה באמת נשאר מההכנסה המשולבת אחרי מס וב.ל.',
+    href: '/self-employed/employee-and-self-employed',
+    available: true,
+  },
+  {
+    title: '🆕 כמה עולה לפתוח עסק?',
+    description: 'כל עלויות פתיחת העסק בשקלים — אגרות, רו"ח, ביטוחים וציוד',
+    href: '/self-employed/business-setup-cost',
+    available: true,
+  },
+  {
+    title: '🆕 חשבונית מס, חשבונית עסקה או קבלה?',
+    description: 'המדריך המלא לסוגי המסמכים — מה מוציאים, מתי, וההבדלים בין עוסק פטור למורשה',
+    href: '/self-employed/invoices',
+    available: true,
+  },
+  {
     title: 'מחשבון ביטוח לאומי לעצמאי',
     description: 'חישוב ב.ל. + בריאות, השוואה לשכיר, הטבת מס 52%, תיאום שנתי וזכויות',
     href: '/self-employed/social-security',
