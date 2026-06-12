@@ -194,12 +194,12 @@ export default function EmployerCostPage() {
             </li>
             <li>
               <a
-                href="https://www.kolzchut.org.il/he/%D7%A2%D7%9C%D7%95%D7%AA_%D7%A2%D7%95%D7%91%D7%93_%D7%9C%D7%9E%D7%A2%D7%A1%D7%99%D7%A7"
+                href="https://www.kolzchut.org.il/he/%D7%94%D7%A2%D7%A1%D7%A7%D7%AA_%D7%A2%D7%95%D7%91%D7%93%D7%99%D7%9D_-_%D7%9E%D7%99%D7%93%D7%A2_%D7%9C%D7%9E%D7%A2%D7%A1%D7%99%D7%A7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                כל-זכות: עלות עובד למעסיק
+                כל-זכות: העסקת עובדים — מידע למעסיק
               </a>
             </li>
             <li>

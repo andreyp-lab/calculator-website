@@ -161,7 +161,7 @@ export default function MaternityBenefitsPage() {
           </li>
           <li>
             <a
-              href="https://www.btl.gov.il/benefits/maternity/Pages/TnaiZchaut.aspx"
+              href="https://www.btl.gov.il/benefits/maternity"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"

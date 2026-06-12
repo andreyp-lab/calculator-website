@@ -22,10 +22,16 @@
 - [מחשבון מענק עבודה](https://cheshbonai.co.il/employee-rights/work-grant)
 
 ### מחשבונים פיננסיים - עצמאיים
+- [מדריך פתיחת עסק — עוסק פטור או מורשה? 2026](https://cheshbonai.co.il/self-employed/opening-business)
 - [סימולטור שנת מס לעצמאי](https://cheshbonai.co.il/self-employed/year-end-tax-simulator)
+- [מחשבון מקדמות מס הכנסה לעצמאי](https://cheshbonai.co.il/self-employed/tax-advances)
 - [מחשבון שכר נטו עצמאי](https://cheshbonai.co.il/self-employed/net)
 - [מחשבון ביטוח לאומי לעצמאי](https://cheshbonai.co.il/self-employed/social-security)
 - [מחשבון מע"מ](https://cheshbonai.co.il/self-employed/vat)
+- [מחשבון תמחור שעת עבודה לעצמאי](https://cheshbonai.co.il/self-employed/hourly-rate)
+- [מחשבון פנסיה חובה לעצמאי](https://cheshbonai.co.il/self-employed/mandatory-pension)
+- [מחשבון דיבידנד מול משכורת](https://cheshbonai.co.il/self-employed/dividend-vs-salary)
+- [מחשבון עלות מעסיק](https://cheshbonai.co.il/self-employed/employer-cost)
 - [מחשבון חברה מול עוסק מורשה](https://cheshbonai.co.il/self-employed/corporation-vs-individual)
 
 ### מחשבונים פיננסיים - נדל"ן ומשכנתא
@@ -55,6 +61,31 @@
 - [מדד המחירים לצרכן](https://cheshbonai.co.il/news/cpi) — אינפלציה שנתית 2.8%, שינוי חודשי
 - [שכר ממוצע](https://cheshbonai.co.il/news/average-wage) — ₪13,200/חודש ברוטו (Q1 2026)
 - [מענקי חרבות ברזל](https://cheshbonai.co.il/news/iron-swords) — מענק כללי ₪5,000, יומי ₪280
+
+## שאלות ותשובות מרכזיות (2026)
+
+**מהי תקרת עוסק פטור 2026?**
+122,833 ₪ מחזור שנתי. מעל זה — חובה לעבור לעוסק מורשה.
+מדריך: https://cheshbonai.co.il/self-employed/opening-business
+
+**עוסק פטור משלם מס הכנסה?**
+כן. "פטור" מתייחס רק לגביית מע"מ. מס הכנסה וביטוח לאומי חלים על כל עצמאי.
+
+**כמה ביטוח לאומי משלם עצמאי ב-2026?**
+6.1% על הכנסה עד 7,522 ₪/חודש, ו-18% מעל (עד תקרה של 51,910 ₪/חודש). השיעורים כוללים דמי ביטוח בריאות.
+מחשבון: https://cheshbonai.co.il/self-employed/social-security
+
+**מה שיעור המע"מ בישראל 2026?**
+18%. עוסק מורשה גובה ומדווח; עוסק פטור (מחזור עד 122,833 ₪) אינו גובה מע"מ.
+מחשבון: https://cheshbonai.co.il/self-employed/vat
+
+**כמה חייב עצמאי להפקיד לפנסיה ב-2026?**
+4.45% מההכנסה עד 6,884 ₪/חודש (מחצית השכר הממוצע) + 12.55% מהחלק שמעל, עד השכר הממוצע (13,769 ₪/חודש).
+מחשבון: https://cheshbonai.co.il/self-employed/mandatory-pension
+
+**מהי נקודת זיכוי ב-2026?**
+242 ₪ הנחה ממס בחודש (2,904 ₪ בשנה). תושב ישראל: 2.25 נקודות (גבר) / 2.75 (אישה).
+מחשבון: https://cheshbonai.co.il/personal-tax/tax-credits
 
 ## אופציונלי
 

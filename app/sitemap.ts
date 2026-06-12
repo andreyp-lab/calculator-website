@@ -43,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed', 'weekly', 0.95),
     make('/loans', 'weekly', 0.95),
     make('/topics', 'weekly', 0.85),
+    make('/guides', 'weekly', 0.85),
     make('/tools', 'weekly', 0.90),
 
     // ===== קטגוריות משנה =====

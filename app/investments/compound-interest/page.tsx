@@ -170,7 +170,7 @@ export default function CompoundInterestPage() {
         <ul className="space-y-2 text-blue-700">
           <li>
             <a
-              href="https://www.irs.gov.il"
+              href="https://www.gov.il/he/departments/topics/tax-on-capital-gains"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"

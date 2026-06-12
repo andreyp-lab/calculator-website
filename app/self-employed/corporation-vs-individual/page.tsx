@@ -239,12 +239,12 @@ export default function CorpVsIndividualPage() {
             </li>
             <li>
               <a
-                href="https://www.justice.gov.il/Units/RasamHaHavarot"
+                href="https://www.gov.il/he/departments/israeli_corporations_authority"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                רשם החברות — אגרות ותהליך פתיחת חברה
+                רשות התאגידים (רשם החברות) — פתיחת חברה ואגרות
               </a>
             </li>
             <li>

@@ -172,7 +172,7 @@ export default function Page() {
         <ul className="space-y-2 text-sm">
           <li>
             <a
-              href="https://www.btl.gov.il/insurance/SelfEmployed/Pages/default.aspx"
+              href="https://www.btl.gov.il/insurance/Pages/default.aspx"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
@@ -182,12 +182,12 @@ export default function Page() {
           </li>
           <li>
             <a
-              href="https://www.kolzchut.org.il/he/%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%9C%D7%90%D7%95%D7%9E%D7%99_%D7%9C%D7%A2%D7%A6%D7%9E%D7%90%D7%99%D7%99%D7%9D"
+              href="https://www.kolzchut.org.il/he/%D7%93%D7%9E%D7%99_%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%9C%D7%90%D7%95%D7%9E%D7%99_%D7%9C%D7%A2%D7%A6%D7%9E%D7%90%D7%99"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
             >
-              כל-זכות: ביטוח לאומי לעצמאים
+              כל-זכות: דמי ביטוח לאומי לעצמאי
             </a>
           </li>
           <li>

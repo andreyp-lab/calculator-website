@@ -196,12 +196,12 @@ export default function Page() {
           </li>
           <li>
             <a
-              href="https://www.economy.gov.il/labor/minimumwage"
+              href="https://www.gov.il/he/departments/topics/minimum-wage"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              משרד הכלכלה: שכר מינימום — הנחיות ותעריפים עדכניים
+              ממשלת ישראל — שכר מינימום: הנחיות ותעריפים עדכניים
             </a>
           </li>
           <li>

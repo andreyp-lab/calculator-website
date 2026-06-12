@@ -199,12 +199,12 @@ export default function Page() {
           </li>
           <li>
             <a
-              href="https://www.kolzchut.org.il/he/%D7%9E%D7%A7%D7%93%D7%9E%D7%95%D7%AA_%D7%9E%D7%A1_%D7%94%D7%9B%D7%A0%D7%A1%D7%94_%D7%9C%D7%A2%D7%A6%D7%9E%D7%90%D7%99"
+              href="https://www.gov.il/he/departments/topics/income-tax-advances"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              כל-זכות: מקדמות מס הכנסה לעצמאי
+              רשות המסים — מקדמות מס הכנסה
             </a>
           </li>
         </ul>

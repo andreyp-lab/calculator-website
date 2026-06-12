@@ -1127,7 +1127,7 @@ export function PensionCalculator() {
           <ul className="text-gray-700 space-y-0.5">
             <li>• המחשבון הוא הערכה - לא ייעוץ פנסיוני מקצועי</li>
             <li>• תוצאות תלויות בתשואה בפועל ובדמי ניהול</li>
-            <li>• לבדיקת הצבירה האמיתית: maslaka.org.il</li>
+            <li>• לבדיקת הצבירה האמיתית: המסלקה הפנסיונית (swiftness.co.il)</li>
             <li>• מומלץ לפגישה עם יועץ פנסיוני בלתי-תלוי</li>
           </ul>
         </div>

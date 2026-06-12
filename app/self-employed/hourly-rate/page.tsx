@@ -239,7 +239,7 @@ export default function HourlyRatePage() {
             </li>
             <li>
               <a
-                href="https://www.btl.gov.il/Benefits/Alimony/Pages/selfemployd.aspx"
+                href="https://www.kolzchut.org.il/he/%D7%93%D7%9E%D7%99_%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%9C%D7%90%D7%95%D7%9E%D7%99_%D7%9C%D7%A2%D7%A6%D7%9E%D7%90%D7%99"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -249,7 +249,7 @@ export default function HourlyRatePage() {
             </li>
             <li>
               <a
-                href="https://www.gov.il/he/departments/guides/self-employed-guide"
+                href="https://www.gov.il/he/pages/self_employed_guide"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"

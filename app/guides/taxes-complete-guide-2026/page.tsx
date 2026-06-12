@@ -247,7 +247,8 @@ export default function TaxesCompleteGuide() {
               {[
                 { who: 'תושב ישראל', points: '2.25' },
                 { who: 'אישה עובדת', points: '0.5' },
-                { who: 'הורה לילד 0–5', points: '2.0 לכל ילד' },
+                { who: 'הורה לילד בשנת לידתו', points: '1.5' },
+                { who: 'הורה לילד 1–5', points: '2.5 לכל ילד' },
                 { who: 'הורה לילד 6–17', points: '1.0 לכל ילד' },
                 { who: 'הורה יחיד', points: '1.0' },
                 { who: 'אזרח חדש (3 שנים ראשונות)', points: 'עד 3.0' },
@@ -346,7 +347,7 @@ export default function TaxesCompleteGuide() {
                 <ul className="space-y-2 text-sm text-blue-800">
                   <li>• ב.ל. עובד: 4.27% (עד 7,522 ₪) + 12.17% (מעל)</li>
                   <li>• ב.ל. מעסיק: 4.51% + 7.6%</li>
-                  <li>• ביטוח בריאות: 3.1% + 5%</li>
+                  <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
                   <li>• כל הניכויים אוטומטיים מהשכר</li>
                 </ul>
               </div>
@@ -355,7 +356,7 @@ export default function TaxesCompleteGuide() {
                 <ul className="space-y-2 text-sm text-orange-800">
                   <li>• ב.ל. (הכנסות עד 7,522 ₪): 6.10%</li>
                   <li>• ב.ל. (הכנסות מעל עד 51,910 ₪): 18%</li>
-                  <li>• ביטוח בריאות: 3.1% + 5%</li>
+                  <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
                   <li>• תשלום דרך פנקס המקדמות</li>
                 </ul>
               </div>
@@ -688,7 +689,7 @@ export default function TaxesCompleteGuide() {
             </div>
 
             <p className="text-gray-700 mb-3">
-              <strong>תנאים:</strong> מינימום תרומה 190 ₪ בשנה. הסכום המוכר: עד 30% מההכנסה החייבת
+              <strong>תנאים:</strong> מינימום תרומה 207 ₪ בשנה. הסכום המוכר: עד 30% מההכנסה החייבת
               (לשכירים) / 30% מהרווח (לעצמאיים).
             </p>
           </section>

@@ -169,12 +169,12 @@ export default function Page() {
           </li>
           <li>
             <a
-              href="https://www.kolzchut.org.il/he/חיסכון_פנסיוני_לעצמאיים"
+              href="https://www.kolzchut.org.il/he/%D7%97%D7%99%D7%A1%D7%9B%D7%95%D7%9F_%D7%A4%D7%A0%D7%A1%D7%99%D7%95%D7%A0%D7%99"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
             >
-              חוק חיסכון פנסיוני לעצמאיים - כל-זכות
+              כל-זכות: חיסכון פנסיוני
             </a>
           </li>
         </ul>
