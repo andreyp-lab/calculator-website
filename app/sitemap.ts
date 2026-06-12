@@ -7,6 +7,8 @@ const SITE_URL = 'https://cheshbonai.co.il';
 // תאריך עדכון תוכן יציב (anchored) — מונע מ-Google לראות את כל הדפים כאילו "עודכנו עכשיו"
 // בכל crawl (סיגנל freshness מזויף). מעדכנים ידנית כשמרעננים תוכן בפועל.
 const CONTENT_UPDATED = new Date('2026-06-01');
+// רענון תוכן ייעודי לעמודים שהורחבו ב-12.6 (בלוק בידול) — סיגנל סריקה-מחדש אמיתי
+const FRESH_2026_06_12 = new Date('2026-06-12');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = CONTENT_UPDATED;
@@ -53,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/insurance', 'weekly', 0.85),
 
     // ===== מחשבונים: שכירים / מסים =====
-    make('/personal-tax/salary-net-gross', 'weekly', 0.95),
+    make('/personal-tax/salary-net-gross', 'weekly', 0.95, FRESH_2026_06_12),
     make('/personal-tax/tax-refund', 'weekly', 0.95),
     make('/personal-tax/income-tax', 'monthly', 0.90),
     make('/personal-tax/tax-credits', 'monthly', 0.90),
@@ -62,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== מחשבונים: זכויות עובד =====
     make('/employee-rights/severance', 'monthly', 0.95),
     make('/employee-rights/maternity-benefits', 'monthly', 0.90),
-    make('/employee-rights/unemployment-benefits', 'monthly', 0.90),
+    make('/employee-rights/unemployment-benefits', 'monthly', 0.90, FRESH_2026_06_12),
     make('/employee-rights/reserve-duty-pay', 'monthly', 0.90),
     make('/employee-rights/minimum-wage', 'monthly', 0.90),
     make('/employee-rights/recreation-pay', 'monthly', 0.90),
