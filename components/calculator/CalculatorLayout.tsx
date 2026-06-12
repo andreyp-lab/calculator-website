@@ -5,6 +5,7 @@ import { AuthorBox } from './AuthorBox';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { CalculatorSchemaClient } from '@/components/seo/CalculatorSchemaClient';
 import { RelatedCalculators } from './RelatedCalculators';
+import { CourseCTA } from '@/components/marketing/CourseCTA';
 
 const SITE_URL = 'https://cheshbonai.co.il'; // used for breadcrumb schema fallback
 
@@ -94,6 +95,9 @@ export function CalculatorLayout({
 
         {/* Related calculators — internal linking */}
         <RelatedCalculators currentPath={currentPath} />
+
+        {/* קידום קורסי FinSchool — מרונדר רק בעמודי /self-employed */}
+        <CourseCTA />
 
         {/* Author */}
         <section className="mb-8">

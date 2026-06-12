@@ -184,7 +184,7 @@ export default function Page() {
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              רשות המסים — מקדמות מס
+              רשות המסים בישראל — אתר רשמי
             </a>
           </li>
           <li>

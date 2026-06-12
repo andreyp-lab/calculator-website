@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
+import { CourseCTA } from '@/components/marketing/CourseCTA';
 
 const PAGE_PATH = '/self-employed/opening-business';
 const SITE_URL = 'https://cheshbonai.co.il';
@@ -235,6 +236,9 @@ export default function OpeningBusinessPage() {
             ))}
           </div>
         </section>
+
+        {/* קידום קורס FinSchool */}
+        <CourseCTA />
 
         <section className="mb-8">
           <AuthorBox />
