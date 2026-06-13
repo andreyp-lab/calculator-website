@@ -98,6 +98,13 @@ export const MACRO_DATA = {
     sourceUrl: 'https://www.btl.gov.il/Benefits/OperationIronSwords/Pages/default.aspx',
     notes: 'הזכאות מותנית בתקופת הגיוס ובמעמד המבוטח',
   },
+
+  avgMortgageRate: {
+    value: 4.8,              // % ריבית משכנתא ממוצעת (מסלולים מעורבים)
+    lastUpdated: '2026-05-21',
+    source: 'בנק ישראל — דוח ריביות משכנתא',
+    sourceUrl: 'https://www.boi.org.il/information/interestrates/mortgage/',
+  },
 } as const;
 
 /** Helper: פורמט תאריך עברי */

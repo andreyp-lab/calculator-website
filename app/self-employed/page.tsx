@@ -1,7 +1,17 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { ArrowLeft, Calculator } from 'lucide-react';
+import { ArrowLeft, Calculator, LayoutDashboard, Wallet, TrendingUp, BarChart3, LineChart, Target } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+
+/** כלים מתקדמים לניהול פיננסי של העסק (B2B) */
+const businessTools = [
+  { href: '/tools/unified', icon: LayoutDashboard, title: 'מערכת מאוחדת', description: 'תקציב + תזרים + ניתוח דוחות במקום אחד', badge: 'מומלץ' },
+  { href: '/tools/budget-wizard', icon: Target, title: 'אשף תקציב חכם', description: '10 שאלות מודרכות → תקציב שנתי מוכן' },
+  { href: '/tools/cash-flow', icon: Wallet, title: 'תזרים מזומנים', description: 'יתרות בנק, תחזיות והתראות גירעון' },
+  { href: '/tools/budget', icon: TrendingUp, title: 'תכנון תקציב', description: 'P&L, הכנסות, הוצאות ועובדים' },
+  { href: '/tools/financial-analysis', icon: BarChart3, title: 'ניתוח דוחות', description: 'יחסים פיננסיים, Z-Score ודירוג אשראי' },
+  { href: '/tools/forecast', icon: LineChart, title: 'חיזוי פיננסי', description: 'תחזיות הכנסה ותרחישים' },
+];
 
 export const metadata: Metadata = {
   alternates: { canonical: '/self-employed' },
@@ -155,6 +165,55 @@ export default function SelfEmployedPage() {
             )
           )}
         </div>
+
+        {/* כלים מתקדמים לניהול העסק (B2B) */}
+        <section className="mt-14">
+          <div className="mb-6">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">
+              ✦ כלים מתקדמים לניהול העסק
+            </p>
+            <h2 className="text-2xl font-bold text-ink">
+              מעבר למחשבונים — <span className="font-serif italic font-normal text-gold">מערכת ניהול פיננסי מלאה</span>
+            </h2>
+            <p className="text-ink/60 mt-2 max-w-2xl">
+              תקציב שנתי, תזרים מזומנים, ניתוח דוחות וחיזוי — הכלים שבנינו לניהול הכספים של העסק,
+              בלי אקסלים מסורבלים. הנתונים נשמרים מקומית אצלך.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {businessTools.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <Link
+                  key={tool.href}
+                  href={tool.href}
+                  className="group bg-ink border border-ink/15 p-5 text-cream transition hover:bg-ink-deep flex flex-col"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <Icon className="w-6 h-6 text-gold-light" />
+                    {tool.badge && (
+                      <span className="font-mono text-[10px] uppercase tracking-[0.12em] bg-gold text-ink px-2 py-0.5">
+                        {tool.badge}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-bold text-cream mb-1 group-hover:text-gold-light transition">
+                    {tool.title}
+                  </h3>
+                  <p className="text-sm text-cream/60 flex-1">{tool.description}</p>
+                  <span className="mt-4 flex items-center gap-1 text-xs font-mono uppercase tracking-[0.1em] text-gold-light">
+                    פתח <ArrowLeft className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="mt-4 text-center">
+            <Link href="/tools" className="font-mono text-xs uppercase tracking-[0.12em] text-gold hover:text-gold-2">
+              לכל הכלים העסקיים ←
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );

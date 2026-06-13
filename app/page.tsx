@@ -117,9 +117,8 @@ export default function Home() {
 
               <h1 className="mt-7 text-5xl font-black leading-[1.05] md:text-6xl">
                 <span className="block text-ink-deep">כל מספר פיננסי</span>
-                <span className="block text-ink-mid">שחשוב לכם —</span>
                 <span className="block font-serif font-normal italic text-gold">
-                  מחושב בעברית.
+                  שחשוב לכם.
                 </span>
               </h1>
 
@@ -241,10 +240,10 @@ export default function Home() {
               ✦ בית הספר הפיננסי FinSchool ✦
             </p>
             <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-cream md:text-4xl">
-              אהבתם את המחשבונים?
+              הכלים נותנים לכם תשובה.
               <br />
               <span className="font-serif font-normal italic text-gold-light">
-                תלמדו לבנות אותם בעצמכם.
+                הקורסים נותנים לכם שליטה.
               </span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-cream/70">

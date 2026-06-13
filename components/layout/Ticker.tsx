@@ -5,29 +5,62 @@ import { MINIMUM_WAGE_2026 } from '@/lib/constants/tax-2026';
  * רצועת טיקר מאקרו עליונה — סגנון FinSchool אדיטוריאלי.
  * רקע ink-deep, טקסט cream, מפרידי ✦ זהב.
  *
- * נתונים אמיתיים מהאתר:
- *  - פריים: MACRO_DATA.primeRate.value
- *  - מדד (חודשי): MACRO_DATA.inflation.monthlyRate
- *  - שכר מינ׳: MINIMUM_WAGE_2026.monthly
- * נתונים שאינם מנוהלים בנתוני המאקרו (דולר, ריבית משכנתא) — ערכי ברירת מחדל סבירים.
+ * שער הדולר נמשך **חי** משער היציג של בנק ישראל (PublicApi), עם ISR:
+ * Next.js שומר במטמון ומרענן כל 6 שעות. אם ה-API נכשל — fallback ל-API חינמי,
+ * ואז לערך ברירת מחדל. שאר הנתונים (פריים/מדד/שכר מינ׳/משכנתא) מנוהלים מרכזית
+ * ב-MACRO_DATA ומתעדכנים כשהם משתנים (נתונים איטיים).
  */
 
-const USD_ILS = 3.71; // ₪ לדולר — ערך ברירת מחדל סביר (לא מנוהל בנתוני המאקרו)
-const MORTGAGE_RATE = 4.8; // % ריבית משכנתא ממוצעת — ערך ברירת מחדל סביר
+const USD_ILS_FALLBACK = 2.93; // אם כל ה-APIs נכשלים
+const MORTGAGE_RATE = MACRO_DATA.avgMortgageRate?.value ?? 4.8;
 
-const minWage = Math.round(MINIMUM_WAGE_2026.monthly).toLocaleString('he-IL');
-const monthlyCpi = MACRO_DATA.inflation.monthlyRate;
-const cpiLabel = `${monthlyCpi >= 0 ? '+' : ''}${monthlyCpi.toFixed(1)}%`;
+const REVALIDATE_SECONDS = 21600; // 6 שעות
 
-const items: { label: string; value: string }[] = [
-  { label: 'דולר', value: `₪${USD_ILS.toFixed(2)}` },
-  { label: 'פריים', value: `${MACRO_DATA.primeRate.value.toFixed(1)}%` },
-  { label: 'מדד', value: cpiLabel },
-  { label: 'שכר מינ׳', value: `₪${minWage}` },
-  { label: 'משכנתא', value: `${MORTGAGE_RATE.toFixed(1)}%` },
-];
+async function fetchUsdIls(): Promise<number> {
+  // 1) בנק ישראל — שער יציג רשמי
+  try {
+    const res = await fetch('https://boi.org.il/PublicApi/GetExchangeRate?key=USD', {
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const rate = Number(data?.currentExchangeRate);
+      if (rate > 0 && rate < 100) return rate;
+    }
+  } catch {
+    /* נופל ל-fallback */
+  }
+  // 2) fallback חינמי ללא מפתח
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/USD', {
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const rate = Number(data?.rates?.ILS);
+      if (rate > 0 && rate < 100) return rate;
+    }
+  } catch {
+    /* נופל לברירת מחדל */
+  }
+  return USD_ILS_FALLBACK;
+}
 
-export function Ticker() {
+export async function Ticker() {
+  const usdIls = await fetchUsdIls();
+
+  const minWage = Math.round(MINIMUM_WAGE_2026.monthly).toLocaleString('he-IL');
+  const monthlyCpi = MACRO_DATA.inflation.monthlyRate;
+  const cpiLabel = `${monthlyCpi >= 0 ? '+' : ''}${monthlyCpi.toFixed(1)}%`;
+
+  const items: { label: string; value: string }[] = [
+    { label: 'דולר', value: `₪${usdIls.toFixed(2)}` },
+    { label: 'פריים', value: `${MACRO_DATA.primeRate.value.toFixed(1)}%` },
+    { label: 'מדד', value: cpiLabel },
+    { label: 'שכר מינ׳', value: `₪${minWage}` },
+    { label: 'משכנתא', value: `${MORTGAGE_RATE.toFixed(1)}%` },
+  ];
+
   return (
     <div className="bg-ink-deep text-cream border-b border-cream/15">
       <div className="max-w-7xl mx-auto px-4">
