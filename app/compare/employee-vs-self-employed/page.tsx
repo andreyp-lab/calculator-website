@@ -59,91 +59,91 @@ export default function EmployeeVsSelfEmployedComparePage() {
           <div className="overflow-x-auto my-6">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-blue-50">
-                  <th className="border border-gray-300 p-3 text-right font-bold">קריטריון</th>
-                  <th className="border border-gray-300 p-3 text-right font-bold text-blue-900">
+                <tr className="bg-ink text-cream">
+                  <th className="border border-ink/20 p-3 text-right font-bold">קריטריון</th>
+                  <th className="border border-ink/20 p-3 text-right font-bold text-cream">
                     👔 שכיר
                   </th>
-                  <th className="border border-gray-300 p-3 text-right font-bold text-emerald-900">
+                  <th className="border border-ink/20 p-3 text-right font-bold text-cream">
                     💼 עצמאי
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">מס הכנסה</td>
-                  <td className="border border-gray-300 p-3">10%-50% (לפי מדרגות)</td>
-                  <td className="border border-gray-300 p-3">10%-50% (זהה)</td>
+                  <td className="border border-ink/15 p-3 font-semibold">מס הכנסה</td>
+                  <td className="border border-ink/15 p-3">10%-50% (לפי מדרגות)</td>
+                  <td className="border border-ink/15 p-3">10%-50% (זהה)</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-3 font-semibold">ביטוח לאומי</td>
-                  <td className="border border-gray-300 p-3">~5% (עובד)</td>
-                  <td className="border border-gray-300 p-3">מופחת 6.10% / מלא 18% (לבד)</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">פנסיה חובה</td>
-                  <td className="border border-gray-300 p-3">12.5% מהמעסיק</td>
-                  <td className="border border-gray-300 p-3">חובה להפקיד עצמית</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-3 font-semibold">קרן השתלמות</td>
-                  <td className="border border-gray-300 p-3">7.5% מהמעסיק (פטור ממס)</td>
-                  <td className="border border-gray-300 p-3">עצמאית - תקרה 20,566 ₪</td>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-3 font-semibold">ביטוח לאומי</td>
+                  <td className="border border-ink/15 p-3">~5% (עובד)</td>
+                  <td className="border border-ink/15 p-3">מופחת 6.10% / מלא 18% (לבד)</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">פיצויי פיטורין</td>
-                  <td className="border border-gray-300 p-3">חובה - חודש לכל שנה</td>
-                  <td className="border border-gray-300 p-3">אין</td>
+                  <td className="border border-ink/15 p-3 font-semibold">פנסיה חובה</td>
+                  <td className="border border-ink/15 p-3">12.5% מהמעסיק</td>
+                  <td className="border border-ink/15 p-3">חובה להפקיד עצמית</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-3 font-semibold">דמי הבראה</td>
-                  <td className="border border-gray-300 p-3">5-10 ימים בשנה</td>
-                  <td className="border border-gray-300 p-3">אין</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">חופשה</td>
-                  <td className="border border-gray-300 p-3">14-28 ימים בתשלום (16 ברוטו / 14 נטו בשנים הראשונות, עד 28)</td>
-                  <td className="border border-gray-300 p-3">חופשה ללא תשלום</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-3 font-semibold">דמי מחלה</td>
-                  <td className="border border-gray-300 p-3">18 ימים מהמעסיק</td>
-                  <td className="border border-gray-300 p-3">דמי מחלה מב.ל. (עם תקופת המתנה)</td>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-3 font-semibold">קרן השתלמות</td>
+                  <td className="border border-ink/15 p-3">7.5% מהמעסיק (פטור ממס)</td>
+                  <td className="border border-ink/15 p-3">עצמאית - תקרה 20,566 ₪</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">דמי לידה</td>
-                  <td className="border border-gray-300 p-3">15 שבועות בתשלום מלא</td>
-                  <td className="border border-gray-300 p-3">לפי הצהרת הכנסות (לרוב נמוך)</td>
+                  <td className="border border-ink/15 p-3 font-semibold">פיצויי פיטורין</td>
+                  <td className="border border-ink/15 p-3">חובה - חודש לכל שנה</td>
+                  <td className="border border-ink/15 p-3">אין</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-3 font-semibold">דמי אבטלה</td>
-                  <td className="border border-gray-300 p-3">זכאי אחרי 360 ימי עבודה</td>
-                  <td className="border border-gray-300 p-3">אין</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">הוצאות מוכרות</td>
-                  <td className="border border-gray-300 p-3">לא רלוונטי</td>
-                  <td className="border border-gray-300 p-3">חלק גדול מהוצאות הופך מוכר</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-3 font-semibold">יציבות הכנסה</td>
-                  <td className="border border-gray-300 p-3">גבוהה מאוד</td>
-                  <td className="border border-gray-300 p-3">תנודתית</td>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-3 font-semibold">דמי הבראה</td>
+                  <td className="border border-ink/15 p-3">5-10 ימים בשנה</td>
+                  <td className="border border-ink/15 p-3">אין</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">פוטנציאל הכנסה</td>
-                  <td className="border border-gray-300 p-3">תקרה לרוב 30K-50K/חודש</td>
-                  <td className="border border-gray-300 p-3">בלתי מוגבל - לפי המאמץ</td>
+                  <td className="border border-ink/15 p-3 font-semibold">חופשה</td>
+                  <td className="border border-ink/15 p-3">14-28 ימים בתשלום (16 ברוטו / 14 נטו בשנים הראשונות, עד 28)</td>
+                  <td className="border border-ink/15 p-3">חופשה ללא תשלום</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-3 font-semibold">בירוקרטיה</td>
-                  <td className="border border-gray-300 p-3">המעסיק עושה הכל</td>
-                  <td className="border border-gray-300 p-3">הרבה ניירת + רואה חשבון</td>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-3 font-semibold">דמי מחלה</td>
+                  <td className="border border-ink/15 p-3">18 ימים מהמעסיק</td>
+                  <td className="border border-ink/15 p-3">דמי מחלה מב.ל. (עם תקופת המתנה)</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-3 font-semibold">חופש בעבודה</td>
-                  <td className="border border-gray-300 p-3">מוגבל - יש בוס</td>
-                  <td className="border border-gray-300 p-3">חופש מלא</td>
+                  <td className="border border-ink/15 p-3 font-semibold">דמי לידה</td>
+                  <td className="border border-ink/15 p-3">15 שבועות בתשלום מלא</td>
+                  <td className="border border-ink/15 p-3">לפי הצהרת הכנסות (לרוב נמוך)</td>
+                </tr>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-3 font-semibold">דמי אבטלה</td>
+                  <td className="border border-ink/15 p-3">זכאי אחרי 360 ימי עבודה</td>
+                  <td className="border border-ink/15 p-3">אין</td>
+                </tr>
+                <tr>
+                  <td className="border border-ink/15 p-3 font-semibold">הוצאות מוכרות</td>
+                  <td className="border border-ink/15 p-3">לא רלוונטי</td>
+                  <td className="border border-ink/15 p-3">חלק גדול מהוצאות הופך מוכר</td>
+                </tr>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-3 font-semibold">יציבות הכנסה</td>
+                  <td className="border border-ink/15 p-3">גבוהה מאוד</td>
+                  <td className="border border-ink/15 p-3">תנודתית</td>
+                </tr>
+                <tr>
+                  <td className="border border-ink/15 p-3 font-semibold">פוטנציאל הכנסה</td>
+                  <td className="border border-ink/15 p-3">תקרה לרוב 30K-50K/חודש</td>
+                  <td className="border border-ink/15 p-3">בלתי מוגבל - לפי המאמץ</td>
+                </tr>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-3 font-semibold">בירוקרטיה</td>
+                  <td className="border border-ink/15 p-3">המעסיק עושה הכל</td>
+                  <td className="border border-ink/15 p-3">הרבה ניירת + רואה חשבון</td>
+                </tr>
+                <tr>
+                  <td className="border border-ink/15 p-3 font-semibold">חופש בעבודה</td>
+                  <td className="border border-ink/15 p-3">מוגבל - יש בוס</td>
+                  <td className="border border-ink/15 p-3">חופש מלא</td>
                 </tr>
               </tbody>
             </table>
@@ -179,13 +179,13 @@ export default function EmployeeVsSelfEmployedComparePage() {
           <h2>מחשבונים רלוונטיים לעצמאים</h2>
           <ul>
             <li>
-              <Link href="/self-employed/net" className="text-blue-600 underline">
+              <Link href="/self-employed/net" className="text-gold underline">
                 מחשבון נטו לעצמאי
               </Link>{' '}
               - חשב את ההכנסה נטו לאחר מס הכנסה וב.ל.
             </li>
             <li>
-              <Link href="/self-employed/mandatory-pension" className="text-blue-600 underline">
+              <Link href="/self-employed/mandatory-pension" className="text-gold underline">
                 מחשבון פנסיה חובה לעצמאי
               </Link>{' '}
               - חשב את ההפקדות המינימליות הנדרשות בחוק.
@@ -195,7 +195,7 @@ export default function EmployeeVsSelfEmployedComparePage() {
           <h2>מתי לעבור מעצמאי לחברה בע"מ?</h2>
           <p>
             בהכנסות שנתיות מעל 350K-450K ₪, חברה בע"מ הופכת ליעילה יותר ממס. ראה את{' '}
-            <Link href="/self-employed/corporation-vs-individual" className="text-blue-600 underline">
+            <Link href="/self-employed/corporation-vs-individual" className="text-gold underline">
               המחשבון המפורט
             </Link>{' '}
             להחלטה.

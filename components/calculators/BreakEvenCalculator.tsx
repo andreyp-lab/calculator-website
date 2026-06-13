@@ -23,11 +23,11 @@ export function BreakEvenCalculator() {
 
   return (
     <div className="grid lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-3 bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">פרטי העסק</h2>
+      <div className="lg:col-span-3 bg-paper border border-ink/15 rounded-none p-6">
+        <h2 className="text-xl font-bold text-ink mb-6">פרטי העסק</h2>
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               הוצאות קבועות חודשיות (₪)
             </label>
             <input
@@ -36,15 +36,15 @@ export function BreakEvenCalculator() {
               step={500}
               value={input.fixedCosts}
               onChange={(e) => update('fixedCosts', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שכ"ד, משכורות קבועות, ביטוחים, רואה חשבון, תוכנות, וכו'
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 מחיר ליחידה (₪)
               </label>
               <input
@@ -52,11 +52,11 @@ export function BreakEvenCalculator() {
                 min={0}
                 value={input.pricePerUnit}
                 onChange={(e) => update('pricePerUnit', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 עלות משתנה ליחידה (₪)
               </label>
               <input
@@ -64,13 +64,13 @@ export function BreakEvenCalculator() {
                 min={0}
                 value={input.variableCostPerUnit}
                 onChange={(e) => update('variableCostPerUnit', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 יחידות צפויות (חודשי)
               </label>
               <input
@@ -78,11 +78,11 @@ export function BreakEvenCalculator() {
                 min={0}
                 value={input.expectedUnits ?? 0}
                 onChange={(e) => update('expectedUnits', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 רווח מטרה חודשי (₪)
               </label>
               <input
@@ -90,7 +90,7 @@ export function BreakEvenCalculator() {
                 min={0}
                 value={input.targetProfit ?? 0}
                 onChange={(e) => update('targetProfit', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
             </div>
           </div>
@@ -99,7 +99,7 @@ export function BreakEvenCalculator() {
 
       <div className="lg:col-span-2 space-y-4">
         {!result.isValid && (
-          <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-3 text-sm text-amber-900">
+          <div className="bg-amber-50 border border-amber-300 rounded-none p-3 text-sm text-amber-900">
             ⚠️ {result.warning}
           </div>
         )}
@@ -116,19 +116,19 @@ export function BreakEvenCalculator() {
           variant="primary"
         />
 
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2 text-sm">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-gray-600">תרומה ליחידה:</span>
+            <span className="text-ink/60">תרומה ליחידה:</span>
             <span className="font-medium">{formatCurrency(result.contributionPerUnit)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600">שיעור תרומה:</span>
+            <span className="text-ink/60">שיעור תרומה:</span>
             <span className="font-medium">{result.contributionMarginPct.toFixed(1)}%</span>
           </div>
           {input.expectedUnits ? (
             <>
-              <div className="flex justify-between pt-2 border-t border-gray-200">
-                <span className="text-gray-600">מרווח ביטחון:</span>
+              <div className="flex justify-between pt-2 border-t border-ink/15">
+                <span className="text-ink/60">מרווח ביטחון:</span>
                 <span
                   className={`font-medium ${result.marginOfSafetyPct >= 0 ? 'text-emerald-700' : 'text-red-700'}`}
                 >
@@ -136,7 +136,7 @@ export function BreakEvenCalculator() {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">רווח חודשי צפוי:</span>
+                <span className="text-ink/60">רווח חודשי צפוי:</span>
                 <span
                   className={`font-bold ${result.expectedProfit >= 0 ? 'text-emerald-700' : 'text-red-700'}`}
                 >
@@ -146,8 +146,8 @@ export function BreakEvenCalculator() {
             </>
           ) : null}
           {input.targetProfit ? (
-            <div className="flex justify-between pt-2 border-t border-gray-200">
-              <span className="text-gray-600">יחידות לרווח מטרה:</span>
+            <div className="flex justify-between pt-2 border-t border-ink/15">
+              <span className="text-ink/60">יחידות לרווח מטרה:</span>
               <span className="font-medium">{result.unitsForTargetProfit.toFixed(0)}</span>
             </div>
           ) : null}

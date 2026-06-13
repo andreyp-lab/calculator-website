@@ -63,8 +63,8 @@ const RESIGNATION_LABELS: Record<ResignationReason, string> = {
 // ============================================================
 
 const SectionCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-    <h2 className="text-lg font-bold text-gray-900">{title}</h2>
+  <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+    <h2 className="text-lg font-bold text-ink">{title}</h2>
     {children}
   </div>
 );
@@ -77,12 +77,12 @@ const InfoBox = ({
   variant?: 'blue' | 'amber' | 'red' | 'green';
 }) => {
   const classes = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
     red: 'bg-red-50 border-red-200 text-red-900',
     green: 'bg-green-50 border-green-200 text-green-900',
   };
-  return <div className={`border rounded-xl p-4 ${classes[variant]}`}>{children}</div>;
+  return <div className={`border rounded-none p-4 ${classes[variant]}`}>{children}</div>;
 };
 
 const Recommendations = ({ items }: { items: string[] }) => {
@@ -144,19 +144,19 @@ const EligibilityTab = () => {
       <SectionCard title="פרטים אישיים ותעסוקתיים">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">גיל</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
             <input
               type="number"
               min={16}
               max={70}
               value={age}
               onChange={(e) => setAge(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">זכאות: גיל 20–66</p>
+            <p className="text-xs text-ink/60 mt-1">זכאות: גיל 20–66</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               חודשי ביטוח ב-18 חודשים האחרונים
             </label>
             <input
@@ -165,15 +165,15 @@ const EligibilityTab = () => {
               max={18}
               value={insuredMonths}
               onChange={(e) => setInsuredMonths(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               נדרש: {hasChildren ? '9' : '12'} חודשים{hasChildren ? ' (בעל/ת משפחה)' : ''}
             </p>
           </div>
         </div>
 
-        <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer">
+        <label className="flex items-center gap-3 p-3 bg-cream-2 rounded-none cursor-pointer">
           <input
             type="checkbox"
             checked={hasChildren}
@@ -182,18 +182,18 @@ const EligibilityTab = () => {
           />
           <div>
             <span className="text-sm font-medium">יש ילדים מתחת לגיל 18</span>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-ink/60">
               משפיע על תקופת הזכאות ועל דרישת הותק (9 חודשים במקום 12)
             </p>
           </div>
         </label>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             סיבת הפסקת עבודה
           </label>
           <div className="space-y-2">
-            <label className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-colors border-blue-300 bg-blue-50">
+            <label className="flex items-center gap-3 p-3 rounded-none border-2 cursor-pointer transition-colors border-gold/40 bg-cream-2">
               <input
                 type="radio"
                 name="dismissal"
@@ -203,10 +203,10 @@ const EligibilityTab = () => {
               />
               <div>
                 <span className="text-sm font-medium">פוטרתי מעבודה</span>
-                <p className="text-xs text-gray-600">5 ימי המתנה בלבד</p>
+                <p className="text-xs text-ink/70">5 ימי המתנה בלבד</p>
               </div>
             </label>
-            <label className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-colors border-gray-200 bg-white">
+            <label className="flex items-center gap-3 p-3 rounded-none border-2 cursor-pointer transition-colors border-ink/15 bg-paper">
               <input
                 type="radio"
                 name="dismissal"
@@ -216,7 +216,7 @@ const EligibilityTab = () => {
               />
               <div>
                 <span className="text-sm font-medium">התפטרתי</span>
-                <p className="text-xs text-gray-600">90 ימי המתנה (אלא אם עילה מוצדקת)</p>
+                <p className="text-xs text-ink/70">90 ימי המתנה (אלא אם עילה מוצדקת)</p>
               </div>
             </label>
           </div>
@@ -224,13 +224,13 @@ const EligibilityTab = () => {
 
         {!wasDismissed && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               סיבת ההתפטרות
             </label>
             <select
               value={resignationReason}
               onChange={(e) => setResignationReason(e.target.value as ResignationReason)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             >
               {Object.entries(RESIGNATION_LABELS).map(([key, label]) => (
                 <option key={key} value={key}>
@@ -260,7 +260,7 @@ const EligibilityTab = () => {
           </label>
           {isPriorClaim && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 ימי זכאות שנותרו מהתביעה הקודמת
               </label>
               <input
@@ -269,7 +269,7 @@ const EligibilityTab = () => {
                 max={175}
                 value={remainingDays}
                 onChange={(e) => setRemainingDays(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
               />
             </div>
           )}
@@ -278,7 +278,7 @@ const EligibilityTab = () => {
 
       {/* תוצאת זכאות */}
       {result.isEligible ? (
-        <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-xl p-6">
+        <div className="bg-green-50 border-2 border-green-300 rounded-none p-6">
           <div className="flex items-center gap-3 mb-4">
             <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0" />
             <div>
@@ -287,22 +287,22 @@ const EligibilityTab = () => {
             </div>
           </div>
           <div className="grid sm:grid-cols-3 gap-4">
-            <div className="bg-white rounded-lg p-3 border border-green-200 text-center">
+            <div className="bg-paper rounded-none p-3 border border-green-200 text-center">
               <p className="text-2xl font-black text-green-700">{result.maxEntitlementDays}</p>
-              <p className="text-xs text-gray-600">ימי זכאות מרביים</p>
+              <p className="text-xs text-ink/70">ימי זכאות מרביים</p>
             </div>
-            <div className="bg-white rounded-lg p-3 border border-green-200 text-center">
+            <div className="bg-paper rounded-none p-3 border border-green-200 text-center">
               <p className="text-2xl font-black text-amber-600">{result.waitingDays}</p>
-              <p className="text-xs text-gray-600">ימי המתנה לפני תשלום</p>
+              <p className="text-xs text-ink/70">ימי המתנה לפני תשלום</p>
             </div>
-            <div className="bg-white rounded-lg p-3 border border-green-200 text-center">
-              <p className="text-sm font-bold text-gray-800">{ageGroupLabels[result.ageGroup]}</p>
-              <p className="text-xs text-gray-600">קבוצת גיל</p>
+            <div className="bg-paper rounded-none p-3 border border-green-200 text-center">
+              <p className="text-sm font-bold text-ink">{ageGroupLabels[result.ageGroup]}</p>
+              <p className="text-xs text-ink/70">קבוצת גיל</p>
             </div>
           </div>
         </div>
       ) : (
-        <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 flex gap-4">
+        <div className="bg-red-50 border-2 border-red-300 rounded-none p-6 flex gap-4">
           <AlertCircle className="w-8 h-8 text-red-600 flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="text-xl font-bold text-red-900 mb-2">אינך זכאי לדמי אבטלה</h3>
@@ -341,10 +341,10 @@ const EligibilityTab = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="px-3 py-2 text-right font-semibold text-gray-700">קבוצת גיל</th>
-                <th className="px-3 py-2 text-center font-semibold text-gray-700">ללא ילדים</th>
-                <th className="px-3 py-2 text-center font-semibold text-gray-700">עם ילדים</th>
+              <tr className="bg-ink text-cream">
+                <th className="px-3 py-2 text-right font-semibold">קבוצת גיל</th>
+                <th className="px-3 py-2 text-center font-semibold">ללא ילדים</th>
+                <th className="px-3 py-2 text-center font-semibold">עם ילדים</th>
               </tr>
             </thead>
             <tbody>
@@ -357,8 +357,8 @@ const EligibilityTab = () => {
               ].map((row, i) => (
                 <tr
                   key={i}
-                  className={`border-t border-gray-100 ${
-                    ageGroupLabels[result.ageGroup]?.includes(row.label.split('–')[0]) ? 'bg-blue-50 font-semibold' : ''
+                  className={`border-t border-ink/10 ${
+                    ageGroupLabels[result.ageGroup]?.includes(row.label.split('–')[0]) ? 'bg-cream-2 font-semibold' : ''
                   }`}
                 >
                   <td className="px-3 py-2">{row.label}</td>
@@ -369,7 +369,7 @@ const EligibilityTab = () => {
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-gray-500">* גיל 25+ ללא ילדים — 100 ימים גם כן</p>
+        <p className="text-xs text-ink/60">* גיל 25+ ללא ילדים — 100 ימים גם כן</p>
       </SectionCard>
     </div>
   );
@@ -422,7 +422,7 @@ const PayTab = () => {
     return items;
   }, [result]);
 
-  const PIE_COLORS = ['#3b82f6', '#f59e0b'];
+  const PIE_COLORS = ['#102219', '#D8B36A'];
 
   // גרף עמודות — השוואת שכר מלא מול דמי אבטלה
   const comparisonData = [
@@ -438,7 +438,7 @@ const PayTab = () => {
       <SectionCard title="פרטי המשכורת">
         <div className="grid sm:grid-cols-3 gap-5">
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו ממוצע — 6 חודשים אחרונים (₪)
             </label>
             <input
@@ -448,26 +448,26 @@ const PayTab = () => {
               step={500}
               value={averageSalary}
               onChange={(e) => setAverageSalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שכר יומי: {formatCurrency(result.dailySalary, { decimals: 2 })} | שכר ממוצע
               ארצי: {formatCurrency(AVERAGE_NATIONAL_WAGE_2026)}
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">גיל</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
             <input
               type="number"
               min={20}
               max={66}
               value={age}
               onChange={(e) => setAge(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
           </div>
         </div>
-        <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer">
+        <label className="flex items-center gap-3 p-3 bg-cream-2 rounded-none cursor-pointer">
           <input
             type="checkbox"
             checked={hasChildren}
@@ -486,17 +486,17 @@ const PayTab = () => {
           ].map((bracket, i) => (
             <div
               key={i}
-              className={`rounded-xl p-3 border-2 transition-all ${
+              className={`rounded-none p-3 border-2 transition-all ${
                 bracket.active
-                  ? 'border-blue-400 bg-blue-50 shadow-sm'
-                  : 'border-gray-200 bg-white'
+                  ? 'border-gold/40 bg-cream-2 shadow-sm'
+                  : 'border-ink/15 bg-paper'
               }`}
             >
-              <p className={`text-2xl font-black ${bracket.active ? 'text-blue-700' : 'text-gray-500'}`}>
+              <p className={`text-2xl font-black ${bracket.active ? 'text-gold' : 'text-ink/60'}`}>
                 {bracket.rate}
               </p>
-              <p className="text-xs text-gray-600 mt-1">{bracket.label}</p>
-              <p className="text-xs text-gray-400">{bracket.threshold}</p>
+              <p className="text-xs text-ink/70 mt-1">{bracket.label}</p>
+              <p className="text-xs text-ink/45">{bracket.threshold}</p>
             </div>
           ))}
         </div>
@@ -534,7 +534,7 @@ const PayTab = () => {
       </div>
 
       {result.isCapped && (
-        <div className="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 flex gap-3">
+        <div className="bg-amber-50 border-2 border-amber-300 rounded-none p-4 flex gap-3">
           <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-amber-900">תשלום מוגבל לתקרה</h4>
@@ -571,8 +571,8 @@ const PayTab = () => {
 
       {/* גרף השוואה */}
       {averageSalary > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">השוואה: שכר מלא מול דמי אבטלה (₪/חודש)</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">השוואה: שכר מלא מול דמי אבטלה (₪/חודש)</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={comparisonData} margin={{ top: 5, right: 10, left: 10, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -581,7 +581,7 @@ const PayTab = () => {
               <Tooltip formatter={(v) => formatCurrency(Number(v))} />
               <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                 {comparisonData.map((_, index) => (
-                  <Cell key={index} fill={index === 0 ? '#22c55e' : index === 1 ? '#3b82f6' : '#f59e0b'} />
+                  <Cell key={index} fill={index === 0 ? '#22c55e' : index === 1 ? '#102219' : '#D8B36A'} />
                 ))}
               </Bar>
             </BarChart>
@@ -591,8 +591,8 @@ const PayTab = () => {
 
       {/* גרף עוגה — חלוקת הסכום */}
       {result.totalGross > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">חלוקת סכום דמי האבטלה לפי תקופה</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">חלוקת סכום דמי האבטלה לפי תקופה</h3>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie
@@ -617,8 +617,8 @@ const PayTab = () => {
 
       {/* לוח תשלומים */}
       {schedule.length > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">לוח תשלומים דו-שבועי</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">לוח תשלומים דו-שבועי</h3>
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={cumulativeData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -635,7 +635,7 @@ const PayTab = () => {
               <Line
                 type="monotone"
                 dataKey="תשלום מצטבר"
-                stroke="#3b82f6"
+                stroke="#102219"
                 strokeWidth={2}
                 dot={false}
               />
@@ -654,18 +654,18 @@ const PayTab = () => {
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="bg-gray-50 border-b">
-                    <th className="px-2 py-2 text-right text-gray-600">תקופה</th>
-                    <th className="px-2 py-2 text-center text-gray-600">ימים</th>
-                    <th className="px-2 py-2 text-center text-gray-600">₪/יום</th>
-                    <th className="px-2 py-2 text-left text-gray-600">תשלום</th>
-                    <th className="px-2 py-2 text-left text-gray-600">מצטבר</th>
+                  <tr className="bg-cream-2 border-b border-ink/15">
+                    <th className="px-2 py-2 text-right text-ink/70">תקופה</th>
+                    <th className="px-2 py-2 text-center text-ink/70">ימים</th>
+                    <th className="px-2 py-2 text-center text-ink/70">₪/יום</th>
+                    <th className="px-2 py-2 text-left text-ink/70">תשלום</th>
+                    <th className="px-2 py-2 text-left text-ink/70">מצטבר</th>
                   </tr>
                 </thead>
                 <tbody>
                   {schedule.map((s, i) => (
-                    <tr key={i} className="border-b border-gray-50 hover:bg-gray-50">
-                      <td className="px-2 py-1.5 text-gray-700">{s.label}</td>
+                    <tr key={i} className="border-b border-ink/10 hover:bg-cream-2">
+                      <td className="px-2 py-1.5 text-ink/70">{s.label}</td>
                       <td className="px-2 py-1.5 text-center">{s.daysInPeriod}</td>
                       <td className="px-2 py-1.5 text-center">
                         {formatCurrency(s.dailyRate, { decimals: 0 })}
@@ -673,14 +673,14 @@ const PayTab = () => {
                       <td className="px-2 py-1.5 text-left font-medium">
                         {formatCurrency(s.periodPayment)}
                       </td>
-                      <td className="px-2 py-1.5 text-left text-blue-700 font-medium">
+                      <td className="px-2 py-1.5 text-left text-gold font-medium">
                         {formatCurrency(s.cumulativePayment)}
                       </td>
                     </tr>
                   ))}
                 </tbody>
                 <tfoot>
-                  <tr className="bg-blue-50 font-bold border-t-2 border-blue-200">
+                  <tr className="bg-cream-2 font-bold border-t-2 border-ink/15">
                     <td className="px-2 py-2" colSpan={3}>
                       סה&quot;כ
                     </td>
@@ -742,7 +742,7 @@ const WorkIncomeTab = () => {
       <SectionCard title="פרטי עבודה חלקית בתקופת האבטלה">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שכר ממוצע לפני הפסקת עבודה (₪/חודש)
             </label>
             <input
@@ -751,11 +751,11 @@ const WorkIncomeTab = () => {
               step={500}
               value={averageSalary}
               onChange={(e) => setAverageSalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-xl font-bold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               הכנסה חודשית מעבודה חלקית חדשה (₪)
             </label>
             <input
@@ -764,15 +764,15 @@ const WorkIncomeTab = () => {
               step={500}
               value={partTimeIncome}
               onChange={(e) => setPartTimeIncome(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               סף: {formatCurrency(halfNational)} (50% מהשכר הממוצע) — מעל זה אין זכאות
             </p>
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             אחוז משרה בעבודה החדשה: {partTimePercent}%
           </label>
           <input
@@ -784,7 +784,7 @@ const WorkIncomeTab = () => {
             onChange={(e) => setPartTimePercent(Number(e.target.value))}
             className="w-full"
           />
-          <div className="flex justify-between text-xs text-gray-400 mt-1">
+          <div className="flex justify-between text-xs text-ink/45 mt-1">
             <span>10%</span>
             <span>50%</span>
             <span>100%</span>
@@ -794,34 +794,34 @@ const WorkIncomeTab = () => {
 
       {/* תוצאה */}
       {result.isEntitledToPartialBenefit ? (
-        <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-xl p-6">
+        <div className="bg-green-50 border-2 border-green-300 rounded-none p-6">
           <div className="flex items-center gap-3 mb-4">
             <CheckCircle className="w-6 h-6 text-green-600" />
             <h3 className="text-lg font-bold text-green-900">זכאי להשלמת אבטלה</h3>
           </div>
           <div className="grid sm:grid-cols-3 gap-4">
-            <div className="bg-white rounded-xl p-4 border border-green-200 text-center">
-              <p className="text-2xl font-black text-blue-700">
+            <div className="bg-paper rounded-none p-4 border border-green-200 text-center">
+              <p className="text-2xl font-black text-gold">
                 {formatCurrency(result.partialDailyBenefit, { decimals: 0 })}
               </p>
-              <p className="text-xs text-gray-600">דמי אבטלה מופחתים/יום</p>
+              <p className="text-xs text-ink/70">דמי אבטלה מופחתים/יום</p>
             </div>
-            <div className="bg-white rounded-xl p-4 border border-green-200 text-center">
+            <div className="bg-paper rounded-none p-4 border border-green-200 text-center">
               <p className="text-2xl font-black text-amber-700">
                 {formatCurrency(result.reduction, { decimals: 0 })}
               </p>
-              <p className="text-xs text-gray-600">הפחתה/יום</p>
+              <p className="text-xs text-ink/70">הפחתה/יום</p>
             </div>
-            <div className="bg-white rounded-xl p-4 border border-green-200 text-center">
+            <div className="bg-paper rounded-none p-4 border border-green-200 text-center">
               <p className="text-2xl font-black text-green-700">
                 {formatCurrency(partTimeIncome + result.partialDailyBenefit * 30)}
               </p>
-              <p className="text-xs text-gray-600">סה&quot;כ הכנסה חודשית</p>
+              <p className="text-xs text-ink/70">סה&quot;כ הכנסה חודשית</p>
             </div>
           </div>
         </div>
       ) : (
-        <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 flex gap-4">
+        <div className="bg-red-50 border-2 border-red-300 rounded-none p-6 flex gap-4">
           <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="text-lg font-bold text-red-900 mb-1">לא זכאי לדמי אבטלה</h3>
@@ -835,8 +835,8 @@ const WorkIncomeTab = () => {
       </InfoBox>
 
       {/* גרף השוואה */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">השוואת הכנסות חודשיות</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">השוואת הכנסות חודשיות</h3>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={barData} margin={{ top: 5, right: 10, left: 10, bottom: 30 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -851,8 +851,8 @@ const WorkIncomeTab = () => {
                     index === 0
                       ? '#22c55e'
                       : index === barData.length - 1
-                      ? '#8b5cf6'
-                      : '#3b82f6'
+                      ? '#8E6824'
+                      : '#102219'
                   }
                 />
               ))}
@@ -908,7 +908,7 @@ const TaxTab = () => {
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               סך דמי אבטלה שקיבלת (₪)
             </label>
             <input
@@ -917,11 +917,11 @@ const TaxTab = () => {
               step={1_000}
               value={totalBenefits}
               onChange={(e) => setTotalBenefits(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-xl font-bold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               הכנסות אחרות באותה שנה (₪)
             </label>
             <input
@@ -930,9 +930,9 @@ const TaxTab = () => {
               step={1_000}
               value={otherIncome}
               onChange={(e) => setOtherIncome(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שכר ממשכורת אחרת, עסק, שכירות וכד&apos; — משפיע על מדרגת המס
             </p>
           </div>
@@ -963,8 +963,8 @@ const TaxTab = () => {
 
       {/* גרף עוגה */}
       {totalBenefits > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">חלוקת דמי האבטלה: נטו לעומת מס</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">חלוקת דמי האבטלה: נטו לעומת מס</h3>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie
@@ -1024,8 +1024,8 @@ export function UnemploymentBenefitsCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* Tab navigation */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-        <div className="flex flex-wrap border-b border-gray-200">
+      <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+        <div className="flex flex-wrap border-b border-ink/15">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -1033,8 +1033,8 @@ export function UnemploymentBenefitsCalculator() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 min-w-[130px] px-4 py-3 text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white border-b-2 border-blue-600'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-ink text-cream border-b-2 border-ink'
+                  : 'text-ink/70 hover:text-ink hover:bg-cream-2'
               }`}
             >
               <span className="ml-1">{tab.emoji}</span>

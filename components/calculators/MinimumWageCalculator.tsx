@@ -66,10 +66,10 @@ function TabBtn({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-colors ${
+      className={`px-4 py-2 text-sm font-medium rounded-none whitespace-nowrap transition-colors ${
         active
-          ? 'bg-blue-600 text-white shadow-sm'
-          : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+          ? 'bg-ink text-cream shadow-sm'
+          : 'bg-paper text-ink/70 border border-ink/15 hover:bg-paper-hover'
       }`}
     >
       {children}
@@ -78,14 +78,14 @@ function TabBtn({
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-base font-semibold text-gray-800 mb-3">{children}</h3>;
+  return <h3 className="text-base font-semibold text-ink mb-3">{children}</h3>;
 }
 
 function InfoRow({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className={`flex justify-between items-center py-2 border-b border-gray-100 last:border-0 ${highlight ? 'bg-blue-50 px-2 rounded' : ''}`}>
-      <span className="text-sm text-gray-600">{label}</span>
-      <span className={`text-sm font-semibold ${highlight ? 'text-blue-700' : 'text-gray-900'}`}>{value}</span>
+    <div className={`flex justify-between items-center py-2 border-b border-ink/15 last:border-0 ${highlight ? 'bg-cream-2 px-2 rounded-none' : ''}`}>
+      <span className="text-sm text-ink/70">{label}</span>
+      <span className={`text-sm font-semibold ${highlight ? 'text-gold' : 'text-ink'}`}>{value}</span>
     </div>
   );
 }
@@ -128,15 +128,15 @@ function RatesTab() {
     <div className="grid lg:grid-cols-5 gap-6">
       {/* Inputs */}
       <div className="lg:col-span-3 space-y-5">
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
           <SectionLabel>פרטי העסקה</SectionLabel>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">סוג שכר</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">סוג שכר</label>
             <select
               value={input.workType}
               onChange={(e) => update('workType', e.target.value as WorkType)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-gold"
             >
               <option value="monthly">חודשי (משרה מלאה)</option>
               <option value="hourly-182">שעתי (182 שעות/חודש)</option>
@@ -147,11 +147,11 @@ function RatesTab() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">גיל העובד</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">גיל העובד</label>
             <select
               value={input.ageGroup}
               onChange={(e) => update('ageGroup', e.target.value as AgeGroup)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-gold"
             >
               <option value="adult">בוגר (18+) – 100%</option>
               <option value="youth-17-18">17-18 – 75% משכר מינימום</option>
@@ -162,8 +162,8 @@ function RatesTab() {
 
           {input.workType === 'monthly' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                אחוז משרה: <span className="text-blue-600 font-bold">{input.partTimePercentage}%</span>
+              <label className="block text-sm font-medium text-ink/70 mb-2">
+                אחוז משרה: <span className="text-gold font-bold">{input.partTimePercentage}%</span>
               </label>
               <input
                 type="range"
@@ -172,9 +172,9 @@ function RatesTab() {
                 step={5}
                 value={input.partTimePercentage}
                 onChange={(e) => update('partTimePercentage', Number(e.target.value))}
-                className="w-full accent-blue-600"
+                className="w-full accent-gold"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-ink/60 mt-1">
                 <span>10%</span>
                 <span>50%</span>
                 <span>100%</span>
@@ -184,7 +184,7 @@ function RatesTab() {
         </div>
 
         {/* All rates table */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5">
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
           <SectionLabel>כל תעריפי שכר המינימום (מותאמים לגיל)</SectionLabel>
           <div className="space-y-1">
             {allRates.map((r) => (
@@ -203,7 +203,7 @@ function RatesTab() {
           variant={result.isAboveMinimum ? 'success' : 'primary'}
         />
 
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-4 space-y-3">
           <label className="block text-sm font-medium text-amber-900">
             השכר שאני מקבל בפועל (₪)
           </label>
@@ -213,11 +213,11 @@ function RatesTab() {
             step={100}
             value={actualWage}
             onChange={(e) => setActualWage(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-400"
+            className="w-full px-3 py-2 border border-amber-300 rounded-none focus:ring-2 focus:ring-amber-400"
           />
           {actualWage > 0 && (
             <div
-              className={`border-2 rounded-lg p-3 ${
+              className={`border-2 rounded-none p-3 ${
                 result.isAboveMinimum
                   ? 'border-emerald-400 bg-emerald-50 text-emerald-900'
                   : 'border-red-400 bg-red-50 text-red-900'
@@ -234,15 +234,15 @@ function RatesTab() {
         </div>
 
         {result.notes.length > 0 && (
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 space-y-1">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-3 space-y-1">
             {result.notes.map((n, i) => (
-              <p key={i} className="text-xs text-blue-900">{n}</p>
+              <p key={i} className="text-xs text-ink">{n}</p>
             ))}
           </div>
         )}
 
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-          <p className="text-xs text-gray-500 font-medium mb-2">מידע כללי</p>
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+          <p className="text-xs text-ink/60 font-medium mb-2">מידע כללי</p>
           <InfoRow label="תקף מ-" value="1.4.2026" />
           <InfoRow label="שעות מלאה" value="182 שעות/חודש" />
           <InfoRow label="ימי עבודה" value="22 ימים (5 יום/שבוע)" />
@@ -284,16 +284,16 @@ function ComplianceTab() {
 
   return (
     <div className="grid lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-3 bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
+      <div className="lg:col-span-3 bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
         <SectionLabel>בדיקת עמידה בשכר מינימום</SectionLabel>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">גיל עובד</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">גיל עובד</label>
             <select
               value={ageGroup}
               onChange={(e) => setAgeGroup(e.target.value as AgeGroup)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             >
               <option value="adult">18+ (בוגר)</option>
               <option value="youth-17-18">17-18</option>
@@ -303,11 +303,11 @@ function ComplianceTab() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">סוג עסקה</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">סוג עסקה</label>
             <select
               value={workType}
               onChange={(e) => setWorkType(e.target.value as WorkType)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             >
               <option value="monthly">חודשי</option>
               <option value="hourly-182">שעתי 182 ש/ח</option>
@@ -320,8 +320,8 @@ function ComplianceTab() {
 
         {workType === 'monthly' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              אחוז משרה: <span className="text-blue-600 font-bold">{partTime}%</span>
+            <label className="block text-sm font-medium text-ink/70 mb-2">
+              אחוז משרה: <span className="text-gold font-bold">{partTime}%</span>
             </label>
             <input
               type="range"
@@ -330,42 +330,42 @@ function ComplianceTab() {
               step={5}
               value={partTime}
               onChange={(e) => setPartTime(Number(e.target.value))}
-              className="w-full accent-blue-600"
+              className="w-full accent-gold"
             />
           </div>
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">שכר בפועל (₪)</label>
+          <label className="block text-sm font-medium text-ink/70 mb-2">שכר בפועל (₪)</label>
           <input
             type="number"
             min={0}
             step={100}
             value={actualWage}
             onChange={(e) => setActualWage(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg font-semibold"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg font-semibold"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">שעות חודשיות</label>
+          <label className="block text-sm font-medium text-ink/70 mb-2">שעות חודשיות</label>
           <input
             type="number"
             min={1}
             max={300}
             value={hoursPerMonth}
             onChange={(e) => setHoursPerMonth(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
         </div>
 
         {/* Visual gauge */}
         <div className="mt-2">
-          <div className="flex justify-between text-xs text-gray-500 mb-1">
+          <div className="flex justify-between text-xs text-ink/60 mb-1">
             <span>0%</span>
             <span>שכר מינימום</span>
           </div>
-          <div className="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
+          <div className="w-full bg-cream-2 rounded-full h-4 overflow-hidden">
             <div
               className={`h-4 rounded-full transition-all ${
                 result.severity === 'ok'
@@ -385,7 +385,7 @@ function ComplianceTab() {
 
       <div className="lg:col-span-2 space-y-4">
         <div
-          className={`rounded-xl border-2 p-5 ${
+          className={`rounded-none border-2 p-5 ${
             result.severity === 'ok'
               ? 'border-green-400 bg-green-50'
               : result.severity === 'warning'
@@ -403,7 +403,7 @@ function ComplianceTab() {
           <p className="text-sm leading-relaxed">{result.recommendation}</p>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-1">
+        <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-1">
           <InfoRow label="שכר מינימום חוקי" value={formatCurrency(result.legalMinimum)} highlight />
           <InfoRow label="שכר בפועל" value={formatCurrency(actualWage)} />
           <InfoRow
@@ -418,7 +418,7 @@ function ComplianceTab() {
         </div>
 
         {result.severity !== 'ok' && (
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-900 space-y-2">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm text-ink space-y-2">
             <p className="font-semibold">מה לעשות?</p>
             <ul className="list-disc list-inside space-y-1 text-xs">
               <li>תעד את שעות העבודה ותלושי השכר שלך</li>
@@ -438,7 +438,7 @@ function ComplianceTab() {
 // Net Wage Tab
 // ============================================================
 
-const NET_COLORS = ['#3b82f6', '#ef4444', '#f59e0b', '#10b981'];
+const NET_COLORS = ['#102219', '#ef4444', '#f59e0b', '#10b981'];
 
 function NetWageTab() {
   const [ageGroup, setAgeGroup] = useState<AgeGroup>('adult');
@@ -459,16 +459,16 @@ function NetWageTab() {
 
   return (
     <div className="grid lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-3 bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
+      <div className="lg:col-span-3 bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
         <SectionLabel>חישוב שכר מינימום נטו</SectionLabel>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">קבוצת גיל</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">קבוצת גיל</label>
             <select
               value={ageGroup}
               onChange={(e) => setAgeGroup(e.target.value as AgeGroup)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             >
               <option value="adult">18+ (100%)</option>
               <option value="youth-17-18">17-18 (75%)</option>
@@ -478,7 +478,7 @@ function NetWageTab() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               נקודות זיכוי
             </label>
             <input
@@ -488,9 +488,9 @@ function NetWageTab() {
               step={0.25}
               value={creditPoints}
               onChange={(e) => setCreditPoints(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
-            <p className="text-xs text-gray-500 mt-1">ברירת מחדל: 2.25 (תושב ישראל)</p>
+            <p className="text-xs text-ink/60 mt-1">ברירת מחדל: 2.25 (תושב ישראל)</p>
           </div>
         </div>
 
@@ -500,9 +500,9 @@ function NetWageTab() {
             id="pension-net"
             checked={pensionEnabled}
             onChange={(e) => setPensionEnabled(e.target.checked)}
-            className="w-4 h-4 accent-blue-600"
+            className="w-4 h-4 accent-gold"
           />
-          <label htmlFor="pension-net" className="text-sm text-gray-700">
+          <label htmlFor="pension-net" className="text-sm text-ink/70">
             ניכוי פנסיה 6% (חובה לפי חוק)
           </label>
         </div>
@@ -530,7 +530,7 @@ function NetWageTab() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink">
           <p className="font-semibold mb-1">הערה חשובה</p>
           <p>שכר מינימום נמצא בעיקר במדרגת 10% בלבד — כלומר מרבית ההכנסה כמעט פטורה ממס הכנסה בזכות נקודות הזיכוי.</p>
         </div>
@@ -550,7 +550,7 @@ function NetWageTab() {
           variant="primary"
         />
 
-        <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-1">
+        <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-1">
           <InfoRow label="שכר ברוטו" value={formatCurrency(result.grossMonthly)} highlight />
           <InfoRow label="מס הכנסה" value={`-${formatCurrency(result.incomeTax)}`} />
           <InfoRow label="ב.ל. + בריאות" value={`-${formatCurrency(result.nationalInsurance)}`} />
@@ -585,7 +585,7 @@ function YouthTab() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-900">
+      <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm text-amber-900">
         <p className="font-semibold mb-1">חוק עבודת נוער - שכר מינימום מופחת</p>
         <p>עובדים מתחת לגיל 18 זכאים לשכר מינימום מופחת. עם הגיע ל-18 יש זכות לשכר מינימום מלא.</p>
       </div>
@@ -595,23 +595,23 @@ function YouthTab() {
         {youthData.map((d) => (
           <div
             key={d.ageGroup}
-            className={`rounded-xl border-2 p-4 text-center ${
+            className={`rounded-none border-2 p-4 text-center ${
               d.ageGroup === 'adult'
-                ? 'border-blue-400 bg-blue-50'
+                ? 'border-ink/40 bg-cream-2'
                 : 'border-amber-300 bg-amber-50'
             }`}
           >
-            <p className="text-xs font-medium text-gray-600 mb-1">{d.label}</p>
-            <p className="text-xl font-bold text-gray-900">{formatCurrency(d.monthlyGross)}</p>
-            <p className="text-xs text-gray-500 mt-1">{(d.multiplier * 100).toFixed(0)}% מהמינימום</p>
+            <p className="text-xs font-medium text-ink/70 mb-1">{d.label}</p>
+            <p className="text-xl font-bold text-ink">{formatCurrency(d.monthlyGross)}</p>
+            <p className="text-xs text-ink/60 mt-1">{(d.multiplier * 100).toFixed(0)}% מהמינימום</p>
             <p className="text-xs text-green-700 mt-1">נטו: ~{formatCurrency(d.netWage)}</p>
-            <p className="text-xs text-gray-500 mt-1">{formatCurrency(d.hourly182)}/שעה</p>
+            <p className="text-xs text-ink/60 mt-1">{formatCurrency(d.hourly182)}/שעה</p>
           </div>
         ))}
       </div>
 
       {/* Bar chart */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <SectionLabel>השוואת שכר לפי גיל – ברוטו מול נטו</SectionLabel>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
@@ -621,7 +621,7 @@ function YouthTab() {
               <YAxis type="category" dataKey="name" width={90} tick={{ fontSize: 12 }} />
               <Tooltip formatter={(v) => formatCurrency(Number(v))} />
               <Legend />
-              <Bar dataKey="ברוטו" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="ברוטו" fill="#102219" radius={[0, 4, 4, 0]} />
               <Bar dataKey="נטו" fill="#10b981" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -629,25 +629,25 @@ function YouthTab() {
       </div>
 
       {/* Sector comparison */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <SectionLabel>מינימום מיוחד לפי ענף</SectionLabel>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="bg-gray-50">
-                <th className="border border-gray-200 p-2 text-right font-semibold">ענף</th>
-                <th className="border border-gray-200 p-2 text-right font-semibold">מינימום חודשי</th>
-                <th className="border border-gray-200 p-2 text-right font-semibold">מקור</th>
-                <th className="border border-gray-200 p-2 text-right font-semibold">הערות</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-2 text-right font-semibold">ענף</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">מינימום חודשי</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">מקור</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">הערות</th>
               </tr>
             </thead>
             <tbody>
               {SECTOR_MINIMUMS.map((s, i) => (
-                <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="border border-gray-200 p-2 font-medium">{s.sector}</td>
-                  <td className="border border-gray-200 p-2 text-blue-700 font-semibold">{formatCurrency(s.minimumMonthly)}</td>
-                  <td className="border border-gray-200 p-2 text-gray-600 text-xs">{s.source}</td>
-                  <td className="border border-gray-200 p-2 text-gray-500 text-xs">{s.notes}</td>
+                <tr key={i} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
+                  <td className="border border-ink/15 p-2 font-medium">{s.sector}</td>
+                  <td className="border border-ink/15 p-2 text-gold font-semibold">{formatCurrency(s.minimumMonthly)}</td>
+                  <td className="border border-ink/15 p-2 text-ink/70 text-xs">{s.source}</td>
+                  <td className="border border-ink/15 p-2 text-ink/60 text-xs">{s.notes}</td>
                 </tr>
               ))}
             </tbody>
@@ -676,25 +676,25 @@ function HistoryTab() {
         {HISTORICAL_MINIMUM_WAGES.map((h) => (
           <div
             key={h.year}
-            className={`rounded-xl border-2 p-4 ${
-              h.year === 2026 ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'
+            className={`rounded-none border-2 p-4 ${
+              h.year === 2026 ? 'border-ink bg-cream-2' : 'border-ink/15 bg-paper'
             }`}
           >
-            <p className="text-sm font-semibold text-gray-600 mb-1">{h.year}</p>
-            <p className="text-2xl font-bold text-gray-900">{formatCurrency(h.monthly)}</p>
-            <p className="text-xs text-gray-500 mt-1">{formatCurrency(h.hourly182)}/שעה</p>
+            <p className="text-sm font-semibold text-ink/70 mb-1">{h.year}</p>
+            <p className="text-2xl font-bold text-ink">{formatCurrency(h.monthly)}</p>
+            <p className="text-xs text-ink/60 mt-1">{formatCurrency(h.hourly182)}/שעה</p>
             {h.changePercent !== null && (
               <p className="text-xs text-green-700 font-medium mt-2">
                 +{h.changePercent.toFixed(2)}% משנה קודמת
               </p>
             )}
-            <p className="text-xs text-gray-400 mt-1">תקף מ: {h.effectiveFrom}</p>
+            <p className="text-xs text-ink/45 mt-1">תקף מ: {h.effectiveFrom}</p>
           </div>
         ))}
       </div>
 
       {/* Line chart */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <SectionLabel>מגמת שכר מינימום 2024–2026</SectionLabel>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
@@ -713,7 +713,7 @@ function HistoryTab() {
                 yAxisId="monthly"
                 type="monotone"
                 dataKey="חודשי"
-                stroke="#3b82f6"
+                stroke="#102219"
                 strokeWidth={3}
                 dot={{ r: 6 }}
               />
@@ -731,19 +731,19 @@ function HistoryTab() {
       </div>
 
       {/* Comparison table */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <SectionLabel>השוואת תעריפים 2024–2026</SectionLabel>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="bg-gray-50">
-                <th className="border border-gray-200 p-2 text-right font-semibold">תעריף</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-2 text-right font-semibold">תעריף</th>
                 {HISTORICAL_MINIMUM_WAGES.map((h) => (
-                  <th key={h.year} className="border border-gray-200 p-2 text-right font-semibold">
+                  <th key={h.year} className="border border-ink/15 p-2 text-right font-semibold">
                     {h.year}
                   </th>
                 ))}
-                <th className="border border-gray-200 p-2 text-right font-semibold">שינוי כולל</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">שינוי כולל</th>
               </tr>
             </thead>
             <tbody>
@@ -760,14 +760,14 @@ function HistoryTab() {
                 const last = HISTORICAL_MINIMUM_WAGES[HISTORICAL_MINIMUM_WAGES.length - 1][row.key] as number;
                 const totalChange = (((last - first) / first) * 100).toFixed(1);
                 return (
-                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="border border-gray-200 p-2 font-medium">{row.label}</td>
+                  <tr key={i} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
+                    <td className="border border-ink/15 p-2 font-medium">{row.label}</td>
                     {HISTORICAL_MINIMUM_WAGES.map((h) => (
-                      <td key={h.year} className="border border-gray-200 p-2">
+                      <td key={h.year} className="border border-ink/15 p-2">
                         {formatCurrency(h[row.key] as number)}
                       </td>
                     ))}
-                    <td className="border border-gray-200 p-2 text-green-700 font-semibold">
+                    <td className="border border-ink/15 p-2 text-green-700 font-semibold">
                       +{totalChange}%
                     </td>
                   </tr>
@@ -797,13 +797,13 @@ function InternationalTab() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-900">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm text-ink">
         <p className="font-semibold mb-1">השוואה בינלאומית – שכר מינימום בארצות OECD</p>
         <p>הנתונים מוצגים ב-USD בהתאמת כוח קנייה (PPP) לצורך השוואה הוגנת. ישראל (2026): ~{formatCurrency(6_443.85)} / ~{israelUSD.toLocaleString()} USD.</p>
       </div>
 
       {/* Bar chart */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <SectionLabel>שכר מינימום חודשי בארצות OECD נבחרות (USD PPP)</SectionLabel>
         <div className="h-96">
           <ResponsiveContainer width="100%" height="100%">
@@ -814,7 +814,7 @@ function InternationalTab() {
               <Tooltip formatter={(v) => [`$${Number(v).toLocaleString()}`, 'USD PPP']} />
               <Bar dataKey="USD" radius={[0, 4, 4, 0]}>
                 {barData.map((entry, i) => (
-                  <Cell key={i} fill={entry.isIsrael ? '#3b82f6' : '#94a3b8'} />
+                  <Cell key={i} fill={entry.isIsrael ? '#102219' : '#94a3b8'} />
                 ))}
               </Bar>
             </BarChart>
@@ -823,18 +823,18 @@ function InternationalTab() {
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <SectionLabel>פירוט מדינות</SectionLabel>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="bg-gray-50">
-                <th className="border border-gray-200 p-2 text-right">דגל</th>
-                <th className="border border-gray-200 p-2 text-right">מדינה</th>
-                <th className="border border-gray-200 p-2 text-right">מטבע מקומי</th>
-                <th className="border border-gray-200 p-2 text-right">מינימום מקומי</th>
-                <th className="border border-gray-200 p-2 text-right">USD PPP</th>
-                <th className="border border-gray-200 p-2 text-right">שנה</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-2 text-right">דגל</th>
+                <th className="border border-ink/15 p-2 text-right">מדינה</th>
+                <th className="border border-ink/15 p-2 text-right">מטבע מקומי</th>
+                <th className="border border-ink/15 p-2 text-right">מינימום מקומי</th>
+                <th className="border border-ink/15 p-2 text-right">USD PPP</th>
+                <th className="border border-ink/15 p-2 text-right">שנה</th>
               </tr>
             </thead>
             <tbody>
@@ -843,28 +843,28 @@ function InternationalTab() {
                   key={i}
                   className={
                     c.country.startsWith('ישראל')
-                      ? 'bg-blue-50 font-semibold'
+                      ? 'bg-gold-light/40 font-semibold'
                       : i % 2 === 0
-                      ? 'bg-white'
-                      : 'bg-gray-50'
+                      ? 'bg-paper'
+                      : 'bg-cream-2'
                   }
                 >
-                  <td className="border border-gray-200 p-2 text-center text-lg">{c.flag}</td>
-                  <td className="border border-gray-200 p-2">{c.country.replace(' 🇮🇱', '')}</td>
-                  <td className="border border-gray-200 p-2 text-gray-500">{c.currency}</td>
-                  <td className="border border-gray-200 p-2">
+                  <td className="border border-ink/15 p-2 text-center text-lg">{c.flag}</td>
+                  <td className="border border-ink/15 p-2">{c.country.replace(' 🇮🇱', '')}</td>
+                  <td className="border border-ink/15 p-2 text-ink/60">{c.currency}</td>
+                  <td className="border border-ink/15 p-2">
                     {c.monthlyLocal.toLocaleString()} {c.currency}
                   </td>
-                  <td className="border border-gray-200 p-2 text-blue-700 font-semibold">
+                  <td className="border border-ink/15 p-2 text-gold font-semibold">
                     ${c.monthlyUSD.toLocaleString()}
                   </td>
-                  <td className="border border-gray-200 p-2 text-gray-400">{c.year}</td>
+                  <td className="border border-ink/15 p-2 text-ink/45">{c.year}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-gray-500 mt-3">מקורות: OECD.stat, ILO Global Wage Report 2025, ממוצעים מוערכים לפי PPP</p>
+        <p className="text-xs text-ink/60 mt-3">מקורות: OECD.stat, ILO Global Wage Report 2025, ממוצעים מוערכים לפי PPP</p>
       </div>
     </div>
   );
@@ -874,7 +874,7 @@ function InternationalTab() {
 // Living Wage Tab
 // ============================================================
 
-const LIVING_COLORS = ['#3b82f6', '#ef4444', '#f59e0b', '#10b981', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'];
+const LIVING_COLORS = ['#102219', '#264B36', '#8E6824', '#D8B36A', '#6B5B3A', '#A88B4A', '#3A4A40', '#C9A24B'];
 
 function LivingWageTab() {
   const [familySize, setFamilySize] = useState<1 | 2 | 3 | 4>(1);
@@ -893,20 +893,20 @@ function LivingWageTab() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       <div className="lg:col-span-3 space-y-5">
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
           <SectionLabel>חישוב עלות מחיה מינימלית</SectionLabel>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">גודל משפחה</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">גודל משפחה</label>
             <div className="flex gap-3">
               {([1, 2, 3, 4] as const).map((n) => (
                 <button
                   key={n}
                   onClick={() => setFamilySize(n)}
-                  className={`flex-1 py-2 rounded-lg text-sm font-medium border-2 transition-colors ${
+                  className={`flex-1 py-2 rounded-none text-sm font-medium border-2 transition-colors ${
                     familySize === n
-                      ? 'border-blue-500 bg-blue-50 text-blue-700'
-                      : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
+                      ? 'border-ink bg-ink text-cream'
+                      : 'border-ink/15 bg-paper text-ink/70 hover:bg-cream-2'
                   }`}
                 >
                   {n === 1 ? 'יחיד' : n === 2 ? 'זוג' : n === 3 ? '3 נפשות' : '4 נפשות'}
@@ -916,11 +916,11 @@ function LivingWageTab() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">קבוצת גיל</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">קבוצת גיל</label>
             <select
               value={ageGroup}
               onChange={(e) => setAgeGroup(e.target.value as AgeGroup)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             >
               <option value="adult">18+ (100%)</option>
               <option value="youth-17-18">17-18 (75%)</option>
@@ -931,11 +931,11 @@ function LivingWageTab() {
 
           {/* Coverage bar */}
           <div className="mt-2">
-            <div className="flex justify-between text-xs text-gray-600 mb-1">
+            <div className="flex justify-between text-xs text-ink/70 mb-1">
               <span>כיסוי שכר מינימום</span>
               <span>{result.coveragePercent.toFixed(0)}%</span>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-5">
+            <div className="w-full bg-cream-2 rounded-full h-5">
               <div
                 className={`h-5 rounded-full transition-all ${
                   result.coveragePercent >= 80
@@ -951,22 +951,22 @@ function LivingWageTab() {
         </div>
 
         {/* Breakdown table */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5">
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
           <SectionLabel>פירוט הוצאות חודשיות מוערכות</SectionLabel>
           <div className="space-y-1">
             {result.breakdown.map((b, i) => (
-              <div key={i} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+              <div key={i} className="flex justify-between items-center py-2 border-b border-ink/15 last:border-0">
                 <div className="flex items-center gap-2">
                   <div
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: LIVING_COLORS[i % LIVING_COLORS.length] }}
                   />
-                  <span className="text-sm text-gray-600">{b.category}</span>
+                  <span className="text-sm text-ink/70">{b.category}</span>
                 </div>
                 <span className="text-sm font-semibold">{formatCurrency(b.monthlyEstimate)}</span>
               </div>
             ))}
-            <div className="flex justify-between items-center py-2 font-bold border-t-2 border-gray-300">
+            <div className="flex justify-between items-center py-2 font-bold border-t-2 border-ink/15">
               <span className="text-sm">סה״כ עלות מחיה מוערכת</span>
               <span className="text-sm text-red-700">{formatCurrency(result.estimatedLivingWage)}</span>
             </div>
@@ -983,7 +983,7 @@ function LivingWageTab() {
         />
 
         <div
-          className={`rounded-xl border-2 p-4 ${
+          className={`rounded-none border-2 p-4 ${
             result.gap > 0 ? 'border-red-400 bg-red-50' : 'border-green-400 bg-green-50'
           }`}
         >
@@ -1001,8 +1001,8 @@ function LivingWageTab() {
         </div>
 
         {/* Pie chart */}
-        <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <p className="text-sm font-semibold text-gray-700 mb-2">חלוקת הוצאות</p>
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <p className="text-sm font-semibold text-ink/70 mb-2">חלוקת הוצאות</p>
           <div className="h-52">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -1025,7 +1025,7 @@ function LivingWageTab() {
           </div>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink">
           <p className="font-semibold mb-1">מקורות</p>
           <p>עלות מחיה מוערכת בהתאם לנתוני הלמ"ס (2025), מחירי שכ"ד ממוצעים ארציים, ומחקר מרכז אדוה.</p>
         </div>

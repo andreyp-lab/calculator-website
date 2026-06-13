@@ -38,10 +38,10 @@ import {
 
 const CATEGORY_PALETTE: Record<ExpenseCategory, string[]> = {
   cogs: ['#dc2626', '#ef4444', '#f87171', '#fca5a5', '#fecaca', '#fee2e2'],
-  rnd: ['#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe', '#ede9fe'],
+  rnd: ['#102219', '#264B36', '#3a6b52', '#5a8b72', '#8ab0a0', '#c0d8d0'],
   marketing: ['#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa', '#ffedd5'],
-  operating: ['#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe'],
-  financial: ['#0891b2', '#06b6d4', '#22d3ee', '#67e8f9', '#a5f3fc', '#cffafe'],
+  operating: ['#102219', '#8E6824', '#264B36', '#D8B36A', '#c0d8d0', '#f0e8d0'],
+  financial: ['#264B36', '#102219', '#8E6824', '#5a8b72', '#D8B36A', '#c0d8d0'],
 };
 
 const INCOME_PALETTE = [
@@ -54,11 +54,11 @@ const INCOME_PALETTE = [
 ];
 
 const CATEGORY_HEADER_COLORS: Record<ExpenseCategory, string> = {
-  cogs: 'from-red-600 to-rose-600',
-  rnd: 'from-violet-600 to-purple-600',
-  marketing: 'from-orange-600 to-amber-600',
-  operating: 'from-blue-600 to-indigo-600',
-  financial: 'from-cyan-600 to-teal-600',
+  cogs: 'bg-red-700',
+  rnd: 'bg-ink',
+  marketing: 'bg-orange-600',
+  operating: 'bg-ink-deep',
+  financial: 'bg-ink',
 };
 
 type View = 'overview' | 'distribution';
@@ -127,28 +127,28 @@ export function BudgetCharts() {
   return (
     <div className="space-y-4">
       {/* Toggle */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-3 shadow-sm flex items-center justify-between">
-        <h3 className="font-bold text-gray-900 flex items-center gap-2">
-          <ChartArea className="w-5 h-5 text-blue-600" />
+      <div className="bg-paper border-2 border-ink/15 p-3 shadow-sm flex items-center justify-between">
+        <h3 className="font-bold text-ink flex items-center gap-2">
+          <ChartArea className="w-5 h-5 text-gold" />
           גרפים פיננסיים
         </h3>
         <div className="flex gap-1">
           <button
             onClick={() => setView('overview')}
-            className={`px-3 py-1.5 rounded text-sm transition ${
+            className={`px-3 py-1.5 text-sm transition ${
               view === 'overview'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-ink text-cream'
+                : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
             }`}
           >
             מבט-על
           </button>
           <button
             onClick={() => setView('distribution')}
-            className={`px-3 py-1.5 rounded text-sm transition ${
+            className={`px-3 py-1.5 text-sm transition ${
               view === 'distribution'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-ink text-cream'
+                : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
             }`}
           >
             התפלגות
@@ -159,13 +159,13 @@ export function BudgetCharts() {
       {view === 'overview' && (
         <>
           {/* Income vs Profit + Cumulative */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3">
+          <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+            <div className="bg-ink text-cream p-3">
               <h3 className="font-bold flex items-center gap-2">
                 <TrendingUp className="w-5 h-5" />
                 הכנסות מול רווח חודשי + רווח מצטבר
               </h3>
-              <p className="text-xs text-blue-100">לאורך כל התקופה</p>
+              <p className="text-xs text-cream/70">לאורך כל התקופה</p>
             </div>
             <div className="p-4">
               <ResponsiveContainer width="100%" height={320}>
@@ -183,11 +183,11 @@ export function BudgetCharts() {
                   />
                   <Legend wrapperStyle={{ direction: 'rtl', fontSize: 11 }} />
                   <Bar dataKey="הכנסות" fill="#10b981" />
-                  <Bar dataKey="רווח נקי" fill="#3b82f6" />
+                  <Bar dataKey="רווח נקי" fill="#102219" />
                   <Line
                     type="monotone"
                     dataKey="רווח מצטבר"
-                    stroke="#a855f7"
+                    stroke="#8E6824"
                     strokeWidth={3}
                     strokeDasharray="5 5"
                     dot={{ r: 4 }}
@@ -203,8 +203,8 @@ export function BudgetCharts() {
         <>
           {/* Income Distribution */}
           {data.incomeDistribution.length > 0 && (
-            <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-              <div className="bg-gradient-to-r from-emerald-600 to-green-600 text-white p-3">
+            <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+              <div className="bg-emerald-700 text-white p-3">
                 <h3 className="font-bold flex items-center gap-2">
                   <ChartPie className="w-5 h-5" />
                   התפלגות הכנסות לפי מקור
@@ -252,10 +252,10 @@ export function BudgetCharts() {
               return (
                 <div
                   key={cat}
-                  className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden"
+                  className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden"
                 >
                   <div
-                    className={`bg-gradient-to-r ${CATEGORY_HEADER_COLORS[cat]} text-white p-3`}
+                    className={`${CATEGORY_HEADER_COLORS[cat]} text-white p-3`}
                   >
                     <h3 className="font-bold flex items-center gap-2 text-sm">
                       <ChartPie className="w-4 h-4" />

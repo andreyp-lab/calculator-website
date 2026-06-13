@@ -59,7 +59,7 @@ export default function PrimeRatePage() {
   const yearlyInterest = exampleLoan * (value / 100);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-paper">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs
@@ -72,27 +72,27 @@ export default function PrimeRatePage() {
         </div>
 
         {/* Hero */}
-        <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl p-8 mb-8">
+        <div className="bg-ink text-cream rounded-none p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
-              <h1 className="text-blue-200 text-sm font-medium mb-2">ריבית פריים נוכחית</h1>
+              <h1 className="text-gold-light text-sm font-mono uppercase tracking-[0.14em] mb-2">ריבית פריים נוכחית</h1>
               <div className="text-7xl font-bold mb-2">{value}%</div>
-              <p className="text-blue-100 text-lg">
-                ריבית בנק ישראל: <strong className="text-white">{boiBaseRate}%</strong> + מרווח{' '}
-                <strong className="text-white">{bankSpread}%</strong>
+              <p className="text-cream/80 text-lg">
+                ריבית בנק ישראל: <strong className="text-cream">{boiBaseRate}%</strong> + מרווח{' '}
+                <strong className="text-cream">{bankSpread}%</strong>
               </p>
             </div>
             <div className="flex flex-col gap-3 md:text-left">
-              <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
-                <p className="text-blue-200 text-xs mb-1">עודכן</p>
+              <div className="bg-cream/10 px-5 py-4">
+                <p className="text-gold-light text-xs mb-1">עודכן</p>
                 <p className="font-semibold text-sm">
                   <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
                 </p>
               </div>
-              <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
-                <p className="text-blue-200 text-xs mb-1">החלטה הבאה</p>
+              <div className="bg-cream/10 px-5 py-4">
+                <p className="text-gold-light text-xs mb-1">החלטה הבאה</p>
                 <p className="font-semibold text-sm">{formatHebrewDate(nextScheduledDecision)}</p>
-                <p className="text-blue-200 text-xs mt-1">בעוד {daysLeft} ימים</p>
+                <p className="text-gold-light text-xs mt-1">בעוד {daysLeft} ימים</p>
               </div>
             </div>
           </div>
@@ -100,32 +100,32 @@ export default function PrimeRatePage() {
 
         {/* Breakdown */}
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
-            <p className="text-xs text-blue-600 font-medium mb-2">ריבית בנק ישראל</p>
-            <p className="text-4xl font-bold text-blue-700">{boiBaseRate}%</p>
-            <p className="text-xs text-gray-500 mt-2">הריבית הבסיסית שקובע בנק ישראל</p>
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-5 text-center">
+            <p className="text-xs text-gold font-medium mb-2">ריבית בנק ישראל</p>
+            <p className="text-4xl font-bold text-ink">{boiBaseRate}%</p>
+            <p className="text-xs text-ink/60 mt-2">הריבית הבסיסית שקובע בנק ישראל</p>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
-            <p className="text-xs text-blue-600 font-medium mb-2">מרווח בנקאי</p>
-            <p className="text-4xl font-bold text-blue-700">+{bankSpread}%</p>
-            <p className="text-xs text-gray-500 mt-2">תוספת קבועה שהוסכמה ב-1994</p>
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-5 text-center">
+            <p className="text-xs text-gold font-medium mb-2">מרווח בנקאי</p>
+            <p className="text-4xl font-bold text-ink">+{bankSpread}%</p>
+            <p className="text-xs text-ink/60 mt-2">תוספת קבועה שהוסכמה ב-1994</p>
           </div>
-          <div className="bg-gradient-to-br from-blue-100 to-blue-50 border-2 border-blue-300 rounded-xl p-5 text-center">
-            <p className="text-xs text-blue-700 font-bold mb-2">ריבית פריים = סכום</p>
-            <p className="text-4xl font-bold text-blue-800">{value}%</p>
-            <p className="text-xs text-gray-500 mt-2">הריבית שהבנקים מלווים בה</p>
+          <div className="bg-ink border-2 border-ink rounded-none p-5 text-center">
+            <p className="text-xs text-gold-light font-bold mb-2">ריבית פריים = סכום</p>
+            <p className="text-4xl font-bold text-cream">{value}%</p>
+            <p className="text-xs text-cream/60 mt-2">הריבית שהבנקים מלווים בה</p>
           </div>
         </div>
 
         {/* Chart */}
-        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-1">היסטוריה — 12 חודשים אחרונים</h2>
-          <p className="text-sm text-gray-500 mb-6">ריבית בנק ישראל וריבית פריים</p>
+        <div className="bg-paper border border-ink/15 rounded-none p-6 mb-8">
+          <h2 className="text-xl font-bold text-ink mb-1">היסטוריה — 12 חודשים אחרונים</h2>
+          <p className="text-sm text-ink/60 mb-6">ריבית בנק ישראל וריבית פריים</p>
           <PrimeRateChart data={[...historicalRates] as Array<{ month: string; boiRate: number; primeRate: number }>} />
         </div>
 
         {/* Next Decision Countdown */}
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-8 flex items-start gap-4">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-6 mb-8 flex items-start gap-4">
           <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
             <Calendar className="w-5 h-5 text-amber-600" />
           </div>
@@ -139,24 +139,24 @@ export default function PrimeRatePage() {
         </div>
 
         {/* Calculator Example */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-6 mb-8">
           <div className="flex items-center gap-2 mb-4">
-            <TrendingDown className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-bold text-blue-900">מה זה אומר עבור המשכנתא שלי?</h2>
+            <TrendingDown className="w-5 h-5 text-gold" />
+            <h2 className="text-lg font-bold text-ink">מה זה אומר עבור המשכנתא שלי?</h2>
           </div>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-ink/70 mb-4">
             דוגמה: משכנתא של ₪1,000,000 במסלול פריים ל-20 שנה:
           </p>
           <div className="grid sm:grid-cols-2 gap-4 mb-4">
-            <div className="bg-white rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">תשלום חודשי משוער</p>
-              <p className="text-2xl font-bold text-blue-700">
+            <div className="bg-paper rounded-none p-4">
+              <p className="text-xs text-ink/60 mb-1">תשלום חודשי משוער</p>
+              <p className="text-2xl font-bold text-ink">
                 ₪{Math.round(monthlyPayment).toLocaleString('he-IL')}
               </p>
             </div>
-            <div className="bg-white rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">ריבית שנתית (שנה ראשונה)</p>
-              <p className="text-2xl font-bold text-blue-700">
+            <div className="bg-paper rounded-none p-4">
+              <p className="text-xs text-ink/60 mb-1">ריבית שנתית (שנה ראשונה)</p>
+              <p className="text-2xl font-bold text-ink">
                 ₪{Math.round(yearlyInterest).toLocaleString('he-IL')}
               </p>
             </div>
@@ -164,14 +164,14 @@ export default function PrimeRatePage() {
           <div className="flex flex-wrap gap-2 mt-2">
             <Link
               href="/real-estate/mortgage"
-              className="inline-flex items-center gap-1.5 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+              className="inline-flex items-center gap-1.5 bg-ink text-cream px-4 py-2 rounded-none text-sm font-medium hover:bg-ink-deep transition"
             >
               <Home className="w-4 h-4" />
               מחשבון משכנתא
             </Link>
             <Link
               href="/real-estate/mortgage-optimizer"
-              className="inline-flex items-center gap-1.5 bg-white border border-blue-300 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition"
+              className="inline-flex items-center gap-1.5 bg-paper border border-ink/15 text-gold px-4 py-2 rounded-none text-sm font-medium hover:bg-cream-2 transition"
             >
               אופטימייזר תמהיל
               <ArrowLeft className="w-4 h-4" />
@@ -181,7 +181,7 @@ export default function PrimeRatePage() {
 
         {/* FAQ */}
         <div className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">שאלות נפוצות</h2>
+          <h2 className="text-xl font-bold text-ink mb-4">שאלות נפוצות</h2>
           <div className="space-y-3">
             {[
               {
@@ -201,25 +201,25 @@ export default function PrimeRatePage() {
                 a: 'ציפיות השוק מגולמות בשוק האג"ח. לניתוח עדכני, עקוב אחרי מסיבות העיתונאים של בנק ישראל לאחר כל החלטה.',
               },
             ].map(({ q, a }) => (
-              <details key={q} className="border border-gray-200 rounded-lg">
-                <summary className="px-4 py-3 font-medium text-gray-900 cursor-pointer hover:bg-gray-50 rounded-lg">
+              <details key={q} className="border border-ink/15 rounded-none">
+                <summary className="px-4 py-3 font-medium text-ink cursor-pointer hover:bg-cream-2 rounded-none">
                   {q}
                 </summary>
-                <p className="px-4 pb-3 pt-1 text-sm text-gray-600 leading-relaxed">{a}</p>
+                <p className="px-4 pb-3 pt-1 text-sm text-ink/70 leading-relaxed">{a}</p>
               </details>
             ))}
           </div>
         </div>
 
         {/* Source */}
-        <div className="text-center text-xs text-gray-400">
+        <div className="text-center text-xs text-ink/45">
           <p>
             מקור:{' '}
             <a
               href={sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:underline inline-flex items-center gap-1"
+              className="text-gold hover:underline inline-flex items-center gap-1"
             >
               בנק ישראל — ריביות <ExternalLink className="w-3 h-3" />
             </a>{' '}

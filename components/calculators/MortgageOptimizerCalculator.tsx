@@ -126,7 +126,7 @@ const OBJECTIVE_OPTIONS: { id: OptimizationObjective; label: string; desc: strin
   },
 ];
 
-const PIE_COLORS_LIST = ['#2563eb', '#f59e0b', '#f97316', '#8b5cf6', '#10b981'];
+const PIE_COLORS_LIST = ['#102219', '#f59e0b', '#8E6824', '#D8B36A', '#10b981'];
 
 // ============================================================
 // קומפוננטת אינפוט מספרי
@@ -149,7 +149,7 @@ interface NumericInputProps {
 function NumericInput({ label, value, onChange, min, max, step, unit, note, className, error, placeholder }: NumericInputProps) {
   return (
     <div className={className}>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       <div className="relative">
         <input
           type="number"
@@ -159,17 +159,17 @@ function NumericInput({ label, value, onChange, min, max, step, unit, note, clas
           step={step}
           placeholder={placeholder}
           onChange={(e) => onChange(Number(e.target.value))}
-          className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-            error ? 'border-red-400 bg-red-50' : 'border-gray-300'
+          className={`w-full px-3 py-2 border rounded-none focus:ring-2 focus:ring-gold ${
+            error ? 'border-red-400 bg-red-50' : 'border-ink/15'
           }`}
         />
         {unit && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 pointer-events-none">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/60 pointer-events-none">
             {unit}
           </span>
         )}
       </div>
-      {note && !error && <p className="text-xs text-gray-500 mt-1">{note}</p>}
+      {note && !error && <p className="text-xs text-ink/60 mt-1">{note}</p>}
       {error && <p className="text-xs text-red-600 mt-1 font-medium">{error}</p>}
     </div>
   );
@@ -186,18 +186,18 @@ function DTIBadge({ dti }: { dti: DTIInfo }) {
     amber: 'bg-amber-50 border-amber-200 text-amber-800',
     orange: 'bg-orange-50 border-orange-200 text-orange-800',
     red: 'bg-red-50 border-red-200 text-red-800',
-    gray: 'bg-gray-50 border-gray-200 text-gray-600',
+    gray: 'bg-cream-2 border-ink/15 text-ink/70',
   };
   const cls = colorMap[dti.statusColor as keyof typeof colorMap] || colorMap.gray;
 
   return (
-    <div className={`border rounded-xl p-4 ${cls}`}>
+    <div className={`border rounded-none p-4 ${cls}`}>
       <div className="flex items-center justify-between mb-1">
         <span className="font-bold text-sm">{dti.statusLabel}</span>
         <span className="text-2xl font-bold">{dti.ratioPercent.toFixed(0)}%</span>
       </div>
       <div className="text-xs leading-relaxed">{dti.message}</div>
-      <div className="mt-2 bg-white/50 rounded-full h-2 overflow-hidden">
+      <div className="mt-2 bg-paper/50 rounded-full h-2 overflow-hidden">
         <div
           className={`h-2 rounded-full transition-all ${
             dti.status === 'safe' ? 'bg-green-500' :
@@ -234,29 +234,29 @@ function AllocationCard({ result, title, isOptimal, badge, onSelect, showInflati
 
   return (
     <div
-      className={`bg-white rounded-xl border-2 p-5 transition ${
+      className={`bg-paper rounded-none border-2 p-5 transition ${
         isOptimal
-          ? 'border-blue-500 shadow-lg'
-          : 'border-gray-200 hover:border-blue-300 cursor-pointer'
+          ? 'border-ink shadow-lg'
+          : 'border-ink/15 hover:border-ink/40 cursor-pointer'
       }`}
       onClick={onSelect}
     >
       <div className="flex items-start justify-between mb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h4 className="font-bold text-gray-900">{title}</h4>
+            <h4 className="font-bold text-ink">{title}</h4>
             {isOptimal && (
-              <span className="bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+              <span className="bg-ink text-cream text-xs px-2 py-0.5 rounded-full font-medium">
                 מומלץ
               </span>
             )}
             {badge && (
-              <span className="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">
+              <span className="bg-cream-2 text-ink/70 text-xs px-2 py-0.5 rounded-full">
                 {badge}
               </span>
             )}
           </div>
-          <p className="text-sm text-gray-500 mt-0.5">
+          <p className="text-sm text-ink/60 mt-0.5">
             ריבית ממוצעת: {result.weightedAvgRate.toFixed(2)}%
           </p>
         </div>
@@ -283,9 +283,9 @@ function AllocationCard({ result, title, isOptimal, badge, onSelect, showInflati
                 className="w-3 h-3 rounded-full flex-shrink-0"
                 style={{ backgroundColor: PIE_COLORS_LIST[i % PIE_COLORS_LIST.length] }}
               />
-              <span className="flex-1 text-gray-700">{a.trackName}</span>
-              <span className="text-gray-500 text-xs">{Math.round(a.percent * 100)}%</span>
-              <span className="font-medium text-gray-900">{formatCurrency(a.amount)}</span>
+              <span className="flex-1 text-ink/70">{a.trackName}</span>
+              <span className="text-ink/60 text-xs">{Math.round(a.percent * 100)}%</span>
+              <span className="font-medium text-ink">{formatCurrency(a.amount)}</span>
             </div>
           ))}
       </div>
@@ -319,19 +319,19 @@ function AllocationCard({ result, title, isOptimal, badge, onSelect, showInflati
       )}
 
       {/* תוצאות עיקריות */}
-      <div className="grid grid-cols-2 gap-3 pt-3 border-t border-gray-100">
+      <div className="grid grid-cols-2 gap-3 pt-3 border-t border-ink/15">
         <div className="text-center">
-          <p className="text-xs text-gray-500 mb-0.5">תשלום חודשי</p>
-          <p className="font-bold text-gray-900">{formatCurrency(result.monthlyPayment)}</p>
+          <p className="text-xs text-ink/60 mb-0.5">תשלום חודשי</p>
+          <p className="font-bold text-ink">{formatCurrency(result.monthlyPayment)}</p>
         </div>
         <div className="text-center">
-          <p className="text-xs text-gray-500 mb-0.5">סה"כ ריבית</p>
+          <p className="text-xs text-ink/60 mb-0.5">סה"כ ריבית</p>
           <p className="font-bold text-amber-700">{formatCurrency(result.totalCost)}</p>
         </div>
         {showInflation && result.indexedPercent > 0 && (
           <div className="text-center col-span-2">
-            <p className="text-xs text-gray-500 mb-0.5">% צמוד מדד</p>
-            <p className="font-medium text-gray-700">{Math.round(result.indexedPercent * 100)}%</p>
+            <p className="text-xs text-ink/60 mb-0.5">% צמוד מדד</p>
+            <p className="font-medium text-ink/70">{Math.round(result.indexedPercent * 100)}%</p>
           </div>
         )}
       </div>
@@ -354,47 +354,47 @@ interface ThreeOptionsCardProps {
 function ThreeOptionCard({ option, onSelect, isSelected, showInflation, totalAmount }: ThreeOptionsCardProps) {
   return (
     <div
-      className={`relative rounded-xl border-2 p-5 cursor-pointer transition-all ${
-        isSelected ? 'border-blue-500 bg-blue-50 shadow-lg' : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-md'
+      className={`relative rounded-none border-2 p-5 cursor-pointer transition-all ${
+        isSelected ? 'border-ink bg-cream-2 shadow-lg' : 'border-ink/15 bg-paper hover:border-ink/40 hover:shadow-md'
       }`}
       onClick={onSelect}
     >
       {isSelected && (
-        <div className="absolute -top-3 right-4 bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-bold">
+        <div className="absolute -top-3 right-4 bg-ink text-cream text-xs px-3 py-1 rounded-full font-bold">
           נבחר
         </div>
       )}
-      <h4 className="font-bold text-gray-900 text-base mb-1">{option.label}</h4>
-      <p className="text-xs text-gray-500 mb-3">{option.description}</p>
+      <h4 className="font-bold text-ink text-base mb-1">{option.label}</h4>
+      <p className="text-xs text-ink/60 mb-3">{option.description}</p>
 
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
-          <span className="text-gray-600">תשלום חודשי</span>
-          <span className="font-bold text-blue-700">{formatCurrency(option.monthlyPayment)}</span>
+          <span className="text-ink/70">תשלום חודשי</span>
+          <span className="font-bold text-ink">{formatCurrency(option.monthlyPayment)}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-gray-600">סה"כ ריבית</span>
+          <span className="text-ink/70">סה"כ ריבית</span>
           <span className="font-bold text-amber-700">{formatCurrency(option.totalCost)}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-gray-600">סה"כ תשלומים</span>
-          <span className="font-bold text-gray-800">{formatCurrency(option.totalPayments)}</span>
+          <span className="text-ink/70">סה"כ תשלומים</span>
+          <span className="font-bold text-ink">{formatCurrency(option.totalPayments)}</span>
         </div>
         {showInflation && option.indexedPercent > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">% צמוד מדד</span>
+            <span className="text-ink/70">% צמוד מדד</span>
             <span className="font-medium text-amber-600">{Math.round(option.indexedPercent * 100)}%</span>
           </div>
         )}
         <div className="flex justify-between text-sm">
-          <span className="text-gray-600">ציון סיכון</span>
+          <span className="text-ink/70">ציון סיכון</span>
           <span className={`font-bold ${option.riskScore < 30 ? 'text-green-600' : option.riskScore < 60 ? 'text-amber-600' : 'text-red-600'}`}>
             {option.riskScore}/100
           </span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-gray-600">ריבית ממוצעת</span>
-          <span className="font-medium text-gray-700">{option.weightedAvgRate.toFixed(2)}%</span>
+          <span className="text-ink/70">ריבית ממוצעת</span>
+          <span className="font-medium text-ink/70">{option.weightedAvgRate.toFixed(2)}%</span>
         </div>
       </div>
 
@@ -423,7 +423,7 @@ function ThreeOptionCard({ option, onSelect, isSelected, showInflation, totalAmo
         {option.allocation.filter((a) => a.amount > 0).map((a, i) => (
           <div key={a.trackId} className="flex items-center gap-1 text-xs">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PIE_COLORS_LIST[i % PIE_COLORS_LIST.length] }} />
-            <span className="flex-1 text-gray-600">{a.trackName}</span>
+            <span className="flex-1 text-ink/70">{a.trackName}</span>
             <span className="font-medium">{Math.round(a.percent * 100)}%</span>
           </div>
         ))}
@@ -487,22 +487,22 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
   return (
     <div className="space-y-6">
       {/* כותרת */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-        <h3 className="font-bold text-blue-900 text-lg mb-1">אופטימייזר תמהיל המשכנתא — V3</h3>
-        <p className="text-sm text-blue-700">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink text-lg mb-1">אופטימייזר תמהיל המשכנתא — V3</h3>
+        <p className="text-sm text-ink/70">
           כמו Excel Solver — מוצא את החלוקה המתמטית האופטימלית בין מסלולי המשכנתא למזעור העלות,
           הסיכון, או התשלום החודשי.
         </p>
         <div className="mt-2 flex flex-wrap gap-1.5">
           {['כשירות בנקאית', 'ריביות LTV', 'תקופת גרייס', 'מבחן עמידות', 'השוואת בנקים', 'לוח זמנים'].map((f) => (
-            <span key={f} className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full font-medium">{f}</span>
+            <span key={f} className="bg-ink/10 text-ink text-xs px-2 py-0.5 rounded-full font-medium">{f}</span>
           ))}
         </div>
       </div>
 
       {/* סכום */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-4">סכום המשכנתא</h3>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-4">סכום המשכנתא</h3>
         <NumericInput
           label='סה"כ סכום משכנתא (₪)'
           value={state.totalAmount}
@@ -518,10 +518,10 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
               key={a}
               type="button"
               onClick={() => onChange({ ...state, totalAmount: a })}
-              className={`px-3 py-1.5 text-sm rounded-lg border transition ${
+              className={`px-3 py-1.5 text-sm rounded-none border transition ${
                 state.totalAmount === a
-                  ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium'
-                  : 'border-gray-300 bg-white text-gray-600 hover:border-blue-300'
+                  ? 'border-ink bg-cream-2 text-ink font-medium'
+                  : 'border-ink/15 bg-paper text-ink/70 hover:border-ink/40'
               }`}
             >
               {formatCurrency(a)}
@@ -543,8 +543,8 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       </div>
 
       {/* אילוצי תקציב */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-4">אילוצי תקציב (אופציונלי)</h3>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-4">אילוצי תקציב (אופציונלי)</h3>
         <div className="grid sm:grid-cols-2 gap-4">
           <NumericInput
             label="תשלום חודשי מקסימלי (₪)"
@@ -568,21 +568,21 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
         </div>
 
         {state.maxMonthlyPayment > 0 && (
-          <div className="mt-3 bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
+          <div className="mt-3 bg-cream-2 border border-ink/15 rounded-none p-3 text-sm text-ink">
             <strong>הגבלת תשלום:</strong> תמהילים עם תשלום &gt; {formatCurrency(state.maxMonthlyPayment)}/חודש יסומנו כחורגים מהתקציב.
           </div>
         )}
         {state.maxTermYears > 0 && (
-          <div className="mt-2 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm text-amber-800">
+          <div className="mt-2 bg-amber-50 border border-amber-200 rounded-none p-3 text-sm text-amber-800">
             <strong>טיפ:</strong> תקופה קצרה = תשלום חודשי גבוה יותר אבל ריבית כוללת נמוכה משמעותית.
           </div>
         )}
       </div>
 
       {/* V3: LTV */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-1">שווי הנכס ו-LTV</h3>
-        <p className="text-xs text-gray-500 mb-4">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-1">שווי הנכס ו-LTV</h3>
+        <p className="text-xs text-ink/60 mb-4">
           הזן שווי הנכס לחישוב LTV ולקבלת ריביות מותאמות אוטומטית
         </p>
         <NumericInput
@@ -598,26 +598,26 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
           const ltv = state.totalAmount / state.propertyValue;
           const adj = getLTVRateAdjustment(ltv);
           const bandLabel = getLTVBandLabel(ltv);
-          const adjColor = adj < 0 ? 'text-green-700' : adj > 0 ? 'text-red-700' : 'text-gray-700';
-          const bandBg = adj < -0.25 ? 'bg-green-50 border-green-200' : adj < 0 ? 'bg-blue-50 border-blue-200' : adj === 0 ? 'bg-gray-50 border-gray-200' : 'bg-orange-50 border-orange-200';
+          const adjColor = adj < 0 ? 'text-green-700' : adj > 0 ? 'text-red-700' : 'text-ink/70';
+          const bandBg = adj < -0.25 ? 'bg-green-50 border-green-200' : adj < 0 ? 'bg-cream-2 border-ink/15' : adj === 0 ? 'bg-cream-2 border-ink/15' : 'bg-orange-50 border-orange-200';
           return (
-            <div className={`mt-3 border rounded-xl p-4 ${bandBg}`}>
+            <div className={`mt-3 border rounded-none p-4 ${bandBg}`}>
               <div className="flex items-center justify-between mb-1">
-                <span className="font-bold text-sm text-gray-800">LTV: {(ltv * 100).toFixed(1)}%</span>
+                <span className="font-bold text-sm text-ink">LTV: {(ltv * 100).toFixed(1)}%</span>
                 <span className={`text-sm font-bold ${adjColor}`}>
                   {adj > 0 ? '+' : ''}{adj.toFixed(2)}% לריבית
                 </span>
               </div>
-              <p className="text-xs text-gray-600">{bandLabel}</p>
+              <p className="text-xs text-ink/70">{bandLabel}</p>
               <div className="mt-2 flex items-center gap-2">
                 <input
                   type="checkbox"
                   id="applyLTV"
                   checked={state.applyLTVAdjustment}
                   onChange={(e) => onChange({ ...state, applyLTVAdjustment: e.target.checked })}
-                  className="accent-blue-600"
+                  className="accent-gold"
                 />
-                <label htmlFor="applyLTV" className="text-xs text-gray-700 cursor-pointer">
+                <label htmlFor="applyLTV" className="text-xs text-ink/70 cursor-pointer">
                   החל התאמת LTV אוטומטית על כל המסלולים
                 </label>
               </div>
@@ -632,7 +632,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                   );
                   if (savings.estimatedSavings > 0) {
                     return (
-                      <div className="mt-2 bg-green-50 border border-green-200 rounded-lg p-3 text-xs text-green-800">
+                      <div className="mt-2 bg-green-50 border border-green-200 rounded-none p-3 text-xs text-green-800">
                         <strong>טיפ:</strong> הוספת {formatCurrency(extra)} הון עצמי (LTV יורד ל-{(savings.newLtv * 100).toFixed(0)}%) תחסוך כ-{formatCurrency(savings.estimatedSavings)} לאורך חיי המשכנתא.
                       </div>
                     );
@@ -646,9 +646,9 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       </div>
 
       {/* DTI */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-1">בדיקת יחס החזר-הכנסה (DTI)</h3>
-        <p className="text-xs text-gray-500 mb-4">הזן הכנסה נטו משפחתית לקבלת המלצה</p>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-1">בדיקת יחס החזר-הכנסה (DTI)</h3>
+        <p className="text-xs text-ink/60 mb-4">הזן הכנסה נטו משפחתית לקבלת המלצה</p>
         <NumericInput
           label="הכנסה משפחתית נטו חודשית (₪)"
           value={state.netIncome}
@@ -665,41 +665,41 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       </div>
 
       {/* V3: Bank-Grade Affordability */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <button
           type="button"
           onClick={() => onChange({ ...state, showAffordability: !state.showAffordability })}
           className="flex items-center justify-between w-full"
         >
           <div>
-            <h3 className="font-bold text-gray-900">כשירות בנקאית מלאה</h3>
-            <p className="text-xs text-gray-500">חישוב מדויק כפי שהבנק מחשב — לפי הרכב משפחה וחובות</p>
+            <h3 className="font-bold text-ink">כשירות בנקאית מלאה</h3>
+            <p className="text-xs text-ink/60">חישוב מדויק כפי שהבנק מחשב — לפי הרכב משפחה וחובות</p>
           </div>
-          <span className="text-gray-400 text-lg">{state.showAffordability ? '▲' : '▼'}</span>
+          <span className="text-ink/45 text-lg">{state.showAffordability ? '▲' : '▼'}</span>
         </button>
 
         {state.showAffordability && (
           <div className="mt-4 space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">מצב משפחתי</label>
+                <label className="block text-sm font-medium text-ink/70 mb-1">מצב משפחתי</label>
                 <select
                   value={state.familyStatus}
                   onChange={(e) => onChange({ ...state, familyStatus: e.target.value as FamilyStatus })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
                 >
                   <option value="single">יחיד/ה</option>
                   <option value="couple">זוג</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">מספר ילדים</label>
+                <label className="block text-sm font-medium text-ink/70 mb-1">מספר ילדים</label>
                 <input
                   type="number"
                   min={0} max={10}
                   value={state.numChildren}
                   onChange={(e) => onChange({ ...state, numChildren: Number(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
                 />
               </div>
               <NumericInput
@@ -741,14 +741,14 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                                 aff.profileColor === 'red' ? 'text-red-800' : 'text-amber-800';
 
               return (
-                <div className={`border rounded-xl p-4 ${bgColor}`}>
+                <div className={`border rounded-none p-4 ${bgColor}`}>
                   <div className="flex items-center justify-between mb-3">
                     <span className={`font-bold text-sm ${textColor}`}>{aff.profileLabel}</span>
                     <span className={`text-xl font-bold ${textColor}`}>
                       כשירות: {formatCurrency(aff.maxMonthlyPayment)}/חודש
                     </span>
                   </div>
-                  <div className="space-y-1 text-xs text-gray-700">
+                  <div className="space-y-1 text-xs text-ink/70">
                     <div className="flex justify-between">
                       <span>הכנסה נטו</span>
                       <span className="font-medium">{formatCurrency(aff.breakdown.netIncome)}</span>
@@ -775,11 +775,11 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                     </div>
                     <div className="flex justify-between">
                       <span>גבול DTI ({aff.breakdown.dtiLimitPercent.toFixed(0)}%)</span>
-                      <span className="font-bold text-blue-700">{formatCurrency(aff.maxMonthlyPayment)}/חודש</span>
+                      <span className="font-bold text-ink">{formatCurrency(aff.maxMonthlyPayment)}/חודש</span>
                     </div>
                   </div>
                   {aff.warningMessage && (
-                    <div className="mt-2 bg-red-100 border border-red-300 rounded-lg p-2 text-xs text-red-800 font-medium">
+                    <div className="mt-2 bg-red-100 border border-red-300 rounded-none p-2 text-xs text-red-800 font-medium">
                       {aff.warningMessage}
                     </div>
                   )}
@@ -791,82 +791,82 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       </div>
 
       {/* עלויות נלוות */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <button
           type="button"
           onClick={() => onChange({ ...state, showClosingCosts: !state.showClosingCosts })}
           className="flex items-center justify-between w-full"
         >
-          <h3 className="font-bold text-gray-900">עלויות נלוות לחישוב</h3>
-          <span className="text-gray-400 text-lg">{state.showClosingCosts ? '▲' : '▼'}</span>
+          <h3 className="font-bold text-ink">עלויות נלוות לחישוב</h3>
+          <span className="text-ink/45 text-lg">{state.showClosingCosts ? '▲' : '▼'}</span>
         </button>
         {state.showClosingCosts && (
           <div className="mt-4 space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">אגרת עו"ד (%)</label>
+                <label className="block text-sm font-medium text-ink/70 mb-1">אגרת עו"ד (%)</label>
                 <div className="flex items-center gap-3">
                   <input type="range" min={0.3} max={1.5} step={0.05}
                     value={state.lawyerFeePercent}
                     onChange={(e) => onChange({ ...state, lawyerFeePercent: Number(e.target.value) })}
-                    className="flex-1 accent-blue-600"
+                    className="flex-1 accent-gold"
                   />
                   <span className="text-sm w-12 text-left">{state.lawyerFeePercent.toFixed(2)}%</span>
                 </div>
-                <p className="text-xs text-gray-400 mt-1">= {formatCurrency((state.lawyerFeePercent / 100) * state.totalAmount)}</p>
+                <p className="text-xs text-ink/45 mt-1">= {formatCurrency((state.lawyerFeePercent / 100) * state.totalAmount)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">אגרת שמאי (₪)</label>
+                <label className="block text-sm font-medium text-ink/70 mb-1">אגרת שמאי (₪)</label>
                 <input type="number" value={state.appraiserFee}
                   onChange={(e) => onChange({ ...state, appraiserFee: Number(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">אגרת פתיחה בבנק (%)</label>
+                <label className="block text-sm font-medium text-ink/70 mb-1">אגרת פתיחה בבנק (%)</label>
                 <div className="flex items-center gap-3">
                   <input type="range" min={0.1} max={0.75} step={0.025}
                     value={state.bankOpeningFeePercent}
                     onChange={(e) => onChange({ ...state, bankOpeningFeePercent: Number(e.target.value) })}
-                    className="flex-1 accent-blue-600"
+                    className="flex-1 accent-gold"
                   />
                   <span className="text-sm w-12 text-left">{state.bankOpeningFeePercent.toFixed(3)}%</span>
                 </div>
-                <p className="text-xs text-gray-400 mt-1">= {formatCurrency((state.bankOpeningFeePercent / 100) * state.totalAmount)}</p>
+                <p className="text-xs text-ink/45 mt-1">= {formatCurrency((state.bankOpeningFeePercent / 100) * state.totalAmount)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">ביטוח חיים (%/שנה)</label>
+                <label className="block text-sm font-medium text-ink/70 mb-1">ביטוח חיים (%/שנה)</label>
                 <div className="flex items-center gap-3">
                   <input type="range" min={0.03} max={0.20} step={0.005}
                     value={state.lifeInsurancePercent}
                     onChange={(e) => onChange({ ...state, lifeInsurancePercent: Number(e.target.value) })}
-                    className="flex-1 accent-blue-600"
+                    className="flex-1 accent-gold"
                   />
                   <span className="text-sm w-14 text-left">{state.lifeInsurancePercent.toFixed(3)}%</span>
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">ביטוח מבנה (₪/שנה)</label>
+                <label className="block text-sm font-medium text-ink/70 mb-1">ביטוח מבנה (₪/שנה)</label>
                 <div className="flex items-center gap-3">
                   <input type="range" min={400} max={2000} step={50}
                     value={state.buildingInsuranceAnnual}
                     onChange={(e) => onChange({ ...state, buildingInsuranceAnnual: Number(e.target.value) })}
-                    className="flex-1 accent-blue-600"
+                    className="flex-1 accent-gold"
                   />
                   <span className="text-sm w-20 text-left">{formatCurrency(state.buildingInsuranceAnnual)}</span>
                 </div>
               </div>
             </div>
             {closingCosts && (
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 mt-2">
-                <h4 className="font-bold text-gray-800 mb-3 text-sm">סיכום עלויות נלוות</h4>
+              <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mt-2">
+                <h4 className="font-bold text-ink mb-3 text-sm">סיכום עלויות נלוות</h4>
                 <div className="space-y-1 text-sm">
-                  <div className="flex justify-between"><span className="text-gray-600">אגרת עו"ד</span><span className="font-medium">{formatCurrency(closingCosts.lawyerFeeAmount)}</span></div>
-                  <div className="flex justify-between"><span className="text-gray-600">אגרת שמאי</span><span className="font-medium">{formatCurrency(closingCosts.appraiserFee)}</span></div>
-                  <div className="flex justify-between"><span className="text-gray-600">אגרת פתיחה בבנק</span><span className="font-medium">{formatCurrency(closingCosts.bankOpeningFeeAmount)}</span></div>
+                  <div className="flex justify-between"><span className="text-ink/70">אגרת עו"ד</span><span className="font-medium">{formatCurrency(closingCosts.lawyerFeeAmount)}</span></div>
+                  <div className="flex justify-between"><span className="text-ink/70">אגרת שמאי</span><span className="font-medium">{formatCurrency(closingCosts.appraiserFee)}</span></div>
+                  <div className="flex justify-between"><span className="text-ink/70">אגרת פתיחה בבנק</span><span className="font-medium">{formatCurrency(closingCosts.bankOpeningFeeAmount)}</span></div>
                   <div className="flex justify-between border-t pt-1 font-bold"><span>סה"כ עלויות חד-פעמיות</span><span className="text-red-700">{formatCurrency(closingCosts.totalClosingCosts)}</span></div>
-                  <div className="flex justify-between mt-1"><span className="text-gray-600">ביטוח חיים (שנתי)</span><span className="font-medium">{formatCurrency(closingCosts.lifeInsuranceAnnual)}</span></div>
-                  <div className="flex justify-between"><span className="text-gray-600">ביטוח מבנה (שנתי)</span><span className="font-medium">{formatCurrency(closingCosts.buildingInsuranceAnnual)}</span></div>
+                  <div className="flex justify-between mt-1"><span className="text-ink/70">ביטוח חיים (שנתי)</span><span className="font-medium">{formatCurrency(closingCosts.lifeInsuranceAnnual)}</span></div>
+                  <div className="flex justify-between"><span className="text-ink/70">ביטוח מבנה (שנתי)</span><span className="font-medium">{formatCurrency(closingCosts.buildingInsuranceAnnual)}</span></div>
                   <div className="flex justify-between border-t pt-1 font-bold"><span>סה"כ ביטוח שנתי</span><span className="text-amber-700">{formatCurrency(closingCosts.totalAnnualInsurance)}</span></div>
                 </div>
               </div>
@@ -876,8 +876,8 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       </div>
 
       {/* בחירת פריסט */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-4">נקודת התחלה</h3>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-4">נקודת התחלה</h3>
         <div className="grid sm:grid-cols-3 gap-3">
           {[
             {
@@ -906,14 +906,14 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
               key={opt.id}
               type="button"
               onClick={() => applyPreset(opt.id)}
-              className={`text-right p-4 rounded-xl border-2 transition ${
+              className={`text-right p-4 rounded-none border-2 transition ${
                 state.preset === opt.id
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 bg-white hover:border-blue-300'
+                  ? 'border-ink bg-cream-2'
+                  : 'border-ink/15 bg-paper hover:border-ink/40'
               }`}
             >
-              <div className="font-bold text-gray-900 text-sm">{opt.label}</div>
-              <div className="text-xs text-gray-500 mt-1">{opt.desc}</div>
+              <div className="font-bold text-ink text-sm">{opt.label}</div>
+              <div className="text-xs text-ink/60 mt-1">{opt.desc}</div>
               <div className={`text-xs mt-2 font-medium ${opt.riskColor}`}>
                 סיכון: {opt.risk}
               </div>
@@ -925,7 +925,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       <button
         type="button"
         onClick={onNext}
-        className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition"
+        className="w-full py-3 bg-ink text-cream rounded-none font-bold hover:bg-ink-deep transition"
       >
         הגדר מסלולים ←
       </button>
@@ -990,12 +990,12 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
     onChange(tracks.filter((t) => t.id !== id));
   }
 
-  const TRACK_COLORS_LIST = ['#2563eb', '#f59e0b', '#f97316', '#8b5cf6', '#10b981'];
+  const TRACK_COLORS_LIST = ['#102219', '#f59e0b', '#8E6824', '#D8B36A', '#10b981'];
   const hasLinked = hasInflationRelevance(tracks);
 
   return (
     <div className="space-y-5">
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+      <div className="bg-amber-50 border border-amber-200 rounded-none p-4">
         <p className="text-sm text-amber-800">
           <strong>הוסף/ערוך עד 5 מסלולים.</strong> בנק ישראל מחייב לפחות 33% בריבית קבועה
           (קל"צ או צמוד מדד). האופטימייזר ידאג לכך אוטומטית.
@@ -1006,7 +1006,7 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
           </p>
         )}
         {(maxTermYears ?? 0) > 0 && (
-          <p className="text-sm text-blue-800 mt-1">
+          <p className="text-sm text-ink/70 mt-1">
             <strong>מגבלת תקופה:</strong> מקסימום {maxTermYears} שנים לכל המסלולים.
           </p>
         )}
@@ -1018,7 +1018,7 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
         return (
           <div
             key={track.id}
-            className="bg-white border-2 rounded-xl p-5 space-y-4"
+            className="bg-paper border-2 rounded-none p-5 space-y-4"
             style={{ borderColor: color }}
           >
             <div className="flex items-center justify-between">
@@ -1028,7 +1028,7 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
                   type="text"
                   value={track.name}
                   onChange={(e) => updateTrack(track.id, 'name', e.target.value)}
-                  className="font-bold text-gray-900 bg-transparent border-b border-dashed border-gray-300 focus:border-blue-500 focus:outline-none text-base"
+                  className="font-bold text-ink bg-transparent border-b border-dashed border-ink/15 focus:border-gold focus:outline-none text-base"
                 />
               </div>
               {tracks.length > 1 && (
@@ -1044,11 +1044,11 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
 
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-2">
-                <label className="block text-xs font-medium text-gray-600 mb-1">סוג מסלול</label>
+                <label className="block text-xs font-medium text-ink/70 mb-1">סוג מסלול</label>
                 <select
                   value={track.type}
                   onChange={(e) => updateTrack(track.id, 'type', e.target.value as OptimizerTrackType)}
-                  className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
                 >
                   {(Object.keys(TRACK_TYPE_LABELS) as OptimizerTrackType[]).map((t) => (
                     <option key={t} value={t}>
@@ -1086,8 +1086,8 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
             </div>
 
             {/* V3: גרייס */}
-            <div className="pt-2 border-t border-gray-100">
-              <label className="block text-xs font-medium text-gray-600 mb-1">
+            <div className="pt-2 border-t border-ink/15">
+              <label className="block text-xs font-medium text-ink/70 mb-1">
                 תקופת גרייס (חודשים): <strong>{track.gracePeriodMonths ?? 0}</strong>
               </label>
               <input
@@ -1097,22 +1097,22 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
                 step={1}
                 value={track.gracePeriodMonths ?? 0}
                 onChange={(e) => updateTrack(track.id, 'gracePeriodMonths', Number(e.target.value))}
-                className="w-full accent-blue-600"
+                className="w-full accent-gold"
               />
               {(track.gracePeriodMonths ?? 0) > 0 && (() => {
                 const grace = calculateMonthlyPaymentWithGrace(1_000_000, track.rate, effectiveTerm, track.gracePeriodMonths ?? 0);
                 return (
-                  <p className="text-xs text-blue-700 mt-1">
+                  <p className="text-xs text-ink/70 mt-1">
                     בגרייס: {formatCurrency(grace.duringGrace)}/חודש | אחרי גרייס: {formatCurrency(grace.afterGrace)}/חודש (ל-1M ₪)
                   </p>
                 );
               })()}
               {(track.gracePeriodMonths ?? 0) === 0 && (
-                <p className="text-xs text-gray-400 mt-1">0 = ללא גרייס (שפיצר רגיל)</p>
+                <p className="text-xs text-ink/45 mt-1">0 = ללא גרייס (שפיצר רגיל)</p>
               )}
             </div>
 
-            <div className="flex items-center justify-between text-xs text-gray-500 pt-1 border-t border-gray-100">
+            <div className="flex items-center justify-between text-xs text-ink/60 pt-1 border-t border-ink/15">
               <span>
                 סיכון: <strong>{TRACK_RISK_LABELS[track.type]}</strong>
               </span>
@@ -1128,7 +1128,7 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
         <button
           type="button"
           onClick={addTrack}
-          className="w-full py-3 border-2 border-dashed border-blue-300 rounded-xl text-blue-600 hover:border-blue-500 hover:bg-blue-50 transition font-medium"
+          className="w-full py-3 border-2 border-dashed border-ink/30 rounded-none text-gold hover:border-gold hover:bg-paper-hover transition font-medium"
         >
           + הוסף מסלול (עד 5)
         </button>
@@ -1137,7 +1137,7 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
       <button
         type="button"
         onClick={onNext}
-        className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition"
+        className="w-full py-3 bg-ink text-cream rounded-none font-bold hover:bg-ink-deep transition"
       >
         הגדר מטרה ואילוצים ←
       </button>
@@ -1202,26 +1202,26 @@ function ObjectiveTab({
   return (
     <div className="space-y-6">
       {/* בחירת מטרה */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-4">מה רוצים לאופטם?</h3>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-4">מה רוצים לאופטם?</h3>
         <div className="space-y-3">
           {OBJECTIVE_OPTIONS.map((opt) => (
             <button
               key={opt.id}
               type="button"
               onClick={() => onObjectiveChange(opt.id)}
-              className={`w-full text-right p-4 rounded-xl border-2 transition flex items-start gap-3 ${
+              className={`w-full text-right p-4 rounded-none border-2 transition flex items-start gap-3 ${
                 objective === opt.id
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 bg-white hover:border-blue-300'
+                  ? 'border-ink bg-cream-2'
+                  : 'border-ink/15 bg-paper hover:border-ink/40'
               }`}
             >
               <span className="text-2xl mt-0.5 flex-shrink-0">{opt.emoji}</span>
               <div>
-                <div className={`font-bold text-sm ${objective === opt.id ? 'text-blue-800' : 'text-gray-900'}`}>
+                <div className={`font-bold text-sm ${objective === opt.id ? 'text-ink' : 'text-ink'}`}>
                   {opt.label}
                 </div>
-                <div className="text-xs text-gray-500 mt-0.5">{opt.desc}</div>
+                <div className="text-xs text-ink/60 mt-0.5">{opt.desc}</div>
               </div>
             </button>
           ))}
@@ -1230,8 +1230,8 @@ function ObjectiveTab({
 
       {/* סליידר סיכון-עלות (עבור balanced) */}
       {objective === 'balanced' && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-          <h3 className="font-bold text-gray-900 mb-3">רמת שמרנות</h3>
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+          <h3 className="font-bold text-ink mb-3">רמת שמרנות</h3>
           <div className="space-y-3">
             <input
               type="range"
@@ -1240,11 +1240,11 @@ function ObjectiveTab({
               step={0.1}
               value={riskAversion}
               onChange={(e) => onRiskAversionChange(Number(e.target.value))}
-              className="w-full accent-blue-600"
+              className="w-full accent-gold"
             />
-            <div className="flex justify-between text-xs text-gray-500">
+            <div className="flex justify-between text-xs text-ink/60">
               <span>מקסימלי — עלות נמוכה</span>
-              <span className="font-medium text-blue-700">
+              <span className="font-medium text-ink">
                 {riskAversion < 0.3
                   ? 'אגרסיבי'
                   : riskAversion < 0.6
@@ -1258,24 +1258,24 @@ function ObjectiveTab({
       )}
 
       {/* אילוצים */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-4">אילוצים</h3>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-4">אילוצים</h3>
 
         <div className="space-y-4">
           {/* אילוץ בנק ישראל - קבוע */}
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-between p-3 bg-cream-2 rounded-none">
             <div>
-              <p className="text-sm font-medium text-gray-800">מינימום 33% ריבית קבועה</p>
-              <p className="text-xs text-gray-500">הוראת בנק ישראל — לא ניתן לשנות</p>
+              <p className="text-sm font-medium text-ink">מינימום 33% ריבית קבועה</p>
+              <p className="text-xs text-ink/60">הוראת בנק ישראל — לא ניתן לשנות</p>
             </div>
-            <span className="bg-gray-300 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">
+            <span className="bg-ink/20 text-ink text-xs px-3 py-1 rounded-full font-medium">
               33% מינימום
             </span>
           </div>
 
           {/* מקסימום % למסלול בודד */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               מקסימום % למסלול בודד
             </label>
             <div className="flex items-center gap-3">
@@ -1286,9 +1286,9 @@ function ObjectiveTab({
                 step={0.05}
                 value={constraints.maxPerTrackPercent ?? 0.8}
                 onChange={(e) => updC('maxPerTrackPercent', Number(e.target.value))}
-                className="flex-1 accent-blue-600"
+                className="flex-1 accent-gold"
               />
-              <span className="text-sm font-medium text-gray-900 w-12 text-left">
+              <span className="text-sm font-medium text-ink w-12 text-left">
                 {Math.round((constraints.maxPerTrackPercent ?? 0.8) * 100)}%
               </span>
             </div>
@@ -1296,7 +1296,7 @@ function ObjectiveTab({
 
           {/* מקסימום % צמוד מדד */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               מקסימום % צמוד מדד
             </label>
             <div className="flex items-center gap-3">
@@ -1307,9 +1307,9 @@ function ObjectiveTab({
                 step={0.05}
                 value={constraints.maxIndexedPercent ?? 0.6}
                 onChange={(e) => updC('maxIndexedPercent', Number(e.target.value))}
-                className="flex-1 accent-blue-600"
+                className="flex-1 accent-gold"
               />
-              <span className="text-sm font-medium text-gray-900 w-12 text-left">
+              <span className="text-sm font-medium text-ink w-12 text-left">
                 {Math.round((constraints.maxIndexedPercent ?? 0.6) * 100)}%
               </span>
             </div>
@@ -1318,17 +1318,17 @@ function ObjectiveTab({
       </div>
 
       {/* תכנון פירעונות מוקדמים */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-2">תכנון פירעונות מוקדמים</h3>
-        <p className="text-xs text-gray-500 mb-4">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-2">תכנון פירעונות מוקדמים</h3>
+        <p className="text-xs text-ink/60 mb-4">
           הוסף פירעונות מוקדמים מתוכננים (ירושה, קרן השתלמות, בונוס). המחשבון יחשב חיסכון בריבית ותאריך סיום מוקדם.
         </p>
 
         <div className="space-y-3">
           {prepayments.map((pp, idx) => (
-            <div key={pp.id} className="border border-gray-200 rounded-xl p-4 bg-gray-50 space-y-3">
+            <div key={pp.id} className="border border-ink/15 rounded-none p-4 bg-cream-2 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-700 text-sm">פירעון {idx + 1}</span>
+                <span className="font-medium text-ink/70 text-sm">פירעון {idx + 1}</span>
                 <button
                   type="button"
                   onClick={() => removePrepayment(pp.id)}
@@ -1339,41 +1339,41 @@ function ObjectiveTab({
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">תיאור</label>
+                  <label className="block text-xs font-medium text-ink/70 mb-1">תיאור</label>
                   <input
                     type="text"
                     value={pp.description}
                     onChange={(e) => updatePrepayment(pp.id, 'description', e.target.value)}
                     placeholder="קרן השתלמות, ירושה..."
-                    className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                    className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">בשנה מספר</label>
+                  <label className="block text-xs font-medium text-ink/70 mb-1">בשנה מספר</label>
                   <input
                     type="number"
                     value={pp.yearNumber}
                     min={1} max={30}
                     onChange={(e) => updatePrepayment(pp.id, 'yearNumber', Number(e.target.value))}
-                    className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                    className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">סכום (₪)</label>
+                  <label className="block text-xs font-medium text-ink/70 mb-1">סכום (₪)</label>
                   <input
                     type="number"
                     value={pp.amount}
                     min={10000} step={10000}
                     onChange={(e) => updatePrepayment(pp.id, 'amount', Number(e.target.value))}
-                    className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                    className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">החל על מסלול</label>
+                  <label className="block text-xs font-medium text-ink/70 mb-1">החל על מסלול</label>
                   <select
                     value={pp.trackId}
                     onChange={(e) => updatePrepayment(pp.id, 'trackId', e.target.value)}
-                    className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                    className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                   >
                     <option value="auto">אוטומטי (ריבית גבוהה)</option>
                     {tracks.map((t) => (
@@ -1389,13 +1389,13 @@ function ObjectiveTab({
         <button
           type="button"
           onClick={addPrepayment}
-          className="w-full mt-3 py-2.5 border-2 border-dashed border-green-300 rounded-xl text-green-600 hover:border-green-500 hover:bg-green-50 transition font-medium text-sm"
+          className="w-full mt-3 py-2.5 border-2 border-dashed border-green-300 rounded-none text-green-600 hover:border-green-500 hover:bg-green-50 transition font-medium text-sm"
         >
           + הוסף פירעון מוקדם
         </button>
 
         {prepayments.length > 0 && (
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-ink/60 mt-2">
             סה"כ פירעונות מתוכננים: {formatCurrency(prepayments.reduce((s, p) => s + p.amount, 0))}
           </p>
         )}
@@ -1405,10 +1405,10 @@ function ObjectiveTab({
         type="button"
         onClick={onRun}
         disabled={isRunning}
-        className={`w-full py-4 rounded-xl font-bold text-lg transition ${
+        className={`w-full py-4 rounded-none font-bold text-lg transition ${
           isRunning
-            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            : 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl'
+            ? 'bg-ink/20 text-ink/50 cursor-not-allowed'
+            : 'bg-ink text-cream hover:bg-ink-deep shadow-lg hover:shadow-xl'
         }`}
       >
         {isRunning ? 'מחשב תמהיל אופטימלי...' : 'הפעל אופטימייזר ←'}
@@ -1449,7 +1449,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
       name: 'אופטימלי',
       'ריבית כוללת': Math.round(optimal.totalCost),
       'תשלום חודשי': Math.round(optimal.monthlyPayment),
-      fill: '#2563eb',
+      fill: '#102219',
     },
     ...(defaultMixResult
       ? [
@@ -1485,9 +1485,9 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
 
       {/* 3 אפשרויות — HERO SECTION */}
       {threeOptions && (
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">3 אפשרויות להשוואה</h3>
-          <p className="text-sm text-gray-500 mb-5">בחר את האפשרות שמתאימה לצרכים שלך</p>
+        <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6">
+          <h3 className="text-xl font-bold text-ink mb-2">3 אפשרויות להשוואה</h3>
+          <p className="text-sm text-ink/60 mb-5">בחר את האפשרות שמתאימה לצרכים שלך</p>
           <div className="grid md:grid-cols-3 gap-4">
             <ThreeOptionCard
               option={threeOptions.lowestMonthly}
@@ -1513,39 +1513,39 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
           </div>
 
           {/* השוואה מהירה */}
-          <div className="mt-4 bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div className="mt-4 bg-paper rounded-none border border-ink/15 overflow-hidden">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 border-b">
-                  <th className="text-right py-2 px-3 font-medium text-gray-600">מדד</th>
-                  <th className="text-center py-2 px-2 font-medium text-blue-700">תשלום מינימלי</th>
-                  <th className="text-center py-2 px-2 font-medium text-purple-700">מאוזן</th>
+                <tr className="bg-cream-2 border-b">
+                  <th className="text-right py-2 px-3 font-medium text-ink/70">מדד</th>
+                  <th className="text-center py-2 px-2 font-medium text-ink">תשלום מינימלי</th>
+                  <th className="text-center py-2 px-2 font-medium text-gold">מאוזן</th>
                   <th className="text-center py-2 px-2 font-medium text-green-700">עלות מינימלית</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b">
-                  <td className="py-2 px-3 text-gray-600">תשלום חודשי</td>
-                  <td className="py-2 px-2 text-center font-bold text-blue-700">{formatCurrency(threeOptions.lowestMonthly.monthlyPayment)}</td>
-                  <td className="py-2 px-2 text-center font-bold text-purple-700">{formatCurrency(threeOptions.balanced.monthlyPayment)}</td>
+                  <td className="py-2 px-3 text-ink/70">תשלום חודשי</td>
+                  <td className="py-2 px-2 text-center font-bold text-ink">{formatCurrency(threeOptions.lowestMonthly.monthlyPayment)}</td>
+                  <td className="py-2 px-2 text-center font-bold text-gold">{formatCurrency(threeOptions.balanced.monthlyPayment)}</td>
                   <td className="py-2 px-2 text-center font-bold text-green-700">{formatCurrency(threeOptions.lowestCost.monthlyPayment)}</td>
                 </tr>
-                <tr className="border-b bg-gray-50">
-                  <td className="py-2 px-3 text-gray-600">סה"כ ריבית</td>
-                  <td className="py-2 px-2 text-center text-blue-700">{formatCurrency(threeOptions.lowestMonthly.totalCost)}</td>
-                  <td className="py-2 px-2 text-center text-purple-700">{formatCurrency(threeOptions.balanced.totalCost)}</td>
+                <tr className="border-b bg-cream-2">
+                  <td className="py-2 px-3 text-ink/70">סה"כ ריבית</td>
+                  <td className="py-2 px-2 text-center text-ink">{formatCurrency(threeOptions.lowestMonthly.totalCost)}</td>
+                  <td className="py-2 px-2 text-center text-gold">{formatCurrency(threeOptions.balanced.totalCost)}</td>
                   <td className="py-2 px-2 text-center text-green-700 font-bold">{formatCurrency(threeOptions.lowestCost.totalCost)}</td>
                 </tr>
                 <tr className="border-b">
-                  <td className="py-2 px-3 text-gray-600">סה"כ תשלומים</td>
-                  <td className="py-2 px-2 text-center text-blue-700">{formatCurrency(threeOptions.lowestMonthly.totalPayments)}</td>
-                  <td className="py-2 px-2 text-center text-purple-700">{formatCurrency(threeOptions.balanced.totalPayments)}</td>
+                  <td className="py-2 px-3 text-ink/70">סה"כ תשלומים</td>
+                  <td className="py-2 px-2 text-center text-ink">{formatCurrency(threeOptions.lowestMonthly.totalPayments)}</td>
+                  <td className="py-2 px-2 text-center text-gold">{formatCurrency(threeOptions.balanced.totalPayments)}</td>
                   <td className="py-2 px-2 text-center text-green-700">{formatCurrency(threeOptions.lowestCost.totalPayments)}</td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-3 text-gray-600">ציון סיכון</td>
-                  <td className="py-2 px-2 text-center text-blue-700">{threeOptions.lowestMonthly.riskScore}/100</td>
-                  <td className="py-2 px-2 text-center text-purple-700">{threeOptions.balanced.riskScore}/100</td>
+                  <td className="py-2 px-3 text-ink/70">ציון סיכון</td>
+                  <td className="py-2 px-2 text-center text-ink">{threeOptions.lowestMonthly.riskScore}/100</td>
+                  <td className="py-2 px-2 text-center text-gold">{threeOptions.balanced.riskScore}/100</td>
                   <td className="py-2 px-2 text-center text-green-700">{threeOptions.lowestCost.riskScore}/100</td>
                 </tr>
               </tbody>
@@ -1556,15 +1556,15 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
 
       {/* DTI */}
       {dti && dti.netIncome > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h4 className="font-bold text-gray-900 mb-3">בדיקת יחס החזר-הכנסה (DTI)</h4>
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+          <h4 className="font-bold text-ink mb-3">בדיקת יחס החזר-הכנסה (DTI)</h4>
           <DTIBadge dti={dti} />
         </div>
       )}
 
       {/* אזהרת תקציב */}
       {exceedsBudget && (
-        <div className="bg-red-50 border-2 border-red-300 rounded-xl p-5">
+        <div className="bg-red-50 border-2 border-red-300 rounded-none p-5">
           <p className="font-bold text-red-800 mb-1">חריגה מתקציב!</p>
           <p className="text-sm text-red-700">
             התשלום החודשי האופטימלי ({formatCurrency(optimal.monthlyPayment)}) חורג מהמגבלה שהגדרת ({formatCurrency(maxMonthlyPayment!)}).
@@ -1580,10 +1580,10 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
       )}
 
       {/* Hero - תמהיל אופטימלי */}
-      <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 rounded-xl p-6">
+      <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6">
         <div className="flex items-center gap-2 mb-4">
           <span className="text-2xl">🏆</span>
-          <h3 className="text-xl font-bold text-blue-900">התמהיל האופטימלי</h3>
+          <h3 className="text-xl font-bold text-ink">התמהיל האופטימלי</h3>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -1623,9 +1623,9 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
                       className="w-3 h-3 rounded-full flex-shrink-0"
                       style={{ backgroundColor: PIE_COLORS_LIST[i % PIE_COLORS_LIST.length] }}
                     />
-                    <span className="flex-1 font-medium text-gray-800">{a.trackName}</span>
-                    <span className="text-gray-500">{Math.round(a.percent * 100)}%</span>
-                    <span className="font-bold text-gray-900">{formatCurrency(a.amount)}</span>
+                    <span className="flex-1 font-medium text-ink">{a.trackName}</span>
+                    <span className="text-ink/60">{Math.round(a.percent * 100)}%</span>
+                    <span className="font-bold text-ink">{formatCurrency(a.amount)}</span>
                   </div>
                 ))}
             </div>
@@ -1633,28 +1633,28 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
 
           {/* מדדים עיקריים */}
           <div className="space-y-3">
-            <div className="bg-white rounded-xl p-4 border border-blue-200">
-              <p className="text-xs text-gray-500 mb-1">תשלום חודשי ראשוני</p>
-              <p className="text-3xl font-bold text-blue-700">{formatCurrency(optimal.monthlyPayment)}</p>
+            <div className="bg-paper rounded-none p-4 border border-ink/15">
+              <p className="text-xs text-ink/60 mb-1">תשלום חודשי ראשוני</p>
+              <p className="text-3xl font-bold text-ink">{formatCurrency(optimal.monthlyPayment)}</p>
             </div>
-            <div className="bg-white rounded-xl p-4 border border-amber-200">
-              <p className="text-xs text-gray-500 mb-1">סה"כ ריבית לכל חיי המשכנתא</p>
+            <div className="bg-paper rounded-none p-4 border border-amber-200">
+              <p className="text-xs text-ink/60 mb-1">סה"כ ריבית לכל חיי המשכנתא</p>
               <p className="text-2xl font-bold text-amber-700">{formatCurrency(optimal.totalCost)}</p>
             </div>
             {showInflation && optimal.indexedPercent > 0 && (
-              <div className="bg-white rounded-xl p-4 border border-yellow-200">
-                <p className="text-xs text-gray-500 mb-1">% צמוד מדד (חשיפת אינפלציה)</p>
+              <div className="bg-paper rounded-none p-4 border border-yellow-200">
+                <p className="text-xs text-ink/60 mb-1">% צמוד מדד (חשיפת אינפלציה)</p>
                 <p className="text-2xl font-bold text-yellow-700">{Math.round(optimal.indexedPercent * 100)}%</p>
               </div>
             )}
-            <div className="bg-white rounded-xl p-4 border border-gray-200">
-              <p className="text-xs text-gray-500 mb-1">ריבית ממוצעת משוקללת</p>
-              <p className="text-2xl font-bold text-gray-800">{optimal.weightedAvgRate.toFixed(2)}%</p>
+            <div className="bg-paper rounded-none p-4 border border-ink/15">
+              <p className="text-xs text-ink/60 mb-1">ריבית ממוצעת משוקללת</p>
+              <p className="text-2xl font-bold text-ink">{optimal.weightedAvgRate.toFixed(2)}%</p>
             </div>
 
             <div className="flex gap-2">
               <div
-                className={`flex-1 text-center p-3 rounded-lg ${
+                className={`flex-1 text-center p-3 rounded-none ${
                   optimal.riskScore < 30
                     ? 'bg-green-50 border border-green-200'
                     : optimal.riskScore < 60
@@ -1662,7 +1662,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
                     : 'bg-red-50 border border-red-200'
                 }`}
               >
-                <p className="text-xs text-gray-500 mb-0.5">ציון סיכון</p>
+                <p className="text-xs text-ink/60 mb-0.5">ציון סיכון</p>
                 <p
                   className={`text-xl font-bold ${
                     optimal.riskScore < 30
@@ -1676,13 +1676,13 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
                 </p>
               </div>
               <div
-                className={`flex-1 text-center p-3 rounded-lg ${
+                className={`flex-1 text-center p-3 rounded-none ${
                   optimal.isRegulationCompliant
                     ? 'bg-green-50 border border-green-200'
                     : 'bg-red-50 border border-red-200'
                 }`}
               >
-                <p className="text-xs text-gray-500 mb-0.5">תקנות בנק ישראל</p>
+                <p className="text-xs text-ink/60 mb-0.5">תקנות בנק ישראל</p>
                 <p
                   className={`text-lg font-bold ${
                     optimal.isRegulationCompliant ? 'text-green-700' : 'text-red-700'
@@ -1698,19 +1698,19 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
 
       {/* פירעונות מוקדמים */}
       {hasPrepayments && prepayoffResult && (
-        <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6">
+        <div className="bg-green-50 border-2 border-green-200 rounded-none p-6">
           <h3 className="text-lg font-bold text-green-900 mb-4">השפעת פירעונות מוקדמים</h3>
           <div className="grid sm:grid-cols-3 gap-4 mb-4">
-            <div className="bg-white rounded-xl p-4 text-center border border-green-200">
-              <p className="text-xs text-gray-500 mb-1">חיסכון בריבית</p>
+            <div className="bg-paper rounded-none p-4 text-center border border-green-200">
+              <p className="text-xs text-ink/60 mb-1">חיסכון בריבית</p>
               <p className="text-2xl font-bold text-green-700">{formatCurrency(prepayoffResult.totalInterestSaved)}</p>
             </div>
-            <div className="bg-white rounded-xl p-4 text-center border border-green-200">
-              <p className="text-xs text-gray-500 mb-1">ריבית ללא פירעונות</p>
-              <p className="text-xl font-bold text-gray-700">{formatCurrency(prepayoffResult.totalOriginalInterest)}</p>
+            <div className="bg-paper rounded-none p-4 text-center border border-green-200">
+              <p className="text-xs text-ink/60 mb-1">ריבית ללא פירעונות</p>
+              <p className="text-xl font-bold text-ink/70">{formatCurrency(prepayoffResult.totalOriginalInterest)}</p>
             </div>
-            <div className="bg-white rounded-xl p-4 text-center border border-green-200">
-              <p className="text-xs text-gray-500 mb-1">ריבית עם פירעונות</p>
+            <div className="bg-paper rounded-none p-4 text-center border border-green-200">
+              <p className="text-xs text-ink/60 mb-1">ריבית עם פירעונות</p>
               <p className="text-xl font-bold text-green-700">{formatCurrency(prepayoffResult.totalNewInterest)}</p>
             </div>
           </div>
@@ -1739,7 +1739,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
               <div className="space-y-2">
                 {prepayoffResult.trackResults.flatMap((r) =>
                   r.prepaymentEvents.map((ev, i) => (
-                    <div key={`${r.trackId}-${i}`} className="bg-white rounded-lg p-3 border border-green-100 text-sm">
+                    <div key={`${r.trackId}-${i}`} className="bg-paper rounded-none p-3 border border-green-100 text-sm">
                       <span className="font-medium text-green-700">שנה {ev.year} — {r.trackName}: </span>
                       <span>פירעון {formatCurrency(ev.amount)} | יתרה {formatCurrency(ev.balanceBefore)} ← {formatCurrency(ev.balanceAfter)}</span>
                     </div>
@@ -1753,17 +1753,17 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
 
       {/* עלויות נלוות */}
       {closingCosts && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h4 className="font-bold text-gray-900 mb-3">ALL-IN Cost — עלות כוללת כולל הוצאות נלוות</h4>
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+          <h4 className="font-bold text-ink mb-3">ALL-IN Cost — עלות כוללת כולל הוצאות נלוות</h4>
           <div className="space-y-2 text-sm">
-            <div className="flex justify-between"><span className="text-gray-600">סה"כ קרן</span><span className="font-medium">{formatCurrency(totalAmount)}</span></div>
-            <div className="flex justify-between"><span className="text-gray-600">סה"כ ריבית</span><span className="font-medium text-amber-700">{formatCurrency(optimal.totalCost)}</span></div>
-            <div className="flex justify-between"><span className="text-gray-600">עלויות חד-פעמיות</span><span className="font-medium text-red-600">{formatCurrency(closingCosts.totalClosingCosts)}</span></div>
+            <div className="flex justify-between"><span className="text-ink/70">סה"כ קרן</span><span className="font-medium">{formatCurrency(totalAmount)}</span></div>
+            <div className="flex justify-between"><span className="text-ink/70">סה"כ ריבית</span><span className="font-medium text-amber-700">{formatCurrency(optimal.totalCost)}</span></div>
+            <div className="flex justify-between"><span className="text-ink/70">עלויות חד-פעמיות</span><span className="font-medium text-red-600">{formatCurrency(closingCosts.totalClosingCosts)}</span></div>
             <div className="flex justify-between border-t pt-2 font-bold text-base">
               <span>ALL-IN סה"כ</span>
               <span className="text-red-700">{formatCurrency(totalAmount + optimal.totalCost + closingCosts.totalClosingCosts)}</span>
             </div>
-            <div className="flex justify-between text-xs text-gray-500"><span>ביטוח שנתי (ממוצע)</span><span>{formatCurrency(closingCosts.totalAnnualInsurance)}/שנה</span></div>
+            <div className="flex justify-between text-xs text-ink/60"><span>ביטוח שנתי (ממוצע)</span><span>{formatCurrency(closingCosts.totalAnnualInsurance)}/שנה</span></div>
           </div>
         </div>
       )}
@@ -1772,7 +1772,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
       {(savingsVsDefault !== undefined || savingsVsBank !== undefined) && (
         <div className="grid sm:grid-cols-2 gap-4">
           {savingsVsDefault !== undefined && savingsVsDefault > 0 && (
-            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-5">
+            <div className="bg-green-50 border-2 border-green-200 rounded-none p-5">
               <p className="text-sm font-medium text-green-700 mb-1">חיסכון לעומת תמהיל שווה</p>
               <p className="text-3xl font-bold text-green-800">{formatCurrency(savingsVsDefault)}</p>
               <p className="text-xs text-green-600 mt-1">
@@ -1781,7 +1781,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
             </div>
           )}
           {savingsVsBank !== undefined && savingsVsBank > 0 && (
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-5">
+            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-none p-5">
               <p className="text-sm font-medium text-emerald-700 mb-1">חיסכון לעומת הצעת הבנק</p>
               <p className="text-3xl font-bold text-emerald-800">{formatCurrency(savingsVsBank)}</p>
               <p className="text-xs text-emerald-600 mt-1">ריבית פחות לאורך כל חיי המשכנתא</p>
@@ -1792,8 +1792,8 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
 
       {/* גרף השוואה */}
       {comparisonData.length > 1 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">השוואה לתמהילים אחרים</h3>
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+          <h3 className="text-lg font-bold text-ink mb-4">השוואה לתמהילים אחרים</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={comparisonData}>
@@ -1803,7 +1803,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
                 <Tooltip formatter={(v) => formatCurrency(Number(v))} />
                 <Legend />
                 <Bar dataKey="ריבית כוללת" fill="#ef4444" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="תשלום חודשי" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="תשלום חודשי" fill="#102219" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -1811,15 +1811,15 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
       )}
 
       {/* המלצה */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-        <h4 className="font-bold text-blue-900 mb-2">המלצת המערכת</h4>
-        <p className="text-sm text-blue-800 leading-relaxed">{result.recommendation}</p>
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h4 className="font-bold text-ink mb-2">המלצת המערכת</h4>
+        <p className="text-sm text-ink leading-relaxed">{result.recommendation}</p>
       </div>
 
       {/* חלופות */}
       {alternatives.length > 0 && (
         <div>
-          <h3 className="text-lg font-bold text-gray-900 mb-4">תמהילים חלופיים</h3>
+          <h3 className="text-lg font-bold text-ink mb-4">תמהילים חלופיים</h3>
           <div className="grid sm:grid-cols-2 gap-4">
             {alternatives.map((alt, i) => (
               <AllocationCard
@@ -1916,7 +1916,7 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
   };
 
   const scenarioLines = [
-    { label: 'בסיס (ריבית כיום)', primeShock: 0, inflation: showInflation ? AVG_INFLATION_ISRAEL : 0, color: '#2563eb' },
+    { label: 'בסיס (ריבית כיום)', primeShock: 0, inflation: showInflation ? AVG_INFLATION_ISRAEL : 0, color: '#102219' },
     { label: 'ריבית עולה +2%', primeShock: 2, inflation: showInflation ? AVG_INFLATION_ISRAEL : 0, color: '#ef4444' },
     { label: 'ריבית יורדת -2%', primeShock: -2, inflation: showInflation ? AVG_INFLATION_ISRAEL : 0, color: '#10b981' },
     ...(showInflation ? [{ label: 'אינפלציה 4%', primeShock: 0, inflation: 4.0, color: '#f59e0b' }] : []),
@@ -1940,15 +1940,15 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
   return (
     <div className="space-y-6">
       {!showInflation && (
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm text-ink">
           <strong>שים לב:</strong> אין מסלולים צמודים בתמהיל — ניתוח אינפלציה מוסתר. ריבית קבועה = עלות ידועה מראש.
         </div>
       )}
 
       {/* גרף תשלומים לאורך זמן */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-2">התפתחות תשלום חודשי לאורך זמן</h3>
-        <p className="text-sm text-gray-500 mb-4">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="text-lg font-bold text-ink mb-2">התפתחות תשלום חודשי לאורך זמן</h3>
+        <p className="text-sm text-ink/60 mb-4">
           השוואת תשלומים בתרחישי ריבית{showInflation ? ' ואינפלציה' : ''} שונים
         </p>
         <div className="h-72">
@@ -1975,23 +1975,23 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
       </div>
 
       {/* טבלת תרחישים */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">ניתוח תרחישי סיכון</h3>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="text-lg font-bold text-ink mb-4">ניתוח תרחישי סיכון</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-right py-2 pr-2 font-medium text-gray-600">תרחיש</th>
-                <th className="text-left py-2 pl-2 font-medium text-gray-600">תשלום חודשי</th>
-                <th className="text-left py-2 pl-2 font-medium text-gray-600">שינוי מבסיס</th>
-                <th className="text-left py-2 pl-2 font-medium text-gray-600">עלות כוללת</th>
+              <tr className="border-b border-ink/15">
+                <th className="text-right py-2 pr-2 font-medium text-ink/70">תרחיש</th>
+                <th className="text-left py-2 pl-2 font-medium text-ink/70">תשלום חודשי</th>
+                <th className="text-left py-2 pl-2 font-medium text-ink/70">שינוי מבסיס</th>
+                <th className="text-left py-2 pl-2 font-medium text-ink/70">עלות כוללת</th>
               </tr>
             </thead>
             <tbody>
               {filteredScenarios.map((sc, i) => (
-                <tr key={i} className={`border-b border-gray-100 ${i % 2 === 0 ? 'bg-gray-50' : ''}`}>
-                  <td className="py-2 pr-2 text-gray-700">{sc.name}</td>
-                  <td className="py-2 pl-2 text-right text-gray-900 font-medium">
+                <tr key={i} className={`border-b border-ink/15 ${i % 2 === 0 ? 'bg-cream-2' : ''}`}>
+                  <td className="py-2 pr-2 text-ink/70">{sc.name}</td>
+                  <td className="py-2 pl-2 text-right text-ink font-medium">
                     {formatCurrency(sc.monthlyPaymentYear1)}
                   </td>
                   <td className={`py-2 pl-2 text-right font-medium ${
@@ -1999,7 +1999,7 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
                       ? 'text-red-600'
                       : sc.deltaFromBase < -500
                       ? 'text-green-600'
-                      : 'text-gray-500'
+                      : 'text-ink/60'
                   }`}>
                     {sc.deltaFromBase > 0 ? '+' : ''}
                     {formatCurrency(sc.deltaFromBase)}
@@ -2016,9 +2016,9 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
 
       {/* Pareto Frontier */}
       {result.paretoFrontier && result.paretoFrontier.length > 1 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-2">קיצת פארטו: עלות vs. סיכון</h3>
-          <p className="text-sm text-gray-500 mb-4">
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+          <h3 className="text-lg font-bold text-ink mb-2">קיצת פארטו: עלות vs. סיכון</h3>
+          <p className="text-sm text-ink/60 mb-4">
             כל נקודה היא תמהיל שלא ניתן לשפר בשני הממדים בו-זמנית
           </p>
           <div className="h-60">
@@ -2036,9 +2036,9 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
                 <Line
                   type="monotone"
                   dataKey="ציון סיכון"
-                  stroke="#8b5cf6"
+                  stroke="#102219"
                   strokeWidth={2}
-                  dot={{ r: 5, fill: '#8b5cf6' }}
+                  dot={{ r: 5, fill: '#102219' }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -2048,10 +2048,10 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
 
       {/* סיכום ציון סיכון */}
       <div className="grid sm:grid-cols-3 gap-4">
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
-          <p className="text-sm text-blue-700 mb-1">ציון סיכון</p>
-          <p className="text-3xl font-bold text-blue-900">{optimal.riskScore}/100</p>
-          <p className="text-xs text-blue-600 mt-1">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
+          <p className="text-sm text-ink/70 mb-1">ציון סיכון</p>
+          <p className="text-3xl font-bold text-ink">{optimal.riskScore}/100</p>
+          <p className="text-xs text-ink/60 mt-1">
             {optimal.riskScore < 30
               ? 'נמוך — תמהיל מוגן'
               : optimal.riskScore < 60
@@ -2059,14 +2059,14 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
               : 'גבוה — שמור רזרבה!'}
           </p>
         </div>
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-center">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-center">
           <p className="text-sm text-amber-700 mb-1">% קבוע (בנק ישראל)</p>
           <p className="text-3xl font-bold text-amber-900">
             {Math.round(optimal.fixedPercent * 100)}%
           </p>
           <p className="text-xs text-amber-600 mt-1">נדרש לפחות 33%</p>
         </div>
-        <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+        <div className="bg-green-50 border border-green-200 rounded-none p-4 text-center">
           <p className="text-sm text-green-700 mb-1">ריבית ממוצעת</p>
           <p className="text-3xl font-bold text-green-900">{optimal.weightedAvgRate.toFixed(2)}%</p>
           <p className="text-xs text-green-600 mt-1">משוקללת לפי סכום</p>
@@ -2088,9 +2088,9 @@ interface StressTestTabProps {
 function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
   if (monthlyIncome <= 0 || monthlyPayment <= 0) {
     return (
-      <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center">
-        <p className="text-gray-500 text-lg mb-2">הזן הכנסה חודשית בטאב הגדרות</p>
-        <p className="text-gray-400 text-sm">ואחרי הרצת האופטימייזר תראה את מבחן העמידות</p>
+      <div className="bg-cream-2 border-2 border-dashed border-ink/15 rounded-none p-12 text-center">
+        <p className="text-ink/60 text-lg mb-2">הזן הכנסה חודשית בטאב הגדרות</p>
+        <p className="text-ink/45 text-sm">ואחרי הרצת האופטימייזר תראה את מבחן העמידות</p>
       </div>
     );
   }
@@ -2105,17 +2105,17 @@ function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
 
   return (
     <div className="space-y-6" dir="rtl">
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-        <h3 className="font-bold text-blue-900 text-lg mb-1">מבחן עמידות — Income Stress Test</h3>
-        <p className="text-sm text-blue-700">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink text-lg mb-1">מבחן עמידות — Income Stress Test</h3>
+        <p className="text-sm text-ink/70">
           מדמה 4 תרחישי ירידה בהכנסה. הבנק בוחן תרחישים דומים לפני אישור משכנתא.
           DTI מעל 55% בתרחיש קיצוני = אזהרה אדומה.
         </p>
       </div>
 
       {/* Bar Chart */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">יחס החזר לפי תרחיש (%)</h3>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="text-lg font-bold text-ink mb-4">יחס החזר לפי תרחיש (%)</h3>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} layout="vertical">
@@ -2136,7 +2136,7 @@ function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+        <div className="flex items-center gap-4 mt-2 text-xs text-ink/60">
           <div className="flex items-center gap-1"><div className="w-3 h-3 bg-green-500 rounded" />עד 40% — נוח</div>
           <div className="flex items-center gap-1"><div className="w-3 h-3 bg-amber-500 rounded" />40%-55% — מאתגר</div>
           <div className="flex items-center gap-1"><div className="w-3 h-3 bg-red-500 rounded" />מעל 55% — בעייתי</div>
@@ -2151,11 +2151,11 @@ function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
           const textColor = r.status === 'green' ? 'text-green-800' :
                             r.status === 'amber' ? 'text-amber-800' : 'text-red-800';
           return (
-            <div key={r.scenarioId} className={`border-2 rounded-xl p-4 ${cardBg}`}>
+            <div key={r.scenarioId} className={`border-2 rounded-none p-4 ${cardBg}`}>
               <div className="flex items-start justify-between mb-2">
                 <div>
                   <h4 className={`font-bold text-sm ${textColor}`}>{r.label}</h4>
-                  <p className="text-xs text-gray-500 mt-0.5">{r.description}</p>
+                  <p className="text-xs text-ink/60 mt-0.5">{r.description}</p>
                 </div>
                 <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
                   r.status === 'green' ? 'bg-green-200 text-green-800' :
@@ -2164,28 +2164,28 @@ function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
               </div>
               <div className="space-y-1 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">הכנסה חדשה</span>
+                  <span className="text-ink/70">הכנסה חדשה</span>
                   <span className="font-medium">{formatCurrency(r.newMonthlyIncome)}/חודש</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">תשלום משכנתא</span>
+                  <span className="text-ink/70">תשלום משכנתא</span>
                   <span className="font-medium">{formatCurrency(r.monthlyPayment)}/חודש</span>
                 </div>
                 <div className="flex justify-between border-t pt-1">
-                  <span className="font-medium text-gray-700">DTI</span>
+                  <span className="font-medium text-ink/70">DTI</span>
                   <span className={`font-bold text-lg ${textColor}`}>{r.newDTIPercent.toFixed(0)}%</span>
                 </div>
               </div>
-              <p className="mt-2 text-xs text-gray-700 leading-relaxed">{r.recommendation}</p>
+              <p className="mt-2 text-xs text-ink/70 leading-relaxed">{r.recommendation}</p>
             </div>
           );
         })}
       </div>
 
       {/* המלצה */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-        <h4 className="font-bold text-blue-900 mb-2">איך להתכונן לתרחישי קיצון?</h4>
-        <ul className="text-sm text-blue-800 space-y-1">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h4 className="font-bold text-ink mb-2">איך להתכונן לתרחישי קיצון?</h4>
+        <ul className="text-sm text-ink space-y-1">
           <li>• שמור רזרבה של 6 חודשי תשלומים בפיקדון נזיל</li>
           <li>• שקול ביטוח חיים ו/או ביטוח אובדן כושר עבודה</li>
           <li>• אם DTI מעל 45% בבסיס — שקול הקטנת הסכום או הארכת התקופה</li>
@@ -2268,9 +2268,9 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
 
   return (
     <div className="space-y-6" dir="rtl">
-      <div className="bg-purple-50 border border-purple-200 rounded-xl p-5">
-        <h3 className="font-bold text-purple-900 text-lg mb-1">השוואת הצעות בנקים</h3>
-        <p className="text-sm text-purple-700">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink text-lg mb-1">השוואת הצעות בנקים</h3>
+        <p className="text-sm text-gold">
           הזן עד 5 הצעות מבנקים שונים עם הריביות שקיבלת. המחשבון ימצא את התמהיל האופטימלי לכל בנק ויציג השוואה מלאה.
         </p>
       </div>
@@ -2278,15 +2278,15 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
       {/* הצעות */}
       <div className="space-y-4">
         {offers.map((offer, idx) => (
-          <div key={offer.id} className={`bg-white border-2 rounded-xl p-5 ${
-            ranked.find((r) => r.offer.bankName === offer.bankName)?.isBest ? 'border-green-400' : 'border-gray-200'
+          <div key={offer.id} className={`bg-paper border-2 rounded-none p-5 ${
+            ranked.find((r) => r.offer.bankName === offer.bankName)?.isBest ? 'border-green-400' : 'border-ink/15'
           }`}>
             <div className="flex items-center justify-between mb-4">
               <input
                 type="text"
                 value={offer.bankName}
                 onChange={(e) => updateOffer(offer.id, 'bankName', e.target.value)}
-                className="font-bold text-gray-900 bg-transparent border-b border-dashed border-gray-300 focus:border-blue-500 focus:outline-none text-base"
+                className="font-bold text-ink bg-transparent border-b border-dashed border-ink/15 focus:border-gold focus:outline-none text-base"
                 placeholder="שם הבנק"
               />
               <div className="flex items-center gap-2">
@@ -2304,7 +2304,7 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
                 const offerRate = offer.rates.find((r) => r.trackType === track.type);
                 return (
                   <div key={track.type}>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">
+                    <label className="block text-xs font-medium text-ink/70 mb-1">
                       ריבית {TRACK_TYPE_LABELS[track.type]} (%)
                     </label>
                     <input
@@ -2314,20 +2314,20 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
                       max={15}
                       value={offerRate?.rate ?? track.rate}
                       onChange={(e) => updateOfferRate(offer.id, track.type, Number(e.target.value))}
-                      className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                      className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                     />
                   </div>
                 );
               })}
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">אגרת פתיחה (₪)</label>
+                <label className="block text-xs font-medium text-ink/70 mb-1">אגרת פתיחה (₪)</label>
                 <input
                   type="number"
                   step={500}
                   min={0}
                   value={offer.openingFee}
                   onChange={(e) => updateOffer(offer.id, 'openingFee', Number(e.target.value))}
-                  className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                  className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                 />
               </div>
             </div>
@@ -2339,7 +2339,7 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
         <button
           type="button"
           onClick={addOffer}
-          className="w-full py-3 border-2 border-dashed border-purple-300 rounded-xl text-purple-600 hover:border-purple-500 hover:bg-purple-50 transition font-medium"
+          className="w-full py-3 border-2 border-dashed border-ink/30 rounded-none text-gold hover:border-gold hover:bg-paper-hover transition font-medium"
         >
           + הוסף הצעת בנק (עד 5)
         </button>
@@ -2348,8 +2348,8 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
       {/* תוצאות */}
       {ranked.length > 0 && (
         <>
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">השוואה גרפית — עלות ALL-IN</h3>
+          <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+            <h3 className="text-lg font-bold text-ink mb-4">השוואה גרפית — עלות ALL-IN</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData}>
@@ -2366,29 +2366,29 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
           </div>
 
           {/* טבלת דירוג */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
+          <div className="bg-paper border-2 border-ink/15 rounded-none overflow-hidden">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 border-b">
-                  <th className="text-right py-2 px-3 font-medium text-gray-600">דירוג</th>
-                  <th className="text-right py-2 px-3 font-medium text-gray-600">בנק</th>
-                  <th className="text-center py-2 px-2 font-medium text-gray-600">ריבית כוללת</th>
-                  <th className="text-center py-2 px-2 font-medium text-gray-600">אגרת פתיחה</th>
-                  <th className="text-center py-2 px-2 font-medium text-gray-600">ALL-IN</th>
-                  <th className="text-center py-2 px-2 font-medium text-gray-600">יקר יותר ב-</th>
+                <tr className="bg-cream-2 border-b">
+                  <th className="text-right py-2 px-3 font-medium text-ink/70">דירוג</th>
+                  <th className="text-right py-2 px-3 font-medium text-ink/70">בנק</th>
+                  <th className="text-center py-2 px-2 font-medium text-ink/70">ריבית כוללת</th>
+                  <th className="text-center py-2 px-2 font-medium text-ink/70">אגרת פתיחה</th>
+                  <th className="text-center py-2 px-2 font-medium text-ink/70">ALL-IN</th>
+                  <th className="text-center py-2 px-2 font-medium text-ink/70">יקר יותר ב-</th>
                 </tr>
               </thead>
               <tbody>
                 {ranked.map((r, idx) => (
-                  <tr key={idx} className={`border-b ${r.isBest ? 'bg-green-50' : idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                  <tr key={idx} className={`border-b ${r.isBest ? 'bg-green-50' : idx % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}`}>
                     <td className="py-2 px-3 text-center">
                       {r.isBest ? (
                         <span className="bg-green-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">1</span>
                       ) : r.rank}
                     </td>
-                    <td className="py-2 px-3 font-medium text-gray-900">{r.offer.bankName}</td>
+                    <td className="py-2 px-3 font-medium text-ink">{r.offer.bankName}</td>
                     <td className="py-2 px-2 text-center text-amber-700">{formatCurrency(r.totalInterest)}</td>
-                    <td className="py-2 px-2 text-center text-gray-600">{formatCurrency(r.openingFeeAmount)}</td>
+                    <td className="py-2 px-2 text-center text-ink/70">{formatCurrency(r.openingFeeAmount)}</td>
                     <td className="py-2 px-2 text-center font-bold text-red-700">{formatCurrency(r.totalAllInCost)}</td>
                     <td className="py-2 px-2 text-center">
                       {r.isBest ? (
@@ -2427,28 +2427,28 @@ function TimelineTab() {
 
   return (
     <div className="space-y-6" dir="rtl">
-      <div className="bg-teal-50 border border-teal-200 rounded-xl p-5">
+      <div className="bg-teal-50 border border-teal-200 rounded-none p-5">
         <h3 className="font-bold text-teal-900 text-lg mb-1">לוח זמנים — מ"אני רוצה" עד "יש לי מפתח"</h3>
         <p className="text-sm text-teal-700">
           תהליך המשכנתא לוקח בממוצע 10-12 שבועות. הזן את תאריך קבלת המפתח המתוכנן ונחשב לך את תאריך ההתחלה.
         </p>
       </div>
 
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <label className="block text-sm font-medium text-ink/70 mb-2">
           תאריך קבלת מפתח מתוכנן
         </label>
         <input
           type="date"
           value={keysDateStr}
           onChange={(e) => setKeysDateStr(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
+          className="px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
           dir="ltr"
         />
         {timeline && (
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-ink/70">
             כדי לעמוד בלוח הזמנים הזה, צריך להתחיל ב-{' '}
-            <strong className="text-blue-700">{timeline.startDate.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })}</strong>
+            <strong className="text-gold">{timeline.startDate.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })}</strong>
           </p>
         )}
       </div>
@@ -2456,14 +2456,14 @@ function TimelineTab() {
       {timeline && (
         <div className="relative">
           {/* קו ציר */}
-          <div className="absolute right-8 top-0 bottom-0 w-0.5 bg-gray-200" />
+          <div className="absolute right-8 top-0 bottom-0 w-0.5 bg-ink/15" />
 
           <div className="space-y-6">
             {timeline.stages.map((stage, idx) => {
               const isLast = idx === timeline.stages.length - 1;
               const stageColors = [
-                'bg-blue-500', 'bg-purple-500', 'bg-indigo-500', 'bg-teal-500',
-                'bg-orange-500', 'bg-red-500', 'bg-green-600',
+                'bg-ink', 'bg-ink-mid', 'bg-gold', 'bg-gold-2',
+                'bg-ink-deep', 'bg-gold-light', 'bg-green-600',
               ];
               const color = stageColors[idx % stageColors.length];
 
@@ -2474,27 +2474,27 @@ function TimelineTab() {
                     {stage.stageNumber}
                   </div>
 
-                  <div className="flex-1 bg-white border-2 border-gray-200 rounded-xl p-4">
+                  <div className="flex-1 bg-paper border-2 border-ink/15 rounded-none p-4">
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <span className="text-xs font-medium text-gray-500">{stage.weekRange}</span>
-                        <h4 className="font-bold text-gray-900 text-base">{stage.title}</h4>
+                        <span className="text-xs font-medium text-ink/60">{stage.weekRange}</span>
+                        <h4 className="font-bold text-ink text-base">{stage.title}</h4>
                       </div>
-                      <div className="text-left text-xs text-gray-500">
+                      <div className="text-left text-xs text-ink/60">
                         <div>{stage.formattedStart}</div>
-                        {!isLast && <div className="text-gray-400">– {stage.formattedEnd}</div>}
+                        {!isLast && <div className="text-ink/45">– {stage.formattedEnd}</div>}
                       </div>
                     </div>
                     <ul className="space-y-1">
                       {stage.tasks.map((task, ti) => (
-                        <li key={ti} className="text-sm text-gray-700 flex items-start gap-1.5">
+                        <li key={ti} className="text-sm text-ink/70 flex items-start gap-1.5">
                           <span className={`mt-0.5 w-1.5 h-1.5 rounded-full ${color} flex-shrink-0`} />
                           {task}
                         </li>
                       ))}
                     </ul>
                     {isLast && (
-                      <div className="mt-3 bg-green-50 border border-green-200 rounded-lg p-2 text-sm font-bold text-green-800 text-center">
+                      <div className="mt-3 bg-green-50 border border-green-200 rounded-none p-2 text-sm font-bold text-green-800 text-center">
                         קבלת מפתח — {timeline.keysDate.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })}
                       </div>
                     )}
@@ -2507,7 +2507,7 @@ function TimelineTab() {
       )}
 
       {/* טיפים */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+      <div className="bg-amber-50 border border-amber-200 rounded-none p-5">
         <h4 className="font-bold text-amber-900 mb-2">טיפים חשובים לתהליך</h4>
         <ul className="text-sm text-amber-800 space-y-1">
           <li>• קבל לפחות 3 הצעות מבנקים שונים — זה הכי חשוב לחיסכון</li>
@@ -2655,7 +2655,7 @@ export function MortgageOptimizerCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* Tab Navigation */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
+      <div className="bg-paper border-2 border-ink/15 rounded-none overflow-hidden">
         <div className="flex overflow-x-auto">
           {tabs.map((tab) => (
             <button
@@ -2664,12 +2664,12 @@ export function MortgageOptimizerCalculator() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-shrink-0 px-4 py-4 text-right border-b-2 transition-all ${
                 activeTab === tab.id
-                  ? 'border-blue-600 bg-blue-50 text-blue-900'
-                  : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-800'
+                  ? 'border-ink bg-cream-2 text-ink'
+                  : 'border-transparent text-ink/70 hover:bg-cream-2 hover:text-ink'
               }`}
             >
               <div className="font-medium text-sm whitespace-nowrap">{tab.label}</div>
-              <div className="text-xs text-gray-500 mt-0.5 whitespace-nowrap">{tab.description}</div>
+              <div className="text-xs text-ink/60 mt-0.5 whitespace-nowrap">{tab.description}</div>
             </button>
           ))}
         </div>
@@ -2727,12 +2727,12 @@ export function MortgageOptimizerCalculator() {
               closingCosts={closingCosts}
             />
           ) : (
-            <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center">
-              <p className="text-gray-500 text-lg mb-4">טרם הרצת אופטימיזציה</p>
+            <div className="bg-cream-2 border-2 border-dashed border-ink/15 rounded-none p-12 text-center">
+              <p className="text-ink/60 text-lg mb-4">טרם הרצת אופטימיזציה</p>
               <button
                 type="button"
                 onClick={() => setActiveTab('objective')}
-                className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition"
+                className="px-6 py-3 bg-ink text-cream rounded-none font-bold hover:bg-ink-deep transition"
               >
                 עבור להגדרת מטרה ←
               </button>
@@ -2750,12 +2750,12 @@ export function MortgageOptimizerCalculator() {
               totalAmount={setupState.totalAmount}
             />
           ) : (
-            <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-12 text-center">
-              <p className="text-gray-500 text-lg mb-4">הרץ אופטימיזציה תחילה לצפייה בתרחישים</p>
+            <div className="bg-cream-2 border-2 border-dashed border-ink/15 rounded-none p-12 text-center">
+              <p className="text-ink/60 text-lg mb-4">הרץ אופטימיזציה תחילה לצפייה בתרחישים</p>
               <button
                 type="button"
                 onClick={() => setActiveTab('objective')}
-                className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition"
+                className="px-6 py-3 bg-ink text-cream rounded-none font-bold hover:bg-ink-deep transition"
               >
                 עבור להגדרת מטרה ←
               </button>

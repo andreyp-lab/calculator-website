@@ -159,12 +159,12 @@ export function AnnualLeaveCalculator() {
   // Shared inputs section
   // ============================
   const SharedInputs = () => (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-      <h2 className="text-lg font-bold text-gray-900">פרטי ההעסקה</h2>
+    <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+      <h2 className="text-lg font-bold text-ink">פרטי ההעסקה</h2>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-ink/70 mb-1">
             שנות וותק
           </label>
           <input
@@ -173,17 +173,17 @@ export function AnnualLeaveCalculator() {
             max={50}
             value={yearsOfService}
             onChange={(e) => setYearsOfService(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-semibold"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-lg font-semibold"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-ink/70 mb-1">
             חודשים נוספים
           </label>
           <select
             value={additionalMonths}
             onChange={(e) => setAdditionalMonths(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
           >
             {Array.from({ length: 12 }, (_, i) => (
               <option key={i} value={i}>{i === 0 ? 'אין' : `${i} חודשים`}</option>
@@ -194,20 +194,20 @@ export function AnnualLeaveCalculator() {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-ink/70 mb-1">
             ימי עבודה בשבוע
           </label>
           <select
             value={workDays}
             onChange={(e) => setWorkDays(Number(e.target.value) as 5 | 6)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
           >
             <option value={5}>5 ימים (משרה רגילה)</option>
             <option value={6}>6 ימים (שישי עבודה)</option>
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-ink/70 mb-1">
             היקף משרה (%)
           </label>
           <div className="flex items-center gap-2">
@@ -220,15 +220,15 @@ export function AnnualLeaveCalculator() {
               onChange={(e) => setPartTime(Number(e.target.value))}
               className="flex-1"
             />
-            <span className="text-sm font-semibold text-blue-700 w-10 text-center">{partTime}%</span>
+            <span className="text-sm font-semibold text-gold w-10 text-center">{partTime}%</span>
           </div>
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-ink/70 mb-1">
           שכר חודשי ברוטו (₪)
-          <span className="text-xs text-gray-500 mr-2">לחישוב ערך יום וסכום פדיון</span>
+          <span className="text-xs text-ink/60 mr-2">לחישוב ערך יום וסכום פדיון</span>
         </label>
         <input
           type="number"
@@ -237,10 +237,10 @@ export function AnnualLeaveCalculator() {
           step={500}
           value={monthlySalary}
           onChange={(e) => setMonthlySalary(Number(e.target.value))}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
         />
         {monthlySalary > 0 && (
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-ink/60 mt-1">
             ערך יום חופשה: {formatCurrency(monthlySalary / (workDays === 5 ? 21.67 : 25), { decimals: 0 })}
           </p>
         )}
@@ -252,29 +252,29 @@ export function AnnualLeaveCalculator() {
   // Tenure table widget
   // ============================
   const TenureTableWidget = () => (
-    <div className="bg-blue-50 border border-blue-200 rounded-xl overflow-hidden">
+    <div className="bg-cream-2 border border-ink/15 rounded-none overflow-hidden">
       <button
         type="button"
         onClick={() => setShowTenureTable(!showTenureTable)}
-        className="w-full flex items-center justify-between px-4 py-3 hover:bg-blue-100 transition"
+        className="w-full flex items-center justify-between px-4 py-3 hover:bg-paper-hover transition"
       >
-        <span className="text-sm font-medium text-blue-900">
+        <span className="text-sm font-medium text-ink">
           טבלת ימי חופשה לפי וותק (לפי חוק 2026)
         </span>
         {showTenureTable ? (
-          <ChevronUp className="w-4 h-4 text-blue-700" />
+          <ChevronUp className="w-4 h-4 text-gold" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-blue-700" />
+          <ChevronDown className="w-4 h-4 text-gold" />
         )}
       </button>
       {showTenureTable && (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-blue-100">
-                <th className="px-3 py-2 text-right font-semibold text-blue-900">וותק</th>
-                <th className="px-3 py-2 text-center font-semibold text-blue-900">5 ימים</th>
-                <th className="px-3 py-2 text-center font-semibold text-blue-900">6 ימים</th>
+              <tr className="bg-ink text-cream">
+                <th className="px-3 py-2 text-right font-semibold">וותק</th>
+                <th className="px-3 py-2 text-center font-semibold">5 ימים</th>
+                <th className="px-3 py-2 text-center font-semibold">6 ימים</th>
               </tr>
             </thead>
             <tbody>
@@ -286,20 +286,20 @@ export function AnnualLeaveCalculator() {
                 return (
                   <tr
                     key={i}
-                    className={isHighlighted ? 'bg-emerald-100 font-bold' : i % 2 === 0 ? 'bg-white' : 'bg-blue-50'}
+                    className={isHighlighted ? 'bg-emerald-100 font-bold' : i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}
                   >
-                    <td className="px-3 py-2 text-right text-gray-800">
+                    <td className="px-3 py-2 text-right text-ink">
                       {row.tenure}
                       {isHighlighted && <span className="mr-1 text-emerald-700"> ◀ אתה כאן</span>}
                     </td>
-                    <td className="px-3 py-2 text-center text-gray-700">{row.days5}</td>
-                    <td className="px-3 py-2 text-center text-gray-700">{row.days6}</td>
+                    <td className="px-3 py-2 text-center text-ink/70">{row.days5}</td>
+                    <td className="px-3 py-2 text-center text-ink/70">{row.days6}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-          <p className="text-xs text-blue-700 px-3 py-2">
+          <p className="text-xs text-ink/60 px-3 py-2">
             מקור: חוק חופשה שנתית תשי"א-1951, סעיף 3 | עדכון 2026
           </p>
         </div>
@@ -326,9 +326,9 @@ export function AnnualLeaveCalculator() {
 
     return (
       <div className="space-y-2">
-        <div className="flex h-8 rounded-lg overflow-hidden border border-gray-200">
+        <div className="flex h-8 rounded-none overflow-hidden border border-ink/15">
           <div
-            className="bg-blue-500 flex items-center justify-center text-white text-xs font-medium transition-all"
+            className="bg-ink flex items-center justify-center text-cream text-xs font-medium transition-all"
             style={{ width: `${usedPct}%` }}
           >
             {usedPct > 10 && `${Math.round(usedPct)}%`}
@@ -350,16 +350,16 @@ export function AnnualLeaveCalculator() {
         </div>
         <div className="flex flex-wrap gap-3 text-xs">
           <span className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3 rounded bg-blue-500" />
+            <span className="inline-block w-3 h-3 rounded-none bg-ink" />
             נוצל ({used.toFixed(1)} ימים)
           </span>
           <span className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3 rounded bg-emerald-400" />
+            <span className="inline-block w-3 h-3 rounded-none bg-emerald-400" />
             זמין ({Math.max(0, entitled - used).toFixed(1)} ימים)
           </span>
           {forfeitable > 0 && (
             <span className="flex items-center gap-1">
-              <span className="inline-block w-3 h-3 rounded bg-amber-400" />
+              <span className="inline-block w-3 h-3 rounded-none bg-amber-400" />
               בסכנת אובדן ({forfeitable.toFixed(1)} ימים)
             </span>
           )}
@@ -374,7 +374,7 @@ export function AnnualLeaveCalculator() {
   const Recommendations = ({ items }: { items: string[] }) => {
     if (items.length === 0) return null;
     return (
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
+      <div className="bg-amber-50 border border-amber-200 rounded-none p-4 space-y-2">
         <h4 className="text-sm font-bold text-amber-900 flex items-center gap-2">
           <Info className="w-4 h-4" />
           המלצות
@@ -425,12 +425,12 @@ export function AnnualLeaveCalculator() {
       </div>
 
       {additionalMonths > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-          <h4 className="text-sm font-bold text-blue-900 mb-2">זכאות יחסית לשנה הנוכחית</h4>
-          <p className="text-2xl font-bold text-blue-700">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+          <h4 className="text-sm font-bold text-ink mb-2">זכאות יחסית לשנה הנוכחית</h4>
+          <p className="text-2xl font-bold text-gold">
             {entitlementResult.proRatedCurrentYear} ימים
           </p>
-          <p className="text-xs text-blue-700 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             {entitlementResult.annualEntitlement} ימים × {additionalMonths}/12 חודשים
             {partTime < 100 ? ` × ${partTime}%` : ''}
           </p>
@@ -471,9 +471,9 @@ export function AnnualLeaveCalculator() {
         ]}
       />
 
-      <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-        <h4 className="text-sm font-bold text-gray-800 mb-2">חשוב לדעת</h4>
-        <ul className="text-xs text-gray-700 space-y-1.5">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+        <h4 className="text-sm font-bold text-ink mb-2">חשוב לדעת</h4>
+        <ul className="text-xs text-ink/70 space-y-1.5">
           <li>• המעסיק <strong>חייב</strong> לאפשר לפחות <strong>7 ימים רצופים</strong> בשנה</li>
           <li>• המעסיק קובע את המועד, אך חייב להודיע <strong>14 יום מראש</strong></li>
           <li>• חופשת מחלה, לידה ומילואים <strong>אינן</strong> נחשבות לימי חופשה</li>
@@ -491,11 +491,11 @@ export function AnnualLeaveCalculator() {
     <div className="space-y-4">
       <SharedInputs />
 
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-        <h3 className="font-bold text-gray-900">ניצול חופשה</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+        <h3 className="font-bold text-ink">ניצול חופשה</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               ימים שניצלת השנה
             </label>
             <input
@@ -505,11 +505,11 @@ export function AnnualLeaveCalculator() {
               step={0.5}
               value={daysUsedThisYear}
               onChange={(e) => setDaysUsedThisYear(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               יתרה שנה שעברה (ימים)
             </label>
             <input
@@ -519,9 +519,9 @@ export function AnnualLeaveCalculator() {
               step={0.5}
               value={daysUsedLastYear}
               onChange={(e) => setDaysUsedLastYear(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">ימי חופשה שנשארו מהשנה הקודמת</p>
+            <p className="text-xs text-ink/60 mt-1">ימי חופשה שנשארו מהשנה הקודמת</p>
           </div>
         </div>
       </div>
@@ -556,8 +556,8 @@ export function AnnualLeaveCalculator() {
         )}
       </div>
 
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">מצב חופשה — שנה נוכחית</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">מצב חופשה — שנה נוכחית</h3>
         <VacationProgressBar
           entitled={balanceResult.proRatedCurrentYear}
           used={daysUsedThisYear}
@@ -566,7 +566,7 @@ export function AnnualLeaveCalculator() {
       </div>
 
       {balanceResult.forfeitableDays > 0 && (
-        <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 flex gap-3">
+        <div className="bg-red-50 border-2 border-red-200 rounded-none p-4 flex gap-3">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-red-900 mb-1">אזהרה: ימים עלולים לאבד!</h4>
@@ -580,25 +580,25 @@ export function AnnualLeaveCalculator() {
       )}
 
       {/* Accumulation breakdown */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">היסטוריית צבירה ({yearsOfService} שנים)</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">היסטוריית צבירה ({yearsOfService} שנים)</h3>
         <div className="grid sm:grid-cols-3 gap-4 mb-4">
-          <div className="text-center bg-emerald-50 rounded-lg p-3">
+          <div className="text-center bg-emerald-50 rounded-none p-3">
             <p className="text-2xl font-bold text-emerald-700">{accumulationResult.totalAccumulated}</p>
             <p className="text-xs text-emerald-700">סך ימים שנצברו</p>
           </div>
-          <div className="text-center bg-blue-50 rounded-lg p-3">
-            <p className="text-2xl font-bold text-blue-700">{accumulationResult.totalUsed}</p>
-            <p className="text-xs text-blue-700">ימים שנוצלו</p>
+          <div className="text-center bg-cream-2 rounded-none p-3">
+            <p className="text-2xl font-bold text-ink">{accumulationResult.totalUsed}</p>
+            <p className="text-xs text-ink/60">ימים שנוצלו</p>
           </div>
-          <div className="text-center bg-amber-50 rounded-lg p-3">
+          <div className="text-center bg-amber-50 rounded-none p-3">
             <p className="text-2xl font-bold text-amber-700">{accumulationResult.balance}</p>
             <p className="text-xs text-amber-700">יתרה כוללת</p>
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             סך ימי חופשה שניצלת לאורך כל הוותק
           </label>
           <input
@@ -607,7 +607,7 @@ export function AnnualLeaveCalculator() {
             max={500}
             value={totalDaysUsedEver}
             onChange={(e) => setTotalDaysUsedEver(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
           />
         </div>
 
@@ -615,29 +615,29 @@ export function AnnualLeaveCalculator() {
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="px-3 py-2 text-right font-medium text-gray-600">שנה</th>
-                  <th className="px-3 py-2 text-center font-medium text-gray-600">זכאות</th>
-                  <th className="px-3 py-2 text-center font-medium text-gray-600">ניצול</th>
-                  <th className="px-3 py-2 text-center font-medium text-gray-600">יתרה</th>
-                  <th className="px-3 py-2 text-center font-medium text-gray-600">בסכנה</th>
+                <tr className="bg-cream-2">
+                  <th className="px-3 py-2 text-right font-medium text-ink/60">שנה</th>
+                  <th className="px-3 py-2 text-center font-medium text-ink/60">זכאות</th>
+                  <th className="px-3 py-2 text-center font-medium text-ink/60">ניצול</th>
+                  <th className="px-3 py-2 text-center font-medium text-ink/60">יתרה</th>
+                  <th className="px-3 py-2 text-center font-medium text-ink/60">בסכנה</th>
                 </tr>
               </thead>
               <tbody>
                 {accumulationResult.yearlyBreakdown.map((row) => (
                   <tr
                     key={row.year}
-                    className={`border-t border-gray-100 ${row.forfeitable > 0 ? 'bg-amber-50' : ''}`}
+                    className={`border-t border-ink/10 ${row.forfeitable > 0 ? 'bg-amber-50' : ''}`}
                   >
-                    <td className="px-3 py-2 text-right text-gray-800">שנה {row.year}</td>
+                    <td className="px-3 py-2 text-right text-ink">שנה {row.year}</td>
                     <td className="px-3 py-2 text-center text-emerald-700">{row.entitled}</td>
-                    <td className="px-3 py-2 text-center text-blue-700">{row.used}</td>
+                    <td className="px-3 py-2 text-center text-ink/70">{row.used}</td>
                     <td className="px-3 py-2 text-center font-medium">{row.balance}</td>
                     <td className="px-3 py-2 text-center">
                       {row.forfeitable > 0 ? (
                         <span className="text-amber-700 font-medium">{row.forfeitable}</span>
                       ) : (
-                        <span className="text-gray-400">—</span>
+                        <span className="text-ink/45">—</span>
                       )}
                     </td>
                   </tr>
@@ -657,9 +657,9 @@ export function AnnualLeaveCalculator() {
   // ============================
   const RedemptionTab = () => (
     <div className="space-y-4">
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-        <h3 className="font-bold text-blue-900 mb-1">מה זה פדיון חופשה?</h3>
-        <p className="text-sm text-blue-800">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+        <h3 className="font-bold text-ink mb-1">מה זה פדיון חופשה?</h3>
+        <p className="text-sm text-ink/70">
           בעת <strong>סיום עבודה</strong> (פיטורים, התפטרות, פרישה), המעסיק חייב לפדות בכסף
           את כל ימי החופשה שלא נוצלו. הסכום מחושב לפי <strong>השכר האחרון</strong>.
           לפי פסיקה (ע"ע 31579-09-15) — הפדיון כולל גם הפרשות סוציאליות.
@@ -667,10 +667,10 @@ export function AnnualLeaveCalculator() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-          <h3 className="font-bold text-gray-900">פרטי החישוב</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+          <h3 className="font-bold text-ink">פרטי החישוב</h3>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               ימי חופשה צבורים לפדיון
             </label>
             <input
@@ -680,12 +680,12 @@ export function AnnualLeaveCalculator() {
               step={0.5}
               value={accumulatedDaysRed}
               onChange={(e) => setAccumulatedDaysRed(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-semibold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-lg font-semibold"
             />
-            <p className="text-xs text-gray-500 mt-1">כמה ימי חופשה לא נוצלו שמגיעים לך בעת הסיום</p>
+            <p className="text-xs text-ink/60 mt-1">כמה ימי חופשה לא נוצלו שמגיעים לך בעת הסיום</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               שכר חודשי ברוטו אחרון (₪)
             </label>
             <input
@@ -695,17 +695,17 @@ export function AnnualLeaveCalculator() {
               step={500}
               value={monthlySalary}
               onChange={(e) => setMonthlySalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               ימי עבודה בשבוע
             </label>
             <select
               value={workDays}
               onChange={(e) => setWorkDays(Number(e.target.value) as 5 | 6)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             >
               <option value={5}>5 ימים</option>
               <option value={6}>6 ימים</option>
@@ -755,7 +755,7 @@ export function AnnualLeaveCalculator() {
         ]}
       />
 
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
+      <div className="bg-amber-50 border border-amber-200 rounded-none p-4 space-y-2">
         <h4 className="text-sm font-bold text-amber-900">חשוב לדעת על פדיון חופשה</h4>
         <ul className="text-xs text-amber-900 space-y-1.5">
           <li>• <strong>מגיע לך בעת כל סיום עבודה</strong> — פיטורים, התפטרות, פרישה.</li>
@@ -773,15 +773,15 @@ export function AnnualLeaveCalculator() {
   // ============================
   const TerminationTab = () => (
     <div className="space-y-4">
-      <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 space-y-5">
-        <h2 className="text-lg font-bold text-gray-900">אם עזבתי/עוזב/ת היום</h2>
-        <p className="text-sm text-gray-600">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-6 space-y-5">
+        <h2 className="text-lg font-bold text-ink">אם עזבתי/עוזב/ת היום</h2>
+        <p className="text-sm text-ink/70">
           מחשבון זה מחשב כמה ימי חופשה מגיעים לך בעת עזיבה — כולל החודשים שעבדת בשנה הנוכחית + כל הצבירה הקודמת.
         </p>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               שנות וותק שלמות
             </label>
             <input
@@ -790,17 +790,17 @@ export function AnnualLeaveCalculator() {
               max={50}
               value={yearsOfService}
               onChange={(e) => setYearsOfService(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               חודשים בשנה הנוכחית
             </label>
             <select
               value={monthsWorkedCurrent}
               onChange={(e) => setMonthsWorkedCurrent(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
                 <option key={m} value={m}>{m} חודשים</option>
@@ -811,20 +811,20 @@ export function AnnualLeaveCalculator() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               ימי עבודה בשבוע
             </label>
             <select
               value={workDays}
               onChange={(e) => setWorkDays(Number(e.target.value) as 5 | 6)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             >
               <option value={5}>5 ימים</option>
               <option value={6}>6 ימים</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               היקף משרה (%)
             </label>
             <div className="flex items-center gap-2">
@@ -837,14 +837,14 @@ export function AnnualLeaveCalculator() {
                 onChange={(e) => setPartTime(Number(e.target.value))}
                 className="flex-1"
               />
-              <span className="text-sm font-semibold text-blue-700 w-10 text-center">{partTime}%</span>
+              <span className="text-sm font-semibold text-gold w-10 text-center">{partTime}%</span>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               שכר חודשי ברוטו אחרון (₪)
             </label>
             <input
@@ -854,11 +854,11 @@ export function AnnualLeaveCalculator() {
               step={500}
               value={monthlySalary}
               onChange={(e) => setMonthlySalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               ימי חופשה שניצלת השנה
             </label>
             <input
@@ -868,7 +868,7 @@ export function AnnualLeaveCalculator() {
               step={0.5}
               value={totalDaysUsedEver}
               onChange={(e) => setTotalDaysUsedEver(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
           </div>
         </div>
@@ -948,9 +948,9 @@ export function AnnualLeaveCalculator() {
         ]}
       />
 
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 space-y-2">
-        <h4 className="text-sm font-bold text-blue-900">זכויות נוספות בסיום עבודה</h4>
-        <ul className="text-xs text-blue-900 space-y-1">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2">
+        <h4 className="text-sm font-bold text-ink">זכויות נוספות בסיום עבודה</h4>
+        <ul className="text-xs text-ink/70 space-y-1">
           <li>• <strong>פיצויי פיטורים</strong>: שנת עבודה × משכורת אחרונה (אם פוטרת/פרשת)</li>
           <li>• <strong>הודעה מוקדמת</strong>: 1 יום לכל חודש (שנה ראשונה) + 1 שבוע לכל שנה נוספת עד תקרה</li>
           <li>• <strong>דמי הבראה</strong>: לפי ותק — מגיע בעת הסיום</li>
@@ -968,8 +968,8 @@ export function AnnualLeaveCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* Tab navigation */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-        <div className="flex flex-wrap border-b border-gray-200">
+      <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+        <div className="flex flex-wrap border-b border-ink/15">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -977,8 +977,8 @@ export function AnnualLeaveCalculator() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 min-w-[120px] px-4 py-3 text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white border-b-2 border-blue-600'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-ink text-cream border-b-2 border-ink'
+                  : 'text-ink/60 hover:text-ink hover:bg-cream-2'
               }`}
             >
               <span className="ml-1">{tab.emoji}</span>

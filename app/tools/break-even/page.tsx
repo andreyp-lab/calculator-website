@@ -76,11 +76,11 @@ export default function BreakEvenPage() {
             </p>
 
             <h2>הנוסחה</h2>
-            <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4">
-              <p className="font-mono text-lg text-blue-900">
+            <div className="bg-cream-2 border-r-4 border-ink p-4 my-4">
+              <p className="font-mono text-lg text-ink">
                 נקודת איזון = הוצאות קבועות ÷ (מחיר - עלות משתנה)
               </p>
-              <p className="text-sm text-blue-700 mt-2">
+              <p className="text-sm text-ink/70 mt-2">
                 כל יחידה שנמכרת מעבר לנקודת האיזון = רווח נקי
               </p>
             </div>
@@ -121,7 +121,7 @@ export default function BreakEvenPage() {
             </ul>
 
             <h2>דוגמה מלאה: מסעדה</h2>
-            <div className="bg-gray-50 border border-gray-200 rounded p-4 my-4 text-sm">
+            <div className="bg-cream-2 border border-ink/15 p-4 my-4 text-sm">
               <ul>
                 <li>הוצאות קבועות חודשיות: 80,000 ₪ (שכ"ד, משכורות, ביטוח, רישיונות)</li>
                 <li>מחיר ארוחה ממוצעת: 120 ₪</li>
@@ -136,19 +136,19 @@ export default function BreakEvenPage() {
             <h2>כלים קשורים</h2>
             <ul>
               <li>
-                <a href="/tools/business-valuation" className="text-blue-700 hover:underline">
+                <a href="/tools/business-valuation" className="text-gold hover:underline">
                   מחשבון שווי עסק
                 </a>{' '}
                 — הערכת שווי עסק לפי DCF, EBITDA ומכפיל הכנסות
               </li>
               <li>
-                <a href="/tools/cash-flow" className="text-blue-700 hover:underline">
+                <a href="/tools/cash-flow" className="text-gold hover:underline">
                   מחשבון תזרים מזומנים
                 </a>{' '}
                 — תכנון תזרים חודשי לעסק
               </li>
               <li>
-                <a href="/tools/budget" className="text-blue-700 hover:underline">
+                <a href="/tools/budget" className="text-gold hover:underline">
                   מחשבון תקציב עסקי
                 </a>{' '}
                 — בנה תקציב שנתי ועקוב אחר הוצאות
@@ -158,7 +158,7 @@ export default function BreakEvenPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.kolzchut.org.il"

@@ -53,21 +53,21 @@ const RELATION_LABELS: Record<FamilyRelation, string> = {
 // ============================================================
 
 const SectionCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-    <h2 className="text-lg font-bold text-gray-900">{title}</h2>
+  <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+    <h2 className="text-lg font-bold text-ink">{title}</h2>
     {children}
   </div>
 );
 
 const InfoBox = ({ children, variant = 'blue' }: { children: React.ReactNode; variant?: 'blue' | 'amber' | 'red' | 'green' }) => {
   const classes = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
     red: 'bg-red-50 border-red-200 text-red-900',
     green: 'bg-green-50 border-green-200 text-green-900',
   };
   return (
-    <div className={`border rounded-xl p-4 ${classes[variant]}`}>
+    <div className={`border rounded-none p-4 ${classes[variant]}`}>
       {children}
     </div>
   );
@@ -106,18 +106,18 @@ const SickDayProgressBar = ({
   const pct = Math.min(100, (balance / max) * 100);
   const color =
     pct >= 80 ? 'bg-green-500' :
-    pct >= 40 ? 'bg-blue-500' :
+    pct >= 40 ? 'bg-gold' :
     pct >= 15 ? 'bg-amber-500' :
     'bg-red-500';
 
   return (
     <div className="space-y-2">
-      <div className="flex justify-between text-xs text-gray-600">
+      <div className="flex justify-between text-xs text-ink/70">
         <span>0 ימים</span>
-        <span className="font-semibold text-gray-800">{balance.toFixed(1)} ימים ({pct.toFixed(0)}%)</span>
+        <span className="font-semibold text-ink">{balance.toFixed(1)} ימים ({pct.toFixed(0)}%)</span>
         <span>{max} ימים</span>
       </div>
-      <div className="h-6 bg-gray-100 rounded-full overflow-hidden border border-gray-200">
+      <div className="h-6 bg-cream-2 rounded-full overflow-hidden border border-ink/15">
         <div
           className={`h-full ${color} rounded-full transition-all duration-500 flex items-center justify-end pr-2`}
           style={{ width: `${Math.max(3, pct)}%` }}
@@ -133,7 +133,7 @@ const SickDayProgressBar = ({
           מוגן (80%+)
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block w-3 h-3 rounded-full bg-blue-500" />
+          <span className="inline-block w-3 h-3 rounded-full bg-gold" />
           טוב
         </span>
         <span className="flex items-center gap-1">
@@ -189,7 +189,7 @@ const PayTab = ({
       <SectionCard title="פרטי המחלה">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               מספר ימי מחלה
             </label>
             <input
@@ -198,12 +198,12 @@ const PayTab = ({
               max={90}
               value={sickDays}
               onChange={(e) => setSickDays(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">מקסימום 90 ימים (תקרת החוק)</p>
+            <p className="text-xs text-ink/60 mt-1">מקסימום 90 ימים (תקרת החוק)</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו (₪)
             </label>
             <input
@@ -213,10 +213,10 @@ const PayTab = ({
               step={500}
               value={monthlySalary}
               onChange={(e) => setMonthlySalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
             {monthlySalary > 0 && (
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 שכר יומי: {formatCurrency(result.dailySalary, { decimals: 0 })}
               </p>
             )}
@@ -226,17 +226,17 @@ const PayTab = ({
         <InfoBox variant="blue">
           <p className="text-sm font-bold mb-2">חוק דמי מחלה — שיעורי תשלום</p>
           <div className="grid grid-cols-3 gap-2 text-center">
-            <div className="bg-white rounded-lg p-2 border border-blue-200">
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
               <p className="text-lg font-black text-red-600">0%</p>
-              <p className="text-xs text-gray-600">יום 1</p>
+              <p className="text-xs text-ink/70">יום 1</p>
             </div>
-            <div className="bg-white rounded-lg p-2 border border-blue-200">
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
               <p className="text-lg font-black text-amber-600">50%</p>
-              <p className="text-xs text-gray-600">ימים 2-3</p>
+              <p className="text-xs text-ink/70">ימים 2-3</p>
             </div>
-            <div className="bg-white rounded-lg p-2 border border-blue-200">
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
               <p className="text-lg font-black text-green-600">100%</p>
-              <p className="text-xs text-gray-600">יום 4+</p>
+              <p className="text-xs text-ink/70">יום 4+</p>
             </div>
           </div>
         </InfoBox>
@@ -297,8 +297,8 @@ const PayTab = ({
 
       {/* גרף — עמודות תשלום לפי ימים */}
       {sickDays > 1 && sickDays <= 14 && monthlySalary > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">תשלום לפי ימים</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">תשלום לפי ימים</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={chartData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -315,8 +315,8 @@ const PayTab = ({
 
       {/* גרף עוגה — פירוט */}
       {sickDays > 0 && monthlySalary > 0 && result.totalUnpaidLoss > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">חלוקת השכר בתקופת המחלה</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">חלוקת השכר בתקופת המחלה</h3>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie
@@ -391,7 +391,7 @@ const BalanceTab = ({
       <SectionCard title="פרטי ההעסקה">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               חודשי עבודה אצל המעסיק
             </label>
             <input
@@ -400,16 +400,16 @@ const BalanceTab = ({
               max={600}
               value={monthsWorked}
               onChange={(e) => setMonthsWorked(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               {monthsWorked >= 12
                 ? `${Math.floor(monthsWorked / 12)} שנים ו-${monthsWorked % 12} חודשים`
                 : `${monthsWorked} חודשים (שנה ראשונה)`}
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               ימי מחלה שנוצלו בסה"כ
             </label>
             <input
@@ -418,9 +418,9 @@ const BalanceTab = ({
               max={90}
               value={daysUsed}
               onChange={(e) => setDaysUsed(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">סך ימים שנעדרת בשל מחלה</p>
+            <p className="text-xs text-ink/60 mt-1">סך ימים שנעדרת בשל מחלה</p>
           </div>
         </div>
 
@@ -458,18 +458,18 @@ const BalanceTab = ({
       </div>
 
       {/* Progress bar */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">מצב יתרת ימי מחלה</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">מצב יתרת ימי מחלה</h3>
         <SickDayProgressBar balance={result.balance} max={SICK_DAYS_MAX_BALANCE} />
-        <p className="text-xs text-gray-500 mt-3 text-center">
+        <p className="text-xs text-ink/60 mt-3 text-center">
           {result.balance.toFixed(1)} מתוך 90 ימים ({result.percentOfMax.toFixed(0)}% מהתקרה)
         </p>
       </div>
 
       {/* גרף צבירה לאורך שנים */}
       {monthsWorked >= 12 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">צבירת ימי מחלה לאורך שנים</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">צבירת ימי מחלה לאורך שנים</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={chartData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -477,17 +477,17 @@ const BalanceTab = ({
               <YAxis domain={[0, 90]} tick={{ fontSize: 11 }} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="צבורים" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="צבורים" fill="#102219" radius={[4, 4, 0, 0]} />
               <Bar dataKey="נוצלו" fill="#f59e0b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
-          <p className="text-xs text-gray-400 text-center mt-1">הקו המקסימלי: 90 ימים</p>
+          <p className="text-xs text-ink/45 text-center mt-1">הקו המקסימלי: 90 ימים</p>
         </div>
       )}
 
       {/* אזהרה אם יתרה נמוכה */}
       {result.balance < 5 && monthsWorked > 0 && (
-        <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 flex gap-3">
+        <div className="bg-red-50 border-2 border-red-200 rounded-none p-4 flex gap-3">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-red-900 mb-1">יתרת ימי מחלה נמוכה!</h4>
@@ -565,13 +565,13 @@ const FamilyTab = ({
       <SectionCard title="מחלת בן משפחה — פרטים">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               קרבת משפחה
             </label>
             <select
               value={relation}
               onChange={(e) => setRelation(e.target.value as FamilyRelation)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             >
               <option value="child">ילד עד גיל 16</option>
               <option value="spouse">בן/בת זוג</option>
@@ -579,7 +579,7 @@ const FamilyTab = ({
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               ימי היעדרות
             </label>
             <input
@@ -588,14 +588,14 @@ const FamilyTab = ({
               max={30}
               value={absenceDays}
               onChange={(e) => setAbsenceDays(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
           </div>
         </div>
 
         {relation === 'parent' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               גיל ההורה
             </label>
             <input
@@ -604,16 +604,16 @@ const FamilyTab = ({
               max={100}
               value={parentAge}
               onChange={(e) => setParentAge(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               זכאות למחלת הורה חלה רק מגיל 65
             </p>
           </div>
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             שכר חודשי ברוטו (₪)
           </label>
           <input
@@ -623,7 +623,7 @@ const FamilyTab = ({
             step={500}
             value={monthlySalary}
             onChange={(e) => setMonthlySalary(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
           />
         </div>
       </SectionCard>
@@ -676,7 +676,7 @@ const FamilyTab = ({
           />
         </>
       ) : (
-        <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 flex gap-3">
+        <div className="bg-red-50 border-2 border-red-200 rounded-none p-4 flex gap-3">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-red-900 mb-1">אינך זכאי להיעדרות מכוסה</h4>
@@ -702,36 +702,36 @@ const FamilyTab = ({
       <button
         type="button"
         onClick={() => setShowCompare(!showCompare)}
-        className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl transition"
+        className="w-full flex items-center justify-between px-4 py-3 bg-cream-2 hover:bg-paper-hover border border-ink/15 rounded-none transition"
       >
-        <span className="text-sm font-medium text-gray-800">השוואת מכסות לפי סוג קרבה</span>
+        <span className="text-sm font-medium text-ink">השוואת מכסות לפי סוג קרבה</span>
         {showCompare ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
       </button>
       {showCompare && (
-        <div className="bg-white border border-gray-200 rounded-xl p-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50">
-                <th className="px-3 py-2 text-right font-semibold text-gray-700">קרבה</th>
-                <th className="px-3 py-2 text-center font-semibold text-gray-700">מכסה שנתית</th>
-                <th className="px-3 py-2 text-right font-semibold text-gray-700">תנאי זכאות</th>
+              <tr className="bg-cream-2">
+                <th className="px-3 py-2 text-right font-semibold text-ink/70">קרבה</th>
+                <th className="px-3 py-2 text-center font-semibold text-ink/70">מכסה שנתית</th>
+                <th className="px-3 py-2 text-right font-semibold text-ink/70">תנאי זכאות</th>
               </tr>
             </thead>
             <tbody>
-              <tr className={`border-t border-gray-100 ${relation === 'child' ? 'bg-blue-50 font-semibold' : ''}`}>
+              <tr className={`border-t border-ink/10 ${relation === 'child' ? 'bg-cream-2 font-semibold' : ''}`}>
                 <td className="px-3 py-2">ילד</td>
                 <td className="px-3 py-2 text-center">{FAMILY_ILLNESS_ALLOWANCES.child} ימים</td>
-                <td className="px-3 py-2 text-xs text-gray-600">עד גיל 16</td>
+                <td className="px-3 py-2 text-xs text-ink/70">עד גיל 16</td>
               </tr>
-              <tr className={`border-t border-gray-100 ${relation === 'spouse' ? 'bg-blue-50 font-semibold' : ''}`}>
+              <tr className={`border-t border-ink/10 ${relation === 'spouse' ? 'bg-cream-2 font-semibold' : ''}`}>
                 <td className="px-3 py-2">בן/בת זוג</td>
                 <td className="px-3 py-2 text-center">{FAMILY_ILLNESS_ALLOWANCES.spouse} ימים</td>
-                <td className="px-3 py-2 text-xs text-gray-600">ללא תנאי גיל</td>
+                <td className="px-3 py-2 text-xs text-ink/70">ללא תנאי גיל</td>
               </tr>
-              <tr className={`border-t border-gray-100 ${relation === 'parent' ? 'bg-blue-50 font-semibold' : ''}`}>
+              <tr className={`border-t border-ink/10 ${relation === 'parent' ? 'bg-cream-2 font-semibold' : ''}`}>
                 <td className="px-3 py-2">הורה</td>
                 <td className="px-3 py-2 text-center">{FAMILY_ILLNESS_ALLOWANCES.parent} ימים</td>
-                <td className="px-3 py-2 text-xs text-gray-600">רק מגיל 65</td>
+                <td className="px-3 py-2 text-xs text-ink/70">רק מגיל 65</td>
               </tr>
             </tbody>
           </table>
@@ -769,7 +769,7 @@ const LongIllnessTab = ({
       <SectionCard title="תרחיש מחלה ממושכת">
         <div className="grid sm:grid-cols-3 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שנות עבודה אצל המעסיק
             </label>
             <input
@@ -779,11 +779,11 @@ const LongIllnessTab = ({
               step={0.5}
               value={yearsOfService}
               onChange={(e) => setYearsOfService(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               סך ימי מחלה
             </label>
             <input
@@ -792,11 +792,11 @@ const LongIllnessTab = ({
               max={365}
               value={totalSickDays}
               onChange={(e) => setTotalSickDays(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו (₪)
             </label>
             <input
@@ -806,7 +806,7 @@ const LongIllnessTab = ({
               step={500}
               value={monthlySalary}
               onChange={(e) => setMonthlySalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
           </div>
         </div>
@@ -835,13 +835,13 @@ const LongIllnessTab = ({
       </div>
 
       {/* שלבי המחלה */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">שלבי המחלה — מה מגיע מתי?</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">שלבי המחלה — מה מגיע מתי?</h3>
         <div className="space-y-3">
           {result.scenarios.map((s, i) => (
             <div
               key={i}
-              className={`flex items-start gap-3 p-3 rounded-lg border ${
+              className={`flex items-start gap-3 p-3 rounded-none border ${
                 s.rate === 0 && s.startDay > 1
                   ? 'bg-red-50 border-red-200'
                   : s.rate === 1
@@ -849,7 +849,7 @@ const LongIllnessTab = ({
                   : 'bg-amber-50 border-amber-200'
               }`}
             >
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white border-2 border-current flex items-center justify-center text-sm font-bold">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-paper border-2 border-current flex items-center justify-center text-sm font-bold">
                 {i + 1}
               </div>
               <div className="flex-1">
@@ -861,7 +861,7 @@ const LongIllnessTab = ({
                     {s.rate === 0 && s.startDay > 1 ? '0 ₪' : formatCurrency(s.payment)}
                   </p>
                 </div>
-                <p className="text-xs text-gray-600 mt-0.5">{s.description}</p>
+                <p className="text-xs text-ink/70 mt-0.5">{s.description}</p>
               </div>
             </div>
           ))}
@@ -922,8 +922,8 @@ export function SickPayCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* Tab navigation */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-        <div className="flex flex-wrap border-b border-gray-200">
+      <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+        <div className="flex flex-wrap border-b border-ink/15">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -931,8 +931,8 @@ export function SickPayCalculator() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 min-w-[120px] px-4 py-3 text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white border-b-2 border-blue-600'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-ink text-cream border-b-2 border-ink'
+                  : 'text-ink/70 hover:text-ink hover:bg-cream-2'
               }`}
             >
               <span className="ml-1">{tab.emoji}</span>

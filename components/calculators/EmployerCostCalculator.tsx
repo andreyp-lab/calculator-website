@@ -111,16 +111,16 @@ export function EmployerCostCalculator() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       {/* קלט */}
-      <div className="lg:col-span-3 bg-white border-2 border-gray-200 rounded-xl p-6">
+      <div className="lg:col-span-3 bg-paper border border-ink/15 rounded-none p-6">
         {/* Tabs */}
-        <div className="flex gap-2 mb-6 border-b">
+        <div className="flex gap-2 mb-6 border-b border-ink/15">
           <button
             type="button"
             onClick={() => setActiveTab('basic')}
             className={`px-4 py-2 border-b-2 transition ${
               activeTab === 'basic'
-                ? 'border-blue-600 text-blue-600 font-semibold'
-                : 'border-transparent text-gray-600 hover:text-gray-900'
+                ? 'border-gold text-ink font-semibold'
+                : 'border-transparent text-ink/60 hover:text-ink'
             }`}
           >
             פרטי העובד
@@ -130,8 +130,8 @@ export function EmployerCostCalculator() {
             onClick={() => setActiveTab('benefits')}
             className={`px-4 py-2 border-b-2 transition ${
               activeTab === 'benefits'
-                ? 'border-blue-600 text-blue-600 font-semibold'
-                : 'border-transparent text-gray-600 hover:text-gray-900'
+                ? 'border-gold text-ink font-semibold'
+                : 'border-transparent text-ink/60 hover:text-ink'
             }`}
           >
             הטבות נוספות
@@ -142,13 +142,13 @@ export function EmployerCostCalculator() {
           <div className="space-y-5">
             {/* פרופיל תפקיד */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 בחר תפקיד (טעינה מהירה)
               </label>
               <select
                 value={jobProfile}
                 onChange={(e) => applyJobProfile(e.target.value as JobProfile)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               >
                 {Object.entries(JOB_PROFILES_2026).map(([key, p]) => (
                   <option key={key} value={key}>
@@ -163,7 +163,7 @@ export function EmployerCostCalculator() {
             <div>
               <label
                 htmlFor="grossSalary"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-ink/70 mb-2"
               >
                 שכר ברוטו חודשי (₪)
               </label>
@@ -174,7 +174,7 @@ export function EmployerCostCalculator() {
                 step={500}
                 value={input.grossSalary}
                 onChange={(e) => updateField('grossSalary', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
               />
             </div>
 
@@ -183,7 +183,7 @@ export function EmployerCostCalculator() {
               <div>
                 <label
                   htmlFor="employmentType"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-ink/70 mb-2"
                 >
                   סוג העסקה
                 </label>
@@ -193,7 +193,7 @@ export function EmployerCostCalculator() {
                   onChange={(e) =>
                     updateField('employmentType', e.target.value as EmployerCostInput['employmentType'])
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 >
                   <option value="regular">משרה מלאה</option>
                   <option value="part-time">משרה חלקית</option>
@@ -203,7 +203,7 @@ export function EmployerCostCalculator() {
               <div>
                 <label
                   htmlFor="yearsOfService"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-ink/70 mb-2"
                 >
                   וותק (שנים)
                 </label>
@@ -214,7 +214,7 @@ export function EmployerCostCalculator() {
                   step={0.5}
                   value={input.yearsOfService}
                   onChange={(e) => updateField('yearsOfService', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
               </div>
             </div>
@@ -222,7 +222,7 @@ export function EmployerCostCalculator() {
             {/* משרה חלקית */}
             {input.employmentType === 'part-time' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink/70 mb-2">
                   אחוז משרה (%)
                 </label>
                 <input
@@ -231,7 +231,7 @@ export function EmployerCostCalculator() {
                   max={100}
                   value={input.partTimePercentage ?? 100}
                   onChange={(e) => updateField('partTimePercentage', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
               </div>
             )}
@@ -240,7 +240,7 @@ export function EmployerCostCalculator() {
             {input.employmentType === 'hourly' && (
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-ink/70 mb-2">
                     תעריף לשעה (₪)
                   </label>
                   <input
@@ -248,11 +248,11 @@ export function EmployerCostCalculator() {
                     min={0}
                     value={input.hourlyRate ?? 60}
                     onChange={(e) => updateField('hourlyRate', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-ink/70 mb-2">
                     שעות בחודש
                   </label>
                   <input
@@ -260,18 +260,18 @@ export function EmployerCostCalculator() {
                     min={1}
                     value={input.hoursPerMonth ?? 182}
                     onChange={(e) => updateField('hoursPerMonth', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                 </div>
               </div>
             )}
 
             {/* פנסיה ופיצויים */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-              <h4 className="font-semibold text-gray-900 mb-3 text-sm">פנסיה ופיצויים</h4>
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+              <h4 className="font-semibold text-ink mb-3 text-sm">פנסיה ופיצויים</h4>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-gray-700 mb-1">פנסיה מעסיק (%)</label>
+                  <label className="block text-xs text-ink/70 mb-1">פנסיה מעסיק (%)</label>
                   <input
                     type="number"
                     step={0.1}
@@ -281,11 +281,11 @@ export function EmployerCostCalculator() {
                     onChange={(e) =>
                       updateField('pensionEmployerRate', Number(e.target.value))
                     }
-                    className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                    className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-700 mb-1">פיצויים (%)</label>
+                  <label className="block text-xs text-ink/70 mb-1">פיצויים (%)</label>
                   <input
                     type="number"
                     step={0.01}
@@ -293,7 +293,7 @@ export function EmployerCostCalculator() {
                     max={20}
                     value={input.compensationRate}
                     onChange={(e) => updateField('compensationRate', Number(e.target.value))}
-                    className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                    className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                   />
                 </div>
               </div>
@@ -304,13 +304,15 @@ export function EmployerCostCalculator() {
                   onChange={(e) => updateField('hasEducationFund', e.target.checked)}
                   className="w-4 h-4"
                 />
-                <span className="text-sm text-gray-700">קרן השתלמות (7.5% מעסיק)</span>
+                <span className="text-sm text-ink/70">קרן השתלמות (7.5% מעסיק)</span>
               </label>
             </div>
 
             {/* נסיעות */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">נסיעות</label>
+              <label className="block text-sm font-medium text-ink/70 mb-2">
+                נסיעות
+              </label>
               <select
                 value={input.transportationType}
                 onChange={(e) => {
@@ -321,7 +323,7 @@ export function EmployerCostCalculator() {
                   else if (t === 'company') updateField('transportationCost', 3_500);
                   else updateField('transportationCost', 0);
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               >
                 <option value="none">ללא</option>
                 <option value="public">תחבורה ציבורית</option>
@@ -334,7 +336,7 @@ export function EmployerCostCalculator() {
                   min={0}
                   value={input.transportationCost ?? 0}
                   onChange={(e) => updateField('transportationCost', Number(e.target.value))}
-                  className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full mt-2 px-3 py-2 border border-ink/15 rounded-none text-sm"
                   placeholder="עלות חודשית (₪)"
                 />
               )}
@@ -344,7 +346,7 @@ export function EmployerCostCalculator() {
 
         {activeTab === 'benefits' && (
           <div className="space-y-3">
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm text-ink/70 mb-3">
               סמן את ההטבות שאתה מעניק לעובד והגדר את הסכום
             </p>
             {(
@@ -361,10 +363,10 @@ export function EmployerCostCalculator() {
             ).map(({ key, label, period }) => (
               <div
                 key={key}
-                className={`p-3 rounded-lg border-2 transition ${
+                className={`p-3 rounded-none border-2 transition ${
                   benefits[key].active
-                    ? 'border-blue-300 bg-blue-50'
-                    : 'border-gray-200 bg-gray-50'
+                    ? 'border-gold bg-cream-2'
+                    : 'border-ink/15 bg-cream-2'
                 }`}
               >
                 <label className="flex items-center gap-3 cursor-pointer">
@@ -374,8 +376,8 @@ export function EmployerCostCalculator() {
                     onChange={() => toggleBenefit(key)}
                     className="w-4 h-4"
                   />
-                  <span className="text-sm font-medium text-gray-900 flex-1">{label}</span>
-                  <span className="text-xs text-gray-500">({period})</span>
+                  <span className="text-sm font-medium text-ink flex-1">{label}</span>
+                  <span className="text-xs text-ink/60">({period})</span>
                 </label>
                 {benefits[key].active && (
                   <input
@@ -383,7 +385,7 @@ export function EmployerCostCalculator() {
                     min={0}
                     value={benefits[key].amount}
                     onChange={(e) => updateBenefitAmount(key, Number(e.target.value))}
-                    className="w-full mt-2 px-3 py-1.5 border border-gray-300 rounded text-sm"
+                    className="w-full mt-2 px-3 py-1.5 border border-ink/15 rounded-none text-sm"
                   />
                 )}
               </div>
@@ -395,7 +397,7 @@ export function EmployerCostCalculator() {
       {/* תוצאה */}
       <div className="lg:col-span-2 space-y-4">
         {result.warning && (
-          <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-3 text-xs text-amber-900">
+          <div className="bg-amber-50 border-2 border-amber-300 rounded-none p-3 text-xs text-amber-900">
             ⚠️ {result.warning}
           </div>
         )}
@@ -413,71 +415,71 @@ export function EmployerCostCalculator() {
           variant="primary"
         />
 
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-900 mb-3 text-sm">פירוט חודשי</h4>
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+          <h4 className="font-semibold text-ink mb-3 text-sm">פירוט חודשי</h4>
           <dl className="space-y-1.5 text-sm">
             <div className="flex justify-between">
-              <dt className="text-gray-600">שכר ברוטו:</dt>
+              <dt className="text-ink/70">שכר ברוטו:</dt>
               <dd className="font-medium">{formatCurrency(result.baseSalary)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-gray-600">ביטוח לאומי:</dt>
+              <dt className="text-ink/70">ביטוח לאומי:</dt>
               <dd className="font-medium">{formatCurrency(result.nationalInsurance)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-gray-600">פנסיה מעסיק:</dt>
+              <dt className="text-ink/70">פנסיה מעסיק:</dt>
               <dd className="font-medium">{formatCurrency(result.pensionEmployer)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-gray-600">פיצויים:</dt>
+              <dt className="text-ink/70">פיצויים:</dt>
               <dd className="font-medium">{formatCurrency(result.compensation)}</dd>
             </div>
             {result.educationFundEmployer > 0 && (
               <div className="flex justify-between">
-                <dt className="text-gray-600">קרן השתלמות:</dt>
+                <dt className="text-ink/70">קרן השתלמות:</dt>
                 <dd className="font-medium">
                   {formatCurrency(result.educationFundEmployer)}
                 </dd>
               </div>
             )}
             <div className="flex justify-between">
-              <dt className="text-gray-600">
+              <dt className="text-ink/70">
                 דמי הבראה ({result.effectiveRecoveryDays} ימים):
               </dt>
               <dd className="font-medium">{formatCurrency(result.recoveryPay)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-gray-600">
+              <dt className="text-ink/70">
                 חופשה ({result.effectiveVacationDays} ימים):
               </dt>
               <dd className="font-medium">{formatCurrency(result.vacationCost)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-gray-600">
+              <dt className="text-ink/70">
                 מחלה ({result.effectiveSickDays} ימים, 25%):
               </dt>
               <dd className="font-medium">{formatCurrency(result.sickDaysCost)}</dd>
             </div>
             {result.transportationCost > 0 && (
               <div className="flex justify-between">
-                <dt className="text-gray-600">נסיעות:</dt>
+                <dt className="text-ink/70">נסיעות:</dt>
                 <dd className="font-medium">{formatCurrency(result.transportationCost)}</dd>
               </div>
             )}
             {result.benefitsCost > 0 && (
               <div className="flex justify-between">
-                <dt className="text-gray-600">הטבות:</dt>
+                <dt className="text-ink/70">הטבות:</dt>
                 <dd className="font-medium">{formatCurrency(result.benefitsCost)}</dd>
               </div>
             )}
-            <div className="flex justify-between pt-2 border-t border-gray-300 font-bold">
-              <dt className="text-gray-900">סה"כ:</dt>
-              <dd className="text-gray-900">{formatCurrency(result.totalMonthlyCost)}</dd>
+            <div className="flex justify-between pt-2 border-t border-ink/15 font-bold">
+              <dt className="text-ink">סה"כ:</dt>
+              <dd className="text-ink">{formatCurrency(result.totalMonthlyCost)}</dd>
             </div>
           </dl>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-xs text-ink">
           <p className="font-semibold mb-1">יחס עלות/שכר: {result.costToSalaryRatio.toFixed(2)}</p>
           <p>
             על כל ₪1 ברוטו לעובד, אתה משלם {formatCurrency(result.costToSalaryRatio)} בפועל.

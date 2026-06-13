@@ -129,12 +129,12 @@ export default function UnifiedToolPage() {
       {/* Header */}
       <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
         <div className="flex items-center gap-3">
-          <div className="bg-purple-100 p-3 rounded-lg">
-            <LayoutDashboard className="w-6 h-6 text-purple-700" />
+          <div className="bg-cream-2 p-3 rounded-none">
+            <LayoutDashboard className="w-6 h-6 text-gold" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">מערכת פיננסית מאוחדת</h1>
-            <p className="text-sm text-gray-600">
+            <h1 className="text-2xl font-bold text-ink">מערכת פיננסית מאוחדת</h1>
+            <p className="text-sm text-ink/70">
               תקציב + תזרים + ניתוח דוחות + חיזוי - הכל במקום אחד, מסונכרן בזמן אמת
             </p>
           </div>
@@ -150,7 +150,7 @@ export default function UnifiedToolPage() {
       </div>
 
       {/* Master Tabs */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-2 shadow-sm flex flex-wrap gap-1 mb-4">
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-2 shadow-sm flex flex-wrap gap-1 mb-4">
         <MasterTabButton
           active={masterTab === 'overview'}
           onClick={() => setMasterTab('overview')}
@@ -348,19 +348,19 @@ function MasterTabButton({
   color: string;
 }) {
   const colorMap: Record<string, string> = {
-    purple: 'bg-purple-600',
-    green: 'bg-emerald-600',
-    blue: 'bg-blue-600',
-    orange: 'bg-orange-600',
-    indigo: 'bg-indigo-600',
+    purple: 'bg-ink',
+    green: 'bg-ink',
+    blue: 'bg-ink',
+    orange: 'bg-ink',
+    indigo: 'bg-ink',
   };
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2.5 rounded text-sm font-semibold transition ${
+      className={`flex items-center gap-2 px-4 py-2.5 rounded-none text-sm font-semibold transition ${
         active
-          ? `${colorMap[color]} text-white shadow-md`
-          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          ? `${colorMap[color]} text-cream shadow-md`
+          : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
       }`}
     >
       <Icon className="w-4 h-4" />
@@ -371,7 +371,7 @@ function MasterTabButton({
 
 function SubTabNav({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 p-2 shadow-sm flex flex-wrap gap-1 mb-4">
+    <div className="bg-paper rounded-none border-2 border-ink/15 p-2 shadow-sm flex flex-wrap gap-1 mb-4">
       {children}
     </div>
   );
@@ -391,24 +391,24 @@ function SubTab({
   color: string;
 }) {
   const colorMap: Record<string, string> = {
-    blue: 'bg-blue-600',
-    purple: 'bg-purple-600',
-    indigo: 'bg-indigo-600',
-    cyan: 'bg-cyan-600',
-    teal: 'bg-teal-600',
-    rose: 'bg-rose-600',
-    violet: 'bg-violet-600',
-    emerald: 'bg-emerald-600',
-    amber: 'bg-amber-600',
-    orange: 'bg-orange-600',
-    green: 'bg-emerald-600',
-    pink: 'bg-pink-600',
+    blue: 'bg-ink',
+    purple: 'bg-ink',
+    indigo: 'bg-ink',
+    cyan: 'bg-ink',
+    teal: 'bg-ink',
+    rose: 'bg-ink',
+    violet: 'bg-ink',
+    emerald: 'bg-ink',
+    amber: 'bg-ink',
+    orange: 'bg-ink',
+    green: 'bg-ink',
+    pink: 'bg-ink',
   };
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs transition ${
-        active ? `${colorMap[color]} text-white` : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs transition ${
+        active ? `${colorMap[color]} text-cream` : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
       }`}
     >
       <Icon className="w-3.5 h-3.5" />

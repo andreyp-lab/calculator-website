@@ -96,7 +96,7 @@ export default function CapitalGainsTaxPage() {
           </p>
 
           <h2>נוסחת חישוב מס שבח</h2>
-          <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4 rounded">
+          <div className="bg-cream-2 border-r-4 border-ink p-4 my-4">
             <ol className="space-y-2 text-sm">
               <li><strong>1.</strong> שבח כולל = שווי מכירה − שווי רכישה − הוצאות מוכרות</li>
               <li><strong>2.</strong> שבח אינפלציוני (פטור) = שווי רכישה × עליית מדד CPI</li>
@@ -136,7 +136,7 @@ export default function CapitalGainsTaxPage() {
           <p>
             כל הוצאה מוכרת מורידה את השבח החייב במס — וחוסכת 25 אגורות מס לכל שקל. הוצאות
             עיקריות: שכ&quot;ט עו&quot;ד, עמלת תיווך,{' '}
-            <Link href="/real-estate/purchase-tax" className="text-blue-600 hover:underline">
+            <Link href="/real-estate/purchase-tax" className="text-gold hover:underline">
               מס רכישה
             </Link>{' '}
             ששולם, שיפוצים, היטל השבחה.
@@ -152,19 +152,19 @@ export default function CapitalGainsTaxPage() {
           <h2>מחשבונים קשורים</h2>
           <ul className="space-y-1">
             <li>
-              <Link href="/real-estate/purchase-tax" className="text-blue-600 hover:underline">
+              <Link href="/real-estate/purchase-tax" className="text-gold hover:underline">
                 מחשבון מס רכישה 2026
               </Link>{' '}
               — חישוב מס רכישה לדירה ראשונה, שנייה ומשקיעים
             </li>
             <li>
-              <Link href="/real-estate/mortgage" className="text-blue-600 hover:underline">
+              <Link href="/real-estate/mortgage" className="text-gold hover:underline">
                 מחשבון משכנתא
               </Link>{' '}
               — השוואת מסלולי משכנתא והחזר חודשי
             </li>
             <li>
-              <Link href="/investments/compound-interest" className="text-blue-600 hover:underline">
+              <Link href="/investments/compound-interest" className="text-gold hover:underline">
                 מחשבון ריבית דריבית
               </Link>{' '}
               — תכנון השקעות לטווח ארוך
@@ -174,7 +174,7 @@ export default function CapitalGainsTaxPage() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.gov.il/he/departments/israel_tax_authority"

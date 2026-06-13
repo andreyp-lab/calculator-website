@@ -105,7 +105,7 @@ export function BurnRateDashboard() {
 
   const statusColors = {
     profitable: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700', icon: CheckCircle2 },
-    healthy: { bg: 'bg-blue-50', border: 'border-blue-300', text: 'text-blue-700', icon: CheckCircle2 },
+    healthy: { bg: 'bg-cream-2', border: 'border-ink/20', text: 'text-ink', icon: CheckCircle2 },
     caution: { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-700', icon: AlertTriangle },
     critical: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', icon: AlertTriangle },
   };
@@ -128,28 +128,28 @@ export function BurnRateDashboard() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Flame className="w-5 h-5" />
             Burn Rate / Cash Runway
           </h3>
-          <p className="text-xs text-orange-100">קצב שריפת מזומן + תאריך אזילה צפוי</p>
+          <p className="text-xs text-cream/70">קצב שריפת מזומן + תאריך אזילה צפוי</p>
         </div>
       </div>
 
       {/* Big Status Card */}
-      <div className={`rounded-xl border-4 p-6 text-center ${sc.bg} ${sc.border}`}>
+      <div className={`border-4 p-6 text-center ${sc.bg} ${sc.border}`}>
         <StatusIcon className={`w-12 h-12 ${sc.text} mx-auto mb-2`} />
         <div className={`text-4xl font-bold ${sc.text} mb-2`}>
           {Number.isFinite(metrics.runwayMonths)
             ? `${metrics.runwayMonths.toFixed(1)} חודשים`
             : '∞'}
         </div>
-        <div className="text-sm text-gray-700 mb-3">Cash Runway</div>
+        <div className="text-sm text-ink/70 mb-3">Cash Runway</div>
         <div className={`text-base ${sc.text} font-medium`}>{metrics.recommendation}</div>
         {metrics.projectedZeroDate && (
-          <div className="mt-3 text-xs text-gray-600 flex items-center justify-center gap-1">
+          <div className="mt-3 text-xs text-ink/60 flex items-center justify-center gap-1">
             <Calendar className="w-3.5 h-3.5" />
             תאריך אזילה צפוי: {metrics.projectedZeroDate}
           </div>
@@ -161,7 +161,7 @@ export function BurnRateDashboard() {
         <KpiCard
           label="מזומן נוכחי"
           value={`₪${fmt(metrics.currentCash)}`}
-          color="blue"
+          color="neutral"
           icon={CheckCircle2}
         />
         <KpiCard
@@ -185,8 +185,8 @@ export function BurnRateDashboard() {
       </div>
 
       {/* Cash trajectory */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3">
           <h3 className="font-bold">מסלול מזומן צפוי</h3>
         </div>
         <div className="p-4">
@@ -200,8 +200,8 @@ export function BurnRateDashboard() {
               <Area
                 type="monotone"
                 dataKey="יתרת מזומן"
-                stroke="#3b82f6"
-                fill="#3b82f6"
+                stroke="#102219"
+                fill="#102219"
                 fillOpacity={0.3}
                 strokeWidth={3}
               />
@@ -226,23 +226,23 @@ function KpiCard({
 }: {
   label: string;
   value: string;
-  color: 'blue' | 'red' | 'orange' | 'amber';
+  color: 'neutral' | 'red' | 'orange' | 'amber';
   icon: typeof Flame;
 }) {
   const colors: Record<string, { bg: string; text: string; iconBg: string }> = {
-    blue: { bg: 'bg-blue-50 border-blue-200', text: 'text-blue-700', iconBg: 'bg-blue-100' },
+    neutral: { bg: 'bg-cream-2 border-ink/15', text: 'text-ink', iconBg: 'bg-paper' },
     red: { bg: 'bg-red-50 border-red-200', text: 'text-red-700', iconBg: 'bg-red-100' },
     orange: { bg: 'bg-orange-50 border-orange-200', text: 'text-orange-700', iconBg: 'bg-orange-100' },
     amber: { bg: 'bg-amber-50 border-amber-200', text: 'text-amber-700', iconBg: 'bg-amber-100' },
   };
   const c = colors[color];
   return (
-    <div className={`${c.bg} border-2 rounded-lg p-3 flex items-center gap-2`}>
-      <div className={`${c.iconBg} p-2 rounded`}>
+    <div className={`${c.bg} border-2 p-3 flex items-center gap-2`}>
+      <div className={`${c.iconBg} p-2`}>
         <Icon className={`w-4 h-4 ${c.text}`} />
       </div>
       <div>
-        <div className="text-[10px] text-gray-600">{label}</div>
+        <div className="text-[10px] text-ink/60">{label}</div>
         <div className={`text-lg font-bold ${c.text}`}>{value}</div>
       </div>
     </div>
@@ -252,7 +252,7 @@ function KpiCard({
 function CutsCalculator({ currentCash, netBurn }: { currentCash: number; netBurn: number }) {
   const targets = [12, 18, 24];
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
+    <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
       <div className="bg-amber-600 text-white p-3">
         <h3 className="font-bold">כמה לחתוך כדי להאריך runway?</h3>
       </div>
@@ -266,11 +266,11 @@ function CutsCalculator({ currentCash, netBurn }: { currentCash: number; netBurn
             return (
               <div
                 key={targetMonths}
-                className={`rounded-lg p-3 border-2 ${
+                className={`p-3 border-2 ${
                   possible ? 'bg-amber-50 border-amber-300' : 'bg-emerald-50 border-emerald-300'
                 }`}
               >
-                <div className="text-xs text-gray-700">להגיע ל-runway של</div>
+                <div className="text-xs text-ink/70">להגיע ל-runway של</div>
                 <div className="text-2xl font-bold mb-2">{targetMonths} חודשים</div>
                 {possible ? (
                   <>
@@ -278,7 +278,7 @@ function CutsCalculator({ currentCash, netBurn }: { currentCash: number; netBurn
                     <div className="text-xl font-bold text-amber-700">
                       ₪{Math.round(cutNeeded / 1000)}K/חודש
                     </div>
-                    <div className="text-xs text-gray-500">({cutPct.toFixed(0)}% מ-burn)</div>
+                    <div className="text-xs text-ink/45">({cutPct.toFixed(0)}% מ-burn)</div>
                   </>
                 ) : (
                   <div className="text-sm text-emerald-700">✓ כבר מספיק!</div>

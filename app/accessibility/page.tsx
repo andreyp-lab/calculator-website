@@ -9,18 +9,18 @@ export const metadata = {
 
 export default function AccessibilityPage() {
   return (
-    <div className="min-h-screen bg-white py-12">
-      <article className="max-w-3xl mx-auto px-4 text-gray-700">
+    <div className="min-h-screen bg-cream py-12">
+      <article className="max-w-3xl mx-auto px-4 text-ink/70">
 
         {/* כותרת */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">הצהרת נגישות</h1>
-        <p className="text-sm text-gray-500 mb-8">
+        <h1 className="text-4xl font-bold text-ink mb-2">הצהרת נגישות</h1>
+        <p className="text-sm text-ink/50 mb-8">
           תאריך עדכון: {SITE_INFO.legal.accessibilityLastUpdated}
         </p>
 
         {/* 1. רקע */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             1. רקע
           </h2>
           <p className="mb-3">
@@ -39,34 +39,34 @@ export default function AccessibilityPage() {
 
         {/* 2. רמת תאימות */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             2. רמת תאימות
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h3 className="font-bold text-blue-800 mb-1">תקן ישראלי</h3>
-              <p className="text-blue-700 text-sm">ת&quot;י 5568 (IS-5568)</p>
-              <p className="text-blue-600 text-xs mt-1">תקן ישראלי לנגישות רשת</p>
+            <div className="bg-cream-2 border border-ink/15 p-4">
+              <h3 className="font-bold text-ink mb-1">תקן ישראלי</h3>
+              <p className="text-ink/70 text-sm">ת&quot;י 5568 (IS-5568)</p>
+              <p className="text-ink/60 text-xs mt-1">תקן ישראלי לנגישות רשת</p>
             </div>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h3 className="font-bold text-green-800 mb-1">תקן בינלאומי</h3>
-              <p className="text-green-700 text-sm">WCAG 2.0 רמה AA</p>
-              <p className="text-green-600 text-xs mt-1">Web Content Accessibility Guidelines</p>
+            <div className="bg-cream-2 border border-ink/15 p-4">
+              <h3 className="font-bold text-ink mb-1">תקן בינלאומי</h3>
+              <p className="text-ink/70 text-sm">WCAG 2.0 רמה AA</p>
+              <p className="text-ink/60 text-xs mt-1">Web Content Accessibility Guidelines</p>
             </div>
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-              <h3 className="font-bold text-purple-800 mb-1">חוק ישראלי</h3>
-              <p className="text-purple-700 text-sm">חוק שוויון זכויות לאנשים עם מוגבלות, התשנ&quot;ח-1998</p>
+            <div className="bg-cream-2 border border-ink/15 p-4">
+              <h3 className="font-bold text-ink mb-1">חוק ישראלי</h3>
+              <p className="text-ink/70 text-sm">חוק שוויון זכויות לאנשים עם מוגבלות, התשנ&quot;ח-1998</p>
             </div>
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-              <h3 className="font-bold text-orange-800 mb-1">תקנות</h3>
-              <p className="text-orange-700 text-sm">תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע&quot;ג-2013</p>
+            <div className="bg-cream-2 border border-ink/15 p-4">
+              <h3 className="font-bold text-ink mb-1">תקנות</h3>
+              <p className="text-ink/70 text-sm">תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע&quot;ג-2013</p>
             </div>
           </div>
         </section>
 
         {/* 3. מה הונגש */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             3. מה הונגש באתר
           </h2>
           <p className="mb-4">
@@ -129,10 +129,10 @@ export default function AccessibilityPage() {
               },
             ].map((item) => (
               <div key={item.title} className="flex gap-3 items-start">
-                <span className="text-green-500 text-lg flex-shrink-0 mt-0.5" aria-hidden="true">✓</span>
+                <span className="text-gold text-lg flex-shrink-0 mt-0.5" aria-hidden="true">✓</span>
                 <div>
-                  <strong className="text-gray-900">{item.title}</strong>
-                  <p className="text-sm text-gray-600 mt-0.5">{item.desc}</p>
+                  <strong className="text-ink">{item.title}</strong>
+                  <p className="text-sm text-ink/60 mt-0.5">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -141,7 +141,7 @@ export default function AccessibilityPage() {
 
         {/* 4. תפריט נגישות */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             4. תפריט הנגישות הצף — הסבר
           </h2>
           <p className="mb-4">
@@ -163,13 +163,13 @@ export default function AccessibilityPage() {
               'רווח שורות מוגדל — מרווח שורה של 2',
               'איפוס — ביטול כל ההתאמות',
             ].map((feature) => (
-              <div key={feature} className="bg-gray-50 border border-gray-200 rounded p-3 text-sm">
+              <div key={feature} className="bg-cream-2 border border-ink/15 p-3 text-sm">
                 {feature}
               </div>
             ))}
           </div>
 
-          <p className="mt-4 text-sm text-gray-600">
+          <p className="mt-4 text-sm text-ink/60">
             ההגדרות נשמרות באופן מקומי בדפדפן שלך (localStorage) וישמרו בין ביקורים.
             ניתן לסגור את התפריט בלחיצה על Esc, לחיצה מחוץ לתפריט, או לחיצה חוזרת על הכפתור.
           </p>
@@ -177,7 +177,7 @@ export default function AccessibilityPage() {
 
         {/* 5. מגבלות ידועות */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             5. מגבלות ידועות
           </h2>
           <p className="mb-4">
@@ -185,7 +185,7 @@ export default function AccessibilityPage() {
           </p>
 
           <div className="space-y-4">
-            <div className="border border-amber-200 bg-amber-50 rounded-lg p-4">
+            <div className="border border-amber-200 bg-amber-50 p-4">
               <h3 className="font-semibold text-amber-800 mb-2">גרפים אינטרקטיביים (Recharts)</h3>
               <p className="text-sm text-amber-700">
                 הגרפים הפיננסיים (עוגה, קו, עמודות) מוצגים כאלמנטי SVG אינטרקטיביים.
@@ -195,7 +195,7 @@ export default function AccessibilityPage() {
               <p className="text-xs text-amber-600 mt-1">סטטוס: בעבודה — מוסיפים alt-text ו-data tables לגרפים.</p>
             </div>
 
-            <div className="border border-amber-200 bg-amber-50 rounded-lg p-4">
+            <div className="border border-amber-200 bg-amber-50 p-4">
               <h3 className="font-semibold text-amber-800 mb-2">תוצאות מחשבונים</h3>
               <p className="text-sm text-amber-700">
                 חלק מהמחשבונים מציגים תוצאות כמספרים בלבד, ללא הקשר תיאורי מספיק לקוראי מסך.
@@ -204,7 +204,7 @@ export default function AccessibilityPage() {
               <p className="text-xs text-amber-600 mt-1">סטטוס: בשיפור מתמיד.</p>
             </div>
 
-            <div className="border border-amber-200 bg-amber-50 rounded-lg p-4">
+            <div className="border border-amber-200 bg-amber-50 p-4">
               <h3 className="font-semibold text-amber-800 mb-2">תוכן PDFs חיצוניים</h3>
               <p className="text-sm text-amber-700">
                 האתר מקשר לקבצי PDF של רשויות ממשלתיות (מס הכנסה, בנק ישראל).
@@ -213,9 +213,9 @@ export default function AccessibilityPage() {
             </div>
           </div>
 
-          <p className="mt-4 text-sm font-medium text-gray-800">
+          <p className="mt-4 text-sm font-medium text-ink">
             אנחנו מחויבים לשיפור מתמיד של הנגישות. אם נתקלת בבעיה —
-            <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline mr-1 ml-1">
+            <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline mr-1 ml-1">
               אנא דווח לנו
             </Link>
             ונפעל לפתרונה.
@@ -224,7 +224,7 @@ export default function AccessibilityPage() {
 
         {/* 6. דיווח על בעיה */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             6. דיווח על בעיית נגישות
           </h2>
           <p className="mb-3">
@@ -233,18 +233,18 @@ export default function AccessibilityPage() {
           <ul className="space-y-2 mb-4">
             <li>
               <strong>טופס יצירת קשר:</strong>{' '}
-              <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline">
+              <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
                 {SITE_INFO.domain}{SITE_INFO.contact.contactPage}
               </Link>
             </li>
             <li>
               <strong>דוא&quot;ל נגישות:</strong>{' '}
-              <a href={`mailto:${SITE_INFO.contact.accessibilityEmail}`} className="text-blue-600 hover:underline">
+              <a href={`mailto:${SITE_INFO.contact.accessibilityEmail}`} className="text-gold hover:underline">
                 {SITE_INFO.contact.accessibilityEmail}
               </a>
             </li>
           </ul>
-          <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
+          <div className="bg-cream-2 border border-ink/15 p-3 text-sm text-ink">
             <strong>זמן תגובה:</strong> נשתדל להשיב תוך 7 ימי עסקים. לבעיות דחופות — ציין זאת בנושא
             הפנייה.
           </div>
@@ -252,7 +252,7 @@ export default function AccessibilityPage() {
 
         {/* 7. לא יכולת לגשת */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             7. לא יכולת לגשת לתוכן?
           </h2>
           <p className="mb-3">
@@ -262,18 +262,18 @@ export default function AccessibilityPage() {
           <ul className="space-y-2">
             <li>
               פנייה בדוא&quot;ל:{' '}
-              <a href={`mailto:${SITE_INFO.contact.accessibilityEmail}`} className="text-blue-600 hover:underline">
+              <a href={`mailto:${SITE_INFO.contact.accessibilityEmail}`} className="text-gold hover:underline">
                 {SITE_INFO.contact.accessibilityEmail}
               </a>
             </li>
             <li>
               טופס יצירת קשר:{' '}
-              <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline">
+              <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
                 {SITE_INFO.contact.contactPage}
               </Link>
             </li>
           </ul>
-          <p className="text-sm text-gray-600 mt-3">
+          <p className="text-sm text-ink/60 mt-3">
             <em>הערה: האתר מנוהל על ידי יחיד פרטי. אין חובה חוקית למינוי רכז נגישות, אך
             כל פנייה תקבל מענה אישי.</em>
           </p>
@@ -281,39 +281,39 @@ export default function AccessibilityPage() {
 
         {/* 8. חוקים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             8. חוקים, תקנות ותקנים
           </h2>
           <div className="space-y-3">
-            <div className="border border-gray-200 rounded p-3">
-              <h3 className="font-semibold text-gray-900 text-sm">
+            <div className="border border-ink/15 p-3">
+              <h3 className="font-semibold text-ink text-sm">
                 חוק שוויון זכויות לאנשים עם מוגבלות, התשנ&quot;ח-1998
               </h3>
-              <p className="text-xs text-gray-600 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 הבסיס החוקי לזכות לנגישות בישראל.
               </p>
             </div>
-            <div className="border border-gray-200 rounded p-3">
-              <h3 className="font-semibold text-gray-900 text-sm">
+            <div className="border border-ink/15 p-3">
+              <h3 className="font-semibold text-ink text-sm">
                 תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע&quot;ג-2013
               </h3>
-              <p className="text-xs text-gray-600 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 התקנות הקובעות את דרישות הנגישות לאתרי אינטרנט בישראל.
               </p>
             </div>
-            <div className="border border-gray-200 rounded p-3">
-              <h3 className="font-semibold text-gray-900 text-sm">
+            <div className="border border-ink/15 p-3">
+              <h3 className="font-semibold text-ink text-sm">
                 תקן ישראלי 5568 (ת&quot;י 5568)
               </h3>
-              <p className="text-xs text-gray-600 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 תקן ישראלי לנגישות אתרי אינטרנט, המבוסס על WCAG 2.0.
               </p>
             </div>
-            <div className="border border-gray-200 rounded p-3">
-              <h3 className="font-semibold text-gray-900 text-sm">
+            <div className="border border-ink/15 p-3">
+              <h3 className="font-semibold text-ink text-sm">
                 WCAG 2.0 Level AA — Web Content Accessibility Guidelines
               </h3>
-              <p className="text-xs text-gray-600 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 הקווים המנחים הבינלאומיים של ארגון W3C לנגישות תוכן ברשת.
               </p>
             </div>
@@ -322,7 +322,7 @@ export default function AccessibilityPage() {
 
         {/* תאריכים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             9. תאריכים
           </h2>
           <ul className="space-y-2 text-sm">
@@ -333,11 +333,11 @@ export default function AccessibilityPage() {
         </section>
 
         {/* תחתית */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mt-10">
-          <p className="text-sm text-gray-700">
+        <div className="bg-cream-2 border border-ink/15 p-5 mt-10">
+          <p className="text-sm text-ink/70">
             הנגישות היא עדיפות עבורנו. אנחנו ממשיכים לשפר את האתר כדי שיהיה נגיש לכלל
             המשתמשים. לפניות בנושא נגישות:{' '}
-            <a href={`mailto:${SITE_INFO.contact.accessibilityEmail}`} className="text-blue-600 hover:underline">
+            <a href={`mailto:${SITE_INFO.contact.accessibilityEmail}`} className="text-gold hover:underline">
               {SITE_INFO.contact.accessibilityEmail}
             </a>
           </p>

@@ -86,10 +86,10 @@ export default function Page() {
       <h2>טבלת זכאות ימי חופשה לפי ותק (2026)</h2>
       <table className="w-full text-sm border-collapse my-4">
         <thead>
-          <tr className="bg-blue-50">
-            <th className="border border-gray-300 p-2 text-right">וותק</th>
-            <th className="border border-gray-300 p-2 text-center">5 ימי עבודה</th>
-            <th className="border border-gray-300 p-2 text-center">6 ימי עבודה</th>
+          <tr className="bg-cream-2">
+            <th className="border border-ink/15 p-2 text-right">וותק</th>
+            <th className="border border-ink/15 p-2 text-center">5 ימי עבודה</th>
+            <th className="border border-ink/15 p-2 text-center">6 ימי עבודה</th>
           </tr>
         </thead>
         <tbody>
@@ -105,10 +105,10 @@ export default function Page() {
             { tenure: 'שנה 13', d5: 22, d6: 26 },
             { tenure: 'שנה 14+', d5: 23, d6: 28 },
           ].map((row, i) => (
-            <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-              <td className="border border-gray-300 p-2 font-medium">{row.tenure}</td>
-              <td className="border border-gray-300 p-2 text-center">{row.d5}</td>
-              <td className="border border-gray-300 p-2 text-center">{row.d6}</td>
+            <tr key={i} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
+              <td className="border border-ink/15 p-2 font-medium">{row.tenure}</td>
+              <td className="border border-ink/15 p-2 text-center">{row.d5}</td>
+              <td className="border border-ink/15 p-2 text-center">{row.d6}</td>
             </tr>
           ))}
         </tbody>
@@ -133,11 +133,11 @@ export default function Page() {
       <h2>זכויות נוספות בעת עזיבה</h2>
       <p>
         מעבר לפדיון חופשה, בעת עזיבה ייתכן ותהיה זכאי גם ל
-        <Link href="/employee-rights/severance" className="text-blue-600 underline">פיצויי פיטורים</Link>,
+        <Link href="/employee-rights/severance" className="text-gold underline">פיצויי פיטורים</Link>,
         {' '}הודעה מוקדמת,{' '}
-        <Link href="/employee-rights/recreation-pay" className="text-blue-600 underline">דמי הבראה</Link>,
+        <Link href="/employee-rights/recreation-pay" className="text-gold underline">דמי הבראה</Link>,
         {' '}וכספי{' '}
-        <Link href="/insurance/pension" className="text-blue-600 underline">פנסיה</Link>.
+        <Link href="/insurance/pension" className="text-gold underline">פנסיה</Link>.
         {' '}השתמש במחשבונים האחרים באתר לחישוב מלא של הזכויות.
       </p>
     </>

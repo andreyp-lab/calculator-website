@@ -48,12 +48,12 @@ export default function FinancialAnalysisPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-4">
-        <div className="bg-orange-100 p-3 rounded-lg">
-          <BarChart3 className="w-6 h-6 text-orange-700" />
+        <div className="bg-cream-2 p-3">
+          <BarChart3 className="w-6 h-6 text-ink-mid" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">ניתוח דוחות כספיים מלא</h1>
-          <p className="text-sm text-gray-600">
+          <h1 className="text-2xl font-bold text-ink">ניתוח דוחות כספיים מלא</h1>
+          <p className="text-sm text-ink/70">
             11 כלי ניתוח: יחסים, DuPont, DSCR מתקדם, Break-Even, סיכונים, אשראי בנקאי, ועוד
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function FinancialAnalysisPage() {
       <SettingsCard />
 
       {/* Tabs */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-2 shadow-sm flex flex-wrap gap-1 my-4">
+      <div className="bg-paper border-2 border-ink/15 p-2 shadow-sm flex flex-wrap gap-1 my-4">
         <TabButton
           active={tab === 'data'}
           onClick={() => setTab('data')}
@@ -183,22 +183,22 @@ function TabButton({
   color: string;
 }) {
   const colorMap: Record<string, string> = {
-    orange: 'bg-orange-600',
-    blue: 'bg-blue-600',
-    indigo: 'bg-indigo-600',
-    cyan: 'bg-cyan-600',
-    teal: 'bg-teal-600',
-    rose: 'bg-rose-600',
-    purple: 'bg-purple-600',
-    amber: 'bg-amber-600',
-    violet: 'bg-violet-600',
-    emerald: 'bg-emerald-600',
+    orange: 'bg-ink',
+    blue: 'bg-ink',
+    indigo: 'bg-ink',
+    cyan: 'bg-ink',
+    teal: 'bg-ink-mid',
+    rose: 'bg-ink',
+    purple: 'bg-ink',
+    amber: 'bg-ink',
+    violet: 'bg-ink',
+    emerald: 'bg-ink-mid',
   };
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 px-3 py-2 rounded text-sm transition ${
-        active ? `${colorMap[color]} text-white` : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+      className={`flex items-center gap-1.5 px-3 py-2 text-sm transition ${
+        active ? `${colorMap[color]} text-cream` : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
       }`}
     >
       <Icon className="w-4 h-4" />

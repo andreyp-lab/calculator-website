@@ -208,7 +208,7 @@ export default function Page() {
             <li>
               <a
                 href="/self-employed/net"
-                className="text-blue-700 hover:underline"
+                className="text-gold hover:underline"
               >
                 מחשבון נטו לעצמאי
               </a>{' '}
@@ -217,7 +217,7 @@ export default function Page() {
             <li>
               <a
                 href="/self-employed/social-security"
-                className="text-blue-700 hover:underline"
+                className="text-gold hover:underline"
               >
                 מחשבון ביטוח לאומי לעצמאי
               </a>{' '}
@@ -226,7 +226,7 @@ export default function Page() {
             <li>
               <a
                 href="/self-employed/tax-advances"
-                className="text-blue-700 hover:underline"
+                className="text-gold hover:underline"
               >
                 מחשבון מקדמות מס לעצמאי
               </a>{' '}
@@ -237,7 +237,7 @@ export default function Page() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.btl.gov.il/Insurance/National%20Insurance/type_list/Self_Employed/Pages/rates.aspx"

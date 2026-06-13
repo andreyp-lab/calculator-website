@@ -65,7 +65,7 @@ export function FinancialSensitivity() {
   }, [input]);
 
   if (!input || !sensitivity || !scenarios) {
-    return <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">חסרים נתונים</div>;
+    return <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6 text-center">חסרים נתונים</div>;
   }
 
   const fmt = (v: number) => formatCurrency(v, settings?.currency ?? 'ILS');
@@ -80,21 +80,21 @@ export function FinancialSensitivity() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Activity className="w-5 h-5" />
             ניתוח רגישות + תרחישים מהירים
           </h3>
-          <p className="text-xs text-purple-100">
+          <p className="text-xs text-cream/70">
             בדיקת השפעה של שינויים על DSCR, רווחיות ויכולת החזר
           </p>
         </div>
       </div>
 
       {/* Quick Scenarios */}
-      <div className="bg-white rounded-lg border-2 border-amber-200 shadow-sm overflow-hidden">
-        <div className="bg-amber-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3">
           <h4 className="font-bold flex items-center gap-2">
             <Zap className="w-4 h-4" />
             תרחישים מהירים
@@ -108,8 +108,8 @@ export function FinancialSensitivity() {
       </div>
 
       {/* Variable Sensitivity */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-purple-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3">
           <h4 className="font-bold flex items-center gap-2">
             <TrendingDown className="w-4 h-4" />
             ניתוח רגישות חד-משתני
@@ -119,11 +119,11 @@ export function FinancialSensitivity() {
           {/* Controls */}
           <div className="grid md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-gray-700 mb-1">משתנה לבדיקה</label>
+              <label className="block text-xs text-ink/70 mb-1">משתנה לבדיקה</label>
               <select
                 value={variable}
                 onChange={(e) => setVariable(e.target.value as SensitivityVariable)}
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               >
                 <option value="revenue">📈 הכנסות</option>
                 <option value="cogs">🏭 עלות מכר</option>
@@ -133,11 +133,11 @@ export function FinancialSensitivity() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">טווח שינוי (±%)</label>
+              <label className="block text-xs text-ink/70 mb-1">טווח שינוי (±%)</label>
               <select
                 value={range}
                 onChange={(e) => setRange(parseInt(e.target.value))}
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               >
                 <option value={10}>±10%</option>
                 <option value={20}>±20%</option>
@@ -146,9 +146,9 @@ export function FinancialSensitivity() {
               </select>
             </div>
             <div className="flex items-end">
-              <div className="w-full p-2 bg-purple-50 rounded text-center text-xs">
-                <div className="text-gray-600">DSCR בסיס</div>
-                <div className="text-xl font-bold text-purple-700">
+              <div className="w-full p-2 bg-cream-2 rounded-none text-center text-xs">
+                <div className="text-ink/60">DSCR בסיס</div>
+                <div className="text-xl font-bold text-gold">
                   {sensitivity.baseDSCR.toFixed(2)}
                 </div>
               </div>
@@ -181,7 +181,7 @@ export function FinancialSensitivity() {
               <Line
                 type="monotone"
                 dataKey="DSCR"
-                stroke="#7c3aed"
+                stroke="#8E6824"
                 strokeWidth={3}
                 dot={{ r: 4 }}
               />
@@ -191,7 +191,7 @@ export function FinancialSensitivity() {
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-cream-2">
                 <tr>
                   <th className="p-2 text-center">שינוי</th>
                   <th className="p-2 text-center">{sensitivity.variableLabel}</th>
@@ -205,7 +205,7 @@ export function FinancialSensitivity() {
                 {sensitivity.results.map((r, i) => {
                   const statusBg = {
                     excellent: 'bg-emerald-50',
-                    good: 'bg-blue-50',
+                    good: 'bg-cream-2',
                     fair: 'bg-amber-50',
                     critical: 'bg-red-50',
                   }[r.status];
@@ -216,7 +216,7 @@ export function FinancialSensitivity() {
                     critical: 'קריטי',
                   }[r.status];
                   return (
-                    <tr key={i} className={`border-t border-gray-100 ${statusBg}`}>
+                    <tr key={i} className={`border-t border-ink/10 ${statusBg}`}>
                       <td className="p-2 text-center font-bold">
                         {r.changePercent > 0 ? '+' : ''}
                         {r.changePercent.toFixed(0)}%
@@ -235,8 +235,8 @@ export function FinancialSensitivity() {
 
           {/* Insights */}
           {sensitivity.insights.length > 0 && (
-            <div className="bg-blue-50 border border-blue-200 rounded p-3">
-              <ul className="text-sm text-blue-900 space-y-1">
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
+              <ul className="text-sm text-ink space-y-1">
                 {sensitivity.insights.map((i, idx) => (
                   <li key={idx}>{i}</li>
                 ))}
@@ -263,12 +263,12 @@ function ScenarioCard({
   }[scenario.status];
 
   return (
-    <div className={`bg-${statusColor}-50 border-2 border-${statusColor}-200 rounded-lg p-3`}>
+    <div className={`bg-${statusColor}-50 border-2 border-${statusColor}-200 rounded-none p-3`}>
       <h5 className={`font-semibold text-${statusColor}-900 mb-1`}>{scenario.name}</h5>
-      <p className="text-xs text-gray-600 mb-2">{scenario.description}</p>
+      <p className="text-xs text-ink/60 mb-2">{scenario.description}</p>
       <div className="grid grid-cols-3 gap-2 text-center text-xs mb-2">
         <div>
-          <div className="text-gray-600">EBITDA</div>
+          <div className="text-ink/60">EBITDA</div>
           <div className="font-bold">{fmt(scenario.scenario.ebitda)}</div>
           <div className={`text-[10px] text-${scenario.changes_metrics.ebitdaChange >= 0 ? 'emerald' : 'red'}-700`}>
             {scenario.changes_metrics.ebitdaChange >= 0 ? '+' : ''}
@@ -276,7 +276,7 @@ function ScenarioCard({
           </div>
         </div>
         <div>
-          <div className="text-gray-600">רווח נקי</div>
+          <div className="text-ink/60">רווח נקי</div>
           <div className="font-bold">{fmt(scenario.scenario.netProfit)}</div>
           <div className={`text-[10px] text-${scenario.changes_metrics.netProfitChange >= 0 ? 'emerald' : 'red'}-700`}>
             {scenario.changes_metrics.netProfitChange >= 0 ? '+' : ''}
@@ -284,11 +284,11 @@ function ScenarioCard({
           </div>
         </div>
         <div>
-          <div className="text-gray-600">DSCR</div>
+          <div className="text-ink/60">DSCR</div>
           <div className={`font-bold text-${statusColor}-700`}>
             {scenario.scenario.dscr.toFixed(2)}
           </div>
-          <div className="text-[10px] text-gray-600">
+          <div className="text-[10px] text-ink/60">
             {scenario.canRepay ? '✓ יכול' : '✗ לא יכול'}
           </div>
         </div>

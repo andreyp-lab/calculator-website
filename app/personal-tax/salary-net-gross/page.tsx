@@ -135,20 +135,20 @@ export default function SalaryNetGrossPage() {
           <h2>מדרגות מס הכנסה 2026</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="border border-gray-300 p-2 text-right">הכנסה חודשית</th>
-                <th className="border border-gray-300 p-2 text-right">שיעור מס</th>
-                <th className="border border-gray-300 p-2 text-right">הערה</th>
+              <tr className="bg-ink text-cream">
+                <th className="border border-ink/15 p-2 text-right">הכנסה חודשית</th>
+                <th className="border border-ink/15 p-2 text-right">שיעור מס</th>
+                <th className="border border-ink/15 p-2 text-right">הערה</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td className="border border-gray-300 p-2">עד 7,010 ₪</td><td className="border border-gray-300 p-2">10%</td><td className="border border-gray-300 p-2">ללא שינוי</td></tr>
-              <tr className="bg-gray-50"><td className="border border-gray-300 p-2">7,011–10,060 ₪</td><td className="border border-gray-300 p-2">14%</td><td className="border border-gray-300 p-2">ללא שינוי</td></tr>
-              <tr className="bg-emerald-50"><td className="border border-gray-300 p-2">10,061–19,000 ₪</td><td className="border border-gray-300 p-2">20%</td><td className="border border-gray-300 p-2 font-semibold text-emerald-700">הורחב מ-16,150 ₪!</td></tr>
-              <tr className="bg-emerald-50"><td className="border border-gray-300 p-2">19,001–25,100 ₪</td><td className="border border-gray-300 p-2">31%</td><td className="border border-gray-300 p-2 font-semibold text-emerald-700">הורחב מ-22,440 ₪!</td></tr>
-              <tr className="bg-gray-50"><td className="border border-gray-300 p-2">25,101–46,690 ₪</td><td className="border border-gray-300 p-2">35%</td><td className="border border-gray-300 p-2">ללא שינוי</td></tr>
-              <tr><td className="border border-gray-300 p-2">46,691–60,130 ₪</td><td className="border border-gray-300 p-2">47%</td><td className="border border-gray-300 p-2">ללא שינוי</td></tr>
-              <tr className="bg-red-50"><td className="border border-gray-300 p-2">מעל 60,130 ₪</td><td className="border border-gray-300 p-2">50%</td><td className="border border-gray-300 p-2">47% + 3% מס יסף</td></tr>
+              <tr><td className="border border-ink/15 p-2">עד 7,010 ₪</td><td className="border border-ink/15 p-2">10%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
+              <tr className="bg-cream-2"><td className="border border-ink/15 p-2">7,011–10,060 ₪</td><td className="border border-ink/15 p-2">14%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
+              <tr className="bg-emerald-50"><td className="border border-ink/15 p-2">10,061–19,000 ₪</td><td className="border border-ink/15 p-2">20%</td><td className="border border-ink/15 p-2 font-semibold text-emerald-700">הורחב מ-16,150 ₪!</td></tr>
+              <tr className="bg-emerald-50"><td className="border border-ink/15 p-2">19,001–25,100 ₪</td><td className="border border-ink/15 p-2">31%</td><td className="border border-ink/15 p-2 font-semibold text-emerald-700">הורחב מ-22,440 ₪!</td></tr>
+              <tr className="bg-cream-2"><td className="border border-ink/15 p-2">25,101–46,690 ₪</td><td className="border border-ink/15 p-2">35%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
+              <tr><td className="border border-ink/15 p-2">46,691–60,130 ₪</td><td className="border border-ink/15 p-2">47%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
+              <tr className="bg-red-50"><td className="border border-ink/15 p-2">מעל 60,130 ₪</td><td className="border border-ink/15 p-2">50%</td><td className="border border-ink/15 p-2">47% + 3% מס יסף</td></tr>
             </tbody>
           </table>
 

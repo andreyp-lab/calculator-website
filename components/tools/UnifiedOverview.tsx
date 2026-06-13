@@ -220,9 +220,9 @@ export function UnifiedOverview({ onNavigate }: Props) {
   return (
     <div className="space-y-4">
       {/* Workflow Status */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-        <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-          <Activity className="w-5 h-5 text-blue-600" />
+      <div className="bg-paper border-2 border-ink/15 p-4">
+        <h3 className="font-bold text-ink mb-3 flex items-center gap-2">
+          <Activity className="w-5 h-5 text-gold" />
           סטטוס מערכת
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -252,13 +252,13 @@ export function UnifiedOverview({ onNavigate }: Props) {
 
       {/* Cross-Section Insights */}
       {crossInsights.length > 0 && (
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-gradient-to-r from-amber-600 to-orange-600 text-white p-3">
+        <div className="bg-paper border-2 border-ink/15 overflow-hidden">
+          <div className="bg-ink text-cream p-3">
             <h3 className="font-bold flex items-center gap-2">
               <Sparkles className="w-5 h-5" />
               תובנות חוצות-מערכת
             </h3>
-            <p className="text-xs text-amber-100">
+            <p className="text-xs text-cream/60">
               ניתוח אוטומטי שמחבר נתונים מתקציב + תזרים + ניתוח
             </p>
           </div>
@@ -381,9 +381,9 @@ export function UnifiedOverview({ onNavigate }: Props) {
               />
             </>
           ) : (
-            <div className="text-sm text-gray-600 py-2">
+            <div className="text-sm text-ink/60 py-2">
               <p className="mb-2">מלא נתוני מאזן כדי לראות ניתוח מלא:</p>
-              <ul className="text-xs space-y-1 text-gray-500">
+              <ul className="text-xs space-y-1 text-ink/50">
                 <li>• דירוג אשראי AAA-D</li>
                 <li>• ציון בריאות 0-100</li>
                 <li>• Altman Z-Score</li>
@@ -395,9 +395,9 @@ export function UnifiedOverview({ onNavigate }: Props) {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-        <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-          <Target className="w-5 h-5 text-purple-600" />
+      <div className="bg-paper border-2 border-ink/15 p-4">
+        <h3 className="font-bold text-ink mb-3 flex items-center gap-2">
+          <Target className="w-5 h-5 text-gold" />
           פעולות מהירות
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -451,24 +451,24 @@ function WorkflowStep({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-3 p-3 border-2 rounded-lg transition hover:shadow-md text-right ${
+      className={`flex items-center gap-3 p-3 border-2 transition hover:shadow-md text-right ${
         done
           ? 'bg-emerald-50 border-emerald-300'
-          : 'bg-gray-50 border-gray-200 opacity-75'
+          : 'bg-cream-2 border-ink/15 opacity-75'
       }`}
     >
       <div
         className={`w-10 h-10 rounded-full flex items-center justify-center font-bold shrink-0 ${
-          done ? 'bg-emerald-600 text-white' : 'bg-gray-400 text-white'
+          done ? 'bg-emerald-600 text-cream' : 'bg-ink/40 text-cream'
         }`}
       >
         {done ? <CheckCircle2 className="w-5 h-5" /> : num}
       </div>
       <div className="flex-1">
-        <div className="font-medium text-gray-900">{label}</div>
-        <div className="text-xs text-gray-600">{sublabel}</div>
+        <div className="font-medium text-ink">{label}</div>
+        <div className="text-xs text-ink/60">{sublabel}</div>
       </div>
-      <ArrowLeft className="w-4 h-4 text-gray-400 shrink-0" />
+      <ArrowLeft className="w-4 h-4 text-ink/40 shrink-0" />
     </button>
   );
 }
@@ -487,13 +487,13 @@ function PillarCard({
   children: React.ReactNode;
 }) {
   const colorMap: Record<string, { bg: string; text: string; border: string }> = {
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
-    blue: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-    orange: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' },
+    emerald: { bg: 'bg-cream-2', text: 'text-ink', border: 'border-ink/15' },
+    blue: { bg: 'bg-cream-2', text: 'text-ink', border: 'border-ink/15' },
+    orange: { bg: 'bg-cream-2', text: 'text-ink', border: 'border-ink/15' },
   };
   const c = colorMap[color];
   return (
-    <div className={`bg-white border-2 ${c.border} rounded-lg shadow-sm overflow-hidden`}>
+    <div className={`bg-paper border-2 ${c.border} overflow-hidden`}>
       <div className={`${c.bg} p-3 flex items-center justify-between`}>
         <h4 className={`font-bold ${c.text} flex items-center gap-2`}>
           <Icon className="w-5 h-5" />
@@ -526,17 +526,17 @@ function PillarRow({
   const colorMap: Record<string, string> = {
     emerald: 'text-emerald-700',
     red: 'text-red-700',
-    blue: 'text-blue-700',
+    blue: 'text-ink',
     amber: 'text-amber-700',
   };
-  const valueClass = color ? colorMap[color] : 'text-gray-900';
+  const valueClass = color ? colorMap[color] : 'text-ink';
   return (
     <div
       className={`flex justify-between items-center py-1 ${
         highlight ? 'border-t pt-2 mt-2 font-semibold' : ''
       }`}
     >
-      <span className="text-sm text-gray-600">{label}:</span>
+      <span className="text-sm text-ink/60">{label}:</span>
       <span className={`text-sm ${highlight ? 'font-bold' : 'font-medium'} ${valueClass}`}>
         {value}
       </span>
@@ -560,11 +560,11 @@ function InsightCard({
     critical: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-900' },
     warning: { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-900' },
     success: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-900' },
-    info: { bg: 'bg-blue-50', border: 'border-blue-300', text: 'text-blue-900' },
+    info: { bg: 'bg-cream-2', border: 'border-ink/15', text: 'text-ink' },
   };
   const c = colorMap[insight.type];
   return (
-    <div className={`${c.bg} ${c.border} border rounded p-3`}>
+    <div className={`${c.bg} ${c.border} border p-3`}>
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
           <div className={`font-semibold ${c.text} mb-0.5`}>{insight.title}</div>
@@ -596,15 +596,15 @@ function QuickAction({
   color: string;
 }) {
   const colorMap: Record<string, string> = {
-    violet: 'bg-violet-50 border-violet-200 hover:bg-violet-100 text-violet-900',
-    purple: 'bg-purple-50 border-purple-200 hover:bg-purple-100 text-purple-900',
-    indigo: 'bg-indigo-50 border-indigo-200 hover:bg-indigo-100 text-indigo-900',
-    rose: 'bg-rose-50 border-rose-200 hover:bg-rose-100 text-rose-900',
+    violet: 'bg-cream-2 border-ink/15 hover:bg-paper-hover text-ink',
+    purple: 'bg-cream-2 border-ink/15 hover:bg-paper-hover text-ink',
+    indigo: 'bg-cream-2 border-ink/15 hover:bg-paper-hover text-ink',
+    rose: 'bg-cream-2 border-ink/15 hover:bg-paper-hover text-ink',
   };
   return (
     <button
       onClick={onClick}
-      className={`text-right p-3 border-2 rounded-lg transition ${colorMap[color]}`}
+      className={`text-right p-3 border-2 transition ${colorMap[color]}`}
     >
       <div className="font-semibold text-sm">{label}</div>
       <div className="text-xs opacity-75 mt-0.5">{description}</div>

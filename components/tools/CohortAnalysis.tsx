@@ -21,7 +21,7 @@ import { Users, Plus, Trash2, TrendingUp } from 'lucide-react';
 
 const STORAGE_KEY = 'cohort-analysis-v1';
 
-const COHORT_COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#ef4444', '#84cc16'];
+const COHORT_COLORS = ['#102219', '#8E6824', '#264B36', '#D8B36A', '#10b981', '#4a7c5f', '#ef4444', '#84cc16'];
 
 export function CohortAnalysis() {
   const [cohorts, setCohorts] = useState<CustomerCohort[]>(() => {
@@ -81,13 +81,13 @@ export function CohortAnalysis() {
   return (
     <div className="space-y-4">
       {/* Header + KPIs */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-pink-600 to-rose-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Users className="w-5 h-5" />
             ניתוח קוהורט - LTV / CAC
           </h3>
-          <p className="text-xs text-pink-100">מדדים קריטיים ל-SaaS, e-commerce, מנויים</p>
+          <p className="text-xs text-cream/70">מדדים קריטיים ל-SaaS, e-commerce, מנויים</p>
         </div>
 
         <div className="p-4 grid md:grid-cols-5 gap-2">
@@ -127,14 +127,14 @@ export function CohortAnalysis() {
       </div>
 
       {/* Cohorts editor */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
-          <h4 className="font-semibold text-gray-900">קוהורטים ({cohorts.length})</h4>
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between p-3 bg-cream-2 border-b border-ink/15">
+          <h4 className="font-semibold text-ink">קוהורטים ({cohorts.length})</h4>
           <div className="flex items-center gap-2">
             <select
               value={horizonMonths}
               onChange={(e) => setHorizonMonths(parseInt(e.target.value))}
-              className="px-2 py-1 border border-gray-300 rounded text-xs"
+              className="px-2 py-1 border border-ink/15 text-xs"
             >
               <option value={12}>12 חודשים</option>
               <option value={24}>24 חודשים</option>
@@ -142,7 +142,7 @@ export function CohortAnalysis() {
             </select>
             <button
               onClick={addCohort}
-              className="flex items-center gap-1 px-2 py-1 bg-pink-600 text-white rounded text-xs hover:bg-pink-700"
+              className="flex items-center gap-1 px-2 py-1 bg-ink text-cream text-xs hover:bg-ink-deep"
             >
               <Plus className="w-3 h-3" />
               הוסף קוהורט
@@ -152,7 +152,7 @@ export function CohortAnalysis() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-100">
+            <thead className="bg-cream-2">
               <tr>
                 <th className="text-right p-2 text-xs">חודש רכישה</th>
                 <th className="text-center p-2 text-xs">לקוחות חדשים</th>
@@ -169,13 +169,13 @@ export function CohortAnalysis() {
                 const ltv = c.monthlyChurnPct > 0 ? c.arpu / (c.monthlyChurnPct / 100) : c.arpu * 60;
                 const ltvCac = c.cac > 0 ? ltv / c.cac : 0;
                 return (
-                  <tr key={i} className="border-t border-gray-100">
+                  <tr key={i} className="border-t border-ink/10">
                     <td className="p-1.5">
                       <input
                         type="month"
                         value={c.acquisitionMonth}
                         onChange={(e) => updateCohort(i, { acquisitionMonth: e.target.value })}
-                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
+                        className="w-full px-2 py-1 border border-ink/15 text-xs"
                       />
                     </td>
                     <td className="p-1.5">
@@ -183,7 +183,7 @@ export function CohortAnalysis() {
                         type="number"
                         value={c.newCustomers}
                         onChange={(e) => updateCohort(i, { newCustomers: parseInt(e.target.value) || 0 })}
-                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs text-center"
+                        className="w-full px-2 py-1 border border-ink/15 text-xs text-center"
                       />
                     </td>
                     <td className="p-1.5">
@@ -191,7 +191,7 @@ export function CohortAnalysis() {
                         type="number"
                         value={c.arpu}
                         onChange={(e) => updateCohort(i, { arpu: parseFloat(e.target.value) || 0 })}
-                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs text-center"
+                        className="w-full px-2 py-1 border border-ink/15 text-xs text-center"
                       />
                     </td>
                     <td className="p-1.5">
@@ -202,7 +202,7 @@ export function CohortAnalysis() {
                         onChange={(e) =>
                           updateCohort(i, { monthlyChurnPct: parseFloat(e.target.value) || 0 })
                         }
-                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs text-center"
+                        className="w-full px-2 py-1 border border-ink/15 text-xs text-center"
                       />
                     </td>
                     <td className="p-1.5">
@@ -210,15 +210,15 @@ export function CohortAnalysis() {
                         type="number"
                         value={c.cac}
                         onChange={(e) => updateCohort(i, { cac: parseFloat(e.target.value) || 0 })}
-                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs text-center"
+                        className="w-full px-2 py-1 border border-ink/15 text-xs text-center"
                       />
                     </td>
-                    <td className="p-1.5 text-center text-xs font-semibold text-blue-700">
+                    <td className="p-1.5 text-center text-xs font-semibold text-gold">
                       ₪{Math.round(ltv).toLocaleString()}
                     </td>
                     <td className="p-1.5 text-center">
                       <span
-                        className={`text-xs px-1.5 py-0.5 rounded font-bold ${
+                        className={`text-xs px-1.5 py-0.5 font-bold ${
                           ltvCac >= 3
                             ? 'bg-emerald-100 text-emerald-800'
                             : ltvCac >= 1.5
@@ -232,7 +232,7 @@ export function CohortAnalysis() {
                     <td className="p-1.5 text-center">
                       <button
                         onClick={() => removeCohort(i)}
-                        className="p-1 text-red-600 hover:bg-red-50 rounded"
+                        className="p-1 text-red-600 hover:bg-red-50"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
@@ -247,8 +247,8 @@ export function CohortAnalysis() {
 
       {/* Cohort Revenue Chart */}
       {cohorts.length > 0 && (
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-3">
+        <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+          <div className="bg-ink text-cream p-3">
             <h3 className="font-bold flex items-center gap-2">
               <TrendingUp className="w-5 h-5" />
               הכנסות מצטברות לפי קוהורט
@@ -295,18 +295,18 @@ function KPICard({
   sublabel?: string;
 }) {
   const colorMap: Record<string, { bg: string; text: string }> = {
-    blue: { bg: 'bg-blue-50', text: 'text-blue-700' },
-    purple: { bg: 'bg-purple-50', text: 'text-purple-700' },
+    blue: { bg: 'bg-cream-2', text: 'text-gold' },
+    purple: { bg: 'bg-cream-2', text: 'text-ink' },
     emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
     amber: { bg: 'bg-amber-50', text: 'text-amber-700' },
     red: { bg: 'bg-red-50', text: 'text-red-700' },
   };
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} rounded-lg p-3 border border-gray-200`}>
-      <div className="text-xs text-gray-600 mb-0.5">{label}</div>
+    <div className={`${c.bg} p-3 border border-ink/15`}>
+      <div className="text-xs text-ink/60 mb-0.5">{label}</div>
       <div className={`text-xl font-bold ${c.text}`}>{value}</div>
-      {sublabel && <div className="text-[10px] text-gray-500 mt-1 line-clamp-1">{sublabel}</div>}
+      {sublabel && <div className="text-[10px] text-ink/45 mt-1 line-clamp-1">{sublabel}</div>}
     </div>
   );
 }

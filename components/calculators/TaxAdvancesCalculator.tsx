@@ -64,16 +64,16 @@ export function TaxAdvancesCalculator() {
   return (
     <div className="space-y-6">
       {/* טאבים */}
-      <div className="flex gap-1 bg-gray-100 p-1 rounded-xl overflow-x-auto">
+      <div className="flex gap-1 bg-cream-2 p-1 rounded-none overflow-x-auto">
         {tabs.map((t) => (
           <button
             key={t.id}
             type="button"
             onClick={() => setActiveTab(t.id)}
-            className={`flex-1 min-w-fit px-3 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap ${
+            className={`flex-1 min-w-fit px-3 py-2 rounded-none text-sm font-medium transition whitespace-nowrap ${
               activeTab === t.id
-                ? 'bg-white text-blue-700 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-ink text-cream'
+                : 'text-ink/70 hover:text-ink'
             }`}
           >
             {t.label}
@@ -87,11 +87,11 @@ export function TaxAdvancesCalculator() {
           {/* קלט */}
           <div className="lg:col-span-3 space-y-5">
             {/* פרטי הכנסה */}
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-              <h2 className="text-xl font-bold text-gray-900">פרטי ההכנסה</h2>
+            <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+              <h2 className="text-xl font-bold text-ink">פרטי ההכנסה</h2>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink/70 mb-2">
                   הכנסה שנתית צפויה — אחרי הוצאות מוכרות (₪)
                 </label>
                 <input
@@ -100,16 +100,16 @@ export function TaxAdvancesCalculator() {
                   step={5_000}
                   value={input.expectedAnnualIncome}
                   onChange={(e) => update('expectedAnnualIncome', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-ink/60 mt-1">
                   הכנסה ברוטו פחות הוצאות מוכרות. לא כולל מע"מ.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-ink/70 mb-2">
                     נקודות זיכוי
                   </label>
                   <input
@@ -119,20 +119,20 @@ export function TaxAdvancesCalculator() {
                     step={0.25}
                     value={input.creditPoints}
                     onChange={(e) => update('creditPoints', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-ink/60 mt-1">
                     תושב: 2.25 | אישה: +0.5 | ילד: +1-2.5
                   </p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-ink/70 mb-2">
                     תדירות תשלום
                   </label>
                   <select
                     value={input.frequency}
                     onChange={(e) => update('frequency', e.target.value as AdvanceFrequency)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none"
                   >
                     <option value="monthly">חודשי (12 תשלומים)</option>
                     <option value="bimonthly">דו-חודשי (6 תשלומים)</option>
@@ -142,14 +142,14 @@ export function TaxAdvancesCalculator() {
             </div>
 
             {/* ניכויים */}
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-              <h2 className="text-lg font-bold text-gray-900">ניכויים פנסיוניים</h2>
-              <p className="text-xs text-gray-500">
+            <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+              <h2 className="text-lg font-bold text-ink">ניכויים פנסיוניים</h2>
+              <p className="text-xs text-ink/60">
                 ניכויים אלה מקטינים את ההכנסה החייבת ובכך מפחיתים את מקדמות המס
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-ink/70 mb-2">
                     פנסיה חודשית (₪)
                   </label>
                   <input
@@ -158,15 +158,15 @@ export function TaxAdvancesCalculator() {
                     step={50}
                     value={input.monthlyPensionDeposit ?? 0}
                     onChange={(e) => update('monthlyPensionDeposit', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-ink/60 mt-1">
                     ניכוי עד 11% מהכנסה (שנתי:{' '}
                     {formatCurrency((input.monthlyPensionDeposit ?? 0) * 12)})
                   </p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-ink/70 mb-2">
                     קרן השתלמות חודשית (₪)
                   </label>
                   <input
@@ -175,15 +175,15 @@ export function TaxAdvancesCalculator() {
                     step={50}
                     value={input.monthlyStudyFundDeposit ?? 0}
                     onChange={(e) => update('monthlyStudyFundDeposit', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-ink/60 mt-1">
                     ניכוי עד 4.5% (מקסימום 20,566 ₪/שנה)
                   </p>
                 </div>
               </div>
               {(result.annualPensionDeduction > 0 || result.annualStudyFundDeduction > 0) && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-xs text-green-900">
+                <div className="bg-green-50 border border-green-200 rounded-none p-3 text-xs text-green-900">
                   חסכת במס:{' '}
                   <strong>
                     {formatCurrency(
@@ -197,7 +197,7 @@ export function TaxAdvancesCalculator() {
             </div>
 
             {/* מע"מ */}
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
+            <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
                   type="checkbox"
@@ -206,15 +206,15 @@ export function TaxAdvancesCalculator() {
                   className="w-4 h-4"
                 />
                 <div>
-                  <span className="text-base font-semibold text-gray-900">עוסק מורשה</span>
-                  <p className="text-xs text-gray-500">חייב בגביית ותשלום מע"מ 18%</p>
+                  <span className="text-base font-semibold text-ink">עוסק מורשה</span>
+                  <p className="text-xs text-ink/60">חייב בגביית ותשלום מע"מ 18%</p>
                 </div>
               </label>
 
               {input.isVatRegistered && (
-                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-gray-100">
+                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-ink/10">
                   <div>
-                    <label className="block text-xs font-medium text-blue-900 mb-1">
+                    <label className="block text-xs font-medium text-ink mb-1">
                       מע"מ עסקאות שנתי (₪)
                     </label>
                     <input
@@ -223,15 +223,15 @@ export function TaxAdvancesCalculator() {
                       step={1_000}
                       value={input.annualVatCollected ?? 0}
                       onChange={(e) => update('annualVatCollected', Number(e.target.value))}
-                      className="w-full px-2 py-1.5 border border-blue-300 rounded text-sm"
+                      className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                     />
-                    <p className="text-xs text-gray-400 mt-0.5">
+                    <p className="text-xs text-ink/45 mt-0.5">
                       מחזור × 18% ={' '}
                       {formatCurrency(input.expectedAnnualIncome * 0.18)} (אומדן)
                     </p>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-blue-900 mb-1">
+                    <label className="block text-xs font-medium text-ink mb-1">
                       מע"מ תשומות שנתי (₪)
                     </label>
                     <input
@@ -240,14 +240,14 @@ export function TaxAdvancesCalculator() {
                       step={1_000}
                       value={input.annualVatDeductible ?? 0}
                       onChange={(e) => update('annualVatDeductible', Number(e.target.value))}
-                      className="w-full px-2 py-1.5 border border-blue-300 rounded text-sm"
+                      className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                     />
-                    <p className="text-xs text-gray-400 mt-0.5">
+                    <p className="text-xs text-ink/45 mt-0.5">
                       קניות עסקיות × 18% — מקוזז מהעסקאות
                     </p>
                   </div>
                   {result.annualVatPayable > 0 && (
-                    <div className="col-span-2 bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-900">
+                    <div className="col-span-2 bg-cream-2 border border-ink/15 rounded-none p-2 text-xs text-ink">
                       מע"מ נטו לתשלום: <strong>{formatCurrency(result.annualVatPayable)}</strong>{' '}
                       לשנה ({result.paymentsPerYear === 6 ? 'כל חודשיים' : 'חודשי'}:{' '}
                       {formatCurrency(result.perPaymentBreakdown.vat)})
@@ -282,8 +282,8 @@ export function TaxAdvancesCalculator() {
             />
 
             {/* פירוט */}
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-4 space-y-2 text-sm">
-              <h4 className="font-bold text-gray-900 mb-3">פירוט שנתי</h4>
+            <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-2 text-sm">
+              <h4 className="font-bold text-ink mb-3">פירוט שנתי</h4>
               <Row label="הכנסה צפויה" value={formatCurrency(input.expectedAnnualIncome)} />
               {result.annualPensionDeduction > 0 && (
                 <Row
@@ -333,8 +333,8 @@ export function TaxAdvancesCalculator() {
               />
 
               {/* פר תשלום */}
-              <div className="pt-2 border-t border-gray-100 mt-2">
-                <h5 className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">
+              <div className="pt-2 border-t border-ink/10 mt-2">
+                <h5 className="text-xs font-semibold text-ink/60 mb-2 uppercase tracking-wide">
                   פר תשלום {freqLabel}
                 </h5>
                 <Row
@@ -353,8 +353,8 @@ export function TaxAdvancesCalculator() {
             </div>
 
             {/* חלוקה ויזואלית */}
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-              <h4 className="font-bold text-gray-900 mb-3 text-sm">חלוקת המקדמות</h4>
+            <div className="bg-paper border border-ink/15 rounded-none p-4">
+              <h4 className="font-bold text-ink mb-3 text-sm">חלוקת המקדמות</h4>
               <TaxBreakdownBar result={result} />
             </div>
 
@@ -362,7 +362,7 @@ export function TaxAdvancesCalculator() {
             <button
               type="button"
               onClick={() => setShowSchedule((v) => !v)}
-              className="w-full text-sm text-blue-600 hover:text-blue-800 underline text-center py-1"
+              className="w-full text-sm text-gold hover:text-gold-2 underline text-center py-1"
             >
               {showSchedule ? 'הסתר לוח תשלומים' : 'הצג לוח תשלומים שנתי'}
             </button>
@@ -373,7 +373,7 @@ export function TaxAdvancesCalculator() {
 
             {/* המלצות */}
             {result.recommendations.length > 0 && (
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
+              <div className="bg-amber-50 border border-amber-200 rounded-none p-4 space-y-2">
                 <h4 className="text-sm font-bold text-amber-900">המלצות</h4>
                 {result.recommendations.map((r, i) => (
                   <p key={i} className="text-xs text-amber-900 flex gap-2">
@@ -411,37 +411,37 @@ export function TaxAdvancesCalculator() {
             />
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-            <h3 className="font-bold text-blue-900 mb-2">עיקרון ה-X% מדי חודש</h3>
-            <p className="text-sm text-blue-800">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+            <h3 className="font-bold text-ink mb-2">עיקרון ה-X% מדי חודש</h3>
+            <p className="text-sm text-ink/80">
               הפרש <strong>{formatCurrency(result.monthlySetAside)}</strong> (
               {formatPercent(result.setAsidePercent, 0)}) מכל תשלום שתקבל לחשבון נפרד. כך כשיגיע
               מועד המקדמה — הכסף כבר שם.
             </p>
           </div>
 
-          <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-            <div className="p-4 border-b border-gray-100">
-              <h3 className="font-bold text-gray-900">תזרים חודשי — 2026</h3>
-              <p className="text-xs text-gray-500 mt-1">
+          <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+            <div className="p-4 border-b border-ink/10">
+              <h3 className="font-bold text-ink">תזרים חודשי — 2026</h3>
+              <p className="text-xs text-ink/60 mt-1">
                 כולל: הפרשה חודשית מומלצת + מועדי תשלום
               </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-cream-2 border-b border-ink/15">
                   <tr>
-                    <th className="text-right py-2 px-3 font-semibold text-gray-700">חודש</th>
-                    <th className="text-left py-2 px-3 font-semibold text-gray-700">
+                    <th className="text-right py-2 px-3 font-semibold text-ink/70">חודש</th>
+                    <th className="text-left py-2 px-3 font-semibold text-ink/70">
                       הפרשה חודשית
                     </th>
-                    <th className="text-left py-2 px-3 font-semibold text-gray-700">
+                    <th className="text-left py-2 px-3 font-semibold text-ink/70">
                       מצטבר בחיסכון
                     </th>
-                    <th className="text-left py-2 px-3 font-semibold text-gray-700">
+                    <th className="text-left py-2 px-3 font-semibold text-ink/70">
                       תשלום מקדמה
                     </th>
-                    <th className="text-left py-2 px-3 font-semibold text-gray-700">
+                    <th className="text-left py-2 px-3 font-semibold text-ink/70">
                       יתרה לאחר תשלום
                     </th>
                   </tr>
@@ -450,15 +450,15 @@ export function TaxAdvancesCalculator() {
                   {result.cashFlowPlan.map((row) => (
                     <tr
                       key={row.month}
-                      className={`border-b border-gray-100 ${
-                        row.paymentDue ? 'bg-amber-50' : 'hover:bg-gray-50'
+                      className={`border-b border-ink/10 ${
+                        row.paymentDue ? 'bg-amber-50' : 'hover:bg-cream-2'
                       }`}
                     >
-                      <td className="py-2 px-3 font-medium text-gray-800">{row.monthName}</td>
+                      <td className="py-2 px-3 font-medium text-ink">{row.monthName}</td>
                       <td className="py-2 px-3 tabular-nums text-green-700">
                         +{formatCurrency(row.suggestedSetAside)}
                       </td>
-                      <td className="py-2 px-3 tabular-nums text-gray-700">
+                      <td className="py-2 px-3 tabular-nums text-ink/70">
                         {formatCurrency(row.cumulativeSetAside)}
                       </td>
                       <td className="py-2 px-3 tabular-nums">
@@ -467,7 +467,7 @@ export function TaxAdvancesCalculator() {
                             -{formatCurrency(row.paymentDue)}
                           </span>
                         ) : (
-                          <span className="text-gray-400">—</span>
+                          <span className="text-ink/45">—</span>
                         )}
                       </td>
                       <td
@@ -484,29 +484,29 @@ export function TaxAdvancesCalculator() {
             </div>
           </div>
 
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5 space-y-3">
-            <h3 className="font-bold text-gray-900">לוח תשלומי מע&quot;מ (עוסק מורשה)</h3>
+          <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-3">
+            <h3 className="font-bold text-ink">לוח תשלומי מע&quot;מ (עוסק מורשה)</h3>
             {input.isVatRegistered ? (
               <div className="space-y-2 text-sm">
-                <p className="text-gray-600">
+                <p className="text-ink/70">
                   מע&quot;מ מדווח ומשולם כל חודשיים (דו-חודשי) — בנפרד ממס הכנסה וב.ל.
                 </p>
                 <div className="grid grid-cols-3 gap-3 text-center">
                   {['מרץ', 'מאי', 'יולי', 'ספטמבר', 'נובמבר', 'ינואר'].map((m) => (
-                    <div key={m} className="bg-blue-50 border border-blue-200 rounded-lg p-2">
-                      <div className="text-xs text-blue-700 font-medium">15 ב{m}</div>
-                      <div className="font-bold text-blue-900 text-sm">
+                    <div key={m} className="bg-cream-2 border border-ink/15 rounded-none p-2">
+                      <div className="text-xs text-ink/70 font-medium">15 ב{m}</div>
+                      <div className="font-bold text-ink text-sm">
                         {formatCurrency(result.annualVatPayable / 6)}
                       </div>
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-ink/60">
                   * תאריך הגשה: 15 לחודש שאחרי סיום התקופה. תשלום עד אותו תאריך.
                 </p>
               </div>
             ) : (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-ink/60">
                 עוסק פטור — פטור מדיווח וגביית מע&quot;מ (עד {(122_833).toLocaleString('he-IL')}{' '}
                 ₪/שנה)
               </p>
@@ -518,16 +518,16 @@ export function TaxAdvancesCalculator() {
       {/* ===== טאב תיאום אמצע שנה ===== */}
       {activeTab === 'midyear' && (
         <div className="space-y-6">
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-            <h2 className="text-xl font-bold text-gray-900">תיאום מקדמות אמצע שנה</h2>
-            <p className="text-sm text-gray-600">
+          <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+            <h2 className="text-xl font-bold text-ink">תיאום מקדמות אמצע שנה</h2>
+            <p className="text-sm text-ink/70">
               אם ההכנסה בפועל שונה מהתכנון — כדאי לדווח על תיאום מקדמות (טופס 1300 / פניה
               לרשות המסים)
             </p>
 
             <div className="grid md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink/70 mb-2">
                   חודש נוכחי (1-12)
                 </label>
                 <input
@@ -536,11 +536,11 @@ export function TaxAdvancesCalculator() {
                   max={12}
                   value={input.currentMonth ?? new Date().getMonth() + 1}
                   onChange={(e) => update('currentMonth', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink/70 mb-2">
                   הכנסה בפועל מתחילת השנה (₪)
                 </label>
                 <input
@@ -555,11 +555,11 @@ export function TaxAdvancesCalculator() {
                       e.target.value === '' ? undefined : Number(e.target.value),
                     )
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink/70 mb-2">
                   מקדמות שולמו עד כה (₪)
                 </label>
                 <input
@@ -574,7 +574,7 @@ export function TaxAdvancesCalculator() {
                       e.target.value === '' ? undefined : Number(e.target.value),
                     )
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none"
                 />
               </div>
             </div>
@@ -584,15 +584,15 @@ export function TaxAdvancesCalculator() {
           {result.midYearAdjustment ? (
             <div className="space-y-4">
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
-                  <div className="text-xs text-gray-500 mb-1">תכנית מקורית (שנתי)</div>
-                  <div className="text-2xl font-bold text-gray-800">
+                <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
+                  <div className="text-xs text-ink/60 mb-1">תכנית מקורית (שנתי)</div>
+                  <div className="text-2xl font-bold text-ink">
                     {formatCurrency(result.midYearAdjustment.originalPlan)}
                   </div>
                 </div>
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
-                  <div className="text-xs text-blue-700 mb-1">הכנסה שנתית צפויה (מוצפת)</div>
-                  <div className="text-2xl font-bold text-blue-900">
+                <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
+                  <div className="text-xs text-ink/70 mb-1">הכנסה שנתית צפויה (מוצפת)</div>
+                  <div className="text-2xl font-bold text-ink">
                     {formatCurrency(result.midYearAdjustment.projectedAnnual)}
                   </div>
                   <div
@@ -607,7 +607,7 @@ export function TaxAdvancesCalculator() {
                   </div>
                 </div>
                 <div
-                  className={`border-2 rounded-xl p-4 text-center ${
+                  className={`border-2 rounded-none p-4 text-center ${
                     result.midYearAdjustment.shouldAdjust
                       ? 'bg-red-50 border-red-300'
                       : 'bg-green-50 border-green-300'
@@ -627,7 +627,7 @@ export function TaxAdvancesCalculator() {
                   >
                     {formatCurrency(result.midYearAdjustment.newAdviceAdvance)}
                   </div>
-                  <div className="text-xs mt-1 text-gray-600">
+                  <div className="text-xs mt-1 text-ink/70">
                     {result.midYearAdjustment.advanceDiff > 0 ? '+' : ''}
                     {formatCurrency(result.midYearAdjustment.advanceDiff)} מהמקדמה הנוכחית
                   </div>
@@ -635,7 +635,7 @@ export function TaxAdvancesCalculator() {
               </div>
 
               <div
-                className={`border-2 rounded-xl p-5 ${
+                className={`border-2 rounded-none p-5 ${
                   result.midYearAdjustment.shouldAdjust
                     ? 'bg-orange-50 border-orange-300'
                     : 'bg-green-50 border-green-300'
@@ -666,30 +666,30 @@ export function TaxAdvancesCalculator() {
               </div>
             </div>
           ) : (
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center text-gray-500">
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/60">
               <p>הזן הכנסה בפועל מתחילת השנה + חודש נוכחי לחישוב תיאום</p>
             </div>
           )}
 
           {/* הערכת גמר שנה */}
           {result.reconciliationEstimate && (
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-              <h3 className="text-lg font-bold text-gray-900">הערכת גמר שנה (טופס 1301)</h3>
+            <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+              <h3 className="text-lg font-bold text-ink">הערכת גמר שנה (טופס 1301)</h3>
               <div className="grid md:grid-cols-3 gap-4 text-center">
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <div className="text-xs text-gray-500 mb-1">מקדמות ששולמו</div>
-                  <div className="text-2xl font-bold text-gray-800">
+                <div className="bg-cream-2 rounded-none p-4">
+                  <div className="text-xs text-ink/60 mb-1">מקדמות ששולמו</div>
+                  <div className="text-2xl font-bold text-ink">
                     {formatCurrency(result.reconciliationEstimate.totalAdvancesPaid)}
                   </div>
                 </div>
-                <div className="bg-blue-50 rounded-xl p-4">
-                  <div className="text-xs text-blue-600 mb-1">חבות מס אמיתית</div>
-                  <div className="text-2xl font-bold text-blue-900">
+                <div className="bg-cream-2 rounded-none p-4">
+                  <div className="text-xs text-ink/70 mb-1">חבות מס אמיתית</div>
+                  <div className="text-2xl font-bold text-ink">
                     {formatCurrency(result.reconciliationEstimate.actualTaxLiability)}
                   </div>
                 </div>
                 <div
-                  className={`rounded-xl p-4 ${
+                  className={`rounded-none p-4 ${
                     result.reconciliationEstimate.isRefund
                       ? 'bg-green-50'
                       : 'bg-red-50'
@@ -709,13 +709,13 @@ export function TaxAdvancesCalculator() {
                   >
                     {formatCurrency(Math.abs(result.reconciliationEstimate.difference))}
                   </div>
-                  <div className="text-xs mt-1 text-gray-500">
+                  <div className="text-xs mt-1 text-ink/60">
                     ניצול מקדמות:{' '}
                     {formatPercent(result.reconciliationEstimate.utilizationRate, 0)}
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-ink/60">
                 * גמר שנה מוגש עד 31 במרץ השנה הבאה. עורך דין / רואה חשבון יכול להגיש עד 30 ביוני.
               </p>
             </div>
@@ -726,16 +726,16 @@ export function TaxAdvancesCalculator() {
       {/* ===== טאב ריבית פיגורים ===== */}
       {activeTab === 'late' && (
         <div className="space-y-6">
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-            <h2 className="text-xl font-bold text-gray-900">מחשבון ריבית פיגורים</h2>
-            <p className="text-sm text-gray-600">
+          <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+            <h2 className="text-xl font-bold text-ink">מחשבון ריבית פיגורים</h2>
+            <p className="text-sm text-ink/70">
               אי תשלום מקדמה בזמן גורר ריבית פיגורים של ~1.5% לחודש (ריבית עוגן + 2%). חשוב
               לשלם בזמן או לבקש הסדר תשלום.
             </p>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink/70 mb-2">
                   סכום מקדמה שלא שולמה (₪)
                 </label>
                 <input
@@ -744,11 +744,11 @@ export function TaxAdvancesCalculator() {
                   step={500}
                   value={lateAmount}
                   onChange={(e) => setLateAmount(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink/70 mb-2">
                   מספר חודשי איחור
                 </label>
                 <input
@@ -758,7 +758,7 @@ export function TaxAdvancesCalculator() {
                   step={1}
                   value={lateMonths}
                   onChange={(e) => setLateMonths(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
                 />
               </div>
             </div>
@@ -786,18 +786,18 @@ export function TaxAdvancesCalculator() {
           </div>
 
           {/* טבלת ריבית לפי חודשים */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-            <div className="p-4 border-b border-gray-100">
-              <h3 className="font-bold text-gray-900">התפתחות ריבית לפי חודשים</h3>
+          <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+            <div className="p-4 border-b border-ink/10">
+              <h3 className="font-bold text-ink">התפתחות ריבית לפי חודשים</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-cream-2 border-b border-ink/15">
                   <tr>
-                    <th className="text-right py-2 px-3 font-semibold text-gray-700">חודש איחור</th>
-                    <th className="text-left py-2 px-3 font-semibold text-gray-700">ריבית מצטברת</th>
-                    <th className="text-left py-2 px-3 font-semibold text-gray-700">סה&quot;כ לתשלום</th>
-                    <th className="text-left py-2 px-3 font-semibold text-gray-700">עלות %</th>
+                    <th className="text-right py-2 px-3 font-semibold text-ink/70">חודש איחור</th>
+                    <th className="text-left py-2 px-3 font-semibold text-ink/70">ריבית מצטברת</th>
+                    <th className="text-left py-2 px-3 font-semibold text-ink/70">סה&quot;כ לתשלום</th>
+                    <th className="text-left py-2 px-3 font-semibold text-ink/70">עלות %</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -809,15 +809,15 @@ export function TaxAdvancesCalculator() {
                     return (
                       <tr
                         key={m}
-                        className={`border-b border-gray-100 hover:bg-gray-50 ${
+                        className={`border-b border-ink/10 hover:bg-cream-2 ${
                           m === lateMonths ? 'bg-amber-50 font-semibold' : ''
                         }`}
                       >
-                        <td className="py-2 px-3 text-gray-800">{m} חודש{m === 1 ? '' : 'ים'}</td>
+                        <td className="py-2 px-3 text-ink">{m} חודש{m === 1 ? '' : 'ים'}</td>
                         <td className="py-2 px-3 tabular-nums text-red-700">
                           {formatCurrency(interest)}
                         </td>
-                        <td className="py-2 px-3 tabular-nums text-gray-900">
+                        <td className="py-2 px-3 tabular-nums text-ink">
                           {formatCurrency(total)}
                         </td>
                         <td className="py-2 px-3 tabular-nums text-orange-700">
@@ -831,7 +831,7 @@ export function TaxAdvancesCalculator() {
             </div>
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-900 space-y-2">
+          <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm text-amber-900 space-y-2">
             <h4 className="font-bold">מה לעשות אם לא שילמת בזמן?</h4>
             <ul className="space-y-1 list-disc list-inside text-xs">
               <li>שלם מיד — ריבית ממשיכה לצבור כל חודש</li>
@@ -872,21 +872,21 @@ function Row({
   return (
     <div
       className={`flex justify-between items-center py-1.5 ${
-        line ? 'border-t border-gray-200 pt-2.5 mt-1' : ''
-      } ${highlight ? 'bg-blue-50 -mx-2 px-2 rounded' : ''}`}
+        line ? 'border-t border-ink/15 pt-2.5 mt-1' : ''
+      } ${highlight ? 'bg-cream-2 -mx-2 px-2 rounded-none' : ''}`}
     >
-      <span className={`${mute ? 'text-gray-500' : 'text-gray-800'} ${bold ? 'font-bold' : ''}`}>
+      <span className={`${mute ? 'text-ink/60' : 'text-ink'} ${bold ? 'font-bold' : ''}`}>
         {label}
       </span>
       <div className="text-right">
         <span
-          className={`tabular-nums ${bold ? 'font-bold text-gray-900' : ''} ${
-            mute ? 'text-gray-500' : ''
+          className={`tabular-nums ${bold ? 'font-bold text-ink' : ''} ${
+            mute ? 'text-ink/60' : ''
           } ${negative ? 'text-red-700' : ''}`}
         >
           {value}
         </span>
-        {sub && <div className="text-xs text-gray-400">{sub}</div>}
+        {sub && <div className="text-xs text-ink/45">{sub}</div>}
       </div>
     </div>
   );
@@ -898,7 +898,7 @@ function TaxBreakdownBar({
   result: ReturnType<typeof calculateTaxAdvances>;
 }) {
   const total = result.totalAnnual;
-  if (total <= 0) return <p className="text-sm text-gray-500">אין נתונים</p>;
+  if (total <= 0) return <p className="text-sm text-ink/60">אין נתונים</p>;
 
   const items = [
     {
@@ -918,8 +918,8 @@ function TaxBreakdownBar({
           {
             label: 'מע"מ',
             value: result.annualVatPayable,
-            color: 'bg-blue-500',
-            textColor: 'text-blue-700',
+            color: 'bg-ink',
+            textColor: 'text-ink',
           },
         ]
       : []),
@@ -927,7 +927,7 @@ function TaxBreakdownBar({
 
   return (
     <div className="space-y-3">
-      <div className="flex h-7 rounded-lg overflow-hidden border border-gray-200">
+      <div className="flex h-7 rounded-none overflow-hidden border border-ink/15">
         {items.map((item) => {
           const pct = (item.value / total) * 100;
           return (
@@ -965,50 +965,50 @@ function PaymentScheduleTable({
   schedule: ReturnType<typeof calculateTaxAdvances>['paymentSchedule'];
 }) {
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-      <div className="p-3 border-b border-gray-100 bg-gray-50">
-        <h4 className="font-bold text-gray-900 text-sm">לוח תשלומים שנתי</h4>
+    <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+      <div className="p-3 border-b border-ink/10 bg-cream-2">
+        <h4 className="font-bold text-ink text-sm">לוח תשלומים שנתי</h4>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-cream-2 border-b border-ink/15">
             <tr>
-              <th className="text-right py-2 px-2 font-semibold text-gray-600">תשלום</th>
-              <th className="text-right py-2 px-2 font-semibold text-gray-600">חודשים</th>
-              <th className="text-left py-2 px-2 font-semibold text-gray-600">מס הכנסה</th>
-              <th className="text-left py-2 px-2 font-semibold text-gray-600">ב.ל.</th>
-              <th className="text-left py-2 px-2 font-semibold text-gray-600 hidden sm:table-cell">
+              <th className="text-right py-2 px-2 font-semibold text-ink/70">תשלום</th>
+              <th className="text-right py-2 px-2 font-semibold text-ink/70">חודשים</th>
+              <th className="text-left py-2 px-2 font-semibold text-ink/70">מס הכנסה</th>
+              <th className="text-left py-2 px-2 font-semibold text-ink/70">ב.ל.</th>
+              <th className="text-left py-2 px-2 font-semibold text-ink/70 hidden sm:table-cell">
                 מע&quot;מ
               </th>
-              <th className="text-left py-2 px-2 font-semibold text-gray-600">סה&quot;כ</th>
+              <th className="text-left py-2 px-2 font-semibold text-ink/70">סה&quot;כ</th>
             </tr>
           </thead>
           <tbody>
             {schedule.map((row) => (
               <tr
                 key={row.paymentNumber}
-                className="border-b border-gray-100 hover:bg-gray-50"
+                className="border-b border-ink/10 hover:bg-cream-2"
               >
-                <td className="py-2 px-2 text-gray-700 font-medium">{row.paymentNumber}</td>
-                <td className="py-2 px-2 text-gray-600">{row.monthsCovered}</td>
-                <td className="py-2 px-2 tabular-nums text-gray-700">
+                <td className="py-2 px-2 text-ink/70 font-medium">{row.paymentNumber}</td>
+                <td className="py-2 px-2 text-ink/70">{row.monthsCovered}</td>
+                <td className="py-2 px-2 tabular-nums text-ink/70">
                   {formatCurrency(row.incomeTax)}
                 </td>
-                <td className="py-2 px-2 tabular-nums text-gray-700">
+                <td className="py-2 px-2 tabular-nums text-ink/70">
                   {formatCurrency(row.socialSecurity)}
                 </td>
-                <td className="py-2 px-2 tabular-nums text-gray-700 hidden sm:table-cell">
+                <td className="py-2 px-2 tabular-nums text-ink/70 hidden sm:table-cell">
                   {row.vat > 0 ? formatCurrency(row.vat) : '—'}
                 </td>
-                <td className="py-2 px-2 tabular-nums font-bold text-gray-900">
+                <td className="py-2 px-2 tabular-nums font-bold text-ink">
                   {formatCurrency(row.total)}
                 </td>
               </tr>
             ))}
           </tbody>
-          <tfoot className="bg-gray-50 border-t-2 border-gray-200">
+          <tfoot className="bg-cream-2 border-t-2 border-ink/15">
             <tr>
-              <td colSpan={2} className="py-2 px-2 font-bold text-gray-800 text-right">
+              <td colSpan={2} className="py-2 px-2 font-bold text-ink text-right">
                 סה&quot;כ שנתי
               </td>
               <td className="py-2 px-2 tabular-nums font-bold text-red-700">
@@ -1017,10 +1017,10 @@ function PaymentScheduleTable({
               <td className="py-2 px-2 tabular-nums font-bold text-orange-700">
                 {formatCurrency(schedule.reduce((s, r) => s + r.socialSecurity, 0))}
               </td>
-              <td className="py-2 px-2 tabular-nums font-bold text-blue-700 hidden sm:table-cell">
+              <td className="py-2 px-2 tabular-nums font-bold text-ink hidden sm:table-cell">
                 {formatCurrency(schedule.reduce((s, r) => s + r.vat, 0))}
               </td>
-              <td className="py-2 px-2 tabular-nums font-bold text-gray-900">
+              <td className="py-2 px-2 tabular-nums font-bold text-ink">
                 {formatCurrency(schedule.reduce((s, r) => s + r.total, 0))}
               </td>
             </tr>

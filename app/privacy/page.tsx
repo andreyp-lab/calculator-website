@@ -9,18 +9,18 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white py-12">
-      <article className="max-w-3xl mx-auto px-4 text-gray-700">
+    <div className="min-h-screen bg-paper py-12">
+      <article className="max-w-3xl mx-auto px-4 text-ink/70">
 
         {/* כותרת */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">מדיניות פרטיות</h1>
-        <p className="text-sm text-gray-500 mb-4">
+        <h1 className="text-4xl font-bold text-ink mb-2">מדיניות פרטיות</h1>
+        <p className="text-sm text-ink/60 mb-4">
           תאריך עדכון אחרון: {SITE_INFO.legal.privacyLastUpdated}
         </p>
 
         {/* 1. מבוא */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             1. מבוא
           </h2>
           <p className="mb-3">
@@ -44,11 +44,11 @@ export default function PrivacyPage() {
 
         {/* 2. מידע שאנחנו אוספים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             2. איזה מידע אנחנו אוספים?
           </h2>
 
-          <div className="bg-green-50 border border-green-300 rounded-lg p-5 mb-4">
+          <div className="bg-green-50 border border-green-300 rounded-none p-5 mb-4">
             <h3 className="text-lg font-bold text-green-800 mb-2">
               התשובה הקצרה: כמעט כלום.
             </h3>
@@ -59,14 +59,14 @@ export default function PrivacyPage() {
             </p>
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">2.1 מידע שאתה מזין במחשבונים</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">2.1 מידע שאתה מזין במחשבונים</h3>
           <p className="mb-3">
             נתונים שאתה מזין במחשבונים (סכומי כסף, שכר, תאריכים וכו&apos;) <strong>אינם נשלחים לשרת</strong>.
             כל החישובים מתבצעים <strong>בדפדפן שלך בלבד</strong>, בזיכרון זמני.
             הנתונים לא נשמרים, לא מועברים, ולא מנותחים על ידינו.
           </p>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">2.2 אנחנו לא אוספים</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">2.2 אנחנו לא אוספים</h3>
           <ul className="list-disc list-inside space-y-1 mb-3 mr-2">
             <li>שם, כתובת דוא&quot;ל, מספר טלפון</li>
             <li>מידע פיננסי אישי</li>
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
 
         {/* 3. מידע טכני - Vercel */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             3. מידע טכני שנאסף על ידי Vercel (ספק האחסון)
           </h2>
           <p className="mb-3">
@@ -89,7 +89,7 @@ export default function PrivacyPage() {
             לצורכי אבטחה, ביצועים ואיתור תקלות.
           </p>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">3.1 מה יומני Vercel כוללים (בדרך כלל):</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">3.1 מה יומני Vercel כוללים (בדרך כלל):</h3>
           <ul className="list-disc list-inside space-y-1 mb-3 mr-2">
             <li>כתובת IP של המבקר (מוסתרת/מקוצרת בדרך כלל)</li>
             <li>סוג דפדפן ומערכת הפעלה (User-Agent)</li>
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
             <li>קוד תגובת שרת (200, 404 וכד&apos;)</li>
           </ul>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">3.2 חשוב לדעת:</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">3.2 חשוב לדעת:</h3>
           <ul className="list-disc list-inside space-y-1 mb-3 mr-2">
             <li>מידע זה <strong>אינו מקושר לזהות אישית</strong></li>
             <li>אנחנו <strong>לא ניגשים</strong> ליומנים אלה בשגרה</li>
@@ -106,13 +106,13 @@ export default function PrivacyPage() {
             <li>Vercel היא המעבדת (Data Processor) — אנחנו הבקר (Data Controller)</li>
           </ul>
 
-          <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded">
+          <p className="text-sm text-ink/60 bg-cream-2 p-3 rounded-none">
             לפרטים על מדיניות הפרטיות של Vercel:{' '}
             <a
               href={SITE_INFO.hosting.privacyPolicyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gold hover:underline"
             >
               {SITE_INFO.hosting.privacyPolicyUrl}
             </a>
@@ -121,26 +121,26 @@ export default function PrivacyPage() {
 
         {/* 4. עוגיות */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             4. עוגיות (Cookies)
           </h2>
           <p className="mb-3">
             אנחנו <strong>לא</strong> משתמשים בעוגיות לצורכי ניתוח, שיווק או מעקב.
           </p>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">4.1 עוגיות פונקציונליות (אופציונלי)</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">4.1 עוגיות פונקציונליות (אופציונלי)</h3>
           <p className="mb-3">
             ייתכן שהאתר שומר העדפות מקומיות (כגון הגדרות נגישות) ב-<strong>localStorage</strong> של
             הדפדפן שלך — זה שמור אצלך בלבד, ולא נשלח לשרת.
           </p>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">4.2 עוגיות תשתית (Vercel)</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">4.2 עוגיות תשתית (Vercel)</h3>
           <p className="mb-3">
             Vercel עשויה להציב עוגיות טכניות הכרחיות לתפעול השרת (ניהול עומסים, אבטחה).
             אלה <strong>אינן עוגיות שיווקיות</strong> ואינן עוקבות אחר פעילותך באתרים אחרים.
           </p>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">4.3 מה אנחנו לא עושים:</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">4.3 מה אנחנו לא עושים:</h3>
           <ul className="list-disc list-inside space-y-1 mr-2">
             <li>אין Google Analytics</li>
             <li>אין Facebook Pixel</li>
@@ -152,7 +152,7 @@ export default function PrivacyPage() {
 
         {/* 5. צד שלישי */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             5. שירותי צד שלישי
           </h2>
           <p className="mb-3">
@@ -160,30 +160,30 @@ export default function PrivacyPage() {
           </p>
 
           <div className="space-y-4">
-            <div className="border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-900">Vercel Inc. — אחסון אתר</h3>
-              <p className="text-sm text-gray-600 mt-1">
+            <div className="border border-ink/15 rounded-none p-4">
+              <h3 className="font-semibold text-ink">Vercel Inc. — אחסון אתר</h3>
+              <p className="text-sm text-ink/60 mt-1">
                 ספק האחסון. ראה סעיף 3 למעלה. מדיניות פרטיות:{' '}
-                <a href={SITE_INFO.hosting.privacyPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a href={SITE_INFO.hosting.privacyPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
                   vercel.com/legal/privacy-policy
                 </a>
               </p>
             </div>
 
-            <div className="border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-900">Google Fonts — פונטים</h3>
-              <p className="text-sm text-gray-600 mt-1">
+            <div className="border border-ink/15 rounded-none p-4">
+              <h3 className="font-semibold text-ink">Google Fonts — פונטים</h3>
+              <p className="text-sm text-ink/60 mt-1">
                 האתר משתמש בפונט &quot;Heebo&quot; מ-Google Fonts. טעינת הפונט כרוכה בבקשה לשרתי Google,
                 אשר עשויה לכלול כתובת IP שלך. Google Fonts אינה שומרת מידע זיהוי אישי לפי
                 מדיניות Google הנוכחית.{' '}
-                <a href="https://fonts.google.com/about" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a href="https://fonts.google.com/about" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
                   קרא עוד
                 </a>
               </p>
             </div>
           </div>
 
-          <p className="mt-4 text-sm text-gray-600">
+          <p className="mt-4 text-sm text-ink/60">
             <strong>לא</strong> משולבים: Google Analytics, Facebook SDK, Twitter SDK, LinkedIn Pixel,
             Hotjar, Intercom, Crisp Chat, או כל שירות ניתוח/פרסום אחר.
           </p>
@@ -191,7 +191,7 @@ export default function PrivacyPage() {
 
         {/* 6. העברת מידע לחו"ל */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             6. העברת מידע לחו&quot;ל
           </h2>
           <p className="mb-3">
@@ -203,7 +203,7 @@ export default function PrivacyPage() {
             מכיוון שלא נאסף מידע אישי על ידינו, <strong>אין העברת מידע אישי</strong> לצדדים שלישיים,
             לא בישראל ולא בחו&quot;ל.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink/60">
             Vercel פועלת בהתאם לסטנדרטים של GDPR ו-SCCs (Standard Contractual Clauses)
             לצורך העברת מידע מהאיחוד האירופי לארה&quot;ב.
           </p>
@@ -211,7 +211,7 @@ export default function PrivacyPage() {
 
         {/* 7. זכויותיך */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             7. זכויותיך על פי חוק
           </h2>
           <p className="mb-4">
@@ -222,53 +222,53 @@ export default function PrivacyPage() {
 
           <div className="space-y-3">
             <div className="flex gap-3">
-              <span className="font-bold text-blue-600 w-8 flex-shrink-0">1.</span>
+              <span className="font-bold text-gold w-8 flex-shrink-0">1.</span>
               <div>
                 <strong>זכות עיון (Right of Access)</strong> — לדעת אילו נתונים שמורים עליך.
-                <span className="text-gray-500 text-sm block">מצבנו: אין נתונים לעיין בהם.</span>
+                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים לעיין בהם.</span>
               </div>
             </div>
             <div className="flex gap-3">
-              <span className="font-bold text-blue-600 w-8 flex-shrink-0">2.</span>
+              <span className="font-bold text-gold w-8 flex-shrink-0">2.</span>
               <div>
                 <strong>זכות תיקון (Right to Rectification)</strong> — לתקן מידע שגוי.
-                <span className="text-gray-500 text-sm block">מצבנו: אין נתונים לתיקון.</span>
+                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים לתיקון.</span>
               </div>
             </div>
             <div className="flex gap-3">
-              <span className="font-bold text-blue-600 w-8 flex-shrink-0">3.</span>
+              <span className="font-bold text-gold w-8 flex-shrink-0">3.</span>
               <div>
                 <strong>זכות מחיקה (Right to Erasure)</strong> — &quot;הזכות להישכח&quot;.
-                <span className="text-gray-500 text-sm block">מצבנו: אין נתונים למחיקה.</span>
+                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים למחיקה.</span>
               </div>
             </div>
             <div className="flex gap-3">
-              <span className="font-bold text-blue-600 w-8 flex-shrink-0">4.</span>
+              <span className="font-bold text-gold w-8 flex-shrink-0">4.</span>
               <div>
                 <strong>זכות אי-שימוש / התנגדות (Right to Object)</strong> — להתנגד לעיבוד.
-                <span className="text-gray-500 text-sm block">מצבנו: אין עיבוד מידע אישי.</span>
+                <span className="text-ink/60 text-sm block">מצבנו: אין עיבוד מידע אישי.</span>
               </div>
             </div>
             <div className="flex gap-3">
-              <span className="font-bold text-blue-600 w-8 flex-shrink-0">5.</span>
+              <span className="font-bold text-gold w-8 flex-shrink-0">5.</span>
               <div>
                 <strong>זכות ניוד (Data Portability)</strong> — לקבל נתוניך בפורמט מובנה.
-                <span className="text-gray-500 text-sm block">מצבנו: אין נתונים להעביר.</span>
+                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים להעביר.</span>
               </div>
             </div>
             <div className="flex gap-3">
-              <span className="font-bold text-blue-600 w-8 flex-shrink-0">6.</span>
+              <span className="font-bold text-gold w-8 flex-shrink-0">6.</span>
               <div>
                 <strong>זכות הגבלה (Right to Restrict Processing)</strong> — להגביל את השימוש.
-                <span className="text-gray-500 text-sm block">מצבנו: אין עיבוד לצמצם.</span>
+                <span className="text-ink/60 text-sm block">מצבנו: אין עיבוד לצמצם.</span>
               </div>
             </div>
           </div>
 
-          <p className="mt-4 text-sm text-gray-600">
+          <p className="mt-4 text-sm text-ink/60">
             אם ברצונך לממש זכויות אלה בנוגע למידע שנאסף על ידי <strong>Vercel</strong>,
             ניתן לפנות ישירות לפרטיות Vercel:{' '}
-            <a href={SITE_INFO.hosting.privacyPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+            <a href={SITE_INFO.hosting.privacyPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
               vercel.com/legal/privacy-policy
             </a>.
           </p>
@@ -276,7 +276,7 @@ export default function PrivacyPage() {
 
         {/* 8. קטינים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             8. קטינים
           </h2>
           <p className="mb-3">
@@ -284,9 +284,9 @@ export default function PrivacyPage() {
             מכיוון שאיננו אוספים מידע אישי כלל, אין לנו אפשרות לדעת את גיל המשתמש,
             ואין לנו צורך לדעת זאת.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink/60">
             אם הנך הורה או אפוטרופוס וסבור שילדך מסר מידע אישי כלשהו, אנא{' '}
-            <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline">
+            <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
               פנה אלינו
             </Link>{' '}
             ונפעל בהתאם.
@@ -295,45 +295,45 @@ export default function PrivacyPage() {
 
         {/* 9. שינויים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             9. שינויים במדיניות הפרטיות
           </h2>
           <p className="mb-3">
             אנחנו עשויים לעדכן מדיניות פרטיות זו מעת לעת. שינויים מהותיים יסומנו בראש הדף.
             השימוש המתמשך באתר לאחר פרסום שינויים מהווה הסכמה למדיניות המעודכנת.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink/60">
             תאריך עדכון אחרון: <strong>{SITE_INFO.legal.privacyLastUpdated}</strong>
           </p>
         </section>
 
         {/* 10. יצירת קשר */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             10. יצירת קשר בנושא פרטיות
           </h2>
           <p className="mb-3">
             לשאלות, הערות או בקשות בנוגע למדיניות פרטיות זו, אנא{' '}
-            <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline font-medium">
+            <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline font-medium">
               פנה אלינו דרך טופס יצירת הקשר
             </Link>
             {' '}או ישירות לכתובת:{' '}
-            <a href={`mailto:${SITE_INFO.contact.email}`} className="text-blue-600 hover:underline">
+            <a href={`mailto:${SITE_INFO.contact.email}`} className="text-gold hover:underline">
               {SITE_INFO.contact.email}
             </a>.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink/60">
             נשתדל להשיב בתוך 7 ימי עסקים.
           </p>
         </section>
 
         {/* תחתית */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mt-10">
-          <p className="text-sm text-gray-700">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-5 mt-10">
+          <p className="text-sm text-ink/70">
             <strong>סיכום:</strong> האתר {SITE_INFO.domain} אינו אוסף נתונים אישיים. המידע הטכני היחיד
             שנאסף הוא יומני שרת סטנדרטיים של Vercel (IP, User-Agent, Timestamp), שאינם מקושרים לזהות אישית.
             לשאלות:{' '}
-            <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline">
+            <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
               {SITE_INFO.contact.contactPage}
             </Link>
           </p>

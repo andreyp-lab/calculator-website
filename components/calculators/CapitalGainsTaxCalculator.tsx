@@ -54,7 +54,7 @@ const TAB_LABELS: Record<Tab, string> = {
 const CURRENT_YEAR = 2026;
 
 const PIE_COLORS = ['#ef4444', '#10b981', '#f59e0b'];
-const BAR_COLORS = { withLinear: '#3b82f6', withoutLinear: '#ef4444' };
+const BAR_COLORS = { withLinear: '#102219', withoutLinear: '#ef4444' };
 
 // ============================================================
 // עזרי UI
@@ -73,10 +73,10 @@ function TabButton({
     <button
       type="button"
       onClick={onClick}
-      className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
+      className={`px-4 py-2 text-sm font-medium rounded-none transition-colors whitespace-nowrap ${
         active
-          ? 'bg-blue-600 text-white shadow-sm'
-          : 'bg-white text-gray-600 border border-gray-200 hover:border-blue-300 hover:text-blue-600'
+          ? 'bg-ink text-cream shadow-sm'
+          : 'bg-paper text-ink/60 border border-ink/15 hover:border-gold hover:text-gold'
       }`}
     >
       {label}
@@ -92,9 +92,9 @@ interface FieldProps {
 function Field({ label, hint, children }: FieldProps) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -123,7 +123,7 @@ function NumberInput({
       step={step}
       placeholder={placeholder}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold focus:border-gold"
     />
   );
 }
@@ -156,7 +156,7 @@ function CheckboxField({
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="w-4 h-4 rounded border-gray-300 text-blue-600"
+        className="w-4 h-4 rounded-none border-ink/30 text-ink"
       />
       <span>{label}</span>
     </label>
@@ -165,14 +165,14 @@ function CheckboxField({
 
 function InfoBox({ text }: { text: string }) {
   return (
-    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900 leading-relaxed">
+    <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/70 leading-relaxed">
       {text}
     </div>
   );
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-base font-semibold text-gray-800 border-b border-gray-200 pb-2 mb-3">{children}</h3>;
+  return <h3 className="text-base font-semibold text-ink border-b border-ink/15 pb-2 mb-3">{children}</h3>;
 }
 
 // ============================================================
@@ -209,7 +209,7 @@ function TaxPieChart({ tax, net, label }: { tax: number; net: number; label?: st
           <Tooltip formatter={(value) => formatCurrency(Number(value))} />
         </PieChart>
       </ResponsiveContainer>
-      {label && <p className="text-center text-xs text-gray-500 -mt-2">{label}</p>}
+      {label && <p className="text-center text-xs text-ink/60 -mt-2">{label}</p>}
     </div>
   );
 }
@@ -295,7 +295,7 @@ function RealEstateTab() {
     <div className="grid lg:grid-cols-5 gap-6">
       {/* קלטים */}
       <div className="lg:col-span-3 space-y-5">
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-4">
           <SectionTitle>פרטי העסקה</SectionTitle>
 
           <div className="grid grid-cols-2 gap-4">
@@ -331,7 +331,7 @@ function RealEstateTab() {
             <select
               value={input.scenario}
               onChange={(e) => update('scenario', e.target.value as CapitalGainsScenario)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             >
               <option value="first-home">דירה יחידה (לתושב ישראל)</option>
               <option value="investment">דירת השקעה / נוספת</option>
@@ -341,13 +341,13 @@ function RealEstateTab() {
         </div>
 
         {/* הוצאות מוכרות */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-4">
           <div className="flex items-center justify-between">
             <SectionTitle>הוצאות מוכרות</SectionTitle>
             <button
               type="button"
               onClick={() => setShowExpenses(!showExpenses)}
-              className="text-xs text-blue-600 hover:underline"
+              className="text-xs text-gold hover:underline"
             >
               {showExpenses ? 'חזרה לסכום כולל' : 'פירוט הוצאות'}
             </button>
@@ -390,7 +390,7 @@ function RealEstateTab() {
               <Field label="הוצאות אחרות (₪)">
                 <NumberInput value={expenses.other} onChange={(v) => updateExp('other', v)} step={1_000} />
               </Field>
-              <div className="col-span-2 bg-blue-50 rounded-lg px-3 py-2 text-sm font-semibold text-blue-800">
+              <div className="col-span-2 bg-cream-2 rounded-none px-3 py-2 text-sm font-semibold text-ink">
                 סה&quot;כ הוצאות: {formatCurrency(Object.values(expenses).reduce((a, b) => a + b, 0))}
               </div>
             </div>
@@ -398,7 +398,7 @@ function RealEstateTab() {
         </div>
 
         {/* הגדרות נוספות */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-3">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-3">
           <SectionTitle>הגדרות נוספות</SectionTitle>
           <Field
             label={`אינפלציה מצטברת (%) ${input.useAutoCPI ? `— אוטומטי לפי מדד: ${autoInflation}%` : ''}`}
@@ -418,7 +418,7 @@ function RealEstateTab() {
               <button
                 type="button"
                 onClick={() => update('useAutoCPI', !input.useAutoCPI)}
-                className={`px-3 py-2 text-xs rounded-lg border ${input.useAutoCPI ? 'bg-blue-100 border-blue-300 text-blue-700' : 'bg-gray-50 border-gray-200 text-gray-600'}`}
+                className={`px-3 py-2 text-xs rounded-none border ${input.useAutoCPI ? 'bg-ink border-ink text-cream' : 'bg-cream-2 border-ink/15 text-ink/60'}`}
               >
                 {input.useAutoCPI ? 'מדד CPI אוטו' : 'הכנס ידני'}
               </button>
@@ -533,7 +533,7 @@ function FirstHomeTab() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       <div className="lg:col-span-3 space-y-5">
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-4">
           <SectionTitle>פרטי הדירה</SectionTitle>
           <div className="grid grid-cols-2 gap-4">
             <Field label="שווי מכירה (₪)">
@@ -557,7 +557,7 @@ function FirstHomeTab() {
           </div>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-3">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-3">
           <SectionTitle>תנאי זכאות</SectionTitle>
           <div className="space-y-2">
             <CheckboxField checked={input.isResident} onChange={(v) => update('isResident', v)} label="תושב ישראל" />
@@ -585,7 +585,7 @@ function FirstHomeTab() {
         </div>
 
         {/* תקרת פטור */}
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm">
           <p className="font-semibold text-amber-800 mb-1">תקרת הפטור 2026</p>
           <p className="text-amber-700">
             שווי מכירה עד <span className="font-bold">{formatCurrency(FIRST_HOME_EXEMPTION_CAP_2026)}</span>
@@ -612,7 +612,7 @@ function FirstHomeTab() {
         />
 
         {!result.isEligible && result.savingFromExemption === 0 && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 space-y-2">
+          <div className="bg-red-50 border border-red-200 rounded-none p-4 space-y-2">
             <p className="font-semibold text-red-800 text-sm">סיבות חוסר זכאות:</p>
             <ul className="space-y-1">
               {result.ineligibilityReasons.map((r, i) => (
@@ -626,7 +626,7 @@ function FirstHomeTab() {
         )}
 
         {result.isEligible && (
-          <div className="bg-green-50 border border-green-200 rounded-xl p-4 space-y-1">
+          <div className="bg-green-50 border border-green-200 rounded-none p-4 space-y-1">
             <p className="font-semibold text-green-800 text-sm">כל תנאי הפטור מתקיימים</p>
             <p className="text-xs text-green-700">תושב ישראל, לא ניצל פטור לאחרונה, בתקרה, ואחזקה 18+ חודשים</p>
           </div>
@@ -686,10 +686,10 @@ function LinearTab() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       <div className="lg:col-span-3 space-y-5">
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-4">
           <SectionTitle>פרטי הנכס הישן (לפני 2014)</SectionTitle>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-800 mb-2">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/70 mb-2">
             החישוב הלינארי חל על דירות שנרכשו לפני 1 בינואר 2014. שנת הרכישה שלכם: <strong>{input.purchaseYear}</strong>
             {input.purchaseYear >= 2014 && (
               <span className="text-red-600 font-bold"> — נרכש אחרי 2014, חישוב לינארי לא חל!</span>
@@ -734,7 +734,7 @@ function LinearTab() {
         </div>
 
         {/* ציר זמן */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5">
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
           <SectionTitle>חלוקת שנות האחזקה</SectionTitle>
           <div className="flex gap-4 mb-4 text-sm">
             <div className="flex items-center gap-1">
@@ -747,7 +747,7 @@ function LinearTab() {
             </div>
           </div>
           {/* פס ויזואלי */}
-          <div className="h-8 flex rounded-lg overflow-hidden mb-3">
+          <div className="h-8 flex rounded-none overflow-hidden mb-3">
             {result.pctBefore2014 > 0 && (
               <div
                 className="bg-green-500 flex items-center justify-center text-white text-xs font-medium"
@@ -765,7 +765,7 @@ function LinearTab() {
               </div>
             )}
           </div>
-          <p className="text-xs text-gray-500">סה&quot;כ {result.totalYears} שנות אחזקה — {input.purchaseYear} עד {input.saleYear}</p>
+          <p className="text-xs text-ink/60">סה&quot;כ {result.totalYears} שנות אחזקה — {input.purchaseYear} עד {input.saleYear}</p>
         </div>
       </div>
 
@@ -836,7 +836,7 @@ function InheritedTab() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       <div className="lg:col-span-3 space-y-5">
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm">
           <p className="font-semibold text-amber-800 mb-1">כלל ירושה במיסוי מקרקעין</p>
           <ul className="text-amber-700 space-y-1 text-xs">
             <li>• ירושה מבן/בת זוג: בדרך כלל פטורה ממס שבח</li>
@@ -845,7 +845,7 @@ function InheritedTab() {
           </ul>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-4">
           <SectionTitle>פרטי הנכס שהתקבל בירושה</SectionTitle>
 
           <CheckboxField
@@ -980,7 +980,7 @@ function SecuritiesTab() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       <div className="lg:col-span-3 space-y-5">
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-4">
           <SectionTitle>פרטי ההשקעה</SectionTitle>
           <div className="grid grid-cols-2 gap-4">
             <Field label="סכום השקעה מקורי (₪)">
@@ -999,7 +999,7 @@ function SecuritiesTab() {
               <select
                 value={input.securitiesType}
                 onChange={(e) => update('securitiesType', e.target.value as SecuritiesType)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               >
                 {(Object.keys(SECURITIES_TYPE_LABELS) as SecuritiesType[]).map((k) => (
                   <option key={k} value={k}>{SECURITIES_TYPE_LABELS[k]}</option>
@@ -1007,14 +1007,14 @@ function SecuritiesTab() {
               </select>
             </Field>
             <div className="flex items-end pb-2">
-              <p className="text-sm text-gray-600">
-                תשואה גולמית: <span className="font-bold text-blue-700">{roi}%</span>
+              <p className="text-sm text-ink/60">
+                תשואה גולמית: <span className="font-bold text-gold">{roi}%</span>
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-4">
           <SectionTitle>דיבידנדים</SectionTitle>
           <div className="grid grid-cols-2 gap-4">
             <Field label="דיבידנדים שהתקבלו (₪)">
@@ -1026,7 +1026,7 @@ function SecuritiesTab() {
           </div>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-3">
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-3">
           <SectionTitle>הגדרות מס</SectionTitle>
           <div className="space-y-2">
             <CheckboxField
@@ -1095,8 +1095,8 @@ function SecuritiesTab() {
             }))}
         />
 
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-gray-700 space-y-2">
-          <p className="font-semibold text-gray-900">הבדלים מרכזיים: ני&quot;ע vs. נדל&quot;ן</p>
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-xs text-ink/70 space-y-2">
+          <p className="font-semibold text-ink">הבדלים מרכזיים: ני&quot;ע vs. נדל&quot;ן</p>
           <ul className="space-y-1">
             <li>• ני&quot;ע: 25% על רווח ריאלי, נדל&quot;ן: 25% + חישוב לינארי</li>
             <li>• ני&quot;ע: אין פטור דירה יחידה</li>

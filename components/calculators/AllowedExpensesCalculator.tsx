@@ -47,19 +47,19 @@ export function AllowedExpensesCalculator() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       {/* קלט */}
-      <div className="lg:col-span-2 bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-        <h2 className="text-xl font-bold text-gray-900">פרטי העסק וההוצאות</h2>
+      <div className="lg:col-span-2 bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+        <h2 className="text-xl font-bold text-ink">פרטי העסק וההוצאות</h2>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">סוג עוסק</label>
+          <label className="block text-sm font-medium text-ink/70 mb-2">סוג עוסק</label>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => update('isVatRegistered', false)}
-              className={`px-3 py-2 rounded-lg border-2 text-sm font-medium transition ${
+              className={`px-3 py-2 rounded-none border text-sm font-medium transition ${
                 !input.isVatRegistered
-                  ? 'bg-blue-600 text-white border-blue-600'
-                  : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400'
+                  ? 'bg-ink text-cream border-ink'
+                  : 'bg-paper text-ink/70 border-ink/15 hover:border-ink/40'
               }`}
             >
               עוסק פטור
@@ -67,20 +67,20 @@ export function AllowedExpensesCalculator() {
             <button
               type="button"
               onClick={() => update('isVatRegistered', true)}
-              className={`px-3 py-2 rounded-lg border-2 text-sm font-medium transition ${
+              className={`px-3 py-2 rounded-none border text-sm font-medium transition ${
                 input.isVatRegistered
-                  ? 'bg-emerald-600 text-white border-emerald-600'
-                  : 'bg-white text-gray-700 border-gray-300 hover:border-emerald-400'
+                  ? 'bg-ink text-cream border-ink'
+                  : 'bg-paper text-ink/70 border-ink/15 hover:border-ink/40'
               }`}
             >
               עוסק מורשה
             </button>
           </div>
-          <p className="text-xs text-gray-500 mt-1">רק עוסק מורשה מקזז מע"מ תשומות.</p>
+          <p className="text-xs text-ink/60 mt-1">רק עוסק מורשה מקזז מע"מ תשומות.</p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             הכנסה שנתית חייבת (₪)
           </label>
           <input
@@ -89,21 +89,21 @@ export function AllowedExpensesCalculator() {
             step={5_000}
             value={input.annualIncome ?? 0}
             onChange={(e) => update('annualIncome', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-ink/60 mt-1">
             קובעת את המדרגה השולית להערכת חיסכון המס.
           </p>
         </div>
 
-        <div className="pt-3 border-t border-gray-200 space-y-3">
-          <p className="text-sm font-medium text-gray-700">הוצאות שנתיות לפי קטגוריה (כולל מע"מ)</p>
+        <div className="pt-3 border-t border-ink/15 space-y-3">
+          <p className="text-sm font-medium text-ink/70">הוצאות שנתיות לפי קטגוריה (כולל מע"מ)</p>
 
           {EXPENSE_CATEGORY_ORDER.map((key) => {
             const rule = EXPENSE_RULES[key];
             return (
               <div key={key}>
-                <label className="block text-xs font-medium text-gray-600 mb-1">
+                <label className="block text-xs font-medium text-ink/60 mb-1">
                   {rule.label}
                 </label>
                 <input
@@ -112,12 +112,12 @@ export function AllowedExpensesCalculator() {
                   step={100}
                   value={input.expenses[key] ?? 0}
                   onChange={(e) => updateExpense(key, Number(e.target.value))}
-                  className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                  className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                 />
 
                 {key === 'cellular' && (input.expenses.cellular ?? 0) > 0 && (
                   <div className="mt-1.5">
-                    <label className="block text-xs text-gray-500 mb-1">
+                    <label className="block text-xs text-ink/60 mb-1">
                       יחס שימוש עסקי: {formatPercent(input.cellularBusinessRatio ?? 0.5, 0)}
                     </label>
                     <input
@@ -134,7 +134,7 @@ export function AllowedExpensesCalculator() {
 
                 {key === 'homeOffice' && (input.expenses.homeOffice ?? 0) > 0 && (
                   <div className="mt-1.5">
-                    <label className="block text-xs text-gray-500 mb-1">
+                    <label className="block text-xs text-ink/60 mb-1">
                       יחס שטח חדר העבודה: {formatPercent(input.homeOfficeAreaRatio ?? 0, 0)}
                     </label>
                     <input
@@ -176,15 +176,15 @@ export function AllowedExpensesCalculator() {
         </div>
 
         {/* פירוט לפי קטגוריה */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">פירוט לפי קטגוריה</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">פירוט לפי קטגוריה</h3>
           {result.categories.length === 0 ? (
-            <p className="text-sm text-gray-500">הזן סכומי הוצאה כדי לראות פירוט.</p>
+            <p className="text-sm text-ink/60">הזן סכומי הוצאה כדי לראות פירוט.</p>
           ) : (
             <div className="overflow-x-auto -mx-1">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-right text-gray-600 border-b border-gray-200">
+                  <tr className="text-right text-ink/60 border-b border-ink/15">
                     <th className="py-2 px-1 font-medium">קטגוריה</th>
                     <th className="py-2 px-1 font-medium">הוצאה</th>
                     <th className="py-2 px-1 font-medium">% הכרה</th>
@@ -194,15 +194,15 @@ export function AllowedExpensesCalculator() {
                 </thead>
                 <tbody>
                   {result.categories.map((c) => (
-                    <tr key={c.key} className="border-b border-gray-100">
-                      <td className="py-2 px-1 text-gray-800">{c.label}</td>
-                      <td className="py-2 px-1 tabular-nums text-gray-600">
+                    <tr key={c.key} className="border-b border-ink/10">
+                      <td className="py-2 px-1 text-ink">{c.label}</td>
+                      <td className="py-2 px-1 tabular-nums text-ink/60">
                         {formatCurrency(c.grossExpense)}
                       </td>
                       <td className="py-2 px-1 tabular-nums">
                         {formatPercent(c.incomeTaxRecognitionApplied, 0)}
                       </td>
-                      <td className="py-2 px-1 tabular-nums font-medium text-gray-900">
+                      <td className="py-2 px-1 tabular-nums font-medium text-ink">
                         {formatCurrency(c.recognizedForIncomeTax)}
                       </td>
                       <td className="py-2 px-1 tabular-nums text-emerald-700">
@@ -210,7 +210,7 @@ export function AllowedExpensesCalculator() {
                       </td>
                     </tr>
                   ))}
-                  <tr className="font-bold text-gray-900 border-t-2 border-gray-200">
+                  <tr className="font-bold text-ink border-t-2 border-ink/15">
                     <td className="py-2 px-1">סה"כ</td>
                     <td className="py-2 px-1 tabular-nums">
                       {formatCurrency(result.totalGrossExpense)}
@@ -231,15 +231,15 @@ export function AllowedExpensesCalculator() {
 
         {/* גרף חזותי — תרומת כל קטגוריה לסכום המוכר */}
         {result.totalRecognizedForIncomeTax > 0 && (
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-            <h3 className="font-bold text-gray-900 mb-3">חלוקת ההוצאה המוכרת</h3>
+          <div className="bg-paper border border-ink/15 rounded-none p-5">
+            <h3 className="font-bold text-ink mb-3">חלוקת ההוצאה המוכרת</h3>
             <RecognizedBreakdown result={result} />
           </div>
         )}
 
         {/* הערות */}
         {result.notes.length > 0 && (
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-900 space-y-1.5">
+          <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm text-amber-900 space-y-1.5">
             {result.notes.map((n, i) => (
               <p key={i}>ℹ️ {n}</p>
             ))}
@@ -256,15 +256,15 @@ function RecognizedBreakdown({
   result: ReturnType<typeof calculateAllowedExpenses>;
 }) {
   const colors = [
-    'bg-blue-500',
-    'bg-emerald-500',
-    'bg-orange-500',
-    'bg-purple-500',
-    'bg-indigo-500',
-    'bg-rose-500',
-    'bg-teal-500',
-    'bg-amber-500',
-    'bg-cyan-500',
+    'bg-ink',
+    'bg-gold',
+    'bg-ink-mid',
+    'bg-gold-light',
+    'bg-ink-deep',
+    'bg-gold-2',
+    'bg-ink/60',
+    'bg-gold/70',
+    'bg-ink-mid/70',
   ];
   const items = result.categories
     .filter((c) => c.recognizedForIncomeTax > 0)
@@ -278,13 +278,13 @@ function RecognizedBreakdown({
 
   return (
     <div className="space-y-3">
-      <div className="flex h-8 rounded-lg overflow-hidden border border-gray-200">
+      <div className="flex h-8 rounded-none overflow-hidden border border-ink/15">
         {items.map((i) => {
           const pct = (i.value / total) * 100;
           return (
             <div
               key={i.label}
-              className={`${i.color} flex items-center justify-center text-white text-xs font-bold`}
+              className={`${i.color} flex items-center justify-center text-cream text-xs font-bold`}
               style={{ width: `${pct}%` }}
               title={`${i.label}: ${pct.toFixed(1)}%`}
             >
@@ -298,8 +298,8 @@ function RecognizedBreakdown({
           const pct = (i.value / total) * 100;
           return (
             <div key={i.label} className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded ${i.color} flex-shrink-0`} />
-              <span className="text-gray-700 font-medium">
+              <div className={`w-3 h-3 rounded-none ${i.color} flex-shrink-0`} />
+              <span className="text-ink/70 font-medium">
                 {i.label}: {pct.toFixed(1)}%
               </span>
             </div>

@@ -30,10 +30,10 @@ const cards = [
     lastUpdated: MACRO_DATA.primeRate.lastUpdated,
     color: 'blue',
     icon: TrendingUp,
-    gradient: 'from-blue-500 to-blue-700',
-    bgLight: 'bg-blue-50',
-    border: 'border-blue-200',
-    textColor: 'text-blue-700',
+    gradient: 'from-ink to-ink-deep',
+    bgLight: 'bg-cream-2',
+    border: 'border-ink/20',
+    textColor: 'text-ink',
     badge: 'מתעדכן ~8 פעמים בשנה',
     description: 'ריבית הפריים קובעת את עלות המשכנתא, ההלוואות והחסכונות שלך.',
   },
@@ -88,7 +88,7 @@ const cards = [
 ];
 
 const colorMap: Record<string, string> = {
-  blue: 'hover:border-blue-400 hover:shadow-blue-100',
+  blue: 'hover:border-gold hover:shadow-sm',
   orange: 'hover:border-orange-400 hover:shadow-orange-100',
   green: 'hover:border-green-400 hover:shadow-green-100',
   red: 'hover:border-red-400 hover:shadow-red-100',
@@ -96,7 +96,7 @@ const colorMap: Record<string, string> = {
 
 export default function NewsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="min-h-screen bg-paper">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs
@@ -106,14 +106,14 @@ export default function NewsPage() {
 
         {/* Hero */}
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-cream-2 text-ink px-4 py-1.5 text-sm font-medium mb-4">
             <RefreshCw className="w-4 h-4" />
             מתעדכן אוטומטית כל 6 שעות
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold text-ink mb-4">
             נתונים כלכליים עדכניים
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-ink/70 max-w-2xl mx-auto">
             ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל —
             כל הנתונים הכלכליים שמשפיעים עליך, במקום אחד.
           </p>
@@ -127,37 +127,37 @@ export default function NewsPage() {
               <Link
                 key={card.href}
                 href={card.href}
-                className={`group bg-white rounded-2xl border-2 ${card.border} p-6 hover:shadow-lg ${colorMap[card.color]} transition-all duration-200`}
+                className={`group bg-paper border-2 ${card.border} p-6 hover:shadow-lg ${colorMap[card.color]} transition-all duration-200`}
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center`}>
+                  <div className={`w-12 h-12 bg-gradient-to-br ${card.gradient} flex items-center justify-center`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${card.bgLight} ${card.textColor}`}>
+                  <span className={`text-xs font-medium px-2.5 py-1 ${card.bgLight} ${card.textColor}`}>
                     {card.badge}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h2 className="text-lg font-bold text-gray-900 mb-1">{card.title}</h2>
-                <p className="text-xs text-gray-500 mb-3">{card.titleEn}</p>
+                <h2 className="text-lg font-bold text-ink mb-1">{card.title}</h2>
+                <p className="text-xs text-ink/60 mb-3">{card.titleEn}</p>
 
                 {/* Big Value */}
                 <div className={`text-4xl font-bold ${card.textColor} mb-1`}>
                   {card.value}
                 </div>
-                <div className="text-sm text-gray-600 mb-4">{card.subtitle}</div>
+                <div className="text-sm text-ink/70 mb-4">{card.subtitle}</div>
 
                 {/* Description */}
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                <p className="text-sm text-ink/70 mb-4 leading-relaxed">
                   {card.description}
                 </p>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
+                <div className="flex items-center justify-between text-xs text-ink/60 pt-4 border-t border-ink/10">
                   <span>עודכן: {formatHebrewDate(card.lastUpdated)}</span>
-                  <div className="flex items-center gap-1 text-blue-600 opacity-0 group-hover:opacity-100 transition font-medium">
+                  <div className="flex items-center gap-1 text-gold opacity-0 group-hover:opacity-100 transition font-medium">
                     <span>לפרטים</span>
                     <ArrowLeft className="w-3 h-3" />
                   </div>
@@ -168,12 +168,12 @@ export default function NewsPage() {
         </div>
 
         {/* ISR Explanation */}
-        <div className="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center">
+        <div className="bg-cream-2 border border-ink/15 p-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <RefreshCw className="w-5 h-5 text-gray-400" />
-            <h3 className="font-semibold text-gray-700">איך הנתונים מתעדכנים?</h3>
+            <RefreshCw className="w-5 h-5 text-ink/45" />
+            <h3 className="font-semibold text-ink/70">איך הנתונים מתעדכנים?</h3>
           </div>
-          <p className="text-sm text-gray-600 max-w-xl mx-auto leading-relaxed">
+          <p className="text-sm text-ink/70 max-w-xl mx-auto leading-relaxed">
             אנו משתמשים ב-ISR (Incremental Static Regeneration) של Next.js — האתר בונה מחדש את
             הדפים אוטומטית כל 6 שעות, ומשלב נתונים מעודכנים מהמקורות הרשמיים.
             לנתונים שמשתנים לעיתים רחוקות (כגון ריבית פריים), מתבצע גם עדכון ידני מאומת.
@@ -181,26 +181,26 @@ export default function NewsPage() {
         </div>
 
         {/* Related Tools */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">כלים קשורים</h2>
+        <div className="mt-8 bg-cream-2 border border-ink/15 p-6">
+          <h2 className="text-lg font-bold text-ink mb-4">כלים קשורים</h2>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/real-estate/mortgage"
-              className="inline-flex items-center gap-1.5 bg-white border border-blue-300 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition"
+              className="inline-flex items-center gap-1.5 bg-paper border border-ink/15 text-ink px-4 py-2 text-sm font-medium hover:border-gold hover:text-gold transition"
             >
               מחשבון משכנתא
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <Link
               href="/personal-tax/salary-net-gross"
-              className="inline-flex items-center gap-1.5 bg-white border border-blue-300 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition"
+              className="inline-flex items-center gap-1.5 bg-paper border border-ink/15 text-ink px-4 py-2 text-sm font-medium hover:border-gold hover:text-gold transition"
             >
               מחשבון שכר נטו/ברוטו
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <Link
               href="/investments/compound-interest"
-              className="inline-flex items-center gap-1.5 bg-white border border-blue-300 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition"
+              className="inline-flex items-center gap-1.5 bg-paper border border-ink/15 text-ink px-4 py-2 text-sm font-medium hover:border-gold hover:text-gold transition"
             >
               מחשבון ריבית דריבית
               <ArrowLeft className="w-4 h-4" />

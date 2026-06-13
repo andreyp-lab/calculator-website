@@ -175,7 +175,7 @@ export default function Page() {
               href="https://www.btl.gov.il/insurance/Pages/default.aspx"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gold hover:underline"
             >
               ביטוח לאומי — עצמאים
             </a>
@@ -185,7 +185,7 @@ export default function Page() {
               href="https://www.kolzchut.org.il/he/%D7%93%D7%9E%D7%99_%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%9C%D7%90%D7%95%D7%9E%D7%99_%D7%9C%D7%A2%D7%A6%D7%9E%D7%90%D7%99"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gold hover:underline"
             >
               כל-זכות: דמי ביטוח לאומי לעצמאי
             </a>
@@ -195,7 +195,7 @@ export default function Page() {
               href="https://www.gov.il/he/departments/israel_tax_authority"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gold hover:underline"
             >
               רשות המסים — ניכוי ב.ל. כהוצאה
             </a>

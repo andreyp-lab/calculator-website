@@ -59,7 +59,7 @@ export function WorkingCapitalOptimizer() {
 
   if (!baseline || !settings) {
     return (
-      <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center text-amber-900">
+      <div className="bg-amber-50 border-2 border-amber-200 p-6 text-center text-amber-900">
         <AlertCircle className="w-10 h-10 mx-auto mb-2" />
         הזן נתוני תקציב כדי לראות אופטימיזציה של הון חוזר
       </div>
@@ -79,13 +79,13 @@ export function WorkingCapitalOptimizer() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Settings className="w-5 h-5" />
             אופטימיזציית הון חוזר
           </h3>
-          <p className="text-xs text-cyan-100">
+          <p className="text-xs text-cream/60">
             "מה יקרה אם DSO ירד מ-60 ל-45?" — חישוב מזומן שמשתחרר
           </p>
         </div>
@@ -93,13 +93,13 @@ export function WorkingCapitalOptimizer() {
 
       {/* Big Cash Impact KPI */}
       <div
-        className={`rounded-lg border-4 p-5 text-center ${
+        className={`border-4 p-5 text-center ${
           cashImpact >= 0
             ? 'bg-emerald-50 border-emerald-300'
             : 'bg-red-50 border-red-300'
         }`}
       >
-        <div className="text-sm text-gray-700 mb-1">השפעה על מזומן (vs מצב נוכחי)</div>
+        <div className="text-sm text-ink/70 mb-1">השפעה על מזומן (vs מצב נוכחי)</div>
         <div
           className={`text-4xl font-bold ${
             cashImpact >= 0 ? 'text-emerald-700' : 'text-red-700'
@@ -108,7 +108,7 @@ export function WorkingCapitalOptimizer() {
           {cashImpact >= 0 ? '+' : ''}
           ₪{fmt(cashImpact)}
         </div>
-        <div className="text-xs text-gray-600 mt-2">
+        <div className="text-xs text-ink/60 mt-2">
           {cashImpact > 0
             ? `🎉 משתחרר ${fmt(cashImpact)} מזומן בהון חוזר`
             : cashImpact < 0
@@ -118,8 +118,8 @@ export function WorkingCapitalOptimizer() {
       </div>
 
       {/* Sliders */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm p-5 space-y-4">
-        <h4 className="font-semibold text-gray-900 mb-2">פרמטרים</h4>
+      <div className="bg-paper border-2 border-ink/15 p-5 space-y-4">
+        <h4 className="font-semibold text-ink mb-2">פרמטרים</h4>
 
         <SliderRow
           label="DSO - ימי גבייה"
@@ -129,7 +129,7 @@ export function WorkingCapitalOptimizer() {
           onChange={setDso}
           min={0}
           max={180}
-          color="blue"
+          color="gold"
           impactDirection="lower-better"
         />
         <SliderRow
@@ -140,7 +140,7 @@ export function WorkingCapitalOptimizer() {
           onChange={setDpo}
           min={0}
           max={180}
-          color="purple"
+          color="amber"
           impactDirection="higher-better"
         />
         <SliderRow
@@ -157,9 +157,9 @@ export function WorkingCapitalOptimizer() {
       </div>
 
       {/* Side-by-side comparison */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-x-auto">
+      <div className="bg-paper border-2 border-ink/15 overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-cream-2">
             <tr>
               <th className="text-right p-3">מדד</th>
               <th className="text-center p-3">מצב נוכחי</th>
@@ -211,12 +211,12 @@ export function WorkingCapitalOptimizer() {
       </div>
 
       {/* Recommendations */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+      <div className="bg-cream-2 border border-ink/15 p-4">
+        <h4 className="font-semibold text-ink mb-2 flex items-center gap-2">
           <Sparkles className="w-4 h-4" />
           טיפים אופרטיביים
         </h4>
-        <ul className="text-sm text-blue-900 space-y-1">
+        <ul className="text-sm text-ink space-y-1">
           {dso < baseline.baseDSO && (
             <li>✓ קצר את DSO ב-{baseline.baseDSO - dso} ימים: בקש מקדמות, תן הנחה לתשלום מהיר</li>
           )}
@@ -255,7 +255,7 @@ function SliderRow({
   onChange: (v: number) => void;
   min: number;
   max: number;
-  color: 'blue' | 'purple' | 'amber';
+  color: 'gold' | 'amber';
   impactDirection: 'lower-better' | 'higher-better';
 }) {
   const delta = value - baseline;
@@ -263,8 +263,7 @@ function SliderRow({
     impactDirection === 'lower-better' ? delta < 0 : delta > 0;
 
   const colorMap: Record<string, string> = {
-    blue: 'accent-blue-600',
-    purple: 'accent-purple-600',
+    gold: 'accent-amber-600',
     amber: 'accent-amber-600',
   };
 
@@ -273,11 +272,11 @@ function SliderRow({
       <div className="flex items-center justify-between mb-1">
         <div>
           <div className="font-medium text-sm">{label}</div>
-          <div className="text-xs text-gray-500">{description}</div>
+          <div className="text-xs text-ink/50">{description}</div>
         </div>
         <div className="text-right">
           <div className="text-2xl font-bold">{value}</div>
-          <div className={`text-xs ${better ? 'text-emerald-700' : delta === 0 ? 'text-gray-500' : 'text-amber-700'}`}>
+          <div className={`text-xs ${better ? 'text-emerald-700' : delta === 0 ? 'text-ink/60' : 'text-amber-700'}`}>
             {delta === 0 ? 'ללא שינוי' : `${delta > 0 ? '+' : ''}${delta} ימים`}
           </div>
         </div>
@@ -290,7 +289,7 @@ function SliderRow({
         onChange={(e) => onChange(parseInt(e.target.value))}
         className={`w-full ${colorMap[color]}`}
       />
-      <div className="flex justify-between text-[10px] text-gray-400 mt-0.5">
+      <div className="flex justify-between text-[10px] text-ink/40 mt-0.5">
         <span>{min}</span>
         <span className="font-bold">בסיס: {baseline}</span>
         <span>{max}</span>
@@ -330,13 +329,13 @@ function ComparisonRow({
   };
 
   return (
-    <tr className={`border-t ${highlight ? 'bg-blue-50 font-bold' : ''}`}>
+    <tr className={`border-t ${highlight ? 'bg-cream-2 font-bold' : ''}`}>
       <td className="p-3">{label}</td>
-      <td className="p-3 text-center text-gray-700">{fmt(base)} {unit}</td>
+      <td className="p-3 text-center text-ink/70">{fmt(base)} {unit}</td>
       <td className="p-3 text-center">{fmt(optimized)} {unit}</td>
       <td
         className={`p-3 text-center ${
-          delta === 0 ? 'text-gray-500' : better ? 'text-emerald-700' : 'text-red-700'
+          delta === 0 ? 'text-ink/60' : better ? 'text-emerald-700' : 'text-red-700'
         }`}
       >
         {delta === 0 ? '—' : `${delta > 0 ? '+' : ''}${fmt(delta)} ${unit}`}

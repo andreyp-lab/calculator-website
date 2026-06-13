@@ -83,7 +83,7 @@ export function MultiMethodForecastDisplay() {
 
   if (!forecast) {
     return (
-      <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
+      <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6 text-center">
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-2" />
         <p className="text-amber-900">חסרים נתונים לחיזוי - דרושות לפחות 2 נקודות זמן</p>
       </div>
@@ -113,26 +113,26 @@ export function MultiMethodForecastDisplay() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-amber-600 to-orange-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Sparkles className="w-5 h-5" />
             חיזוי רב-שיטתי (Ensemble)
           </h3>
-          <p className="text-xs text-amber-100">
+          <p className="text-xs text-cream/70">
             ממוצע משוקלל של 4 שיטות חיזוי + טווחי ביטחון
           </p>
         </div>
       </div>
 
       {/* Controls */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-3 shadow-sm flex gap-3 flex-wrap">
+      <div className="bg-paper border-2 border-ink/15 p-3 shadow-sm flex gap-3 flex-wrap">
         <div>
-          <label className="block text-xs text-gray-700 mb-1">מדד לחיזוי</label>
+          <label className="block text-xs text-ink/70 mb-1">מדד לחיזוי</label>
           <select
             value={metric}
             onChange={(e) => setMetric(e.target.value as Metric)}
-            className="px-2 py-1.5 border border-gray-300 rounded text-sm"
+            className="px-2 py-1.5 border border-ink/15 rounded-none text-sm"
           >
             <option value="revenue">📈 הכנסות</option>
             <option value="netProfit">💰 רווח נקי</option>
@@ -140,11 +140,11 @@ export function MultiMethodForecastDisplay() {
           </select>
         </div>
         <div>
-          <label className="block text-xs text-gray-700 mb-1">אופק חיזוי</label>
+          <label className="block text-xs text-ink/70 mb-1">אופק חיזוי</label>
           <select
             value={yearsAhead}
             onChange={(e) => setYearsAhead(parseInt(e.target.value))}
-            className="px-2 py-1.5 border border-gray-300 rounded text-sm"
+            className="px-2 py-1.5 border border-ink/15 rounded-none text-sm"
           >
             <option value={1}>1 שנה</option>
             <option value={2}>2 שנים</option>
@@ -156,7 +156,7 @@ export function MultiMethodForecastDisplay() {
 
       {/* Statistics */}
       <div className="grid md:grid-cols-4 gap-3">
-        <StatCard label="ממוצע היסטורי" value={fmt(forecast.statistics.mean)} color="blue" />
+        <StatCard label="ממוצע היסטורי" value={fmt(forecast.statistics.mean)} color="gold" />
         <StatCard
           label="CAGR"
           value={`${(forecast.statistics.cagr * 100).toFixed(1)}%`}
@@ -181,14 +181,14 @@ export function MultiMethodForecastDisplay() {
               ? 'emerald'
               : forecast.statistics.trend === 'downward'
                 ? 'red'
-                : 'gray'
+                : 'ink'
           }
         />
       </div>
 
       {/* Chart */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-amber-600 text-white p-3 text-sm font-bold">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3 text-sm font-bold">
           {forecast.metric} - היסטוריה ותחזית עם רצועת ביטחון 90%
         </div>
         <div className="p-4">
@@ -203,7 +203,7 @@ export function MultiMethodForecastDisplay() {
                 type="monotone"
                 dataKey="upper"
                 stroke="transparent"
-                fill="#fbbf24"
+                fill="#D8B36A"
                 fillOpacity={0.2}
                 name="טווח עליון 90%"
               />
@@ -211,7 +211,7 @@ export function MultiMethodForecastDisplay() {
                 type="monotone"
                 dataKey="lower"
                 stroke="transparent"
-                fill="#fbbf24"
+                fill="#D8B36A"
                 fillOpacity={0.2}
                 name="טווח תחתון 90%"
               />
@@ -225,7 +225,7 @@ export function MultiMethodForecastDisplay() {
               <Line
                 type="monotone"
                 dataKey="תחזית"
-                stroke="#f59e0b"
+                stroke="#8E6824"
                 strokeWidth={3}
                 strokeDasharray="5 5"
                 dot={{ r: 5 }}
@@ -236,12 +236,12 @@ export function MultiMethodForecastDisplay() {
       </div>
 
       {/* Methods Comparison */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-x-auto">
-        <div className="bg-gray-700 text-white p-3 text-sm font-bold">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-x-auto">
+        <div className="bg-ink text-cream p-3 text-sm font-bold">
           השוואת שיטות חיזוי - שנה אחרונה
         </div>
         <table className="w-full text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-cream-2">
             <tr>
               <th className="text-right p-2">שיטה</th>
               {forecast.forecast.years.map((y) => (
@@ -279,10 +279,10 @@ export function MultiMethodForecastDisplay() {
               values={forecast.methods.growthRate.values}
               fmt={fmt}
             />
-            <tr className="border-t-2 bg-amber-50 font-bold">
+            <tr className="border-t-2 bg-cream-2 font-bold">
               <td className="p-2">🎯 Ensemble (משוקלל)</td>
               {forecast.forecast.values.map((v, i) => (
-                <td key={i} className="p-2 text-center text-amber-700">
+                <td key={i} className="p-2 text-center text-gold">
                   {fmt(v)}
                 </td>
               ))}
@@ -294,9 +294,9 @@ export function MultiMethodForecastDisplay() {
 
       {/* Anomalies */}
       {forecast.anomalies.length > 0 && (
-        <div className="bg-rose-50 border border-rose-200 rounded-lg p-3">
-          <h4 className="font-semibold text-rose-900 mb-2">🔍 ערכים חריגים בהיסטוריה</h4>
-          <div className="text-xs text-rose-900 space-y-1">
+        <div className="bg-red-50 border border-red-200 rounded-none p-3">
+          <h4 className="font-semibold text-red-900 mb-2">🔍 ערכים חריגים בהיסטוריה</h4>
+          <div className="text-xs text-red-900 space-y-1">
             {forecast.anomalies.map((a, i) => (
               <div key={i}>
                 שנת {a.year}: {fmt(a.value)} (Z={a.zScore.toFixed(2)},{' '}
@@ -309,9 +309,9 @@ export function MultiMethodForecastDisplay() {
 
       {/* Insights */}
       {forecast.insights.length > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-          <h4 className="font-semibold text-blue-900 mb-2">תובנות AI</h4>
-          <ul className="text-sm text-blue-900 space-y-1">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
+          <h4 className="font-semibold text-ink mb-2">תובנות AI</h4>
+          <ul className="text-sm text-ink space-y-1">
             {forecast.insights.map((i, idx) => (
               <li key={idx}>{i}</li>
             ))}
@@ -332,16 +332,16 @@ function StatCard({
   color: string;
 }) {
   const colorMap: Record<string, { bg: string; text: string }> = {
-    blue: { bg: 'bg-blue-50', text: 'text-blue-700' },
+    gold: { bg: 'bg-cream-2', text: 'text-gold' },
+    ink: { bg: 'bg-cream-2', text: 'text-ink' },
     emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
     red: { bg: 'bg-red-50', text: 'text-red-700' },
     amber: { bg: 'bg-amber-50', text: 'text-amber-700' },
-    gray: { bg: 'bg-gray-50', text: 'text-gray-700' },
   };
-  const c = colorMap[color];
+  const c = colorMap[color] ?? colorMap.gold;
   return (
-    <div className={`${c.bg} rounded-lg p-3 text-center border border-gray-200`}>
-      <div className="text-xs text-gray-600 mb-1">{label}</div>
+    <div className={`${c.bg} rounded-none p-3 text-center border border-ink/15`}>
+      <div className="text-xs text-ink/60 mb-1">{label}</div>
       <div className={`text-xl font-bold ${c.text}`}>{value}</div>
     </div>
   );
@@ -359,14 +359,14 @@ function MethodRow({
   extra?: string;
 }) {
   return (
-    <tr className="border-t border-gray-100">
+    <tr className="border-t border-ink/10">
       <td className="p-2 text-xs">{method}</td>
       {values.map((v, i) => (
         <td key={i} className="p-2 text-center text-xs">
           {fmt(v)}
         </td>
       ))}
-      <td className="p-2 text-center text-xs text-gray-500">{extra}</td>
+      <td className="p-2 text-center text-xs text-ink/60">{extra}</td>
     </tr>
   );
 }

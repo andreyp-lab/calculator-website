@@ -213,19 +213,19 @@ export default function TaxCreditsPage() {
           <h2>מחשבונים קשורים</h2>
           <ul>
             <li>
-              <Link href="/personal-tax/tax-refund" className="text-blue-700 hover:underline">
+              <Link href="/personal-tax/tax-refund" className="text-gold hover:underline">
                 מחשבון החזר מס
               </Link>{' '}
               — בדוק כמה החזר מס מגיע לך בגין נקודות זיכוי שלא נוצלו
             </li>
             <li>
-              <Link href="/personal-tax/income-tax" className="text-blue-700 hover:underline">
+              <Link href="/personal-tax/income-tax" className="text-gold hover:underline">
                 מחשבון מס הכנסה לשכיר
               </Link>{' '}
               — חישוב מס לפי מדרגות 2026 כולל נקודות זיכוי
             </li>
             <li>
-              <Link href="/personal-tax/salary-net-gross" className="text-blue-700 hover:underline">
+              <Link href="/personal-tax/salary-net-gross" className="text-gold hover:underline">
                 מחשבון שכר נטו ברוטו
               </Link>{' '}
               — גלה את שכר הנטו שלך לאחר מס, ביטוח לאומי ונקודות זיכוי

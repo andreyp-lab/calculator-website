@@ -105,7 +105,7 @@ export default function OpeningBusinessPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-paper" dir="rtl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
@@ -122,19 +122,19 @@ export default function OpeningBusinessPage() {
         </div>
 
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
             פתיחת עסק 2026 — עוסק פטור או עוסק מורשה?
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-lg text-ink/70 leading-relaxed">
             פותחים עסק עצמאי בישראל? המדריך המלא לבחירה בין עוסק פטור לעוסק מורשה, רישום מול
             הרשויות, תקרת 122,833 ₪, מע"מ 18% והטעויות שכדאי לחסוך כבר בהתחלה.
           </p>
-          <p className="text-sm text-gray-500 mt-3">
+          <p className="text-sm text-ink/60 mt-3">
             נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026
           </p>
         </header>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>3 הצעדים לפתיחת עסק בישראל</h2>
           <ol>
             <li>
@@ -177,26 +177,26 @@ export default function OpeningBusinessPage() {
 
         {/* Comparison table */}
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">קריטריון</th>
-                <th className="p-3 font-bold text-blue-700 border-b">עוסק פטור</th>
-                <th className="p-3 font-bold text-emerald-700 border-b">עוסק מורשה</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">קריטריון</th>
+                <th className="p-3 font-bold text-gold border-b border-ink/15">עוסק פטור</th>
+                <th className="p-3 font-bold text-emerald-700 border-b border-ink/15">עוסק מורשה</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
-              <tr><td className="p-3 border-b font-medium">תקרת מחזור</td><td className="p-3 border-b">עד 122,833 ₪/שנה</td><td className="p-3 border-b">ללא הגבלה</td></tr>
-              <tr className="bg-gray-50/50"><td className="p-3 border-b font-medium">גביית מע"מ</td><td className="p-3 border-b">לא גובה</td><td className="p-3 border-b">גובה 18%</td></tr>
-              <tr><td className="p-3 border-b font-medium">קיזוז מע"מ תשומות</td><td className="p-3 border-b">לא</td><td className="p-3 border-b">כן</td></tr>
-              <tr className="bg-gray-50/50"><td className="p-3 border-b font-medium">דיווח מע"מ</td><td className="p-3 border-b">הצהרה שנתית בלבד</td><td className="p-3 border-b">חודשי / דו-חודשי</td></tr>
-              <tr><td className="p-3 border-b font-medium">מס הכנסה + ב.ל.</td><td className="p-3 border-b">חייב</td><td className="p-3 border-b">חייב</td></tr>
-              <tr className="bg-gray-50/50"><td className="p-3 font-medium">מתאים ל-</td><td className="p-3">עסק קטן, לקוחות פרטיים</td><td className="p-3">מחזור גבוה, לקוחות עסקיים, הוצאות גדולות</td></tr>
+            <tbody className="text-ink/70">
+              <tr><td className="p-3 border-b border-ink/15 font-medium">תקרת מחזור</td><td className="p-3 border-b border-ink/15">עד 122,833 ₪/שנה</td><td className="p-3 border-b border-ink/15">ללא הגבלה</td></tr>
+              <tr className="bg-cream-2/50"><td className="p-3 border-b border-ink/15 font-medium">גביית מע"מ</td><td className="p-3 border-b border-ink/15">לא גובה</td><td className="p-3 border-b border-ink/15">גובה 18%</td></tr>
+              <tr><td className="p-3 border-b border-ink/15 font-medium">קיזוז מע"מ תשומות</td><td className="p-3 border-b border-ink/15">לא</td><td className="p-3 border-b border-ink/15">כן</td></tr>
+              <tr className="bg-cream-2/50"><td className="p-3 border-b border-ink/15 font-medium">דיווח מע"מ</td><td className="p-3 border-b border-ink/15">הצהרה שנתית בלבד</td><td className="p-3 border-b border-ink/15">חודשי / דו-חודשי</td></tr>
+              <tr><td className="p-3 border-b border-ink/15 font-medium">מס הכנסה + ב.ל.</td><td className="p-3 border-b border-ink/15">חייב</td><td className="p-3 border-b border-ink/15">חייב</td></tr>
+              <tr className="bg-cream-2/50"><td className="p-3 font-medium">מתאים ל-</td><td className="p-3">עסק קטן, לקוחות פרטיים</td><td className="p-3">מחזור גבוה, לקוחות עסקיים, הוצאות גדולות</td></tr>
             </tbody>
           </table>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>מתי כדאי לעבור מעוסק פטור למורשה?</h2>
           <ul>
             <li>המחזור השנתי מתקרב או עובר את <strong>122,833 ₪</strong> (אז המעבר חובה).</li>
@@ -215,46 +215,46 @@ export default function OpeningBusinessPage() {
 
         {/* Step-by-step registration section */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">פתיחת תיק ברשויות — צעד אחר צעד</h2>
-          <p className="text-gray-600 mb-6 leading-relaxed">
+          <h2 className="text-2xl font-bold text-ink mb-6">פתיחת תיק ברשויות — צעד אחר צעד</h2>
+          <p className="text-ink/70 mb-6 leading-relaxed">
             להלן שלושת הגופים שאליהם חייב כל עצמאי להירשם. הסדר המומלץ: מע"מ → מס הכנסה → ביטוח לאומי.
           </p>
 
           {/* Step 1: VAT */}
-          <div className="border border-blue-200 rounded-xl p-6 mb-4 bg-blue-50/40">
+          <div className="border border-ink/15 p-6 mb-4 bg-cream-2">
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-blue-600 text-white font-bold text-lg flex items-center justify-center">
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-ink text-cream font-bold text-lg flex items-center justify-center">
                 1
               </span>
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">פתיחת תיק מע"מ</h3>
+                <h3 className="text-xl font-bold text-ink mb-3">פתיחת תיק מע"מ</h3>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm border border-blue-100 rounded-lg overflow-hidden bg-white">
-                    <tbody className="text-gray-700">
-                      <tr className="border-b">
-                        <td className="p-3 font-medium text-gray-600 w-32">טופס</td>
+                  <table className="w-full text-sm border border-ink/15 overflow-hidden bg-paper">
+                    <tbody className="text-ink/70">
+                      <tr className="border-b border-ink/15">
+                        <td className="p-3 font-medium text-ink/60 w-32">טופס</td>
                         <td className="p-3 font-semibold">טופס 821 — בקשה לרישום עוסק</td>
                       </tr>
-                      <tr className="border-b bg-gray-50/50">
-                        <td className="p-3 font-medium text-gray-600">מסמכים</td>
+                      <tr className="border-b border-ink/15 bg-cream-2/50">
+                        <td className="p-3 font-medium text-ink/60">מסמכים</td>
                         <td className="p-3">תעודת זהות · אישור ניהול חשבון בנק · חוזה שכירות / הוכחת בעלות על נכס העסק · פרטי העסק</td>
                       </tr>
-                      <tr className="border-b">
-                        <td className="p-3 font-medium text-gray-600">איך</td>
+                      <tr className="border-b border-ink/15">
+                        <td className="p-3 font-medium text-ink/60">איך</td>
                         <td className="p-3">אונליין דרך אתר רשות המסים, או פיזית בסניף מע"מ הקרוב</td>
                       </tr>
-                      <tr className="border-b bg-gray-50/50">
-                        <td className="p-3 font-medium text-gray-600">עלות</td>
-                        <td className="p-3 font-semibold text-green-700">חינם — אין אגרת פתיחה</td>
+                      <tr className="border-b border-ink/15 bg-cream-2/50">
+                        <td className="p-3 font-medium text-ink/60">עלות</td>
+                        <td className="p-3 font-semibold text-emerald-700">חינם — אין אגרת פתיחה</td>
                       </tr>
                       <tr>
-                        <td className="p-3 font-medium text-gray-600">זמן טיפול</td>
+                        <td className="p-3 font-medium text-ink/60">זמן טיפול</td>
                         <td className="p-3">אונליין — לרוב מיידי עד ימים ספורים</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <p className="text-sm text-gray-500 mt-3">
+                <p className="text-sm text-ink/60 mt-3">
                   כאן תבחרו: <strong>עוסק פטור</strong> (מחזור עד 122,833 ₪) או <strong>עוסק מורשה</strong>.
                   ברגע שאתם מורשים — מתחייבים בדיווח מע"מ חודשי/דו-חודשי.
                 </p>
@@ -263,40 +263,40 @@ export default function OpeningBusinessPage() {
           </div>
 
           {/* Step 2: Income Tax */}
-          <div className="border border-purple-200 rounded-xl p-6 mb-4 bg-purple-50/40">
+          <div className="border border-ink/15 p-6 mb-4 bg-cream-2">
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-purple-600 text-white font-bold text-lg flex items-center justify-center">
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-ink text-cream font-bold text-lg flex items-center justify-center">
                 2
               </span>
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">פתיחת תיק מס הכנסה</h3>
+                <h3 className="text-xl font-bold text-ink mb-3">פתיחת תיק מס הכנסה</h3>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm border border-purple-100 rounded-lg overflow-hidden bg-white">
-                    <tbody className="text-gray-700">
-                      <tr className="border-b">
-                        <td className="p-3 font-medium text-gray-600 w-32">טופס</td>
+                  <table className="w-full text-sm border border-ink/15 overflow-hidden bg-paper">
+                    <tbody className="text-ink/70">
+                      <tr className="border-b border-ink/15">
+                        <td className="p-3 font-medium text-ink/60 w-32">טופס</td>
                         <td className="p-3 font-semibold">טופס 5329 — דו"ח פרטים אישיים והצהרה על מקורות הכנסה</td>
                       </tr>
-                      <tr className="border-b bg-gray-50/50">
-                        <td className="p-3 font-medium text-gray-600">מסמכים</td>
+                      <tr className="border-b border-ink/15 bg-cream-2/50">
+                        <td className="p-3 font-medium text-ink/60">מסמכים</td>
                         <td className="p-3">תעודת זהות · פרטי בנק · אישור פתיחת תיק מע"מ</td>
                       </tr>
-                      <tr className="border-b">
-                        <td className="p-3 font-medium text-gray-600">איך</td>
+                      <tr className="border-b border-ink/15">
+                        <td className="p-3 font-medium text-ink/60">איך</td>
                         <td className="p-3">הגשה ידנית בפקיד השומה, או דרך מייצג (רו"ח / שע"מ). חל על עוסק פטור ועוסק מורשה כאחד.</td>
                       </tr>
-                      <tr className="border-b bg-gray-50/50">
-                        <td className="p-3 font-medium text-gray-600">עלות</td>
-                        <td className="p-3 font-semibold text-green-700">חינם</td>
+                      <tr className="border-b border-ink/15 bg-cream-2/50">
+                        <td className="p-3 font-medium text-ink/60">עלות</td>
+                        <td className="p-3 font-semibold text-emerald-700">חינם</td>
                       </tr>
                       <tr>
-                        <td className="p-3 font-medium text-gray-600">זמן טיפול</td>
+                        <td className="p-3 font-medium text-ink/60">זמן טיפול</td>
                         <td className="p-3">בדרך כלל עד שבוע ממועד ההגשה</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <p className="text-sm text-gray-500 mt-3">
+                <p className="text-sm text-ink/60 mt-3">
                   לאחר הפתיחה, פקיד השומה יקבע <strong>מקדמות מס</strong> חודשיות. חשוב לכייל את המקדמות
                   לפי ההכנסה הצפויה — מקדמה נמוכה מדי תגרור תשלום חוב + ריבית בסוף השנה.
                 </p>
@@ -305,40 +305,40 @@ export default function OpeningBusinessPage() {
           </div>
 
           {/* Step 3: National Insurance */}
-          <div className="border border-emerald-200 rounded-xl p-6 mb-4 bg-emerald-50/40">
+          <div className="border border-ink/15 p-6 mb-4 bg-cream-2">
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-emerald-600 text-white font-bold text-lg flex items-center justify-center">
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-ink text-cream font-bold text-lg flex items-center justify-center">
                 3
               </span>
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">רישום בביטוח לאומי כעצמאי</h3>
+                <h3 className="text-xl font-bold text-ink mb-3">רישום בביטוח לאומי כעצמאי</h3>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm border border-emerald-100 rounded-lg overflow-hidden bg-white">
-                    <tbody className="text-gray-700">
-                      <tr className="border-b">
-                        <td className="p-3 font-medium text-gray-600 w-32">טופס</td>
+                  <table className="w-full text-sm border border-ink/15 overflow-hidden bg-paper">
+                    <tbody className="text-ink/70">
+                      <tr className="border-b border-ink/15">
+                        <td className="p-3 font-medium text-ink/60 w-32">טופס</td>
                         <td className="p-3 font-semibold">טופס בל/6101 — דין וחשבון רב שנתי (מהדורה 03.2026)</td>
                       </tr>
-                      <tr className="border-b bg-gray-50/50">
-                        <td className="p-3 font-medium text-gray-600">מסמכים</td>
+                      <tr className="border-b border-ink/15 bg-cream-2/50">
+                        <td className="p-3 font-medium text-ink/60">מסמכים</td>
                         <td className="p-3">תעודת זהות · אישורי פתיחת תיק מע"מ ומס הכנסה · פרטי חשבון בנק לחיוב</td>
                       </tr>
-                      <tr className="border-b">
-                        <td className="p-3 font-medium text-gray-600">איך</td>
+                      <tr className="border-b border-ink/15">
+                        <td className="p-3 font-medium text-ink/60">איך</td>
                         <td className="p-3">אונליין דרך אתר ביטוח לאומי (btl.gov.il) או בסניף הקרוב</td>
                       </tr>
-                      <tr className="border-b bg-gray-50/50">
-                        <td className="p-3 font-medium text-gray-600">עלות</td>
-                        <td className="p-3 font-semibold text-green-700">חינם — הרישום עצמו ללא אגרה</td>
+                      <tr className="border-b border-ink/15 bg-cream-2/50">
+                        <td className="p-3 font-medium text-ink/60">עלות</td>
+                        <td className="p-3 font-semibold text-emerald-700">חינם — הרישום עצמו ללא אגרה</td>
                       </tr>
                       <tr>
-                        <td className="p-3 font-medium text-gray-600">זמן טיפול</td>
+                        <td className="p-3 font-medium text-ink/60">זמן טיפול</td>
                         <td className="p-3">לרוב ימים ספורים עד שבוע; מקדמות ב"ל מחושבות מיום הרישום</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <p className="text-sm text-gray-500 mt-3">
+                <p className="text-sm text-ink/60 mt-3">
                   שיעורי דמי הביטוח לעצמאי (2026): <strong>6.1%</strong> על חלק ההכנסה עד 7,522 ₪/חודש,
                   ו-<strong>18%</strong> על החלק שמעל (עד תקרה של 51,910 ₪/חודש). הרישום המוקדם חשוב —
                   עיכוב עלול לגרור תשלום רטרואקטיבי.
@@ -348,7 +348,7 @@ export default function OpeningBusinessPage() {
           </div>
 
           {/* Summary notice */}
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-2">
+          <div className="bg-amber-50 border border-amber-200 p-4 mt-2">
             <p className="text-sm text-amber-800 leading-relaxed">
               <strong>טיפ מעשי:</strong> ניתן לפתוח את שלושת התיקים באותו שבוע. אם עובדים עם רואה חשבון — רוב המשרדים מבצעים את הפתיחה במלואה. אם מטפלים לבד, כדאי להיעזר בשער הממשלתי המאוחד.
             </p>
@@ -357,7 +357,7 @@ export default function OpeningBusinessPage() {
 
         {/* Related calculators */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">מחשבונים שיעזרו לך להתחיל</h2>
+          <h2 className="text-2xl font-bold text-ink mb-4">מחשבונים שיעזרו לך להתחיל</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               { href: '/self-employed/vat', label: 'מחשבון מע"מ' },
@@ -372,10 +372,10 @@ export default function OpeningBusinessPage() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="group flex items-center justify-between gap-2 border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition"
+                className="group flex items-center justify-between gap-2 border border-ink/15 p-4 hover:bg-paper-hover hover:shadow-sm transition"
               >
-                <span className="font-medium text-gray-900 group-hover:text-blue-700 transition">{c.label}</span>
-                <span className="text-blue-600 group-hover:-translate-x-1 transition" aria-hidden>←</span>
+                <span className="font-medium text-ink group-hover:text-gold transition">{c.label}</span>
+                <span className="text-gold group-hover:-translate-x-1 transition" aria-hidden>←</span>
               </Link>
             ))}
           </div>
@@ -383,15 +383,15 @@ export default function OpeningBusinessPage() {
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">שאלות נפוצות</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות</h2>
           <div className="space-y-4">
             {faqItems.map((f) => (
-              <details key={f.question} className="border border-gray-200 rounded-lg p-4 group">
-                <summary className="font-bold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+              <details key={f.question} className="border border-ink/15 p-4 group">
+                <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-gray-400 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
-                <p className="text-gray-700 mt-3 leading-relaxed">{f.answer}</p>
+                <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>
             ))}
           </div>

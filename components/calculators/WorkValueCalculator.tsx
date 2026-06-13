@@ -30,59 +30,59 @@ export function WorkValueCalculator() {
 
   return (
     <div className="grid lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-3 bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-        <h2 className="text-xl font-bold text-gray-900">פרטים פיננסיים</h2>
+      <div className="lg:col-span-3 bg-paper border-2 border-ink/15 rounded-none p-6 space-y-5">
+        <h2 className="text-xl font-bold text-ink">פרטים פיננסיים</h2>
 
-        <div className="bg-gray-50 p-4 rounded-lg space-y-3">
-          <h4 className="font-semibold text-gray-900 text-sm">💼 הכנסות מעבודה</h4>
+        <div className="bg-cream-2 p-4 rounded-none space-y-3">
+          <h4 className="font-semibold text-ink text-sm">💼 הכנסות מעבודה</h4>
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-ink/70 mb-1">
               שכר ברוטו חודשי (₪)
             </label>
             <input
               type="number"
               value={input.monthlyGrossSalary}
               onChange={(e) => update('monthlyGrossSalary', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">שעות עבודה</label>
+              <label className="block text-xs font-medium text-ink/70 mb-1">שעות עבודה</label>
               <input
                 type="number"
                 value={input.monthlyWorkHours}
                 onChange={(e) => update('monthlyWorkHours', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">שעות נסיעה</label>
+              <label className="block text-xs font-medium text-ink/70 mb-1">שעות נסיעה</label>
               <input
                 type="number"
                 value={input.monthlyCommutingHours}
                 onChange={(e) => update('monthlyCommutingHours', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </div>
           </div>
         </div>
 
-        <div className="bg-amber-50 p-4 rounded-lg space-y-3">
-          <h4 className="font-semibold text-gray-900 text-sm">
+        <div className="bg-amber-50 p-4 rounded-none space-y-3">
+          <h4 className="font-semibold text-ink text-sm">
             💰 קצבה / הכנסה אלטרנטיבית (אם לא תעבד)
           </h4>
           <input
             type="number"
             value={input.alternativeBenefit}
             onChange={(e) => update('alternativeBenefit', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
             placeholder="₪/חודש - דמי לידה / אבטלה / וכו'"
           />
         </div>
 
-        <div className="bg-red-50 p-4 rounded-lg space-y-3">
-          <h4 className="font-semibold text-gray-900 text-sm">🚗 הוצאות עבודה (₪/חודש)</h4>
+        <div className="bg-red-50 p-4 rounded-none space-y-3">
+          <h4 className="font-semibold text-ink text-sm">🚗 הוצאות עבודה (₪/חודש)</h4>
           <div className="grid grid-cols-2 gap-3">
             <NumField label="נסיעות" value={input.commutingCost} onChange={(v) => update('commutingCost', v)} />
             <NumField
@@ -108,8 +108,8 @@ export function WorkValueCalculator() {
           </div>
         </div>
 
-        <div className="bg-emerald-50 p-4 rounded-lg space-y-3">
-          <h4 className="font-semibold text-gray-900 text-sm">🎁 הטבות מעסיק (₪/חודש)</h4>
+        <div className="bg-emerald-50 p-4 rounded-none space-y-3">
+          <h4 className="font-semibold text-ink text-sm">🎁 הטבות מעסיק (₪/חודש)</h4>
           <div className="grid grid-cols-2 gap-3">
             <NumField
               label="הפרשת מעסיק לפנסיה"
@@ -132,10 +132,10 @@ export function WorkValueCalculator() {
 
       <div className="lg:col-span-2 space-y-4">
         <div
-          className={`rounded-xl p-6 text-center text-white ${
+          className={`rounded-none p-6 text-center text-white ${
             result.isWorthWorking
-              ? 'bg-gradient-to-br from-emerald-500 to-emerald-700'
-              : 'bg-gradient-to-br from-red-500 to-red-700'
+              ? 'bg-emerald-700'
+              : 'bg-red-700'
           }`}
         >
           <div className="text-sm opacity-90 mb-1">
@@ -155,9 +155,9 @@ export function WorkValueCalculator() {
           variant="primary"
         />
 
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2 text-sm">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-gray-600">נטו משכר (משוער):</span>
+            <span className="text-ink/70">נטו משכר (משוער):</span>
             <span className="font-medium">+{formatCurrency(result.estimatedNetSalary)}</span>
           </div>
           <div className="flex justify-between text-emerald-700">
@@ -168,17 +168,17 @@ export function WorkValueCalculator() {
             <span>הוצאות עבודה:</span>
             <span className="font-medium">-{formatCurrency(result.totalWorkExpenses)}</span>
           </div>
-          <div className="flex justify-between pt-2 border-t font-bold">
+          <div className="flex justify-between pt-2 border-t border-ink/15 font-bold">
             <span>נטו אפקטיבי:</span>
             <span>{formatCurrency(result.effectiveTakeHome)}</span>
           </div>
-          <div className="flex justify-between text-gray-500">
+          <div className="flex justify-between text-ink/60">
             <span>אלטרנטיבה:</span>
             <span>{formatCurrency(input.alternativeBenefit)}</span>
           </div>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/70">
           💡 {result.recommendation}
         </div>
       </div>
@@ -197,13 +197,13 @@ function NumField({
 }) {
   return (
     <div>
-      <label className="block text-xs text-gray-700 mb-1">{label}</label>
+      <label className="block text-xs text-ink/70 mb-1">{label}</label>
       <input
         type="number"
         min={0}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+        className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
       />
     </div>
   );

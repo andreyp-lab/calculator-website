@@ -139,7 +139,7 @@ export default function CorpVsIndividualPage() {
             </ul>
 
             <h2>נקודת האיזון (Break-Even)</h2>
-            <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4">
+            <div className="bg-cream-2 border-r-4 border-ink p-4 my-4">
               <p>
                 ברוב המקרים, חברה בע&quot;מ <strong>מתחילה להשתלם ברווח שנתי מעל ~400-500 אלף ₪</strong>{' '}
                 (בעלויות חברה של ~25K/שנה). המספר המדויק תלוי ב:
@@ -216,7 +216,7 @@ export default function CorpVsIndividualPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.gov.il/he/departments/israel_tax_authority"

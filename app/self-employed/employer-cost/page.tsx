@@ -131,7 +131,7 @@ export default function EmployerCostPage() {
             </p>
 
             <h2>דוגמה מספרית: עובד 12,000 ₪ ברוטו, וותק שנה</h2>
-            <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4 text-sm">
+            <div className="bg-cream-2 border-r-4 border-ink p-4 my-4 text-sm">
               <ul className="space-y-1">
                 <li>שכר ברוטו: 12,000 ₪</li>
                 <li>ביטוח לאומי: 339 + 340 = 680 ₪</li>
@@ -181,7 +181,7 @@ export default function EmployerCostPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.btl.gov.il"

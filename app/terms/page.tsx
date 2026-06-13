@@ -9,17 +9,17 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-white py-12">
-      <article className="max-w-3xl mx-auto px-4 text-gray-700">
+    <div className="min-h-screen bg-paper py-12">
+      <article className="max-w-3xl mx-auto px-4 text-ink/70">
 
         {/* כותרת */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">תנאי שימוש</h1>
-        <p className="text-sm text-gray-500 mb-4">
+        <h1 className="text-4xl font-bold text-ink mb-2">תנאי שימוש</h1>
+        <p className="text-sm text-ink/60 mb-4">
           תאריך עדכון אחרון: {SITE_INFO.legal.termsLastUpdated}
         </p>
 
         {/* אזהרה פיננסית בולטת */}
-        <div className="bg-red-50 border-2 border-red-400 rounded-lg p-5 mb-8">
+        <div className="bg-red-50 border-2 border-red-400 p-5 mb-8">
           <h2 className="text-xl font-bold text-red-800 mb-3">אזהרה פיננסית חשובה</h2>
           <p className="text-red-700 font-medium mb-2">
             המידע באתר זה אינו מהווה ייעוץ פיננסי, ייעוץ השקעות, ייעוץ מס, ייעוץ משפטי או ייעוץ
@@ -33,7 +33,7 @@ export default function TermsPage() {
 
         {/* 1. קבלת תנאים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             1. קבלת תנאים
           </h2>
           <p className="mb-3">
@@ -53,7 +53,7 @@ export default function TermsPage() {
 
         {/* 2. תיאור השירות */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             2. תיאור השירות
           </h2>
           <p className="mb-3">
@@ -76,11 +76,11 @@ export default function TermsPage() {
 
         {/* 3. כתב ויתור פיננסי */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             3. כתב ויתור פיננסי מקיף
           </h2>
 
-          <div className="bg-red-50 border border-red-300 rounded-lg p-5 mb-4">
+          <div className="bg-red-50 border border-red-300 p-5 mb-4">
             <h3 className="text-lg font-bold text-red-800 mb-3">3.1 אינו ייעוץ מקצועי</h3>
             <p className="text-red-700 mb-2">
               כל המידע, החישובים, הגרפים, המאמרים, ההסברים, הטיפים וכל תוכן אחר באתר זה:
@@ -95,7 +95,7 @@ export default function TermsPage() {
             </ul>
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">3.2 אחריות המשתמש לנתונים</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">3.2 אחריות המשתמש לנתונים</h3>
           <p className="mb-3">
             המחשבונים מסתמכים <strong>אך ורק</strong> על הנתונים שאתה מזין.
             תוצאות המחשבונים משקפות נוסחאות כלליות ועשויות:
@@ -106,11 +106,11 @@ export default function TermsPage() {
             <li>לסטות מהחישוב האמיתי של רשות המסים / בנק ישראל</li>
             <li>לא לכלול עלויות נסתרות, עמלות, או השפעות מיסוי אישיות</li>
           </ul>
-          <p className="font-medium text-gray-800">
+          <p className="font-medium text-ink">
             <strong>אין ערובה לדיוק התוצאות. השתמש בכלים על אחריותך בלבד.</strong>
           </p>
 
-          <h3 className="text-lg font-semibold text-gray-800 mt-4 mb-2">3.3 המלצה להתייעצות מקצועית</h3>
+          <h3 className="text-lg font-semibold text-ink mt-4 mb-2">3.3 המלצה להתייעצות מקצועית</h3>
           <p className="mb-3">
             <strong>לפני כל החלטה פיננסית משמעותית</strong>, בין אם מדובר ברכישת נכס,
             לקיחת הלוואה, החלטת פנסיה, הגשת דוח מס או כל פעולה אחרת — אנא התייעץ עם:
@@ -126,7 +126,7 @@ export default function TermsPage() {
 
         {/* 4. שימוש מותר */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             4. שימוש מותר
           </h2>
           <p className="mb-3">מותר לך לעשות שימוש באתר לצרכים הבאים:</p>
@@ -140,7 +140,7 @@ export default function TermsPage() {
 
         {/* 5. שימוש אסור */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             5. שימוש אסור
           </h2>
           <p className="mb-3">אסור לעשות שימוש באתר לצרכים הבאים:</p>
@@ -157,7 +157,7 @@ export default function TermsPage() {
 
         {/* 6. קניין רוחני */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             6. קניין רוחני
           </h2>
           <p className="mb-3">
@@ -170,9 +170,9 @@ export default function TermsPage() {
             אין להעתיק, לשכפל, להפיץ, לשדר, לשנות, להציג פומבית או לפרסם כל חלק מהתוכן
             ללא אישור מפורש בכתב מהמפעיל.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink/60">
             לבקשות שימוש / רישיון / שיתופי פעולה:{' '}
-            <a href={`mailto:${SITE_INFO.contact.email}`} className="text-blue-600 hover:underline">
+            <a href={`mailto:${SITE_INFO.contact.email}`} className="text-gold hover:underline">
               {SITE_INFO.contact.email}
             </a>
           </p>
@@ -180,7 +180,7 @@ export default function TermsPage() {
 
         {/* 7. קישורים חיצוניים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             7. קישורים לאתרים חיצוניים
           </h2>
           <p className="mb-3">
@@ -198,12 +198,12 @@ export default function TermsPage() {
 
         {/* 8. הגבלת אחריות */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             8. הגבלת אחריות
           </h2>
 
-          <div className="bg-gray-50 border border-gray-300 rounded-lg p-5 mb-4">
-            <h3 className="text-lg font-bold text-gray-900 mb-3">8.1 כתב ויתור על אחריות</h3>
+          <div className="bg-cream-2 border border-ink/15 p-5 mb-4">
+            <h3 className="text-lg font-bold text-ink mb-3">8.1 כתב ויתור על אחריות</h3>
             <p className="mb-3 font-medium">
               האתר וכל תוכנו ניתנים &quot;כפי שהם&quot; (<em>AS IS</em>) ו&quot;כפי שזמינים&quot;
               (<em>AS AVAILABLE</em>), ללא כל מצג או אחריות מכל סוג — מפורשת או משתמעת — לרבות:
@@ -216,7 +216,7 @@ export default function TermsPage() {
             </ul>
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">8.2 פטור מנזקים</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">8.2 פטור מנזקים</h3>
           <p className="mb-3">
             <strong>באף מקרה</strong> לא יהיה המפעיל אחראי לנזקים מכל סוג, לרבות:
           </p>
@@ -228,8 +228,8 @@ export default function TermsPage() {
             <li>נזק שנגרם מגישה לא מורשית, פריצה, וירוסים, הפרעות שירות</li>
           </ul>
 
-          <div className="bg-gray-100 border border-gray-400 rounded p-4 mt-4">
-            <p className="font-medium text-gray-800">
+          <div className="bg-cream-2 border border-ink/15 p-4 mt-4">
+            <p className="font-medium text-ink">
               <strong>8.3 תקרת אחריות:</strong> אם בית משפט מוסמך יחליט כי חלה אחריות על המפעיל
               בכל מקרה שהוא, אחריות זו מוגבלת לסכום של <strong>עשרה שקלים חדשים (10 ₪)</strong>.
             </p>
@@ -238,7 +238,7 @@ export default function TermsPage() {
 
         {/* 9. שיפוי */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             9. שיפוי
           </h2>
           <p className="mb-3">
@@ -254,7 +254,7 @@ export default function TermsPage() {
 
         {/* 10. שינויי תנאים */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             10. שינויי תנאים
           </h2>
           <p className="mb-3">
@@ -269,7 +269,7 @@ export default function TermsPage() {
 
         {/* 11. דין חל */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             11. דין חל וסמכות שיפוט
           </h2>
           <p className="mb-3">
@@ -284,7 +284,7 @@ export default function TermsPage() {
 
         {/* 12. הפרדה */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             12. הפרדה (Severability)
           </h2>
           <p>
@@ -296,7 +296,7 @@ export default function TermsPage() {
 
         {/* 13. גרסה מחייבת */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             13. גרסה מחייבת
           </h2>
           <p>
@@ -307,7 +307,7 @@ export default function TermsPage() {
 
         {/* 14. יצירת קשר */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
             14. יצירת קשר
           </h2>
           <p className="mb-3">
@@ -316,13 +316,13 @@ export default function TermsPage() {
           <ul className="space-y-2">
             <li>
               <strong>טופס יצירת קשר:</strong>{' '}
-              <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline">
+              <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
                 {SITE_INFO.domain}{SITE_INFO.contact.contactPage}
               </Link>
             </li>
             <li>
               <strong>דוא&quot;ל:</strong>{' '}
-              <a href={`mailto:${SITE_INFO.contact.email}`} className="text-blue-600 hover:underline">
+              <a href={`mailto:${SITE_INFO.contact.email}`} className="text-gold hover:underline">
                 {SITE_INFO.contact.email}
               </a>
             </li>
@@ -330,16 +330,16 @@ export default function TermsPage() {
         </section>
 
         {/* תחתית */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mt-10">
-          <p className="text-sm text-gray-700">
+        <div className="bg-cream-2 border border-ink/15 p-5 mt-10">
+          <p className="text-sm text-ink/70">
             <strong>סיכום:</strong> האתר {SITE_INFO.domain} מספק כלים חינמיים לחישוב וחינוך פיננסי.
             הכלים אינם ייעוץ מקצועי. לפני החלטות פיננסיות — התייעץ עם בעל מקצוע.
             לשאלות:{' '}
-            <Link href={SITE_INFO.contact.contactPage} className="text-blue-600 hover:underline">
+            <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
               {SITE_INFO.contact.contactPage}
             </Link>
           </p>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-ink/60 mt-2">
             תאריך עדכון אחרון: {SITE_INFO.legal.termsLastUpdated}
           </p>
         </div>

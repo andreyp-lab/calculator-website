@@ -33,7 +33,7 @@ export function CashFlowDashboard() {
       title: 'יתרת מזומנים נוכחית',
       value: fmt(kpis.currentCash),
       icon: Wallet,
-      color: kpis.currentCash >= 0 ? 'blue' : 'red',
+      color: kpis.currentCash >= 0 ? 'neutral' : 'red',
       sub: `יתרת פתיחה`,
     },
     {
@@ -61,7 +61,7 @@ export function CashFlowDashboard() {
       title: 'יתרת סיום',
       value: fmt(kpis.closingBalance),
       icon: Target,
-      color: kpis.closingBalance >= 0 ? 'blue' : 'red',
+      color: kpis.closingBalance >= 0 ? 'neutral' : 'red',
       sub: `סוף תקופה`,
     },
     {
@@ -91,7 +91,7 @@ export function CashFlowDashboard() {
   ];
 
   const colorClasses: Record<string, { bg: string; text: string; icon: string }> = {
-    blue: { bg: 'bg-blue-50 border-blue-200', text: 'text-blue-900', icon: 'text-blue-600' },
+    neutral: { bg: 'bg-cream-2 border-ink/15', text: 'text-ink', icon: 'text-gold' },
     emerald: {
       bg: 'bg-emerald-50 border-emerald-200',
       text: 'text-emerald-900',
@@ -104,8 +104,8 @@ export function CashFlowDashboard() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2 mb-2">
-        <Activity className="w-5 h-5 text-blue-600" />
-        <h3 className="font-bold text-lg text-gray-900">דשבורד תזרים</h3>
+        <Activity className="w-5 h-5 text-gold" />
+        <h3 className="font-bold text-lg text-ink">דשבורד תזרים</h3>
       </div>
 
       {/* KPI Cards Grid */}
@@ -116,14 +116,14 @@ export function CashFlowDashboard() {
           return (
             <div
               key={i}
-              className={`border-2 rounded-xl p-3 ${cls.bg} hover:shadow-md transition`}
+              className={`border-2 p-3 ${cls.bg} hover:shadow-md transition`}
             >
               <div className="flex items-start justify-between mb-2">
-                <div className="text-xs text-gray-600">{card.title}</div>
+                <div className="text-xs text-ink/60">{card.title}</div>
                 <Icon className={`w-4 h-4 ${cls.icon}`} />
               </div>
               <div className={`text-base font-bold ${cls.text} mb-1`}>{card.value}</div>
-              <div className="text-[10px] text-gray-500">{card.sub}</div>
+              <div className="text-[10px] text-ink/45">{card.sub}</div>
             </div>
           );
         })}
@@ -131,21 +131,21 @@ export function CashFlowDashboard() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-3 gap-3 text-sm">
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-          <div className="text-xs text-gray-500 mb-1">חודשים שליליים</div>
+        <div className="bg-cream-2 border border-ink/15 p-3">
+          <div className="text-xs text-ink/45 mb-1">חודשים שליליים</div>
           <div className="text-xl font-bold text-red-700">
             {kpis.negativeMonths} / {settings.monthsToShow}
           </div>
         </div>
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-          <div className="text-xs text-gray-500 mb-1">חודשים עם תזרים +</div>
+        <div className="bg-cream-2 border border-ink/15 p-3">
+          <div className="text-xs text-ink/45 mb-1">חודשים עם תזרים +</div>
           <div className="text-xl font-bold text-emerald-700">
             {kpis.positiveMonths} / {settings.monthsToShow}
           </div>
         </div>
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-          <div className="text-xs text-gray-500 mb-1">יתרה ממוצעת</div>
-          <div className="text-xl font-bold text-blue-700">{fmt(kpis.avgBalance)}</div>
+        <div className="bg-cream-2 border border-ink/15 p-3">
+          <div className="text-xs text-ink/45 mb-1">יתרה ממוצעת</div>
+          <div className="text-xl font-bold text-gold">{fmt(kpis.avgBalance)}</div>
         </div>
       </div>
     </div>

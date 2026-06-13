@@ -121,17 +121,17 @@ export default function Page() {
           <ul>
             <li>
               <strong>חוק 30%</strong>: שמור 30% מההכנסה החודשית בחשבון נפרד{' '}
-              ל<Link href="/self-employed/tax-advances" className="text-blue-600 hover:underline">מקדמות מס</Link> -
+              ל<Link href="/self-employed/tax-advances" className="text-gold hover:underline">מקדמות מס</Link> -
               זה מונע הפתעות
             </li>
             <li>
               <strong>הפקדה מקסימלית לפנסיה+ק"ש</strong>: גם אם זה "כואב" - זה חיסכון
               שלך + הקטנת מס.{' '}
-              <Link href="/self-employed/mandatory-pension" className="text-blue-600 hover:underline">מחשבון פנסיה לעצמאי</Link>
+              <Link href="/self-employed/mandatory-pension" className="text-gold hover:underline">מחשבון פנסיה לעצמאי</Link>
             </li>
             <li>
               <strong>מקדמה מתוקנת</strong>: אם ההכנסה השתנתה - בקש "תיקון מקדמה" באתר
-              רשות המסים או השתמש ב<Link href="/self-employed/tax-advances" className="text-blue-600 hover:underline">מחשבון מקדמות המס</Link>
+              רשות המסים או השתמש ב<Link href="/self-employed/tax-advances" className="text-gold hover:underline">מחשבון מקדמות המס</Link>
             </li>
             <li>
               <strong>השקיע בידע על הוצאות מוכרות</strong>: כל 1,000 ₪ הוצאה מוכרת
@@ -152,7 +152,7 @@ export default function Page() {
               href="https://www.gov.il/he/departments/israel_tax_authority"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gold hover:underline"
             >
               רשות המסים בישראל
             </a>
@@ -162,7 +162,7 @@ export default function Page() {
               href="https://www.btl.gov.il"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gold hover:underline"
             >
               המוסד לביטוח לאומי
             </a>
@@ -172,7 +172,7 @@ export default function Page() {
               href="https://www.kolzchut.org.il/he/%D7%97%D7%99%D7%A1%D7%9B%D7%95%D7%9F_%D7%A4%D7%A0%D7%A1%D7%99%D7%95%D7%A0%D7%99"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gold hover:underline"
             >
               כל-זכות: חיסכון פנסיוני
             </a>

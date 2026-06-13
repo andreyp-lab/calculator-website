@@ -54,7 +54,7 @@ export function RiskAssessmentDisplay() {
 
   if (!assessment) {
     return (
-      <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
+      <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-6 text-center">
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-2" />
         <p className="text-amber-900">חסרים נתוני מאזן לזיהוי סיכונים</p>
       </div>
@@ -72,21 +72,21 @@ export function RiskAssessmentDisplay() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-rose-600 to-red-600 text-white p-4">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-red-700 text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Shield className="w-5 h-5" />
             זיהוי סיכונים פיננסיים
           </h3>
-          <p className="text-xs text-rose-100">קיטלוג סיכונים לפי חומרה והמלצות פעולה</p>
+          <p className="text-xs text-red-100">קיטלוג סיכונים לפי חומרה והמלצות פעולה</p>
         </div>
       </div>
 
       {/* Overall Risk Level */}
       <div
-        className={`bg-${overallColor}-50 border-4 border-${overallColor}-300 rounded-xl p-6 text-center`}
+        className={`bg-${overallColor}-50 border-4 border-${overallColor}-300 rounded-none p-6 text-center`}
       >
-        <div className="text-xs text-gray-600 mb-1">רמת סיכון כוללת</div>
+        <div className="text-xs text-ink/60 mb-1">רמת סיכון כוללת</div>
         <div className={`text-5xl font-bold text-${overallColor}-700 mb-2`}>
           {assessment.summary.overallRiskLevel}
         </div>
@@ -155,7 +155,7 @@ export function RiskAssessmentDisplay() {
       {assessment.summary.criticalCount === 0 &&
         assessment.summary.highCount === 0 &&
         assessment.summary.mediumCount === 0 && (
-          <div className="bg-emerald-50 border-2 border-emerald-300 rounded-lg p-6 text-center">
+          <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-6 text-center">
             <p className="text-emerald-800 font-semibold">✅ לא זוהו סיכונים מהותיים</p>
             <p className="text-sm text-emerald-700 mt-1">החברה במצב פיננסי בריא</p>
           </div>
@@ -179,14 +179,14 @@ function RiskCountCard({
     red: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-300' },
     orange: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-300' },
     amber: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-300' },
-    blue: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-300' },
+    blue: { bg: 'bg-cream-2', text: 'text-ink-mid', border: 'border-ink/15' },
   };
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} ${c.border} border-2 rounded-lg p-3 text-center`}>
+    <div className={`${c.bg} ${c.border} border-2 rounded-none p-3 text-center`}>
       <Icon className={`w-6 h-6 ${c.text} mx-auto mb-1`} />
       <div className={`text-2xl font-bold ${c.text}`}>{count}</div>
-      <div className="text-xs text-gray-600">{label}</div>
+      <div className="text-xs text-ink/60">{label}</div>
     </div>
   );
 }
@@ -204,26 +204,26 @@ function RiskSection({
     red: { bg: 'bg-red-50', border: 'border-red-200', head: 'bg-red-600' },
     orange: { bg: 'bg-orange-50', border: 'border-orange-200', head: 'bg-orange-600' },
     amber: { bg: 'bg-amber-50', border: 'border-amber-200', head: 'bg-amber-600' },
-    blue: { bg: 'bg-blue-50', border: 'border-blue-200', head: 'bg-blue-600' },
+    blue: { bg: 'bg-cream-2', border: 'border-ink/15', head: 'bg-ink' },
   };
   const c = colorMap[color];
 
   return (
-    <div className={`bg-white border-2 ${c.border} rounded-lg overflow-hidden shadow-sm`}>
-      <div className={`${c.head} text-white p-3 font-bold text-sm`}>{title}</div>
-      <div className="divide-y divide-gray-100">
+    <div className={`bg-paper border-2 ${c.border} rounded-none overflow-hidden shadow-sm`}>
+      <div className={`${c.head} text-cream p-3 font-bold text-sm`}>{title}</div>
+      <div className="divide-y divide-ink/10">
         {risks.map((r, idx) => (
           <div key={idx} className={`p-3 ${idx % 2 === 1 ? c.bg : ''}`}>
             <div className="flex items-start justify-between mb-1">
-              <h5 className="font-semibold text-gray-900">{r.title}</h5>
+              <h5 className="font-semibold text-ink">{r.title}</h5>
               {r.metric && (
-                <span className="text-xs bg-gray-100 px-2 py-0.5 rounded">
+                <span className="text-xs bg-cream-2 px-2 py-0.5 rounded-none">
                   {r.metric.name}: {r.metric.value.toFixed(2)} (סף {r.metric.threshold})
                 </span>
               )}
             </div>
-            <p className="text-sm text-gray-700 mb-1">{r.description}</p>
-            <p className="text-xs text-gray-600 italic">💡 {r.recommendation}</p>
+            <p className="text-sm text-ink/70 mb-1">{r.description}</p>
+            <p className="text-xs text-ink/60 italic">💡 {r.recommendation}</p>
           </div>
         ))}
       </div>

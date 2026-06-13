@@ -36,12 +36,12 @@ export default function CashFlowPage() {
     <div>
       <div className="flex items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-3">
-          <div className="bg-blue-100 p-3 rounded-lg">
-            <Wallet className="w-6 h-6 text-blue-700" />
+          <div className="bg-cream-2 p-3">
+            <Wallet className="w-6 h-6 text-ink-mid" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">תזרים מזומנים מקצועי</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-2xl font-bold text-ink">תזרים מזומנים מקצועי</h2>
+            <p className="text-sm text-ink/70">
               דשבורד KPI, גרפים, חשבונות בנק, עיכובי גביה, פריסת חוב ותשלומים חד-פעמיים
             </p>
           </div>
@@ -53,7 +53,7 @@ export default function CashFlowPage() {
       <SettingsCard />
 
       {!hasBudgetData && !hasCashFlowData ? (
-        <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-6 mt-4 flex items-start gap-3">
+        <div className="bg-amber-50 border-2 border-amber-300 p-6 mt-4 flex items-start gap-3">
           <Info className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-bold text-amber-900 mb-1">אין נתונים עדיין</h3>
@@ -63,7 +63,7 @@ export default function CashFlowPage() {
             </p>
             <Link
               href="/tools/budget"
-              className="inline-block px-4 py-2 bg-amber-700 text-white rounded-lg hover:bg-amber-800 text-sm"
+              className="inline-block px-4 py-2 bg-amber-700 text-white hover:bg-amber-800 text-sm"
             >
               עבור לתכנון תקציב →
             </Link>
@@ -72,13 +72,13 @@ export default function CashFlowPage() {
       ) : (
         <>
           {/* Tabs */}
-          <div className="flex gap-1 mt-4 border-b-2 border-gray-200">
+          <div className="flex gap-1 mt-4 border-b-2 border-ink/15">
             <button
               onClick={() => setTab('dashboard')}
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'dashboard'
-                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'border-b-2 border-gold text-gold -mb-0.5'
+                  : 'text-ink/60 hover:text-ink'
               }`}
             >
               📊 דשבורד וגרפים
@@ -87,8 +87,8 @@ export default function CashFlowPage() {
               onClick={() => setTab('manage')}
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'manage'
-                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'border-b-2 border-gold text-gold -mb-0.5'
+                  : 'text-ink/60 hover:text-ink'
               }`}
             >
               ⚙️ ניהול תזרים
@@ -97,8 +97,8 @@ export default function CashFlowPage() {
               onClick={() => setTab('restructure')}
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'restructure'
-                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'border-b-2 border-gold text-gold -mb-0.5'
+                  : 'text-ink/60 hover:text-ink'
               }`}
             >
               🔄 פריסת חוב
@@ -107,8 +107,8 @@ export default function CashFlowPage() {
               onClick={() => setTab('compare')}
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'compare'
-                  ? 'border-b-2 border-blue-600 text-blue-600 -mb-0.5'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'border-b-2 border-gold text-gold -mb-0.5'
+                  : 'text-ink/60 hover:text-ink'
               }`}
             >
               🔀 השוואת תרחישים
@@ -117,8 +117,8 @@ export default function CashFlowPage() {
               onClick={() => setTab('burn')}
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'burn'
-                  ? 'border-b-2 border-orange-600 text-orange-600 -mb-0.5'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'border-b-2 border-gold text-gold -mb-0.5'
+                  : 'text-ink/60 hover:text-ink'
               }`}
             >
               🔥 Burn Rate / Runway

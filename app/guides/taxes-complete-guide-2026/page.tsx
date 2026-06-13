@@ -93,7 +93,7 @@ const taxesFaqItems = [
 
 export default function TaxesCompleteGuide() {
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-paper" dir="rtl">
       {/* SEO Schemas */}
       <BreadcrumbSchema items={taxesBreadcrumbs} />
       <HowToSchema
@@ -125,23 +125,23 @@ export default function TaxesCompleteGuide() {
       />
 
       {/* Hero */}
-      <div className="bg-gradient-to-bl from-emerald-900 via-emerald-700 to-teal-500 text-white py-16 px-4">
+      <div className="bg-ink text-cream py-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="text-sm text-emerald-200 mb-3">
-            <Link href="/" className="hover:text-white">דף הבית</Link>
+          <div className="text-sm text-cream/70 mb-3">
+            <Link href="/" className="hover:text-cream">דף הבית</Link>
             {' › '}
-            <Link href="/personal-tax" className="hover:text-white">מיסים</Link>
+            <Link href="/personal-tax" className="hover:text-cream">מיסים</Link>
             {' › '}
             <span>מדריך מסים שלם 2026</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
             כל המסים בישראל 2026 – המדריך השלם
           </h1>
-          <p className="text-xl text-emerald-100 mb-6 max-w-3xl">
+          <p className="text-xl text-cream/80 mb-6 max-w-3xl">
             מס הכנסה, ב.ל., מע&quot;מ, מס שבח, מס רכישה, מס יסף, דיבידנד, רווחי הון –
             מדרגות, פטורים, הטבות ותכנון מס חכם.
           </p>
-          <div className="flex flex-wrap gap-4 text-sm text-emerald-200">
+          <div className="flex flex-wrap gap-4 text-sm text-cream/60">
             <span>⏱ זמן קריאה: ~50 דקות</span>
             <span>📅 עודכן: מאי 2026</span>
             <span>📖 ~7,800 מילים</span>
@@ -152,14 +152,14 @@ export default function TaxesCompleteGuide() {
       <div className="max-w-5xl mx-auto px-4 py-10 lg:flex lg:gap-10">
         {/* Sticky TOC */}
         <aside className="hidden lg:block w-64 flex-shrink-0">
-          <div className="sticky top-8 bg-emerald-50 rounded-xl p-5 border border-emerald-100">
-            <h2 className="font-bold text-emerald-900 mb-3 text-sm uppercase tracking-wide">תוכן עניינים</h2>
+          <div className="sticky top-8 bg-cream-2 rounded-none p-5 border border-ink/15">
+            <h2 className="font-bold text-ink mb-3 text-sm uppercase tracking-wide">תוכן עניינים</h2>
             <ol className="space-y-1">
               {tocItems.map((item, i) => (
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
-                    className="text-sm text-emerald-700 hover:text-emerald-900 hover:underline block py-0.5"
+                    className="text-sm text-ink/70 hover:text-ink hover:underline block py-0.5"
                   >
                     {i + 1}. {item.label}
                   </a>
@@ -174,10 +174,10 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 1 */}
           <section id="why" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               1. למה זה חשוב: ישראלים מאבדים מיליארדים
             </h2>
-            <p className="text-gray-700 mb-5 text-lg">
+            <p className="text-ink/70 mb-5 text-lg">
               מחקר של רשות המסים הראה שישראלים מאבדים מאות אלפי שקלים לאורך חיי העבודה שלהם
               על מסים שאפשר היה לחסוך בצורה חוקית לחלוטין. החזרי מס לא נדרשים, ניכויים שלא נוצלו,
               פטורים שלא ידעו עליהם – אלה לא חוקי מס מתוחכמים. אלה זכויות בסיסיות.
@@ -186,17 +186,17 @@ export default function TaxesCompleteGuide() {
             <div className="grid md:grid-cols-3 gap-4 mb-6">
               {[
                 { stat: '2.5B₪', label: 'החזרי מס שלא נדרשו ב-2024', color: 'text-red-700' },
-                { stat: '800K', label: 'שכירים זכאים שלא ביקשו החזר מס', color: 'text-orange-700' },
+                { stat: '800K', label: 'שכירים זכאים שלא ביקשו החזר מס', color: 'text-gold' },
                 { stat: '40K₪', label: 'ממוצע החזר מס שנתי אפשרי לעצמאי', color: 'text-green-700' },
               ].map((item) => (
-                <div key={item.stat} className="bg-white border border-gray-200 rounded-xl p-5 text-center shadow-sm">
+                <div key={item.stat} className="bg-paper border border-ink/15 rounded-none p-5 text-center shadow-sm">
                   <div className={`text-3xl font-bold ${item.color} mb-1`}>{item.stat}</div>
-                  <div className="text-sm text-gray-600">{item.label}</div>
+                  <div className="text-sm text-ink/60">{item.label}</div>
                 </div>
               ))}
             </div>
 
-            <p className="text-gray-700">
+            <p className="text-ink/70">
               מטרת המדריך הזה: לתת לך ידע מלא על כל מס בישראל, כך שתוכל לתכנן נכון ולא לשלם
               שקל יותר ממה שמחויב בחוק.
             </p>
@@ -204,18 +204,18 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 2 */}
           <section id="income-tax-employee" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               2. מס הכנסה לשכיר – מדרגות, נקודות זיכוי, החזר מס
             </h2>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">מדרגות מס הכנסה 2026 (שכיר)</h3>
+            <h3 className="text-xl font-bold text-ink mb-3">מדרגות מס הכנסה 2026 (שכיר)</h3>
             <div className="overflow-x-auto mb-6">
               <table className="w-full border-collapse text-sm">
                 <thead>
-                  <tr className="bg-emerald-900 text-white">
-                    <th className="border border-emerald-700 p-3 text-right">הכנסה שנתית</th>
-                    <th className="border border-emerald-700 p-3 text-right">שיעור מס שולי</th>
-                    <th className="border border-emerald-700 p-3 text-right">מס על המדרגה</th>
+                  <tr className="bg-ink text-cream">
+                    <th className="border border-ink/20 p-3 text-right">הכנסה שנתית</th>
+                    <th className="border border-ink/20 p-3 text-right">שיעור מס שולי</th>
+                    <th className="border border-ink/20 p-3 text-right">מס על המדרגה</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -228,18 +228,18 @@ export default function TaxesCompleteGuide() {
                     ['560,281 – 721,560 ₪', '47%', '75,802 ₪'],
                     ['מעל 721,560 ₪', '47% + 3% יסף', 'על כל שקל נוסף'],
                   ].map(([income, rate, tax], i) => (
-                    <tr key={income} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      <td className="border border-gray-200 p-3">{income}</td>
-                      <td className="border border-gray-200 p-3 font-bold text-emerald-700">{rate}</td>
-                      <td className="border border-gray-200 p-3">{tax}</td>
+                    <tr key={income} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
+                      <td className="border border-ink/15 p-3">{income}</td>
+                      <td className="border border-ink/15 p-3 font-bold text-gold">{rate}</td>
+                      <td className="border border-ink/15 p-3">{tax}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">נקודות זיכוי – הכלי הכי לא ידוע</h3>
-            <p className="text-gray-700 mb-4">
+            <h3 className="text-xl font-bold text-ink mb-3">נקודות זיכוי – הכלי הכי לא ידוע</h3>
+            <p className="text-ink/70 mb-4">
               נקודת זיכוי שווה 242 ₪ לחודש (2,904 ₪ לשנה). כולם מקבלים 2.25 נקודות בסיס,
               ויש עשרות סיבות לנקודות נוספות. הנה הנפוצות:
             </p>
@@ -255,25 +255,25 @@ export default function TaxesCompleteGuide() {
                 { who: 'שינוי תושבות', points: 'תלוי מוצא' },
                 { who: 'תואר אקדמי', points: '0.5–1.0' },
               ].map((item) => (
-                <div key={item.who} className="bg-gray-50 border border-gray-200 rounded-lg p-3 flex justify-between">
-                  <span className="text-gray-800 text-sm">{item.who}</span>
-                  <span className="font-bold text-emerald-700 text-sm">{item.points} נקודות</span>
+                <div key={item.who} className="bg-cream-2 border border-ink/15 rounded-none p-3 flex justify-between">
+                  <span className="text-ink text-sm">{item.who}</span>
+                  <span className="font-bold text-gold text-sm">{item.points} נקודות</span>
                 </div>
               ))}
             </div>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">מי זכאי להחזר מס?</h3>
-            <p className="text-gray-700 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">מי זכאי להחזר מס?</h3>
+            <p className="text-ink/70 mb-5">
               שכיר שעבד אצל יותר ממעסיק אחד, היה בחל&quot;ת חלקי, נולד לו ילד, עלה לישראל, למד,
               תרם, או שיש לו הוצאות מוכרות – עשוי לקבל החזר של 5,000–25,000 ₪. ניתן לדרוש
               עד 6 שנים אחורה! בדוק:
             </p>
-            <Link href="/personal-tax/tax-refund" className="inline-block bg-emerald-600 text-white px-5 py-2.5 rounded-lg hover:bg-emerald-700 font-medium mb-4">
+            <Link href="/personal-tax/tax-refund" className="inline-block bg-ink text-cream px-5 py-2.5 rounded-none hover:bg-ink-deep font-medium mb-4">
               מחשבון החזר מס לשכיר ←
             </Link>
 
             <div className="mt-3">
-              <Link href="/blog/tax-refund-complete-guide-2026" className="text-emerald-600 underline text-sm">
+              <Link href="/blog/tax-refund-complete-guide-2026" className="text-gold underline text-sm">
                 המדריך השלם להחזר מס לשכירים 2026 ←
               </Link>
             </div>
@@ -281,16 +281,16 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 3 */}
           <section id="income-tax-self" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               3. מס הכנסה לעצמאי – מקדמות, ניכויים, הוצאות מוכרות
             </h2>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               עצמאי מחשב מס הכנסה על הרווח (הכנסות פחות הוצאות מוכרות), לא על מחזור.
               מדרגות המס זהות לשכיר, אך יש הבדלים מהותיים:
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">הוצאות מוכרות עיקריות</h3>
+            <h3 className="text-xl font-bold text-ink mb-3">הוצאות מוכרות עיקריות</h3>
             <div className="grid md:grid-cols-2 gap-3 mb-6">
               {[
                 { expense: 'שכר דירה לעסק', rate: '100% (עסק נפרד) / 25% (בית)' },
@@ -302,34 +302,34 @@ export default function TaxesCompleteGuide() {
                 { expense: 'פנסיה עצמאי', rate: '16.5% מהרווח (ניכוי + זיכוי)' },
                 { expense: 'קרן השתלמות עצמאי', rate: '4.5% מהרווח (עד תקרה)' },
               ].map((item) => (
-                <div key={item.expense} className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-                  <div className="font-medium text-gray-800 text-sm">{item.expense}</div>
-                  <div className="text-emerald-700 text-sm">{item.rate}</div>
+                <div key={item.expense} className="bg-cream-2 border border-ink/15 rounded-none p-3">
+                  <div className="font-medium text-ink text-sm">{item.expense}</div>
+                  <div className="text-gold text-sm">{item.rate}</div>
                 </div>
               ))}
             </div>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">מקדמות מס – מה הן ואיך מחשבים?</h3>
-            <p className="text-gray-700 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">מקדמות מס – מה הן ואיך מחשבים?</h3>
+            <p className="text-ink/70 mb-5">
               עצמאי משלם מקדמות מס כל חודש (עד ה-15 לחודש העוקב). גובה המקדמה נקבע
               לפי % מהמחזור, בהתאם לתחום. הכנסות גבוהות מהצפי → ישנם מנגנוני עדכון.
               בסוף השנה מגישים דוח שנתי ומחשבים מס אמיתי.
             </p>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/self-employed/net" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium">
+              <Link href="/self-employed/net" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
                 מחשבון נטו עצמאי ←
               </Link>
-              <Link href="/self-employed/tax-advances" className="bg-white border border-emerald-600 text-emerald-700 px-4 py-2 rounded-lg hover:bg-emerald-50 text-sm font-medium">
+              <Link href="/self-employed/tax-advances" className="bg-paper border border-ink text-ink px-4 py-2 rounded-none hover:bg-paper-hover text-sm font-medium">
                 מחשבון מקדמות מס ←
               </Link>
-              <Link href="/self-employed/year-end-tax-simulator" className="bg-white border border-emerald-600 text-emerald-700 px-4 py-2 rounded-lg hover:bg-emerald-50 text-sm font-medium">
+              <Link href="/self-employed/year-end-tax-simulator" className="bg-paper border border-ink text-ink px-4 py-2 rounded-none hover:bg-paper-hover text-sm font-medium">
                 סימולטור מס שנתי ←
               </Link>
             </div>
 
             <div className="mt-4">
-              <Link href="/blog/year-end-tax-planning-self-employed" className="text-emerald-600 underline text-sm">
+              <Link href="/blog/year-end-tax-planning-self-employed" className="text-gold underline text-sm">
                 תכנון מס לעצמאי לקראת סוף שנה ←
               </Link>
             </div>
@@ -337,23 +337,23 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 4 */}
           <section id="bituach-leumi" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               4. ביטוח לאומי + בריאות – שכיר vs. עצמאי
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-                <h3 className="font-bold text-blue-900 mb-3">שכיר</h3>
-                <ul className="space-y-2 text-sm text-blue-800">
+              <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+                <h3 className="font-bold text-ink mb-3">שכיר</h3>
+                <ul className="space-y-2 text-sm text-ink/70">
                   <li>• ב.ל. עובד: 4.27% (עד 7,522 ₪) + 12.17% (מעל)</li>
                   <li>• ב.ל. מעסיק: 4.51% + 7.6%</li>
                   <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
                   <li>• כל הניכויים אוטומטיים מהשכר</li>
                 </ul>
               </div>
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-5">
-                <h3 className="font-bold text-orange-900 mb-3">עצמאי (עוסק)</h3>
-                <ul className="space-y-2 text-sm text-orange-800">
+              <div className="bg-paper border border-ink/15 rounded-none p-5">
+                <h3 className="font-bold text-ink mb-3">עצמאי (עוסק)</h3>
+                <ul className="space-y-2 text-sm text-ink/70">
                   <li>• ב.ל. (הכנסות עד 7,522 ₪): 6.10%</li>
                   <li>• ב.ל. (הכנסות מעל עד 51,910 ₪): 18%</li>
                   <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
@@ -362,17 +362,17 @@ export default function TaxesCompleteGuide() {
               </div>
             </div>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               <strong>ההבדל הגדול:</strong> שכיר עם שכר 20,000 ₪ ישלם ב.ל. ~700 ₪/חודש.
               עצמאי עם הכנסה זהה ישלם ~3,300 ₪/חודש (כולל חלק מעסיק שמשלם לבד). סה&quot;כ
               הפרש: ~2,600 ₪/חודש = 31,200 ₪ לשנה.
             </p>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/self-employed/social-security" className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 text-sm font-medium">
+              <Link href="/self-employed/social-security" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
                 מחשבון ב.ל. לעצמאי ←
               </Link>
-              <Link href="/blog/bituach-leumi-self-employed-deep-dive" className="text-emerald-600 underline text-sm inline-flex items-center">
+              <Link href="/blog/bituach-leumi-self-employed-deep-dive" className="text-gold underline text-sm inline-flex items-center">
                 מדריך מעמיק לב.ל. לעצמאי ←
               </Link>
             </div>
@@ -380,11 +380,11 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 5 */}
           <section id="vat" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               5. מע&quot;מ – 18%, עוסק פטור/מורשה
             </h2>
 
-            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-5 mb-6">
+            <div className="bg-yellow-50 border border-yellow-200 rounded-none p-5 mb-6">
               <p className="font-bold text-yellow-900 mb-2">שיעור מע&quot;מ 2026: 18%</p>
               <p className="text-yellow-800 text-sm">
                 מע&quot;מ עלה מ-17% ל-18% ב-1 בינואר 2025. המשמעות: כל עסק מורשה גובה 18% מע&quot;מ על
@@ -393,9 +393,9 @@ export default function TaxesCompleteGuide() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-5 mb-6">
-              <div className="border border-gray-200 rounded-xl p-5">
-                <h3 className="font-bold text-gray-900 mb-3">עוסק פטור</h3>
-                <ul className="space-y-1 text-sm text-gray-700">
+              <div className="border border-ink/15 rounded-none p-5">
+                <h3 className="font-bold text-ink mb-3">עוסק פטור</h3>
+                <ul className="space-y-1 text-sm text-ink/70">
                   <li>• מחזור עד 122,833 ₪ לשנה</li>
                   <li>• פטור מגביית מע&quot;מ מלקוחות</li>
                   <li>• אינו מחזיר מע&quot;מ תשומות</li>
@@ -403,9 +403,9 @@ export default function TaxesCompleteGuide() {
                   <li>• <strong>חיסרון:</strong> בלתי מועדף על ידי עסקים (אין חשבונית מע&quot;מ)</li>
                 </ul>
               </div>
-              <div className="border border-gray-200 rounded-xl p-5">
-                <h3 className="font-bold text-gray-900 mb-3">עוסק מורשה</h3>
-                <ul className="space-y-1 text-sm text-gray-700">
+              <div className="border border-ink/15 rounded-none p-5">
+                <h3 className="font-bold text-ink mb-3">עוסק מורשה</h3>
+                <ul className="space-y-1 text-sm text-ink/70">
                   <li>• מחזור מעל 122,833 ₪ לשנה (חובה)</li>
                   <li>• גובה 18% מע&quot;מ מלקוחות</li>
                   <li>• מחזיר מע&quot;מ על הוצאות עסק</li>
@@ -416,10 +416,10 @@ export default function TaxesCompleteGuide() {
             </div>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/self-employed/vat" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium">
+              <Link href="/self-employed/vat" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
                 מחשבון מע&quot;מ ←
               </Link>
-              <Link href="/blog/vat-complete-guide-israel" className="text-emerald-600 underline text-sm inline-flex items-center">
+              <Link href="/blog/vat-complete-guide-israel" className="text-gold underline text-sm inline-flex items-center">
                 המדריך השלם למע&quot;מ ←
               </Link>
             </div>
@@ -427,16 +427,16 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 6 */}
           <section id="surtax" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               6. מס יסף 3% – מי חייב ואיך מחשבים
             </h2>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               מס יסף (Surtax) הוא תוספת של 3% על הכנסה חייבת מעל 721,560 ₪ לשנה (2026).
               מדובר על כלל ההכנסות: שכר, עסק, שכר דירה, רווחי הון, דיבידנד – הכל מצטרף.
             </p>
 
-            <div className="bg-red-50 border border-red-200 rounded-xl p-5 mb-5">
+            <div className="bg-red-50 border border-red-200 rounded-none p-5 mb-5">
               <h3 className="font-bold text-red-900 mb-2">מי חייב?</h3>
               <p className="text-red-800 text-sm">
                 כל מי שהכנסתו הכוללת (מכל המקורות) עולה על 721,560 ₪ לשנה.
@@ -444,46 +444,46 @@ export default function TaxesCompleteGuide() {
               </p>
             </div>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">דוגמה מספרית</h3>
-            <p className="text-gray-700 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">דוגמה מספרית</h3>
+            <p className="text-ink/70 mb-5">
               שכר שנתי 800,000 ₪ → 800,000 – 721,560 = 78,440 ₪ חייב במס יסף → 78,440 × 3% =
               2,353 ₪ מס יסף שנתי (בנוסף למס ה-47% השולי; יחד: 50% על הפרוסה מעל הסף).
             </p>
 
-            <Link href="/blog/surtax-yesef-2026-explained" className="text-emerald-600 underline text-sm">
+            <Link href="/blog/surtax-yesef-2026-explained" className="text-gold underline text-sm">
               הסבר מלא על מס יסף 2026 ←
             </Link>
           </section>
 
           {/* Section 7 */}
           <section id="capital-gains" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               7. מס שבח – מכירת דירה, מס לינארי
             </h2>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               מס שבח = מס על הרווח ממכירת נדל&quot;ן. שיעורו 25%, אך קיימות פטורים ומנגנון לינארי.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">פטור דירת מגורים</h3>
-            <p className="text-gray-700 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">פטור דירת מגורים</h3>
+            <p className="text-ink/70 mb-5">
               מי שמוכר דירת מגורים יחידה, גר בה לפחות 18 חודשים מ-4 השנים האחרונות, ולא מכר
               דירה בפטור ב-18 החודשים האחרונים – זכאי לפטור מלא. אם מכר – שיעור מס מופחת לפי
               חישוב לינארי (לפי יחס השנים לפני 2014 ואחריהן).
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">מס לינארי (דירה שנייה+)</h3>
-            <p className="text-gray-700 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">מס לינארי (דירה שנייה+)</h3>
+            <p className="text-ink/70 mb-5">
               שבח מחולק לשניים: חלק עד 2014 (שיעור 0%) + חלק אחרי 2014 (שיעור 25%).
               דוגמה: קנייה ב-2010, מכירה ב-2026 = 16 שנים סה&quot;כ. 4 שנים עד 2014 = 4/16 פטור.
               12 שנים אחרי 2014 = 12/16 × 25% = 18.75% מס אפקטיבי על כלל השבח.
             </p>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/real-estate/capital-gains-tax" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium">
+              <Link href="/real-estate/capital-gains-tax" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
                 מחשבון מס שבח ←
               </Link>
-              <Link href="/blog/capital-gains-tax-property-2026" className="text-emerald-600 underline text-sm inline-flex items-center">
+              <Link href="/blog/capital-gains-tax-property-2026" className="text-gold underline text-sm inline-flex items-center">
                 מדריך מס שבח 2026 ←
               </Link>
             </div>
@@ -491,21 +491,21 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 8 */}
           <section id="purchase-tax" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               8. מס רכישה – 8 סוגי רוכשים
             </h2>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               מס רכישה משלמים בעת קניית נדל&quot;ן. השיעורים משתנים לפי סוג הרוכש ומחיר הנכס:
             </p>
 
             <div className="overflow-x-auto mb-5">
               <table className="w-full border-collapse text-sm">
                 <thead>
-                  <tr className="bg-emerald-900 text-white">
-                    <th className="border border-emerald-700 p-3 text-right">סוג רוכש</th>
-                    <th className="border border-emerald-700 p-3 text-right">מס עד 1.99M₪</th>
-                    <th className="border border-emerald-700 p-3 text-right">מס מ-1.99M₪ ואילך</th>
+                  <tr className="bg-ink text-cream">
+                    <th className="border border-ink/20 p-3 text-right">סוג רוכש</th>
+                    <th className="border border-ink/20 p-3 text-right">מס עד 1.99M₪</th>
+                    <th className="border border-ink/20 p-3 text-right">מס מ-1.99M₪ ואילך</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -515,10 +515,10 @@ export default function TaxesCompleteGuide() {
                     ['דירה יחידה – עולה חדש', 'מדרגות מופחתות מיוחדות', '5%'],
                     ['מגרש / נכס מסחרי', '6%', '6%'],
                   ].map(([type, low, high], i) => (
-                    <tr key={type} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      <td className="border border-gray-200 p-3 font-medium">{type}</td>
-                      <td className="border border-gray-200 p-3 text-green-700">{low}</td>
-                      <td className="border border-gray-200 p-3 text-red-700">{high}</td>
+                    <tr key={type} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
+                      <td className="border border-ink/15 p-3 font-medium">{type}</td>
+                      <td className="border border-ink/15 p-3 text-green-700">{low}</td>
+                      <td className="border border-ink/15 p-3 text-red-700">{high}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -526,10 +526,10 @@ export default function TaxesCompleteGuide() {
             </div>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/real-estate/purchase-tax" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium">
+              <Link href="/real-estate/purchase-tax" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
                 מחשבון מס רכישה ←
               </Link>
-              <Link href="/blog/purchase-tax-2026-complete-guide" className="text-emerald-600 underline text-sm inline-flex items-center">
+              <Link href="/blog/purchase-tax-2026-complete-guide" className="text-gold underline text-sm inline-flex items-center">
                 מדריך מס רכישה 2026 ←
               </Link>
             </div>
@@ -537,35 +537,35 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 9 */}
           <section id="dividend-tax" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               9. מס דיבידנד – 25%/30% לבעל שליטה
             </h2>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               חלוקת דיבידנד מחברה בע&quot;מ חייבת במס. שיעורי המס:
             </p>
 
             <div className="grid md:grid-cols-2 gap-4 mb-5">
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-                <h3 className="font-bold text-gray-900 mb-2">בעל מניות רגיל</h3>
-                <p className="text-2xl font-bold text-emerald-700">25%</p>
-                <p className="text-sm text-gray-600">מי שמחזיק פחות מ-10% מהחברה</p>
+              <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+                <h3 className="font-bold text-ink mb-2">בעל מניות רגיל</h3>
+                <p className="text-2xl font-bold text-gold">25%</p>
+                <p className="text-sm text-ink/60">מי שמחזיק פחות מ-10% מהחברה</p>
               </div>
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-                <h3 className="font-bold text-gray-900 mb-2">בעל שליטה (10%+)</h3>
+              <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+                <h3 className="font-bold text-ink mb-2">בעל שליטה (10%+)</h3>
                 <p className="text-2xl font-bold text-red-700">30%</p>
-                <p className="text-sm text-gray-600">מחזיק 10%+ מהחברה (רוב בעלי עסקים)</p>
+                <p className="text-sm text-ink/60">מחזיק 10%+ מהחברה (רוב בעלי עסקים)</p>
               </div>
             </div>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               <strong>מס על מס:</strong> חברה שילמה 23% מס חברות על הרווח. מה שנשאר מחולק
               כדיבידנד ומשלם עוד 30%. מס אפקטיבי כולל: 23% + (77% × 30%) = ~46.1%.
               לכן בעלי שליטה רבים מעדיפים לקחת שכר (עד מדרגת 47%) ולא דיבידנד.
             </p>
 
             <div className="flex gap-3">
-              <Link href="/self-employed/dividend-vs-salary" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium">
+              <Link href="/self-employed/dividend-vs-salary" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
                 מחשבון דיבידנד vs. שכר ←
               </Link>
             </div>
@@ -573,41 +573,41 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 10 */}
           <section id="investment-gains" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               10. מס רווחי הון – 25% על השקעות
             </h2>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               רווח ממכירת ניירות ערך, קרנות נאמנות, קריפטו, אופציות – חייב ב-25% מס רווחי הון.
               בעל שליטה בחברה שמשקיע דרכה: 30%.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">מה מחשבים?</h3>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">מה מחשבים?</h3>
+            <ul className="list-disc list-inside text-ink/70 space-y-2 mb-5">
               <li>רווח = מחיר מכירה – מחיר קנייה (מתואם לאינפלציה)</li>
               <li>הפסדים ניתן לקזז מול רווחים באותה שנה</li>
               <li>הפסד שלא קוזז: אפשר להעביר 3 שנים קדימה</li>
               <li>פטור: קרן השתלמות, פנסיה, קופות גמל</li>
             </ul>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">אופציות 102 – הטבה מרכזית</h3>
-            <p className="text-gray-700 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">אופציות 102 – הטבה מרכזית</h3>
+            <p className="text-ink/70 mb-5">
               עובדים שמקבלים אופציות במסלול 102 יכולים לשלם מס רווחי הון (25%) במקום מס
               הכנסה (47%+). תנאי: החזקת האופציות לפחות 24 חודש לאחר ההקצאה (או הבשלה).
             </p>
 
-            <Link href="/investments/compound-interest" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium inline-block">
+            <Link href="/investments/compound-interest" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium inline-block">
               מחשבון ריבית דריבית ←
             </Link>
           </section>
 
           {/* Section 11 */}
           <section id="study-fund" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               11. קרן השתלמות – ההטבה המטורפת
             </h2>
 
-            <div className="bg-gradient-to-l from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 mb-5">
+            <div className="bg-green-50 border border-green-200 rounded-none p-6 mb-5">
               <h3 className="font-bold text-green-900 mb-3 text-lg">למה זאת ההטבה הטובה ביותר בישראל?</h3>
               <ul className="space-y-2 text-green-800 text-sm">
                 <li>• <strong>שכיר:</strong> מעסיק מפקיד 7.5% (פטור ממס הכנסה לעובד!)</li>
@@ -618,36 +618,36 @@ export default function TaxesCompleteGuide() {
               </ul>
             </div>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-3">קרן השתלמות לעצמאי</h3>
-            <p className="text-gray-700 mb-5">
+            <h3 className="text-xl font-bold text-ink mb-3">קרן השתלמות לעצמאי</h3>
+            <p className="text-ink/70 mb-5">
               עצמאי יכול להפקיד עד 4.5% מהרווח (עד ~20,566 ₪ לשנה) ולקבל ניכוי ממס הכנסה.
               כמו כן – הכנסות מהשקעות בקרן פטורות ממס רווחי הון לאחר 6 שנים.
             </p>
 
-            <Link href="/blog/study-fund-self-employed-strategy" className="text-emerald-600 underline text-sm">
+            <Link href="/blog/study-fund-self-employed-strategy" className="text-gold underline text-sm">
               מדריך קרן השתלמות לעצמאי ←
             </Link>
           </section>
 
           {/* Section 12 */}
           <section id="pension-tax" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               12. פנסיה – 11% ניכוי + 5.5% זיכוי לעצמאי
             </h2>
 
             <div className="grid md:grid-cols-2 gap-5 mb-5">
-              <div className="border border-gray-200 rounded-xl p-5">
-                <h3 className="font-bold text-gray-900 mb-3">שכיר</h3>
-                <ul className="space-y-1 text-sm text-gray-700">
+              <div className="border border-ink/15 rounded-none p-5">
+                <h3 className="font-bold text-ink mb-3">שכיר</h3>
+                <ul className="space-y-1 text-sm text-ink/70">
                   <li>• עובד מפקיד: 6%</li>
                   <li>• מעסיק מפקיד: 6.5% (פנסיה) + 6% (פיצויים)</li>
                   <li>• סה&quot;כ: 18.5% מהשכר</li>
                   <li>• עובד: ניכוי מס על 7% מהשכר (עד תקרה)</li>
                 </ul>
               </div>
-              <div className="border border-gray-200 rounded-xl p-5">
-                <h3 className="font-bold text-gray-900 mb-3">עצמאי</h3>
-                <ul className="space-y-1 text-sm text-gray-700">
+              <div className="border border-ink/15 rounded-none p-5">
+                <h3 className="font-bold text-ink mb-3">עצמאי</h3>
+                <ul className="space-y-1 text-sm text-ink/70">
                   <li>• חובת הפקדה מינימלית: לפי גיל וסכום</li>
                   <li>• ניכוי: 11% מהרווח (עד 9,024 ₪/שנה)</li>
                   <li>• זיכוי: 5.5% מהרווח (עד 5,460 ₪/שנה)</li>
@@ -657,13 +657,13 @@ export default function TaxesCompleteGuide() {
             </div>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/insurance/pension" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium">
+              <Link href="/insurance/pension" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
                 מחשבון פנסיה ←
               </Link>
-              <Link href="/self-employed/mandatory-pension" className="bg-white border border-emerald-600 text-emerald-700 px-4 py-2 rounded-lg hover:bg-emerald-50 text-sm font-medium">
+              <Link href="/self-employed/mandatory-pension" className="bg-paper border border-ink text-ink px-4 py-2 rounded-none hover:bg-paper-hover text-sm font-medium">
                 פנסיה חובה לעצמאי ←
               </Link>
-              <Link href="/blog/pension-deduction-self-employed-2026" className="text-emerald-600 underline text-sm inline-flex items-center">
+              <Link href="/blog/pension-deduction-self-employed-2026" className="text-gold underline text-sm inline-flex items-center">
                 ניכוי פנסיה לעצמאי ←
               </Link>
             </div>
@@ -671,24 +671,24 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 13 */}
           <section id="donations" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               13. תרומות – 35% החזר ממס
             </h2>
 
-            <p className="text-gray-700 mb-5">
+            <p className="text-ink/70 mb-5">
               תרומה לגוף ציבורי מוכר (סעיף 46 לפקודת מס הכנסה) מזכה בזיכוי מס של 35% מסכום
               התרומה. לא ניכוי – זיכוי. כלומר, הממשלה מממנת 35% מהתרומה שלך.
             </p>
 
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 mb-4">
-              <p className="text-purple-900 text-sm">
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mb-4">
+              <p className="text-ink/70 text-sm">
                 <strong>דוגמה:</strong> תרמת 10,000 ₪ לעמוסי ישראל →
                 10,000 × 35% = 3,500 ₪ זיכוי ממס הכנסה שתקבל בהחזר.
                 עלות התרומה האפקטיבית: 6,500 ₪.
               </p>
             </div>
 
-            <p className="text-gray-700 mb-3">
+            <p className="text-ink/70 mb-3">
               <strong>תנאים:</strong> מינימום תרומה 207 ₪ בשנה. הסכום המוכר: עד 30% מההכנסה החייבת
               (לשכירים) / 30% מהרווח (לעצמאיים).
             </p>
@@ -696,7 +696,7 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 14 */}
           <section id="annual-planning" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               14. תכנון מס שנתי – 12 חודשים
             </h2>
 
@@ -709,11 +709,11 @@ export default function TaxesCompleteGuide() {
                 { month: 'ספטמבר–נובמבר', action: 'תכנון שנתי: האם לפרוע הוצאות בשנה הנוכחית? לקנות ציוד? להפקיד לקרן השתלמות?' },
                 { month: 'נובמבר–דצמבר', action: 'הפקדה מקסימלית לקרן השתלמות ולפנסיה לפני סוף שנה. בדיקת הפסדים לקיזוז.' },
               ].map((item) => (
-                <div key={item.month} className="flex gap-4 bg-white border border-gray-200 rounded-lg p-4">
-                  <div className="flex-shrink-0 bg-emerald-600 text-white rounded-lg px-3 py-2 text-xs font-bold text-center min-w-[80px]">
+                <div key={item.month} className="flex gap-4 bg-paper border border-ink/15 rounded-none p-4">
+                  <div className="flex-shrink-0 bg-ink text-cream rounded-none px-3 py-2 text-xs font-bold text-center min-w-[80px]">
                     {item.month}
                   </div>
-                  <p className="text-gray-700 text-sm">{item.action}</p>
+                  <p className="text-ink/70 text-sm">{item.action}</p>
                 </div>
               ))}
             </div>
@@ -721,7 +721,7 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 15 */}
           <section id="mistakes" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               15. טעויות שעולות אלפי שקלים
             </h2>
 
@@ -734,7 +734,7 @@ export default function TaxesCompleteGuide() {
                 { mistake: 'לא לנכות פנסיה כעצמאי', cost: '5,000–15,000 ₪ מס נוסף', fix: 'הפקד לפנסיה ודרוש ניכוי מלא בדוח.' },
                 { mistake: 'שכחת לרשום הוצאות', cost: 'תשלום מס על הכנסה בה לא חייב', fix: 'שמור כל קבלה ורשום הוצאות מוכרות.' },
               ].map((item, i) => (
-                <div key={i} className="border border-red-200 rounded-xl p-5 bg-red-50">
+                <div key={i} className="border border-red-200 rounded-none p-5 bg-red-50">
                   <div className="flex justify-between items-start mb-1">
                     <h3 className="font-bold text-red-900">{item.mistake}</h3>
                     <span className="bg-red-700 text-white text-xs px-2 py-1 rounded">{item.cost}</span>
@@ -747,7 +747,7 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 16 */}
           <section id="calculators" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               16. כל המחשבונים שלנו
             </h2>
 
@@ -769,15 +769,15 @@ export default function TaxesCompleteGuide() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block bg-white border border-emerald-200 rounded-xl p-4 hover:border-emerald-400 hover:shadow-md transition group"
+                  className="block bg-paper border border-ink/15 rounded-none p-4 hover:border-gold hover:shadow-md transition group"
                 >
-                  <h3 className="font-bold text-emerald-700 group-hover:text-emerald-900 mb-1">{item.label}</h3>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                  <h3 className="font-bold text-gold group-hover:text-ink mb-1">{item.label}</h3>
+                  <p className="text-ink/60 text-sm">{item.desc}</p>
                 </Link>
               ))}
             </div>
 
-            <h3 className="text-lg font-bold text-gray-800 mt-8 mb-3">מאמרים קשורים</h3>
+            <h3 className="text-lg font-bold text-ink mt-8 mb-3">מאמרים קשורים</h3>
             <div className="grid md:grid-cols-2 gap-2">
               {[
                 { href: '/blog/tax-refund-complete-guide-2026', label: 'המדריך השלם להחזר מס 2026' },
@@ -792,7 +792,7 @@ export default function TaxesCompleteGuide() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-center gap-2 text-emerald-600 hover:text-emerald-800 text-sm py-1 border-b border-gray-100"
+                  className="flex items-center gap-2 text-gold hover:text-ink/70 text-sm py-1 border-b border-ink/10"
                 >
                   <span>←</span> {item.label}
                 </Link>
@@ -802,7 +802,7 @@ export default function TaxesCompleteGuide() {
 
           {/* Section 17 - FAQ */}
           <section id="faq" className="mb-14 scroll-mt-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
               17. שאלות נפוצות (FAQ)
             </h2>
 
@@ -869,11 +869,11 @@ export default function TaxesCompleteGuide() {
                   a: 'הפרשות המעסיק לפנסיה: פטורות ממס בידי העובד בעת ההפקדה. הפקדות עצמיות: מזכות בניכוי (7% מהשכר עד תקרה). משיכת פנסיה בגיל פרישה: חייבת בחלקה, אבל יש פטור של עד 5,422 ₪/חודש (2026) — 57.5% מתקרת קצבה מזכה של 9,430 ₪/חודש.',
                 },
               ].map((item, i) => (
-                <details key={i} className="border border-gray-200 rounded-xl overflow-hidden">
-                  <summary className="p-4 font-bold text-gray-900 cursor-pointer hover:bg-gray-50 flex items-center gap-2">
-                    <span className="text-emerald-600">ש:</span> {item.q}
+                <details key={i} className="border border-ink/15 rounded-none overflow-hidden">
+                  <summary className="p-4 font-bold text-ink cursor-pointer hover:bg-cream-2 flex items-center gap-2">
+                    <span className="text-gold">ש:</span> {item.q}
                   </summary>
-                  <div className="p-4 pt-0 bg-gray-50 text-gray-700 text-sm leading-relaxed">
+                  <div className="p-4 pt-0 bg-cream-2 text-ink/70 text-sm leading-relaxed">
                     <span className="text-green-700 font-bold">ת: </span>{item.a}
                   </div>
                 </details>
@@ -882,21 +882,21 @@ export default function TaxesCompleteGuide() {
           </section>
 
           {/* Bottom CTA */}
-          <div className="bg-gradient-to-l from-emerald-600 to-teal-700 text-white rounded-2xl p-8 text-center">
+          <div className="bg-ink text-cream rounded-none p-8 text-center">
             <h2 className="text-2xl font-bold mb-3">מוכן לחסוך מסים?</h2>
-            <p className="text-emerald-100 mb-6">
+            <p className="text-cream/80 mb-6">
               השתמש בכלים שלנו לחישוב מס מדויק ומציאת הזדמנויות חיסכון
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link
                 href="/personal-tax/tax-refund"
-                className="bg-white text-emerald-700 px-6 py-3 rounded-lg font-bold hover:bg-emerald-50 transition"
+                className="bg-cream text-ink px-6 py-3 rounded-none font-bold hover:bg-paper-hover transition"
               >
                 מחשבון החזר מס ←
               </Link>
               <Link
                 href="/self-employed/year-end-tax-simulator"
-                className="bg-emerald-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-emerald-400 transition border border-emerald-400"
+                className="bg-ink-deep text-cream px-6 py-3 rounded-none font-bold hover:bg-ink transition border border-cream/20"
               >
                 סימולטור מס שנתי ←
               </Link>

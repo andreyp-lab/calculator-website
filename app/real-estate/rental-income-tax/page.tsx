@@ -88,7 +88,7 @@ export default function RentalIncomeTaxPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-paper" dir="rtl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
@@ -105,17 +105,17 @@ export default function RentalIncomeTaxPage() {
         </div>
 
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
             מיסוי שכר דירה 2026 — המדריך המלא
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-lg text-ink/70 leading-relaxed">
             משכיר דירה למגורים? יש שלוש דרכים לשלם מס — והבחירה ביניהן יכולה לחסוך לך אלפי שקלים
             בשנה. הנה כל מה שצריך לדעת על מסלול הפטור, מסלול 10% ומסלול מדרגות המס, עם דוגמאות.
           </p>
-          <p className="text-sm text-gray-500 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
+          <p className="text-sm text-ink/60 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
         </header>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>3 מסלולי המס על שכר דירה למגורים</h2>
           <p>
             על הכנסה מהשכרת דירת מגורים בישראל ניתן לבחור באחד משלושה מסלולים. הבחירה היא שנתית
@@ -157,25 +157,25 @@ export default function RentalIncomeTaxPage() {
         </div>
 
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">מסלול</th>
-                <th className="p-3 font-bold text-gray-700 border-b">שיעור</th>
-                <th className="p-3 font-bold text-gray-700 border-b">ניכוי הוצאות</th>
-                <th className="p-3 font-bold text-gray-700 border-b">מתי משתלם</th>
+                <th className="p-3 font-bold text-ink/70 border-b">מסלול</th>
+                <th className="p-3 font-bold text-ink/70 border-b">שיעור</th>
+                <th className="p-3 font-bold text-ink/70 border-b">ניכוי הוצאות</th>
+                <th className="p-3 font-bold text-ink/70 border-b">מתי משתלם</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr><td className="p-3 border-b font-medium">פטור</td><td className="p-3 border-b">0%</td><td className="p-3 border-b">—</td><td className="p-3 border-b">הכנסה עד 5,654 ₪/חודש</td></tr>
-              <tr className="bg-gray-50/50"><td className="p-3 border-b font-medium">10%</td><td className="p-3 border-b">10% מהמחזור</td><td className="p-3 border-b">לא</td><td className="p-3 border-b">הכנסה גבוהה, מעט הוצאות</td></tr>
+              <tr className="bg-cream-2/50"><td className="p-3 border-b font-medium">10%</td><td className="p-3 border-b">10% מהמחזור</td><td className="p-3 border-b">לא</td><td className="p-3 border-b">הכנסה גבוהה, מעט הוצאות</td></tr>
               <tr><td className="p-3 font-medium">מדרגות מס</td><td className="p-3">לפי מדרגה (לרוב 31%+)</td><td className="p-3">כן (כולל פחת)</td><td className="p-3">הוצאות גדולות (ריבית, תחזוקה)</td></tr>
             </tbody>
           </table>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
-          <p className="text-sm text-gray-500">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
+          <p className="text-sm text-ink/60">
             * אין לראות במדריך זה ייעוץ מס. הכללים מורכבים ותלויים בנסיבות אישיות — מומלץ להיוועץ
             ברואה חשבון.
           </p>
@@ -183,7 +183,7 @@ export default function RentalIncomeTaxPage() {
 
         {/* Related */}
         <section className="my-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">כלים ומדריכים רלוונטיים</h2>
+          <h2 className="text-2xl font-bold text-ink mb-4">כלים ומדריכים רלוונטיים</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               { href: '/real-estate/capital-gains-tax', label: 'מחשבון מס שבח' },
@@ -196,10 +196,10 @@ export default function RentalIncomeTaxPage() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="group flex items-center justify-between gap-2 border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition"
+                className="group flex items-center justify-between gap-2 border border-ink/15 p-4 hover:border-gold hover:shadow-sm transition"
               >
-                <span className="font-medium text-gray-900 group-hover:text-blue-700 transition">{c.label}</span>
-                <span className="text-blue-600 group-hover:-translate-x-1 transition" aria-hidden>←</span>
+                <span className="font-medium text-ink group-hover:text-gold transition">{c.label}</span>
+                <span className="text-gold group-hover:-translate-x-1 transition" aria-hidden>←</span>
               </Link>
             ))}
           </div>
@@ -207,15 +207,15 @@ export default function RentalIncomeTaxPage() {
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">שאלות נפוצות</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות</h2>
           <div className="space-y-4">
             {faqItems.map((f) => (
-              <details key={f.question} className="border border-gray-200 rounded-lg p-4 group">
-                <summary className="font-bold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+              <details key={f.question} className="border border-ink/15 p-4 group">
+                <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-gray-400 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
-                <p className="text-gray-700 mt-3 leading-relaxed">{f.answer}</p>
+                <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>
             ))}
           </div>

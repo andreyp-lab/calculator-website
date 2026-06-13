@@ -215,7 +215,7 @@ export default function SeverancePage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.nevo.co.il/law_html/law01/p214_001.htm"

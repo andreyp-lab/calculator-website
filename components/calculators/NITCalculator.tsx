@@ -38,8 +38,8 @@ import {
 // ============================================================
 
 const SectionCard = ({ title, children, className = '' }: { title: string; children: React.ReactNode; className?: string }) => (
-  <div className={`bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5 ${className}`}>
-    <h2 className="text-lg font-bold text-gray-900">{title}</h2>
+  <div className={`bg-paper border-2 border-ink/15 rounded-none p-6 space-y-5 ${className}`}>
+    <h2 className="text-lg font-bold text-ink">{title}</h2>
     {children}
   </div>
 );
@@ -52,13 +52,13 @@ const InfoBox = ({
   variant?: 'blue' | 'amber' | 'red' | 'green' | 'purple';
 }) => {
   const classes: Record<string, string> = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
     red: 'bg-red-50 border-red-200 text-red-900',
     green: 'bg-green-50 border-green-200 text-green-900',
-    purple: 'bg-purple-50 border-purple-200 text-purple-900',
+    purple: 'bg-cream-2 border-ink/15 text-ink',
   };
-  return <div className={`border rounded-xl p-4 ${classes[variant]}`}>{children}</div>;
+  return <div className={`border rounded-none p-4 ${classes[variant]}`}>{children}</div>;
 };
 
 const TabButton = ({
@@ -72,10 +72,10 @@ const TabButton = ({
 }) => (
   <button
     onClick={onClick}
-    className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+    className={`px-4 py-2.5 rounded-none text-sm font-medium transition-colors whitespace-nowrap ${
       active
-        ? 'bg-emerald-600 text-white shadow-sm'
-        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+        ? 'bg-ink text-cream shadow-sm'
+        : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
     }`}
   >
     {children}
@@ -129,7 +129,7 @@ const CalculatorTab = () => {
           <SectionCard title="פרטי הגשה">
             {/* הכנסה */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-ink/70 mb-1">
                 הכנסה שנתית מעבודה (₪)
               </label>
               <input
@@ -138,9 +138,9 @@ const CalculatorTab = () => {
                 step={1000}
                 value={income}
                 onChange={(e) => setIncome(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg font-bold focus:ring-2 focus:ring-gold focus:border-transparent"
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 הכנסה ממשכורת / עצמאי בלבד (ללא קצבאות/שכ"ד). טווח: {WORK_GRANT_MIN_INCOME_2026.toLocaleString('he-IL')}–
                 {(children > 0 ? WORK_GRANT_MAX_INCOME_PARENT_2026 : WORK_GRANT_MAX_INCOME_SINGLE_2026).toLocaleString('he-IL')} ₪
               </p>
@@ -148,21 +148,21 @@ const CalculatorTab = () => {
 
             {/* גיל */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">גיל</label>
+              <label className="block text-sm font-medium text-ink/70 mb-1">גיל</label>
               <input
                 type="number"
                 min={18}
                 max={80}
                 value={age}
                 onChange={(e) => setAge(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
               />
-              <p className="text-xs text-gray-500 mt-1">מינימום: 23 ללא ילדים, 21 עם ילדים, 56-62 גמלאים</p>
+              <p className="text-xs text-ink/60 mt-1">מינימום: 23 ללא ילדים, 21 עם ילדים, 56-62 גמלאים</p>
             </div>
 
             {/* סוג תעסוקה */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">סוג תעסוקה</label>
+              <label className="block text-sm font-medium text-ink/70 mb-2">סוג תעסוקה</label>
               <div className="grid grid-cols-3 gap-2">
                 {[
                   { id: 'salaried' as EmploymentType, label: 'שכיר' },
@@ -172,10 +172,10 @@ const CalculatorTab = () => {
                   <button
                     key={opt.id}
                     onClick={() => setEmploymentType(opt.id)}
-                    className={`px-3 py-2 rounded-lg text-sm border-2 font-medium transition-colors ${
+                    className={`px-3 py-2 rounded-none text-sm border-2 font-medium transition-colors ${
                       employmentType === opt.id
-                        ? 'bg-emerald-600 text-white border-emerald-600'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-emerald-300'
+                        ? 'bg-ink text-cream border-ink'
+                        : 'bg-paper text-ink/70 border-ink/15 hover:border-gold'
                     }`}
                   >
                     {opt.label}
@@ -187,7 +187,7 @@ const CalculatorTab = () => {
             {/* ותק עבודה */}
             {(employmentType === 'salaried' || employmentType === 'both') && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-ink/70 mb-1">
                   חודשי עבודה כשכיר
                 </label>
                 <input
@@ -196,15 +196,15 @@ const CalculatorTab = () => {
                   max={12}
                   value={monthsSalaried}
                   onChange={(e) => setMonthsSalaried(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
-                <p className="text-xs text-gray-500 mt-1">נדרש: לפחות 6 חודשים</p>
+                <p className="text-xs text-ink/60 mt-1">נדרש: לפחות 6 חודשים</p>
               </div>
             )}
 
             {(employmentType === 'self_employed' || employmentType === 'both') && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-ink/70 mb-1">
                   שבועות עצמאי (50%+ ממש)
                 </label>
                 <input
@@ -213,9 +213,9 @@ const CalculatorTab = () => {
                   max={52}
                   value={weeksSelfEmployed}
                   onChange={(e) => setWeeksSelfEmployed(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
-                <p className="text-xs text-gray-500 mt-1">נדרש: לפחות 13 שבועות</p>
+                <p className="text-xs text-ink/60 mt-1">נדרש: לפחות 13 שבועות</p>
               </div>
             )}
           </SectionCard>
@@ -223,7 +223,7 @@ const CalculatorTab = () => {
           <SectionCard title="מצב משפחתי">
             {/* מצב אישי */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">מצב אישי</label>
+              <label className="block text-sm font-medium text-ink/70 mb-2">מצב אישי</label>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {[
                   { id: 'single' as FamilyStatus, label: 'רווק/ה' },
@@ -234,10 +234,10 @@ const CalculatorTab = () => {
                   <button
                     key={opt.id}
                     onClick={() => setFamilyStatus(opt.id)}
-                    className={`px-3 py-2 rounded-lg text-sm border-2 font-medium transition-colors ${
+                    className={`px-3 py-2 rounded-none text-sm border-2 font-medium transition-colors ${
                       familyStatus === opt.id
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-blue-300'
+                        ? 'bg-ink text-cream border-ink'
+                        : 'bg-paper text-ink/70 border-ink/15 hover:border-gold'
                     }`}
                   >
                     {opt.label}
@@ -248,29 +248,29 @@ const CalculatorTab = () => {
 
             {/* ילדים */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-ink/70 mb-1">
                 מספר ילדים מתחת לגיל 18
               </label>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setChildren(Math.max(0, children - 1))}
-                  className="w-10 h-10 rounded-full bg-gray-200 text-gray-700 font-bold text-xl hover:bg-gray-300 transition-colors"
+                  className="w-10 h-10 rounded-full bg-cream-2 text-ink/70 font-bold text-xl hover:bg-paper-hover transition-colors"
                 >
                   -
                 </button>
-                <span className="text-3xl font-black text-emerald-700 w-12 text-center">{children}</span>
+                <span className="text-3xl font-black text-ink w-12 text-center">{children}</span>
                 <button
                   onClick={() => setChildren(Math.min(5, children + 1))}
-                  className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xl hover:bg-emerald-200 transition-colors"
+                  className="w-10 h-10 rounded-full bg-gold/20 text-gold font-bold text-xl hover:bg-gold/30 transition-colors"
                 >
                   +
                 </button>
-                <span className="text-sm text-gray-500">ילדים</span>
+                <span className="text-sm text-ink/60">ילדים</span>
               </div>
             </div>
 
             {children > 0 && (
-              <label className="flex items-center gap-3 p-3 bg-amber-50 border border-amber-200 rounded-lg cursor-pointer">
+              <label className="flex items-center gap-3 p-3 bg-amber-50 border border-amber-200 rounded-none cursor-pointer">
                 <input
                   type="checkbox"
                   checked={singleParent}
@@ -288,7 +288,7 @@ const CalculatorTab = () => {
               </label>
             )}
 
-            <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer">
+            <label className="flex items-center gap-3 p-3 bg-cream-2 rounded-none cursor-pointer">
               <input
                 type="checkbox"
                 checked={isResident}
@@ -304,7 +304,7 @@ const CalculatorTab = () => {
         <div className="lg:col-span-2 space-y-4">
           {result.isEligible ? (
             <>
-              <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-300 rounded-xl p-6">
+              <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0" />
                   <h3 className="text-lg font-bold text-emerald-900">זכאי למענק עבודה</h3>
@@ -335,12 +335,12 @@ const CalculatorTab = () => {
               </div>
 
               {/* Tier indicator */}
-              <div className={`rounded-xl p-4 border-2 flex items-center gap-3 ${
+              <div className={`rounded-none p-4 border-2 flex items-center gap-3 ${
                 result.tier.direction === 'rise'
-                  ? 'bg-blue-50 border-blue-200 text-blue-900'
+                  ? 'bg-cream-2 border-ink/15 text-ink'
                   : result.tier.direction === 'fall'
                   ? 'bg-amber-50 border-amber-200 text-amber-900'
-                  : 'bg-gray-50 border-gray-200 text-gray-700'
+                  : 'bg-cream-2 border-ink/15 text-ink/70'
               }`}>
                 {result.tier.direction === 'rise' ? (
                   <TrendingUp className="w-5 h-5 flex-shrink-0" />
@@ -358,20 +358,20 @@ const CalculatorTab = () => {
               </div>
 
               {/* Breakdown */}
-              <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-2 text-sm">
-                <h4 className="font-bold text-gray-900 mb-3">פירוט המענק</h4>
+              <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-2 text-sm">
+                <h4 className="font-bold text-ink mb-3">פירוט המענק</h4>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">מענק בסיס:</span>
+                  <span className="text-ink/70">מענק בסיס:</span>
                   <span className="font-medium">{formatCurrency(result.breakdown.baseGrant)}</span>
                 </div>
                 {result.breakdown.childrenBonus > 0 && (
-                  <div className="flex justify-between text-blue-700">
+                  <div className="flex justify-between text-ink/70">
                     <span>תוספת {result.numberOfChildren} ילד{result.numberOfChildren > 1 ? 'ים' : ''}:</span>
                     <span className="font-medium">+{formatCurrency(result.breakdown.childrenBonus)}</span>
                   </div>
                 )}
                 {result.breakdown.singleParentBonus > 0 && (
-                  <div className="flex justify-between text-purple-700">
+                  <div className="flex justify-between text-gold">
                     <span>תוספת הורה יחיד:</span>
                     <span className="font-medium">+{formatCurrency(result.breakdown.singleParentBonus)}</span>
                   </div>
@@ -383,7 +383,7 @@ const CalculatorTab = () => {
               </div>
 
               {/* Filing info */}
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-sm space-y-2">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-none p-4 text-sm space-y-2">
                 <div className="flex items-center gap-2 mb-2">
                   <Calendar className="w-4 h-4 text-emerald-700" />
                   <h4 className="font-bold text-emerald-900">איך מגישים?</h4>
@@ -399,7 +399,7 @@ const CalculatorTab = () => {
             </>
           ) : (
             <>
-              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6">
+              <div className="bg-red-50 border-2 border-red-300 rounded-none p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
                   <h3 className="text-lg font-bold text-red-900">לא זכאי בתנאים הנוכחיים</h3>
@@ -409,7 +409,7 @@ const CalculatorTab = () => {
                 )}
               </div>
 
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm">
+              <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm">
                 <p className="font-bold text-amber-900 mb-2">מה ניתן לעשות?</p>
                 <ul className="space-y-1.5 text-amber-800 text-xs">
                   {result.tips.map((tip, i) => (
@@ -422,12 +422,12 @@ const CalculatorTab = () => {
               </div>
 
               {/* Show potential grant at peak income */}
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm">
-                <p className="font-bold text-blue-900 mb-2">פוטנציאל (אם תהיה בטווח):</p>
-                <p className="text-blue-800 text-xs">
+              <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm">
+                <p className="font-bold text-ink mb-2">פוטנציאל (אם תהיה בטווח):</p>
+                <p className="text-ink/70 text-xs">
                   מקסימום עבור הפרופיל שלך: <strong>{formatCurrency(result.maxPossibleGrant)}/שנה</strong>
                 </p>
-                <p className="text-blue-700 text-xs mt-1">
+                <p className="text-ink/70 text-xs mt-1">
                   בהכנסה {WORK_GRANT_PEAK_INCOME_2026.toLocaleString('he-IL')} ₪/שנה
                 </p>
               </div>
@@ -436,7 +436,7 @@ const CalculatorTab = () => {
 
           {/* Tips */}
           {result.isEligible && result.tips.length > 0 && (
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+            <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-xs text-amber-900 space-y-1.5">
               <p className="font-bold mb-1 flex items-center gap-1.5">
                 <Info className="w-3.5 h-3.5" />
                 טיפים
@@ -454,7 +454,7 @@ const CalculatorTab = () => {
 
       {/* Grant Curve Chart */}
       <SectionCard title="עקומת המענק — איך הסכום משתנה לפי הכנסה">
-        <p className="text-xs text-gray-500 -mt-3 mb-2">
+        <p className="text-xs text-ink/60 -mt-3 mb-2">
           עלייה לשיא ב-{WORK_GRANT_PEAK_INCOME_2026.toLocaleString('he-IL')} ₪, ואז ירידה עד לאפס
         </p>
         <div className="h-56">
@@ -533,48 +533,48 @@ const EligibilityTab = () => {
       <SectionCard title="בדיקת תנאי זכאות">
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">גיל</label>
+            <label className="block text-sm font-medium text-ink/70 mb-1">גיל</label>
             <input
               type="number" min={18} max={80} value={age}
               onChange={(e) => setAge(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">הכנסה שנתית (₪)</label>
+            <label className="block text-sm font-medium text-ink/70 mb-1">הכנסה שנתית (₪)</label>
             <input
               type="number" min={0} step={1000} value={income}
               onChange={(e) => setIncome(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">מספר ילדים</label>
+            <label className="block text-sm font-medium text-ink/70 mb-1">מספר ילדים</label>
             <input
               type="number" min={0} max={5} value={children}
               onChange={(e) => setChildren(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">חודשי עבודה (שכיר)</label>
+            <label className="block text-sm font-medium text-ink/70 mb-1">חודשי עבודה (שכיר)</label>
             <input
               type="number" min={0} max={12} value={monthsSalaried}
               onChange={(e) => setMonthsSalaried(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
         </div>
 
-        <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer">
+        <label className="flex items-center gap-3 p-3 bg-cream-2 rounded-none cursor-pointer">
           <input type="checkbox" checked={singleParent} onChange={(e) => setSingleParent(e.target.checked)} className="w-4 h-4" />
           <span className="text-sm">הורה יחיד</span>
         </label>
       </SectionCard>
 
       {/* Condition checklist */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-4">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h3 className="font-bold text-ink mb-4">
           {result.eligibility.isEligible ? (
             <span className="text-emerald-700 flex items-center gap-2">
               <CheckCircle className="w-5 h-5" /> עומד בכל תנאי הזכאות
@@ -590,7 +590,7 @@ const EligibilityTab = () => {
           {result.eligibility.conditions.map((cond, i) => (
             <li
               key={i}
-              className={`flex items-start gap-3 p-3 rounded-lg ${
+              className={`flex items-start gap-3 p-3 rounded-none ${
                 cond.met ? 'bg-green-50' : 'bg-red-50'
               }`}
             >
@@ -612,7 +612,7 @@ const EligibilityTab = () => {
         </ul>
 
         {result.isEligible && (
-          <div className="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+          <div className="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-none">
             <p className="text-sm font-bold text-emerald-900">
               מענק משוער: {formatCurrency(result.annualGrant)}/שנה
             </p>
@@ -681,11 +681,11 @@ const ComparisonTab = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="bg-gray-50">
-              <th className="border border-gray-200 px-3 py-2 text-right font-semibold">פרמטר</th>
-              <th className="border border-gray-200 px-3 py-2 text-center font-semibold">2024</th>
-              <th className="border border-gray-200 px-3 py-2 text-center font-semibold text-emerald-700">2026</th>
-              <th className="border border-gray-200 px-3 py-2 text-center font-semibold text-blue-700">שינוי</th>
+            <tr className="bg-cream-2">
+              <th className="border border-ink/15 px-3 py-2 text-right font-semibold">פרמטר</th>
+              <th className="border border-ink/15 px-3 py-2 text-center font-semibold">2024</th>
+              <th className="border border-ink/15 px-3 py-2 text-center font-semibold text-emerald-700">2026</th>
+              <th className="border border-ink/15 px-3 py-2 text-center font-semibold text-gold">שינוי</th>
             </tr>
           </thead>
           <tbody>
@@ -724,15 +724,15 @@ const ComparisonTab = () => {
               const diff = row.v2026 - row.v2024;
               const pct = ((diff / row.v2024) * 100).toFixed(1);
               return (
-                <tr key={i} className="border-t border-gray-100 hover:bg-gray-50">
-                  <td className="border border-gray-200 px-3 py-2">{row.label}</td>
-                  <td className="border border-gray-200 px-3 py-2 text-center text-gray-500">
+                <tr key={i} className="border-t border-ink/15 hover:bg-cream-2">
+                  <td className="border border-ink/15 px-3 py-2">{row.label}</td>
+                  <td className="border border-ink/15 px-3 py-2 text-center text-ink/60">
                     {formatCurrency(row.v2024)}
                   </td>
-                  <td className="border border-gray-200 px-3 py-2 text-center font-semibold text-emerald-700">
+                  <td className="border border-ink/15 px-3 py-2 text-center font-semibold text-emerald-700">
                     {formatCurrency(row.v2026)}
                   </td>
-                  <td className="border border-gray-200 px-3 py-2 text-center text-blue-700 font-medium">
+                  <td className="border border-ink/15 px-3 py-2 text-center text-gold font-medium">
                     +{pct}%
                   </td>
                 </tr>
@@ -791,13 +791,13 @@ const BenefitsTab = () => {
     {
       name: 'קצבת ילדים',
       value: annualChildAllowance,
-      color: '#3b82f6',
+      color: '#102219',
       description: `${children} ילדים × חודשי`,
     },
     {
       name: 'סה"כ',
       value: Math.round(workGrant.annualGrant) + annualChildAllowance,
-      color: '#8b5cf6',
+      color: '#D8B36A',
       description: 'מענק + קצבת ילדים',
     },
   ];
@@ -806,19 +806,19 @@ const BenefitsTab = () => {
     <div className="space-y-5">
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">הכנסה שנתית (₪)</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">הכנסה שנתית (₪)</label>
           <input
             type="number" min={0} step={1000} value={income}
             onChange={(e) => setIncome(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">ילדים</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">ילדים</label>
           <input
             type="number" min={0} max={5} value={children}
             onChange={(e) => setChildren(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
         </div>
         <div className="flex items-end">
@@ -851,14 +851,14 @@ const BenefitsTab = () => {
         {barData.map((item, i) => (
           <div
             key={i}
-            className="rounded-xl p-4 text-center border-2"
+            className="rounded-none p-4 text-center border-2"
             style={{ borderColor: item.color, backgroundColor: `${item.color}15` }}
           >
-            <p className="text-xs text-gray-500 mb-1">{item.name}</p>
+            <p className="text-xs text-ink/60 mb-1">{item.name}</p>
             <p className="text-2xl font-black" style={{ color: item.color }}>
               {formatCurrency(item.value)}
             </p>
-            <p className="text-xs text-gray-500 mt-1">{item.description}</p>
+            <p className="text-xs text-ink/60 mt-1">{item.description}</p>
           </div>
         ))}
       </div>
@@ -893,7 +893,7 @@ export function NITCalculator() {
   return (
     <div className="space-y-4">
       {/* Tab header */}
-      <div className="flex flex-wrap gap-2 bg-gray-50 border border-gray-200 rounded-xl p-2">
+      <div className="flex flex-wrap gap-2 bg-cream-2 border border-ink/15 rounded-none p-2">
         {TABS.map((tab) => (
           <TabButton
             key={tab.id}

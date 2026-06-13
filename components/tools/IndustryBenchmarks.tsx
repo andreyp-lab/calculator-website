@@ -49,24 +49,24 @@ export function IndustryBenchmarks() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Trophy className="w-5 h-5" />
             השוואה לבנצ'מרק ענפי
           </h3>
-          <p className="text-xs text-emerald-100">
+          <p className="text-xs text-cream/70">
             מקור: {benchmark.source} • {benchmark.asOfYear}
           </p>
         </div>
 
         <div className="p-4 flex items-center justify-between">
           <div>
-            <label className="block text-xs text-gray-700 mb-1">ענף להשוואה</label>
+            <label className="block text-xs text-ink/70 mb-1">ענף להשוואה</label>
             <select
               value={industry}
               onChange={(e) => setIndustryOverride(e.target.value as Industry)}
-              className="px-3 py-1.5 border border-gray-300 rounded text-sm"
+              className="px-3 py-1.5 border border-ink/15 rounded-none text-sm"
             >
               {Object.values(INDUSTRY_BENCHMARKS).map((b) => (
                 <option key={b.industry} value={b.industry}>
@@ -78,7 +78,7 @@ export function IndustryBenchmarks() {
 
           {/* Overall Score */}
           <div className="text-center">
-            <div className="text-xs text-gray-600 mb-1">ציון בריאות פיננסית כולל</div>
+            <div className="text-xs text-ink/60 mb-1">ציון בריאות פיננסית כולל</div>
             <div
               className={`text-3xl font-bold ${
                 overallScore >= 75
@@ -89,7 +89,7 @@ export function IndustryBenchmarks() {
               }`}
             >
               {Math.round(overallScore)}
-              <span className="text-base text-gray-500">/100</span>
+              <span className="text-base text-ink/60">/100</span>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ export function IndustryBenchmarks() {
       </div>
 
       {insights.length === 0 && (
-        <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center text-amber-900">
+        <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6 text-center text-ink">
           הזן נתוני תקציב כדי לראות השוואה
         </div>
       )}
@@ -138,7 +138,7 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 p-3 shadow-sm">
+    <div className="bg-paper border-2 border-ink/15 rounded-none p-3 shadow-sm">
       <div className="flex items-center justify-between mb-2">
         <h4 className="font-semibold text-sm">{metricLabel}</h4>
         <span
@@ -154,14 +154,14 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
       </div>
 
       <div className="flex items-baseline gap-2 mb-3">
-        <span className="text-2xl font-bold text-gray-900">{formatValue(yourValue)}</span>
-        <span className="text-xs text-gray-500">בנצ'מרק חציון: {formatValue(benchmark.median)}</span>
+        <span className="text-2xl font-bold text-ink">{formatValue(yourValue)}</span>
+        <span className="text-xs text-ink/60">בנצ'מרק חציון: {formatValue(benchmark.median)}</span>
       </div>
 
       {/* Spectrum bar */}
-      <div className="relative h-2 bg-gray-100 rounded mb-2">
+      <div className="relative h-2 bg-ink/10 rounded-none mb-2">
         <div
-          className="absolute h-full bg-gradient-to-r from-red-200 via-amber-200 to-emerald-200 rounded"
+          className="absolute h-full bg-gradient-to-r from-red-200 via-amber-200 to-emerald-200"
           style={{
             left: `${lowPct}%`,
             width: `${Math.max(0, highPct - lowPct)}%`,
@@ -174,12 +174,12 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
         />
         {/* Your marker */}
         <div
-          className="absolute -top-1 w-3 h-4 rounded-sm bg-blue-600 border-2 border-white shadow"
+          className="absolute -top-1 w-3 h-4 rounded-none bg-gold border-2 border-paper shadow"
           style={{ left: `calc(${yourPct}% - 6px)` }}
         />
       </div>
 
-      <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+      <div className="flex items-center justify-between text-xs text-ink/60 mb-2">
         <span>Q1: {formatValue(benchmark.low)}</span>
         <span>חציון: {formatValue(benchmark.median)}</span>
         <span>Q3: {formatValue(benchmark.high)}</span>
@@ -193,7 +193,7 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
         ) : (
           <AlertTriangle className="w-3.5 h-3.5 text-red-600 shrink-0 mt-0.5" />
         )}
-        <span className="text-gray-700">{message}</span>
+        <span className="text-ink/70">{message}</span>
       </div>
     </div>
   );

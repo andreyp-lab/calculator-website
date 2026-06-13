@@ -109,7 +109,7 @@ export function VehicleOwnershipCalculator() {
             <select
               value={input.carSegment}
               onChange={(e) => changeSegment(e.target.value as CarSegment)}
-              className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             >
               {(Object.keys(SEGMENT_LABELS) as CarSegment[]).map((s) => (
                 <option key={s} value={s}>
@@ -123,7 +123,7 @@ export function VehicleOwnershipCalculator() {
               type="number"
               value={input.carPrice}
               onChange={(e) => update('carPrice', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             />
           </Field>
           <Field label="שנות שימוש">
@@ -133,7 +133,7 @@ export function VehicleOwnershipCalculator() {
               max={15}
               value={input.yearsOfUse}
               onChange={(e) => update('yearsOfUse', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             />
           </Field>
           <Field label="ק״מ חודשיים">
@@ -141,14 +141,14 @@ export function VehicleOwnershipCalculator() {
               type="number"
               value={input.monthlyKm}
               onChange={(e) => update('monthlyKm', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             />
           </Field>
           <Field label="סוג דלק">
             <select
               value={input.fuelType}
               onChange={(e) => changeFuelType(e.target.value as FuelType)}
-              className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             >
               {(Object.keys(FUEL_LABELS) as FuelType[]).map((ft) => (
                 <option key={ft} value={ft}>
@@ -163,7 +163,7 @@ export function VehicleOwnershipCalculator() {
               step={0.5}
               value={input.fuelEfficiency}
               onChange={(e) => update('fuelEfficiency', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             />
           </Field>
         </div>
@@ -187,7 +187,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.cashPrice}
                 onChange={(e) => update('cashPrice', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field
@@ -201,10 +201,10 @@ export function VehicleOwnershipCalculator() {
                 onChange={(e) =>
                   update('alternativeInvestmentReturn', Number(e.target.value))
                 }
-                className="w-full px-3 py-2 border border-emerald-300 rounded text-sm bg-emerald-50"
+                className="w-full px-3 py-2 border border-emerald-300 rounded-none text-sm bg-emerald-50"
               />
             </Field>
-            <div className="text-xs text-emerald-800 bg-emerald-50 p-2 rounded">
+            <div className="text-xs text-emerald-800 bg-emerald-50 p-2 rounded-none">
               💡 <strong>עלות הזדמנות</strong>: כסף שיוצא לרכב לא מרוויח בהשקעה. המחשבון לוקח את זה בחשבון.
             </div>
           </div>
@@ -214,7 +214,7 @@ export function VehicleOwnershipCalculator() {
         <Section
           title={
             <span className="flex items-center gap-2">
-              <CreditCard className="w-5 h-5 text-blue-600" />
+              <CreditCard className="w-5 h-5 text-ink-mid" />
               🏦 הלוואה
             </span>
           }
@@ -226,7 +226,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.loanDownPayment}
                 onChange={(e) => update('loanDownPayment', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="סכום הלוואה (₪)">
@@ -234,7 +234,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.loanAmount}
                 onChange={(e) => update('loanAmount', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <div className="grid grid-cols-2 gap-2">
@@ -243,7 +243,7 @@ export function VehicleOwnershipCalculator() {
                   type="number"
                   value={input.loanTermMonths}
                   onChange={(e) => update('loanTermMonths', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
                 />
               </Field>
               <Field label="ריבית (%)">
@@ -252,7 +252,7 @@ export function VehicleOwnershipCalculator() {
                   step={0.1}
                   value={input.loanRate}
                   onChange={(e) => update('loanRate', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
                 />
               </Field>
             </div>
@@ -274,7 +274,7 @@ export function VehicleOwnershipCalculator() {
         <Section
           title={
             <span className="flex items-center gap-2">
-              <RefreshCw className="w-5 h-5 text-purple-600" />
+              <RefreshCw className="w-5 h-5 text-gold" />
               🚙 ליסינג
             </span>
           }
@@ -286,7 +286,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.leasingInitialPayment}
                 onChange={(e) => update('leasingInitialPayment', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="תשלום חודשי (₪)">
@@ -294,7 +294,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.leasingMonthlyPayment}
                 onChange={(e) => update('leasingMonthlyPayment', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="תשלום סופי (אם תקנה)">
@@ -302,7 +302,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.leasingFinalPayment}
                 onChange={(e) => update('leasingFinalPayment', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <div className="space-y-1 text-sm">
@@ -343,16 +343,16 @@ export function VehicleOwnershipCalculator() {
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="w-full bg-gray-100 hover:bg-gray-200 rounded-xl p-4 flex items-center justify-between transition"
+          className="w-full bg-cream-2 hover:bg-paper-hover rounded-none p-4 flex items-center justify-between transition"
         >
-          <span className="font-bold text-gray-900 flex items-center gap-2">
+          <span className="font-bold text-ink flex items-center gap-2">
             ⚙️ עלויות תפעול מפורטות (ביטוח, רישוי, טיפולים, צמיגים)
           </span>
           {showAdvanced ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </button>
 
         {showAdvanced && (
-          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4 bg-white border-2 border-gray-200 rounded-xl p-5">
+          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4 bg-paper border-2 border-ink/15 rounded-none p-5">
             <Field label="ביטוח חובה שנתי (₪)">
               <input
                 type="number"
@@ -360,7 +360,7 @@ export function VehicleOwnershipCalculator() {
                 onChange={(e) =>
                   update('insuranceMandatoryYearly', Number(e.target.value))
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="ביטוח מקיף שנתי (₪)">
@@ -370,7 +370,7 @@ export function VehicleOwnershipCalculator() {
                 onChange={(e) =>
                   update('insuranceComprehensiveYearly', Number(e.target.value))
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="אגרת רישוי שנתית (₪)">
@@ -378,7 +378,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.licenseFeeYearly}
                 onChange={(e) => update('licenseFeeYearly', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="טסט שנתי (₪)">
@@ -386,7 +386,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.annualInspection}
                 onChange={(e) => update('annualInspection', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="טיפולים תקופתיים (₪/שנה)">
@@ -394,7 +394,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.serviceYearly}
                 onChange={(e) => update('serviceYearly', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="תיקונים בלתי צפויים (₪/שנה)">
@@ -404,7 +404,7 @@ export function VehicleOwnershipCalculator() {
                 onChange={(e) =>
                   update('unexpectedRepairsYearly', Number(e.target.value))
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="החלפת צמיגים כל כמה ק״מ">
@@ -412,7 +412,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.tiresEveryKm}
                 onChange={(e) => update('tiresEveryKm', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="עלות סט צמיגים (₪)">
@@ -420,7 +420,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.tiresSetPrice}
                 onChange={(e) => update('tiresSetPrice', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="חניה שנתית (₪)">
@@ -428,7 +428,7 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.parkingYearly}
                 onChange={(e) => update('parkingYearly', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="כביש 6 / אגרות חודשיות (₪)">
@@ -436,11 +436,11 @@ export function VehicleOwnershipCalculator() {
                 type="number"
                 value={input.tollsMonthly}
                 onChange={(e) => update('tollsMonthly', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </Field>
             <Field label="עוסק מורשה? (מע״מ מקוזז)">
-              <label className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded">
+              <label className="flex items-center gap-2 px-3 py-2 border border-ink/15 rounded-none">
                 <input
                   type="checkbox"
                   checked={input.vatRefundable}
@@ -472,7 +472,7 @@ export function VehicleOwnershipCalculator() {
 
       {/* המלצות */}
       {result.recommendations.length > 0 && (
-        <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-5">
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-5">
           <h3 className="text-lg font-bold text-amber-900 mb-3 flex items-center gap-2">
             <TrendingUp className="w-5 h-5" />
             המלצות חכמות
@@ -489,13 +489,13 @@ export function VehicleOwnershipCalculator() {
       )}
 
       {/* עלויות תפעול שנתיות */}
-      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm">
         <div className="flex items-center justify-between flex-wrap gap-2">
-          <span className="text-gray-700">
+          <span className="text-ink/70">
             💸 עלות תפעול שנתית (משותפת לכל האופציות):{' '}
             <strong>{formatCurrency(result.yearlyOperatingCost)}</strong>
           </span>
-          <span className="text-gray-600">
+          <span className="text-ink/70">
             עלות לק״מ: <strong>{(result.costPerKm[result.cheapest] || 0).toFixed(2)} ₪</strong>{' '}
             (באופציה הזולה)
           </span>
@@ -517,14 +517,14 @@ function Section({
   children: React.ReactNode;
 }) {
   const bgMap = {
-    gray: 'bg-white border-gray-200',
+    gray: 'bg-paper border-ink/15',
     emerald: 'bg-emerald-50 border-emerald-200',
-    blue: 'bg-blue-50 border-blue-200',
-    purple: 'bg-purple-50 border-purple-200',
+    blue: 'bg-cream-2 border-ink/15',
+    purple: 'bg-cream-2 border-gold/40',
   };
   return (
-    <div className={`rounded-xl border-2 p-5 ${bgMap[color]}`}>
-      <h3 className="font-bold text-gray-900 text-base mb-4">{title}</h3>
+    <div className={`rounded-none border-2 p-5 ${bgMap[color]}`}>
+      <h3 className="font-bold text-ink text-base mb-4">{title}</h3>
       {children}
     </div>
   );
@@ -541,9 +541,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-xs font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -557,24 +557,24 @@ function ResultCard({
 }) {
   const colorMap: Record<PaymentMethod, string> = {
     cash: 'border-emerald-400 bg-emerald-50',
-    loan: 'border-blue-400 bg-blue-50',
-    leasing: 'border-purple-400 bg-purple-50',
+    loan: 'border-ink/30 bg-cream-2',
+    leasing: 'border-gold/40 bg-cream-2',
   };
   const accentMap: Record<PaymentMethod, string> = {
     cash: 'text-emerald-700',
-    loan: 'text-blue-700',
-    leasing: 'text-purple-700',
+    loan: 'text-ink',
+    leasing: 'text-gold',
   };
   return (
     <div
-      className={`rounded-xl border-2 p-5 ${colorMap[option.method]} ${
-        isCheapest ? 'ring-4 ring-amber-300' : ''
+      className={`rounded-none border-2 p-5 ${colorMap[option.method]} ${
+        isCheapest ? 'ring-4 ring-gold/40' : ''
       }`}
     >
       <div className="flex items-center justify-between mb-2">
-        <h4 className="font-bold text-gray-900">{option.label}</h4>
+        <h4 className="font-bold text-ink">{option.label}</h4>
         {isCheapest && (
-          <span className="bg-amber-400 text-amber-900 text-xs font-bold px-2 py-0.5 rounded">
+          <span className="bg-gold text-ink text-xs font-bold px-2 py-0.5 rounded-none">
             הזול ביותר
           </span>
         )}
@@ -582,22 +582,22 @@ function ResultCard({
       <div className={`text-3xl font-bold tabular-nums mb-1 ${accentMap[option.method]}`}>
         {formatCurrency(option.totalCost)}
       </div>
-      <p className="text-xs text-gray-600 mb-3">סך עלות לתקופה</p>
+      <p className="text-xs text-ink/60 mb-3">סך עלות לתקופה</p>
 
       <div className="space-y-1 text-sm">
         <div className="flex justify-between">
-          <span className="text-gray-600">חודשי ממוצע:</span>
+          <span className="text-ink/60">חודשי ממוצע:</span>
           <span className="font-medium tabular-nums">
             {formatCurrency(option.monthlyAverage)}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-600">תשלום ב-Day 1:</span>
+          <span className="text-ink/60">תשלום ב-Day 1:</span>
           <span className="font-medium tabular-nums">{formatCurrency(option.upfrontCash)}</span>
         </div>
         {option.opportunityCost > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">עלות הזדמנות:</span>
+            <span className="text-ink/60">עלות הזדמנות:</span>
             <span className="font-medium tabular-nums text-amber-700">
               {formatCurrency(option.opportunityCost)}
             </span>
@@ -605,7 +605,7 @@ function ResultCard({
         )}
         {option.assetValueAtEnd > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">שווי רכב בסוף:</span>
+            <span className="text-ink/60">שווי רכב בסוף:</span>
             <span className="font-medium tabular-nums text-emerald-700">
               {formatCurrency(option.assetValueAtEnd)}
             </span>
@@ -630,13 +630,13 @@ function ComparisonBar({
   );
   const opts = [result.options.cash, result.options.loan, result.options.leasing];
   const colorMap: Record<PaymentMethod, string> = {
-    cash: 'bg-emerald-500',
-    loan: 'bg-blue-500',
-    leasing: 'bg-purple-500',
+    cash: 'bg-emerald-600',
+    loan: 'bg-ink',
+    leasing: 'bg-gold',
   };
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-      <h3 className="font-bold text-gray-900 mb-4">📊 השוואת סך עלות ({years} שנים)</h3>
+    <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+      <h3 className="font-bold text-ink mb-4">📊 השוואת סך עלות ({years} שנים)</h3>
       <div className="space-y-3">
         {opts.map((o) => {
           const widthPct = (o.totalCost / max) * 100;
@@ -654,7 +654,7 @@ function ComparisonBar({
                   )}
                 </span>
               </div>
-              <div className="h-6 bg-gray-100 rounded overflow-hidden">
+              <div className="h-6 bg-cream-2 rounded-none overflow-hidden">
                 <div
                   className={`h-full ${colorMap[o.method]} transition-all`}
                   style={{ width: `${widthPct}%` }}
@@ -701,8 +701,8 @@ function CumulativeChart({
       .join(' ');
 
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-      <h3 className="font-bold text-gray-900 mb-3">📈 התפתחות עלות מצטברת לאורך השנים</h3>
+    <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+      <h3 className="font-bold text-ink mb-3">📈 התפתחות עלות מצטברת לאורך השנים</h3>
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-64">
         {/* Grid */}
         {[0, 0.25, 0.5, 0.75, 1].map((t) => (
@@ -726,14 +726,14 @@ function CumulativeChart({
         {/* Loan line */}
         <polyline
           fill="none"
-          stroke="#3b82f6"
+          stroke="#102219"
           strokeWidth="1.2"
           points={points(result.options.loan.cumulativeByYear)}
         />
         {/* Leasing line */}
         <polyline
           fill="none"
-          stroke="#a855f7"
+          stroke="#8E6824"
           strokeWidth="1.2"
           points={points(result.options.leasing.cumulativeByYear)}
         />
@@ -752,10 +752,10 @@ function CumulativeChart({
           <span className="inline-block w-4 h-1 bg-emerald-500" /> מזומן
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block w-4 h-1 bg-blue-500" /> הלוואה
+          <span className="inline-block w-4 h-1 bg-ink" /> הלוואה
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block w-4 h-1 bg-purple-500" /> ליסינג
+          <span className="inline-block w-4 h-1 bg-gold" /> ליסינג
         </span>
       </div>
     </div>
@@ -781,17 +781,17 @@ function BreakdownCard({
 }) {
   const borderMap = {
     emerald: 'border-emerald-200',
-    blue: 'border-blue-200',
-    purple: 'border-purple-200',
+    blue: 'border-ink/15',
+    purple: 'border-gold/40',
   };
   return (
-    <div className={`bg-white border-2 rounded-xl p-4 ${borderMap[color]}`}>
-      <h4 className="font-bold text-gray-900 mb-3">{option.label}</h4>
+    <div className={`bg-paper border-2 rounded-none p-4 ${borderMap[color]}`}>
+      <h4 className="font-bold text-ink mb-3">{option.label}</h4>
       <div className="space-y-1.5 text-sm">
         {option.breakdown.map((item, i) => (
-          <div key={i} className="border-b border-gray-100 pb-1.5">
+          <div key={i} className="border-b border-ink/10 pb-1.5">
             <div className="flex justify-between">
-              <span className={item.value < 0 ? 'text-emerald-700' : 'text-gray-700'}>
+              <span className={item.value < 0 ? 'text-emerald-700' : 'text-ink/70'}>
                 {item.label}
               </span>
               <span
@@ -803,10 +803,10 @@ function BreakdownCard({
                 {formatCurrency(Math.abs(item.value))}
               </span>
             </div>
-            {item.note && <div className="text-xs text-gray-500 mt-0.5">{item.note}</div>}
+            {item.note && <div className="text-xs text-ink/60 mt-0.5">{item.note}</div>}
           </div>
         ))}
-        <div className="flex justify-between pt-2 font-bold border-t-2 border-gray-300">
+        <div className="flex justify-between pt-2 font-bold border-t-2 border-ink/20">
           <span>סה״כ</span>
           <span className="tabular-nums">{formatCurrency(option.totalCost)}</span>
         </div>

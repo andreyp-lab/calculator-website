@@ -117,27 +117,27 @@ export default function UnemploymentBenefitsPage() {
           <h2>שיעורי תשלום מדורגים (2026)</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="border border-gray-300 p-2 text-right">מדרגת שכר</th>
-                <th className="border border-gray-300 p-2 text-right">% מהשכר</th>
-                <th className="border border-gray-300 p-2 text-right">שכר עד (₪/חודש)</th>
+              <tr className="bg-ink text-cream">
+                <th className="border border-ink/20 p-2 text-right">מדרגת שכר</th>
+                <th className="border border-ink/20 p-2 text-right">% מהשכר</th>
+                <th className="border border-ink/20 p-2 text-right">שכר עד (₪/חודש)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-2">עד 60% מהשכר הממוצע</td>
-                <td className="border border-gray-300 p-2 font-bold text-green-700">80%</td>
-                <td className="border border-gray-300 p-2">עד 8,261 ₪</td>
+                <td className="border border-ink/15 p-2">עד 60% מהשכר הממוצע</td>
+                <td className="border border-ink/15 p-2 font-bold text-green-700">80%</td>
+                <td className="border border-ink/15 p-2">עד 8,261 ₪</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">60–80% מהשכר הממוצע</td>
-                <td className="border border-gray-300 p-2 font-bold text-blue-700">60%</td>
-                <td className="border border-gray-300 p-2">עד 11,015 ₪</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">60–80% מהשכר הממוצע</td>
+                <td className="border border-ink/15 p-2 font-bold text-ink-mid">60%</td>
+                <td className="border border-ink/15 p-2">עד 11,015 ₪</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-2">מעל 80% מהשכר הממוצע</td>
-                <td className="border border-gray-300 p-2 font-bold text-amber-700">50%</td>
-                <td className="border border-gray-300 p-2">מעל 11,015 ₪</td>
+                <td className="border border-ink/15 p-2">מעל 80% מהשכר הממוצע</td>
+                <td className="border border-ink/15 p-2 font-bold text-gold">50%</td>
+                <td className="border border-ink/15 p-2">מעל 11,015 ₪</td>
               </tr>
             </tbody>
           </table>
@@ -151,37 +151,37 @@ export default function UnemploymentBenefitsPage() {
           <h2>תקופת זכאות לפי גיל ומשפחה</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="border border-gray-300 p-2 text-right">גיל</th>
-                <th className="border border-gray-300 p-2 text-right">ללא ילדים</th>
-                <th className="border border-gray-300 p-2 text-right">עם ילדים (מתחת ל-18)</th>
+              <tr className="bg-ink text-cream">
+                <th className="border border-ink/20 p-2 text-right">גיל</th>
+                <th className="border border-ink/20 p-2 text-right">ללא ילדים</th>
+                <th className="border border-ink/20 p-2 text-right">עם ילדים (מתחת ל-18)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-2">20–24</td>
-                <td className="border border-gray-300 p-2">50 ימים</td>
-                <td className="border border-gray-300 p-2">100 ימים</td>
+                <td className="border border-ink/15 p-2">20–24</td>
+                <td className="border border-ink/15 p-2">50 ימים</td>
+                <td className="border border-ink/15 p-2">100 ימים</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">25–27</td>
-                <td className="border border-gray-300 p-2">100 ימים</td>
-                <td className="border border-gray-300 p-2">100 ימים</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">28–34</td>
-                <td className="border border-gray-300 p-2">138 ימים</td>
-                <td className="border border-gray-300 p-2">138 ימים</td>
-              </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">35–44</td>
-                <td className="border border-gray-300 p-2">138 ימים</td>
-                <td className="border border-gray-300 p-2 font-bold">175 ימים</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">25–27</td>
+                <td className="border border-ink/15 p-2">100 ימים</td>
+                <td className="border border-ink/15 p-2">100 ימים</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-2">45+</td>
-                <td className="border border-gray-300 p-2 font-bold">175 ימים</td>
-                <td className="border border-gray-300 p-2 font-bold">175 ימים</td>
+                <td className="border border-ink/15 p-2">28–34</td>
+                <td className="border border-ink/15 p-2">138 ימים</td>
+                <td className="border border-ink/15 p-2">138 ימים</td>
+              </tr>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">35–44</td>
+                <td className="border border-ink/15 p-2">138 ימים</td>
+                <td className="border border-ink/15 p-2 font-bold">175 ימים</td>
+              </tr>
+              <tr>
+                <td className="border border-ink/15 p-2">45+</td>
+                <td className="border border-ink/15 p-2 font-bold">175 ימים</td>
+                <td className="border border-ink/15 p-2 font-bold">175 ימים</td>
               </tr>
             </tbody>
           </table>
@@ -205,7 +205,7 @@ export default function UnemploymentBenefitsPage() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.btl.gov.il/benefits/Unemployment"

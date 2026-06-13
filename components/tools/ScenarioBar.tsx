@@ -32,16 +32,16 @@ export function ScenarioBar() {
   }
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 p-4 mb-4 shadow-sm">
+    <div className="bg-paper rounded-none border-2 border-ink/15 p-4 mb-4 shadow-sm">
       <div className="flex items-center gap-3 flex-wrap">
-        <div className="flex items-center gap-2 text-gray-700">
+        <div className="flex items-center gap-2 text-ink/70">
           <FolderOpen className="w-5 h-5" />
           <span className="font-medium">תרחיש פעיל:</span>
         </div>
         <select
           value={scenarioId}
           onChange={(e) => switchScenario(e.target.value)}
-          className="flex-1 min-w-[200px] px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+          className="flex-1 min-w-[200px] px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
         >
           {scenariosList.map((s) => (
             <option key={s.id} value={s.id}>
@@ -51,7 +51,7 @@ export function ScenarioBar() {
         </select>
         <button
           onClick={() => setShowCreate(!showCreate)}
-          className="flex items-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+          className="flex items-center gap-1 px-3 py-2 bg-ink text-cream rounded-none hover:bg-ink-deep text-sm"
         >
           <Plus className="w-4 h-4" />
           חדש
@@ -59,7 +59,7 @@ export function ScenarioBar() {
         {scenarioId !== 'default' && (
           <button
             onClick={handleDelete}
-            className="flex items-center gap-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
+            className="flex items-center gap-1 px-3 py-2 bg-red-600 text-cream rounded-none hover:bg-red-700 text-sm"
           >
             <Trash2 className="w-4 h-4" />
             מחק
@@ -68,25 +68,25 @@ export function ScenarioBar() {
       </div>
 
       {showCreate && (
-        <div className="mt-4 pt-4 border-t border-gray-200 space-y-3">
+        <div className="mt-4 pt-4 border-t border-ink/15 space-y-3">
           <input
             type="text"
             placeholder="שם התרחיש (למשל: תרחיש אופטימי)"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
           <textarea
             placeholder="תיאור (אופציונלי)"
             value={newDesc}
             onChange={(e) => setNewDesc(e.target.value)}
             rows={2}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
           <select
             value={baseId}
             onChange={(e) => setBaseId(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           >
             <option value="">התחל מאפס</option>
             {scenariosList.map((s) => (
@@ -99,13 +99,13 @@ export function ScenarioBar() {
             <button
               onClick={handleCreate}
               disabled={!newName.trim()}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50"
+              className="px-4 py-2 bg-ink text-cream rounded-none hover:bg-ink-deep disabled:opacity-50"
             >
               צור תרחיש
             </button>
             <button
               onClick={() => setShowCreate(false)}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+              className="px-4 py-2 bg-cream-2 text-ink rounded-none hover:bg-paper-hover"
             >
               ביטול
             </button>

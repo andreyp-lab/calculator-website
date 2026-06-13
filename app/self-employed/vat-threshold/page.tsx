@@ -160,19 +160,19 @@ export default function Page() {
           <h2>כלים קשורים</h2>
           <ul>
             <li>
-              <a href="/self-employed/vat" className="text-blue-700 hover:underline">
+              <a href="/self-employed/vat" className="text-gold hover:underline">
                 מחשבון מע&quot;מ
               </a>{' '}
               — הוספה, חילוץ ודוח דו-חודשי לעוסק מורשה
             </li>
             <li>
-              <a href="/self-employed/tax-advances" className="text-blue-700 hover:underline">
+              <a href="/self-employed/tax-advances" className="text-gold hover:underline">
                 מחשבון מקדמות מס לעצמאי
               </a>{' '}
               — מס הכנסה, ביטוח לאומי ומע&quot;מ
             </li>
             <li>
-              <a href="/self-employed/opening-business" className="text-blue-700 hover:underline">
+              <a href="/self-employed/opening-business" className="text-gold hover:underline">
                 מדריך פתיחת עסק
               </a>{' '}
               — פתיחת תיקים, טפסים ועלויות
@@ -182,7 +182,7 @@ export default function Page() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.kolzchut.org.il/he/%D7%A2%D7%95%D7%A1%D7%A7_%D7%A4%D7%98%D7%95%D7%A8"

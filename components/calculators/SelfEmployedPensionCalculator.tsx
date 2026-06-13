@@ -39,8 +39,8 @@ import {
 // ============================================================
 
 const SectionCard = ({ title, children, className = '' }: { title: string; children: React.ReactNode; className?: string }) => (
-  <div className={`bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4 ${className}`}>
-    <h2 className="text-lg font-bold text-gray-900">{title}</h2>
+  <div className={`bg-paper border border-ink/15 rounded-none p-6 space-y-4 ${className}`}>
+    <h2 className="text-lg font-bold text-ink">{title}</h2>
     {children}
   </div>
 );
@@ -53,12 +53,12 @@ const InfoBox = ({
   variant?: 'blue' | 'amber' | 'red' | 'green';
 }) => {
   const classes: Record<string, string> = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
     red: 'bg-red-50 border-red-200 text-red-900',
     green: 'bg-green-50 border-green-200 text-green-900',
   };
-  return <div className={`border rounded-xl p-4 ${classes[variant]}`}>{children}</div>;
+  return <div className={`border rounded-none p-4 ${classes[variant]}`}>{children}</div>;
 };
 
 const TabButton = ({
@@ -72,10 +72,10 @@ const TabButton = ({
 }) => (
   <button
     onClick={onClick}
-    className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+    className={`px-4 py-2.5 rounded-none text-sm font-medium transition-colors whitespace-nowrap ${
       active
-        ? 'bg-blue-600 text-white shadow-sm'
-        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+        ? 'bg-ink text-cream'
+        : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
     }`}
   >
     {children}
@@ -130,7 +130,7 @@ const CalculatorTab = () => {
         <div className="lg:col-span-3 space-y-5">
           <SectionCard title="פרטי הכנסה">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-ink/70 mb-1">
                 הכנסה חודשית ממוצעת (₪)
               </label>
               <input
@@ -139,14 +139,14 @@ const CalculatorTab = () => {
                 step={500}
                 value={income}
                 onChange={(e) => setIncome(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xl font-bold focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-xl font-bold focus:ring-2 focus:ring-gold focus:border-transparent"
               />
               <div className="mt-2 flex items-center gap-2 text-xs">
-                <div className={`h-2 flex-1 rounded-full overflow-hidden bg-gray-100`}>
+                <div className={`h-2 flex-1 rounded-full overflow-hidden bg-cream-2`}>
                   <div
                     className={`h-full rounded-full transition-all ${
                       income <= HALF_AVERAGE_WAGE_2026
-                        ? 'bg-blue-400'
+                        ? 'bg-gold'
                         : income <= AVERAGE_WAGE_2026
                         ? 'bg-emerald-500'
                         : 'bg-amber-400'
@@ -154,7 +154,7 @@ const CalculatorTab = () => {
                     style={{ width: `${Math.min(100, (income / (AVERAGE_WAGE_2026 * 1.5)) * 100)}%` }}
                   />
                 </div>
-                <span className="text-gray-500 whitespace-nowrap">
+                <span className="text-ink/60 whitespace-nowrap">
                   {income <= HALF_AVERAGE_WAGE_2026
                     ? `שלב 1 (4.45%)`
                     : income <= AVERAGE_WAGE_2026
@@ -165,7 +165,7 @@ const CalculatorTab = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-ink/70 mb-1">
                 מס שולי שלך (%)
               </label>
               <div className="grid grid-cols-5 gap-1.5 mb-2">
@@ -173,10 +173,10 @@ const CalculatorTab = () => {
                   <button
                     key={rate}
                     onClick={() => setMarginalRate(rate)}
-                    className={`py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`py-2 rounded-none text-sm font-medium transition-colors ${
                       marginalRate === rate
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        ? 'bg-ink text-cream'
+                        : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
                     }`}
                   >
                     {rate}%
@@ -190,12 +190,12 @@ const CalculatorTab = () => {
                 step={1}
                 value={marginalRate}
                 onChange={(e) => setMarginalRate(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-gray-500 mt-1">עצמאי בהכנסה 15K-25K: לרוב 31%-35%</p>
+              <p className="text-xs text-ink/60 mt-1">עצמאי בהכנסה 15K-25K: לרוב 31%-35%</p>
             </div>
 
-            <label className="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg cursor-pointer">
+            <label className="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-none cursor-pointer">
               <input
                 type="checkbox"
                 checked={voluntary}
@@ -212,7 +212,7 @@ const CalculatorTab = () => {
 
             {voluntary && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-ink/70 mb-1">
                   הפקדה רצונית חודשית (₪)
                 </label>
                 <input
@@ -221,7 +221,7 @@ const CalculatorTab = () => {
                   step={100}
                   value={voluntaryAmount}
                   onChange={(e) => setVoluntaryAmount(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
                 {result.taxBenefit.maxBenefitReached && (
                   <p className="text-xs text-emerald-700 mt-1">
@@ -239,16 +239,16 @@ const CalculatorTab = () => {
             {/* Advanced */}
             <button
               onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700"
+              className="flex items-center gap-1.5 text-sm text-ink/60 hover:text-ink"
             >
               {showAdvanced ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               הגדרות מתקדמות
             </button>
 
             {showAdvanced && (
-              <div className="grid sm:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
+              <div className="grid sm:grid-cols-2 gap-4 p-4 bg-cream-2 rounded-none">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-ink/70 mb-1">
                     שנים עד פרישה
                   </label>
                   <input
@@ -257,11 +257,11 @@ const CalculatorTab = () => {
                     max={45}
                     value={yearsToRetirement}
                     onChange={(e) => setYearsToRetirement(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-ink/70 mb-1">
                     תשואה שנתית צפויה (%)
                   </label>
                   <input
@@ -271,9 +271,9 @@ const CalculatorTab = () => {
                     step={0.5}
                     value={expectedReturn}
                     onChange={(e) => setExpectedReturn(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
-                  <p className="text-xs text-gray-500 mt-1">ממוצע היסטורי: 4-6% לשנה</p>
+                  <p className="text-xs text-ink/60 mt-1">ממוצע היסטורי: 4-6% לשנה</p>
                 </div>
               </div>
             )}
@@ -290,23 +290,23 @@ const CalculatorTab = () => {
           />
 
           {/* Tier breakdown */}
-          <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-2 text-sm">
-            <h4 className="font-bold text-gray-900 mb-3">פירוט שלבים</h4>
+          <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-2 text-sm">
+            <h4 className="font-bold text-ink mb-3">פירוט שלבים</h4>
             {result.tierBreakdown.map((tier, i) => (
               <div key={i} className="flex justify-between items-center">
-                <span className="text-gray-600 text-xs">{tier.label}</span>
+                <span className="text-ink/70 text-xs">{tier.label}</span>
                 <span className="font-medium">{formatCurrency(tier.monthlyAmount)}</span>
               </div>
             ))}
             {voluntary && (
-              <div className="flex justify-between items-center text-emerald-700 border-t pt-2">
+              <div className="flex justify-between items-center text-emerald-700 border-t border-ink/15 pt-2">
                 <span className="text-xs">הפקדה רצונית:</span>
                 <span className="font-medium">{formatCurrency(voluntaryAmount)}</span>
               </div>
             )}
-            <div className="flex justify-between items-center border-t pt-2 font-bold">
+            <div className="flex justify-between items-center border-t border-ink/15 pt-2 font-bold">
               <span>סה"כ חודשי:</span>
-              <span className="text-blue-700">{formatCurrency(result.mandatoryMonthly + (voluntary ? voluntaryAmount : 0))}</span>
+              <span className="text-gold">{formatCurrency(result.mandatoryMonthly + (voluntary ? voluntaryAmount : 0))}</span>
             </div>
           </div>
 
@@ -318,7 +318,7 @@ const CalculatorTab = () => {
           />
 
           {/* Tax benefit detail */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs text-blue-900 space-y-1.5">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-xs text-ink space-y-1.5">
             <p className="font-bold text-sm mb-2">פירוט הטבת מס</p>
             <div className="flex justify-between">
               <span>ניכוי (מס שולי {marginalRate}%):</span>
@@ -328,14 +328,14 @@ const CalculatorTab = () => {
               <span>זיכוי (35% × 35%):</span>
               <span className="font-medium">{formatCurrency(result.taxBenefit.creditSaving)}</span>
             </div>
-            <div className="flex justify-between font-bold border-t pt-1.5">
+            <div className="flex justify-between font-bold border-t border-ink/15 pt-1.5">
               <span>החזר אפקטיבי:</span>
               <span>{(result.taxBenefit.effectiveReturnRate * 100).toFixed(0)}%</span>
             </div>
           </div>
 
           {/* Pension projection */}
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-none p-4">
             <p className="text-xs font-bold text-emerald-900 mb-1 flex items-center gap-1.5">
               <TrendingUp className="w-3.5 h-3.5" />
               קצבה חודשית צפויה לפרישה
@@ -369,7 +369,7 @@ const CalculatorTab = () => {
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <p className="text-xs text-gray-500 text-center">
+          <p className="text-xs text-ink/60 text-center">
             מתוך {formatCurrency(result.totalAnnualContribution)}/שנה,
             {' '}{(result.taxBenefit.effectiveReturnRate * 100).toFixed(0)}% מחזיר המדינה
           </p>
@@ -390,8 +390,8 @@ const CalculatorTab = () => {
                   formatter={(v) => formatCurrency(Number(v))}
                   labelFormatter={(v) => `הכנסה: ${Number(v).toLocaleString('he-IL')} ₪`}
                 />
-                <Area type="monotone" dataKey="mandatory" stroke="#3b82f6" fill="#dbeafe" name="חובה חודשית" strokeWidth={2} />
-                <ReferenceLine x={income} stroke="#ef4444" strokeDasharray="4 4" label={{ value: 'אתה', position: 'top', fontSize: 10, fill: '#ef4444' }} />
+                <Area type="monotone" dataKey="mandatory" stroke="#102219" fill="#D8B36A" name="חובה חודשית" strokeWidth={2} />
+                <ReferenceLine x={income} stroke="#8E6824" strokeDasharray="4 4" label={{ value: 'אתה', position: 'top', fontSize: 10, fill: '#8E6824' }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -451,22 +451,22 @@ const ProjectionTab = () => {
     <div className="space-y-5">
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">הכנסה חודשית (₪)</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">הכנסה חודשית (₪)</label>
           <input type="number" min={0} step={500} value={income}
             onChange={(e) => setIncome(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">גיל נוכחי</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">גיל נוכחי</label>
           <input type="number" min={20} max={65} value={currentAge}
             onChange={(e) => setCurrentAge(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">תשואה שנתית (%)</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">תשואה שנתית (%)</label>
           <input type="number" min={0} max={15} step={0.5} value={expectedReturn}
             onChange={(e) => setExpectedReturn(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold" />
         </div>
       </div>
 
@@ -476,14 +476,14 @@ const ProjectionTab = () => {
         {voluntary && (
           <input type="number" min={0} step={100} value={voluntaryAmount}
             onChange={(e) => setVoluntaryAmount(Number(e.target.value))}
-            className="w-32 px-2 py-1 border border-gray-300 rounded-lg text-sm" />
+            className="w-32 px-2 py-1 border border-ink/15 rounded-none text-sm" />
         )}
-        {voluntary && <span className="text-xs text-gray-500">₪/חודש</span>}
+        {voluntary && <span className="text-xs text-ink/60">₪/חודש</span>}
       </label>
 
       {/* Projected fund value */}
       <div className="h-64">
-        <p className="text-xs font-medium text-gray-600 mb-1">שווי הקרן לאורך השנים</p>
+        <p className="text-xs font-medium text-ink/70 mb-1">שווי הקרן לאורך השנים</p>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -493,15 +493,15 @@ const ProjectionTab = () => {
               formatter={(v) => formatCurrency(Number(v))}
               labelFormatter={(v) => `גיל: ${v}`}
             />
-            <Area type="monotone" dataKey="fundValue" stroke="#3b82f6" fill="#dbeafe" name="שווי קרן" strokeWidth={2} />
-            <Area type="monotone" dataKey="totalDeposited" stroke="#9ca3af" fill="transparent" strokeDasharray="4 4" name="סך הפקדות" strokeWidth={1.5} />
+            <Area type="monotone" dataKey="fundValue" stroke="#102219" fill="#D8B36A" name="שווי קרן" strokeWidth={2} />
+            <Area type="monotone" dataKey="totalDeposited" stroke="#8E6824" fill="transparent" strokeDasharray="4 4" name="סך הפקדות" strokeWidth={1.5} />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
       {/* Projected monthly pension */}
       <div className="h-48">
-        <p className="text-xs font-medium text-gray-600 mb-1">קצבה חודשית צפויה לאורך הזמן</p>
+        <p className="text-xs font-medium text-ink/70 mb-1">קצבה חודשית צפויה לאורך הזמן</p>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -533,16 +533,16 @@ const ProjectionTab = () => {
               color: 'gray',
             },
           ].map((item, i) => (
-            <div key={i} className={`rounded-xl p-4 text-center border-2 ${
-              item.color === 'blue' ? 'bg-blue-50 border-blue-200' :
+            <div key={i} className={`rounded-none p-4 text-center border ${
+              item.color === 'blue' ? 'bg-cream-2 border-ink/15' :
               item.color === 'green' ? 'bg-emerald-50 border-emerald-200' :
-              'bg-gray-50 border-gray-200'
+              'bg-cream-2 border-ink/15'
             }`}>
-              <p className="text-xs text-gray-500 mb-1">{item.label}</p>
+              <p className="text-xs text-ink/60 mb-1">{item.label}</p>
               <p className={`text-2xl font-black ${
-                item.color === 'blue' ? 'text-blue-700' :
+                item.color === 'blue' ? 'text-gold' :
                 item.color === 'green' ? 'text-emerald-700' :
-                'text-gray-700'
+                'text-ink/70'
               }`}>{item.value}</p>
             </div>
           ))}
@@ -585,29 +585,29 @@ const PenaltyTab = () => {
       <SectionCard title="חשיפה לקנסות">
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">הכנסה חודשית ממוצעת (₪)</label>
+            <label className="block text-sm font-medium text-ink/70 mb-1">הכנסה חודשית ממוצעת (₪)</label>
             <input type="number" min={0} step={500} value={income}
               onChange={(e) => setIncome(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">שנות חוסר הפקדה (אומדן)</label>
+            <label className="block text-sm font-medium text-ink/70 mb-1">שנות חוסר הפקדה (אומדן)</label>
             <input type="number" min={0} max={8} step={0.5} value={yearsWithout}
               onChange={(e) => setYearsWithout(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
-            <p className="text-xs text-gray-500 mt-1">החובה חלה מ-2017</p>
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold" />
+            <p className="text-xs text-ink/60 mt-1">החובה חלה מ-2017</p>
           </div>
         </div>
 
-        <div className={`rounded-xl p-5 border-2 mt-2 ${
+        <div className={`rounded-none p-5 border-2 mt-2 ${
           severity === 'red' ? 'bg-red-50 border-red-300' :
           severity === 'amber' ? 'bg-amber-50 border-amber-300' :
-          'bg-blue-50 border-blue-300'
+          'bg-cream-2 border-ink/15'
         }`}>
           <p className={`text-lg font-bold mb-4 ${
             severity === 'red' ? 'text-red-800' :
             severity === 'amber' ? 'text-amber-800' :
-            'text-blue-800'
+            'text-ink'
           }`}>
             {severity === 'red' ? 'חשיפה גבוהה!' :
              severity === 'amber' ? 'חשיפה בינונית' :
@@ -620,11 +620,11 @@ const PenaltyTab = () => {
               { label: 'סה"כ חשיפה', value: formatCurrency(totalExposure) },
             ].map((item, i) => (
               <div key={i} className="text-center">
-                <p className="text-xs text-gray-600 mb-1">{item.label}</p>
+                <p className="text-xs text-ink/70 mb-1">{item.label}</p>
                 <p className={`text-xl font-black ${
                   severity === 'red' ? 'text-red-700' :
                   severity === 'amber' ? 'text-amber-700' :
-                  'text-blue-700'
+                  'text-ink'
                 }`}>{item.value}</p>
               </div>
             ))}
@@ -678,26 +678,26 @@ const TaxBenefitsTab = () => {
         <p className="font-bold text-sm mb-2">שתי הטבות מס בו-זמנית</p>
         <div className="grid sm:grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="font-semibold text-blue-800">1. ניכוי (Deduction)</p>
+            <p className="font-semibold text-gold">1. ניכוי (Deduction)</p>
             <p className="text-xs mt-1">כל ₪ שמופקד מוריד את ההכנסה החייבת. חיסכון = סכום × מס שולי.</p>
           </div>
           <div>
-            <p className="font-semibold text-blue-800">2. זיכוי (Tax Credit)</p>
+            <p className="font-semibold text-gold">2. זיכוי (Tax Credit)</p>
             <p className="text-xs mt-1">35% × 35% = 12.25% החזר נוסף. עד תקרה {formatCurrency(optimal.annual)}/שנה.</p>
           </div>
         </div>
       </InfoBox>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-ink/70 mb-1">
           הפקדה חודשית לסימולציה (₪)
         </label>
         <input
           type="number" min={100} max={5000} step={100} value={contribution}
           onChange={(e) => setContribution(Number(e.target.value))}
-          className="w-full max-w-xs px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+          className="w-full max-w-xs px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
         />
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-ink/60 mt-1">
           {formatCurrency(contribution * 12)}/שנה ·
           {contribution * 12 >= optimal.annual
             ? ' מנצל את מלוא הטבת הזיכוי'
@@ -706,7 +706,7 @@ const TaxBenefitsTab = () => {
       </div>
 
       <div className="h-56">
-        <p className="text-xs font-medium text-gray-600 mb-1">חיסכון מס לפי מס שולי — הפקדה {formatCurrency(contribution)}/חודש</p>
+        <p className="text-xs font-medium text-ink/70 mb-1">חיסכון מס לפי מס שולי — הפקדה {formatCurrency(contribution)}/חודש</p>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={barData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -714,7 +714,7 @@ const TaxBenefitsTab = () => {
             <YAxis tickFormatter={(v) => formatCurrency(Number(v))} tick={{ fontSize: 9 }} />
             <Tooltip formatter={(v) => formatCurrency(Number(v))} />
             <Legend />
-            <Bar dataKey="ניכוי" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="ניכוי" fill="#8E6824" radius={[4, 4, 0, 0]} />
             <Bar dataKey="זיכוי" fill="#10b981" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
@@ -723,24 +723,24 @@ const TaxBenefitsTab = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="bg-blue-50">
-              <th className="border border-gray-200 px-3 py-2 text-right">מס שולי</th>
-              <th className="border border-gray-200 px-3 py-2 text-center">ניכוי (שנתי)</th>
-              <th className="border border-gray-200 px-3 py-2 text-center">זיכוי (שנתי)</th>
-              <th className="border border-gray-200 px-3 py-2 text-center">סה"כ חיסכון</th>
-              <th className="border border-gray-200 px-3 py-2 text-center">החזר אפקטיבי</th>
+            <tr className="bg-ink text-cream">
+              <th className="border border-cream/15 px-3 py-2 text-right">מס שולי</th>
+              <th className="border border-cream/15 px-3 py-2 text-center">ניכוי (שנתי)</th>
+              <th className="border border-cream/15 px-3 py-2 text-center">זיכוי (שנתי)</th>
+              <th className="border border-cream/15 px-3 py-2 text-center">סה"כ חיסכון</th>
+              <th className="border border-cream/15 px-3 py-2 text-center">החזר אפקטיבי</th>
             </tr>
           </thead>
           <tbody>
             {incomePoints.map((rate) => {
               const benefit = calculateTaxBenefit(contribution * 12, rate);
               return (
-                <tr key={rate} className="hover:bg-gray-50 border-t border-gray-100">
-                  <td className="border border-gray-200 px-3 py-2 font-medium">{rate}%</td>
-                  <td className="border border-gray-200 px-3 py-2 text-center">{formatCurrency(benefit.deductionSaving)}</td>
-                  <td className="border border-gray-200 px-3 py-2 text-center">{formatCurrency(benefit.creditSaving)}</td>
-                  <td className="border border-gray-200 px-3 py-2 text-center font-semibold text-emerald-700">{formatCurrency(benefit.totalSaving)}</td>
-                  <td className="border border-gray-200 px-3 py-2 text-center font-medium text-blue-700">
+                <tr key={rate} className="hover:bg-cream-2 border-t border-ink/10">
+                  <td className="border border-ink/15 px-3 py-2 font-medium">{rate}%</td>
+                  <td className="border border-ink/15 px-3 py-2 text-center">{formatCurrency(benefit.deductionSaving)}</td>
+                  <td className="border border-ink/15 px-3 py-2 text-center">{formatCurrency(benefit.creditSaving)}</td>
+                  <td className="border border-ink/15 px-3 py-2 text-center font-semibold text-emerald-700">{formatCurrency(benefit.totalSaving)}</td>
+                  <td className="border border-ink/15 px-3 py-2 text-center font-medium text-gold">
                     {(benefit.effectiveReturnRate * 100).toFixed(0)}%
                   </td>
                 </tr>
@@ -772,7 +772,7 @@ export function SelfEmployedPensionCalculator() {
   return (
     <div className="space-y-4">
       {/* Tab header */}
-      <div className="flex flex-wrap gap-2 bg-gray-50 border border-gray-200 rounded-xl p-2">
+      <div className="flex flex-wrap gap-2 bg-cream-2 border border-ink/15 rounded-none p-2">
         {TABS.map((tab) => (
           <TabButton
             key={tab.id}

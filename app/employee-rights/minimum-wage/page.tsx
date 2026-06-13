@@ -92,37 +92,37 @@ export default function Page() {
           <h2>תעריפי שכר מינימום מעודכנים (1.4.2026)</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="border border-gray-300 p-2 text-right font-semibold">סוג</th>
-                <th className="border border-gray-300 p-2 text-right font-semibold">סכום</th>
-                <th className="border border-gray-300 p-2 text-right font-semibold">בסיס</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-2 text-right font-semibold">סוג</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">סכום</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">בסיס</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-2">חודשי (משרה מלאה)</td>
-                <td className="border border-gray-300 p-2 font-bold text-blue-700">6,443.85 ₪</td>
-                <td className="border border-gray-300 p-2 text-gray-500">182 שעות/חודש</td>
+                <td className="border border-ink/15 p-2">חודשי (משרה מלאה)</td>
+                <td className="border border-ink/15 p-2 font-bold text-gold">6,443.85 ₪</td>
+                <td className="border border-ink/15 p-2 text-ink/60">182 שעות/חודש</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">שעתי (182 ש/ח)</td>
-                <td className="border border-gray-300 p-2 font-bold text-blue-700">35.40 ₪</td>
-                <td className="border border-gray-300 p-2 text-gray-500">5 ימי עבודה/שבוע</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">שעתי (186 ש/ח)</td>
-                <td className="border border-gray-300 p-2 font-bold text-blue-700">34.64 ₪</td>
-                <td className="border border-gray-300 p-2 text-gray-500">6 ימי עבודה/שבוע</td>
-              </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">יומי (5 ימים/שבוע)</td>
-                <td className="border border-gray-300 p-2 font-bold text-blue-700">297.40 ₪</td>
-                <td className="border border-gray-300 p-2 text-gray-500">22 ימי עבודה/חודש</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">שעתי (182 ש/ח)</td>
+                <td className="border border-ink/15 p-2 font-bold text-gold">35.40 ₪</td>
+                <td className="border border-ink/15 p-2 text-ink/60">5 ימי עבודה/שבוע</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-2">יומי (6 ימים/שבוע)</td>
-                <td className="border border-gray-300 p-2 font-bold text-blue-700">257.75 ₪</td>
-                <td className="border border-gray-300 p-2 text-gray-500">25 ימי עבודה/חודש</td>
+                <td className="border border-ink/15 p-2">שעתי (186 ש/ח)</td>
+                <td className="border border-ink/15 p-2 font-bold text-gold">34.64 ₪</td>
+                <td className="border border-ink/15 p-2 text-ink/60">6 ימי עבודה/שבוע</td>
+              </tr>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">יומי (5 ימים/שבוע)</td>
+                <td className="border border-ink/15 p-2 font-bold text-gold">297.40 ₪</td>
+                <td className="border border-ink/15 p-2 text-ink/60">22 ימי עבודה/חודש</td>
+              </tr>
+              <tr>
+                <td className="border border-ink/15 p-2">יומי (6 ימים/שבוע)</td>
+                <td className="border border-ink/15 p-2 font-bold text-gold">257.75 ₪</td>
+                <td className="border border-ink/15 p-2 text-ink/60">25 ימי עבודה/חודש</td>
               </tr>
             </tbody>
           </table>
@@ -130,37 +130,37 @@ export default function Page() {
           <h2>שכר מינימום לנוער</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-amber-50">
-                <th className="border border-gray-300 p-2 text-right font-semibold">גיל</th>
-                <th className="border border-gray-300 p-2 text-right font-semibold">אחוז</th>
-                <th className="border border-gray-300 p-2 text-right font-semibold">חודשי</th>
-                <th className="border border-gray-300 p-2 text-right font-semibold">שעתי</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-2 text-right font-semibold">גיל</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">אחוז</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">חודשי</th>
+                <th className="border border-ink/15 p-2 text-right font-semibold">שעתי</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-2">מתחת ל-16</td>
-                <td className="border border-gray-300 p-2">60%</td>
-                <td className="border border-gray-300 p-2">3,866.31 ₪</td>
-                <td className="border border-gray-300 p-2">21.24 ₪</td>
+                <td className="border border-ink/15 p-2">מתחת ל-16</td>
+                <td className="border border-ink/15 p-2">60%</td>
+                <td className="border border-ink/15 p-2">3,866.31 ₪</td>
+                <td className="border border-ink/15 p-2">21.24 ₪</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">16-17</td>
-                <td className="border border-gray-300 p-2">70%</td>
-                <td className="border border-gray-300 p-2">4,510.70 ₪</td>
-                <td className="border border-gray-300 p-2">24.78 ₪</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">16-17</td>
+                <td className="border border-ink/15 p-2">70%</td>
+                <td className="border border-ink/15 p-2">4,510.70 ₪</td>
+                <td className="border border-ink/15 p-2">24.78 ₪</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-2">17-18</td>
-                <td className="border border-gray-300 p-2">75%</td>
-                <td className="border border-gray-300 p-2">4,832.89 ₪</td>
-                <td className="border border-gray-300 p-2">26.55 ₪</td>
+                <td className="border border-ink/15 p-2">17-18</td>
+                <td className="border border-ink/15 p-2">75%</td>
+                <td className="border border-ink/15 p-2">4,832.89 ₪</td>
+                <td className="border border-ink/15 p-2">26.55 ₪</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">18+</td>
-                <td className="border border-gray-300 p-2">100%</td>
-                <td className="border border-gray-300 p-2">6,443.85 ₪</td>
-                <td className="border border-gray-300 p-2">35.40 ₪</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">18+</td>
+                <td className="border border-ink/15 p-2">100%</td>
+                <td className="border border-ink/15 p-2">6,443.85 ₪</td>
+                <td className="border border-ink/15 p-2">35.40 ₪</td>
               </tr>
             </tbody>
           </table>
@@ -183,7 +183,7 @@ export default function Page() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.nevo.co.il/law_html/Law01/P218_001.htm"

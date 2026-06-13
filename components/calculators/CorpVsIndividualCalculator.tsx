@@ -48,10 +48,10 @@ const TABS: { id: TabId; label: string }[] = [
 ];
 
 const SCENARIO_COLORS = {
-  individual: '#6366f1',
+  individual: '#264B36',
   corporationDividend: '#10b981',
   corporationSalary: '#f59e0b',
-  corporationMix: '#3b82f6',
+  corporationMix: '#8E6824',
 };
 
 // ============================================================
@@ -71,10 +71,10 @@ function TabButton({
     <button
       type="button"
       onClick={onClick}
-      className={`px-4 py-2 text-sm font-medium rounded-lg transition-all whitespace-nowrap ${
+      className={`px-4 py-2 text-sm font-medium rounded-none transition-all whitespace-nowrap ${
         active
-          ? 'bg-blue-600 text-white shadow-sm'
-          : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+          ? 'bg-ink text-cream shadow-sm'
+          : 'bg-paper text-ink/70 hover:bg-cream-2 border border-ink/15'
       }`}
     >
       {children}
@@ -92,8 +92,8 @@ function SectionCard({
   className?: string;
 }) {
   return (
-    <div className={`bg-white border border-gray-200 rounded-xl p-5 ${className}`}>
-      {title && <h3 className="text-base font-semibold text-gray-900 mb-4">{title}</h3>}
+    <div className={`bg-paper border border-ink/15 rounded-none p-5 ${className}`}>
+      {title && <h3 className="text-base font-semibold text-ink mb-4">{title}</h3>}
       {children}
     </div>
   );
@@ -110,9 +110,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -142,9 +142,9 @@ function SliderInput({
           step={step}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 accent-blue-600"
+          className="flex-1 accent-gold"
         />
-        <span className="text-sm font-semibold text-blue-700 min-w-[3rem] text-left">
+        <span className="text-sm font-semibold text-gold min-w-[3rem] text-left">
           {formatValue(value)}
         </span>
       </div>
@@ -177,15 +177,15 @@ function CustomTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-lg text-sm" dir="rtl">
-      <p className="font-semibold text-gray-800 mb-2">{label}</p>
+    <div className="bg-paper border border-ink/15 rounded-none p-3 shadow-lg text-sm" dir="rtl">
+      <p className="font-semibold text-ink mb-2">{label}</p>
       {payload.map((p, i) => (
         <div key={i} className="flex items-center gap-2">
           <span
             className="w-3 h-3 rounded-full inline-block"
             style={{ backgroundColor: p.color }}
           />
-          <span className="text-gray-600">{p.name}:</span>
+          <span className="text-ink/70">{p.name}:</span>
           <span className="font-medium">{formatCurrency(p.value)}</span>
         </div>
       ))}
@@ -317,7 +317,7 @@ export function CorpVsIndividualCalculator() {
       { name: 'מס דיבידנד', value: Math.round(r.dividendTax), color: '#f97316' },
       { name: 'מס הכנסה', value: Math.round(r.incomeTax), color: '#dc2626' },
       { name: 'ביטוח לאומי', value: Math.round(r.socialSecurity), color: '#f59e0b' },
-      { name: 'עלות תפעול', value: Math.round(r.corpRunningCosts), color: '#6b7280' },
+      { name: 'עלות תפעול', value: Math.round(r.corpRunningCosts), color: '#264B36' },
     ].filter((d) => d.value > 0);
   }, [result]);
 
@@ -356,7 +356,7 @@ export function CorpVsIndividualCalculator() {
                   step={10_000}
                   value={annualProfit}
                   onChange={(e) => setAnnualProfit(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg font-semibold"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg font-semibold"
                 />
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {[200_000, 350_000, 500_000, 750_000, 1_000_000, 2_000_000].map((v) => (
@@ -364,10 +364,10 @@ export function CorpVsIndividualCalculator() {
                       key={v}
                       type="button"
                       onClick={() => setAnnualProfit(v)}
-                      className={`text-xs px-2 py-0.5 rounded transition ${
+                      className={`text-xs px-2 py-0.5 rounded-none transition ${
                         annualProfit === v
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-blue-50 text-blue-800 hover:bg-blue-100'
+                          ? 'bg-ink text-cream'
+                          : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
                       }`}
                     >
                       {v >= 1_000_000 ? `${v / 1_000_000}M` : `${v / 1000}K`}
@@ -384,7 +384,7 @@ export function CorpVsIndividualCalculator() {
                   step={0.25}
                   value={creditPoints}
                   onChange={(e) => setCreditPoints(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
               </Field>
 
@@ -402,25 +402,25 @@ export function CorpVsIndividualCalculator() {
                 />
               </Field>
 
-              <div className="flex items-center justify-between py-2 border-t border-gray-100">
-                <label className="text-sm font-medium text-gray-700">
+              <div className="flex items-center justify-between py-2 border-t border-ink/10">
+                <label className="text-sm font-medium text-ink/70">
                   בעל מניות מהותי (&gt;10%)?
                 </label>
                 <button
                   type="button"
                   onClick={() => setIsControllingOwner(!isControllingOwner)}
                   className={`relative w-11 h-6 rounded-full transition-colors ${
-                    isControllingOwner ? 'bg-blue-600' : 'bg-gray-300'
+                    isControllingOwner ? 'bg-ink' : 'bg-ink/20'
                   }`}
                 >
                   <span
-                    className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
+                    className={`absolute top-0.5 w-5 h-5 bg-paper rounded-full shadow transition-transform ${
                       isControllingOwner ? 'translate-x-5' : 'translate-x-0.5'
                     }`}
                   />
                 </button>
               </div>
-              <p className="text-xs text-gray-500 -mt-2">
+              <p className="text-xs text-ink/60 -mt-2">
                 {isControllingOwner ? 'מס דיבידנד: 30%+3%=33%' : 'מס דיבידנד: 25%'}
               </p>
             </div>
@@ -435,7 +435,7 @@ export function CorpVsIndividualCalculator() {
                   step={1_000}
                   value={accountantCost}
                   onChange={(e) => setAccountantCost(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
                 />
               </Field>
               <Field label="ניהול ספרים (₪)" hint="8K-24K/שנה">
@@ -445,7 +445,7 @@ export function CorpVsIndividualCalculator() {
                   step={500}
                   value={bookkeepingCost}
                   onChange={(e) => setBookkeepingCost(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
                 />
               </Field>
               <Field label="אגרת רשם החברות (₪)" hint="~1,500 ₪/שנה">
@@ -455,7 +455,7 @@ export function CorpVsIndividualCalculator() {
                   step={100}
                   value={registrarFee}
                   onChange={(e) => setRegistrarFee(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
                 />
               </Field>
               <Field label="עו&quot;ד + עלויות משפטיות (₪)">
@@ -465,11 +465,11 @@ export function CorpVsIndividualCalculator() {
                   step={500}
                   value={lawyerCost}
                   onChange={(e) => setLawyerCost(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
                 />
               </Field>
-              <div className="flex justify-between pt-2 border-t border-gray-200">
-                <span className="text-sm font-semibold text-gray-700">סה&quot;כ עלות שנתית:</span>
+              <div className="flex justify-between pt-2 border-t border-ink/15">
+                <span className="text-sm font-semibold text-ink/70">סה&quot;כ עלות שנתית:</span>
                 <span className="text-sm font-bold text-red-600">
                   {formatCurrency(corpRunningCosts)}
                 </span>
@@ -480,38 +480,38 @@ export function CorpVsIndividualCalculator() {
           <SectionCard title="קרן השתלמות">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <label className="text-sm text-gray-700">עוסק מורשה - ניכוי 4.5%</label>
+                <label className="text-sm text-ink/70">עוסק מורשה - ניכוי 4.5%</label>
                 <button
                   type="button"
                   onClick={() => setIncludeStudyFundIndividual(!includeStudyFundIndividual)}
                   className={`relative w-11 h-6 rounded-full transition-colors ${
-                    includeStudyFundIndividual ? 'bg-blue-600' : 'bg-gray-300'
+                    includeStudyFundIndividual ? 'bg-ink' : 'bg-ink/20'
                   }`}
                 >
                   <span
-                    className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
+                    className={`absolute top-0.5 w-5 h-5 bg-paper rounded-full shadow transition-transform ${
                       includeStudyFundIndividual ? 'translate-x-5' : 'translate-x-0.5'
                     }`}
                   />
                 </button>
               </div>
               <div className="flex items-center justify-between">
-                <label className="text-sm text-gray-700">חברה - ק&quot;ה לבעלים-עובד (7.5%)</label>
+                <label className="text-sm text-ink/70">חברה - ק&quot;ה לבעלים-עובד (7.5%)</label>
                 <button
                   type="button"
                   onClick={() => setIncludeStudyFundCorp(!includeStudyFundCorp)}
                   className={`relative w-11 h-6 rounded-full transition-colors ${
-                    includeStudyFundCorp ? 'bg-blue-600' : 'bg-gray-300'
+                    includeStudyFundCorp ? 'bg-ink' : 'bg-ink/20'
                   }`}
                 >
                   <span
-                    className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
+                    className={`absolute top-0.5 w-5 h-5 bg-paper rounded-full shadow transition-transform ${
                       includeStudyFundCorp ? 'translate-x-5' : 'translate-x-0.5'
                     }`}
                   />
                 </button>
               </div>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-ink/60">
                 {includeStudyFundCorp
                   ? 'יתרון לחברה: קרן השתלמות פטורה ממס על 7.5% ממשכורת'
                   : 'הפעל כדי לכלול קרן השתלמות בחישוב'}
@@ -541,10 +541,10 @@ export function CorpVsIndividualCalculator() {
                       key={y}
                       type="button"
                       onClick={() => setProjectionYears(y)}
-                      className={`flex-1 py-1.5 text-sm rounded-lg transition ${
+                      className={`flex-1 py-1.5 text-sm rounded-none transition ${
                         projectionYears === y
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          ? 'bg-ink text-cream'
+                          : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
                       }`}
                     >
                       {y} שנים
@@ -590,14 +590,14 @@ export function CorpVsIndividualCalculator() {
                   return (
                     <div
                       key={key}
-                      className={`p-4 rounded-xl border-2 transition-all ${
+                      className={`p-4 rounded-none border-2 transition-all ${
                         isRec
                           ? 'border-emerald-400 bg-emerald-50 shadow-md'
-                          : 'border-gray-200 bg-white'
+                          : 'border-ink/15 bg-paper'
                       }`}
                     >
                       <div className="flex items-start justify-between mb-2">
-                        <h4 className="font-bold text-sm text-gray-900 leading-tight">
+                        <h4 className="font-bold text-sm text-ink leading-tight">
                           {label}
                         </h4>
                         {isRec && (
@@ -608,27 +608,27 @@ export function CorpVsIndividualCalculator() {
                       </div>
                       <div className="space-y-1.5 text-xs">
                         <div className="flex justify-between">
-                          <span className="text-gray-500">נטו לבעלים:</span>
+                          <span className="text-ink/60">נטו לבעלים:</span>
                           <span
-                            className={`font-bold text-sm ${isRec ? 'text-emerald-700' : 'text-gray-900'}`}
+                            className={`font-bold text-sm ${isRec ? 'text-emerald-700' : 'text-ink'}`}
                           >
                             {formatCurrency(s.netToOwner)}
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-500">שיעור מס:</span>
+                          <span className="text-ink/60">שיעור מס:</span>
                           <span className="font-medium">
                             {formatPercent(s.effectiveTaxRate, 1)}
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-500">סה&quot;כ מס:</span>
+                          <span className="text-ink/60">סה&quot;כ מס:</span>
                           <span className="font-medium text-red-600">
                             {formatCurrency(s.totalTax)}
                           </span>
                         </div>
                         {s.corpRunningCosts > 0 && (
-                          <div className="flex justify-between text-gray-400">
+                          <div className="flex justify-between text-ink/45">
                             <span>עלות תפעול:</span>
                             <span>{formatCurrency(s.corpRunningCosts)}</span>
                           </div>
@@ -708,10 +708,10 @@ export function CorpVsIndividualCalculator() {
 
               {/* טיפ חכם */}
               <div
-                className={`rounded-xl p-4 border-2 text-sm ${
+                className={`rounded-none p-4 border-2 text-sm ${
                   isCorp
                     ? 'bg-emerald-50 border-emerald-300 text-emerald-900'
-                    : 'bg-blue-50 border-blue-200 text-blue-900'
+                    : 'bg-cream-2 border-ink/15 text-ink'
                 }`}
               >
                 <p className="font-bold mb-1">
@@ -752,9 +752,9 @@ export function CorpVsIndividualCalculator() {
                   }
                   variant={isAboveBreakEven ? 'success' : 'warning'}
                 />
-                <div className="bg-white border border-gray-200 rounded-xl p-5">
-                  <p className="text-sm text-gray-600 mb-1">הרווח הנוכחי שלך</p>
-                  <p className="text-3xl font-bold text-gray-900">{formatCurrency(annualProfit)}</p>
+                <div className="bg-paper border border-ink/15 rounded-none p-5">
+                  <p className="text-sm text-ink/70 mb-1">הרווח הנוכחי שלך</p>
+                  <p className="text-3xl font-bold text-ink">{formatCurrency(annualProfit)}</p>
                   <p
                     className={`text-sm font-semibold mt-1 ${
                       isAboveBreakEven ? 'text-emerald-600' : 'text-amber-600'
@@ -774,21 +774,21 @@ export function CorpVsIndividualCalculator() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="py-2 text-right font-semibold text-gray-700">רווח שנתי</th>
-                        <th className="py-2 text-center font-semibold text-indigo-700">עוסק</th>
+                      <tr className="border-b border-ink/15">
+                        <th className="py-2 text-right font-semibold text-ink/70">רווח שנתי</th>
+                        <th className="py-2 text-center font-semibold text-ink-mid">עוסק</th>
                         <th className="py-2 text-center font-semibold text-emerald-700">חברה (מיקס)</th>
-                        <th className="py-2 text-center font-semibold text-blue-700">חברה (דיב&apos;)</th>
-                        <th className="py-2 text-center font-semibold text-gray-700">עדיף</th>
-                        <th className="py-2 text-center font-semibold text-gray-700">חיסכון</th>
+                        <th className="py-2 text-center font-semibold text-gold">חברה (דיב&apos;)</th>
+                        <th className="py-2 text-center font-semibold text-ink/70">עדיף</th>
+                        <th className="py-2 text-center font-semibold text-ink/70">חיסכון</th>
                       </tr>
                     </thead>
                     <tbody>
                       {result.incomeLevelComparisons.map((row) => (
                         <tr
                           key={row.annualProfit}
-                          className={`border-b border-gray-100 ${
-                            row.annualProfit === annualProfit ? 'bg-blue-50' : ''
+                          className={`border-b border-ink/10 ${
+                            row.annualProfit === annualProfit ? 'bg-cream-2' : ''
                           }`}
                         >
                           <td className="py-2 font-medium">
@@ -796,13 +796,13 @@ export function CorpVsIndividualCalculator() {
                               ? `${row.annualProfit / 1_000_000}M`
                               : `${row.annualProfit / 1000}K`}
                           </td>
-                          <td className="py-2 text-center text-indigo-700">
+                          <td className="py-2 text-center text-ink-mid">
                             {formatPercent(row.individual.effectiveTaxRate, 1)}
                           </td>
                           <td className="py-2 text-center text-emerald-700">
                             {formatPercent(row.corpMix.effectiveTaxRate, 1)}
                           </td>
-                          <td className="py-2 text-center text-blue-700">
+                          <td className="py-2 text-center text-gold">
                             {formatPercent(row.corpDividend.effectiveTaxRate, 1)}
                           </td>
                           <td className="py-2 text-center">
@@ -810,7 +810,7 @@ export function CorpVsIndividualCalculator() {
                               className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                                 row.winner === 'corp'
                                   ? 'bg-emerald-100 text-emerald-800'
-                                  : 'bg-gray-100 text-gray-700'
+                                  : 'bg-cream-2 text-ink/70'
                               }`}
                             >
                               {row.winner === 'corp' ? 'חברה' : 'עוסק'}
@@ -842,7 +842,7 @@ export function CorpVsIndividualCalculator() {
                 </ResponsiveContainer>
               </SectionCard>
 
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-900">
+              <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm text-amber-900">
                 <p className="font-bold mb-1">כיצד מחושבת נקודת האיזון?</p>
                 <p>
                   הנקודה שבה הנטו לבעלים בחברה (לאחר עלויות תפעול של{' '}
@@ -858,16 +858,16 @@ export function CorpVsIndividualCalculator() {
             <div className="space-y-5">
               {/* סיכום תחזית */}
               <div className="grid md:grid-cols-3 gap-3">
-                <div className="bg-white border border-gray-200 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 mb-1">חיסכון בשנה 1</p>
+                <div className="bg-paper border border-ink/15 rounded-none p-4 text-center">
+                  <p className="text-xs text-ink/60 mb-1">חיסכון בשנה 1</p>
                   <p className="text-2xl font-bold text-emerald-700">
                     {result.yearProjections[0]
                       ? formatCurrency(result.yearProjections[0].annualSaving)
                       : '—'}
                   </p>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 mb-1">
+                <div className="bg-paper border border-ink/15 rounded-none p-4 text-center">
+                  <p className="text-xs text-ink/60 mb-1">
                     חיסכון בשנה {projectionYears}
                   </p>
                   <p className="text-2xl font-bold text-emerald-700">
@@ -876,8 +876,8 @@ export function CorpVsIndividualCalculator() {
                       : '—'}
                   </p>
                 </div>
-                <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-600 mb-1">חיסכון מצטבר</p>
+                <div className="bg-emerald-50 border-2 border-emerald-200 rounded-none p-4 text-center">
+                  <p className="text-xs text-ink/70 mb-1">חיסכון מצטבר</p>
                   <p className="text-2xl font-bold text-emerald-700">
                     {result.yearProjections.length > 0
                       ? formatCurrency(
@@ -912,7 +912,7 @@ export function CorpVsIndividualCalculator() {
                       strokeWidth={2}
                       dot={{ r: 4 }}
                     />
-                    <ReferenceLine y={0} stroke="#6b7280" strokeDasharray="4 4" />
+                    <ReferenceLine y={0} stroke="#102219" strokeDasharray="4 4" />
                   </LineChart>
                 </ResponsiveContainer>
               </SectionCard>
@@ -925,7 +925,7 @@ export function CorpVsIndividualCalculator() {
                     <XAxis dataKey="name" tick={{ fontSize: 11 }} />
                     <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
                     <Tooltip content={<CustomTooltip />} />
-                    <ReferenceLine y={0} stroke="#6b7280" strokeDasharray="4 4" label="איזון" />
+                    <ReferenceLine y={0} stroke="#102219" strokeDasharray="4 4" label="איזון" />
                     <Line
                       type="monotone"
                       dataKey="חיסכון מצטבר"
@@ -943,21 +943,21 @@ export function CorpVsIndividualCalculator() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="py-2 text-right text-gray-700">שנה</th>
-                        <th className="py-2 text-center text-gray-700">רווח</th>
-                        <th className="py-2 text-center text-indigo-700">עוסק נטו</th>
+                      <tr className="border-b border-ink/15">
+                        <th className="py-2 text-right text-ink/70">שנה</th>
+                        <th className="py-2 text-center text-ink/70">רווח</th>
+                        <th className="py-2 text-center text-ink-mid">עוסק נטו</th>
                         <th className="py-2 text-center text-emerald-700">חברה נטו</th>
-                        <th className="py-2 text-center text-gray-700">חיסכון שנתי</th>
+                        <th className="py-2 text-center text-ink/70">חיסכון שנתי</th>
                         <th className="py-2 text-center text-emerald-700">חיסכון מצטבר</th>
                       </tr>
                     </thead>
                     <tbody>
                       {result.yearProjections.map((row) => (
-                        <tr key={row.year} className="border-b border-gray-100">
+                        <tr key={row.year} className="border-b border-ink/10">
                           <td className="py-2 font-medium">שנה {row.year}</td>
                           <td className="py-2 text-center">{formatCurrency(row.annualProfit)}</td>
-                          <td className="py-2 text-center text-indigo-700">
+                          <td className="py-2 text-center text-ink-mid">
                             {formatCurrency(row.individualNet)}
                           </td>
                           <td className="py-2 text-center text-emerald-700">
@@ -1022,11 +1022,11 @@ export function CorpVsIndividualCalculator() {
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="flex items-center justify-between py-2 border-b border-gray-100"
+                      className="flex items-center justify-between py-2 border-b border-ink/10"
                     >
                       <div>
-                        <p className="text-sm font-medium text-gray-800">{item.label}</p>
-                        <p className="text-xs text-gray-500">{item.note}</p>
+                        <p className="text-sm font-medium text-ink">{item.label}</p>
+                        <p className="text-xs text-ink/60">{item.note}</p>
                       </div>
                       <div className="flex items-center gap-3">
                         <RiskBadge level={item.risk} />
@@ -1046,7 +1046,7 @@ export function CorpVsIndividualCalculator() {
               {/* סיכון אישי */}
               <SectionCard title="אחריות אישית — שיקול קריטי">
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-none">
                     <div className="flex-1">
                       <p className="font-bold text-red-800 text-sm mb-1">עוסק מורשה — אחריות אישית מלאה</p>
                       <ul className="text-xs text-red-700 space-y-1 list-disc list-inside">
@@ -1059,7 +1059,7 @@ export function CorpVsIndividualCalculator() {
                     <RiskBadge level="high" />
                   </div>
 
-                  <div className="flex items-start gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-start gap-3 p-3 bg-green-50 border border-green-200 rounded-none">
                     <div className="flex-1">
                       <p className="font-bold text-green-800 text-sm mb-1">
                         חברה בע&quot;מ — הגבלת אחריות
@@ -1076,7 +1076,7 @@ export function CorpVsIndividualCalculator() {
                     <RiskBadge level="low" />
                   </div>
 
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800">
+                  <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-xs text-amber-800">
                     <p className="font-bold mb-1">חשוב לדעת: ה-&quot;מסך התאגידי&quot;</p>
                     <p>
                       בנקים דורשים לרוב ערבות אישית של הבעלים על הלוואות לחברות קטנות. כך אחריות
@@ -1091,7 +1091,7 @@ export function CorpVsIndividualCalculator() {
               <SectionCard title="יתרונות אסטרטגיים — מעבר למס">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <p className="font-semibold text-gray-800 text-sm mb-2">חברה בע&quot;מ - יתרונות</p>
+                    <p className="font-semibold text-ink text-sm mb-2">חברה בע&quot;מ - יתרונות</p>
                     <ul className="space-y-2">
                       {[
                         { text: 'מכירת החברה עתידית (Capital Gains)', detail: 'ניתן למכור מניות בנפרד' },
@@ -1103,15 +1103,15 @@ export function CorpVsIndividualCalculator() {
                         <li key={i} className="flex items-start gap-2 text-xs">
                           <span className="text-emerald-600 mt-0.5">✓</span>
                           <div>
-                            <p className="font-medium text-gray-800">{item.text}</p>
-                            <p className="text-gray-500">{item.detail}</p>
+                            <p className="font-medium text-ink">{item.text}</p>
+                            <p className="text-ink/60">{item.detail}</p>
                           </div>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800 text-sm mb-2">עוסק מורשה - יתרונות</p>
+                    <p className="font-semibold text-ink text-sm mb-2">עוסק מורשה - יתרונות</p>
                     <ul className="space-y-2">
                       {[
                         { text: 'גמישות מלאה בכסף', detail: 'כל הכנסה מיד בחשבון האישי' },
@@ -1121,10 +1121,10 @@ export function CorpVsIndividualCalculator() {
                         { text: 'סגירה מהירה', detail: 'ללא פירוק חברה מורכב' },
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-2 text-xs">
-                          <span className="text-blue-500 mt-0.5">✓</span>
+                          <span className="text-gold mt-0.5">✓</span>
                           <div>
-                            <p className="font-medium text-gray-800">{item.text}</p>
-                            <p className="text-gray-500">{item.detail}</p>
+                            <p className="font-medium text-ink">{item.text}</p>
+                            <p className="text-ink/60">{item.detail}</p>
                           </div>
                         </li>
                       ))}
@@ -1134,9 +1134,9 @@ export function CorpVsIndividualCalculator() {
               </SectionCard>
 
               {/* המלצה אישית */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-5">
-                <p className="font-bold text-blue-900 mb-3">המלצה אישית לפי הנתונים שלך</p>
-                <div className="space-y-2 text-sm text-blue-800">
+              <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+                <p className="font-bold text-ink mb-3">המלצה אישית לפי הנתונים שלך</p>
+                <div className="space-y-2 text-sm text-ink/70">
                   <div className="flex items-center gap-2">
                     <span className={result.individual.effectiveTaxRate < 0.35 ? '✅' : '⚠️'} />
                     <span>
@@ -1171,13 +1171,13 @@ export function CorpVsIndividualCalculator() {
                     </span>
                   </div>
                 </div>
-                <div className="mt-4 pt-3 border-t border-blue-200">
-                  <p className="font-bold text-blue-900 text-lg">
+                <div className="mt-4 pt-3 border-t border-ink/15">
+                  <p className="font-bold text-ink text-lg">
                     {isCorp
                       ? `✅ מומלץ: ${recLabel}`
                       : '📊 עוסק מורשה עדיף כרגע'}
                   </p>
-                  <p className="text-sm text-blue-700 mt-1">
+                  <p className="text-sm text-ink/70 mt-1">
                     {isCorp
                       ? `חיסכון שנתי צפוי: ${formatCurrency(result.taxSavingsVsIndividual)}`
                       : `כאשר הרווח יגיע לכ-${breakEven > 0 ? formatCurrency(breakEven) : '350K-450K'} — שקול מעבר לחברה`}

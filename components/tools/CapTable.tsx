@@ -29,7 +29,7 @@ import { Plus, Trash2, Users, Briefcase, DollarSign, Sparkles } from 'lucide-rea
 
 const STORAGE_KEY = 'cap-table-v1';
 
-const COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#ef4444', '#84cc16', '#a855f7'];
+const COLORS = ['#102219', '#8E6824', '#264B36', '#D8B36A', '#5a8b72', '#c0a060', '#ef4444', '#84cc16', '#8E6824'];
 
 const SHARE_CLASS_LABELS: Record<ShareClass, string> = {
   common: 'Common',
@@ -162,13 +162,13 @@ export function CapTable() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Briefcase className="w-5 h-5" />
             Cap Table - דילול וסבבי גיוס
           </h3>
-          <p className="text-xs text-purple-100">
+          <p className="text-xs text-cream/70">
             סימולציה של דילול בעלי מניות לאורך סבבי גיוס + Exit Waterfall
           </p>
         </div>
@@ -177,21 +177,21 @@ export function CapTable() {
       {/* KPI Summary */}
       {finalState && (
         <div className="grid md:grid-cols-3 gap-3">
-          <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-3">
-            <div className="text-xs text-gray-600">סה"כ מניות (לאחר דילול)</div>
-            <div className="text-2xl font-bold text-purple-700">
+          <div className="bg-cream-2 border-2 border-ink/15 p-3">
+            <div className="text-xs text-ink/60">סה"כ מניות (לאחר דילול)</div>
+            <div className="text-2xl font-bold text-gold">
               {fmt(finalState.totalShares)}
             </div>
           </div>
-          <div className="bg-fuchsia-50 border-2 border-fuchsia-200 rounded-lg p-3">
-            <div className="text-xs text-gray-600">Post-Money (סבב אחרון)</div>
-            <div className="text-2xl font-bold text-fuchsia-700">
+          <div className="bg-cream-2 border-2 border-ink/15 p-3">
+            <div className="text-xs text-ink/60">Post-Money (סבב אחרון)</div>
+            <div className="text-2xl font-bold text-gold">
               {fmt(finalState.postMoneyValuation)}
             </div>
           </div>
-          <div className="bg-pink-50 border-2 border-pink-200 rounded-lg p-3">
-            <div className="text-xs text-gray-600">מחיר למניה</div>
-            <div className="text-2xl font-bold text-pink-700">
+          <div className="bg-cream-2 border-2 border-ink/15 p-3">
+            <div className="text-xs text-ink/60">מחיר למניה</div>
+            <div className="text-2xl font-bold text-gold">
               ₪{finalState.pricePerShare.toFixed(2)}
             </div>
           </div>
@@ -199,15 +199,15 @@ export function CapTable() {
       )}
 
       {/* Founders */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
-          <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between p-3 bg-cream-2 border-b border-ink/15">
+          <h4 className="font-semibold text-ink flex items-center gap-2">
             <Users className="w-4 h-4" />
             בעלי מניות התחלתיים (מייסדים)
           </h4>
           <button
             onClick={addFounder}
-            className="px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 flex items-center gap-1"
+            className="px-2 py-1 bg-ink text-cream text-xs hover:bg-ink-deep flex items-center gap-1"
           >
             <Plus className="w-3 h-3" />
             הוסף מייסד
@@ -215,23 +215,23 @@ export function CapTable() {
         </div>
         <div className="p-3 space-y-2">
           {snapshot.initialShareholders.map((s) => (
-            <div key={s.id} className="flex items-center gap-2 p-2 bg-blue-50 rounded">
+            <div key={s.id} className="flex items-center gap-2 p-2 bg-cream-2">
               <input
                 type="text"
                 value={s.name}
                 onChange={(e) => updateFounder(s.id, { name: e.target.value })}
-                className="flex-1 px-2 py-1 border border-gray-300 rounded text-sm"
+                className="flex-1 px-2 py-1 border border-ink/15 text-sm"
               />
-              <span className="text-xs text-gray-500">מניות:</span>
+              <span className="text-xs text-ink/45">מניות:</span>
               <input
                 type="number"
                 value={s.shares}
                 onChange={(e) => updateFounder(s.id, { shares: parseInt(e.target.value) || 0 })}
-                className="w-32 px-2 py-1 border border-gray-300 rounded text-sm"
+                className="w-32 px-2 py-1 border border-ink/15 text-sm"
               />
               <button
                 onClick={() => removeFounder(s.id)}
-                className="p-1 text-red-600 hover:bg-red-100 rounded"
+                className="p-1 text-red-600 hover:bg-red-100"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -241,15 +241,15 @@ export function CapTable() {
       </div>
 
       {/* Funding Rounds */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
-          <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between p-3 bg-cream-2 border-b border-ink/15">
+          <h4 className="font-semibold text-ink flex items-center gap-2">
             <DollarSign className="w-4 h-4" />
             סבבי גיוס ({snapshot.rounds.length})
           </h4>
           <button
             onClick={addRound}
-            className="px-2 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 flex items-center gap-1"
+            className="px-2 py-1 bg-ink text-cream text-xs hover:bg-ink-deep flex items-center gap-1"
           >
             <Plus className="w-3 h-3" />
             הוסף סבב
@@ -257,33 +257,33 @@ export function CapTable() {
         </div>
         <div className="p-3 space-y-3">
           {snapshot.rounds.map((round, i) => (
-            <div key={round.id} className="bg-purple-50 border border-purple-200 rounded-lg p-3">
+            <div key={round.id} className="bg-cream-2 border border-ink/15 p-3">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="bg-purple-600 text-white text-xs px-2 py-0.5 rounded">
+                  <span className="bg-ink text-cream text-xs px-2 py-0.5">
                     סבב {i + 1}
                   </span>
                   <input
                     type="text"
                     value={round.name}
                     onChange={(e) => updateRound(round.id, { name: e.target.value })}
-                    className="px-2 py-0.5 border border-gray-300 rounded text-sm font-semibold"
+                    className="px-2 py-0.5 border border-ink/15 text-sm font-semibold"
                   />
                 </div>
                 <button
                   onClick={() => removeRound(round.id)}
-                  className="p-1 text-red-600 hover:bg-red-100 rounded"
+                  className="p-1 text-red-600 hover:bg-red-100"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
               </div>
               <div className="grid md:grid-cols-3 gap-2 text-xs">
                 <div>
-                  <label className="block text-gray-700 mb-0.5">סוג מניות</label>
+                  <label className="block text-ink/70 mb-0.5">סוג מניות</label>
                   <select
                     value={round.shareClass}
                     onChange={(e) => updateRound(round.id, { shareClass: e.target.value as ShareClass })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded"
+                    className="w-full px-2 py-1 border border-ink/15"
                   >
                     {(Object.keys(SHARE_CLASS_LABELS) as ShareClass[])
                       .filter((c) => c !== 'common' && c !== 'esop')
@@ -293,60 +293,60 @@ export function CapTable() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-gray-700 mb-0.5">משקיע</label>
+                  <label className="block text-ink/70 mb-0.5">משקיע</label>
                   <input
                     type="text"
                     value={round.investorName}
                     onChange={(e) => updateRound(round.id, { investorName: e.target.value })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded"
+                    className="w-full px-2 py-1 border border-ink/15"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 mb-0.5">Pre-Money Valuation</label>
+                  <label className="block text-ink/70 mb-0.5">Pre-Money Valuation</label>
                   <input
                     type="number"
                     value={round.preMoneyValuation}
                     onChange={(e) => updateRound(round.id, { preMoneyValuation: parseFloat(e.target.value) || 0 })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded"
+                    className="w-full px-2 py-1 border border-ink/15"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 mb-0.5">השקעה</label>
+                  <label className="block text-ink/70 mb-0.5">השקעה</label>
                   <input
                     type="number"
                     value={round.investmentAmount}
                     onChange={(e) => updateRound(round.id, { investmentAmount: parseFloat(e.target.value) || 0 })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded"
+                    className="w-full px-2 py-1 border border-ink/15"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 mb-0.5">ESOP Pool % (post-funding)</label>
+                  <label className="block text-ink/70 mb-0.5">ESOP Pool % (post-funding)</label>
                   <input
                     type="number"
                     value={round.esopPoolPct ?? 0}
                     onChange={(e) => updateRound(round.id, { esopPoolPct: parseFloat(e.target.value) || 0 })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded"
+                    className="w-full px-2 py-1 border border-ink/15"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 mb-0.5">ESOP Pre/Post</label>
+                  <label className="block text-ink/70 mb-0.5">ESOP Pre/Post</label>
                   <select
                     value={round.esopPrePostMoney ?? 'pre'}
                     onChange={(e) => updateRound(round.id, { esopPrePostMoney: e.target.value as 'pre' | 'post' })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded"
+                    className="w-full px-2 py-1 border border-ink/15"
                   >
                     <option value="pre">Pre-money (מדולל את המייסדים)</option>
                     <option value="post">Post-money (כל אחד)</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-gray-700 mb-0.5">Liquidation Preference (×)</label>
+                  <label className="block text-ink/70 mb-0.5">Liquidation Preference (×)</label>
                   <input
                     type="number"
                     step="0.5"
                     value={round.liquidationPreference ?? 1}
                     onChange={(e) => updateRound(round.id, { liquidationPreference: parseFloat(e.target.value) || 1 })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded"
+                    className="w-full px-2 py-1 border border-ink/15"
                   />
                 </div>
                 <div className="flex items-end">
@@ -367,12 +367,12 @@ export function CapTable() {
       </div>
 
       {/* Cap Table per round */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-x-auto">
-        <div className="bg-indigo-600 text-white p-2 text-sm font-bold">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-x-auto">
+        <div className="bg-ink text-cream p-2 text-sm font-bold">
           טבלת אחזקות לפי סבב
         </div>
         <table className="w-full text-xs">
-          <thead className="bg-gray-100">
+          <thead className="bg-cream-2">
             <tr>
               <th className="text-right p-2">בעל מניות</th>
               {state.perRound.map((r) => (
@@ -384,7 +384,7 @@ export function CapTable() {
           </thead>
           <tbody>
             {allShareholderNames.map((name) => (
-              <tr key={name} className="border-t border-gray-100">
+              <tr key={name} className="border-t border-ink/10">
                 <td className="p-2 font-medium">{name}</td>
                 {state.perRound.map((r) => {
                   const sh = r.shareholders.find((s) => s.name === name);
@@ -402,8 +402,8 @@ export function CapTable() {
 
       {/* Final distribution + Dilution chart */}
       <div className="grid md:grid-cols-2 gap-3">
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-blue-600 text-white p-2 text-sm font-bold">פיזור סופי</div>
+        <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+          <div className="bg-ink text-cream p-2 text-sm font-bold">פיזור סופי</div>
           <div className="p-3">
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
@@ -426,8 +426,8 @@ export function CapTable() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-emerald-600 text-white p-2 text-sm font-bold">
+        <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+          <div className="bg-emerald-700 text-white p-2 text-sm font-bold">
             דילול לאורך סבבים
           </div>
           <div className="p-3">
@@ -453,7 +453,7 @@ export function CapTable() {
       </div>
 
       {/* Exit Waterfall */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
         <div className="bg-amber-600 text-white p-3">
           <h3 className="font-bold flex items-center gap-2">
             <Sparkles className="w-5 h-5" />
@@ -468,13 +468,13 @@ export function CapTable() {
               type="number"
               value={exitValue}
               onChange={(e) => setExitValue(parseFloat(e.target.value) || 0)}
-              className="px-2 py-1 border border-gray-300 rounded text-sm w-40"
+              className="px-2 py-1 border border-ink/15 text-sm w-40"
             />
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-100">
+              <thead className="bg-cream-2">
                 <tr>
                   <th className="text-right p-2">בעל מניות</th>
                   <th className="text-center p-2">Liquidation Pref</th>
@@ -485,14 +485,14 @@ export function CapTable() {
               </thead>
               <tbody>
                 {waterfall.payouts.map((p, i) => (
-                  <tr key={i} className="border-t border-gray-100">
+                  <tr key={i} className="border-t border-ink/10">
                     <td className="p-2 font-medium">{p.shareholderName}</td>
                     <td className="p-2 text-center">{fmt(p.preferenceAmount)}</td>
                     <td className="p-2 text-center">{fmt(p.proRataAmount)}</td>
                     <td className="p-2 text-center font-bold text-emerald-700">
                       {fmt(p.totalAmount)}
                     </td>
-                    <td className="p-2 text-center text-purple-700">
+                    <td className="p-2 text-center text-gold">
                       {p.sharePct.toFixed(1)}%
                     </td>
                   </tr>

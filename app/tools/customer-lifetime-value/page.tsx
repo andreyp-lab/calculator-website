@@ -76,11 +76,11 @@ export default function CLVPage() {
             </p>
 
             <h2>הנוסחה</h2>
-            <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4">
-              <p className="font-mono text-base text-blue-900">
+            <div className="bg-cream-2 border-r-4 border-gold p-4 my-4">
+              <p className="font-mono text-base text-ink">
                 CLV = ARPU × Gross Margin × Customer Lifespan - CAC
               </p>
-              <p className="text-sm text-blue-700 mt-2">
+              <p className="text-sm text-ink/70 mt-2">
                 או עם Churn: CLV = (ARPU × Margin) / Monthly Churn Rate - CAC
               </p>
             </div>
@@ -113,32 +113,32 @@ export default function CLVPage() {
             <h2>בנצ\'מארקים לפי תעשייה</h2>
             <table className="w-full text-sm border-collapse my-4">
               <thead>
-                <tr className="bg-blue-50">
-                  <th className="border border-gray-300 p-2 text-right">תעשייה</th>
-                  <th className="border border-gray-300 p-2 text-right">LTV/CAC יעד</th>
-                  <th className="border border-gray-300 p-2 text-right">Payback יעד</th>
+                <tr className="bg-cream-2">
+                  <th className="border border-ink/15 p-2 text-right">תעשייה</th>
+                  <th className="border border-ink/15 p-2 text-right">LTV/CAC יעד</th>
+                  <th className="border border-ink/15 p-2 text-right">Payback יעד</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-2">SaaS B2B</td>
-                  <td className="border border-gray-300 p-2">3-5x</td>
-                  <td className="border border-gray-300 p-2">12-18 חודשים</td>
+                  <td className="border border-ink/15 p-2">SaaS B2B</td>
+                  <td className="border border-ink/15 p-2">3-5x</td>
+                  <td className="border border-ink/15 p-2">12-18 חודשים</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">E-commerce</td>
-                  <td className="border border-gray-300 p-2">2-3x</td>
-                  <td className="border border-gray-300 p-2">6-12 חודשים</td>
+                  <td className="border border-ink/15 p-2">E-commerce</td>
+                  <td className="border border-ink/15 p-2">2-3x</td>
+                  <td className="border border-ink/15 p-2">6-12 חודשים</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">Mobile App</td>
-                  <td className="border border-gray-300 p-2">2-4x</td>
-                  <td className="border border-gray-300 p-2">3-9 חודשים</td>
+                  <td className="border border-ink/15 p-2">Mobile App</td>
+                  <td className="border border-ink/15 p-2">2-4x</td>
+                  <td className="border border-ink/15 p-2">3-9 חודשים</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">שירותים מקצועיים</td>
-                  <td className="border border-gray-300 p-2">4-10x</td>
-                  <td className="border border-gray-300 p-2">3-6 חודשים</td>
+                  <td className="border border-ink/15 p-2">שירותים מקצועיים</td>
+                  <td className="border border-ink/15 p-2">4-10x</td>
+                  <td className="border border-ink/15 p-2">3-6 חודשים</td>
                 </tr>
               </tbody>
             </table>
@@ -167,19 +167,19 @@ export default function CLVPage() {
             <h2>כלים קשורים</h2>
             <ul>
               <li>
-                <a href="/tools/forecast" className="text-blue-700 hover:underline">
+                <a href="/tools/forecast" className="text-gold hover:underline">
                   מחשבון חיזוי הכנסות
                 </a>{' '}
                 — חזה הכנסות עתידיות לפי מגמות
               </li>
               <li>
-                <a href="/tools/financial-analysis" className="text-blue-700 hover:underline">
+                <a href="/tools/financial-analysis" className="text-gold hover:underline">
                   ניתוח דוחות פיננסיים
                 </a>{' '}
                 — ניתוח מאזן, רווח והפסד ותזרים
               </li>
               <li>
-                <a href="/tools/unified" className="text-blue-700 hover:underline">
+                <a href="/tools/unified" className="text-gold hover:underline">
                   מערכת ניהול פיננסית מאוחדת
                 </a>{' '}
                 — כל הכלים הפיננסיים במקום אחד
@@ -189,7 +189,7 @@ export default function CLVPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <span>בנצ\'מארקים מבוססי דוחות SaaS Capital, Bain & Co, OpenView Partners</span>
             </li>

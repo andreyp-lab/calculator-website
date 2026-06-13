@@ -125,12 +125,12 @@ export default function FuelCostPage() {
           <h2>מחשבוני רכב נוספים</h2>
           <ul>
             <li>
-              <Link href="/vehicles/leasing-vs-buying" className="text-blue-700 hover:underline">
+              <Link href="/vehicles/leasing-vs-buying" className="text-gold hover:underline">
                 מחשבון בעלות רכב מקיף — השוואת מזומן, הלוואה וליסינג כולל TCO
               </Link>
             </li>
             <li>
-              <Link href="/vehicles/company-car-benefit" className="text-blue-700 hover:underline">
+              <Link href="/vehicles/company-car-benefit" className="text-gold hover:underline">
                 מחשבון שווי שימוש ברכב — חישוב הטבת רכב צמוד לעובד ולמעביד
               </Link>
             </li>

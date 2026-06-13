@@ -142,11 +142,11 @@ export function SalaryNetGrossCalculator() {
       { name: 'ב.ל. + בריאות', value: Math.round(r.socialSecurity), color: '#f59e0b' },
     ];
     if (r.pensionDeduction > 0)
-      data.push({ name: 'פנסיה', value: Math.round(r.pensionDeduction), color: '#3b82f6' });
+      data.push({ name: 'פנסיה', value: Math.round(r.pensionDeduction), color: '#102219' });
     if (r.studyFundDeduction > 0)
-      data.push({ name: 'קרן השתלמות', value: Math.round(r.studyFundDeduction), color: '#8b5cf6' });
+      data.push({ name: 'קרן השתלמות', value: Math.round(r.studyFundDeduction), color: '#8E6824' });
     if (r.disabilityInsurance > 0)
-      data.push({ name: 'אובדן כושר', value: Math.round(r.disabilityInsurance), color: '#6b7280' });
+      data.push({ name: 'אובדן כושר', value: Math.round(r.disabilityInsurance), color: '#264B36' });
     return data.filter((d) => d.value > 0);
   }, [mainResult]);
 
@@ -154,9 +154,9 @@ export function SalaryNetGrossCalculator() {
   const barData = useMemo(() => {
     const r = mainResult;
     return [
-      { name: 'ברוטו', value: Math.round(r.grossSalary), fill: '#6b7280' },
+      { name: 'ברוטו', value: Math.round(r.grossSalary), fill: '#264B36' },
       { name: 'נטו לעובד', value: Math.round(r.netSalary), fill: '#10b981' },
-      { name: 'עלות מעסיק', value: Math.round(r.totalEmployerCost), fill: '#3b82f6' },
+      { name: 'עלות מעסיק', value: Math.round(r.totalEmployerCost), fill: '#102219' },
     ];
   }, [mainResult]);
 
@@ -166,7 +166,7 @@ export function SalaryNetGrossCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* ===== Mode Toggle ===== */}
-      <div className="flex flex-wrap gap-2 bg-gray-100 rounded-xl p-1 w-fit">
+      <div className="flex flex-wrap gap-2 bg-cream-2 rounded-none p-1 w-fit">
         <ModeButton active={mode === 'gross-to-net'} onClick={() => setMode('gross-to-net')} color="emerald">
           ברוטו → נטו
         </ModeButton>
@@ -179,12 +179,12 @@ export function SalaryNetGrossCalculator() {
       </div>
 
       {mode === 'net-to-gross' && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-sm text-ink/80">
           <strong>מצב הפוך:</strong> הכנס את הנטו שאתה רוצה לקבל — המחשבון ימצא את הברוטו הדרוש
         </div>
       )}
       {mode === 'employer-to-net' && (
-        <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-sm text-purple-900">
+        <div className="bg-cream-2 border border-gold/40 rounded-none p-3 text-sm text-ink/80">
           <strong>מצב מעסיק:</strong> הכנס את עלות המעסיק הכוללת — המחשבון יחשב את ברוטו העובד ואת הנטו שלו
         </div>
       )}
@@ -206,7 +206,7 @@ export function SalaryNetGrossCalculator() {
                     step={500}
                     value={grossInput}
                     onChange={(e) => setGrossInput(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg focus:ring-2 focus:ring-gold"
                   />
                   {/* Quick-picks */}
                   <div className="flex flex-wrap gap-1.5 mt-2">
@@ -232,7 +232,7 @@ export function SalaryNetGrossCalculator() {
                     step={500}
                     value={netInput}
                     onChange={(e) => setNetInput(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-blue-300 rounded-lg text-lg bg-blue-50 focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg bg-cream-2 focus:ring-2 focus:ring-gold"
                   />
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {[8_000, 10_000, 12_000, 15_000, 20_000, 25_000].map((v) => (
@@ -240,7 +240,7 @@ export function SalaryNetGrossCalculator() {
                         key={v}
                         type="button"
                         onClick={() => setNetInput(v)}
-                        className="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded hover:bg-blue-200 transition"
+                        className="text-xs px-2 py-0.5 bg-cream text-ink rounded-none hover:bg-paper-hover transition"
                       >
                         {v.toLocaleString('he-IL')}
                       </button>
@@ -257,7 +257,7 @@ export function SalaryNetGrossCalculator() {
                     step={1000}
                     value={employerCostInput}
                     onChange={(e) => setEmployerCostInput(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-purple-300 rounded-lg text-lg bg-purple-50 focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg bg-cream-2 focus:ring-2 focus:ring-gold"
                   />
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {[15_000, 20_000, 25_000, 35_000, 50_000].map((v) => (
@@ -265,7 +265,7 @@ export function SalaryNetGrossCalculator() {
                         key={v}
                         type="button"
                         onClick={() => setEmployerCostInput(v)}
-                        className="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded hover:bg-purple-200 transition"
+                        className="text-xs px-2 py-0.5 bg-cream text-gold rounded-none hover:bg-paper-hover transition"
                       >
                         {(v / 1000).toFixed(0)}K
                       </button>
@@ -283,7 +283,7 @@ export function SalaryNetGrossCalculator() {
                     step={0.25}
                     value={opts.creditPoints}
                     onChange={(e) => updateOpts('creditPoints', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                   <button
                     type="button"
@@ -300,7 +300,7 @@ export function SalaryNetGrossCalculator() {
                     max={300}
                     value={opts.monthlyWorkHours}
                     onChange={(e) => updateOpts('monthlyWorkHours', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                 </Field>
               </div>
@@ -316,7 +316,7 @@ export function SalaryNetGrossCalculator() {
                   id="pension"
                   checked={opts.pensionEnabled}
                   onChange={(e) => updateOpts('pensionEnabled', e.target.checked)}
-                  className="w-4 h-4 text-blue-600"
+                  className="w-4 h-4 accent-ink"
                 />
                 <label htmlFor="pension" className="text-sm font-medium cursor-pointer">
                   הפרשה לפנסיה (חובה לפי חוק)
@@ -325,7 +325,7 @@ export function SalaryNetGrossCalculator() {
 
               {opts.pensionEnabled && (
                 <div className="mr-6 space-y-2">
-                  <p className="text-xs text-gray-500 mb-2">רמת הפרשה:</p>
+                  <p className="text-xs text-ink/60 mb-2">רמת הפרשה:</p>
                   {(['minimum', 'recommended', 'maximum'] as PensionLevel[]).map((level) => (
                     <label key={level} className="flex items-start gap-2 cursor-pointer">
                       <input
@@ -334,17 +334,17 @@ export function SalaryNetGrossCalculator() {
                         value={level}
                         checked={opts.pensionLevel === level}
                         onChange={() => updateOpts('pensionLevel', level)}
-                        className="mt-0.5 w-4 h-4 text-blue-600"
+                        className="mt-0.5 w-4 h-4 accent-ink"
                       />
                       <div>
                         <span className="text-sm font-medium">{PENSION_RATES[level].label}</span>
-                        <p className="text-xs text-gray-500">{PENSION_RATES[level].description}</p>
+                        <p className="text-xs text-ink/60">{PENSION_RATES[level].description}</p>
                       </div>
                     </label>
                   ))}
 
                   {/* השפעה על נטו */}
-                  <div className="bg-blue-50 rounded-lg p-3 text-xs text-blue-900 mt-2">
+                  <div className="bg-cream-2 rounded-none p-3 text-xs text-ink/80 mt-2">
                     <p className="font-semibold mb-1">השפעה על הנטו:</p>
                     <p>
                       ניכוי עובד:{' '}
@@ -365,7 +365,7 @@ export function SalaryNetGrossCalculator() {
                   id="studyFund"
                   checked={opts.studyFundEnabled}
                   onChange={(e) => updateOpts('studyFundEnabled', e.target.checked)}
-                  className="w-4 h-4 text-blue-600"
+                  className="w-4 h-4 accent-ink"
                 />
                 <label htmlFor="studyFund" className="text-sm font-medium cursor-pointer">
                   קרן השתלמות (2.5% עובד + 7.5% מעסיק)
@@ -373,7 +373,7 @@ export function SalaryNetGrossCalculator() {
               </div>
 
               {opts.studyFundEnabled && r.studyFundDeduction > 0 && (
-                <div className="mr-6 bg-purple-50 rounded-lg p-3 text-xs text-purple-900">
+                <div className="mr-6 bg-cream-2 rounded-none p-3 text-xs text-ink/80">
                   <p>ניכוי עובד: <strong>{formatCurrency(r.studyFundDeduction)}/ח</strong></p>
                   <p>הפרשת מעסיק: <strong>{formatCurrency(r.employerStudyFund)}/ח</strong></p>
                   <p className="text-emerald-700 mt-1">
@@ -392,7 +392,7 @@ export function SalaryNetGrossCalculator() {
                   <select
                     value={opts.taxYear}
                     onChange={(e) => updateOpts('taxYear', e.target.value as TaxYear)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 text-sm"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                   >
                     <option value="2024">2024</option>
                     <option value="2025">2025</option>
@@ -410,9 +410,9 @@ export function SalaryNetGrossCalculator() {
                     step={0.1}
                     value={opts.disabilityInsuranceRate}
                     onChange={(e) => updateOpts('disabilityInsuranceRate', Number(e.target.value))}
-                    className="w-full accent-gray-600"
+                    className="w-full accent-ink"
                   />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <div className="flex justify-between text-xs text-ink/60 mt-1">
                     <span>ללא</span>
                     <span>1%</span>
                     <span>2%</span>
@@ -453,7 +453,7 @@ export function SalaryNetGrossCalculator() {
         {/* === Results === */}
         <div className="lg:col-span-2 space-y-4">
           {/* כרטיס נטו */}
-          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-300 rounded-xl p-5">
+          <div className="bg-emerald-50 border border-emerald-300 rounded-none p-5">
             <p className="text-sm font-medium text-emerald-800 mb-1">שכר נטו (לכיס)</p>
             <p className="text-4xl font-bold text-emerald-700 tabular-nums">{formatCurrency(r.netSalary)}</p>
             <p className="text-sm text-emerald-600 mt-1">
@@ -463,19 +463,19 @@ export function SalaryNetGrossCalculator() {
 
           {/* ברוטו (מוצג רק במצבים שבהם הוא מחושב) */}
           {(mode === 'net-to-gross' || mode === 'employer-to-net') && (
-            <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-4">
-              <p className="text-xs font-medium text-gray-600 mb-1">
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+              <p className="text-xs font-medium text-ink/60 mb-1">
                 {mode === 'net-to-gross' ? 'ברוטו נדרש' : 'ברוטו מחושב'}
               </p>
-              <p className="text-2xl font-bold text-gray-900 tabular-nums">
+              <p className="text-2xl font-bold text-ink tabular-nums">
                 {formatCurrency(r.grossSalary)}
               </p>
             </div>
           )}
 
           {/* פירוט ניכויים */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-4 space-y-1.5 text-sm">
-            <h4 className="font-bold text-gray-900 mb-3">פירוט ניכויים</h4>
+          <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-1.5 text-sm">
+            <h4 className="font-bold text-ink mb-3">פירוט ניכויים</h4>
             <Row label="ברוטו" value={formatCurrency(r.grossSalary)} bold />
             <Row label={`מס הכנסה (${r.effectiveTaxRate.toFixed(1)}% בפועל)`} value={`-${formatCurrency(r.incomeTax)}`} color="red" />
             <Row label="ב.ל. + בריאות" value={`-${formatCurrency(r.socialSecurity)}`} color="amber" />
@@ -497,25 +497,25 @@ export function SalaryNetGrossCalculator() {
           <MarginalBracketCard result={r} />
 
           {/* שכר שעתי */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm">
-            <p className="font-semibold text-blue-900 mb-1">שכר שעתי (ברוטו)</p>
-            <p className="text-2xl font-bold text-blue-700 tabular-nums">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm">
+            <p className="font-semibold text-ink mb-1">שכר שעתי (ברוטו)</p>
+            <p className="text-2xl font-bold text-ink tabular-nums">
               {r.hourlyRate.toFixed(1)} ₪/שעה
             </p>
-            <p className="text-xs text-blue-600 mt-1">לפי {opts.monthlyWorkHours} שעות/חודש</p>
+            <p className="text-xs text-ink/60 mt-1">לפי {opts.monthlyWorkHours} שעות/חודש</p>
           </div>
 
           {/* עלות מעסיק */}
-          <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-sm space-y-1.5">
-            <h4 className="font-semibold text-purple-900 mb-2">עלות מעסיק כוללת</h4>
-            <p className="text-2xl font-bold text-purple-700 tabular-nums">
+          <div className="bg-cream-2 border border-gold/40 rounded-none p-4 text-sm space-y-1.5">
+            <h4 className="font-semibold text-ink mb-2">עלות מעסיק כוללת</h4>
+            <p className="text-2xl font-bold text-gold tabular-nums">
               {formatCurrency(r.totalEmployerCost)}
             </p>
             <Row label="ב.ל. מעסיק" value={formatCurrency(r.employerSocialSecurity)} />
             <Row label="פנסיה מעסיק" value={formatCurrency(r.employerPension)} />
             {r.employerStudyFund > 0 && <Row label="קרן השתלמות מעסיק" value={formatCurrency(r.employerStudyFund)} />}
             <Row label="פיצויים (8.33%)" value={formatCurrency(r.employerCompensation)} />
-            <p className="text-xs text-purple-700 pt-1 border-t border-purple-200">
+            <p className="text-xs text-ink/70 pt-1 border-t border-gold/30">
               יחס עלות/נטו: {r.costToNetRatio.toFixed(2)}× (על כל ₪1 נטו, מעסיק משלם ₪{r.costToNetRatio.toFixed(2)})
             </p>
           </div>
@@ -548,7 +548,7 @@ export function SalaryNetGrossCalculator() {
       )}
 
       {/* ===== Charts ===== */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <div className="flex flex-wrap gap-2 mb-5">
           <TabButton active={chartView === 'pie'} onClick={() => setChartView('pie')}>
             חלוקת שכר (Pie)
@@ -563,8 +563,8 @@ export function SalaryNetGrossCalculator() {
 
         {chartView === 'pie' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">חלוקת השכר</h3>
-            <p className="text-xs text-gray-500 mb-4">ירוק = נטו | אדום = מס | כתום = ב.ל. | כחול = פנסיה</p>
+            <h3 className="font-bold text-ink mb-1">חלוקת השכר</h3>
+            <p className="text-xs text-ink/60 mb-4">ירוק = נטו | אדום = מס | כתום = ב.ל. | כחול = פנסיה</p>
             <div className="flex flex-col md:flex-row items-center gap-4">
               <div className="h-64 w-full md:w-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -603,8 +603,8 @@ export function SalaryNetGrossCalculator() {
 
         {chartView === 'bar' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">ברוטו / נטו / עלות מעסיק</h3>
-            <p className="text-xs text-gray-500 mb-4">הבדל ויזואלי בין מה שהמעסיק משלם, מה שבתלוש, ומה שמגיע לכיס</p>
+            <h3 className="font-bold text-ink mb-1">ברוטו / נטו / עלות מעסיק</h3>
+            <p className="text-xs text-ink/60 mb-4">הבדל ויזואלי בין מה שהמעסיק משלם, מה שבתלוש, ומה שמגיע לכיס</p>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={barData} layout="vertical">
@@ -625,8 +625,8 @@ export function SalaryNetGrossCalculator() {
 
         {chartView === 'curve' && salaryCurve && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">עקומת נטו — לאורך טווח שכר</h3>
-            <p className="text-xs text-gray-500 mb-4">ירוק = נטו | אדום = מס הכנסה | כתום = ב.ל. | כחול = פנסיה</p>
+            <h3 className="font-bold text-ink mb-1">עקומת נטו — לאורך טווח שכר</h3>
+            <p className="text-xs text-ink/60 mb-4">ירוק = נטו | אדום = מס הכנסה | כתום = ב.ל. | כחול = פנסיה</p>
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={salaryCurve}>
@@ -638,7 +638,7 @@ export function SalaryNetGrossCalculator() {
                   <Bar dataKey="net" stackId="a" name="נטו" fill="#10b981" />
                   <Bar dataKey="tax" stackId="a" name="מס הכנסה" fill="#ef4444" />
                   <Bar dataKey="ss" stackId="a" name="ב.ל." fill="#f59e0b" />
-                  <Bar dataKey="pension" stackId="a" name="פנסיה" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="pension" stackId="a" name="פנסיה" fill="#102219" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -658,32 +658,32 @@ function MarginalBracketCard({ result }: { result: ReturnType<typeof calculateSa
   const isTop = info.nextRate === null;
 
   return (
-    <div className={`rounded-xl border-2 p-4 text-sm ${isTop ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200'}`}>
+    <div className={`rounded-none border p-4 text-sm ${isTop ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200'}`}>
       <h4 className={`font-semibold mb-2 ${isTop ? 'text-red-800' : 'text-amber-800'}`}>
         מדרגת מס שולי
       </h4>
       <p className={`text-2xl font-bold tabular-nums ${isTop ? 'text-red-700' : 'text-amber-700'}`}>
         {(info.currentRate * 100).toFixed(0)}%
       </p>
-      <p className="text-xs text-gray-600 mt-1">
+      <p className="text-xs text-ink/60 mt-1">
         {isTop
           ? 'אתה במדרגה העליונה (50%). כל תוספת שכר ממוסה ב-50%.'
           : `כל שקל נוסף מעל הברוטו הנוכחי ממוסה ב-${(info.currentRate * 100).toFixed(0)}%`}
       </p>
       {!isTop && info.distanceToNextMonthly > 0 && (
-        <div className="mt-2 bg-white rounded p-2 border border-amber-200">
+        <div className="mt-2 bg-paper rounded-none p-2 border border-amber-200">
           <p className="text-xs text-amber-700">
             מרחק למדרגה הבאה ({(info.nextRate! * 100).toFixed(0)}%):
           </p>
           <p className="font-bold text-amber-900 tabular-nums">
             +{formatCurrency(info.distanceToNextMonthly)}/חודש
           </p>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <p className="text-xs text-ink/60 mt-0.5">
             (כלומר: העלאה של פחות מ-{formatCurrency(info.distanceToNextMonthly)}/ח לא תשנה את המדרגה)
           </p>
         </div>
       )}
-      <div className="mt-2 text-xs text-gray-500">
+      <div className="mt-2 text-xs text-ink/60">
         שיעור אפקטיבי: <strong>{result.effectiveTaxRate.toFixed(1)}%</strong> — הפרש: {((info.currentRate * 100) - result.effectiveTaxRate).toFixed(1)}%
       </div>
     </div>
@@ -708,40 +708,40 @@ function YearComparisonPanel({
     : 0;
 
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-      <h3 className="font-bold text-gray-900 text-lg mb-1">השוואת שנים — אותו ברוטו ({formatCurrency(grossSalary)})</h3>
-      <p className="text-sm text-gray-500 mb-4">
+    <div className="bg-paper border border-ink/15 rounded-none p-5">
+      <h3 className="font-bold text-ink text-lg mb-1">השוואת שנים — אותו ברוטו ({formatCurrency(grossSalary)})</h3>
+      <p className="text-sm text-ink/60 mb-4">
         ב-2026 הורחבו מדרגות 20% ו-31% — מי שמשתכר 19,000-25,100 ₪/חודש נהנה הכי הרבה
       </p>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="bg-gray-50">
-              <th className="text-right p-2 border border-gray-200">שנה</th>
-              <th className="text-right p-2 border border-gray-200">נטו חודשי</th>
-              <th className="text-right p-2 border border-gray-200">מס הכנסה</th>
-              <th className="text-right p-2 border border-gray-200">שיעור אפקטיבי</th>
-              <th className="text-right p-2 border border-gray-200">מדרגה שולית</th>
+            <tr className="bg-cream-2">
+              <th className="text-right p-2 border border-ink/15">שנה</th>
+              <th className="text-right p-2 border border-ink/15">נטו חודשי</th>
+              <th className="text-right p-2 border border-ink/15">מס הכנסה</th>
+              <th className="text-right p-2 border border-ink/15">שיעור אפקטיבי</th>
+              <th className="text-right p-2 border border-ink/15">מדרגה שולית</th>
             </tr>
           </thead>
           <tbody>
             {comparison.map((row, i) => (
-              <tr key={row.year} className={`${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'} ${row.year === '2026' ? 'ring-2 ring-inset ring-emerald-400' : ''}`}>
-                <td className="p-2 border border-gray-200 font-bold">
+              <tr key={row.year} className={`${i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'} ${row.year === '2026' ? 'ring-2 ring-inset ring-emerald-400' : ''}`}>
+                <td className="p-2 border border-ink/15 font-bold">
                   {row.year}
                   {row.year === '2026' && <span className="mr-1 text-emerald-600 text-xs">✓ נוכחי</span>}
                 </td>
-                <td className="p-2 border border-gray-200 tabular-nums font-medium text-emerald-700">
+                <td className="p-2 border border-ink/15 tabular-nums font-medium text-emerald-700">
                   {formatCurrency(row.netSalary)}
                 </td>
-                <td className="p-2 border border-gray-200 tabular-nums text-red-600">
+                <td className="p-2 border border-ink/15 tabular-nums text-red-600">
                   {formatCurrency(row.incomeTax)}
                 </td>
-                <td className="p-2 border border-gray-200 tabular-nums">
+                <td className="p-2 border border-ink/15 tabular-nums">
                   {row.netPercentage.toFixed(1)}%
                 </td>
-                <td className="p-2 border border-gray-200 tabular-nums">
+                <td className="p-2 border border-ink/15 tabular-nums">
                   {row.marginalRate.toFixed(0)}%
                 </td>
               </tr>
@@ -751,7 +751,7 @@ function YearComparisonPanel({
       </div>
 
       {benefitFrom2026 > 0 && (
-        <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-sm text-emerald-900">
+        <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-none p-3 text-sm text-emerald-900">
           <strong>הרווחת מהשינוי ב-2026:</strong> {formatCurrency(benefitFrom2026)} יותר בשנה (לעומת 2025)
         </div>
       )}
@@ -775,23 +775,23 @@ function BonusPanel({
   marginalRate: number;
 }) {
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-      <h3 className="font-bold text-gray-900 text-lg mb-1">מחשבון בונוס / חודש 13</h3>
-      <p className="text-sm text-gray-500 mb-4">
+    <div className="bg-paper border border-ink/15 rounded-none p-5">
+      <h3 className="font-bold text-ink text-lg mb-1">מחשבון בונוס / חודש 13</h3>
+      <p className="text-sm text-ink/60 mb-4">
         הבונוס ממוסה בשיעור המדרגה <strong>השולית</strong> ({marginalRate.toFixed(0)}%) — לא הממוצעת.
         לכן הנטו על בונוס נמוך יותר מהצפוי.
       </p>
 
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">סכום הבונוס (₪)</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">סכום הבונוס (₪)</label>
           <input
             type="number"
             min={0}
             step={1000}
             value={bonusAmount}
             onChange={(e) => setBonusAmount(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
           <div className="flex flex-wrap gap-1 mt-1">
             {[5_000, 10_000, 20_000, 30_000].map((v) => (
@@ -808,14 +808,14 @@ function BonusPanel({
         </div>
 
         {bonusResult && (
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm space-y-1">
+          <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-sm space-y-1">
             <p className="font-semibold text-amber-800 mb-2">תוצאה:</p>
             <Row label="ברוטו בונוס" value={formatCurrency(bonusResult.grossBonus)} />
             <Row label={`מס (${(bonusResult.marginalRate * 100).toFixed(0)}% שולי)`} value={`-${formatCurrency(bonusResult.taxOnBonus)}`} color="red" />
             <Row label="ב.ל." value={`-${formatCurrency(bonusResult.socialSecurityOnBonus)}`} color="amber" />
             <div className="pt-1 border-t">
               <Row label="נטו מהבונוס" value={formatCurrency(bonusResult.netBonus)} bold color="emerald" />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 {bonusResult.effectiveBonusRate.toFixed(1)}% מהבונוס הגיע לכיס
               </p>
             </div>
@@ -824,7 +824,7 @@ function BonusPanel({
       </div>
 
       {bonusResult && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/80">
           <strong>למה הנטו על הבונוס נמוך?</strong> הבונוס נחשב כהכנסה נוספת ומחויב במס שולי (
           {(bonusResult.marginalRate * 100).toFixed(0)}%) — לא בשיעור הממוצע. זה פחות ממה שרוב האנשים מצפים.
         </div>
@@ -853,16 +853,16 @@ function CreditPointsWizard({
   }
 
   return (
-    <div className="bg-white border-2 border-emerald-200 rounded-xl p-5">
-      <h3 className="font-bold text-gray-900 text-lg mb-1">מחשבון נקודות זיכוי אישי</h3>
-      <p className="text-sm text-gray-500 mb-4">
+    <div className="bg-paper border border-emerald-200 rounded-none p-5">
+      <h3 className="font-bold text-ink text-lg mb-1">מחשבון נקודות זיכוי אישי</h3>
+      <p className="text-sm text-ink/60 mb-4">
         מלא את הפרטים שלך — המחשבון ימצא את מספר נקודות הזיכוי הנכון
       </p>
 
       <div className="grid md:grid-cols-2 gap-5">
         <div className="space-y-3">
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">מין</label>
+            <label className="text-sm font-medium text-ink/70 block mb-1">מין</label>
             <div className="flex gap-3">
               {(['male', 'female'] as const).map((g) => (
                 <label key={g} className="flex items-center gap-1.5 cursor-pointer text-sm">
@@ -942,11 +942,11 @@ function CreditPointsWizard({
           />
 
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">עולה חדש</label>
+            <label className="text-sm font-medium text-ink/70 block mb-1">עולה חדש</label>
             <select
               value={profile.newImmigrantYears}
               onChange={(e) => updateProfile('newImmigrantYears', Number(e.target.value) as 0 | 1 | 2 | 3)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             >
               <option value={0}>לא עולה חדש</option>
               <option value={1}>שנה 1-1.5 (+3 נק')</option>
@@ -958,7 +958,7 @@ function CreditPointsWizard({
       </div>
 
       {creditResult && (
-        <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+        <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-none p-4">
           <div className="flex items-center justify-between mb-3">
             <div>
               <p className="font-bold text-emerald-900 text-lg">
@@ -971,7 +971,7 @@ function CreditPointsWizard({
             <button
               type="button"
               onClick={() => onApply(creditResult.totalPoints)}
-              className="bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition"
+              className="bg-emerald-600 text-white px-4 py-2 rounded-none text-sm font-medium hover:bg-emerald-700 transition"
             >
               החל על המחשבון
             </button>
@@ -979,7 +979,7 @@ function CreditPointsWizard({
 
           <div className="grid grid-cols-2 gap-1 text-xs">
             {creditResult.breakdown.map((item, i) => (
-              <div key={i} className="flex justify-between text-gray-700">
+              <div key={i} className="flex justify-between text-ink/70">
                 <span>{item.label}</span>
                 <span className="font-medium tabular-nums">{item.points.toFixed(2)}</span>
               </div>
@@ -1005,13 +1005,13 @@ function Section({
   children: React.ReactNode;
 }) {
   const bgMap = {
-    gray: 'bg-white border-gray-200',
+    gray: 'bg-paper border-ink/15',
     emerald: 'bg-emerald-50 border-emerald-200',
-    blue: 'bg-blue-50 border-blue-200',
+    blue: 'bg-cream-2 border-ink/15',
   };
   return (
-    <div className={`rounded-xl border-2 p-5 ${bgMap[color]}`}>
-      <h3 className="font-bold text-gray-900 text-base mb-4">{title}</h3>
+    <div className={`rounded-none border p-5 ${bgMap[color]}`}>
+      <h3 className="font-bold text-ink text-base mb-4">{title}</h3>
       {children}
     </div>
   );
@@ -1028,9 +1028,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -1054,7 +1054,7 @@ function NumberField({
         max={20}
         value={value}
         onChange={(e) => onChange(Math.max(0, Math.round(Number(e.target.value))))}
-        className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500"
+        className="w-full px-3 py-1.5 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
       />
     </Field>
   );
@@ -1077,11 +1077,11 @@ function ToggleField({
         type="checkbox"
         checked={value}
         onChange={(e) => onChange(e.target.checked)}
-        className="w-4 h-4 text-emerald-600"
+        className="w-4 h-4 accent-ink"
       />
       <div>
-        <span className="text-sm font-medium text-gray-700">{label}</span>
-        <span className="text-xs text-gray-500 mr-1">{hint}</span>
+        <span className="text-sm font-medium text-ink/70">{label}</span>
+        <span className="text-xs text-ink/60 mr-1">{hint}</span>
       </div>
     </label>
   );
@@ -1100,14 +1100,14 @@ function Row({
 }) {
   const colorMap = {
     emerald: 'text-emerald-700',
-    blue: 'text-blue-700',
+    blue: 'text-ink',
     red: 'text-red-600',
     amber: 'text-amber-700',
   };
-  const valueClass = color ? colorMap[color] : 'text-gray-900';
+  const valueClass = color ? colorMap[color] : 'text-ink';
   return (
     <div className="flex justify-between py-0.5">
-      <span className={`text-gray-600 ${bold ? 'font-bold text-gray-900' : ''}`}>{label}</span>
+      <span className={`text-ink/60 ${bold ? 'font-bold text-ink' : ''}`}>{label}</span>
       <span className={`tabular-nums ${bold ? 'font-bold' : ''} ${valueClass}`}>{value}</span>
     </div>
   );
@@ -1125,16 +1125,16 @@ function ModeButton({
   children: React.ReactNode;
 }) {
   const activeMap = {
-    emerald: 'bg-white text-emerald-700 shadow font-bold',
-    blue: 'bg-white text-blue-700 shadow font-bold',
-    purple: 'bg-white text-purple-700 shadow font-bold',
+    emerald: 'bg-paper text-emerald-700 shadow font-bold',
+    blue: 'bg-paper text-ink shadow font-bold',
+    purple: 'bg-paper text-gold shadow font-bold',
   };
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-        active ? activeMap[color] : 'text-gray-600 hover:text-gray-900'
+      className={`px-4 py-2 rounded-none text-sm font-medium transition ${
+        active ? activeMap[color] : 'text-ink/60 hover:text-ink'
       }`}
     >
       {children}
@@ -1155,8 +1155,8 @@ function TabButton({
     <button
       type="button"
       onClick={onClick}
-      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-        active ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+      className={`px-3 py-1.5 rounded-none text-xs font-medium transition ${
+        active ? 'bg-ink text-cream' : 'bg-cream-2 text-ink/60 hover:bg-paper-hover'
       }`}
     >
       {children}

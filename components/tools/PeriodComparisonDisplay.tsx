@@ -67,7 +67,7 @@ export function PeriodComparisonDisplay() {
 
   if (!comparison) {
     return (
-      <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
+      <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-6 text-center">
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-2" />
         <p className="text-amber-900 mb-2">נדרשים לפחות 2 תרחישים להשוואת תקופות</p>
         <p className="text-xs text-amber-700">
@@ -95,23 +95,23 @@ export function PeriodComparisonDisplay() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-violet-600 to-purple-600 text-white p-4">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <GitCompare className="w-5 h-5" />
             השוואת תקופות (YoY)
           </h3>
-          <p className="text-xs text-violet-100">
+          <p className="text-xs text-cream/70">
             ניתוח מגמות לאורך {comparison.periods.length} שנים
           </p>
         </div>
       </div>
 
       {/* Overall Summary */}
-      <div className={`bg-${trendColor}-50 border-2 border-${trendColor}-300 rounded-lg p-4`}>
+      <div className={`bg-${trendColor}-50 border-2 border-${trendColor}-300 rounded-none p-4`}>
         <div className="grid md:grid-cols-3 gap-3 text-center">
           <div>
-            <div className="text-xs text-gray-600">מגמה כללית</div>
+            <div className="text-xs text-ink/60">מגמה כללית</div>
             <div className={`text-2xl font-bold text-${trendColor}-700`}>
               {comparison.summary.overallTrend === 'positive'
                 ? '📈 חיובית'
@@ -121,14 +121,14 @@ export function PeriodComparisonDisplay() {
             </div>
           </div>
           <div>
-            <div className="text-xs text-gray-600">צמיחה חזקה ביותר</div>
+            <div className="text-xs text-ink/60">צמיחה חזקה ביותר</div>
             <div className="text-sm font-bold">{comparison.summary.strongestGrowth.metric}</div>
             <div className="text-emerald-700 font-bold">
               {comparison.summary.strongestGrowth.cagr.toFixed(1)}% CAGR
             </div>
           </div>
           <div>
-            <div className="text-xs text-gray-600">ביצוע חלש ביותר</div>
+            <div className="text-xs text-ink/60">ביצוע חלש ביותר</div>
             <div className="text-sm font-bold">
               {comparison.summary.weakestPerformance.metric}
             </div>
@@ -140,8 +140,8 @@ export function PeriodComparisonDisplay() {
       </div>
 
       {/* Trend Chart */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gray-700 text-white p-3 text-sm font-bold">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3 text-sm font-bold">
           מגמות מדדים מרכזיים (₪K)
         </div>
         <div className="p-4">
@@ -152,18 +152,18 @@ export function PeriodComparisonDisplay() {
               <YAxis tickFormatter={(v) => `${v}K`} />
               <Tooltip formatter={(v) => `${Number(v).toLocaleString('he-IL')}K`} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="הכנסות" stroke="#3b82f6" strokeWidth={3} />
+              <Line type="monotone" dataKey="הכנסות" stroke="#102219" strokeWidth={3} />
               <Line type="monotone" dataKey="רווח נקי" stroke="#10b981" strokeWidth={2} />
-              <Line type="monotone" dataKey="EBITDA" stroke="#f59e0b" strokeWidth={2} />
+              <Line type="monotone" dataKey="EBITDA" stroke="#8E6824" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       {/* Metrics Table */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-x-auto">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-cream-2">
             <tr>
               <th className="text-right p-2">מדד</th>
               {comparison.periods.map((y) => (
@@ -177,7 +177,7 @@ export function PeriodComparisonDisplay() {
           </thead>
           <tbody>
             {Object.values(comparison.metrics).map((m) => (
-              <tr key={m.key} className="border-t border-gray-100">
+              <tr key={m.key} className="border-t border-ink/10">
                 <td className="p-2 font-medium">{m.label}</td>
                 {m.values.map((v, i) => (
                   <td key={i} className="p-2 text-center text-xs">
@@ -186,7 +186,7 @@ export function PeriodComparisonDisplay() {
                 ))}
                 <td
                   className={`p-2 text-center font-bold ${
-                    m.cagr > 0 ? 'text-emerald-700' : m.cagr < 0 ? 'text-red-700' : 'text-gray-600'
+                    m.cagr > 0 ? 'text-emerald-700' : m.cagr < 0 ? 'text-red-700' : 'text-ink/60'
                   }`}
                 >
                   {m.cagr > 0 ? '+' : ''}
@@ -206,11 +206,11 @@ export function PeriodComparisonDisplay() {
       </div>
 
       {/* YoY Analysis */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-purple-600 text-white p-3 text-sm font-bold">YoY Growth - שנה לשנה</div>
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3 text-sm font-bold">YoY Growth - שנה לשנה</div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-100">
+            <thead className="bg-cream-2">
               <tr>
                 <th className="text-right p-2">תקופה</th>
                 <th className="text-center p-2">הכנסות</th>
@@ -220,7 +220,7 @@ export function PeriodComparisonDisplay() {
             </thead>
             <tbody>
               {comparison.yoyAnalysis.map((y, i) => (
-                <tr key={i} className="border-t border-gray-100">
+                <tr key={i} className="border-t border-ink/10">
                   <td className="p-2">
                     {y.fromYear} → {y.toYear}
                   </td>
@@ -236,9 +236,9 @@ export function PeriodComparisonDisplay() {
 
       {/* Insights */}
       {comparison.insights.length > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="font-semibold text-blue-900 mb-2">תובנות</h4>
-          <ul className="text-sm text-blue-900 space-y-1">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+          <h4 className="font-semibold text-ink mb-2">תובנות</h4>
+          <ul className="text-sm text-ink space-y-1">
             {comparison.insights.map((i, idx) => (
               <li key={idx}>{i}</li>
             ))}
@@ -250,10 +250,10 @@ export function PeriodComparisonDisplay() {
 }
 
 function YoYCell({ value }: { value: number }) {
-  const color = value > 0 ? 'emerald' : value < 0 ? 'red' : 'gray';
+  const color = value > 0 ? 'emerald' : value < 0 ? 'red' : 'ink';
   const Icon = value > 0 ? TrendingUp : value < 0 ? TrendingDown : null;
   return (
-    <td className={`p-2 text-center font-bold text-${color}-700`}>
+    <td className={`p-2 text-center font-bold ${color === 'ink' ? 'text-ink/60' : `text-${color}-700`}`}>
       <span className="inline-flex items-center gap-1">
         {Icon && <Icon className="w-3 h-3" />}
         {value > 0 ? '+' : ''}

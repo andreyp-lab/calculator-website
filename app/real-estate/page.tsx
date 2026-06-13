@@ -50,16 +50,16 @@ const calculators = [
 
 export default function RealEstatePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-paper">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'משכנתא ונדל"ן' }]} />
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+        <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
           מחשבוני משכנתא ונדל&quot;ן
         </h1>
-        <p className="text-lg text-gray-600 mb-12">
+        <p className="text-lg text-ink/70 mb-12">
           מחשבונים מקצועיים לרוכשי ובעלי דירות בישראל
         </p>
 
@@ -69,34 +69,34 @@ export default function RealEstatePage() {
               <Link
                 key={calc.href}
                 href={calc.href}
-                className="group bg-white p-6 rounded-lg border-2 border-gray-200 hover:border-blue-400 hover:shadow-md transition flex items-start gap-4"
+                className="group bg-paper p-6 border-2 border-ink/15 hover:border-gold hover:shadow-md transition flex items-start gap-4"
               >
-                <Calculator className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                <Calculator className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition">
+                    <h3 className="font-bold text-ink group-hover:text-gold transition">
                       {calc.title}
                     </h3>
                     {calc.badge && (
-                      <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium">
+                      <span className="bg-cream-2 text-gold text-xs px-2 py-0.5 rounded-full font-medium">
                         {calc.badge}
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-600">{calc.description}</p>
+                  <p className="text-sm text-ink/70">{calc.description}</p>
                 </div>
-                <ArrowLeft className="w-4 h-4 text-blue-600 mt-2 opacity-0 group-hover:opacity-100 transition" />
+                <ArrowLeft className="w-4 h-4 text-gold mt-2 opacity-0 group-hover:opacity-100 transition" />
               </Link>
             ) : (
               <div
                 key={calc.href}
-                className="bg-gray-50 p-6 rounded-lg border-2 border-gray-200 flex items-start gap-4 opacity-60"
+                className="bg-cream-2 p-6 border-2 border-ink/15 flex items-start gap-4 opacity-60"
               >
-                <Calculator className="w-6 h-6 text-gray-400 flex-shrink-0 mt-1" />
+                <Calculator className="w-6 h-6 text-ink/45 flex-shrink-0 mt-1" />
                 <div className="flex-1">
-                  <h3 className="font-bold text-gray-700 mb-1">{calc.title}</h3>
-                  <p className="text-sm text-gray-500">{calc.description}</p>
-                  <span className="inline-block mt-2 text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">
+                  <h3 className="font-bold text-ink/70 mb-1">{calc.title}</h3>
+                  <p className="text-sm text-ink/60">{calc.description}</p>
+                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/60 px-2 py-1">
                     בקרוב
                   </span>
                 </div>

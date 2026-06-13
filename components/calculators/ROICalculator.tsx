@@ -25,12 +25,12 @@ export function ROICalculator() {
 
   return (
     <div className="grid lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-3 bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">פרטי ההשקעה</h2>
+      <div className="lg:col-span-3 bg-paper border border-ink/15 rounded-none p-6">
+        <h2 className="text-xl font-bold text-ink mb-6">פרטי ההשקעה</h2>
 
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               סכום השקעה ראשוני (ש"ח)
             </label>
             <input
@@ -39,12 +39,12 @@ export function ROICalculator() {
               step={1000}
               value={input.initialInvestment}
               onChange={(e) => update('initialInvestment', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שווי סופי / סכום שנמכר (ש"ח)
             </label>
             <input
@@ -53,12 +53,12 @@ export function ROICalculator() {
               step={1000}
               value={input.finalValue}
               onChange={(e) => update('finalValue', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               תקופת ההשקעה (שנים)
             </label>
             <input
@@ -68,14 +68,14 @@ export function ROICalculator() {
               step={0.1}
               value={input.years}
               onChange={(e) => update('years', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-gray-500 mt-1">לחישוב תשואה שנתית מנורמלת</p>
+            <p className="text-xs text-ink/60 mt-1">לחישוב תשואה שנתית מנורמלת</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 pt-3 border-t border-gray-200">
+          <div className="grid grid-cols-2 gap-3 pt-3 border-t border-ink/15">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 עלויות נוספות (ש"ח)
               </label>
               <input
@@ -84,12 +84,12 @@ export function ROICalculator() {
                 step={100}
                 value={input.additionalCosts}
                 onChange={(e) => update('additionalCosts', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-gray-500 mt-1">עמלות, מס, תחזוקה...</p>
+              <p className="text-xs text-ink/60 mt-1">עמלות, מס, תחזוקה...</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink/70 mb-2">
                 הכנסות נוספות (ש"ח)
               </label>
               <input
@@ -98,9 +98,9 @@ export function ROICalculator() {
                 step={100}
                 value={input.additionalIncome}
                 onChange={(e) => update('additionalIncome', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-gray-500 mt-1">דיבידנדים, שכ"ד...</p>
+              <p className="text-xs text-ink/60 mt-1">דיבידנדים, שכ"ד...</p>
             </div>
           </div>
         </div>
@@ -146,9 +146,9 @@ export function ROICalculator() {
           ]}
         />
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs">
-          <p className="font-medium text-gray-800 mb-1">💡 איך לפרש את התוצאה:</p>
-          <ul className="text-gray-700 space-y-0.5">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs">
+          <p className="font-medium text-ink mb-1">💡 איך לפרש את התוצאה:</p>
+          <ul className="text-ink/70 space-y-0.5">
             <li>• ROI שנתי 7-10% = השקעה סבירה (כמו S&P 500)</li>
             <li>• ROI שנתי מעל 15% = השקעה מצוינת אבל בדוק סיכון</li>
             <li>• ROI שלילי = השקעה כושלת - בחן מה השתבש</li>

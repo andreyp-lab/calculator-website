@@ -44,26 +44,26 @@ export function DebtRestructuring() {
   const fmt = (v: number) => formatCurrency(v, settings.currency);
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 p-5 shadow-sm">
+    <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-3">
-        <RefreshCw className="w-5 h-5 text-purple-600" />
-        <h3 className="font-bold text-base text-gray-900">פריסת חוב</h3>
+        <RefreshCw className="w-5 h-5 text-gold" />
+        <h3 className="font-bold text-base text-ink">פריסת חוב</h3>
       </div>
 
-      <div className="bg-purple-50 border border-purple-200 rounded p-2 mb-3 text-xs text-purple-900">
+      <div className="bg-cream-2 border border-ink/15 p-2 mb-3 text-xs text-ink">
         💡 פריסה מחדש של הלוואה (הארכת תקופה / הקלת ריבית) מקטינה את התשלום החודשי
         ומשפרת את התזרים. <strong>אבל</strong> מגדילה את סך הריבית הכוללת.
       </div>
 
       {budget.loans.length === 0 ? (
-        <div className="text-center py-4 text-gray-400 text-xs">
+        <div className="text-center py-4 text-ink/45 text-xs">
           אין הלוואות לפריסה. הוסף הלוואה ב-{`"`}תכנון תקציב{`"`} קודם.
         </div>
       ) : (
         <>
           <div className="space-y-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-700 mb-1">בחר הלוואה לפריסה</label>
+              <label className="block text-xs text-ink/70 mb-1">בחר הלוואה לפריסה</label>
               <select
                 value={selectedLoanId}
                 onChange={(e) => {
@@ -74,7 +74,7 @@ export function DebtRestructuring() {
                     setNewRate('');
                   }
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               >
                 <option value="">בחר הלוואה...</option>
                 {budget.loans.map((l) => (
@@ -88,19 +88,19 @@ export function DebtRestructuring() {
             {loan && (
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-gray-700 mb-1">תקופה חדשה (חודשים)</label>
+                  <label className="block text-xs text-ink/70 mb-1">תקופה חדשה (חודשים)</label>
                   <input
                     type="number"
                     value={newTermMonths}
                     onChange={(e) => setNewTermMonths(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                    className="w-full px-3 py-2 border border-ink/15 text-sm"
                   />
-                  <p className="text-[10px] text-gray-500 mt-0.5">
+                  <p className="text-[10px] text-ink/60 mt-0.5">
                     ({(newTermMonths / 12).toFixed(1)} שנים)
                   </p>
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-700 mb-1">
+                  <label className="block text-xs text-ink/70 mb-1">
                     ריבית חדשה (%) - השאר ריק כדי לא לשנות
                   </label>
                   <input
@@ -109,7 +109,7 @@ export function DebtRestructuring() {
                     value={newRate}
                     onChange={(e) => setNewRate(e.target.value === '' ? '' : Number(e.target.value))}
                     placeholder={`${loan.annualRate}% (נוכחית)`}
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                    className="w-full px-3 py-2 border border-ink/15 text-sm"
                   />
                 </div>
               </div>
@@ -119,13 +119,13 @@ export function DebtRestructuring() {
           {result && loan && (
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-2">
-                <div className="bg-blue-50 border border-blue-200 rounded p-2">
-                  <div className="text-[10px] text-blue-700">תשלום חודשי נוכחי</div>
-                  <div className="text-base font-bold text-blue-900">
+                <div className="bg-cream-2 border border-ink/15 p-2">
+                  <div className="text-[10px] text-ink/60">תשלום חודשי נוכחי</div>
+                  <div className="text-base font-bold text-ink">
                     {fmt(result.originalMonthlyPayment)}
                   </div>
                 </div>
-                <div className="bg-emerald-50 border border-emerald-200 rounded p-2">
+                <div className="bg-emerald-50 border border-emerald-200 p-2">
                   <div className="text-[10px] text-emerald-700">תשלום חודשי חדש</div>
                   <div className="text-base font-bold text-emerald-900">
                     {fmt(result.newMonthlyPayment)}
@@ -133,12 +133,12 @@ export function DebtRestructuring() {
                 </div>
               </div>
 
-              <div className="bg-gray-50 border border-gray-200 rounded p-3">
+              <div className="bg-cream-2 border border-ink/15 p-3">
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div className="flex items-center gap-2">
-                    <ArrowLeftRight className="w-4 h-4 text-purple-600" />
+                    <ArrowLeftRight className="w-4 h-4 text-gold" />
                     <div>
-                      <div className="text-[10px] text-gray-500">חיסכון חודשי בתזרים</div>
+                      <div className="text-[10px] text-ink/60">חיסכון חודשי בתזרים</div>
                       <div
                         className={`font-bold ${result.cashFlowReliefMonthly > 0 ? 'text-emerald-700' : 'text-red-700'}`}
                       >
@@ -149,7 +149,7 @@ export function DebtRestructuring() {
                   <div className="flex items-center gap-2">
                     <Calculator className="w-4 h-4 text-amber-600" />
                     <div>
-                      <div className="text-[10px] text-gray-500">תוספת ריבית כוללת</div>
+                      <div className="text-[10px] text-ink/60">תוספת ריבית כוללת</div>
                       <div
                         className={`font-bold ${result.additionalInterestCost < 0 ? 'text-emerald-700' : 'text-red-700'}`}
                       >
@@ -161,7 +161,7 @@ export function DebtRestructuring() {
                 </div>
               </div>
 
-              <div className="bg-amber-50 border border-amber-200 rounded p-3 text-xs text-amber-900">
+              <div className="bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900">
                 <strong>סיכום:</strong> פריסה ל-{newTermMonths} חודשים תקטין את התשלום החודשי
                 ב-{fmt(result.cashFlowReliefMonthly)} (
                 {((result.cashFlowReliefMonthly / result.originalMonthlyPayment) * 100).toFixed(0)}
@@ -170,7 +170,7 @@ export function DebtRestructuring() {
 
               <button
                 onClick={applyRestructure}
-                className="w-full py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm font-medium"
+                className="w-full py-2 bg-ink text-cream hover:bg-ink-deep text-sm font-medium"
               >
                 החל פריסה על ההלוואה
               </button>

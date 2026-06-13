@@ -190,7 +190,7 @@ export default function TaxRefundPage() {
             </ol>
 
             <h2>איך עובד החישוב?</h2>
-            <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4">
+            <div className="bg-cream-2 border-r-4 border-ink p-4 my-4">
               <p className="font-semibold mb-2">הנוסחה:</p>
               <ol className="space-y-1 text-sm">
                 <li>1. הכנסה ברוטו - ניכויים = הכנסה חייבת</li>
@@ -225,23 +225,23 @@ export default function TaxRefundPage() {
             <h2>זמני טיפול</h2>
             <table className="w-full text-sm border-collapse my-4">
               <thead>
-                <tr className="bg-blue-50">
-                  <th className="border border-gray-300 p-2 text-right">סוג בקשה</th>
-                  <th className="border border-gray-300 p-2 text-right">זמן טיפול</th>
+                <tr className="bg-ink text-cream">
+                  <th className="border border-ink/15 p-2 text-right">סוג בקשה</th>
+                  <th className="border border-ink/15 p-2 text-right">זמן טיפול</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-2">דוח שכיר פשוט (טופס 135)</td>
-                  <td className="border border-gray-300 p-2">60-90 ימי עסקים</td>
+                  <td className="border border-ink/15 p-2">דוח שכיר פשוט (טופס 135)</td>
+                  <td className="border border-ink/15 p-2">60-90 ימי עסקים</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">דוח עם נסיבות מיוחדות</td>
-                  <td className="border border-gray-300 p-2">90-150 ימי עסקים</td>
+                  <td className="border border-ink/15 p-2">דוח עם נסיבות מיוחדות</td>
+                  <td className="border border-ink/15 p-2">90-150 ימי עסקים</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">בדיקה / השגה</td>
-                  <td className="border border-gray-300 p-2">עד 12 חודשים</td>
+                  <td className="border border-ink/15 p-2">בדיקה / השגה</td>
+                  <td className="border border-ink/15 p-2">עד 12 חודשים</td>
                 </tr>
               </tbody>
             </table>
@@ -249,7 +249,7 @@ export default function TaxRefundPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.gov.il/he/service/simulator-employee"

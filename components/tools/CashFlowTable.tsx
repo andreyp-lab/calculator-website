@@ -41,11 +41,11 @@ export function CashFlowTable() {
                   ? 'bg-amber-50 border-amber-300 text-amber-900'
                   : insight.type === 'success'
                     ? 'bg-green-50 border-green-300 text-green-900'
-                    : 'bg-blue-50 border-blue-300 text-blue-900';
+                    : 'bg-cream-2 border-ink/15 text-ink';
             return (
               <div
                 key={i}
-                className={`border-2 rounded-lg p-3 flex items-start gap-3 ${colorClass}`}
+                className={`border-2 p-3 flex items-start gap-3 ${colorClass}`}
               >
                 <Icon className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <div>
@@ -59,17 +59,17 @@ export function CashFlowTable() {
       )}
 
       {/* Table */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold text-lg">תזרים מזומנים חודשי</h3>
-          <p className="text-sm text-blue-100">
+          <p className="text-sm text-cream/70">
             {data.monthly.length} חודשים | יתרת פתיחה: {fmt(settings.openingBalance)}
           </p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-cream-2 border-b border-ink/15">
               <tr>
                 <th className="text-right px-3 py-2">חודש</th>
                 <th className="text-right px-3 py-2">יתרת פתיחה</th>
@@ -85,7 +85,7 @@ export function CashFlowTable() {
                 return (
                   <tr
                     key={i}
-                    className={`border-b border-gray-100 hover:bg-gray-50 ${
+                    className={`border-b border-ink/10 hover:bg-cream-2 ${
                       isNegative ? 'bg-red-50' : ''
                     }`}
                   >
@@ -112,7 +112,7 @@ export function CashFlowTable() {
                     </td>
                     <td
                       className={`px-3 py-2 font-bold ${
-                        isNegative ? 'text-red-700' : 'text-blue-700'
+                        isNegative ? 'text-red-700' : 'text-gold'
                       }`}
                     >
                       {fmt(m.closingBalance)}

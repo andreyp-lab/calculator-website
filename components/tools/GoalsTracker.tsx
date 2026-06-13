@@ -76,18 +76,18 @@ export function GoalsTracker() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-violet-600 to-purple-600 text-white p-4 flex items-center justify-between">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4 flex items-center justify-between">
           <div>
             <h3 className="font-bold flex items-center gap-2">
               <Target className="w-5 h-5" />
               מעקב יעדים ({goals.length})
             </h3>
-            <p className="text-xs text-violet-100">הגדר יעדים פיננסיים ועקוב אחרי ההתקדמות</p>
+            <p className="text-xs text-cream/70">הגדר יעדים פיננסיים ועקוב אחרי ההתקדמות</p>
           </div>
           <button
             onClick={() => setShowForm(!showForm)}
-            className="px-3 py-1.5 bg-white text-violet-700 rounded text-sm font-medium hover:bg-violet-50 flex items-center gap-1"
+            className="px-3 py-1.5 bg-cream text-ink rounded-none text-sm font-medium hover:bg-paper-hover flex items-center gap-1"
           >
             <Plus className="w-4 h-4" />
             יעד חדש
@@ -97,25 +97,25 @@ export function GoalsTracker() {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-white rounded-lg border-2 border-violet-200 p-4 shadow-sm">
+        <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
           <h4 className="font-semibold mb-3">יעד חדש</h4>
           <div className="grid md:grid-cols-2 gap-3 text-sm">
             <div>
-              <label className="block text-xs text-gray-700 mb-1">שם היעד</label>
+              <label className="block text-xs text-ink/70 mb-1">שם היעד</label>
               <input
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="לדוגמה: 1M ARR עד סוף 2026"
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">סוג</label>
+              <label className="block text-xs text-ink/70 mb-1">סוג</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as Goal['type'] })}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none"
               >
                 {(Object.keys(GOAL_TYPE_LABELS) as Goal['type'][]).map((t) => (
                   <option key={t} value={t}>{GOAL_TYPE_LABELS[t]}</option>
@@ -123,30 +123,30 @@ export function GoalsTracker() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">ערך יעד</label>
+              <label className="block text-xs text-ink/70 mb-1">ערך יעד</label>
               <input
                 type="number"
                 value={form.targetValue}
                 onChange={(e) => setForm({ ...form, targetValue: parseFloat(e.target.value) || 0 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">תאריך יעד</label>
+              <label className="block text-xs text-ink/70 mb-1">תאריך יעד</label>
               <input
                 type="date"
                 value={form.targetDate}
                 onChange={(e) => setForm({ ...form, targetDate: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-xs text-gray-700 mb-1">הערות (אופציונלי)</label>
+              <label className="block text-xs text-ink/70 mb-1">הערות (אופציונלי)</label>
               <input
                 type="text"
                 value={form.notes}
                 onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
             </div>
           </div>
@@ -154,13 +154,13 @@ export function GoalsTracker() {
             <button
               onClick={addGoal}
               disabled={!form.name.trim() || form.targetValue <= 0}
-              className="px-4 py-2 bg-violet-600 text-white rounded hover:bg-violet-700 disabled:opacity-50"
+              className="px-4 py-2 bg-ink text-cream rounded-none hover:bg-ink-deep disabled:opacity-50"
             >
               שמור יעד
             </button>
             <button
               onClick={() => setShowForm(false)}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+              className="px-4 py-2 bg-cream-2 text-ink rounded-none hover:bg-paper-hover"
             >
               ביטול
             </button>
@@ -170,9 +170,9 @@ export function GoalsTracker() {
 
       {/* Goals list */}
       {progress.length === 0 ? (
-        <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
-          <Target className="w-12 h-12 mx-auto mb-2 text-amber-500" />
-          <p className="text-amber-900">אין יעדים עדיין. הוסף יעד פיננסי כדי לעקוב.</p>
+        <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6 text-center">
+          <Target className="w-12 h-12 mx-auto mb-2 text-gold" />
+          <p className="text-ink">אין יעדים עדיין. הוסף יעד פיננסי כדי לעקוב.</p>
         </div>
       ) : (
         <div className="grid md:grid-cols-2 gap-3">
@@ -191,7 +191,7 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
   const statusConfig = {
     achieved: { label: 'הושג! 🎉', color: 'emerald', icon: CheckCircle2 },
     ahead: { label: 'מעל הצפוי', color: 'emerald', icon: TrendingUp },
-    on_track: { label: 'בקצב', color: 'blue', icon: CheckCircle2 },
+    on_track: { label: 'בקצב', color: 'gold', icon: CheckCircle2 },
     at_risk: { label: 'בסיכון', color: 'amber', icon: AlertTriangle },
     behind: { label: 'מאחור', color: 'red', icon: TrendingDown },
   };
@@ -200,7 +200,7 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
 
   const colorMap: Record<string, { bg: string; border: string; text: string; bar: string }> = {
     emerald: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700', bar: 'bg-emerald-500' },
-    blue: { bg: 'bg-blue-50', border: 'border-blue-300', text: 'text-blue-700', bar: 'bg-blue-500' },
+    gold: { bg: 'bg-cream-2', border: 'border-ink/20', text: 'text-gold', bar: 'bg-gold' },
     amber: { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-700', bar: 'bg-amber-500' },
     red: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', bar: 'bg-red-500' },
   };
@@ -214,11 +214,11 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
         : v.toFixed(0);
 
   return (
-    <div className={`${c.bg} border-2 ${c.border} rounded-lg p-4 shadow-sm`}>
+    <div className={`${c.bg} border-2 ${c.border} rounded-none p-4 shadow-sm`}>
       <div className="flex items-start justify-between mb-2">
         <div>
-          <h4 className="font-bold text-gray-900">{goal.name}</h4>
-          <div className="text-xs text-gray-600">{GOAL_TYPE_LABELS[goal.type]}</div>
+          <h4 className="font-bold text-ink">{goal.name}</h4>
+          <div className="text-xs text-ink/60">{GOAL_TYPE_LABELS[goal.type]}</div>
         </div>
         <button
           onClick={onRemove}
@@ -230,11 +230,11 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
 
       <div className="flex items-baseline gap-2 mb-2">
         <span className="text-2xl font-bold">{fmt(currentValue)}</span>
-        <span className="text-sm text-gray-500">/ {fmt(goal.targetValue)}</span>
+        <span className="text-sm text-ink/60">/ {fmt(goal.targetValue)}</span>
       </div>
 
       {/* Progress bar */}
-      <div className="bg-gray-200 rounded-full h-3 mb-2 overflow-hidden">
+      <div className="bg-ink/10 rounded-full h-3 mb-2 overflow-hidden">
         <div
           className={`${c.bar} h-full rounded-full transition-all`}
           style={{ width: `${Math.min(100, pctComplete)}%` }}
@@ -246,19 +246,19 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
           <StatusIcon className="w-3.5 h-3.5" />
           {cfg.label}
         </span>
-        <span className="text-gray-600">
+        <span className="text-ink/60">
           {pctComplete.toFixed(1)}% • יעד: {goal.targetDate}
         </span>
       </div>
 
       {gap > 0 && status !== 'achieved' && (
-        <div className="mt-2 text-xs text-gray-700">
+        <div className="mt-2 text-xs text-ink/70">
           🎯 חסר: {fmt(gap)}
         </div>
       )}
 
       {goal.notes && (
-        <div className="mt-2 text-xs text-gray-600 italic">"{goal.notes}"</div>
+        <div className="mt-2 text-xs text-ink/60 italic">"{goal.notes}"</div>
       )}
     </div>
   );

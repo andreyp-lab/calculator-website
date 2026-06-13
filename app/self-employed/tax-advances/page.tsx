@@ -132,7 +132,7 @@ export default function Page() {
               <strong>הוצאות מוכרות</strong>: כלי רכב (45% מההוצאות), ציוד ופחת, טלפון נייד —
               חלק יחסי לפי שימוש עסקי (נפוץ ~50%), חדר עבודה בבית — חלק יחסי לפי שטח החדר מתוך
               הדירה. לרשימה המלאה ראו{' '}
-              <a href="/self-employed/allowed-expenses" className="text-blue-700 hover:underline">
+              <a href="/self-employed/allowed-expenses" className="text-gold hover:underline">
                 מחשבון הוצאות מוכרות לעצמאי
               </a>
             </li>
@@ -159,25 +159,25 @@ export default function Page() {
           <h2>כלים קשורים</h2>
           <ul>
             <li>
-              <a href="/self-employed/social-security" className="text-blue-700 hover:underline">
+              <a href="/self-employed/social-security" className="text-gold hover:underline">
                 מחשבון ביטוח לאומי לעצמאי
               </a>{' '}
               — חשב דמי ביטוח לאומי ובריאות לפי הכנסה
             </li>
             <li>
-              <a href="/self-employed/vat" className="text-blue-700 hover:underline">
+              <a href="/self-employed/vat" className="text-gold hover:underline">
                 מחשבון מע&quot;מ
               </a>{' '}
               — הוספה, חילוץ ודוח דו-חודשי לעוסק מורשה
             </li>
             <li>
-              <a href="/self-employed/net" className="text-blue-700 hover:underline">
+              <a href="/self-employed/net" className="text-gold hover:underline">
                 מחשבון נטו לעצמאי
               </a>{' '}
               — חשב הכנסה נטו לאחר כל הניכויים
             </li>
             <li>
-              <a href="/self-employed/allowed-expenses" className="text-blue-700 hover:underline">
+              <a href="/self-employed/allowed-expenses" className="text-gold hover:underline">
                 מחשבון הוצאות מוכרות לעצמאי
               </a>{' '}
               — בדוק אילו הוצאות מקטינות את ההכנסה החייבת והמקדמה
@@ -187,7 +187,7 @@ export default function Page() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.gov.il/he/departments/israel_tax_authority"

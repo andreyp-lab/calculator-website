@@ -100,8 +100,8 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
   if (compact) {
     return (
       <div className="space-y-1">
-        {label && <label className="block text-xs text-gray-700">{label}</label>}
-        <div className="text-xs text-gray-700 bg-gray-50 px-2 py-1 rounded border">
+        {label && <label className="block text-xs text-ink/70">{label}</label>}
+        <div className="text-xs text-ink/70 bg-cream-2 px-2 py-1 rounded-none border border-ink/15">
           {describePaymentTerms(terms)}
         </div>
       </div>
@@ -110,7 +110,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
 
   return (
     <div className="space-y-2">
-      {label && <label className="block text-xs font-medium text-gray-700">{label}</label>}
+      {label && <label className="block text-xs font-medium text-ink/70">{label}</label>}
 
       {/* Toggle split mode */}
       <div className="flex items-center gap-2">
@@ -127,7 +127,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
           <select
             value=""
             onChange={(e) => e.target.value && applyPreset(e.target.value)}
-            className="text-xs px-2 py-1 border border-gray-300 rounded"
+            className="text-xs px-2 py-1 border border-ink/15 rounded-none"
           >
             <option value="">בחר תבנית מהירה...</option>
             <option value="immediate">מיידי</option>
@@ -141,7 +141,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
       {/* Simple mode */}
       {!splitMode && (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-600">נטו</span>
+          <span className="text-xs text-ink/60">נטו</span>
           <input
             type="number"
             min={0}
@@ -150,9 +150,9 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
             onChange={(e) =>
               updateTerms({ ...terms, simpleNet: parseInt(e.target.value) || 0 })
             }
-            className="w-20 px-2 py-1 border border-gray-300 rounded text-sm"
+            className="w-20 px-2 py-1 border border-ink/15 rounded-none text-sm"
           />
-          <span className="text-xs text-gray-600">ימים</span>
+          <span className="text-xs text-ink/60">ימים</span>
         </div>
       )}
 
@@ -163,7 +163,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
             <select
               value=""
               onChange={(e) => e.target.value && applyPreset(e.target.value)}
-              className="text-xs px-2 py-1 border border-gray-300 rounded flex-1"
+              className="text-xs px-2 py-1 border border-ink/15 rounded-none flex-1"
             >
               <option value="">תבניות מוכנות...</option>
               <option value="30-70-30">30% מקדמה + 70% נטו 30</option>
@@ -175,7 +175,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
           {(terms.installments ?? []).map((inst, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-1 bg-gray-50 p-1.5 rounded text-xs"
+              className="flex items-center gap-1 bg-cream-2 p-1.5 rounded-none text-xs"
             >
               <input
                 type="number"
@@ -185,11 +185,11 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
                 onChange={(e) =>
                   updateInstallment(idx, { percentage: parseFloat(e.target.value) || 0 })
                 }
-                className="w-14 px-1 py-0.5 border border-gray-300 rounded text-center"
+                className="w-14 px-1 py-0.5 border border-ink/15 rounded-none text-center"
                 placeholder="%"
               />
-              <span className="text-gray-500">%</span>
-              <span className="text-gray-500">נטו</span>
+              <span className="text-ink/60">%</span>
+              <span className="text-ink/60">נטו</span>
               <input
                 type="number"
                 min={0}
@@ -198,20 +198,20 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
                 onChange={(e) =>
                   updateInstallment(idx, { daysOffset: parseInt(e.target.value) || 0 })
                 }
-                className="w-14 px-1 py-0.5 border border-gray-300 rounded text-center"
+                className="w-14 px-1 py-0.5 border border-ink/15 rounded-none text-center"
               />
-              <span className="text-gray-500">ימים</span>
+              <span className="text-ink/60">ימים</span>
               <input
                 type="text"
                 value={inst.label ?? ''}
                 onChange={(e) => updateInstallment(idx, { label: e.target.value })}
                 placeholder="הערה"
-                className="flex-1 px-1 py-0.5 border border-gray-300 rounded"
+                className="flex-1 px-1 py-0.5 border border-ink/15 rounded-none"
               />
               <button
                 type="button"
                 onClick={() => removeInstallment(idx)}
-                className="p-1 text-red-600 hover:bg-red-50 rounded"
+                className="p-1 text-red-600 hover:bg-red-50 rounded-none"
               >
                 <Trash2 className="w-3 h-3" />
               </button>
@@ -221,7 +221,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
           <button
             type="button"
             onClick={addInstallment}
-            className="flex items-center gap-1 text-xs text-blue-600 hover:bg-blue-50 px-2 py-1 rounded"
+            className="flex items-center gap-1 text-xs text-gold hover:bg-cream-2 px-2 py-1 rounded-none"
           >
             <Plus className="w-3 h-3" />
             הוסף תשלום
@@ -249,14 +249,14 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
 
       {/* Validation errors */}
       {!validation.valid && (
-        <div className="text-xs text-red-700 bg-red-50 p-1.5 rounded">
+        <div className="text-xs text-red-700 bg-red-50 p-1.5 rounded-none">
           {validation.errors.join(' • ')}
         </div>
       )}
 
       {/* Description */}
       {validation.valid && (
-        <div className="text-xs text-gray-500">
+        <div className="text-xs text-ink/60">
           📋 {describePaymentTerms(terms)}
         </div>
       )}

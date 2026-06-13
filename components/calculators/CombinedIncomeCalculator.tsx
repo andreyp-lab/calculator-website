@@ -28,11 +28,11 @@ export function CombinedIncomeCalculator() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       {/* קלט */}
-      <div className="lg:col-span-2 bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-        <h2 className="text-xl font-bold text-gray-900">פרטים</h2>
+      <div className="lg:col-span-2 bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+        <h2 className="text-xl font-bold text-ink">פרטים</h2>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             שכר חודשי ברוטו כשכיר (₪)
           </label>
           <input
@@ -41,15 +41,15 @@ export function CombinedIncomeCalculator() {
             step={500}
             value={input.monthlyGrossSalary}
             onChange={(e) => update('monthlyGrossSalary', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-ink/60 mt-1">
             הברוטו מתלוש המשכורת — לפני ניכויי מס וב.ל.
           </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             הכנסה שנתית חייבת כעצמאי (₪)
           </label>
           <input
@@ -60,15 +60,15 @@ export function CombinedIncomeCalculator() {
             onChange={(e) =>
               update('annualSelfEmployedIncome', Number(e.target.value))
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-ink/60 mt-1">
             המחזור מהעסק בשנה, פחות הוצאות מוכרות (ללא מע&quot;מ)
           </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             נקודות זיכוי
           </label>
           <input
@@ -78,14 +78,14 @@ export function CombinedIncomeCalculator() {
             step={0.25}
             value={input.creditPoints}
             onChange={(e) => update('creditPoints', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-ink/60 mt-1">
             תושב/ת = 2.25; הנקודות מנוצלות פעם אחת על כלל ההכנסה
           </p>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900 leading-relaxed">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/70 leading-relaxed">
           המחשבון מציג את ההשפעה של ההכנסה הצדדית{' '}
           <strong>מעל</strong> השכר: מדרגות המס &quot;יושבות&quot; על השכר,
           וב.ל. מחושב על היתרה עד התקרה המשותפת.
@@ -110,8 +110,8 @@ export function CombinedIncomeCalculator() {
         </div>
 
         {/* פירוט */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">
             פירוט שנתי — ההכנסה הצדדית
           </h3>
           <div className="space-y-1.5 text-sm">
@@ -141,8 +141,8 @@ export function CombinedIncomeCalculator() {
         </div>
 
         {/* פירוט מס הכנסה משולב */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">מס הכנסה — תמונה משולבת</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">מס הכנסה — תמונה משולבת</h3>
           <div className="space-y-1.5 text-sm">
             <Row
               label="שכר שנתי (שכיר)"
@@ -177,12 +177,12 @@ export function CombinedIncomeCalculator() {
         </div>
 
         {/* פירוט ב"ל */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">
             ביטוח לאומי — כללי &quot;שכיר וגם עצמאי&quot;
           </h3>
           {result.capReachedBySalary ? (
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-sm text-emerald-900">
+            <div className="bg-emerald-50 border border-emerald-200 rounded-none p-3 text-sm text-emerald-900">
               ✓ השכר שלך מיצה את תקרת הב.ל. (51,910 ₪/חודש) — אין חבות ב.ל.
               נוספת על ההכנסה העצמאית.
             </div>
@@ -230,14 +230,14 @@ export function CombinedIncomeCalculator() {
         </div>
 
         {/* גרף ויזואלי */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">
             לאן הולך כל ₪ מההכנסה הצדדית
           </h3>
           <SideIncomeBar result={result} />
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm text-amber-900 leading-relaxed">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-sm text-amber-900 leading-relaxed">
           ⚠️ בלי תיאום מס — המעסיק או המשלם המשני עלול לנכות במקור עד 47%.
           חשוב לבצע תיאום מס בתחילת כל שנה ולשלם מקדמות על ההכנסה העצמאית.
         </div>
@@ -268,19 +268,19 @@ function Row({
   return (
     <div
       className={`flex justify-between items-center py-1.5 ${
-        line ? 'border-t border-gray-200 pt-2.5 mt-1' : ''
-      } ${highlight ? 'bg-emerald-50 -mx-2 px-2 rounded' : ''}`}
+        line ? 'border-t border-ink/15 pt-2.5 mt-1' : ''
+      } ${highlight ? 'bg-emerald-50 -mx-2 px-2 rounded-none' : ''}`}
     >
       <span
-        className={`${mute ? 'text-gray-600' : 'text-gray-800'} ${
+        className={`${mute ? 'text-ink/60' : 'text-ink'} ${
           bold ? 'font-bold' : ''
         }`}
       >
         {label}
       </span>
       <span
-        className={`tabular-nums ${bold ? 'font-bold text-gray-900' : ''} ${
-          mute ? 'text-gray-500' : ''
+        className={`tabular-nums ${bold ? 'font-bold text-ink' : ''} ${
+          mute ? 'text-ink/60' : ''
         } ${positive ? 'text-emerald-700' : ''} ${
           negative ? 'text-red-700' : ''
         }`}
@@ -299,7 +299,7 @@ function SideIncomeBar({
   const base = result.annualSelfEmployedIncome;
   if (base <= 0) {
     return (
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-ink/60">
         הזן הכנסה כעצמאי כדי לראות את החלוקה
       </p>
     );
@@ -315,8 +315,8 @@ function SideIncomeBar({
     {
       label: 'ביטוח לאומי + בריאות',
       value: result.selfEmployedBituachLeumi,
-      color: 'bg-orange-500',
-      textColor: 'text-orange-700',
+      color: 'bg-ink-mid',
+      textColor: 'text-ink-mid',
     },
     {
       label: 'נטו ביד',
@@ -330,7 +330,7 @@ function SideIncomeBar({
 
   return (
     <div className="space-y-3">
-      <div className="flex h-8 rounded-lg overflow-hidden border border-gray-200">
+      <div className="flex h-8 rounded-none overflow-hidden border border-ink/15">
         {items.map((i) => {
           const pct = total > 0 ? (i.value / total) * 100 : 0;
           return (
@@ -350,7 +350,7 @@ function SideIncomeBar({
           const pct = total > 0 ? (i.value / total) * 100 : 0;
           return (
             <div key={i.label} className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded ${i.color} flex-shrink-0`} />
+              <div className={`w-3 h-3 rounded-none ${i.color} flex-shrink-0`} />
               <span className={`${i.textColor} font-medium`}>
                 {i.label}: {pct.toFixed(1)}%
               </span>

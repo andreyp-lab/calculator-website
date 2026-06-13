@@ -50,7 +50,7 @@ export function CashFlowQualityDisplay() {
 
   if (!analysis) {
     return (
-      <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
+      <div className="bg-amber-50 border-2 border-amber-200 p-6 text-center">
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-2" />
         <p className="text-amber-900">חסרים נתונים לניתוח איכות תזרים</p>
       </div>
@@ -69,13 +69,13 @@ export function CashFlowQualityDisplay() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white p-4">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Droplets className="w-5 h-5" />
             איכות תזרים מזומנים
           </h3>
-          <p className="text-xs text-cyan-100">
+          <p className="text-xs text-cream/70">
             ניתוח לפי שיטה אינדירקטית + Free Cash Flow + מדדי איכות
           </p>
         </div>
@@ -83,9 +83,9 @@ export function CashFlowQualityDisplay() {
 
       {/* Quality Score */}
       <div
-        className={`bg-${qualityColor}-50 border-4 border-${qualityColor}-300 rounded-xl p-6 text-center`}
+        className={`bg-${qualityColor}-50 border-4 border-${qualityColor}-300 p-6 text-center`}
       >
-        <div className="text-xs text-gray-600 mb-1">ציון איכות תזרים</div>
+        <div className="text-xs text-ink/60 mb-1">ציון איכות תזרים</div>
         <div className={`text-6xl font-bold text-${qualityColor}-700 mb-2`}>
           {analysis.qualityMetrics.qualityScore}/100
         </div>
@@ -143,8 +143,8 @@ export function CashFlowQualityDisplay() {
       </div>
 
       {/* Cash Flow Decomposition */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-blue-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3">
           <h4 className="font-bold">פירוק תזרים (שיטה אינדירקטית)</h4>
         </div>
         <div className="p-4 space-y-1 text-sm">
@@ -156,8 +156,8 @@ export function CashFlowQualityDisplay() {
             fmt={fmt}
             indent
           />
-          <div className="bg-gray-50 p-2 rounded my-2">
-            <div className="font-semibold text-xs text-gray-700 mb-1">שינויים בהון חוזר:</div>
+          <div className="bg-cream-2 p-2 my-2">
+            <div className="font-semibold text-xs text-ink/70 mb-1">שינויים בהון חוזר:</div>
             <CashFlowRow
               label="לקוחות"
               value={analysis.decomposition.changeInWC.receivables}
@@ -231,7 +231,7 @@ export function CashFlowQualityDisplay() {
             label="= תזרים מימון"
             value={analysis.decomposition.cashFromFinancing}
             fmt={fmt}
-            highlight="purple"
+            highlight="neutral"
           />
           <div className="border-t-2 my-2"></div>
           <CashFlowRow
@@ -246,14 +246,14 @@ export function CashFlowQualityDisplay() {
             value={analysis.decomposition.endingCash}
             fmt={fmt}
             bold
-            highlight="blue"
+            highlight="ink"
           />
         </div>
       </div>
 
       {/* Free Cash Flow */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-emerald-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-emerald-700 text-white p-3">
           <h4 className="font-bold">Free Cash Flow</h4>
         </div>
         <div className="p-4 grid md:grid-cols-2 gap-3 text-sm">
@@ -278,14 +278,14 @@ export function CashFlowQualityDisplay() {
             color={analysis.freeCashFlow.leveredFCF > 0 ? 'emerald' : 'red'}
           />
         </div>
-        <div className="bg-gray-50 border-t p-3 text-xs text-gray-700">
+        <div className="bg-cream-2 border-t border-ink/15 p-3 text-xs text-ink/70">
           מרווח FCF: {(analysis.freeCashFlow.fcfMargin * 100).toFixed(1)}% מהכנסות
         </div>
       </div>
 
       {/* Coverage Ratios */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-purple-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3">
           <h4 className="font-bold">יחסי כיסוי תזרימיים</h4>
         </div>
         <div className="p-4 grid md:grid-cols-2 gap-3 text-sm">
@@ -309,7 +309,7 @@ export function CashFlowQualityDisplay() {
       {(analysis.insights.length > 0 || analysis.warnings.length > 0) && (
         <div className="grid md:grid-cols-2 gap-3">
           {analysis.warnings.length > 0 && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <div className="bg-red-50 border border-red-200 p-3">
               <h4 className="font-semibold text-red-900 mb-2 flex items-center gap-1">
                 <AlertTriangle className="w-4 h-4" />
                 אזהרות
@@ -322,7 +322,7 @@ export function CashFlowQualityDisplay() {
             </div>
           )}
           {analysis.insights.length > 0 && (
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+            <div className="bg-emerald-50 border border-emerald-200 p-3">
               <h4 className="font-semibold text-emerald-900 mb-2 flex items-center gap-1">
                 <CheckCircle2 className="w-4 h-4" />
                 תובנות
@@ -358,10 +358,10 @@ function QualityMetric({
   };
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} ${c.border} border-2 rounded-lg p-3 text-center`}>
-      <div className="text-xs text-gray-600 mb-1">{label}</div>
+    <div className={`${c.bg} ${c.border} border-2 p-3 text-center`}>
+      <div className="text-xs text-ink/60 mb-1">{label}</div>
       <div className={`text-2xl font-bold ${c.text}`}>{value}</div>
-      <div className="text-[10px] text-gray-500 mt-1">יעד: {target}</div>
+      <div className="text-[10px] text-ink/45 mt-1">יעד: {target}</div>
     </div>
   );
 }
@@ -384,7 +384,17 @@ function CashFlowRow({
   highlight?: string;
 }) {
   const highlightClass = highlight
-    ? `bg-${highlight}-100 text-${highlight}-900 px-2 py-1 rounded font-bold`
+    ? highlight === 'emerald'
+      ? 'bg-emerald-100 text-emerald-900 px-2 py-1 font-bold'
+      : highlight === 'amber'
+        ? 'bg-amber-100 text-amber-900 px-2 py-1 font-bold'
+        : highlight === 'red'
+          ? 'bg-red-100 text-red-900 px-2 py-1 font-bold'
+          : highlight === 'ink'
+            ? 'bg-ink/10 text-ink px-2 py-1 font-bold'
+            : highlight === 'neutral'
+              ? 'bg-cream-2 text-ink px-2 py-1 font-bold'
+              : 'bg-cream-2 text-ink px-2 py-1 font-bold'
     : '';
   return (
     <div
@@ -403,8 +413,8 @@ function FCFCard({ label, value, color }: { label: string; value: string; color:
   };
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} rounded p-3`}>
-      <div className="text-xs text-gray-600 mb-1">{label}</div>
+    <div className={`${c.bg} p-3`}>
+      <div className="text-xs text-ink/60 mb-1">{label}</div>
       <div className={`text-xl font-bold ${c.text}`}>{value}</div>
     </div>
   );
@@ -424,13 +434,13 @@ function CoverageRow({
   const isGood = inverse ? value <= target : value >= target;
   const color = isGood ? 'text-emerald-700' : 'text-amber-700';
   return (
-    <div className="bg-gray-50 rounded p-2 flex justify-between items-center">
-      <span className="text-gray-700">{label}</span>
+    <div className="bg-cream-2 p-2 flex justify-between items-center">
+      <span className="text-ink/70">{label}</span>
       <div className="text-left">
         <span className={`font-bold ${color}`}>
           {value > 99 ? '∞' : value.toFixed(2)}
         </span>
-        <span className="text-[10px] text-gray-500 mr-2">
+        <span className="text-[10px] text-ink/45 mr-2">
           ({inverse ? '<' : '>'}{target})
         </span>
       </div>

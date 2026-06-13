@@ -25,13 +25,13 @@ export function IncomeTaxCalculator() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
       {/* Form */}
-      <div className="lg:col-span-3 bg-white border-2 border-gray-200 rounded-xl p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">פרטי השכר</h2>
+      <div className="lg:col-span-3 bg-paper border-2 border-ink/15 rounded-none p-6">
+        <h2 className="text-xl font-bold text-ink mb-6">פרטי השכר</h2>
 
         <div className="space-y-5">
           {/* Monthly Salary */}
           <div>
-            <label htmlFor="salary" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="salary" className="block text-sm font-medium text-ink/70 mb-2">
               משכורת חודשית ברוטו (ש"ח)
             </label>
             <input
@@ -42,13 +42,13 @@ export function IncomeTaxCalculator() {
               step={100}
               value={input.monthlySalary}
               onChange={(e) => updateField('monthlySalary', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-lg"
             />
           </div>
 
           {/* Credit Points */}
           <div>
-            <label htmlFor="credits" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="credits" className="block text-sm font-medium text-ink/70 mb-2">
               מספר נקודות זיכוי
             </label>
             <input
@@ -59,29 +59,29 @@ export function IncomeTaxCalculator() {
               step={0.25}
               value={input.creditPoints}
               onChange={(e) => updateField('creditPoints', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               תושב = 2.25, אישה = 2.75, +2.5 לכל ילד 1-5, +1 לכל ילד 6-17
             </p>
           </div>
 
           {/* Pension */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
             <label className="flex items-center gap-2 cursor-pointer mb-3">
               <input
                 type="checkbox"
                 checked={input.hasPension}
                 onChange={(e) => updateField('hasPension', e.target.checked)}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                className="w-4 h-4 text-ink border-ink/15 rounded focus:ring-gold"
               />
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm font-medium text-ink">
                 כולל הפרשה לפנסיה (ניכוי משכר)
               </span>
             </label>
             {input.hasPension && (
               <div>
-                <label htmlFor="pensionPct" className="block text-xs text-gray-700 mb-1">
+                <label htmlFor="pensionPct" className="block text-xs text-ink/70 mb-1">
                   אחוז הפרשת עובד (%)
                 </label>
                 <input
@@ -92,7 +92,7 @@ export function IncomeTaxCalculator() {
                   step={0.1}
                   value={input.pensionPercentage}
                   onChange={(e) => updateField('pensionPercentage', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
               </div>
             )}
@@ -110,11 +110,11 @@ export function IncomeTaxCalculator() {
         >
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">שיעור מס אפקטיבי:</span>
+              <span className="text-ink/70">שיעור מס אפקטיבי:</span>
               <span className="font-medium">{formatPercent(result.effectiveTaxRate, 2)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">סה"כ ניכויים חודשי:</span>
+              <span className="text-ink/70">סה"כ ניכויים חודשי:</span>
               <span className="font-medium">
                 {formatCurrency(
                   result.monthlyTaxAfterCredits +

@@ -178,7 +178,7 @@ export default function MortgagePage() {
             <p>
               מחזור כדאי כאשר: (1) הריבית ירדה ב-0.5%-1% לפחות; (2) נשארו לפחות 8-10 שנים; (3)
               עמלות המחזור מכוסות תוך 2-3 שנים. חשוב לחשב את <strong>נקודת האיזון</strong> — שימוש
-              ב<Link href="/real-estate/mortgage-optimizer" className="text-blue-700 hover:underline">אופטימייזר המשכנתא שלנו</Link>.
+              ב<Link href="/real-estate/mortgage-optimizer" className="text-gold hover:underline">אופטימייזר המשכנתא שלנו</Link>.
             </p>
 
             <h2>טיפים חשובים לרוכש משכנתא</h2>
@@ -206,19 +206,19 @@ export default function MortgagePage() {
             <h2>כלים נוספים בנושא נדל"ן</h2>
             <ul>
               <li>
-                <Link href="/real-estate/mortgage-optimizer" className="text-blue-700 hover:underline">
+                <Link href="/real-estate/mortgage-optimizer" className="text-gold hover:underline">
                   אופטימייזר תמהיל משכנתא V3
                 </Link>{' '}
                 — מצא את החלוקה האופטימלית בין מסלולי המשכנתא ולקבלת כשירות בנקאית מלאה
               </li>
               <li>
-                <Link href="/real-estate/purchase-tax" className="text-blue-700 hover:underline">
+                <Link href="/real-estate/purchase-tax" className="text-gold hover:underline">
                   מחשבון מס רכישה 2026
                 </Link>{' '}
                 — חשב את מס הרכישה לפי מדרגות 2026 (פטור עד 1,978,745 ₪ לדירה ראשונה)
               </li>
               <li>
-                <Link href="/real-estate/capital-gains-tax" className="text-blue-700 hover:underline">
+                <Link href="/real-estate/capital-gains-tax" className="text-gold hover:underline">
                   מחשבון מס שבח
                 </Link>{' '}
                 — חשב את מס השבח על מכירת דירה
@@ -228,7 +228,7 @@ export default function MortgagePage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.boi.org.il/information/interestrates/mortgage/"

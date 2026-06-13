@@ -41,14 +41,14 @@ const FUND_TYPE_LABELS: Record<PensionFundType, string> = {
 };
 
 const FUND_TYPE_COLORS: Record<PensionFundType, string> = {
-  comprehensive: '#3b82f6',
-  managers: '#8b5cf6',
+  comprehensive: '#102219',
+  managers: '#8E6824',
   provident: '#10b981',
-  study_fund: '#f59e0b',
+  study_fund: '#D8B36A',
   national_ins: '#ef4444',
 };
 
-const SOURCE_COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#06b6d4'];
+const SOURCE_COLORS = ['#102219', '#8E6824', '#10b981', '#D8B36A', '#ef4444', '#264B36'];
 
 function makeDefaultSource(id: number): PensionSourceInput {
   return {
@@ -107,9 +107,9 @@ function InputRow({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -137,7 +137,7 @@ function NumInput({
       max={max}
       step={step}
       onChange={(e) => onChange(Number(e.target.value))}
-      className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${className}`}
+      className={`w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent ${className}`}
     />
   );
 }
@@ -169,10 +169,10 @@ function SourceCard({
   const monthlyTotal = source.monthlySalary * (totalContrib / 100);
 
   return (
-    <div className="border-2 border-gray-200 rounded-xl overflow-hidden">
+    <div className="border border-ink/15 rounded-none overflow-hidden">
       {/* כותרת כרטיס */}
       <div
-        className="flex items-center justify-between px-4 py-3 bg-gray-50 cursor-pointer hover:bg-gray-100 transition"
+        className="flex items-center justify-between px-4 py-3 bg-cream-2 cursor-pointer hover:bg-paper-hover transition"
         onClick={() => setExpanded(!expanded)}
       >
         <div className="flex items-center gap-2">
@@ -180,8 +180,8 @@ function SourceCard({
             className="w-3 h-3 rounded-full"
             style={{ backgroundColor: SOURCE_COLORS[index % SOURCE_COLORS.length] }}
           />
-          <span className="font-semibold text-gray-800">{source.label}</span>
-          <span className="text-xs text-gray-500 bg-gray-200 px-2 py-0.5 rounded-full">
+          <span className="font-semibold text-ink">{source.label}</span>
+          <span className="text-xs text-ink/60 bg-cream px-2 py-0.5 rounded-full">
             {FUND_TYPE_LABELS[source.fundType]}
           </span>
           {source.isActive && (
@@ -189,7 +189,7 @@ function SourceCard({
           )}
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-600">{formatCurrency(monthlyTotal)}/ח</span>
+          <span className="text-sm text-ink/60">{formatCurrency(monthlyTotal)}/ח</span>
           {canRemove && (
             <button
               type="button"
@@ -199,27 +199,27 @@ function SourceCard({
               <Trash2 className="w-4 h-4" />
             </button>
           )}
-          {expanded ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
+          {expanded ? <ChevronUp className="w-4 h-4 text-ink/60" /> : <ChevronDown className="w-4 h-4 text-ink/60" />}
         </div>
       </div>
 
       {/* תוכן כרטיס */}
       {expanded && (
-        <div className="p-4 space-y-4 bg-white">
+        <div className="p-4 space-y-4 bg-paper">
           <div className="grid grid-cols-2 gap-3">
             <InputRow label="שם / תיאור">
               <input
                 type="text"
                 value={source.label}
                 onChange={(e) => upd('label', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
             </InputRow>
             <InputRow label="סוג קרן">
               <select
                 value={source.fundType}
                 onChange={(e) => upd('fundType', e.target.value as PensionFundType)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               >
                 {Object.entries(FUND_TYPE_LABELS).map(([k, v]) => (
                   <option key={k} value={k}>{v}</option>
@@ -238,8 +238,8 @@ function SourceCard({
           </div>
 
           {/* שיעורי הפרשה */}
-          <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-            <h4 className="text-sm font-semibold text-gray-800 mb-2">שיעורי הפרשה (%)</h4>
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
+            <h4 className="text-sm font-semibold text-ink mb-2">שיעורי הפרשה (%)</h4>
             <div className="grid grid-cols-3 gap-2">
               <InputRow label="עובד" hint="חוק: 6-7%">
                 <NumInput value={source.employeeContrib} onChange={(v) => upd('employeeContrib', v)} min={0} max={10} step={0.1} />
@@ -251,7 +251,7 @@ function SourceCard({
                 <NumInput value={source.severanceContrib} onChange={(v) => upd('severanceContrib', v)} min={0} max={10} step={0.1} />
               </InputRow>
             </div>
-            <div className="mt-2 text-sm font-medium text-blue-800">
+            <div className="mt-2 text-sm font-medium text-ink">
               סה&quot;כ: {totalContrib.toFixed(1)}% = {formatCurrency(monthlyTotal)}/חודש
             </div>
           </div>
@@ -280,9 +280,9 @@ function SourceCard({
               id={`active_${source.id}`}
               checked={source.isActive}
               onChange={(e) => upd('isActive', e.target.checked)}
-              className="w-4 h-4 text-blue-600"
+              className="w-4 h-4 accent-ink"
             />
-            <label htmlFor={`active_${source.id}`} className="text-sm text-gray-700">
+            <label htmlFor={`active_${source.id}`} className="text-sm text-ink/70">
               קרן פעילה (עדיין מפקיד)
             </label>
           </div>
@@ -302,8 +302,8 @@ function CustomTooltip({ active, payload, label }: {
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-right">
-      <p className="text-xs font-semibold text-gray-700 mb-1">גיל {label}</p>
+    <div className="bg-paper border border-ink/15 rounded-none shadow-lg p-3 text-right">
+      <p className="text-xs font-semibold text-ink/70 mb-1">גיל {label}</p>
       {payload.map((p, i) => (
         <p key={i} className="text-xs" style={{ color: p.color }}>
           {p.name}: {formatCurrency(p.value)}
@@ -376,13 +376,13 @@ export function PensionCalculator() {
   const incomeChartData = useMemo(() => {
     const data = [];
     if (result.totalMonthlyPension > 0) {
-      data.push({ name: 'קצבת פנסיה', value: Math.round(result.totalMonthlyPension), fill: '#3b82f6' });
+      data.push({ name: 'קצבת פנסיה', value: Math.round(result.totalMonthlyPension), fill: '#102219' });
     }
     if (input.includNationalIns) {
       data.push({ name: 'ביטוח לאומי', value: Math.round(input.nationalInsAmount), fill: '#ef4444' });
     }
     if (showStudyFund && result.studyFundMonthlyEquivalent > 0) {
-      data.push({ name: 'קרן השתלמות', value: Math.round(result.studyFundMonthlyEquivalent), fill: '#f59e0b' });
+      data.push({ name: 'קרן השתלמות', value: Math.round(result.studyFundMonthlyEquivalent), fill: '#D8B36A' });
     }
     return data;
   }, [result, input.includNationalIns, input.nationalInsAmount, showStudyFund]);
@@ -428,8 +428,8 @@ export function PensionCalculator() {
     return (
       <div className="space-y-4">
         {/* פרטים אישיים */}
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">פרטים אישיים</h3>
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">פרטים אישיים</h3>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <InputRow label="גיל נוכחי">
               <NumInput
@@ -449,7 +449,7 @@ export function PensionCalculator() {
               <select
                 value={input.gender}
                 onChange={(e) => updateInput('gender', e.target.value as 'male' | 'female')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               >
                 <option value="male">גבר</option>
                 <option value="female">אישה</option>
@@ -459,7 +459,7 @@ export function PensionCalculator() {
               <select
                 value={input.maritalStatus}
                 onChange={(e) => updateInput('maritalStatus', e.target.value as ComprehensivePensionInput['maritalStatus'])}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               >
                 <option value="single">רווק/ה</option>
                 <option value="married">נשוי/אה</option>
@@ -468,7 +468,7 @@ export function PensionCalculator() {
               </select>
             </InputRow>
           </div>
-          <div className="mt-3 text-sm text-blue-700 bg-blue-50 border border-blue-100 rounded p-2">
+          <div className="mt-3 text-sm text-ink/70 bg-cream-2 border border-ink/15 rounded-none p-2">
             זמן עד פרישה: <strong>{result.yearsUntilRetirement} שנים</strong> | מקדם המרה אוטומטי: <strong>{displayConvFactor}</strong>
           </div>
         </div>
@@ -476,11 +476,11 @@ export function PensionCalculator() {
         {/* מקורות פנסיה */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-md font-semibold text-gray-800">קרנות פנסיה וחיסכון</h3>
+            <h3 className="text-md font-semibold text-ink">קרנות פנסיה וחיסכון</h3>
             <button
               type="button"
               onClick={addSource}
-              className="flex items-center gap-1.5 text-sm bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition"
+              className="flex items-center gap-1.5 text-sm bg-ink text-cream px-3 py-1.5 rounded-none hover:bg-ink-deep transition"
             >
               <PlusCircle className="w-4 h-4" />
               הוסף קרן
@@ -501,7 +501,7 @@ export function PensionCalculator() {
         </div>
 
         {/* קרן השתלמות */}
-        <div className="border-2 border-amber-200 rounded-xl overflow-hidden">
+        <div className="border border-amber-200 rounded-none overflow-hidden">
           <div
             className="flex items-center justify-between px-4 py-3 bg-amber-50 cursor-pointer"
             onClick={() => setShowStudyFund(!showStudyFund)}
@@ -510,7 +510,7 @@ export function PensionCalculator() {
             {showStudyFund ? <ChevronUp className="w-4 h-4 text-amber-700" /> : <ChevronDown className="w-4 h-4 text-amber-700" />}
           </div>
           {showStudyFund && (
-            <div className="p-4 bg-white">
+            <div className="p-4 bg-paper">
               <div className="grid grid-cols-2 gap-3">
                 <InputRow label="צבירה נוכחית (₪)">
                   <NumInput value={input.studyFundBalance} onChange={(v) => updateInput('studyFundBalance', v)} step={5000} />
@@ -533,7 +533,7 @@ export function PensionCalculator() {
         </div>
 
         {/* ב.ל.ל */}
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+        <div className="bg-red-50 border border-red-200 rounded-none p-4">
           <div className="flex items-center gap-3 mb-3">
             <input
               type="checkbox"
@@ -581,8 +581,8 @@ export function PensionCalculator() {
     return (
       <div className="space-y-5">
         {/* מקדם המרה */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">מקדם המרה</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">מקדם המרה</h3>
           <div className="grid grid-cols-2 gap-3 mb-3">
             <InputRow label="מקדם המרה (0 = אוטומטי)" hint="גיל 67 ≈ 205, גיל 70 ≈ 190">
               <NumInput
@@ -600,18 +600,18 @@ export function PensionCalculator() {
             </InputRow>
           </div>
 
-          <div className="bg-gray-50 rounded-lg p-3">
-            <p className="text-sm font-medium text-gray-700 mb-2">מקדמים לפי גיל:</p>
+          <div className="bg-cream-2 rounded-none p-3">
+            <p className="text-sm font-medium text-ink/70 mb-2">מקדמים לפי גיל:</p>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
               {Object.entries(PENSION_CONSTANTS_2026.conversionFactors).map(([age, cf]) => (
                 <button
                   key={age}
                   type="button"
                   onClick={() => updateInput('conversionFactor', cf)}
-                  className={`text-xs rounded px-2 py-1 border transition ${
+                  className={`text-xs rounded-none px-2 py-1 border transition ${
                     displayConvFactor === cf
-                      ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                      ? 'bg-ink text-cream border-ink'
+                      : 'bg-paper text-ink/70 border-ink/15 hover:bg-paper-hover'
                   }`}
                 >
                   גיל {age}:{' '}
@@ -623,8 +623,8 @@ export function PensionCalculator() {
         </div>
 
         {/* קצבת שאיר */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">קצבת שאיר (לאחר פטירת הפנסיונר)</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">קצבת שאיר (לאחר פטירת הפנסיונר)</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {(['none', '40pct', '60pct', '100pct'] as SpouseOption[]).map((opt) => {
               const labels: Record<SpouseOption, string> = {
@@ -644,20 +644,20 @@ export function PensionCalculator() {
                   key={opt}
                   type="button"
                   onClick={() => updateInput('spouseOption', opt)}
-                  className={`p-3 rounded-lg border-2 text-right transition ${
+                  className={`p-3 rounded-none border text-right transition ${
                     input.spouseOption === opt
-                      ? 'border-blue-600 bg-blue-50'
-                      : 'border-gray-200 hover:bg-gray-50'
+                      ? 'border-gold bg-cream-2'
+                      : 'border-ink/15 hover:bg-cream-2'
                   }`}
                 >
-                  <p className="text-sm font-semibold text-gray-800">{labels[opt]}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{descs[opt]}</p>
+                  <p className="text-sm font-semibold text-ink">{labels[opt]}</p>
+                  <p className="text-xs text-ink/60 mt-0.5">{descs[opt]}</p>
                 </button>
               );
             })}
           </div>
           {input.spouseOption !== 'none' && (
-            <div className="mt-3 text-sm text-blue-700 bg-blue-50 rounded p-2">
+            <div className="mt-3 text-sm text-ink/70 bg-cream-2 rounded-none p-2">
               עם מקדם {result.conversionFactorWithSpouse} קצבת {formatCurrency(result.monthlyPensionWithSpouse)}/חודש
               (לעומת {formatCurrency(result.totalMonthlyPension)} ללא שאיר)
             </div>
@@ -665,35 +665,35 @@ export function PensionCalculator() {
         </div>
 
         {/* פיצויים */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">פיצויים (סעיף 14)</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">פיצויים (סעיף 14)</h3>
           <div className="flex items-center gap-3">
             <input
               type="checkbox"
               id="lumpSum"
               checked={input.lumpSumFromSeverance}
               onChange={(e) => updateInput('lumpSumFromSeverance', e.target.checked)}
-              className="w-4 h-4"
+              className="w-4 h-4 accent-ink"
             />
-            <label htmlFor="lumpSum" className="text-sm text-gray-700">
+            <label htmlFor="lumpSum" className="text-sm text-ink/70">
               קח פיצויים כסכום חד-פעמי (סעיף 14) במקום להמיר לקצבה
             </label>
           </div>
           {input.lumpSumFromSeverance && result.severanceLumpSum && (
             <div className="mt-3 grid grid-cols-2 gap-3">
-              <div className="bg-amber-50 rounded-lg p-3 text-center">
-                <p className="text-xs text-gray-600">סכום פיצויים</p>
+              <div className="bg-amber-50 rounded-none p-3 text-center">
+                <p className="text-xs text-ink/60">סכום פיצויים</p>
                 <p className="text-lg font-bold text-amber-700">{formatCurrency(result.severanceLumpSum)}</p>
               </div>
-              <div className="bg-green-50 rounded-lg p-3 text-center">
-                <p className="text-xs text-gray-600">נטו (אחרי מס)</p>
+              <div className="bg-green-50 rounded-none p-3 text-center">
+                <p className="text-xs text-ink/60">נטו (אחרי מס)</p>
                 <p className="text-lg font-bold text-green-700">
                   {formatCurrency(result.severanceLumpSumNet ?? 0)}
                 </p>
               </div>
             </div>
           )}
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-ink/60 mt-2">
             שים לב: משיכת פיצויים מפחיתה את הצבירה הפנסיונית. מומלץ להשאיר בקרן.
           </p>
         </div>
@@ -708,44 +708,44 @@ export function PensionCalculator() {
     const tax = result.taxAnalysis;
     return (
       <div className="space-y-4">
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">מיסוי קצבה בפרישה (סעיף 9א)</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">מיסוי קצבה בפרישה (סעיף 9א)</h3>
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">קצבה ברוטו</p>
-              <p className="text-xl font-bold text-gray-800">{formatCurrency(tax.grossMonthlyPension)}</p>
+            <div className="bg-cream-2 rounded-none p-3">
+              <p className="text-xs text-ink/60">קצבה ברוטו</p>
+              <p className="text-xl font-bold text-ink">{formatCurrency(tax.grossMonthlyPension)}</p>
             </div>
-            <div className="bg-green-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">פטור ממס (52% עד {formatCurrency(PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling)})</p>
+            <div className="bg-green-50 rounded-none p-3">
+              <p className="text-xs text-ink/60">פטור ממס (52% עד {formatCurrency(PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling)})</p>
               <p className="text-xl font-bold text-green-700">{formatCurrency(tax.taxExemptAmount)}</p>
             </div>
-            <div className="bg-amber-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">חייב במס</p>
+            <div className="bg-amber-50 rounded-none p-3">
+              <p className="text-xs text-ink/60">חייב במס</p>
               <p className="text-xl font-bold text-amber-700">{formatCurrency(tax.taxableAmount)}</p>
             </div>
-            <div className="bg-red-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">מס חודשי (מדרגות הכנסה)</p>
+            <div className="bg-red-50 rounded-none p-3">
+              <p className="text-xs text-ink/60">מס חודשי (מדרגות הכנסה)</p>
               <p className="text-xl font-bold text-red-700">{formatCurrency(tax.estimatedMonthlyTax)}</p>
             </div>
           </div>
-          <div className="mt-3 bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <div className="mt-3 bg-cream-2 border border-ink/15 rounded-none p-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-700">קצבה נטו אחרי מס:</span>
-              <strong className="text-lg text-blue-700">{formatCurrency(tax.netMonthlyPension)}/חודש</strong>
+              <span className="text-sm text-ink/70">קצבה נטו אחרי מס:</span>
+              <strong className="text-lg text-ink">{formatCurrency(tax.netMonthlyPension)}/חודש</strong>
             </div>
             <div className="flex justify-between items-center mt-1">
-              <span className="text-sm text-gray-700">מס אפקטיבי:</span>
-              <strong className="text-sm text-gray-800">{tax.effectiveTaxRate.toFixed(1)}%</strong>
+              <span className="text-sm text-ink/70">מס אפקטיבי:</span>
+              <strong className="text-sm text-ink">{tax.effectiveTaxRate.toFixed(1)}%</strong>
             </div>
           </div>
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-4">
           <h4 className="font-semibold text-amber-800 mb-2 flex items-center gap-2">
             <AlertTriangle className="w-4 h-4" />
             תכנון מס בפרישה
           </h4>
-          <ul className="text-sm text-gray-700 space-y-1">
+          <ul className="text-sm text-ink/70 space-y-1">
             <li>• הפטור ממס (52%) הוא רק לגיל 67+ - פרישה מוקדמת משלמת יותר מס</li>
             <li>• ניתן לפרוס הכנסה מחד-פעמית (פיצויים) על 6 שנים</li>
             <li>• מומלץ לשקול סדר נכון: קצבה ראשית, אחר-כך פיצויים, אחר-כך תיק השקעות</li>
@@ -753,16 +753,16 @@ export function PensionCalculator() {
           </ul>
         </div>
 
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">מקדמי המרה והשפעה על הקצבה</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">מקדמי המרה והשפעה על הקצבה</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 text-right">
-                  <th className="px-3 py-2 text-gray-700">גיל פרישה</th>
-                  <th className="px-3 py-2 text-gray-700">מקדם</th>
-                  <th className="px-3 py-2 text-gray-700">מקדם עם שאיר 60%</th>
-                  <th className="px-3 py-2 text-gray-700">קצבה חודשית</th>
+                <tr className="bg-cream-2 text-right">
+                  <th className="px-3 py-2 text-ink/70">גיל פרישה</th>
+                  <th className="px-3 py-2 text-ink/70">מקדם</th>
+                  <th className="px-3 py-2 text-ink/70">מקדם עם שאיר 60%</th>
+                  <th className="px-3 py-2 text-ink/70">קצבה חודשית</th>
                 </tr>
               </thead>
               <tbody>
@@ -773,12 +773,12 @@ export function PensionCalculator() {
                   return (
                     <tr
                       key={age}
-                      className={`border-t ${isSelected ? 'bg-blue-50 font-semibold' : 'hover:bg-gray-50'}`}
+                      className={`border-t border-ink/10 ${isSelected ? 'bg-cream-2 font-semibold' : 'hover:bg-cream-2'}`}
                     >
                       <td className="px-3 py-2">{age}</td>
                       <td className="px-3 py-2">{cf}</td>
                       <td className="px-3 py-2">{cfSpouse}</td>
-                      <td className="px-3 py-2 text-blue-700">{formatCurrency(pension)}</td>
+                      <td className="px-3 py-2 text-ink">{formatCurrency(pension)}</td>
                     </tr>
                   );
                 })}
@@ -799,8 +799,8 @@ export function PensionCalculator() {
 
     return (
       <div className="space-y-4">
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">יעד הכנסה חודשית בפרישה</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">יעד הכנסה חודשית בפרישה</h3>
           <InputRow label="קצבה חודשית רצויה (₪)">
             <NumInput
               value={input.targetMonthlyIncome}
@@ -814,10 +814,10 @@ export function PensionCalculator() {
                 key={v}
                 type="button"
                 onClick={() => updateInput('targetMonthlyIncome', v)}
-                className={`text-sm rounded-lg border px-3 py-2 transition ${
+                className={`text-sm rounded-none border px-3 py-2 transition ${
                   input.targetMonthlyIncome === v
-                    ? 'border-blue-600 bg-blue-50 text-blue-700 font-semibold'
-                    : 'border-gray-200 hover:bg-gray-50'
+                    ? 'border-gold bg-cream-2 text-gold font-semibold'
+                    : 'border-ink/15 hover:bg-cream-2'
                 }`}
               >
                 {formatCurrency(v)}
@@ -827,7 +827,7 @@ export function PensionCalculator() {
         </div>
 
         {/* מצב יעד */}
-        <div className={`border-2 rounded-xl p-4 ${isOnTarget ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'}`}>
+        <div className={`border rounded-none p-4 ${isOnTarget ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'}`}>
           <div className="flex items-center gap-2 mb-3">
             {isOnTarget
               ? <TrendingUp className="w-5 h-5 text-green-600" />
@@ -838,15 +838,15 @@ export function PensionCalculator() {
             </h3>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-white rounded-lg p-3">
-              <p className="text-xs text-gray-500">קצבה צפויה</p>
+            <div className="bg-paper rounded-none p-3">
+              <p className="text-xs text-ink/60">קצבה צפויה</p>
               <p className={`text-xl font-bold ${isOnTarget ? 'text-green-700' : 'text-red-700'}`}>
                 {formatCurrency(g.currentProjected)}
               </p>
             </div>
-            <div className="bg-white rounded-lg p-3">
-              <p className="text-xs text-gray-500">יעד</p>
-              <p className="text-xl font-bold text-gray-800">{formatCurrency(g.targetMonthlyIncome)}</p>
+            <div className="bg-paper rounded-none p-3">
+              <p className="text-xs text-ink/60">יעד</p>
+              <p className="text-xl font-bold text-ink">{formatCurrency(g.targetMonthlyIncome)}</p>
             </div>
           </div>
           {!isOnTarget && (
@@ -863,15 +863,15 @@ export function PensionCalculator() {
 
         {/* המלצות */}
         {g.recommendations.length > 0 && (
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-            <h4 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+            <h4 className="font-semibold text-ink mb-2 flex items-center gap-2">
               <Target className="w-4 h-4" />
               המלצות מותאמות אישית
             </h4>
             <ul className="space-y-1">
               {g.recommendations.map((rec, i) => (
-                <li key={i} className="text-sm text-gray-700 flex gap-2">
-                  <span className="text-blue-500 mt-0.5 shrink-0">•</span>
+                <li key={i} className="text-sm text-ink/70 flex gap-2">
+                  <span className="text-gold mt-0.5 shrink-0">•</span>
                   {rec}
                 </li>
               ))}
@@ -880,15 +880,15 @@ export function PensionCalculator() {
         )}
 
         {/* חישוב גב-אל-גב */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
-          <h3 className="text-md font-semibold text-gray-800 mb-3">כמה להפקיד ליעד?</h3>
-          <p className="text-sm text-gray-600 mb-3">
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
+          <h3 className="text-md font-semibold text-ink mb-3">כמה להפקיד ליעד?</h3>
+          <p className="text-sm text-ink/60 mb-3">
             ליעד של {formatCurrency(input.targetMonthlyIncome)}/חודש עם מקדם {displayConvFactor}:
           </p>
-          <div className="bg-gray-50 rounded-lg p-3">
-            <p className="text-sm text-gray-600">נדרש ריבית-על-ריבית חודשית:</p>
-            <p className="text-2xl font-bold text-blue-700">{formatCurrency(goalSeekResult)}/חודש</p>
-            <p className="text-xs text-gray-500 mt-1">
+          <div className="bg-cream-2 rounded-none p-3">
+            <p className="text-sm text-ink/60">נדרש ריבית-על-ריבית חודשית:</p>
+            <p className="text-2xl font-bold text-ink">{formatCurrency(goalSeekResult)}/חודש</p>
+            <p className="text-xs text-ink/60 mt-1">
               (זה ה-PMT - הפקדה חודשית כוללת עובד+מעסיק)
             </p>
           </div>
@@ -915,10 +915,10 @@ export function PensionCalculator() {
                 key={v}
                 type="button"
                 onClick={() => setChartView(v)}
-                className={`text-sm px-3 py-1.5 rounded-lg border transition ${
+                className={`text-sm px-3 py-1.5 rounded-none border transition ${
                   chartView === v
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    ? 'bg-ink text-cream border-ink'
+                    : 'bg-paper text-ink/70 border-ink/15 hover:bg-cream-2'
                 }`}
               >
                 {labels[v]}
@@ -929,10 +929,10 @@ export function PensionCalculator() {
 
         {chartView === 'accumulation' && (
           <div>
-            <p className="text-xs text-gray-500 mb-2">צבירה כוללת לפי מקורות לאורך השנים (₪)</p>
+            <p className="text-xs text-ink/60 mb-2">צבירה כוללת לפי מקורות לאורך השנים (₪)</p>
             <ResponsiveContainer width="100%" height={260}>
               <AreaChart data={accChartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e7ddc9" />
                 <XAxis dataKey="age" tick={{ fontSize: 11 }} label={{ value: 'גיל', position: 'insideBottom', offset: -2, fontSize: 11 }} />
                 <YAxis tickFormatter={(v) => `${(v / 1_000_000).toFixed(1)}M`} tick={{ fontSize: 10 }} />
                 <Tooltip content={<CustomTooltip />} />
@@ -953,8 +953,8 @@ export function PensionCalculator() {
                     type="monotone"
                     dataKey="קרן השתלמות"
                     stackId="1"
-                    stroke="#f59e0b"
-                    fill="#f59e0b"
+                    stroke="#D8B36A"
+                    fill="#D8B36A"
                     fillOpacity={0.6}
                   />
                 )}
@@ -965,14 +965,14 @@ export function PensionCalculator() {
 
         {chartView === 'income' && (
           <div>
-            <p className="text-xs text-gray-500 mb-2">פירוט הכנסה חודשית בפרישה (₪)</p>
+            <p className="text-xs text-ink/60 mb-2">פירוט הכנסה חודשית בפרישה (₪)</p>
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={incomeChartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e7ddc9" />
                 <XAxis dataKey="name" tick={{ fontSize: 11 }} />
                 <YAxis tickFormatter={(v) => `${v.toLocaleString()}`} tick={{ fontSize: 10 }} />
                 <Tooltip formatter={(v) => [formatCurrency(Number(v)), '']} />
-                <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]}>
+                <Bar dataKey="value" fill="#102219" radius={[4, 4, 0, 0]}>
                   {incomeChartData.map((d, i) => (
                     <Bar key={i} dataKey="value" fill={d.fill} />
                   ))}
@@ -986,7 +986,7 @@ export function PensionCalculator() {
                   {d.name}: {formatCurrency(d.value)}
                 </span>
               ))}
-              <span className="font-semibold text-blue-700">
+              <span className="font-semibold text-ink">
                 סה&quot;כ: {formatCurrency(totalMonthlyIncome)}
               </span>
             </div>
@@ -995,14 +995,14 @@ export function PensionCalculator() {
 
         {chartView === 'comparison' && (
           <div>
-            <p className="text-xs text-gray-500 mb-2">קצבה חודשית לפי גיל פרישה (₪)</p>
+            <p className="text-xs text-ink/60 mb-2">קצבה חודשית לפי גיל פרישה (₪)</p>
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={comparisonData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e7ddc9" />
                 <XAxis dataKey="age" tick={{ fontSize: 11 }} />
                 <YAxis tickFormatter={(v) => `${v.toLocaleString()}`} tick={{ fontSize: 10 }} />
                 <Tooltip formatter={(v) => [formatCurrency(Number(v)), 'קצבה']} />
-                <Bar dataKey="קצבה" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="קצבה" fill="#102219" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -1026,16 +1026,16 @@ export function PensionCalculator() {
       {/* עמודה שמאל - קלטים */}
       <div className="lg:col-span-3 space-y-4">
         {/* טאבים */}
-        <div className="flex gap-1 bg-gray-100 p-1 rounded-xl flex-wrap">
+        <div className="flex gap-1 bg-cream-2 p-1 rounded-none flex-wrap">
           {tabs.map((t) => (
             <button
               key={t.id}
               type="button"
               onClick={() => setActiveTab(t.id)}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition flex-1 justify-center ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-none text-sm font-medium transition flex-1 justify-center ${
                 activeTab === t.id
-                  ? 'bg-white text-blue-700 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-paper text-ink shadow-sm'
+                  : 'text-ink/60 hover:text-ink'
               }`}
             >
               {t.icon}
@@ -1117,14 +1117,14 @@ export function PensionCalculator() {
         />
 
         {/* גרפים */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-4">
+        <div className="bg-paper border border-ink/15 rounded-none p-4">
           <Charts />
         </div>
 
         {/* אזהרות */}
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-xs">
           <p className="font-semibold text-amber-800 mb-1">שים לב:</p>
-          <ul className="text-gray-700 space-y-0.5">
+          <ul className="text-ink/70 space-y-0.5">
             <li>• המחשבון הוא הערכה - לא ייעוץ פנסיוני מקצועי</li>
             <li>• תוצאות תלויות בתשואה בפועל ובדמי ניהול</li>
             <li>• לבדיקת הצבירה האמיתית: המסלקה הפנסיונית (swiftness.co.il)</li>

@@ -122,7 +122,7 @@ export default function InvoicesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-paper" dir="rtl">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -148,19 +148,19 @@ export default function InvoicesPage() {
         </div>
 
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
             חשבונית מס, חשבונית עסקה או קבלה? המדריך המלא לעצמאים 2026
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-lg text-ink/70 leading-relaxed">
             איזה מסמך מנפיקים, מתי, ולמי — ומה ההבדל הקריטי בין עוסק פטור לעוסק מורשה. כולל
             מספרי הקצאה, חשבוניות ישראל וטעויות שעולות כסף.
           </p>
-          <p className="text-sm text-gray-500 mt-3">
+          <p className="text-sm text-ink/60 mt-3">
             נכתב על ידי אנדרי פלטונוב, רו&quot;ח · עודכן {lastUpdated}
           </p>
         </header>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>סוגי המסמכים — טבלת מפתח</h2>
           <p>
             ישנם ארבעה מסמכים עיקריים שעצמאי עשוי להנפיק. ההחלטה מי מנפיק מה תלויה לגמרי
@@ -170,18 +170,18 @@ export default function InvoicesPage() {
 
         {/* Main document type table */}
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">סוג מסמך</th>
-                <th className="p-3 font-bold text-gray-700 border-b">מי מנפיק</th>
-                <th className="p-3 font-bold text-gray-700 border-b">מתי</th>
-                <th className="p-3 font-bold text-gray-700 border-b">דוגמה מעשית</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סוג מסמך</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">מי מנפיק</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">מתי</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">דוגמה מעשית</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr>
-                <td className="p-3 border-b font-semibold text-blue-800">חשבונית מס</td>
+                <td className="p-3 border-b font-semibold text-ink">חשבונית מס</td>
                 <td className="p-3 border-b">
                   <strong>עוסק מורשה או חברה בלבד.</strong>{' '}
                   <span className="text-red-700 font-medium">עוסק פטור — אסור</span>
@@ -193,8 +193,8 @@ export default function InvoicesPage() {
                   מעצב גרפי (מורשה) מסיים פרויקט ומנפיק חשבונית מס ב-11,800 ₪ כולל מע&quot;מ
                 </td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="p-3 border-b font-semibold text-purple-800">חשבונית מס-קבלה</td>
+              <tr className="bg-cream-2/50">
+                <td className="p-3 border-b font-semibold text-ink">חשבונית מס-קבלה</td>
                 <td className="p-3 border-b">עוסק מורשה או חברה בלבד</td>
                 <td className="p-3 border-b">כשהתשלום מתקבל באותו מעמד שמנפיקים את החשבונית</td>
                 <td className="p-3 border-b">
@@ -202,7 +202,7 @@ export default function InvoicesPage() {
                 </td>
               </tr>
               <tr>
-                <td className="p-3 border-b font-semibold text-orange-800">חשבונית עסקה</td>
+                <td className="p-3 border-b font-semibold text-ink">חשבונית עסקה</td>
                 <td className="p-3 border-b">עוסק מורשה ועוסק פטור</td>
                 <td className="p-3 border-b">
                   דרישת תשלום לפני קבלת התמורה; לא מאפשרת קיזוז מע&quot;מ אצל הקונה
@@ -211,8 +211,8 @@ export default function InvoicesPage() {
                   מנחה סדנאות (פטור) שולחת חשבונית עסקה עם פירוט השירות לפני קבלת התשלום
                 </td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="p-3 font-semibold text-emerald-800">קבלה</td>
+              <tr className="bg-cream-2/50">
+                <td className="p-3 font-semibold text-ink">קבלה</td>
                 <td className="p-3">עוסק מורשה ועוסק פטור</td>
                 <td className="p-3">עם קבלת התשלום בפועל</td>
                 <td className="p-3">
@@ -224,7 +224,7 @@ export default function InvoicesPage() {
         </div>
 
         {/* Critical distinction callout */}
-        <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 mb-8 not-prose">
+        <div className="bg-amber-50 border border-amber-300 rounded-none p-4 mb-8 not-prose">
           <p className="font-bold text-amber-900 mb-1">ההבחנה הקריטית: עוסק פטור לא מנפיק חשבונית מס</p>
           <p className="text-amber-800 text-sm leading-relaxed">
             עוסק פטור אינו גובה מע&quot;מ ולכן <strong>אינו רשאי</strong> להנפיק חשבונית מס.
@@ -234,7 +234,7 @@ export default function InvoicesPage() {
           </p>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>חשבוניות ישראל — מספרי הקצאה 2026</h2>
           <p>
             מ-2024 רשות המסים מחייבת קבלת <strong>מספר הקצאה</strong> (אישור ממחולל חשבוניות
@@ -245,23 +245,23 @@ export default function InvoicesPage() {
 
         {/* Allocation number threshold table */}
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">תקופה</th>
-                <th className="p-3 font-bold text-gray-700 border-b">סף (לפני מע&quot;מ)</th>
-                <th className="p-3 font-bold text-gray-700 border-b">משמעות</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">תקופה</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סף (לפני מע&quot;מ)</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">משמעות</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr>
                 <td className="p-3 border-b font-medium">עד 31.12.2025</td>
                 <td className="p-3 border-b">20,000 ₪</td>
                 <td className="p-3 border-b">הסף הקודם</td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="p-3 border-b font-medium text-blue-800">1.1.2026 – 31.5.2026</td>
-                <td className="p-3 border-b font-bold text-blue-800">10,000 ₪</td>
+              <tr className="bg-cream-2/50">
+                <td className="p-3 border-b font-medium text-ink">1.1.2026 – 31.5.2026</td>
+                <td className="p-3 border-b font-bold text-ink">10,000 ₪</td>
                 <td className="p-3 border-b">
                   חשבונית מס מעל 10,000 ₪ חייבת במספר הקצאה לפני הנפקה
                 </td>
@@ -277,16 +277,16 @@ export default function InvoicesPage() {
           </table>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 not-prose">
-          <p className="font-bold text-blue-900 mb-1">איך מקבלים מספר הקצאה?</p>
-          <p className="text-blue-800 text-sm leading-relaxed">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mb-8 not-prose">
+          <p className="font-bold text-ink mb-1">איך מקבלים מספר הקצאה?</p>
+          <p className="text-ink/70 text-sm leading-relaxed">
             דרך מערכת &quot;חשבוניות ישראל&quot; של רשות המסים, שמחוברת אוטומטית לתוכנות
             חשבוניות מוכרות (Green Invoice, iCount, Invoice4U ואחרות). בעת הנפקה מעל הסף,
             המערכת פונה לרשות המסים ומקבלת מספר הקצאה שמוטבע על גבי החשבונית.
           </p>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>מסמכים דיגיטליים — מה מותר?</h2>
           <p>
             חשבוניות ומסמכים שנוצרו דיגיטלית (PDF שנשמר בצורה מקורית) מוכרים לחלוטין. אין
@@ -326,15 +326,15 @@ export default function InvoicesPage() {
 
         {/* Common mistakes table */}
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">הטעות</th>
-                <th className="p-3 font-bold text-gray-700 border-b">מה קורה בפועל</th>
-                <th className="p-3 font-bold text-gray-700 border-b">מה לעשות</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">הטעות</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">מה קורה בפועל</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">מה לעשות</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr>
                 <td className="p-3 border-b text-red-700 font-medium">
                   עוסק פטור מנפיק &quot;חשבונית מס&quot;
@@ -342,7 +342,7 @@ export default function InvoicesPage() {
                 <td className="p-3 border-b">עבירה על חוק מע&quot;מ; חשיפה לקנסות</td>
                 <td className="p-3 border-b">להנפיק קבלה / חשבונית עסקה בלבד</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b text-red-700 font-medium">
                   חשבונית מעל 10,000 ₪ ללא מספר הקצאה
                 </td>
@@ -362,7 +362,7 @@ export default function InvoicesPage() {
                   לבטל בחשבונית זיכוי ולהנפיק חשבונית חדשה
                 </td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b text-red-700 font-medium">פערים במספרי החשבוניות</td>
                 <td className="p-3 border-b">
                   מעורר חשד בביקורת — פקיד שומה ידרוש הסבר
@@ -378,7 +378,7 @@ export default function InvoicesPage() {
                 </td>
                 <td className="p-3 border-b">לכלול שם, כתובת ומספר ע.מ./ח.פ. של הלקוח</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 text-red-700 font-medium">
                   הוצאת חשבונית זמן רב אחרי העסקה
                 </td>
@@ -393,7 +393,7 @@ export default function InvoicesPage() {
 
         {/* Related links */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">מדריכים קשורים</h2>
+          <h2 className="text-2xl font-bold text-ink mb-4">מדריכים קשורים</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               {
@@ -415,15 +415,15 @@ export default function InvoicesPage() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="group flex flex-col gap-1 border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition"
+                className="group flex flex-col gap-1 border border-ink/15 rounded-none p-4 hover:bg-paper-hover transition"
               >
-                <span className="font-medium text-gray-900 group-hover:text-blue-700 transition flex items-center justify-between">
+                <span className="font-medium text-ink group-hover:text-gold transition flex items-center justify-between">
                   {c.label}
-                  <span className="text-blue-600 group-hover:-translate-x-1 transition" aria-hidden>
+                  <span className="text-gold group-hover:-translate-x-1 transition" aria-hidden>
                     ←
                   </span>
                 </span>
-                <span className="text-sm text-gray-500">{c.desc}</span>
+                <span className="text-sm text-ink/60">{c.desc}</span>
               </Link>
             ))}
           </div>
@@ -431,32 +431,32 @@ export default function InvoicesPage() {
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">שאלות נפוצות</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות</h2>
           <div className="space-y-4">
             {faqItems.map((f) => (
-              <details key={f.question} className="border border-gray-200 rounded-lg p-4 group">
-                <summary className="font-bold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+              <details key={f.question} className="border border-ink/15 rounded-none p-4 group">
+                <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-gray-400 group-open:rotate-180 transition" aria-hidden>
+                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>
                     ▾
                   </span>
                 </summary>
-                <p className="text-gray-700 mt-3 leading-relaxed">{f.answer}</p>
+                <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* Sources */}
-        <section className="mb-10 border-t border-gray-100 pt-8">
-          <h2 className="text-lg font-bold text-gray-700 mb-3">מקורות</h2>
-          <ul className="text-sm text-gray-500 space-y-1 list-disc list-inside">
+        <section className="mb-10 border-t border-ink/15 pt-8">
+          <h2 className="text-lg font-bold text-ink/70 mb-3">מקורות</h2>
+          <ul className="text-sm text-ink/60 space-y-1 list-disc list-inside">
             <li>
               <a
                 href="https://www.kolzchut.org.il/he/%D7%A2%D7%95%D7%A1%D7%A7_%D7%A4%D7%98%D7%95%D7%A8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline hover:text-gray-700"
+                className="underline hover:text-ink"
               >
                 כל-זכות — עוסק פטור
               </a>
@@ -466,7 +466,7 @@ export default function InvoicesPage() {
                 href="https://www.greeninvoice.co.il/magazine/israel-invoice/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline hover:text-gray-700"
+                className="underline hover:text-ink"
               >
                 Green Invoice — חשבוניות ישראל ומספרי הקצאה 2026
               </a>
@@ -476,7 +476,7 @@ export default function InvoicesPage() {
                 href="https://bakertilly.co.il/blog-invoices-2026.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline hover:text-gray-700"
+                className="underline hover:text-ink"
               >
                 Baker Tilly — חשבוניות ישראל 2026
               </a>
@@ -489,13 +489,13 @@ export default function InvoicesPage() {
                 href="https://www.kolzchut.org.il/he/%D7%9E%D7%A1_%D7%AA%D7%A9%D7%95%D7%9E%D7%95%D7%AA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline hover:text-gray-700"
+                className="underline hover:text-ink"
               >
                 כל-זכות — מס תשומות
               </a>
             </li>
           </ul>
-          <p className="text-xs text-gray-400 mt-3">
+          <p className="text-xs text-ink/45 mt-3">
             עודכן לאחרונה: {lastUpdated}. המידע לצורכי הכוונה כללית בלבד ואינו מהווה ייעוץ משפטי
             או מיסויי. לפני החלטה — יש להתייעץ עם רואה חשבון.
           </p>

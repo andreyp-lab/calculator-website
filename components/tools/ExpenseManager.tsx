@@ -15,10 +15,10 @@ import type { PaymentTermInstallment } from '@/lib/tools/types';
 
 const CATEGORY_COLORS: Record<ExpenseCategory, string> = {
   cogs: 'border-red-200 bg-red-50',
-  rnd: 'border-purple-200 bg-purple-50',
+  rnd: 'border-ink/15 bg-cream-2',
   marketing: 'border-orange-200 bg-orange-50',
-  operating: 'border-blue-200 bg-blue-50',
-  financial: 'border-teal-200 bg-teal-50',
+  operating: 'border-ink/15 bg-cream-2',
+  financial: 'border-ink/15 bg-cream-2',
 };
 
 export function ExpenseManager() {
@@ -81,29 +81,29 @@ export function ExpenseManager() {
   );
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 p-5 shadow-sm">
+    <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
         <TrendingDown className="w-5 h-5 text-red-600" />
-        <h3 className="font-bold text-lg text-gray-900">הוצאות</h3>
+        <h3 className="font-bold text-lg text-ink">הוצאות</h3>
       </div>
 
       {/* Category Tabs */}
-      <div className="flex gap-2 flex-wrap mb-4 border-b border-gray-200 pb-3">
+      <div className="flex gap-2 flex-wrap mb-4 border-b border-ink/15 pb-3">
         {(Object.keys(EXPENSE_CATEGORY_LABELS) as ExpenseCategory[]).map((cat) => {
           const count = budget.expenses.filter((e) => e.category === cat).length;
           return (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
+              className={`px-3 py-1.5 text-sm font-medium transition ${
                 activeCategory === cat
                   ? `${CATEGORY_COLORS[cat]} border-2`
-                  : 'bg-gray-100 text-gray-600 border-2 border-transparent hover:bg-gray-200'
+                  : 'bg-cream-2 text-ink/70 border-2 border-transparent hover:bg-paper-hover'
               }`}
             >
               {EXPENSE_CATEGORY_LABELS[cat]}
               {count > 0 && (
-                <span className="ml-1 text-xs bg-white px-1.5 py-0.5 rounded">{count}</span>
+                <span className="ml-1 text-xs bg-paper px-1.5 py-0.5">{count}</span>
               )}
             </button>
           );
@@ -111,12 +111,12 @@ export function ExpenseManager() {
       </div>
 
       <div className="flex justify-between items-center mb-3">
-        <span className="text-sm text-gray-600">
+        <span className="text-sm text-ink/70">
           {EXPENSE_CATEGORY_LABELS[activeCategory]} - {categoryExpenses.length} פריטים
         </span>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+          className="flex items-center gap-1 px-3 py-1.5 bg-ink text-cream hover:bg-ink-deep text-sm"
         >
           <Plus className="w-4 h-4" />
           הוסף הוצאה
@@ -125,20 +125,20 @@ export function ExpenseManager() {
 
       {/* Form */}
       {showForm && (
-        <div className={`border rounded-lg p-4 mb-4 ${CATEGORY_COLORS[activeCategory]}`}>
+        <div className={`border p-4 mb-4 ${CATEGORY_COLORS[activeCategory]}`}>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div className="col-span-2 md:col-span-3">
-              <label className="block text-xs text-gray-700 mb-1">שם ההוצאה *</label>
+              <label className="block text-xs text-ink/70 mb-1">שם ההוצאה *</label>
               <input
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="לדוגמה: שכר דירה משרד"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               />
             </div>
 
-            <div className="col-span-2 md:col-span-3 flex items-center gap-3 bg-white p-3 rounded">
+            <div className="col-span-2 md:col-span-3 flex items-center gap-3 bg-paper p-3">
               <label className="flex items-center gap-2 text-sm">
                 <input
                   type="radio"
@@ -159,18 +159,18 @@ export function ExpenseManager() {
 
             {!form.isPct ? (
               <div>
-                <label className="block text-xs text-gray-700 mb-1">סכום חודשי *</label>
+                <label className="block text-xs text-ink/70 mb-1">סכום חודשי *</label>
                 <input
                   type="number"
                   value={form.amount || ''}
                   onChange={(e) => setForm({ ...form, amount: parseFloat(e.target.value) || 0 })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 text-sm"
                 />
               </div>
             ) : (
               <>
                 <div>
-                  <label className="block text-xs text-gray-700 mb-1">% מהכנסה *</label>
+                  <label className="block text-xs text-ink/70 mb-1">% מהכנסה *</label>
                   <input
                     type="number"
                     value={form.percentage || ''}
@@ -178,15 +178,15 @@ export function ExpenseManager() {
                       setForm({ ...form, percentage: parseFloat(e.target.value) || 0 })
                     }
                     step={0.1}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-ink/15 text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-700 mb-1">קישור להכנסה</label>
+                  <label className="block text-xs text-ink/70 mb-1">קישור להכנסה</label>
                   <select
                     value={form.linkedIncomeId}
                     onChange={(e) => setForm({ ...form, linkedIncomeId: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-ink/15 text-sm"
                   >
                     <option value="">סך כל ההכנסות</option>
                     {budget.income.map((inc) => (
@@ -200,11 +200,11 @@ export function ExpenseManager() {
             )}
 
             <div>
-              <label className="block text-xs text-gray-700 mb-1">חודש התחלה</label>
+              <label className="block text-xs text-ink/70 mb-1">חודש התחלה</label>
               <select
                 value={form.startMonth}
                 onChange={(e) => setForm({ ...form, startMonth: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               >
                 {HEBREW_MONTHS.map((m, i) => (
                   <option key={i} value={i}>
@@ -214,7 +214,7 @@ export function ExpenseManager() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">משך (חודשים)</label>
+              <label className="block text-xs text-ink/70 mb-1">משך (חודשים)</label>
               <input
                 type="number"
                 value={form.duration}
@@ -223,7 +223,7 @@ export function ExpenseManager() {
                 }
                 min={1}
                 max={36}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               />
             </div>
             <div className="md:col-span-2">
@@ -251,20 +251,20 @@ export function ExpenseManager() {
                   onChange={(e) => setForm({ ...form, applyInflation: e.target.checked })}
                   className="w-4 h-4"
                 />
-                <span className="text-xs text-gray-700">החל אינפלציה שנתית (מהגדרות)</span>
+                <span className="text-xs text-ink/70">החל אינפלציה שנתית (מהגדרות)</span>
               </label>
             </div>
           </div>
           <div className="flex gap-2 mt-3">
             <button
               onClick={handleAdd}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="px-4 py-2 bg-ink text-cream hover:bg-ink-deep"
             >
               הוסף
             </button>
             <button
               onClick={() => setShowForm(false)}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+              className="px-4 py-2 bg-cream-2 text-ink"
             >
               ביטול
             </button>
@@ -274,13 +274,13 @@ export function ExpenseManager() {
 
       {/* Table */}
       {categoryExpenses.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-ink/60">
           <p>אין הוצאות ב{EXPENSE_CATEGORY_LABELS[activeCategory]}</p>
         </div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50">
+            <thead className="bg-cream-2">
               <tr>
                 <th className="text-right px-3 py-2">שם</th>
                 <th className="text-right px-3 py-2">סכום</th>
@@ -292,19 +292,19 @@ export function ExpenseManager() {
             </thead>
             <tbody>
               {categoryExpenses.map((exp) => (
-                <tr key={exp.id} className="border-b border-gray-100 hover:bg-gray-50">
+                <tr key={exp.id} className="border-b border-ink/10 hover:bg-cream-2">
                   <td className="px-3 py-2 font-medium">{exp.name}</td>
                   <td className="px-3 py-2">
                     {exp.isPct ? (
-                      <span className="text-blue-700">{exp.percentage}% מהכנסות</span>
+                      <span className="text-gold">{exp.percentage}% מהכנסות</span>
                     ) : (
                       formatCurrency(exp.amount, settings.currency)
                     )}
                   </td>
-                  <td className="px-3 py-2 text-xs text-gray-600">
+                  <td className="px-3 py-2 text-xs text-ink/60">
                     {HEBREW_MONTHS[exp.startMonth]} ({exp.duration} ח')
                   </td>
-                  <td className="px-3 py-2 text-xs text-gray-600">
+                  <td className="px-3 py-2 text-xs text-ink/60">
                     {exp.paymentTerms === 0 ? 'מיידי' : `+${exp.paymentTerms}`}
                   </td>
                   <td className="px-3 py-2 font-medium text-red-700">
@@ -316,7 +316,7 @@ export function ExpenseManager() {
                   <td className="px-3 py-2 text-center">
                     <button
                       onClick={() => deleteExpense(exp.id)}
-                      className="p-1 text-red-600 hover:bg-red-50 rounded"
+                      className="p-1 text-red-600 hover:bg-red-50"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

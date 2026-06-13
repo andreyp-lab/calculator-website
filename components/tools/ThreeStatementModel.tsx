@@ -136,17 +136,17 @@ export function ThreeStatementModelUI() {
   return (
     <div className="space-y-4">
       {/* Header + tabs */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-3 shadow-sm">
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-3 shadow-sm">
         <div className="flex items-center justify-between mb-3 gap-2 flex-wrap">
-          <h3 className="font-bold text-gray-900 flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-indigo-600" />
+          <h3 className="font-bold text-ink flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-gold" />
             מודל תלת-דוחות (P&L + מאזן + תזרים)
           </h3>
           <div className="flex items-center gap-2 flex-wrap">
             {budget && settings && (
               <button
                 onClick={loadFromBudget}
-                className="flex items-center gap-1 px-2.5 py-1.5 bg-emerald-600 text-white rounded text-xs hover:bg-emerald-700"
+                className="flex items-center gap-1 px-2.5 py-1.5 bg-ink text-cream rounded-none text-xs hover:bg-ink-deep"
               >
                 <Upload className="w-3.5 h-3.5" />
                 טען מהתקציב הנוכחי
@@ -156,21 +156,21 @@ export function ThreeStatementModelUI() {
               <>
                 <button
                   onClick={() => exportForecastPDF(model, settings?.companyName ?? 'Forecast')}
-                  className="flex items-center gap-1 px-2.5 py-1.5 bg-red-600 text-white rounded text-xs hover:bg-red-700"
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-ink text-cream rounded-none text-xs hover:bg-ink-deep"
                 >
                   <Download className="w-3.5 h-3.5" />
                   PDF
                 </button>
                 <button
                   onClick={() => exportForecastExcel(model, settings?.companyName ?? 'Forecast')}
-                  className="flex items-center gap-1 px-2.5 py-1.5 bg-green-600 text-white rounded text-xs hover:bg-green-700"
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-ink text-cream rounded-none text-xs hover:bg-ink-deep"
                 >
                   <Download className="w-3.5 h-3.5" />
                   Excel
                 </button>
               </>
             )}
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-ink/60">
               {historical.length} שנות היסטוריה ← {assumptions.yearsToProject} שנות חיזוי
             </div>
           </div>
@@ -188,10 +188,10 @@ export function ThreeStatementModelUI() {
               <button
                 key={t.id}
                 onClick={() => setTab(t.id)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded text-sm transition ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-none text-sm transition ${
                   tab === t.id
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-ink text-cream'
+                    : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -252,7 +252,7 @@ function HistoricalDataTab({ historical, onAddYear, onRemoveYear, onUpdate }: Hi
 
   return (
     <div className="space-y-3">
-      <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-900">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-sm text-ink">
         💡 הזן 1-3 שנים של נתוני עבר. ככל שיש יותר שנים, החיזוי יהיה מדויק יותר.
         ערכים נגזרים (רווח גולמי, EBITDA, סה"כ נכסים) מחושבים אוטומטית.
       </div>
@@ -260,7 +260,7 @@ function HistoricalDataTab({ historical, onAddYear, onRemoveYear, onUpdate }: Hi
       <div className="flex gap-2">
         <button
           onClick={onAddYear}
-          className="px-3 py-1.5 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700"
+          className="px-3 py-1.5 bg-ink text-cream rounded-none text-sm hover:bg-ink-deep"
         >
           + הוסף שנה אחורה
         </button>
@@ -312,23 +312,23 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
   const bsValid = validateBalanceSheet(statements.balanceSheet, 1000);
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-      <div className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-gray-100 border-b">
+    <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+      <div className="flex items-center justify-between p-3 bg-cream-2 border-b border-ink/15">
         <div className="flex items-center gap-3">
-          <h4 className="font-bold text-gray-900">שנת {statements.year}</h4>
+          <h4 className="font-bold text-ink">שנת {statements.year}</h4>
           <div className="flex gap-1">
             <button
               onClick={() => setSection('pnl')}
-              className={`px-2 py-1 text-xs rounded ${
-                section === 'pnl' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'
+              className={`px-2 py-1 text-xs rounded-none ${
+                section === 'pnl' ? 'bg-ink text-cream' : 'bg-paper text-ink/70 border border-ink/15'
               }`}
             >
               רווח והפסד
             </button>
             <button
               onClick={() => setSection('bs')}
-              className={`px-2 py-1 text-xs rounded ${
-                section === 'bs' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'
+              className={`px-2 py-1 text-xs rounded-none ${
+                section === 'bs' ? 'bg-ink text-cream' : 'bg-paper text-ink/70 border border-ink/15'
               }`}
             >
               מאזן
@@ -344,7 +344,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
         {canRemove && (
           <button
             onClick={onRemove}
-            className="text-xs text-red-600 hover:bg-red-50 px-2 py-1 rounded"
+            className="text-xs text-red-600 hover:bg-red-50 px-2 py-1 rounded-none"
           >
             הסר שנה
           </button>
@@ -372,7 +372,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
         {section === 'bs' && (
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h5 className="font-semibold text-gray-900 mb-2 text-sm">נכסים</h5>
+              <h5 className="font-semibold text-ink mb-2 text-sm">נכסים</h5>
               <div className="space-y-2 text-sm">
                 <NumberField label="מזומן ושווי מזומן" value={statements.balanceSheet.cash} onChange={(v) => updateBS('cash', v)} />
                 <NumberField label="לקוחות (AR)" value={statements.balanceSheet.accountsReceivable} onChange={(v) => updateBS('accountsReceivable', v)} />
@@ -385,7 +385,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
               </div>
             </div>
             <div>
-              <h5 className="font-semibold text-gray-900 mb-2 text-sm">התחייבויות + הון</h5>
+              <h5 className="font-semibold text-ink mb-2 text-sm">התחייבויות + הון</h5>
               <div className="space-y-2 text-sm">
                 <NumberField label="ספקים (AP)" value={statements.balanceSheet.accountsPayable} onChange={(v) => updateBS('accountsPayable', v)} />
                 <NumberField label="חוב לזמן קצר" value={statements.balanceSheet.shortTermDebt} onChange={(v) => updateBS('shortTermDebt', v)} />
@@ -408,12 +408,12 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
 function NumberField({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
   return (
     <div className="flex items-center gap-2">
-      <label className="flex-1 text-xs text-gray-700">{label}</label>
+      <label className="flex-1 text-xs text-ink/70">{label}</label>
       <input
         type="number"
         value={value || ''}
         onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
-        className="w-32 px-2 py-1 border border-gray-300 rounded text-sm text-left"
+        className="w-32 px-2 py-1 border border-ink/15 rounded-none text-sm text-left"
       />
     </div>
   );
@@ -421,9 +421,9 @@ function NumberField({ label, value, onChange }: { label: string; value: number;
 
 function ReadOnlyField({ label, value, highlight }: { label: string; value: number; highlight?: boolean }) {
   return (
-    <div className={`flex items-center gap-2 ${highlight ? 'bg-blue-50 px-2 py-1 rounded' : ''}`}>
-      <label className={`flex-1 text-xs ${highlight ? 'font-bold text-blue-900' : 'text-gray-600'}`}>{label}</label>
-      <span className={`w-32 text-sm text-left ${highlight ? 'font-bold text-blue-900' : 'text-gray-700'}`}>
+    <div className={`flex items-center gap-2 ${highlight ? 'bg-cream-2 px-2 py-1 rounded-none' : ''}`}>
+      <label className={`flex-1 text-xs ${highlight ? 'font-bold text-ink' : 'text-ink/60'}`}>{label}</label>
+      <span className={`w-32 text-sm text-left ${highlight ? 'font-bold text-ink' : 'text-ink/70'}`}>
         {Math.round(value).toLocaleString('he-IL')}
       </span>
     </div>
@@ -464,14 +464,14 @@ function AssumptionsTab({
 
   return (
     <div className="space-y-3">
-      <div className="bg-purple-50 border border-purple-200 rounded p-3 flex items-center justify-between">
-        <div className="text-sm text-purple-900">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-3 flex items-center justify-between">
+        <div className="text-sm text-ink">
           💡 הגדר הנחות לחיזוי. ניתן לשנות ערך לכל שנה (1-5) או להשתמש באוטו-חיזוי.
         </div>
         {hasHistorical && (
           <button
             onClick={onAutoSuggest}
-            className="px-3 py-1.5 bg-purple-600 text-white rounded text-sm hover:bg-purple-700 flex items-center gap-1"
+            className="px-3 py-1.5 bg-ink text-cream rounded-none text-sm hover:bg-ink-deep flex items-center gap-1"
           >
             <Sparkles className="w-4 h-4" />
             הצע אוטומטית מההיסטוריה
@@ -480,14 +480,14 @@ function AssumptionsTab({
       </div>
 
       {/* Years to project */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-        <label className="block text-sm font-medium text-gray-900 mb-2">
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+        <label className="block text-sm font-medium text-ink mb-2">
           שנות חיזוי
         </label>
         <select
           value={assumptions.yearsToProject}
           onChange={(e) => update({ yearsToProject: parseInt(e.target.value) })}
-          className="w-32 px-3 py-1.5 border border-gray-300 rounded text-sm"
+          className="w-32 px-3 py-1.5 border border-ink/15 rounded-none text-sm"
         >
           <option value={3}>3 שנים</option>
           <option value={4}>4 שנים</option>
@@ -496,10 +496,10 @@ function AssumptionsTab({
       </div>
 
       {/* Growth & Margins */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="font-semibold text-gray-900">צמיחה ומרווחים (% לשנה)</h4>
-          <span className="text-xs text-gray-500">
+          <h4 className="font-semibold text-ink">צמיחה ומרווחים (% לשנה)</h4>
+          <span className="text-xs text-ink/60">
             השוואה לענף: {bench.industryLabel}
           </span>
         </div>
@@ -543,8 +543,8 @@ function AssumptionsTab({
       </div>
 
       {/* Working Capital */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-        <h4 className="font-semibold text-gray-900 mb-3">הון חוזר (ימים)</h4>
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+        <h4 className="font-semibold text-ink mb-3">הון חוזר (ימים)</h4>
         <div className="grid md:grid-cols-3 gap-3">
           <SimpleField
             label="DSO - ימי גבייה"
@@ -568,8 +568,8 @@ function AssumptionsTab({
       </div>
 
       {/* Capital & Tax */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-        <h4 className="font-semibold text-gray-900 mb-3">הון, מס וריבית</h4>
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+        <h4 className="font-semibold text-ink mb-3">הון, מס וריבית</h4>
         <div className="grid md:grid-cols-2 gap-3 mb-3">
           <SimpleField label="ריבית אפקטיבית %" value={assumptions.effectiveInterestRate} onChange={(v) => update({ effectiveInterestRate: v })} />
           <SimpleField label="שיעור מס אפקטיבי %" value={assumptions.effectiveTaxRate} onChange={(v) => update({ effectiveTaxRate: v })} />
@@ -629,12 +629,12 @@ function SimpleField({
 }) {
   return (
     <div>
-      <label className="block text-xs text-gray-700 mb-1">{label}</label>
+      <label className="block text-xs text-ink/70 mb-1">{label}</label>
       <input
         type="number"
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
-        className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+        className="w-full px-2 py-1 border border-ink/15 rounded-none text-sm"
       />
       {benchHint && <div className="text-[10px] text-emerald-700 mt-0.5">📊 {benchHint}</div>}
     </div>
@@ -669,7 +669,7 @@ function ArrayField({
   return (
     <div>
       <div className="flex items-baseline justify-between mb-1">
-        <label className="text-xs text-gray-700">{label}</label>
+        <label className="text-xs text-ink/70">{label}</label>
         {benchmark && !isCurrency && (
           <span className="text-[10px] text-emerald-700">
             ענף: {benchmark.low.toFixed(0)}–{benchmark.high.toFixed(0)}% (חציון{' '}
@@ -680,12 +680,12 @@ function ArrayField({
       <div className="grid grid-cols-5 gap-1">
         {Array.from({ length: years }, (_, i) => (
           <div key={i}>
-            <div className="text-[10px] text-gray-500 mb-0.5">שנה {i + 1}</div>
+            <div className="text-[10px] text-ink/60 mb-0.5">שנה {i + 1}</div>
             <input
               type="number"
               value={values[i] ?? ''}
               onChange={(e) => onChange(i, parseFloat(e.target.value) || 0)}
-              className="w-full px-1 py-0.5 border border-gray-300 rounded text-xs"
+              className="w-full px-1 py-0.5 border border-ink/15 rounded-none text-xs"
               placeholder={isCurrency ? '0' : '%'}
             />
           </div>
@@ -717,8 +717,8 @@ function PnLTab({ model }: { model: Model | null }) {
   return (
     <div className="space-y-4">
       {/* Chart */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3">
           <h3 className="font-bold">רווח והפסד לאורך זמן</h3>
         </div>
         <div className="p-4">
@@ -729,10 +729,10 @@ function PnLTab({ model }: { model: Model | null }) {
               <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} orientation="right" />
               <Tooltip formatter={(v) => Number(v).toLocaleString('he-IL') + ' ₪'} />
               <Legend wrapperStyle={{ direction: 'rtl', fontSize: 11 }} />
-              <Bar dataKey="הכנסות" fill="#3b82f6" />
+              <Bar dataKey="הכנסות" fill="#102219" />
               <Line type="monotone" dataKey="רווח גולמי" stroke="#10b981" strokeWidth={2} />
-              <Line type="monotone" dataKey="EBITDA" stroke="#f59e0b" strokeWidth={2} />
-              <Line type="monotone" dataKey="רווח נקי" stroke="#ec4899" strokeWidth={3} />
+              <Line type="monotone" dataKey="EBITDA" stroke="#8E6824" strokeWidth={2} />
+              <Line type="monotone" dataKey="רווח נקי" stroke="#10b981" strokeWidth={3} strokeDasharray="4 2" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
@@ -749,11 +749,11 @@ function PnLTable({ years }: { years: AnnualStatements[] }) {
   const pct = (n: number, d: number) => (d > 0 ? `${((n / d) * 100).toFixed(1)}%` : '—');
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-x-auto">
+    <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="bg-gray-100">
+        <thead className="bg-cream-2">
           <tr>
-            <th className="text-right p-2 sticky right-0 bg-gray-100 z-10">פריט</th>
+            <th className="text-right p-2 sticky right-0 bg-cream-2 z-10">פריט</th>
             {years.map((y) => (
               <th key={y.year} className={`text-center p-2 ${y.isProjection ? 'bg-amber-50' : ''}`}>
                 {y.year} {y.isProjection && <span className="text-amber-700 text-xs">(תחזית)</span>}
@@ -774,10 +774,10 @@ function PnLTable({ years }: { years: AnnualStatements[] }) {
             { key: 'ebit' as const, label: 'EBIT' },
             { key: 'interest' as const, label: 'ריבית' },
             { key: 'tax' as const, label: 'מס' },
-            { key: 'netProfit' as const, label: 'רווח נקי', highlight: 'blue' },
+            { key: 'netProfit' as const, label: 'רווח נקי', highlight: 'green' },
           ]).map((row) => (
-            <tr key={row.key} className="border-t border-gray-100">
-              <td className={`p-2 sticky right-0 bg-white z-10 ${row.bold ? 'font-bold' : ''}`}>
+            <tr key={row.key} className="border-t border-ink/10">
+              <td className={`p-2 sticky right-0 bg-paper z-10 ${row.bold ? 'font-bold' : ''}`}>
                 {row.label}
               </td>
               {years.map((y) => (
@@ -787,7 +787,7 @@ function PnLTable({ years }: { years: AnnualStatements[] }) {
                     y.isProjection ? 'bg-amber-50/50' : ''
                   } ${row.highlight === 'green' ? 'text-emerald-700 font-semibold' : ''} ${
                     row.highlight === 'amber' ? 'text-amber-700 font-semibold' : ''
-                  } ${row.highlight === 'blue' ? 'text-blue-700 font-bold' : ''}`}
+                  } ${row.highlight === 'green' && row.key === 'netProfit' ? 'font-bold' : ''}`}
                 >
                   {fmt(y.pnl[row.key])}
                 </td>
@@ -795,24 +795,24 @@ function PnLTable({ years }: { years: AnnualStatements[] }) {
             </tr>
           ))}
           {/* Margins row */}
-          <tr className="border-t-2 border-gray-300 bg-gray-50">
-            <td className="p-2 sticky right-0 bg-gray-50 z-10 text-xs">מרווח גולמי %</td>
+          <tr className="border-t-2 border-ink/20 bg-cream-2">
+            <td className="p-2 sticky right-0 bg-cream-2 z-10 text-xs">מרווח גולמי %</td>
             {years.map((y) => (
               <td key={y.year} className="p-2 text-center text-xs">
                 {pct(y.pnl.grossProfit, y.pnl.revenue)}
               </td>
             ))}
           </tr>
-          <tr className="bg-gray-50">
-            <td className="p-2 sticky right-0 bg-gray-50 z-10 text-xs">מרווח EBITDA %</td>
+          <tr className="bg-cream-2">
+            <td className="p-2 sticky right-0 bg-cream-2 z-10 text-xs">מרווח EBITDA %</td>
             {years.map((y) => (
               <td key={y.year} className="p-2 text-center text-xs">
                 {pct(y.pnl.ebitda, y.pnl.revenue)}
               </td>
             ))}
           </tr>
-          <tr className="bg-gray-50">
-            <td className="p-2 sticky right-0 bg-gray-50 z-10 text-xs">מרווח נקי %</td>
+          <tr className="bg-cream-2">
+            <td className="p-2 sticky right-0 bg-cream-2 z-10 text-xs">מרווח נקי %</td>
             {years.map((y) => (
               <td key={y.year} className="p-2 text-center text-xs font-semibold">
                 {pct(y.pnl.netProfit, y.pnl.revenue)}
@@ -848,8 +848,8 @@ function BalanceTab({ model }: { model: Model | null }) {
   return (
     <div className="space-y-4">
       {/* Cash chart */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-3">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-3">
           <h3 className="font-bold flex items-center gap-2">
             <TrendingUp className="w-5 h-5" />
             תזרים מזומן ויתרה
@@ -864,26 +864,26 @@ function BalanceTab({ model }: { model: Model | null }) {
               <Tooltip formatter={(v) => Number(v).toLocaleString('he-IL') + ' ₪'} />
               <Legend wrapperStyle={{ direction: 'rtl', fontSize: 11 }} />
               <Bar dataKey="תזרים תפעולי" fill="#10b981" />
-              <Bar dataKey="תזרים השקעה" fill="#f59e0b" />
-              <Bar dataKey="תזרים מימון" fill="#8b5cf6" />
-              <Line type="monotone" dataKey="יתרת מזומן" stroke="#3b82f6" strokeWidth={3} dot={{ r: 5 }} />
+              <Bar dataKey="תזרים השקעה" fill="#8E6824" />
+              <Bar dataKey="תזרים מימון" fill="#264B36" />
+              <Line type="monotone" dataKey="יתרת מזומן" stroke="#102219" strokeWidth={3} dot={{ r: 5 }} />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       {/* Balance Sheet table */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-x-auto">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-x-auto">
+        <div className="bg-ink text-cream p-3">
           <h3 className="font-bold flex items-center gap-2">
             <Building2 className="w-5 h-5" />
             מאזן (Balance Sheet)
           </h3>
         </div>
         <table className="w-full text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-cream-2">
             <tr>
-              <th className="text-right p-2 sticky right-0 bg-gray-100 z-10">פריט</th>
+              <th className="text-right p-2 sticky right-0 bg-cream-2 z-10">פריט</th>
               {allYears.map((y) => (
                 <th key={y.year} className={`text-center p-2 ${y.isProjection ? 'bg-amber-50' : ''}`}>
                   {y.year}
@@ -892,14 +892,14 @@ function BalanceTab({ model }: { model: Model | null }) {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-blue-50">
-              <td colSpan={allYears.length + 1} className="p-2 font-bold text-blue-900 text-xs">
+            <tr className="bg-cream-2">
+              <td colSpan={allYears.length + 1} className="p-2 font-bold text-ink text-xs">
                 נכסים
               </td>
             </tr>
             {(['cash', 'accountsReceivable', 'inventory', 'fixedAssets', 'totalAssets'] as const).map((k) => (
-              <tr key={k} className="border-t border-gray-100">
-                <td className="p-2 sticky right-0 bg-white z-10 text-xs">
+              <tr key={k} className="border-t border-ink/10">
+                <td className="p-2 sticky right-0 bg-paper z-10 text-xs">
                   {k === 'cash' && 'מזומן'}
                   {k === 'accountsReceivable' && 'לקוחות (AR)'}
                   {k === 'inventory' && 'מלאי'}
@@ -924,8 +924,8 @@ function BalanceTab({ model }: { model: Model | null }) {
               </td>
             </tr>
             {(['accountsPayable', 'longTermDebt', 'totalLiabilities', 'totalEquity'] as const).map((k) => (
-              <tr key={k} className="border-t border-gray-100">
-                <td className="p-2 sticky right-0 bg-white z-10 text-xs">
+              <tr key={k} className="border-t border-ink/10">
+                <td className="p-2 sticky right-0 bg-paper z-10 text-xs">
                   {k === 'accountsPayable' && 'ספקים (AP)'}
                   {k === 'longTermDebt' && 'חוב לזמן ארוך'}
                   {k === 'totalLiabilities' && <strong>סה״כ התחייבויות</strong>}
@@ -948,14 +948,14 @@ function BalanceTab({ model }: { model: Model | null }) {
       </div>
 
       {/* Cash Flow table */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-x-auto">
-        <div className="bg-gradient-to-r from-emerald-600 to-green-600 text-white p-3">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-x-auto">
+        <div className="bg-ink text-cream p-3">
           <h3 className="font-bold">דוח תזרים מזומנים</h3>
         </div>
         <table className="w-full text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-cream-2">
             <tr>
-              <th className="text-right p-2 sticky right-0 bg-gray-100 z-10">פריט</th>
+              <th className="text-right p-2 sticky right-0 bg-cream-2 z-10">פריט</th>
               {allYears.map((y) => (
                 <th key={y.year} className="text-center p-2">{y.year}</th>
               ))}
@@ -969,8 +969,8 @@ function BalanceTab({ model }: { model: Model | null }) {
               { k: 'netChangeInCash' as const, label: 'שינוי נטו במזומן', bold: true, highlight: true },
               { k: 'closingCash' as const, label: 'יתרת סגירה', bold: true, highlight: true },
             ]).map((row) => (
-              <tr key={row.k} className="border-t border-gray-100">
-                <td className={`p-2 sticky right-0 bg-white z-10 text-xs ${row.bold ? 'font-bold' : ''}`}>
+              <tr key={row.k} className="border-t border-ink/10">
+                <td className={`p-2 sticky right-0 bg-paper z-10 text-xs ${row.bold ? 'font-bold' : ''}`}>
                   {row.label}
                 </td>
                 {allYears.map((y) => (
@@ -994,7 +994,7 @@ function BalanceTab({ model }: { model: Model | null }) {
 
 function NoDataNotice({ message }: { message: string }) {
   return (
-    <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
+    <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-6 text-center">
       <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-3" />
       <p className="text-amber-900">{message}</p>
     </div>

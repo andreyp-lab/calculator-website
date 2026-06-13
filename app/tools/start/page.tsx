@@ -39,22 +39,22 @@ export default function StartPage() {
     <div className="max-w-7xl mx-auto py-6">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+        <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
           כלים פיננסיים לעסקים — מאיפה להתחיל?
         </h1>
-        <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+        <p className="text-base md:text-lg text-ink/70 max-w-3xl mx-auto">
           בחר את המסלול שמתאים למצב שלך. כל מסלול נותן גישה לכל הכלים — רק נקודת ההתחלה משתנה.
         </p>
       </div>
 
       {/* Existing data banner */}
       {hasExistingData && (
-        <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-300 rounded-xl p-4 mb-6 flex items-center justify-between flex-wrap gap-3">
+        <div className="bg-cream-2 border-2 border-ink/20 rounded-none p-4 mb-6 flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="w-6 h-6 text-blue-600 shrink-0" />
+            <CheckCircle2 className="w-6 h-6 text-gold shrink-0" />
             <div>
-              <div className="font-semibold text-blue-900">יש לך תרחיש קיים</div>
-              <div className="text-sm text-blue-800">
+              <div className="font-semibold text-ink">יש לך תרחיש קיים</div>
+              <div className="text-sm text-ink/70">
                 "{scenario?.name}" - {scenario?.budget.income.length} הכנסות,{' '}
                 {scenario?.budget.expenses.length} הוצאות
               </div>
@@ -62,7 +62,7 @@ export default function StartPage() {
           </div>
           <Link
             href="/tools/unified"
-            className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold flex items-center gap-2"
+            className="px-5 py-2 bg-ink text-cream rounded-none hover:bg-ink-deep font-semibold flex items-center gap-2"
           >
             המשך לעבוד עליו
             <ArrowLeft className="w-4 h-4" />
@@ -76,7 +76,6 @@ export default function StartPage() {
         <PathCard
           href="/tools/budget-wizard"
           icon={Sparkles}
-          gradient="from-violet-500 via-purple-600 to-fuchsia-600"
           recommendedFor="🚀 למתחילים"
           title="אשף תקציב חכם"
           subtitle="10 שאלות מודרכות → תקציב + תזרים + ניתוח מוכנים"
@@ -95,7 +94,6 @@ export default function StartPage() {
         <PathCard
           href="/tools/unified"
           icon={LayoutDashboard}
-          gradient="from-blue-600 via-indigo-700 to-purple-700"
           recommendedFor="🎯 למקצוענים"
           title="מערכת מאוחדת"
           subtitle="תקציב + תזרים + ניתוח + חיזוי במקום אחד"
@@ -114,7 +112,6 @@ export default function StartPage() {
         <PathCard
           href="/tools/cashflow-solo"
           icon={Wallet}
-          gradient="from-emerald-500 via-teal-600 to-cyan-700"
           recommendedFor="⚡ לרואי חשבון"
           title="תזרים בלבד (סולו)"
           subtitle="תזרים מזומנים ללא תקציב — הזנה ישירה"
@@ -133,7 +130,6 @@ export default function StartPage() {
         <PathCard
           href="/tools/forecast"
           icon={LineChart}
-          gradient="from-rose-500 via-pink-600 to-fuchsia-600"
           recommendedFor="💎 ליזמים ומשקיעים"
           title="חיזוי + הערכת שווי"
           subtitle="מודל 3-דוחות (P&L+מאזן+תזרים) + DCF + Cap Table"
@@ -158,7 +154,7 @@ export default function StartPage() {
 
       {/* Skip option */}
       <div className="text-center mb-4">
-        <label className="inline-flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+        <label className="inline-flex items-center gap-2 text-sm text-ink/70 cursor-pointer">
           <input
             type="checkbox"
             onChange={(e) => {
@@ -175,10 +171,10 @@ export default function StartPage() {
       </div>
 
       {/* Advanced - direct deep links (collapsed by default) */}
-      <div className="border-t border-gray-200 pt-5">
+      <div className="border-t border-ink/15 pt-5">
         <button
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 mx-auto"
+          className="text-sm text-ink/60 hover:text-ink flex items-center gap-1 mx-auto"
         >
           <span>{showAdvanced ? '▾' : '▸'}</span>
           קישורים ישירים (Power Users)
@@ -222,7 +218,6 @@ export default function StartPage() {
 function PathCard({
   href,
   icon: Icon,
-  gradient,
   recommendedFor,
   title,
   subtitle,
@@ -233,7 +228,6 @@ function PathCard({
 }: {
   href: string;
   icon: typeof LayoutDashboard;
-  gradient: string;
   recommendedFor: string;
   title: string;
   subtitle: string;
@@ -245,13 +239,13 @@ function PathCard({
   return (
     <Link
       href={href}
-      className="group bg-white rounded-2xl border-2 border-gray-200 hover:border-purple-400 hover:shadow-2xl transition-all overflow-hidden flex flex-col"
+      className="group bg-paper rounded-none border-2 border-ink/15 hover:border-gold hover:shadow-2xl transition-all overflow-hidden flex flex-col"
     >
-      {/* Header gradient */}
-      <div className={`bg-gradient-to-br ${gradient} p-5 text-white`}>
+      {/* Header */}
+      <div className="bg-ink p-5 text-cream">
         <div className="flex items-start justify-between mb-3">
           <Icon className="w-10 h-10" />
-          <span className="bg-white/25 backdrop-blur px-2.5 py-0.5 rounded-full text-xs font-medium">
+          <span className="bg-cream/20 backdrop-blur px-2.5 py-0.5 rounded-full text-xs font-medium">
             {recommendedFor}
           </span>
         </div>
@@ -261,27 +255,27 @@ function PathCard({
 
       {/* Body */}
       <div className="p-5 flex-1 flex flex-col">
-        <p className="text-sm text-gray-700 mb-4 leading-relaxed">{description}</p>
+        <p className="text-sm text-ink/70 mb-4 leading-relaxed">{description}</p>
 
-        <div className="bg-purple-50 border border-purple-200 rounded p-2 mb-4 text-xs text-purple-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-2 mb-4 text-xs text-ink">
           <strong>מתי לבחור:</strong> {when}
         </div>
 
         <ul className="space-y-1.5 mb-4 flex-1">
           {features.map((f, i) => (
-            <li key={i} className="flex items-start gap-2 text-xs text-gray-700">
+            <li key={i} className="flex items-start gap-2 text-xs text-ink/70">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
               <span>{f}</span>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center justify-between pt-3 border-t border-gray-200">
-          <span className="text-xs text-gray-500 flex items-center gap-1">
+        <div className="flex items-center justify-between pt-3 border-t border-ink/15">
+          <span className="text-xs text-ink/60 flex items-center gap-1">
             <Clock className="w-3 h-3" />
             {duration}
           </span>
-          <span className="text-purple-600 group-hover:text-purple-800 font-bold text-sm flex items-center gap-1">
+          <span className="text-gold group-hover:text-ink font-bold text-sm flex items-center gap-1">
             התחל
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition" />
           </span>
@@ -301,13 +295,13 @@ function TrustSignal({
   description: string;
 }) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 flex items-center gap-3">
-      <div className="bg-white rounded-full p-2 shrink-0">
-        <Icon className="w-4 h-4 text-gray-700" />
+    <div className="bg-cream-2 border border-ink/15 rounded-none p-3 flex items-center gap-3">
+      <div className="bg-paper rounded-full p-2 shrink-0">
+        <Icon className="w-4 h-4 text-ink/70" />
       </div>
       <div>
-        <div className="text-sm font-semibold text-gray-900">{title}</div>
-        <div className="text-xs text-gray-600">{description}</div>
+        <div className="text-sm font-semibold text-ink">{title}</div>
+        <div className="text-xs text-ink/70">{description}</div>
       </div>
     </div>
   );
@@ -325,13 +319,13 @@ function DeepLink({
   return (
     <Link
       href={href}
-      className="bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded p-2 flex items-center justify-between transition"
+      className="bg-cream-2 hover:bg-paper-hover border border-ink/15 rounded-none p-2 flex items-center justify-between transition"
     >
       <div>
-        <div className="font-medium text-gray-900">{label}</div>
-        <div className="text-xs text-gray-500">{description}</div>
+        <div className="font-medium text-ink">{label}</div>
+        <div className="text-xs text-ink/60">{description}</div>
       </div>
-      <ArrowLeft className="w-3 h-3 text-gray-400" />
+      <ArrowLeft className="w-3 h-3 text-ink/45" />
     </Link>
   );
 }

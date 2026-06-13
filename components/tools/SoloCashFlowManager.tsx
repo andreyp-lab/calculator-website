@@ -129,18 +129,18 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
   const sortedItems = [...data.items].sort((a, b) => a.date.localeCompare(b.date));
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 p-5 shadow-sm">
+    <div className="bg-paper rounded-none border-2 border-ink/15 p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div className="flex items-center gap-2">
-          <Database className="w-5 h-5 text-emerald-600" />
-          <h3 className="font-bold text-lg text-gray-900">פריטי תזרים</h3>
-          <span className="text-sm text-gray-500">({data.items.length} פריטים)</span>
+          <Database className="w-5 h-5 text-ink-mid" />
+          <h3 className="font-bold text-lg text-ink">פריטי תזרים</h3>
+          <span className="text-sm text-ink/60">({data.items.length} פריטים)</span>
         </div>
         <div className="flex gap-2">
           {data.items.length === 0 && (
             <button
               onClick={loadSample}
-              className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-sm flex items-center gap-1"
+              className="px-3 py-1.5 bg-cream-2 text-ink rounded-none hover:bg-paper-hover text-sm flex items-center gap-1"
             >
               <Database className="w-4 h-4" />
               טען דוגמה
@@ -148,7 +148,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
           )}
           <button
             onClick={() => (showForm && !editingId ? reset() : (reset(), setShowForm(true)))}
-            className="px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 text-sm flex items-center gap-1"
+            className="px-3 py-1.5 bg-ink text-cream rounded-none hover:bg-ink-deep text-sm flex items-center gap-1"
           >
             <Plus className="w-4 h-4" />
             הוסף פריט
@@ -159,23 +159,23 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
       {/* Summary Bar */}
       {data.items.length > 0 && (
         <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="bg-emerald-50 rounded p-2 text-center">
-            <div className="text-xs text-gray-600">תקבולים צפויים</div>
+          <div className="bg-emerald-50 rounded-none p-2 text-center">
+            <div className="text-xs text-ink/60">תקבולים צפויים</div>
             <div className="text-lg font-bold text-emerald-700">{fmt(totalIn)}</div>
           </div>
-          <div className="bg-red-50 rounded p-2 text-center">
-            <div className="text-xs text-gray-600">תשלומים צפויים</div>
+          <div className="bg-red-50 rounded-none p-2 text-center">
+            <div className="text-xs text-ink/60">תשלומים צפויים</div>
             <div className="text-lg font-bold text-red-700">{fmt(totalOut)}</div>
           </div>
           <div
             className={`${
-              totalIn - totalOut >= 0 ? 'bg-blue-50' : 'bg-amber-50'
-            } rounded p-2 text-center`}
+              totalIn - totalOut >= 0 ? 'bg-cream-2' : 'bg-amber-50'
+            } rounded-none p-2 text-center`}
           >
-            <div className="text-xs text-gray-600">תזרים נטו</div>
+            <div className="text-xs text-ink/60">תזרים נטו</div>
             <div
               className={`text-lg font-bold ${
-                totalIn - totalOut >= 0 ? 'text-blue-700' : 'text-amber-700'
+                totalIn - totalOut >= 0 ? 'text-ink' : 'text-amber-700'
               }`}
             >
               {fmt(totalIn - totalOut)}
@@ -186,19 +186,19 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mb-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-gray-700 mb-1">סוג *</label>
+              <label className="block text-xs text-ink/70 mb-1">סוג *</label>
               <div className="flex gap-1">
                 <button
                   onClick={() =>
                     setForm({ ...form, type: 'in', category: 'sales' })
                   }
-                  className={`flex-1 px-2 py-1.5 rounded text-sm transition ${
+                  className={`flex-1 px-2 py-1.5 rounded-none text-sm transition ${
                     form.type === 'in'
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-white border border-gray-300 text-gray-700'
+                      ? 'bg-emerald-600 text-cream'
+                      : 'bg-paper border border-ink/15 text-ink/70'
                   }`}
                 >
                   <ArrowDownCircle className="w-4 h-4 inline mr-1" />
@@ -208,10 +208,10 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                   onClick={() =>
                     setForm({ ...form, type: 'out', category: 'rent' })
                   }
-                  className={`flex-1 px-2 py-1.5 rounded text-sm transition ${
+                  className={`flex-1 px-2 py-1.5 rounded-none text-sm transition ${
                     form.type === 'out'
-                      ? 'bg-red-600 text-white'
-                      : 'bg-white border border-gray-300 text-gray-700'
+                      ? 'bg-red-600 text-cream'
+                      : 'bg-paper border border-ink/15 text-ink/70'
                   }`}
                 >
                   <ArrowUpCircle className="w-4 h-4 inline mr-1" />
@@ -221,39 +221,39 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-700 mb-1">תאריך *</label>
+              <label className="block text-xs text-ink/70 mb-1">תאריך *</label>
               <input
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               />
             </div>
 
             <div>
-              <label className="block text-xs text-gray-700 mb-1">סכום (₪) *</label>
+              <label className="block text-xs text-ink/70 mb-1">סכום (₪) *</label>
               <input
                 type="number"
                 value={form.amount || ''}
                 onChange={(e) => setForm({ ...form, amount: parseFloat(e.target.value) || 0 })}
                 placeholder="0"
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-xs text-gray-700 mb-1">תיאור *</label>
+              <label className="block text-xs text-ink/70 mb-1">תיאור *</label>
               <input
                 type="text"
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 placeholder="לדוגמה: שכירות משרד"
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               />
             </div>
 
             <div>
-              <label className="block text-xs text-gray-700 mb-1">קטגוריה</label>
+              <label className="block text-xs text-ink/70 mb-1">קטגוריה</label>
               <select
                 value={form.category}
                 onChange={(e) =>
@@ -262,7 +262,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                     category: e.target.value as SoloIncomeCategory | SoloExpenseCategory,
                   })
                 }
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               >
                 {categoryOptions.map((cat) => (
                   <option key={cat} value={cat}>
@@ -275,13 +275,13 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-700 mb-1">תכיפות</label>
+              <label className="block text-xs text-ink/70 mb-1">תכיפות</label>
               <select
                 value={form.recurring}
                 onChange={(e) =>
                   setForm({ ...form, recurring: e.target.value as SoloRecurringFrequency })
                 }
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               >
                 {(Object.keys(RECURRING_LABELS) as SoloRecurringFrequency[]).map((f) => (
                   <option key={f} value={f}>
@@ -293,14 +293,14 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
 
             {form.recurring !== 'once' && (
               <div>
-                <label className="block text-xs text-gray-700 mb-1">תאריך סיום (אופציונלי)</label>
+                <label className="block text-xs text-ink/70 mb-1">תאריך סיום (אופציונלי)</label>
                 <input
                   type="date"
                   value={form.recurringEnd ?? ''}
                   onChange={(e) =>
                     setForm({ ...form, recurringEnd: e.target.value || undefined })
                   }
-                  className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                  className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                 />
               </div>
             )}
@@ -310,13 +310,13 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
             <button
               onClick={handleSubmit}
               disabled={!form.description.trim() || form.amount <= 0}
-              className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50"
+              className="px-4 py-2 bg-ink text-cream rounded-none hover:bg-ink-deep disabled:opacity-50"
             >
               {editingId ? 'עדכן' : 'הוסף'}
             </button>
             <button
               onClick={reset}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+              className="px-4 py-2 bg-cream-2 text-ink rounded-none hover:bg-paper-hover"
             >
               ביטול
             </button>
@@ -326,14 +326,14 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
 
       {/* Items List */}
       {data.items.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-ink/60">
           <Database className="w-12 h-12 mx-auto mb-2 opacity-30" />
           <p>אין פריטים. לחץ "הוסף פריט" או "טען דוגמה".</p>
         </div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50">
+            <thead className="bg-cream-2">
               <tr>
                 <th className="text-right p-2">תאריך</th>
                 <th className="text-right p-2">סוג</th>
@@ -351,8 +351,8 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                     ? INCOME_CATEGORY_LABELS[item.category as SoloIncomeCategory]
                     : EXPENSE_CATEGORY_LABELS[item.category as SoloExpenseCategory];
                 return (
-                  <tr key={item.id} className="border-t border-gray-100 hover:bg-gray-50">
-                    <td className="p-2 text-xs">{item.date}</td>
+                  <tr key={item.id} className="border-t border-ink/10 hover:bg-cream-2">
+                    <td className="p-2 text-xs text-ink/70">{item.date}</td>
                     <td className="p-2">
                       {item.type === 'in' ? (
                         <span className="flex items-center gap-1 text-emerald-700">
@@ -367,9 +367,9 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                       )}
                     </td>
                     <td className="p-2 font-medium">{item.description}</td>
-                    <td className="p-2 text-xs text-gray-600">{catLabel}</td>
+                    <td className="p-2 text-xs text-ink/60">{catLabel}</td>
                     <td className="p-2 text-xs">
-                      <span className="bg-gray-100 px-2 py-0.5 rounded">
+                      <span className="bg-cream-2 px-2 py-0.5 rounded-none">
                         {RECURRING_LABELS[item.recurring]}
                       </span>
                     </td>
@@ -385,13 +385,13 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                       <div className="flex gap-1">
                         <button
                           onClick={() => startEdit(item)}
-                          className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                          className="p-1 text-ink-mid hover:bg-cream-2 rounded-none"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => deleteItem(item.id)}
-                          className="p-1 text-red-600 hover:bg-red-50 rounded"
+                          className="p-1 text-red-600 hover:bg-red-50 rounded-none"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>

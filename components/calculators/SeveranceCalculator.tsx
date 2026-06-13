@@ -160,31 +160,31 @@ export function SeveranceCalculator() {
   // ============================================================
 
   const BasicInputsSection = () => (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-      <h2 className="text-lg font-bold text-gray-900">פרטי ההעסקה</h2>
+    <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
+      <h2 className="text-lg font-bold text-ink">פרטי ההעסקה</h2>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">תאריך תחילת עבודה</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">תאריך תחילת עבודה</label>
           <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">תאריך סיום עבודה</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">תאריך סיום עבודה</label>
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-ink/70 mb-1">
           שכר חודשי קובע (ש"ח)
         </label>
         <input
@@ -194,18 +194,18 @@ export function SeveranceCalculator() {
           step={500}
           value={monthlySalary}
           onChange={(e) => setMonthlySalary(Number(e.target.value))}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-semibold"
+          className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-lg font-semibold"
         />
-        <p className="text-xs text-gray-500 mt-1">שכר חודש אחרון / ממוצע 12 חודשים (לפי השיטה שנבחרה)</p>
+        <p className="text-xs text-ink/60 mt-1">שכר חודש אחרון / ממוצע 12 חודשים (לפי השיטה שנבחרה)</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">סוג העסקה</label>
+          <label className="block text-sm font-medium text-ink/70 mb-1">סוג העסקה</label>
           <select
             value={employmentType}
             onChange={(e) => setEmploymentType(e.target.value as EmploymentType)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
           >
             <option value="monthly">עובד חודשי (משכורת קבועה)</option>
             <option value="hourly">עובד שעתי / חלקי משרה</option>
@@ -213,7 +213,7 @@ export function SeveranceCalculator() {
         </div>
         {employmentType === 'hourly' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               היקף משרה ({partTimePercentage}%)
             </label>
             <input
@@ -230,11 +230,11 @@ export function SeveranceCalculator() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">סיבת סיום העבודה</label>
+        <label className="block text-sm font-medium text-ink/70 mb-1">סיבת סיום העבודה</label>
         <select
           value={terminationReason}
           onChange={(e) => setTerminationReason(e.target.value as TerminationReason)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
         >
           {allReasons.map((r) => (
             <option key={r} value={r}>{TERMINATION_REASON_LABELS[r]}</option>
@@ -252,7 +252,7 @@ export function SeveranceCalculator() {
       <BasicInputsSection />
 
       {!basicResult.isEligible ? (
-        <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+        <div className="bg-red-50 border-2 border-red-200 rounded-none p-6">
           <div className="flex gap-3">
             <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
             <div>
@@ -294,7 +294,7 @@ export function SeveranceCalculator() {
           </div>
 
           {basicResult.taxableAmount > 0 && (
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3">
+            <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
               <Info className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-bold text-amber-900 mb-1">יש סכום חייב במס!</p>
@@ -329,9 +329,9 @@ export function SeveranceCalculator() {
             ]}
           />
 
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 space-y-2">
-            <h4 className="text-sm font-bold text-blue-900">חשוב לדעת</h4>
-            <ul className="text-xs text-blue-900 space-y-1.5">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2">
+            <h4 className="text-sm font-bold text-ink">חשוב לדעת</h4>
+            <ul className="text-xs text-ink/80 space-y-1.5">
               <li>• <strong>שכר קובע</strong>: כולל שכר בסיס, קצובות קבועות (רכב, ביגוד) אך לא בונוסים חד-פעמיים</li>
               <li>• <strong>פריסה</strong>: ניתן לפרוס את הסכום החייב על עד 6 שנים — חיסכון מס משמעותי</li>
               <li>• <strong>רצף קצבה</strong>: העברה לפנסיה — פטור מלא ממס, גידול בקצבה חודשית</li>
@@ -349,50 +349,50 @@ export function SeveranceCalculator() {
   // ============================================================
   const TaxOptionsTab = () => {
     const optionColors: Record<string, string> = {
-      immediate_exemption: 'border-blue-300 bg-blue-50',
+      immediate_exemption: 'border-ink/15 bg-cream-2',
       pension_continuity: 'border-emerald-300 bg-emerald-50',
-      multi_year_spread: 'border-purple-300 bg-purple-50',
+      multi_year_spread: 'border-gold/40 bg-cream-2',
       combination: 'border-amber-300 bg-amber-50',
     };
     const optionHeaderColors: Record<string, string> = {
-      immediate_exemption: 'bg-blue-100',
+      immediate_exemption: 'bg-paper-hover',
       pension_continuity: 'bg-emerald-100',
-      multi_year_spread: 'bg-purple-100',
+      multi_year_spread: 'bg-paper-hover',
       combination: 'bg-amber-100',
     };
     const optionValueColors: Record<string, string> = {
-      immediate_exemption: 'text-blue-700',
+      immediate_exemption: 'text-ink',
       pension_continuity: 'text-emerald-700',
-      multi_year_spread: 'text-purple-700',
+      multi_year_spread: 'text-gold',
       combination: 'text-amber-700',
     };
 
     return (
       <div className="space-y-4">
         {/* Tax profile inputs */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-bold text-gray-900">פרופיל מס</h2>
-          <p className="text-sm text-gray-600">
+        <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+          <h2 className="text-lg font-bold text-ink">פרופיל מס</h2>
+          <p className="text-sm text-ink/70">
             לקבלת השוואה מדויקת, הכנס נתוני מס אישיים:
           </p>
 
           <div className="grid sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">גיל</label>
+              <label className="block text-sm font-medium text-ink/70 mb-1">גיל</label>
               <input
                 type="number"
                 min={18}
                 max={80}
                 value={age}
                 onChange={(e) => setAge(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
               {age >= 50 && (
                 <p className="text-xs text-emerald-700 mt-1">מגיל 50: פטור מוגדל (×1.5)</p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">הכנסה שנתית אחרת (₪)</label>
+              <label className="block text-sm font-medium text-ink/70 mb-1">הכנסה שנתית אחרת (₪)</label>
               <input
                 type="number"
                 min={0}
@@ -400,12 +400,12 @@ export function SeveranceCalculator() {
                 step={12000}
                 value={currentAnnualIncome}
                 onChange={(e) => setCurrentAnnualIncome(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-gray-500 mt-1">לחישוב מדרגת מס שולי</p>
+              <p className="text-xs text-ink/60 mt-1">לחישוב מדרגת מס שולי</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">שנות פריסה (1-6)</label>
+              <label className="block text-sm font-medium text-ink/70 mb-1">שנות פריסה (1-6)</label>
               <input
                 type="range"
                 min={1}
@@ -415,19 +415,19 @@ export function SeveranceCalculator() {
                 onChange={(e) => setSpreadYears(Number(e.target.value))}
                 className="w-full mt-2"
               />
-              <p className="text-xs text-center text-purple-700 font-semibold">{spreadYears} שנים</p>
+              <p className="text-xs text-center text-gold font-semibold">{spreadYears} שנים</p>
             </div>
           </div>
         </div>
 
         {!basicResult.isEligible ? (
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
-            <p className="text-gray-600">הכנס נתוני ותק ושכר בטאב "חישוב פיצויים" כדי לראות השוואת אפשרויות מס</p>
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center">
+            <p className="text-ink/70">הכנס נתוני ותק ושכר בטאב "חישוב פיצויים" כדי לראות השוואת אפשרויות מס</p>
           </div>
         ) : taxComparison ? (
           <>
             {/* Recommendation banner */}
-            <div className="bg-emerald-50 border-2 border-emerald-300 rounded-xl p-4 flex gap-3">
+            <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-4 flex gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-bold text-emerald-900 mb-1">המלצה</p>
@@ -441,14 +441,14 @@ export function SeveranceCalculator() {
                 <div
                   key={opt.option}
                   onClick={() => setSelectedTaxOption(opt.option)}
-                  className={`border-2 rounded-xl overflow-hidden cursor-pointer transition-all ${
+                  className={`border-2 rounded-none overflow-hidden cursor-pointer transition-all ${
                     optionColors[opt.option]
                   } ${opt.isRecommended ? 'ring-2 ring-emerald-400' : ''} ${
                     selectedTaxOption === opt.option ? 'shadow-lg scale-[1.01]' : ''
                   }`}
                 >
                   <div className={`px-4 py-3 ${optionHeaderColors[opt.option]} flex justify-between items-center`}>
-                    <span className="font-bold text-gray-900">{opt.label}</span>
+                    <span className="font-bold text-ink">{opt.label}</span>
                     {opt.isRecommended && (
                       <span className="text-xs bg-emerald-500 text-white px-2 py-0.5 rounded-full font-medium">
                         מומלץ
@@ -457,39 +457,39 @@ export function SeveranceCalculator() {
                   </div>
 
                   <div className="p-4 space-y-3">
-                    <p className="text-xs text-gray-600">{opt.description}</p>
+                    <p className="text-xs text-ink/70">{opt.description}</p>
 
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">פטור ממס:</span>
+                        <span className="text-ink/70">פטור ממס:</span>
                         <span className="font-semibold text-emerald-700">
                           {formatCurrency(opt.taxExemptAmount, { decimals: 0 })}
                         </span>
                       </div>
                       {opt.taxableAmount > 0 && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">חייב במס:</span>
+                          <span className="text-ink/70">חייב במס:</span>
                           <span className="font-semibold text-red-600">
                             {formatCurrency(opt.taxableAmount, { decimals: 0 })}
                           </span>
                         </div>
                       )}
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">מס:</span>
+                        <span className="text-ink/70">מס:</span>
                         <span className="font-semibold text-red-700">
                           {opt.estimatedTax > 0 ? formatCurrency(opt.estimatedTax, { decimals: 0 }) : 'ללא'}
                         </span>
                       </div>
                       {opt.pensionTransferAmount > 0 && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">לפנסיה:</span>
+                          <span className="text-ink/70">לפנסיה:</span>
                           <span className="font-semibold text-emerald-700">
                             {formatCurrency(opt.pensionTransferAmount, { decimals: 0 })}
                           </span>
                         </div>
                       )}
-                      <div className="pt-2 border-t border-gray-300 flex justify-between">
-                        <span className="font-bold text-gray-800">מזומן נטו:</span>
+                      <div className="pt-2 border-t border-ink/15 flex justify-between">
+                        <span className="font-bold text-ink">מזומן נטו:</span>
                         <span className={`text-xl font-bold ${optionValueColors[opt.option]}`}>
                           {formatCurrency(opt.netCash, { decimals: 0 })}
                         </span>
@@ -497,7 +497,7 @@ export function SeveranceCalculator() {
                     </div>
 
                     {opt.note && (
-                      <p className="text-xs text-gray-500 italic">{opt.note}</p>
+                      <p className="text-xs text-ink/60 italic">{opt.note}</p>
                     )}
                   </div>
                 </div>
@@ -509,8 +509,8 @@ export function SeveranceCalculator() {
               const opt = taxComparison.options.find((o) => o.option === selectedTaxOption);
               if (!opt) return null;
               return (
-                <div className={`border-2 rounded-xl p-5 ${optionColors[selectedTaxOption]}`}>
-                  <h3 className="font-bold text-gray-900 mb-4">{opt.label} — יתרונות וחסרונות</h3>
+                <div className={`border-2 rounded-none p-5 ${optionColors[selectedTaxOption]}`}>
+                  <h3 className="font-bold text-ink mb-4">{opt.label} — יתרונות וחסרונות</h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <h4 className="text-sm font-semibold text-emerald-800 mb-2 flex items-center gap-1">
@@ -518,7 +518,7 @@ export function SeveranceCalculator() {
                       </h4>
                       <ul className="space-y-1">
                         {opt.pros.map((p, i) => (
-                          <li key={i} className="text-sm text-gray-700 flex gap-2">
+                          <li key={i} className="text-sm text-ink/70 flex gap-2">
                             <span className="text-emerald-600 flex-shrink-0">+</span>
                             {p}
                           </li>
@@ -531,7 +531,7 @@ export function SeveranceCalculator() {
                       </h4>
                       <ul className="space-y-1">
                         {opt.cons.map((c, i) => (
-                          <li key={i} className="text-sm text-gray-700 flex gap-2">
+                          <li key={i} className="text-sm text-ink/70 flex gap-2">
                             <span className="text-red-500 flex-shrink-0">−</span>
                             {c}
                           </li>
@@ -544,33 +544,33 @@ export function SeveranceCalculator() {
             })()}
 
             {/* Visual bar chart */}
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-              <h3 className="font-bold text-gray-900 mb-4">השוואה ויזואלית — מזומן נטו</h3>
+            <div className="bg-paper border border-ink/15 rounded-none p-5">
+              <h3 className="font-bold text-ink mb-4">השוואה ויזואלית — מזומן נטו</h3>
               <div className="space-y-3">
                 {taxComparison.options.map((opt) => {
                   const maxCash = Math.max(...taxComparison.options.map((o) => Math.max(o.netCash, 1)));
                   const pct = maxCash > 0 ? Math.max(5, (opt.netCash / maxCash) * 100) : 0;
                   const barColors: Record<string, string> = {
-                    immediate_exemption: 'bg-blue-500',
+                    immediate_exemption: 'bg-ink',
                     pension_continuity: 'bg-emerald-500',
-                    multi_year_spread: 'bg-purple-500',
+                    multi_year_spread: 'bg-gold',
                     combination: 'bg-amber-500',
                   };
                   return (
                     <div key={opt.option}>
                       <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-700 font-medium">{opt.label}</span>
-                        <span className="font-bold text-gray-900">
+                        <span className="text-ink/70 font-medium">{opt.label}</span>
+                        <span className="font-bold text-ink">
                           {formatCurrency(opt.netCash, { decimals: 0 })}
                         </span>
                       </div>
-                      <div className="h-7 bg-gray-100 rounded-lg overflow-hidden">
+                      <div className="h-7 bg-cream-2 rounded-none overflow-hidden">
                         <div
                           className={`h-full ${barColors[opt.option]} flex items-center justify-end pr-2 transition-all`}
                           style={{ width: `${pct}%` }}
                         >
                           {pct > 20 && (
-                            <span className="text-white text-xs font-medium">
+                            <span className="text-cream text-xs font-medium">
                               {Math.round(pct)}%
                             </span>
                           )}
@@ -580,7 +580,7 @@ export function SeveranceCalculator() {
                   );
                 })}
               </div>
-              <p className="text-xs text-gray-500 mt-3">
+              <p className="text-xs text-ink/60 mt-3">
                 * רצף קצבה אינו מזומן מיידי — הסכום ממשיך לצמוח בפנסיה
               </p>
             </div>
@@ -595,25 +595,25 @@ export function SeveranceCalculator() {
   // ============================================================
   const Section14Tab = () => (
     <div className="space-y-4">
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-        <h3 className="font-bold text-blue-900 mb-2">מה זה סעיף 14?</h3>
-        <p className="text-sm text-blue-800 leading-relaxed">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+        <h3 className="font-bold text-ink mb-2">מה זה סעיף 14?</h3>
+        <p className="text-sm text-ink/80 leading-relaxed">
           סעיף 14 לחוק פיצויי פיטורים מאפשר למעסיק לשחרר עצמו מחובת תשלום פיצויים על-ידי הפרשה
           חודשית לקרן פנסיה/גמל לשם כך. העובד מקבל את הסכום שנצבר בקרן — אפילו בהתפטרות.
           הפרשה חלקית (72% / 83.3%) — המעסיק עדיין חייב להשלים את ההפרש.
         </p>
       </div>
 
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-gray-900">פרטי סעיף 14</h2>
+      <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+        <h2 className="text-lg font-bold text-ink">פרטי סעיף 14</h2>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">אחוז כיסוי סעיף 14</label>
+            <label className="block text-sm font-medium text-ink/70 mb-1">אחוז כיסוי סעיף 14</label>
             <select
               value={section14Coverage}
               onChange={(e) => setSection14Coverage(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               {SECTION14_COVERAGE_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -621,7 +621,7 @@ export function SeveranceCalculator() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               סכום שנצבר בקרן (₪)
             </label>
             <input
@@ -630,12 +630,12 @@ export function SeveranceCalculator() {
               step={1000}
               value={accumulatedInFund}
               onChange={(e) => setAccumulatedInFund(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg font-semibold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg font-semibold"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               נמצא בדו"ח קרן הפנסיה / גמל תחת "מרכיב פיצויים"
               {baseSeverance > 0 && accumulatedInFund === 0 && (
-                <span className="text-blue-600"> (אמדן: {formatCurrency(adjustedSalary * (section14Percentage / 100) * years * 12, { decimals: 0 })} לפי 8.33%)</span>
+                <span className="text-gold"> (אמדן: {formatCurrency(adjustedSalary * (section14Percentage / 100) * years * 12, { decimals: 0 })} לפי 8.33%)</span>
               )}
             </p>
           </div>
@@ -643,9 +643,9 @@ export function SeveranceCalculator() {
 
         {/* Show basic severance if available */}
         {basicResult.isEligible && (
-          <div className="bg-gray-50 rounded-lg p-3 flex justify-between items-center">
-            <span className="text-sm text-gray-700">זכאות חוקית לפיצויים (שכר × ותק):</span>
-            <span className="font-bold text-gray-900">{formatCurrency(baseSeverance, { decimals: 0 })}</span>
+          <div className="bg-cream-2 rounded-none p-3 flex justify-between items-center">
+            <span className="text-sm text-ink/70">זכאות חוקית לפיצויים (שכר × ותק):</span>
+            <span className="font-bold text-ink">{formatCurrency(baseSeverance, { decimals: 0 })}</span>
           </div>
         )}
       </div>
@@ -681,7 +681,7 @@ export function SeveranceCalculator() {
             />
           </div>
 
-          <div className={`border-2 rounded-xl p-4 flex gap-3 ${
+          <div className={`border-2 rounded-none p-4 flex gap-3 ${
             section14Detail.fundSurplus > 0 ? 'bg-emerald-50 border-emerald-200' : 'bg-amber-50 border-amber-200'
           }`}>
             <Info className={`w-5 h-5 flex-shrink-0 mt-0.5 ${section14Detail.fundSurplus > 0 ? 'text-emerald-600' : 'text-amber-600'}`} />
@@ -709,24 +709,24 @@ export function SeveranceCalculator() {
             ]}
           />
 
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-3">
-            <h4 className="text-sm font-bold text-gray-800">הבדל בין סעיף 14 מלא לחלקי</h4>
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-3">
+            <h4 className="text-sm font-bold text-ink">הבדל בין סעיף 14 מלא לחלקי</h4>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-100">
-                    <th className="px-3 py-2 text-right font-medium text-gray-700">נושא</th>
-                    <th className="px-3 py-2 text-center font-medium text-gray-700">סעיף 14 מלא (100%)</th>
-                    <th className="px-3 py-2 text-center font-medium text-gray-700">סעיף 14 חלקי (72%/83%)</th>
+                  <tr className="bg-ink text-cream">
+                    <th className="px-3 py-2 text-right font-medium">נושא</th>
+                    <th className="px-3 py-2 text-center font-medium">סעיף 14 מלא (100%)</th>
+                    <th className="px-3 py-2 text-center font-medium">סעיף 14 חלקי (72%/83%)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-ink/15">
                   <tr>
                     <td className="px-3 py-2">כיסוי הקרן</td>
                     <td className="px-3 py-2 text-center">100% מהזכאות</td>
                     <td className="px-3 py-2 text-center">72%-83% מהזכאות</td>
                   </tr>
-                  <tr className="bg-gray-50">
+                  <tr className="bg-paper">
                     <td className="px-3 py-2">אם הקרן קטנה מהזכאות</td>
                     <td className="px-3 py-2 text-center text-red-700">מעסיק לא משלים</td>
                     <td className="px-3 py-2 text-center text-emerald-700">מעסיק משלים את ההפרש</td>
@@ -736,7 +736,7 @@ export function SeveranceCalculator() {
                     <td className="px-3 py-2 text-center text-emerald-700">עובד מקבל הכל</td>
                     <td className="px-3 py-2 text-center text-emerald-700">עובד מקבל הכל</td>
                   </tr>
-                  <tr className="bg-gray-50">
+                  <tr className="bg-paper">
                     <td className="px-3 py-2">זכאות בהתפטרות</td>
                     <td className="px-3 py-2 text-center text-emerald-700">כן — מקבל את הקרן</td>
                     <td className="px-3 py-2 text-center text-amber-700">חלקי — רק הקרן</td>
@@ -760,12 +760,12 @@ export function SeveranceCalculator() {
 
     return (
       <div className="space-y-4">
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5 space-y-3">
-          <h2 className="text-lg font-bold text-gray-900">בחר את סיבת הסיום שלך</h2>
+        <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-3">
+          <h2 className="text-lg font-bold text-ink">בחר את סיבת הסיום שלך</h2>
           <select
             value={terminationReason}
             onChange={(e) => setTerminationReason(e.target.value as TerminationReason)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           >
             {allReasons.map((r) => (
               <option key={r} value={r}>{TERMINATION_REASON_LABELS[r]}</option>
@@ -774,7 +774,7 @@ export function SeveranceCalculator() {
         </div>
 
         {/* Current selection highlight */}
-        <div className={`border-2 rounded-xl overflow-hidden ${terminationRights.isEntitled ? 'border-emerald-300' : 'border-red-300'}`}>
+        <div className={`border-2 rounded-none overflow-hidden ${terminationRights.isEntitled ? 'border-emerald-300' : 'border-red-300'}`}>
           <div className={`px-4 py-3 flex items-center gap-3 ${terminationRights.isEntitled ? 'bg-emerald-50' : 'bg-red-50'}`}>
             {terminationRights.isEntitled ? (
               <CheckCircle2 className="w-6 h-6 text-emerald-600 flex-shrink-0" />
@@ -782,33 +782,33 @@ export function SeveranceCalculator() {
               <XCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
             )}
             <div>
-              <h3 className="font-bold text-gray-900">{terminationRights.label}</h3>
+              <h3 className="font-bold text-ink">{terminationRights.label}</h3>
               <p className={`text-sm font-medium ${terminationRights.isEntitled ? 'text-emerald-700' : 'text-red-700'}`}>
                 {terminationRights.isEntitled ? 'זכאי לפיצויי פיטורין' : 'לא זכאי לפיצויי פיטורין'}
               </p>
             </div>
           </div>
 
-          <div className="p-4 space-y-3 bg-white">
+          <div className="p-4 space-y-3 bg-paper">
             {terminationRights.entitlementCondition && (
-              <div className="bg-blue-50 rounded-lg p-3">
-                <p className="text-sm text-blue-800">
+              <div className="bg-cream-2 rounded-none p-3">
+                <p className="text-sm text-ink/80">
                   <strong>תנאי:</strong> {terminationRights.entitlementCondition}
                 </p>
               </div>
             )}
 
             <div>
-              <p className="text-xs font-semibold text-gray-500 mb-1">בסיס משפטי:</p>
-              <p className="text-sm text-gray-700">{terminationRights.legalBasis}</p>
+              <p className="text-xs font-semibold text-ink/60 mb-1">בסיס משפטי:</p>
+              <p className="text-sm text-ink/70">{terminationRights.legalBasis}</p>
             </div>
 
             <div>
-              <p className="text-xs font-semibold text-gray-500 mb-2">נקודות חשובות:</p>
+              <p className="text-xs font-semibold text-ink/60 mb-2">נקודות חשובות:</p>
               <ul className="space-y-1.5">
                 {terminationRights.notes.map((note, i) => (
-                  <li key={i} className="text-sm text-gray-700 flex gap-2">
-                    <span className="flex-shrink-0 text-blue-500">•</span>
+                  <li key={i} className="text-sm text-ink/70 flex gap-2">
+                    <span className="flex-shrink-0 text-gold">•</span>
                     {note}
                   </li>
                 ))}
@@ -816,7 +816,7 @@ export function SeveranceCalculator() {
             </div>
 
             {terminationRights.requiresProof && (
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex gap-2">
+              <div className="bg-amber-50 border border-amber-200 rounded-none p-3 flex gap-2">
                 <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-semibold text-amber-900">נדרש תיעוד</p>
@@ -826,7 +826,7 @@ export function SeveranceCalculator() {
             )}
 
             {terminationRights.importantDeadline && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+              <div className="bg-red-50 border border-red-200 rounded-none p-3">
                 <p className="text-sm text-red-800">
                   <strong>מועד חשוב:</strong> {terminationRights.importantDeadline}
                 </p>
@@ -836,36 +836,36 @@ export function SeveranceCalculator() {
         </div>
 
         {/* All reasons table */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
+        <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
           <button
             type="button"
             onClick={() => setShowTerminationAll(!showTerminationAll)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition"
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-paper-hover transition"
           >
-            <span className="font-medium text-gray-900">כל 13 הסיבות — טבלת זכאות</span>
-            {showTerminationAll ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
+            <span className="font-medium text-ink">כל 13 הסיבות — טבלת זכאות</span>
+            {showTerminationAll ? <ChevronUp className="w-5 h-5 text-ink/60" /> : <ChevronDown className="w-5 h-5 text-ink/60" />}
           </button>
           {showTerminationAll && (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50">
-                    <th className="px-3 py-2 text-right font-medium text-gray-600">סיבה</th>
-                    <th className="px-3 py-2 text-center font-medium text-gray-600">זכאי?</th>
-                    <th className="px-3 py-2 text-right font-medium text-gray-600">תנאי עיקרי</th>
-                    <th className="px-3 py-2 text-center font-medium text-gray-600">הוכחה?</th>
+                  <tr className="bg-cream-2">
+                    <th className="px-3 py-2 text-right font-medium text-ink/70">סיבה</th>
+                    <th className="px-3 py-2 text-center font-medium text-ink/70">זכאי?</th>
+                    <th className="px-3 py-2 text-right font-medium text-ink/70">תנאי עיקרי</th>
+                    <th className="px-3 py-2 text-center font-medium text-ink/70">הוכחה?</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-ink/10">
                   {allReasons.map((r) => {
                     const rights = getTerminationRights(r);
                     return (
                       <tr
                         key={r}
                         onClick={() => setTerminationReason(r)}
-                        className={`cursor-pointer hover:bg-blue-50 transition ${r === terminationReason ? 'bg-blue-50 font-medium' : ''}`}
+                        className={`cursor-pointer hover:bg-cream-2 transition ${r === terminationReason ? 'bg-cream-2 font-medium' : ''}`}
                       >
-                        <td className="px-3 py-2 text-gray-800">{rights.label}</td>
+                        <td className="px-3 py-2 text-ink">{rights.label}</td>
                         <td className="px-3 py-2 text-center">
                           {rights.isEntitled ? (
                             <span className="text-emerald-700 font-medium">כן</span>
@@ -873,14 +873,14 @@ export function SeveranceCalculator() {
                             <span className="text-red-600 font-medium">לא</span>
                           )}
                         </td>
-                        <td className="px-3 py-2 text-gray-600 text-xs">
+                        <td className="px-3 py-2 text-ink/70 text-xs">
                           {rights.entitlementCondition ?? '—'}
                         </td>
                         <td className="px-3 py-2 text-center">
                           {rights.requiresProof ? (
                             <span className="text-amber-700 text-xs">כן</span>
                           ) : (
-                            <span className="text-gray-400 text-xs">—</span>
+                            <span className="text-ink/45 text-xs">—</span>
                           )}
                         </td>
                       </tr>
@@ -906,48 +906,48 @@ export function SeveranceCalculator() {
     };
     return (
       <div className="space-y-4">
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-          <h3 className="font-bold text-blue-900 mb-1">מה זה שכר קובע?</h3>
-          <p className="text-sm text-blue-800">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+          <h3 className="font-bold text-ink mb-1">מה זה שכר קובע?</h3>
+          <p className="text-sm text-ink/80">
             השכר הקובע הוא הבסיס לחישוב הפיצויים. לרוב הוא השכר האחרון, אך ניתן לבחור את השיטה הנוחה
             יותר לעובד (הגבוהה ביותר). הכנס 3 נתונים — המחשבון ימליץ על השיטה הטובה ביותר.
           </p>
         </div>
 
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-bold text-gray-900">הכנס נתוני שכר</h2>
+        <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+          <h2 className="text-lg font-bold text-ink">הכנס נתוני שכר</h2>
           <div className="grid sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">שכר חודש אחרון (₪)</label>
+              <label className="block text-sm font-medium text-ink/70 mb-1">שכר חודש אחרון (₪)</label>
               <input
                 type="number"
                 min={0}
                 step={500}
                 value={lastMonthSalary}
                 onChange={(e) => setLastMonthSalary(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg font-semibold"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg font-semibold"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">ממוצע 3 חודשים (₪)</label>
+              <label className="block text-sm font-medium text-ink/70 mb-1">ממוצע 3 חודשים (₪)</label>
               <input
                 type="number"
                 min={0}
                 step={500}
                 value={avg3mSalary}
                 onChange={(e) => setAvg3mSalary(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg font-semibold"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg font-semibold"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">ממוצע 12 חודשים (₪)</label>
+              <label className="block text-sm font-medium text-ink/70 mb-1">ממוצע 12 חודשים (₪)</label>
               <input
                 type="number"
                 min={0}
                 step={500}
                 value={avg12mSalary}
                 onChange={(e) => setAvg12mSalary(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg font-semibold"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg font-semibold"
               />
             </div>
           </div>
@@ -962,19 +962,19 @@ export function SeveranceCalculator() {
             return (
               <div
                 key={method}
-                className={`border-2 rounded-xl p-4 ${isRecommended ? 'border-emerald-400 bg-emerald-50' : 'border-gray-200 bg-white'}`}
+                className={`border-2 rounded-none p-4 ${isRecommended ? 'border-emerald-400 bg-emerald-50' : 'border-ink/15 bg-paper'}`}
               >
                 <div className="flex justify-between items-start mb-2">
-                  <p className="text-sm font-medium text-gray-700">{methodLabels[method]}</p>
+                  <p className="text-sm font-medium text-ink/70">{methodLabels[method]}</p>
                   {isRecommended && (
                     <span className="text-xs bg-emerald-500 text-white px-2 py-0.5 rounded-full">מומלץ</span>
                   )}
                 </div>
-                <p className={`text-2xl font-bold ${isRecommended ? 'text-emerald-700' : 'text-gray-900'}`}>
+                <p className={`text-2xl font-bold ${isRecommended ? 'text-emerald-700' : 'text-ink'}`}>
                   {formatCurrency(value, { decimals: 0 })}
                 </p>
                 {basicResult.isEligible && years > 0 && (
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-ink/60 mt-1">
                     פיצויים: {formatCurrency(value * years, { decimals: 0 })}
                   </p>
                 )}
@@ -983,7 +983,7 @@ export function SeveranceCalculator() {
           })}
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
           <Info className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-bold text-amber-900 mb-1">המלצה</p>
@@ -1011,12 +1011,12 @@ export function SeveranceCalculator() {
           ]}
         />
 
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-2">
-          <h4 className="text-sm font-bold text-gray-800">מה כולל השכר הקובע?</h4>
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2">
+          <h4 className="text-sm font-bold text-ink">מה כולל השכר הקובע?</h4>
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
               <p className="text-xs font-semibold text-emerald-700 mb-1">כולל:</p>
-              <ul className="text-xs text-gray-700 space-y-1">
+              <ul className="text-xs text-ink/70 space-y-1">
                 <li>• שכר בסיס</li>
                 <li>• קצובת רכב קבועה</li>
                 <li>• קצובת ביגוד קבועה</li>
@@ -1026,7 +1026,7 @@ export function SeveranceCalculator() {
             </div>
             <div>
               <p className="text-xs font-semibold text-red-700 mb-1">לא כולל (בדרך כלל):</p>
-              <ul className="text-xs text-gray-700 space-y-1">
+              <ul className="text-xs text-ink/70 space-y-1">
                 <li>• בונוס חד-פעמי</li>
                 <li>• עמלות (אם לא קבועות)</li>
                 <li>• שעות נוספות</li>
@@ -1045,7 +1045,7 @@ export function SeveranceCalculator() {
   // ============================================================
   const LatePaymentTab = () => (
     <div className="space-y-4">
-      <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+      <div className="bg-red-50 border border-red-200 rounded-none p-4">
         <h3 className="font-bold text-red-900 mb-2">הלנת פיצויים — מה מגיע לי?</h3>
         <p className="text-sm text-red-800">
           לפי חוק הגנת השכר (סעיף 20), מעסיק שלא שילם פיצויים תוך 15 ימים מסיום העבודה
@@ -1054,11 +1054,11 @@ export function SeveranceCalculator() {
         </p>
       </div>
 
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-gray-900">פרטי העיכוב</h2>
+      <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
+        <h2 className="text-lg font-bold text-ink">פרטי העיכוב</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               סכום פיצויים שלא שולם (₪)
             </label>
             <input
@@ -1067,12 +1067,12 @@ export function SeveranceCalculator() {
               step={1000}
               value={basicResult.isEligible ? basicResult.baseSeverance : monthlySalary * 5}
               readOnly
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 text-lg font-semibold cursor-not-allowed"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none bg-cream-2 text-lg font-semibold cursor-not-allowed"
             />
-            <p className="text-xs text-gray-500 mt-1">לפי חישוב בטאב "חישוב פיצויים"</p>
+            <p className="text-xs text-ink/60 mt-1">לפי חישוב בטאב "חישוב פיצויים"</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ink/70 mb-1">
               כמה ימים מאוחר? ({daysLate} ימים)
             </label>
             <input
@@ -1084,7 +1084,7 @@ export function SeveranceCalculator() {
               onChange={(e) => setDaysLate(Number(e.target.value))}
               className="w-full mt-3"
             />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <div className="flex justify-between text-xs text-ink/60 mt-1">
               <span>0</span>
               <span>30 ימים</span>
               <span>365 ימים</span>
@@ -1094,12 +1094,12 @@ export function SeveranceCalculator() {
       </div>
 
       {daysLate === 0 ? (
-        <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex gap-3">
+        <div className="bg-emerald-50 border border-emerald-200 rounded-none p-4 flex gap-3">
           <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
           <p className="text-sm text-emerald-800 font-medium">שולם בזמן — אין פיצויי הלנה</p>
         </div>
       ) : daysLate <= 15 ? (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
           <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0" />
           <p className="text-sm text-amber-800">
             בתוך 15 הימים הראשונים — עדיין בחסד. פיצויי הלנה חלים רק לאחר 15 ימים.
@@ -1144,9 +1144,9 @@ export function SeveranceCalculator() {
             ]}
           />
 
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-2">
-            <h4 className="text-sm font-bold text-gray-800">כיצד לפעול?</h4>
-            <ul className="text-xs text-gray-700 space-y-1.5">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2">
+            <h4 className="text-sm font-bold text-ink">כיצד לפעול?</h4>
+            <ul className="text-xs text-ink/70 space-y-1.5">
               <li>1. <strong>שלח מכתב דרישה</strong> בכתב (מייל + דואר רשום) עם סכום מדויק וחישוב הלנה</li>
               <li>2. <strong>בקר בהסתדרות</strong> לייעוץ ראשוני חינמי (זכות עובד)</li>
               <li>3. <strong>הגש תלונה</strong> לאגף פיקוח על עבודה (משרד העבודה) — בחינם</li>
@@ -1165,8 +1165,8 @@ export function SeveranceCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* Tabs */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-        <div className="flex flex-wrap border-b border-gray-200">
+      <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+        <div className="flex flex-wrap border-b border-ink/15">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -1174,8 +1174,8 @@ export function SeveranceCalculator() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 min-w-[110px] px-3 py-3 text-xs sm:text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-ink text-cream'
+                  : 'text-ink/70 hover:text-ink hover:bg-cream-2'
               }`}
             >
               {tab.label}

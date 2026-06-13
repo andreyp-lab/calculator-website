@@ -71,7 +71,7 @@ export default function IronSwordsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-paper">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs
@@ -84,12 +84,12 @@ export default function IronSwordsPage() {
         </div>
 
         {/* Hero */}
-        <div className="bg-gradient-to-br from-red-600 to-rose-700 text-white rounded-2xl p-8 mb-8">
+        <div className="bg-red-700 text-white p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <Shield className="w-8 h-8" />
-                <span className={`text-sm font-bold px-3 py-1 rounded-full border ${statusInfo.color}`}>
+                <span className={`text-sm font-bold px-3 py-1 border ${statusInfo.color}`}>
                   {statusInfo.label}
                 </span>
               </div>
@@ -104,13 +104,13 @@ export default function IronSwordsPage() {
               </p>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
+              <div className="bg-white/10 backdrop-blur px-5 py-4">
                 <p className="text-red-200 text-xs mb-1">עודכן</p>
                 <p className="font-semibold text-sm">
                   <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>
                 </p>
               </div>
-              <div className="bg-white/10 backdrop-blur rounded-xl px-5 py-4">
+              <div className="bg-white/10 backdrop-blur px-5 py-4">
                 <p className="text-red-200 text-xs mb-1">מקור</p>
                 <p className="font-semibold text-sm">ביטוח לאומי</p>
               </div>
@@ -119,7 +119,7 @@ export default function IronSwordsPage() {
         </div>
 
         {/* Notes Banner */}
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 flex items-start gap-3">
+        <div className="bg-amber-50 border border-amber-200 p-4 mb-8 flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <p className="text-sm text-amber-800">
             <strong>הערה חשובה:</strong> {notes}. לפרטים מלאים ולהגשת תביעה,{' '}
@@ -133,20 +133,20 @@ export default function IronSwordsPage() {
         {/* Grant Cards */}
         <div className="space-y-4 mb-8">
           {grants.map((grant) => (
-            <div key={grant.title} className="bg-red-50 border border-red-200 rounded-xl p-6">
+            <div key={grant.title} className="bg-red-50 border border-red-200 p-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
                 <h2 className="text-lg font-bold text-red-900">{grant.title}</h2>
                 <div className="text-3xl font-bold text-red-700">
                   ₪{grant.amount.toLocaleString('he-IL')}
                 </div>
               </div>
-              <p className="text-sm text-gray-600 mb-3">{grant.description}</p>
+              <p className="text-sm text-ink/70 mb-3">{grant.description}</p>
               <div className="space-y-1.5">
                 <p className="text-xs font-semibold text-red-700 mb-1">תנאי זכאות עיקריים:</p>
                 {grant.conditions.map((c) => (
                   <div key={c} className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-700">{c}</span>
+                    <span className="text-sm text-ink/70">{c}</span>
                   </div>
                 ))}
               </div>
@@ -155,26 +155,26 @@ export default function IronSwordsPage() {
         </div>
 
         {/* Calculator Links */}
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">מחשבונים קשורים</h2>
+        <div className="bg-cream-2 border border-ink/15 p-6 mb-8">
+          <h2 className="text-lg font-bold text-ink mb-4">מחשבונים קשורים</h2>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/employee-rights/reserve-duty-pay"
-              className="inline-flex items-center gap-1.5 bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 transition"
+              className="inline-flex items-center gap-1.5 bg-red-600 text-white px-4 py-2.5 text-sm font-medium hover:bg-red-700 transition"
             >
               <Shield className="w-4 h-4" />
               מחשבון שכר מילואים
             </Link>
             <Link
               href="/employee-rights/unemployment-benefits"
-              className="inline-flex items-center gap-1.5 bg-white border border-gray-300 text-gray-700 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-50 transition"
+              className="inline-flex items-center gap-1.5 bg-paper border border-ink/15 text-ink px-4 py-2.5 text-sm font-medium hover:bg-cream-2 transition"
             >
               דמי אבטלה
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <Link
               href="/employee-rights/severance"
-              className="inline-flex items-center gap-1.5 bg-white border border-gray-300 text-gray-700 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-50 transition"
+              className="inline-flex items-center gap-1.5 bg-paper border border-ink/15 text-ink px-4 py-2.5 text-sm font-medium hover:bg-cream-2 transition"
             >
               פיצויי פיטורין
               <ArrowLeft className="w-4 h-4" />
@@ -184,7 +184,7 @@ export default function IronSwordsPage() {
 
         {/* FAQ */}
         <div className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">שאלות נפוצות</h2>
+          <h2 className="text-xl font-bold text-ink mb-4">שאלות נפוצות</h2>
           <div className="space-y-3">
             {[
               {
@@ -204,22 +204,22 @@ export default function IronSwordsPage() {
                 a: 'הזכאות ותקופות הפעילות מתעדכנות בהתאם להחלטות הממשלה. הדף מתעדכן עם כל שינוי.',
               },
             ].map(({ q, a }) => (
-              <details key={q} className="border border-gray-200 rounded-lg">
-                <summary className="px-4 py-3 font-medium text-gray-900 cursor-pointer hover:bg-gray-50 rounded-lg">
+              <details key={q} className="border border-ink/15">
+                <summary className="px-4 py-3 font-medium text-ink cursor-pointer hover:bg-cream-2">
                   {q}
                 </summary>
-                <p className="px-4 pb-3 pt-1 text-sm text-gray-600 leading-relaxed">{a}</p>
+                <p className="px-4 pb-3 pt-1 text-sm text-ink/70 leading-relaxed">{a}</p>
               </details>
             ))}
           </div>
         </div>
 
         {/* Source */}
-        <div className="text-center text-xs text-gray-400">
+        <div className="text-center text-xs text-ink/45">
           <p>
             מקור:{' '}
             <a href={sourceUrl} target="_blank" rel="noopener noreferrer"
-              className="text-red-500 hover:underline inline-flex items-center gap-1">
+              className="text-gold hover:underline inline-flex items-center gap-1">
               ביטוח לאומי — חרבות ברזל <ExternalLink className="w-3 h-3" />
             </a>{' '}
             | עודכן: <time dateTime={lastUpdated}>{formatHebrewDate(lastUpdated)}</time>

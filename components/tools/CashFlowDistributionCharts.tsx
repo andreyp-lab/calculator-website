@@ -7,16 +7,16 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recha
 import { PieChart as PieIcon } from 'lucide-react';
 
 const COLORS = [
-  '#3b82f6', // blue
-  '#10b981', // emerald
+  '#102219', // ink
+  '#10b981', // emerald (הכנסות)
   '#f59e0b', // amber
   '#ef4444', // red
-  '#8b5cf6', // violet
-  '#ec4899', // pink
-  '#06b6d4', // cyan
+  '#8E6824', // gold
+  '#264B36', // ink-mid
+  '#D8B36A', // gold-light
   '#f97316', // orange
   '#84cc16', // lime
-  '#6366f1', // indigo
+  '#5a8b72', // muted green
 ];
 
 export function CashFlowDistributionCharts() {
@@ -113,13 +113,13 @@ export function CashFlowDistributionCharts() {
   return (
     <div className="grid md:grid-cols-2 gap-4">
       {/* התפלגות הכנסות */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-emerald-600 to-green-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-emerald-700 text-white p-3">
           <h3 className="font-bold flex items-center gap-2">
             <PieIcon className="w-5 h-5" />
             התפלגות הכנסות לפי מקור
           </h3>
-          <p className="text-xs text-emerald-100">סה"כ: {fmt(totalIncome)}</p>
+          <p className="text-xs text-white/70">סה"כ: {fmt(totalIncome)}</p>
         </div>
         <div className="p-3">
           {incomeData.length > 0 ? (
@@ -153,7 +153,7 @@ export function CashFlowDistributionCharts() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-[280px] flex items-center justify-center text-gray-400 text-sm">
+            <div className="h-[280px] flex items-center justify-center text-ink/45 text-sm">
               אין הכנסות להציג
             </div>
           )}
@@ -161,13 +161,13 @@ export function CashFlowDistributionCharts() {
       </div>
 
       {/* התפלגות הוצאות */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-red-600 to-rose-600 text-white p-3">
+      <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-red-700 text-white p-3">
           <h3 className="font-bold flex items-center gap-2">
             <PieIcon className="w-5 h-5" />
             התפלגות הוצאות לפי קטגוריה
           </h3>
-          <p className="text-xs text-red-100">סה"כ: {fmt(totalExpenses)}</p>
+          <p className="text-xs text-white/70">סה"כ: {fmt(totalExpenses)}</p>
         </div>
         <div className="p-3">
           {expensesData.length > 0 ? (
@@ -199,7 +199,7 @@ export function CashFlowDistributionCharts() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-[280px] flex items-center justify-center text-gray-400 text-sm">
+            <div className="h-[280px] flex items-center justify-center text-ink/45 text-sm">
               אין הוצאות להציג
             </div>
           )}

@@ -212,12 +212,12 @@ export default function LeasingVsBuyingPage() {
           <h2>מחשבוני רכב נוספים</h2>
           <ul>
             <li>
-              <Link href="/vehicles/fuel-cost" className="text-blue-700 hover:underline">
+              <Link href="/vehicles/fuel-cost" className="text-gold hover:underline">
                 מחשבון עלות דלק 2026 — חישוב הוצאה חודשית ושנתית לבנזין, סולר וחשמל
               </Link>
             </li>
             <li>
-              <Link href="/vehicles/company-car-benefit" className="text-blue-700 hover:underline">
+              <Link href="/vehicles/company-car-benefit" className="text-gold hover:underline">
                 מחשבון שווי שימוש ברכב — חישוב הטבת רכב צמוד לעובד ולמעביד
               </Link>
             </li>

@@ -101,37 +101,37 @@ export default function BusinessValuationPage() {
             <h2>מכפילים טיפוסיים בישראל 2026</h2>
             <table className="w-full text-sm border-collapse my-4">
               <thead>
-                <tr className="bg-blue-50">
-                  <th className="border border-gray-300 p-2 text-right">ענף</th>
-                  <th className="border border-gray-300 p-2 text-right">מכפיל EBITDA</th>
-                  <th className="border border-gray-300 p-2 text-right">מכפיל הכנסות</th>
+                <tr className="bg-cream-2">
+                  <th className="border border-ink/15 p-2 text-right">ענף</th>
+                  <th className="border border-ink/15 p-2 text-right">מכפיל EBITDA</th>
+                  <th className="border border-ink/15 p-2 text-right">מכפיל הכנסות</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-2">שירותים מקצועיים</td>
-                  <td className="border border-gray-300 p-2">3-5x</td>
-                  <td className="border border-gray-300 p-2">0.5-1.5x</td>
+                  <td className="border border-ink/15 p-2">שירותים מקצועיים</td>
+                  <td className="border border-ink/15 p-2">3-5x</td>
+                  <td className="border border-ink/15 p-2">0.5-1.5x</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">מסחר</td>
-                  <td className="border border-gray-300 p-2">2-4x</td>
-                  <td className="border border-gray-300 p-2">0.3-0.7x</td>
+                  <td className="border border-ink/15 p-2">מסחר</td>
+                  <td className="border border-ink/15 p-2">2-4x</td>
+                  <td className="border border-ink/15 p-2">0.3-0.7x</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">תעשייה</td>
-                  <td className="border border-gray-300 p-2">4-6x</td>
-                  <td className="border border-gray-300 p-2">0.8-1.5x</td>
+                  <td className="border border-ink/15 p-2">תעשייה</td>
+                  <td className="border border-ink/15 p-2">4-6x</td>
+                  <td className="border border-ink/15 p-2">0.8-1.5x</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">היי-טק SaaS</td>
-                  <td className="border border-gray-300 p-2">8-12x</td>
-                  <td className="border border-gray-300 p-2">3-7x</td>
+                  <td className="border border-ink/15 p-2">היי-טק SaaS</td>
+                  <td className="border border-ink/15 p-2">8-12x</td>
+                  <td className="border border-ink/15 p-2">3-7x</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">מסעדנות / תיירות</td>
-                  <td className="border border-gray-300 p-2">2-3x</td>
-                  <td className="border border-gray-300 p-2">0.5-1x</td>
+                  <td className="border border-ink/15 p-2">מסעדנות / תיירות</td>
+                  <td className="border border-ink/15 p-2">2-3x</td>
+                  <td className="border border-ink/15 p-2">0.5-1x</td>
                 </tr>
               </tbody>
             </table>
@@ -161,19 +161,19 @@ export default function BusinessValuationPage() {
             <h2>כלים קשורים</h2>
             <ul>
               <li>
-                <a href="/tools/break-even" className="text-blue-700 hover:underline">
+                <a href="/tools/break-even" className="text-gold hover:underline">
                   מחשבון נקודת איזון
                 </a>{' '}
                 — כמה למכור כדי לכסות הוצאות קבועות
               </li>
               <li>
-                <a href="/tools/cash-flow" className="text-blue-700 hover:underline">
+                <a href="/tools/cash-flow" className="text-gold hover:underline">
                   מחשבון תזרים מזומנים
                 </a>{' '}
                 — תכנון תזרים חודשי ושנתי
               </li>
               <li>
-                <a href="/tools/budget" className="text-blue-700 hover:underline">
+                <a href="/tools/budget" className="text-gold hover:underline">
                   מחשבון תקציב עסקי
                 </a>{' '}
                 — בנה תקציב ועקוב אחר הוצאות
@@ -183,7 +183,7 @@ export default function BusinessValuationPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.icpas.org.il"

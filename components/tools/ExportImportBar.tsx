@@ -170,9 +170,9 @@ export function ExportImportBar() {
         <div className="relative">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-white border-2 border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition text-sm"
+            className="flex items-center gap-2 px-3 py-1.5 bg-paper border-2 border-ink/15 rounded-none hover:border-gold hover:bg-cream-2 transition text-sm"
           >
-            <FileDown className="w-4 h-4 text-blue-600" />
+            <FileDown className="w-4 h-4 text-gold" />
             ייצוא / ייבוא
             <ChevronDown
               className={`w-4 h-4 transition-transform ${menuOpen ? 'rotate-180' : ''}`}
@@ -185,62 +185,62 @@ export function ExportImportBar() {
                 className="fixed inset-0 z-10"
                 onClick={() => setMenuOpen(false)}
               />
-              <div className="absolute top-full left-0 mt-1 w-64 bg-white border-2 border-gray-200 rounded-lg shadow-lg z-20 py-1">
-                <div className="px-3 py-1.5 text-xs font-semibold text-gray-500 border-b border-gray-100">
+              <div className="absolute top-full left-0 mt-1 w-64 bg-paper border-2 border-ink/15 rounded-none shadow-lg z-20 py-1">
+                <div className="px-3 py-1.5 text-xs font-semibold text-ink-mid border-b border-ink/10">
                   ייצוא
                 </div>
                 <button
                   onClick={handleExportExcel}
-                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-blue-50 text-sm"
+                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-cream-2 text-sm"
                 >
                   <Download className="w-4 h-4 text-emerald-600" />
                   <div className="flex-1">
                     <div className="font-medium">ייצוא ל-Excel</div>
-                    <div className="text-xs text-gray-500">כל הנתונים ב-9 גיליונות</div>
+                    <div className="text-xs text-ink/60">כל הנתונים ב-9 גיליונות</div>
                   </div>
                 </button>
                 <button
                   onClick={handleExportPDF}
-                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-blue-50 text-sm"
+                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-cream-2 text-sm"
                 >
                   <FileDown className="w-4 h-4 text-rose-600" />
                   <div className="flex-1">
                     <div className="font-medium">ייצוא ל-PDF (מקצועי)</div>
-                    <div className="text-xs text-gray-500">דוח עם KPI + טבלאות + גרפים</div>
+                    <div className="text-xs text-ink/60">דוח עם KPI + טבלאות + גרפים</div>
                   </div>
                 </button>
                 <button
                   onClick={handlePrint}
-                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-blue-50 text-sm"
+                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-cream-2 text-sm"
                 >
-                  <Printer className="w-4 h-4 text-blue-600" />
+                  <Printer className="w-4 h-4 text-gold" />
                   <div className="flex-1">
                     <div className="font-medium">הדפסה (PDF דרך הדפדפן)</div>
-                    <div className="text-xs text-gray-500">חלופה - Ctrl+P</div>
+                    <div className="text-xs text-ink/60">חלופה - Ctrl+P</div>
                   </div>
                 </button>
 
-                <div className="px-3 py-1.5 text-xs font-semibold text-gray-500 border-b border-gray-100 mt-1">
+                <div className="px-3 py-1.5 text-xs font-semibold text-ink-mid border-b border-ink/10 mt-1">
                   ייבוא
                 </div>
                 <button
                   onClick={handleImportClick}
-                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-blue-50 text-sm"
+                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-cream-2 text-sm"
                 >
-                  <Upload className="w-4 h-4 text-purple-600" />
+                  <Upload className="w-4 h-4 text-gold" />
                   <div className="flex-1">
                     <div className="font-medium">ייבוא מ-Excel</div>
-                    <div className="text-xs text-gray-500">העלה קובץ xlsx</div>
+                    <div className="text-xs text-ink/60">העלה קובץ xlsx</div>
                   </div>
                 </button>
                 <button
                   onClick={handleDownloadTemplate}
-                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-blue-50 text-sm"
+                  className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-cream-2 text-sm"
                 >
-                  <FileText className="w-4 h-4 text-amber-600" />
+                  <FileText className="w-4 h-4 text-gold" />
                   <div className="flex-1">
                     <div className="font-medium">הורד תבנית ריקה</div>
-                    <div className="text-xs text-gray-500">דוגמאות מוכנות לעריכה</div>
+                    <div className="text-xs text-ink/60">דוגמאות מוכנות לעריכה</div>
                   </div>
                 </button>
               </div>
@@ -260,7 +260,7 @@ export function ExportImportBar() {
       {/* הודעת ייבוא */}
       {importMessage && (
         <div
-          className={`absolute top-full mt-2 right-0 z-30 px-3 py-2 rounded-lg shadow-lg flex items-center gap-2 text-sm whitespace-nowrap ${
+          className={`absolute top-full mt-2 right-0 z-30 px-3 py-2 rounded-none shadow-lg flex items-center gap-2 text-sm whitespace-nowrap ${
             importMessage.type === 'success'
               ? 'bg-emerald-50 border-2 border-emerald-300 text-emerald-900'
               : 'bg-red-50 border-2 border-red-300 text-red-900'

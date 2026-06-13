@@ -18,13 +18,13 @@ const popularLinks = [
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4" dir="rtl">
+    <div className="min-h-screen bg-paper flex items-center justify-center px-4" dir="rtl">
       <div className="max-w-lg w-full text-center">
         {/* 404 Visual */}
-        <div className="text-8xl font-black text-blue-100 mb-2 select-none">404</div>
+        <div className="text-8xl font-black text-ink/10 mb-2 select-none">404</div>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-3">הדף לא נמצא</h1>
-        <p className="text-gray-500 mb-8">
+        <h1 className="text-2xl font-bold text-ink mb-3">הדף לא נמצא</h1>
+        <p className="text-ink/60 mb-8">
           ייתכן שהכתובת שגויה או שהדף הוסר. אנחנו כאן כדי לעזור — בחר מהמחשבונים הפופולריים:
         </p>
 
@@ -34,7 +34,7 @@ export default function NotFound() {
             <Link
               key={link.href}
               href={link.href}
-              className="block border border-gray-200 rounded-lg px-4 py-3 text-sm font-medium text-blue-700 hover:border-blue-400 hover:bg-blue-50 transition"
+              className="block border border-ink/15 rounded-none px-4 py-3 text-sm font-medium text-gold hover:border-ink/30 hover:bg-cream-2 transition"
             >
               {link.label}
             </Link>
@@ -44,7 +44,7 @@ export default function NotFound() {
         {/* Back to home */}
         <Link
           href="/"
-          className="inline-block bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition"
+          className="inline-block bg-ink text-cream px-8 py-3 rounded-none font-bold hover:bg-ink-deep transition"
         >
           חזרה לדף הבית ←
         </Link>

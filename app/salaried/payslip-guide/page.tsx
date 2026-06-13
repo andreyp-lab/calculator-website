@@ -88,7 +88,7 @@ export default function PayslipGuidePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-paper" dir="rtl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
@@ -105,17 +105,17 @@ export default function PayslipGuidePage() {
         </div>
 
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
             איך קוראים תלוש משכורת 2026
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-lg text-ink/70 leading-relaxed">
             תלוש המשכורת מלא במספרים ומונחים מבלבלים — אבל ברגע שמבינים את המבנה, הכול נהיה ברור.
             הנה מדריך שורה-אחר-שורה: מברוטו לנטו, מה כל ניכוי אומר, ומה חשוב לבדוק כל חודש.
           </p>
-          <p className="text-sm text-gray-500 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
+          <p className="text-sm text-ink/60 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
         </header>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>מבנה התלוש — 4 החלקים העיקריים</h2>
           <ol>
             <li><strong>פרטים כלליים</strong> — שם, ת"ז, ותק, חודש השכר, ימי/שעות עבודה, ומספר נקודות הזיכוי.</li>
@@ -128,24 +128,24 @@ export default function PayslipGuidePage() {
         </div>
 
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">ניכוי</th>
-                <th className="p-3 font-bold text-gray-700 border-b">שיעור 2026</th>
-                <th className="p-3 font-bold text-gray-700 border-b">הסבר</th>
+                <th className="p-3 font-bold text-ink/70 border-b">ניכוי</th>
+                <th className="p-3 font-bold text-ink/70 border-b">שיעור 2026</th>
+                <th className="p-3 font-bold text-ink/70 border-b">הסבר</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr><td className="p-3 border-b font-medium">מס הכנסה</td><td className="p-3 border-b">10%–50% מדורג</td><td className="p-3 border-b">לפי מדרגות, פחות נקודות זיכוי (242 ₪ ליחידה)</td></tr>
-              <tr className="bg-gray-50/50"><td className="p-3 border-b font-medium">ביטוח לאומי + בריאות</td><td className="p-3 border-b">4.27% / 12.17%</td><td className="p-3 border-b">מופחת עד 7,522 ₪, מלא מעבר (עד תקרה 51,910)</td></tr>
+              <tr className="bg-cream-2/50"><td className="p-3 border-b font-medium">ביטוח לאומי + בריאות</td><td className="p-3 border-b">4.27% / 12.17%</td><td className="p-3 border-b">מופחת עד 7,522 ₪, מלא מעבר (עד תקרה 51,910)</td></tr>
               <tr><td className="p-3 border-b font-medium">פנסיה (חלק העובד)</td><td className="p-3 border-b">6%</td><td className="p-3 border-b">נצבר לטובתך בקרן הפנסיה</td></tr>
-              <tr className="bg-gray-50/50"><td className="p-3 font-medium">קרן השתלמות (רשות)</td><td className="p-3">2.5%</td><td className="p-3">אם קיימת — הטבת מס משמעותית</td></tr>
+              <tr className="bg-cream-2/50"><td className="p-3 font-medium">קרן השתלמות (רשות)</td><td className="p-3">2.5%</td><td className="p-3">אם קיימת — הטבת מס משמעותית</td></tr>
             </tbody>
           </table>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>הפרשות המעסיק — כסף שלא רואים בנטו</h2>
           <p>
             מעבר לשכר, המעסיק מפריש <strong>עבורך</strong> (לא מנוכה ממך) — והכסף נצבר בקופות
@@ -169,14 +169,14 @@ export default function PayslipGuidePage() {
             <li>שתוספות (נסיעות, שעות נוספות) משולמות כחוק.</li>
           </ul>
 
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-ink/60">
             * אין לראות במדריך זה ייעוץ מס. לבדיקה מדויקת של הנטו שלך — השתמש במחשבון למטה.
           </p>
         </div>
 
         {/* Related */}
         <section className="my-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">כלים ומדריכים רלוונטיים</h2>
+          <h2 className="text-2xl font-bold text-ink mb-4">כלים ומדריכים רלוונטיים</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו / ברוטו' },
@@ -189,10 +189,10 @@ export default function PayslipGuidePage() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="group flex items-center justify-between gap-2 border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition"
+                className="group flex items-center justify-between gap-2 border border-ink/15 p-4 hover:border-gold hover:shadow-sm transition"
               >
-                <span className="font-medium text-gray-900 group-hover:text-blue-700 transition">{c.label}</span>
-                <span className="text-blue-600 group-hover:-translate-x-1 transition" aria-hidden>←</span>
+                <span className="font-medium text-ink group-hover:text-gold transition">{c.label}</span>
+                <span className="text-gold group-hover:-translate-x-1 transition" aria-hidden>←</span>
               </Link>
             ))}
           </div>
@@ -200,15 +200,15 @@ export default function PayslipGuidePage() {
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">שאלות נפוצות</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות</h2>
           <div className="space-y-4">
             {faqItems.map((f) => (
-              <details key={f.question} className="border border-gray-200 rounded-lg p-4 group">
-                <summary className="font-bold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+              <details key={f.question} className="border border-ink/15 p-4 group">
+                <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-gray-400 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
-                <p className="text-gray-700 mt-3 leading-relaxed">{f.answer}</p>
+                <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>
             ))}
           </div>

@@ -50,34 +50,34 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
               setQuery(e.target.value);
               setActiveLetter(null);
             }}
-            className="w-full border-2 border-gray-300 rounded-xl px-5 py-3 text-right text-lg focus:border-blue-500 focus:outline-none shadow-sm"
+            className="w-full border-2 border-ink/20 rounded-none px-5 py-3 text-right text-lg focus:border-gold focus:outline-none shadow-sm"
             dir="rtl"
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 text-xl"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/45 hover:text-ink text-xl"
             >
               ✕
             </button>
           )}
         </div>
         {query && (
-          <p className="text-sm text-gray-500 mt-2 text-center">
+          <p className="text-sm text-ink/60 mt-2 text-center">
             נמצאו {filtered.length} מונחים לחיפוש &quot;{query}&quot;
           </p>
         )}
       </div>
 
       {/* Letter navigation */}
-      <div className="sticky top-0 bg-white/95 backdrop-blur z-10 border-b border-gray-200 py-3 mb-8">
+      <div className="sticky top-0 bg-paper/95 backdrop-blur z-10 border-b border-ink/15 py-3 mb-8">
         <div className="flex flex-wrap gap-1.5 justify-center">
           <button
             onClick={() => { setActiveLetter(null); setQuery(''); }}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
+            className={`px-3 py-1.5 rounded-none text-sm font-medium transition ${
               !activeLetter && !query
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-ink text-cream'
+                : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
             }`}
           >
             הכל
@@ -92,12 +92,12 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
                   setQuery('');
                 }}
                 disabled={!hasTerms && !activeLetter}
-                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition ${
+                className={`px-3 py-1.5 rounded-none text-sm font-bold transition ${
                   activeLetter === letter
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-ink text-cream'
                     : hasTerms
-                    ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    : 'bg-gray-50 text-gray-300 cursor-default'
+                    ? 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
+                    : 'bg-cream-2 text-ink/30 cursor-default'
                 }`}
               >
                 {letter}
@@ -109,10 +109,10 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
 
       {/* Terms display */}
       {displayLetters.length === 0 ? (
-        <div className="text-center py-16 text-gray-500">
+        <div className="text-center py-16 text-ink/60">
           <div className="text-4xl mb-4">🔍</div>
           <p className="text-xl">לא נמצאו מונחים עבור &quot;{query}&quot;</p>
-          <button onClick={() => setQuery('')} className="mt-4 text-blue-600 underline">
+          <button onClick={() => setQuery('')} className="mt-4 text-gold underline">
             נקה חיפוש
           </button>
         </div>
@@ -120,7 +120,7 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
         <div className="space-y-12">
           {displayLetters.map((letter) => (
             <section key={letter} id={`letter-${letter}`} className="scroll-mt-20">
-              <h2 className="text-3xl font-bold text-blue-700 border-b-2 border-blue-200 pb-2 mb-6">
+              <h2 className="text-3xl font-bold text-ink border-b-2 border-ink/20 pb-2 mb-6">
                 {letter}
               </h2>
               <div className="grid md:grid-cols-2 gap-5">
@@ -128,25 +128,25 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
                   <article
                     key={t.id}
                     id={t.id}
-                    className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition"
+                    className="bg-paper border border-ink/15 rounded-none p-5 shadow-sm hover:shadow-md transition"
                   >
                     <h3 className="text-lg font-bold mb-2">
                       <Link
                         href={`/glossary/${t.id}`}
-                        className="text-gray-900 hover:text-blue-700 transition"
+                        className="text-ink hover:text-gold transition"
                       >
                         {t.term}
                       </Link>
                     </h3>
-                    <p className="text-gray-700 text-sm leading-relaxed mb-3">{t.definition}</p>
+                    <p className="text-ink/70 text-sm leading-relaxed mb-3">{t.definition}</p>
                     {t.seeAlso && t.seeAlso.length > 0 && (
                       <div className="flex flex-wrap gap-2 mt-2">
-                        <span className="text-xs text-gray-500">ראה גם:</span>
+                        <span className="text-xs text-ink/60">ראה גם:</span>
                         {t.seeAlso.map((link) => (
                           <Link
                             key={link.href}
                             href={link.href}
-                            className="text-xs text-blue-600 hover:text-blue-800 underline"
+                            className="text-xs text-gold hover:text-gold-2 underline"
                           >
                             {link.label}
                           </Link>

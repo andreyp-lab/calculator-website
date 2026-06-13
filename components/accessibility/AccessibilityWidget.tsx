@@ -15,7 +15,7 @@ interface ToggleRowProps {
 function ToggleRow({ label, checked, onChange, id }: ToggleRowProps) {
   return (
     <div className="flex items-center justify-between gap-3 py-2">
-      <label htmlFor={id} className="text-sm text-gray-800 cursor-pointer flex-1">
+      <label htmlFor={id} className="text-sm text-ink/70 cursor-pointer flex-1">
         {label}
       </label>
       <button
@@ -26,14 +26,14 @@ function ToggleRow({ label, checked, onChange, id }: ToggleRowProps) {
         onClick={() => onChange(!checked)}
         className={[
           'relative inline-flex w-10 h-5 rounded-full transition-colors duration-200 flex-shrink-0',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1',
-          checked ? 'bg-blue-600' : 'bg-gray-300',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-1',
+          checked ? 'bg-ink' : 'bg-ink/20',
         ].join(' ')}
       >
         <span
           aria-hidden="true"
           className={[
-            'inline-block w-4 h-4 rounded-full bg-white shadow transform transition-transform duration-200 mt-0.5',
+            'inline-block w-4 h-4 rounded-full bg-paper shadow transform transition-transform duration-200 mt-0.5',
             checked ? 'translate-x-5' : 'translate-x-1',
           ].join(' ')}
         />
@@ -56,7 +56,7 @@ function TextSizeSelector() {
 
   return (
     <div className="py-2">
-      <p className="text-sm text-gray-700 mb-2 font-medium">גודל טקסט</p>
+      <p className="text-sm text-ink/70 mb-2 font-medium">גודל טקסט</p>
       <div className="flex gap-1" role="group" aria-label="גודל טקסט">
         {([0, 1, 2, 3] as TextSize[]).map((size) => (
           <button
@@ -65,11 +65,11 @@ function TextSizeSelector() {
             aria-pressed={settings.textSize === size}
             aria-label={TEXT_SIZE_LABELS[size]}
             className={[
-              'flex-1 py-1 text-xs rounded border transition-colors duration-150',
-              'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+              'flex-1 py-1 text-xs rounded-none border transition-colors duration-150',
+              'focus:outline-none focus-visible:ring-2 focus-visible:ring-gold',
               settings.textSize === size
-                ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50',
+                ? 'bg-ink text-cream border-ink'
+                : 'bg-paper text-ink/70 border-ink/15 hover:bg-paper-hover',
             ].join(' ')}
           >
             {TEXT_SIZE_LABELS[size]}
@@ -177,17 +177,17 @@ export function AccessibilityWidget() {
           className={[
             'w-12 h-12 rounded-full shadow-lg flex items-center justify-center',
             'text-2xl font-bold transition-all duration-200',
-            'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500',
+            'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gold',
             hasActiveSettings
-              ? 'bg-blue-600 text-white hover:bg-blue-700'
-              : 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50',
+              ? 'bg-ink text-cream hover:bg-ink-deep'
+              : 'bg-paper text-ink border-2 border-ink hover:bg-paper-hover',
           ].join(' ')}
         >
           <span aria-hidden="true">♿</span>
           {hasActiveSettings && (
             <span
               aria-hidden="true"
-              className="absolute top-0 left-0 w-3 h-3 rounded-full bg-orange-400 border border-white"
+              className="absolute top-0 left-0 w-3 h-3 rounded-full bg-gold border border-cream"
             />
           )}
         </button>
@@ -204,13 +204,13 @@ export function AccessibilityWidget() {
           dir="rtl"
           className={[
             'fixed bottom-20 left-5 z-[9001]',
-            'w-72 bg-white rounded-xl shadow-2xl border border-gray-200',
+            'w-72 bg-paper rounded-none shadow-2xl border border-ink/15',
             'overflow-y-auto max-h-[80vh]',
           ].join(' ')}
         >
           {/* Panel header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-blue-50 rounded-t-xl">
-            <h2 className="font-bold text-blue-800 text-base" id="a11y-panel-title">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-ink/15 bg-cream-2 rounded-none">
+            <h2 className="font-bold text-ink text-base" id="a11y-panel-title">
               הגדרות נגישות
             </h2>
             <button
@@ -219,14 +219,14 @@ export function AccessibilityWidget() {
                 triggerRef.current?.focus();
               }}
               aria-label="סגור תפריט נגישות"
-              className="text-gray-500 hover:text-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded p-1"
+              className="text-ink/60 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-none p-1"
             >
               <span aria-hidden="true" className="text-lg">✕</span>
             </button>
           </div>
 
           {/* Panel body */}
-          <div className="px-4 py-2 divide-y divide-gray-100">
+          <div className="px-4 py-2 divide-y divide-ink/10">
 
             {/* Text size */}
             <TextSizeSelector />
@@ -303,24 +303,24 @@ export function AccessibilityWidget() {
           </div>
 
           {/* Footer */}
-          <div className="px-4 py-3 border-t border-gray-100 flex justify-between items-center">
+          <div className="px-4 py-3 border-t border-ink/15 flex justify-between items-center">
             <button
               onClick={resetSettings}
               disabled={!hasActiveSettings}
               aria-label="איפוס כל הגדרות הנגישות"
               className={[
-                'text-xs py-1.5 px-3 rounded border transition-colors',
+                'text-xs py-1.5 px-3 rounded-none border transition-colors',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400',
                 hasActiveSettings
                   ? 'border-red-300 text-red-600 hover:bg-red-50 cursor-pointer'
-                  : 'border-gray-200 text-gray-400 cursor-not-allowed',
+                  : 'border-ink/15 text-ink/45 cursor-not-allowed',
               ].join(' ')}
             >
               איפוס הכל
             </button>
             <a
               href="/accessibility"
-              className="text-xs text-blue-600 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+              className="text-xs text-gold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-none"
             >
               הצהרת נגישות
             </a>

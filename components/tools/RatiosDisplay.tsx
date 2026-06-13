@@ -53,7 +53,7 @@ export function RatiosDisplay() {
 
   if (!analysis) {
     return (
-      <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-6 flex items-start gap-3">
+      <div className="bg-amber-50 border-2 border-amber-300 rounded-none p-6 flex items-start gap-3">
         <AlertTriangle className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
         <div>
           <h3 className="font-bold text-amber-900 mb-1">חסרים נתוני מאזן</h3>
@@ -91,59 +91,59 @@ export function RatiosDisplay() {
     <div className="space-y-4">
       {/* KPI Cards - Top */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className={`border-2 rounded-lg p-4 ${
+        <div className={`border-2 rounded-none p-4 ${
           credit.investmentGrade ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'
         }`}>
-          <div className="text-xs text-gray-600 mb-1">דירוג אשראי</div>
+          <div className="text-xs text-ink/60 mb-1">דירוג אשראי</div>
           <div className={`text-3xl font-bold ${credit.investmentGrade ? 'text-green-700' : 'text-amber-700'}`}>
             {credit.rating}
           </div>
-          <div className="text-xs text-gray-600">{credit.outlook}</div>
+          <div className="text-xs text-ink/60">{credit.outlook}</div>
         </div>
 
-        <div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-4">
-          <div className="text-xs text-gray-600 mb-1">ציון בריאות</div>
-          <div className="text-3xl font-bold text-blue-700">{health.totalScore}/100</div>
-          <div className="text-xs text-gray-600">{health.grade}</div>
+        <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-4">
+          <div className="text-xs text-ink/60 mb-1">ציון בריאות</div>
+          <div className="text-3xl font-bold text-ink">{health.totalScore}/100</div>
+          <div className="text-xs text-ink/60">{health.grade}</div>
         </div>
 
-        <div className={`border-2 rounded-lg p-4 ${
+        <div className={`border-2 rounded-none p-4 ${
           zScore.zone === 'safe' ? 'bg-green-50 border-green-300' :
           zScore.zone === 'grey' ? 'bg-amber-50 border-amber-300' : 'bg-red-50 border-red-300'
         }`}>
-          <div className="text-xs text-gray-600 mb-1">Z-Score (Altman)</div>
+          <div className="text-xs text-ink/60 mb-1">Z-Score (Altman)</div>
           <div className={`text-3xl font-bold ${
             zScore.zone === 'safe' ? 'text-green-700' :
             zScore.zone === 'grey' ? 'text-amber-700' : 'text-red-700'
           }`}>
             {formatRatio(zScore.score)}
           </div>
-          <div className="text-xs text-gray-600">
+          <div className="text-xs text-ink/60">
             {zScore.zone === 'safe' ? 'אזור בטוח' :
              zScore.zone === 'grey' ? 'אזור אפור' : 'סכנה'}
           </div>
         </div>
 
-        <div className={`border-2 rounded-lg p-4 ${
+        <div className={`border-2 rounded-none p-4 ${
           ratios.dscr >= 1.5 ? 'bg-green-50 border-green-300' :
           ratios.dscr >= 1.0 ? 'bg-amber-50 border-amber-300' : 'bg-red-50 border-red-300'
         }`}>
-          <div className="text-xs text-gray-600 mb-1">DSCR</div>
+          <div className="text-xs text-ink/60 mb-1">DSCR</div>
           <div className={`text-3xl font-bold ${
             ratios.dscr >= 1.5 ? 'text-green-700' :
             ratios.dscr >= 1.0 ? 'text-amber-700' : 'text-red-700'
           }`}>
             {ratios.dscr > 99 ? '∞' : formatRatio(ratios.dscr)}
           </div>
-          <div className="text-xs text-gray-600">יכולת החזר חוב</div>
+          <div className="text-xs text-ink/60">יכולת החזר חוב</div>
         </div>
       </div>
 
       {/* Ratios Tables */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* רווחיות */}
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-          <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+        <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+          <h4 className="font-bold text-ink mb-3 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-green-600" />
             יחסי רווחיות
           </h4>
@@ -157,9 +157,9 @@ export function RatiosDisplay() {
         </div>
 
         {/* נזילות */}
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-          <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <Shield className="w-4 h-4 text-blue-600" />
+        <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+          <h4 className="font-bold text-ink mb-3 flex items-center gap-2">
+            <Shield className="w-4 h-4 text-ink-mid" />
             יחסי נזילות
           </h4>
           <div className="space-y-2 text-sm">
@@ -170,9 +170,9 @@ export function RatiosDisplay() {
         </div>
 
         {/* מינוף */}
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-          <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <ChartBar className="w-4 h-4 text-purple-600" />
+        <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+          <h4 className="font-bold text-ink mb-3 flex items-center gap-2">
+            <ChartBar className="w-4 h-4 text-ink-mid" />
             יחסי מינוף
           </h4>
           <div className="space-y-2 text-sm">
@@ -183,9 +183,9 @@ export function RatiosDisplay() {
         </div>
 
         {/* הון חוזר */}
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-          <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <ChartBar className="w-4 h-4 text-orange-600" />
+        <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+          <h4 className="font-bold text-ink mb-3 flex items-center gap-2">
+            <ChartBar className="w-4 h-4 text-gold" />
             הון חוזר (ימים)
           </h4>
           <div className="space-y-2 text-sm">
@@ -198,8 +198,8 @@ export function RatiosDisplay() {
       </div>
 
       {/* Health Score Breakdown */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-        <h4 className="font-bold text-gray-900 mb-3">פירוט ציון בריאות</h4>
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
+        <h4 className="font-bold text-ink mb-3">פירוט ציון בריאות</h4>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {Object.entries(health.breakdown).map(([key, score]) => {
             const labels: Record<string, string> = {
@@ -210,8 +210,8 @@ export function RatiosDisplay() {
               efficiency: 'יעילות',
             };
             return (
-              <div key={key} className="bg-gray-50 rounded p-3 text-center">
-                <div className="text-xs text-gray-600 mb-1">{labels[key]}</div>
+              <div key={key} className="bg-cream-2 rounded-none p-3 text-center">
+                <div className="text-xs text-ink/60 mb-1">{labels[key]}</div>
                 <div className={`text-2xl font-bold ${
                   score >= 70 ? 'text-green-700' : score >= 50 ? 'text-amber-700' : 'text-red-700'
                 }`}>
@@ -221,7 +221,7 @@ export function RatiosDisplay() {
             );
           })}
         </div>
-        <p className="text-sm text-gray-600 mt-3 text-center">
+        <p className="text-sm text-ink/60 mt-3 text-center">
           {health.interpretation}
         </p>
       </div>
@@ -245,8 +245,8 @@ function RatioRow({
   };
   return (
     <div className="flex justify-between items-center py-1">
-      <span className="text-gray-700">{label}</span>
-      <span className={`px-2 py-0.5 rounded font-medium ${colors[status]}`}>{value}</span>
+      <span className="text-ink/70">{label}</span>
+      <span className={`px-2 py-0.5 rounded-none font-medium ${colors[status]}`}>{value}</span>
     </div>
   );
 }

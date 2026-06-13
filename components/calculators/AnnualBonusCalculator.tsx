@@ -64,8 +64,8 @@ const PIE_COLORS = {
   net: '#10b981',
   tax: '#ef4444',
   ss: '#f59e0b',
-  pension: '#3b82f6',
-  studyFund: '#8b5cf6',
+  pension: '#102219',
+  studyFund: '#8E6824',
 };
 
 // ============================================================
@@ -74,16 +74,16 @@ const PIE_COLORS = {
 
 function TabBar({ active, onChange }: { active: TabMode; onChange: (t: TabMode) => void }) {
   return (
-    <div className="flex flex-wrap gap-1.5 bg-gray-100 rounded-xl p-1.5">
+    <div className="flex flex-wrap gap-1.5 bg-cream-2 rounded-none p-1.5">
       {TABS.map((t) => (
         <button
           key={t.id}
           type="button"
           onClick={() => onChange(t.id)}
-          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+          className={`px-3 py-1.5 rounded-none text-sm font-medium transition-all ${
             active === t.id
-              ? 'bg-white text-blue-700 shadow-sm'
-              : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+              ? 'bg-paper text-ink shadow-sm'
+              : 'text-ink/60 hover:text-ink hover:bg-paper/60'
           }`}
         >
           <span className="hidden sm:inline">{t.label}</span>
@@ -105,30 +105,30 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }
 
 function InfoBox({ children, color = 'blue' }: { children: React.ReactNode; color?: 'blue' | 'amber' | 'green' | 'red' }) {
   const styles = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    blue: 'bg-cream-2 border-ink/15 text-ink/80',
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
     green: 'bg-green-50 border-green-200 text-green-900',
     red: 'bg-red-50 border-red-200 text-red-900',
   };
   return (
-    <div className={`border rounded-lg p-3 text-sm ${styles[color]}`}>{children}</div>
+    <div className={`border rounded-none p-3 text-sm ${styles[color]}`}>{children}</div>
   );
 }
 
 function SectionTitle({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="mb-4">
-      <h2 className="text-lg font-bold text-gray-900">{title}</h2>
-      {subtitle && <p className="text-sm text-gray-600 mt-0.5">{subtitle}</p>}
+      <h2 className="text-lg font-bold text-ink">{title}</h2>
+      {subtitle && <p className="text-sm text-ink/60 mt-0.5">{subtitle}</p>}
     </div>
   );
 }
@@ -205,7 +205,7 @@ function TabNetBonus() {
             step={1000}
             value={grossBonus}
             onChange={(e) => setGrossBonus(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg focus:ring-2 focus:ring-gold"
           />
           <div className="flex flex-wrap gap-1.5 mt-2">
             {[10_000, 25_000, 50_000, 75_000, 100_000, 200_000].map((v) => (
@@ -213,7 +213,7 @@ function TabNetBonus() {
                 key={v}
                 type="button"
                 onClick={() => setGrossBonus(v)}
-                className="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded hover:bg-blue-200 transition"
+                className="text-xs px-2 py-0.5 bg-ink text-cream rounded-none hover:bg-ink-deep transition"
               >
                 {v >= 1000 ? `${v / 1000}K` : v.toLocaleString('he-IL')}
               </button>
@@ -228,7 +228,7 @@ function TabNetBonus() {
             step={500}
             value={monthlyBase}
             onChange={(e) => setMonthlyBase(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
           <div className="flex flex-wrap gap-1.5 mt-2">
             {[6_444, 10_000, 15_000, 20_000, 30_000, 50_000].map((v) => (
@@ -236,7 +236,7 @@ function TabNetBonus() {
                 key={v}
                 type="button"
                 onClick={() => setMonthlyBase(v)}
-                className="text-xs px-2 py-0.5 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition"
+                className="text-xs px-2 py-0.5 bg-cream-2 text-ink/70 rounded-none hover:bg-paper-hover transition"
               >
                 {v >= 1000 ? `${(v / 1000).toFixed(v % 1000 === 0 ? 0 : 3).replace(/\.?0+$/, '')}K` : v}
               </button>
@@ -252,7 +252,7 @@ function TabNetBonus() {
             step={0.25}
             value={creditPoints}
             onChange={(e) => setCreditPoints(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
         </Field>
 
@@ -262,18 +262,18 @@ function TabNetBonus() {
               type="checkbox"
               checked={pensionEnabled}
               onChange={(e) => setPensionEnabled(e.target.checked)}
-              className="w-4 h-4 text-blue-600 rounded"
+              className="w-4 h-4 text-ink rounded-none"
             />
-            <span className="text-sm text-gray-700">הפריש 6% לפנסיה מהבונוס (מפחית הכנסה חייבת)</span>
+            <span className="text-sm text-ink/70">הפריש 6% לפנסיה מהבונוס (מפחית הכנסה חייבת)</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={studyFundEnabled}
               onChange={(e) => setStudyFundEnabled(e.target.checked)}
-              className="w-4 h-4 text-blue-600 rounded"
+              className="w-4 h-4 text-ink rounded-none"
             />
-            <span className="text-sm text-gray-700">הפריש 2.5% לקרן השתלמות</span>
+            <span className="text-sm text-ink/70">הפריש 2.5% לקרן השתלמות</span>
           </label>
         </div>
 
@@ -303,8 +303,8 @@ function TabNetBonus() {
 
         {/* Pie Chart */}
         {grossBonus > 0 && (
-          <div className="border border-gray-200 rounded-lg p-4">
-            <p className="text-sm font-medium text-gray-700 mb-3">חלוקת הבונוס</p>
+          <div className="border border-ink/15 rounded-none p-4">
+            <p className="text-sm font-medium text-ink/70 mb-3">חלוקת הבונוס</p>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
@@ -326,7 +326,7 @@ function TabNetBonus() {
           </div>
         )}
 
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/60">
           {result.explanation}
         </div>
       </div>
@@ -373,28 +373,28 @@ function TabThreeMethods() {
           <input
             type="number" min={0} step={1000} value={grossBonus}
             onChange={(e) => setGrossBonus(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
         </Field>
         <Field label="שכר חודשי (₪)">
           <input
             type="number" min={0} step={500} value={monthlyBase}
             onChange={(e) => setMonthlyBase(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
         </Field>
         <Field label="חודשים שנותרו בשנה">
           <input
             type="number" min={1} max={12} step={1} value={monthsLeft}
             onChange={(e) => setMonthsLeft(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
         </Field>
       </div>
 
       {/* Bar chart */}
-      <div className="border border-gray-200 rounded-lg p-4">
-        <p className="text-sm font-medium text-gray-700 mb-3">השוואה: נטו מיידי vs נטו סופי</p>
+      <div className="border border-ink/15 rounded-none p-4">
+        <p className="text-sm font-medium text-ink/70 mb-3">השוואה: נטו מיידי vs נטו סופי</p>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={barData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -411,25 +411,25 @@ function TabThreeMethods() {
       {/* Cards per method */}
       <div className="grid md:grid-cols-3 gap-4">
         {methods.map((m) => (
-          <div key={m.method} className="border border-gray-200 rounded-xl p-4 space-y-3">
-            <h3 className="font-bold text-gray-900 text-sm">{m.label}</h3>
-            <p className="text-xs text-gray-600">{m.description}</p>
+          <div key={m.method} className="border border-ink/15 rounded-none p-4 space-y-3">
+            <h3 className="font-bold text-ink text-sm">{m.label}</h3>
+            <p className="text-xs text-ink/60">{m.description}</p>
             <div className="space-y-1 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-600">ניכוי במקור:</span>
+                <span className="text-ink/60">ניכוי במקור:</span>
                 <span className="font-medium text-red-600">-{formatCurrency(m.estimatedWithheld)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">נטו מיידי:</span>
+                <span className="text-ink/60">נטו מיידי:</span>
                 <span className="font-medium">{formatCurrency(m.netImmediately)}</span>
               </div>
               {m.estimatedRefund > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-gray-600">החזר מס משוער:</span>
+                  <span className="text-ink/60">החזר מס משוער:</span>
                   <span className="font-medium text-green-600">+{formatCurrency(m.estimatedRefund)}</span>
                 </div>
               )}
-              <div className="flex justify-between pt-2 border-t font-bold">
+              <div className="flex justify-between pt-2 border-t border-ink/15 font-bold">
                 <span>נטו סופי:</span>
                 <span className="text-emerald-700">{formatCurrency(m.netAfterRefund)}</span>
               </div>
@@ -478,9 +478,9 @@ function TabBonusVsRaise() {
 
   const monthlyRaise = Math.round(grossBonus / 12);
   const barData = [
-    { name: 'בונוס (נטו)', value: Math.round(result.bonus.netReceived), fill: '#3b82f6' },
+    { name: 'בונוס (נטו)', value: Math.round(result.bonus.netReceived), fill: '#102219' },
     { name: `שכר (נטו שנה ראשונה)`, value: Math.round(result.raise.annualNetValue), fill: '#10b981' },
-    { name: `שכר (נטו 3 שנים)`, value: Math.round(result.raise.annualNetValue * 3), fill: '#6b7280' },
+    { name: `שכר (נטו 3 שנים)`, value: Math.round(result.raise.annualNetValue * 3), fill: '#264B36' },
   ];
 
   return (
@@ -494,63 +494,63 @@ function TabBonusVsRaise() {
         <Field label="בונוס ברוטו (₪)">
           <input type="number" min={0} step={1000} value={grossBonus}
             onChange={(e) => setGrossBonus(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="שכר חודשי (₪)">
           <input type="number" min={0} step={500} value={monthlyBase}
             onChange={(e) => setMonthlyBase(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="נקודות זיכוי">
           <input type="number" min={0} max={15} step={0.25} value={creditPoints}
             onChange={(e) => setCreditPoints(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="חודשים שנותרו בשנה">
           <input type="number" min={1} max={12} step={1} value={monthsLeft}
             onChange={(e) => setMonthsLeft(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">
         {/* Bonus card */}
-        <div className="border-2 border-blue-200 rounded-xl p-5 bg-blue-50">
-          <h3 className="font-bold text-blue-900 mb-3">בונוס חד-פעמי {formatCurrency(grossBonus)} ברוטו</h3>
+        <div className="border border-ink/15 rounded-none p-5 bg-cream-2">
+          <h3 className="font-bold text-ink mb-3">בונוס חד-פעמי {formatCurrency(grossBonus)} ברוטו</h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">מס הכנסה:</span>
+              <span className="text-ink/60">מס הכנסה:</span>
               <span className="text-red-600">-{formatCurrency(result.bonus.taxPaid)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">ב.ל. + בריאות:</span>
+              <span className="text-ink/60">ב.ל. + בריאות:</span>
               <span className="text-red-600">-{formatCurrency(result.bonus.ssPaid)}</span>
             </div>
-            <div className="flex justify-between pt-2 border-t font-bold text-blue-800">
+            <div className="flex justify-between pt-2 border-t border-ink/15 font-bold text-ink">
               <span>נטו לכיס:</span>
               <span>{formatCurrency(result.bonus.netReceived)}</span>
             </div>
-            <div className="text-xs text-blue-700">
+            <div className="text-xs text-ink/60">
               {result.bonus.netPercentage.toFixed(1)}% מהברוטו — קבלה מיידית
             </div>
           </div>
         </div>
 
         {/* Raise card */}
-        <div className="border-2 border-green-200 rounded-xl p-5 bg-green-50">
+        <div className="border-2 border-green-200 rounded-none p-5 bg-green-50">
           <h3 className="font-bold text-green-900 mb-3">
             העלאת שכר +{formatCurrency(monthlyRaise)}/חודש (שווה ערך)
           </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">נטו נוסף/חודש:</span>
+              <span className="text-ink/60">נטו נוסף/חודש:</span>
               <span className="text-green-700">+{formatCurrency(result.raise.netMonthlyIncrease)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">נטו ל-{monthsLeft} חודשים:</span>
+              <span className="text-ink/60">נטו ל-{monthsLeft} חודשים:</span>
               <span className="font-medium">{formatCurrency(result.raise.netForRemainingYear)}</span>
             </div>
-            <div className="flex justify-between pt-2 border-t font-bold text-green-800">
+            <div className="flex justify-between pt-2 border-t border-green-200 font-bold text-green-800">
               <span>נטו שנה מלאה:</span>
               <span>{formatCurrency(result.raise.annualNetValue)}</span>
             </div>
@@ -562,15 +562,15 @@ function TabBonusVsRaise() {
       </div>
 
       {/* Comparison */}
-      <div className="border border-gray-200 rounded-lg p-4">
-        <p className="text-sm font-medium text-gray-700 mb-3">השוואה לאורך הזמן</p>
+      <div className="border border-ink/15 rounded-none p-4">
+        <p className="text-sm font-medium text-ink/70 mb-3">השוואה לאורך הזמן</p>
         <ResponsiveContainer width="100%" height={200}>
           <BarChart data={barData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" tick={{ fontSize: 11 }} />
             <YAxis tickFormatter={(v) => `${Math.round(v / 1000)}K`} />
             <Tooltip formatter={(v) => formatCurrency(Number(v))} />
-            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+            <Bar dataKey="value" radius={[0, 0, 0, 0]}>
               {barData.map((entry, i) => (
                 <Cell key={i} fill={entry.fill} />
               ))}
@@ -631,14 +631,14 @@ function TabThirteenth() {
         <Field label="שכר חודשי ברוטו (₪)">
           <input type="number" min={0} step={500} value={monthlySalary}
             onChange={(e) => setMonthlySalary(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
 
         <Field label="אמנת חישוב משכורת 13" hint="בדוק בחוזה העבודה שלך">
           <select
             value={convention}
             onChange={(e) => setConvention(e.target.value as ThirteenthSalaryConvention)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none bg-paper"
           >
             <option value="full_month">שכר חודש מלא (הנפוץ)</option>
             <option value="half_month">חצי חודש</option>
@@ -651,7 +651,7 @@ function TabThirteenth() {
           <Field label="חודשים שעבדת בשנה זו" hint="1-12 חודשים">
             <input type="number" min={1} max={12} step={1} value={monthsWorked}
               onChange={(e) => setMonthsWorked(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+              className="w-full px-3 py-2 border border-ink/15 rounded-none" />
           </Field>
         )}
 
@@ -659,21 +659,21 @@ function TabThirteenth() {
           <Field label="סכום מותאם (₪)">
             <input type="number" min={0} step={1000} value={customAmount}
               onChange={(e) => setCustomAmount(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+              className="w-full px-3 py-2 border border-ink/15 rounded-none" />
           </Field>
         )}
 
         <Field label="נקודות זיכוי">
           <input type="number" min={0} max={15} step={0.25} value={creditPoints}
             onChange={(e) => setCreditPoints(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
 
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" checked={includesSocialRights}
             onChange={(e) => setIncludesSocialRights(e.target.checked)}
-            className="w-4 h-4 text-blue-600 rounded" />
-          <span className="text-sm text-gray-700">
+            className="w-4 h-4 text-ink rounded-none" />
+          <span className="text-sm text-ink/70">
             משכורת 13 כוללת בבסיס לזכויות סוציאליות (כתוב בחוזה)
           </span>
         </label>
@@ -692,24 +692,24 @@ function TabThirteenth() {
           variant="success"
         />
 
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm space-y-2">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm space-y-2">
           <div className="flex justify-between">
-            <span className="text-gray-600">אמנה:</span>
+            <span className="text-ink/60">אמנה:</span>
             <span className="font-medium">{result.convention}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600">ברוטו:</span>
+            <span className="text-ink/60">ברוטו:</span>
             <span className="font-medium">{formatCurrency(result.grossAmount)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600">מס הכנסה:</span>
+            <span className="text-ink/60">מס הכנסה:</span>
             <span className="text-red-600">-{formatCurrency(result.taxOnAmount)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600">ב.ל. + בריאות:</span>
+            <span className="text-ink/60">ב.ל. + בריאות:</span>
             <span className="text-red-600">-{formatCurrency(result.ssOnAmount)}</span>
           </div>
-          <div className="flex justify-between pt-2 border-t font-bold text-emerald-700">
+          <div className="flex justify-between pt-2 border-t border-ink/15 font-bold text-emerald-700">
             <span>נטו:</span>
             <span>{formatCurrency(result.netAmount)}</span>
           </div>
@@ -723,7 +723,7 @@ function TabThirteenth() {
           <strong>עלות הזדמנות:</strong> {result.opportunityCost}
         </InfoBox>
 
-        <p className="text-xs text-gray-500">{result.conventionNote}</p>
+        <p className="text-xs text-ink/60">{result.conventionNote}</p>
       </div>
     </div>
   );
@@ -773,12 +773,12 @@ function TabPerformance() {
         <Field label="שכר חודשי ברוטו (₪)">
           <input type="number" min={0} step={500} value={monthlySalary}
             onChange={(e) => setMonthlySalary(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="נקודות זיכוי">
           <input type="number" min={0} max={15} step={0.25} value={creditPoints}
             onChange={(e) => setCreditPoints(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
       </div>
 
@@ -791,10 +791,10 @@ function TabPerformance() {
           ].map(({ v, l }) => (
             <button key={v} type="button"
               onClick={() => setBonusType(v as PerformanceBonusType)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+              className={`px-4 py-2 rounded-none text-sm font-medium transition ${
                 bonusType === v
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-ink text-cream'
+                  : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
               }`}>
               {l}
             </button>
@@ -806,7 +806,7 @@ function TabPerformance() {
         <Field label="% מהשכר השנתי" hint="לדוגמה: 10 = 10% מהשכר השנתי">
           <input type="number" min={0} max={500} step={1} value={bonusPct}
             onChange={(e) => setBonusPct(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
       )}
 
@@ -814,7 +814,7 @@ function TabPerformance() {
         <Field label="סכום בונוס קבוע (₪)">
           <input type="number" min={0} step={1000} value={fixedAmount}
             onChange={(e) => setFixedAmount(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
       )}
 
@@ -823,12 +823,12 @@ function TabPerformance() {
           <Field label="בונוס יעד מלא (₪) — 100% עמידה">
             <input type="number" min={0} step={1000} value={targetAmount}
               onChange={(e) => setTargetAmount(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+              className="w-full px-3 py-2 border border-ink/15 rounded-none" />
           </Field>
           <Field label="% עמידה ביעד בפועל" hint="50-200%">
             <input type="number" min={0} max={200} step={5} value={achievementPct}
               onChange={(e) => setAchievementPct(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+              className="w-full px-3 py-2 border border-ink/15 rounded-none" />
           </Field>
         </div>
       )}
@@ -853,8 +853,8 @@ function TabPerformance() {
         />
       </div>
 
-      <div className="border border-gray-200 rounded-lg p-4">
-        <p className="text-sm font-medium text-gray-700 mb-3">תרחישי עמידה ביעד</p>
+      <div className="border border-ink/15 rounded-none p-4">
+        <p className="text-sm font-medium text-ink/70 mb-3">תרחישי עמידה ביעד</p>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={scenarioBarData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -862,7 +862,7 @@ function TabPerformance() {
             <YAxis tickFormatter={(v) => `${Math.round(v / 1000)}K`} />
             <Tooltip formatter={(v) => formatCurrency(Number(v))} />
             <Legend />
-            <Bar dataKey="ברוטו" fill="#6b7280" />
+            <Bar dataKey="ברוטו" fill="#264B36" />
             <Bar dataKey="נטו" fill="#10b981" />
           </BarChart>
         </ResponsiveContainer>
@@ -919,32 +919,32 @@ function TabStock102() {
         <Field label="מספר יחידות (אופציות / RSU)">
           <input type="number" min={0} step={100} value={units}
             onChange={(e) => setUnits(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="מחיר מימוש (₪ ליחידה)" hint="0 עבור RSU">
           <input type="number" min={0} step={0.1} value={exercisePrice}
             onChange={(e) => setExercisePrice(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="מחיר שוק בעת מימוש (₪)">
           <input type="number" min={0} step={0.5} value={marketPrice}
             onChange={(e) => setMarketPrice(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="מחיר שוק בעת מכירה (₪)" hint="לחישוב רווח הון נוסף">
           <input type="number" min={0} step={0.5} value={salePrice}
             onChange={(e) => setSalePrice(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="% וסטינג שהושלם">
           <input type="number" min={0} max={100} step={25} value={vestedPct}
             onChange={(e) => setVestedPct(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="שנות וסטינג">
           <input type="number" min={1} max={10} step={1} value={vestingYears}
             onChange={(e) => setVestingYears(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
       </div>
 
@@ -956,12 +956,12 @@ function TabStock102() {
           ].map(({ v, l, hint }) => (
             <button key={v} type="button"
               onClick={() => setTrack(v as Section102Track)}
-              className={`flex-1 px-4 py-3 rounded-lg text-sm font-medium border-2 transition ${
+              className={`flex-1 px-4 py-3 rounded-none text-sm font-medium border-2 transition ${
                 track === v
                   ? v === 'capital'
                     ? 'bg-green-50 border-green-500 text-green-800'
                     : 'bg-red-50 border-red-500 text-red-800'
-                  : 'bg-gray-50 border-gray-200 text-gray-600'
+                  : 'bg-cream-2 border-ink/15 text-ink/60'
               }`}>
               <div className="font-bold">{l}</div>
               <div className="text-xs mt-0.5 opacity-75">{hint}</div>
@@ -974,7 +974,7 @@ function TabStock102() {
         <Field label="הכנסה שנתית אחרת (₪)" hint="לחישוב מס שולי נכון">
           <input type="number" min={0} step={10000} value={otherIncome}
             onChange={(e) => setOtherIncome(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
       )}
 
@@ -999,19 +999,19 @@ function TabStock102() {
       </div>
 
       {result.additionalCapitalGain !== undefined && result.additionalCapitalGain > 0 && (
-        <div className="border border-purple-200 rounded-lg p-4 bg-purple-50">
-          <p className="font-medium text-purple-900 mb-2">שלב ב׳ — רווח הון ממכירה</p>
+        <div className="border border-gold/40 rounded-none p-4 bg-cream-2">
+          <p className="font-medium text-ink mb-2">שלב ב׳ — רווח הון ממכירה</p>
           <div className="grid sm:grid-cols-3 gap-3 text-sm">
             <div>
-              <span className="text-gray-600">רווח הון נוסף: </span>
+              <span className="text-ink/60">רווח הון נוסף: </span>
               <span className="font-bold">{formatCurrency(result.additionalCapitalGain)}</span>
             </div>
             <div>
-              <span className="text-gray-600">מס 25%: </span>
+              <span className="text-ink/60">מס 25%: </span>
               <span className="font-bold text-red-600">-{formatCurrency(result.additionalTaxOnSale ?? 0)}</span>
             </div>
             <div>
-              <span className="text-gray-600">נטו ממכירה: </span>
+              <span className="text-ink/60">נטו ממכירה: </span>
               <span className="font-bold text-green-700">{formatCurrency(result.netFromSale ?? 0)}</span>
             </div>
           </div>
@@ -1019,8 +1019,8 @@ function TabStock102() {
       )}
 
       {/* Vesting schedule */}
-      <div className="border border-gray-200 rounded-lg p-4">
-        <p className="text-sm font-medium text-gray-700 mb-3">לוח וסטינג ({vestingYears} שנים)</p>
+      <div className="border border-ink/15 rounded-none p-4">
+        <p className="text-sm font-medium text-ink/70 mb-3">לוח וסטינג ({vestingYears} שנים)</p>
         <ResponsiveContainer width="100%" height={200}>
           <BarChart data={vestingBarData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -1028,7 +1028,7 @@ function TabStock102() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="יחידות" fill="#3b82f6" />
+            <Bar dataKey="יחידות" fill="#102219" />
             <Bar dataKey="מצטבר" fill="#10b981" />
           </BarChart>
         </ResponsiveContainer>
@@ -1043,11 +1043,11 @@ function TabStock102() {
         </InfoBox>
       )}
 
-      <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-        <p className="font-medium text-gray-800 mb-2">כללים מרכזיים — סעיף 102</p>
+      <div className="border border-ink/15 rounded-none p-4 bg-cream-2">
+        <p className="font-medium text-ink mb-2">כללים מרכזיים — סעיף 102</p>
         <ul className="space-y-1">
           {result.keyRules.map((r, i) => (
-            <li key={i} className="text-sm text-gray-700">• {r}</li>
+            <li key={i} className="text-sm text-ink/70">• {r}</li>
           ))}
         </ul>
       </div>
@@ -1093,17 +1093,17 @@ function TabYearCompare() {
         <Field label="בונוס ברוטו (₪)">
           <input type="number" min={0} step={1000} value={grossBonus}
             onChange={(e) => setGrossBonus(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="שכר חודשי (₪)">
           <input type="number" min={0} step={500} value={monthlyBase}
             onChange={(e) => setMonthlyBase(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="נקודות זיכוי">
           <input type="number" min={0} max={15} step={0.25} value={creditPoints}
             onChange={(e) => setCreditPoints(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
       </div>
 
@@ -1111,8 +1111,8 @@ function TabYearCompare() {
         {years.map((y) => (
           <div
             key={y.year}
-            className={`border-2 rounded-xl p-4 ${
-              y.year === best.year ? 'border-green-500 bg-green-50' : 'border-gray-200'
+            className={`border-2 rounded-none p-4 ${
+              y.year === best.year ? 'border-green-500 bg-green-50' : 'border-ink/15'
             }`}
           >
             {y.year === best.year && (
@@ -1120,16 +1120,16 @@ function TabYearCompare() {
                 הכי טוב
               </span>
             )}
-            <p className="text-xl font-bold text-gray-900">{y.year}</p>
+            <p className="text-xl font-bold text-ink">{y.year}</p>
             <p className="text-2xl font-bold text-emerald-700 mt-1">{formatCurrency(y.netBonus)}</p>
-            <p className="text-sm text-gray-600 mt-1">נטו לכיס ({y.netBonus > 0 ? ((y.netBonus / grossBonus) * 100).toFixed(1) : 0}%)</p>
+            <p className="text-sm text-ink/60 mt-1">נטו לכיס ({y.netBonus > 0 ? ((y.netBonus / grossBonus) * 100).toFixed(1) : 0}%)</p>
             <div className="mt-3 text-sm space-y-1">
               <div className="flex justify-between">
-                <span className="text-gray-500">מס:</span>
+                <span className="text-ink/60">מס:</span>
                 <span className="text-red-600">-{formatCurrency(y.taxOnBonus)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">מס שולי:</span>
+                <span className="text-ink/60">מס שולי:</span>
                 <span>{Math.round(y.marginalRate * 100)}%</span>
               </div>
             </div>
@@ -1137,8 +1137,8 @@ function TabYearCompare() {
         ))}
       </div>
 
-      <div className="border border-gray-200 rounded-lg p-4">
-        <p className="text-sm font-medium text-gray-700 mb-3">השוואה ויזואלית</p>
+      <div className="border border-ink/15 rounded-none p-4">
+        <p className="text-sm font-medium text-ink/70 mb-3">השוואה ויזואלית</p>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={barData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -1191,16 +1191,16 @@ function TabCurve() {
         <Field label="שכר חודשי (₪)">
           <input type="number" min={0} step={500} value={monthlyBase}
             onChange={(e) => setMonthlyBase(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="נקודות זיכוי">
           <input type="number" min={0} max={15} step={0.25} value={creditPoints}
             onChange={(e) => setCreditPoints(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
+            className="w-full px-3 py-2 border border-ink/15 rounded-none" />
         </Field>
         <Field label="בונוס מקסימלי לגרף (₪)">
           <select value={maxBonus} onChange={(e) => setMaxBonus(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white">
+            className="w-full px-3 py-2 border border-ink/15 rounded-none bg-paper">
             <option value={50_000}>50,000</option>
             <option value={100_000}>100,000</option>
             <option value={200_000}>200,000</option>
@@ -1209,8 +1209,8 @@ function TabCurve() {
         </Field>
       </div>
 
-      <div className="border border-gray-200 rounded-lg p-4">
-        <p className="text-sm font-medium text-gray-700 mb-3">נטו (₪) לפי גודל בונוס</p>
+      <div className="border border-ink/15 rounded-none p-4">
+        <p className="text-sm font-medium text-ink/70 mb-3">נטו (₪) לפי גודל בונוס</p>
         <ResponsiveContainer width="100%" height={250}>
           <LineChart data={chartData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -1256,7 +1256,7 @@ export function AnnualBonusCalculator() {
         {activeTab === 'curve' && <TabCurve />}
       </div>
 
-      <div className="text-xs text-gray-400 border-t pt-3">
+      <div className="text-xs text-ink/45 border-t border-ink/15 pt-3">
         מקורות: רשות המסים, ביטוח לאומי 2026. החישובים הם אומדן — לייעוץ מס מחייב פנה לרואה חשבון.
       </div>
     </div>

@@ -91,31 +91,31 @@ export default function Page() {
           <h2>שיעורי ההפקדה (2026)</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="border border-gray-300 p-2 text-right">שלב</th>
-                <th className="border border-gray-300 p-2 text-right">הכנסה</th>
-                <th className="border border-gray-300 p-2 text-right">שיעור</th>
-                <th className="border border-gray-300 p-2 text-right">דוגמה (15K ₪/חודש)</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-2 text-right">שלב</th>
+                <th className="border border-ink/15 p-2 text-right">הכנסה</th>
+                <th className="border border-ink/15 p-2 text-right">שיעור</th>
+                <th className="border border-ink/15 p-2 text-right">דוגמה (15K ₪/חודש)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-2">1</td>
-                <td className="border border-gray-300 p-2">עד 6,884 ₪/חודש</td>
-                <td className="border border-gray-300 p-2 font-semibold">4.45%</td>
-                <td className="border border-gray-300 p-2">306 ₪</td>
+                <td className="border border-ink/15 p-2">1</td>
+                <td className="border border-ink/15 p-2">עד 6,884 ₪/חודש</td>
+                <td className="border border-ink/15 p-2 font-semibold">4.45%</td>
+                <td className="border border-ink/15 p-2">306 ₪</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">2</td>
-                <td className="border border-gray-300 p-2">6,885–13,769 ₪/חודש</td>
-                <td className="border border-gray-300 p-2 font-semibold">12.55%</td>
-                <td className="border border-gray-300 p-2">864 ₪</td>
+              <tr className="bg-cream-2/50">
+                <td className="border border-ink/15 p-2">2</td>
+                <td className="border border-ink/15 p-2">6,885–13,769 ₪/חודש</td>
+                <td className="border border-ink/15 p-2 font-semibold">12.55%</td>
+                <td className="border border-ink/15 p-2">864 ₪</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-2">3</td>
-                <td className="border border-gray-300 p-2">מעל 13,769 ₪/חודש</td>
-                <td className="border border-gray-300 p-2">לא חובה (מומלץ)</td>
-                <td className="border border-gray-300 p-2">—</td>
+                <td className="border border-ink/15 p-2">3</td>
+                <td className="border border-ink/15 p-2">מעל 13,769 ₪/חודש</td>
+                <td className="border border-ink/15 p-2">לא חובה (מומלץ)</td>
+                <td className="border border-ink/15 p-2">—</td>
               </tr>
             </tbody>
           </table>

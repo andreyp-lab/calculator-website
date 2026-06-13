@@ -102,15 +102,15 @@ export default function Page() {
 
           <h2>הטבלה המלאה — % הכרה במס, % קיזוז מע"מ ותנאים</h2>
           <div className="overflow-x-auto my-6 not-prose">
-            <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-              <thead className="bg-gray-50">
+            <table className="w-full text-sm border border-ink/15 overflow-hidden">
+              <thead className="bg-cream-2">
                 <tr>
-                  <th className="p-3 font-bold text-gray-700 border-b text-right">הוצאה</th>
-                  <th className="p-3 font-bold text-blue-700 border-b text-right">% הכרה במס</th>
-                  <th className="p-3 font-bold text-emerald-700 border-b text-right">
+                  <th className="p-3 font-bold text-ink/70 border-b text-right">הוצאה</th>
+                  <th className="p-3 font-bold text-ink border-b text-right">% הכרה במס</th>
+                  <th className="p-3 font-bold text-ink-mid border-b text-right">
                     קיזוז מע"מ
                   </th>
-                  <th className="p-3 font-bold text-gray-700 border-b text-right">תנאים עיקריים</th>
+                  <th className="p-3 font-bold text-ink/70 border-b text-right">תנאים עיקריים</th>
                 </tr>
               </thead>
               <tbody>
@@ -122,7 +122,7 @@ export default function Page() {
                     רכב עד 3.5 טון. חלופה: הוצאות בניכוי שווי שימוש — הגבוה מביניהם
                   </td>
                 </tr>
-                <tr className="bg-gray-50/50">
+                <tr className="bg-cream-2/50">
                   <td className="p-3 border-b font-medium">סלולר ותקשורת</td>
                   <td className="p-3 border-b">לפי שימוש (~50%)</td>
                   <td className="p-3 border-b">2/3</td>
@@ -134,7 +134,7 @@ export default function Page() {
                   <td className="p-3 border-b">2/3</td>
                   <td className="p-3 border-b">חלק יחסי לפי שימוש עסקי; החלק הפרטי לא מוכר</td>
                 </tr>
-                <tr className="bg-gray-50/50">
+                <tr className="bg-cream-2/50">
                   <td className="p-3 border-b font-medium">עבודה מהבית</td>
                   <td className="p-3 border-b">יחס שטח</td>
                   <td className="p-3 border-b">—</td>
@@ -150,7 +150,7 @@ export default function Page() {
                     שתייה ועוגיות במקום העיסוק. מע"מ על כיבוד ככלל אינו ניתן לקיזוז
                   </td>
                 </tr>
-                <tr className="bg-gray-50/50">
+                <tr className="bg-cream-2/50">
                   <td className="p-3 border-b font-medium">אירוח</td>
                   <td className="p-3 border-b">לא מוכר*</td>
                   <td className="p-3 border-b">אין</td>
@@ -164,7 +164,7 @@ export default function Page() {
                   <td className="p-3 border-b">—</td>
                   <td className="p-3 border-b">עד 240 ₪ לאדם לשנה (בארץ); עד 15$ לאדם (בחו"ל)</td>
                 </tr>
-                <tr className="bg-gray-50/50">
+                <tr className="bg-cream-2/50">
                   <td className="p-3 border-b font-medium">ציוד ופחת (מחשבים)</td>
                   <td className="p-3 border-b">33%/שנה</td>
                   <td className="p-3 border-b">מלא</td>
@@ -178,7 +178,7 @@ export default function Page() {
                     *רק "שמירה על הקיים" — לא השכלה ראשונית/מקצוע חדש
                   </td>
                 </tr>
-                <tr className="bg-gray-50/50">
+                <tr className="bg-cream-2/50">
                   <td className="p-3 border-b font-medium">ביטוחים מקצועיים</td>
                   <td className="p-3 border-b">מלא</td>
                   <td className="p-3 border-b">מלא</td>
@@ -192,7 +192,7 @@ export default function Page() {
                   <td className="p-3 border-b">מלא</td>
                   <td className="p-3 border-b">הוצאה שוטפת לייצור הכנסה</td>
                 </tr>
-                <tr className="bg-gray-50/50">
+                <tr className="bg-cream-2/50">
                   <td className="p-3 font-medium">נסיעות בארץ</td>
                   <td className="p-3">מלא*</td>
                   <td className="p-3">מלא</td>
@@ -203,7 +203,7 @@ export default function Page() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-ink/60">
             תקנה 18 לתקנות מע"מ: בהוצאה מעורבת שעיקרה עסקי — קיזוז עד 2/3; שעיקרה פרטי — עד 1/4.
           </p>
 
@@ -245,19 +245,19 @@ export default function Page() {
           <h2>כלים קשורים</h2>
           <ul>
             <li>
-              <a href="/self-employed/net" className="text-blue-700 hover:underline">
+              <a href="/self-employed/net" className="text-gold hover:underline">
                 מחשבון נטו לעצמאי
               </a>{' '}
               — הכנסה נטו לאחר הוצאות, מס וביטוח לאומי
             </li>
             <li>
-              <a href="/self-employed/tax-advances" className="text-blue-700 hover:underline">
+              <a href="/self-employed/tax-advances" className="text-gold hover:underline">
                 מחשבון מקדמות מס
               </a>{' '}
               — הוצאות מוכרות מקטינות את המקדמה
             </li>
             <li>
-              <a href="/self-employed/vat" className="text-blue-700 hover:underline">
+              <a href="/self-employed/vat" className="text-gold hover:underline">
                 מחשבון מע&quot;מ
               </a>{' '}
               — חישוב מע"מ עסקאות מול תשומות
@@ -267,7 +267,7 @@ export default function Page() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.nevo.co.il/law_html/law01/255_418.htm"

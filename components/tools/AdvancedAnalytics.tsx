@@ -66,7 +66,7 @@ export function AdvancedAnalytics() {
   return (
     <div className="space-y-4">
       {/* Tabs */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-2 shadow-sm flex flex-wrap gap-1">
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-2 shadow-sm flex flex-wrap gap-1">
         {[
           { id: 'breakeven' as Tab, label: 'נקודת איזון', icon: Scale },
           { id: 'sensitivity' as Tab, label: 'ניתוח רגישות', icon: Activity },
@@ -78,10 +78,10 @@ export function AdvancedAnalytics() {
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded text-sm transition ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-none text-sm transition ${
                 tab === t.id
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-ink text-cream'
+                  : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -93,17 +93,17 @@ export function AdvancedAnalytics() {
 
       {/* Break-Even Analysis */}
       {tab === 'breakeven' && (
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white p-4">
+        <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+          <div className="bg-ink text-cream p-4">
             <h3 className="font-bold flex items-center gap-2">
               <Scale className="w-5 h-5" />
               ניתוח נקודת איזון (Break-Even)
             </h3>
-            <p className="text-xs text-blue-100">חישוב מינימום הכנסות לכיסוי הוצאות</p>
+            <p className="text-xs text-cream/70">חישוב מינימום הכנסות לכיסוי הוצאות</p>
           </div>
           <div className="p-5 space-y-4">
             <div
-              className={`border-2 rounded-lg p-4 ${
+              className={`border-2 rounded-none p-4 ${
                 computed.breakEven.isAboveBreakEven
                   ? 'border-emerald-400 bg-emerald-50'
                   : 'border-red-400 bg-red-50'
@@ -132,8 +132,8 @@ export function AdvancedAnalytics() {
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <h4 className="font-semibold text-gray-900">פירוט עלויות</h4>
-                <div className="bg-gray-50 rounded p-3 space-y-1.5 text-sm">
+                <h4 className="font-semibold text-ink">פירוט עלויות</h4>
+                <div className="bg-cream-2 rounded-none p-3 space-y-1.5 text-sm">
                   <div className="flex justify-between">
                     <span>עלויות קבועות:</span>
                     <span className="font-medium">{fmt(computed.breakEven.fixedCosts)}</span>
@@ -142,15 +142,15 @@ export function AdvancedAnalytics() {
                     <span>עלויות משתנות:</span>
                     <span className="font-medium">{fmt(computed.breakEven.variableCosts)}</span>
                   </div>
-                  <div className="flex justify-between pt-1 border-t font-bold">
+                  <div className="flex justify-between pt-1 border-t border-ink/15 font-bold">
                     <span>סה"כ עלויות:</span>
                     <span>{fmt(computed.breakEven.totalCosts)}</span>
                   </div>
                 </div>
               </div>
               <div className="space-y-2">
-                <h4 className="font-semibold text-gray-900">תוצאות</h4>
-                <div className="bg-gray-50 rounded p-3 space-y-1.5 text-sm">
+                <h4 className="font-semibold text-ink">תוצאות</h4>
+                <div className="bg-cream-2 rounded-none p-3 space-y-1.5 text-sm">
                   <div className="flex justify-between">
                     <span>תרומה לכיסוי:</span>
                     <span className="font-medium">
@@ -163,9 +163,9 @@ export function AdvancedAnalytics() {
                       {formatPercent(computed.breakEven.contributionMarginRatio, 1)}
                     </span>
                   </div>
-                  <div className="flex justify-between pt-1 border-t font-bold">
+                  <div className="flex justify-between pt-1 border-t border-ink/15 font-bold">
                     <span>הכנסות לאיזון:</span>
-                    <span className="text-cyan-700">
+                    <span className="text-ink">
                       {fmt(computed.breakEven.breakEvenRevenue)}
                     </span>
                   </div>
@@ -178,13 +178,13 @@ export function AdvancedAnalytics() {
 
       {/* Sensitivity Analysis */}
       {tab === 'sensitivity' && (
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4">
+        <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+          <div className="bg-ink text-cream p-4">
             <h3 className="font-bold flex items-center gap-2">
               <Activity className="w-5 h-5" />
               ניתוח רגישות - מטריצת רווח
             </h3>
-            <p className="text-xs text-purple-100">
+            <p className="text-xs text-cream/70">
               רווח נקי לפי שינוי בהכנסות (שורות) ובהוצאות (עמודות)
             </p>
           </div>
@@ -192,13 +192,13 @@ export function AdvancedAnalytics() {
             <table className="w-full text-xs border-collapse">
               <thead>
                 <tr>
-                  <th className="border border-gray-300 p-2 bg-gray-100 text-gray-600">
+                  <th className="border border-ink/15 p-2 bg-ink text-cream">
                     הכנסות \ הוצאות
                   </th>
                   {[-30, -20, -10, 0, 10, 20, 30].map((c) => (
                     <th
                       key={c}
-                      className="border border-gray-300 p-2 bg-gray-100 text-center font-medium"
+                      className="border border-ink/15 p-2 bg-ink text-cream text-center font-medium"
                     >
                       {c > 0 ? '+' : ''}
                       {c}%
@@ -209,7 +209,7 @@ export function AdvancedAnalytics() {
               <tbody>
                 {computed.sensitivity.map((row, i) => (
                   <tr key={i}>
-                    <td className="border border-gray-300 p-2 bg-gray-100 font-medium text-center">
+                    <td className="border border-ink/15 p-2 bg-cream-2 font-medium text-center">
                       {row[0].incomeChange > 0 ? '+' : ''}
                       {row[0].incomeChange}%
                     </td>
@@ -225,11 +225,11 @@ export function AdvancedAnalytics() {
                       return (
                         <td
                           key={j}
-                          className="border border-gray-300 p-2 text-center"
+                          className="border border-ink/15 p-2 text-center"
                           style={{ backgroundColor: bg }}
                         >
                           <div className="font-medium">{fmt(cell.netProfit)}</div>
-                          <div className="text-[10px] text-gray-600">
+                          <div className="text-[10px] text-ink/60">
                             {formatPercent(cell.margin, 1)}
                           </div>
                         </td>
@@ -239,7 +239,7 @@ export function AdvancedAnalytics() {
                 ))}
               </tbody>
             </table>
-            <div className="mt-3 text-xs text-gray-600">
+            <div className="mt-3 text-xs text-ink/60">
               💡 ירוק = רווח, אדום = הפסד. עומק הצבע = גודל הסכום.
             </div>
           </div>
@@ -248,22 +248,22 @@ export function AdvancedAnalytics() {
 
       {/* Forecast */}
       {tab === 'forecast' && (
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-gradient-to-r from-amber-600 to-orange-600 text-white p-4">
+        <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+          <div className="bg-ink text-cream p-4">
             <h3 className="font-bold flex items-center gap-2">
               <TrendingUp className="w-5 h-5" />
               תחזית הכנסות
             </h3>
-            <p className="text-xs text-amber-100">חיזוי לפי שיטות סטטיסטיות</p>
+            <p className="text-xs text-cream/70">חיזוי לפי שיטות סטטיסטיות</p>
           </div>
           <div className="p-4">
             <div className="grid md:grid-cols-3 gap-3 mb-4">
               <div>
-                <label className="block text-xs text-gray-700 mb-1">שיטת חיזוי</label>
+                <label className="block text-xs text-ink/70 mb-1">שיטת חיזוי</label>
                 <select
                   value={forecastMethod}
                   onChange={(e) => setForecastMethod(e.target.value as ForecastMethod)}
-                  className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                  className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                 >
                   <option value="moving-average">ממוצע נע (Moving Average)</option>
                   <option value="exponential">החלקה מעריכית (Exponential)</option>
@@ -272,11 +272,11 @@ export function AdvancedAnalytics() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs text-gray-700 mb-1">אופק חיזוי (חודשים)</label>
+                <label className="block text-xs text-ink/70 mb-1">אופק חיזוי (חודשים)</label>
                 <select
                   value={forecastMonths}
                   onChange={(e) => setForecastMonths(parseInt(e.target.value))}
-                  className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                  className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                 >
                   <option value={6}>6 חודשים</option>
                   <option value={12}>12 חודשים</option>
@@ -286,12 +286,12 @@ export function AdvancedAnalytics() {
               </div>
               <div className="flex items-end">
                 <div
-                  className={`w-full p-2 rounded text-center text-sm ${
+                  className={`w-full p-2 rounded-none text-center text-sm ${
                     computed.forecastResult.trend === 'up'
                       ? 'bg-emerald-50 text-emerald-700'
                       : computed.forecastResult.trend === 'down'
                         ? 'bg-red-50 text-red-700'
-                        : 'bg-gray-50 text-gray-700'
+                        : 'bg-cream-2 text-ink/70'
                   }`}
                 >
                   טרנד:{' '}
@@ -336,7 +336,7 @@ export function AdvancedAnalytics() {
                   type="monotone"
                   dataKey="upper"
                   stroke="transparent"
-                  fill="#fbbf24"
+                  fill="#D8B36A"
                   fillOpacity={0.2}
                   name="טווח עליון"
                 />
@@ -344,7 +344,7 @@ export function AdvancedAnalytics() {
                   type="monotone"
                   dataKey="lower"
                   stroke="transparent"
-                  fill="#fbbf24"
+                  fill="#D8B36A"
                   fillOpacity={0.2}
                   name="טווח תחתון"
                 />
@@ -359,7 +359,7 @@ export function AdvancedAnalytics() {
                 <Line
                   type="monotone"
                   dataKey="forecast"
-                  stroke="#f59e0b"
+                  stroke="#8E6824"
                   strokeWidth={3}
                   strokeDasharray="5 5"
                   dot={{ r: 4 }}
@@ -373,13 +373,13 @@ export function AdvancedAnalytics() {
 
       {/* Financial Ratios */}
       {tab === 'ratios' && (
-        <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-4">
+        <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+          <div className="bg-ink text-cream p-4">
             <h3 className="font-bold flex items-center gap-2">
               <Percent className="w-5 h-5" />
               יחסים פיננסיים
             </h3>
-            <p className="text-xs text-emerald-100">מדדי ביצוע פיננסיים מבוססי תקציב</p>
+            <p className="text-xs text-cream/70">מדדי ביצוע פיננסיים מבוססי תקציב</p>
           </div>
           <div className="p-5">
             <div className="grid md:grid-cols-3 gap-3">
@@ -389,18 +389,18 @@ export function AdvancedAnalytics() {
                   value: computed.ratios.grossMargin,
                   format: 'pct',
                   benchmark: 'יעד: 40%+',
-                  bg: 'bg-blue-50',
-                  border: 'border-blue-200',
-                  text: 'text-blue-700',
+                  bg: 'bg-cream-2',
+                  border: 'border-ink/15',
+                  text: 'text-ink',
                 },
                 {
                   label: 'מרווח תפעולי',
                   value: computed.ratios.operatingMargin,
                   format: 'pct',
                   benchmark: 'יעד: 15%+',
-                  bg: 'bg-purple-50',
-                  border: 'border-purple-200',
-                  text: 'text-purple-700',
+                  bg: 'bg-cream-2',
+                  border: 'border-gold/40',
+                  text: 'text-gold',
                 },
                 {
                   label: 'מרווח נקי',
@@ -425,9 +425,9 @@ export function AdvancedAnalytics() {
                   value: computed.ratios.roi,
                   format: 'pct',
                   benchmark: 'יעד: 15%+',
-                  bg: 'bg-cyan-50',
-                  border: 'border-cyan-200',
-                  text: 'text-cyan-700',
+                  bg: 'bg-cream-2',
+                  border: 'border-ink/15',
+                  text: 'text-ink',
                 },
                 {
                   label: 'חוב/הכנסה',
@@ -452,9 +452,9 @@ export function AdvancedAnalytics() {
                   value: computed.ratios.monthlyIncomeGrowth,
                   format: 'pct',
                   benchmark: 'יעד: 5%+/חודש',
-                  bg: 'bg-pink-50',
-                  border: 'border-pink-200',
-                  text: 'text-pink-700',
+                  bg: 'bg-cream-2',
+                  border: 'border-gold/40',
+                  text: 'text-gold',
                 },
               ].map((r) => {
                 const value =
@@ -464,11 +464,11 @@ export function AdvancedAnalytics() {
                 return (
                   <div
                     key={r.label}
-                    className={`${r.bg} border-2 ${r.border} rounded-lg p-3`}
+                    className={`${r.bg} border-2 ${r.border} rounded-none p-3`}
                   >
-                    <div className="text-xs text-gray-600 mb-1">{r.label}</div>
+                    <div className="text-xs text-ink/60 mb-1">{r.label}</div>
                     <div className={`text-2xl font-bold ${r.text}`}>{value}</div>
-                    <div className="text-[10px] text-gray-500 mt-1">{r.benchmark}</div>
+                    <div className="text-[10px] text-ink/60 mt-1">{r.benchmark}</div>
                   </div>
                 );
               })}

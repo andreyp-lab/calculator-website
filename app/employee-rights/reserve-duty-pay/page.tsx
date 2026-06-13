@@ -173,7 +173,7 @@ export default function ReserveDutyPayPage() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700 text-sm">
+        <ul className="space-y-2 text-gold text-sm">
           <li>
             <a
               href="https://www.btl.gov.il/benefits/Reserve_Service"

@@ -220,7 +220,7 @@ export function HourlyRateCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* ======= Main Mode Tabs ======= */}
-      <div className="flex flex-wrap gap-2 bg-gray-100 rounded-xl p-1 w-fit">
+      <div className="flex flex-wrap gap-2 bg-cream-2 rounded-none p-1 w-fit">
         <ModeBtn active={mainTab === 'quick'} onClick={() => setMainTab('quick')} color="blue">
           מהיר — עלות + רווח
         </ModeBtn>
@@ -246,7 +246,7 @@ export function HourlyRateCalculator() {
                       type="number" min={0} step={500}
                       value={quickInput.monthlySalary}
                       onChange={(e) => updateQuick('monthlySalary', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                     />
                     <QuickPicks
                       values={[10_000, 15_000, 18_000, 25_000, 35_000]}
@@ -261,7 +261,7 @@ export function HourlyRateCalculator() {
                         type="number" min={1} max={300} step={5}
                         value={quickInput.workingHours}
                         onChange={(e) => updateQuick('workingHours', Number(e.target.value))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                       />
                     </Field>
                     <Field label="שעות לחיוב / חודש" hint="בד״כ 60–75% מהעבודה">
@@ -269,7 +269,7 @@ export function HourlyRateCalculator() {
                         type="number" min={1} max={300} step={5}
                         value={quickInput.billableHours}
                         onChange={(e) => updateQuick('billableHours', Number(e.target.value))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                       />
                     </Field>
                   </div>
@@ -278,7 +278,7 @@ export function HourlyRateCalculator() {
                   <button
                     type="button"
                     onClick={() => setShowBillableWizard(!showBillableWizard)}
-                    className="text-xs text-blue-700 hover:underline font-medium"
+                    className="text-xs text-gold hover:underline font-medium"
                   >
                     {showBillableWizard ? '▲ סגור מחשבון שעות ריאליסטי' : '▼ חשב שעות חיוב ריאליסטיות (חופשה / מחלה / ניהול)'}
                   </button>
@@ -297,7 +297,7 @@ export function HourlyRateCalculator() {
                       type="number" min={0} step={100}
                       value={quickInput.monthlyOverhead}
                       onChange={(e) => updateQuick('monthlyOverhead', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                     />
                     <QuickPicks
                       values={[2_000, 3_500, 5_000, 8_000, 12_000]}
@@ -314,20 +314,20 @@ export function HourlyRateCalculator() {
                       type="range" min={0} max={100} step={5}
                       value={quickInput.profitMargin}
                       onChange={(e) => updateQuick('profitMargin', Number(e.target.value))}
-                      className="w-full accent-blue-600 mt-1"
+                      className="w-full accent-gold mt-1"
                     />
-                    <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+                    <div className="flex justify-between text-xs text-ink/45 mt-0.5">
                       <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
                     </div>
                   </Field>
 
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                  <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
                     <label className="flex items-center gap-2 cursor-pointer text-sm font-medium">
                       <input
                         type="checkbox"
                         checked={quickInput.addVat ?? false}
                         onChange={(e) => updateQuick('addVat', e.target.checked)}
-                        className="w-4 h-4 text-blue-600"
+                        className="w-4 h-4 text-ink"
                       />
                       הצג גם תעריף כולל מע"מ (18%)
                     </label>
@@ -337,7 +337,7 @@ export function HourlyRateCalculator() {
 
               {/* Vacation compensation callout */}
               {vacationComp.hourlyAddition > 0 && (
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm">
+                <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm">
                   <p className="font-semibold text-amber-900 mb-1">שכיר מקבל ימי חופשה — עצמאי לא!</p>
                   <p className="text-amber-800">
                     {billableInput.vacationDays + billableInput.sickDays} ימי חופשה + מחלה = אובדן
@@ -359,7 +359,7 @@ export function HourlyRateCalculator() {
                     type="number" min={0} step={500}
                     value={detailedInput.targetMonthlySalary}
                     onChange={(e) => updateDetailed('targetMonthlySalary', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                   <QuickPicks
                     values={[10_000, 15_000, 20_000, 30_000, 40_000]}
@@ -378,7 +378,7 @@ export function HourlyRateCalculator() {
                   <SmallField label="ביטוח בריאות ₪" value={detailedInput.healthInsurance} onChange={(v) => updateDetailed('healthInsurance', v)} />
                   <SmallField label="ביטוח אחריות מקצועית ₪" value={detailedInput.professionalInsurance} onChange={(v) => updateDetailed('professionalInsurance', v)} />
                 </div>
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-xs text-ink/60 mt-2">
                   סה"כ קבועות: <strong>{formatCurrency(detailedFull.fixedCostsMonthly)}/חודש</strong>
                 </p>
               </Section>
@@ -389,7 +389,7 @@ export function HourlyRateCalculator() {
                   <SmallField label="פגישות + נסיעות ₪" value={detailedInput.meetingExpenses} onChange={(v) => updateDetailed('meetingExpenses', v)} />
                   <SmallField label="קורסים + השתלמויות ₪" value={detailedInput.training} onChange={(v) => updateDetailed('training', v)} />
                 </div>
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-xs text-ink/60 mt-2">
                   סה"כ משתנות: <strong>{formatCurrency(detailedFull.variableCostsMonthly)}/חודש</strong>
                 </p>
               </Section>
@@ -402,7 +402,7 @@ export function HourlyRateCalculator() {
                         type="range" min={0} max={15} step={0.5}
                         value={detailedInput.pensionRate}
                         onChange={(e) => updateDetailed('pensionRate', Number(e.target.value))}
-                        className="w-full accent-purple-600"
+                        className="w-full accent-gold"
                       />
                     </Field>
                     <Field label="נקודות זיכוי" hint="גבר=2.25, אישה=2.75">
@@ -410,7 +410,7 @@ export function HourlyRateCalculator() {
                         type="number" min={0} max={15} step={0.25}
                         value={detailedInput.creditPoints}
                         onChange={(e) => updateDetailed('creditPoints', Number(e.target.value))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                       />
                     </Field>
                   </div>
@@ -420,7 +420,7 @@ export function HourlyRateCalculator() {
                       type="checkbox"
                       checked={detailedInput.studyFundEnabled}
                       onChange={(e) => updateDetailed('studyFundEnabled', e.target.checked)}
-                      className="w-4 h-4 text-purple-600"
+                      className="w-4 h-4 text-ink"
                     />
                     קרן השתלמות (7.5%)
                   </label>
@@ -433,7 +433,7 @@ export function HourlyRateCalculator() {
                       type="range" min={0} max={100} step={5}
                       value={detailedInput.profitMargin}
                       onChange={(e) => updateDetailed('profitMargin', Number(e.target.value))}
-                      className="w-full accent-emerald-600"
+                      className="w-full accent-gold"
                     />
                   </Field>
 
@@ -442,12 +442,12 @@ export function HourlyRateCalculator() {
                       type="number" min={1} max={300} step={5}
                       value={quickInput.billableHours}
                       onChange={(e) => updateQuick('billableHours', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                     />
                     <button
                       type="button"
                       onClick={() => setShowBillableWizard(!showBillableWizard)}
-                      className="text-xs text-emerald-700 hover:underline mt-1"
+                      className="text-xs text-gold hover:underline mt-1"
                     >
                       {showBillableWizard ? '▲ סגור אשף' : '▼ חשב שעות ריאליסטיות'}
                     </button>
@@ -469,7 +469,7 @@ export function HourlyRateCalculator() {
           {/* ---------- VALUE-BASED ---------- */}
           {mainTab === 'value-based' && (
             <Section title="תמחור מבוסס ערך ללקוח" color="purple">
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-sm text-purple-900 mb-4">
+              <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-sm text-ink/70 mb-4">
                 <strong>שיטת Value-Based:</strong> במקום לשאול "כמה עולה לי?" — שואלים "כמה שווה ללקוח?"
                 גובים אחוז מהערך שאתה יוצר. רלוונטי ליועצים, מפתחים ומומחים מנוסים.
               </div>
@@ -482,7 +482,7 @@ export function HourlyRateCalculator() {
                     type="number" min={0} step={10_000}
                     value={valueInput.clientAnnualValue}
                     onChange={(e) => setValueInput((p) => ({ ...p, clientAnnualValue: Number(e.target.value) }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                   <QuickPicks
                     values={[100_000, 250_000, 500_000, 1_000_000, 2_000_000]}
@@ -500,9 +500,9 @@ export function HourlyRateCalculator() {
                     type="range" min={1} max={50} step={1}
                     value={valueInput.valueCapturePercent}
                     onChange={(e) => setValueInput((p) => ({ ...p, valueCapturePercent: Number(e.target.value) }))}
-                    className="w-full accent-purple-600"
+                    className="w-full accent-gold"
                   />
-                  <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+                  <div className="flex justify-between text-xs text-ink/45 mt-0.5">
                     <span>1%</span><span>10%</span><span>20%</span><span>30%</span><span>50%</span>
                   </div>
                 </Field>
@@ -512,12 +512,12 @@ export function HourlyRateCalculator() {
                     type="number" min={1} step={5}
                     value={valueInput.projectHours}
                     onChange={(e) => setValueInput((p) => ({ ...p, projectHours: Number(e.target.value) }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                 </Field>
 
                 {valueResult.impliedHourlyRate > 0 && (
-                  <div className={`rounded-lg p-3 text-sm ${valueResult.impliedHourlyRate > 300 ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-amber-50 border border-amber-200 text-amber-900'}`}>
+                  <div className={`rounded-none p-3 text-sm ${valueResult.impliedHourlyRate > 300 ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-amber-50 border border-amber-200 text-amber-900'}`}>
                     <p className="font-semibold mb-1">פירוש:</p>
                     <p>ערך ללקוח: <strong>{formatCurrency(valueResult.projectValue)}/שנה</strong></p>
                     <p>מה שאתה לוקח: <strong>{formatCurrency(valueResult.capturedValue)}</strong></p>
@@ -543,15 +543,15 @@ export function HourlyRateCalculator() {
 
           {/* Warning */}
           {mainTab === 'quick' && !quickResult.isValid && quickResult.warning && (
-            <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-3 text-sm text-amber-900">
+            <div className="bg-amber-50 border-2 border-amber-300 rounded-none p-3 text-sm text-amber-900">
               {quickResult.warning}
             </div>
           )}
 
           {/* Quick summary breakdown */}
           {mainTab === 'quick' && (
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-4 text-sm space-y-1.5">
-              <h4 className="font-bold text-gray-900 mb-2">פירוט</h4>
+            <div className="bg-paper border border-ink/15 rounded-none p-4 text-sm space-y-1.5">
+              <h4 className="font-bold text-ink mb-2">פירוט</h4>
               <Row label="עלות בסיס לשעה" value={formatCurrency(quickResult.baseCostPerHour)} />
               <Row label="רווח לשעה" value={`+${formatCurrency(quickResult.profitPerHour)}`} color="emerald" />
               <div className="border-t pt-1.5">
@@ -571,8 +571,8 @@ export function HourlyRateCalculator() {
 
           {/* Detailed summary */}
           {mainTab === 'detailed' && (
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-4 text-sm space-y-1.5">
-              <h4 className="font-bold text-gray-900 mb-2">פירוט עלויות חודשי</h4>
+            <div className="bg-paper border border-ink/15 rounded-none p-4 text-sm space-y-1.5">
+              <h4 className="font-bold text-ink mb-2">פירוט עלויות חודשי</h4>
               <Row label="שכר לעצמי" value={formatCurrency(detailedInput.targetMonthlySalary)} />
               <Row label="הוצאות קבועות" value={formatCurrency(detailedFull.fixedCostsMonthly)} />
               <Row label="הוצאות משתנות" value={formatCurrency(detailedFull.variableCostsMonthly)} />
@@ -586,27 +586,27 @@ export function HourlyRateCalculator() {
                 <Row label="סה״כ עלות" value={formatCurrency(detailedFull.totalCostMonthly)} bold />
                 <Row label="הכנסה נדרשת (עם רווח)" value={formatCurrency(detailedFull.requiredRevenueMonthly)} bold color="emerald" />
               </div>
-              <p className="text-xs text-gray-500 pt-1">
+              <p className="text-xs text-ink/60 pt-1">
                 שיעור מס אפקטיבי: {(detailedFull.effectiveTaxRate * 100).toFixed(1)}%
               </p>
             </div>
           )}
 
           {/* Industry picker */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-            <label className="block text-sm font-semibold text-blue-900 mb-2">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
+            <label className="block text-sm font-semibold text-ink mb-2">
               בנצ'מארק לפי תחום
             </label>
             <select
               value={selectedIndustry}
               onChange={(e) => setSelectedIndustry(e.target.value as IndustryKey)}
-              className="w-full px-3 py-2 border border-blue-300 rounded-lg text-sm bg-white"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm bg-paper"
             >
               {INDUSTRY_OPTIONS.map((o) => (
                 <option key={o.key} value={o.key}>{o.label}</option>
               ))}
             </select>
-            <div className="mt-2 text-xs text-blue-800">
+            <div className="mt-2 text-xs text-ink/70">
               <span className="font-medium">{INDUSTRY_RATES_2026[selectedIndustry].label}:</span>{' '}
               {INDUSTRY_RATES_2026[selectedIndustry].min}–{INDUSTRY_RATES_2026[selectedIndustry].max} ₪/שעה
             </div>
@@ -616,7 +616,7 @@ export function HourlyRateCalculator() {
               max={INDUSTRY_RATES_2026[selectedIndustry].max}
               mid={INDUSTRY_RATES_2026[selectedIndustry].mid}
             />
-            <p className={`text-xs mt-2 font-medium ${benchmarkResult.percentile === 'below' ? 'text-red-700' : benchmarkResult.percentile === 'premium' ? 'text-purple-700' : 'text-blue-800'}`}>
+            <p className={`text-xs mt-2 font-medium ${benchmarkResult.percentile === 'below' ? 'text-red-700' : benchmarkResult.percentile === 'premium' ? 'text-gold' : 'text-ink/70'}`}>
               {benchmarkResult.percentileLabel}
             </p>
           </div>
@@ -624,7 +624,7 @@ export function HourlyRateCalculator() {
       </div>
 
       {/* ======= Result Tabs (full width) ======= */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <div className="flex flex-wrap gap-2 mb-5">
           <TabBtn active={resultTab === 'summary'} onClick={() => setResultTab('summary')}>סיכום</TabBtn>
           <TabBtn active={resultTab === 'breakdown'} onClick={() => setResultTab('breakdown')}>פירוט עלויות</TabBtn>
@@ -636,8 +636,8 @@ export function HourlyRateCalculator() {
         {/* ---- Summary Tab ---- */}
         {resultTab === 'summary' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-3">כמה שעות חיוב ריאליסטי?</h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <h3 className="font-bold text-ink mb-3">כמה שעות חיוב ריאליסטי?</h3>
+            <p className="text-sm text-ink/70 mb-4">
               פרילנסרים רבים מניחים 160 שעות × 12 חודש = 1,920 שעות/שנה. המציאות שונה.
             </p>
             <div className="grid md:grid-cols-3 gap-4 mb-5">
@@ -662,8 +662,8 @@ export function HourlyRateCalculator() {
             </div>
 
             {/* Rate vs Billable Hours Chart */}
-            <h3 className="font-bold text-gray-900 mb-2">תעריף לפי שעות חיוב</h3>
-            <p className="text-xs text-gray-500 mb-3">ככל שפחות שעות חיוב — התעריף חייב לעלות</p>
+            <h3 className="font-bold text-ink mb-2">תעריף לפי שעות חיוב</h3>
+            <p className="text-xs text-ink/60 mb-3">ככל שפחות שעות חיוב — התעריף חייב לעלות</p>
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={rateVsBillableData}>
@@ -671,7 +671,7 @@ export function HourlyRateCalculator() {
                   <XAxis dataKey="hours" tick={{ fontSize: 11 }} />
                   <YAxis tickFormatter={(v) => `${v}₪`} tick={{ fontSize: 11 }} width={55} />
                   <Tooltip formatter={(v) => formatCurrency(Number(v))} />
-                  <Line type="monotone" dataKey="rate" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} name="תעריף שעתי" />
+                  <Line type="monotone" dataKey="rate" stroke="#8E6824" strokeWidth={2} dot={{ r: 3 }} name="תעריף שעתי" />
                   <ReferenceLine
                     x={`${Math.round(quickInput.billableHours)}ש'`}
                     stroke="#ef4444"
@@ -687,7 +687,7 @@ export function HourlyRateCalculator() {
         {/* ---- Breakdown Tab ---- */}
         {resultTab === 'breakdown' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-2">פירוט עלויות חודשי (מצב מפורט)</h3>
+            <h3 className="font-bold text-ink mb-2">פירוט עלויות חודשי (מצב מפורט)</h3>
             {mainTab !== 'detailed' && (
               <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded p-2 mb-4">
                 עבור לטאב &quot;מפורט&quot; לפירוט מלא של הוצאות ומסים.
@@ -713,23 +713,23 @@ export function HourlyRateCalculator() {
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm border-collapse">
                 <thead>
-                  <tr className="bg-gray-50">
-                    <th className="text-right p-2 border border-gray-200">רכיב</th>
-                    <th className="text-right p-2 border border-gray-200">חודשי</th>
-                    <th className="text-right p-2 border border-gray-200">שנתי</th>
-                    <th className="text-right p-2 border border-gray-200">% מהסה"כ</th>
+                  <tr className="bg-cream-2">
+                    <th className="text-right p-2 border border-ink/15">רכיב</th>
+                    <th className="text-right p-2 border border-ink/15">חודשי</th>
+                    <th className="text-right p-2 border border-ink/15">שנתי</th>
+                    <th className="text-right p-2 border border-ink/15">% מהסה"כ</th>
                   </tr>
                 </thead>
                 <tbody>
                   {detailedFull.costBreakdown.map((item, i) => (
-                    <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      <td className="p-2 border border-gray-200">
+                    <tr key={i} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
+                      <td className="p-2 border border-ink/15">
                         <span className="inline-block w-2 h-2 rounded-full ml-1" style={{ backgroundColor: item.color }} />
                         {item.label}
                       </td>
-                      <td className="p-2 border border-gray-200 tabular-nums">{formatCurrency(item.amount)}</td>
-                      <td className="p-2 border border-gray-200 tabular-nums">{formatCurrency(item.amount * 12)}</td>
-                      <td className="p-2 border border-gray-200 tabular-nums">
+                      <td className="p-2 border border-ink/15 tabular-nums">{formatCurrency(item.amount)}</td>
+                      <td className="p-2 border border-ink/15 tabular-nums">{formatCurrency(item.amount * 12)}</td>
+                      <td className="p-2 border border-ink/15 tabular-nums">
                         {detailedFull.totalCostMonthly > 0
                           ? ((item.amount / detailedFull.totalCostMonthly) * 100).toFixed(1) + '%'
                           : '—'}
@@ -737,10 +737,10 @@ export function HourlyRateCalculator() {
                     </tr>
                   ))}
                   <tr className="bg-emerald-50 font-bold">
-                    <td className="p-2 border border-gray-200">סה"כ</td>
-                    <td className="p-2 border border-gray-200 tabular-nums text-emerald-700">{formatCurrency(detailedFull.totalCostMonthly)}</td>
-                    <td className="p-2 border border-gray-200 tabular-nums text-emerald-700">{formatCurrency(detailedFull.totalCostMonthly * 12)}</td>
-                    <td className="p-2 border border-gray-200">100%</td>
+                    <td className="p-2 border border-ink/15">סה"כ</td>
+                    <td className="p-2 border border-ink/15 tabular-nums text-emerald-700">{formatCurrency(detailedFull.totalCostMonthly)}</td>
+                    <td className="p-2 border border-ink/15 tabular-nums text-emerald-700">{formatCurrency(detailedFull.totalCostMonthly * 12)}</td>
+                    <td className="p-2 border border-ink/15">100%</td>
                   </tr>
                 </tbody>
               </table>
@@ -751,8 +751,8 @@ export function HourlyRateCalculator() {
         {/* ---- Benchmark Tab ---- */}
         {resultTab === 'benchmark' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-2">תעריפי שוק 2026 — ישראל (₪/שעה)</h3>
-            <p className="text-xs text-gray-500 mb-4">
+            <h3 className="font-bold text-ink mb-2">תעריפי שוק 2026 — ישראל (₪/שעה)</h3>
+            <p className="text-xs text-ink/60 mb-4">
               הקו האדום הוא התעריף שלך ({formatCurrency(activeRate)}/שעה)
             </p>
             <div className="h-80">
@@ -769,18 +769,18 @@ export function HourlyRateCalculator() {
                   <YAxis tickFormatter={(v) => `${v}₪`} tick={{ fontSize: 10 }} width={45} />
                   <Tooltip formatter={(v) => `${v} ₪/שעה`} />
                   <Legend wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
-                  <Bar dataKey="min" name="מינימום" fill="#93c5fd" stackId="range" />
-                  <Bar dataKey="max" name="מקסימום" fill="#3b82f6" stackId="range" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="min" name="מינימום" fill="#D8B36A" stackId="range" />
+                  <Bar dataKey="max" name="מקסימום" fill="#8E6824" stackId="range" radius={[4, 4, 0, 0]} />
                   <ReferenceLine y={activeRate} stroke="#ef4444" strokeWidth={2} strokeDasharray="5 3" label={{ value: 'התעריף שלך', fill: '#ef4444', fontSize: 11 }} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
             {/* Benchmark recommendation */}
-            <div className={`mt-4 rounded-lg p-4 text-sm ${
+            <div className={`mt-4 rounded-none p-4 text-sm ${
               benchmarkResult.percentile === 'below' ? 'bg-red-50 border border-red-200 text-red-900'
-              : benchmarkResult.percentile === 'premium' ? 'bg-purple-50 border border-purple-200 text-purple-900'
-              : 'bg-blue-50 border border-blue-200 text-blue-900'
+              : benchmarkResult.percentile === 'premium' ? 'bg-cream-2 border border-ink/15 text-ink'
+              : 'bg-cream-2 border border-ink/15 text-ink'
             }`}>
               <p className="font-semibold mb-1">
                 {INDUSTRY_RATES_2026[selectedIndustry].label}: {benchmarkResult.percentileLabel}
@@ -793,8 +793,8 @@ export function HourlyRateCalculator() {
         {/* ---- Tiers Tab ---- */}
         {resultTab === 'tiers' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-2">מחיר לפי סוג לקוח / פרויקט</h3>
-            <p className="text-xs text-gray-500 mb-4">בסיס: {formatCurrency(activeRate)}/שעה</p>
+            <h3 className="font-bold text-ink mb-2">מחיר לפי סוג לקוח / פרויקט</h3>
+            <p className="text-xs text-ink/60 mb-4">בסיס: {formatCurrency(activeRate)}/שעה</p>
             <div className="grid md:grid-cols-2 gap-3">
               <TierCard
                 label="לקוח חדש (סטנדרט)"
@@ -838,7 +838,7 @@ export function HourlyRateCalculator() {
               />
             </div>
 
-            <div className="mt-4 bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-700">
+            <div className="mt-4 bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/70">
               <strong>טיפ:</strong> הצג ללקוחות 2–3 חבילות תמחור — Standard / Premium / Enterprise.
               מחקרים מראים שהוספת חבילה יקרה מעלה את שיעור הרכישה של החבילה הבינונית ב-20–35%.
             </div>
@@ -848,7 +848,7 @@ export function HourlyRateCalculator() {
         {/* ---- Salary Compare Tab ---- */}
         {resultTab === 'salary-compare' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-3">
+            <h3 className="font-bold text-ink mb-3">
               מה שווה {formatCurrency(activeRate)}/שעה כשכיר?
             </h3>
             <div className="grid md:grid-cols-3 gap-4 mb-5">
@@ -872,7 +872,7 @@ export function HourlyRateCalculator() {
               />
             </div>
 
-            <div className={`rounded-lg p-4 text-sm mb-4 ${
+            <div className={`rounded-none p-4 text-sm mb-4 ${
               salaryComparison.advantage >= 0
                 ? 'bg-emerald-50 border border-emerald-200 text-emerald-900'
                 : 'bg-red-50 border border-red-200 text-red-900'
@@ -889,9 +889,9 @@ export function HourlyRateCalculator() {
               )}
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm space-y-2">
-              <h4 className="font-semibold text-gray-900">מה העצמאי משלם שהשכיר לא?</h4>
-              <ul className="space-y-1 text-gray-700 text-xs">
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm space-y-2">
+              <h4 className="font-semibold text-ink">מה העצמאי משלם שהשכיר לא?</h4>
+              <ul className="space-y-1 text-ink/70 text-xs">
                 <li>• ביטוח לאומי מלא (12.5% + בריאות 5%) — במקום 3.5%+2.5% של שכיר</li>
                 <li>• פנסיה מהכיס שלו (אין הפרשת מעסיק)</li>
                 <li>• ימי חופשה ומחלה — אין שכר</li>
@@ -899,7 +899,7 @@ export function HourlyRateCalculator() {
                 <li>• ביטוח אחריות מקצועית</li>
                 <li>• אין בונוסים, רכב חברה, נסיעות מעסיק</li>
               </ul>
-              <p className="text-xs text-gray-500 pt-1">
+              <p className="text-xs text-ink/60 pt-1">
                 נקודת שיווי-משקל: <strong>{formatCurrency(salaryComparison.breakEvenHourlyRate)}/שעה</strong> — מתחת לזה שכיר עדיף נטו.
               </p>
             </div>
@@ -926,8 +926,8 @@ function BillableWizard({
   onApply: (hours: number) => void;
 }) {
   return (
-    <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
-      <h4 className="font-bold text-blue-900 mb-3 text-sm">מחשבון שעות חיוב ריאליסטי</h4>
+    <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-4">
+      <h4 className="font-bold text-ink mb-3 text-sm">מחשבון שעות חיוב ריאליסטי</h4>
       <div className="grid grid-cols-2 gap-3 mb-3">
         <SmallField
           label="ימי חופשה / שנה"
@@ -952,9 +952,9 @@ function BillableWizard({
         />
       </div>
 
-      <div className="bg-white rounded-lg p-3 text-xs space-y-1 mb-3">
+      <div className="bg-paper rounded-none p-3 text-xs space-y-1 mb-3">
         <div className="flex justify-between">
-          <span className="text-gray-600">ימי עבודה גולמי:</span>
+          <span className="text-ink/70">ימי עבודה גולמי:</span>
           <span className="font-medium">{result.grossWorkingDays} ימים</span>
         </div>
         <div className="flex justify-between text-red-700">
@@ -965,15 +965,15 @@ function BillableWizard({
           <span>- ניהול / שיווק:</span>
           <span className="font-medium">-{result.nonBillableAdminDays} ימים</span>
         </div>
-        <div className="flex justify-between font-bold text-blue-900 border-t pt-1">
+        <div className="flex justify-between font-bold text-ink border-t border-ink/15 pt-1">
           <span>ימי חיוב נטו:</span>
           <span>{result.netBillableDays} ימים/שנה</span>
         </div>
-        <div className="flex justify-between font-bold text-blue-900">
+        <div className="flex justify-between font-bold text-ink">
           <span>שעות חיוב:</span>
           <span>{result.netBillableHoursPerYear} ש׳/שנה</span>
         </div>
-        <div className="flex justify-between font-bold text-blue-900">
+        <div className="flex justify-between font-bold text-ink">
           <span>ממוצע חודשי:</span>
           <span>{result.netBillableHoursPerMonth} ש׳/חודש</span>
         </div>
@@ -982,7 +982,7 @@ function BillableWizard({
       <button
         type="button"
         onClick={() => onApply(result.netBillableHoursPerMonth)}
-        className="w-full bg-blue-600 text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 transition"
+        className="w-full bg-ink text-cream text-sm font-medium py-2 rounded-none hover:bg-ink-deep transition"
       >
         החל {result.netBillableHoursPerMonth} ש׳/חודש על המחשבון
       </button>
@@ -1007,13 +1007,13 @@ function PrimaryResultCard({
 }) {
   if (mainTab === 'value-based') {
     return (
-      <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-300 rounded-xl p-5">
-        <p className="text-sm font-medium text-purple-800 mb-1">תעריף שעתי משתמע (Value-Based)</p>
-        <p className="text-4xl font-bold text-purple-700 tabular-nums">
+      <div className="bg-ink border-2 border-ink rounded-none p-5 text-cream">
+        <p className="text-sm font-medium text-cream/80 mb-1">תעריף שעתי משתמע (Value-Based)</p>
+        <p className="text-4xl font-bold text-cream tabular-nums">
           {formatCurrency(valueResult.impliedHourlyRate)}
           <span className="text-lg font-normal">/שעה</span>
         </p>
-        <p className="text-sm text-purple-600 mt-1">
+        <p className="text-sm text-cream/70 mt-1">
           כולל מע"מ: {formatCurrency(valueResult.impliedHourlyRateWithVat)}
         </p>
       </div>
@@ -1022,7 +1022,7 @@ function PrimaryResultCard({
 
   if (mainTab === 'detailed') {
     return (
-      <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-300 rounded-xl p-5">
+      <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-5">
         <p className="text-sm font-medium text-emerald-800 mb-1">תעריף שעתי נדרש (מפורט)</p>
         <p className="text-4xl font-bold text-emerald-700 tabular-nums">
           {formatCurrency(detailedResult.requiredHourlyRate)}
@@ -1036,14 +1036,14 @@ function PrimaryResultCard({
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 rounded-xl p-5">
-      <p className="text-sm font-medium text-blue-800 mb-1">תעריף שעתי מומלץ</p>
-      <p className="text-4xl font-bold text-blue-700 tabular-nums">
+    <div className="bg-ink border-2 border-ink rounded-none p-5 text-cream">
+      <p className="text-sm font-medium text-cream/80 mb-1">תעריף שעתי מומלץ</p>
+      <p className="text-4xl font-bold text-cream tabular-nums">
         {formatCurrency(quickResult.hourlyRate)}
         <span className="text-lg font-normal">/שעה</span>
       </p>
       {addVat && (
-        <p className="text-sm text-blue-600 mt-1">
+        <p className="text-sm text-cream/70 mt-1">
           כולל מע"מ: {formatCurrency(quickResult.hourlyRate * (1 + vatRate))}
         </p>
       )}
@@ -1068,13 +1068,13 @@ function BenchmarkBar({
 
   return (
     <div className="mt-2">
-      <div className="relative h-4 bg-gray-200 rounded-full overflow-visible">
+      <div className="relative h-4 bg-ink/10 rounded-full overflow-visible">
         <div
-          className="absolute top-0 left-0 h-4 bg-blue-300 rounded-full"
+          className="absolute top-0 left-0 h-4 bg-gold-light rounded-full"
           style={{ width: '100%' }}
         />
         <div
-          className="absolute top-0 h-4 w-0.5 bg-blue-600"
+          className="absolute top-0 h-4 w-0.5 bg-gold"
           style={{ left: `${midPos}%` }}
           title="ממוצע"
         />
@@ -1084,7 +1084,7 @@ function BenchmarkBar({
           title="התעריף שלך"
         />
       </div>
-      <div className="flex justify-between text-xs text-gray-500 mt-1">
+      <div className="flex justify-between text-xs text-ink/60 mt-1">
         <span>{min}₪</span>
         <span>{mid}₪ ממוצע</span>
         <span>{max}₪</span>
@@ -1109,22 +1109,22 @@ function TierCard({
   note: string;
 }) {
   const colorMap = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
     emerald: 'bg-emerald-50 border-emerald-200 text-emerald-900',
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
-    teal: 'bg-teal-50 border-teal-200 text-teal-900',
-    purple: 'bg-purple-50 border-purple-200 text-purple-900',
+    teal: 'bg-cream-2 border-ink/15 text-ink',
+    purple: 'bg-cream-2 border-ink/15 text-ink',
   };
   const badgeMap = {
-    blue: 'bg-blue-200 text-blue-800',
+    blue: 'bg-ink text-cream',
     emerald: 'bg-emerald-200 text-emerald-800',
     amber: 'bg-amber-200 text-amber-800',
-    teal: 'bg-teal-200 text-teal-800',
-    purple: 'bg-purple-200 text-purple-800',
+    teal: 'bg-ink-mid text-cream',
+    purple: 'bg-gold text-cream',
   };
 
   return (
-    <div className={`border-2 rounded-xl p-4 ${colorMap[color]}`}>
+    <div className={`border-2 rounded-none p-4 ${colorMap[color]}`}>
       <div className="flex justify-between items-start mb-1">
         <span className="text-sm font-semibold">{label}</span>
         <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${badgeMap[color]}`}>{badge}</span>
@@ -1148,17 +1148,17 @@ function InfoCard({
   color: 'blue' | 'emerald' | 'amber' | 'gray' | 'red';
 }) {
   const colorMap = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-700',
+    blue: 'bg-cream-2 border-ink/15 text-gold',
     emerald: 'bg-emerald-50 border-emerald-200 text-emerald-700',
     amber: 'bg-amber-50 border-amber-200 text-amber-700',
-    gray: 'bg-gray-50 border-gray-200 text-gray-700',
+    gray: 'bg-cream-2 border-ink/15 text-ink',
     red: 'bg-red-50 border-red-200 text-red-700',
   };
   return (
-    <div className={`border-2 rounded-xl p-4 ${colorMap[color].split(' ').slice(0, 2).join(' ')}`}>
-      <p className="text-xs font-medium text-gray-600 mb-1">{title}</p>
+    <div className={`border-2 rounded-none p-4 ${colorMap[color].split(' ').slice(0, 2).join(' ')}`}>
+      <p className="text-xs font-medium text-ink/70 mb-1">{title}</p>
       <p className={`text-xl font-bold tabular-nums ${colorMap[color].split(' ')[2]}`}>{value}</p>
-      {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-ink/60 mt-0.5">{subtitle}</p>}
     </div>
   );
 }
@@ -1177,14 +1177,14 @@ function Section({
   children: React.ReactNode;
 }) {
   const map = {
-    gray: 'bg-white border-gray-200',
+    gray: 'bg-paper border-ink/15',
     emerald: 'bg-emerald-50 border-emerald-200',
-    blue: 'bg-blue-50 border-blue-200',
-    purple: 'bg-purple-50 border-purple-200',
+    blue: 'bg-cream-2 border-ink/15',
+    purple: 'bg-cream-2 border-ink/15',
   };
   return (
-    <div className={`rounded-xl border-2 p-5 ${map[color]}`}>
-      <h3 className="font-bold text-gray-900 text-base mb-4">{title}</h3>
+    <div className={`rounded-none border p-5 ${map[color]}`}>
+      <h3 className="font-bold text-ink text-base mb-4">{title}</h3>
       {children}
     </div>
   );
@@ -1201,9 +1201,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-0.5">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-0.5">{hint}</p>}
     </div>
   );
 }
@@ -1225,7 +1225,7 @@ function SmallField({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-gray-600 mb-1">{label}</label>
+      <label className="block text-xs font-medium text-ink/70 mb-1">{label}</label>
       <input
         type="number"
         min={min}
@@ -1233,7 +1233,7 @@ function SmallField({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+        className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
       />
     </div>
   );
@@ -1251,9 +1251,9 @@ function QuickPicks({
   format?: (v: number) => string;
 }) {
   const colorMap = {
-    blue: 'bg-blue-100 text-blue-800 hover:bg-blue-200',
-    emerald: 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200',
-    purple: 'bg-purple-100 text-purple-800 hover:bg-purple-200',
+    blue: 'bg-cream-2 text-ink/70 hover:bg-paper-hover',
+    emerald: 'bg-cream-2 text-ink/70 hover:bg-paper-hover',
+    purple: 'bg-cream-2 text-ink/70 hover:bg-paper-hover',
   };
   return (
     <div className="flex flex-wrap gap-1 mt-1.5">
@@ -1262,7 +1262,7 @@ function QuickPicks({
           key={v}
           type="button"
           onClick={() => onPick(v)}
-          className={`text-xs px-2 py-0.5 rounded transition ${colorMap[color]}`}
+          className={`text-xs px-2 py-0.5 rounded-none transition ${colorMap[color]}`}
         >
           {format ? format(v) : v.toLocaleString('he-IL')}
         </button>
@@ -1284,14 +1284,14 @@ function Row({
 }) {
   const colorMap = {
     emerald: 'text-emerald-700',
-    blue: 'text-blue-700',
+    blue: 'text-gold',
     red: 'text-red-600',
     amber: 'text-amber-700',
   };
-  const valueClass = color ? colorMap[color] : 'text-gray-900';
+  const valueClass = color ? colorMap[color] : 'text-ink';
   return (
     <div className="flex justify-between py-0.5">
-      <span className={`text-gray-600 ${bold ? 'font-bold text-gray-900' : ''}`}>{label}</span>
+      <span className={`text-ink/70 ${bold ? 'font-bold text-ink' : ''}`}>{label}</span>
       <span className={`tabular-nums ${bold ? 'font-bold' : ''} ${valueClass}`}>{value}</span>
     </div>
   );
@@ -1309,16 +1309,16 @@ function ModeBtn({
   children: React.ReactNode;
 }) {
   const activeMap = {
-    blue: 'bg-white text-blue-700 shadow font-bold',
-    emerald: 'bg-white text-emerald-700 shadow font-bold',
-    purple: 'bg-white text-purple-700 shadow font-bold',
+    blue: 'bg-paper text-ink shadow font-bold',
+    emerald: 'bg-paper text-ink shadow font-bold',
+    purple: 'bg-paper text-ink shadow font-bold',
   };
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-        active ? activeMap[color] : 'text-gray-600 hover:text-gray-900'
+      className={`px-4 py-2 rounded-none text-sm font-medium transition ${
+        active ? activeMap[color] : 'text-ink/70 hover:text-ink'
       }`}
     >
       {children}
@@ -1339,8 +1339,8 @@ function TabBtn({
     <button
       type="button"
       onClick={onClick}
-      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-        active ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+      className={`px-3 py-1.5 rounded-none text-xs font-medium transition ${
+        active ? 'bg-ink text-cream' : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
       }`}
     >
       {children}

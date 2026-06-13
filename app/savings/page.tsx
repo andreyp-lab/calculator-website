@@ -36,16 +36,16 @@ const calculators = [
 
 export default function SavingsPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-paper">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'חיסכון וחובות' }]} />
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+        <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
           💳 חיסכון וחובות
         </h1>
-        <p className="text-lg text-gray-600 mb-12">
+        <p className="text-lg text-ink/70 mb-12">
           ניהול תקציב משפחתי וחישוב החזרי הלוואה
         </p>
 
@@ -54,16 +54,16 @@ export default function SavingsPage() {
             <Link
               key={calc.href}
               href={calc.href}
-              className="group bg-white p-6 rounded-lg border-2 border-gray-200 hover:border-blue-400 hover:shadow-md transition flex items-start gap-4"
+              className="group bg-paper p-6 border-2 border-ink/15 hover:border-gold hover:shadow-md transition flex items-start gap-4"
             >
               <div className="text-3xl">{calc.icon}</div>
               <div className="flex-1">
-                <h3 className="font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition">
+                <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition">
                   {calc.title}
                 </h3>
-                <p className="text-sm text-gray-600">{calc.description}</p>
+                <p className="text-sm text-ink/70">{calc.description}</p>
               </div>
-              <ArrowLeft className="w-4 h-4 text-blue-600 mt-2 opacity-0 group-hover:opacity-100 transition" />
+              <ArrowLeft className="w-4 h-4 text-gold mt-2 opacity-0 group-hover:opacity-100 transition" />
             </Link>
           ))}
         </div>

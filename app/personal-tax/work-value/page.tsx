@@ -71,7 +71,7 @@ export default function WorkValuePage() {
           </p>
 
           <h2>הנוסחה</h2>
-          <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4">
+          <div className="bg-cream-2 border-r-4 border-ink p-4 my-4">
             <p className="text-sm">
               <strong>שווי אמיתי</strong> = (נטו משכר + הטבות מעסיק - הוצאות עבודה) - אלטרנטיבה
             </p>
@@ -105,19 +105,19 @@ export default function WorkValuePage() {
           <h2>מחשבונים קשורים</h2>
           <ul>
             <li>
-              <Link href="/personal-tax/salary-net-gross" className="text-blue-700 hover:underline">
+              <Link href="/personal-tax/salary-net-gross" className="text-gold hover:underline">
                 מחשבון שכר נטו ברוטו 2026
               </Link>{' '}
               — חשב את השכר הנטו המדויק שלך לאחר מס וביטוח לאומי
             </li>
             <li>
-              <Link href="/personal-tax/income-tax" className="text-blue-700 hover:underline">
+              <Link href="/personal-tax/income-tax" className="text-gold hover:underline">
                 מחשבון מס הכנסה לשכיר
               </Link>{' '}
               — ראה את חישוב המס המלא לפי מדרגות 2026
             </li>
             <li>
-              <Link href="/compare/employee-vs-self-employed" className="text-blue-700 hover:underline">
+              <Link href="/compare/employee-vs-self-employed" className="text-gold hover:underline">
                 השוואה: שכיר מול עצמאי
               </Link>{' '}
               — מחשבון מקיף להשוואת כדאיות מעבר לעצמאות
@@ -125,7 +125,7 @@ export default function WorkValuePage() {
           </ul>
 
           <h2>דוגמה: אם אחרי לידה</h2>
-          <div className="bg-pink-50 border border-pink-200 rounded p-4 my-4 text-sm">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 my-4 text-sm">
             <p>
               שכר ברוטו: 15,000 ₪ → נטו ~10,500 ₪. אבל: מעון 4,000 ₪ + נסיעות 800 ₪ + ארוחות
               500 ₪ = הוצאות 5,300 ₪. נטו אחרי הוצאות: 5,200 ₪. דמי לידה אם הקודם 12,000 ברוטו

@@ -53,9 +53,9 @@ const TABS: { id: TabMode; label: string; icon: React.ReactNode }[] = [
 // ============================================================
 
 const SectionCard = ({ title, children, icon }: { title: string; children: React.ReactNode; icon?: React.ReactNode }) => (
-  <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-    <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-      {icon && <span className="text-pink-500">{icon}</span>}
+  <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-5">
+    <h2 className="text-lg font-bold text-ink flex items-center gap-2">
+      {icon && <span className="text-gold">{icon}</span>}
       {title}
     </h2>
     {children}
@@ -70,14 +70,14 @@ const InfoBox = ({
   variant?: 'blue' | 'amber' | 'red' | 'green' | 'pink';
 }) => {
   const classes = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
     red: 'bg-red-50 border-red-200 text-red-900',
     green: 'bg-green-50 border-green-200 text-green-900',
-    pink: 'bg-pink-50 border-pink-200 text-pink-900',
+    pink: 'bg-cream-2 border-ink/15 text-ink',
   };
   return (
-    <div className={`border rounded-xl p-4 ${classes[variant]}`}>
+    <div className={`border rounded-none p-4 ${classes[variant]}`}>
       {children}
     </div>
   );
@@ -87,11 +87,11 @@ const Recommendations = ({ items, variant = 'amber' }: { items: string[]; varian
   if (items.length === 0) return null;
   const classes = {
     amber: 'bg-amber-50 border-amber-200 text-amber-900',
-    pink: 'bg-pink-50 border-pink-200 text-pink-900',
-    blue: 'bg-blue-50 border-blue-200 text-blue-900',
+    pink: 'bg-cream-2 border-ink/15 text-ink',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
   };
   return (
-    <div className={`border rounded-xl p-4 ${classes[variant]}`}>
+    <div className={`border rounded-none p-4 ${classes[variant]}`}>
       <h4 className="text-sm font-bold mb-2 flex items-center gap-2">
         <Info className="w-4 h-4" />
         המלצות ותובנות
@@ -190,7 +190,7 @@ const EligibilityTab = ({
       <SectionCard title="פרטי הזכאות" icon={<Baby className="w-5 h-5" />}>
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               חודשים שעבדת מתוך 14 חודשים אחרונים
             </label>
             <input
@@ -199,20 +199,20 @@ const EligibilityTab = ({
               max={14}
               value={monthsWorked}
               onChange={(e) => setMonthsWorked(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               10+ חודשים → חופשה מלאה (15 שב'). 6-9 חודשים → חלקית (8 שב').
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               מספר ילדים בלידה
             </label>
             <select
               value={numberOfBabies}
               onChange={(e) => setNumberOfBabies(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             >
               <option value={1}>ילד אחד</option>
               <option value={2}>תאומים (+3 שבועות)</option>
@@ -224,7 +224,7 @@ const EligibilityTab = ({
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               ימי אישפוז יילוד (אם רלוונטי)
             </label>
             <input
@@ -233,9 +233,9 @@ const EligibilityTab = ({
               max={140}
               value={hospitalizationDays}
               onChange={(e) => setHospitalizationDays(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">7+ ימים → זכאות להארכה עד 20 שבועות</p>
+            <p className="text-xs text-ink/60 mt-1">7+ ימים → זכאות להארכה עד 20 שבועות</p>
           </div>
           <div className="flex items-center gap-3 pt-6">
             <input
@@ -243,17 +243,17 @@ const EligibilityTab = ({
               id="premature"
               checked={isPremature}
               onChange={(e) => setIsPremature(e.target.checked)}
-              className="w-5 h-5 rounded accent-pink-500"
+              className="w-5 h-5 rounded accent-gold"
             />
-            <label htmlFor="premature" className="text-sm font-medium text-gray-700 cursor-pointer">
+            <label htmlFor="premature" className="text-sm font-medium text-ink/70 cursor-pointer">
               לידה מוקדמת / פג (משקל &lt;1.5 ק"ג)
-              <span className="block text-xs text-gray-500 font-normal">+21 ימים נוספים</span>
+              <span className="block text-xs text-ink/60 font-normal">+21 ימים נוספים</span>
             </label>
           </div>
         </div>
 
         {/* כרטיס זכאות */}
-        <div className={`border-2 rounded-xl p-4 ${eligibilityBg}`}>
+        <div className={`border-2 rounded-none p-4 ${eligibilityBg}`}>
           <div className="flex items-start gap-3">
             {result.eligibility === 'full' ? (
               <CheckCircle className={`w-6 h-6 text-${eligibilityColor}-600 flex-shrink-0 mt-0.5`} />
@@ -318,15 +318,15 @@ const EligibilityTab = ({
           />
 
           {/* גרף השוואת תרחישים */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-            <h3 className="font-bold text-gray-900 mb-4">השוואת אורך חופשה לפי תרחישים</h3>
+          <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+            <h3 className="font-bold text-ink mb-4">השוואת אורך חופשה לפי תרחישים</h3>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={chartData} margin={{ top: 5, right: 10, left: 10, bottom: 40 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="תרחיש" tick={{ fontSize: 11 }} angle={-15} textAnchor="end" interval={0} />
                 <YAxis tick={{ fontSize: 11 }} unit=" ימים" />
                 <Tooltip formatter={(v) => `${Number(v)} ימים`} />
-                <Bar dataKey="ימים" fill="#ec4899" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="ימים" fill="#8E6824" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -404,7 +404,7 @@ const PayTab = ({
       <SectionCard title="פרטי השכר">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ממוצע — 3 חודשים אחרונים (₪)
             </label>
             <input
@@ -414,15 +414,15 @@ const PayTab = ({
               step={500}
               value={salary3Months}
               onChange={(e) => setSalary3Months(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שכר יומי: {formatCurrency(salary3Months / 30, { decimals: 0 })}
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              שכר חודשי ממוצע — 6 חודשים אחרונים (₪) <span className="text-gray-400 font-normal">(אופציונלי)</span>
+            <label className="block text-sm font-medium text-ink/70 mb-2">
+              שכר חודשי ממוצע — 6 חודשים אחרונים (₪) <span className="text-ink/45 font-normal">(אופציונלי)</span>
             </label>
             <input
               type="number"
@@ -431,14 +431,14 @@ const PayTab = ({
               step={500}
               value={salary6Months}
               onChange={(e) => setSalary6Months(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">ב.ל. ייקח את הגבוה מבין שני החישובים</p>
+            <p className="text-xs text-ink/60 mt-1">ב.ל. ייקח את הגבוה מבין שני החישובים</p>
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             ימי חופשת לידה בתשלום
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -451,10 +451,10 @@ const PayTab = ({
                 key={days}
                 type="button"
                 onClick={() => setLeaveDays(days)}
-                className={`p-2 rounded-lg border-2 text-sm transition text-center ${
+                className={`p-2 rounded-none border-2 text-sm transition text-center ${
                   leaveDays === days
-                    ? 'bg-pink-500 text-white border-pink-500'
-                    : 'bg-white text-gray-700 border-gray-300 hover:border-pink-300'
+                    ? 'bg-ink text-cream border-ink'
+                    : 'bg-paper text-ink/70 border-ink/15 hover:border-gold'
                 }`}
               >
                 <div className="font-bold">{label}</div>
@@ -469,29 +469,29 @@ const PayTab = ({
             step={7}
             value={leaveDays}
             onChange={(e) => setLeaveDays(Number(e.target.value))}
-            className="w-full mt-3 accent-pink-500"
+            className="w-full mt-3 accent-gold"
           />
-          <p className="text-xs text-gray-500 text-center mt-1">{leaveDays} ימים ({Math.round(leaveDays / 7)} שבועות)</p>
+          <p className="text-xs text-ink/60 text-center mt-1">{leaveDays} ימים ({Math.round(leaveDays / 7)} שבועות)</p>
         </div>
 
         <InfoBox variant="pink">
           <p className="text-sm font-bold mb-2">מנגנון חישוב הביטוח הלאומי</p>
           <div className="grid grid-cols-2 gap-3 text-sm">
-            <div className="bg-white rounded-lg p-2 border border-pink-200">
-              <p className="font-bold text-pink-700">שכר קובע</p>
-              <p className="text-xs text-gray-600">הגבוה מ-3 חודשים או 6 חודשים</p>
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
+              <p className="font-bold text-gold">שכר קובע</p>
+              <p className="text-xs text-ink/70">הגבוה מ-3 חודשים או 6 חודשים</p>
             </div>
-            <div className="bg-white rounded-lg p-2 border border-pink-200">
-              <p className="font-bold text-pink-700">תשלום יומי</p>
-              <p className="text-xs text-gray-600">שכר קובע ÷ 30 ימים</p>
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
+              <p className="font-bold text-gold">תשלום יומי</p>
+              <p className="text-xs text-ink/70">שכר קובע ÷ 30 ימים</p>
             </div>
-            <div className="bg-white rounded-lg p-2 border border-pink-200">
-              <p className="font-bold text-pink-700">תקרה יומית</p>
-              <p className="text-xs text-gray-600">{formatCurrency(MATERNITY_DAILY_CAP_2026, { decimals: 0 })}/יום</p>
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
+              <p className="font-bold text-gold">תקרה יומית</p>
+              <p className="text-xs text-ink/70">{formatCurrency(MATERNITY_DAILY_CAP_2026, { decimals: 0 })}/יום</p>
             </div>
-            <div className="bg-white rounded-lg p-2 border border-pink-200">
-              <p className="font-bold text-pink-700">תקרה חודשית</p>
-              <p className="text-xs text-gray-600">{formatCurrency(MATERNITY_MONTHLY_CAP_2026)} (5× שכר ממוצע)</p>
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
+              <p className="font-bold text-gold">תקרה חודשית</p>
+              <p className="text-xs text-ink/70">{formatCurrency(MATERNITY_MONTHLY_CAP_2026)} (5× שכר ממוצע)</p>
             </div>
           </div>
         </InfoBox>
@@ -528,7 +528,7 @@ const PayTab = ({
           </div>
 
           {result.warning && (
-            <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4 flex gap-3">
+            <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-4 flex gap-3">
               <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
               <p className="text-sm text-amber-900">{result.warning}</p>
             </div>
@@ -554,8 +554,8 @@ const PayTab = ({
           />
 
           {/* גרף עוגה */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-            <h3 className="font-bold text-gray-900 mb-4">חלוקת דמי הלידה</h3>
+          <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+            <h3 className="font-bold text-ink mb-4">חלוקת דמי הלידה</h3>
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie
@@ -578,43 +578,43 @@ const PayTab = ({
           </div>
 
           {/* גרף השוואת שכרים */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-            <h3 className="font-bold text-gray-900 mb-4">השוואת שכר לעומת תקרות</h3>
+          <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+            <h3 className="font-bold text-ink mb-4">השוואת שכר לעומת תקרות</h3>
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={salaryCompare} margin={{ top: 5, right: 10, left: 10, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="name" tick={{ fontSize: 11 }} angle={-10} textAnchor="end" />
                 <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => `${Math.round(v / 1000)}K`} />
                 <Tooltip formatter={(v) => formatCurrency(Number(v))} />
-                <Bar dataKey="שכר" fill="#ec4899" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="שכר" fill="#8E6824" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
 
           {/* השוואה: אישפוז vs. בית */}
           {hospitalizationDays >= 7 && (
-            <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
+            <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
               <button
                 type="button"
                 onClick={() => setShowHospitalComparison(!showHospitalComparison)}
                 className="w-full flex items-center justify-between text-right"
               >
-                <h3 className="font-bold text-gray-900">השוואה: הארכת חופשה vs. חזרה לעבודה בזמן האישפוז</h3>
-                <span className="text-pink-500 text-sm font-medium">{showHospitalComparison ? 'הסתר' : 'הצג'}</span>
+                <h3 className="font-bold text-ink">השוואה: הארכת חופשה vs. חזרה לעבודה בזמן האישפוז</h3>
+                <span className="text-gold text-sm font-medium">{showHospitalComparison ? 'הסתר' : 'הצג'}</span>
               </button>
 
               {showHospitalComparison && hospitalResult && (
                 <div className="mt-4 space-y-3">
                   <div className="grid sm:grid-cols-2 gap-3">
-                    <div className="bg-pink-50 border border-pink-200 rounded-lg p-3">
-                      <h4 className="font-bold text-pink-800 text-sm mb-1">תרחיש א׳: הארכת חופשה</h4>
-                      <p className="text-xs text-pink-700">{hospitalResult.hospitalScenario.description}</p>
-                      <p className="text-lg font-black text-pink-700 mt-2">{formatCurrency(hospitalResult.hospitalScenario.totalBenefit)}</p>
+                    <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
+                      <h4 className="font-bold text-ink text-sm mb-1">תרחיש א׳: הארכת חופשה</h4>
+                      <p className="text-xs text-gold">{hospitalResult.hospitalScenario.description}</p>
+                      <p className="text-lg font-black text-gold mt-2">{formatCurrency(hospitalResult.hospitalScenario.totalBenefit)}</p>
                     </div>
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                      <h4 className="font-bold text-blue-800 text-sm mb-1">תרחיש ב׳: חזרה לעבודה</h4>
-                      <p className="text-xs text-blue-700">{hospitalResult.homeScenario.description}</p>
-                      <p className="text-lg font-black text-blue-700 mt-2">{formatCurrency(hospitalResult.homeScenario.totalBenefit)}</p>
+                    <div className="bg-ink border border-ink rounded-none p-3">
+                      <h4 className="font-bold text-cream text-sm mb-1">תרחיש ב׳: חזרה לעבודה</h4>
+                      <p className="text-xs text-cream/80">{hospitalResult.homeScenario.description}</p>
+                      <p className="text-lg font-black text-cream mt-2">{formatCurrency(hospitalResult.homeScenario.totalBenefit)}</p>
                     </div>
                   </div>
                   <InfoBox variant={hospitalResult.difference >= 0 ? 'green' : 'blue'}>
@@ -693,16 +693,16 @@ const FatherTab = ({
             id="motherFull"
             checked={motherFullEligible}
             onChange={(e) => setMotherFullEligible(e.target.checked)}
-            className="w-5 h-5 rounded accent-pink-500"
+            className="w-5 h-5 rounded accent-gold"
           />
-          <label htmlFor="motherFull" className="text-sm font-medium text-gray-700 cursor-pointer">
+          <label htmlFor="motherFull" className="text-sm font-medium text-ink/70 cursor-pointer">
             האם זכאית לחופשה מלאה (10+ חודשי עבודה מתוך 14)
           </label>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">שכר חודשי האם (₪)</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">שכר חודשי האם (₪)</label>
             <input
               type="number"
               min={0}
@@ -710,11 +710,11 @@ const FatherTab = ({
               step={500}
               value={motherSalary}
               onChange={(e) => setMotherSalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-xl font-bold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">שכר חודשי האב (₪)</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">שכר חודשי האב (₪)</label>
             <input
               type="number"
               min={0}
@@ -722,13 +722,13 @@ const FatherTab = ({
               step={500}
               value={fatherSalary}
               onChange={(e) => setFatherSalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-xl font-bold"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             ימי חופשה שהאם תיקח: {motherLeaveDays} ימים
           </label>
           <input
@@ -738,9 +738,9 @@ const FatherTab = ({
             step={7}
             value={motherLeaveDays}
             onChange={(e) => setMotherLeaveDays(Number(e.target.value))}
-            className="w-full accent-pink-500"
+            className="w-full accent-gold"
           />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <div className="flex justify-between text-xs text-ink/60 mt-1">
             <span>8 שבועות</span>
             <span>15 שבועות</span>
           </div>
@@ -785,15 +785,15 @@ const FatherTab = ({
 
       {/* גרף השוואה */}
       {fatherSalary > 0 && motherSalary > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-4">תועלת כלכלית: ניצול חופשת האב</h3>
+        <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-4">תועלת כלכלית: ניצול חופשת האב</h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={chartData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="name" tick={{ fontSize: 12 }} />
               <YAxis tickFormatter={(v) => `${Math.round(v / 1000)}K ₪`} tick={{ fontSize: 11 }} />
               <Tooltip formatter={(v) => formatCurrency(Number(v))} />
-              <Bar dataKey="תשלום" fill="#ec4899" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="תשלום" fill="#8E6824" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
           {result.fatherLeaveDays > 0 && (
@@ -851,20 +851,20 @@ const ProtectionTab = ({
       <SectionCard title="ציר זמן הגנת המשרה" icon={<Shield className="w-5 h-5" />}>
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               תאריך הלידה
             </label>
             <input
               type="date"
               value={birthDateStr}
               onChange={(e) => setBirthDateStr(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div className="flex items-center">
-            <div className="bg-pink-50 border border-pink-200 rounded-lg p-3 w-full">
-              <p className="text-sm font-bold text-pink-800">ימי חופשה: {leaveDays}</p>
-              <p className="text-xs text-pink-700">שנה בלשונית "חישוב תשלום"</p>
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-3 w-full">
+              <p className="text-sm font-bold text-ink">ימי חופשה: {leaveDays}</p>
+              <p className="text-xs text-gold">שנה בלשונית "חישוב תשלום"</p>
             </div>
           </div>
         </div>
@@ -872,17 +872,17 @@ const ProtectionTab = ({
         <InfoBox variant="pink">
           <p className="text-sm font-bold mb-2">הגנות חוק עבודת נשים</p>
           <div className="grid sm:grid-cols-3 gap-2 text-sm">
-            <div className="bg-white rounded-lg p-2 border border-pink-200">
-              <p className="font-bold text-pink-700">בזמן החופשה</p>
-              <p className="text-xs text-gray-600">אסור לפטר בכלל</p>
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
+              <p className="font-bold text-gold">בזמן החופשה</p>
+              <p className="text-xs text-ink/70">אסור לפטר בכלל</p>
             </div>
-            <div className="bg-white rounded-lg p-2 border border-pink-200">
-              <p className="font-bold text-pink-700">60 יום אחרי</p>
-              <p className="text-xs text-gray-600">פיטורים רק עם אישור שר</p>
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
+              <p className="font-bold text-gold">60 יום אחרי</p>
+              <p className="text-xs text-ink/70">פיטורים רק עם אישור שר</p>
             </div>
-            <div className="bg-white rounded-lg p-2 border border-pink-200">
-              <p className="font-bold text-pink-700">שעת הנקה</p>
-              <p className="text-xs text-gray-600">{BREASTFEEDING_HOUR_MONTHS} חודשים בתשלום</p>
+            <div className="bg-paper rounded-none p-2 border border-ink/15">
+              <p className="font-bold text-gold">שעת הנקה</p>
+              <p className="text-xs text-ink/70">{BREASTFEEDING_HOUR_MONTHS} חודשים בתשלום</p>
             </div>
           </div>
         </InfoBox>
@@ -891,29 +891,29 @@ const ProtectionTab = ({
       {result && (
         <>
           {/* ציר זמן */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-            <h3 className="font-bold text-gray-900 mb-5 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-pink-500" />
+          <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+            <h3 className="font-bold text-ink mb-5 flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-gold" />
               ציר זמן מלא
             </h3>
             <div className="space-y-3">
               {result.timeline.map((phase, i) => (
                 <div
                   key={i}
-                  className={`flex items-start gap-3 p-3 rounded-lg border-2 ${
+                  className={`flex items-start gap-3 p-3 rounded-none border-2 ${
                     phase.isProtected
                       ? 'bg-green-50 border-green-300'
-                      : 'bg-gray-50 border-gray-200'
+                      : 'bg-cream-2 border-ink/15'
                   }`}
                 >
                   <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
-                    phase.isProtected ? 'bg-green-500 text-white' : 'bg-gray-400 text-white'
+                    phase.isProtected ? 'bg-green-500 text-white' : 'bg-ink/45 text-cream'
                   }`}>
                     {i + 1}
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
-                      <h4 className={`font-bold text-sm ${phase.isProtected ? 'text-green-800' : 'text-gray-800'}`}>
+                      <h4 className={`font-bold text-sm ${phase.isProtected ? 'text-green-800' : 'text-ink'}`}>
                         {phase.phase}
                       </h4>
                       {phase.isProtected && (
@@ -922,8 +922,8 @@ const ProtectionTab = ({
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-600 mt-0.5">{phase.description}</p>
-                    <p className="text-xs font-medium text-gray-700 mt-1">
+                    <p className="text-xs text-ink/70 mt-0.5">{phase.description}</p>
+                    <p className="text-xs font-medium text-ink/70 mt-1">
                       {phase.startDate} — {phase.endDate}
                     </p>
                   </div>
@@ -1025,7 +1025,7 @@ const BreastfeedingTab = ({
       <SectionCard title="שווי שעת ההנקה" icon={<Clock className="w-5 h-5" />}>
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו (₪)
             </label>
             <input
@@ -1035,17 +1035,17 @@ const BreastfeedingTab = ({
               step={500}
               value={monthlySalary}
               onChange={(e) => setMonthlySalary(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 text-xl font-bold"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-xl font-bold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               שעות עבודה ביום
             </label>
             <select
               value={workHoursPerDay}
               onChange={(e) => setWorkHoursPerDay(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               <option value={6}>6 שעות</option>
               <option value={7}>7 שעות</option>
@@ -1093,13 +1093,13 @@ const BreastfeedingTab = ({
           </InfoBox>
 
           {/* גרף — שווי לפי חודשים */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
+          <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-bold text-gray-900">שווי שעת ההנקה לאורך 4 חודשים</h3>
+              <h3 className="font-bold text-ink">שווי שעת ההנקה לאורך 4 חודשים</h3>
               <button
                 type="button"
                 onClick={() => setShowMonthlyChart(!showMonthlyChart)}
-                className="text-sm text-pink-500 font-medium"
+                className="text-sm text-gold font-medium"
               >
                 {showMonthlyChart ? 'שווי מצטבר' : 'שווי חודשי'}
               </button>
@@ -1112,7 +1112,7 @@ const BreastfeedingTab = ({
                 <Tooltip formatter={(v) => formatCurrency(Number(v))} />
                 <Bar
                   dataKey={showMonthlyChart ? 'שווי' : 'מצטבר'}
-                  fill="#ec4899"
+                  fill="#8E6824"
                   radius={[4, 4, 0, 0]}
                 />
               </BarChart>
@@ -1120,22 +1120,22 @@ const BreastfeedingTab = ({
           </div>
 
           {/* השוואה לפי שעות */}
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-            <h3 className="font-bold text-gray-900 mb-4">השוואת שווי לפי שעות עבודה יומיות</h3>
+          <div className="bg-paper border-2 border-ink/15 rounded-none p-5">
+            <h3 className="font-bold text-ink mb-4">השוואת שווי לפי שעות עבודה יומיות</h3>
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-pink-50">
-                  <th className="px-3 py-2 text-right font-semibold text-gray-700">שעות ביום</th>
-                  <th className="px-3 py-2 text-center font-semibold text-gray-700">שכר שעתי</th>
-                  <th className="px-3 py-2 text-center font-semibold text-gray-700">שווי חודשי</th>
-                  <th className="px-3 py-2 text-center font-semibold text-gray-700">שווי 4 חודשים</th>
+                <tr className="bg-cream-2">
+                  <th className="px-3 py-2 text-right font-semibold text-ink/70">שעות ביום</th>
+                  <th className="px-3 py-2 text-center font-semibold text-ink/70">שכר שעתי</th>
+                  <th className="px-3 py-2 text-center font-semibold text-ink/70">שווי חודשי</th>
+                  <th className="px-3 py-2 text-center font-semibold text-ink/70">שווי 4 חודשים</th>
                 </tr>
               </thead>
               <tbody>
                 {hoursCompare.map((row, i) => (
                   <tr
                     key={i}
-                    className={`border-t border-gray-100 ${row['שעות ביום'] === `${workHoursPerDay} שעות` ? 'bg-pink-50 font-semibold' : ''}`}
+                    className={`border-t border-ink/15 ${row['שעות ביום'] === `${workHoursPerDay} שעות` ? 'bg-cream-2 font-semibold' : ''}`}
                   >
                     <td className="px-3 py-2">{row['שעות ביום']}</td>
                     <td className="px-3 py-2 text-center">{formatCurrency(row['שכר שעתי'])}</td>
@@ -1200,8 +1200,8 @@ export function MaternityBenefitsCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* Tab Navigation */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
-        <div className="flex flex-wrap border-b border-gray-200">
+      <div className="bg-paper border-2 border-ink/15 rounded-none overflow-hidden">
+        <div className="flex flex-wrap border-b border-ink/15">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -1209,8 +1209,8 @@ export function MaternityBenefitsCalculator() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 min-w-[120px] px-3 py-3 text-sm font-medium transition-colors flex items-center justify-center gap-1.5 ${
                 activeTab === tab.id
-                  ? 'bg-pink-500 text-white border-b-2 border-pink-500'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-ink text-cream border-b-2 border-ink'
+                  : 'text-ink/70 hover:text-ink hover:bg-cream-2'
               }`}
             >
               {tab.icon}

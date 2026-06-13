@@ -138,7 +138,7 @@ export default function MaternityBenefitsPage() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a
               href="https://www.btl.gov.il/benefits/maternity"

@@ -169,25 +169,25 @@ export default function VatPage() {
             <h2>כלים קשורים</h2>
             <ul>
               <li>
-                <a href="/self-employed/tax-advances" className="text-blue-700 hover:underline">
+                <a href="/self-employed/tax-advances" className="text-gold hover:underline">
                   מחשבון מקדמות מס
                 </a>{' '}
                 — חשב מקדמות מס הכנסה, ב.ל. ומע&quot;מ חודשיות
               </li>
               <li>
-                <a href="/self-employed/net" className="text-blue-700 hover:underline">
+                <a href="/self-employed/net" className="text-gold hover:underline">
                   מחשבון נטו לעצמאי
                 </a>{' '}
                 — הכנסה נטו לאחר מסים וביטוח לאומי
               </li>
               <li>
-                <a href="/self-employed/social-security" className="text-blue-700 hover:underline">
+                <a href="/self-employed/social-security" className="text-gold hover:underline">
                   מחשבון ביטוח לאומי לעצמאי
                 </a>{' '}
                 — דמי ביטוח לאומי ובריאות לפי הכנסה שנתית
               </li>
               <li>
-                <a href="/self-employed/vat-threshold" className="text-blue-700 hover:underline">
+                <a href="/self-employed/vat-threshold" className="text-gold hover:underline">
                   מחשבון תקרת עוסק פטור
                 </a>{' '}
                 — בדוק אם חצית את תקרת 122,833 ₪ ומה לעשות במעבר לעוסק מורשה
@@ -197,7 +197,7 @@ export default function VatPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.gov.il/he/departments/israel_tax_authority"

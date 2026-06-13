@@ -37,8 +37,8 @@ export function TaxCreditsCalculator() {
     <div className="grid lg:grid-cols-5 gap-6">
       <div className="lg:col-span-3 space-y-4">
         {/* בסיס */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">👤 פרטים בסיסיים</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">👤 פרטים בסיסיים</h3>
           <div className="space-y-3">
             <label className="flex items-center gap-2">
               <input
@@ -50,7 +50,7 @@ export function TaxCreditsCalculator() {
             </label>
 
             <div>
-              <label className="block text-xs text-gray-700 mb-1">מין</label>
+              <label className="block text-xs text-ink/70 mb-1">מין</label>
               <div className="flex gap-3">
                 <label className="flex items-center gap-1">
                   <input
@@ -83,8 +83,8 @@ export function TaxCreditsCalculator() {
         </div>
 
         {/* ילדים */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">👶 ילדים</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">👶 ילדים</h3>
           <div className="grid grid-cols-2 gap-3">
             <NumberField
               label="בני שנה (0-1)"
@@ -120,8 +120,8 @@ export function TaxCreditsCalculator() {
         </div>
 
         {/* מצבים מיוחדים */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-900 mb-3">⭐ מצבים מיוחדים</h3>
+        <div className="bg-paper border border-ink/15 rounded-none p-5">
+          <h3 className="font-bold text-ink mb-3">⭐ מצבים מיוחדים</h3>
           <div className="space-y-3">
             <div>
               <label className="flex items-center gap-2 mb-2">
@@ -140,7 +140,7 @@ export function TaxCreditsCalculator() {
                   placeholder="שנים מאז שחרור"
                   value={input.yearsSinceRelease}
                   onChange={(e) => update('yearsSinceRelease', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
                 />
               )}
             </div>
@@ -162,7 +162,7 @@ export function TaxCreditsCalculator() {
                   placeholder="חודשים מהעלייה"
                   value={input.monthsSinceImmigration}
                   onChange={(e) => update('monthsSinceImmigration', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
                 />
               )}
             </div>
@@ -211,31 +211,31 @@ export function TaxCreditsCalculator() {
         />
 
         {result.breakdown.length > 0 && (
-          <div className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden">
-            <div className="bg-gray-50 px-4 py-2 border-b border-gray-200">
-              <h4 className="font-semibold text-gray-900 text-sm">פירוט נקודות</h4>
+          <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
+            <div className="bg-cream-2 px-4 py-2 border-b border-ink/15">
+              <h4 className="font-semibold text-ink text-sm">פירוט נקודות</h4>
             </div>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y divide-ink/10">
               {result.breakdown.map((b, i) => (
                 <div key={i} className="px-4 py-2 flex justify-between items-center">
-                  <div className="text-sm text-gray-700">{b.category}</div>
+                  <div className="text-sm text-ink/70">{b.category}</div>
                   <div className="text-sm">
-                    <span className="font-bold text-blue-700">{b.points}</span>
-                    <span className="text-xs text-gray-500"> נק'</span>
+                    <span className="font-bold text-gold">{b.points}</span>
+                    <span className="text-xs text-ink/60"> נק'</span>
                   </div>
                 </div>
               ))}
-              <div className="bg-blue-50 px-4 py-2 flex justify-between items-center font-bold">
+              <div className="bg-cream-2 px-4 py-2 flex justify-between items-center font-bold">
                 <span>סה"כ</span>
-                <span className="text-blue-700">{result.totalPoints.toFixed(2)} נק'</span>
+                <span className="text-gold">{result.totalPoints.toFixed(2)} נק'</span>
               </div>
             </div>
           </div>
         )}
 
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs">
-          <p className="font-medium text-gray-800 mb-1">💡 מה זה אומר?</p>
-          <p className="text-gray-700">
+        <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-xs">
+          <p className="font-medium text-ink mb-1">💡 מה זה אומר?</p>
+          <p className="text-ink/70">
             אם ההכנסה שלך חייבת במס - תקבל הנחה ישירה ב-{formatCurrency(result.monthlyValue)} מהמס
             החודשי. אם לא חייב במס (הכנסה נמוכה) - הנקודות לא רלוונטיות.
           </p>
@@ -258,16 +258,16 @@ function NumberField({
 }) {
   return (
     <div>
-      <label className="block text-xs text-gray-700 mb-1">{label}</label>
+      <label className="block text-xs text-ink/70 mb-1">{label}</label>
       <input
         type="number"
         min={0}
         max={20}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full px-3 py-1.5 border border-gray-300 rounded text-sm"
+        className="w-full px-3 py-1.5 border border-ink/15 rounded-none text-sm"
       />
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }

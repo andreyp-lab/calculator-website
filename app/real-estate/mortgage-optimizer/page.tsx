@@ -308,7 +308,7 @@ export default function MortgageOptimizerPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.boi.org.il/information/interestrates/mortgage/"

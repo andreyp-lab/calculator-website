@@ -16,10 +16,10 @@ const DEPARTMENT_LABELS: Record<Department, string> = {
 };
 
 const DEPARTMENT_COLORS: Record<Department, string> = {
-  sales: 'bg-blue-100 text-blue-800',
+  sales: 'bg-cream-2 text-ink',
   marketing: 'bg-amber-100 text-amber-800',
   development: 'bg-emerald-100 text-emerald-800',
-  operations: 'bg-violet-100 text-violet-800',
+  operations: 'bg-cream-2 text-ink-mid',
   administration: 'bg-red-100 text-red-800',
 };
 
@@ -80,16 +80,16 @@ export function EmployeeManager() {
   const fmt = (v: number) => formatCurrency(v, settings.currency);
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 p-5 shadow-sm">
+    <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-purple-600" />
-          <h3 className="font-bold text-lg text-gray-900">עובדים</h3>
-          <span className="text-sm text-gray-500">({budget.employees.length} עובדים)</span>
+          <Users className="w-5 h-5 text-gold" />
+          <h3 className="font-bold text-lg text-ink">עובדים</h3>
+          <span className="text-sm text-ink/60">({budget.employees.length} עובדים)</span>
         </div>
         <button
           onClick={() => (showForm && !editingId ? reset() : (reset(), setShowForm(true)))}
-          className="flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm"
+          className="flex items-center gap-1 px-3 py-1.5 bg-ink text-cream hover:bg-ink-deep text-sm"
         >
           <Plus className="w-4 h-4" />
           הוסף עובד
@@ -97,47 +97,47 @@ export function EmployeeManager() {
       </div>
 
       {budget.employees.length > 0 && (
-        <div className="bg-purple-50 border border-purple-200 rounded p-2 mb-4 text-sm flex justify-between">
-          <span className="text-purple-700">סה"כ שכר חודשי:</span>
-          <span className="font-bold text-purple-900">{fmt(totalMonthly)}</span>
+        <div className="bg-cream-2 border border-ink/15 p-2 mb-4 text-sm flex justify-between">
+          <span className="text-ink/70">סה"כ שכר חודשי:</span>
+          <span className="font-bold text-ink">{fmt(totalMonthly)}</span>
         </div>
       )}
 
-      <div className="bg-blue-50 border border-blue-200 rounded p-2 mb-3 text-xs text-blue-900">
+      <div className="bg-cream-2 border border-ink/15 p-2 mb-3 text-xs text-ink">
         💡 שכר העובדים מתווסף אוטומטית ל-P&L לפי המחלקה: <strong>מכירות/מנהל → תפעול</strong>,{' '}
         <strong>שיווק → שיווק</strong>, <strong>פיתוח → R&D</strong>,{' '}
         <strong>תפעול → COGS</strong>
       </div>
 
       {showForm && (
-        <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+        <div className="bg-cream-2 border border-ink/15 p-4 mb-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-gray-700 mb-1">שם עובד *</label>
+              <label className="block text-xs text-ink/70 mb-1">שם עובד *</label>
               <input
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="ישראל ישראלי"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">תפקיד</label>
+              <label className="block text-xs text-ink/70 mb-1">תפקיד</label>
               <input
                 type="text"
                 value={form.position}
                 onChange={(e) => setForm({ ...form, position: e.target.value })}
                 placeholder="מנהל מכירות"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">מחלקה *</label>
+              <label className="block text-xs text-ink/70 mb-1">מחלקה *</label>
               <select
                 value={form.department}
                 onChange={(e) => setForm({ ...form, department: e.target.value as Department })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               >
                 {(Object.keys(DEPARTMENT_LABELS) as Department[]).map((d) => (
                   <option key={d} value={d}>
@@ -145,12 +145,12 @@ export function EmployeeManager() {
                   </option>
                 ))}
               </select>
-              <p className="text-[10px] text-gray-500 mt-0.5">
+              <p className="text-[10px] text-ink/45 mt-0.5">
                 → הוצאה ל-{DEPT_TO_CATEGORY[form.department]}
               </p>
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">שכר ברוטו חודשי (₪) *</label>
+              <label className="block text-xs text-ink/70 mb-1">שכר ברוטו חודשי (₪) *</label>
               <input
                 type="number"
                 value={form.monthlySalary || ''}
@@ -158,15 +158,15 @@ export function EmployeeManager() {
                   setForm({ ...form, monthlySalary: parseFloat(e.target.value) || 0 })
                 }
                 placeholder="15,000"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">חודש התחלה</label>
+              <label className="block text-xs text-ink/70 mb-1">חודש התחלה</label>
               <select
                 value={form.startMonth}
                 onChange={(e) => setForm({ ...form, startMonth: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               >
                 {HEBREW_MONTHS.map((m, i) => (
                   <option key={i} value={i}>
@@ -176,7 +176,7 @@ export function EmployeeManager() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-gray-700 mb-1">חודש סיום</label>
+              <label className="block text-xs text-ink/70 mb-1">חודש סיום</label>
               <select
                 value={form.endMonth ?? ''}
                 onChange={(e) =>
@@ -185,7 +185,7 @@ export function EmployeeManager() {
                     endMonth: e.target.value === '' ? null : parseInt(e.target.value),
                   })
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                className="w-full px-3 py-2 border border-ink/15 text-sm"
               >
                 <option value="">ממשיך</option>
                 {HEBREW_MONTHS.map((m, i) => (
@@ -200,13 +200,13 @@ export function EmployeeManager() {
             <button
               onClick={handleSubmit}
               disabled={!form.name.trim() || form.monthlySalary <= 0}
-              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
+              className="px-4 py-2 bg-ink text-cream hover:bg-ink-deep disabled:opacity-50"
             >
               {editingId ? 'עדכן' : 'הוסף'}
             </button>
             <button
               onClick={reset}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+              className="px-4 py-2 bg-cream-2 text-ink"
             >
               ביטול
             </button>
@@ -215,7 +215,7 @@ export function EmployeeManager() {
       )}
 
       {budget.employees.length === 0 ? (
-        <div className="text-center py-6 text-gray-500 text-sm">
+        <div className="text-center py-6 text-ink/60 text-sm">
           <Users className="w-12 h-12 mx-auto mb-2 opacity-30" />
           <p>אין עובדים. הוסף עובד כדי לראות את עלות השכר ב-P&L.</p>
         </div>
@@ -226,29 +226,29 @@ export function EmployeeManager() {
               <div className="flex items-center justify-between text-sm mb-1.5">
                 <div className="flex items-center gap-2">
                   <span
-                    className={`text-xs px-2 py-0.5 rounded ${DEPARTMENT_COLORS[g.dept]}`}
+                    className={`text-xs px-2 py-0.5 ${DEPARTMENT_COLORS[g.dept]}`}
                   >
                     {DEPARTMENT_LABELS[g.dept]}
                   </span>
-                  <span className="text-gray-500 text-xs">({g.employees.length} עובדים)</span>
+                  <span className="text-ink/60 text-xs">({g.employees.length} עובדים)</span>
                 </div>
-                <span className="font-semibold text-gray-700">{fmt(g.total)}/חודש</span>
+                <span className="font-semibold text-ink/70">{fmt(g.total)}/חודש</span>
               </div>
               <div className="space-y-1">
                 {g.employees.map((emp) => (
                   <div
                     key={emp.id}
-                    className="flex items-center gap-2 p-2 bg-gray-50 border border-gray-200 rounded text-sm"
+                    className="flex items-center gap-2 p-2 bg-cream-2 border border-ink/15 text-sm"
                   >
                     <div className="flex-1">
-                      <div className="font-medium text-gray-900">{emp.name}</div>
-                      <div className="text-xs text-gray-500">
+                      <div className="font-medium text-ink">{emp.name}</div>
+                      <div className="text-xs text-ink/60">
                         {emp.position && <span>{emp.position} • </span>}
                         {HEBREW_MONTHS[emp.startMonth]}–
                         {emp.endMonth !== null ? HEBREW_MONTHS[emp.endMonth] : 'ממשיך'}
                       </div>
                     </div>
-                    <div className="font-bold text-purple-700">
+                    <div className="font-bold text-gold">
                       {fmt(emp.monthlySalary)}
                     </div>
                     <button
@@ -264,13 +264,13 @@ export function EmployeeManager() {
                         setEditingId(emp.id);
                         setShowForm(true);
                       }}
-                      className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                      className="p-1 text-gold hover:bg-paper"
                     >
                       <Edit2 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => deleteEmployee(emp.id)}
-                      className="p-1 text-red-600 hover:bg-red-50 rounded"
+                      className="p-1 text-red-600 hover:bg-red-50"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

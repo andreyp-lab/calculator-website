@@ -41,7 +41,7 @@ import {
 
 const STORAGE_KEY = 'solo-cashflow-v1';
 
-const CATEGORY_COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#ef4444', '#84cc16'];
+const CATEGORY_COLORS = ['#102219', '#8E6824', '#264B36', '#D8B36A', '#10b981', '#102219', '#ef4444', '#8E6824'];
 
 export default function CashFlowSoloPage() {
   const [data, setData] = useState<SoloCashFlowData>(() => {
@@ -127,12 +127,12 @@ export default function CashFlowSoloPage() {
       {/* Header */}
       <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
         <div className="flex items-center gap-3">
-          <div className="bg-emerald-100 p-3 rounded-lg">
-            <Wallet className="w-6 h-6 text-emerald-700" />
+          <div className="bg-cream-2 p-3">
+            <Wallet className="w-6 h-6 text-ink-mid" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">תזרים מזומנים סולו</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-2xl font-bold text-ink">תזרים מזומנים סולו</h2>
+            <p className="text-sm text-ink/70">
               תזרים ללא תקציב - הזן ישירות תקבולים ותשלומים לפי תאריכים
             </p>
           </div>
@@ -141,14 +141,14 @@ export default function CashFlowSoloPage() {
         <div className="flex items-center gap-2 flex-wrap">
           <Link
             href="/tools/start"
-            className="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-1"
+            className="text-sm text-ink/60 hover:text-gold flex items-center gap-1"
           >
             <ArrowLeft className="w-4 h-4" />
             חזרה למסך הראשי
           </Link>
           <Link
             href="/tools/unified"
-            className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-sm flex items-center gap-1"
+            className="px-3 py-1.5 bg-cream-2 text-ink hover:bg-paper-hover text-sm flex items-center gap-1"
           >
             <Sparkles className="w-4 h-4" />
             עבור למערכת מלאה
@@ -157,23 +157,23 @@ export default function CashFlowSoloPage() {
       </div>
 
       {/* Settings */}
-      <div className="bg-white border-2 border-gray-200 rounded-lg p-4 mb-4 shadow-sm">
+      <div className="bg-paper border-2 border-ink/15 p-4 mb-4 shadow-sm">
         <div className="grid md:grid-cols-3 gap-3">
           <div>
-            <label className="block text-xs text-gray-700 mb-1">תאריך התחלה</label>
+            <label className="block text-xs text-ink/70 mb-1">תאריך התחלה</label>
             <input
               type="date"
               value={data.startDate}
               onChange={(e) => setData({ ...data, startDate: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              className="w-full px-3 py-2 border border-ink/15 text-sm"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-700 mb-1">חודשים לחיזוי</label>
+            <label className="block text-xs text-ink/70 mb-1">חודשים לחיזוי</label>
             <select
               value={data.monthsToProject}
               onChange={(e) => setData({ ...data, monthsToProject: parseInt(e.target.value) })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              className="w-full px-3 py-2 border border-ink/15 text-sm"
             >
               <option value={3}>3 חודשים</option>
               <option value={6}>6 חודשים</option>
@@ -183,13 +183,13 @@ export default function CashFlowSoloPage() {
             </select>
           </div>
           <div>
-            <label className="block text-xs text-gray-700 mb-1">מטבע</label>
+            <label className="block text-xs text-ink/70 mb-1">מטבע</label>
             <select
               value={data.currency}
               onChange={(e) =>
                 setData({ ...data, currency: e.target.value as SoloCashFlowData['currency'] })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              className="w-full px-3 py-2 border border-ink/15 text-sm"
             >
               <option value="ILS">₪ שקל</option>
               <option value="USD">$ דולר</option>
@@ -201,19 +201,19 @@ export default function CashFlowSoloPage() {
       </div>
 
       {/* Bank Accounts */}
-      <div className="bg-white border-2 border-gray-200 rounded-lg p-4 mb-4 shadow-sm">
+      <div className="bg-paper border-2 border-ink/15 p-4 mb-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900">חשבונות בנק (יתרת פתיחה)</h3>
+          <h3 className="font-semibold text-ink">חשבונות בנק (יתרת פתיחה)</h3>
           <button
             onClick={addAccount}
-            className="px-2 py-1 bg-emerald-600 text-white rounded text-xs flex items-center gap-1 hover:bg-emerald-700"
+            className="px-2 py-1 bg-ink text-cream text-xs flex items-center gap-1 hover:bg-ink-deep"
           >
             <Plus className="w-3 h-3" />
             הוסף חשבון
           </button>
         </div>
         {data.accounts.length === 0 ? (
-          <p className="text-sm text-gray-500">אין חשבונות. הוסף חשבון לקביעת יתרת פתיחה.</p>
+          <p className="text-sm text-ink/60">אין חשבונות. הוסף חשבון לקביעת יתרת פתיחה.</p>
         ) : (
           <div className="space-y-2">
             {data.accounts.map((acc) => (
@@ -223,7 +223,7 @@ export default function CashFlowSoloPage() {
                   value={acc.name}
                   onChange={(e) => updateAccount(acc.id, { name: e.target.value })}
                   placeholder="שם חשבון"
-                  className="flex-1 px-2 py-1.5 border border-gray-300 rounded text-sm"
+                  className="flex-1 px-2 py-1.5 border border-ink/15 text-sm"
                 />
                 <input
                   type="number"
@@ -232,7 +232,7 @@ export default function CashFlowSoloPage() {
                     updateAccount(acc.id, { balance: parseFloat(e.target.value) || 0 })
                   }
                   placeholder="יתרה"
-                  className="w-32 px-2 py-1.5 border border-gray-300 rounded text-sm text-left"
+                  className="w-32 px-2 py-1.5 border border-ink/15 text-sm text-left"
                 />
                 <button
                   onClick={() => removeAccount(acc.id)}
@@ -242,7 +242,7 @@ export default function CashFlowSoloPage() {
                 </button>
               </div>
             ))}
-            <div className="text-xs text-gray-600 text-left pt-2 border-t">
+            <div className="text-xs text-ink/60 text-left pt-2 border-t border-ink/15">
               סה"כ פתיחה: {fmt(data.accounts.reduce((s, a) => s + a.balance, 0))}
             </div>
           </div>
@@ -275,7 +275,7 @@ export default function CashFlowSoloPage() {
           subValue={
             negativeMonths > 0 ? `⚠️ ${negativeMonths} חודשים שליליים` : '✓ יציב'
           }
-          color={finalBalance >= 0 ? 'blue' : 'red'}
+          color={finalBalance >= 0 ? 'neutral' : 'red'}
           icon={Wallet}
         />
         <KPICard
@@ -293,8 +293,8 @@ export default function CashFlowSoloPage() {
 
       {/* Chart */}
       {monthly.length > 0 && data.items.length > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-lg shadow-sm overflow-hidden mb-4">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-3">
+        <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden mb-4">
+          <div className="bg-ink text-cream p-3">
             <h3 className="font-bold flex items-center gap-2">
               <Wallet className="w-5 h-5" />
               תזרים חודשי + יתרה מצטברת
@@ -317,7 +317,7 @@ export default function CashFlowSoloPage() {
                 <Line
                   type="monotone"
                   dataKey="יתרה מצטברת"
-                  stroke="#3b82f6"
+                  stroke="#8E6824"
                   strokeWidth={3}
                   dot={{ r: 4 }}
                 />
@@ -331,8 +331,8 @@ export default function CashFlowSoloPage() {
       {(incomePieData.length > 0 || expensePieData.length > 0) && (
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           {incomePieData.length > 0 && (
-            <div className="bg-white border-2 border-gray-200 rounded-lg shadow-sm overflow-hidden">
-              <div className="bg-emerald-600 text-white p-3 text-sm font-bold">
+            <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+              <div className="bg-ink-mid text-cream p-3 text-sm font-bold">
                 התפלגות תקבולים
               </div>
               <div className="p-3">
@@ -363,7 +363,7 @@ export default function CashFlowSoloPage() {
           )}
 
           {expensePieData.length > 0 && (
-            <div className="bg-white border-2 border-gray-200 rounded-lg shadow-sm overflow-hidden">
+            <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
               <div className="bg-red-600 text-white p-3 text-sm font-bold">
                 התפלגות תשלומים
               </div>
@@ -398,10 +398,10 @@ export default function CashFlowSoloPage() {
 
       {/* Monthly Table */}
       {monthly.length > 0 && data.items.length > 0 && (
-        <div className="bg-white border-2 border-gray-200 rounded-lg shadow-sm overflow-x-auto mb-4">
-          <div className="bg-gray-700 text-white p-3 text-sm font-bold">טבלת תזרים חודשית</div>
+        <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-x-auto mb-4">
+          <div className="bg-ink text-cream p-3 text-sm font-bold">טבלת תזרים חודשית</div>
           <table className="w-full text-sm">
-            <thead className="bg-gray-100">
+            <thead className="bg-cream-2">
               <tr>
                 <th className="text-right p-2">חודש</th>
                 <th className="text-left p-2">פתיחה</th>
@@ -415,8 +415,8 @@ export default function CashFlowSoloPage() {
               {monthly.map((m, i) => (
                 <tr
                   key={i}
-                  className={`border-t border-gray-100 ${
-                    m.closingBalance < 0 ? 'bg-red-50' : i % 2 === 0 ? '' : 'bg-gray-50'
+                  className={`border-t border-ink/10 ${
+                    m.closingBalance < 0 ? 'bg-red-50' : i % 2 === 0 ? '' : 'bg-cream-2'
                   }`}
                 >
                   <td className="p-2 font-medium">{m.monthName}</td>
@@ -433,7 +433,7 @@ export default function CashFlowSoloPage() {
                   </td>
                   <td
                     className={`p-2 text-left font-bold ${
-                      m.closingBalance >= 0 ? 'text-blue-700' : 'text-red-700'
+                      m.closingBalance >= 0 ? 'text-ink' : 'text-red-700'
                     }`}
                   >
                     {fmt(m.closingBalance)}
@@ -446,7 +446,7 @@ export default function CashFlowSoloPage() {
       )}
 
       {/* Info */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-900">
+      <div className="bg-cream-2 border border-ink/15 p-4 text-sm text-ink">
         <p className="font-semibold mb-1">💡 רוצה יותר?</p>
         <p>
           עבור ל
@@ -470,23 +470,23 @@ function KPICard({
   label: string;
   value: string;
   subValue?: string;
-  color: 'emerald' | 'red' | 'blue';
+  color: 'emerald' | 'red' | 'neutral';
   icon: typeof TrendingUp;
 }) {
   const colorMap: Record<string, { bg: string; border: string; text: string }> = {
     emerald: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700' },
     red: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700' },
-    blue: { bg: 'bg-blue-50', border: 'border-blue-300', text: 'text-blue-700' },
+    neutral: { bg: 'bg-cream-2', border: 'border-ink/15', text: 'text-ink' },
   };
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} ${c.border} border-2 rounded-lg p-3`}>
+    <div className={`${c.bg} ${c.border} border-2 p-3`}>
       <div className="flex items-center justify-between mb-1">
-        <span className="text-xs text-gray-700">{label}</span>
+        <span className="text-xs text-ink/70">{label}</span>
         <Icon className={`w-4 h-4 ${c.text}`} />
       </div>
       <div className={`text-2xl font-bold ${c.text}`}>{value}</div>
-      {subValue && <div className="text-[10px] text-gray-600 mt-1">{subValue}</div>}
+      {subValue && <div className="text-[10px] text-ink/60 mt-1">{subValue}</div>}
     </div>
   );
 }

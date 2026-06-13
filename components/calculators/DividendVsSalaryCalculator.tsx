@@ -45,9 +45,9 @@ const TABS: { id: TabMode; label: string }[] = [
   { id: 'sensitivity', label: 'ניתוח רגישות' },
 ];
 
-const PIE_COLORS_SALARY = ['#3b82f6', '#ef4444', '#f59e0b', '#8b5cf6'];
+const PIE_COLORS_SALARY = ['#102219', '#ef4444', '#f59e0b', '#264B36'];
 const PIE_COLORS_DIVIDEND = ['#10b981', '#ef4444', '#f97316'];
-const PIE_COLORS_OPTIMAL = ['#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#f97316'];
+const PIE_COLORS_OPTIMAL = ['#8E6824', '#10b981', '#ef4444', '#f59e0b', '#264B36', '#f97316'];
 
 const initial: DividendVsSalaryInput = {
   companyAnnualProfit: 800_000,
@@ -90,13 +90,13 @@ function CustomTooltip({
 }) {
   if (!active || !payload || payload.length === 0) return null;
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-sm" dir="rtl">
-      {label && <div className="font-bold text-gray-900 mb-2">{label}</div>}
+    <div className="bg-paper border border-ink/15 rounded-none shadow-lg p-3 text-sm" dir="rtl">
+      {label && <div className="font-bold text-ink mb-2">{label}</div>}
       {payload.map((p, i) => (
         <div key={i} className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: p.color }} />
-          <span className="text-gray-700">{p.name}:</span>
-          <span className="font-semibold text-gray-900">{formatCurrency(p.value)}</span>
+          <span className="text-ink/70">{p.name}:</span>
+          <span className="font-semibold text-ink">{formatCurrency(p.value)}</span>
         </div>
       ))}
     </div>
@@ -137,10 +137,10 @@ function ScenarioDetail({
 
   return (
     <div
-      className={`rounded-xl border-2 p-5 transition-all ${
+      className={`rounded-none border-2 p-5 transition-all ${
         isRecommended
           ? 'border-emerald-400 bg-emerald-50 shadow-md'
-          : 'border-gray-200 bg-white'
+          : 'border-ink/15 bg-paper'
       }`}
     >
       {isRecommended && (
@@ -148,7 +148,7 @@ function ScenarioDetail({
           ✓ מומלץ
         </div>
       )}
-      <h3 className="font-bold text-gray-900 text-lg mb-3">{label}</h3>
+      <h3 className="font-bold text-ink text-lg mb-3">{label}</h3>
 
       <div className="flex justify-center mb-3">
         <PieChart width={160} height={160}>
@@ -174,71 +174,71 @@ function ScenarioDetail({
       <div className="space-y-2 text-sm">
         {scenario.grossSalary > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">משכורת ברוטו:</span>
+            <span className="text-ink/70">משכורת ברוטו:</span>
             <span className="font-medium">{formatCurrency(scenario.grossSalary)}</span>
           </div>
         )}
         {scenario.dividend > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">דיבידנד:</span>
+            <span className="text-ink/70">דיבידנד:</span>
             <span className="font-medium">{formatCurrency(scenario.dividend)}</span>
           </div>
         )}
         {scenario.incomeTax > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">מס הכנסה:</span>
+            <span className="text-ink/70">מס הכנסה:</span>
             <span className="font-medium text-red-600">−{formatCurrency(scenario.incomeTax)}</span>
           </div>
         )}
         {scenario.employeeSocialSecurity > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">ב.ל. עובד:</span>
+            <span className="text-ink/70">ב.ל. עובד:</span>
             <span className="font-medium text-red-600">−{formatCurrency(scenario.employeeSocialSecurity)}</span>
           </div>
         )}
         {scenario.employerSocialSecurity > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">ב.ל. מעסיק:</span>
+            <span className="text-ink/70">ב.ל. מעסיק:</span>
             <span className="font-medium text-orange-600">−{formatCurrency(scenario.employerSocialSecurity)}</span>
           </div>
         )}
         {scenario.corporateTax > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">מס חברות (23%):</span>
+            <span className="text-ink/70">מס חברות (23%):</span>
             <span className="font-medium text-red-600">−{formatCurrency(scenario.corporateTax)}</span>
           </div>
         )}
         {scenario.dividendTax > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">מס דיבידנד:</span>
+            <span className="text-ink/70">מס דיבידנד:</span>
             <span className="font-medium text-red-600">−{formatCurrency(scenario.dividendTax)}</span>
           </div>
         )}
         {scenario.surtax > 0 && (
           <div className="flex justify-between">
-            <span className="text-gray-600">מס יסף (3%):</span>
+            <span className="text-ink/70">מס יסף (3%):</span>
             <span className="font-medium text-red-600">−{formatCurrency(scenario.surtax)}</span>
           </div>
         )}
-        <div className="flex justify-between pt-2 border-t border-gray-200">
-          <span className="font-bold text-gray-900">סה"כ מס:</span>
+        <div className="flex justify-between pt-2 border-t border-ink/15">
+          <span className="font-bold text-ink">סה"כ מס:</span>
           <span className="font-bold text-red-700">{formatCurrency(scenario.totalTax)}</span>
         </div>
         <div
           className={`flex justify-between pt-2 border-t-2 ${
-            isRecommended ? 'border-emerald-300' : 'border-gray-300'
+            isRecommended ? 'border-emerald-300' : 'border-ink/15'
           }`}
         >
-          <span className="font-bold text-gray-900">נטו לבעלים:</span>
+          <span className="font-bold text-ink">נטו לבעלים:</span>
           <span
             className={`font-bold text-xl ${
-              isRecommended ? 'text-emerald-700' : 'text-gray-900'
+              isRecommended ? 'text-emerald-700' : 'text-ink'
             }`}
           >
             {formatCurrency(scenario.netToOwner)}
           </span>
         </div>
-        <div className="flex justify-between text-gray-500">
+        <div className="flex justify-between text-ink/60">
           <span>שיעור מס אפקטיבי:</span>
           <span>{pct(scenario.effectiveTaxRate)}</span>
         </div>
@@ -267,29 +267,29 @@ function InputSection({
   update: <K extends keyof DividendVsSalaryInput>(k: K, v: DividendVsSalaryInput[K]) => void;
 }) {
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-      <h2 className="text-xl font-bold text-gray-900 mb-6">פרטי החברה והבעלים</h2>
+    <div className="bg-paper border border-ink/15 rounded-none p-6">
+      <h2 className="text-xl font-bold text-ink mb-6">פרטי החברה והבעלים</h2>
       <div className="space-y-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-ink/70 mb-1">
             רווח שנתי לפני מס (₪)
           </label>
-          <p className="text-xs text-gray-500 mb-2">לפני משכורת בעלים ולפני מס חברות</p>
+          <p className="text-xs text-ink/60 mb-2">לפני משכורת בעלים ולפני מס חברות</p>
           <input
             type="number"
             min={0}
             step={50_000}
             value={input.companyAnnualProfit}
             onChange={(e) => update('companyAnnualProfit', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-ink/70 mb-1">
             נקודות זיכוי של הבעלים
           </label>
-          <p className="text-xs text-gray-500 mb-2">
+          <p className="text-xs text-ink/60 mb-2">
             גבר רגיל = 2.25 | אישה = 2.75 | הורה לילדים = יותר
           </p>
           <input
@@ -299,12 +299,12 @@ function InputSection({
             step={0.25}
             value={input.creditPoints}
             onChange={(e) => update('creditPoints', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
         </div>
 
-        <div className="border border-gray-200 rounded-lg p-4 space-y-3">
-          <h3 className="font-semibold text-gray-800 text-sm">סטטוס בעלות</h3>
+        <div className="border border-ink/15 rounded-none p-4 space-y-3">
+          <h3 className="font-semibold text-ink text-sm">סטטוס בעלות</h3>
 
           <label className="flex items-start gap-3 cursor-pointer">
             <input
@@ -314,16 +314,16 @@ function InputSection({
               className="w-4 h-4 mt-0.5"
             />
             <div>
-              <div className="text-sm font-medium text-gray-700">בעל מניות מהותי (בעל שליטה)</div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm font-medium text-ink/70">בעל מניות מהותי (בעל שליטה)</div>
+              <div className="text-xs text-ink/60">
                 מחזיק 10%+ מהמניות → מס דיבידנד 30% (במקום 25%)
               </div>
             </div>
           </label>
         </div>
 
-        <div className="border border-gray-200 rounded-lg p-4 space-y-3">
-          <h3 className="font-semibold text-gray-800 text-sm">הטבות נוספות</h3>
+        <div className="border border-ink/15 rounded-none p-4 space-y-3">
+          <h3 className="font-semibold text-ink text-sm">הטבות נוספות</h3>
 
           <label className="flex items-start gap-3 cursor-pointer">
             <input
@@ -333,8 +333,8 @@ function InputSection({
               className="w-4 h-4 mt-0.5"
             />
             <div>
-              <div className="text-sm font-medium text-gray-700">כלול הפקדות פנסיה</div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm font-medium text-ink/70">כלול הפקדות פנסיה</div>
+              <div className="text-xs text-ink/60">
                 מעסיק 6.5% + עובד 6% + פיצויים 8.33% — הוצאה מוכרת לחברה
               </div>
             </div>
@@ -348,15 +348,15 @@ function InputSection({
               className="w-4 h-4 mt-0.5"
             />
             <div>
-              <div className="text-sm font-medium text-gray-700">כלול קרן השתלמות</div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm font-medium text-ink/70">כלול קרן השתלמות</div>
+              <div className="text-xs text-ink/60">
                 7.5% מעסיק + 2.5% עובד — חסכון מס משמעותי עד 18,840 ₪/שנה
               </div>
             </div>
           </label>
         </div>
 
-        <div className="border border-gray-200 rounded-lg p-4 space-y-3">
+        <div className="border border-ink/15 rounded-none p-4 space-y-3">
           <label className="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
@@ -365,17 +365,17 @@ function InputSection({
               className="w-4 h-4 mt-0.5"
             />
             <div>
-              <div className="text-sm font-medium text-gray-700">בן/בת זוג עובד בחברה</div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm font-medium text-ink/70">בן/בת זוג עובד בחברה</div>
+              <div className="text-xs text-ink/60">
                 מפזר הכנסה → מדרגות מס נמוכות יותר
               </div>
             </div>
           </label>
 
           {input.includeSpouseSalary && (
-            <div className="space-y-3 pt-2 border-t border-gray-100">
+            <div className="space-y-3 pt-2 border-t border-ink/10">
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">
+                <label className="block text-xs font-medium text-ink/70 mb-1">
                   משכורת חודשית ברוטו לבן/בת זוג (₪)
                 </label>
                 <input
@@ -385,11 +385,11 @@ function InputSection({
                   step={1_000}
                   value={input.spouseMonthlyGross ?? 15_000}
                   onChange={(e) => update('spouseMonthlyGross', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">
+                <label className="block text-xs font-medium text-ink/70 mb-1">
                   נקודות זיכוי של בן/בת הזוג
                 </label>
                 <input
@@ -399,7 +399,7 @@ function InputSection({
                   step={0.25}
                   value={input.spouseCreditPoints ?? 2.25}
                   onChange={(e) => update('spouseCreditPoints', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                 />
               </div>
             </div>
@@ -408,7 +408,7 @@ function InputSection({
       </div>
 
       {/* מידע מס נוכחי */}
-      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-800 space-y-1">
+      <div className="mt-6 bg-cream-2 border border-ink/15 rounded-none p-4 text-xs text-ink/70 space-y-1">
         <div className="font-bold mb-2">שיעורי מס 2026 בשימוש:</div>
         <div className="flex justify-between">
           <span>מס חברות:</span>
@@ -487,8 +487,8 @@ function CompareTab({
       </div>
 
       {/* גרף השוואה */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">השוואת נטו לבעלים לפי אסטרטגיה</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">השוואת נטו לבעלים לפי אסטרטגיה</h3>
         <ResponsiveContainer width="100%" height={280}>
           <BarChart data={barData} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -497,8 +497,8 @@ function CompareTab({
             <Tooltip content={<CustomTooltip />} />
             <Legend />
             <Bar dataKey="נטו לבעלים" fill="#10b981" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="מס הכנסה" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="ב.ל." fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="מס הכנסה" fill="#8E6824" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="ב.ל." fill="#264B36" radius={[4, 4, 0, 0]} />
             <Bar dataKey="מס חברות" fill="#f59e0b" radius={[4, 4, 0, 0]} />
             <Bar dataKey="מס דיבידנד" fill="#ef4444" radius={[4, 4, 0, 0]} />
           </BarChart>
@@ -538,7 +538,7 @@ function CompareTab({
 
       {/* המלצה */}
       {result.taxSavings > 0 && (
-        <div className="bg-emerald-50 border-2 border-emerald-300 rounded-xl p-5">
+        <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-5">
           <div className="flex items-start gap-3">
             <div className="text-2xl">💡</div>
             <div>
@@ -635,9 +635,9 @@ function OptimalMixTab({
       </div>
 
       {/* גרף נטו לפי משכורת */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-1">נטו לבעלים לפי גובה המשכורת</h3>
-        <p className="text-sm text-gray-500 mb-4">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-1">נטו לבעלים לפי גובה המשכורת</h3>
+        <p className="text-sm text-ink/60 mb-4">
           הנקודה הגבוהה ביותר = המיקס האופטימלי. מימין: הכל משכורת. משמאל: הכל דיבידנד.
         </p>
         <ResponsiveContainer width="100%" height={300}>
@@ -661,7 +661,7 @@ function OptimalMixTab({
             <Line
               type="monotone"
               dataKey='נטו לבעלים'
-              stroke="#3b82f6"
+              stroke="#8E6824"
               strokeWidth={2}
               dot={false}
             />
@@ -677,8 +677,8 @@ function OptimalMixTab({
       </div>
 
       {/* גרף עמודות: פירוק מס לפי מיקס */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">הרכב המס לפי גובה המשכורת</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">הרכב המס לפי גובה המשכורת</h3>
         <ResponsiveContainer width="100%" height={280}>
           <BarChart
             data={chartData.map((d) => ({
@@ -703,8 +703,8 @@ function OptimalMixTab({
             <YAxis tickFormatter={shortCurrency} tick={{ fontSize: 11 }} />
             <Tooltip content={<CustomTooltip />} />
             <Legend />
-            <Bar dataKey="מס הכנסה" stackId="a" fill="#3b82f6" />
-            <Bar dataKey="ב.ל." stackId="a" fill="#8b5cf6" />
+            <Bar dataKey="מס הכנסה" stackId="a" fill="#8E6824" />
+            <Bar dataKey="ב.ל." stackId="a" fill="#264B36" />
             <Bar dataKey="מס חברות" stackId="a" fill="#f59e0b" />
             <Bar dataKey="מס דיבידנד" stackId="a" fill="#ef4444" />
           </BarChart>
@@ -712,9 +712,9 @@ function OptimalMixTab({
       </div>
 
       {/* הסבר */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-        <h4 className="font-bold text-blue-900 mb-3">למה זה האופטימום?</h4>
-        <div className="text-sm text-blue-800 space-y-2">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h4 className="font-bold text-ink mb-3">למה זה האופטימום?</h4>
+        <div className="text-sm text-ink/70 space-y-2">
           <p>
             <strong>הנוסחה:</strong> כל ₪ משכורת שמוסיפים — חוסך מס חברות (23%) + ב.ל. מעסיק, אבל עולה
             מס הכנסה שולי + ב.ל. עובד.
@@ -794,8 +794,8 @@ function LongTermTab({ result }: { result: ReturnType<typeof calculateDividendVs
         />
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">נטו מצטבר לאורך 20 שנה</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">נטו מצטבר לאורך 20 שנה</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -808,14 +808,14 @@ function LongTermTab({ result }: { result: ReturnType<typeof calculateDividendVs
             />
             <Legend />
             <Line type="monotone" dataKey="אופטימלי" stroke="#10b981" strokeWidth={3} dot={false} />
-            <Line type="monotone" dataKey="הכל משכורת" stroke="#3b82f6" strokeWidth={2} dot={false} strokeDasharray="5 5" />
+            <Line type="monotone" dataKey="הכל משכורת" stroke="#264B36" strokeWidth={2} dot={false} strokeDasharray="5 5" />
             <Line type="monotone" dataKey="הכל דיבידנד" stroke="#f59e0b" strokeWidth={2} dot={false} strokeDasharray="3 3" />
-            <Line type="monotone" dataKey="קרן פנסיה" stroke="#8b5cf6" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="קרן פנסיה" stroke="#8E6824" strokeWidth={2} dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+      <div className="bg-amber-50 border border-amber-200 rounded-none p-5">
         <h4 className="font-bold text-amber-900 mb-3">שיקולי פנסיה וחיסכון ארוך טווח</h4>
         <div className="text-sm text-amber-800 space-y-3">
           <div className="flex gap-2">
@@ -884,9 +884,9 @@ function SpouseTab({
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-        <h3 className="font-bold text-blue-900 mb-2">מהי אסטרטגיית פיצול הכנסה?</h3>
-        <p className="text-sm text-blue-800">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-2">מהי אסטרטגיית פיצול הכנסה?</h3>
+        <p className="text-sm text-ink/70">
           כשבן/בת הזוג עובד בחברה ומקבל משכורת, הכנסה מתפזרת לשני מסלולי מס נפרדים. כל אחד ממלא
           את המדרגות הנמוכות שלו, מה שמוריד את שיעור המס האפקטיבי הכולל.
         </p>
@@ -928,15 +928,15 @@ function SpouseTab({
           />
         </>
       ) : (
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center text-gray-500">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/60">
           <div className="text-4xl mb-3">👩‍💼</div>
           <p className="font-medium">סמן &quot;בן/בת זוג עובד בחברה&quot; בטופס הקלט כדי לראות את האנליזה</p>
         </div>
       )}
 
       {/* טבלת דוגמאות */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">
           השוואת חיסכון לפי גובה משכורת בן/בת זוג
         </h3>
         <ResponsiveContainer width="100%" height={220}>
@@ -950,7 +950,7 @@ function SpouseTab({
         </ResponsiveContainer>
       </div>
 
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 text-sm text-amber-800">
+      <div className="bg-amber-50 border border-amber-200 rounded-none p-5 text-sm text-amber-800">
         <strong>שים לב:</strong> כדי שמשכורת לבן/בת זוג תהיה חוקית, הבן/בת זוג חייב לבצע עבודה
         ממשית בחברה בהלימה לשכר. שכר חסר בסיס עסקי עלול להיפסל על ידי פקיד השומה. מומלץ
         לתעד את תפקיד הבן/בת זוג, שעות עבודה, ולשמור חוזה עבודה מסודר.
@@ -995,17 +995,17 @@ function SensitivityTab({ result }: { result: ReturnType<typeof calculateDividen
 
   return (
     <div className="space-y-6">
-      <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-2">מה אם שיעורי המס ישתנו?</h3>
-        <p className="text-sm text-gray-700">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-2">מה אם שיעורי המס ישתנו?</h3>
+        <p className="text-sm text-ink/70">
           שיעורי המס בישראל משתנים מעת לעת. הניתוח הבא מראה איך היה משתנה הנטו שלך תחת תרחישי
           מס שונים.
         </p>
       </div>
 
       {/* גרף עמודות - השפעת שינוי מס חברות */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">
           השפעת שינוי מס חברות על הנטו (מס דיבידנד מהותי 30%)
         </h3>
         <ResponsiveContainer width="100%" height={250}>
@@ -1022,15 +1022,15 @@ function SensitivityTab({ result }: { result: ReturnType<typeof calculateDividen
       </div>
 
       {/* מטריצה */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">מטריצת רגישות - נטו (דיבידנד מלא)</h3>
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">מטריצת רגישות - נטו (דיבידנד מלא)</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="bg-gray-50">
-                <th className="border border-gray-200 px-3 py-2 text-right">מס חברות \ מס דיב'</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 px-3 py-2 text-right">מס חברות \ מס דיב'</th>
                 {divTaxRates.map((dt) => (
-                  <th key={dt} className="border border-gray-200 px-3 py-2 text-center">
+                  <th key={dt} className="border border-ink/15 px-3 py-2 text-center">
                     {pct(dt)}
                   </th>
                 ))}
@@ -1038,21 +1038,21 @@ function SensitivityTab({ result }: { result: ReturnType<typeof calculateDividen
             </thead>
             <tbody>
               {corpTaxRates.map((ct) => (
-                <tr key={ct} className="hover:bg-gray-50">
-                  <td className="border border-gray-200 px-3 py-2 font-medium">{pct(ct)}</td>
+                <tr key={ct} className="hover:bg-cream-2">
+                  <td className="border border-ink/15 px-3 py-2 font-medium">{pct(ct)}</td>
                   {divTaxRates.map((dt) => {
                     const point = sensitivity.find((s) => s.corpTax === ct && s.divTax === dt);
                     const isCurrent = ct === CORP_TAX_2026 && dt === DIVIDEND_TAX_CONTROLLING;
                     return (
                       <td
                         key={dt}
-                        className={`border border-gray-200 px-3 py-2 text-center ${
-                          isCurrent ? 'bg-blue-100 font-bold text-blue-900' : ''
+                        className={`border border-ink/15 px-3 py-2 text-center ${
+                          isCurrent ? 'bg-cream-2 font-bold text-ink' : ''
                         }`}
                       >
                         {point ? shortCurrency(point.netDividend) : '—'}
                         {isCurrent && (
-                          <div className="text-xs text-blue-600">נוכחי</div>
+                          <div className="text-xs text-gold">נוכחי</div>
                         )}
                       </td>
                     );
@@ -1064,7 +1064,7 @@ function SensitivityTab({ result }: { result: ReturnType<typeof calculateDividen
         </div>
       </div>
 
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-sm text-blue-800">
+      <div className="bg-cream-2 border border-ink/15 rounded-none p-5 text-sm text-ink/70">
         <strong>מה זה אומר למעשה?</strong> אם ממשלת ישראל תעלה את מס החברות ל-28%, הנטו שלך מדיבידנד
         ירד. לכן, אסטרטגיית מיקס גמישה שיכולה להתאים לשינויים — עדיפה על פני מדיניות קשיחה של
         &quot;הכל דיבידנד&quot;.
@@ -1093,25 +1093,25 @@ export function DividendVsSalaryCalculator() {
     <div className="space-y-6" dir="rtl">
       {/* שורת סיכום עליונה */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="bg-white border border-gray-200 rounded-lg p-3 text-center">
-          <div className="text-xs text-gray-500 mb-1">רווח חברה</div>
-          <div className="font-bold text-gray-900 text-lg">{shortCurrency(profit)}</div>
+        <div className="bg-paper border border-ink/15 rounded-none p-3 text-center">
+          <div className="text-xs text-ink/60 mb-1">רווח חברה</div>
+          <div className="font-bold text-ink text-lg">{shortCurrency(profit)}</div>
         </div>
-        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-center">
-          <div className="text-xs text-gray-500 mb-1">נטו אופטימלי</div>
+        <div className="bg-emerald-50 border border-emerald-200 rounded-none p-3 text-center">
+          <div className="text-xs text-ink/60 mb-1">נטו אופטימלי</div>
           <div className="font-bold text-emerald-700 text-lg">
             {shortCurrency(result.optimal.netToOwner)}
           </div>
         </div>
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
-          <div className="text-xs text-gray-500 mb-1">חיסכון vs. כל-משכורת</div>
-          <div className="font-bold text-blue-700 text-lg">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-center">
+          <div className="text-xs text-ink/60 mb-1">חיסכון vs. כל-משכורת</div>
+          <div className="font-bold text-gold text-lg">
             {shortCurrency(result.taxSavings)}
           </div>
         </div>
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center">
-          <div className="text-xs text-gray-500 mb-1">מס אפקטיבי (אופטימלי)</div>
-          <div className="font-bold text-gray-900 text-lg">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-center">
+          <div className="text-xs text-ink/60 mb-1">מס אפקטיבי (אופטימלי)</div>
+          <div className="font-bold text-ink text-lg">
             {pct(result.optimal.effectiveTaxRate)}
           </div>
         </div>
@@ -1131,10 +1131,10 @@ export function DividendVsSalaryCalculator() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-3 py-2 text-sm rounded-lg font-medium transition-colors ${
+                className={`px-3 py-2 text-sm rounded-none font-medium transition-colors ${
                   activeTab === tab.id
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-ink text-cream shadow-sm'
+                    : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'
                 }`}
               >
                 {tab.label}

@@ -59,7 +59,7 @@ export function LoanEligibilityChecker() {
     input.legalStatus !== undefined;
 
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-6 max-w-3xl mx-auto">
+    <div className="bg-paper border-2 border-ink/15 rounded-none p-6 max-w-3xl mx-auto">
       {/* Progress bar */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
@@ -68,8 +68,8 @@ export function LoanEligibilityChecker() {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition ${
                   step >= s.id
-                    ? 'bg-gradient-to-r from-blue-600 to-emerald-500 text-white shadow-lg'
-                    : 'bg-gray-200 text-gray-500'
+                    ? 'bg-ink text-cream shadow-lg'
+                    : 'bg-cream-2 text-ink/60'
                 }`}
               >
                 {step > s.id ? '✓' : s.id}
@@ -77,16 +77,16 @@ export function LoanEligibilityChecker() {
               {i < STEPS.length - 1 && (
                 <div
                   className={`flex-1 h-1 mx-2 rounded transition ${
-                    step > s.id ? 'bg-gradient-to-r from-blue-600 to-emerald-500' : 'bg-gray-200'
+                    step > s.id ? 'bg-ink' : 'bg-cream-2'
                   }`}
                 />
               )}
             </div>
           ))}
         </div>
-        <div className="flex justify-between text-xs text-gray-600">
+        <div className="flex justify-between text-xs text-ink/70">
           {STEPS.map((s) => (
-            <span key={s.id} className={step >= s.id ? 'font-medium text-gray-900' : ''}>
+            <span key={s.id} className={step >= s.id ? 'font-medium text-ink' : ''}>
               {s.label}
             </span>
           ))}
@@ -96,14 +96,14 @@ export function LoanEligibilityChecker() {
       {/* Step 1: Business details */}
       {step === 1 && (
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">פרטי העסק</h3>
+          <h3 className="text-xl font-bold text-ink mb-4">פרטי העסק</h3>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">סוג העסק</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">סוג העסק</label>
             <select
               value={businessType}
               onChange={(e) => setBusinessType(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               <option value="">בחר/י...</option>
               <option value="service">שירותים</option>
@@ -117,11 +117,11 @@ export function LoanEligibilityChecker() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">ותק העסק</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">ותק העסק</label>
             <select
               value={input.businessAge}
               onChange={(e) => update('businessAge', e.target.value as BusinessAge)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               <option value="new">עסק בהקמה</option>
               <option value="under3">עד 3 שנים</option>
@@ -130,11 +130,11 @@ export function LoanEligibilityChecker() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">מחזור שנתי</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">מחזור שנתי</label>
             <select
               value={input.annualRevenue}
               onChange={(e) => update('annualRevenue', e.target.value as AnnualRevenueBand)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               <option value="under625">עד 6.25 מיליון ₪</option>
               <option value="625to25m">6.25 - 25 מיליון ₪</option>
@@ -144,11 +144,11 @@ export function LoanEligibilityChecker() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">סטטוס משפטי</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">סטטוס משפטי</label>
             <select
               value={input.legalStatus}
               onChange={(e) => update('legalStatus', e.target.value as LegalStatus)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               <option value="individual">עוסק מורשה / פטור</option>
               <option value="company">חברה בע"מ</option>
@@ -162,7 +162,7 @@ export function LoanEligibilityChecker() {
               type="button"
               onClick={() => setStep(2)}
               disabled={!isStep1Valid}
-              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-emerald-500 text-white rounded-lg font-semibold hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-ink text-cream rounded-none font-semibold hover:bg-ink-deep transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               הבא
             </button>
@@ -173,8 +173,8 @@ export function LoanEligibilityChecker() {
       {/* Step 2: Threshold */}
       {step === 2 && (
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">תנאי סף</h3>
-          <p className="text-sm text-gray-600 mb-4">
+          <h3 className="text-xl font-bold text-ink mb-2">תנאי סף</h3>
+          <p className="text-sm text-ink/70 mb-4">
             תנאים אלה מבטלים זכאות לכל מסלולי הקרן. סמן רק אם רלוונטי.
           </p>
 
@@ -191,8 +191,8 @@ export function LoanEligibilityChecker() {
           ].map(({ key, label }) => (
             <label
               key={key}
-              className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition ${
-                input[key] ? 'border-amber-400 bg-amber-50' : 'border-gray-200 bg-gray-50'
+              className={`flex items-center gap-3 p-3 rounded-none border-2 cursor-pointer transition ${
+                input[key] ? 'border-amber-400 bg-amber-50' : 'border-ink/15 bg-cream-2'
               }`}
             >
               <input
@@ -201,7 +201,7 @@ export function LoanEligibilityChecker() {
                 onChange={(e) => update(key, e.target.checked)}
                 className="w-5 h-5"
               />
-              <span className="text-sm text-gray-900 font-medium">{label}</span>
+              <span className="text-sm text-ink font-medium">{label}</span>
             </label>
           ))}
 
@@ -209,14 +209,14 @@ export function LoanEligibilityChecker() {
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="px-6 py-2 bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-600 transition"
+              className="px-6 py-2 bg-ink-mid text-cream rounded-none font-semibold hover:bg-ink transition"
             >
               חזור
             </button>
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-emerald-500 text-white rounded-lg font-semibold hover:shadow-lg transition"
+              className="px-6 py-2 bg-ink text-cream rounded-none font-semibold hover:bg-ink-deep transition"
             >
               הבא
             </button>
@@ -227,14 +227,14 @@ export function LoanEligibilityChecker() {
       {/* Step 3: Additional details */}
       {step === 3 && (
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">פרטים נוספים</h3>
+          <h3 className="text-xl font-bold text-ink mb-4">פרטים נוספים</h3>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">מטרת ההלוואה</label>
+            <label className="block text-sm font-medium text-ink/70 mb-2">מטרת ההלוואה</label>
             <select
               value={input.loanPurpose}
               onChange={(e) => update('loanPurpose', e.target.value as LoanPurpose)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               <option value="workingCapital">הון חוזר</option>
               <option value="expansion">הרחבת עסק קיים</option>
@@ -268,8 +268,8 @@ export function LoanEligibilityChecker() {
           ].map(({ key, label, hint }) => (
             <label
               key={key}
-              className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition ${
-                input[key] ? 'border-blue-400 bg-blue-50' : 'border-gray-200 bg-gray-50'
+              className={`flex items-start gap-3 p-3 rounded-none border-2 cursor-pointer transition ${
+                input[key] ? 'border-ink/40 bg-cream-2' : 'border-ink/15 bg-cream-2'
               }`}
             >
               <input
@@ -279,8 +279,8 @@ export function LoanEligibilityChecker() {
                 className="w-5 h-5 mt-0.5"
               />
               <div className="flex-1">
-                <div className="text-sm text-gray-900 font-medium">{label}</div>
-                <div className="text-xs text-gray-500">{hint}</div>
+                <div className="text-sm text-ink font-medium">{label}</div>
+                <div className="text-xs text-ink/60">{hint}</div>
               </div>
             </label>
           ))}
@@ -289,14 +289,14 @@ export function LoanEligibilityChecker() {
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="px-6 py-2 bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-600 transition"
+              className="px-6 py-2 bg-ink-mid text-cream rounded-none font-semibold hover:bg-ink transition"
             >
               חזור
             </button>
             <button
               type="button"
               onClick={() => setStep(4)}
-              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-emerald-500 text-white rounded-lg font-semibold hover:shadow-lg transition"
+              className="px-6 py-2 bg-ink text-cream rounded-none font-semibold hover:bg-ink-deep transition"
             >
               בדוק זכאות
             </button>
@@ -308,12 +308,12 @@ export function LoanEligibilityChecker() {
       {step === 4 && (
         <div>
           {result.eligible ? (
-            <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl p-8 text-center">
+            <div className="bg-emerald-600 text-white rounded-none p-8 text-center">
               <div className="text-5xl mb-4">✓</div>
               <h3 className="text-2xl font-bold mb-2">נמצאת זכאי להלוואה בערבות המדינה!</h3>
               <p className="opacity-90 mb-6">{result.message}</p>
 
-              <div className="bg-white text-gray-900 rounded-lg p-6 text-right space-y-3">
+              <div className="bg-paper text-ink rounded-none p-6 text-right space-y-3">
                 <ResultRow label="מסלול ההלוואה" value={result.route} />
                 <ResultRow
                   label="סכום מקסימלי"
@@ -340,7 +340,7 @@ export function LoanEligibilityChecker() {
               </p>
             </div>
           ) : (
-            <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6">
+            <div className="bg-red-50 border-2 border-red-300 rounded-none p-6">
               <div className="text-3xl mb-3">⚠️</div>
               <h3 className="text-xl font-bold text-red-900 mb-3">
                 לא נמצאה זכאות להלוואה בערבות המדינה
@@ -348,9 +348,9 @@ export function LoanEligibilityChecker() {
               <p className="text-red-800 mb-4">{result.message}</p>
 
               {result.disqualifiers.length > 0 && (
-                <div className="bg-white rounded-lg p-4 border border-red-200">
-                  <h4 className="font-semibold text-gray-900 mb-2 text-sm">סיבות:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
+                <div className="bg-paper rounded-none p-4 border border-red-200">
+                  <h4 className="font-semibold text-ink mb-2 text-sm">סיבות:</h4>
+                  <ul className="space-y-1 text-sm text-ink/70">
                     {result.disqualifiers.map((d) => (
                       <li key={d}>• {d}</li>
                     ))}
@@ -358,7 +358,7 @@ export function LoanEligibilityChecker() {
                 </div>
               )}
 
-              <p className="text-xs text-gray-600 mt-4">
+              <p className="text-xs text-ink/70 mt-4">
                 * צור קשר עם יועץ פיננסי לבחינת חלופות מימון.
               </p>
             </div>
@@ -368,7 +368,7 @@ export function LoanEligibilityChecker() {
             <button
               type="button"
               onClick={reset}
-              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-emerald-500 text-white rounded-lg font-semibold hover:shadow-lg transition"
+              className="px-6 py-2 bg-ink text-cream rounded-none font-semibold hover:bg-ink-deep transition"
             >
               בדיקה חדשה
             </button>
@@ -389,9 +389,9 @@ function ResultRow({
   highlight?: boolean;
 }) {
   return (
-    <div className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
-      <span className="text-sm text-gray-600 font-medium">{label}:</span>
-      <span className={`text-sm ${highlight ? 'font-bold text-emerald-700 text-lg' : 'text-gray-900'}`}>
+    <div className="flex justify-between items-center py-2 border-b border-ink/15 last:border-0">
+      <span className="text-sm text-ink/70 font-medium">{label}:</span>
+      <span className={`text-sm ${highlight ? 'font-bold text-emerald-700 text-lg' : 'text-ink'}`}>
         {value}
       </span>
     </div>

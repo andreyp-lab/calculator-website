@@ -109,7 +109,7 @@ export default function IncomeTaxPage() {
             <p>
               נקודת זיכוי היא הנחה ישירה ממס ההכנסה, בערך <strong>242 ₪/חודש</strong> או 2,904 ₪/שנה
               ב-2026. לחישוב מדויק של נקודות הזיכוי שלך, ראה את{' '}
-              <Link href="/personal-tax/tax-credits" className="text-blue-600 hover:underline">
+              <Link href="/personal-tax/tax-credits" className="text-gold hover:underline">
                 מחשבון נקודות הזיכוי
               </Link>
               .
@@ -162,11 +162,11 @@ export default function IncomeTaxPage() {
             <h2>דוגמה מספרית</h2>
             <p>
               עובד שכיר עם משכורת חודשית של 15,000 ₪ ו-2.25 נקודות זיכוי. לחישוב שכר נטו/ברוטו מלא, נסה את{' '}
-              <Link href="/personal-tax/salary-net-gross" className="text-blue-600 hover:underline">
+              <Link href="/personal-tax/salary-net-gross" className="text-gold hover:underline">
                 מחשבון שכר נטו/ברוטו
               </Link>
               . לבדיקת החזר מס, ראה{' '}
-              <Link href="/personal-tax/tax-refund" className="text-blue-600 hover:underline">
+              <Link href="/personal-tax/tax-refund" className="text-gold hover:underline">
                 מחשבון החזר מס
               </Link>
               :
@@ -184,7 +184,7 @@ export default function IncomeTaxPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.gov.il/he/departments/israel_tax_authority"

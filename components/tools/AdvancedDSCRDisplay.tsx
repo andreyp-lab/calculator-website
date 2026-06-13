@@ -48,7 +48,7 @@ export function AdvancedDSCRDisplay() {
 
   if (!dscr) {
     return (
-      <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 text-center">
+      <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-6 text-center">
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-2" />
         <p className="text-amber-900">חסרים נתונים לחישוב DSCR</p>
       </div>
@@ -60,13 +60,13 @@ export function AdvancedDSCRDisplay() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white p-4">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Banknote className="w-5 h-5" />
             DSCR מתקדם - 5 שיטות מדידה
           </h3>
-          <p className="text-xs text-cyan-100">
+          <p className="text-xs text-cream/70">
             הערכת יכולת החזר חוב מ-5 זוויות שונות + הערכת בנק
           </p>
         </div>
@@ -93,8 +93,8 @@ export function AdvancedDSCRDisplay() {
       />
 
       {/* Max Debt Capacity */}
-      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-        <div className="bg-purple-600 text-white p-2 text-sm font-bold">
+      <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+        <div className="bg-ink text-cream p-2 text-sm font-bold">
           יכולת חוב מקסימלית - 3 רמות שמרנות
         </div>
         <div className="p-4 grid md:grid-cols-3 gap-3">
@@ -106,7 +106,7 @@ export function AdvancedDSCRDisplay() {
           <CapacityBox
             label="מתון (DSCR 1.35)"
             value={fmt(dscr.maxDebtCapacity.moderate)}
-            color="blue"
+            color="ink"
           />
           <CapacityBox
             label="אגרסיבי (DSCR 1.0)"
@@ -117,32 +117,32 @@ export function AdvancedDSCRDisplay() {
       </div>
 
       {/* Components */}
-      <div className="bg-gray-50 rounded-lg p-4">
-        <h4 className="font-semibold text-gray-900 mb-3">נתוני בסיס</h4>
+      <div className="bg-cream-2 rounded-none p-4">
+        <h4 className="font-semibold text-ink mb-3">נתוני בסיס</h4>
         <div className="grid md:grid-cols-2 gap-2 text-sm">
-          <div className="flex justify-between p-2 bg-white rounded">
+          <div className="flex justify-between p-2 bg-paper rounded-none">
             <span>EBITDA:</span>
             <span className="font-bold">{fmt(dscr.components.ebitda)}</span>
           </div>
-          <div className="flex justify-between p-2 bg-white rounded">
+          <div className="flex justify-between p-2 bg-paper rounded-none">
             <span>תזרים תפעולי:</span>
             <span className="font-bold">{fmt(dscr.components.operatingCashFlow)}</span>
           </div>
-          <div className="flex justify-between p-2 bg-white rounded">
+          <div className="flex justify-between p-2 bg-paper rounded-none">
             <span>תזרים חופשי:</span>
             <span className="font-bold">{fmt(dscr.components.freeCashFlow)}</span>
           </div>
-          <div className="flex justify-between p-2 bg-white rounded">
+          <div className="flex justify-between p-2 bg-paper rounded-none">
             <span>סך שירות חוב:</span>
             <span className="font-bold text-red-700">
               {fmt(dscr.components.totalDebtService)}
             </span>
           </div>
-          <div className="flex justify-between p-2 bg-white rounded">
+          <div className="flex justify-between p-2 bg-paper rounded-none">
             <span>קרן:</span>
             <span>{fmt(dscr.components.principalPayment)}</span>
           </div>
-          <div className="flex justify-between p-2 bg-white rounded">
+          <div className="flex justify-between p-2 bg-paper rounded-none">
             <span>ריבית:</span>
             <span>{fmt(dscr.components.interestExpense)}</span>
           </div>
@@ -155,7 +155,7 @@ export function AdvancedDSCRDisplay() {
 function PrimaryDSCRCard({ dscr }: { dscr: { value: number; interpretation: { status: string; text: string } } }) {
   const statusColor = {
     excellent: 'emerald',
-    good: 'blue',
+    good: 'teal',
     fair: 'amber',
     weak: 'orange',
     critical: 'red',
@@ -163,9 +163,9 @@ function PrimaryDSCRCard({ dscr }: { dscr: { value: number; interpretation: { st
 
   return (
     <div
-      className={`bg-${statusColor}-50 border-4 border-${statusColor}-300 rounded-xl p-6 text-center`}
+      className={`bg-${statusColor}-50 border-4 border-${statusColor}-300 rounded-none p-6 text-center`}
     >
-      <div className="text-sm text-gray-700 mb-2">DSCR משוקלל (5 שיטות)</div>
+      <div className="text-sm text-ink/70 mb-2">DSCR משוקלל (5 שיטות)</div>
       <div className={`text-6xl font-bold text-${statusColor}-700 mb-3`}>
         {dscr.value > 99 ? '∞' : dscr.value.toFixed(2)}
       </div>
@@ -188,21 +188,21 @@ function DSCRMethodCard({
 }) {
   const statusColor = {
     excellent: 'emerald',
-    good: 'blue',
+    good: 'teal',
     fair: 'amber',
     weak: 'orange',
     critical: 'red',
   }[method.interpretation.status] as string;
 
   return (
-    <div className={`bg-white border-2 border-${statusColor}-200 rounded-lg p-3 shadow-sm`}>
+    <div className={`bg-paper border-2 border-${statusColor}-200 rounded-none p-3 shadow-sm`}>
       <div className="flex items-center justify-between mb-2">
-        <h5 className="font-semibold text-sm text-gray-900">{method.label}</h5>
+        <h5 className="font-semibold text-sm text-ink">{method.label}</h5>
         <span className={`text-xl font-bold text-${statusColor}-700`}>
           {method.value > 99 ? '∞' : method.value.toFixed(2)}
         </span>
       </div>
-      <div className="text-[10px] text-gray-500 mb-1">{method.formula}</div>
+      <div className="text-[10px] text-ink/60 mb-1">{method.formula}</div>
       <div className={`text-xs text-${statusColor}-700`}>{method.interpretation.text}</div>
     </div>
   );
@@ -222,30 +222,30 @@ function BankAssessmentCard({
   const approvalColor = approval.includes('מומלץ לאישור')
     ? 'emerald'
     : approval.includes('בתנאים')
-      ? 'blue'
+      ? 'teal'
       : approval.includes('בכפוף')
         ? 'amber'
         : 'red';
 
   return (
-    <div className={`bg-${approvalColor}-50 border-2 border-${approvalColor}-300 rounded-lg p-4`}>
+    <div className={`bg-${approvalColor}-50 border-2 border-${approvalColor}-300 rounded-none p-4`}>
       <h4 className={`font-bold text-${approvalColor}-900 mb-3`}>הערכת בנק</h4>
       <div className="grid md:grid-cols-3 gap-3 mb-3">
         <div>
-          <div className="text-xs text-gray-600">המלצת אישור</div>
+          <div className="text-xs text-ink/60">המלצת אישור</div>
           <div className={`font-bold text-${approvalColor}-800`}>{approval}</div>
         </div>
         <div>
-          <div className="text-xs text-gray-600">רמת ביטחון</div>
+          <div className="text-xs text-ink/60">רמת ביטחון</div>
           <div className="font-bold">{confidence}</div>
         </div>
         <div>
-          <div className="text-xs text-gray-600">LTV מקסימלי</div>
+          <div className="text-xs text-ink/60">LTV מקסימלי</div>
           <div className="font-bold">{maxLTV}%</div>
         </div>
       </div>
       {comments.length > 0 && (
-        <ul className="text-sm text-gray-700 space-y-1">
+        <ul className="text-sm text-ink/70 space-y-1">
           {comments.map((c, i) => (
             <li key={i}>• {c}</li>
           ))}
@@ -258,13 +258,13 @@ function BankAssessmentCard({
 function CapacityBox({ label, value, color }: { label: string; value: string; color: string }) {
   const colorMap: Record<string, { bg: string; text: string }> = {
     emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
-    blue: { bg: 'bg-blue-50', text: 'text-blue-700' },
+    ink: { bg: 'bg-cream-2', text: 'text-ink' },
     amber: { bg: 'bg-amber-50', text: 'text-amber-700' },
   };
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} rounded-lg p-3 text-center border border-gray-200`}>
-      <div className="text-xs text-gray-600 mb-1">{label}</div>
+    <div className={`${c.bg} rounded-none p-3 text-center border border-ink/15`}>
+      <div className="text-xs text-ink/60 mb-1">{label}</div>
       <div className={`text-xl font-bold ${c.text}`}>{value}</div>
     </div>
   );

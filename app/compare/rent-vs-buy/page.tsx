@@ -34,47 +34,47 @@ export default function RentVsBuyComparePage() {
           <h2>השוואת עלויות חודשיות (דירה 2.5M ₪)</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="border border-gray-300 p-3 text-right">סעיף</th>
-                <th className="border border-gray-300 p-3 text-right">קנייה</th>
-                <th className="border border-gray-300 p-3 text-right">שכירות</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-3 text-right">סעיף</th>
+                <th className="border border-ink/15 p-3 text-right">קנייה</th>
+                <th className="border border-ink/15 p-3 text-right">שכירות</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-3">משכנתא חודשית</td>
-                <td className="border border-gray-300 p-3">~10,500 ₪ (פריים+1.5%)</td>
-                <td className="border border-gray-300 p-3">-</td>
+                <td className="border border-ink/15 p-3">משכנתא חודשית</td>
+                <td className="border border-ink/15 p-3">~10,500 ₪ (פריים+1.5%)</td>
+                <td className="border border-ink/15 p-3">-</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-3">שכר דירה</td>
-                <td className="border border-gray-300 p-3">-</td>
-                <td className="border border-gray-300 p-3">~7,500-8,500 ₪</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-3">ארנונה</td>
-                <td className="border border-gray-300 p-3">~600-1,200 ₪</td>
-                <td className="border border-gray-300 p-3">~600-1,200 ₪</td>
-              </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-3">ועד בית</td>
-                <td className="border border-gray-300 p-3">~250-500 ₪</td>
-                <td className="border border-gray-300 p-3">~250-500 ₪</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-3">שכר דירה</td>
+                <td className="border border-ink/15 p-3">-</td>
+                <td className="border border-ink/15 p-3">~7,500-8,500 ₪</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-3">תחזוקה ותיקונים</td>
-                <td className="border border-gray-300 p-3">~500-1,000 ₪</td>
-                <td className="border border-gray-300 p-3">בעל הבית</td>
+                <td className="border border-ink/15 p-3">ארנונה</td>
+                <td className="border border-ink/15 p-3">~600-1,200 ₪</td>
+                <td className="border border-ink/15 p-3">~600-1,200 ₪</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-3">ביטוח דירה</td>
-                <td className="border border-gray-300 p-3">~150 ₪</td>
-                <td className="border border-gray-300 p-3">~50 ₪ (תכולה)</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-3">ועד בית</td>
+                <td className="border border-ink/15 p-3">~250-500 ₪</td>
+                <td className="border border-ink/15 p-3">~250-500 ₪</td>
               </tr>
-              <tr className="bg-blue-100 font-bold">
-                <td className="border border-gray-300 p-3">סה"כ חודשי משוער</td>
-                <td className="border border-gray-300 p-3">~12,000-13,500 ₪</td>
-                <td className="border border-gray-300 p-3">~8,500-10,000 ₪</td>
+              <tr>
+                <td className="border border-ink/15 p-3">תחזוקה ותיקונים</td>
+                <td className="border border-ink/15 p-3">~500-1,000 ₪</td>
+                <td className="border border-ink/15 p-3">בעל הבית</td>
+              </tr>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-3">ביטוח דירה</td>
+                <td className="border border-ink/15 p-3">~150 ₪</td>
+                <td className="border border-ink/15 p-3">~50 ₪ (תכולה)</td>
+              </tr>
+              <tr className="bg-ink text-cream font-bold">
+                <td className="border border-ink/20 p-3">סה"כ חודשי משוער</td>
+                <td className="border border-ink/20 p-3">~12,000-13,500 ₪</td>
+                <td className="border border-ink/20 p-3">~8,500-10,000 ₪</td>
               </tr>
             </tbody>
           </table>
@@ -126,7 +126,7 @@ export default function RentVsBuyComparePage() {
             עדיף לקנות.
           </p>
 
-          <div className="bg-blue-50 border-r-4 border-blue-600 p-4 my-4 text-sm">
+          <div className="bg-cream-2 border-r-4 border-ink p-4 my-4 text-sm">
             <p className="font-semibold mb-2">דוגמה:</p>
             <p>
               דירה 2.5M ₪. שכ"ד דומה: 8,000 ₪/חודש = 96,000 ₪/שנה. עלות שנתית של קנייה: ~150K
@@ -152,14 +152,14 @@ export default function RentVsBuyComparePage() {
 
           <h2>חישוב מדויק</h2>
           <p>
-            השתמש ב<Link href="/real-estate/mortgage" className="text-blue-600 underline">מחשבון המשכנתא</Link>{' '}
+            השתמש ב<Link href="/real-estate/mortgage" className="text-gold underline">מחשבון המשכנתא</Link>{' '}
             למטה כדי לחשב בדיוק כמה תשלם בקנייה. אחר כך השווה לשכר דירה שמתאים לאותה דירה
             באותה שכונה.
           </p>
           <p>
-            שים לב: בעת רכישת דירה חל גם <Link href="/real-estate/purchase-tax" className="text-blue-600 underline">מס רכישה</Link>{' '}
+            שים לב: בעת רכישת דירה חל גם <Link href="/real-estate/purchase-tax" className="text-gold underline">מס רכישה</Link>{' '}
             — לרוכשי דירה ראשונה הפטור עד 1,978,745 ₪, ולאחר מכן מדרגות עד 10%. השתמש ב
-            <Link href="/real-estate/purchase-tax" className="text-blue-600 underline">מחשבון מס הרכישה</Link>{' '}
+            <Link href="/real-estate/purchase-tax" className="text-gold underline">מחשבון מס הרכישה</Link>{' '}
             לחישוב מדויק.
           </p>
         </>

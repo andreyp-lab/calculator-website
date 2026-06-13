@@ -56,31 +56,31 @@ export function YearEndTaxSimulator() {
   return (
     <div className="space-y-6">
       {/* פרטי עסק */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-5">
-        <h2 className="text-xl font-bold text-gray-900">פרטי העסק</h2>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-5">
+        <h2 className="text-xl font-bold text-ink">פרטי העסק</h2>
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               סוג העסק
             </label>
             <select
               value={input.businessType}
               onChange={(e) => update('businessType', e.target.value as BusinessType)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             >
               <option value="exempt">עוסק פטור</option>
               <option value="authorized">עוסק מורשה</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               רבעון נוכחי (לחישוב מקדמות)
             </label>
             <select
               value={input.currentQuarter}
               onChange={(e) => update('currentQuarter', e.target.value as Quarter)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             >
               <option value="Q1">רבעון 1 (ינו׳-מרץ)</option>
               <option value="Q2">רבעון 1+2 מצטבר (ינו׳-יוני)</option>
@@ -92,13 +92,13 @@ export function YearEndTaxSimulator() {
       </div>
 
       {/* הכנסות חודשיות */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
         <div className="flex items-center justify-between flex-wrap gap-2">
-          <h2 className="text-xl font-bold text-gray-900">הכנסות חודשיות (ללא מע"מ)</h2>
+          <h2 className="text-xl font-bold text-ink">הכנסות חודשיות (ללא מע"מ)</h2>
           <button
             type="button"
             onClick={fillForward}
-            className="text-sm text-blue-600 hover:text-blue-700 underline"
+            className="text-sm text-gold hover:text-gold-2 underline"
           >
             ↩ העתק קדימה (מילוי חודשים ריקים)
           </button>
@@ -107,7 +107,7 @@ export function YearEndTaxSimulator() {
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {MONTHS.map((label, i) => (
             <div key={i}>
-              <label className="block text-xs font-medium text-gray-600 mb-1">
+              <label className="block text-xs font-medium text-ink/60 mb-1">
                 {label}
               </label>
               <input
@@ -116,7 +116,7 @@ export function YearEndTaxSimulator() {
                 step={500}
                 value={input.monthlyRevenue[i] ?? 0}
                 onChange={(e) => updateMonth(i, Number(e.target.value))}
-                className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm"
+                className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
               />
             </div>
           ))}
@@ -124,20 +124,20 @@ export function YearEndTaxSimulator() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
           {(Object.keys(result.quarterlyRevenue) as Quarter[]).map((q) => (
-            <div key={q} className="bg-gray-50 rounded-lg p-2 text-center">
-              <div className="text-gray-500">{q}</div>
-              <div className="font-bold text-gray-900">
+            <div key={q} className="bg-cream-2 rounded-none p-2 text-center">
+              <div className="text-ink/60">{q}</div>
+              <div className="font-bold text-ink">
                 {formatCurrency(result.quarterlyRevenue[q])}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-sm">
           <strong>מחזור שנתי צפוי:</strong>{' '}
           {formatCurrency(result.annualRevenue)} (ללא מע"מ)
           {input.businessType === 'authorized' && (
-            <span className="block text-xs text-blue-800 mt-1">
+            <span className="block text-xs text-ink/70 mt-1">
               כולל מע"מ: {formatCurrency(result.annualRevenueIncludingVat)} | מע"מ עסקאות:{' '}
               {formatCurrency(result.vatOutput)}
             </span>
@@ -146,10 +146,10 @@ export function YearEndTaxSimulator() {
       </div>
 
       {/* הוצאות מוכרות */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-        <h2 className="text-xl font-bold text-gray-900">הוצאות מוכרות</h2>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
+        <h2 className="text-xl font-bold text-ink">הוצאות מוכרות</h2>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink/70 mb-2">
             סה"כ הוצאות מוכרות שנתיות (לאחר התאמה לאחוז ההכרה)
           </label>
           <input
@@ -158,9 +158,9 @@ export function YearEndTaxSimulator() {
             step={500}
             value={input.recognizedExpenses}
             onChange={(e) => update('recognizedExpenses', Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-lg"
+            className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-ink/60 mt-1">
             הוצאות עסקיות (חומרי גלם, פרסום, עו"ד, רואה חשבון, אינטרנט) מוכרות 100%.
             הוצאות מעורבות (טלפון נייד 50%/רכב 45%/בית 25%) - לאחר התאמת אחוז ההכרה.
           </p>
@@ -168,12 +168,12 @@ export function YearEndTaxSimulator() {
       </div>
 
       {/* ניכויים / זיכויים */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-        <h2 className="text-xl font-bold text-gray-900">ניכויים וזיכויים</h2>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
+        <h2 className="text-xl font-bold text-ink">ניכויים וזיכויים</h2>
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               הפקדה חודשית לפנסיה (₪)
             </label>
             <input
@@ -182,14 +182,14 @@ export function YearEndTaxSimulator() {
               step={50}
               value={input.monthlyPensionDeposit}
               onChange={(e) => update('monthlyPensionDeposit', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שנתי: {formatCurrency(input.monthlyPensionDeposit * 12)}
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               הפקדה חודשית לקרן השתלמות (₪)
             </label>
             <input
@@ -198,14 +198,14 @@ export function YearEndTaxSimulator() {
               step={50}
               value={input.monthlyStudyFundDeposit}
               onChange={(e) => update('monthlyStudyFundDeposit', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שנתי: {formatCurrency(input.monthlyStudyFundDeposit * 12)}
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               נקודות זיכוי
             </label>
             <input
@@ -215,14 +215,14 @@ export function YearEndTaxSimulator() {
               step={0.25}
               value={input.creditPoints}
               onChange={(e) => update('creditPoints', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שווי שנתי: {formatCurrency(input.creditPoints * 2904)} (₪2,904/נקודה)
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               תרומות לעמותות מוכרות (שנתי, ₪)
             </label>
             <input
@@ -231,19 +231,19 @@ export function YearEndTaxSimulator() {
               step={100}
               value={input.donations ?? 0}
               onChange={(e) => update('donations', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
-            <p className="text-xs text-gray-500 mt-1">זיכוי 35% מסכום התרומה</p>
+            <p className="text-xs text-ink/60 mt-1">זיכוי 35% מסכום התרומה</p>
           </div>
         </div>
       </div>
 
       {/* מקדמות ששולמו */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4">
-        <h2 className="text-xl font-bold text-gray-900">מקדמות ששולמו עד כה</h2>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-4">
+        <h2 className="text-xl font-bold text-ink">מקדמות ששולמו עד כה</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               מקדמות מס הכנסה (₪)
             </label>
             <input
@@ -252,11 +252,11 @@ export function YearEndTaxSimulator() {
               step={100}
               value={input.incomeTaxAdvancesPaid}
               onChange={(e) => update('incomeTaxAdvancesPaid', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink/70 mb-2">
               מקדמות ביטוח לאומי (₪)
             </label>
             <input
@@ -265,7 +265,7 @@ export function YearEndTaxSimulator() {
               step={100}
               value={input.bituachLeumiAdvancesPaid}
               onChange={(e) => update('bituachLeumiAdvancesPaid', Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
           </div>
         </div>
@@ -294,8 +294,8 @@ export function YearEndTaxSimulator() {
       </div>
 
       {/* טבלת פירוט */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-3">
-        <h2 className="text-xl font-bold text-gray-900 mb-3">פירוט החישוב</h2>
+      <div className="bg-paper border-2 border-ink/15 rounded-none p-6 space-y-3">
+        <h2 className="text-xl font-bold text-ink mb-3">פירוט החישוב</h2>
 
         <div className="space-y-2 text-sm">
           <Row label="מחזור שנתי" value={formatCurrency(result.annualRevenue)} />
@@ -384,7 +384,7 @@ export function YearEndTaxSimulator() {
 
       {/* המלצות */}
       {result.recommendations.length > 0 && (
-        <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-5">
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-5">
           <h3 className="text-lg font-bold text-amber-900 mb-3">המלצות לאופטימיזציה</h3>
           <ul className="space-y-2">
             {result.recommendations.map((r, i) => (
@@ -418,15 +418,15 @@ function Row({
   return (
     <div
       className={`flex justify-between items-center py-1.5 ${
-        line ? 'border-t border-gray-200 pt-2.5 mt-1' : ''
-      } ${highlight ? 'bg-blue-50 -mx-2 px-2 rounded' : ''}`}
+        line ? 'border-t border-ink/15 pt-2.5 mt-1' : ''
+      } ${highlight ? 'bg-cream-2 -mx-2 px-2 rounded-none' : ''}`}
     >
-      <span className={`${mute ? 'text-gray-600' : 'text-gray-800'} ${bold ? 'font-bold' : ''}`}>
+      <span className={`${mute ? 'text-ink/60' : 'text-ink/80'} ${bold ? 'font-bold' : ''}`}>
         {label}
       </span>
       <span
-        className={`tabular-nums ${bold ? 'font-bold text-gray-900' : 'text-gray-700'} ${
-          mute ? 'text-gray-500' : ''
+        className={`tabular-nums ${bold ? 'font-bold text-ink' : 'text-ink/70'} ${
+          mute ? 'text-ink/60' : ''
         }`}
       >
         {value}
@@ -455,35 +455,35 @@ function AdvancesCard({
 
   return (
     <div
-      className={`border-2 rounded-xl p-5 ${
+      className={`border-2 rounded-none p-5 ${
         isExact
           ? 'bg-emerald-50 border-emerald-300'
           : isShortfall
           ? 'bg-red-50 border-red-300'
-          : 'bg-blue-50 border-blue-300'
+          : 'bg-cream-2 border-gold/40'
       }`}
     >
-      <h3 className="font-bold text-gray-900 mb-3">{title}</h3>
+      <h3 className="font-bold text-ink mb-3">{title}</h3>
       <div className="space-y-1.5 text-sm">
         <div className="flex justify-between">
-          <span className="text-gray-700">צפי שנתי:</span>
+          <span className="text-ink/70">צפי שנתי:</span>
           <span className="font-medium tabular-nums">{formatCurrency(required)}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-700">נדרש עד {quarter}:</span>
+          <span className="text-ink/70">נדרש עד {quarter}:</span>
           <span className="font-medium tabular-nums">{formatCurrency(needed)}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-700">שולם בפועל:</span>
+          <span className="text-ink/70">שולם בפועל:</span>
           <span className="font-medium tabular-nums">{formatCurrency(paid)}</span>
         </div>
-        <div className="border-t border-gray-300 pt-2 mt-2 flex justify-between">
-          <span className="font-bold text-gray-900">
+        <div className="border-t border-ink/15 pt-2 mt-2 flex justify-between">
+          <span className="font-bold text-ink">
             {isShortfall ? 'להשלים:' : isExact ? 'מאוזן:' : 'יתרה לטובתך:'}
           </span>
           <span
             className={`font-bold tabular-nums ${
-              isShortfall ? 'text-red-700' : isExact ? 'text-emerald-700' : 'text-blue-700'
+              isShortfall ? 'text-red-700' : isExact ? 'text-emerald-700' : 'text-gold'
             }`}
           >
             {formatCurrency(Math.abs(diff))}

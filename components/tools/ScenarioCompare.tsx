@@ -68,24 +68,24 @@ export function ScenarioCompare() {
 
   return (
     <div className="space-y-4">
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-4">
+      <div className="bg-paper rounded-none border-2 border-ink/15 p-4">
         <div className="flex items-center gap-2 mb-3">
-          <GitCompare className="w-5 h-5 text-purple-600" />
-          <h3 className="font-bold text-base text-gray-900">השוואת תרחישים</h3>
+          <GitCompare className="w-5 h-5 text-ink-mid" />
+          <h3 className="font-bold text-base text-ink">השוואת תרחישים</h3>
         </div>
 
         {otherScenarios.length === 0 ? (
-          <div className="bg-amber-50 border border-amber-200 rounded p-3 text-sm text-amber-900">
+          <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-sm text-amber-900">
             ⚠️ אין תרחיש נוסף להשוואה. צור תרחיש נוסף ב-ScenarioBar למעלה.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div className="md:col-span-2">
-              <label className="block text-xs text-gray-700 mb-1">בחר תרחיש להשוואה:</label>
+              <label className="block text-xs text-ink/70 mb-1">בחר תרחיש להשוואה:</label>
               <select
                 value={compareId}
                 onChange={(e) => setCompareId(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               >
                 <option value="">— בחר תרחיש —</option>
                 {otherScenarios.map((s) => (
@@ -96,15 +96,15 @@ export function ScenarioCompare() {
               </select>
             </div>
             <div className="flex items-end gap-2">
-              <div className="flex-1 bg-blue-50 border border-blue-200 rounded p-2 text-xs">
-                <div className="text-blue-700">תרחיש נוכחי:</div>
-                <div className="font-bold text-blue-900">{scenario.name}</div>
+              <div className="flex-1 bg-cream-2 border border-ink/15 rounded-none p-2 text-xs">
+                <div className="text-ink-mid">תרחיש נוכחי:</div>
+                <div className="font-bold text-ink">{scenario.name}</div>
               </div>
-              <ArrowLeftRight className="w-5 h-5 text-purple-600 flex-shrink-0" />
+              <ArrowLeftRight className="w-5 h-5 text-ink-mid flex-shrink-0" />
               {compareScenario && (
-                <div className="flex-1 bg-purple-50 border border-purple-200 rounded p-2 text-xs">
-                  <div className="text-purple-700">משווה ל:</div>
-                  <div className="font-bold text-purple-900">{compareScenario.name}</div>
+                <div className="flex-1 bg-cream-2 border border-ink/15 rounded-none p-2 text-xs">
+                  <div className="text-gold">משווה ל:</div>
+                  <div className="font-bold text-ink">{compareScenario.name}</div>
                 </div>
               )}
             </div>
@@ -115,17 +115,17 @@ export function ScenarioCompare() {
       {data && compareScenario && (
         <>
           {/* KPI Comparison Table */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-3">
+          <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+            <div className="bg-ink text-cream p-3">
               <h3 className="font-bold">השוואת מדדים מרכזיים</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50">
+                <thead className="bg-cream-2">
                   <tr>
                     <th className="text-right px-3 py-2">מדד</th>
-                    <th className="text-right px-3 py-2 text-blue-700">{scenario.name}</th>
-                    <th className="text-right px-3 py-2 text-purple-700">{compareScenario.name}</th>
+                    <th className="text-right px-3 py-2 text-ink-mid">{scenario.name}</th>
+                    <th className="text-right px-3 py-2 text-gold">{compareScenario.name}</th>
                     <th className="text-right px-3 py-2">הפרש</th>
                   </tr>
                 </thead>
@@ -166,7 +166,7 @@ export function ScenarioCompare() {
                     const diff = row.a - row.b;
                     const isGood = row.reverse ? diff < 0 : diff > 0;
                     return (
-                      <tr key={i} className="border-b border-gray-100 hover:bg-gray-50">
+                      <tr key={i} className="border-b border-ink/10 hover:bg-cream-2">
                         <td className="px-3 py-2 font-medium">{row.label}</td>
                         <td className="px-3 py-2">{fmt(row.a)}</td>
                         <td className="px-3 py-2">{fmt(row.b)}</td>
@@ -183,14 +183,14 @@ export function ScenarioCompare() {
           </div>
 
           {/* Balance Comparison Chart */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-3">
+          <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+            <div className="bg-ink text-cream p-3">
               <h3 className="font-bold">השוואת יתרות לאורך זמן</h3>
             </div>
             <div className="p-4">
               <ResponsiveContainer width="100%" height={280}>
                 <LineChart data={data.balanceData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#D9D4CB" />
                   <XAxis dataKey="month" tick={{ fontSize: 11 }} reversed />
                   <YAxis
                     tick={{ fontSize: 11 }}
@@ -206,14 +206,14 @@ export function ScenarioCompare() {
                   <Line
                     type="monotone"
                     dataKey={scenario.name}
-                    stroke="#3b82f6"
+                    stroke="#102219"
                     strokeWidth={3}
                     dot={{ r: 4 }}
                   />
                   <Line
                     type="monotone"
                     dataKey={compareScenario.name}
-                    stroke="#a855f7"
+                    stroke="#8E6824"
                     strokeWidth={3}
                     strokeDasharray="5 5"
                     dot={{ r: 4 }}
@@ -224,14 +224,14 @@ export function ScenarioCompare() {
           </div>
 
           {/* Flow Comparison Chart */}
-          <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-            <div className="bg-gradient-to-r from-emerald-600 to-green-600 text-white p-3">
+          <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
+            <div className="bg-ink text-cream p-3">
               <h3 className="font-bold">השוואת תזרים נטו חודשי</h3>
             </div>
             <div className="p-4">
               <ResponsiveContainer width="100%" height={280}>
                 <LineChart data={data.flowData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#D9D4CB" />
                   <XAxis dataKey="month" tick={{ fontSize: 11 }} reversed />
                   <YAxis
                     tick={{ fontSize: 11 }}
@@ -243,17 +243,17 @@ export function ScenarioCompare() {
                     contentStyle={{ direction: 'rtl', textAlign: 'right' }}
                   />
                   <Legend wrapperStyle={{ direction: 'rtl' }} />
-                  <ReferenceLine y={0} stroke="#000" />
+                  <ReferenceLine y={0} stroke="#102219" />
                   <Line
                     type="monotone"
                     dataKey={scenario.name}
-                    stroke="#10b981"
+                    stroke="#102219"
                     strokeWidth={3}
                   />
                   <Line
                     type="monotone"
                     dataKey={compareScenario.name}
-                    stroke="#f59e0b"
+                    stroke="#8E6824"
                     strokeWidth={3}
                     strokeDasharray="5 5"
                   />

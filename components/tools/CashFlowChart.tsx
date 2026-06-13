@@ -44,27 +44,27 @@ export function CashFlowChart() {
   const fmt = (v: number) => formatCurrency(v, settings.currency);
 
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-200 shadow-sm overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-4 flex items-center justify-between">
+    <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
+      <div className="bg-ink text-cream p-4 flex items-center justify-between">
         <div>
           <h3 className="font-bold text-lg flex items-center gap-2">
             <ChartIcon className="w-5 h-5" />
             ויזואליזציית תזרים
           </h3>
-          <p className="text-sm text-blue-100">
+          <p className="text-sm text-cream/70">
             מגמת היתרה והתזרים החודשי לאורך התקופה
           </p>
         </div>
-        <div className="flex bg-white/10 rounded-lg p-1">
+        <div className="flex bg-white/10 p-1">
           <button
             onClick={() => setView('balance')}
-            className={`px-3 py-1 rounded text-xs ${view === 'balance' ? 'bg-white text-blue-700 font-semibold' : 'text-white'}`}
+            className={`px-3 py-1 text-xs ${view === 'balance' ? 'bg-cream text-ink font-semibold' : 'text-cream'}`}
           >
             יתרת מזומנים
           </button>
           <button
             onClick={() => setView('flow')}
-            className={`px-3 py-1 rounded text-xs ${view === 'flow' ? 'bg-white text-blue-700 font-semibold' : 'text-white'}`}
+            className={`px-3 py-1 text-xs ${view === 'flow' ? 'bg-cream text-ink font-semibold' : 'text-cream'}`}
           >
             תזרים חודשי
           </button>
@@ -77,8 +77,8 @@ export function CashFlowChart() {
             <AreaChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
               <defs>
                 <linearGradient id="balanceGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#102219" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#102219" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -92,7 +92,7 @@ export function CashFlowChart() {
               <Area
                 type="monotone"
                 dataKey="יתרה"
-                stroke="#3b82f6"
+                stroke="#102219"
                 strokeWidth={2}
                 fill="url(#balanceGradient)"
               />

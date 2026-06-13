@@ -44,7 +44,7 @@ export function FamilyBudgetCalculator() {
 
   const statusColors = {
     excellent: 'bg-green-50 border-green-300 text-green-800',
-    good: 'bg-blue-50 border-blue-300 text-blue-800',
+    good: 'bg-cream-2 border-ink/15 text-ink',
     warning: 'bg-amber-50 border-amber-300 text-amber-800',
     danger: 'bg-red-50 border-red-300 text-red-800',
   };
@@ -60,7 +60,7 @@ export function FamilyBudgetCalculator() {
     <div className="space-y-6">
       <div className="grid lg:grid-cols-2 gap-4">
         {/* Income */}
-        <div className="bg-green-50 border-2 border-green-200 rounded-xl p-5">
+        <div className="bg-green-50 border-2 border-green-200 rounded-none p-5">
           <h3 className="font-bold text-green-900 mb-4">💰 הכנסות (נטו)</h3>
           <div className="space-y-3">
             <InputField
@@ -78,7 +78,7 @@ export function FamilyBudgetCalculator() {
               value={input.additionalIncome}
               onChange={(v) => update('additionalIncome', v)}
             />
-            <div className="bg-white rounded p-3 mt-3 border-2 border-green-300">
+            <div className="bg-paper rounded p-3 mt-3 border-2 border-green-300">
               <div className="flex justify-between font-bold text-green-900">
                 <span>סה&quot;כ הכנסות</span>
                 <span>{formatCurrency(result.totalIncome)}</span>
@@ -88,7 +88,7 @@ export function FamilyBudgetCalculator() {
         </div>
 
         {/* Fixed Expenses */}
-        <div className="bg-red-50 border-2 border-red-200 rounded-xl p-5">
+        <div className="bg-red-50 border-2 border-red-200 rounded-none p-5">
           <h3 className="font-bold text-red-900 mb-4">🏠 הוצאות קבועות</h3>
           <div className="space-y-3">
             <InputField
@@ -106,7 +106,7 @@ export function FamilyBudgetCalculator() {
               value={input.insurance}
               onChange={(v) => update('insurance', v)}
             />
-            <div className="bg-white rounded p-3 mt-3 border-2 border-red-300">
+            <div className="bg-paper rounded p-3 mt-3 border-2 border-red-300">
               <div className="flex justify-between font-bold text-red-900">
                 <span>סה&quot;כ הוצאות קבועות</span>
                 <span>{formatCurrency(result.totalFixedExpenses)}</span>
@@ -116,7 +116,7 @@ export function FamilyBudgetCalculator() {
         </div>
 
         {/* Variable Expenses */}
-        <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-5">
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-5">
           <h3 className="font-bold text-amber-900 mb-4">🛒 הוצאות משתנות</h3>
           <div className="space-y-3">
             <InputField
@@ -149,7 +149,7 @@ export function FamilyBudgetCalculator() {
               value={input.other}
               onChange={(v) => update('other', v)}
             />
-            <div className="bg-white rounded p-3 mt-3 border-2 border-amber-300">
+            <div className="bg-paper rounded p-3 mt-3 border-2 border-amber-300">
               <div className="flex justify-between font-bold text-amber-900">
                 <span>סה&quot;כ הוצאות משתנות</span>
                 <span>{formatCurrency(result.totalVariableExpenses)}</span>
@@ -159,8 +159,8 @@ export function FamilyBudgetCalculator() {
         </div>
 
         {/* Savings */}
-        <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-5">
-          <h3 className="font-bold text-blue-900 mb-4">💎 חיסכון והשקעות</h3>
+        <div className="bg-green-50 border-2 border-green-200 rounded-none p-5">
+          <h3 className="font-bold text-green-900 mb-4">💎 חיסכון והשקעות</h3>
           <div className="space-y-3">
             <InputField
               label="חיסכון חודשי"
@@ -172,12 +172,12 @@ export function FamilyBudgetCalculator() {
               value={input.pension}
               onChange={(v) => update('pension', v)}
             />
-            <div className="bg-white rounded p-3 mt-3 border-2 border-blue-300">
-              <div className="flex justify-between font-bold text-blue-900">
+            <div className="bg-paper rounded p-3 mt-3 border-2 border-green-300">
+              <div className="flex justify-between font-bold text-green-900">
                 <span>סה&quot;כ חיסכון</span>
                 <span>{formatCurrency(result.totalSavings)}</span>
               </div>
-              <div className="text-xs text-blue-700 mt-1">
+              <div className="text-xs text-green-700 mt-1">
                 שיעור חיסכון: {formatPercent(result.savingsRate / 100, 1)}
               </div>
             </div>
@@ -186,7 +186,7 @@ export function FamilyBudgetCalculator() {
       </div>
 
       {/* Status */}
-      <div className={`border-2 rounded-xl p-5 ${statusColors[result.status]}`}>
+      <div className={`border-2 rounded-none p-5 ${statusColors[result.status]}`}>
         <div className="flex items-start gap-3">
           <StatusIcon className="w-8 h-8 flex-shrink-0" />
           <div className="flex-1">
@@ -201,9 +201,9 @@ export function FamilyBudgetCalculator() {
       </div>
 
       {/* 50/30/20 Rule */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
-        <h3 className="font-bold text-gray-900 mb-4">📊 ניתוח לפי כלל 50/30/20</h3>
-        <p className="text-sm text-gray-600 mb-4">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
+        <h3 className="font-bold text-ink mb-4">📊 ניתוח לפי כלל 50/30/20</h3>
+        <p className="text-sm text-ink/70 mb-4">
           הכלל מומלץ: 50% צרכים, 30% רצונות, 20% חיסכון
         </p>
         <div className="space-y-3">
@@ -248,13 +248,13 @@ function InputField({
 }) {
   return (
     <div>
-      <label className="block text-xs text-gray-700 mb-1">{label}</label>
+      <label className="block text-xs text-ink/70 mb-1">{label}</label>
       <input
         type="number"
         min={0}
         value={value || ''}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full px-3 py-1.5 border border-gray-300 rounded text-sm"
+        className="w-full px-3 py-1.5 border border-ink/15 rounded-none text-sm"
       />
     </div>
   );
@@ -291,7 +291,7 @@ function RuleBar({
           {formatCurrency(actual)} ({pct.toFixed(1)}%) | יעד: {target}%
         </span>
       </div>
-      <div className="bg-gray-200 rounded-full h-3 overflow-hidden">
+      <div className="bg-ink/10 rounded-full h-3 overflow-hidden">
         <div
           className={`h-full ${colorClasses[color]} transition-all`}
           style={{ width: `${Math.min(pct, 100)}%` }}

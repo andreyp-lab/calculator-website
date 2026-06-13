@@ -29,10 +29,10 @@ const DEPARTMENT_LABELS: Record<Department, string> = {
 };
 
 const DEPARTMENT_COLORS: Record<Department, string> = {
-  sales: '#3b82f6',
+  sales: '#102219',
   marketing: '#f59e0b',
   development: '#10b981',
-  operations: '#8b5cf6',
+  operations: '#8E6824',
   administration: '#ef4444',
 };
 
@@ -129,7 +129,7 @@ export function EmployeeAnalysis() {
     {
       name: 'עלויות עובדים',
       value: Math.max(0, analysis.totalEmployeeCost),
-      color: '#3b82f6',
+      color: '#102219',
     },
     {
       name: 'עלויות אחרות',
@@ -147,7 +147,7 @@ export function EmployeeAnalysis() {
     if (eff > 1.5) return 'bg-emerald-100 text-emerald-800 border-emerald-300';
     if (eff > 0.8) return 'bg-amber-100 text-amber-800 border-amber-300';
     if (eff > 0) return 'bg-red-100 text-red-800 border-red-300';
-    return 'bg-gray-100 text-gray-800 border-gray-300';
+    return 'bg-cream-2 text-ink/60 border-ink/15';
   }
 
   function getEfficiencyLabel(eff: number) {
@@ -159,17 +159,17 @@ export function EmployeeAnalysis() {
 
   return (
     <div className="space-y-4">
-      <div className="bg-white rounded-lg border-2 border-gray-200 p-5 shadow-sm">
+      <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
         <div className="flex items-center gap-2 mb-4">
-          <Users className="w-5 h-5 text-purple-600" />
-          <h3 className="font-bold text-lg text-gray-900">ניתוח עובדים</h3>
-          <span className="text-sm text-gray-500">({analysis.totalCount} עובדים)</span>
+          <Users className="w-5 h-5 text-gold" />
+          <h3 className="font-bold text-lg text-ink">ניתוח עובדים</h3>
+          <span className="text-sm text-ink/60">({analysis.totalCount} עובדים)</span>
         </div>
 
         {/* טבלת סיכום */}
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50">
+            <thead className="bg-cream-2">
               <tr>
                 <th className="text-right px-3 py-2">מחלקה</th>
                 <th className="text-center px-3 py-2">עובדים</th>
@@ -181,7 +181,7 @@ export function EmployeeAnalysis() {
             </thead>
             <tbody>
               {activeDepts.map(([dept, d]) => (
-                <tr key={dept} className="border-b border-gray-100 hover:bg-gray-50">
+                <tr key={dept} className="border-b border-ink/10 hover:bg-cream-2">
                   <td className="px-3 py-2 font-medium" style={{ color: DEPARTMENT_COLORS[dept] }}>
                     {DEPARTMENT_LABELS[dept]}
                   </td>
@@ -191,7 +191,7 @@ export function EmployeeAnalysis() {
                   <td className="px-3 py-2 text-emerald-700">{fmt(d.revenue)}</td>
                   <td className="px-3 py-2 text-center">
                     <span
-                      className={`inline-block px-2 py-0.5 rounded-full text-xs border ${getEfficiencyClass(
+                      className={`inline-block px-2 py-0.5 text-xs border ${getEfficiencyClass(
                         d.efficiency,
                       )}`}
                     >
@@ -201,7 +201,7 @@ export function EmployeeAnalysis() {
                 </tr>
               ))}
             </tbody>
-            <tfoot className="bg-purple-50 font-bold">
+            <tfoot className="bg-cream-2 font-bold">
               <tr>
                 <td className="px-3 py-2">סה"כ</td>
                 <td className="px-3 py-2 text-center">{analysis.totalCount}</td>
@@ -218,8 +218,8 @@ export function EmployeeAnalysis() {
       {/* גרפים */}
       <div className="grid md:grid-cols-3 gap-4">
         {/* Distribution */}
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-          <h4 className="font-semibold text-gray-900 mb-2 text-sm">חלוקת עובדים</h4>
+        <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
+          <h4 className="font-semibold text-ink mb-2 text-sm">חלוקת עובדים</h4>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
@@ -240,22 +240,22 @@ export function EmployeeAnalysis() {
         </div>
 
         {/* Efficiency */}
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-          <h4 className="font-semibold text-gray-900 mb-2 text-sm">יחס יעילות (הכנסות/עלות)</h4>
+        <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
+          <h4 className="font-semibold text-ink mb-2 text-sm">יחס יעילות (הכנסות/עלות)</h4>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={efficiencyData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" tick={{ fontSize: 11 }} />
               <YAxis tick={{ fontSize: 11 }} />
               <Tooltip formatter={(v) => `${v}x`} />
-              <Bar dataKey="efficiency" fill="#8b5cf6" />
+              <Bar dataKey="efficiency" fill="#8E6824" />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Cost Structure */}
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-sm">
-          <h4 className="font-semibold text-gray-900 mb-2 text-sm">מבנה עלויות</h4>
+        <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
+          <h4 className="font-semibold text-ink mb-2 text-sm">מבנה עלויות</h4>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
@@ -277,7 +277,7 @@ export function EmployeeAnalysis() {
         </div>
       </div>
 
-      <div className="bg-blue-50 border border-blue-200 rounded p-3 text-xs text-blue-900">
+      <div className="bg-cream-2 border border-ink/15 p-3 text-xs text-ink">
         💡 <strong>הערה:</strong> תרומת ההכנסות מבוססת על אחוזי הקצאה מקובלים: מכירות 40%,
         שיווק 30%, פיתוח 20%, תפעול 10%. ניתן להתאים זאת לעסק שלך.
       </div>

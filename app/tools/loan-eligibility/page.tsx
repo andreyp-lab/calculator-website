@@ -187,17 +187,17 @@ export default function LoanEligibilityPage() {
             <h2>כלים נוספים לבעלי עסקים</h2>
             <ul>
               <li>
-                <Link href="/tools/unified" className="text-blue-700 hover:underline">
+                <Link href="/tools/unified" className="text-gold hover:underline">
                   מערכת ניהול פיננסית מאוחדת — תקציב, תזרים וניתוח במקום אחד
                 </Link>
               </li>
               <li>
-                <Link href="/tools/cash-flow" className="text-blue-700 hover:underline">
+                <Link href="/tools/cash-flow" className="text-gold hover:underline">
                   מחשבון תזרים מזומנים — חיזוי תקבולים ותשלומים לפי תאריכים
                 </Link>
               </li>
               <li>
-                <Link href="/tools/financial-analysis" className="text-blue-700 hover:underline">
+                <Link href="/tools/financial-analysis" className="text-gold hover:underline">
                   ניתוח דוחות כספיים — יחסים פיננסיים, מגמות ותובנות לעסק
                 </Link>
               </li>
@@ -206,7 +206,7 @@ export default function LoanEligibilityPage() {
         }
         faq={<FAQ items={faqItems} />}
         sources={
-          <ul className="space-y-2 text-blue-700">
+          <ul className="space-y-2 text-gold">
             <li>
               <a
                 href="https://www.gov.il/he/departments/general/loan-state-guarantee-fund"

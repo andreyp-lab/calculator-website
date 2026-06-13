@@ -99,43 +99,43 @@ export default function FirePage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse my-4">
               <thead>
-                <tr className="bg-blue-50">
-                  <th className="border border-gray-300 p-2 text-right">סוג FIRE</th>
-                  <th className="border border-gray-300 p-2 text-right">הוצאות/חודש (זוג)</th>
-                  <th className="border border-gray-300 p-2 text-right">FIRE Number</th>
-                  <th className="border border-gray-300 p-2 text-right">מה זה מחייב?</th>
+                <tr className="bg-cream-2">
+                  <th className="border border-ink/15 p-2 text-right">סוג FIRE</th>
+                  <th className="border border-ink/15 p-2 text-right">הוצאות/חודש (זוג)</th>
+                  <th className="border border-ink/15 p-2 text-right">FIRE Number</th>
+                  <th className="border border-ink/15 p-2 text-right">מה זה מחייב?</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-2 font-medium text-green-700">Lean FIRE</td>
-                  <td className="border border-gray-300 p-2">₪8K-12K</td>
-                  <td className="border border-gray-300 p-2">₪2.4M-3.6M</td>
-                  <td className="border border-gray-300 p-2">חיים פשוטים, ייתכן פריפריה</td>
+                  <td className="border border-ink/15 p-2 font-medium text-ink-mid">Lean FIRE</td>
+                  <td className="border border-ink/15 p-2">₪8K-12K</td>
+                  <td className="border border-ink/15 p-2">₪2.4M-3.6M</td>
+                  <td className="border border-ink/15 p-2">חיים פשוטים, ייתכן פריפריה</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-2 font-medium text-blue-700">Regular FIRE</td>
-                  <td className="border border-gray-300 p-2">₪15K-25K</td>
-                  <td className="border border-gray-300 p-2">₪4.5M-7.5M</td>
-                  <td className="border border-gray-300 p-2">רמת חיים נוחה, נסיעות מדי פעם</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 p-2 font-medium text-purple-700">Fat FIRE</td>
-                  <td className="border border-gray-300 p-2">₪35K-50K+</td>
-                  <td className="border border-gray-300 p-2">₪10.5M-15M+</td>
-                  <td className="border border-gray-300 p-2">עושר אמיתי, ללא פשרות</td>
-                </tr>
-                <tr className="bg-gray-50">
-                  <td className="border border-gray-300 p-2 font-medium text-amber-700">Coast FIRE</td>
-                  <td className="border border-gray-300 p-2">כל סכום</td>
-                  <td className="border border-gray-300 p-2">תלוי בגיל</td>
-                  <td className="border border-gray-300 p-2">הפסק הפקדות, ממשיך לעבוד</td>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-2 font-medium text-ink-mid">Regular FIRE</td>
+                  <td className="border border-ink/15 p-2">₪15K-25K</td>
+                  <td className="border border-ink/15 p-2">₪4.5M-7.5M</td>
+                  <td className="border border-ink/15 p-2">רמת חיים נוחה, נסיעות מדי פעם</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2 font-medium text-pink-700">Barista FIRE</td>
-                  <td className="border border-gray-300 p-2">₪12K-18K</td>
-                  <td className="border border-gray-300 p-2">₪2.5M-4M</td>
-                  <td className="border border-gray-300 p-2">עבודה חלקית + תיק קטן</td>
+                  <td className="border border-ink/15 p-2 font-medium text-gold">Fat FIRE</td>
+                  <td className="border border-ink/15 p-2">₪35K-50K+</td>
+                  <td className="border border-ink/15 p-2">₪10.5M-15M+</td>
+                  <td className="border border-ink/15 p-2">עושר אמיתי, ללא פשרות</td>
+                </tr>
+                <tr className="bg-cream-2">
+                  <td className="border border-ink/15 p-2 font-medium text-amber-700">Coast FIRE</td>
+                  <td className="border border-ink/15 p-2">כל סכום</td>
+                  <td className="border border-ink/15 p-2">תלוי בגיל</td>
+                  <td className="border border-ink/15 p-2">הפסק הפקדות, ממשיך לעבוד</td>
+                </tr>
+                <tr>
+                  <td className="border border-ink/15 p-2 font-medium text-ink-mid">Barista FIRE</td>
+                  <td className="border border-ink/15 p-2">₪12K-18K</td>
+                  <td className="border border-ink/15 p-2">₪2.5M-4M</td>
+                  <td className="border border-ink/15 p-2">עבודה חלקית + תיק קטן</td>
                 </tr>
               </tbody>
             </table>
@@ -145,41 +145,41 @@ export default function FirePage() {
           <p>הגורם הכי קריטי הוא לא הכנסה - אלא שיעור החיסכון:</p>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-blue-50">
-                <th className="border border-gray-300 p-2 text-right">שיעור חיסכון</th>
-                <th className="border border-gray-300 p-2 text-right">שנים ל-FIRE</th>
-                <th className="border border-gray-300 p-2 text-right">תיאור</th>
+              <tr className="bg-cream-2">
+                <th className="border border-ink/15 p-2 text-right">שיעור חיסכון</th>
+                <th className="border border-ink/15 p-2 text-right">שנים ל-FIRE</th>
+                <th className="border border-ink/15 p-2 text-right">תיאור</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-2">10%</td>
-                <td className="border border-gray-300 p-2">~51 שנים</td>
-                <td className="border border-gray-300 p-2">ממוצע ישראלי</td>
+                <td className="border border-ink/15 p-2">10%</td>
+                <td className="border border-ink/15 p-2">~51 שנים</td>
+                <td className="border border-ink/15 p-2">ממוצע ישראלי</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">25%</td>
-                <td className="border border-gray-300 p-2">~32 שנים</td>
-                <td className="border border-gray-300 p-2">FIRE-aware</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">40%</td>
-                <td className="border border-gray-300 p-2">~22 שנים</td>
-                <td className="border border-gray-300 p-2">FIRE רציני</td>
-              </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">50%</td>
-                <td className="border border-gray-300 p-2">~17 שנים</td>
-                <td className="border border-gray-300 p-2">Regular FIRE</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">25%</td>
+                <td className="border border-ink/15 p-2">~32 שנים</td>
+                <td className="border border-ink/15 p-2">FIRE-aware</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-2">70%+</td>
-                <td className="border border-gray-300 p-2">~7-10 שנים</td>
-                <td className="border border-gray-300 p-2">Extreme FIRE</td>
+                <td className="border border-ink/15 p-2">40%</td>
+                <td className="border border-ink/15 p-2">~22 שנים</td>
+                <td className="border border-ink/15 p-2">FIRE רציני</td>
+              </tr>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">50%</td>
+                <td className="border border-ink/15 p-2">~17 שנים</td>
+                <td className="border border-ink/15 p-2">Regular FIRE</td>
+              </tr>
+              <tr>
+                <td className="border border-ink/15 p-2">70%+</td>
+                <td className="border border-ink/15 p-2">~7-10 שנים</td>
+                <td className="border border-ink/15 p-2">Extreme FIRE</td>
               </tr>
             </tbody>
           </table>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink/70">
             בהנחת תשואה ריאלית של 5% שנתי. מקור: Mr. Money Mustache.
           </p>
 
@@ -218,7 +218,7 @@ export default function FirePage() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>Trinity Study - Cooley, Hubbard, Walz (1998, עודכן 2011)</li>
           <li>Early Retirement Extreme - Jacob Lund Fisker</li>
           <li>ביטוח לאומי ישראל - קצבת זקנה 2026</li>

@@ -156,7 +156,7 @@ export default function RetirementPage() {
       }
       faq={<FAQ items={faqItems} />}
       sources={
-        <ul className="space-y-2 text-blue-700">
+        <ul className="space-y-2 text-gold">
           <li>
             <a href="https://www.btl.gov.il" target="_blank" rel="noopener noreferrer" className="hover:underline">
               ביטוח לאומי — קצבת זקנה 2026

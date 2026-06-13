@@ -104,37 +104,37 @@ export default function Page() {
           <h2>טבלת סכומים מקסימליים 2026</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
-              <tr className="bg-emerald-50">
-                <th className="border border-gray-300 p-2 text-right">מצב משפחתי</th>
-                <th className="border border-gray-300 p-2 text-center">מקסימום שנתי</th>
-                <th className="border border-gray-300 p-2 text-center">חודשי</th>
-                <th className="border border-gray-300 p-2 text-center">הכנסה מקסימלית</th>
+              <tr className="bg-ink text-cream">
+                <th className="border border-ink/20 p-2 text-right">מצב משפחתי</th>
+                <th className="border border-ink/20 p-2 text-center">מקסימום שנתי</th>
+                <th className="border border-ink/20 p-2 text-center">חודשי</th>
+                <th className="border border-ink/20 p-2 text-center">הכנסה מקסימלית</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 p-2">יחיד ללא ילדים</td>
-                <td className="border border-gray-300 p-2 text-center font-semibold">~5,506 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">~459 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">83,400 ₪</td>
+                <td className="border border-ink/15 p-2">יחיד ללא ילדים</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">~5,506 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">~459 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">83,400 ₪</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">הורה — ילד אחד</td>
-                <td className="border border-gray-300 p-2 text-center font-semibold">~7,068 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">~589 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">99,960 ₪</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">הורה — ילד אחד</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">~7,068 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">~589 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">99,960 ₪</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 p-2">הורה — שני ילדים</td>
-                <td className="border border-gray-300 p-2 text-center font-semibold">~8,630 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">~719 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">99,960 ₪</td>
+                <td className="border border-ink/15 p-2">הורה — שני ילדים</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">~8,630 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">~719 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">99,960 ₪</td>
               </tr>
-              <tr className="bg-gray-50">
-                <td className="border border-gray-300 p-2">הורה יחיד — שני ילדים</td>
-                <td className="border border-gray-300 p-2 text-center font-semibold">~11,580 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">~965 ₪</td>
-                <td className="border border-gray-300 p-2 text-center">99,960 ₪</td>
+              <tr className="bg-cream-2">
+                <td className="border border-ink/15 p-2">הורה יחיד — שני ילדים</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">~11,580 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">~965 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">99,960 ₪</td>
               </tr>
             </tbody>
           </table>

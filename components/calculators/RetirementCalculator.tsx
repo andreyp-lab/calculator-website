@@ -49,11 +49,11 @@ const DEFAULT_INPUT: ComprehensiveRetirementInput = {
   pensionTaxRate: 10,
   capitalGainsTaxRate: 25,
   scenarios: [
-    { label: 'שמרני (3%)', returnRate: 3, color: '#6b7280', retirementAge: 67 },
-    { label: 'מתון (6%)', returnRate: 6, color: '#3b82f6', retirementAge: 67 },
+    { label: 'שמרני (3%)', returnRate: 3, color: '#264B36', retirementAge: 67 },
+    { label: 'מתון (6%)', returnRate: 6, color: '#102219', retirementAge: 67 },
     { label: 'אגרסיבי (8%)', returnRate: 8, color: '#10b981', retirementAge: 67 },
     { label: 'מוקדם 62 (6%)', returnRate: 6, color: '#f59e0b', retirementAge: 62 },
-    { label: 'מאוחר 70 (6%)', returnRate: 6, color: '#8b5cf6', retirementAge: 70 },
+    { label: 'מאוחר 70 (6%)', returnRate: 6, color: '#8E6824', retirementAge: 70 },
   ],
 };
 
@@ -152,7 +152,7 @@ export function RetirementCalculator() {
       {
         name: 'פנסיה (נטו)',
         value: Math.round(incomeSources.pensionMonthly * (1 - pensionTaxRate / 100) * inflFactor),
-        fill: '#3b82f6',
+        fill: '#102219',
       },
       {
         name: 'ביטוח לאומי',
@@ -162,7 +162,7 @@ export function RetirementCalculator() {
       {
         name: 'שכירות',
         value: Math.round(incomeSources.rentalIncome * inflFactor),
-        fill: '#8b5cf6',
+        fill: '#8E6824',
       },
       {
         name: 'עבודה חלקית',
@@ -196,18 +196,18 @@ export function RetirementCalculator() {
   return (
     <div className="space-y-6" dir="rtl">
       {/* ===== Mode Toggle ===== */}
-      <div className="flex gap-2 bg-gray-100 rounded-xl p-1 w-fit">
+      <div className="flex gap-2 bg-cream-2 rounded-none p-1 w-fit">
         <button
           type="button"
           onClick={() => setMainMode('planning')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition ${mainMode === 'planning' ? 'bg-white text-blue-700 shadow font-bold' : 'text-gray-600 hover:text-gray-900'}`}
+          className={`px-4 py-2 rounded-none text-sm font-medium transition ${mainMode === 'planning' ? 'bg-paper text-ink shadow font-bold' : 'text-ink/60 hover:text-ink'}`}
         >
           📋 תכנון פרישה
         </button>
         <button
           type="button"
           onClick={() => setMainMode('goal')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition ${mainMode === 'goal' ? 'bg-white text-emerald-700 shadow font-bold' : 'text-gray-600 hover:text-gray-900'}`}
+          className={`px-4 py-2 rounded-none text-sm font-medium transition ${mainMode === 'goal' ? 'bg-paper text-emerald-700 shadow font-bold' : 'text-ink/60 hover:text-ink'}`}
         >
           🎯 כמה להפקיד?
         </button>
@@ -224,25 +224,25 @@ export function RetirementCalculator() {
               <Field label="גיל נוכחי" hint="גיל הנוכחי שלך">
                 <input type="number" min={18} max={75} value={input.currentAge}
                   onChange={(e) => update('currentAge', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-base"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-base"
                 />
               </Field>
               <Field label="גיל פרישה" hint="גבר: 67 | אישה: 65 (עולה ל-67)">
                 <input type="number" min={50} max={80} value={input.retirementAge}
                   onChange={(e) => update('retirementAge', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
               </Field>
               <Field label="שנות פרישה" hint="תוחלת חיים ממוצעת: 85-90">
                 <input type="number" min={5} max={40} value={input.yearsInRetirement}
                   onChange={(e) => update('yearsInRetirement', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
               </Field>
-              <div className="bg-blue-50 rounded-lg p-3 flex items-center">
+              <div className="bg-cream-2 rounded-none p-3 flex items-center">
                 <div>
-                  <p className="text-xs text-blue-700 font-medium">שנים עד פרישה</p>
-                  <p className="text-2xl font-bold text-blue-800">{result.yearsUntilRetirement}</p>
+                  <p className="text-xs text-ink/70 font-medium">שנים עד פרישה</p>
+                  <p className="text-2xl font-bold text-ink">{result.yearsUntilRetirement}</p>
                 </div>
               </div>
             </div>
@@ -254,37 +254,37 @@ export function RetirementCalculator() {
               <Field label="חיסכון נוכחי סה&quot;כ (₪)" hint="פנסיה + השתלמות + חיסכון פרטי">
                 <input type="number" min={0} step={10_000} value={input.currentSavings}
                   onChange={(e) => update('currentSavings', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-lg"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
                 />
               </Field>
               <Field label="הפקדה חודשית כוללת (₪)" hint="כולל הפרשות מעסיק לפנסיה (18.5% מהשכר)">
                 <input type="number" min={0} step={500} value={input.monthlyContribution}
                   onChange={(e) => update('monthlyContribution', Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
               </Field>
               <div className="grid grid-cols-2 gap-3">
                 <Field label="תשואה שנתית צפויה (%)">
                   <input type="number" min={0} max={20} step={0.5} value={input.expectedReturn}
                     onChange={(e) => update('expectedReturn', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                 </Field>
                 <Field label="אינפלציה שנתית (%)">
                   <input type="number" min={0} max={10} step={0.5} value={input.inflationRate}
                     onChange={(e) => update('inflationRate', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
                 </Field>
               </div>
               {/* תשואות ייחוס */}
-              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-none p-3">
                 <p className="text-xs text-emerald-800 font-medium mb-2">💡 תשואות ייחוס לפנסיה:</p>
                 <div className="grid grid-cols-3 gap-1">
                   {[['שמרני', 3], ['מסלול כללי', 5.5], ['מניות', 7]].map(([label, rate]) => (
                     <button key={String(label)} type="button"
                       onClick={() => update('expectedReturn', Number(rate))}
-                      className={`text-xs py-1 px-2 rounded transition text-center ${input.expectedReturn === Number(rate) ? 'bg-emerald-600 text-white' : 'bg-white border border-emerald-300 text-emerald-700 hover:bg-emerald-100'}`}
+                      className={`text-xs py-1 px-2 rounded-none transition text-center ${input.expectedReturn === Number(rate) ? 'bg-emerald-600 text-white' : 'bg-paper border border-emerald-300 text-emerald-700 hover:bg-emerald-100'}`}
                     >
                       {label}: {rate}%
                     </button>
@@ -300,21 +300,21 @@ export function RetirementCalculator() {
               hint="כמה תרצה לחיות בחודש? המחשבון יתאים לאינפלציה">
               <input type="number" min={0} step={500} value={input.desiredMonthlyIncome}
                 onChange={(e) => update('desiredMonthlyIncome', Number(e.target.value))}
-                className="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 text-lg bg-purple-50"
+                className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg bg-cream-2"
               />
             </Field>
             <div className="mt-3 grid grid-cols-3 gap-2">
               {[8_000, 12_000, 15_000, 20_000, 25_000, 30_000].map((amt) => (
                 <button key={amt} type="button"
                   onClick={() => update('desiredMonthlyIncome', amt)}
-                  className={`text-xs py-1.5 px-2 rounded-lg transition text-center ${input.desiredMonthlyIncome === amt ? 'bg-purple-600 text-white font-bold' : 'bg-purple-50 border border-purple-200 text-purple-700 hover:bg-purple-100'}`}
+                  className={`text-xs py-1.5 px-2 rounded-none transition text-center ${input.desiredMonthlyIncome === amt ? 'bg-ink text-cream font-bold' : 'bg-cream-2 border border-ink/15 text-ink/70 hover:bg-paper-hover'}`}
                 >
                   {formatCurrency(amt)}/ח
                 </button>
               ))}
             </div>
-            <div className="mt-3 bg-purple-50 border border-purple-200 rounded-lg p-3">
-              <p className="text-xs text-purple-800">
+            <div className="mt-3 bg-cream-2 border border-gold/40 rounded-none p-3">
+              <p className="text-xs text-ink/80">
                 <strong>בערכים נומינליים בגיל פרישה:</strong>{' '}
                 {formatCurrency(Math.round(input.desiredMonthlyIncome * Math.pow(1 + input.inflationRate / 100, result.yearsUntilRetirement)))}/חודש
                 {' '}(אחרי {result.yearsUntilRetirement} שנות אינפלציה של {input.inflationRate}%)
@@ -325,7 +325,7 @@ export function RetirementCalculator() {
           {/* מקורות הכנסה בפרישה */}
           <button type="button"
             onClick={() => setShowIncomeSources(!showIncomeSources)}
-            className="w-full bg-gray-100 hover:bg-gray-200 rounded-xl p-4 flex items-center justify-between transition text-sm font-medium text-gray-700"
+            className="w-full bg-cream-2 hover:bg-paper-hover rounded-none p-4 flex items-center justify-between transition text-sm font-medium text-ink/70"
           >
             <span>💼 מקורות הכנסה בפרישה — פנסיה, ב.ל., שכירות, עבודה</span>
             <span>{showIncomeSources ? '▲' : '▼'}</span>
@@ -337,35 +337,35 @@ export function RetirementCalculator() {
                 {/* אומדן אוטומטי */}
                 <button type="button"
                   onClick={() => setShowEstimator(!showEstimator)}
-                  className="w-full bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-700 hover:bg-blue-100 transition text-right"
+                  className="w-full bg-cream-2 border border-ink/15 rounded-none p-3 text-sm text-ink hover:bg-paper-hover transition text-right"
                 >
                   🧮 חשב לי אומדן פנסיה + ב.ל. אוטומטי
                 </button>
 
                 {showEstimator && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-3">
-                    <p className="text-sm font-medium text-blue-900">אומדן מהיר — מבוסס על שכר + וותק</p>
+                  <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-3">
+                    <p className="text-sm font-medium text-ink">אומדן מהיר — מבוסס על שכר + וותק</p>
                     <div className="grid grid-cols-2 gap-3">
                       <Field label="שכר ממוצע (₪/חודש)">
                         <input type="number" min={5_000} step={1_000} value={estimatorSalary}
                           onChange={(e) => setEstimatorSalary(Number(e.target.value))}
-                          className="w-full px-3 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm"
+                          className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                         />
                       </Field>
                       <Field label="שנות הפקדה לפנסיה">
                         <input type="number" min={1} max={50} value={estimatorYears}
                           onChange={(e) => setEstimatorYears(Number(e.target.value))}
-                          className="w-full px-3 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm"
+                          className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                         />
                       </Field>
                     </div>
                     <label className="flex items-center gap-2 text-sm cursor-pointer">
                       <input type="checkbox" checked={estimatorCouple}
                         onChange={(e) => setEstimatorCouple(e.target.checked)}
-                        className="w-4 h-4 text-blue-600" />
+                        className="w-4 h-4 accent-ink" />
                       <span>חישוב לזוג (ב.ל. לזוג: ~4,900 ₪)</span>
                     </label>
-                    <div className="bg-white rounded-lg p-3 text-sm space-y-1">
+                    <div className="bg-paper rounded-none p-3 text-sm space-y-1">
                       <div className="flex justify-between">
                         <span>פנסיה מוערכת:</span>
                         <strong>{formatCurrency(estimatePensionBenefit({ averageSalary: estimatorSalary, yearsOfContribution: estimatorYears }).monthlyPension)}/ח</strong>
@@ -374,13 +374,13 @@ export function RetirementCalculator() {
                         <span>ב.ל. מוערך:</span>
                         <strong>{formatCurrency(estimateSocialSecurityBenefit({ retirementAge: input.retirementAge, yearsContributed: estimatorYears, averageSalary: estimatorSalary, isCouple: estimatorCouple }))}/ח</strong>
                       </div>
-                      <div className="flex justify-between text-gray-500">
+                      <div className="flex justify-between text-ink/60">
                         <span>שיעור החלפה:</span>
                         <span>{estimatePensionBenefit({ averageSalary: estimatorSalary, yearsOfContribution: estimatorYears }).replacementRate.toFixed(0)}% מהשכר</span>
                       </div>
                     </div>
                     <button type="button" onClick={applyEstimate}
-                      className="w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
+                      className="w-full bg-ink text-cream py-2 rounded-none text-sm font-medium hover:bg-ink-deep transition">
                       החל אומדנים
                     </button>
                   </div>
@@ -390,32 +390,32 @@ export function RetirementCalculator() {
                   <Field label="קצבת פנסיה (₪/ח)" hint="לפני מס">
                     <input type="number" min={0} step={500} value={input.incomeSources.pensionMonthly}
                       onChange={(e) => updateIncomeSources('pensionMonthly', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm"
+                      className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                     />
                   </Field>
                   <Field label="ב.ל. — קצבת זקנה (₪/ח)" hint="פטור ממס (כ-3,500 ₪)">
                     <input type="number" min={0} step={100} value={input.incomeSources.socialSecurityMonthly}
                       onChange={(e) => updateIncomeSources('socialSecurityMonthly', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm"
+                      className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                     />
                   </Field>
                   <Field label="דמי שכירות (₪/ח)" hint="הכנסה פסיבית מנדל&quot;ן">
                     <input type="number" min={0} step={500} value={input.incomeSources.rentalIncome}
                       onChange={(e) => updateIncomeSources('rentalIncome', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm"
+                      className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                     />
                   </Field>
                   <Field label="עבודה חלקית (₪/ח)" hint="משרה חלקית / ייעוץ בפרישה">
                     <input type="number" min={0} step={500} value={input.incomeSources.partTimeWork}
                       onChange={(e) => updateIncomeSources('partTimeWork', Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 text-sm"
+                      className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                     />
                   </Field>
                 </div>
 
                 {/* סיכום הכנסות קבועות */}
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-                  <p className="text-xs text-gray-500 mb-2">סיכום הכנסות קבועות (בערכי היום):</p>
+                <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
+                  <p className="text-xs text-ink/60 mb-2">סיכום הכנסות קבועות (בערכי היום):</p>
                   <div className="space-y-1 text-sm">
                     {[
                       { label: 'פנסיה נטו', val: input.incomeSources.pensionMonthly * (1 - input.pensionTaxRate / 100) },
@@ -424,11 +424,11 @@ export function RetirementCalculator() {
                       { label: 'עבודה חלקית', val: input.incomeSources.partTimeWork },
                     ].filter((r) => r.val > 0).map((r) => (
                       <div key={r.label} className="flex justify-between">
-                        <span className="text-gray-600">{r.label}</span>
+                        <span className="text-ink/60">{r.label}</span>
                         <span className="font-medium">{formatCurrency(Math.round(r.val))}/ח</span>
                       </div>
                     ))}
-                    <div className="border-t border-gray-300 pt-1 flex justify-between font-bold">
+                    <div className="border-t border-ink/15 pt-1 flex justify-between font-bold">
                       <span>סה&quot;כ קבוע</span>
                       <span>{formatCurrency(Math.round(
                         input.incomeSources.pensionMonthly * (1 - input.pensionTaxRate / 100) +
@@ -437,7 +437,7 @@ export function RetirementCalculator() {
                         input.incomeSources.partTimeWork
                       ))}/ח</span>
                     </div>
-                    <div className="flex justify-between text-purple-700">
+                    <div className="flex justify-between text-gold">
                       <span>נדרש מהתיק להשלמה</span>
                       <span className="font-bold">{formatCurrency(Math.round(result.portfolioMonthlyDrawdown))}/ח</span>
                     </div>
@@ -450,7 +450,7 @@ export function RetirementCalculator() {
           {/* הגדרות מתקדמות */}
           <button type="button"
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="w-full bg-gray-100 hover:bg-gray-200 rounded-xl p-4 flex items-center justify-between transition text-sm font-medium text-gray-700"
+            className="w-full bg-cream-2 hover:bg-paper-hover rounded-none p-4 flex items-center justify-between transition text-sm font-medium text-ink/70"
           >
             <span>⚙️ הגדרות מתקדמות — מיסוי, שיעור משיכה</span>
             <span>{showAdvanced ? '▲' : '▼'}</span>
@@ -463,11 +463,11 @@ export function RetirementCalculator() {
                   hint="כלל 4% = בטוח ל-30 שנה. 3% = שמרני מאוד. 5% = סיכון גבוה">
                   <input type="range" min={2} max={8} step={0.5} value={input.withdrawalRate}
                     onChange={(e) => update('withdrawalRate', Number(e.target.value))}
-                    className="w-full accent-blue-600"
+                    className="w-full accent-ink"
                   />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <div className="flex justify-between text-xs text-ink/60 mt-1">
                     <span>2% (שמרני)</span>
-                    <span className="text-blue-600 font-medium">4% (כלל אצבע)</span>
+                    <span className="text-gold font-medium">4% (כלל אצבע)</span>
                     <span>8% (אגרסיבי)</span>
                   </div>
                 </Field>
@@ -479,7 +479,7 @@ export function RetirementCalculator() {
                       onChange={(e) => update('pensionTaxRate', Number(e.target.value))}
                       className="w-full accent-amber-500"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-ink/60 mt-1">
                       <span>0%</span>
                       <span className="text-amber-600">{input.pensionTaxRate}%</span>
                       <span>35%</span>
@@ -492,7 +492,7 @@ export function RetirementCalculator() {
                       onChange={(e) => update('capitalGainsTaxRate', Number(e.target.value))}
                       className="w-full accent-red-500"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-ink/60 mt-1">
                       <span>0%</span>
                       <span className="text-red-600">{input.capitalGainsTaxRate}%</span>
                       <span>30%</span>
@@ -500,7 +500,7 @@ export function RetirementCalculator() {
                   </Field>
                 </div>
 
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-900 space-y-1">
+                <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-xs text-amber-900 space-y-1">
                   <p className="font-medium">מיסוי פנסיה בישראל (2026):</p>
                   <p>• פטור עד ~8,100 ₪/חודש (אחרי 67) — מגדיל עם הגיל</p>
                   <p>• פיצויים: פטור עד ~13,000 ₪ לשנת עבודה (תקרה שנתית)</p>
@@ -522,7 +522,7 @@ export function RetirementCalculator() {
       </div>
 
       {/* ===== Charts ===== */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
+      <div className="bg-paper border border-ink/15 rounded-none p-5">
         <div className="flex flex-wrap gap-2 mb-5">
           <TabButton active={chartView === 'accumulation'} onClick={() => setChartView('accumulation')}>
             📈 צמיחת חיסכון
@@ -540,8 +540,8 @@ export function RetirementCalculator() {
 
         {chartView === 'accumulation' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">צמיחת החיסכון עד גיל {input.retirementAge}</h3>
-            <p className="text-xs text-gray-500 mb-4">
+            <h3 className="font-bold text-ink mb-1">צמיחת החיסכון עד גיל {input.retirementAge}</h3>
+            <p className="text-xs text-ink/60 mb-4">
               כחול = נומינלי | ירוק מנוקד = ריאלי (אחרי {input.inflationRate}% אינפלציה)
             </p>
             <div className="h-72">
@@ -549,8 +549,8 @@ export function RetirementCalculator() {
                 <AreaChart data={accumulationChartData}>
                   <defs>
                     <linearGradient id="gradNominal" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#102219" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#102219" stopOpacity={0}/>
                     </linearGradient>
                     <linearGradient id="gradReal" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#10b981" stopOpacity={0.2}/>
@@ -562,23 +562,23 @@ export function RetirementCalculator() {
                   <YAxis tickFormatter={(v) => `${(v / 1_000_000).toFixed(1)}M`} tick={{ fontSize: 10 }} />
                   <Tooltip formatter={(value) => formatCurrency(Number(value))} labelStyle={{ direction: 'rtl', fontFamily: 'inherit' }} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
-                  <Area type="monotone" dataKey="חיסכון נומינלי" stroke="#3b82f6" strokeWidth={2} fill="url(#gradNominal)" />
+                  <Area type="monotone" dataKey="חיסכון נומינלי" stroke="#102219" strokeWidth={2} fill="url(#gradNominal)" />
                   <Area type="monotone" dataKey="ערך ריאלי" stroke="#10b981" strokeWidth={2} fill="url(#gradReal)" strokeDasharray="5 5" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-3 text-center text-sm">
-              <div className="bg-blue-50 rounded-lg p-2">
-                <p className="text-xs text-blue-600">חיסכון נומינלי</p>
-                <p className="font-bold text-blue-800">{formatCurrency(result.projectedSavings)}</p>
+              <div className="bg-cream-2 rounded-none p-2">
+                <p className="text-xs text-ink/70">חיסכון נומינלי</p>
+                <p className="font-bold text-ink">{formatCurrency(result.projectedSavings)}</p>
               </div>
-              <div className="bg-green-50 rounded-lg p-2">
+              <div className="bg-green-50 rounded-none p-2">
                 <p className="text-xs text-green-600">ערך ריאלי</p>
                 <p className="font-bold text-green-800">{formatCurrency(result.realProjectedSavings)}</p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-2">
-                <p className="text-xs text-gray-500">הפקדות בלבד</p>
-                <p className="font-bold text-gray-700">{formatCurrency(result.totalContributions)}</p>
+              <div className="bg-cream-2 rounded-none p-2">
+                <p className="text-xs text-ink/60">הפקדות בלבד</p>
+                <p className="font-bold text-ink/70">{formatCurrency(result.totalContributions)}</p>
               </div>
             </div>
           </div>
@@ -586,8 +586,8 @@ export function RetirementCalculator() {
 
         {chartView === 'drawdown' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">תיק ההשקעות בגיל {input.retirementAge}–{input.retirementAge + input.yearsInRetirement}</h3>
-            <p className="text-xs text-gray-500 mb-4">
+            <h3 className="font-bold text-ink mb-1">תיק ההשקעות בגיל {input.retirementAge}–{input.retirementAge + input.yearsInRetirement}</h3>
+            <p className="text-xs text-ink/60 mb-4">
               כחול = יתרת תיק | ירוק = הכנסה חודשית בפועל | כתום מנוקד = יעד הכנסה
             </p>
             {drawdownChartData.length > 0 ? (
@@ -600,19 +600,19 @@ export function RetirementCalculator() {
                     <YAxis yAxisId="income" orientation="left" tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} tick={{ fontSize: 9 }} width={40} />
                     <Tooltip formatter={(value) => formatCurrency(Number(value))} labelStyle={{ direction: 'rtl', fontFamily: 'inherit' }} />
                     <Legend wrapperStyle={{ fontSize: 11 }} />
-                    <Line yAxisId="balance" type="monotone" dataKey="יתרת תיק" stroke="#3b82f6" strokeWidth={2} dot={false} />
+                    <Line yAxisId="balance" type="monotone" dataKey="יתרת תיק" stroke="#102219" strokeWidth={2} dot={false} />
                     <Line yAxisId="income" type="monotone" dataKey="הכנסה חודשית" stroke="#10b981" strokeWidth={2} dot={false} />
                     <Line yAxisId="income" type="monotone" dataKey="יעד הכנסה" stroke="#f59e0b" strokeWidth={1} strokeDasharray="4 4" dot={false} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="h-72 flex items-center justify-center text-gray-500">
+              <div className="h-72 flex items-center justify-center text-ink/60">
                 <p>הגדר יעד הכנסה ומקורות כדי לראות גרף drawdown</p>
               </div>
             )}
-            <div className="mt-3 bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm">
-              <p className="text-blue-800">
+            <div className="mt-3 bg-cream-2 border border-ink/15 rounded-none p-3 text-sm">
+              <p className="text-ink/80">
                 <strong>תוחלת כסף:</strong> הכסף יחזיק{' '}
                 <strong>{result.yearsMoneyWillLast} שנים</strong> (עד גיל {result.portfolioDepletionAge})
                 {result.yearsMoneyWillLast >= 40 && ' 🎉 — הכסף לא ייגמר!'}
@@ -623,8 +623,8 @@ export function RetirementCalculator() {
 
         {chartView === 'income' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">מקורות הכנסה חודשית בפרישה</h3>
-            <p className="text-xs text-gray-500 mb-4">
+            <h3 className="font-bold text-ink mb-1">מקורות הכנסה חודשית בפרישה</h3>
+            <p className="text-xs text-ink/60 mb-4">
               כל הסכומים נומינליים — מותאמים לאינפלציה עד גיל {input.retirementAge}
             </p>
             <div className="h-72">
@@ -643,19 +643,19 @@ export function RetirementCalculator() {
               </ResponsiveContainer>
             </div>
             <div className="mt-3 grid grid-cols-2 gap-3">
-              <div className="bg-green-50 rounded-lg p-3 text-center">
+              <div className="bg-green-50 rounded-none p-3 text-center">
                 <p className="text-xs text-green-600">סה&quot;כ הכנסה חודשית</p>
                 <p className="font-bold text-green-800 text-lg">{formatCurrency(result.totalMonthlyIncomeAtRetirement)}</p>
                 <p className="text-xs text-green-600">נומינלי בשנת פרישה ראשונה</p>
               </div>
-              <div className="bg-purple-50 rounded-lg p-3 text-center">
-                <p className="text-xs text-purple-600">ערך ריאלי (בערכי היום)</p>
-                <p className="font-bold text-purple-800 text-lg">{formatCurrency(result.totalMonthlyIncomeReal)}</p>
-                <p className="text-xs text-purple-600">= כוח קנייה של היום</p>
+              <div className="bg-cream-2 rounded-none p-3 text-center">
+                <p className="text-xs text-gold">ערך ריאלי (בערכי היום)</p>
+                <p className="font-bold text-gold text-lg">{formatCurrency(result.totalMonthlyIncomeReal)}</p>
+                <p className="text-xs text-gold">= כוח קנייה של היום</p>
               </div>
             </div>
             {result.incomeGap > 0 && (
-              <div className="mt-3 bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-800">
+              <div className="mt-3 bg-red-50 border border-red-200 rounded-none p-3 text-sm text-red-800">
                 <strong>פער הכנסה:</strong> {formatCurrency(Math.round(result.incomeGap))}/חודש — ההכנסה הצפויה לא מכסה את היעד.
                 שקול הגדלת חיסכון או הפחתת הוצאות.
               </div>
@@ -665,8 +665,8 @@ export function RetirementCalculator() {
 
         {chartView === 'scenarios' && (
           <div>
-            <h3 className="font-bold text-gray-900 mb-1">השוואת תרחישים — תשואה וגיל פרישה שונים</h3>
-            <p className="text-xs text-gray-500 mb-4">
+            <h3 className="font-bold text-ink mb-1">השוואת תרחישים — תשואה וגיל פרישה שונים</h3>
+            <p className="text-xs text-ink/60 mb-4">
               אותה הפקדה ({formatCurrency(input.monthlyContribution)}/ח) עם נתונים שונים
             </p>
             <div className="h-72">
@@ -677,7 +677,7 @@ export function RetirementCalculator() {
                   <YAxis tickFormatter={(v) => `${(v / 1_000_000).toFixed(1)}M`} tick={{ fontSize: 10 }} />
                   <Tooltip formatter={(value) => formatCurrency(Number(value))} labelStyle={{ direction: 'rtl', fontFamily: 'inherit' }} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
-                  <Bar dataKey="חיסכון צפוי" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="חיסכון צפוי" fill="#102219" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="ערך ריאלי" fill="#10b981" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -687,29 +687,29 @@ export function RetirementCalculator() {
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm border-collapse min-w-[500px]">
                 <thead>
-                  <tr className="bg-gray-50">
-                    <th className="text-right p-2 border border-gray-200">תרחיש</th>
-                    <th className="text-right p-2 border border-gray-200">גיל פרישה</th>
-                    <th className="text-right p-2 border border-gray-200">חיסכון</th>
-                    <th className="text-right p-2 border border-gray-200">ריאלי</th>
-                    <th className="text-right p-2 border border-gray-200">שנות כסף</th>
-                    <th className="text-right p-2 border border-gray-200">מצב</th>
+                  <tr className="bg-cream-2">
+                    <th className="text-right p-2 border border-ink/15">תרחיש</th>
+                    <th className="text-right p-2 border border-ink/15">גיל פרישה</th>
+                    <th className="text-right p-2 border border-ink/15">חיסכון</th>
+                    <th className="text-right p-2 border border-ink/15">ריאלי</th>
+                    <th className="text-right p-2 border border-ink/15">שנות כסף</th>
+                    <th className="text-right p-2 border border-ink/15">מצב</th>
                   </tr>
                 </thead>
                 <tbody>
                   {result.scenarioResults.map((s, i) => (
-                    <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      <td className="p-2 border border-gray-200">
+                    <tr key={i} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
+                      <td className="p-2 border border-ink/15">
                         <span className="inline-block w-3 h-3 rounded-full ml-1" style={{ backgroundColor: s.color }} />
                         {s.label}
                       </td>
-                      <td className="p-2 border border-gray-200 text-center">{s.retirementAge}</td>
-                      <td className="p-2 border border-gray-200 tabular-nums font-medium">{formatCurrency(s.projectedSavings)}</td>
-                      <td className="p-2 border border-gray-200 tabular-nums text-blue-700">{formatCurrency(s.realProjectedSavings)}</td>
-                      <td className="p-2 border border-gray-200 text-center">
+                      <td className="p-2 border border-ink/15 text-center">{s.retirementAge}</td>
+                      <td className="p-2 border border-ink/15 tabular-nums font-medium">{formatCurrency(s.projectedSavings)}</td>
+                      <td className="p-2 border border-ink/15 tabular-nums text-ink">{formatCurrency(s.realProjectedSavings)}</td>
+                      <td className="p-2 border border-ink/15 text-center">
                         {s.yearsMoneyWillLast >= 40 ? '40+' : s.yearsMoneyWillLast}
                       </td>
-                      <td className="p-2 border border-gray-200">
+                      <td className="p-2 border border-ink/15">
                         {s.isOnTrack
                           ? <span className="text-green-600 font-medium">במסלול ✓</span>
                           : <span className="text-red-500 font-medium">פער ✗</span>}
@@ -744,7 +744,7 @@ function PlanningResults({
   return (
     <>
       {/* כרטיס סטטוס */}
-      <div className={`border-2 rounded-xl p-5 ${statusBg}`}>
+      <div className={`border rounded-none p-5 ${statusBg}`}>
         <div className="flex items-start gap-3">
           {statusColor === 'green'
             ? <CheckCircle2 className="w-7 h-7 text-green-600 flex-shrink-0" />
@@ -764,13 +764,13 @@ function PlanningResults({
       </div>
 
       {/* חיסכון צפוי */}
-      <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 rounded-xl p-4">
+      <div className="bg-ink rounded-none p-4">
         <div className="flex items-center gap-2 mb-1">
-          <TrendingUp className="w-5 h-5 text-blue-600" />
-          <p className="text-sm font-medium text-blue-800">חיסכון צפוי בפרישה</p>
+          <TrendingUp className="w-5 h-5 text-gold-light" />
+          <p className="text-sm font-medium text-cream">חיסכון צפוי בפרישה</p>
         </div>
-        <p className="text-3xl font-bold text-blue-700 tabular-nums">{formatCurrency(result.projectedSavings)}</p>
-        <p className="text-xs text-blue-600 mt-1">ריאלי: {formatCurrency(result.realProjectedSavings)} (בכוח קנייה של היום)</p>
+        <p className="text-3xl font-bold text-cream tabular-nums">{formatCurrency(result.projectedSavings)}</p>
+        <p className="text-xs text-gold-light mt-1">ריאלי: {formatCurrency(result.realProjectedSavings)} (בכוח קנייה של היום)</p>
       </div>
 
       {/* כרטיסים קטנים */}
@@ -806,18 +806,18 @@ function PlanningResults({
       </div>
 
       {/* פירוט */}
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-4 space-y-1.5 text-sm">
-        <h4 className="font-bold text-gray-900 mb-2">📊 פירוט מלא</h4>
+      <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-1.5 text-sm">
+        <h4 className="font-bold text-ink mb-2">📊 פירוט מלא</h4>
         <Row label="שנים עד פרישה" value={`${result.yearsUntilRetirement}`} />
         <Row label="חיסכון נוכחי" value={formatCurrency(input.currentSavings)} />
         <Row label="הפקדה חודשית" value={`${formatCurrency(input.monthlyContribution)}/ח`} />
         <Row label="סה&quot;כ הפקדות" value={formatCurrency(result.totalContributions)} />
         <Row label="צמיחת תיק" value={formatCurrency(result.totalGrowth)} color="emerald" />
-        <div className="border-t border-gray-200 pt-2">
+        <div className="border-t border-ink/15 pt-2">
           <Row label="חיסכון נומינלי" value={formatCurrency(result.projectedSavings)} bold />
           <Row label="חיסכון ריאלי" value={formatCurrency(result.realProjectedSavings)} color="blue" bold />
         </div>
-        <div className="border-t border-gray-200 pt-2">
+        <div className="border-t border-ink/15 pt-2">
           <Row label="משיכה חודשית מתיק" value={`${formatCurrency(Math.round(result.portfolioMonthlyDrawdown))}/ח`} color="red" />
           <Row label="מס פנסיה שנתי מוערך" value={`~${formatCurrency(Math.round(result.estimatedPensionTax))}`} color="amber" />
           <Row label="מס על תיק מוערך" value={`~${formatCurrency(Math.round(result.estimatedPortfolioTax))}`} color="amber" />
@@ -839,7 +839,7 @@ function GoalSeekingResults({
   const additionalNeeded = Math.max(0, result.requiredMonthlyContributionForGoal - input.monthlyContribution);
   return (
     <>
-      <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-300 rounded-xl p-5">
+      <div className="bg-emerald-50 border border-emerald-300 rounded-none p-5">
         <div className="flex items-center gap-2 mb-2">
           <Target className="w-5 h-5 text-emerald-600" />
           <p className="text-sm font-medium text-emerald-800">הפקדה חודשית נדרשת ליעד</p>
@@ -853,21 +853,21 @@ function GoalSeekingResults({
       </div>
 
       {additionalNeeded > 100 ? (
-        <div className="bg-amber-50 border-2 border-amber-300 rounded-xl p-4">
+        <div className="bg-amber-50 border border-amber-300 rounded-none p-4">
           <p className="text-sm font-medium text-amber-800 mb-1">צריך להוסיף</p>
           <p className="text-2xl font-bold text-amber-700">{formatCurrency(Math.round(additionalNeeded))}/חודש</p>
           <p className="text-xs text-amber-600 mt-1">מעל ההפקדה הנוכחית ({formatCurrency(input.monthlyContribution)}/ח)</p>
         </div>
       ) : (
-        <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4">
+        <div className="bg-green-50 border border-green-300 rounded-none p-4">
           <CheckCircle2 className="w-6 h-6 text-green-600 mb-1" />
           <p className="text-sm font-medium text-green-800">ההפקדה הנוכחית מספיקה!</p>
           <p className="text-xs text-green-700 mt-1">אפשר אפילו להפחית ב-{formatCurrency(Math.abs(additionalNeeded))}/ח</p>
         </div>
       )}
 
-      <div className="bg-white border-2 border-gray-200 rounded-xl p-4 space-y-2 text-sm">
-        <h4 className="font-bold text-gray-900 mb-2">📊 ניתוח יעד</h4>
+      <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-2 text-sm">
+        <h4 className="font-bold text-ink mb-2">📊 ניתוח יעד</h4>
         <Row label="הכנסה רצויה (היום)" value={`${formatCurrency(input.desiredMonthlyIncome)}/ח`} />
         <Row label="קצבאות קבועות" value={`${formatCurrency(Math.round(
           input.incomeSources.pensionMonthly * (1 - input.pensionTaxRate / 100) +
@@ -876,11 +876,11 @@ function GoalSeekingResults({
           input.incomeSources.partTimeWork
         ))}/ח`} />
         <Row label="נדרש מהתיק (היום)" value={`${formatCurrency(Math.round(result.portfolioMonthlyDrawdown))}/ח`} color="red" />
-        <div className="border-t border-gray-200 pt-2">
+        <div className="border-t border-ink/15 pt-2">
           <Row label="חיסכון נדרש" value={formatCurrency(result.requiredSavings)} bold />
           <Row label="חיסכון צפוי" value={formatCurrency(result.projectedSavings)} bold color={result.isOnTrack ? 'emerald' : 'red'} />
         </div>
-        <div className="border-t border-gray-200 pt-2">
+        <div className="border-t border-ink/15 pt-2">
           <Row label="הפקדה נוכחית" value={`${formatCurrency(input.monthlyContribution)}/ח`} />
           <Row label="הפקדה נדרשת" value={`${formatCurrency(Math.round(result.requiredMonthlyContributionForGoal))}/ח`} bold color="emerald" />
           <Row label="תוספת נדרשת" value={`${additionalNeeded > 0 ? '+' : ''}${formatCurrency(Math.round(additionalNeeded))}/ח`} color={additionalNeeded > 0 ? 'red' : 'emerald'} />
@@ -889,9 +889,9 @@ function GoalSeekingResults({
 
       {/* טיפ: אופציות לסגירת הפער */}
       {additionalNeeded > 100 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm">
-          <p className="font-medium text-blue-900 mb-2">💡 אפשרויות לסגירת הפער:</p>
-          <ul className="space-y-1 text-blue-800 text-xs">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm">
+          <p className="font-medium text-ink mb-2">💡 אפשרויות לסגירת הפער:</p>
+          <ul className="space-y-1 text-ink/80 text-xs">
             <li>✓ דחה פרישה ב-3 שנים (עד {input.retirementAge + 3}) — חיסכון עולה משמעותית</li>
             <li>✓ הגדל הפקדה חודשית ב-{formatCurrency(Math.round(additionalNeeded))}</li>
             <li>✓ הפחת הכנסה רצויה ב-{formatCurrency(Math.round(additionalNeeded * 0.3))} (פחות תלות בתיק)</li>
@@ -918,36 +918,36 @@ function RetirementEducation({
   const delayBenefit = result.scenarioResults.find((s) => s.retirementAge === input.retirementAge + 3)?.projectedSavings;
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-xl p-5 space-y-5">
-      <h3 className="font-bold text-gray-900 text-lg">📚 תובנות פרישה — ישראל 2026</h3>
+    <div className="bg-cream-2 border border-ink/15 rounded-none p-5 space-y-5">
+      <h3 className="font-bold text-ink text-lg">📚 תובנות פרישה — ישראל 2026</h3>
 
       <div className="grid md:grid-cols-3 gap-4">
         {/* כלל ה-4% */}
-        <div className="bg-white rounded-xl border border-blue-200 p-4">
-          <h4 className="font-bold text-blue-800 mb-2">📐 כלל ה-4%</h4>
-          <p className="text-xs text-gray-600 mb-3">
+        <div className="bg-paper rounded-none border border-ink/15 p-4">
+          <h4 className="font-bold text-ink mb-2">📐 כלל ה-4%</h4>
+          <p className="text-xs text-ink/60 mb-3">
             משוך 4% מהתיק בשנה הראשונה, הגדל בהתאם לאינפלציה. מחקר Trinity (1998): הכסף מחזיק 30+ שנה ב-95% מהמקרים.
           </p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">4% מ-{formatCurrency(result.projectedSavings)}:</span>
+              <span className="text-ink/60">4% מ-{formatCurrency(result.projectedSavings)}:</span>
             </div>
-            <div className="text-lg font-bold text-blue-700">
+            <div className="text-lg font-bold text-ink">
               {formatCurrency(Math.round(result.projectedSavings * 0.04 / 12))}/חודש
             </div>
-            <p className="text-xs text-gray-500">זה הsustainable drawdown מהתיק</p>
+            <p className="text-xs text-ink/60">זה הsustainable drawdown מהתיק</p>
           </div>
         </div>
 
         {/* כוח הזמן */}
-        <div className="bg-white rounded-xl border border-emerald-200 p-4">
+        <div className="bg-paper rounded-none border border-emerald-200 p-4">
           <h4 className="font-bold text-emerald-800 mb-2">⏰ כוח הזמן</h4>
-          <p className="text-xs text-gray-600 mb-3">
+          <p className="text-xs text-ink/60 mb-3">
             כל שנה נוספת של חיסכון שווה יותר מהשנה הקודמת — בגלל ריבית דריבית על הריבית.
           </p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">חיסכון נוכחי:</span>
+              <span className="text-ink/60">חיסכון נוכחי:</span>
               <span className="font-bold">{formatCurrency(result.projectedSavings)}</span>
             </div>
             {delayBenefit && (
@@ -966,21 +966,21 @@ function RetirementEducation({
         </div>
 
         {/* ביטוח לאומי */}
-        <div className="bg-white rounded-xl border border-amber-200 p-4">
+        <div className="bg-paper rounded-none border border-amber-200 p-4">
           <h4 className="font-bold text-amber-800 mb-2">🛡️ קצבאות ישראל</h4>
-          <p className="text-xs text-gray-600 mb-3">
+          <p className="text-xs text-ink/60 mb-3">
             ביטוח לאומי: ~3,500 ₪ ביחיד, ~4,900 ₪ לזוג. פנסיה חובה: 18.5% מהשכר (עובד + מעסיק).
           </p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">ב.ל. (זוג):</span>
+              <span className="text-ink/60">ב.ל. (זוג):</span>
               <span className="font-bold text-amber-700">4,900 ₪/ח</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">פנסיה (40 שנה):</span>
+              <span className="text-ink/60">פנסיה (40 שנה):</span>
               <span className="font-bold text-amber-700">~{formatCurrency(estimatePensionBenefit({ averageSalary: 15000, yearsOfContribution: 40 }).monthlyPension)}/ח</span>
             </div>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-ink/60 mt-1">
               שיעור החלפה: {estimatePensionBenefit({ averageSalary: 15000, yearsOfContribution: 40 }).replacementRate.toFixed(0)}% מהשכר
             </p>
           </div>
@@ -988,7 +988,7 @@ function RetirementEducation({
       </div>
 
       {/* קו הגדול: קצבה vs. פיצויים */}
-      <div className="bg-amber-50 border border-amber-300 rounded-xl p-4">
+      <div className="bg-amber-50 border border-amber-300 rounded-none p-4">
         <h4 className="font-bold text-amber-900 mb-2">⚠️ הטעות הגדולה: משיכת פיצויים</h4>
         <p className="text-sm text-amber-800">
           משיכת פיצויים בסיום עבודה = פגיעה אנושה בפנסיה. כל ₪ שנמשך כפיצויים הוא
@@ -1011,14 +1011,14 @@ function Section({
   children: React.ReactNode;
 }) {
   const bgMap = {
-    gray: 'bg-white border-gray-200',
+    gray: 'bg-paper border-ink/15',
     emerald: 'bg-emerald-50 border-emerald-200',
-    blue: 'bg-blue-50 border-blue-200',
-    purple: 'bg-purple-50 border-purple-200',
+    blue: 'bg-cream-2 border-ink/15',
+    purple: 'bg-cream-2 border-gold/40',
   };
   return (
-    <div className={`rounded-xl border-2 p-5 ${bgMap[color]}`}>
-      <h3 className="font-bold text-gray-900 text-base mb-4">{title}</h3>
+    <div className={`rounded-none border p-5 ${bgMap[color]}`}>
+      <h3 className="font-bold text-ink text-base mb-4">{title}</h3>
       {children}
     </div>
   );
@@ -1029,9 +1029,9 @@ function Field({ label, hint, children }: {
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
       {children}
-      {hint && <p className="text-xs text-gray-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -1039,11 +1039,11 @@ function Field({ label, hint, children }: {
 function Row({ label, value, bold, color }: {
   label: string; value: string; bold?: boolean; color?: 'emerald' | 'blue' | 'red' | 'amber';
 }) {
-  const colorMap = { emerald: 'text-emerald-700', blue: 'text-blue-700', red: 'text-red-600', amber: 'text-amber-700' };
-  const valueClass = color ? colorMap[color] : 'text-gray-900';
+  const colorMap = { emerald: 'text-emerald-700', blue: 'text-ink', red: 'text-red-600', amber: 'text-amber-700' };
+  const valueClass = color ? colorMap[color] : 'text-ink';
   return (
     <div className="flex justify-between py-0.5">
-      <span className={`text-gray-600 ${bold ? 'font-bold text-gray-900' : ''}`}>{label}</span>
+      <span className={`text-ink/60 ${bold ? 'font-bold text-ink' : ''}`}>{label}</span>
       <span className={`tabular-nums ${bold ? 'font-bold' : ''} ${valueClass}`}>{value}</span>
     </div>
   );
@@ -1053,15 +1053,15 @@ function MiniCard({ title, value, subtitle, color, icon }: {
   title: string; value: string; subtitle: string; color: string; icon?: React.ReactNode;
 }) {
   const colorMap: Record<string, string> = {
-    purple: 'bg-purple-50 border-purple-200 text-purple-800',
+    purple: 'bg-cream-2 border-gold/40 text-gold',
     green: 'bg-green-50 border-green-200 text-green-800',
     red: 'bg-red-50 border-red-200 text-red-800',
     emerald: 'bg-emerald-50 border-emerald-200 text-emerald-800',
-    blue: 'bg-blue-50 border-blue-200 text-blue-800',
+    blue: 'bg-cream-2 border-ink/15 text-ink',
   };
-  const cls = colorMap[color] ?? 'bg-gray-50 border-gray-200 text-gray-800';
+  const cls = colorMap[color] ?? 'bg-cream-2 border-ink/15 text-ink';
   return (
-    <div className={`border-2 rounded-xl p-3 ${cls}`}>
+    <div className={`border rounded-none p-3 ${cls}`}>
       <div className="flex items-center gap-1 mb-1">
         {icon}
         <p className="text-xs font-medium">{title}</p>
@@ -1077,7 +1077,7 @@ function TabButton({ active, onClick, children }: {
 }) {
   return (
     <button type="button" onClick={onClick}
-      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${active ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+      className={`px-3 py-1.5 rounded-none text-xs font-medium transition ${active ? 'bg-ink text-cream' : 'bg-cream-2 text-ink/60 hover:bg-paper-hover'}`}>
       {children}
     </button>
   );

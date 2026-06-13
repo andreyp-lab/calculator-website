@@ -115,7 +115,7 @@ export default function BusinessSetupCostPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-paper" dir="rtl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
@@ -132,34 +132,34 @@ export default function BusinessSetupCostPage() {
         </div>
 
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
             כמה עולה לפתוח עסק ב-2026? כל העלויות בשקלים
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-lg text-ink/70 leading-relaxed">
             טבלאות עלות לפי מסלול: עוסק פטור, עוסק מורשה וחברה בע"מ. הפרדה ברורה בין
             אגרות רשמיות לעלויות שוק, ועלות שנה ראשונה כוללת לכל מסלול.
           </p>
-          <p className="text-sm text-gray-500 mt-3">
+          <p className="text-sm text-ink/60 mt-3">
             נכתב על ידי אנדרי פלטונוב, רו&quot;ח · עודכן ל-2026 · עודכן לאחרונה 2026-06-12
           </p>
         </header>
 
         {/* Legend */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 text-sm text-blue-900">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mb-8 text-sm text-ink">
           <p className="font-bold mb-2">מקרא</p>
           <ul className="space-y-1">
             <li>
-              <span className="inline-block bg-blue-700 text-white text-xs px-2 py-0.5 rounded ml-1">אגרה רשמית</span>
+              <span className="inline-block bg-ink text-cream text-xs px-2 py-0.5 ml-1">אגרה רשמית</span>
               — סכום קבוע בחוק/תקנות. אינו משתנה לפי ספק.
             </li>
             <li>
-              <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded ml-1">טווח שוק משוער</span>
+              <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 ml-1">טווח שוק משוער</span>
               — מחיר שוק ממוצע. עשוי להשתנות לפי רו&quot;ח, אזור ומורכבות.
             </li>
           </ul>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>עוסק פטור — עלויות שנה ראשונה</h2>
           <p>
             עוסק פטור הוא המסלול הפשוט ביותר. פתיחת התיקים ברשות המסים ובביטוח לאומי היא חינם.
@@ -169,59 +169,59 @@ export default function BusinessSetupCostPage() {
 
         {/* Table: עוסק פטור */}
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">סעיף</th>
-                <th className="p-3 font-bold text-gray-700 border-b">עלות</th>
-                <th className="p-3 font-bold text-gray-700 border-b">סוג</th>
-                <th className="p-3 font-bold text-gray-700 border-b">הערה</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סעיף</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">עלות</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סוג</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">הערה</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr>
                 <td className="p-3 border-b font-medium">רישום עוסק פטור (מע&quot;מ + מ&quot;ה + ב&quot;ל)</td>
                 <td className="p-3 border-b text-green-700 font-bold">חינם</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-blue-700 text-white text-xs px-2 py-0.5 rounded">אגרה רשמית</span>
+                  <span className="inline-block bg-ink text-cream text-xs px-2 py-0.5">אגרה רשמית</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">אין אגרת פתיחה</td>
+                <td className="p-3 border-b text-ink/60">אין אגרת פתיחה</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">רו&quot;ח — דוח שנתי</td>
                 <td className="p-3 border-b">1,500–4,000 ₪/שנה</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">תלוי היקף ומורכבות</td>
+                <td className="p-3 border-b text-ink/60">תלוי היקף ומורכבות</td>
               </tr>
               <tr>
                 <td className="p-3 border-b font-medium">תוכנת חשבוניות</td>
                 <td className="p-3 border-b">0–100 ₪/חודש</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">חלק מהפלטפורמות חינמיות לעוסק קטן</td>
+                <td className="p-3 border-b text-ink/60">חלק מהפלטפורמות חינמיות לעוסק קטן</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">ביטוח אחריות מקצועית</td>
                 <td className="p-3 border-b">1,000–5,000+ ₪/שנה</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">אופציונלי, תלוי מקצוע</td>
+                <td className="p-3 border-b text-ink/60">אופציונלי, תלוי מקצוע</td>
               </tr>
               <tr className="bg-yellow-50 font-bold">
                 <td className="p-3 font-bold">עלות שנה ראשונה (הערכה)</td>
-                <td className="p-3 text-blue-800">2,000–8,000 ₪</td>
+                <td className="p-3 text-ink">2,000–8,000 ₪</td>
                 <td className="p-3">—</td>
-                <td className="p-3 text-gray-500 font-normal text-xs">ללא ביטוח; עם ביטוח — עד 13,000 ₪</td>
+                <td className="p-3 text-ink/60 font-normal text-xs">ללא ביטוח; עם ביטוח — עד 13,000 ₪</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>עוסק מורשה — עלויות שנה ראשונה</h2>
           <p>
             עוסק מורשה גובה מע&quot;מ ומדווח בתדירות גבוהה יותר, ולכן שכ&quot;ט הרו&quot;ח גבוה יותר מעוסק פטור.
@@ -231,73 +231,73 @@ export default function BusinessSetupCostPage() {
 
         {/* Table: עוסק מורשה */}
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">סעיף</th>
-                <th className="p-3 font-bold text-gray-700 border-b">עלות</th>
-                <th className="p-3 font-bold text-gray-700 border-b">סוג</th>
-                <th className="p-3 font-bold text-gray-700 border-b">הערה</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סעיף</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">עלות</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סוג</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">הערה</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr>
                 <td className="p-3 border-b font-medium">רישום עוסק מורשה (מע&quot;מ + מ&quot;ה + ב&quot;ל)</td>
                 <td className="p-3 border-b text-green-700 font-bold">חינם</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-blue-700 text-white text-xs px-2 py-0.5 rounded">אגרה רשמית</span>
+                  <span className="inline-block bg-ink text-cream text-xs px-2 py-0.5">אגרה רשמית</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">אין אגרת פתיחה</td>
+                <td className="p-3 border-b text-ink/60">אין אגרת פתיחה</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">רו&quot;ח שנתי (כולל דיווחי מע&quot;מ)</td>
                 <td className="p-3 border-b">3,000–8,000 ₪/שנה</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">כולל דיווח דו-חודשי למע&quot;מ</td>
+                <td className="p-3 border-b text-ink/60">כולל דיווח דו-חודשי למע&quot;מ</td>
               </tr>
               <tr>
                 <td className="p-3 border-b font-medium">הנהלת חשבונות חודשית</td>
                 <td className="p-3 border-b">300–1,200 ₪/חודש</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">אם לא כלול בשכ&quot;ט הרו&quot;ח</td>
+                <td className="p-3 border-b text-ink/60">אם לא כלול בשכ&quot;ט הרו&quot;ח</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">תוכנת חשבוניות/הנה&quot;ח</td>
                 <td className="p-3 border-b">50–100 ₪/חודש</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">נחוץ לניהול חשבוניות מס</td>
+                <td className="p-3 border-b text-ink/60">נחוץ לניהול חשבוניות מס</td>
               </tr>
               <tr>
                 <td className="p-3 border-b font-medium">ביטוח אחריות מקצועית</td>
                 <td className="p-3 border-b">1,000–5,000+ ₪/שנה</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">מומלץ; חובה במקצועות מוסדרים</td>
+                <td className="p-3 border-b text-ink/60">מומלץ; חובה במקצועות מוסדרים</td>
               </tr>
               <tr className="bg-yellow-50 font-bold">
                 <td className="p-3 font-bold">עלות שנה ראשונה (הערכה)</td>
-                <td className="p-3 text-blue-800">5,000–15,000 ₪</td>
+                <td className="p-3 text-ink">5,000–15,000 ₪</td>
                 <td className="p-3">—</td>
-                <td className="p-3 text-gray-500 font-normal text-xs">תלוי אם הנה&quot;ח כלולה ברו&quot;ח</td>
+                <td className="p-3 text-ink/60 font-normal text-xs">תלוי אם הנה&quot;ח כלולה ברו&quot;ח</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>חברה בע&quot;מ — עלויות שנה ראשונה</h2>
           <p>
             חברה בע&quot;מ כרוכה באגרת רישום חד-פעמית אצל רשות התאגידים ובאגרה שנתית שוטפת. בנוסף,
             הדרישות החשבונאיות קפדניות יותר — דוחות כספיים מבוקרים ועלויות רו&quot;ח גבוהות משמעותית.
           </p>
-          <p className="text-sm text-gray-600 bg-amber-50 border border-amber-200 rounded p-3 not-prose">
+          <p className="text-sm text-ink/70 bg-amber-50 border border-amber-200 rounded-none p-3 not-prose">
             <strong>שימו לב:</strong> בשנת ההקמה פטורה החברה מאגרה שנתית. מהשנה השנייה:
             1,338 ₪ בתשלום עד 31.3 (1,777 ₪ לאחר מכן).
           </p>
@@ -305,105 +305,105 @@ export default function BusinessSetupCostPage() {
 
         {/* Table: חברה בע"מ */}
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">סעיף</th>
-                <th className="p-3 font-bold text-gray-700 border-b">עלות</th>
-                <th className="p-3 font-bold text-gray-700 border-b">סוג</th>
-                <th className="p-3 font-bold text-gray-700 border-b">הערה</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סעיף</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">עלות</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">סוג</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">הערה</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr>
                 <td className="p-3 border-b font-medium">אגרת רישום חברה (הגשה מקוונת)</td>
                 <td className="p-3 border-b font-bold">כ-2,559 ₪</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-blue-700 text-white text-xs px-2 py-0.5 rounded">אגרה רשמית</span>
+                  <span className="inline-block bg-ink text-cream text-xs px-2 py-0.5">אגרה רשמית</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">רשות התאגידים, הגשה מקוונת; ידנית כ-3,123 ₪</td>
+                <td className="p-3 border-b text-ink/60">רשות התאגידים, הגשה מקוונת; ידנית כ-3,123 ₪</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">אגרה שנתית (מהשנה השנייה)</td>
                 <td className="p-3 border-b">1,338 ₪ (עד 31.3) / 1,777 ₪ לאחר מכן</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-blue-700 text-white text-xs px-2 py-0.5 rounded">אגרה רשמית</span>
+                  <span className="inline-block bg-ink text-cream text-xs px-2 py-0.5">אגרה רשמית</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">שנת הקמה — פטור מאגרה שנתית</td>
+                <td className="p-3 border-b text-ink/60">שנת הקמה — פטור מאגרה שנתית</td>
               </tr>
               <tr>
                 <td className="p-3 border-b font-medium">עו&quot;ד/רו&quot;ח — הקמה (חד-פעמי)</td>
                 <td className="p-3 border-b">2,000–5,000 ₪</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">תקנון, רישום, פרוטוקולים</td>
+                <td className="p-3 border-b text-ink/60">תקנון, רישום, פרוטוקולים</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">רו&quot;ח שנתי (דוחות כספיים)</td>
                 <td className="p-3 border-b">8,000–20,000+ ₪/שנה</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">כולל דוחות מבוקרים; יכול להגיע לעשרות אלפים בחברה גדולה</td>
+                <td className="p-3 border-b text-ink/60">כולל דוחות מבוקרים; יכול להגיע לעשרות אלפים בחברה גדולה</td>
               </tr>
               <tr>
                 <td className="p-3 border-b font-medium">הנהלת חשבונות חודשית</td>
                 <td className="p-3 border-b">500–1,500 ₪/חודש</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">מחייב ניהול מלא</td>
+                <td className="p-3 border-b text-ink/60">מחייב ניהול מלא</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">תוכנת הנה&quot;ח</td>
                 <td className="p-3 border-b">100–300 ₪/חודש</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">תוכנה מקצועית כגון Priority/חשבשבת</td>
+                <td className="p-3 border-b text-ink/60">תוכנה מקצועית כגון Priority/חשבשבת</td>
               </tr>
               <tr>
                 <td className="p-3 border-b font-medium">ביטוח אחריות מקצועית / צד ג&apos;</td>
                 <td className="p-3 border-b">2,000–8,000+ ₪/שנה</td>
                 <td className="p-3 border-b">
-                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5 rounded">טווח שוק משוער</span>
+                  <span className="inline-block bg-orange-500 text-white text-xs px-2 py-0.5">טווח שוק משוער</span>
                 </td>
-                <td className="p-3 border-b text-gray-500">תלוי ענף וכיסוי</td>
+                <td className="p-3 border-b text-ink/60">תלוי ענף וכיסוי</td>
               </tr>
               <tr className="bg-yellow-50 font-bold">
                 <td className="p-3 font-bold">עלות שנה ראשונה (הערכה)</td>
-                <td className="p-3 text-blue-800">15,000–35,000+ ₪</td>
+                <td className="p-3 text-ink">15,000–35,000+ ₪</td>
                 <td className="p-3">—</td>
-                <td className="p-3 text-gray-500 font-normal text-xs">כולל אגרת רישום ועלויות הקמה</td>
+                <td className="p-3 text-ink/60 font-normal text-xs">כולל אגרת רישום ועלויות הקמה</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         {/* Summary comparison table */}
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>השוואת עלות שנה ראשונה לפי מסלול</h2>
         </div>
 
         <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-            <thead className="bg-gray-50">
+          <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+            <thead className="bg-cream-2">
               <tr className="text-right">
-                <th className="p-3 font-bold text-gray-700 border-b">עלות</th>
-                <th className="p-3 font-bold text-blue-700 border-b">עוסק פטור</th>
-                <th className="p-3 font-bold text-emerald-700 border-b">עוסק מורשה</th>
-                <th className="p-3 font-bold text-purple-700 border-b">חברה בע&quot;מ</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">עלות</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">עוסק פטור</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">עוסק מורשה</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">חברה בע&quot;מ</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700">
+            <tbody className="text-ink/70">
               <tr>
                 <td className="p-3 border-b font-medium">אגרות רשמיות</td>
                 <td className="p-3 border-b text-green-700">0 ₪</td>
                 <td className="p-3 border-b text-green-700">0 ₪</td>
                 <td className="p-3 border-b">~2,559 ₪</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">רו&quot;ח (שנתי)</td>
                 <td className="p-3 border-b">1,500–4,000 ₪</td>
                 <td className="p-3 border-b">3,000–8,000 ₪</td>
@@ -415,7 +415,7 @@ export default function BusinessSetupCostPage() {
                 <td className="p-3 border-b">3,600–14,400 ₪</td>
                 <td className="p-3 border-b">6,000–18,000 ₪</td>
               </tr>
-              <tr className="bg-gray-50/50">
+              <tr className="bg-cream-2/50">
                 <td className="p-3 border-b font-medium">תוכנה</td>
                 <td className="p-3 border-b">0–1,200 ₪</td>
                 <td className="p-3 border-b">600–1,200 ₪</td>
@@ -429,26 +429,26 @@ export default function BusinessSetupCostPage() {
               </tr>
               <tr className="bg-yellow-50 font-bold border-t-2 border-yellow-300">
                 <td className="p-3 font-bold">סה&quot;כ שנה ראשונה (הערכה)</td>
-                <td className="p-3 text-blue-800">2,000–8,000 ₪</td>
-                <td className="p-3 text-emerald-800">5,000–15,000 ₪</td>
-                <td className="p-3 text-purple-800">15,000–35,000+ ₪</td>
+                <td className="p-3 text-ink">2,000–8,000 ₪</td>
+                <td className="p-3 text-ink">5,000–15,000 ₪</td>
+                <td className="p-3 text-ink">15,000–35,000+ ₪</td>
               </tr>
             </tbody>
           </table>
-          <p className="text-xs text-gray-500 mt-2 not-prose">
+          <p className="text-xs text-ink/60 mt-2 not-prose">
             * כל הטווחים הם הערכות שוק. הוצאות ביטוח לאומי ומס הכנסה אינן כלולות — הן תלויות ברווח ומחושבות
             בנפרד. ראה מחשבון נטו לעצמאי לחישוב מדויק.
           </p>
         </div>
 
         {/* What to save / what not to save */}
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>מה אפשר לחסוך — ומה לא שווה לחסוך</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4 my-6 not-prose">
           {/* אפשר לחסוך */}
-          <div className="border border-green-200 rounded-lg p-5 bg-green-50">
+          <div className="border border-green-200 rounded-none p-5 bg-green-50">
             <h3 className="font-bold text-green-800 text-lg mb-3">אפשר לחסוך</h3>
             <ul className="space-y-2 text-sm text-green-900">
               <li className="flex gap-2">
@@ -483,7 +483,7 @@ export default function BusinessSetupCostPage() {
           </div>
 
           {/* לא שווה לחסוך */}
-          <div className="border border-red-200 rounded-lg p-5 bg-red-50">
+          <div className="border border-red-200 rounded-none p-5 bg-red-50">
             <h3 className="font-bold text-red-800 text-lg mb-3">לא שווה לחסוך</h3>
             <ul className="space-y-2 text-sm text-red-900">
               <li className="flex gap-2">
@@ -519,9 +519,9 @@ export default function BusinessSetupCostPage() {
         </div>
 
         {/* Tip box */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 my-6 not-prose">
-          <h3 className="font-bold text-blue-900 mb-2">טיפ: מה מוכר כהוצאה?</h3>
-          <p className="text-sm text-blue-800">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-5 my-6 not-prose">
+          <h3 className="font-bold text-ink mb-2">טיפ: מה מוכר כהוצאה?</h3>
+          <p className="text-sm text-ink/70">
             רוב עלויות פתיחת העסק — שכ&quot;ט רו&quot;ח, ביטוח מקצועי, תוכנה — מוכרות כהוצאה עסקית
             ומקטינות את ההכנסה החייבת במס. כלומר, חלק מהעלות &quot;מוחזר&quot; דרך חיסכון במס.
             ראה פרטים בדף ההוצאות המוכרות.
@@ -530,7 +530,7 @@ export default function BusinessSetupCostPage() {
 
         {/* Related pages */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">מדריכים וכלים קשורים</h2>
+          <h2 className="text-2xl font-bold text-ink mb-4">מדריכים וכלים קשורים</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               { href: '/self-employed/opening-business', label: 'איך פותחים עסק בישראל — המדריך המלא' },
@@ -543,10 +543,10 @@ export default function BusinessSetupCostPage() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="group flex items-center justify-between gap-2 border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition"
+                className="group flex items-center justify-between gap-2 border border-ink/15 rounded-none p-4 hover:bg-paper-hover transition"
               >
-                <span className="font-medium text-gray-900 group-hover:text-blue-700 transition">{c.label}</span>
-                <span className="text-blue-600 group-hover:-translate-x-1 transition" aria-hidden>←</span>
+                <span className="font-medium text-ink group-hover:text-gold transition">{c.label}</span>
+                <span className="text-gold group-hover:-translate-x-1 transition" aria-hidden>←</span>
               </Link>
             ))}
           </div>
@@ -554,15 +554,15 @@ export default function BusinessSetupCostPage() {
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">שאלות נפוצות</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות</h2>
           <div className="space-y-4">
             {faqItems.map((f) => (
-              <details key={f.question} className="border border-gray-200 rounded-lg p-4 group">
-                <summary className="font-bold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+              <details key={f.question} className="border border-ink/15 rounded-none p-4 group">
+                <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-gray-400 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
-                <p className="text-gray-700 mt-3 leading-relaxed">{f.answer}</p>
+                <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>
             ))}
           </div>
@@ -570,15 +570,15 @@ export default function BusinessSetupCostPage() {
 
         {/* Sources */}
         <section className="mb-10">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">מקורות</h2>
-          <ul className="text-sm text-gray-600 space-y-1">
+          <h2 className="text-xl font-bold text-ink mb-4">מקורות</h2>
+          <ul className="text-sm text-ink/60 space-y-1">
             <li>
               רשות התאגידים — אגרות רישום חברה:{' '}
               <a
                 href="https://ica.justice.gov.il/IcaSite/request-type-menu/8/3"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline"
+                className="text-gold underline"
               >
                 ica.justice.gov.il
               </a>
@@ -589,7 +589,7 @@ export default function BusinessSetupCostPage() {
                 href="https://www.kolzchut.org.il/he/%D7%A2%D7%95%D7%A1%D7%A7_%D7%A4%D7%98%D7%95%D7%A8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline"
+                className="text-gold underline"
               >
                 kolzchut.org.il
               </a>
@@ -600,7 +600,7 @@ export default function BusinessSetupCostPage() {
                 href="https://www.btl.gov.il/Insurance/National%20Insurance/type_list/Self_Employed/Pages/rates.aspx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline"
+                className="text-gold underline"
               >
                 btl.gov.il
               </a>
@@ -611,13 +611,13 @@ export default function BusinessSetupCostPage() {
                 href="https://www.nevo.co.il/law_html/law01/255_418.htm"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline"
+                className="text-gold underline"
               >
                 nevo.co.il
               </a>
             </li>
           </ul>
-          <p className="text-xs text-gray-400 mt-3">
+          <p className="text-xs text-ink/45 mt-3">
             * נתוני האגרות הרשמיות מבוססים על פרסומי רשות התאגידים לשנת 2026. טווחי השוק הם הערכות בלבד
             ועשויים להשתנות. אין לראות בתוכן זה ייעוץ מקצועי. עודכן לאחרונה: 2026-06-12.
           </p>
