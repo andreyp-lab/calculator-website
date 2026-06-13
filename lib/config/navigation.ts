@@ -1,14 +1,15 @@
 export const navigation = {
   main: [
+    { label: '🎓 הקורס', href: '/course', highlight: true },
     { label: '👤 שכירים', href: '/salaried' },
-    { label: '💼 עצמאיים', href: '/self-employed' },
+    { label: '💼 עצמאים ועסקים', href: '/self-employed' },
     { label: '🏠 הלוואות', href: '/loans' },
-    { label: '📂 נושאים אחרים', href: '/topics' },
-    { label: '🚀 כלים לבעלי עסקים', href: '/tools', highlight: true },
+    { label: '🚀 כלים עסקיים', href: '/tools' },
     { label: '📝 בלוג', href: '/blog' },
     { label: '📖 מדריכים', href: '/guides' },
   ],
   footer: [
+    { label: 'נושאים נוספים', href: '/topics' },
     { label: 'מדיניות פרטיות', href: '/privacy' },
     { label: 'תנאי שימוש', href: '/terms' },
     { label: 'יצירת קשר', href: '/contact' },

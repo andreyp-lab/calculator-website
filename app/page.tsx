@@ -63,6 +63,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FinSchool course band — charcoal + amber */}
+      <section className="max-w-6xl mx-auto px-4 py-8">
+        <div className="rounded-2xl bg-gray-900 p-6 sm:p-10 text-white shadow-lg">
+          <p className="text-xs font-semibold tracking-wide text-amber-400 mb-3">
+            בית הספר הפיננסי FinSchool · בהדרכת רו״ח
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold leading-tight mb-3">
+            הכלים חינמיים. הידע — בקורסים.
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-2xl mb-6">
+            3 קורסים פרקטיים לעצמאים ולבעלי עסקים — מע״מ ומס, ניהול כספים ותזרים, ו-AI לעבודה הפיננסית.
+            גישה לכל החיים, 14 יום החזר כספי מלא.
+          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              href="/course"
+              className="inline-block rounded-lg bg-amber-500 px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-amber-400"
+            >
+              לכל הקורסים ←
+            </Link>
+            <a
+              href="https://school.profitmargin.co.il/CPA.html?utm_source=cheshbonai&utm_medium=home_band&utm_campaign=cpa-course&utm_content=home_band"
+              target="_blank"
+              rel="noopener"
+              className="text-sm font-semibold text-amber-400 hover:text-amber-300 transition"
+            >
+              קורס לעצמאים: הכסף של העסק בידיים שלך ←
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Macro Data Widget */}
       <MacroDataWidget />
 

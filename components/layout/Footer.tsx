@@ -114,6 +114,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/topics" className="hover:text-blue-600">
+                  נושאים נוספים
+                </Link>
+              </li>
+              <li>
                 <Link href="/glossary" className="hover:text-blue-600">
                   מילון מונחים
                 </Link>

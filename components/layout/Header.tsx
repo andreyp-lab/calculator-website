@@ -50,7 +50,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1.5 rounded-lg font-medium hover:shadow-md transition text-sm whitespace-nowrap flex-shrink-0"
+                  className="bg-amber-500 text-gray-900 px-3 py-1.5 rounded-lg font-bold hover:bg-amber-400 hover:shadow-md transition text-sm whitespace-nowrap flex-shrink-0"
                 >
                   {item.label}
                 </Link>
@@ -81,7 +81,7 @@ export function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`px-3 py-2.5 rounded-lg text-sm transition ${
                       isHighlight
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium'
+                        ? 'bg-amber-500 text-gray-900 font-bold hover:bg-amber-400'
                         : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >

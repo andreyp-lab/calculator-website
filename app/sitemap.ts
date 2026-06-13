@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('', 'weekly', 1.0),
     make('/about', 'monthly', 0.6),
     make('/contact', 'monthly', 0.5),
+    make('/course', 'monthly', 0.7), // דף נחיתה — קורסי FinSchool
 
     // ===== Hubs קטגוריות =====
     make('/salaried', 'weekly', 0.95),

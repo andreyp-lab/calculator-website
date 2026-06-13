@@ -70,6 +70,9 @@ export function CalculatorLayout({
           <DisclaimerBox />
         </div>
 
+        {/* קידום קורסי FinSchool — מיד אחרי התוצאה והדיסקליימר, לפני התוכן */}
+        <CourseCTA />
+
         {/* Content */}
         {content && (
           <section className="prose prose-lg max-w-none mb-12 text-gray-800 leading-relaxed">
@@ -95,9 +98,6 @@ export function CalculatorLayout({
 
         {/* Related calculators — internal linking */}
         <RelatedCalculators currentPath={currentPath} />
-
-        {/* קידום קורסי FinSchool — מרונדר רק בעמודי /self-employed */}
-        <CourseCTA />
 
         {/* Author */}
         <section className="mb-8">
