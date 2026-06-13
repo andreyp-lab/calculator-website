@@ -14,21 +14,21 @@ export function AuthorBox({
   licenseNumber,
 }: AuthorBoxProps) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+    <div className="bg-paper border border-ink/15 p-6">
       <div className="flex items-start gap-4">
-        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+        <div className="w-16 h-16 bg-gold flex items-center justify-center text-cream text-2xl font-serif font-bold flex-shrink-0">
           {name.charAt(0)}
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <h4 className="font-bold text-gray-900">{name}</h4>
-            <BadgeCheck className="w-4 h-4 text-blue-600" />
+            <h4 className="font-serif text-xl text-ink">{name}</h4>
+            <BadgeCheck className="w-4 h-4 text-gold" />
           </div>
-          <p className="text-sm text-gray-600 mb-2">
+          <p className="font-mono text-xs uppercase tracking-[0.12em] text-gold mb-2.5">
             {title}
             {licenseNumber && ` · רישיון ${licenseNumber}`}
           </p>
-          <p className="text-sm text-gray-700 leading-relaxed">{bio}</p>
+          <p className="text-sm text-ink/70 leading-relaxed">{bio}</p>
         </div>
       </div>
     </div>

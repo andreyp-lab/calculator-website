@@ -48,7 +48,7 @@ export function SearchBar() {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => query && setIsOpen(true)}
           placeholder="חפש מחשבון... (משכנתא, פנסיה, רכב)"
-          className="w-full pr-9 pl-9 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          className="w-full pr-9 pl-9 py-2 text-sm bg-paper border border-ink/20 rounded-none text-ink placeholder:text-ink/45 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition"
         />
         {query && (
           <button
@@ -63,7 +63,7 @@ export function SearchBar() {
 
       {/* Results Dropdown */}
       {isOpen && (
-        <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+        <div className="absolute top-full mt-1 w-full bg-paper border border-ink/20 rounded-none shadow-lg z-50 max-h-96 overflow-y-auto">
           {results.length === 0 ? (
             <div className="p-4 text-center text-sm text-gray-500">
               לא נמצאו מחשבונים. נסה: &quot;משכנתא&quot;, &quot;פנסיה&quot;, &quot;ROI&quot;
@@ -79,7 +79,7 @@ export function SearchBar() {
                     <Link
                       href={calc.href}
                       onClick={handleResultClick}
-                      className="flex items-start gap-3 px-3 py-2.5 hover:bg-blue-50 transition border-b border-gray-100 last:border-0"
+                      className="flex items-start gap-3 px-3 py-2.5 hover:bg-paper-hover transition border-b border-ink/10 last:border-0"
                     >
                       <span className="text-2xl flex-shrink-0">{calc.icon}</span>
                       <div className="flex-1 min-w-0">

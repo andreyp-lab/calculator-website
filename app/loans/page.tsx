@@ -98,49 +98,42 @@ const others: Calculator[] = [
 
 export default function LoansPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-cream">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'הלוואות' }]} />
         </div>
 
         {/* Hero */}
-        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 md:p-10 text-white mb-10 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: 'radial-gradient(circle at 30% 70%, white 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
-          />
+        <div className="bg-ink-deep border border-cream/15 p-6 md:p-10 text-cream mb-10 relative overflow-hidden">
           <div className="relative z-10 max-w-3xl">
             <div className="flex items-center gap-2 mb-3">
-              <TrendingDown className="w-8 h-8" />
-              <span className="text-xs font-medium bg-white/20 px-2 py-1 rounded">
-                כל ההלוואות במקום אחד
-              </span>
+              <TrendingDown className="w-8 h-8 text-gold-light" />
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light">
+                // כל ההלוואות במקום אחד ✦
+              </p>
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold mb-3 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold mb-3 leading-tight">
               מחשבוני הלוואות 2026
             </h1>
-            <p className="text-blue-100 text-base md:text-lg mb-4">
+            <p className="text-cream/70 text-base md:text-lg mb-4">
               5 כלים מקצועיים לכל סוג הלוואה - משכנתא, אישית, איחוד חובות, ובדיקת כושר.
-              עם <strong>אופטימייזר משכנתא בלעדי</strong> שמוצא את התמהיל האידיאלי בשבילך.
+              עם <strong className="text-cream">אופטימייזר משכנתא בלעדי</strong> שמוצא את התמהיל האידיאלי בשבילך.
             </p>
             <div className="flex flex-wrap gap-2 text-sm">
-              <span className="bg-white/15 px-3 py-1 rounded-full">משכנתא מעורבת</span>
-              <span className="bg-white/15 px-3 py-1 rounded-full">מחזור משכנתא</span>
-              <span className="bg-white/15 px-3 py-1 rounded-full">פירעון מוקדם</span>
-              <span className="bg-white/15 px-3 py-1 rounded-full">איחוד חובות</span>
-              <span className="bg-white/15 px-3 py-1 rounded-full">APR אמיתי</span>
+              <span className="border border-cream/20 text-cream/80 px-3 py-1 font-mono text-xs">משכנתא מעורבת</span>
+              <span className="border border-cream/20 text-cream/80 px-3 py-1 font-mono text-xs">מחזור משכנתא</span>
+              <span className="border border-cream/20 text-cream/80 px-3 py-1 font-mono text-xs">פירעון מוקדם</span>
+              <span className="border border-cream/20 text-cream/80 px-3 py-1 font-mono text-xs">איחוד חובות</span>
+              <span className="border border-cream/20 text-cream/80 px-3 py-1 font-mono text-xs">APR אמיתי</span>
             </div>
           </div>
         </div>
 
         {/* Featured */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-5 flex items-center gap-2">
-            <Sparkles className="w-6 h-6 text-amber-500" />
+          <h2 className="text-2xl font-bold text-ink mb-5 flex items-center gap-2">
+            <span className="text-gold">✦</span>
             הכלים המרכזיים
           </h2>
           <div className="grid md:grid-cols-2 gap-5">
@@ -150,33 +143,33 @@ export default function LoansPage() {
                 <Link
                   key={calc.href}
                   href={calc.href}
-                  className="group block bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl rounded-2xl p-6 transition"
+                  className="group block bg-paper border border-ink/15 hover:bg-paper-hover hover:border-ink/25 p-6 transition"
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <div className="bg-white p-3 rounded-xl">
-                      <Icon className="w-7 h-7 text-blue-600" />
+                    <div className="border border-ink/15 p-3 bg-cream">
+                      <Icon className="w-7 h-7 text-ink-mid" />
                     </div>
                     {calc.badge && (
-                      <span className="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">
+                      <span className="bg-ink text-cream text-xs font-bold px-2.5 py-1 font-mono uppercase tracking-[0.1em]">
                         {calc.badge}
                       </span>
                     )}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-700 transition">
+                  <h3 className="text-xl font-bold text-ink mb-2 group-hover:text-gold transition">
                     {calc.title}
                   </h3>
-                  <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+                  <p className="text-sm text-ink/70 mb-4 leading-relaxed">
                     {calc.description}
                   </p>
                   <ul className="space-y-1 mb-4">
                     {calc.features.map((f, i) => (
-                      <li key={i} className="text-sm text-gray-600 flex items-start gap-2">
-                        <span className="text-blue-500 mt-0.5">✓</span>
+                      <li key={i} className="text-sm text-ink/60 flex items-start gap-2">
+                        <span className="text-gold mt-0.5">✦</span>
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center gap-2 text-blue-600 text-sm font-medium pt-3 border-t border-blue-200">
+                  <div className="flex items-center gap-2 text-gold text-sm font-medium pt-3 border-t border-ink/10">
                     <span>פתח את המחשבון</span>
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition" />
                   </div>
@@ -187,8 +180,8 @@ export default function LoansPage() {
         </section>
 
         {/* Others */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-5">
+        <section className="mb-10 bg-cream-2 border border-ink/15 p-6 md:p-8">
+          <h2 className="text-2xl font-bold text-ink mb-5">
             מחשבונים נוספים
           </h2>
           <div className="grid md:grid-cols-3 gap-4">
@@ -198,31 +191,31 @@ export default function LoansPage() {
                 <Link
                   key={calc.href}
                   href={calc.href}
-                  className="group block bg-white border-2 border-gray-200 hover:border-blue-300 hover:shadow-md rounded-xl p-5 transition"
+                  className="group block bg-paper border border-ink/15 hover:bg-paper-hover hover:border-ink/25 p-5 transition"
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <Icon className="w-6 h-6 text-blue-600" />
+                    <Icon className="w-6 h-6 text-ink-mid" />
                     {calc.badge && (
-                      <span className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-0.5 rounded">
+                      <span className="bg-cream border border-ink/15 text-ink text-xs font-mono uppercase tracking-[0.1em] px-2 py-0.5">
                         {calc.badge}
                       </span>
                     )}
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-1.5 group-hover:text-blue-600 transition">
+                  <h3 className="font-bold text-ink mb-1.5 group-hover:text-gold transition">
                     {calc.title}
                   </h3>
-                  <p className="text-xs text-gray-600 mb-3 leading-relaxed">
+                  <p className="text-xs text-ink/60 mb-3 leading-relaxed">
                     {calc.description}
                   </p>
                   <ul className="space-y-0.5 mb-3">
                     {calc.features.map((f, i) => (
-                      <li key={i} className="text-xs text-gray-600 flex items-start gap-1.5">
-                        <span className="text-blue-400 mt-0.5">·</span>
+                      <li key={i} className="text-xs text-ink/50 flex items-start gap-1.5">
+                        <span className="text-gold mt-0.5">·</span>
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center gap-2 text-blue-600 text-xs font-medium pt-2 border-t border-gray-100">
+                  <div className="flex items-center gap-2 text-gold text-xs font-medium pt-2 border-t border-ink/10">
                     <span>פתח</span>
                     <ArrowLeft className="w-3 h-3" />
                   </div>
@@ -233,37 +226,38 @@ export default function LoansPage() {
         </section>
 
         {/* Tips */}
-        <section className="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
-          <h3 className="font-bold text-amber-900 mb-3 flex items-center gap-2">
-            💡 איך לבחור את המחשבון הנכון?
+        <section className="bg-paper border border-ink/15 p-6 mb-8">
+          <h3 className="font-bold text-ink mb-3 flex items-center gap-2">
+            <span className="text-gold">✦</span>
+            איך לבחור את המחשבון הנכון?
           </h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm text-amber-900">
-            <div>
-              <strong className="block mb-1">🏠 רכישת דירה?</strong>
+          <div className="grid md:grid-cols-2 gap-4 text-sm text-ink/80">
+            <div className="border-b border-ink/10 pb-4 md:border-b-0 md:border-l md:border-ink/10 md:pl-4">
+              <strong className="block mb-1 text-ink">🏠 רכישת דירה?</strong>
               <p className="leading-relaxed">
-                התחל ב<Link href="/real-estate/mortgage-optimizer" className="underline">אופטימייזר משכנתא</Link>{' '}
-                למציאת התמהיל הנכון, ואז ב<Link href="/real-estate/mortgage" className="underline">מחשבון המשכנתא</Link>{' '}
+                התחל ב<Link href="/real-estate/mortgage-optimizer" className="text-gold hover:text-gold-2 underline transition">אופטימייזר משכנתא</Link>{' '}
+                למציאת התמהיל הנכון, ואז ב<Link href="/real-estate/mortgage" className="text-gold hover:text-gold-2 underline transition">מחשבון המשכנתא</Link>{' '}
                 לחישוב מפורט.
               </p>
             </div>
-            <div>
-              <strong className="block mb-1">💳 חוב בכרטיס אשראי?</strong>
+            <div className="border-b border-ink/10 pb-4 md:border-b-0 md:border-l md:border-ink/10 md:pl-4">
+              <strong className="block mb-1 text-ink">💳 חוב בכרטיס אשראי?</strong>
               <p className="leading-relaxed">
-                ב<Link href="/savings/personal-loan" className="underline">הלוואה אישית</Link>{' '}
+                ב<Link href="/savings/personal-loan" className="text-gold hover:text-gold-2 underline transition">הלוואה אישית</Link>{' '}
                 תוכל לחשב כמה תחסוך אם תחליף לחוב לאיחוד הלוואות בריבית נמוכה יותר.
               </p>
             </div>
-            <div>
-              <strong className="block mb-1">📊 כמה הצעות מהבנקים?</strong>
+            <div className="border-b border-ink/10 pb-4 md:border-b-0 md:border-l md:border-ink/10 md:pl-4">
+              <strong className="block mb-1 text-ink">📊 כמה הצעות מהבנקים?</strong>
               <p className="leading-relaxed">
-                <Link href="/savings/loan-repayment" className="underline">השוואת הלוואות</Link>{' '}
+                <Link href="/savings/loan-repayment" className="text-gold hover:text-gold-2 underline transition">השוואת הלוואות</Link>{' '}
                 מדרגת אותן לפי עלות אמיתית - כולל APR שמכלילה עמלות נסתרות.
               </p>
             </div>
             <div>
-              <strong className="block mb-1">❓ לא בטוח אם תאושר?</strong>
+              <strong className="block mb-1 text-ink">❓ לא בטוח אם תאושר?</strong>
               <p className="leading-relaxed">
-                <Link href="/tools/loan-eligibility" className="underline">כושר החזר</Link>{' '}
+                <Link href="/tools/loan-eligibility" className="text-gold hover:text-gold-2 underline transition">כושר החזר</Link>{' '}
                 בודק את ה-DTI שלך ומראה אם הבנק יאשר את הסכום הרצוי.
               </p>
             </div>
@@ -271,24 +265,24 @@ export default function LoansPage() {
         </section>
 
         {/* Cross-links */}
-        <div className="mt-8 text-center bg-gray-50 rounded-xl p-5 border border-gray-200">
-          <p className="text-sm text-gray-700 mb-3">חזרה לקטגוריות אחרות:</p>
+        <div className="text-center bg-cream-2 border border-ink/15 p-5">
+          <p className="text-sm text-ink/70 mb-3">חזרה לקטגוריות אחרות:</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/real-estate"
-              className="px-4 py-2 bg-white border border-blue-300 rounded-lg text-sm hover:bg-blue-50 hover:border-blue-500 transition"
+              className="px-4 py-2 bg-paper border border-ink/20 text-sm hover:bg-paper-hover hover:border-ink/35 transition text-ink"
             >
-              🏠 משכנתא ונדל"ן
+              🏠 משכנתא ונדל&quot;ן
             </Link>
             <Link
               href="/savings"
-              className="px-4 py-2 bg-white border border-blue-300 rounded-lg text-sm hover:bg-blue-50 hover:border-blue-500 transition"
+              className="px-4 py-2 bg-paper border border-ink/20 text-sm hover:bg-paper-hover hover:border-ink/35 transition text-ink"
             >
               💰 חיסכון וחובות
             </Link>
             <Link
               href="/topics"
-              className="px-4 py-2 bg-white border border-blue-300 rounded-lg text-sm hover:bg-blue-50 hover:border-blue-500 transition"
+              className="px-4 py-2 bg-paper border border-ink/20 text-sm hover:bg-paper-hover hover:border-ink/35 transition text-ink"
             >
               📂 נושאים אחרים
             </Link>

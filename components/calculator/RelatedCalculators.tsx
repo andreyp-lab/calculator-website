@@ -16,7 +16,7 @@ export function RelatedCalculators({ currentPath }: RelatedCalculatorsProps) {
 
   return (
     <section className="mb-12" aria-labelledby="related-calculators-heading">
-      <h2 id="related-calculators-heading" className="text-2xl font-bold text-gray-900 mb-6">
+      <h2 id="related-calculators-heading" className="text-2xl text-ink mb-6">
         מחשבונים קשורים
       </h2>
       <div className="grid sm:grid-cols-2 gap-3">
@@ -24,12 +24,12 @@ export function RelatedCalculators({ currentPath }: RelatedCalculatorsProps) {
           <Link
             key={c.path}
             href={c.path}
-            className="group flex items-center justify-between gap-2 border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition"
+            className="group flex items-center justify-between gap-2 bg-paper border border-ink/15 p-4 hover:bg-paper-hover hover:border-ink/25 transition"
           >
-            <span className="font-medium text-gray-900 group-hover:text-blue-700 transition">
+            <span className="font-medium text-ink group-hover:text-gold transition">
               {c.label}
             </span>
-            <span className="text-blue-600 group-hover:-translate-x-1 transition" aria-hidden>
+            <span className="text-gold group-hover:-translate-x-1 transition" aria-hidden>
               ←
             </span>
           </Link>

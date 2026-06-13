@@ -183,21 +183,21 @@ const FAQ_ITEMS = [
 
 export default function CoursePage() {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'הקורסים' }]} />
         </div>
 
-        {/* Hero — charcoal + amber */}
-        <section className="rounded-2xl bg-gray-900 p-6 sm:p-10 text-white shadow-lg mb-10">
-          <p className="text-xs font-semibold tracking-wide text-amber-400 mb-3">
-            בית הספר הפיננסי לעצמאים ובעלי עסקים · בהדרכת רו״ח אנדרי פלטונוב
+        {/* Hero — ink + gold */}
+        <section className="bg-ink p-6 sm:p-10 text-cream mb-10">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
+            // בית הספר הפיננסי לעצמאים ובעלי עסקים · בהדרכת רו״ח אנדרי פלטונוב
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
             בית הספר הפיננסי FinSchool
           </h1>
-          <p className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mb-6">
+          <p className="text-base sm:text-lg text-cream/70 leading-relaxed max-w-2xl mb-6">
             מרו״ח שמנהל מאות מיליוני שקלים — ידע פרקטי לניהול כספי העסק. 3 קורסים פרקטיים
             שיביאו אותך מ״לחשב מספר״ ל״להבין את השיטה״, ולנהל את הכסף של העסק בביטחון מלא.
           </p>
@@ -207,10 +207,10 @@ export default function CoursePage() {
             {TRUST_BAND.map((item) => (
               <li
                 key={item}
-                className="inline-flex items-center gap-2 rounded-full bg-gray-800 px-4 py-1.5 text-sm text-gray-200"
+                className="inline-flex items-center gap-2 border border-cream/15 px-4 py-1.5 text-sm text-cream/85"
               >
                 <CheckCircle2
-                  className="w-4 h-4 text-amber-400 flex-shrink-0"
+                  className="w-4 h-4 text-gold-light flex-shrink-0"
                   aria-hidden="true"
                 />
                 {item}
@@ -220,8 +220,8 @@ export default function CoursePage() {
 
           <ul className="grid gap-2 sm:grid-cols-3">
             {SCHOOL_FACTS.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-start gap-2 text-sm text-gray-300">
-                <Icon className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <li key={label} className="flex items-start gap-2 text-sm text-cream/70">
+                <Icon className="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <span>{label}</span>
               </li>
             ))}
@@ -230,8 +230,8 @@ export default function CoursePage() {
 
         {/* Courses */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">שלושת הקורסים של FinSchool</h2>
-          <p className="text-gray-600 mb-6">
+          <h2 className="text-2xl font-bold text-ink mb-2">שלושת הקורסים של FinSchool</h2>
+          <p className="text-ink/70 mb-6">
             בחרו את הקורס שמתאים לשלב שבו אתם נמצאים — מעצמאי שמתחיל ועד איש כספים מנוסה.
           </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
@@ -240,34 +240,36 @@ export default function CoursePage() {
               return (
                 <article
                   key={course.id}
-                  className={`relative flex flex-col rounded-2xl bg-gray-900 text-white p-6 shadow-lg ${
-                    course.featured ? 'ring-2 ring-amber-400' : ''
+                  className={`relative flex flex-col bg-paper p-6 ${
+                    course.featured
+                      ? 'border-2 border-gold'
+                      : 'border border-ink/15'
                   }`}
                 >
                   <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span className="inline-block rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-300">
+                    <span className="inline-block border border-gold/40 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-gold">
                       {course.badge}
                     </span>
                     {course.featured && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-500 px-3 py-1 text-xs font-bold text-gray-900">
+                      <span className="inline-flex items-center gap-1 bg-gold px-3 py-1 text-xs font-bold text-paper">
                         <Star className="w-3 h-3" aria-hidden="true" /> הכי פופולרי לעצמאים
                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-xl font-bold mb-1 leading-snug">{course.name}</h3>
-                  <p className="text-sm font-medium text-amber-300 mb-3">
+                  <h3 className="text-xl font-bold text-ink mb-1 leading-snug">{course.name}</h3>
+                  <p className="text-sm font-medium text-gold mb-3">
                     למי שמתאים: {course.audience}
                   </p>
-                  <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                  <p className="text-sm text-ink/70 leading-relaxed mb-4">
                     {course.description}
                   </p>
 
                   <ul className="space-y-2 mb-5">
                     {course.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2 text-sm text-gray-200">
+                      <li key={b} className="flex items-start gap-2 text-sm text-ink/80">
                         <CheckCircle2
-                          className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5"
+                          className="w-4 h-4 text-gold flex-shrink-0 mt-0.5"
                           aria-hidden="true"
                         />
                         <span>{b}</span>
@@ -276,10 +278,10 @@ export default function CoursePage() {
                   </ul>
 
                   <div className="mt-auto">
-                    <p className="text-xs text-gray-400 mb-1">{course.scope}</p>
-                    <p className="text-base font-semibold text-white mb-1">{course.price}</p>
+                    <p className="text-xs text-ink/50 mb-1">{course.scope}</p>
+                    <p className="text-base font-semibold text-ink mb-1">{course.price}</p>
                     {course.social ? (
-                      <p className="text-xs text-gray-400 mb-4">{course.social}</p>
+                      <p className="text-xs text-ink/50 mb-4">{course.social}</p>
                     ) : (
                       <div className="mb-4" />
                     )}
@@ -287,7 +289,7 @@ export default function CoursePage() {
                       href={href}
                       target="_blank"
                       rel="noopener"
-                      className="block w-full rounded-lg bg-amber-500 px-6 py-3 text-center text-sm font-bold text-gray-900 transition hover:bg-amber-400"
+                      className="block w-full bg-gold px-6 py-3 text-center text-sm font-bold text-paper transition hover:bg-gold-2"
                     >
                       לפרטי הקורס ←
                     </a>
@@ -299,27 +301,27 @@ export default function CoursePage() {
         </section>
 
         {/* About the instructor */}
-        <section className="rounded-2xl bg-gray-900 text-white p-6 sm:p-8 shadow-lg mb-10">
+        <section className="bg-ink text-cream p-6 sm:p-8 mb-10">
           <div className="flex flex-col sm:flex-row items-start gap-5">
-            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-amber-500 text-2xl font-bold text-gray-900">
+            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center bg-gold text-2xl font-bold text-paper">
               א
             </div>
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h2 className="text-xl font-bold">אנדרי פלטונוב</h2>
-                <BadgeCheck className="w-5 h-5 text-amber-400" aria-hidden="true" />
+                <BadgeCheck className="w-5 h-5 text-gold-light" aria-hidden="true" />
               </div>
-              <p className="text-sm font-medium text-amber-400 mb-3">
+              <p className="text-sm font-medium text-gold-light mb-3">
                 רו״ח מוסמך · בוגר PwC · סמנכ״ל כספים (CFO) לשעבר
               </p>
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-2xl mb-4">
+              <p className="text-sm sm:text-base text-cream/70 leading-relaxed max-w-2xl mb-4">
                 15+ שנות ניסיון בעולם הכספים, שכלל ניהול של כ-400 מיליון ₪ בשנה. הקורסים של
                 FinSchool בנויים על ידע פרקטי מהשטח — בדיוק מה שעצמאי או בעל עסק צריך כדי לנהל
                 את הכסף בביטחון, בלי תיאוריה מיותרת.
               </p>
               <Link
                 href="/about"
-                className="inline-block text-sm font-semibold text-amber-400 hover:text-amber-300"
+                className="inline-block text-sm font-semibold text-gold-light hover:text-gold"
               >
                 עוד על הרקע המקצועי ←
               </Link>
@@ -329,15 +331,15 @@ export default function CoursePage() {
 
         {/* Personas */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">למי הקורסים מתאימים?</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">למי הקורסים מתאימים?</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {PERSONAS.map((persona) => (
               <div
                 key={persona.title}
-                className="rounded-2xl border border-gray-200 bg-gray-50 p-6"
+                className="border border-ink/15 bg-cream-2 p-6"
               >
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{persona.title}</h3>
-                <p className="text-sm text-gray-700 leading-relaxed">{persona.body}</p>
+                <h3 className="text-lg font-bold text-ink mb-2">{persona.title}</h3>
+                <p className="text-sm text-ink/75 leading-relaxed">{persona.body}</p>
               </div>
             ))}
           </div>
@@ -345,24 +347,24 @@ export default function CoursePage() {
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">שאלות נפוצות</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות</h2>
           <div className="space-y-3">
             {FAQ_ITEMS.map((item, idx) => (
               <details
                 key={idx}
-                className="group rounded-lg border border-gray-200 bg-white overflow-hidden"
+                className="group border border-ink/15 bg-paper overflow-hidden"
               >
-                <summary className="flex cursor-pointer items-center justify-between px-4 py-3 font-medium text-gray-900 hover:bg-gray-50 transition list-none">
+                <summary className="flex cursor-pointer items-center justify-between px-4 py-3 font-medium text-ink hover:bg-paper-hover transition list-none">
                   <span>{item.question}</span>
                   <span
-                    className="ms-4 text-xl leading-none text-amber-500 transition-transform group-open:rotate-45"
+                    className="ms-4 text-xl leading-none text-gold transition-transform group-open:rotate-45"
                     aria-hidden="true"
                   >
                     +
                   </span>
                 </summary>
-                <div className="border-t border-gray-200 bg-gray-50 px-4 py-3">
-                  <p className="text-gray-700 leading-relaxed">{item.answer}</p>
+                <div className="border-t border-ink/15 bg-cream-2 px-4 py-3">
+                  <p className="text-ink/75 leading-relaxed">{item.answer}</p>
                 </div>
               </details>
             ))}
@@ -370,7 +372,7 @@ export default function CoursePage() {
         </section>
 
         {/* Disclaimer — mandatory */}
-        <section className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-xs text-gray-500 leading-relaxed text-center">
+        <section className="border border-ink/15 bg-cream-2 p-4 text-xs text-ink/55 leading-relaxed text-center">
           המידע באתר אינו מהווה ייעוץ פיננסי ואינו מחליף התייעצות עם רו״ח מוסמך. הרכישה
           וההתחייבות הן מול FinSchool.
         </section>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Heebo, JetBrains_Mono } from "next/font/google";
+import { Heebo, JetBrains_Mono, Frank_Ruhl_Libre } from "next/font/google";
 import "./globals.css";
+import { Ticker } from "@/components/layout/Ticker";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AccessibilityProvider } from "@/components/accessibility/AccessibilityProvider";
@@ -20,6 +21,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// כותרות serif בסגנון FinSchool האדיטוריאלי
+const frankRuhl = Frank_Ruhl_Libre({
+  variable: "--font-frank-ruhl",
+  subsets: ["hebrew", "latin"],
+  weight: ["400", "500", "700", "900"],
+});
+
 // Canonical domain is the apex (matches GSC property, sitemap.ts, robots.txt, site-info.ts).
 // Vercel must be configured so apex serves direct (no redirect) and www→apex redirects to it.
 const SITE_URL = "https://cheshbonai.co.il";
@@ -27,7 +35,7 @@ const SITE_URL = "https://cheshbonai.co.il";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2563eb",
+  themeColor: "#102219",
   colorScheme: "light",
 };
 
@@ -151,7 +159,7 @@ export default function RootLayout({
     <html
       lang="he"
       dir="rtl"
-      className={`${heebo.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${heebo.variable} ${jetbrainsMono.variable} ${frankRuhl.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -163,9 +171,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-gray-900">
+      <body className="min-h-full flex flex-col bg-cream text-ink">
         <AccessibilityProvider>
           <SkipToContent />
+          <Ticker />
           <Header />
           <main id="main-content" className="flex-1">{children}</main>
           <Footer />

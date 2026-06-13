@@ -3,7 +3,6 @@ import { Metadata } from 'next';
 import {
   ArrowLeft,
   Calculator,
-  Sparkles,
   Receipt,
   Heart,
   TrendingUp,
@@ -161,7 +160,7 @@ const COMPARE: Calc[] = [
 
 export default function SalariedPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-cream">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs
@@ -170,35 +169,26 @@ export default function SalariedPage() {
         </div>
 
         {/* Hero */}
-        <div className="bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-700 rounded-2xl p-6 md:p-10 text-white mb-8 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 30% 70%, white 1px, transparent 1px), radial-gradient(circle at 70% 30%, white 1px, transparent 1px)',
-              backgroundSize: '50px 50px',
-            }}
-          />
+        <div className="bg-ink-deep border border-cream/15 p-6 md:p-10 text-cream mb-8 relative overflow-hidden">
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-3 py-1 rounded-full text-sm font-medium mb-3">
-              <Sparkles className="w-4 h-4" />
-              מרכז שכירים
-            </div>
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-3 leading-tight">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
+              // מרכז שכירים ✦
+            </p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
               כל המחשבונים שעובד שכיר זקוק להם
               <br />
-              <span className="bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">
+              <span className="text-gold-light italic font-normal font-serif">
                 במקום אחד
               </span>
             </h1>
-            <p className="text-blue-100 text-base md:text-lg mb-5 max-w-3xl">
+            <p className="text-cream/70 text-base md:text-lg mb-5 max-w-3xl">
               החזר מס, נטו/ברוטו, פיצויים, דמי הבראה, דמי לידה, מילואים, אבטלה ועוד —{' '}
-              <strong className="text-white">{TAX_AND_SALARY.length + RIGHTS.length} כלים</strong>{' '}
+              <strong className="text-cream">{TAX_AND_SALARY.length + RIGHTS.length} כלים</strong>{' '}
               לפי החקיקה העדכנית 2026.
             </p>
             <Link
               href="/personal-tax/tax-refund"
-              className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-gray-900 px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center gap-2 bg-gold text-paper px-8 py-3.5 hover:bg-gold-2 transition font-bold"
             >
               <Receipt className="w-5 h-5" />
               <span>בדוק החזר מס שלך — חינם</span>
@@ -210,14 +200,12 @@ export default function SalariedPage() {
         {/* TAX & SALARY Section */}
         <section className="mb-10">
           <div className="flex items-center gap-3 mb-5">
-            <div className="bg-blue-100 p-2 rounded-lg">
-              <Receipt className="w-6 h-6 text-blue-700" />
+            <div className="border border-ink/15 p-2 bg-paper">
+              <Receipt className="w-6 h-6 text-ink-mid" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">מיסוי ושכר</h2>
-              <p className="text-sm text-gray-600">
-                החזר מס, חישוב נטו/ברוטו, נקודות זיכוי
-              </p>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">// מיסוי ושכר</p>
+              <h2 className="text-2xl font-bold text-ink">החזר מס, חישוב נטו/ברוטו, נקודות זיכוי</h2>
             </div>
           </div>
 
@@ -229,16 +217,14 @@ export default function SalariedPage() {
         </section>
 
         {/* RIGHTS Section */}
-        <section className="mb-10">
+        <section className="mb-10 bg-cream-2 border border-ink/15 p-6 md:p-8">
           <div className="flex items-center gap-3 mb-5">
-            <div className="bg-emerald-100 p-2 rounded-lg">
-              <Shield className="w-6 h-6 text-emerald-700" />
+            <div className="border border-ink/15 p-2 bg-paper">
+              <Shield className="w-6 h-6 text-ink-mid" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">זכויות עובד</h2>
-              <p className="text-sm text-gray-600">
-                פיצויי פיטורין, הבראה, חופשה, מחלה, דמי לידה, מילואים, אבטלה
-              </p>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">// זכויות עובד</p>
+              <h2 className="text-2xl font-bold text-ink">פיצויי פיטורין, הבראה, חופשה, מחלה, דמי לידה, מילואים, אבטלה</h2>
             </div>
           </div>
 
@@ -252,12 +238,12 @@ export default function SalariedPage() {
         {/* COMPARE */}
         <section className="mb-10">
           <div className="flex items-center gap-3 mb-5">
-            <div className="bg-purple-100 p-2 rounded-lg">
-              <TrendingUp className="w-6 h-6 text-purple-700" />
+            <div className="border border-ink/15 p-2 bg-paper">
+              <TrendingUp className="w-6 h-6 text-ink-mid" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">השוואות</h2>
-              <p className="text-sm text-gray-600">השוואה בין מסלולי תעסוקה</p>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">// השוואות</p>
+              <h2 className="text-2xl font-bold text-ink">השוואה בין מסלולי תעסוקה</h2>
             </div>
           </div>
 
@@ -269,27 +255,27 @@ export default function SalariedPage() {
         </section>
 
         {/* Why this section */}
-        <div className="bg-gradient-to-br from-gray-50 to-blue-50 border-2 border-blue-200 rounded-2xl p-6 mb-8">
-          <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-blue-600" />
+        <div className="bg-paper border border-ink/15 p-6 mb-8">
+          <h3 className="font-bold text-ink mb-3 flex items-center gap-2">
+            <span className="text-gold">✦</span>
             למה כדאי להשתמש?
           </h3>
           <div className="grid md:grid-cols-3 gap-4 text-sm">
-            <div>
-              <strong className="text-gray-900">💰 כסף מגיע לך</strong>
-              <p className="text-gray-700 mt-1">
+            <div className="border-r border-ink/10 pl-4 last:border-r-0">
+              <strong className="text-ink">💰 כסף מגיע לך</strong>
+              <p className="text-ink/70 mt-1">
                 לפי רשות המסים, רק כ-50% מהזכאים מגישים החזר מס — בממוצע ₪3,500 לשנה. אתה משאיר כסף על השולחן.
               </p>
             </div>
-            <div>
-              <strong className="text-gray-900">⚖️ זכויות מלאות</strong>
-              <p className="text-gray-700 mt-1">
+            <div className="border-r border-ink/10 pl-4 last:border-r-0">
+              <strong className="text-ink">⚖️ זכויות מלאות</strong>
+              <p className="text-ink/70 mt-1">
                 המעסיק לא תמיד מחשב נכון פיצויים, דמי הבראה או חופשה. בדוק בעצמך לפני שאתה חותם.
               </p>
             </div>
             <div>
-              <strong className="text-gray-900">📊 תכנון פיננסי</strong>
-              <p className="text-gray-700 mt-1">
+              <strong className="text-ink">📊 תכנון פיננסי</strong>
+              <p className="text-ink/70 mt-1">
                 להבין מה אתה מקבל ביד מאפשר לך לתכנן: חיסכון, הוצאות, הלוואות. ידע = כוח.
               </p>
             </div>
@@ -297,26 +283,26 @@ export default function SalariedPage() {
         </div>
 
         {/* Other categories */}
-        <div className="text-center bg-gray-50 rounded-xl p-5 border border-gray-200">
-          <p className="text-sm text-gray-700 mb-2">לא שכיר? יש לי גם:</p>
+        <div className="text-center bg-cream-2 border border-ink/15 p-5">
+          <p className="text-sm text-ink/70 mb-2">לא שכיר? יש לי גם:</p>
           <div className="flex flex-wrap justify-center gap-2 text-sm">
-            <Link href="/self-employed" className="text-blue-600 hover:underline">
+            <Link href="/self-employed" className="text-gold hover:text-gold-2 transition">
               💼 עצמאיים
             </Link>
-            <span className="text-gray-400">•</span>
-            <Link href="/real-estate" className="text-blue-600 hover:underline">
-              🏠 משכנתא ונדל"ן
+            <span className="text-ink/30">•</span>
+            <Link href="/real-estate" className="text-gold hover:text-gold-2 transition">
+              🏠 משכנתא ונדל&quot;ן
             </Link>
-            <span className="text-gray-400">•</span>
-            <Link href="/savings" className="text-blue-600 hover:underline">
+            <span className="text-ink/30">•</span>
+            <Link href="/savings" className="text-gold hover:text-gold-2 transition">
               💳 חיסכון והשקעות
             </Link>
-            <span className="text-gray-400">•</span>
-            <Link href="/vehicles" className="text-blue-600 hover:underline">
+            <span className="text-ink/30">•</span>
+            <Link href="/vehicles" className="text-gold hover:text-gold-2 transition">
               🚗 רכב
             </Link>
-            <span className="text-gray-400">•</span>
-            <Link href="/tools" className="text-blue-600 hover:underline">
+            <span className="text-ink/30">•</span>
+            <Link href="/tools" className="text-gold hover:text-gold-2 transition">
               🚀 כלים לבעלי עסקים
             </Link>
           </div>
@@ -333,26 +319,26 @@ function CalcCard({ calc }: { calc: Calc }) {
     return (
       <Link
         href={calc.href}
-        className="md:col-span-2 lg:col-span-3 group bg-gradient-to-br from-amber-400 via-orange-400 to-pink-500 p-1 rounded-xl hover:shadow-2xl transition-all"
+        className="md:col-span-2 lg:col-span-3 group bg-ink border border-cream/15 hover:bg-ink-deep transition p-1"
       >
-        <div className="bg-white rounded-lg p-5 h-full">
+        <div className="bg-paper border border-ink/10 p-5 h-full">
           <div className="flex items-start gap-4">
-            <div className="bg-amber-100 p-3 rounded-xl flex-shrink-0">
-              <Icon className="w-6 h-6 text-amber-700" />
+            <div className="border border-ink/15 p-3 bg-cream flex-shrink-0">
+              <Icon className="w-6 h-6 text-gold" />
             </div>
             <div className="flex-1">
               <div className="flex items-start justify-between gap-2 mb-1">
-                <h3 className="font-bold text-lg text-gray-900 group-hover:text-amber-700 transition">
+                <h3 className="font-bold text-lg text-ink group-hover:text-gold transition">
                   {calc.title}
                 </h3>
                 {calc.badge && (
-                  <span className="bg-amber-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  <span className="bg-gold text-paper text-xs font-bold px-2 py-0.5 font-mono uppercase tracking-[0.1em]">
                     {calc.badge}
                   </span>
                 )}
               </div>
-              <p className="text-sm text-gray-700 leading-relaxed">{calc.description}</p>
-              <div className="mt-3 inline-flex items-center gap-1 text-amber-700 group-hover:text-amber-900 font-semibold text-sm">
+              <p className="text-sm text-ink/70 leading-relaxed">{calc.description}</p>
+              <div className="mt-3 inline-flex items-center gap-1 text-gold group-hover:text-gold-2 font-semibold text-sm transition">
                 <span>בדוק עכשיו</span>
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition" />
               </div>
@@ -366,19 +352,19 @@ function CalcCard({ calc }: { calc: Calc }) {
   return (
     <Link
       href={calc.href}
-      className="group bg-white p-5 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-md transition flex flex-col gap-3"
+      className="group bg-paper border border-ink/15 hover:bg-paper-hover transition p-5 flex flex-col gap-3"
     >
       <div className="flex items-start justify-between gap-2">
-        <div className="bg-blue-50 p-2 rounded-lg">
-          <Icon className="w-5 h-5 text-blue-600" />
+        <div className="border border-ink/15 p-2 bg-cream">
+          <Icon className="w-5 h-5 text-ink-mid" />
         </div>
-        <ArrowLeft className="w-4 h-4 text-blue-600 opacity-0 group-hover:opacity-100 transition" />
+        <ArrowLeft className="w-4 h-4 text-gold opacity-0 group-hover:opacity-100 transition" />
       </div>
       <div className="flex-1">
-        <h3 className="font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition text-base">
+        <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition text-base">
           {calc.title}
         </h3>
-        <p className="text-sm text-gray-600 leading-relaxed">{calc.description}</p>
+        <p className="text-sm text-ink/60 leading-relaxed">{calc.description}</p>
       </div>
     </Link>
   );

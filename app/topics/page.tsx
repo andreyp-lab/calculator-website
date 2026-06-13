@@ -5,7 +5,6 @@ import {
   Home as HomeIcon,
   TrendingUp,
   Car,
-  Shield,
   PiggyBank,
 } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -22,7 +21,6 @@ interface Group {
   title: string;
   description: string;
   icon: typeof HomeIcon;
-  gradient: string;
   topics: Array<{
     href: string;
     label: string;
@@ -37,7 +35,6 @@ const GROUPS: Group[] = [
     title: 'משכנתא ונדל"ן',
     description: 'מחשבוני משכנתא, מס רכישה, מס שבח, רווחי הון מנכסים',
     icon: HomeIcon,
-    gradient: 'from-blue-500 to-indigo-700',
     topics: [
       {
         href: '/real-estate',
@@ -51,7 +48,6 @@ const GROUPS: Group[] = [
     title: 'חיסכון, השקעות ופנסיה',
     description: 'חיסכון לטווח ארוך, השקעות, ריבית דריבית, תכנון פרישה',
     icon: TrendingUp,
-    gradient: 'from-emerald-500 to-teal-700',
     topics: [
       {
         href: '/savings',
@@ -75,7 +71,6 @@ const GROUPS: Group[] = [
     title: 'רכב ותחבורה',
     description: 'עלות דלק, ליסינג מול קנייה, שווי שימוש ברכב',
     icon: Car,
-    gradient: 'from-orange-500 to-red-700',
     topics: [
       {
         href: '/vehicles',
@@ -127,76 +122,70 @@ const POPULAR: Array<{ href: string; label: string; description: string; emoji: 
 
 export default function TopicsPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-cream">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'נושאים אחרים' }]} />
         </div>
 
         {/* Hero */}
-        <div className="bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl p-6 md:p-10 text-white mb-8 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 30% 70%, white 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
-          />
-          <div className="relative z-10">
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-3 leading-tight">
-              נושאים נוספים
-            </h1>
-            <p className="text-slate-200 text-base md:text-lg max-w-3xl">
-              משכנתא ונדל"ן, חיסכון והשקעות, ביטוחים ופנסיה, רכב ותחבורה — כל הקטגוריות הנוספות במקום אחד.
-            </p>
-          </div>
+        <div className="bg-ink border border-cream/15 p-6 md:p-10 text-cream mb-8">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
+            {'// '}נושאים פיננסיים ✦
+          </p>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
+            נושאים נוספים
+          </h1>
+          <p className="text-cream/70 text-base md:text-lg max-w-3xl">
+            משכנתא ונדל&quot;ן, חיסכון והשקעות, ביטוחים ופנסיה, רכב ותחבורה — כל הקטגוריות הנוספות במקום אחד.
+          </p>
         </div>
 
         {/* Popular calculators */}
         <section className="mb-10">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <PiggyBank className="w-5 h-5 text-emerald-600" />
-            מחשבונים פופולריים
+          <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
+            <PiggyBank className="w-5 h-5 text-gold" />
+            <span>מחשבונים פופולריים</span>
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {POPULAR.map((calc) => (
               <Link
                 key={calc.href}
                 href={calc.href}
-                className="group bg-white p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-md transition flex items-start gap-3"
+                className="group bg-paper border border-ink/15 hover:bg-paper-hover transition p-4 flex items-start gap-3"
               >
                 <div className="text-2xl">{calc.emoji}</div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition">
+                  <h3 className="font-bold text-ink group-hover:text-gold transition">
                     {calc.label}
                   </h3>
-                  <p className="text-xs text-gray-600 mt-0.5">{calc.description}</p>
+                  <p className="text-xs text-ink/60 mt-0.5">{calc.description}</p>
                 </div>
-                <ArrowLeft className="w-4 h-4 text-blue-600 opacity-0 group-hover:opacity-100 transition mt-1" />
+                <ArrowLeft className="w-4 h-4 text-gold opacity-0 group-hover:opacity-100 transition mt-1" />
               </Link>
             ))}
           </div>
         </section>
 
         {/* Groups */}
-        <section className="mb-10">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">קטגוריות</h2>
+        <section className="mb-10 bg-cream-2 border border-ink/15 p-6 md:p-8">
+          <h2 className="text-xl font-bold text-ink mb-4">קטגוריות</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {GROUPS.map((group) => {
               const Icon = group.icon;
               return (
                 <div
                   key={group.id}
-                  className="bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition overflow-hidden flex flex-col"
+                  className="bg-paper border border-ink/15 hover:border-ink/25 transition overflow-hidden flex flex-col"
                 >
                   {/* Header */}
-                  <div className={`bg-gradient-to-br ${group.gradient} p-5 text-white`}>
+                  <div className="bg-ink p-5 text-cream">
                     <div className="flex items-center gap-2 mb-2">
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-6 h-6 text-gold-light" />
+                      <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light">✦</p>
                     </div>
                     <h3 className="text-xl font-bold mb-1">{group.title}</h3>
-                    <p className="text-sm opacity-90">{group.description}</p>
+                    <p className="text-sm text-cream/70">{group.description}</p>
                   </div>
 
                   {/* Body */}
@@ -206,14 +195,14 @@ export default function TopicsPage() {
                         <li key={topic.href}>
                           <Link
                             href={topic.href}
-                            className="group flex items-start gap-2 p-2 rounded hover:bg-blue-50 transition"
+                            className="group flex items-start gap-2 p-2 hover:bg-cream transition"
                           >
-                            <ArrowLeft className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100 transition" />
+                            <ArrowLeft className="w-4 h-4 text-gold mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100 transition" />
                             <div className="flex-1">
-                              <div className="font-semibold text-gray-900 text-sm group-hover:text-blue-600 transition">
+                              <div className="font-semibold text-ink text-sm group-hover:text-gold transition">
                                 {topic.label}
                               </div>
-                              <div className="text-xs text-gray-600">{topic.description}</div>
+                              <div className="text-xs text-ink/60">{topic.description}</div>
                             </div>
                           </Link>
                         </li>
@@ -227,24 +216,24 @@ export default function TopicsPage() {
         </section>
 
         {/* Cross-links */}
-        <div className="text-center bg-gray-50 rounded-xl p-5 border border-gray-200">
-          <p className="text-sm text-gray-700 mb-3">חזרה לקטגוריות הראשיות:</p>
+        <div className="text-center bg-cream-2 border border-ink/15 p-5">
+          <p className="text-sm text-ink/70 mb-3">חזרה לקטגוריות הראשיות:</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/salaried"
-              className="px-4 py-2 bg-white border border-blue-300 rounded-lg text-sm hover:bg-blue-50 hover:border-blue-500 transition"
+              className="px-4 py-2 bg-paper border border-ink/20 text-sm hover:bg-paper-hover hover:border-ink/35 transition text-ink"
             >
               👤 שכירים
             </Link>
             <Link
               href="/self-employed"
-              className="px-4 py-2 bg-white border border-blue-300 rounded-lg text-sm hover:bg-blue-50 hover:border-blue-500 transition"
+              className="px-4 py-2 bg-paper border border-ink/20 text-sm hover:bg-paper-hover hover:border-ink/35 transition text-ink"
             >
               💼 עצמאיים
             </Link>
             <Link
               href="/tools"
-              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg text-sm font-semibold hover:shadow-md transition"
+              className="px-4 py-2 bg-ink text-cream text-sm font-semibold hover:bg-ink-deep transition"
             >
               🚀 כלים לבעלי עסקים
             </Link>

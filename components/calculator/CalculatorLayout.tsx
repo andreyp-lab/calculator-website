@@ -44,7 +44,7 @@ export function CalculatorLayout({
     pageUrl ?? [...breadcrumbs].reverse().find((b) => b.href)?.href ?? undefined;
 
   return (
-    <article className="bg-white">
+    <article className="bg-cream">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Breadcrumbs */}
         <div className="mb-6">
@@ -52,11 +52,11 @@ export function CalculatorLayout({
         </div>
 
         {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{title}</h1>
-          <p className="text-lg text-gray-600 leading-relaxed">{description}</p>
+        <header className="mb-8 pb-6 border-b border-ink/15">
+          <h1 className="text-3xl md:text-4xl text-ink mb-3">{title}</h1>
+          <p className="text-lg text-ink/65 leading-relaxed">{description}</p>
           {lastUpdated && (
-            <p className="text-sm text-gray-500 mt-3">
+            <p className="font-mono text-xs uppercase tracking-[0.12em] text-gold mt-4">
               עודכן לאחרונה: <time dateTime={lastUpdated}>{lastUpdated}</time>
             </p>
           )}
@@ -75,7 +75,7 @@ export function CalculatorLayout({
 
         {/* Content */}
         {content && (
-          <section className="prose prose-lg max-w-none mb-12 text-gray-800 leading-relaxed">
+          <section className="prose prose-lg max-w-none mb-12 text-ink leading-relaxed">
             {content}
           </section>
         )}
@@ -83,7 +83,7 @@ export function CalculatorLayout({
         {/* FAQ */}
         {faq && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">שאלות נפוצות</h2>
+            <h2 className="text-2xl text-ink mb-6">שאלות נפוצות</h2>
             {faq}
           </section>
         )}
@@ -91,7 +91,7 @@ export function CalculatorLayout({
         {/* Sources */}
         {sources && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">מקורות וקישורים רשמיים</h2>
+            <h2 className="text-2xl text-ink mb-4">מקורות וקישורים רשמיים</h2>
             {sources}
           </section>
         )}

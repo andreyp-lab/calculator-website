@@ -9,7 +9,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-heebo);
   --font-mono: var(--font-jetbrains-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-frank-ruhl);
+  --font-serif: var(--font-frank-ruhl);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,31 +49,52 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ============================================================
+   FinSchool Editorial palette — "old-money finance"
+   cream + deep green + gold. Sharp corners, hairline borders.
+   Exposes utility classes: bg-cream, text-ink, text-gold,
+   bg-ink, text-gold-light, border-ink, etc.
+   ============================================================ */
+@theme {
+  --color-cream: #F5F0E6;        /* main page background */
+  --color-cream-2: #EFE9DA;      /* alternating section background */
+  --color-paper: #FBF9F2;        /* card / surface background */
+  --color-paper-hover: #FCFAF3;  /* card hover */
+  --color-ink: #102219;          /* primary deep green / body text */
+  --color-ink-deep: #0A1812;     /* darkest green (footer, ticker) */
+  --color-ink-mid: #264B36;      /* mid green accent */
+  --color-gold: #8E6824;         /* primary gold accent */
+  --color-gold-2: #A87E34;       /* gold hover */
+  --color-gold-light: #D8B36A;   /* light gold (on dark backgrounds) */
+}
+
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Editorial palette mapped onto the base semantic tokens so any
+     shadcn/token-driven element shifts to cream/green/gold automatically. */
+  --background: #F5F0E6;
+  --foreground: #102219;
+  --card: #FBF9F2;
+  --card-foreground: #102219;
+  --popover: #FBF9F2;
+  --popover-foreground: #102219;
+  --primary: #102219;
+  --primary-foreground: #F5F0E6;
+  --secondary: #EFE9DA;
+  --secondary-foreground: #102219;
+  --muted: #EFE9DA;
+  --muted-foreground: #4A5A50;
+  --accent: #EFE9DA;
+  --accent-foreground: #102219;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --border: rgba(16, 34, 25, 0.14);
+  --input: rgba(16, 34, 25, 0.18);
+  --ring: #8E6824;
+  --chart-1: #8E6824;
+  --chart-2: #264B36;
+  --chart-3: #D8B36A;
+  --chart-4: #1B4D3E;
+  --chart-5: #0A1812;
+  --radius: 0rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -126,6 +148,17 @@
   }
   html {
     @apply font-sans;
+  }
+
+  /* כותרות serif (Frank Ruhl Libre) — שפת FinSchool האדיטוריאלית */
+  h1, h2, h3 {
+    font-family: var(--font-frank-ruhl), Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: #fff;
   }
 
   /* ============================================================

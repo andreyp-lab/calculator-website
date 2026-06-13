@@ -57,21 +57,25 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+
       {/* CTA למחשבון */}
       {post.relatedCalculator && (
-        <div className="bg-gradient-to-br from-blue-50 to-emerald-50 border-2 border-blue-200 rounded-xl p-6">
+        <div className="bg-ink border border-ink/20 rounded-none p-6">
           <div className="flex items-start gap-4">
-            <div className="bg-blue-100 rounded-lg p-3 flex-shrink-0">
-              <Calculator className="w-6 h-6 text-blue-600" />
+            <div className="border border-gold-light/30 p-3 flex-shrink-0">
+              <Calculator className="w-6 h-6 text-gold-light" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-gray-900 mb-1 text-lg">רוצה לחשב בעצמך?</h3>
-              <p className="text-sm text-gray-600 mb-3">
-                המחשבון המקצועי שלנו יבצע את החישוב במדויק לפי הנתונים שלך - בחינם.
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-2">
+                ✦ כלי מעשי
+              </p>
+              <h3 className="font-serif text-lg text-cream mb-1">רוצה לחשב בעצמך?</h3>
+              <p className="text-sm text-cream/65 mb-4 leading-relaxed">
+                המחשבון המקצועי שלנו יבצע את החישוב במדויק לפי הנתונים שלך — בחינם.
               </p>
               <Link
                 href={post.relatedCalculator.href}
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-lg transition"
+                className="inline-flex items-center gap-2 bg-gold text-paper hover:bg-gold-2 font-medium px-6 py-2.5 rounded-none transition"
               >
                 <span>{post.relatedCalculator.label}</span>
                 <ArrowLeft className="w-4 h-4" />
@@ -84,22 +88,28 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
       {/* מאמרים קשורים */}
       {related.length > 0 && (
         <div>
-          <h3 className="text-xl font-bold text-gray-900 mb-4">
-            📚 מאמרים נוספים שיעניינו אותך
+          <h3 className="text-xl text-ink mb-1 flex items-center gap-2">
+            <span className="text-gold">✦</span>
+            מאמרים נוספים שיעניינו אותך
           </h3>
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-5">
+            קריאה נוספת
+          </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {related.map((p) => (
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
-                className="block bg-white border-2 border-gray-200 hover:border-blue-300 hover:shadow-md transition rounded-lg p-4 group"
+                className="block bg-paper border border-ink/15 hover:bg-paper-hover rounded-none p-4 transition group"
               >
-                <div className="text-xs font-medium text-blue-600 mb-1.5">{p.category}</div>
-                <h4 className="font-bold text-gray-900 mb-1.5 leading-snug group-hover:text-blue-600 transition">
+                <div className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">
+                  {p.category}
+                </div>
+                <h4 className="font-serif text-base text-ink mb-1.5 leading-snug group-hover:text-ink-mid transition">
                   {p.title}
                 </h4>
-                <p className="text-xs text-gray-600 line-clamp-2">{p.description}</p>
-                <div className="mt-2 text-xs text-gray-500">⏱️ {p.readTime}</div>
+                <p className="text-xs text-ink/55 line-clamp-2 leading-relaxed">{p.description}</p>
+                <div className="mt-3 text-xs text-ink/40">{p.readTime}</div>
               </Link>
             ))}
           </div>

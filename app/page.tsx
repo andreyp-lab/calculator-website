@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { navigation } from '@/lib/config/navigation';
-import { ArrowLeft, LayoutDashboard, TrendingUp, Wallet, BarChart3 } from 'lucide-react';
-import { MacroDataWidget } from '@/components/widgets/MacroDataWidget';
 import { AllCalculatorsGrid } from '@/components/home/AllCalculatorsGrid';
+import { HeroSalaryCalc } from '@/components/home/HeroSalaryCalc';
 
 export const metadata: Metadata = {
   title: '30 מחשבונים פיננסיים חינם בעברית – כלים מעודכנים 2026',
@@ -12,211 +10,337 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
+// ============================================================
+// 6 קטגוריות ראשיות — שם, ספירת כלים וקישור פנימי
+// ============================================================
+const CATEGORIES = [
+  {
+    idx: '01',
+    label: 'מסים אישיים',
+    count: 5,
+    href: '/personal-tax',
+    description: 'החזר מס, שכר נטו/ברוטו, מס הכנסה, נקודות זיכוי ומענק עבודה.',
+  },
+  {
+    idx: '02',
+    label: 'זכויות עובדים',
+    count: 10,
+    href: '/employee-rights',
+    description: 'פיצויי פיטורין, דמי לידה ואבטלה, מילואים, הבראה, חופשה ומחלה.',
+  },
+  {
+    idx: '03',
+    label: 'עצמאיים ועסקים',
+    count: 13,
+    href: '/self-employed',
+    description: 'מע״מ, מקדמות מס, ביטוח לאומי, תמחור שעה ומבנה עסקי אופטימלי.',
+  },
+  {
+    idx: '04',
+    label: 'משכנתא ונדל״ן',
+    count: 4,
+    href: '/real-estate',
+    description: 'מחשבון משכנתא, אופטימייזר תמהיל, מס רכישה ומס שבח.',
+  },
+  {
+    idx: '05',
+    label: 'השקעות וחיסכון',
+    count: 8,
+    href: '/investments',
+    description: 'ריבית דריבית, תכנון פרישה, FIRE, תשואה ותקציב משפחתי.',
+  },
+  {
+    idx: '06',
+    label: 'רכב ותחבורה',
+    count: 3,
+    href: '/vehicles',
+    description: 'ליסינג מול קנייה, עלות דלק שנתית ושווי שימוש ברכב.',
+  },
+] as const;
+
+// ============================================================
+// 3 כרטיסי קורס — כולם מקשרים פנימה ל-/course
+// ============================================================
+const COURSE_CARDS = [
+  {
+    id: 'ai',
+    badge: 'הכי פופולרי',
+    name: 'Claude AI לאנשי כספים',
+    audience: 'בעלי עסקים, מנהלי כספים, רואי חשבון',
+    description:
+      'לרתום את Claude לעבודה הפיננסית היומית — דוחות, מצגות, אוטומציה ודאשבורדים. מהבסיס ועד צוותי סוכנים.',
+    featured: true,
+  },
+  {
+    id: 'cpa',
+    badge: 'לעצמאים ופרילנסרים',
+    name: 'הכסף של העסק בידיים שלך',
+    audience: 'עצמאים / פרילנסרים',
+    description:
+      'מע״מ, מס הכנסה וביטוח לאומי — בשפה שכולם מבינים. תפסיק לשלם ביתר ותנהל את הכסף של העסק בביטחון מלא.',
+    featured: false,
+  },
+  {
+    id: 'cfo',
+    badge: 'לבעלי עסקים מבוססים',
+    name: 'מנהל הכספים של העסק שלך',
+    audience: 'בעלי עסקים מבוססים, חברות',
+    description:
+      'תזרים מזומנים, תקציב שנתי, הון חוזר, בנקים ואשראי — לנהל את העסק כמו מנהל כספים, בלי לשכור אחד.',
+    featured: false,
+  },
+] as const;
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      {/* Hero Section */}
-      <section className="max-w-6xl mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            מחשבונים פיננסיים בעברית - 30 כלים מעודכנים 2026
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            מעל 30 מחשבונים מקצועיים בעברית - מס הכנסה, משכנתא, השקעות, רכב, ביטוחים ועוד.
-            כל החישובים מעודכנים לחוק הישראלי 2026 ובוצעו על ידי רואה חשבון מוסמך.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link
-              href="#calculators"
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-medium inline-flex items-center gap-2"
-            >
-              עיין בכל המחשבונים
-              <ArrowLeft className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/tools"
-              className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-medium inline-flex items-center gap-2"
-            >
-              🚀 כלים לבעלי עסקים
-            </Link>
-          </div>
-        </div>
+    <div className="bg-cream">
+      {/* ============================================================
+          1. HERO
+          ============================================================ */}
+      <section className="relative overflow-hidden bg-cream">
+        {/* רקע גריד עדין של קווים אופקיים */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.5]"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(to bottom, transparent, transparent 47px, rgba(16,34,25,0.05) 47px, rgba(16,34,25,0.05) 48px)',
+          }}
+        />
+        <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* קופי */}
+            <div>
+              <span className="inline-flex items-center gap-2 border border-gold/40 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-gold">
+                ✦ 30+ מחשבונים · עדכני לחוק 2026
+              </span>
 
-        {/* Trust Signals */}
-        <div className="grid md:grid-cols-4 gap-6 mb-16 bg-white p-8 rounded-lg border border-gray-200">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-1">30+</div>
-            <p className="text-sm text-gray-600">מחשבונים מקצועיים</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-1">8</div>
-            <p className="text-sm text-gray-600">קטגוריות</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-1">100%</div>
-            <p className="text-sm text-gray-600">חינם ובעברית</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-1">2026</div>
-            <p className="text-sm text-gray-600">מעודכן ומאומת</p>
-          </div>
-        </div>
-      </section>
-
-      {/* FinSchool course band — charcoal + amber */}
-      <section className="max-w-6xl mx-auto px-4 py-8">
-        <div className="rounded-2xl bg-gray-900 p-6 sm:p-10 text-white shadow-lg">
-          <p className="text-xs font-semibold tracking-wide text-amber-400 mb-3">
-            בית הספר הפיננסי FinSchool · בהדרכת רו״ח
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold leading-tight mb-3">
-            הכלים חינמיים. הידע — בקורסים.
-          </h2>
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-2xl mb-6">
-            3 קורסים פרקטיים לעצמאים ולבעלי עסקים — מע״מ ומס, ניהול כספים ותזרים, ו-AI לעבודה הפיננסית.
-            גישה לכל החיים, 14 יום החזר כספי מלא.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href="/course"
-              className="inline-block rounded-lg bg-amber-500 px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-amber-400"
-            >
-              לכל הקורסים ←
-            </Link>
-            <a
-              href="https://school.profitmargin.co.il/CPA.html?utm_source=cheshbonai&utm_medium=home_band&utm_campaign=cpa-course&utm_content=home_band"
-              target="_blank"
-              rel="noopener"
-              className="text-sm font-semibold text-amber-400 hover:text-amber-300 transition"
-            >
-              קורס לעצמאים: הכסף של העסק בידיים שלך ←
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Macro Data Widget */}
-      <MacroDataWidget />
-
-      {/* Professional Tools Section - חדש! */}
-      <section className="max-w-6xl mx-auto px-4 py-12">
-        <div className="bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
-          <div className="flex items-start gap-4 mb-6">
-            <div className="bg-white/20 backdrop-blur p-3 rounded-xl">
-              <LayoutDashboard className="w-8 h-8" />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">
-                  ⭐ חדש
+              <h1 className="mt-7 text-5xl font-black leading-[1.05] md:text-6xl">
+                <span className="block text-ink-deep">כל מספר פיננסי</span>
+                <span className="block text-ink-mid">שחשוב לכם —</span>
+                <span className="block font-serif font-normal italic text-gold">
+                  מחושב בעברית.
                 </span>
-                <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs">
-                  לעסקים
-                </span>
+              </h1>
+
+              <p className="mt-7 max-w-lg text-lg leading-relaxed text-ink/70">
+                ספרייה של מחשבונים פיננסיים מקצועיים — מס הכנסה, משכנתא, פיצויים,
+                ביטוח לאומי, השקעות ועוד. כל חישוב בנוי לפי החוק הישראלי ומעודכן
+                לשנת המס 2026.
+              </p>
+
+              {/* שורת סטטים */}
+              <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.1em] text-ink/60">
+                <span>30+ מחשבונים</span>
+                <span className="text-gold" aria-hidden="true">✦</span>
+                <span>6 קטגוריות</span>
+                <span className="text-gold" aria-hidden="true">✦</span>
+                <span>100% בעברית</span>
+                <span className="text-gold" aria-hidden="true">✦</span>
+                <span>₪0</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                🚀 כלים פיננסיים מקצועיים
-              </h2>
-              <p className="text-white/90 text-lg">
-                מערכת מאוחדת לתכנון תקציב, ניהול תזרים מזומנים וניתוח דוחות כספיים
+
+              {/* כפתורים */}
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Link
+                  href="#calculators"
+                  className="bg-ink px-8 py-3.5 text-sm font-medium text-cream transition hover:bg-ink-deep"
+                >
+                  עיין במחשבונים ←
+                </Link>
+                <Link
+                  href="/course"
+                  className="border border-ink/35 bg-transparent px-8 py-3.5 text-sm font-medium text-ink transition hover:bg-ink/5"
+                >
+                  הקורסים של FinSchool
+                </Link>
+              </div>
+            </div>
+
+            {/* מחשבון חי */}
+            <div className="lg:ps-4">
+              <HeroSalaryCalc />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          2. CATEGORIES
+          ============================================================ */}
+      <section id="categories" className="scroll-mt-20 bg-cream-2 py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-4">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
+            {'// '}קטגוריות
+          </p>
+          <h2 className="mt-3 text-3xl font-black md:text-4xl">
+            שש קטגוריות.{' '}
+            <span className="font-serif font-normal italic text-gold">
+              כל מצב פיננסי.
+            </span>
+          </h2>
+
+          {/* גריד 6 כרטיסים בגבול קו-שיער */}
+          <div className="mt-10 grid border-t border-e border-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+            {CATEGORIES.map((cat) => (
+              <Link
+                key={cat.idx}
+                href={cat.href}
+                className="group flex flex-col border-b border-s border-ink/15 p-7 transition hover:bg-paper-hover"
+              >
+                <div className="flex items-baseline justify-between">
+                  <span className="font-mono text-sm text-ink/40">{cat.idx}</span>
+                  <span className="font-mono text-xs uppercase tracking-[0.1em] text-gold">
+                    {cat.count} כלים
+                  </span>
+                </div>
+                <h3 className="mt-5 text-xl font-black text-ink transition group-hover:text-gold">
+                  {cat.label}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink/65">
+                  {cat.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          3. ALL CALCULATORS
+          ============================================================ */}
+      <section id="calculators" className="scroll-mt-20 bg-cream py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
+            ✦ הספרייה המלאה ✦
+          </p>
+          <h2 className="mt-3 text-3xl font-black md:text-4xl">כל המחשבונים שלנו</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-ink/70">
+            כל הכלים, מסודרים לפי קטגוריה. עדכני לחוק 2026, בחינם וללא הרשמה.
+          </p>
+        </div>
+        <AllCalculatorsGrid />
+      </section>
+
+      {/* ============================================================
+          4. COURSES BAND
+          ============================================================ */}
+      <section id="courses" className="relative overflow-hidden bg-ink py-20 md:py-24">
+        {/* רקע גריד עדין זהב */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.4]"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(to bottom, transparent, transparent 47px, rgba(216,179,106,0.07) 47px, rgba(216,179,106,0.07) 48px)',
+          }}
+        />
+        <div className="relative mx-auto max-w-6xl px-4">
+          <div className="text-center">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light">
+              ✦ בית הספר הפיננסי FinSchool ✦
+            </p>
+            <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-cream md:text-4xl">
+              אהבתם את המחשבונים?
+              <br />
+              <span className="font-serif font-normal italic text-gold-light">
+                תלמדו לבנות אותם בעצמכם.
+              </span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-cream/70">
+              3 קורסים פרקטיים בהדרכת רו״ח — מע״מ ומס לעצמאים, ניהול כספים לבעלי
+              עסקים, ו-AI לעבודה הפיננסית. גישה לכל החיים, 14 יום החזר כספי מלא.
+            </p>
+          </div>
+
+          {/* 3 כרטיסי קורס */}
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {COURSE_CARDS.map((course) => (
+              <Link
+                key={course.id}
+                href="/course"
+                className={`group relative flex flex-col bg-paper p-7 transition hover:bg-paper-hover ${
+                  course.featured ? 'border-2 border-gold' : 'border border-ink/15'
+                }`}
+              >
+                <span
+                  className={`inline-flex w-fit items-center px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] ${
+                    course.featured
+                      ? 'bg-gold text-paper'
+                      : 'border border-ink/25 text-ink/60'
+                  }`}
+                >
+                  {course.badge}
+                </span>
+                <h3 className="mt-5 text-xl font-black leading-snug text-ink">
+                  {course.name}
+                </h3>
+                <p className="mt-2 text-xs font-medium text-gold">
+                  למי שמתאים: {course.audience}
+                </p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink/70">
+                  {course.description}
+                </p>
+                <span className="mt-6 flex items-center justify-between border-t border-ink/12 pt-4 text-sm font-medium text-ink transition group-hover:text-gold">
+                  לפרטי הקורס
+                  <span className="text-gold transition-transform group-hover:-translate-x-1" aria-hidden="true">
+                    ←
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* שורת מנחה */}
+          <div className="mt-12 flex flex-col items-center gap-4 border-t border-cream/15 pt-10 sm:flex-row sm:items-center sm:justify-center sm:gap-5 sm:text-start">
+            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center border border-gold-light/40 font-serif text-lg font-black text-gold-light">
+              AP
+            </div>
+            <div className="text-center sm:text-start">
+              <p className="font-bold text-cream">
+                אנדרי פלטונוב — רו״ח &amp; סמנכ״ל כספים
+              </p>
+              <p className="mt-1 max-w-xl text-sm leading-relaxed text-cream/65">
+                בוגר PwC, 15+ שנות ניסיון וניהול של כ-400 מיליון ₪ בשנה. הקורסים
+                בנויים על ידע פרקטי מהשטח.
               </p>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
-            {navigation.professionalTools.map((tool) => {
-              const icons: Record<string, typeof LayoutDashboard> = {
-                unified: LayoutDashboard,
-                budget: TrendingUp,
-                'cash-flow': Wallet,
-                'financial-analysis': BarChart3,
-              };
-              const Icon = icons[tool.id] || LayoutDashboard;
-              const isFeatured = tool.id === 'unified';
-
-              return (
-                <Link
-                  key={tool.id}
-                  href={tool.href}
-                  className={`group flex items-start gap-3 p-4 rounded-lg border-2 transition hover:scale-[1.02] ${
-                    isFeatured
-                      ? 'bg-yellow-400/20 border-yellow-300 hover:bg-yellow-400/30'
-                      : 'bg-white/10 border-white/20 hover:bg-white/20'
-                  }`}
-                >
-                  <Icon className="w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-bold">{tool.label}</h3>
-                      {(tool as { badge?: string }).badge && (
-                        <span className="bg-yellow-400 text-yellow-900 text-xs px-2 py-0.5 rounded-full font-bold">
-                          {(tool as { badge?: string }).badge}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm text-white/80">{tool.description}</p>
-                  </div>
-                  <ArrowLeft className="w-4 h-4 opacity-0 group-hover:opacity-100 transition flex-shrink-0 mt-2" />
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="mt-6 pt-6 border-t border-white/20 flex items-center justify-between">
-            <div className="text-sm text-white/80">
-              ✨ פרטיות מלאה - הנתונים נשמרים מקומית
-            </div>
-            <Link
-              href="/tools"
-              className="bg-white text-purple-700 px-5 py-2.5 rounded-lg font-bold hover:bg-yellow-100 transition flex items-center gap-2"
-            >
-              פתח את כל הכלים
-              <ArrowLeft className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Categories Grid */}
-      <section id="calculators" className="max-w-6xl mx-auto px-4 py-12 scroll-mt-20">
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">📐 כל המחשבונים</h2>
-        <p className="text-gray-600 mb-8">5 קטגוריות ראשיות עם 27+ מחשבוני 2026 מעודכנים</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
-          {navigation.categories.map((category) => (
+      {/* ============================================================
+          5. BOTTOM CTA
+          ============================================================ */}
+      <section className="bg-cream-2 py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
+            ✦ ההחלטה ✦
+          </p>
+          <h2 className="mt-3 text-3xl font-black leading-tight md:text-4xl">
+            מהמחשבונים — עד{' '}
+            <span className="font-serif font-normal italic text-gold">
+              האוטומציה המלאה.
+            </span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-ink/70">
+            התחילו עם הכלים החינמיים, ותעלו רמה עם הקורסים של FinSchool — מהבנת
+            המספרים ועד ניהול כספי העסק בביטחון מלא.
+          </p>
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Link
-              key={category.id}
-              href={category.href}
-              className="group bg-white p-5 rounded-lg border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition"
+              href="#calculators"
+              className="bg-ink px-8 py-3.5 text-sm font-medium text-cream transition hover:bg-ink-deep"
             >
-              <div className="text-3xl mb-2">{(category as { icon?: string }).icon || '📊'}</div>
-              <h3 className="font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition">
-                {category.label}
-              </h3>
-              <p className="text-gray-600 text-xs">{category.description}</p>
-              <div className="flex items-center gap-1 mt-3 text-blue-600 opacity-0 group-hover:opacity-100 transition text-xs">
-                <span className="font-medium">פתח</span>
-                <ArrowLeft className="w-3 h-3" />
-              </div>
+              עיין במחשבונים ←
             </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* All Calculators Grid - direct internal links for SEO PageRank flow */}
-      <AllCalculatorsGrid />
-
-      {/* Info Section */}
-      <section className="bg-blue-50 py-12 border-t border-gray-200 mt-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">אודות האתר</h2>
-          <p className="text-gray-600 max-w-3xl mb-4">
-            חשבונאי הוא אתר מחשבונים פיננסיים בעברית, נבנה על ידי רואה חשבון מוסמך עם ניסיון רב בתחום.
-            כל המחשבונים בנויים בהתאם לחוק ותקנות בישראל, ועדכנים לשנה הנוכחית.
-          </p>
-          <p className="text-gray-600">
-            <strong>הערה חשובה:</strong> התוכן באתר זה אינו מהווה ייעוץ משפטי או מקצועי, והוא מיועד לעזר כללי בלבד.
-            אנא התייעץ עם רואה חשבון או עורך דין לפני קבלת החלטות פיננסיות חשובות.
-          </p>
+            <Link
+              href="/course"
+              className="bg-gold px-8 py-3.5 text-sm font-medium text-paper transition hover:bg-gold-2"
+            >
+              לכל הקורסים
+            </Link>
+          </div>
         </div>
       </section>
     </div>

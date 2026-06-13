@@ -57,16 +57,16 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
 
   return (
     <>
-      {/* קטגוריות */}
+      {/* כפתורי קטגוריות */}
       <div className="mb-10 flex flex-wrap gap-2 justify-center">
         <button
           type="button"
           onClick={() => choose(null)}
           aria-pressed={selected === null}
-          className={`px-3 py-1.5 text-sm font-medium rounded-full transition ${
+          className={`px-4 py-1.5 text-sm font-medium rounded-none transition border ${
             selected === null
-              ? 'bg-gray-800 text-white'
-              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+              ? 'bg-ink text-cream border-ink'
+              : 'bg-paper border-ink/15 text-ink hover:bg-paper-hover'
           }`}
         >
           הכל ({totalCount})
@@ -77,10 +77,10 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
             key={c.name}
             onClick={() => choose(c.name)}
             aria-pressed={selected === c.name}
-            className={`px-3 py-1.5 text-sm font-medium rounded-full transition ${
+            className={`px-4 py-1.5 text-sm font-medium rounded-none transition border ${
               selected === c.name
-                ? 'bg-blue-600 text-white'
-                : 'bg-blue-50 hover:bg-blue-100 text-blue-700'
+                ? 'bg-ink text-cream border-ink'
+                : 'bg-paper border-ink/15 text-ink hover:bg-paper-hover'
             }`}
           >
             {c.name} ({c.count})
@@ -91,8 +91,8 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
       {/* מאמרי עוגן — רק במצב "הכל" */}
       {featured.length > 0 && (
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-            <Sparkles className="w-6 h-6 text-amber-500" />
+          <h2 className="text-2xl text-ink mb-6 flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-gold flex-shrink-0" />
             מאמרי עוגן
           </h2>
           <div className="grid md:grid-cols-2 gap-5">
@@ -100,19 +100,19 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="block bg-gradient-to-br from-blue-50 to-emerald-50 p-6 rounded-xl border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition group"
+                className="block bg-paper border border-ink/15 hover:bg-paper-hover rounded-none p-6 transition group"
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded">
-                    {post.category}
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
+                    ✦ {post.category}
                   </span>
-                  <span className="text-xs text-gray-500">⏱️ {post.readTime}</span>
+                  <span className="text-xs text-ink/50">{post.readTime}</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition leading-snug">
+                <h3 className="text-xl text-ink mb-2 leading-snug group-hover:text-ink-mid transition">
                   {post.title}
                 </h3>
-                <p className="text-gray-700 text-sm mb-3 leading-relaxed">{post.description}</p>
-                <div className="flex items-center gap-2 text-blue-600 text-sm font-medium">
+                <p className="text-ink/65 text-sm mb-4 leading-relaxed">{post.description}</p>
+                <div className="flex items-center gap-1.5 text-gold text-sm font-medium">
                   <span>קרא את המדריך</span>
                   <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition" />
                 </div>
@@ -124,33 +124,37 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
 
       {/* רשימת המאמרים (מסוננת) */}
       <section id="all-posts" className="scroll-mt-24">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <BookOpen className="w-6 h-6 text-blue-600" />
+        <h2 className="text-2xl text-ink mb-6 flex items-center gap-2">
+          <BookOpen className="w-5 h-5 text-gold flex-shrink-0" />
           {selected ? `מאמרים בנושא ${selected}` : 'כל המאמרים'}
-          <span className="text-base font-normal text-gray-400">({visible.length})</span>
+          <span className="text-base font-normal text-ink/40 mr-1">({visible.length})</span>
         </h2>
         <div className="grid md:grid-cols-2 gap-4">
           {visible.map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="block bg-white p-5 rounded-lg border-2 border-gray-200 hover:border-blue-400 hover:shadow-md transition group"
+              className="block bg-paper border border-ink/15 hover:bg-paper-hover rounded-none p-5 transition group"
             >
               <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <span className="bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded">
+                <span className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
                   {post.category}
                 </span>
-                <span className="text-xs text-gray-500">⏱️ {post.readTime}</span>
-                <time className="text-xs text-gray-500" dateTime={post.date}>
+                <span className="text-xs text-ink/45">{post.readTime}</span>
+                <time className="text-xs text-ink/45" dateTime={post.date}>
                   {new Date(post.date).toLocaleDateString('he-IL')}
                 </time>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-1.5 group-hover:text-blue-600 transition leading-snug">
+              <h3 className="text-lg text-ink mb-1.5 leading-snug group-hover:text-ink-mid transition">
                 {post.title}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+              <p className="text-ink/60 text-sm leading-relaxed line-clamp-2">
                 {post.description}
               </p>
+              <div className="mt-3 flex items-center gap-1 text-gold text-xs font-medium">
+                <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition" />
+                <span>קרא עוד</span>
+              </div>
             </Link>
           ))}
         </div>

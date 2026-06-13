@@ -10,15 +10,22 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="border-b border-gray-200 bg-white sticky top-0 z-40 shadow-sm">
+    <header className="sticky top-0 z-40 border-b border-ink/14 bg-cream/92 backdrop-blur">
       <div className="max-w-7xl mx-auto px-4">
         {/* Top bar */}
-        <div className="flex items-center justify-between gap-4 py-3">
+        <div className="flex items-center justify-between gap-4 py-3.5">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">ח</span>
-            </div>
-            <span className="font-bold text-gray-900 hidden sm:inline">חשבונאי</span>
+            <span className="font-serif text-2xl font-black text-ink leading-none">
+              חשבונ<span className="text-gold">אי</span>
+            </span>
+            <span className="hidden sm:flex items-center gap-1.5">
+              <span className="text-gold" aria-hidden="true">
+                ✦
+              </span>
+              <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/50">
+                est. 2026
+              </span>
+            </span>
           </Link>
 
           {/* Search - desktop */}
@@ -29,7 +36,7 @@ export function Header() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 -mr-2"
+            className="md:hidden p-2 -mr-2 text-ink"
             aria-label={mobileOpen ? 'סגור תפריט' : 'פתח תפריט'}
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -42,7 +49,7 @@ export function Header() {
         </div>
 
         {/* Navigation - desktop */}
-        <nav className="hidden md:flex items-center gap-4 lg:gap-6 pb-3 overflow-x-auto">
+        <nav className="hidden md:flex items-center gap-5 lg:gap-7 pb-3 overflow-x-auto">
           {navigation.main.map((item) => {
             const isHighlight = (item as { highlight?: boolean }).highlight;
             if (isHighlight) {
@@ -50,7 +57,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="bg-amber-500 text-gray-900 px-3 py-1.5 rounded-lg font-bold hover:bg-amber-400 hover:shadow-md transition text-sm whitespace-nowrap flex-shrink-0"
+                  className="bg-ink text-cream px-5 py-2.5 hover:bg-ink-deep transition text-sm font-medium whitespace-nowrap flex-shrink-0"
                 >
                   {item.label}
                 </Link>
@@ -60,7 +67,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 hover:text-blue-600 transition text-sm whitespace-nowrap flex-shrink-0"
+                className="font-sans text-sm text-ink/70 hover:text-ink transition whitespace-nowrap flex-shrink-0"
               >
                 {item.label}
               </Link>
@@ -70,7 +77,7 @@ export function Header() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-gray-200 py-3">
+          <div className="md:hidden border-t border-ink/14 py-3">
             <nav className="flex flex-col gap-1">
               {navigation.main.map((item) => {
                 const isHighlight = (item as { highlight?: boolean }).highlight;
@@ -79,35 +86,35 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`px-3 py-2.5 rounded-lg text-sm transition ${
+                    className={`px-4 py-2.5 text-sm transition ${
                       isHighlight
-                        ? 'bg-amber-500 text-gray-900 font-bold hover:bg-amber-400'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-ink text-cream font-medium hover:bg-ink-deep'
+                        : 'text-ink/70 hover:bg-ink/5 hover:text-ink'
                     }`}
                   >
                     {item.label}
                   </Link>
                 );
               })}
-              <div className="border-t border-gray-200 my-2" />
+              <div className="border-t border-ink/14 my-2" />
               <Link
                 href="/about"
                 onClick={() => setMobileOpen(false)}
-                className="px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100"
+                className="px-4 py-2.5 text-sm text-ink/70 hover:bg-ink/5 hover:text-ink transition"
               >
                 אודות
               </Link>
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100"
+                className="px-4 py-2.5 text-sm text-ink/70 hover:bg-ink/5 hover:text-ink transition"
               >
                 יצירת קשר
               </Link>
               <Link
                 href="/blog"
                 onClick={() => setMobileOpen(false)}
-                className="px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100"
+                className="px-4 py-2.5 text-sm text-ink/70 hover:bg-ink/5 hover:text-ink transition"
               >
                 בלוג
               </Link>

@@ -51,13 +51,13 @@ export function CourseCTA() {
   return (
     <aside
       aria-label="קורס דיגיטלי מומלץ"
-      className="my-12 rounded-2xl bg-gray-900 p-6 sm:p-8 text-white shadow-lg"
+      className="my-12 bg-ink border border-gold-light/30 p-6 sm:p-8 text-cream"
     >
-      <p className="text-xs font-semibold tracking-wide text-amber-400 mb-2">
-        {course.eyebrow}
+      <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
+        // {course.eyebrow}
       </p>
-      <p className="text-xl sm:text-2xl font-bold mb-3 leading-snug">{course.headline}</p>
-      <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-5 max-w-2xl">
+      <p className="font-serif text-xl sm:text-2xl mb-3 leading-snug text-cream">{course.headline}</p>
+      <p className="text-sm sm:text-base text-cream/70 leading-relaxed mb-5 max-w-2xl">
         {course.support}
       </p>
       <div className="flex flex-wrap items-center gap-4">
@@ -65,11 +65,11 @@ export function CourseCTA() {
           href={href}
           target="_blank"
           rel="noopener"
-          className="inline-block rounded-lg bg-amber-500 px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-amber-400"
+          className="inline-block bg-gold px-8 py-3.5 text-sm font-bold text-paper transition hover:bg-gold-2"
         >
           {course.cta} ←
         </a>
-        <span className="text-xs text-gray-400">
+        <span className="text-xs text-cream/50">
           FinSchool · רו״ח אנדרי פלטונוב, בוגר PwC · 14 יום החזר כספי מלא
         </span>
       </div>
