@@ -23,6 +23,8 @@ export interface BlogPost {
   category: BlogCategory;
   readTime: string;
   date: string;
+  /** תאריך עדכון תוכן אמיתי (ISO). למלא רק אם הפוסט עודכן בפועל — מזין dateModified ב-schema. */
+  updatedDate?: string;
   featured: boolean;
   /** מחשבון רלוונטי - יוצג כ-CTA בסוף הפוסט */
   relatedCalculator?: {

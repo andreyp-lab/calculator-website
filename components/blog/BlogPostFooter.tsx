@@ -20,44 +20,12 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
 
   const related = getRelatedPosts(slug, 3);
 
-  // Schema.org Article JSON-LD - Google Rich Snippets
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.description,
-    inLanguage: 'he-IL',
-    datePublished: post.date,
-    dateModified: post.date,
-    author: {
-      '@type': 'Organization',
-      name: 'חשבונאי - FinCalc',
-      url: 'https://cheshbonai.co.il',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'חשבונאי - FinCalc',
-      url: 'https://cheshbonai.co.il',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://cheshbonai.co.il/og-default.png',
-      },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://cheshbonai.co.il/blog/${post.slug}`,
-    },
-    articleSection: post.category,
-    timeRequired: post.readTime,
-  };
+  // הערה: ה-Article/BlogPosting JSON-LD מוזרק פעם אחת בלבד דרך BlogArticleSchema
+  // ב-app/blog/(post)/layout.tsx (עם author=Person אנדרי פלטונוב). אין להזריק כאן שוב
+  // כדי למנוע duplicate-schema ו-author מנותק.
 
   return (
     <div className="space-y-8 mt-12 not-prose">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-
       {/* CTA למחשבון */}
       {post.relatedCalculator && (
         <div className="bg-ink border border-ink/20 rounded-none p-6">

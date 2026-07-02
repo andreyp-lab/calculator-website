@@ -63,8 +63,8 @@
   --color-ink: #102219;          /* primary deep green / body text */
   --color-ink-deep: #0A1812;     /* darkest green (footer, ticker) */
   --color-ink-mid: #264B36;      /* mid green accent */
-  --color-gold: #8E6824;         /* primary gold accent */
-  --color-gold-2: #A87E34;       /* gold hover */
+  --color-gold: #7A5718;         /* primary gold accent — WCAG AA on cream (5.8:1) */
+  --color-gold-2: #6B4C16;       /* gold hover (darker — keeps AA on hover) */
   --color-gold-light: #D8B36A;   /* light gold (on dark backgrounds) */
 }
 

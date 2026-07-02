@@ -140,14 +140,6 @@ const websiteSchema = {
   url: SITE_URL,
   description: "מחשבונים פיננסיים מקצועיים בעברית, מעודכנים 2026",
   inLanguage: "he-IL",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export default function RootLayout({

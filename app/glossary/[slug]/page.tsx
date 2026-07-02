@@ -22,10 +22,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cleanDef = term.definition.replace(/\s+/g, ' ').trim();
   const description =
     cleanDef.length > 158 ? cleanDef.slice(0, 155).trimEnd() + '…' : cleanDef;
+
+  // מונחים דקים (הגדרה מתחת ל-60 מילים) הם thin-content ששורף crawl budget
+  // ומדלל סמכות → noindex,follow מסיר אותם מהאינדקס אך שומר על מעבר link-equity
+  // למחשבונים (seeAlso). מונח שיורחב ל-60+ מילים יחזור אוטומטית לאינדוקס.
+  const wordCount = cleanDef.split(/\s+/).filter(Boolean).length;
+  const isThin = wordCount < 60;
+
   return {
     title: `${term.term} – מה זה? הסבר והגדרה | מילון פיננסי 2026`,
     description,
     alternates: { canonical: `/glossary/${term.id}` },
+    robots: isThin ? { index: false, follow: true } : undefined,
     openGraph: {
       title: `${term.term} – הגדרה והסבר`,
       description,

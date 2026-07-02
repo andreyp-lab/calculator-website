@@ -18,22 +18,33 @@ export function BlogArticleSchema() {
 
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updatedDate ?? post.date,
     url: `${SITE_URL}/blog/${post.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blog/${post.slug}`,
+    },
     inLanguage: 'he-IL',
+    articleSection: post.category,
+    timeRequired: post.readTime,
     author: {
       '@type': 'Person',
-      name: 'צוות חשבונאי',
+      name: 'אנדרי פלטונוב',
+      jobTitle: 'רואה חשבון מוסמך וסמנכ״ל כספים',
       url: `${SITE_URL}/about`,
     },
     publisher: {
       '@type': 'Organization',
       name: 'חשבונאי',
       url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/og-default.png`,
+      },
     },
   };
 

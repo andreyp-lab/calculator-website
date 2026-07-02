@@ -53,7 +53,7 @@ export function CalculatorLayout({
 
         {/* Header */}
         <header className="mb-8 pb-6 border-b border-ink/15">
-          <h1 className="text-3xl md:text-4xl text-ink mb-3">{title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">{title}</h1>
           <p className="text-lg text-ink/65 leading-relaxed">{description}</p>
           {lastUpdated && (
             <p className="font-mono text-xs uppercase tracking-[0.12em] text-gold mt-4">

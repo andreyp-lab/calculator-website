@@ -158,8 +158,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מילון מונחים =====
     make('/glossary', 'monthly', 0.92),
-    // עמודי מונח בודדים (long-tail) — אוטומטית מ-ALL_TERMS
-    ...ALL_TERMS.map((t) => make(`/glossary/${t.id}`, 'yearly', 0.5)),
+    // עמודי מונח בודדים — רק מונחים מהותיים (60+ מילים) נכנסים ל-sitemap ולאינדקס.
+    // מונחים דקים מקבלים noindex (ראו app/glossary/[slug]/page.tsx) כדי לא לדלל crawl budget.
+    ...ALL_TERMS.filter(
+      (t) => t.definition.replace(/\s+/g, ' ').trim().split(/\s+/).filter(Boolean).length >= 60,
+    ).map((t) => make(`/glossary/${t.id}`, 'yearly', 0.5)),
 
     // ===== משפטי =====
     make('/privacy', 'yearly', 0.3),
