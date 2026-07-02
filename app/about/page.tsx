@@ -33,6 +33,7 @@ const personSchema = {
   },
   worksFor: { '@type': 'Organization', name: 'חשבונאי' },
   url: `${SITE_URL}/about`,
+  sameAs: ['https://www.linkedin.com/in/andreypl/'],
 };
 
 export default function About() {

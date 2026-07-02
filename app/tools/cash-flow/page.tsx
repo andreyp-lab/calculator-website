@@ -40,10 +40,17 @@ export default function CashFlowPage() {
             <Wallet className="w-6 h-6 text-ink-mid" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-ink">תזרים מזומנים מקצועי</h2>
+            <h2 className="text-2xl font-bold text-ink">ניהול תזרים מזומנים לעסק</h2>
             <p className="text-sm text-ink/70">
-              דשבורד KPI, גרפים, חשבונות בנק, עיכובי גביה, פריסת חוב ותשלומים חד-פעמיים
+              כלי לעסק עם חיבור למערכת התקציב — דשבורד KPI, גרפים, חשבונות בנק, עיכובי גביה,
+              פריסת חוב ותשלומים חד-פעמיים
             </p>
+            <Link
+              href="/tools/cashflow-solo"
+              className="text-xs text-ink/60 hover:text-gold underline underline-offset-2"
+            >
+              עצמאי שמחפש כלי פשוט בלי תקציב? ←
+            </Link>
           </div>
         </div>
         <ExportImportBar />

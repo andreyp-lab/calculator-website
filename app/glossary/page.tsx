@@ -4,12 +4,12 @@ import { GlossaryClient } from './GlossaryClient';
 import { ALL_TERMS, HEBREW_ALPHABET } from '@/lib/data/glossary';
 
 export const metadata: Metadata = {
-  title: 'מילון מונחים פיננסיים 2026 – הגדרות בעברית פשוטה',
+  title: 'מילון מונחים פיננסי 2026 — כל המונחים בעברית פשוטה',
   description:
     'מילון מונחים פיננסיים מקיף לשנת 2026: 80+ מושגים מעולם המס, ההשקעות, המשכנתאות והעצמאיים. הגדרה ברורה + לינק למחשבון רלוונטי.',
   alternates: { canonical: '/glossary' },
   openGraph: {
-    title: 'מילון מונחים פיננסיים 2026 – הגדרות בעברית פשוטה',
+    title: 'מילון מונחים פיננסי 2026 — כל המונחים בעברית פשוטה',
     description:
       'מילון מונחים פיננסיים מקיף: 80+ מושגים חשובים מעולם המס, ההשקעות, המשכנתאות והעצמאיים.',
     type: 'website',

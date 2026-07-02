@@ -5,12 +5,12 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 /** כלים מתקדמים לניהול פיננסי של העסק (B2B) */
 const businessTools = [
-  { href: '/tools/unified', icon: LayoutDashboard, title: 'מערכת מאוחדת', description: 'תקציב + תזרים + ניתוח דוחות במקום אחד', badge: 'מומלץ' },
-  { href: '/tools/budget-wizard', icon: Target, title: 'אשף תקציב חכם', description: '10 שאלות מודרכות → תקציב שנתי מוכן' },
-  { href: '/tools/cash-flow', icon: Wallet, title: 'תזרים מזומנים', description: 'יתרות בנק, תחזיות והתראות גירעון' },
-  { href: '/tools/budget', icon: TrendingUp, title: 'תכנון תקציב', description: 'P&L, הכנסות, הוצאות ועובדים' },
-  { href: '/tools/financial-analysis', icon: BarChart3, title: 'ניתוח דוחות', description: 'יחסים פיננסיים, Z-Score ודירוג אשראי' },
-  { href: '/tools/forecast', icon: LineChart, title: 'חיזוי פיננסי', description: 'תחזיות הכנסה ותרחישים' },
+  { href: '/tools/unified', icon: LayoutDashboard, title: 'מערכת מאוחדת לניהול כספי העסק', description: 'תקציב + תזרים + ניתוח דוחות במקום אחד', badge: 'מומלץ' },
+  { href: '/tools/budget-wizard', icon: Target, title: 'אשף תקציב שנתי לעסק', description: '10 שאלות מודרכות → תקציב שנתי מוכן' },
+  { href: '/tools/cash-flow', icon: Wallet, title: 'תזרים מזומנים לעסק', description: 'יתרות בנק, תחזיות והתראות גירעון' },
+  { href: '/tools/budget', icon: TrendingUp, title: 'תכנון תקציב ורווח והפסד', description: 'P&L, הכנסות, הוצאות ועובדים' },
+  { href: '/tools/financial-analysis', icon: BarChart3, title: 'ניתוח דוחות כספיים', description: 'יחסים פיננסיים, Z-Score ודירוג אשראי' },
+  { href: '/tools/forecast', icon: LineChart, title: 'חיזוי פיננסי לעסק', description: 'תחזיות הכנסה ותרחישים' },
 ];
 
 export const metadata: Metadata = {
@@ -24,6 +24,12 @@ const calculators = [
     title: '📘 מדריך פתיחת עסק — עוסק פטור או מורשה?',
     description: 'מתחילים עסק? המדריך המלא לבחירה בין עוסק פטור למורשה, רישום מול הרשויות, תקרת 122,833 ₪ וטעויות נפוצות',
     href: '/self-employed/opening-business',
+    available: true,
+  },
+  {
+    title: '📗 מדריך ניהול כספים לעסק קטן',
+    description: 'השיטה המלאה: הפרדת חשבון עסקי-פרטי, תזרים מזומנים 13 שבועות, תכנון מס ומקדמות, דוח רווח והפסד ומתי לשכור רו"ח',
+    href: '/self-employed/business-finance',
     available: true,
   },
   {

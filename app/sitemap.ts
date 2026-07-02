@@ -65,6 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: זכויות עובד =====
     make('/employee-rights/severance', 'monthly', 0.95),
+    make('/employee-rights/salary-deductions', 'weekly', 0.95, new Date('2026-07-01')), // מחשבון ניכויים ממשכורת (חדש)
     make('/employee-rights/maternity-benefits', 'monthly', 0.90),
     make('/employee-rights/unemployment-benefits', 'monthly', 0.90, FRESH_2026_06_12),
     make('/employee-rights/reserve-duty-pay', 'monthly', 0.90),
@@ -76,7 +77,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/work-grant', 'monthly', 0.90),
 
     // ===== מחשבונים: עצמאיים =====
-    make('/self-employed/opening-business', 'monthly', 0.92), // מדריך פתיחת עסק (pillar)
+    make('/self-employed/opening-business', 'monthly', 0.92, new Date('2026-07-01')), // מדריך פתיחת עסק (pillar, הורחב 7.2026)
+    make('/self-employed/business-finance', 'monthly', 0.92, new Date('2026-07-01')), // מדריך ניהול כספים לעסק קטן (pillar חדש)
     make('/self-employed/year-end-tax-simulator', 'weekly', 0.95),
     make('/self-employed/net', 'weekly', 0.95),
     make('/self-employed/social-security', 'monthly', 0.95),

@@ -4,7 +4,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink-deep text-cream py-12 px-[6%]">
+    <footer className="site-footer bg-ink-deep text-cream py-12 px-[6%]">
       <div className="max-w-6xl mx-auto">
 
         {/* Top row: wordmark + tagline */}

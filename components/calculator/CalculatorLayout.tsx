@@ -20,6 +20,14 @@ interface CalculatorLayoutProps {
   sources?: ReactNode;
   /** URL עמוד המחשבון (נתיב יחסי כגון /personal-tax/income-tax). אם לא סופק – נגזר מ-breadcrumbs. */
   pageUrl?: string;
+  /**
+   * "תשובה מהירה" — פסקה של 80-120 מילים שעונה ישירות על שאלת החיפוש עם המספרים המרכזיים.
+   * מוצגת מיד אחרי הכותרת (Featured Snippets + ציטוט ב-AI Overviews/Perplexity).
+   * class="answer-box" משמש גם כ-selector ל-Speakable schema.
+   */
+  quickAnswer?: ReactNode;
+  /** בלוק "הטמע באתר שלך" (EmbedCodeBox) — מוצג אחרי המחשבונים הקשורים */
+  embed?: ReactNode;
 }
 
 export function CalculatorLayout({
@@ -32,6 +40,8 @@ export function CalculatorLayout({
   faq,
   sources,
   pageUrl,
+  quickAnswer,
+  embed,
 }: CalculatorLayoutProps) {
   // בנה BreadcrumbList items מה-breadcrumbs הקיימים
   const breadcrumbSchemaItems = breadcrumbs.map((b) => ({
@@ -61,6 +71,16 @@ export function CalculatorLayout({
             </p>
           )}
         </header>
+
+        {/* תשובה מהירה — snippet ל-Google ול-AI engines */}
+        {quickAnswer && (
+          <section
+            className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8"
+            aria-label="תשובה מהירה"
+          >
+            {quickAnswer}
+          </section>
+        )}
 
         {/* Calculator (above the fold) */}
         <section className="mb-12">{calculator}</section>
@@ -98,6 +118,9 @@ export function CalculatorLayout({
 
         {/* Related calculators — internal linking */}
         <RelatedCalculators currentPath={currentPath} />
+
+        {/* Embed-this-calculator (backlink engine) */}
+        {embed && <div className="mb-8">{embed}</div>}
 
         {/* Author */}
         <section className="mb-8">

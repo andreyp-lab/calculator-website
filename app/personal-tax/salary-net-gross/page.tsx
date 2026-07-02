@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { SalaryNetGrossCalculator } from '@/components/calculators/SalaryNetGrossCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
 
 export const metadata: Metadata = {
   title: 'מחשבון שכר נטו ברוטו 2026 - חישוב מדויק + כל הכיוונים',
@@ -74,9 +75,29 @@ const faqItems = [
   },
 ];
 
+const taxBracketsDatasetJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'מדרגות מס הכנסה ישראל 2026',
+  description:
+    'טבלת מדרגות מס הכנסה בישראל לשנת 2026 להכנסה מיגיעה אישית: 7 מדרגות מ-10% (עד 7,010 ₪ לחודש) ועד 50% (מעל 60,130 ₪ לחודש, כולל 3% מס יסף), כולל ריווח מדרגות 20% ו-31% שנכנס לתוקף ב-2026.',
+  url: 'https://cheshbonai.co.il/personal-tax/salary-net-gross',
+  temporalCoverage: '2026',
+  creator: {
+    '@type': 'Person',
+    name: 'אנדרי פלטונוב',
+    sameAs: 'https://www.linkedin.com/in/andreypl/',
+  },
+};
+
 export default function SalaryNetGrossPage() {
   return (
-    <CalculatorLayout
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(taxBracketsDatasetJsonLd) }}
+      />
+      <CalculatorLayout
       title="מחשבון שכר נטו ברוטו 2026"
       description="חישוב מדויק בכל הכיוונים: ברוטו→נטו, נטו→ברוטו, עלות מעסיק→נטו. כולל פנסיה, ב.ל., קרן השתלמות, נקודות זיכוי, בונוס, והשוואת שנים."
       breadcrumbs={[
@@ -85,6 +106,17 @@ export default function SalaryNetGrossPage() {
         { label: 'שכר נטו ברוטו' },
       ]}
       lastUpdated="2026-06-12"
+      embed={<EmbedCodeBox slug="salary-net-gross" title="מחשבון שכר נטו ברוטו" />}
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          שכר נטו הוא מה שנשאר מהברוטו אחרי מס הכנסה, ביטוח לאומי ודמי בריאות ופנסיה. ב-2026
+          מס ההכנסה מחושב לפי 7 מדרגות — מ-10% על שכר עד 7,010 ₪/חודש ועד 50% מעל 60,130
+          ₪/חודש (כולל 3% מס יסף), כאשר מדרגות 20% ו-31% הורחבו השנה עד 19,000 ₪ ו-25,100 ₪
+          בהתאמה. ביטוח לאומי ובריאות: 4.27% על השכר עד 7,522 ₪ ו-12.17% מעליו, עד תקרה של
+          51,910 ₪. כל נקודת זיכוי מפחיתה מהמס 242 ₪ בחודש. במחשבון שמתחת אפשר לחשב ברוטו→נטו,
+          נטו→ברוטו וגם עלות מעסיק — בהתאמה אישית מלאה.
+        </p>
+      }
       calculator={<SalaryNetGrossCalculator />}
       content={
         <>
@@ -190,6 +222,7 @@ export default function SalaryNetGrossPage() {
         </>
       }
       faq={<FAQ items={faqItems} />}
-    />
+      />
+    </>
   );
 }

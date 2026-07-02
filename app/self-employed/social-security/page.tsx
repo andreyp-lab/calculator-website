@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { BituachLeumiSelfEmployedCalculator } from '@/components/calculators/BituachLeumiSelfEmployedCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { SOCIAL_SECURITY_SELF_EMPLOYED_2026 } from '@/lib/constants/tax-2026';
 
 export const metadata: Metadata = {
   title: 'מחשבון ביטוח לאומי לעצמאי 2026 - חישוב מלא + הטבת מס',
@@ -73,8 +74,34 @@ const faqItems = [
   },
 ];
 
+const datasetSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'שיעורי ביטוח לאומי ודמי בריאות לעצמאי 2026',
+  description: `שיעורי דמי ביטוח לאומי ודמי בריאות לעצמאי בישראל לשנת 2026: שיעור מופחת ${(SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total * 100).toFixed(2)}% (ביטוח לאומי ${(SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.nationalInsurance * 100).toFixed(2)}% + בריאות ${(SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.healthInsurance * 100).toFixed(2)}%) על הכנסה עד ${SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedThresholdMonthly.toLocaleString('he-IL')} ₪ לחודש, ושיעור מלא ${(SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.total * 100).toFixed(2)}% (ביטוח לאומי ${(SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.nationalInsurance * 100).toFixed(2)}% + בריאות ${(SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.healthInsurance * 100).toFixed(2)}%) עד תקרה של ${SOCIAL_SECURITY_SELF_EMPLOYED_2026.maxThresholdMonthly.toLocaleString('he-IL')} ₪ לחודש.`,
+  url: 'https://cheshbonai.co.il/self-employed/social-security',
+  inLanguage: 'he-IL',
+  temporalCoverage: '2026',
+  creator: {
+    '@type': 'Person',
+    name: 'אנדרי פלטונוב',
+    url: 'https://cheshbonai.co.il/about',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'המוסד לביטוח לאומי',
+    url: 'https://www.btl.gov.il',
+  },
+  dateModified: '2026-05-15',
+};
+
 export default function Page() {
   return (
+    <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }}
+    />
     <CalculatorLayout
       title="מחשבון ביטוח לאומי לעצמאי 2026"
       description="חישוב מלא של ביטוח לאומי + בריאות לעצמאי: שתי המדרגות (6.10% / 18%), הטבת מס 52%, השוואה לשכיר, תיאום שנתי וזכויות. עדכני 2026."
@@ -84,6 +111,17 @@ export default function Page() {
         { label: 'ביטוח לאומי לעצמאי' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          עצמאי בישראל משלם בשנת 2026 דמי ביטוח לאומי ודמי בריאות בשתי מדרגות: שיעור
+          מופחת של 6.10% (ביטוח לאומי 2.87% + בריאות 3.23%) על הכנסה חייבת עד 7,522 ₪
+          לחודש, ושיעור מלא של 18% (ביטוח לאומי 12.83% + בריאות 5.17%) על החלק שמעל,
+          עד תקרה של 51,910 ₪ לחודש — הכנסה מעבר לתקרה פטורה. לדוגמה, בהכנסה חייבת של
+          20,000 ₪ לחודש התשלום הוא כ-2,705 ₪. חשוב לזכור: 52% מהסכום ששולם מוכר
+          כהוצאה לצורך מס הכנסה. המחשבון שמתחת מחשב את התשלום המדויק לפי ההכנסה שלכם,
+          כולל הטבת המס וההשוואה לשכיר.
+        </p>
+      }
       calculator={<BituachLeumiSelfEmployedCalculator />}
       content={
         <>
@@ -203,5 +241,6 @@ export default function Page() {
         </ul>
       }
     />
+    </>
   );
 }

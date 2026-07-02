@@ -131,6 +131,13 @@ const organizationSchema = {
     "פיצויי פיטורין",
     "תכנון פרישה",
   ],
+  founder: {
+    "@type": "Person",
+    name: "אנדרי פלטונוב",
+    jobTitle: "רואה חשבון מוסמך וסמנכ״ל כספים",
+    url: `${SITE_URL}/about`,
+    sameAs: ["https://www.linkedin.com/in/andreypl/"],
+  },
 };
 
 const websiteSchema = {

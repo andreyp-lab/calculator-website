@@ -124,6 +124,28 @@ export default function TaxesCompleteGuide() {
         }}
       />
 
+      {/* Dataset Schema — מדרגות מס ונתוני מס 2026 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Dataset',
+            name: 'מדרגות מס הכנסה ונתוני מס ישראל 2026',
+            description:
+              'מדרגות מס הכנסה, שיעורי ביטוח לאומי, מע"מ ונתוני מס נוספים לשנת 2026 בישראל, כפי שמופיעים במדריך המסים השלם.',
+            temporalCoverage: '2026',
+            inLanguage: 'he',
+            url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026',
+            creator: {
+              '@type': 'Person',
+              name: 'אנדרי פלטונוב',
+              sameAs: 'https://www.linkedin.com/in/andreypl/',
+            },
+          }),
+        }}
+      />
+
       {/* Hero */}
       <div className="bg-ink text-cream py-16 px-4">
         <div className="max-w-5xl mx-auto">

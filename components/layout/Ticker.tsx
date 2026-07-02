@@ -62,7 +62,7 @@ export async function Ticker() {
   ];
 
   return (
-    <div className="bg-ink-deep text-cream border-b border-cream/15">
+    <div className="site-ticker bg-ink-deep text-cream border-b border-cream/15">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-3 py-2 font-mono text-[11.5px] tracking-[0.02em] overflow-x-auto whitespace-nowrap">
           {/* LIVE_DATA label with blinking gold dot */}

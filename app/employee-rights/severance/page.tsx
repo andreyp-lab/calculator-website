@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { SeveranceCalculator } from '@/components/calculators/SeveranceCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
 
 export const metadata: Metadata = {
   title: 'מחשבון פיצויי פיטורין 2026 — סעיף 14, מיסוי ו-13 תרחישי סיום',
@@ -110,6 +111,17 @@ export default function SeverancePage() {
           { label: 'מחשבון פיצויי פיטורין' },
         ]}
         lastUpdated="2026-05-15"
+        embed={<EmbedCodeBox slug="severance" title="מחשבון פיצויי פיטורין" />}
+        quickAnswer={
+          <p className="text-lg text-ink leading-relaxed">
+            פיצויי פיטורין מחושבים לפי הנוסחה: <strong>שכר חודשי קובע × שנות ותק</strong>.
+            הזכאות קמה לאחר שנת עבודה אחת רצופה לפחות אצל אותו מעסיק — בפיטורים, בפרישה או
+            ב&quot;התפטרות בדין מפוטר&quot;. למשל, עובד עם שכר 15,000 ₪ ו-4 שנות ותק זכאי
+            ל-60,000 ₪. מבחינת מס, ב-2026 קיים פטור עד הנמוך מבין 13,750 ₪ לכל שנת עבודה או
+            השכר × 1.5 לכל שנת ותק; מעבר לכך ניתן לחסוך מס באמצעות רצף קצבה או פריסה. המחשבון
+            שמתחת מחשב את הזכאות המלאה, בודק סעיף 14 ומשווה בין ארבע אפשרויות המיסוי.
+          </p>
+        }
         calculator={<SeveranceCalculator />}
         content={
           <>

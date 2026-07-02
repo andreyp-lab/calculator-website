@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { VatCalculator } from '@/components/calculators/VatCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
 
 export const metadata: Metadata = {
   title: 'מחשבון מע"מ 2026 – הוספה, חילוץ ודוח דו-חודשי לעוסק מורשה',
@@ -90,6 +91,18 @@ export default function VatPage() {
           { label: 'מחשבון מע"מ' },
         ]}
         lastUpdated="2026-05-15"
+        embed={<EmbedCodeBox slug="vat" title='מחשבון מע"מ' />}
+        quickAnswer={
+          <p className="text-lg text-ink leading-relaxed">
+            שיעור המע&quot;מ בישראל בשנת 2026 הוא <strong>18%</strong> (השיעור עלה מ-17% ל-18%
+            ב-1 בינואר 2025). כדי להוסיף מע&quot;מ לסכום — מכפילים ב-1.18: למשל 1,000 ₪ הופכים
+            ל-1,180 ₪. כדי לחלץ מע&quot;מ מסכום שכולל אותו — מחלקים ב-1.18. עוסק מורשה חייב
+            לגבות מע&quot;מ בכל חשבונית ולהעבירו לרשות המסים בדוח תקופתי, בעוד עוסק פטור (מחזור
+            שנתי עד 122,833 ₪ ב-2026) אינו גובה מע&quot;מ ואינו מקזז מע&quot;מ תשומות. יצוא
+            ושירותים לחו&quot;ל חייבים בשיעור 0%. במחשבון שמתחת תוכלו להוסיף, לחלץ ולחשב דוח
+            דו-חודשי — בכל סכום ובכל כיוון.
+          </p>
+        }
         calculator={<VatCalculator />}
         content={
           <>

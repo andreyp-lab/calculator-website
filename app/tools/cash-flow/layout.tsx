@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'תזרים מזומנים עסקי 2026 – ניהול, תחזית ו-Burn Rate',
-  description: 'נהל את תזרים המזומנים של העסק שלך לשנת 2026: תחזית חודשית, ניתוח פערים, זיהוי סיכוני נזילות, Burn Rate ו-Runway. מתחבר לתקציב האחוד. כלי חינמי.',
+  title: 'ניהול תזרים מזומנים לעסק 2026 – מחובר לתקציב',
+  description: 'מערכת ניהול תזרים מזומנים לעסק, מחוברת למערכת התקציב: תחזית חודשית, חשבונות בנק, עיכובי גבייה, פריסת חוב, Burn Rate ו-Runway. כלי חינמי.',
   alternates: { canonical: '/tools/cash-flow' },
 };
 

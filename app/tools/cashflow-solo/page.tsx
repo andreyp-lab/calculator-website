@@ -131,10 +131,17 @@ export default function CashFlowSoloPage() {
             <Wallet className="w-6 h-6 text-ink-mid" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-ink">תזרים מזומנים סולו</h2>
+            <h2 className="text-2xl font-bold text-ink">מחשבון תזרים מזומנים לעצמאי</h2>
             <p className="text-sm text-ink/70">
-              תזרים ללא תקציב - הזן ישירות תקבולים ותשלומים לפי תאריכים
+              כלי עצמאי ופשוט לפרילנסר — הזן ישירות תקבולים ותשלומים לפי תאריכים, בלי חיבור
+              לתקציב
             </p>
+            <Link
+              href="/tools/cash-flow"
+              className="text-xs text-ink/60 hover:text-gold underline underline-offset-2"
+            >
+              מנהל עסק ומחפש תזרים מחובר לתקציב? ←
+            </Link>
           </div>
         </div>
 

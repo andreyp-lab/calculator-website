@@ -31,6 +31,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/employee-rights/annual-bonus', label: 'בונוס שנתי', group: 'employee' },
   { path: '/employee-rights/sick-pay', label: 'דמי מחלה', group: 'employee' },
   { path: '/employee-rights/work-grant', label: 'מענק עבודה', group: 'employee' },
+  { path: '/employee-rights/salary-deductions', label: 'ניכויים ממשכורת', group: 'employee' },
   // עצמאיים
   { path: '/self-employed/net', label: 'נטו לעצמאי', group: 'self-employed' },
   { path: '/self-employed/social-security', label: 'ביטוח לאומי עצמאי', group: 'self-employed' },
@@ -68,6 +69,7 @@ export const CALCULATORS: CalcLink[] = [
 
 /** קשרים ידניים חוצי-קבוצה ברמת רלוונטיות גבוהה. */
 const CURATED: Record<string, string[]> = {
+  '/employee-rights/salary-deductions': ['/personal-tax/salary-net-gross', '/personal-tax/tax-credits', '/personal-tax/income-tax', '/insurance/pension'],
   '/personal-tax/salary-net-gross': ['/personal-tax/income-tax', '/personal-tax/tax-refund', '/self-employed/employee-and-self-employed', '/employee-rights/severance'],
   '/personal-tax/income-tax': ['/personal-tax/salary-net-gross', '/personal-tax/tax-credits', '/personal-tax/tax-refund', '/self-employed/net'],
   '/self-employed/net': ['/self-employed/social-security', '/self-employed/vat', '/self-employed/tax-advances', '/self-employed/employee-and-self-employed'],
