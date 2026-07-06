@@ -520,7 +520,7 @@ export default function BusinessFinancePage() {
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              href="/course"
+              href="/course/business"
               className="inline-block bg-gold px-8 py-3.5 text-sm font-bold text-paper transition hover:bg-gold-2"
             >
               לפרטי הקורס ←
