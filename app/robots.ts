@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: ['/'],
-        disallow: ['/api/', '/admin/', '/_next/', '/private/'],
+        disallow: ['/api/', '/admin/', '/_next/', '/private/', '/lp/'],
       },
       // כלל מפורש לבוטים של AI – מאפשר גישה לתוכן ול-llms.txt
       {
@@ -27,7 +27,7 @@ export default function robots(): MetadataRoute.Robots {
           'YouBot',
         ],
         allow: ['/', '/llms.txt'],
-        disallow: ['/api/', '/admin/', '/_next/', '/private/'],
+        disallow: ['/api/', '/admin/', '/_next/', '/private/', '/lp/'],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

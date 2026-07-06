@@ -59,6 +59,8 @@ interface Course {
   social?: string;
   baseUrl: string;
   campaign: 'cpa-course' | 'cfo-course' | 'ai-course';
+  /** דף מכירה משולב באתר (1:1) — קישור פנימי בלי UTM/target חיצוני */
+  internal?: boolean;
   /** תיאור מורחב ל-schema */
   schemaDescription: string;
   featured?: boolean;
@@ -81,7 +83,8 @@ const COURSES: Course[] = [
     price: '297 ₪ (תשלום חד-פעמי)',
     priceValue: '297',
     social: '87+ בוגרים · דירוג 4.9',
-    baseUrl: `${SCHOOL_URL}/CPA.html`,
+    baseUrl: '/course/self-employed',
+    internal: true,
     campaign: 'cpa-course',
     schemaDescription:
       'קורס דיגיטלי לעצמאים ופרילנסרים: מע״מ, מס הכנסה וביטוח לאומי בשפה פשוטה, הפסקת תשלומי יתר וניהול כספי העסק בביטחון. 37 שיעורים, 120+ דקות.',
@@ -102,7 +105,9 @@ const COURSES: Course[] = [
     scope: '25 שיעורים · 180+ דקות',
     price: '297 ₪ מחיר השקה (מחיר רגיל 497 ₪)',
     priceValue: '297',
-    baseUrl: `${SCHOOL_URL}/CFO.html`,
+    social: '64+ בוגרים · דירוג 4.9',
+    baseUrl: '/course/business',
+    internal: true,
     campaign: 'cfo-course',
     schemaDescription:
       'קורס דיגיטלי לבעלי עסקים: תזרים מזומנים, תקציב שנתי, הון חוזר והתנהלות מול בנקים ואשראי — לנהל כמו מנהל כספים בלי לשכור אחד, כולל כלי Excel מוכנים. 25 שיעורים, 180+ דקות.',
@@ -236,7 +241,9 @@ export default function CoursePage() {
           </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
             {COURSES.map((course) => {
-              const href = utm(course.baseUrl, course.campaign, 'course_page', 'card');
+              const href = course.internal
+                ? course.baseUrl
+                : utm(course.baseUrl, course.campaign, 'course_page', 'card');
               return (
                 <article
                   key={course.id}
@@ -287,8 +294,7 @@ export default function CoursePage() {
                     )}
                     <a
                       href={href}
-                      target="_blank"
-                      rel="noopener"
+                      {...(course.internal ? {} : { target: '_blank', rel: 'noopener' })}
                       className="block w-full bg-gold px-6 py-3 text-center text-sm font-bold text-paper transition hover:bg-gold-2"
                     >
                       לפרטי הקורס ←
@@ -383,7 +389,7 @@ export default function CoursePage() {
         courses={COURSES.map((c) => ({
           name: c.name,
           description: c.schemaDescription,
-          url: c.baseUrl,
+          url: c.baseUrl.startsWith('http') ? c.baseUrl : `${SITE_URL}${c.baseUrl}`,
           price: c.priceValue,
         }))}
       />

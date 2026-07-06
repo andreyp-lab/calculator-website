@@ -21,22 +21,21 @@ const CFO_PATHS = [
 
 const COURSES = {
   cpa: {
-    url: 'https://school.profitmargin.co.il/CPA.html',
+    // דף המכירה המשולב באתר (1:1) — לא הפניה חיצונית
+    url: '/course/self-employed',
     eyebrow: 'קורס דיגיטלי לעצמאים · בהדרכת רו״ח',
     headline: 'חישבת את המספר. עכשיו תבין את השיטה.',
     support:
       'מע״מ, מס הכנסה וביטוח לאומי — בשפה שכולם מבינים. תפסיק לשלם ביתר ותנהל את הכסף של העסק בביטחון מלא.',
     cta: 'לפרטי הקורס',
-    campaign: 'cpa-course',
   },
   cfo: {
-    url: 'https://school.profitmargin.co.il/CFO.html',
+    url: '/course/business',
     eyebrow: 'קורס דיגיטלי לבעלי עסקים · בהדרכת רו״ח',
     headline: 'תנהל את העסק כמו מנהל כספים אמיתי.',
     support:
       'תזרים מזומנים, תקציב שנתי, הון חוזר והתנהלות מול הבנק — עם כלי Excel מוכנים לעבודה.',
     cta: 'לפרטי הקורס',
-    campaign: 'cfo-course',
   },
 } as const;
 
@@ -46,7 +45,6 @@ export function CourseCTA() {
   if (!pathname?.startsWith('/self-employed/')) return null;
 
   const course = CFO_PATHS.includes(pathname) ? COURSES.cfo : COURSES.cpa;
-  const href = `${course.url}?utm_source=cheshbonai&utm_medium=site_cta&utm_campaign=${course.campaign}&utm_content=${encodeURIComponent(pathname)}`;
 
   return (
     <aside
@@ -62,9 +60,7 @@ export function CourseCTA() {
       </p>
       <div className="flex flex-wrap items-center gap-4">
         <a
-          href={href}
-          target="_blank"
-          rel="noopener"
+          href={course.url}
           className="inline-block bg-gold px-8 py-3.5 text-sm font-bold text-paper transition hover:bg-gold-2"
         >
           {course.cta} ←

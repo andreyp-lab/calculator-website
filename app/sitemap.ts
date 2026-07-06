@@ -37,6 +37,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/about', 'monthly', 0.6),
     make('/contact', 'monthly', 0.5),
     make('/course', 'monthly', 0.7), // דף נחיתה — קורסי FinSchool
+    make('/course/self-employed', 'monthly', 0.8, new Date('2026-07-06')), // דף מכירה קורס עצמאים (משולב)
+    make('/course/business', 'monthly', 0.8, new Date('2026-07-06')), // דף מכירה קורס בעלי עסקים (משולב)
 
     // ===== Hubs קטגוריות =====
     make('/salaried', 'weekly', 0.95),

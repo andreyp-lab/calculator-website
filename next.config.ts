@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    // דפי המכירה של הקורסים משולבים באתר (1:1) כדפים סטטיים ב-public/lp.
+    // Rewrite נותן URL נקי על cheshbonai.co.il במקום הפניה החוצה ל-school.profitmargin.
+    return [
+      { source: "/course/self-employed", destination: "/lp/cpa.html" },
+      { source: "/course/business", destination: "/lp/cfo.html" },
+    ];
+  },
 };
 
 const withMDX = createMDX({
