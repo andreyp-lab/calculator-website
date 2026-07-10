@@ -55,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate', 'weekly', 0.90),
     make('/investments', 'weekly', 0.90),
     make('/savings', 'weekly', 0.90),
-    make('/vehicles', 'weekly', 0.90),
+    make('/vehicles', 'weekly', 0.90, new Date('2026-07-10')), // הורחב ל-pillar (שווי שימוש/דלק/ליסינג)
     make('/insurance', 'weekly', 0.85),
 
     // ===== מחשבונים: שכירים / מסים =====
@@ -122,7 +122,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/vehicles/company-car-benefit', 'monthly', 0.90),
 
     // ===== מחשבונים: ביטוחים =====
-    make('/insurance/pension', 'monthly', 0.90),
+    make('/insurance/pension', 'monthly', 0.90, new Date('2026-07-10')), // נוסף בלוק תשובה מהירה
 
     // ===== כלים מקצועיים =====
     make('/tools/unified', 'monthly', 0.90),

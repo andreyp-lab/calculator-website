@@ -1,4 +1,58 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 @AGENTS.md
+
+> **Read `AGENTS.md` first** (imported above): this is Next.js 16 + Turbopack with breaking changes from older Next. Consult `node_modules/next/dist/docs/` before writing App Router code.
+
+## Commands
+
+```bash
+npm run dev            # dev server (Turbopack)
+npm run build          # production build — ALSO the most reliable full typecheck + route/metadata validation; run before every commit
+npm run start          # serve the production build (needed to test next.config rewrites, e.g. /course/self-employed)
+npm run lint           # eslint (Next 16 removed `next lint` — call eslint via this script, not `next lint`)
+npx tsc --noEmit       # typecheck only
+npm test               # vitest run — full unit suite (1600+ tests in tests/unit/)
+npm run test:watch     # vitest watch
+npx vitest run tests/unit/<name>.test.ts   # single test file
+npx vitest run -t "<test name substring>"  # single test by name
+```
+
+Standard verification gate before committing: `npx tsc --noEmit && npm test && npm run build`.
+
+## What this is
+
+Hebrew, RTL financial-calculator site (cheshbonai.co.il) — its purpose is to pull organic search traffic and funnel it to the FinSchool courses. It is a **YMYL** site: every displayed number carries legal/financial weight.
+
+## Architecture (the big picture)
+
+**Calculators are a strict three-layer stack — respect the boundaries:**
+1. **`lib/constants/tax-2026.ts`** is the single source of truth for every tax bracket, rate, threshold, and credit point; **`lib/data/macroeconomic-data.ts`** holds macro data (prime rate, CPI, average wage). **Never hardcode or invent a financial number in a component or content** — import it from these files. 22+ calc engines already consume `tax-2026.ts`.
+2. **`lib/calculators/*.ts`** — pure, React-free calculation engines (~46 files). Each has a matching **`tests/unit/*.test.ts`**. Reuse an engine; do not reimplement tax logic inside a widget (e.g. the salary-deductions widget calls `calculateSalaryNetGross`).
+3. **`components/calculators/*.tsx`** — the `'use client'` interactive widgets that call the engines and render results (cards, recharts graphs).
+
+**Calculator page composition:** `app/<category>/<slug>/page.tsx` is a server component (metadata + JSON-LD) that renders **`components/calculator/CalculatorLayout.tsx`**, passing named slots: `quickAnswer` (an answer-box paragraph, `.answer-box`, for featured snippets / AI citation), `calculator` (the widget), `content`, `faq` (the `FAQ` component auto-injects FAQPage schema), `sources`, `embed`. The layout also renders `RelatedCalculators`, `CourseCTA` (only on `/self-employed/*`), and `AuthorBox`.
+
+**Content sources of truth (edit these, not scattered files):**
+- Blog: `content/blog/registry.ts` (post metadata, `updatedDate` optional) + `app/blog/(post)/<slug>/page.mdx` (body). `BlogArticleSchema` injects one `BlogPosting` per post.
+- Glossary: `lib/data/glossary.ts` (per-term pages at `/glossary/[slug]`).
+- Navigation: `lib/config/navigation.ts`.
+
+**SEO infrastructure is centralized — extend it, don't duplicate:** `app/sitemap.ts`, `app/robots.ts`, `public/llms.txt` + `public/llms-full.txt`, and `components/seo/*` (Breadcrumb/Calculator/FAQ/HowTo/Course/Person schemas).
+
+**Two rules that will silently break SEO if ignored:**
+- **Canonical:** the root `app/layout.tsx` deliberately does **not** set `alternates.canonical` (setting it there cascades to every page, making Google see "homepage" everywhere and deindex sub-pages). **Every page must declare its own canonical.**
+- **Client pages can't export `metadata`.** A `'use client'` page needs its metadata (incl. canonical) in a sibling `layout.tsx` (see `app/tools/*/layout.tsx`, `app/contact/`).
+
+**Course sales pages** are integrated 1:1 as standalone static HTML in `public/lp/*.html`, served at clean URLs via **`next.config.ts` rewrites** (`/course/self-employed` → `/lp/cpa.html`, `/course/business` → `/lp/cfo.html`). Inside them, only checkout links go external (to `*.profitmargin.co.il`); all nav/footer links point back inside the site.
+
+**Design system** lives in `app/globals.css` `@theme` (Tailwind v4 — there is **no `tailwind.config`**): palette `cream / paper / ink / ink-deep / ink-mid / gold / gold-light`, sharp corners (radius 0), serif headings (Frank Ruhl Libre), mono eyebrows (JetBrains Mono, uppercase tracked), ✦ gold separators. Fonts are wired via `next/font` in `layout.tsx`. Preserve semantic colors in results/graphs: **red = cost/tax, green = positive/savings, amber = warning**. `gold` is `#7A5718` (WCAG AA on cream) — don't lighten it.
+
+**Live data:** USD/ILS is fetched from the Bank of Israel API with ISR (6h) in `components/layout/Ticker.tsx`; tax/legal constants are **manually maintained and must never be auto-fetched** (YMYL law doesn't live-update safely).
+
+---
 
 # עקרונות מוצר - FinCalc
 
