@@ -63,18 +63,18 @@ export const MACRO_DATA = {
   },
 
   averageWage: {
-    monthly: 13_200,         // ₪ שכר ממוצע חודשי (ברוטו)
-    quarterly: 13_200,       // ₪ (אותו ערך - לרבעון אחרון)
-    lastUpdated: '2026-04-01',
-    reportPeriod: 'Q1 2026', // הרבעון שמדווח
+    monthly: 13_623,         // ₪ שכר ממוצע למשרת שכיר (ינואר 2026, למ"ס/ב"ל)
+    quarterly: 13_623,       // ₪
+    lastUpdated: '2026-07-10',
+    reportPeriod: 'ינואר 2026',
     source: 'הלשכה המרכזית לסטטיסטיקה / ביטוח לאומי',
-    sourceUrl: 'https://www.btl.gov.il/Publications/actuarial_pub/Pages/sk2026.aspx',
+    sourceUrl: 'https://www.btl.gov.il/Mediniyut/GeneralData/Pages/שכר ממוצע.aspx',
     historicalWages: [
       { quarter: 'Q1 2025', wage: 12_650 },
       { quarter: 'Q2 2025', wage: 12_780 },
       { quarter: 'Q3 2025', wage: 12_900 },
       { quarter: 'Q4 2025', wage: 13_050 },
-      { quarter: 'Q1 2026', wage: 13_200 },
+      { quarter: 'ינואר 2026', wage: 13_623 },
     ],
   },
 

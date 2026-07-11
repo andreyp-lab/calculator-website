@@ -188,8 +188,8 @@ export const MINIMUM_WAGE_2026 = {
 // מקור: כל-זכות, צו ההרחבה
 // ============================================================
 export const RECREATION_PAY_2026 = {
-  privateSectorPerDay: 418, // ₪
-  publicSectorPerDay: 471.40, // ₪
+  privateSectorPerDay: 418, // ₪ (העלאה ל-451.5 סוכמה אך טרם הורחבה בצו הרחבה — 418 עדיין המחייב)
+  publicSectorPerDay: 511.60, // ₪ (עודכן מ-1.6.2026, היה 471.40)
   // ימי הבראה לפי ותק (מגזר פרטי)
   daysByYearsOfService: [
     { years: 1, days: 5 },
@@ -259,12 +259,13 @@ export const STUDY_FUND_2026 = {
 // קצבאות ילדים 2026 (חודשי)
 // מקור: ביטוח לאומי
 // ============================================================
+// עודכן 2026 (btl.gov.il): ילד ראשון 173, שני-רביעי 219, חמישי ואילך 173
 export const CHILDREN_ALLOWANCE_2026 = {
-  firstChild: 152,
-  secondChild: 192,
-  thirdChild: 192,
-  fourthChild: 339,
-  fifthAndAbove: 192,
+  firstChild: 173,
+  secondChild: 219,
+  thirdChild: 219,
+  fourthChild: 219,
+  fifthAndAbove: 173,
 } as const;
 
 // ============================================================

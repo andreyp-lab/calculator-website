@@ -90,8 +90,8 @@ describe('calculateRecreationPay (basic — backward compat)', () => {
       sector: 'public',
     });
     expect(result.daysEntitled).toBe(8);
-    expect(result.payPerDay).toBe(471.40);
-    expect(result.fullTimeAmount).toBeCloseTo(8 * 471.40, 1);
+    expect(result.payPerDay).toBe(511.60);
+    expect(result.fullTimeAmount).toBeCloseTo(8 * 511.60, 1);
   });
 
   it('משרת 50% — חצי מהסכום', () => {
@@ -335,8 +335,8 @@ describe('INDUSTRY_RATES_2026', () => {
     expect(INDUSTRY_RATES_2026.private_general.ratePerDay).toBe(418);
   });
 
-  it('מגזר ציבורי — 471.40 ₪', () => {
-    expect(INDUSTRY_RATES_2026.public_general.ratePerDay).toBe(471.40);
+  it('מגזר ציבורי — 511.60 ₪', () => {
+    expect(INDUSTRY_RATES_2026.public_general.ratePerDay).toBe(511.60);
   });
 
   it('בנקאות — גבוה מפרטי', () => {

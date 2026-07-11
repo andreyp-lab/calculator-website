@@ -618,7 +618,7 @@ export function calculateComprehensivePension(
     recommendations.push('דמי הניהול גבוהים - שקול לעבור לקרן זולה יותר');
   }
   if (!includNationalIns) {
-    recommendations.push('אל תשכח לכלול קצבת ביטוח לאומי (~3,465 ₪ ליחיד) בתכנון');
+    recommendations.push('אל תשכח לכלול קצבת ביטוח לאומי (~1,838 ₪ בסיסי ליחיד, עד ~2,757 ₪ עם ותק) בתכנון');
   }
 
   const goalAnalysis: GoalAnalysis = {

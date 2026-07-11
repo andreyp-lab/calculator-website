@@ -6,7 +6,7 @@
  * - הסכמים קיבוציים (מגזר ציבורי)
  * - חוק הגנת השכר תשי"ח-1958 (התיישנות 4 שנים)
  *
- * תעריף 2026: 418 ₪/יום (פרטי) | 471.40 ₪/יום (ציבורי)
+ * תעריף 2026: 418 ₪/יום (פרטי) | 511.60 ₪/יום (ציבורי)
  */
 
 import {
@@ -54,7 +54,7 @@ export const INDUSTRY_RATES_2026: Record<Industry, IndustryRate> = {
   public_general: {
     id: 'public_general',
     label: 'מגזר ציבורי — הסכם קיבוצי',
-    ratePerDay: 471.40,
+    ratePerDay: 511.60,
     source: 'הסכם קיבוצי מגזר ציבורי',
     isCollectiveAgreement: true,
   },
@@ -96,14 +96,14 @@ export const INDUSTRY_RATES_2026: Record<Industry, IndustryRate> = {
   healthcare: {
     id: 'healthcare',
     label: 'בריאות ורפואה',
-    ratePerDay: 471.40,
+    ratePerDay: 511.60,
     source: 'הסכם קיבוצי מגזר הבריאות',
     isCollectiveAgreement: true,
   },
   academia: {
     id: 'academia',
     label: 'אקדמיה ומחקר',
-    ratePerDay: 471.40,
+    ratePerDay: 511.60,
     source: 'הסכם קיבוצי מוסדות אקדמיים',
     isCollectiveAgreement: true,
   },
@@ -455,7 +455,7 @@ export function calculateRecreationPayFull(input: RecreationPayFullInput): Recre
   }
 
   if (years >= 1 && years < 2) {
-    recommendations.push('לאחר שנתיים ותק, מספר ימי ההבראה יעלה ל-6 ימים (+418 ₪/+471.40 ₪).');
+    recommendations.push('לאחר שנתיים ותק, מספר ימי ההבראה יעלה ל-6 ימים (+418 ₪/+511.60 ₪).');
   } else if (years >= 3 && years < 4) {
     recommendations.push('בשנה הרביעית, מספר ימי ההבראה יעלה ל-7 ימים — עלייה משמעותית בזכאות.');
   } else if (years === 10) {
