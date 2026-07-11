@@ -111,7 +111,7 @@ describe('calculateIncomeTax (מחשבון מלא)', () => {
     });
 
     // ב.ל. + בריאות צריך להיות מקסימלי - על התקרה (51,910)
-    // 7,522 × 4.27% + 44,388 × 12.17% ≈ 5,723
-    expect(result.monthlySocialSecurity).toBeCloseTo(5_723, -1);
+    // 7,703 × 4.27% + 44,207 × 12.17% ≈ 5,709
+    expect(result.monthlySocialSecurity).toBeCloseTo(5_709, -1);
   });
 });

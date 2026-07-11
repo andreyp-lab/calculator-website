@@ -49,7 +49,7 @@ export const MAX_NI_MONTHLY = 51_910;
 export const MAX_NI_ANNUAL = MAX_NI_MONTHLY * 12; // 622,920
 
 /** סף מנימלי לחישוב ב.ל. (60% מהשכר הממוצע) */
-export const NI_REDUCED_THRESHOLD_MONTHLY = 7_522;
+export const NI_REDUCED_THRESHOLD_MONTHLY = 7_703;
 export const NI_REDUCED_THRESHOLD_ANNUAL = NI_REDUCED_THRESHOLD_MONTHLY * 12; // 90,264
 
 /** שיעורי ב.ל. עצמאי */

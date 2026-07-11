@@ -50,10 +50,10 @@ describe('calculateEmployerCost - שכר 10,000 ₪', () => {
 
   it('ביטוח לאומי מעסיק - מדורג', () => {
     const result = calculateEmployerCost(baseInput);
-    // 7,522 × 4.51% = 339.24
-    // 2,478 × 7.6% = 188.33
-    // סה"כ ~527.57
-    expect(result.nationalInsurance).toBeCloseTo(527.6, 0);
+    // 7,703 × 4.51% = 347.41
+    // 2,297 × 7.6% = 174.57
+    // סה"כ ~521.98
+    expect(result.nationalInsurance).toBeCloseTo(522.0, 0);
   });
 
   it('פנסיה 6.5%', () => {
@@ -113,8 +113,8 @@ describe('calculateEmployerCost - שכר נמוך וגבוה', () => {
       hasEducationFund: false,
       transportationType: 'none',
     });
-    // 7,522 × 4.51% + (51,910 - 7,522) × 7.6% = 339.24 + 3,373.49 = 3,712.73
-    expect(result.nationalInsurance).toBeCloseTo(3_712.7, 0);
+    // 7,703 × 4.51% + (51,910 - 7,703) × 7.6% = 347.41 + 3,359.73 = 3,707.14
+    expect(result.nationalInsurance).toBeCloseTo(3_707.1, 0);
   });
 });
 

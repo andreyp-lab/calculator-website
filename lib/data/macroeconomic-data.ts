@@ -15,17 +15,15 @@
 
 export const MACRO_DATA = {
   primeRate: {
-    value: 5.5,              // % ריבית פריים נוכחית
-    boiBaseRate: 4.0,        // % ריבית בנק ישראל (ריבית בסיס)
+    value: 5.0,              // % ריבית פריים נוכחית (מ-6.7.2026: בנק ישראל 3.5% + מרווח 1.5%)
+    boiBaseRate: 3.5,        // % ריבית בנק ישראל (ריבית בסיס) — הורדה ל-3.5% ב-6.7.2026
     bankSpread: 1.5,         // % מרווח בנקאי סטנדרטי (פריים = בסיס + 1.5%)
-    lastUpdated: '2026-05-21',
+    lastUpdated: '2026-07-10',
     source: 'בנק ישראל',
     sourceUrl: 'https://www.boi.org.il/he/economic-roles/markets/interest-rates/interest-rates-of-bank-of-israel/',
-    nextScheduledDecision: '2026-07-08', // לוח החלטות בנק ישראל
+    nextScheduledDecision: '2026-08-25', // לוח החלטות בנק ישראל (הערכה — לאמת מול boi.org.il)
     historicalRates: [
       // 12 חודשים אחרונים - עבור גרף היסטורי
-      { month: '2025-06', boiRate: 4.5, primeRate: 6.0 },
-      { month: '2025-07', boiRate: 4.5, primeRate: 6.0 },
       { month: '2025-08', boiRate: 4.25, primeRate: 5.75 },
       { month: '2025-09', boiRate: 4.25, primeRate: 5.75 },
       { month: '2025-10', boiRate: 4.25, primeRate: 5.75 },
@@ -35,7 +33,9 @@ export const MACRO_DATA = {
       { month: '2026-02', boiRate: 4.0, primeRate: 5.5 },
       { month: '2026-03', boiRate: 4.0, primeRate: 5.5 },
       { month: '2026-04', boiRate: 4.0, primeRate: 5.5 },
-      { month: '2026-05', boiRate: 4.0, primeRate: 5.5 },
+      { month: '2026-05', boiRate: 3.75, primeRate: 5.25 }, // הורדה ראשונה 2026
+      { month: '2026-06', boiRate: 3.75, primeRate: 5.25 },
+      { month: '2026-07', boiRate: 3.5, primeRate: 5.0 },  // הורדה שנייה 6.7.2026
     ],
   },
 

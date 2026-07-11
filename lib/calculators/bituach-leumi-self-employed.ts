@@ -28,14 +28,14 @@ import {
 
 export const BL_SE_RATES_2026 = {
   /** תקרה מופחת (60% שכר ממוצע) */
-  reducedThreshold: 7_522,
+  reducedThreshold: 7_703,
   /** תקרה מקסימלית */
   fullThreshold: 51_910,
   /** שיעורים מופחתים */
   reducedRate: {
-    bl: SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.nationalInsurance, // 2.87%
+    bl: SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.nationalInsurance, // 4.47% (תיקון 252)
     health: SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.healthInsurance, // 3.23%
-    total: SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total, // 6.10%
+    total: SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total, // 7.70%
   },
   /** שיעורים מלאים */
   fullRate: {

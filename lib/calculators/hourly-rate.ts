@@ -40,7 +40,7 @@ const TAX_BRACKETS_2026 = [
 
 /** ביטוח לאומי + בריאות לעצמאי 2026 (שיעורים מצרפיים: ב.ל.+בריאות) */
 const SOCIAL_SECURITY_SELF_EMPLOYED_2026 = {
-  reducedThresholdMonthly: 7_522,
+  reducedThresholdMonthly: 7_703,
   maxThresholdMonthly: 51_910,
   reducedRate: 0.0610,   // עד הסף המופחת (2.87% ב.ל. + 3.23% בריאות)
   fullRate: 0.18,        // מהסף המופחת ועד התקרה (12.83% ב.ל. + 5.17% בריאות)

@@ -59,15 +59,15 @@ describe('calcIncomeTax', () => {
 });
 
 describe('calcEmployeeSS', () => {
-  it('משכורת נמוכה (עד 7,522×12) - שיעור מופחת 4.27%', () => {
-    const annual = 7_522 * 12;
+  it('משכורת נמוכה (עד 7,703×12) - שיעור מופחת 4.27%', () => {
+    const annual = 7_703 * 12;
     const ss = calcEmployeeSS(annual);
     expect(ss).toBeCloseTo(annual * 0.0427, 0);
   });
 
   it('משכורת גבוהה - שיעור מלא 12.17% על החלק העודף', () => {
     const annual = 20_000 * 12;
-    const low = 7_522 * 12;
+    const low = 7_703 * 12;
     const expected = low * 0.0427 + (annual - low) * 0.1217;
     expect(calcEmployeeSS(annual)).toBeCloseTo(expected, 0);
   });
@@ -87,7 +87,7 @@ describe('calcEmployerSS', () => {
 
   it('שיעור מלא 7.6% מעל תקרה נמוכה', () => {
     const annual = 30_000 * 12;
-    const low = 7_522 * 12;
+    const low = 7_703 * 12;
     const expected = low * 0.0451 + (annual - low) * 0.076;
     expect(calcEmployerSS(annual)).toBeCloseTo(expected, 0);
   });

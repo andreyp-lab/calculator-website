@@ -128,7 +128,7 @@ export const SOCIAL_SECURITY_EMPLOYEE_2026 = {
     total: 0.1217, // 12.17%
   },
   // ספים ותקרות
-  reducedThresholdMonthly: 7_522, // ₪/חודש
+  reducedThresholdMonthly: 7_703, // ₪/חודש (60% מהשכר הממוצע, מעודכן 2026)
   maxThresholdMonthly: 51_910, // ₪/חודש - הכנסה מקסימלית חייבת
   // מעסיק
   employerRates: {
@@ -142,19 +142,20 @@ export const SOCIAL_SECURITY_EMPLOYEE_2026 = {
 // מקור: ביטוח לאומי
 // ============================================================
 export const SOCIAL_SECURITY_SELF_EMPLOYED_2026 = {
-  // שיעור מופחת - על חלק ההכנסה עד 7,522 ₪/חודש (60% השכר הממוצע)
+  // שיעור מופחת - על חלק ההכנסה עד 7,703 ₪/חודש (60% השכר הממוצע)
+  // עודכן 2026: תיקון 252 העלה את רכיב הב"ל המופחת מ-2.87% ל-4.47% (btl.gov.il)
   reducedRate: {
-    nationalInsurance: 0.0287, // 2.87%
+    nationalInsurance: 0.0447, // 4.47%
     healthInsurance: 0.0323, // 3.23%
-    total: 0.061, // 6.10%
+    total: 0.077, // 7.70%
   },
-  // שיעור מלא - על חלק ההכנסה מ-7,523 ₪ ועד התקרה
+  // שיעור מלא - על חלק ההכנסה מ-7,704 ₪ ועד התקרה
   fullRate: {
     nationalInsurance: 0.1283, // 12.83%
     healthInsurance: 0.0517, // 5.17%
     total: 0.18, // 18%
   },
-  reducedThresholdMonthly: 7_522,
+  reducedThresholdMonthly: 7_703,
   maxThresholdMonthly: 51_910,
 } as const;
 

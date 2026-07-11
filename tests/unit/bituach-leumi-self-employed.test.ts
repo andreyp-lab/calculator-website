@@ -34,63 +34,63 @@ describe('calculateBLByTier', () => {
     expect(r.exempt.income).toBe(0);
   });
 
-  it('הכנסה בדיוק על הסף המופחת (7,522 ₪) — רק מדרגה מופחת', () => {
-    const threshold = BL_SE_RATES_2026.reducedThreshold; // 7,522
+  it('הכנסה בדיוק על הסף המופחת (7,703 ₪) — רק מדרגה מופחת', () => {
+    const threshold = BL_SE_RATES_2026.reducedThreshold; // 7,703
     const r = calculateBLByTier(threshold);
 
     expect(r.reduced.income).toBe(threshold);
     expect(r.full.income).toBe(0);
     expect(r.exempt.income).toBe(0);
 
-    // 7,522 × 6.10% = 458.842
-    expect(r.monthlyTotal).toBeCloseTo(threshold * 0.061, 1);
-    expect(r.monthlyBL).toBeCloseTo(threshold * 0.0287, 1);
+    // 7,703 × 7.70% = 458.842
+    expect(r.monthlyTotal).toBeCloseTo(threshold * 0.077, 1);
+    expect(r.monthlyBL).toBeCloseTo(threshold * 0.0447, 1);
     expect(r.monthlyHealth).toBeCloseTo(threshold * 0.0323, 1);
   });
 
-  it('הכנסה 8,000 ₪ — מדרגה מופחת + מלאה: 7,522 × 6.10% + 478 × 18%', () => {
+  it('הכנסה 8,000 ₪ — מדרגה מופחת + מלאה: 7,703 × 7.70% + 297 × 18%', () => {
     const r = calculateBLByTier(8_000);
 
-    // חלק מופחת: 7,522
-    expect(r.reduced.income).toBe(7_522);
-    // חלק מלא: 8,000 - 7,522 = 478
-    expect(r.full.income).toBe(478);
+    // חלק מופחת: 7,703
+    expect(r.reduced.income).toBe(7_703);
+    // חלק מלא: 8,000 - 7,703 = 297
+    expect(r.full.income).toBe(297);
 
-    const expectedReduced = 7_522 * 0.061;
-    const expectedFull = 478 * 0.18;
+    const expectedReduced = 7_703 * 0.077;
+    const expectedFull = 297 * 0.18;
     const expectedTotal = expectedReduced + expectedFull;
 
-    // 459 + 86 = 545 (לפי הדרישה)
+    // 593.1 + 53.5 = 646.6
     expect(r.monthlyTotal).toBeCloseTo(expectedTotal, 0);
-    expect(r.monthlyTotal).toBeGreaterThan(540);
-    expect(r.monthlyTotal).toBeLessThan(550);
+    expect(r.monthlyTotal).toBeGreaterThan(640);
+    expect(r.monthlyTotal).toBeLessThan(650);
   });
 
-  it('הכנסה 20,000 ₪ — 7,522 × 6.10% + 12,478 × 18%', () => {
+  it('הכנסה 20,000 ₪ — 7,703 × 7.70% + 12,297 × 18%', () => {
     const r = calculateBLByTier(20_000);
 
-    expect(r.reduced.income).toBe(7_522);
-    expect(r.full.income).toBe(20_000 - 7_522); // 12,478
+    expect(r.reduced.income).toBe(7_703);
+    expect(r.full.income).toBe(20_000 - 7_703); // 12,297
 
-    const expectedTotal = 7_522 * 0.061 + 12_478 * 0.18;
-    // 459 + 2,246 = 2,705 (לפי הדרישה)
+    const expectedTotal = 7_703 * 0.077 + 12_297 * 0.18;
+    // 593.1 + 2,213.5 = 2,806.6
     expect(r.monthlyTotal).toBeCloseTo(expectedTotal, 0);
-    expect(r.monthlyTotal).toBeGreaterThan(2_700);
-    expect(r.monthlyTotal).toBeLessThan(2_720);
+    expect(r.monthlyTotal).toBeGreaterThan(2_800);
+    expect(r.monthlyTotal).toBeLessThan(2_815);
   });
 
-  it('הכנסה 60,000 ₪ — מעל תקרה: 7,522 × 6.10% + (51,910-7,522) × 18% + 0%', () => {
+  it('הכנסה 60,000 ₪ — מעל תקרה: 7,703 × 7.70% + (51,910-7,703) × 18% + 0%', () => {
     const r = calculateBLByTier(60_000);
 
-    expect(r.reduced.income).toBe(7_522);
-    expect(r.full.income).toBe(51_910 - 7_522); // 44,388
+    expect(r.reduced.income).toBe(7_703);
+    expect(r.full.income).toBe(51_910 - 7_703); // 44,207
     expect(r.exempt.income).toBe(60_000 - 51_910); // 8,090
 
-    const expectedTotal = 7_522 * 0.061 + 44_388 * 0.18;
-    // 459 + 7,990 = 8,449 (לפי הדרישה)
+    const expectedTotal = 7_703 * 0.077 + 44_207 * 0.18;
+    // 593.1 + 7,957.3 = 8,550.4
     expect(r.monthlyTotal).toBeCloseTo(expectedTotal, 0);
-    expect(r.monthlyTotal).toBeGreaterThan(8_440);
-    expect(r.monthlyTotal).toBeLessThan(8_460);
+    expect(r.monthlyTotal).toBeGreaterThan(8_545);
+    expect(r.monthlyTotal).toBeLessThan(8_555);
   });
 
   it('הכנסה בדיוק על התקרה המלאה (51,910 ₪) — אין פטור', () => {
@@ -226,7 +226,7 @@ describe('calculateEmployeeBL', () => {
 
   it('הכנסה 20,000 — שתי מדרגות', () => {
     const r = calculateEmployeeBL(20_000);
-    const expected = 7_522 * 0.0427 + (20_000 - 7_522) * 0.1217;
+    const expected = 7_703 * 0.0427 + (20_000 - 7_703) * 0.1217;
     expect(r).toBeCloseTo(expected, 0);
   });
 

@@ -50,7 +50,7 @@ import {
 // ============================================================
 
 /** סף המדרגה המופחתת בב"ל (60% מהשכר הממוצע) — חודשי */
-const BL_REDUCED_THRESHOLD_MONTHLY = 7_522;
+const BL_REDUCED_THRESHOLD_MONTHLY = 7_703;
 /** תקרת ב"ל משותפת (שכיר+עצמאי) — חודשי (מאומת: ה.1) */
 const BL_MAX_THRESHOLD_MONTHLY =
   SOCIAL_SECURITY_SELF_EMPLOYED_2026.maxThresholdMonthly; // 51,910

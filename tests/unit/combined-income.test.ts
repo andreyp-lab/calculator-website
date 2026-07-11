@@ -11,8 +11,8 @@ import { calculateSelfEmployedNet } from '@/lib/calculators/self-employed-net';
 // קבועי בקרה (מקובץ הנתונים המאומת / tax-2026.ts)
 // ============================================================
 const BL_CAP_MONTHLY = 51_910;
-const BL_REDUCED_THRESHOLD = 7_522;
-const BL_REDUCED_RATE = 0.061;
+const BL_REDUCED_THRESHOLD = 7_703;
+const BL_REDUCED_RATE = 0.077;
 const BL_FULL_RATE = 0.18;
 
 describe('combined-income — מס הכנסה: ההכנסה העצמאית יושבת על השכר', () => {
@@ -45,7 +45,7 @@ describe('combined-income — מס הכנסה: ההכנסה העצמאית יו�
       annualSelfEmployedIncome: 20_000,
       creditPoints: 2.25,
     });
-    // הב"ל על הצד: השכר (25,000) מעל 7,522 → כל ה-20,000 בשיעור מלא:
+    // הב"ל על הצד: השכר (25,000) מעל 7,703 → כל ה-20,000 בשיעור מלא:
     // 20,000 × 18% = 3,600 ; ניכוי 52% = 1,872.
     // ההכנסה הצדדית החייבת (אחרי ניכוי) = 20,000 − 1,872 = 18,128,
     // יושבת מ-300,000 עד 318,128:
@@ -62,7 +62,7 @@ describe('combined-income — מס הכנסה: ההכנסה העצמאית יו�
       annualSelfEmployedIncome: 100_000,
       creditPoints: 0,
     });
-    // ב"ל: השכר מעל 7,522 → 100,000 × 18% = 18,000 ; ניכוי 52% = 9,360.
+    // ב"ל: השכר מעל 7,703 → 100,000 × 18% = 18,000 ; ניכוי 52% = 9,360.
     // ההכנסה הצדדית החייבת (אחרי ניכוי) = 90,640, יושבת מ-228,000:
     // 228,000 → 301,200 ב-31% (73,200), היתרה (17,440) ב-35%.
     const expected = 73_200 * 0.31 + 17_440 * 0.35; // 28,796
@@ -104,7 +104,7 @@ describe('combined-income — ביטוח לאומי: כללי שכיר-גם-עצ
       annualSelfEmployedIncome: 120_000,
       creditPoints: 2.25,
     });
-    // השכר (10,000) כבר מעל 7,522 → כל ההכנסה העצמאית בשיעור מלא 18%
+    // השכר (10,000) כבר מעל 7,703 → כל ההכנסה העצמאית בשיעור מלא 18%
     expect(r.bituachLeumiBreakdown.reducedTierIncome).toBe(0);
     expect(r.bituachLeumiBreakdown.fullTierIncome).toBeCloseTo(120_000, 0);
     expect(r.selfEmployedBituachLeumi).toBeCloseTo(120_000 * BL_FULL_RATE, 0);
@@ -132,9 +132,9 @@ describe('combined-income — ביטוח לאומי: כללי שכיר-גם-עצ
     expect(r.selfEmployedBituachLeumi).toBe(0);
   });
 
-  it('שכר נמוך מ-7,522: חלק מההכנסה העצמאית בשיעור מופחת', () => {
+  it('שכר נמוך מ-7,703: חלק מההכנסה העצמאית בשיעור מופחת', () => {
     // שכר 5,000/חודש, צד 60,000/שנה = 5,000/חודש
-    // החדר במדרגה מופחת: 7,522-5,000 = 2,522/חודש
+    // החדר במדרגה מופחת: 7,703-5,000 = 2,522/חודש
     const r = calculateCombinedIncome({
       monthlyGrossSalary: 5_000,
       annualSelfEmployedIncome: 60_000,
@@ -170,14 +170,14 @@ describe('combined-income — ביטוח לאומי: כללי שכיר-גם-עצ
       exemptMonthly * 12,
       0,
     );
-    // כל ה-11,910 בשיעור מלא (השכר כבר מעל 7,522)
+    // כל ה-11,910 בשיעור מלא (השכר כבר מעל 7,703)
     expect(r.selfEmployedBituachLeumi).toBeCloseTo(
       roomMonthly * BL_FULL_RATE * 12,
       0,
     );
   });
 
-  it('המדרגה השולית של ב"ל = מלא כשהשכר+צד מעל 7,522 ומתחת לתקרה', () => {
+  it('המדרגה השולית של ב"ל = מלא כשהשכר+צד מעל 7,703 ומתחת לתקרה', () => {
     const r = calculateCombinedIncome({
       monthlyGrossSalary: 12_000,
       annualSelfEmployedIncome: 60_000, // 5,000/חודש → סה"כ 17,000 < תקרה
@@ -186,10 +186,10 @@ describe('combined-income — ביטוח לאומי: כללי שכיר-גם-עצ
     expect(r.marginalBituachRate).toBe(BL_FULL_RATE);
   });
 
-  it('המדרגה השולית של ב"ל = מופחת כששכר+צד מתחת ל-7,522', () => {
+  it('המדרגה השולית של ב"ל = מופחת כששכר+צד מתחת ל-7,703', () => {
     const r = calculateCombinedIncome({
       monthlyGrossSalary: 3_000,
-      annualSelfEmployedIncome: 24_000, // 2,000/חודש → סה"כ 5,000 < 7,522
+      annualSelfEmployedIncome: 24_000, // 2,000/חודש → סה"כ 5,000 < 7,703
       creditPoints: 2.25,
     });
     expect(r.marginalBituachRate).toBe(BL_REDUCED_RATE);
@@ -313,9 +313,9 @@ describe('combined-income — אפס שכיר = עצמאי טהור (הצלבה 
       creditPoints: 2.25,
     });
     // עצמאי טהור: ב"ל על 150,000 (12,500/חודש):
-    //   7,522 × 6.1% + (12,500−7,522) × 18% = 458.842 + 896.04 = 1,354.882/חודש
+    //   7,703 × 7.7% + (12,500−7,703) × 18% = 458.842 + 896.04 = 1,354.882/חודש
     //   × 12 = 16,258.584 ; ניכוי 52% = 8,454.4637
-    const monthlyBL = 7_522 * 0.061 + (150_000 / 12 - 7_522) * 0.18;
+    const monthlyBL = 7_703 * 0.077 + (150_000 / 12 - 7_703) * 0.18;
     const expectedBL = monthlyBL * 12;
     const expectedDeduction = expectedBL * 0.52;
     expect(r.selfEmployedBituachLeumi).toBeCloseTo(expectedBL, 2);
@@ -336,7 +336,7 @@ describe('combined-income — אפס שכיר = עצמאי טהור (הצלבה 
       annualSelfEmployedIncome: 90_000,
       creditPoints: 2.25,
     });
-    const monthlySE = 90_000 / 12; // 7,500 < 7,522
+    const monthlySE = 90_000 / 12; // 7,500 < 7,703
     expect(r.bituachLeumiBreakdown.reducedTierIncome).toBeCloseTo(90_000, 0);
     expect(r.bituachLeumiBreakdown.fullTierIncome).toBe(0);
     expect(r.selfEmployedBituachLeumi).toBeCloseTo(
@@ -352,7 +352,7 @@ describe('combined-income — אפס שכיר = עצמאי טהור (הצלבה 
       annualSelfEmployedIncome: 240_000,
       creditPoints: 2.25,
     });
-    const reduced = BL_REDUCED_THRESHOLD; // 7,522
+    const reduced = BL_REDUCED_THRESHOLD; // 7,703
     const full = 20_000 - reduced; // 12,478
     const expectedBL =
       (reduced * BL_REDUCED_RATE + full * BL_FULL_RATE) * 12;
@@ -392,7 +392,7 @@ describe('combined-income — אפס שכיר = עצמאי טהור (הצלבה 
 describe('combined-income — ניכוי 52% מדמי הב"ל (סעיף 47א)', () => {
   it('הניכוי מקטין את מס ההכנסה על ההכנסה הצדדית מול תרחיש זהה ללא ניכוי', () => {
     // שכר 12,000/חודש (144,000/שנה, מדרגת 20%), צד 80,000.
-    // ב"ל על הצד: השכר מעל 7,522 → 80,000 × 18% = 14,400 ; ניכוי 52% = 7,488.
+    // ב"ל על הצד: השכר מעל 7,703 → 80,000 × 18% = 14,400 ; ניכוי 52% = 7,488.
     const r = calculateCombinedIncome({
       monthlyGrossSalary: 12_000,
       annualSelfEmployedIncome: 80_000,
@@ -448,7 +448,7 @@ describe('combined-income — גבול התקרה המדויק של הב"ל', ()
     expect(r.marginalBituachRate).toBe(0);
     // כל ההכנסה הצדדית עדיין חייבת (היא בתוך התקרה, לא מעליה)
     expect(r.bituachLeumiBreakdown.exemptIncome).toBeCloseTo(0, 0);
-    // השכר (40,000) מעל 7,522 → כל ה-142,920 בשיעור מלא
+    // השכר (40,000) מעל 7,703 → כל ה-142,920 בשיעור מלא
     expect(r.selfEmployedBituachLeumi).toBeCloseTo(142_920 * BL_FULL_RATE, 0);
   });
 

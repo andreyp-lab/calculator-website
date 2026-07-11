@@ -129,7 +129,7 @@ function calculateIncomeTaxBrackets(taxableIncome: number): number {
 
 function calculateBituachLeumi(annualIncome: number): number {
   const monthly = annualIncome / 12;
-  const reducedCeiling = 7_522;
+  const reducedCeiling = 7_703;
   const fullCeiling = SOCIAL_SECURITY_SELF_EMPLOYED_2026.maxThresholdMonthly;
 
   const reducedPart = Math.min(monthly, reducedCeiling);

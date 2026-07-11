@@ -148,7 +148,7 @@ export const SIMULATOR_CONSTANTS_2026 = {
   },
   // ביטוח לאומי לעצמאי - מדרגות חודשיות
   bituachLeumi: {
-    reducedMonthlyCeiling: 7_522,
+    reducedMonthlyCeiling: 7_703,
     fullMonthlyCeiling: 51_910,
     deductibleAsExpense: 0.52, // 52% מהסכום ששולם מוכר כהוצאה
   },

@@ -38,7 +38,7 @@ export const SURTAX_RATE = 0.03; // מס יסף 3%
 export const SURTAX_THRESHOLD = 721_560; // ₪/שנה - סף מס יסף
 
 // ביטוח לאומי + בריאות - עובד שכיר
-export const NI_LOW_MONTHLY = 7_522; // ₪/חודש - ספה לשיעור מופחת
+export const NI_LOW_MONTHLY = 7_703; // ₪/חודש - ספה לשיעור מופחת
 export const NI_HIGH_MONTHLY = 51_910; // ₪/חודש - תקרת חיוב
 export const NI_EMPLOYEE_LOW = 0.0427; // 4.27% - שיעור מופחת (עובד)
 export const NI_EMPLOYEE_HIGH = 0.1217; // 12.17% - שיעור מלא (עובד)
