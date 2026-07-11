@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 // ============================================================
-// 6 קטגוריות ראשיות — שם, ספירת כלים וקישור פנימי
+// 7 קטגוריות ראשיות — שם, ספירת כלים וקישור פנימי
 // ============================================================
 const CATEGORIES = [
   {
@@ -55,6 +55,13 @@ const CATEGORIES = [
     count: 3,
     href: '/vehicles',
     description: 'ליסינג מול קנייה, עלות דלק שנתית ושווי שימוש ברכב.',
+  },
+  {
+    idx: '07',
+    label: 'הקמת עסק',
+    count: 20,
+    href: '/business',
+    description: 'כמה עולה להקים סטודיו, בית קפה, מספרה או קליניקה — תוכנית עסקית מלאה.',
   },
 ] as const;
 
@@ -132,7 +139,7 @@ export default function Home() {
               <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.1em] text-ink/60">
                 <span>30+ מחשבונים</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
-                <span>6 קטגוריות</span>
+                <span>7 קטגוריות</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
                 <span>100% בעברית</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
@@ -173,7 +180,7 @@ export default function Home() {
             {'// '}קטגוריות
           </p>
           <h2 className="mt-3 text-3xl font-black md:text-4xl">
-            שש קטגוריות.{' '}
+            שבע קטגוריות.{' '}
             <span className="font-serif font-normal italic text-gold">
               כל מצב פיננסי.
             </span>

@@ -533,6 +533,7 @@ export default function BusinessSetupCostPage() {
           <h2 className="text-2xl font-bold text-ink mb-4">מדריכים וכלים קשורים</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
+              { href: '/business', label: '🏗️ כמה עולה להקים סטודיו, בית קפה או קליניקה? מחשבון לפי סוג עסק' },
               { href: '/self-employed/opening-business', label: 'איך פותחים עסק בישראל — המדריך המלא' },
               { href: '/self-employed/corporation-vs-individual', label: 'חברה בע"מ מול עוסק — השוואה מלאה' },
               { href: '/self-employed/allowed-expenses', label: 'הוצאות מוכרות לעצמאי 2026' },

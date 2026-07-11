@@ -898,6 +898,7 @@ export default function OpeningBusinessPage() {
               { href: '/self-employed/hourly-rate', label: 'מחשבון תמחור שעת עבודה' },
               { href: '/self-employed/corporation-vs-individual', label: 'חברה בע"מ מול עוסק' },
               { href: '/self-employed/business-setup-cost', label: 'כמה עולה לפתוח עסק?' },
+              { href: '/business', label: '🏗️ כמה עולה להקים סטודיו / בית קפה / קליניקה — לפי סוג עסק' },
               { href: '/self-employed/invoices', label: 'חשבונית מס מול קבלה — המדריך' },
               { href: '/self-employed/business-finance', label: 'התנהלות פיננסית לעצמאים' },
             ].map((c) => (
