@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { blogPosts } from '@/content/blog/registry';
 import { ALL_TERMS } from '@/lib/data/glossary';
+import { BUSINESS_TYPES } from '@/lib/data/business-setup/business-types';
 
 const SITE_URL = 'https://cheshbonai.co.il';
 
@@ -48,6 +49,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/topics', 'weekly', 0.85),
     make('/guides', 'weekly', 0.85),
     make('/tools', 'weekly', 0.90),
+    make('/business', 'weekly', 0.90, new Date('2026-07-10')), // hub: כמה עולה להקים עסק
+    ...BUSINESS_TYPES.map((b) => make(`/business/${b.slug}`, 'monthly', 0.85, new Date('2026-07-10'))),
 
     // ===== קטגוריות משנה =====
     make('/employee-rights', 'weekly', 0.90),

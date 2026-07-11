@@ -3,6 +3,7 @@ export const navigation = {
     { label: '🎓 הקורס', href: '/course', highlight: true },
     { label: '👤 שכירים', href: '/salaried' },
     { label: '💼 עצמאים ועסקים', href: '/self-employed' },
+    { label: '🏗️ הקמת עסק', href: '/business' },
     { label: '🏠 הלוואות', href: '/loans' },
     { label: '🚀 כלים עסקיים', href: '/tools' },
     { label: '📝 בלוג', href: '/blog' },
