@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: 'אילו ניכויי חובה מופיעים בתלוש?',
     answer:
-      'מס הכנסה (לפי מדרגות, בניכוי נקודות זיכוי), ביטוח לאומי ודמי בריאות (4.27% על החלק עד 7,522 ₪ ו-12.17% מעל, עד התקרה), וחלק העובד בהפרשה לפנסיה (לרוב 6%). אלו ניכויים שחובה לנכות מכל עובד.',
+      'מס הכנסה (לפי מדרגות, בניכוי נקודות זיכוי), ביטוח לאומי ודמי בריאות (4.27% על החלק עד 7,703 ₪ ו-12.17% מעל, עד התקרה), וחלק העובד בהפרשה לפנסיה (לרוב 6%). אלו ניכויים שחובה לנכות מכל עובד.',
   },
   {
     question: 'כמה שווה נקודת זיכוי ב-2026?',
@@ -138,7 +138,7 @@ export default function PayslipGuidePage() {
             </thead>
             <tbody className="text-ink/70">
               <tr><td className="p-3 border-b font-medium">מס הכנסה</td><td className="p-3 border-b">10%–50% מדורג</td><td className="p-3 border-b">לפי מדרגות, פחות נקודות זיכוי (242 ₪ ליחידה)</td></tr>
-              <tr className="bg-cream-2/50"><td className="p-3 border-b font-medium">ביטוח לאומי + בריאות</td><td className="p-3 border-b">4.27% / 12.17%</td><td className="p-3 border-b">מופחת עד 7,522 ₪, מלא מעבר (עד תקרה 51,910)</td></tr>
+              <tr className="bg-cream-2/50"><td className="p-3 border-b font-medium">ביטוח לאומי + בריאות</td><td className="p-3 border-b">4.27% / 12.17%</td><td className="p-3 border-b">מופחת עד 7,703 ₪, מלא מעבר (עד תקרה 51,910)</td></tr>
               <tr><td className="p-3 border-b font-medium">פנסיה (חלק העובד)</td><td className="p-3 border-b">6%</td><td className="p-3 border-b">נצבר לטובתך בקרן הפנסיה</td></tr>
               <tr className="bg-cream-2/50"><td className="p-3 font-medium">קרן השתלמות (רשות)</td><td className="p-3">2.5%</td><td className="p-3">אם קיימת — הטבת מס משמעותית</td></tr>
             </tbody>

@@ -115,7 +115,7 @@ export const CREDIT_POINTS_BY_STATUS = {
 // תקרה מקסימלית: 51,910 ₪/חודש
 // ============================================================
 export const SOCIAL_SECURITY_EMPLOYEE_2026 = {
-  // שיעור מופחת - על חלק השכר עד 7,522 ₪/חודש
+  // שיעור מופחת - על חלק השכר עד 7,703 ₪/חודש
   reducedRate: {
     nationalInsurance: 0.0104, // 1.04%
     healthInsurance: 0.0323, // 3.23%

@@ -75,7 +75,7 @@ export interface BLInput {
 }
 
 export interface BLTierBreakdown {
-  /** חלק הכנסה בשיעור מופחת (עד 7,522) */
+  /** חלק הכנסה בשיעור מופחת (עד 7,703) */
   reducedTierIncome: number;
   /** סכום ב.ל. על החלק המופחת */
   reducedTierBL: number;
@@ -192,13 +192,13 @@ export function calculateBLByTier(monthlyIncome: number): {
   const income = Math.max(0, monthlyIncome);
   const { reducedThreshold, fullThreshold, reducedRate, fullRate } = BL_SE_RATES_2026;
 
-  // חלק מדרגה מופחת: עד 7,522
+  // חלק מדרגה מופחת: עד 7,703
   const reducedIncome = Math.min(income, reducedThreshold);
   const reducedBL = reducedIncome * reducedRate.bl;
   const reducedHealth = reducedIncome * reducedRate.health;
   const reducedTotal = reducedIncome * reducedRate.total;
 
-  // חלק מדרגה מלאה: 7,522 - 51,910
+  // חלק מדרגה מלאה: 7,703 - 51,910
   const fullIncome = Math.max(0, Math.min(income, fullThreshold) - reducedThreshold);
   const fullBL = fullIncome * fullRate.bl;
   const fullHealth = fullIncome * fullRate.health;

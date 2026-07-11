@@ -177,8 +177,8 @@ function calculateIncomeTaxByBrackets(taxableIncome: number): number {
 /**
  * חישוב ביטוח לאומי + דמי בריאות לעצמאי על בסיס שנתי (2026)
  * מדרגות חודשיות:
- *   - עד 7,522 ש"ח/חודש: שיעור מופחת 6.10% (ב.ל. + דמי בריאות)
- *   - 7,522-51,910 ש"ח/חודש: שיעור מלא 18.00% (ב.ל. + דמי בריאות)
+ *   - עד 7,703 ש"ח/חודש: שיעור מופחת 7.70% (ב.ל. + דמי בריאות)
+ *   - 7,703-51,910 ש"ח/חודש: שיעור מלא 18.00% (ב.ל. + דמי בריאות)
  *   - מעל תקרת החיוב (51,910 ש"ח/חודש): אין חיוב
  */
 export function calculateBituachLeumiAnnual(annualTaxableIncome: number): number {
@@ -195,7 +195,7 @@ export function calculateBituachLeumiAnnual(annualTaxableIncome: number): number
     SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total; // 6.10% - לשנת 2026 (לוקח את העדכון)
   const fullRate = SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.total; // 18.00%
 
-  // שיעור מופחת 6.10% ושיעור מלא 18.00% לפי קובץ הקבועים tax-2026.ts
+  // שיעור מופחת 7.70% ושיעור מלא 18.00% לפי קובץ הקבועים tax-2026.ts
   const monthlyAmount = reducedPart * reducedRate + fullPart * fullRate;
   return monthlyAmount * 12;
 }

@@ -372,7 +372,7 @@ export function calculateMaternityPay(input: PayInput): PayResult {
   const incomeTaxExempt = false;
 
   // ביטוח לאומי + בריאות — מנוכים מדמי הלידה בשיעורי עובד שכיר רגילים:
-  // 4.27% על החלק עד 7,522 ₪/חודש, 12.17% על החלק שמעל (עד התקרה 51,910 ₪/חודש).
+  // 4.27% על החלק עד 7,703 ₪/חודש, 12.17% על החלק שמעל (עד התקרה 51,910 ₪/חודש).
   // מחושב על הסכום החודשי בפועל ומוכפל בחלק היחסי של תקופת החופשה.
   const monthlyNI = calculateEmployeeSocialSecurity(monthlyBenefit).total;
   const nationalInsuranceAmount = monthlyNI * (leaveDays / 30);

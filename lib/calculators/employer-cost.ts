@@ -3,7 +3,7 @@
  *
  * חישוב מקיף של עלות העסקת עובד:
  * - שכר ברוטו
- * - ביטוח לאומי מעסיק (שיעורים מדורגים: 4.51% עד 7,522 ₪, 7.6% מעל)
+ * - ביטוח לאומי מעסיק (שיעורים מדורגים: 4.51% עד 7,703 ₪, 7.6% מעל)
  * - הפרשות פנסיה ופיצויים (6.5% פנסיה + 6%-8.33% פיצויים)
  * - קרן השתלמות (אופציונלי, 7.5% מעסיק)
  * - דמי הבראה (418 ₪/יום מגזר פרטי, ימים לפי וותק)
@@ -133,7 +133,7 @@ export function calculateEmployerCost(input: EmployerCostInput): EmployerCostRes
   }
 
   // 2. ביטוח לאומי מעסיק - מדורג
-  const blThreshold = SOCIAL_SECURITY_EMPLOYEE_2026.reducedThresholdMonthly; // 7,522
+  const blThreshold = SOCIAL_SECURITY_EMPLOYEE_2026.reducedThresholdMonthly; // 7,703
   const blMaxThreshold = SOCIAL_SECURITY_EMPLOYEE_2026.maxThresholdMonthly; // 51,910
   const reducedRate = SOCIAL_SECURITY_EMPLOYEE_2026.employerRates.reducedRate; // 4.51%
   const fullRate = SOCIAL_SECURITY_EMPLOYEE_2026.employerRates.fullRate; // 7.6%

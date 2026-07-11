@@ -367,7 +367,7 @@ export default function TaxesCompleteGuide() {
               <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
                 <h3 className="font-bold text-ink mb-3">שכיר</h3>
                 <ul className="space-y-2 text-sm text-ink/70">
-                  <li>• ב.ל. עובד: 4.27% (עד 7,522 ₪) + 12.17% (מעל)</li>
+                  <li>• ב.ל. עובד: 4.27% (עד 7,703 ₪) + 12.17% (מעל)</li>
                   <li>• ב.ל. מעסיק: 4.51% + 7.6%</li>
                   <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
                   <li>• כל הניכויים אוטומטיים מהשכר</li>
@@ -376,7 +376,7 @@ export default function TaxesCompleteGuide() {
               <div className="bg-paper border border-ink/15 rounded-none p-5">
                 <h3 className="font-bold text-ink mb-3">עצמאי (עוסק)</h3>
                 <ul className="space-y-2 text-sm text-ink/70">
-                  <li>• ב.ל. (הכנסות עד 7,522 ₪): 6.10%</li>
+                  <li>• ב.ל. (הכנסות עד 7,703 ₪): 7.70%</li>
                   <li>• ב.ל. (הכנסות מעל עד 51,910 ₪): 18%</li>
                   <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
                   <li>• תשלום דרך פנקס המקדמות</li>

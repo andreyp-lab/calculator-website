@@ -78,7 +78,7 @@ export default function EmployeeVsSelfEmployedComparePage() {
                 <tr className="bg-cream-2">
                   <td className="border border-ink/15 p-3 font-semibold">ביטוח לאומי</td>
                   <td className="border border-ink/15 p-3">~5% (עובד)</td>
-                  <td className="border border-ink/15 p-3">מופחת 6.10% / מלא 18% (לבד)</td>
+                  <td className="border border-ink/15 p-3">מופחת 7.70% / מלא 18% (לבד)</td>
                 </tr>
                 <tr>
                   <td className="border border-ink/15 p-3 font-semibold">פנסיה חובה</td>
