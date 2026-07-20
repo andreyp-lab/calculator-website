@@ -14,7 +14,7 @@ npm run build          # production build — ALSO the most reliable full typech
 npm run start          # serve the production build (needed to test next.config rewrites, e.g. /course/self-employed)
 npm run lint           # eslint (Next 16 removed `next lint` — call eslint via this script, not `next lint`)
 npx tsc --noEmit       # typecheck only
-npm test               # vitest run — full unit suite (1600+ tests in tests/unit/)
+npm test               # vitest run — full unit suite (~1,700 tests, 52 files in tests/unit/)
 npm run test:watch     # vitest watch
 npx vitest run tests/unit/<name>.test.ts   # single test file
 npx vitest run -t "<test name substring>"  # single test by name
@@ -33,6 +33,17 @@ Hebrew, RTL financial-calculator site (cheshbonai.co.il) — its purpose is to p
 2. **`lib/calculators/*.ts`** — pure, React-free calculation engines (~46 files). Each has a matching **`tests/unit/*.test.ts`**. Reuse an engine; do not reimplement tax logic inside a widget (e.g. the salary-deductions widget calls `calculateSalaryNetGross`).
 3. **`components/calculators/*.tsx`** — the `'use client'` interactive widgets that call the engines and render results (cards, recharts graphs).
 
+**⚠️ Changing a financial constant is a repo-wide operation, not a one-line edit.** `tax-2026.ts` is the *declared* source of truth, but values are duplicated in three other places, and missing any one of them ships a wrong number:
+1. **Engine-local constant tables** partially derive from `tax-2026.ts` and partially hardcode. E.g. `bituach-leumi-self-employed.ts` pulls its *rates* from the constant but hardcoded `reducedThreshold`; `recreation-pay.ts` has an entirely separate `INDUSTRY_RATES_2026` table. The 60%-average-wage threshold alone was hardcoded in **7** engine files.
+2. **Tests hardcode expected values** computed from the old constants — they will fail, and the fix is to *recompute* the expectation, not to relax the assertion.
+3. **Content prose** repeats the numbers, often inside worked examples (`"7,703 × 7.70% = 593.13"`). A blind find/replace of the rate leaves the *result* stale and creates a new error.
+
+Procedure: change `tax-2026.ts` → `grep -rn "<old value>" lib app public content` → fix engines → run tests and recompute failures → update prose **and its arithmetic** → `tsc && npm test && npm run build`.
+
+**Data-driven page generation (`/business` cluster):** adding an object to `BUSINESS_TYPES` in `lib/data/business-setup/business-types.ts` creates a whole new statically-generated SEO page at `/business/[slug]` (guide + calculator + FAQ schema + course CTA) via `generateStaticParams`. Costs come from that file plus `rent-by-city.ts`; the math lives in `lib/calculators/business-plan.ts` (setup cost, monthly opex, break-even, **depreciation + renewal reserve**). Remember to add new slugs to `app/sitemap.ts` and `public/llms.txt`.
+
+**Embeddable widgets:** `app/embed/<slug>/page.tsx` renders a calculator widget bare (site chrome hidden via the `site-header`/`site-footer`/`site-ticker` classes), is `robots: { index: false }` with a canonical back to the full page, and carries a credit backlink. `EmbedCodeBox` (passed as `CalculatorLayout`'s `embed` slot) shows the copy-paste iframe.
+
 **Calculator page composition:** `app/<category>/<slug>/page.tsx` is a server component (metadata + JSON-LD) that renders **`components/calculator/CalculatorLayout.tsx`**, passing named slots: `quickAnswer` (an answer-box paragraph, `.answer-box`, for featured snippets / AI citation), `calculator` (the widget), `content`, `faq` (the `FAQ` component auto-injects FAQPage schema), `sources`, `embed`. The layout also renders `RelatedCalculators`, `CourseCTA` (only on `/self-employed/*`), and `AuthorBox`.
 
 **Content sources of truth (edit these, not scattered files):**
@@ -50,7 +61,9 @@ Hebrew, RTL financial-calculator site (cheshbonai.co.il) — its purpose is to p
 
 **Design system** lives in `app/globals.css` `@theme` (Tailwind v4 — there is **no `tailwind.config`**): palette `cream / paper / ink / ink-deep / ink-mid / gold / gold-light`, sharp corners (radius 0), serif headings (Frank Ruhl Libre), mono eyebrows (JetBrains Mono, uppercase tracked), ✦ gold separators. Fonts are wired via `next/font` in `layout.tsx`. Preserve semantic colors in results/graphs: **red = cost/tax, green = positive/savings, amber = warning**. `gold` is `#7A5718` (WCAG AA on cream) — don't lighten it.
 
-**Live data:** USD/ILS is fetched from the Bank of Israel API with ISR (6h) in `components/layout/Ticker.tsx`; tax/legal constants are **manually maintained and must never be auto-fetched** (YMYL law doesn't live-update safely).
+**Live data:** USD/ILS is fetched from the Bank of Israel API with ISR (6h) in `components/layout/Ticker.tsx`; tax/legal constants are **manually maintained and must never be auto-fetched** (YMYL law doesn't live-update safely). Because they're manual, they go stale — rates, benefit amounts and thresholds change mid-year. Re-verify against the primary source (btl.gov.il, רשות המסים, boi.org.il) before trusting a value, and record the check in `docs/data-verification-*.md`.
+
+**Measurement & docs:** Search Console data for `https://cheshbonai.co.il/` is queryable through the Supermetrics MCP when connected (GA4 has no property for this site) — useful for grounding SEO work in real impressions/positions instead of guesses. Prior analysis lives in `docs/`: the SEO audit + agent work-order, the data-verification report, and the course-promotion plan.
 
 ---
 
