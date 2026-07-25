@@ -9,6 +9,9 @@ import { AccessibilityWidget } from "@/components/accessibility/AccessibilityWid
 import { SkipToContent } from "@/components/accessibility/SkipToContent";
 import { SEARCH_CONSOLE } from "@/lib/config/search-console";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
+
+const GA_MEASUREMENT_ID = "G-LQGTH0XT3M";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -169,6 +172,18 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <AccessibilityProvider>
