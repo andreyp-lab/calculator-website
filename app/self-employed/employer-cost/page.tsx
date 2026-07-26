@@ -4,9 +4,9 @@ import { EmployerCostCalculator } from '@/components/calculators/EmployerCostCal
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון עלות מעסיק 2026 - כמה עולה להעסיק עובד בישראל?',
+  title: 'מחשבון עלות מעסיק 2026 — שכר 10,000 ₪ עולה ~13,000 ₪',
   description:
-    'מחשבון מקיף לעלות העסקת עובד בישראל 2026. כולל שכר, ביטוח לאומי מעסיק, פנסיה, פיצויים, דמי הבראה, חופשה, מחלה והטבות. נתונים מאומתים מ-2026.',
+    'כמה עולה להעסיק עובד ב-2026? שכר ברוטו + 25-40%: ביטוח לאומי מעסיק, פנסיה 6.5%, פיצויים 8.33%, הבראה, חופשה ומחלה. חישוב מדויק לכל שכר, כולל השוואה לפרילנסר.',
   alternates: { canonical: '/self-employed/employer-cost' },
 };
 

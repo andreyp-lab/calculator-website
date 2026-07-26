@@ -4,11 +4,30 @@ import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { SalaryNetGrossCalculator } from '@/components/calculators/SalaryNetGrossCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
+import { calculateSalaryNetGross } from '@/lib/calculators/salary-net-gross';
+
+// טבלת ברוטו→נטו לסכומים הנפוצים, מחושבת בזמן build מאותה פונקציה של המחשבון —
+// המספרים תמיד עקביים עם תוצאת המחשבון. הנחות: גבר יחיד (2.25 נ"ז), פנסיה מינימום, בלי קה"ש.
+const COMMON_SALARIES = [8000, 10000, 12000, 15000, 18000, 20000, 25000, 30000];
+const salaryTableRows = COMMON_SALARIES.map((gross) => {
+  const r = calculateSalaryNetGross({
+    grossSalary: gross,
+    creditPoints: 2.25,
+    pensionEnabled: true,
+    studyFundEnabled: false,
+    monthlyWorkHours: 182,
+  });
+  return {
+    gross,
+    net: Math.round(r.netSalary),
+    pct: Math.round((r.netSalary / gross) * 100),
+  };
+});
 
 export const metadata: Metadata = {
-  title: 'מחשבון שכר נטו ברוטו 2026 - חישוב מדויק + כל הכיוונים',
+  title: 'מחשבון ברוטו נטו 2026 — כמה נטו יוצא מהמשכורת שלך?',
   description:
-    'מחשבון שכר נטו/ברוטו המקיף בישראל — ברוטו→נטו, נטו→ברוטו, עלות מעסיק→נטו. כולל מס הכנסה, ב.ל., פנסיה, קרן השתלמות, בונוס, נקודות זיכוי. השוואת 2024/2025/2026. מעודכן מאי 2026.',
+    'חישוב ברוטו לנטו 2026: 10,000 ברוטו, 15,000, 20,000 — כמה נטו? טבלת שכר מלאה + מחשבון מדויק בכל הכיוונים (גם נטו→ברוטו ועלות מעסיק). מס הכנסה, ב.ל., פנסיה ונקודות זיכוי.',
   alternates: { canonical: '/personal-tax/salary-net-gross' },
 };
 
@@ -120,6 +139,33 @@ export default function SalaryNetGrossPage() {
       calculator={<SalaryNetGrossCalculator />}
       content={
         <>
+          <h2>כמה נטו יוצא? — טבלת ברוטו לנטו 2026</h2>
+          <p>
+            הטבלה מחושבת לפי עובד יחיד עם 2.25 נקודות זיכוי, הפרשת פנסיה מינימלית (6%) וללא קרן
+            השתלמות — הנחות ברירת המחדל הנפוצות. יש לך ילדים, קרן השתלמות או נקודות זיכוי נוספות?
+            המחשבון למעלה ייתן לך תוצאה מדויקת אישית.
+          </p>
+          <table className="w-full text-sm border-collapse my-4">
+            <thead>
+              <tr className="bg-ink text-cream">
+                <th className="border border-ink/20 p-2 text-right">ברוטו חודשי</th>
+                <th className="border border-ink/20 p-2 text-center">נטו משוער</th>
+                <th className="border border-ink/20 p-2 text-center">% מהברוטו</th>
+              </tr>
+            </thead>
+            <tbody>
+              {salaryTableRows.map((row, i) => (
+                <tr key={row.gross} className={i % 2 === 1 ? 'bg-cream-2' : undefined}>
+                  <td className="border border-ink/15 p-2">{row.gross.toLocaleString('he-IL')} ₪</td>
+                  <td className="border border-ink/15 p-2 text-center font-semibold">
+                    ~{row.net.toLocaleString('he-IL')} ₪
+                  </td>
+                  <td className="border border-ink/15 p-2 text-center">{row.pct}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
           <h2>מחשבון השכר הכי מקיף בישראל — 2026</h2>
           <p>
             המחשבון הכי מבוקש בישראל — עכשיו עם חישוב בכל הכיוונים. רוצה לדעת כמה תקבל נטו על

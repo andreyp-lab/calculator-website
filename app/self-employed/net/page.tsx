@@ -5,9 +5,9 @@ import { SelfEmployedNetCalculator } from '@/components/calculators/SelfEmployed
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון נטו לעצמאי 2026 - כמה כסף נשאר ביד לאחר מס?',
+  title: 'מחשבון ברוטו נטו לעצמאי 2026 — כמה נשאר ביד אחרי מיסים?',
   description:
-    'מחשבון נטו מהיר לעצמאי: מה הסכום שאתה מקבל בפועל לחשבון הבנק אחרי מס הכנסה, ביטוח לאומי, מע"מ ופנסיה. עוסק פטור או מורשה. עדכני לשנת 2026.',
+    'ברוטו נטו לעצמאי 2026: חישוב הנטו האמיתי מהכנסה עסקית — אחרי מס הכנסה, ביטוח לאומי לעצמאי, מע"מ ופנסיה. עוסק פטור או מורשה. שונה משכיר — בדוק במחשבון החינמי.',
   alternates: { canonical: '/self-employed/net' },
 };
 
