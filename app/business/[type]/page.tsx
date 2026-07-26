@@ -140,6 +140,8 @@ export default async function BusinessGuidePage({ params }: PageProps) {
             {[
               { href: '/self-employed/opening-business', label: 'מדריך פתיחת עסק — עוסק פטור או מורשה?' },
               { href: '/self-employed/business-finance', label: 'ניהול כספים לעסק קטן' },
+              { href: '/tools/loan-eligibility', label: 'איך תממנו את ההקמה? זכאות להלוואה בערבות המדינה' },
+              { href: '/savings/loan-repayment', label: 'מחשבון הלוואה — כמה יעלה ההחזר החודשי?' },
               { href: '/self-employed/employer-cost', label: 'מחשבון עלות מעסיק (לשכירת עובדים)' },
               { href: '/self-employed/vat', label: 'מחשבון מע"מ' },
             ].map((l) => (

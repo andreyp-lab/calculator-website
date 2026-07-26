@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { EmployerCostCalculator } from '@/components/calculators/EmployerCostCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
@@ -145,6 +146,12 @@ export default function EmployerCostPage() {
                 </li>
               </ul>
             </div>
+
+            <p>
+              מחשבים עלות עובד ראשון לעסק חדש? עלות ההעסקה היא רק חלק מהתמונה —{' '}
+              <Link href="/business">בדקו כמה עולה להקים את העסק כולו</Link>, כולל שכירות,
+              ציוד והוצאות חודשיות ל-20 סוגי עסקים.
+            </p>
 
             <h2>איך להפחית עלויות באופן חוקי?</h2>
             <ul>

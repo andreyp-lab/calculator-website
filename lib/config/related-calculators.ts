@@ -65,6 +65,9 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/vehicles/leasing-vs-buying', label: 'ליסינג מול קנייה', group: 'vehicles' },
   { path: '/vehicles/fuel-cost', label: 'עלות דלק', group: 'vehicles' },
   { path: '/vehicles/company-car-benefit', label: 'שווי שימוש ברכב', group: 'vehicles' },
+  // הקמת עסק ומימון (group ייעודי — מופיעים רק דרך CURATED, לא כ-fallback)
+  { path: '/business', label: 'כמה עולה להקים עסק?', group: 'business-setup' },
+  { path: '/tools/loan-eligibility', label: 'זכאות להלוואה בערבות המדינה', group: 'business-setup' },
 ];
 
 /** קשרים ידניים חוצי-קבוצה ברמת רלוונטיות גבוהה. */
@@ -82,6 +85,11 @@ const CURATED: Record<string, string[]> = {
   '/real-estate/purchase-tax': ['/real-estate/mortgage', '/real-estate/capital-gains-tax', '/real-estate/mortgage-optimizer'],
   '/employee-rights/severance': ['/employee-rights/recreation-pay', '/employee-rights/annual-leave', '/personal-tax/salary-net-gross', '/insurance/pension'],
   '/vehicles/leasing-vs-buying': ['/vehicles/fuel-cost', '/vehicles/company-car-benefit', '/self-employed/employer-cost'],
+  // קישור אשכול הקמת-עסק מהדפים הנסרקים ביותר (GSC, יולי 2026) — פתרון לבעיית ה-discovery
+  '/self-employed/hourly-rate': ['/business', '/self-employed/net', '/self-employed/employer-cost', '/self-employed/vat-threshold'],
+  '/self-employed/employer-cost': ['/business', '/self-employed/hourly-rate', '/self-employed/corporation-vs-individual', '/employee-rights/severance'],
+  '/employee-rights/unemployment-benefits': ['/employee-rights/work-grant', '/business', '/personal-tax/salary-net-gross', '/savings/family-budget'],
+  '/savings/loan-repayment': ['/tools/loan-eligibility', '/real-estate/mortgage', '/savings/personal-loan', '/business'],
   '/investments/compound-interest': ['/investments/retirement', '/investments/fire', '/insurance/pension', '/investments/roi'],
 };
 

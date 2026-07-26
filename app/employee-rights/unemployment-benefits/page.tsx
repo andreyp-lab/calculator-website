@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { UnemploymentBenefitsCalculator } from '@/components/calculators/UnemploymentBenefitsCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
@@ -212,6 +213,16 @@ export default function UnemploymentBenefitsPage() {
               <strong>להתייצב קבוע</strong> בלשכת התעסוקה לפי הזמנים שנקבעו
             </li>
           </ol>
+
+          <h2>שוקלים עצמאות במקום משרה חדשה?</h2>
+          <p>
+            תקופת אבטלה היא נקודת פתיחה נפוצה לעסק עצמאי. לפני שקופצים למים, כדאי לדעת כמה זה
+            באמת עולה — <Link href="/business">מחשבון עלות הקמת עסק</Link> מפרט עלויות הקמה
+            והוצאות חודשיות ל-20 סוגי עסקים, ו
+            <Link href="/self-employed/opening-business">מדריך פתיחת עסק</Link> מסביר את כל
+            השלבים מול הרשויות. שימו לב: פתיחת תיק עצמאי משפיעה על הזכאות לדמי אבטלה — התייעצו
+            לפני.
+          </p>
         </>
       }
       faq={<FAQ items={faqItems} />}
