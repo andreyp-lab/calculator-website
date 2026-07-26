@@ -5,7 +5,7 @@ import { TaxCreditsCalculator } from '@/components/calculators/TaxCreditsCalcula
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון נקודות זיכוי 2026 | בדוק כמה נקודות מגיעות לך',
+  title: 'מחשבון נקודות זיכוי 2026 — איך מחשבים וכמה שווה כל נקודה (242 ₪)',
   description:
     'מחשבון נקודות זיכוי מקצועי לשנת 2026. גלה כמה נקודות מגיעות לך לפי מצב משפחתי, ילדים, עולה חדש, חייל משוחרר ועוד. שווי נקודה: 242 ₪/חודש. חשב עכשיו.',
   alternates: { canonical: '/personal-tax/tax-credits' },

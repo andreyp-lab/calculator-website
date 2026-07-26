@@ -4,7 +4,7 @@ import { PensionCalculator } from '@/components/calculators/PensionCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון פנסיה מקיפה 2026 | קצבה חודשית, מקדם המרה, מיסוי',
+  title: 'מחשבון פנסיה 2026 — חישוב קצבה חודשית, מקדם המרה ומיסוי',
   description:
     'מחשב קצבת פנסיה חודשית 2026 לפי שכר, חיסכון, הפרשות וסוג קרן. כולל מקדם המרה, קצבת שאיר, מיסוי סעיף 9א ויעד הכנסה לפרישה. נסה את המחשבון עכשיו בחינם.',
   alternates: { canonical: '/insurance/pension' },

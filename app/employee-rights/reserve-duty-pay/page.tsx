@@ -4,7 +4,7 @@ import { ReserveDutyPayCalculator } from '@/components/calculators/ReserveDutyPa
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון תגמולי מילואים 2026 — חרבות ברזל, שכירים ועצמאים',
+  title: 'מחשבון תגמולי מילואים 2026 — כמה מקבלים ליום? מ-328.76 ₪ ומעלה',
   description:
     'מחשבון תגמולי מילואים 2026 לשכירים, עצמאיים וחסרי תעסוקה. כולל מענקי חרבות ברזל (5,000 ₪ + 280 ₪/יום), קצבות משפחה ונקודת זיכוי מס.',
   alternates: { canonical: '/employee-rights/reserve-duty-pay' },

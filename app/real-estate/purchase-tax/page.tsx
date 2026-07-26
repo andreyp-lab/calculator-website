@@ -5,7 +5,7 @@ import { PurchaseTaxCalculator } from '@/components/calculators/PurchaseTaxCalcu
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מס רכישה 2026 | חישוב מדויק לכל סוגי הרוכשים',
+  title: 'מחשבון מס רכישה 2026 — דירה ראשונה פטורה עד 1,978,745 ₪',
   description:
     'חשב מס רכישה על דירה — דירה ראשונה, משפר דיור, משקיע, עולה חדש, נכה, רכישה משותפת. מדרגות 2026 מאומתות ועדכניות. השוואת שנים, פירוט מדרגות וגרפים.',
   alternates: { canonical: '/real-estate/purchase-tax' },

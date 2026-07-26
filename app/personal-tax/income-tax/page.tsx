@@ -5,7 +5,7 @@ import { IncomeTaxCalculator } from '@/components/calculators/IncomeTaxCalculato
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מס הכנסה לשכיר 2026 - חישוב נטו מדויק',
+  title: 'מחשבון מס הכנסה 2026 — מדרגות המס החדשות + חישוב נטו מדויק',
   description:
     'מחשבון מס הכנסה מקצועי לשכירים לפי מדרגות 2026 (כולל ריווח), נקודות זיכוי, ביטוח לאומי ובריאות. כולל חישוב מס יסף ודוגמאות מפורטות. חשב עכשיו בחינם.',
   alternates: { canonical: '/personal-tax/income-tax' },

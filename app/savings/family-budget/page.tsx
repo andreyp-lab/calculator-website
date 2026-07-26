@@ -5,7 +5,7 @@ import { FamilyBudgetCalculator } from '@/components/calculators/FamilyBudgetCal
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון תקציב משפחתי 2026 | ניהול הכנסות והוצאות',
+  title: 'מחשבון הוצאות חודשיות 2026 — תקציב משפחתי, הכנסות מול הוצאות',
   description:
     'כלי לניהול תקציב משפחתי חודשי 2026 – הזן הכנסות, הוצאות קבועות ומשתנות וקבל ניתוח לפי כלל 50/30/20 עם המלצות לחיסכון. נסה עכשיו חינם.',
   alternates: { canonical: '/savings/family-budget' },
