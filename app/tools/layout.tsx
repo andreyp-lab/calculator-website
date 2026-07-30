@@ -16,6 +16,7 @@ import {
   Landmark,
   Sparkles,
   Compass,
+  Percent,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -108,6 +109,13 @@ const tools = [
     label: 'אשף תקציב',
     icon: Sparkles,
     description: 'בניית תקציב שלב אחר שלב',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/vat-extract',
+    label: 'חילוץ מע"מ',
+    icon: Percent,
+    description: 'סכום לפני מע"מ מכל סכום כולל',
     color: 'bg-cream-2 text-ink border-ink/15',
   },
   {
