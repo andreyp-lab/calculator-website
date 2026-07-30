@@ -3,6 +3,10 @@ import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CompoundInterestCalculator } from '@/components/calculators/CompoundInterestCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
+// הדוגמאות מחושבות בקוד מהנוסחה עצמה — אין מספרים כתובים ביד.
+const EXAMPLE_30Y = Math.floor(100_000 * Math.pow(1.07, 30)).toLocaleString('he-IL'); // 761,225
+const RULE_72_AT_7 = (72 / 7).toFixed(1); // 10.3
+
 export const metadata: Metadata = {
   title: 'מחשבון ריבית דריבית 2026 — אינפלציה, מס ויעדי חיסכון',
   description:
@@ -74,6 +78,19 @@ export default function CompoundInterestPage() {
         { label: 'ריבית דריבית' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            ריבית דריבית היא ריבית שנצברת גם על הריבית שכבר הרווחת, לפי הנוסחה: ערך עתידי =
+            קרן × (1 + ריבית שנתית) בחזקת מספר השנים.
+          </strong>{' '}
+          האפקט מואץ עם הזמן: 100,000 ₪ בתשואה שנתית של 7% הופכים אחרי 30 שנה ל-
+          {EXAMPLE_30Y} ₪ — פי 7.6 מהקרן, בלי להוסיף שקל. כלל אצבע מהיר הוא כלל 72: מספר
+          השנים להכפלת הכסף = 72 חלקי הריבית השנתית (ב-7% — כ-{RULE_72_AT_7} שנים). המחשבון
+          בדף מוסיף את מה שהנוסחה הפשוטה מפספסת: הפקדות חודשיות שוטפות, שחיקת אינפלציה, מס
+          רווחי הון, השוואת תרחישים וחישוב ההפקדה הנדרשת ליעד שלך.
+        </p>
+      }
       calculator={<CompoundInterestCalculator />}
       content={
         <>

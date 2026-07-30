@@ -2,6 +2,20 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { TaxAdvancesCalculator } from '@/components/calculators/TaxAdvancesCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  TAX_BRACKETS_2026,
+  SOCIAL_SECURITY_SELF_EMPLOYED_2026,
+  VAT_2026,
+} from '@/lib/constants/tax-2026';
+
+// כל מספר בתיבת התשובה נשלף מקבועי tax-2026 — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const TAX_MIN_PCT = TAX_BRACKETS_2026[0].rate * 100; // 10
+const TAX_MAX_PCT = TAX_BRACKETS_2026[TAX_BRACKETS_2026.length - 1].rate * 100; // 50
+const SS_REDUCED_PCT = (SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total * 100).toFixed(1); // 7.7
+const SS_FULL_PCT = SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.total * 100; // 18
+const SS_THRESHOLD = nis(SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedThresholdMonthly); // 7,703
+const VAT_PCT = VAT_2026.standard * 100; // 18
 
 export const metadata: Metadata = {
   title: { absolute: 'מחשבון מקדמות מס לעצמאי 2026 | מס הכנסה + ביטוח לאומי + מע"מ' },
@@ -84,6 +98,19 @@ export default function Page() {
         { label: 'מקדמות מס' },
       ]}
       lastUpdated="2026-06-12"
+      quickAnswer={
+        <p>
+          <strong>
+            מקדמות המס של עצמאי מורכבות משלושה תשלומים: מס הכנסה לפי מדרגות ({TAX_MIN_PCT}%–
+            {TAX_MAX_PCT}%), ביטוח לאומי ובריאות ({SS_REDUCED_PCT}% על הכנסה עד {SS_THRESHOLD}{' '}
+            ₪ בחודש ו-{SS_FULL_PCT}% מעל לסף), ומע&quot;מ {VAT_PCT}% לעוסק מורשה.
+          </strong>{' '}
+          התשלום נעשה מדי חודש או חודשיים, עד ה-15 בחודש שאחרי תום התקופה, ובסוף השנה הדוח
+          השנתי מיישר את החשבון — החזר אם שילמת יותר מדי, חוב עם ריבית אם פחות. כלל אצבע:
+          להפריש כ-30% מכל הכנסה בצד. המחשבון בדף מחשב את גובה המקדמה המדויק לפי הכנסתך,
+          כולל תיאום אמצע שנה וריבית פיגורים.
+        </p>
+      }
       calculator={<TaxAdvancesCalculator />}
       content={
         <>

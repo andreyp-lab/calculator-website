@@ -3,6 +3,17 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CompanyCarBenefitCalculator } from '@/components/calculators/CompanyCarBenefitCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  LINEAR_USAGE_RATE_2026,
+  USAGE_VALUE_PRICE_CEILING_2026,
+  ELECTRIC_USAGE_REDUCTION,
+  PLUGIN_USAGE_REDUCTION,
+  HYBRID_USAGE_REDUCTION,
+} from '@/lib/calculators/company-car-benefit';
+
+// כל מספר בתיבת התשובה נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const USAGE_RATE_PCT = (LINEAR_USAGE_RATE_2026 * 100).toFixed(2); // 2.48%
 
 export const metadata: Metadata = {
   title: 'מחשבון שווי שימוש רכב 2026 — כמה יורד לך מהנטו בתלוש?',
@@ -146,6 +157,19 @@ export default function Page() {
         { label: 'שווי שימוש רכב חברה' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            שווי השימוש החודשי ברכב חברה ב-2026 הוא {USAGE_RATE_PCT}% ממחיר המחירון של הרכב
+          </strong>{' '}
+          (לרכב שנרשם מ-2010 ואילך), עד תקרת מחיר של {nis(USAGE_VALUE_PRICE_CEILING_2026)} ₪.
+          הסכום מתווסף לשכר החייב במס, והמס בפועל = שווי השימוש כפול המס השולי שלך. רכב ירוק
+          מקבל הפחתה קבועה בשקלים: חשמלי {nis(ELECTRIC_USAGE_REDUCTION)} ₪/חודש, פלאג-אין{' '}
+          {nis(PLUGIN_USAGE_REDUCTION)} ₪/חודש והיברידי {nis(HYBRID_USAGE_REDUCTION)} ₪/חודש.
+          המחשבון בדף מחשב את המס המדויק לפי שכרך, בודק אם השווי דוחף אותך מדרגת מס, ומשווה
+          לחלופה של רכב פרטי עם החזר הוצאות.
+        </p>
+      }
       calculator={<CompanyCarBenefitCalculator />}
       content={contentHtml}
       faq={<FAQ items={faqItems} />}

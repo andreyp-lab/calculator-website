@@ -2,6 +2,17 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { SickPayCalculator } from '@/components/calculators/SickPayCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  SICK_PAY_RATES,
+  SICK_DAYS_ACCRUAL_PER_MONTH,
+  SICK_DAYS_ACCRUAL_PER_YEAR,
+  SICK_DAYS_MAX_BALANCE,
+  SICK_PAY_WORK_DAYS_PER_MONTH,
+} from '@/lib/calculators/sick-pay';
+
+// כל מספר בתיבת התשובה נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const RATE_DAYS_2_3 = SICK_PAY_RATES.days2_3 * 100; // 50%
+const RATE_DAY_4 = SICK_PAY_RATES.day4plus * 100; // 100%
 
 export const metadata: Metadata = {
   title: 'מחשבון דמי מחלה 2026 - חישוב תשלום, יתרה ומחלת משפחה',
@@ -125,6 +136,20 @@ export default function Page() {
         { label: 'דמי מחלה' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            דמי מחלה משולמים במדרג: יום המחלה הראשון — ללא תשלום, ימים 2–3 — {RATE_DAYS_2_3}%
+            מהשכר היומי, ומהיום הרביעי ואילך — {RATE_DAY_4}%.
+          </strong>{' '}
+          השכר היומי מחושב כשכר החודשי ברוטו חלקי {SICK_PAY_WORK_DAYS_PER_MONTH} ימי עבודה.
+          הצבירה היא {SICK_DAYS_ACCRUAL_PER_MONTH} ימים לכל חודש עבודה —{' '}
+          {SICK_DAYS_ACCRUAL_PER_YEAR} ימים בשנה — עד תקרה מצטברת של {SICK_DAYS_MAX_BALANCE}{' '}
+          ימים, וימים שלא נוצלו אינם ניתנים לפדיון בסיום עבודה. המחשבון בדף מחשב את התשלום
+          המדויק לתקופת המחלה שלך, את יתרת הימים הצבורה, ואת הזכאות להיעדרות בשל מחלת ילד, בן
+          זוג או הורה.
+        </p>
+      }
       calculator={<SickPayCalculator />}
       content={
         <>

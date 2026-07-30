@@ -3,6 +3,16 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { AnnualBonusCalculator } from '@/components/calculators/AnnualBonusCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  TAX_BRACKETS_2026,
+  SOCIAL_SECURITY_EMPLOYEE_2026,
+} from '@/lib/constants/tax-2026';
+
+// כל מספר בתיבת התשובה נשלף מקבועי tax-2026 — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const BRACKET_20_MONTHLY = nis(TAX_BRACKETS_2026[2].monthlyUpTo); // 19,000
+const BRACKET_31_MONTHLY = nis(TAX_BRACKETS_2026[3].monthlyUpTo); // 25,100
+const SS_FULL_PCT = (SOCIAL_SECURITY_EMPLOYEE_2026.fullRate.total * 100).toFixed(2); // 12.17
 
 export const metadata: Metadata = {
   title: 'מחשבון בונוס שנתי 2026 - חישוב נטו, משכורת 13, אופציות',
@@ -125,6 +135,20 @@ export default function Page() {
         { label: 'בונוס שנתי' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            בונוס שנתי ממוסה לפי המדרגה השולית שלך — לא לפי המס הממוצע
+          </strong>
+          : הבונוס מצטרף להכנסה השנתית ו&quot;ממלא&quot; את המדרגות הגבוהות. ב-2026 מדרגת
+          ה-20% מגיעה עד שכר של {BRACKET_20_MONTHLY} ₪ בחודש ומדרגת ה-31% עד{' '}
+          {BRACKET_31_MONTHLY} ₪, ומעל הבונוס נכנס למדרגות 35%–50%. על הבונוס משולמים גם דמי
+          ביטוח לאומי ובריאות — עד {SS_FULL_PCT}% על החלק שמעל הסף המופחת — כך שמהבונוס נשארים
+          ביד בדרך כלל 35%–65% נטו, תלוי בגובה השכר. המחשבון בדף מחשב את הנטו המדויק מהבונוס שלך,
+          משווה שלוש שיטות ניכוי (חד-פעמי, פריסה, דחייה), ובודק אם העלאת שכר הייתה משתלמת
+          יותר.
+        </p>
+      }
       calculator={<AnnualBonusCalculator />}
       content={content}
       faq={<FAQ items={faqItems} />}

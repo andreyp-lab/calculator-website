@@ -3,6 +3,17 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { EmployerCostCalculator } from '@/components/calculators/EmployerCostCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  SOCIAL_SECURITY_EMPLOYEE_2026,
+  RECREATION_PAY_2026,
+} from '@/lib/constants/tax-2026';
+
+// כל מספר בתיבת התשובה נשלף מקבועי tax-2026 — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const NI_REDUCED_PCT = (SOCIAL_SECURITY_EMPLOYEE_2026.employerRates.reducedRate * 100).toFixed(2); // 4.51%
+const NI_FULL_PCT = (SOCIAL_SECURITY_EMPLOYEE_2026.employerRates.fullRate * 100).toFixed(1); // 7.6%
+const NI_THRESHOLD = nis(SOCIAL_SECURITY_EMPLOYEE_2026.reducedThresholdMonthly); // 7,703
+const RECREATION_DAY = nis(RECREATION_PAY_2026.privateSectorPerDay); // 418
 
 export const metadata: Metadata = {
   title: 'מחשבון עלות מעסיק 2026 — שכר 10,000 ₪ עולה ~13,000 ₪',
@@ -71,6 +82,19 @@ export default function EmployerCostPage() {
           { label: 'עלות מעסיק' },
         ]}
         lastUpdated="2026-05-03"
+        quickAnswer={
+          <p>
+            <strong>
+              עלות מעסיק ב-2026 היא בדרך כלל כ-25%–40% מעל השכר ברוטו.
+            </strong>{' '}
+            {/* רכיבי הפנסיה/פיצויים: ברירות מחדל של המנוע — lib/calculators/employer-cost.ts (6.5% פנסיה, 6%–8.33% פיצויים) */}
+            הרכיבים העיקריים: ביטוח לאומי מעסיק — {NI_REDUCED_PCT}% על השכר עד {NI_THRESHOLD} ₪
+            בחודש ו-{NI_FULL_PCT}% מעל לסף; פנסיה — 6.5%; פיצויים — 6% עד 8.33%; דמי הבראה —{' '}
+            {RECREATION_DAY} ₪ ליום במגזר הפרטי לפי ותק; ובנוסף עלות ימי חופשה, ימי מחלה
+            ונסיעות. כך שכר של 10,000 ₪ ברוטו עולה למעסיק כ-12,500–13,000 ₪ בחודש. המחשבון בדף
+            מפרט את העלות המדויקת לפי שכר, ותק והטבות — כולל השוואה להעסקת פרילנסר.
+          </p>
+        }
         calculator={<EmployerCostCalculator />}
         content={
           <>

@@ -3,6 +3,10 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { VehicleOwnershipCalculator } from '@/components/calculators/VehicleOwnershipCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { DEPRECIATION_CURVE_2026 } from '@/lib/calculators/vehicle-ownership';
+
+// כל מספר בתיבת התשובה נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const YEAR1_DEPRECIATION_PCT = DEPRECIATION_CURVE_2026[0] * 100; // 22
 
 export const metadata: Metadata = {
   title: 'מחשבון בעלות רכב מקיף 2026 - מזומן / הלוואה / ליסינג',
@@ -80,6 +84,19 @@ export default function LeasingVsBuyingPage() {
         { label: 'ליסינג / הלוואה / מזומן' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            אין תשובה אחת נכונה בין מזומן, הלוואה וליסינג — ההשוואה הנכונה היא עלות בעלות
+            כוללת (TCO) לכל התקופה, לא התשלום החודשי.
+          </strong>{' '}
+          TCO מלא כולל את ירידת הערך — {YEAR1_DEPRECIATION_PCT}% מערך הרכב כבר בשנה הראשונה
+          — ריבית מימון, דלק, ביטוח, רישוי וטיפולים, ובקנייה במזומן גם את עלות ההזדמנות:
+          הרווח שהכסף היה מניב אילו הושקע. הכלל: אם התשואה הצפויה על הכסף גבוהה מריבית
+          ההלוואה — מימון עדיף על מזומן. המחשבון בדף משווה את שלוש החלופות זו מול זו על כל
+          רכיבי העלות, ומחזיר המלצה מסודרת לפי הנתונים שלך.
+        </p>
+      }
       calculator={<VehicleOwnershipCalculator />}
       content={
         <>

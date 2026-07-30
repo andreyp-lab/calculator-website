@@ -3,6 +3,20 @@ import Link from 'next/link';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { HowToSchema } from '@/components/seo/HowToSchema';
 import { FAQSchema } from '@/components/seo/FAQSchema';
+import {
+  TAX_BRACKETS_2026,
+  SURTAX_2026,
+  VAT_2026,
+  CREDIT_POINT_2026,
+} from '@/lib/constants/tax-2026';
+
+// כל מספר בתיבת התשובה נשלף מקבועי tax-2026 — אתר YMYL, אין מספרים כתובים ביד.
+const TAX_MIN_PCT = TAX_BRACKETS_2026[0].rate * 100; // 10
+const TAX_TOP_PCT = TAX_BRACKETS_2026[TAX_BRACKETS_2026.length - 2].rate * 100; // 47
+const SURTAX_PCT = SURTAX_2026.rate * 100; // 3
+const SURTAX_THRESHOLD = SURTAX_2026.annualThreshold.toLocaleString('he-IL'); // 721,560
+const VAT_PCT = VAT_2026.standard * 100; // 18
+const CREDIT_POINT_MONTHLY = CREDIT_POINT_2026.monthly; // 242
 
 export const metadata: Metadata = {
   title: 'כל המסים בישראל 2026 - המדריך השלם',
@@ -195,6 +209,25 @@ export default function TaxesCompleteGuide() {
 
         {/* Main Content */}
         <main className="flex-1 min-w-0">
+
+          {/* Quick answer */}
+          <section
+            className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-10"
+            aria-label="תשובה מהירה"
+          >
+            <p className="text-lg text-ink leading-relaxed">
+              <strong>
+                אלה המסים העיקריים שמשלם יחיד בישראל ב-2026: מס הכנסה בשבע מדרגות, מ-
+                {TAX_MIN_PCT}% ועד {TAX_TOP_PCT}%
+              </strong>{' '}
+              (ומס יסף של {SURTAX_PCT}% נוסף על הכנסה שנתית מעל {SURTAX_THRESHOLD} ₪), ביטוח
+              לאומי ודמי בריאות בשיעורים מדורגים, ומע&quot;מ של {VAT_PCT}% על צריכה. מנגד,
+              כל נקודת זיכוי שווה {CREDIT_POINT_MONTHLY} ₪ בחודש שמפחיתים ישירות מהמס.
+              בנדל&quot;ן נוספים מס רכישה לקונה ומס שבח למוכר, ובהשקעות — מס רווחי הון.
+              המדריך שלפניך מפרט כל מס: מי משלם, כמה, אילו פטורים והטבות קיימים — עם קישור
+              למחשבון מדויק לכל אחד מהם.
+            </p>
+          </section>
 
           {/* Section 1 */}
           <section id="why" className="mb-14 scroll-mt-8">

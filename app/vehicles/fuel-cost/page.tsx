@@ -3,6 +3,14 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FuelCostCalculator } from '@/components/calculators/FuelCostCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { FUEL_PRICES_2026 } from '@/lib/calculators/vehicles';
+
+// כל מספר בתיבת התשובה נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const P95 = FUEL_PRICES_2026.gasoline_95;
+const DIESEL = FUEL_PRICES_2026.diesel;
+const ELECTRIC = FUEL_PRICES_2026.electric;
+// דוגמה מחושבת: 1,500 ק"מ/חודש, 7 ל'/100 ק"מ, בנזין 95
+const EXAMPLE_MONTHLY = Math.round((1_500 * 7 / 100) * P95);
 
 export const metadata: Metadata = {
   title: 'מחשבון עלות דלק 2026 | חישוב חודשי ושנתי',
@@ -50,6 +58,19 @@ export default function FuelCostPage() {
         { label: 'עלות דלק' },
       ]}
       lastUpdated="2026-05-03"
+      quickAnswer={
+        <p>
+          <strong>
+            עלות הדלק החודשית = (ק&quot;מ חודשי × צריכה ל-100 ק&quot;מ ÷ 100) × מחיר ליטר.
+          </strong>{' '}
+          לפי מחירי 2026 במחשבון: בנזין 95 — {P95} ₪/ליטר, סולר — {DIESEL} ₪/ליטר, חשמל —{' '}
+          {ELECTRIC} ₪/קוט&quot;ש. דוגמה: רכב משפחתי שנוסע 1,500 ק&quot;מ בחודש וצורך 7 ליטר
+          ל-100 ק&quot;מ ישלם כ-{EXAMPLE_MONTHLY.toLocaleString('he-IL')} ₪ בחודש על בנזין 95 —
+          כ-{(EXAMPLE_MONTHLY * 12).toLocaleString('he-IL')} ₪ בשנה. רכב חשמלי באותה נסועה עולה
+          פחות מחמישית מזה. המחשבון בדף מחשב את ההוצאה החודשית והשנתית המדויקת לפי הרכב שלך,
+          כולל השוואה בין בנזין, סולר וחשמל ועלות לקילומטר.
+        </p>
+      }
       calculator={<FuelCostCalculator />}
       content={
         <>

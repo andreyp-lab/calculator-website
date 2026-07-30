@@ -2,6 +2,18 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { ReserveDutyPayCalculator } from '@/components/calculators/ReserveDutyPayCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  RESERVE_PAY_2026,
+  IRON_SWORDS_BONUSES,
+} from '@/lib/calculators/reserve-duty-pay';
+
+// כל מספר בתיבת התשובה נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const MIN_DAILY = nis(RESERVE_PAY_2026.MIN_DAILY); // 328.76
+const DAILY_CAP = nis(RESERVE_PAY_2026.DAILY_CAP); // 1,730.33
+const DAYS_IN_MONTH = RESERVE_PAY_2026.DAYS_IN_MONTH; // 30
+const DAILY_GRANT = nis(IRON_SWORDS_BONUSES.DAILY_GRANT); // 280
+const GENERAL_GRANT = nis(IRON_SWORDS_BONUSES.GENERAL_GRANT); // 5,000
 
 export const metadata: Metadata = {
   title: { absolute: 'מחשבון תגמולי מילואים 2026 — כמה מקבלים ליום? מ-328.76 ₪ ומעלה' },
@@ -93,6 +105,19 @@ export default function ReserveDutyPayPage() {
         { label: 'תגמולי מילואים' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            תגמול המילואים היומי = השכר החודשי הממוצע שלך חלקי {DAYS_IN_MONTH} — מינימום{' '}
+            {MIN_DAILY} ₪ ליום ועד תקרה של {DAILY_CAP} ₪ ליום ב-2026.
+          </strong>{' '}
+          הביטוח הלאומי מחשב לפי ממוצע 3 החודשים שלפני השירות, והתגמול משולם גם לעצמאים
+          ולמי שאינם עובדים. בנוסף, במסגרת מענקי חרבות ברזל: מענק יומי של {DAILY_GRANT} ₪ לכל
+          יום שירות ומענק כללי חד-פעמי של {GENERAL_GRANT} ₪ — שניהם פטורים ממס. המחשבון בדף
+          מחשב את התגמול המלא שלך לפי מעמד (שכיר, עצמאי, חסר תעסוקה), כולל המענקים, קצבאות
+          המשפחה ונקודת הזיכוי במס.
+        </p>
+      }
       calculator={<ReserveDutyPayCalculator />}
       content={
         <>

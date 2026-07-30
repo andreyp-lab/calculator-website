@@ -2,6 +2,17 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MaternityBenefitsCalculator } from '@/components/calculators/MaternityBenefitsCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  MATERNITY_DAILY_CAP_2026,
+  MATERNITY_MONTHLY_CAP_2026,
+  FULL_LEAVE_WEEKS,
+  FULL_LEAVE_DAYS,
+  MIN_LEAVE_WEEKS,
+} from '@/lib/calculators/maternity-benefits';
+
+// כל מספר בתיבת התשובה נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const DAILY_CAP = MATERNITY_DAILY_CAP_2026.toLocaleString('he-IL'); // 1,730.33
+const MONTHLY_CAP = MATERNITY_MONTHLY_CAP_2026.toLocaleString('he-IL'); // 51,910
 
 export const metadata: Metadata = {
   title: { absolute: 'מחשבון דמי לידה 2026 — איך מחשבים וכמה מקבלים? עד 1,730 ₪ ליום' },
@@ -84,6 +95,19 @@ export default function MaternityBenefitsPage() {
         { label: 'דמי לידה' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            דמי הלידה ליום = השכר הקובע שלך חלקי 30, עד תקרה של {DAILY_CAP} ₪ ליום ב-2026
+          </strong>{' '}
+          (תקרה חודשית: {MONTHLY_CAP} ₪). השכר הקובע הוא הגבוה מבין ממוצע 3 החודשים לממוצע 6
+          החודשים שלפני הלידה. מי שעבדה 10 חודשים ומעלה מתוך 14 האחרונים זכאית ל-
+          {FULL_LEAVE_WEEKS} שבועות בתשלום ({FULL_LEAVE_DAYS} ימים); מי שעבדה 6–9 חודשים —
+          ל-{MIN_LEAVE_WEEKS} שבועות. דמי הלידה פטורים ממס הכנסה, ולכן הנטו קרוב מאוד לברוטו.
+          המחשבון בדף בודק את הזכאות שלך ומחשב את הסכום המלא — כולל הארכות לתאומים, פג ואשפוז,
+          חופשת אב ודמי לידה לעצמאית.
+        </p>
+      }
       calculator={<MaternityBenefitsCalculator />}
       content={
         <>

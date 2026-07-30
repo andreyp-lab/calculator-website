@@ -4,6 +4,10 @@ import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { ROICalculator } from '@/components/calculators/ROICalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
+// הדוגמאות מחושבות בקוד מהנוסחה עצמה — אין מספרים כתובים ביד.
+const EXAMPLE_ROI_PCT = ((150_000 - 100_000) / 100_000) * 100; // 50
+const EXAMPLE_ANNUALIZED = ((Math.pow(150_000 / 100_000, 1 / 3) - 1) * 100).toFixed(1); // 14.5
+
 export const metadata: Metadata = {
   title: 'מחשבון ROI 2026 — תשואה על השקעה | מניות, נדל"ן ועסק',
   description:
@@ -75,6 +79,19 @@ export default function ROIPage() {
         { label: 'ROI' },
       ]}
       lastUpdated="2026-05-03"
+      quickAnswer={
+        <p>
+          <strong>
+            ROI (תשואה על השקעה) = הרווח נטו חלקי עלות ההשקעה, כפול 100.
+          </strong>{' '}
+          דוגמה: השקעה של 100,000 ₪ שגדלה ל-150,000 ₪ היא ROI של {EXAMPLE_ROI_PCT}%. אבל
+          להשוואה הוגנת בין השקעות חייבים לנרמל לשנה: ROI שנתי = (שווי סופי חלקי שווי התחלתי)
+          בחזקת (1 חלקי מספר השנים), פחות 1. אותם {EXAMPLE_ROI_PCT}% שהושגו על פני 3 שנים הם
+          רק כ-{EXAMPLE_ANNUALIZED}% בשנה. חישוב מדויק חייב לכלול גם עמלות, מסים ועלויות
+          נלוות. המחשבון בדף מחשב ROI כולל ושנתי מנורמל למניות, נדל&quot;ן ועסק — כולל השפעת
+          מס רווחי הון והשוואה לאלטרנטיבות.
+        </p>
+      }
       calculator={<ROICalculator />}
       content={
         <>

@@ -3,6 +3,19 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { PurchaseTaxCalculator } from '@/components/calculators/PurchaseTaxCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  PURCHASE_TAX_FIRST_HOME_2026,
+  PURCHASE_TAX_INVESTOR_2026,
+} from '@/lib/calculators/purchase-tax';
+
+// כל מספר בתיבת התשובה נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const EXEMPT_UP_TO = nis(PURCHASE_TAX_FIRST_HOME_2026[0].upTo); // 1,978,745
+const BRACKET_2_UP_TO = nis(PURCHASE_TAX_FIRST_HOME_2026[1].upTo); // 2,347,040
+const BRACKET_2_PCT = PURCHASE_TAX_FIRST_HOME_2026[1].rate * 100; // 3.5
+const BRACKET_3_UP_TO = nis(PURCHASE_TAX_FIRST_HOME_2026[2].upTo); // 6,055,070
+const BRACKET_3_PCT = PURCHASE_TAX_FIRST_HOME_2026[2].rate * 100; // 5
+const INVESTOR_PCT = PURCHASE_TAX_INVESTOR_2026[0].rate * 100; // 8
 
 export const metadata: Metadata = {
   title: 'מחשבון מס רכישה 2026 — דירה ראשונה פטורה עד 1,978,745 ₪',
@@ -85,6 +98,19 @@ export default function PurchaseTaxPage() {
         { label: 'מס רכישה' },
       ]}
       lastUpdated="2026-05-15"
+      quickAnswer={
+        <p>
+          <strong>
+            דירה ראשונה ויחידה פטורה ממס רכישה ב-2026 עד שווי של {EXEMPT_UP_TO} ₪.
+          </strong>{' '}
+          מעל הפטור: {BRACKET_2_PCT}% על החלק שעד {BRACKET_2_UP_TO} ₪, {BRACKET_3_PCT}% על
+          החלק שעד {BRACKET_3_UP_TO} ₪, ומדרגות גבוהות יותר מעבר לכך. דירה נוספת (משקיע)
+          ממוסה ב-{INVESTOR_PCT}% מהשקל הראשון — ללא שום פטור — כך שדירה ב-2.5 מיליון ₪ עולה
+          לרוכש ראשון כ-20,538 ₪ ולמשקיע 200,000 ₪. את המס משלמים תוך 60 יום מחתימת החוזה.
+          המחשבון בדף מחשב את המס המדויק לכל סוגי הרוכשים — כולל משפר דיור, עולה חדש, נכה
+          ורכישה משותפת — עם השוואת שנים.
+        </p>
+      }
       calculator={<PurchaseTaxCalculator />}
       content={
         <>
