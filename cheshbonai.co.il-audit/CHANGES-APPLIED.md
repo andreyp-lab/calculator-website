@@ -1,7 +1,27 @@
 # מה תוקן בפועל — 30.7.2026
 
-מיושם על הקוד ומאומת מול build פרודקשן מקומי.
+**נדחף לפרודקשן ואומת חי ב-cheshbonai.co.il** (deploy `dpl_DPEa9qsuTRnqY6QT17wPDzccu6mU`).
 **שער אימות:** `npx tsc --noEmit` נקי · `npm test` 1707/1707 עוברים · `npm run build` נקי.
+
+## Lighthouse בפרודקשן — `/employee-rights/work-grant`, מובייל
+
+אותו URL, אותו כלי, אותן הגדרות כמו במדידת ה"לפני":
+
+| | לפני | אחרי |
+|---|---|---|
+| **Performance** | 66 | **96** |
+| **LCP** | 6.2s | **2.6s** |
+| FCP | 3.8s | **1.3s** |
+| TBT | 80ms | **60ms** |
+| Speed Index | 5.3s | **2.7s** |
+| Accessibility | 91 | **98** |
+| CLS | 0 | 0.048 |
+
+אזהרת ה-preconnect של Lighthouse נעלמה.
+
+⚠️ **CLS עלה מ-0 ל-0.048.** זה עדיין בתחום ה"טוב" של גוגל (הסף 0.1) ולא נכשל,
+אבל זה כן שינוי לרעה — כנראה תוצאה של `lazyOnload` שמזריק את GA אחרי הציור הראשון.
+שווה מעקב; אם יטפס מעל 0.1 זה סימן לחזור ל-`afterInteractive`.
 
 ## מדידה לפני/אחרי — סריקה מלאה של 226 דפים
 
@@ -20,7 +40,7 @@
 
 *(הכותרת היחידה שנשארה מעל 65 היא `/business/clinic` ב-66 תווים — שם הענף עצמו ארוך.)*
 
-## Lighthouse — נגישות
+## Lighthouse — נגישות (build מקומי)
 
 | דף | לפני | אחרי |
 |---|---|---|
@@ -44,8 +64,7 @@ SEO 100 בכל הדפים שנבדקו. `color-contrast` ו-`label`: **0 כשל�
 במלואו. משמעות: ביקורים קצרים מאוד (bounce תוך פחות משנייה) עלולים לא להירשם. אם מדידת
 bounce מדויקת חשובה יותר ממהירות מובייל — החזר ל-`afterInteractive` והשאר את ה-preconnect.
 
-**המדידה האמיתית תגיע רק אחרי deploy** — Lighthouse מקומי רץ ללא latency רשת ואינו
-משקף את השיפור.
+**נמדד בפרודקשן:** מובייל 66 → 96, LCP 6.2s → 2.6s. ראה הטבלה בראש המסמך.
 
 ## 2. נגישות — היקף גדול בהרבה ממה שהדוח תיאר
 
@@ -124,9 +143,9 @@ bounce מדויקת חשובה יותר ממהירות מובייל — החזר
 
 ## הצעד הבא
 
-הכל בנוי ועובר את שער האימות, אבל **טרם נדחף** — הרווח האמיתי (מובייל LCP, אינדוקס
-האשכול) נמדד רק בפרודקשן. אחרי deploy כדאי:
-
-1. להריץ PageSpeed על `/employee-rights/work-grant` במובייל ולהשוות ל-66.
-2. לבצע את שתי הפעולות ב-GSC (Request Indexing + מספר הרישיון).
-3. לשמור baseline ל-drift: `"$HOME/.claude/skills/seo/bin/claude-seo" run drift_baseline.py https://cheshbonai.co.il/`
+1. **שתי הפעולות ב-GSC** — Request Indexing ל-`/business`, `cafe`, `gym`, `pizzeria`,
+   ומספר רישיון רו"ח ל-`sameAs`.
+2. **הגשת `/employee-rights/work-grant/eligibility` לאינדוקס** — דף חדש, וחלון ההגשה
+   של מענק עבודה נסגר בספטמבר. כדאי לא לחכות לגילוי טבעי.
+3. **מעקב CLS** — עלה מ-0 ל-0.048.
+4. **baseline ל-drift:** `"$HOME/.claude/skills/seo/bin/claude-seo" run drift_baseline.py https://cheshbonai.co.il/`
