@@ -115,7 +115,7 @@ function TabBar({
           className={`px-4 py-2 text-sm font-medium rounded-none border-b-2 transition ${
             active === tab.id
               ? 'border-gold text-gold bg-cream-2'
-              : 'border-transparent text-ink/60 hover:text-ink hover:border-ink/30'
+              : 'border-transparent text-ink/70 hover:text-ink hover:border-ink/30'
           }`}
         >
           {tab.label}
@@ -180,10 +180,10 @@ function CalculatorTab({
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="purchasetaxcalculator-f79027" className="block text-sm font-medium text-ink/70 mb-1">
                 שווי הדירה (ש"ח)
               </label>
-              <input
+              <input id="purchasetaxcalculator-f79027"
                 type="number"
                 min={0}
                 step={50_000}
@@ -191,7 +191,7 @@ function CalculatorTab({
                 onChange={(e) => setPropertyValue(Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg font-semibold focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 מחיר הדירה כפי שהוסכם בחוזה הרכישה
               </p>
             </div>
@@ -208,14 +208,14 @@ function CalculatorTab({
                     className={`flex-1 py-2 rounded-none border text-sm font-medium transition ${
                       year === y
                         ? 'border-ink bg-ink text-cream'
-                        : 'border-ink/15 text-ink/60 hover:border-ink/30'
+                        : 'border-ink/15 text-ink/70 hover:border-ink/30'
                     }`}
                   >
                     {y}
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 המדרגות מתעדכנות ב-15 בינואר לפי מדד המחירים לצרכן
               </p>
             </div>
@@ -245,7 +245,7 @@ function CalculatorTab({
                   <div className="font-semibold text-sm text-ink">
                     {BUYER_TYPE_LABELS[type]}
                   </div>
-                  <div className="text-xs text-ink/60 mt-0.5">
+                  <div className="text-xs text-ink/70 mt-0.5">
                     {BUYER_TYPE_DESCRIPTION[type]}
                   </div>
                 </div>
@@ -271,19 +271,19 @@ function CalculatorTab({
         {/* סיכום */}
         <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-ink/60">שווי הדירה</span>
+            <span className="text-ink/70">שווי הדירה</span>
             <span className="font-bold">{fmt(propertyValue)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">מס רכישה</span>
-            <span className="font-bold text-red-600">{fmt(result.totalTax)}</span>
+            <span className="text-ink/70">מס רכישה</span>
+            <span className="font-bold text-red-700">{fmt(result.totalTax)}</span>
           </div>
           <div className="flex justify-between border-t border-ink/15 pt-2">
             <span className="text-ink/70 font-semibold">עלות כוללת (דירה + מס)</span>
             <span className="font-bold text-ink">{fmt(propertyValue + result.totalTax)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">שיעור אפקטיבי</span>
+            <span className="text-ink/70">שיעור אפקטיבי</span>
             <span className="font-medium">{formatPercent(result.effectiveRate / 100, 3)}</span>
           </div>
         </div>
@@ -327,7 +327,7 @@ function CalculatorTab({
                       >
                         {b.bracket}
                       </div>
-                      <div className="text-ink/45 text-[10px]">{b.range}</div>
+                      <div className="text-ink/70 text-[10px]">{b.range}</div>
                     </td>
                     <td className="px-3 py-2 text-ink/70">{fmt(b.amountInBracket)}</td>
                     <td className="px-3 py-2 font-semibold text-ink">
@@ -493,10 +493,10 @@ function ComparisonTab({
                   {c.totalTax === 0 ? (
                     <span className="text-green-600">פטור מלא</span>
                   ) : (
-                    <span className={c.totalTax === maxTax ? 'text-red-600' : ''}>{fmt(c.totalTax)}</span>
+                    <span className={c.totalTax === maxTax ? 'text-red-700' : ''}>{fmt(c.totalTax)}</span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-ink/60">
+                <td className="px-4 py-3 text-ink/70">
                   {formatPercent(c.effectiveRate / 100, 2)}
                 </td>
                 <td className="px-4 py-3 text-ink/70">
@@ -525,7 +525,7 @@ function ComparisonTab({
                     <p className="text-2xl font-bold text-red-700">
                       {fmt(investor.totalTax - firstHome.totalTax)}
                     </p>
-                    <p className="text-xs text-red-600 mt-1">
+                    <p className="text-xs text-red-700 mt-1">
                       כך יותר משלם משקיע על אותה הדירה
                     </p>
                   </div>
@@ -622,16 +622,16 @@ function YearsTab({
                   {y.year} {y.year === 2026 && <span className="text-xs text-green-600 font-normal">(נוכחי)</span>}
                 </td>
                 <td className="px-4 py-3 font-bold">{fmt(y.totalTax)}</td>
-                <td className="px-4 py-3 text-ink/60">{formatPercent(y.effectiveRate / 100, 2)}</td>
+                <td className="px-4 py-3 text-ink/70">{formatPercent(y.effectiveRate / 100, 2)}</td>
                 <td className="px-4 py-3">
                   {i === 0 ? (
-                    <span className="text-ink/45">—</span>
+                    <span className="text-ink/70">—</span>
                   ) : y.difference! > 0 ? (
                     <span className="text-green-600">+{fmt(y.difference!)}</span>
                   ) : y.difference! < 0 ? (
-                    <span className="text-red-600">{fmt(y.difference!)}</span>
+                    <span className="text-red-700">{fmt(y.difference!)}</span>
                   ) : (
-                    <span className="text-ink/60">ללא שינוי</span>
+                    <span className="text-ink/70">ללא שינוי</span>
                   )}
                 </td>
               </tr>
@@ -694,7 +694,7 @@ function YearsTab({
                 <h5 className="font-bold text-ink mb-2">{yr} {yr === 2026 && '(נוכחי)'}</h5>
                 <table className="w-full">
                   <thead>
-                    <tr className="text-ink/60">
+                    <tr className="text-ink/70">
                       <th className="text-right pb-1">טווח</th>
                       <th className="text-right pb-1">מס</th>
                     </tr>
@@ -784,7 +784,7 @@ function JointPurchaseTab({
             onChange={(e) => setOwnershipA(Number(e.target.value))}
             className="w-full accent-ink"
           />
-          <div className="flex justify-between text-xs text-ink/60 mt-1">
+          <div className="flex justify-between text-xs text-ink/70 mt-1">
             <span>1%</span>
             <span>50%</span>
             <span>99%</span>
@@ -808,15 +808,15 @@ function JointPurchaseTab({
             </select>
             <div className="mt-3 space-y-1 text-sm">
               <div className="flex justify-between">
-                <span className="text-ink/60">שווי חלק</span>
+                <span className="text-ink/70">שווי חלק</span>
                 <span className="font-medium">{fmt(propertyValue * ownershipA / 100)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-ink/60">מס רכישה</span>
-                <span className="font-bold text-red-600">{fmt(resultA.totalTax)}</span>
+                <span className="text-ink/70">מס רכישה</span>
+                <span className="font-bold text-red-700">{fmt(resultA.totalTax)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-ink/60">שיעור אפקטיבי</span>
+                <span className="text-ink/70">שיעור אפקטיבי</span>
                 <span>{formatPercent(resultA.effectiveRate / 100, 2)}</span>
               </div>
             </div>
@@ -838,15 +838,15 @@ function JointPurchaseTab({
             </select>
             <div className="mt-3 space-y-1 text-sm">
               <div className="flex justify-between">
-                <span className="text-ink/60">שווי חלק</span>
+                <span className="text-ink/70">שווי חלק</span>
                 <span className="font-medium">{fmt(propertyValue * ownershipB / 100)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-ink/60">מס רכישה</span>
-                <span className="font-bold text-red-600">{fmt(resultB.totalTax)}</span>
+                <span className="text-ink/70">מס רכישה</span>
+                <span className="font-bold text-red-700">{fmt(resultB.totalTax)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-ink/60">שיעור אפקטיבי</span>
+                <span className="text-ink/70">שיעור אפקטיבי</span>
                 <span>{formatPercent(resultB.effectiveRate / 100, 2)}</span>
               </div>
             </div>
@@ -925,11 +925,11 @@ function RecommendationsTab({
               </div>
               <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
                 <div className="bg-paper rounded-none p-3 border border-green-200">
-                  <div className="text-ink/60 text-xs mb-1">מס נוכחי ({BUYER_TYPE_LABELS[buyerType]})</div>
-                  <div className="font-bold text-red-600">{fmt(rec.currentTax)}</div>
+                  <div className="text-ink/70 text-xs mb-1">מס נוכחי ({BUYER_TYPE_LABELS[buyerType]})</div>
+                  <div className="font-bold text-red-700">{fmt(rec.currentTax)}</div>
                 </div>
                 <div className="bg-paper rounded-none p-3 border border-green-200">
-                  <div className="text-ink/60 text-xs mb-1">מס אלטרנטיבי</div>
+                  <div className="text-ink/70 text-xs mb-1">מס אלטרנטיבי</div>
                   <div className="font-bold text-green-700">{fmt(rec.alternativeTax)}</div>
                 </div>
               </div>
@@ -948,7 +948,7 @@ function RecommendationsTab({
         <h3 className="font-bold text-ink mb-4">מה אם אני עולה חדש?</h3>
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-cream-2 rounded-none p-4 text-center">
-            <div className="text-xs text-ink/60 mb-2">מס דירה ראשונה</div>
+            <div className="text-xs text-ink/70 mb-2">מס דירה ראשונה</div>
             <div className="text-2xl font-bold text-ink">{fmt(olehDiscount.baseTax)}</div>
           </div>
           <div className="bg-cream-2 rounded-none p-4 text-center border border-gold/40">
@@ -963,7 +963,7 @@ function RecommendationsTab({
             </div>
           </div>
         </div>
-        <p className="text-xs text-ink/60 mt-3">
+        <p className="text-xs text-ink/70 mt-3">
           * הזכאות בתוקף ל-7 שנים ממועד העלייה. עולה חדש = מי שקיבל תעודת עולה ולא היה
           תושב ישראל 10 שנים לפני עלייתו. תושב חוזר ותיק — הטבות שונות.
         </p>

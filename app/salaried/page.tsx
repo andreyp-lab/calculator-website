@@ -364,7 +364,7 @@ function CalcCard({ calc }: { calc: Calc }) {
         <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition text-base">
           {calc.title}
         </h3>
-        <p className="text-sm text-ink/60 leading-relaxed">{calc.description}</p>
+        <p className="text-sm text-ink/70 leading-relaxed">{calc.description}</p>
       </div>
     </Link>
   );

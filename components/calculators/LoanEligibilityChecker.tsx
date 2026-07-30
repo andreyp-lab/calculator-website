@@ -69,7 +69,7 @@ export function LoanEligibilityChecker() {
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition ${
                   step >= s.id
                     ? 'bg-ink text-cream shadow-lg'
-                    : 'bg-cream-2 text-ink/60'
+                    : 'bg-cream-2 text-ink/70'
                 }`}
               >
                 {step > s.id ? '✓' : s.id}
@@ -280,7 +280,7 @@ export function LoanEligibilityChecker() {
               />
               <div className="flex-1">
                 <div className="text-sm text-ink font-medium">{label}</div>
-                <div className="text-xs text-ink/60">{hint}</div>
+                <div className="text-xs text-ink/70">{hint}</div>
               </div>
             </label>
           ))}
@@ -391,7 +391,7 @@ function ResultRow({
   return (
     <div className="flex justify-between items-center py-2 border-b border-ink/15 last:border-0">
       <span className="text-sm text-ink/70 font-medium">{label}:</span>
-      <span className={`text-sm ${highlight ? 'font-bold text-emerald-700 text-lg' : 'text-ink'}`}>
+      <span className={`text-sm ${highlight ? 'font-bold text-emerald-800 text-lg' : 'text-ink'}`}>
         {value}
       </span>
     </div>

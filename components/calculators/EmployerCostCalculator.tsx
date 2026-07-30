@@ -120,7 +120,7 @@ export function EmployerCostCalculator() {
             className={`px-4 py-2 border-b-2 transition ${
               activeTab === 'basic'
                 ? 'border-gold text-ink font-semibold'
-                : 'border-transparent text-ink/60 hover:text-ink'
+                : 'border-transparent text-ink/70 hover:text-ink'
             }`}
           >
             פרטי העובד
@@ -131,7 +131,7 @@ export function EmployerCostCalculator() {
             className={`px-4 py-2 border-b-2 transition ${
               activeTab === 'benefits'
                 ? 'border-gold text-ink font-semibold'
-                : 'border-transparent text-ink/60 hover:text-ink'
+                : 'border-transparent text-ink/70 hover:text-ink'
             }`}
           >
             הטבות נוספות
@@ -222,10 +222,10 @@ export function EmployerCostCalculator() {
             {/* משרה חלקית */}
             {input.employmentType === 'part-time' && (
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="employercostcalculator-475d8e" className="block text-sm font-medium text-ink/70 mb-2">
                   אחוז משרה (%)
                 </label>
-                <input
+                <input id="employercostcalculator-475d8e"
                   type="number"
                   min={1}
                   max={100}
@@ -240,10 +240,10 @@ export function EmployerCostCalculator() {
             {input.employmentType === 'hourly' && (
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-2">
+                  <label htmlFor="employercostcalculator-faf43a" className="block text-sm font-medium text-ink/70 mb-2">
                     תעריף לשעה (₪)
                   </label>
-                  <input
+                  <input id="employercostcalculator-faf43a"
                     type="number"
                     min={0}
                     value={input.hourlyRate ?? 60}
@@ -252,10 +252,10 @@ export function EmployerCostCalculator() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-2">
+                  <label htmlFor="employercostcalculator-71aef6" className="block text-sm font-medium text-ink/70 mb-2">
                     שעות בחודש
                   </label>
-                  <input
+                  <input id="employercostcalculator-71aef6"
                     type="number"
                     min={1}
                     value={input.hoursPerMonth ?? 182}
@@ -271,8 +271,8 @@ export function EmployerCostCalculator() {
               <h4 className="font-semibold text-ink mb-3 text-sm">פנסיה ופיצויים</h4>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">פנסיה מעסיק (%)</label>
-                  <input
+                  <label htmlFor="employercostcalculator-9c05c9" className="block text-xs text-ink/70 mb-1">פנסיה מעסיק (%)</label>
+                  <input id="employercostcalculator-9c05c9"
                     type="number"
                     step={0.1}
                     min={0}
@@ -285,8 +285,8 @@ export function EmployerCostCalculator() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">פיצויים (%)</label>
-                  <input
+                  <label htmlFor="employercostcalculator-e95dff" className="block text-xs text-ink/70 mb-1">פיצויים (%)</label>
+                  <input id="employercostcalculator-e95dff"
                     type="number"
                     step={0.01}
                     min={0}
@@ -377,7 +377,7 @@ export function EmployerCostCalculator() {
                     className="w-4 h-4"
                   />
                   <span className="text-sm font-medium text-ink flex-1">{label}</span>
-                  <span className="text-xs text-ink/60">({period})</span>
+                  <span className="text-xs text-ink/70">({period})</span>
                 </label>
                 {benefits[key].active && (
                   <input

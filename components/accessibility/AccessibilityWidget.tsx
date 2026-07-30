@@ -219,7 +219,7 @@ export function AccessibilityWidget() {
                 triggerRef.current?.focus();
               }}
               aria-label="סגור תפריט נגישות"
-              className="text-ink/60 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-none p-1"
+              className="text-ink/70 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-none p-1"
             >
               <span aria-hidden="true" className="text-lg">✕</span>
             </button>
@@ -312,8 +312,8 @@ export function AccessibilityWidget() {
                 'text-xs py-1.5 px-3 rounded-none border transition-colors',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400',
                 hasActiveSettings
-                  ? 'border-red-300 text-red-600 hover:bg-red-50 cursor-pointer'
-                  : 'border-ink/15 text-ink/45 cursor-not-allowed',
+                  ? 'border-red-300 text-red-700 hover:bg-red-50 cursor-pointer'
+                  : 'border-ink/15 text-ink/70 cursor-not-allowed',
               ].join(' ')}
             >
               איפוס הכל

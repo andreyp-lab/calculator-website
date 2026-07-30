@@ -26,8 +26,8 @@ export function ContactForm() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">שם מלא</label>
-          <input
+          <label htmlFor="contactform-5d5691" className="block text-sm font-medium text-ink/70 mb-2">שם מלא</label>
+          <input id="contactform-5d5691"
             type="text"
             required
             className="w-full px-4 py-2 border border-ink/15 focus:ring-2 focus:ring-gold focus:border-transparent"
@@ -36,8 +36,8 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">דוא&quot;ל</label>
-          <input
+          <label htmlFor="contactform-6f8f62" className="block text-sm font-medium text-ink/70 mb-2">דוא&quot;ל</label>
+          <input id="contactform-6f8f62"
             type="email"
             required
             className="w-full px-4 py-2 border border-ink/15 focus:ring-2 focus:ring-gold focus:border-transparent"
@@ -46,8 +46,8 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">נושא</label>
-          <input
+          <label htmlFor="contactform-f1b9c7" className="block text-sm font-medium text-ink/70 mb-2">נושא</label>
+          <input id="contactform-f1b9c7"
             type="text"
             required
             className="w-full px-4 py-2 border border-ink/15 focus:ring-2 focus:ring-gold focus:border-transparent"

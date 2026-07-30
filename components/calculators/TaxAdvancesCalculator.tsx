@@ -91,10 +91,10 @@ export function TaxAdvancesCalculator() {
               <h2 className="text-xl font-bold text-ink">פרטי ההכנסה</h2>
 
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="taxadvancescalculator-2ff9d5" className="block text-sm font-medium text-ink/70 mb-2">
                   הכנסה שנתית צפויה — אחרי הוצאות מוכרות (₪)
                 </label>
-                <input
+                <input id="taxadvancescalculator-2ff9d5"
                   type="number"
                   min={0}
                   step={5_000}
@@ -102,17 +102,17 @@ export function TaxAdvancesCalculator() {
                   onChange={(e) => update('expectedAnnualIncome', Number(e.target.value))}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
                 />
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/70 mt-1">
                   הכנסה ברוטו פחות הוצאות מוכרות. לא כולל מע"מ.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-2">
+                  <label htmlFor="taxadvancescalculator-9d2ed5" className="block text-sm font-medium text-ink/70 mb-2">
                     נקודות זיכוי
                   </label>
-                  <input
+                  <input id="taxadvancescalculator-9d2ed5"
                     type="number"
                     min={0}
                     max={10}
@@ -121,7 +121,7 @@ export function TaxAdvancesCalculator() {
                     onChange={(e) => update('creditPoints', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none"
                   />
-                  <p className="text-xs text-ink/60 mt-1">
+                  <p className="text-xs text-ink/70 mt-1">
                     תושב: 2.25 | אישה: +0.5 | ילד: +1-2.5
                   </p>
                 </div>
@@ -144,15 +144,15 @@ export function TaxAdvancesCalculator() {
             {/* ניכויים */}
             <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
               <h2 className="text-lg font-bold text-ink">ניכויים פנסיוניים</h2>
-              <p className="text-xs text-ink/60">
+              <p className="text-xs text-ink/70">
                 ניכויים אלה מקטינים את ההכנסה החייבת ובכך מפחיתים את מקדמות המס
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-2">
+                  <label htmlFor="taxadvancescalculator-d99481" className="block text-sm font-medium text-ink/70 mb-2">
                     פנסיה חודשית (₪)
                   </label>
-                  <input
+                  <input id="taxadvancescalculator-d99481"
                     type="number"
                     min={0}
                     step={50}
@@ -160,16 +160,16 @@ export function TaxAdvancesCalculator() {
                     onChange={(e) => update('monthlyPensionDeposit', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none"
                   />
-                  <p className="text-xs text-ink/60 mt-1">
+                  <p className="text-xs text-ink/70 mt-1">
                     ניכוי עד 11% מהכנסה (שנתי:{' '}
                     {formatCurrency((input.monthlyPensionDeposit ?? 0) * 12)})
                   </p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-2">
+                  <label htmlFor="taxadvancescalculator-fc65ef" className="block text-sm font-medium text-ink/70 mb-2">
                     קרן השתלמות חודשית (₪)
                   </label>
-                  <input
+                  <input id="taxadvancescalculator-fc65ef"
                     type="number"
                     min={0}
                     step={50}
@@ -177,7 +177,7 @@ export function TaxAdvancesCalculator() {
                     onChange={(e) => update('monthlyStudyFundDeposit', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none"
                   />
-                  <p className="text-xs text-ink/60 mt-1">
+                  <p className="text-xs text-ink/70 mt-1">
                     ניכוי עד 4.5% (מקסימום 20,566 ₪/שנה)
                   </p>
                 </div>
@@ -207,17 +207,17 @@ export function TaxAdvancesCalculator() {
                 />
                 <div>
                   <span className="text-base font-semibold text-ink">עוסק מורשה</span>
-                  <p className="text-xs text-ink/60">חייב בגביית ותשלום מע"מ 18%</p>
+                  <p className="text-xs text-ink/70">חייב בגביית ותשלום מע"מ 18%</p>
                 </div>
               </label>
 
               {input.isVatRegistered && (
                 <div className="grid grid-cols-2 gap-4 pt-2 border-t border-ink/10">
                   <div>
-                    <label className="block text-xs font-medium text-ink mb-1">
+                    <label htmlFor="taxadvancescalculator-1a7b04" className="block text-xs font-medium text-ink mb-1">
                       מע"מ עסקאות שנתי (₪)
                     </label>
-                    <input
+                    <input id="taxadvancescalculator-1a7b04"
                       type="number"
                       min={0}
                       step={1_000}
@@ -225,16 +225,16 @@ export function TaxAdvancesCalculator() {
                       onChange={(e) => update('annualVatCollected', Number(e.target.value))}
                       className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                     />
-                    <p className="text-xs text-ink/45 mt-0.5">
+                    <p className="text-xs text-ink/70 mt-0.5">
                       מחזור × 18% ={' '}
                       {formatCurrency(input.expectedAnnualIncome * 0.18)} (אומדן)
                     </p>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-ink mb-1">
+                    <label htmlFor="taxadvancescalculator-843c99" className="block text-xs font-medium text-ink mb-1">
                       מע"מ תשומות שנתי (₪)
                     </label>
-                    <input
+                    <input id="taxadvancescalculator-843c99"
                       type="number"
                       min={0}
                       step={1_000}
@@ -242,7 +242,7 @@ export function TaxAdvancesCalculator() {
                       onChange={(e) => update('annualVatDeductible', Number(e.target.value))}
                       className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
                     />
-                    <p className="text-xs text-ink/45 mt-0.5">
+                    <p className="text-xs text-ink/70 mt-0.5">
                       קניות עסקיות × 18% — מקוזז מהעסקאות
                     </p>
                   </div>
@@ -334,7 +334,7 @@ export function TaxAdvancesCalculator() {
 
               {/* פר תשלום */}
               <div className="pt-2 border-t border-ink/10 mt-2">
-                <h5 className="text-xs font-semibold text-ink/60 mb-2 uppercase tracking-wide">
+                <h5 className="text-xs font-semibold text-ink/70 mb-2 uppercase tracking-wide">
                   פר תשלום {freqLabel}
                 </h5>
                 <Row
@@ -423,7 +423,7 @@ export function TaxAdvancesCalculator() {
           <div className="bg-paper border border-ink/15 rounded-none overflow-hidden">
             <div className="p-4 border-b border-ink/10">
               <h3 className="font-bold text-ink">תזרים חודשי — 2026</h3>
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 כולל: הפרשה חודשית מומלצת + מועדי תשלום
               </p>
             </div>
@@ -467,12 +467,12 @@ export function TaxAdvancesCalculator() {
                             -{formatCurrency(row.paymentDue)}
                           </span>
                         ) : (
-                          <span className="text-ink/45">—</span>
+                          <span className="text-ink/70">—</span>
                         )}
                       </td>
                       <td
                         className={`py-2 px-3 tabular-nums font-medium ${
-                          row.balanceAfterPayment < 0 ? 'text-red-700' : 'text-emerald-700'
+                          row.balanceAfterPayment < 0 ? 'text-red-700' : 'text-emerald-800'
                         }`}
                       >
                         {formatCurrency(row.balanceAfterPayment)}
@@ -501,12 +501,12 @@ export function TaxAdvancesCalculator() {
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-ink/60">
+                <p className="text-xs text-ink/70">
                   * תאריך הגשה: 15 לחודש שאחרי סיום התקופה. תשלום עד אותו תאריך.
                 </p>
               </div>
             ) : (
-              <p className="text-sm text-ink/60">
+              <p className="text-sm text-ink/70">
                 עוסק פטור — פטור מדיווח וגביית מע&quot;מ (עד {(122_833).toLocaleString('he-IL')}{' '}
                 ₪/שנה)
               </p>
@@ -527,10 +527,10 @@ export function TaxAdvancesCalculator() {
 
             <div className="grid md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="taxadvancescalculator-129038" className="block text-sm font-medium text-ink/70 mb-2">
                   חודש נוכחי (1-12)
                 </label>
-                <input
+                <input id="taxadvancescalculator-129038"
                   type="number"
                   min={1}
                   max={12}
@@ -540,10 +540,10 @@ export function TaxAdvancesCalculator() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="taxadvancescalculator-a04cde" className="block text-sm font-medium text-ink/70 mb-2">
                   הכנסה בפועל מתחילת השנה (₪)
                 </label>
-                <input
+                <input id="taxadvancescalculator-a04cde"
                   type="number"
                   min={0}
                   step={5_000}
@@ -559,10 +559,10 @@ export function TaxAdvancesCalculator() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="taxadvancescalculator-8e20d0" className="block text-sm font-medium text-ink/70 mb-2">
                   מקדמות שולמו עד כה (₪)
                 </label>
-                <input
+                <input id="taxadvancescalculator-8e20d0"
                   type="number"
                   min={0}
                   step={1_000}
@@ -585,7 +585,7 @@ export function TaxAdvancesCalculator() {
             <div className="space-y-4">
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
-                  <div className="text-xs text-ink/60 mb-1">תכנית מקורית (שנתי)</div>
+                  <div className="text-xs text-ink/70 mb-1">תכנית מקורית (שנתי)</div>
                   <div className="text-2xl font-bold text-ink">
                     {formatCurrency(result.midYearAdjustment.originalPlan)}
                   </div>
@@ -666,7 +666,7 @@ export function TaxAdvancesCalculator() {
               </div>
             </div>
           ) : (
-            <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/60">
+            <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/70">
               <p>הזן הכנסה בפועל מתחילת השנה + חודש נוכחי לחישוב תיאום</p>
             </div>
           )}
@@ -677,7 +677,7 @@ export function TaxAdvancesCalculator() {
               <h3 className="text-lg font-bold text-ink">הערכת גמר שנה (טופס 1301)</h3>
               <div className="grid md:grid-cols-3 gap-4 text-center">
                 <div className="bg-cream-2 rounded-none p-4">
-                  <div className="text-xs text-ink/60 mb-1">מקדמות ששולמו</div>
+                  <div className="text-xs text-ink/70 mb-1">מקדמות ששולמו</div>
                   <div className="text-2xl font-bold text-ink">
                     {formatCurrency(result.reconciliationEstimate.totalAdvancesPaid)}
                   </div>
@@ -697,7 +697,7 @@ export function TaxAdvancesCalculator() {
                 >
                   <div
                     className={`text-xs mb-1 ${
-                      result.reconciliationEstimate.isRefund ? 'text-green-600' : 'text-red-600'
+                      result.reconciliationEstimate.isRefund ? 'text-green-600' : 'text-red-700'
                     }`}
                   >
                     {result.reconciliationEstimate.isRefund ? 'החזר מס צפוי' : 'תשלום נוסף צפוי'}
@@ -709,13 +709,13 @@ export function TaxAdvancesCalculator() {
                   >
                     {formatCurrency(Math.abs(result.reconciliationEstimate.difference))}
                   </div>
-                  <div className="text-xs mt-1 text-ink/60">
+                  <div className="text-xs mt-1 text-ink/70">
                     ניצול מקדמות:{' '}
                     {formatPercent(result.reconciliationEstimate.utilizationRate, 0)}
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-ink/60">
+              <p className="text-xs text-ink/70">
                 * גמר שנה מוגש עד 31 במרץ השנה הבאה. עורך דין / רואה חשבון יכול להגיש עד 30 ביוני.
               </p>
             </div>
@@ -735,10 +735,10 @@ export function TaxAdvancesCalculator() {
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="taxadvancescalculator-b3863c" className="block text-sm font-medium text-ink/70 mb-2">
                   סכום מקדמה שלא שולמה (₪)
                 </label>
-                <input
+                <input id="taxadvancescalculator-b3863c"
                   type="number"
                   min={0}
                   step={500}
@@ -748,10 +748,10 @@ export function TaxAdvancesCalculator() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="taxadvancescalculator-9ce677" className="block text-sm font-medium text-ink/70 mb-2">
                   מספר חודשי איחור
                 </label>
-                <input
+                <input id="taxadvancescalculator-9ce677"
                   type="number"
                   min={1}
                   max={36}
@@ -875,18 +875,18 @@ function Row({
         line ? 'border-t border-ink/15 pt-2.5 mt-1' : ''
       } ${highlight ? 'bg-cream-2 -mx-2 px-2 rounded-none' : ''}`}
     >
-      <span className={`${mute ? 'text-ink/60' : 'text-ink'} ${bold ? 'font-bold' : ''}`}>
+      <span className={`${mute ? 'text-ink/70' : 'text-ink'} ${bold ? 'font-bold' : ''}`}>
         {label}
       </span>
       <div className="text-right">
         <span
           className={`tabular-nums ${bold ? 'font-bold text-ink' : ''} ${
-            mute ? 'text-ink/60' : ''
+            mute ? 'text-ink/70' : ''
           } ${negative ? 'text-red-700' : ''}`}
         >
           {value}
         </span>
-        {sub && <div className="text-xs text-ink/45">{sub}</div>}
+        {sub && <div className="text-xs text-ink/70">{sub}</div>}
       </div>
     </div>
   );
@@ -898,7 +898,7 @@ function TaxBreakdownBar({
   result: ReturnType<typeof calculateTaxAdvances>;
 }) {
   const total = result.totalAnnual;
-  if (total <= 0) return <p className="text-sm text-ink/60">אין נתונים</p>;
+  if (total <= 0) return <p className="text-sm text-ink/70">אין נתונים</p>;
 
   const items = [
     {

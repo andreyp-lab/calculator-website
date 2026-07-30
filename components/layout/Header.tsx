@@ -22,7 +22,7 @@ export function Header() {
               <span className="text-gold" aria-hidden="true">
                 ✦
               </span>
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/50">
+              <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/70">
                 est. 2026
               </span>
             </span>

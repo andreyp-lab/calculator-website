@@ -81,14 +81,14 @@ export function TaxRefundCalculator() {
                 <option value={2021}>2021</option>
                 <option value={2020}>2020 (אחרון לתביעה)</option>
               </select>
-              <p className="text-xs text-ink/60 mt-1">ניתן להגיש החזר עד 6 שנים אחורה</p>
+              <p className="text-xs text-ink/70 mt-1">ניתן להגיש החזר עד 6 שנים אחורה</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-ab4d57" className="block text-sm font-medium text-ink/70 mb-2">
                 שכר ברוטו שנתי (₪)
               </label>
-              <input
+              <input id="taxrefundcalculator-ab4d57"
                 type="number"
                 min={0}
                 step={1000}
@@ -96,14 +96,14 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('annualGrossSalary', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
               />
-              <p className="text-xs text-ink/60 mt-1">סך כל השכר הברוטו מכל המעסיקים</p>
+              <p className="text-xs text-ink/70 mt-1">סך כל השכר הברוטו מכל המעסיקים</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-0edc25" className="block text-sm font-medium text-ink/70 mb-2">
                 מס הכנסה שנוכה במקור (₪)
               </label>
-              <input
+              <input id="taxrefundcalculator-0edc25"
                 type="number"
                 min={0}
                 step={500}
@@ -111,14 +111,14 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('taxWithheld', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
               />
-              <p className="text-xs text-ink/60 mt-1">שורת "מס הכנסה" בטופס 106</p>
+              <p className="text-xs text-ink/70 mt-1">שורת "מס הכנסה" בטופס 106</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-9c145e" className="block text-sm font-medium text-ink/70 mb-2">
                 חודשים עבדת בשנה
               </label>
-              <input
+              <input id="taxrefundcalculator-9c145e"
                 type="number"
                 min={0}
                 max={12}
@@ -126,7 +126,7 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('monthsWorked', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">פחות מ-12 = פוטנציאל החזר משמעותי</p>
+              <p className="text-xs text-ink/70 mt-1">פחות מ-12 = פוטנציאל החזר משמעותי</p>
             </div>
 
             <div className="bg-amber-50 border border-amber-300 rounded-none p-3 space-y-2 text-sm">
@@ -269,10 +269,10 @@ export function TaxRefundCalculator() {
             <h3 className="text-lg font-bold text-ink">⭐ מצבים מיוחדים</h3>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-35f108" className="block text-sm font-medium text-ink/70 mb-2">
                 עולה חדש - חודשים מאז העלייה
               </label>
-              <input
+              <input id="taxrefundcalculator-35f108"
                 type="number"
                 min={0}
                 max={120}
@@ -280,16 +280,16 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('monthsSinceImmigration', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 1-18 = 3 נקודות, 19-30 = 2, 31-54 = 1
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-11fe18" className="block text-sm font-medium text-ink/70 mb-2">
                 חייל משוחרר - שנים מהשחרור
               </label>
-              <input
+              <input id="taxrefundcalculator-11fe18"
                 type="number"
                 min={0}
                 max={10}
@@ -297,7 +297,7 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('yearsSinceRelease', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">+2 נקודות ב-3 שנים מהשחרור</p>
+              <p className="text-xs text-ink/70 mt-1">+2 נקודות ב-3 שנים מהשחרור</p>
             </div>
 
             <div className="space-y-2 p-3 bg-cream-2 rounded-none">
@@ -372,10 +372,10 @@ export function TaxRefundCalculator() {
               </label>
 
               <div className="mr-6">
-                <label className="block text-xs text-ink/70 mb-1">
+                <label htmlFor="taxrefundcalculator-a43437" className="block text-xs text-ink/70 mb-1">
                   ימי מילואים בשנה (לתיעוד)
                 </label>
-                <input
+                <input id="taxrefundcalculator-a43437"
                   type="number"
                   min={0}
                   max={365}
@@ -383,7 +383,7 @@ export function TaxRefundCalculator() {
                   onChange={(e) => update('reserveDuyDays', Number(e.target.value))}
                   className="w-full px-3 py-1.5 border border-ink/15 rounded-none text-sm"
                 />
-                <p className="text-[10px] text-ink/60 mt-1">
+                <p className="text-[10px] text-ink/70 mt-1">
                   10+ ימים = זכאי אוטומטית לנקודה (גם אם לא סימנת מעל)
                 </p>
               </div>
@@ -403,10 +403,10 @@ export function TaxRefundCalculator() {
             <p className="text-sm text-ink/70">הפקדות עצמאיות שלא נוכו במקור</p>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-c373ee" className="block text-sm font-medium text-ink/70 mb-2">
                 הפקדה עצמאית לפנסיה / קופ"ג (₪/שנה)
               </label>
-              <input
+              <input id="taxrefundcalculator-c373ee"
                 type="number"
                 min={0}
                 step={500}
@@ -414,14 +414,14 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('privatePensionDeposits', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">תקרה: 13,700 ₪/שנה</p>
+              <p className="text-xs text-ink/70 mt-1">תקרה: 13,700 ₪/שנה</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-9cdbc1" className="block text-sm font-medium text-ink/70 mb-2">
                 קרן השתלמות עצמאית (₪/שנה)
               </label>
-              <input
+              <input id="taxrefundcalculator-9cdbc1"
                 type="number"
                 min={0}
                 step={500}
@@ -429,14 +429,14 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('privateStudyFundDeposits', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">תקרה: 18,840 ₪/שנה</p>
+              <p className="text-xs text-ink/70 mt-1">תקרה: 18,840 ₪/שנה</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-a74069" className="block text-sm font-medium text-ink/70 mb-2">
                 ביטוח חיים - פרמיה שנתית (₪)
               </label>
-              <input
+              <input id="taxrefundcalculator-a74069"
                 type="number"
                 min={0}
                 step={100}
@@ -444,14 +444,14 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('lifeInsurancePremium', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">זיכוי 25%, תקרה 12,000 ₪</p>
+              <p className="text-xs text-ink/70 mt-1">זיכוי 25%, תקרה 12,000 ₪</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-45d232" className="block text-sm font-medium text-ink/70 mb-2">
                 ביטוח אובדן כושר עבודה (₪/שנה)
               </label>
-              <input
+              <input id="taxrefundcalculator-45d232"
                 type="number"
                 min={0}
                 step={100}
@@ -459,14 +459,14 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('disabilityInsurancePremium', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">ניכוי עד 5% מההכנסה</p>
+              <p className="text-xs text-ink/70 mt-1">ניכוי עד 5% מההכנסה</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-6dd346" className="block text-sm font-medium text-ink/70 mb-2">
                 הוצאות לימודים מקצועיים (₪/שנה)
               </label>
-              <input
+              <input id="taxrefundcalculator-6dd346"
                 type="number"
                 min={0}
                 step={500}
@@ -474,14 +474,14 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('educationExpenses', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">לימודים הקשורים לעיסוק</p>
+              <p className="text-xs text-ink/70 mt-1">לימודים הקשורים לעיסוק</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-191506" className="block text-sm font-medium text-ink/70 mb-2">
                 שכר טרחה רו"ח / יועץ מס (₪/שנה) 🆕
               </label>
-              <input
+              <input id="taxrefundcalculator-191506"
                 type="number"
                 min={0}
                 step={100}
@@ -489,7 +489,7 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('accountantFees', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">הוצאה מותרת בחישוב המס</p>
+              <p className="text-xs text-ink/70 mt-1">הוצאה מותרת בחישוב המס</p>
             </div>
           </div>
         )}
@@ -516,7 +516,7 @@ export function TaxRefundCalculator() {
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
                 placeholder="הוצאות מעון שנתיות (₪)"
               />
-              <p className="text-[10px] text-ink/60 mt-1">
+              <p className="text-[10px] text-ink/70 mt-1">
                 תקרה ~8,400 ₪ לכל ילד מתחת ל-5
               </p>
             </div>
@@ -537,17 +537,17 @@ export function TaxRefundCalculator() {
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
                 placeholder="סך הוצאות רפואיות שנתיות (₪)"
               />
-              <p className="text-[10px] text-ink/60 mt-1">
+              <p className="text-[10px] text-ink/70 mt-1">
                 סף לניכוי בהכנסתך: ~
                 {(input.annualGrossSalary * 0.125).toLocaleString()} ₪
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-9705bb" className="block text-sm font-medium text-ink/70 mb-2">
                 מזונות לבן/בת זוג גרוש (₪/שנה) 🆕
               </label>
-              <input
+              <input id="taxrefundcalculator-9705bb"
                 type="number"
                 min={0}
                 step={1000}
@@ -555,7 +555,7 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('alimonyPaid', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">הוצאה מוכרת רק למשלם</p>
+              <p className="text-xs text-ink/70 mt-1">הוצאה מוכרת רק למשלם</p>
             </div>
           </div>
         )}
@@ -566,10 +566,10 @@ export function TaxRefundCalculator() {
             <h3 className="text-lg font-bold text-ink">🎁 תרומות ופריפריה</h3>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-3a5ae6" className="block text-sm font-medium text-ink/70 mb-2">
                 תרומות לעמותות (סעיף 46) - ₪/שנה
               </label>
-              <input
+              <input id="taxrefundcalculator-3a5ae6"
                 type="number"
                 min={0}
                 step={50}
@@ -577,16 +577,16 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('donations', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 זיכוי 35%. מינימום 207 ₪/שנה. דרוש אישור 46.
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-5dfccc" className="block text-sm font-medium text-ink/70 mb-2">
                 תרומות פוליטיות (סעיף 46א) - ₪/שנה 🆕
               </label>
-              <input
+              <input id="taxrefundcalculator-5dfccc"
                 type="number"
                 min={0}
                 step={100}
@@ -594,7 +594,7 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('politicalDonations', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 זיכוי 35% עד תקרה של 12,800 ₪/שנה
               </p>
             </div>
@@ -614,7 +614,7 @@ export function TaxRefundCalculator() {
                 <option value="tier-b">קו עימות חלקי (11%)</option>
                 <option value="tier-c">קו עימות מלא (13%)</option>
               </select>
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 דרוש 12 חודשי תושבות רצופים
               </p>
             </div>
@@ -630,10 +630,10 @@ export function TaxRefundCalculator() {
             </p>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-665260" className="block text-sm font-medium text-ink/70 mb-2">
                 סך הכנסות הון שנתיות (₪)
               </label>
-              <input
+              <input id="taxrefundcalculator-665260"
                 type="number"
                 min={0}
                 step={1000}
@@ -641,16 +641,16 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('capitalIncome', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 דיב' מניות, ריבית פיקדונות, רווחי הון משוק ההון
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="taxrefundcalculator-1abc6e" className="block text-sm font-medium text-ink/70 mb-2">
                 מס שנוכה על הכנסות הון (₪)
               </label>
-              <input
+              <input id="taxrefundcalculator-1abc6e"
                 type="number"
                 min={0}
                 step={500}
@@ -658,7 +658,7 @@ export function TaxRefundCalculator() {
                 onChange={(e) => update('capitalTaxWithheld', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 לרוב הבנק/ברוקר ניכה אוטומטית 25% - אם פחות, אתה חייב; אם יותר - מגיע החזר
               </p>
             </div>
@@ -765,10 +765,10 @@ export function TaxRefundCalculator() {
             <Row
               label="החזר מס הון"
               value={`+${formatCurrency(result.capitalGainsRefund)}`}
-              className="text-emerald-700"
+              className="text-emerald-800"
             />
           )}
-          <div className="pt-2 mt-2 border-t-2 border-emerald-400 flex justify-between font-bold text-emerald-700">
+          <div className="pt-2 mt-2 border-t-2 border-emerald-400 flex justify-between font-bold text-emerald-800">
             <span>החזר משוער:</span>
             <span>{formatCurrency(result.estimatedRefund)}</span>
           </div>
@@ -834,7 +834,7 @@ function NumField({
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full px-2 py-1.5 border border-ink/15 rounded-none text-sm"
       />
-      {hint && <p className="text-[10px] text-ink/60 mt-1">{hint}</p>}
+      {hint && <p className="text-[10px] text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }

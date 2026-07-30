@@ -92,7 +92,7 @@ export function CashFlowTable() {
                     <td className="px-3 py-2 font-medium">{m.monthName}</td>
                     <td
                       className={`px-3 py-2 ${
-                        m.openingBalance < 0 ? 'text-red-600' : ''
+                        m.openingBalance < 0 ? 'text-red-700' : ''
                       }`}
                     >
                       {fmt(m.openingBalance)}
@@ -100,7 +100,7 @@ export function CashFlowTable() {
                     <td className="px-3 py-2 text-green-700">
                       {fmt(m.incomeReceived)}
                     </td>
-                    <td className="px-3 py-2 text-red-600">
+                    <td className="px-3 py-2 text-red-700">
                       ({fmt(m.expensesPaid)})
                     </td>
                     <td

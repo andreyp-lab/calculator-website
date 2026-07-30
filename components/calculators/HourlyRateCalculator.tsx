@@ -316,7 +316,7 @@ export function HourlyRateCalculator() {
                       onChange={(e) => updateQuick('profitMargin', Number(e.target.value))}
                       className="w-full accent-gold mt-1"
                     />
-                    <div className="flex justify-between text-xs text-ink/45 mt-0.5">
+                    <div className="flex justify-between text-xs text-ink/70 mt-0.5">
                       <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
                     </div>
                   </Field>
@@ -378,7 +378,7 @@ export function HourlyRateCalculator() {
                   <SmallField label="ביטוח בריאות ₪" value={detailedInput.healthInsurance} onChange={(v) => updateDetailed('healthInsurance', v)} />
                   <SmallField label="ביטוח אחריות מקצועית ₪" value={detailedInput.professionalInsurance} onChange={(v) => updateDetailed('professionalInsurance', v)} />
                 </div>
-                <p className="text-xs text-ink/60 mt-2">
+                <p className="text-xs text-ink/70 mt-2">
                   סה"כ קבועות: <strong>{formatCurrency(detailedFull.fixedCostsMonthly)}/חודש</strong>
                 </p>
               </Section>
@@ -389,7 +389,7 @@ export function HourlyRateCalculator() {
                   <SmallField label="פגישות + נסיעות ₪" value={detailedInput.meetingExpenses} onChange={(v) => updateDetailed('meetingExpenses', v)} />
                   <SmallField label="קורסים + השתלמויות ₪" value={detailedInput.training} onChange={(v) => updateDetailed('training', v)} />
                 </div>
-                <p className="text-xs text-ink/60 mt-2">
+                <p className="text-xs text-ink/70 mt-2">
                   סה"כ משתנות: <strong>{formatCurrency(detailedFull.variableCostsMonthly)}/חודש</strong>
                 </p>
               </Section>
@@ -502,7 +502,7 @@ export function HourlyRateCalculator() {
                     onChange={(e) => setValueInput((p) => ({ ...p, valueCapturePercent: Number(e.target.value) }))}
                     className="w-full accent-gold"
                   />
-                  <div className="flex justify-between text-xs text-ink/45 mt-0.5">
+                  <div className="flex justify-between text-xs text-ink/70 mt-0.5">
                     <span>1%</span><span>10%</span><span>20%</span><span>30%</span><span>50%</span>
                   </div>
                 </Field>
@@ -586,7 +586,7 @@ export function HourlyRateCalculator() {
                 <Row label="סה״כ עלות" value={formatCurrency(detailedFull.totalCostMonthly)} bold />
                 <Row label="הכנסה נדרשת (עם רווח)" value={formatCurrency(detailedFull.requiredRevenueMonthly)} bold color="emerald" />
               </div>
-              <p className="text-xs text-ink/60 pt-1">
+              <p className="text-xs text-ink/70 pt-1">
                 שיעור מס אפקטיבי: {(detailedFull.effectiveTaxRate * 100).toFixed(1)}%
               </p>
             </div>
@@ -663,7 +663,7 @@ export function HourlyRateCalculator() {
 
             {/* Rate vs Billable Hours Chart */}
             <h3 className="font-bold text-ink mb-2">תעריף לפי שעות חיוב</h3>
-            <p className="text-xs text-ink/60 mb-3">ככל שפחות שעות חיוב — התעריף חייב לעלות</p>
+            <p className="text-xs text-ink/70 mb-3">ככל שפחות שעות חיוב — התעריף חייב לעלות</p>
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={rateVsBillableData}>
@@ -689,7 +689,7 @@ export function HourlyRateCalculator() {
           <div>
             <h3 className="font-bold text-ink mb-2">פירוט עלויות חודשי (מצב מפורט)</h3>
             {mainTab !== 'detailed' && (
-              <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded p-2 mb-4">
+              <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded p-2 mb-4">
                 עבור לטאב &quot;מפורט&quot; לפירוט מלא של הוצאות ומסים.
               </p>
             )}
@@ -738,8 +738,8 @@ export function HourlyRateCalculator() {
                   ))}
                   <tr className="bg-emerald-50 font-bold">
                     <td className="p-2 border border-ink/15">סה"כ</td>
-                    <td className="p-2 border border-ink/15 tabular-nums text-emerald-700">{formatCurrency(detailedFull.totalCostMonthly)}</td>
-                    <td className="p-2 border border-ink/15 tabular-nums text-emerald-700">{formatCurrency(detailedFull.totalCostMonthly * 12)}</td>
+                    <td className="p-2 border border-ink/15 tabular-nums text-emerald-800">{formatCurrency(detailedFull.totalCostMonthly)}</td>
+                    <td className="p-2 border border-ink/15 tabular-nums text-emerald-800">{formatCurrency(detailedFull.totalCostMonthly * 12)}</td>
                     <td className="p-2 border border-ink/15">100%</td>
                   </tr>
                 </tbody>
@@ -752,7 +752,7 @@ export function HourlyRateCalculator() {
         {resultTab === 'benchmark' && (
           <div>
             <h3 className="font-bold text-ink mb-2">תעריפי שוק 2026 — ישראל (₪/שעה)</h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               הקו האדום הוא התעריף שלך ({formatCurrency(activeRate)}/שעה)
             </p>
             <div className="h-80">
@@ -794,7 +794,7 @@ export function HourlyRateCalculator() {
         {resultTab === 'tiers' && (
           <div>
             <h3 className="font-bold text-ink mb-2">מחיר לפי סוג לקוח / פרויקט</h3>
-            <p className="text-xs text-ink/60 mb-4">בסיס: {formatCurrency(activeRate)}/שעה</p>
+            <p className="text-xs text-ink/70 mb-4">בסיס: {formatCurrency(activeRate)}/שעה</p>
             <div className="grid md:grid-cols-2 gap-3">
               <TierCard
                 label="לקוח חדש (סטנדרט)"
@@ -899,7 +899,7 @@ export function HourlyRateCalculator() {
                 <li>• ביטוח אחריות מקצועית</li>
                 <li>• אין בונוסים, רכב חברה, נסיעות מעסיק</li>
               </ul>
-              <p className="text-xs text-ink/60 pt-1">
+              <p className="text-xs text-ink/70 pt-1">
                 נקודת שיווי-משקל: <strong>{formatCurrency(salaryComparison.breakEvenHourlyRate)}/שעה</strong> — מתחת לזה שכיר עדיף נטו.
               </p>
             </div>
@@ -961,7 +961,7 @@ function BillableWizard({
           <span>- חופשה + מחלה + חג:</span>
           <span className="font-medium">-{result.vacationDays + result.sickDays + result.holidayDays} ימים</span>
         </div>
-        <div className="flex justify-between text-amber-700">
+        <div className="flex justify-between text-amber-800">
           <span>- ניהול / שיווק:</span>
           <span className="font-medium">-{result.nonBillableAdminDays} ימים</span>
         </div>
@@ -1024,11 +1024,11 @@ function PrimaryResultCard({
     return (
       <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-5">
         <p className="text-sm font-medium text-emerald-800 mb-1">תעריף שעתי נדרש (מפורט)</p>
-        <p className="text-4xl font-bold text-emerald-700 tabular-nums">
+        <p className="text-4xl font-bold text-emerald-800 tabular-nums">
           {formatCurrency(detailedResult.requiredHourlyRate)}
           <span className="text-lg font-normal">/שעה</span>
         </p>
-        <p className="text-sm text-emerald-600 mt-1">
+        <p className="text-sm text-emerald-800 mt-1">
           כולל מע"מ: {formatCurrency(detailedResult.requiredHourlyRateWithVat)}
         </p>
       </div>
@@ -1084,7 +1084,7 @@ function BenchmarkBar({
           title="התעריף שלך"
         />
       </div>
-      <div className="flex justify-between text-xs text-ink/60 mt-1">
+      <div className="flex justify-between text-xs text-ink/70 mt-1">
         <span>{min}₪</span>
         <span>{mid}₪ ממוצע</span>
         <span>{max}₪</span>
@@ -1149,8 +1149,8 @@ function InfoCard({
 }) {
   const colorMap = {
     blue: 'bg-cream-2 border-ink/15 text-gold',
-    emerald: 'bg-emerald-50 border-emerald-200 text-emerald-700',
-    amber: 'bg-amber-50 border-amber-200 text-amber-700',
+    emerald: 'bg-emerald-50 border-emerald-200 text-emerald-800',
+    amber: 'bg-amber-50 border-amber-200 text-amber-800',
     gray: 'bg-cream-2 border-ink/15 text-ink',
     red: 'bg-red-50 border-red-200 text-red-700',
   };
@@ -1158,7 +1158,7 @@ function InfoCard({
     <div className={`border-2 rounded-none p-4 ${colorMap[color].split(' ').slice(0, 2).join(' ')}`}>
       <p className="text-xs font-medium text-ink/70 mb-1">{title}</p>
       <p className={`text-xl font-bold tabular-nums ${colorMap[color].split(' ')[2]}`}>{value}</p>
-      {subtitle && <p className="text-xs text-ink/60 mt-0.5">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-ink/70 mt-0.5">{subtitle}</p>}
     </div>
   );
 }
@@ -1201,9 +1201,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-0.5">{hint}</p>}
+      <label className="block text-sm font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-0.5">{hint}</p>}
     </div>
   );
 }
@@ -1283,10 +1285,10 @@ function Row({
   color?: 'emerald' | 'blue' | 'red' | 'amber';
 }) {
   const colorMap = {
-    emerald: 'text-emerald-700',
+    emerald: 'text-emerald-800',
     blue: 'text-gold',
-    red: 'text-red-600',
-    amber: 'text-amber-700',
+    red: 'text-red-700',
+    amber: 'text-amber-800',
   };
   const valueClass = color ? colorMap[color] : 'text-ink';
   return (

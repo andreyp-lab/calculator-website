@@ -102,13 +102,13 @@ export function WorkingCapitalOptimizer() {
         <div className="text-sm text-ink/70 mb-1">השפעה על מזומן (vs מצב נוכחי)</div>
         <div
           className={`text-4xl font-bold ${
-            cashImpact >= 0 ? 'text-emerald-700' : 'text-red-700'
+            cashImpact >= 0 ? 'text-emerald-800' : 'text-red-700'
           }`}
         >
           {cashImpact >= 0 ? '+' : ''}
           ₪{fmt(cashImpact)}
         </div>
-        <div className="text-xs text-ink/60 mt-2">
+        <div className="text-xs text-ink/70 mt-2">
           {cashImpact > 0
             ? `🎉 משתחרר ${fmt(cashImpact)} מזומן בהון חוזר`
             : cashImpact < 0
@@ -272,11 +272,11 @@ function SliderRow({
       <div className="flex items-center justify-between mb-1">
         <div>
           <div className="font-medium text-sm">{label}</div>
-          <div className="text-xs text-ink/50">{description}</div>
+          <div className="text-xs text-ink/70">{description}</div>
         </div>
         <div className="text-right">
           <div className="text-2xl font-bold">{value}</div>
-          <div className={`text-xs ${better ? 'text-emerald-700' : delta === 0 ? 'text-ink/60' : 'text-amber-700'}`}>
+          <div className={`text-xs ${better ? 'text-emerald-800' : delta === 0 ? 'text-ink/70' : 'text-amber-800'}`}>
             {delta === 0 ? 'ללא שינוי' : `${delta > 0 ? '+' : ''}${delta} ימים`}
           </div>
         </div>
@@ -289,7 +289,7 @@ function SliderRow({
         onChange={(e) => onChange(parseInt(e.target.value))}
         className={`w-full ${colorMap[color]}`}
       />
-      <div className="flex justify-between text-[10px] text-ink/40 mt-0.5">
+      <div className="flex justify-between text-[10px] text-ink/70 mt-0.5">
         <span>{min}</span>
         <span className="font-bold">בסיס: {baseline}</span>
         <span>{max}</span>
@@ -335,7 +335,7 @@ function ComparisonRow({
       <td className="p-3 text-center">{fmt(optimized)} {unit}</td>
       <td
         className={`p-3 text-center ${
-          delta === 0 ? 'text-ink/60' : better ? 'text-emerald-700' : 'text-red-700'
+          delta === 0 ? 'text-ink/70' : better ? 'text-emerald-800' : 'text-red-700'
         }`}
       >
         {delta === 0 ? '—' : `${delta > 0 ? '+' : ''}${fmt(delta)} ${unit}`}

@@ -24,7 +24,7 @@ export default function NotFound() {
         <div className="text-8xl font-black text-ink/10 mb-2 select-none">404</div>
 
         <h1 className="text-2xl font-bold text-ink mb-3">הדף לא נמצא</h1>
-        <p className="text-ink/60 mb-8">
+        <p className="text-ink/70 mb-8">
           ייתכן שהכתובת שגויה או שהדף הוסר. אנחנו כאן כדי לעזור — בחר מהמחשבונים הפופולריים:
         </p>
 

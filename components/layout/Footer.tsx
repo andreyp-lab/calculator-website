@@ -13,9 +13,9 @@ export function Footer() {
             <div className="font-serif font-black text-2xl leading-none mb-1">
               <span className="text-cream">חשבונ</span><span className="text-gold-light">אי</span>
             </div>
-            <span className="font-mono text-[10px] text-cream/40 tracking-[0.14em] uppercase">/ FINSCHOOL</span>
+            <span className="font-mono text-[10px] text-cream/60 tracking-[0.14em] uppercase">/ FINSCHOOL</span>
           </div>
-          <p className="font-mono text-[10px] text-cream/35 tracking-[0.12em] uppercase">
+          <p className="font-mono text-[10px] text-cream/60 tracking-[0.12em] uppercase">
             כלי פיננסים חינמיים לישראלים ✦ 2026
           </p>
         </div>
@@ -25,7 +25,7 @@ export function Footer() {
 
           {/* 1. שכירים */}
           <div>
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold mb-4">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
               // שכירים
             </h3>
             <ul className="space-y-2.5">
@@ -54,7 +54,7 @@ export function Footer() {
 
           {/* 2. עצמאיים */}
           <div>
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold mb-4">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
               // עצמאיים
             </h3>
             <ul className="space-y-2.5">
@@ -83,7 +83,7 @@ export function Footer() {
 
           {/* 3. הלוואות ונדל"ן */}
           <div>
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold mb-4">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
               // הלוואות ונדל&quot;ן
             </h3>
             <ul className="space-y-2.5">
@@ -112,7 +112,7 @@ export function Footer() {
 
           {/* 4. על האתר */}
           <div>
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold mb-4">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
               // על האתר
             </h3>
             <ul className="space-y-2.5">
@@ -185,7 +185,7 @@ export function Footer() {
           <div className="flex flex-wrap items-start gap-x-8 gap-y-4">
 
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">// כלים לעסקים</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light">// כלים לעסקים</span>
               <Link href="/tools" className="font-mono text-[11px] text-cream/55 hover:text-gold-light transition-colors">
                 מרכז הכלים
               </Link>
@@ -204,7 +204,7 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">// עדכוני שוק</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light">// עדכוני שוק</span>
               <Link href="/news/prime-rate" className="font-mono text-[11px] text-cream/55 hover:text-gold-light transition-colors">
                 פריים
               </Link>
@@ -227,10 +227,10 @@ export function Footer() {
 
         {/* Bottom bar: copyright + disclaimer */}
         <div className="border-t border-cream/10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <p className="font-sans text-xs text-cream/35">
+          <p className="font-sans text-xs text-cream/60">
             © {currentYear} חשבונאי ✦ כל הזכויות שמורות
           </p>
-          <p className="font-sans text-xs text-cream/35 sm:text-end max-w-md">
+          <p className="font-sans text-xs text-cream/60 sm:text-end max-w-md">
             התוכן באתר אינו ייעוץ משפטי או מקצועי. המחשבונים מבוססים על החוק הישראלי {currentYear}.
           </p>
         </div>

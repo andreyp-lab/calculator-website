@@ -258,7 +258,7 @@ export function DCFValuation() {
           <div className="p-3 space-y-2 text-sm">
             {state.fcfs.map((fcf, i) => (
               <div key={i} className="flex items-center gap-2">
-                <span className="text-xs text-ink/60 w-16">שנה {i + 1}:</span>
+                <span className="text-xs text-ink/70 w-16">שנה {i + 1}:</span>
                 <input
                   type="number"
                   value={fcf}
@@ -363,7 +363,7 @@ export function DCFValuation() {
                     <span>− Net Debt:</span>
                     <span>{fmt(state.netDebt)}</span>
                   </div>
-                  <div className="flex justify-between font-bold border-t border-ink/15 pt-1 text-emerald-700">
+                  <div className="flex justify-between font-bold border-t border-ink/15 pt-1 text-emerald-800">
                     <span>= Equity Value:</span>
                     <span>{fmt(result.equityValue)}</span>
                   </div>
@@ -407,7 +407,7 @@ export function DCFValuation() {
                             isBaseRow
                               ? 'bg-gold/20 font-bold'
                               : Number.isNaN(cell.equityValue)
-                                ? 'bg-red-50 text-red-600'
+                                ? 'bg-red-50 text-red-700'
                                 : ''
                           }`}
                         >
@@ -464,15 +464,15 @@ function SummaryCard({
 }) {
   const colorMap: Record<string, { bg: string; text: string }> = {
     indigo: { bg: 'bg-cream-2 border-ink/15', text: 'text-gold' },
-    emerald: { bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-700' },
+    emerald: { bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-800' },
     rose: { bg: 'bg-cream-2 border-ink/15', text: 'text-ink' },
   };
   const c = colorMap[color];
   return (
     <div className={`${c.bg} border-2 p-3`}>
-      <div className="text-xs text-ink/60 mb-1">{label}</div>
+      <div className="text-xs text-ink/70 mb-1">{label}</div>
       <div className={`text-2xl font-bold ${c.text}`}>{value}</div>
-      {sub && <div className="text-[10px] text-ink/45 mt-1">{sub}</div>}
+      {sub && <div className="text-[10px] text-ink/70 mt-1">{sub}</div>}
     </div>
   );
 }

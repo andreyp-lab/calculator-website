@@ -134,7 +134,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
         <div className="flex items-center gap-2">
           <Database className="w-5 h-5 text-ink-mid" />
           <h3 className="font-bold text-lg text-ink">פריטי תזרים</h3>
-          <span className="text-sm text-ink/60">({data.items.length} פריטים)</span>
+          <span className="text-sm text-ink/70">({data.items.length} פריטים)</span>
         </div>
         <div className="flex gap-2">
           {data.items.length === 0 && (
@@ -160,11 +160,11 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
       {data.items.length > 0 && (
         <div className="grid grid-cols-3 gap-2 mb-4">
           <div className="bg-emerald-50 rounded-none p-2 text-center">
-            <div className="text-xs text-ink/60">תקבולים צפויים</div>
-            <div className="text-lg font-bold text-emerald-700">{fmt(totalIn)}</div>
+            <div className="text-xs text-ink/70">תקבולים צפויים</div>
+            <div className="text-lg font-bold text-emerald-800">{fmt(totalIn)}</div>
           </div>
           <div className="bg-red-50 rounded-none p-2 text-center">
-            <div className="text-xs text-ink/60">תשלומים צפויים</div>
+            <div className="text-xs text-ink/70">תשלומים צפויים</div>
             <div className="text-lg font-bold text-red-700">{fmt(totalOut)}</div>
           </div>
           <div
@@ -172,10 +172,10 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
               totalIn - totalOut >= 0 ? 'bg-cream-2' : 'bg-amber-50'
             } rounded-none p-2 text-center`}
           >
-            <div className="text-xs text-ink/60">תזרים נטו</div>
+            <div className="text-xs text-ink/70">תזרים נטו</div>
             <div
               className={`text-lg font-bold ${
-                totalIn - totalOut >= 0 ? 'text-ink' : 'text-amber-700'
+                totalIn - totalOut >= 0 ? 'text-ink' : 'text-amber-800'
               }`}
             >
               {fmt(totalIn - totalOut)}
@@ -221,8 +221,8 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
             </div>
 
             <div>
-              <label className="block text-xs text-ink/70 mb-1">תאריך *</label>
-              <input
+              <label htmlFor="solocashflowmanager-d1a645" className="block text-xs text-ink/70 mb-1">תאריך *</label>
+              <input id="solocashflowmanager-d1a645"
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
@@ -231,8 +231,8 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
             </div>
 
             <div>
-              <label className="block text-xs text-ink/70 mb-1">סכום (₪) *</label>
-              <input
+              <label htmlFor="solocashflowmanager-760cb3" className="block text-xs text-ink/70 mb-1">סכום (₪) *</label>
+              <input id="solocashflowmanager-760cb3"
                 type="number"
                 value={form.amount || ''}
                 onChange={(e) => setForm({ ...form, amount: parseFloat(e.target.value) || 0 })}
@@ -242,8 +242,8 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-xs text-ink/70 mb-1">תיאור *</label>
-              <input
+              <label htmlFor="solocashflowmanager-f1a804" className="block text-xs text-ink/70 mb-1">תיאור *</label>
+              <input id="solocashflowmanager-f1a804"
                 type="text"
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -293,8 +293,8 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
 
             {form.recurring !== 'once' && (
               <div>
-                <label className="block text-xs text-ink/70 mb-1">תאריך סיום (אופציונלי)</label>
-                <input
+                <label htmlFor="solocashflowmanager-767c4c" className="block text-xs text-ink/70 mb-1">תאריך סיום (אופציונלי)</label>
+                <input id="solocashflowmanager-767c4c"
                   type="date"
                   value={form.recurringEnd ?? ''}
                   onChange={(e) =>
@@ -326,7 +326,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
 
       {/* Items List */}
       {data.items.length === 0 ? (
-        <div className="text-center py-8 text-ink/60">
+        <div className="text-center py-8 text-ink/70">
           <Database className="w-12 h-12 mx-auto mb-2 opacity-30" />
           <p>אין פריטים. לחץ "הוסף פריט" או "טען דוגמה".</p>
         </div>
@@ -355,7 +355,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                     <td className="p-2 text-xs text-ink/70">{item.date}</td>
                     <td className="p-2">
                       {item.type === 'in' ? (
-                        <span className="flex items-center gap-1 text-emerald-700">
+                        <span className="flex items-center gap-1 text-emerald-800">
                           <ArrowDownCircle className="w-4 h-4" />
                           תקבול
                         </span>
@@ -367,7 +367,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                       )}
                     </td>
                     <td className="p-2 font-medium">{item.description}</td>
-                    <td className="p-2 text-xs text-ink/60">{catLabel}</td>
+                    <td className="p-2 text-xs text-ink/70">{catLabel}</td>
                     <td className="p-2 text-xs">
                       <span className="bg-cream-2 px-2 py-0.5 rounded-none">
                         {RECURRING_LABELS[item.recurring]}
@@ -375,7 +375,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                     </td>
                     <td
                       className={`p-2 text-left font-bold ${
-                        item.type === 'in' ? 'text-emerald-700' : 'text-red-700'
+                        item.type === 'in' ? 'text-emerald-800' : 'text-red-700'
                       }`}
                     >
                       {item.type === 'in' ? '+' : '-'}
@@ -391,7 +391,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
                         </button>
                         <button
                           onClick={() => deleteItem(item.id)}
-                          className="p-1 text-red-600 hover:bg-red-50 rounded-none"
+                          className="p-1 text-red-700 hover:bg-red-50 rounded-none"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>

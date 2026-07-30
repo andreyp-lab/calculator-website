@@ -42,14 +42,14 @@ export function PLSummary() {
         {/* COGS */}
         <div className="flex justify-between items-center py-2 px-3">
           <span className="text-ink/70">עלות המכר (COGS)</span>
-          <span className="text-red-600">({fmt(totals.cogs)})</span>
+          <span className="text-red-700">({fmt(totals.cogs)})</span>
         </div>
 
         {/* רווח גולמי */}
         <div className="flex justify-between items-center py-2 bg-cream-2 rounded-none px-3 border-r-4 border-gold">
           <div>
             <span className="font-bold text-ink">רווח גולמי</span>
-            <span className="text-xs text-ink/60 mr-2">({formatPercent(totals.grossMargin)})</span>
+            <span className="text-xs text-ink/70 mr-2">({formatPercent(totals.grossMargin)})</span>
           </div>
           <span className="font-bold text-gold">{fmt(totals.grossProfit)}</span>
         </div>
@@ -74,7 +74,7 @@ export function PLSummary() {
         <div className="flex justify-between items-center py-2 bg-cream-2 rounded-none px-3 border-r-4 border-ink">
           <div>
             <span className="font-bold text-ink">רווח תפעולי (EBIT)</span>
-            <span className="text-xs text-ink/60 mr-2">
+            <span className="text-xs text-ink/70 mr-2">
               ({formatPercent(totals.operatingMargin)})
             </span>
           </div>
@@ -96,7 +96,7 @@ export function PLSummary() {
         {/* הוצאות מימון */}
         <div className="flex justify-between items-center py-2 px-3 text-sm">
           <span className="text-ink/70">הוצאות מימון</span>
-          <span className="text-red-600">({fmt(totals.financial)})</span>
+          <span className="text-red-700">({fmt(totals.financial)})</span>
         </div>
 
         {/* רווח לפני מס */}
@@ -110,7 +110,7 @@ export function PLSummary() {
         {/* מס */}
         <div className="flex justify-between items-center py-2 px-3 text-sm">
           <span className="text-ink/70">מס ({settings.taxRate}%)</span>
-          <span className="text-red-600">({fmt(totals.tax)})</span>
+          <span className="text-red-700">({fmt(totals.tax)})</span>
         </div>
 
         {/* רווח נקי */}
@@ -144,19 +144,19 @@ export function PLSummary() {
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 pt-4 border-t border-ink/10">
           <div className="bg-cream-2 p-3 rounded-none text-center">
-            <div className="text-xs text-ink/60">מרווח גולמי</div>
+            <div className="text-xs text-ink/70">מרווח גולמי</div>
             <div className="font-bold text-gold">{formatPercent(totals.grossMargin)}</div>
           </div>
           <div className="bg-cream-2 p-3 rounded-none text-center">
-            <div className="text-xs text-ink/60">מרווח תפעולי</div>
+            <div className="text-xs text-ink/70">מרווח תפעולי</div>
             <div className="font-bold text-ink">{formatPercent(totals.operatingMargin)}</div>
           </div>
           <div className="bg-green-50 p-3 rounded-none text-center">
-            <div className="text-xs text-ink/60">מרווח נקי</div>
+            <div className="text-xs text-ink/70">מרווח נקי</div>
             <div className="font-bold text-green-700">{formatPercent(totals.netMargin)}</div>
           </div>
           <div className="bg-cream-2 p-3 rounded-none text-center">
-            <div className="text-xs text-ink/60">מרווח EBITDA</div>
+            <div className="text-xs text-ink/70">מרווח EBITDA</div>
             <div className="font-bold text-gold">{formatPercent(totals.ebitdaMargin)}</div>
           </div>
         </div>

@@ -98,7 +98,7 @@ export default function ToolsLandingPage() {
               <ArrowLeft className="w-5 h-5" />
             </Link>
 
-            <p className="text-xs text-cream/40 mt-4">
+            <p className="text-xs text-cream/60 mt-4">
               4 מסלולי כניסה לבחירה • הנתונים נשמרים מקומית • חינם לחלוטין
             </p>
           </div>
@@ -180,9 +180,9 @@ export default function ToolsLandingPage() {
           <h2 className="text-xl font-bold text-ink">
             מחשבונים נוספים (עצמאיים)
           </h2>
-          <span className="font-mono text-xs text-ink/40 uppercase tracking-[0.1em]">לא חלק מהמערכת המאוחדת</span>
+          <span className="font-mono text-xs text-ink/70 uppercase tracking-[0.1em]">לא חלק מהמערכת המאוחדת</span>
         </div>
-        <p className="text-sm text-ink/60 mb-5">
+        <p className="text-sm text-ink/70 mb-5">
           מחשבונים מהירים לבדיקות נקודתיות — מתאימים אם אתה לא רוצה לפתוח פרויקט שלם.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -202,7 +202,7 @@ export default function ToolsLandingPage() {
                   <h3 className="font-bold text-base">{tool.title}</h3>
                 </div>
                 <div className="p-3">
-                  <p className="text-xs text-ink/60 mb-2 line-clamp-2">{tool.description}</p>
+                  <p className="text-xs text-ink/70 mb-2 line-clamp-2">{tool.description}</p>
                   <div className="text-gold group-hover:text-gold-2 text-xs flex items-center gap-1 transition">
                     <span>פתח</span>
                     <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition" />

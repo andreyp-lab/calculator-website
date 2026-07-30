@@ -202,7 +202,7 @@ function DSCRMethodCard({
           {method.value > 99 ? '∞' : method.value.toFixed(2)}
         </span>
       </div>
-      <div className="text-[10px] text-ink/60 mb-1">{method.formula}</div>
+      <div className="text-[10px] text-ink/70 mb-1">{method.formula}</div>
       <div className={`text-xs text-${statusColor}-700`}>{method.interpretation.text}</div>
     </div>
   );
@@ -232,15 +232,15 @@ function BankAssessmentCard({
       <h4 className={`font-bold text-${approvalColor}-900 mb-3`}>הערכת בנק</h4>
       <div className="grid md:grid-cols-3 gap-3 mb-3">
         <div>
-          <div className="text-xs text-ink/60">המלצת אישור</div>
+          <div className="text-xs text-ink/70">המלצת אישור</div>
           <div className={`font-bold text-${approvalColor}-800`}>{approval}</div>
         </div>
         <div>
-          <div className="text-xs text-ink/60">רמת ביטחון</div>
+          <div className="text-xs text-ink/70">רמת ביטחון</div>
           <div className="font-bold">{confidence}</div>
         </div>
         <div>
-          <div className="text-xs text-ink/60">LTV מקסימלי</div>
+          <div className="text-xs text-ink/70">LTV מקסימלי</div>
           <div className="font-bold">{maxLTV}%</div>
         </div>
       </div>
@@ -257,14 +257,14 @@ function BankAssessmentCard({
 
 function CapacityBox({ label, value, color }: { label: string; value: string; color: string }) {
   const colorMap: Record<string, { bg: string; text: string }> = {
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800' },
     ink: { bg: 'bg-cream-2', text: 'text-ink' },
-    amber: { bg: 'bg-amber-50', text: 'text-amber-700' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-800' },
   };
   const c = colorMap[color];
   return (
     <div className={`${c.bg} rounded-none p-3 text-center border border-ink/15`}>
-      <div className="text-xs text-ink/60 mb-1">{label}</div>
+      <div className="text-xs text-ink/70 mb-1">{label}</div>
       <div className={`text-xl font-bold ${c.text}`}>{value}</div>
     </div>
   );

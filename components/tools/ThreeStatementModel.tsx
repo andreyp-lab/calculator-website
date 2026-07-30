@@ -170,7 +170,7 @@ export function ThreeStatementModelUI() {
                 </button>
               </>
             )}
-            <div className="text-xs text-ink/60">
+            <div className="text-xs text-ink/70">
               {historical.length} שנות היסטוריה ← {assumptions.yearsToProject} שנות חיזוי
             </div>
           </div>
@@ -335,7 +335,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
             </button>
           </div>
           {!bsValid && (
-            <span className="flex items-center gap-1 text-xs text-amber-700">
+            <span className="flex items-center gap-1 text-xs text-amber-800">
               <AlertCircle className="w-3.5 h-3.5" />
               מאזן לא מאוזן
             </span>
@@ -344,7 +344,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
         {canRemove && (
           <button
             onClick={onRemove}
-            className="text-xs text-red-600 hover:bg-red-50 px-2 py-1 rounded-none"
+            className="text-xs text-red-700 hover:bg-red-50 px-2 py-1 rounded-none"
           >
             הסר שנה
           </button>
@@ -422,7 +422,7 @@ function NumberField({ label, value, onChange }: { label: string; value: number;
 function ReadOnlyField({ label, value, highlight }: { label: string; value: number; highlight?: boolean }) {
   return (
     <div className={`flex items-center gap-2 ${highlight ? 'bg-cream-2 px-2 py-1 rounded-none' : ''}`}>
-      <label className={`flex-1 text-xs ${highlight ? 'font-bold text-ink' : 'text-ink/60'}`}>{label}</label>
+      <label className={`flex-1 text-xs ${highlight ? 'font-bold text-ink' : 'text-ink/70'}`}>{label}</label>
       <span className={`w-32 text-sm text-left ${highlight ? 'font-bold text-ink' : 'text-ink/70'}`}>
         {Math.round(value).toLocaleString('he-IL')}
       </span>
@@ -499,7 +499,7 @@ function AssumptionsTab({
       <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
           <h4 className="font-semibold text-ink">צמיחה ומרווחים (% לשנה)</h4>
-          <span className="text-xs text-ink/60">
+          <span className="text-xs text-ink/70">
             השוואה לענף: {bench.industryLabel}
           </span>
         </div>
@@ -636,7 +636,7 @@ function SimpleField({
         onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
         className="w-full px-2 py-1 border border-ink/15 rounded-none text-sm"
       />
-      {benchHint && <div className="text-[10px] text-emerald-700 mt-0.5">📊 {benchHint}</div>}
+      {benchHint && <div className="text-[10px] text-emerald-800 mt-0.5">📊 {benchHint}</div>}
     </div>
   );
 }
@@ -671,7 +671,7 @@ function ArrayField({
       <div className="flex items-baseline justify-between mb-1">
         <label className="text-xs text-ink/70">{label}</label>
         {benchmark && !isCurrency && (
-          <span className="text-[10px] text-emerald-700">
+          <span className="text-[10px] text-emerald-800">
             ענף: {benchmark.low.toFixed(0)}–{benchmark.high.toFixed(0)}% (חציון{' '}
             {benchmark.median.toFixed(0)}%) {positionLabel}
           </span>
@@ -680,7 +680,7 @@ function ArrayField({
       <div className="grid grid-cols-5 gap-1">
         {Array.from({ length: years }, (_, i) => (
           <div key={i}>
-            <div className="text-[10px] text-ink/60 mb-0.5">שנה {i + 1}</div>
+            <div className="text-[10px] text-ink/70 mb-0.5">שנה {i + 1}</div>
             <input
               type="number"
               value={values[i] ?? ''}
@@ -756,7 +756,7 @@ function PnLTable({ years }: { years: AnnualStatements[] }) {
             <th className="text-right p-2 sticky right-0 bg-cream-2 z-10">פריט</th>
             {years.map((y) => (
               <th key={y.year} className={`text-center p-2 ${y.isProjection ? 'bg-amber-50' : ''}`}>
-                {y.year} {y.isProjection && <span className="text-amber-700 text-xs">(תחזית)</span>}
+                {y.year} {y.isProjection && <span className="text-amber-800 text-xs">(תחזית)</span>}
               </th>
             ))}
           </tr>
@@ -785,8 +785,8 @@ function PnLTable({ years }: { years: AnnualStatements[] }) {
                   key={y.year}
                   className={`p-2 text-center ${
                     y.isProjection ? 'bg-amber-50/50' : ''
-                  } ${row.highlight === 'green' ? 'text-emerald-700 font-semibold' : ''} ${
-                    row.highlight === 'amber' ? 'text-amber-700 font-semibold' : ''
+                  } ${row.highlight === 'green' ? 'text-emerald-800 font-semibold' : ''} ${
+                    row.highlight === 'amber' ? 'text-amber-800 font-semibold' : ''
                   } ${row.highlight === 'green' && row.key === 'netProfit' ? 'font-bold' : ''}`}
                 >
                   {fmt(y.pnl[row.key])}
@@ -977,7 +977,7 @@ function BalanceTab({ model }: { model: Model | null }) {
                   <td
                     key={y.year}
                     className={`p-2 text-center text-xs ${y.isProjection ? 'bg-amber-50/50' : ''} ${
-                      row.highlight ? 'text-emerald-700 font-bold' : ''
+                      row.highlight ? 'text-emerald-800 font-bold' : ''
                     }`}
                   >
                     {fmt(y.cashFlow[row.k])}

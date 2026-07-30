@@ -101,7 +101,7 @@ export function BituachLeumiSelfEmployedCalculator() {
             className={`flex-1 min-w-fit px-3 py-2 rounded-none text-sm font-medium transition whitespace-nowrap ${
               activeTab === t.id
                 ? 'bg-paper text-ink shadow-sm'
-                : 'text-ink/60 hover:text-ink'
+                : 'text-ink/70 hover:text-ink'
             }`}
           >
             {t.label}
@@ -119,7 +119,7 @@ export function BituachLeumiSelfEmployedCalculator() {
 
               {/* Quick picks */}
               <div>
-                <p className="text-xs text-ink/60 mb-2">בחר סכום מהיר:</p>
+                <p className="text-xs text-ink/70 mb-2">בחר סכום מהיר:</p>
                 <div className="flex flex-wrap gap-2">
                   {QUICK_PICKS.map((v) => (
                     <button
@@ -139,10 +139,10 @@ export function BituachLeumiSelfEmployedCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="bituachleumiselfemployedcalculator-7e7866" className="block text-sm font-medium text-ink/70 mb-2">
                   הכנסה חייבת חודשית (₪) — לאחר הוצאות מוכרות
                 </label>
-                <input
+                <input id="bituachleumiselfemployedcalculator-7e7866"
                   type="number"
                   min={0}
                   step={1_000}
@@ -150,7 +150,7 @@ export function BituachLeumiSelfEmployedCalculator() {
                   onChange={(e) => update('monthlyIncome', Number(e.target.value))}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
                 />
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/70 mt-1">
                   מחזור מינוס הוצאות מוכרות = הכנסה חייבת
                 </p>
               </div>
@@ -180,8 +180,8 @@ export function BituachLeumiSelfEmployedCalculator() {
 
               {/* גיל */}
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
-                <input
+                <label htmlFor="bituachleumiselfemployedcalculator-bb1c22" className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
+                <input id="bituachleumiselfemployedcalculator-bb1c22"
                   type="number"
                   min={18}
                   max={75}
@@ -203,15 +203,15 @@ export function BituachLeumiSelfEmployedCalculator() {
                   />
                   <div>
                     <span className="text-sm font-medium text-ink">כפל עיסוקים</span>
-                    <p className="text-xs text-ink/60">עובד גם כשכיר</p>
+                    <p className="text-xs text-ink/70">עובד גם כשכיר</p>
                   </div>
                 </label>
                 {input.hasOtherEmployment && (
                   <div>
-                    <label className="block text-xs font-medium text-ink/70 mb-1">
+                    <label htmlFor="bituachleumiselfemployedcalculator-1af374" className="block text-xs font-medium text-ink/70 mb-1">
                       שכר חודשי כשכיר (₪)
                     </label>
-                    <input
+                    <input id="bituachleumiselfemployedcalculator-1af374"
                       type="number"
                       min={0}
                       step={500}
@@ -281,7 +281,7 @@ export function BituachLeumiSelfEmployedCalculator() {
                     key={month}
                     className="bg-cream-2 border border-ink/15 rounded-none p-2 text-center"
                   >
-                    <div className="text-xs text-ink/60 font-medium">15 ב{month}</div>
+                    <div className="text-xs text-ink/70 font-medium">15 ב{month}</div>
                     <div className="font-bold text-ink text-sm">
                       {formatCurrency(result.paymentPerInstallment)}
                     </div>
@@ -289,7 +289,7 @@ export function BituachLeumiSelfEmployedCalculator() {
                 ))}
               </div>
               {input.paymentFrequency === 'monthly' && (
-                <p className="text-xs text-ink/60 mt-2">
+                <p className="text-xs text-ink/70 mt-2">
                   * תשלום חודשי מגיע עד ה-15 לחודש העוקב
                 </p>
               )}
@@ -301,13 +301,13 @@ export function BituachLeumiSelfEmployedCalculator() {
                 <h4 className="font-bold text-ink">ב.ל. בכפל עיסוקים</h4>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <div className="text-xs text-ink/60">ב.ל. כעצמאי</div>
+                    <div className="text-xs text-ink/70">ב.ל. כעצמאי</div>
                     <div className="font-bold text-ink">
                       {formatCurrency(combinedResult.selfEmployedBL)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs text-ink/60">ב.ל. שכבר שולם כשכיר</div>
+                    <div className="text-xs text-ink/70">ב.ל. שכבר שולם כשכיר</div>
                     <div className="font-bold text-ink">
                       {formatCurrency(combinedResult.employeePortionAlreadyPaid)}
                     </div>
@@ -395,14 +395,14 @@ export function BituachLeumiSelfEmployedCalculator() {
                   </tr>
                   {result.tierBreakdown.exemptIncome > 0 && (
                     <tr className="border-b border-ink/10 bg-cream-2">
-                      <td className="py-2 px-3 text-ink/60 font-medium">
+                      <td className="py-2 px-3 text-ink/70 font-medium">
                         פטור (מעל {BL_SE_RATES_2026.fullThreshold.toLocaleString('he-IL')} ₪)
                       </td>
-                      <td className="py-2 px-3 tabular-nums text-ink/60">
+                      <td className="py-2 px-3 tabular-nums text-ink/70">
                         {formatCurrency(result.tierBreakdown.exemptIncome)}
                       </td>
-                      <td className="py-2 px-3 text-ink/45">0%</td>
-                      <td colSpan={3} className="py-2 px-3 text-ink/45 text-xs">
+                      <td className="py-2 px-3 text-ink/70">0%</td>
+                      <td colSpan={3} className="py-2 px-3 text-ink/70 text-xs">
                         לא חייב בב.ל.
                       </td>
                     </tr>
@@ -432,16 +432,16 @@ export function BituachLeumiSelfEmployedCalculator() {
           {/* השוואה לשכיר */}
           <div className="bg-paper border border-ink/15 rounded-none p-6">
             <h2 className="text-xl font-bold text-ink mb-2">השוואה לשכיר</h2>
-            <p className="text-sm text-ink/60 mb-4">
+            <p className="text-sm text-ink/70 mb-4">
               עצמאי משלם הן חלק עובד והן חלק מעסיק — לכן שיעורי ב.ל. גבוהים יותר
             </p>
             <div className="grid md:grid-cols-3 gap-4 mb-4">
               <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
-                <div className="text-xs text-ink/60 mb-1">שכיר - ב.ל. חודשי</div>
+                <div className="text-xs text-ink/70 mb-1">שכיר - ב.ל. חודשי</div>
                 <div className="text-2xl font-bold text-ink">
                   {formatCurrency(result.comparisonToEmployee.employeeMonthly)}
                 </div>
-                <div className="text-xs text-ink/60 mt-1">
+                <div className="text-xs text-ink/70 mt-1">
                   (4.27% / 12.17%)
                 </div>
               </div>
@@ -450,7 +450,7 @@ export function BituachLeumiSelfEmployedCalculator() {
                 <div className="text-2xl font-bold text-red-900">
                   {formatCurrency(result.monthlyTotal)}
                 </div>
-                <div className="text-xs text-red-600 mt-1">
+                <div className="text-xs text-red-700 mt-1">
                   (6.10% / 18.00%)
                 </div>
               </div>
@@ -506,7 +506,7 @@ export function BituachLeumiSelfEmployedCalculator() {
           {/* שיעור מס שולי */}
           <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
             <h3 className="font-bold text-ink">שיעור מס שולי שלך</h3>
-            <p className="text-sm text-ink/60">
+            <p className="text-sm text-ink/70">
               בחר את שיעור המס שחל על ההכנסה שלך (המדרגה הגבוהה ביותר):
             </p>
             <div className="flex flex-wrap gap-2">
@@ -525,7 +525,7 @@ export function BituachLeumiSelfEmployedCalculator() {
                 </button>
               ))}
             </div>
-            <p className="text-xs text-ink/60">
+            <p className="text-xs text-ink/70">
               הכנסה חודשית {formatCurrency(input.monthlyIncome)} → שיעור מס שולי מוצע:{' '}
               <strong>{formatPercent(getSuggestedMarginalRate(input.monthlyIncome), 0)}</strong>
             </p>
@@ -555,9 +555,9 @@ export function BituachLeumiSelfEmployedCalculator() {
 
           {/* עלות נטו */}
           <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-6 text-center">
-            <p className="text-sm text-emerald-700 mb-2">עלות אמיתית של ב.ל. לאחר הטבת מס</p>
+            <p className="text-sm text-emerald-800 mb-2">עלות אמיתית של ב.ל. לאחר הטבת מס</p>
             <p className="text-4xl font-bold text-emerald-900">{formatCurrency(result.netCostAfterTax)}</p>
-            <p className="text-sm text-emerald-700 mt-1">
+            <p className="text-sm text-emerald-800 mt-1">
               לשנה (חסכת {formatCurrency(result.taxSavingAmount)} בזכות הניכוי)
             </p>
           </div>
@@ -613,17 +613,17 @@ export function BituachLeumiSelfEmployedCalculator() {
         <div className="space-y-6">
           <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-5">
             <h2 className="text-xl font-bold text-ink">תיאום מקדמות ב.ל. שנתי</h2>
-            <p className="text-sm text-ink/60">
+            <p className="text-sm text-ink/70">
               בתחילת שנה מגישים אומדן הכנסה לב.ל. ומשלמים לפיו. בסוף שנה — מתיאמים לפי הכנסה
               בפועל. הפרש לתשלום / החזר מגיע עד מרץ.
             </p>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="bituachleumiselfemployedcalculator-82ae37" className="block text-sm font-medium text-ink/70 mb-2">
                   הכנסה חודשית שהוערכה (לפיה שולם)
                 </label>
-                <input
+                <input id="bituachleumiselfemployedcalculator-82ae37"
                   type="number"
                   min={0}
                   step={1_000}
@@ -631,15 +631,15 @@ export function BituachLeumiSelfEmployedCalculator() {
                   onChange={(e) => setEstimatedMonthly(Number(e.target.value))}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
                 />
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/70 mt-1">
                   הכנסה שהצהרת בתחילת השנה לב.ל.
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="bituachleumiselfemployedcalculator-c2c917" className="block text-sm font-medium text-ink/70 mb-2">
                   הכנסה חודשית בפועל (סוף שנה)
                 </label>
-                <input
+                <input id="bituachleumiselfemployedcalculator-c2c917"
                   type="number"
                   min={0}
                   step={1_000}
@@ -647,7 +647,7 @@ export function BituachLeumiSelfEmployedCalculator() {
                   onChange={(e) => setActualMonthly(Number(e.target.value))}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
                 />
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/70 mt-1">
                   ההכנסה בפועל לאחר גמר שנת המס
                 </p>
               </div>
@@ -657,18 +657,18 @@ export function BituachLeumiSelfEmployedCalculator() {
           {/* תוצאות תיאום */}
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
-              <div className="text-xs text-ink/60 mb-1">ב.ל. ששולם (הערכה)</div>
+              <div className="text-xs text-ink/70 mb-1">ב.ל. ששולם (הערכה)</div>
               <div className="text-2xl font-bold text-ink">
                 {formatCurrency(reconciliationResult.paidBL)}
               </div>
-              <div className="text-xs text-ink/60 mt-1">שנתי</div>
+              <div className="text-xs text-ink/70 mt-1">שנתי</div>
             </div>
             <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
-              <div className="text-xs text-ink/60 mb-1">ב.ל. אמיתי (בפועל)</div>
+              <div className="text-xs text-ink/70 mb-1">ב.ל. אמיתי (בפועל)</div>
               <div className="text-2xl font-bold text-ink">
                 {formatCurrency(reconciliationResult.actualBL)}
               </div>
-              <div className="text-xs text-ink/60 mt-1">שנתי</div>
+              <div className="text-xs text-ink/70 mt-1">שנתי</div>
             </div>
             <div
               className={`border-2 rounded-none p-4 text-center ${
@@ -685,7 +685,7 @@ export function BituachLeumiSelfEmployedCalculator() {
                     ? 'text-green-700'
                     : reconciliationResult.refundOrPayment === 'payment'
                     ? 'text-red-700'
-                    : 'text-ink/60'
+                    : 'text-ink/70'
                 }`}
               >
                 {reconciliationResult.refundOrPayment === 'refund'
@@ -755,15 +755,15 @@ export function BituachLeumiSelfEmployedCalculator() {
           {/* תחזית פנסיה */}
           <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
             <h2 className="text-xl font-bold text-ink">תחזית קצבת זקנה</h2>
-            <p className="text-sm text-ink/60">
+            <p className="text-sm text-ink/70">
               קצבת זקנה מב.ל. מחושבת לפי &quot;נקודות ביטוח&quot; שנצברות עם השנים. כאן הערכה גסה:
             </p>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="bituachleumiselfemployedcalculator-a150c4" className="block text-sm font-medium text-ink/70 mb-2">
                 שנות תשלום ב.ל. כעצמאי (עד היום)
               </label>
-              <input
+              <input id="bituachleumiselfemployedcalculator-a150c4"
                 type="number"
                 min={0}
                 max={45}
@@ -782,12 +782,12 @@ export function BituachLeumiSelfEmployedCalculator() {
                 <div className={`text-2xl font-bold ${pensionProjection.meetsMinimumYears ? 'text-green-900' : 'text-red-900'}`}>
                   {input.yearsContributing ?? 5} / {pensionProjection.minimumYearsRequired}
                 </div>
-                <div className="text-xs text-ink/60 mt-1">שנות ביטוח מינימום</div>
+                <div className="text-xs text-ink/70 mt-1">שנות ביטוח מינימום</div>
               </div>
               <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
-                <div className="text-xs text-ink/60 mb-1">גיל זכאות</div>
+                <div className="text-xs text-ink/70 mb-1">גיל זכאות</div>
                 <div className="text-2xl font-bold text-ink">{pensionProjection.retirementAge}</div>
-                <div className="text-xs text-ink/60 mt-1">לגברים (65 לנשים)</div>
+                <div className="text-xs text-ink/70 mt-1">לגברים (65 לנשים)</div>
               </div>
               <div className="bg-cream-2 border border-gold/40 rounded-none p-4 text-center">
                 <div className="text-xs text-gold mb-1">הערכת קצבה חודשית*</div>
@@ -899,12 +899,12 @@ function Row({
         line ? 'border-t border-ink/15 pt-2.5 mt-1' : ''
       } ${highlight ? 'bg-emerald-50 -mx-2 px-2 rounded-none' : ''}`}
     >
-      <span className={`${mute ? 'text-ink/60' : 'text-ink'} ${bold ? 'font-bold' : ''}`}>
+      <span className={`${mute ? 'text-ink/70' : 'text-ink'} ${bold ? 'font-bold' : ''}`}>
         {label}
       </span>
       <span
         className={`tabular-nums ${bold ? 'font-bold text-ink' : ''} ${
-          mute ? 'text-ink/60' : ''
+          mute ? 'text-ink/70' : ''
         } ${negative ? 'text-red-700' : ''}`}
       >
         {value}
@@ -923,7 +923,7 @@ function TierBar({
   const safeIncome = Math.max(0, monthlyIncome);
   if (safeIncome === 0) {
     return (
-      <div className="text-sm text-ink/60">
+      <div className="text-sm text-ink/70">
         תשלום מינימום: {formatCurrency(BL_SE_RATES_2026.minimumMonthlyPayment)}/חודש
       </div>
     );
@@ -966,7 +966,7 @@ function TierBar({
             income: result.tierBreakdown.exemptIncome,
             pct: exemptPct,
             color: 'bg-ink/20',
-            textColor: 'text-ink/60',
+            textColor: 'text-ink/70',
           },
         ]
       : []),
@@ -992,7 +992,7 @@ function TierBar({
             <div className={`w-3 h-3 rounded-none ${item.color} flex-shrink-0 mt-0.5`} />
             <div>
               <div className={`${item.textColor} font-medium`}>{item.label}</div>
-              <div className="text-ink/60">{formatCurrency(item.income)} הכנסה</div>
+              <div className="text-ink/70">{formatCurrency(item.income)} הכנסה</div>
               {item.value > 0 && (
                 <div className="text-ink/70 font-medium">{formatCurrency(item.value)} ב.ל.</div>
               )}
@@ -1048,7 +1048,7 @@ function ComparisonBar({
           </div>
         </div>
       </div>
-      <p className="text-xs text-ink/60">
+      <p className="text-xs text-ink/70">
         הפרש: עצמאי משלם{' '}
         <strong className="text-red-700">
           {formatCurrency(selfEmployedMonthly - employeeMonthly)} יותר

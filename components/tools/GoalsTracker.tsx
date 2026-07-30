@@ -101,8 +101,8 @@ export function GoalsTracker() {
           <h4 className="font-semibold mb-3">יעד חדש</h4>
           <div className="grid md:grid-cols-2 gap-3 text-sm">
             <div>
-              <label className="block text-xs text-ink/70 mb-1">שם היעד</label>
-              <input
+              <label htmlFor="goalstracker-dccb61" className="block text-xs text-ink/70 mb-1">שם היעד</label>
+              <input id="goalstracker-dccb61"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -123,8 +123,8 @@ export function GoalsTracker() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">ערך יעד</label>
-              <input
+              <label htmlFor="goalstracker-9f9fc7" className="block text-xs text-ink/70 mb-1">ערך יעד</label>
+              <input id="goalstracker-9f9fc7"
                 type="number"
                 value={form.targetValue}
                 onChange={(e) => setForm({ ...form, targetValue: parseFloat(e.target.value) || 0 })}
@@ -132,8 +132,8 @@ export function GoalsTracker() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">תאריך יעד</label>
-              <input
+              <label htmlFor="goalstracker-6bdbd6" className="block text-xs text-ink/70 mb-1">תאריך יעד</label>
+              <input id="goalstracker-6bdbd6"
                 type="date"
                 value={form.targetDate}
                 onChange={(e) => setForm({ ...form, targetDate: e.target.value })}
@@ -141,8 +141,8 @@ export function GoalsTracker() {
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-xs text-ink/70 mb-1">הערות (אופציונלי)</label>
-              <input
+              <label htmlFor="goalstracker-4eb91c" className="block text-xs text-ink/70 mb-1">הערות (אופציונלי)</label>
+              <input id="goalstracker-4eb91c"
                 type="text"
                 value={form.notes}
                 onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -199,9 +199,9 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
   const StatusIcon = cfg.icon;
 
   const colorMap: Record<string, { bg: string; border: string; text: string; bar: string }> = {
-    emerald: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700', bar: 'bg-emerald-500' },
+    emerald: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-800', bar: 'bg-emerald-500' },
     gold: { bg: 'bg-cream-2', border: 'border-ink/20', text: 'text-gold', bar: 'bg-gold' },
-    amber: { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-700', bar: 'bg-amber-500' },
+    amber: { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-800', bar: 'bg-amber-500' },
     red: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', bar: 'bg-red-500' },
   };
   const c = colorMap[cfg.color];
@@ -218,11 +218,11 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
       <div className="flex items-start justify-between mb-2">
         <div>
           <h4 className="font-bold text-ink">{goal.name}</h4>
-          <div className="text-xs text-ink/60">{GOAL_TYPE_LABELS[goal.type]}</div>
+          <div className="text-xs text-ink/70">{GOAL_TYPE_LABELS[goal.type]}</div>
         </div>
         <button
           onClick={onRemove}
-          className="p-1 text-red-600 hover:bg-red-100 rounded"
+          className="p-1 text-red-700 hover:bg-red-100 rounded"
         >
           <Trash2 className="w-3.5 h-3.5" />
         </button>
@@ -230,7 +230,7 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
 
       <div className="flex items-baseline gap-2 mb-2">
         <span className="text-2xl font-bold">{fmt(currentValue)}</span>
-        <span className="text-sm text-ink/60">/ {fmt(goal.targetValue)}</span>
+        <span className="text-sm text-ink/70">/ {fmt(goal.targetValue)}</span>
       </div>
 
       {/* Progress bar */}
@@ -246,7 +246,7 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
           <StatusIcon className="w-3.5 h-3.5" />
           {cfg.label}
         </span>
-        <span className="text-ink/60">
+        <span className="text-ink/70">
           {pctComplete.toFixed(1)}% • יעד: {goal.targetDate}
         </span>
       </div>
@@ -258,7 +258,7 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
       )}
 
       {goal.notes && (
-        <div className="mt-2 text-xs text-ink/60 italic">"{goal.notes}"</div>
+        <div className="mt-2 text-xs text-ink/70 italic">"{goal.notes}"</div>
       )}
     </div>
   );

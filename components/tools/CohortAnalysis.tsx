@@ -232,7 +232,7 @@ export function CohortAnalysis() {
                     <td className="p-1.5 text-center">
                       <button
                         onClick={() => removeCohort(i)}
-                        className="p-1 text-red-600 hover:bg-red-50"
+                        className="p-1 text-red-700 hover:bg-red-50"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
@@ -297,16 +297,16 @@ function KPICard({
   const colorMap: Record<string, { bg: string; text: string }> = {
     blue: { bg: 'bg-cream-2', text: 'text-gold' },
     purple: { bg: 'bg-cream-2', text: 'text-ink' },
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
-    amber: { bg: 'bg-amber-50', text: 'text-amber-700' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-800' },
     red: { bg: 'bg-red-50', text: 'text-red-700' },
   };
   const c = colorMap[color];
   return (
     <div className={`${c.bg} p-3 border border-ink/15`}>
-      <div className="text-xs text-ink/60 mb-0.5">{label}</div>
+      <div className="text-xs text-ink/70 mb-0.5">{label}</div>
       <div className={`text-xl font-bold ${c.text}`}>{value}</div>
-      {sublabel && <div className="text-[10px] text-ink/45 mt-1 line-clamp-1">{sublabel}</div>}
+      {sublabel && <div className="text-[10px] text-ink/70 mt-1 line-clamp-1">{sublabel}</div>}
     </div>
   );
 }

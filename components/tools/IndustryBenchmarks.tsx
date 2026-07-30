@@ -78,18 +78,18 @@ export function IndustryBenchmarks() {
 
           {/* Overall Score */}
           <div className="text-center">
-            <div className="text-xs text-ink/60 mb-1">ציון בריאות פיננסית כולל</div>
+            <div className="text-xs text-ink/70 mb-1">ציון בריאות פיננסית כולל</div>
             <div
               className={`text-3xl font-bold ${
                 overallScore >= 75
-                  ? 'text-emerald-600'
+                  ? 'text-emerald-800'
                   : overallScore >= 50
-                    ? 'text-amber-600'
-                    : 'text-red-600'
+                    ? 'text-amber-800'
+                    : 'text-red-700'
               }`}
             >
               {Math.round(overallScore)}
-              <span className="text-base text-ink/60">/100</span>
+              <span className="text-base text-ink/70">/100</span>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
 
       <div className="flex items-baseline gap-2 mb-3">
         <span className="text-2xl font-bold text-ink">{formatValue(yourValue)}</span>
-        <span className="text-xs text-ink/60">בנצ'מרק חציון: {formatValue(benchmark.median)}</span>
+        <span className="text-xs text-ink/70">בנצ'מרק חציון: {formatValue(benchmark.median)}</span>
       </div>
 
       {/* Spectrum bar */}
@@ -179,7 +179,7 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
         />
       </div>
 
-      <div className="flex items-center justify-between text-xs text-ink/60 mb-2">
+      <div className="flex items-center justify-between text-xs text-ink/70 mb-2">
         <span>Q1: {formatValue(benchmark.low)}</span>
         <span>חציון: {formatValue(benchmark.median)}</span>
         <span>Q3: {formatValue(benchmark.high)}</span>
@@ -187,11 +187,11 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
 
       <div className="flex items-start gap-1.5 text-xs">
         {score >= 75 ? (
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-800 shrink-0 mt-0.5" />
         ) : score >= 50 ? (
-          <TrendingUp className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+          <TrendingUp className="w-3.5 h-3.5 text-amber-800 shrink-0 mt-0.5" />
         ) : (
-          <AlertTriangle className="w-3.5 h-3.5 text-red-600 shrink-0 mt-0.5" />
+          <AlertTriangle className="w-3.5 h-3.5 text-red-700 shrink-0 mt-0.5" />
         )}
         <span className="text-ink/70">{message}</span>
       </div>

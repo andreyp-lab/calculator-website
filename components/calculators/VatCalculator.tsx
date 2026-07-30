@@ -146,7 +146,7 @@ function BasicVatTab() {
                 }`}
               >
                 <div className="font-bold text-sm mb-0.5">{m.label}</div>
-                <div className="text-xs text-ink/60">{m.sub}</div>
+                <div className="text-xs text-ink/70">{m.sub}</div>
               </button>
             ))}
           </div>
@@ -193,7 +193,7 @@ function BasicVatTab() {
             onChange={(e) => setRatePercent(Math.max(0, Math.min(50, Number(e.target.value))))}
             className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
-          <p className="text-xs text-ink/60 mt-1">שיעור רגיל ב-2026: 18% | 0% ליצוא ותיירות</p>
+          <p className="text-xs text-ink/70 mt-1">שיעור רגיל ב-2026: 18% | 0% ליצוא ותיירות</p>
         </div>
 
         {/* Formula explanation */}
@@ -360,7 +360,7 @@ function BimonthlyTab() {
             ⚠ אזהרה: מחזור שנתי משוער ({formatCurrency(report.projectedAnnualRevenue)}) חורג מתקרת
             עוסק פטור ({formatCurrency(EXEMPT_THRESHOLD_2026)})
           </p>
-          <p className="text-amber-700 text-sm mt-1">
+          <p className="text-amber-800 text-sm mt-1">
             אם אינך עוסק מורשה — עליך להירשם כעוסק מורשה בתוך 90 יום מהחריגה.
           </p>
         </div>
@@ -376,7 +376,7 @@ function BimonthlyTab() {
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
           <p className="text-xs text-ink/70 font-medium mb-1">מע&quot;מ תשומות (Input)</p>
           <p className="text-2xl font-bold text-ink">{formatCurrency(report.inputVat)}</p>
-          <p className="text-xs text-ink/60 mt-0.5">בסיס: {formatCurrency(report.inputBase)}</p>
+          <p className="text-xs text-ink/70 mt-0.5">בסיס: {formatCurrency(report.inputBase)}</p>
         </div>
         <div
           className={`border rounded-none p-4 text-center ${
@@ -399,7 +399,7 @@ function BimonthlyTab() {
           >
             {formatCurrency(Math.abs(report.netVatDue))}
           </p>
-          <p className={`text-xs mt-0.5 ${report.isRefund ? 'text-gold' : 'text-red-600'}`}>
+          <p className={`text-xs mt-0.5 ${report.isRefund ? 'text-gold' : 'text-red-700'}`}>
             {report.isRefund ? 'זכות להחזר' : 'חיוב לרשות המסים'}
           </p>
         </div>
@@ -442,10 +442,10 @@ function BimonthlyTab() {
 
       {/* Annual revenue */}
       <div className="bg-paper border border-ink/15 rounded-none p-4">
-        <label className="block text-sm font-medium text-ink/70 mb-2">
+        <label htmlFor="vatcalculator-cbd8e6" className="block text-sm font-medium text-ink/70 mb-2">
           מחזור שנתי עד כה (₪) — לבדיקת תקרת עוסק פטור
         </label>
-        <input
+        <input id="vatcalculator-cbd8e6"
           type="number"
           min={0}
           step={1000}
@@ -453,7 +453,7 @@ function BimonthlyTab() {
           onChange={(e) => setAnnualRevenue(Math.max(0, Number(e.target.value)))}
           className="w-full max-w-xs px-3 py-2 border border-ink/15 rounded-none text-right"
         />
-        <p className="text-xs text-ink/60 mt-1">
+        <p className="text-xs text-ink/70 mt-1">
           תקרת עוסק פטור: {formatCurrency(EXEMPT_THRESHOLD_2026)} לשנה
         </p>
       </div>
@@ -494,7 +494,7 @@ function InvoiceTable({
   onRemove: (id: string) => void;
 }) {
   if (rows.length === 0) {
-    return <p className="text-ink/45 text-sm py-2">אין פריטים. לחץ &quot;הוסף&quot; להוספה.</p>;
+    return <p className="text-ink/70 text-sm py-2">אין פריטים. לחץ &quot;הוסף&quot; להוספה.</p>;
   }
   return (
     <div className="overflow-x-auto">
@@ -550,7 +550,7 @@ function InvoiceTable({
                 <button
                   type="button"
                   onClick={() => onRemove(row.id)}
-                  className="text-red-400 hover:text-red-600 text-lg leading-none"
+                  className="text-red-400 hover:text-red-700 text-lg leading-none"
                   title="מחק שורה"
                 >
                   ×
@@ -734,7 +734,7 @@ function TrackerTab() {
                         <button
                           type="button"
                           onClick={() => removeRow(row.id)}
-                          className="text-red-400 hover:text-red-600 text-lg"
+                          className="text-red-400 hover:text-red-700 text-lg"
                         >
                           ×
                         </button>
@@ -770,7 +770,7 @@ function TrackerTab() {
           )}
         </>
       ) : (
-        <div className="text-center py-12 text-ink/45">
+        <div className="text-center py-12 text-ink/70">
           <p className="text-lg">אין חשבוניות עדיין</p>
           <p className="text-sm mt-1">הוסף עסקאות ותשומות למעקב</p>
         </div>
@@ -854,10 +854,10 @@ function ScenariosTab() {
             <h3 className="font-bold text-ink mb-4">הנחה — פרטים</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">
+                <label htmlFor="vatcalculator-2e707f" className="block text-sm font-medium text-ink/70 mb-1">
                   מחיר מקורי (ללא מע&quot;מ, ₪)
                 </label>
-                <input
+                <input id="vatcalculator-2e707f"
                   type="number"
                   min={0}
                   value={discountNet}
@@ -866,10 +866,10 @@ function ScenariosTab() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">
+                <label htmlFor="vatcalculator-501833" className="block text-sm font-medium text-ink/70 mb-1">
                   אחוז הנחה (%)
                 </label>
-                <input
+                <input id="vatcalculator-501833"
                   type="number"
                   min={0}
                   max={100}
@@ -954,8 +954,8 @@ function ScenariosTab() {
             <h3 className="font-bold text-ink mb-4">יבוא בינלאומי</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">שווי סחורה ($)</label>
-                <input
+                <label htmlFor="vatcalculator-03322c" className="block text-sm font-medium text-ink/70 mb-1">שווי סחורה ($)</label>
+                <input id="vatcalculator-03322c"
                   type="number"
                   min={0}
                   value={importUSD}
@@ -964,8 +964,8 @@ function ScenariosTab() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">שער חליפין (₪ לדולר)</label>
-                <input
+                <label htmlFor="vatcalculator-588bb3" className="block text-sm font-medium text-ink/70 mb-1">שער חליפין (₪ לדולר)</label>
+                <input id="vatcalculator-588bb3"
                   type="number"
                   min={0}
                   step={0.01}
@@ -975,8 +975,8 @@ function ScenariosTab() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">מכס (%)</label>
-                <input
+                <label htmlFor="vatcalculator-c7f734" className="block text-sm font-medium text-ink/70 mb-1">מכס (%)</label>
+                <input id="vatcalculator-c7f734"
                   type="number"
                   min={0}
                   max={200}
@@ -986,8 +986,8 @@ function ScenariosTab() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">מס קנייה (%)</label>
-                <input
+                <label htmlFor="vatcalculator-4e999e" className="block text-sm font-medium text-ink/70 mb-1">מס קנייה (%)</label>
+                <input id="vatcalculator-4e999e"
                   type="number"
                   min={0}
                   max={100}
@@ -1074,8 +1074,8 @@ function ScenariosTab() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">סכום עסקה (₪)</label>
-                <input
+                <label htmlFor="vatcalculator-79b0cb" className="block text-sm font-medium text-ink/70 mb-1">סכום עסקה (₪)</label>
+                <input id="vatcalculator-79b0cb"
                   type="number"
                   min={0}
                   step={1000}
@@ -1207,10 +1207,10 @@ function OperatorTab() {
         </div>
 
         <div className="bg-paper border border-ink/15 rounded-none p-5">
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="vatcalculator-86ab2f" className="block text-sm font-medium text-ink/70 mb-2">
             מחזור שנתי (₪)
           </label>
-          <input
+          <input id="vatcalculator-86ab2f"
             type="number"
             min={0}
             step={10000}
@@ -1219,7 +1219,7 @@ function OperatorTab() {
             className="w-full px-3 py-2 border border-ink/15 rounded-none text-right"
           />
           {rules.threshold !== null && revenue > rules.threshold && (
-            <p className="text-amber-600 text-xs mt-2">
+            <p className="text-amber-800 text-xs mt-2">
               מחזור חורג מתקרת {rules.label} ({formatCurrency(rules.threshold)})
             </p>
           )}
@@ -1338,10 +1338,10 @@ function CompareTab() {
           <h3 className="font-bold text-ink mb-4">פרמטרים להשוואה</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="vatcalculator-f95fd6" className="block text-sm font-medium text-ink/70 mb-1">
                 סכום עסקה (ללא מע&quot;מ, ₪)
               </label>
-              <input
+              <input id="vatcalculator-f95fd6"
                 type="number"
                 min={0}
                 step={100}
@@ -1351,10 +1351,10 @@ function CompareTab() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="vatcalculator-922e13" className="block text-sm font-medium text-ink/70 mb-1">
                 מחזור שנתי (ללא מע&quot;מ, ₪) — לחישוב השפעה שנתית
               </label>
-              <input
+              <input id="vatcalculator-922e13"
                 type="number"
                 min={0}
                 step={10000}
@@ -1374,7 +1374,7 @@ function CompareTab() {
               <p className="text-2xl font-bold text-ink">
                 {formatCurrency(comparison.year2024.vatAmount)}
               </p>
-              <p className="text-xs text-ink/60 mt-0.5">
+              <p className="text-xs text-ink/70 mt-0.5">
                 ברוטו: {formatCurrency(comparison.year2024.grossAmount)}
               </p>
             </div>
@@ -1383,7 +1383,7 @@ function CompareTab() {
               <p className="text-2xl font-bold text-ink">
                 {formatCurrency(comparison.year2025plus.vatAmount)}
               </p>
-              <p className="text-xs text-ink/60 mt-0.5">
+              <p className="text-xs text-ink/70 mt-0.5">
                 ברוטו: {formatCurrency(comparison.year2025plus.grossAmount)}
               </p>
             </div>
@@ -1393,7 +1393,7 @@ function CompareTab() {
             <p className="text-xl font-bold text-amber-900">
               +{formatCurrency(comparison.difference.vatAmountDiff)}
             </p>
-            <p className="text-xs text-amber-700 mt-0.5">
+            <p className="text-xs text-amber-800 mt-0.5">
               עלייה של {formatNumber(comparison.difference.percentIncrease, 2)}% במחיר לצרכן
             </p>
           </div>
@@ -1426,7 +1426,7 @@ function CompareTab() {
               </p>
             </div>
           </div>
-          <p className="text-xs text-ink/60">
+          <p className="text-xs text-ink/70">
             * לצרכן — עלות נוספת שנתית: {formatCurrency(comparison.annualImpact.extraCostToConsumer)}
           </p>
         </div>

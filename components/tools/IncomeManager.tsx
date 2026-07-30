@@ -91,7 +91,7 @@ export function IncomeManager() {
         <div className="flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-green-600" />
           <h3 className="font-bold text-lg text-ink">הכנסות</h3>
-          <span className="text-sm text-ink/60">({budget.income.length} פריטים)</span>
+          <span className="text-sm text-ink/70">({budget.income.length} פריטים)</span>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -106,8 +106,8 @@ export function IncomeManager() {
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mb-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-ink/70 mb-1">שם הכנסה *</label>
-              <input
+              <label htmlFor="incomemanager-67ca2f" className="block text-xs text-ink/70 mb-1">שם הכנסה *</label>
+              <input id="incomemanager-67ca2f"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -116,8 +116,8 @@ export function IncomeManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">סכום חודשי *</label>
-              <input
+              <label htmlFor="incomemanager-3bf7bf" className="block text-xs text-ink/70 mb-1">סכום חודשי *</label>
+              <input id="incomemanager-3bf7bf"
                 type="number"
                 value={form.amount || ''}
                 onChange={(e) => setForm({ ...form, amount: parseFloat(e.target.value) || 0 })}
@@ -139,8 +139,8 @@ export function IncomeManager() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">משך (חודשים)</label>
-              <input
+              <label htmlFor="incomemanager-ae4410" className="block text-xs text-ink/70 mb-1">משך (חודשים)</label>
+              <input id="incomemanager-ae4410"
                 type="number"
                 value={form.duration}
                 onChange={(e) => setForm({ ...form, duration: parseInt(e.target.value) || 12 })}
@@ -150,8 +150,8 @@ export function IncomeManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">צמיחה חודשית (%)</label>
-              <input
+              <label htmlFor="incomemanager-ae345f" className="block text-xs text-ink/70 mb-1">צמיחה חודשית (%)</label>
+              <input id="incomemanager-ae345f"
                 type="number"
                 value={form.growthPct}
                 onChange={(e) =>
@@ -189,11 +189,11 @@ export function IncomeManager() {
                 onChange={(e) => setVarExp({ ...varExp, enabled: e.target.checked })}
                 className="w-4 h-4 accent-emerald-600"
               />
-              <Link2 className="w-4 h-4 text-emerald-600" />
+              <Link2 className="w-4 h-4 text-emerald-800" />
               <span className="text-sm font-semibold text-ink">
                 הוסף הוצאה משתנה מקושרת להכנסה זו
               </span>
-              <span className="text-xs text-ink/60">
+              <span className="text-xs text-ink/70">
                 (אחוז שמשתנה אוטומטית עם ההכנסה)
               </span>
             </label>
@@ -201,8 +201,8 @@ export function IncomeManager() {
             {varExp.enabled && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2 pt-2 border-t border-ink/10">
                 <div className="col-span-2">
-                  <label className="block text-xs text-ink/70 mb-1">שם ההוצאה *</label>
-                  <input
+                  <label htmlFor="incomemanager-87f285" className="block text-xs text-ink/70 mb-1">שם ההוצאה *</label>
+                  <input id="incomemanager-87f285"
                     type="text"
                     value={varExp.name}
                     onChange={(e) => setVarExp({ ...varExp, name: e.target.value })}
@@ -211,8 +211,8 @@ export function IncomeManager() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">% מההכנסה *</label>
-                  <input
+                  <label htmlFor="incomemanager-0118e5" className="block text-xs text-ink/70 mb-1">% מההכנסה *</label>
+                  <input id="incomemanager-0118e5"
                     type="number"
                     value={varExp.percentage || ''}
                     onChange={(e) =>
@@ -261,8 +261,8 @@ export function IncomeManager() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">משך</label>
-                  <input
+                  <label htmlFor="incomemanager-827861" className="block text-xs text-ink/70 mb-1">משך</label>
+                  <input id="incomemanager-827861"
                     type="number"
                     value={varExp.duration}
                     onChange={(e) =>
@@ -317,7 +317,7 @@ export function IncomeManager() {
       )}
 
       {budget.income.length === 0 ? (
-        <div className="text-center py-8 text-ink/60">
+        <div className="text-center py-8 text-ink/70">
           <TrendingUp className="w-12 h-12 mx-auto mb-2 opacity-30" />
           <p>אין הכנסות עדיין. לחץ "הוסף הכנסה" כדי להתחיל.</p>
         </div>
@@ -363,13 +363,13 @@ export function IncomeManager() {
                     <td className="px-3 py-2 text-xs">
                       {inc.paymentTerms > 0 ? `+${inc.paymentTerms}י'` : 'מיידי'}
                     </td>
-                    <td className="px-3 py-2 font-bold text-emerald-700">
+                    <td className="px-3 py-2 font-bold text-emerald-800">
                       {formatCurrency(total, settings.currency)}
                     </td>
                     <td className="text-center">
                       <button
                         onClick={() => deleteIncome(inc.id)}
-                        className="p-1 text-red-600 hover:bg-red-50 rounded"
+                        className="p-1 text-red-700 hover:bg-red-50 rounded"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -383,7 +383,7 @@ export function IncomeManager() {
                 <td colSpan={5} className="px-3 py-2">
                   סה"כ הכנסות
                 </td>
-                <td className="px-3 py-2 text-emerald-700">
+                <td className="px-3 py-2 text-emerald-800">
                   {formatCurrency(totalIncome, settings.currency)}
                 </td>
                 <td></td>

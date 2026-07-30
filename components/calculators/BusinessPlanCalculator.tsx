@@ -68,7 +68,7 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
             onChange={(e) => setAreaSqm(Number(e.target.value))}
             className="w-full accent-gold"
           />
-          <span className="flex justify-between text-xs text-ink/50 mt-1">
+          <span className="flex justify-between text-xs text-ink/70 mt-1">
             <span>{bt.minAreaSqm} מ"ר</span>
             <span>{bt.maxAreaSqm} מ"ר</span>
           </span>
@@ -134,9 +134,9 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
       <div className="p-5 sm:p-6 grid md:grid-cols-2 gap-6">
         {/* Setup */}
         <div>
-          <h3 className="font-bold text-ink mb-3 flex items-center gap-2">
+          <h2 className="font-bold text-ink mb-3 flex items-center gap-2">
             <span className="text-gold">✦</span> עלות הקמה חד-פעמית
-          </h3>
+          </h2>
           <table className="w-full text-sm">
             <tbody>
               {result.setupLines.map((l) => (
@@ -151,7 +151,7 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
               </tr>
             </tbody>
           </table>
-          <p className="text-xs text-ink/55 mt-3">
+          <p className="text-xs text-ink/70 mt-3">
             הציוד והשיפוץ ({formatCurrency(result.depreciableBase)}) הם תזרים יוצא במעמד ההקמה. מומלץ להחזיק
             <strong className="text-ink"> הון חוזר של {formatCurrency(result.recommendedWorkingCapital)}</strong> (≈4 חודשי הוצאות) לתקופת ההרצה.
           </p>
@@ -159,9 +159,9 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
 
         {/* Monthly */}
         <div>
-          <h3 className="font-bold text-ink mb-3 flex items-center gap-2">
+          <h2 className="font-bold text-ink mb-3 flex items-center gap-2">
             <span className="text-gold">✦</span> הוצאות חודשיות
-          </h3>
+          </h2>
           <table className="w-full text-sm">
             <tbody>
               {result.monthlyLines.map((l) => (
@@ -173,7 +173,7 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
               <tr className="border-b border-ink/10 bg-cream-2/50">
                 <td className="py-2 text-ink/70">
                   רזרבת חידוש / פחת
-                  <span className="block text-xs text-ink/45">ציוד מתבלה — הפרשה חודשית ({result.equipmentUsefulLifeYears} שנות חיים)</span>
+                  <span className="block text-xs text-ink/70">ציוד מתבלה — הפרשה חודשית ({result.equipmentUsefulLifeYears} שנות חיים)</span>
                 </td>
                 <td className="py-2 text-left font-medium text-gold">{formatCurrency(result.recommendedRenewalReserve)}</td>
               </tr>
@@ -190,26 +190,26 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
 
       {/* Profit projection */}
       <div className="p-5 sm:p-6 border-t border-ink/15 bg-cream-2/40">
-        <h3 className="font-bold text-ink mb-3 flex items-center gap-2">
+        <h2 className="font-bold text-ink mb-3 flex items-center gap-2">
           <span className="text-gold">✦</span> תחזית רווחיות — ב-{result.projectedUnits} {bt.revenue.unitLabel} בחודש
-        </h3>
+        </h2>
         <div className="grid sm:grid-cols-4 gap-4 text-sm">
           <div>
-            <p className="text-ink/55">הכנסה חודשית</p>
+            <p className="text-ink/70">הכנסה חודשית</p>
             <p className="text-lg font-bold text-ink">{formatCurrency(result.projectedRevenue)}</p>
           </div>
           <div>
-            <p className="text-ink/55">רווח תזרימי</p>
+            <p className="text-ink/70">רווח תזרימי</p>
             <p className="text-lg font-bold text-ink">{formatCurrency(result.projectedMonthlyProfit)}</p>
           </div>
           <div>
-            <p className="text-ink/55">רווח אחרי רזרבה</p>
-            <p className={`text-lg font-bold ${profitPositive ? 'text-emerald-700' : 'text-red-700'}`}>
+            <p className="text-ink/70">רווח אחרי רזרבה</p>
+            <p className={`text-lg font-bold ${profitPositive ? 'text-emerald-800' : 'text-red-700'}`}>
               {formatCurrency(result.projectedProfitAfterReserve)}
             </p>
           </div>
           <div>
-            <p className="text-ink/55">החזר השקעה</p>
+            <p className="text-ink/70">החזר השקעה</p>
             <p className="text-lg font-bold text-ink">
               {result.monthsToRecoup ? `${result.monthsToRecoup} חודשים` : '—'}
             </p>
@@ -222,7 +222,7 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
         )}
       </div>
 
-      <p className="px-5 sm:px-6 py-3 text-xs text-ink/50 border-t border-ink/15">
+      <p className="px-5 sm:px-6 py-3 text-xs text-ink/70 border-t border-ink/15">
         ⚠️ אומדן בקירוב בלבד לפי טווחי שוק 2026 — לא תחליף לתוכנית עסקית מקצועית או להצעות מחיר.
       </p>
     </div>

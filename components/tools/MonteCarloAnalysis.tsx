@@ -189,8 +189,8 @@ export function MonteCarloAnalysis() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs text-ink/70 mb-1">יעד (לסיכוי)</label>
-                <input
+                <label htmlFor="montecarloanalysis-665f74" className="block text-xs text-ink/70 mb-1">יעד (לסיכוי)</label>
+                <input id="montecarloanalysis-665f74"
                   type="number"
                   value={target}
                   onChange={(e) => setTarget(parseFloat(e.target.value) || 0)}
@@ -266,7 +266,7 @@ export function MonteCarloAnalysis() {
               </BarChart>
             </ResponsiveContainer>
 
-            <div className="mt-3 text-xs text-ink/60">
+            <div className="mt-3 text-xs text-ink/70">
               💡 P5 = "גרוע מ-95% מהתרחישים", P95 = "טוב מ-95%". טווח P5-P95 = "טווח אמון 90%".
             </div>
           </div>
@@ -301,14 +301,14 @@ function StatCard({ label, value, color }: { label: string; value: string; color
   const colorMap: Record<string, { bg: string; text: string }> = {
     gold: { bg: 'bg-cream-2', text: 'text-gold' },
     ink: { bg: 'bg-cream-2', text: 'text-ink' },
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
-    amber: { bg: 'bg-amber-50', text: 'text-amber-700' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-800' },
     red: { bg: 'bg-red-50', text: 'text-red-700' },
   };
   const c = colorMap[color] ?? colorMap.gold;
   return (
     <div className={`${c.bg} rounded-none p-2 text-center border border-ink/15`}>
-      <div className="text-[10px] text-ink/60 mb-0.5">{label}</div>
+      <div className="text-[10px] text-ink/70 mb-0.5">{label}</div>
       <div className={`text-lg font-bold ${c.text}`}>{value}</div>
     </div>
   );

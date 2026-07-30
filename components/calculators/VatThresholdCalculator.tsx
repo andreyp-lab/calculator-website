@@ -64,10 +64,10 @@ export function VatThresholdCalculator() {
             <h2 className="text-xl font-bold text-ink">נתוני המחזור שלך</h2>
 
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="vatthresholdcalculator-13a379" className="block text-sm font-medium text-ink/70 mb-2">
                 מחזור מצטבר מתחילת השנה (₪, ללא מע&quot;מ)
               </label>
-              <input
+              <input id="vatthresholdcalculator-13a379"
                 type="number"
                 min={0}
                 step={1_000}
@@ -75,7 +75,7 @@ export function VatThresholdCalculator() {
                 onChange={(e) => update('cumulativeRevenue', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 סך כל ההכנסות מתחילת השנה ועד החודש שבחרת מטה.
               </p>
             </div>
@@ -96,15 +96,15 @@ export function VatThresholdCalculator() {
                     </option>
                   ))}
                 </select>
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/70 mt-1">
                   החודש האחרון שכבר נכלל במחזור.
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-2">
+                <label htmlFor="vatthresholdcalculator-cf7a2d" className="block text-sm font-medium text-ink/70 mb-2">
                   צפי חודשי להמשך (₪)
                 </label>
-                <input
+                <input id="vatthresholdcalculator-cf7a2d"
                   type="number"
                   min={0}
                   step={500}
@@ -112,7 +112,7 @@ export function VatThresholdCalculator() {
                   onChange={(e) => update('expectedMonthlyRevenue', Number(e.target.value))}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none"
                 />
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/70 mt-1">
                   ממוצע מחזור צפוי לכל חודש שנותר.
                 </p>
               </div>
@@ -147,22 +147,22 @@ export function VatThresholdCalculator() {
 
             <div className="grid grid-cols-3 gap-3 text-center pt-2">
               <div>
-                <div className="text-xs text-ink/60">ניצול נוכחי</div>
+                <div className="text-xs text-ink/70">ניצול נוכחי</div>
                 <div className="text-lg font-bold text-ink">
                   {formatPercent(Math.min(result.utilizationRate, 9.99), 0)}
                 </div>
               </div>
               <div>
-                <div className="text-xs text-ink/60">ניצול לפי צפי שנתי</div>
+                <div className="text-xs text-ink/70">ניצול לפי צפי שנתי</div>
                 <div className="text-lg font-bold text-ink">
                   {formatPercent(Math.min(result.projectedUtilizationRate, 9.99), 0)}
                 </div>
               </div>
               <div>
-                <div className="text-xs text-ink/60">נותר עד התקרה</div>
+                <div className="text-xs text-ink/70">נותר עד התקרה</div>
                 <div
                   className={`text-lg font-bold ${
-                    result.remainingRoom > 0 ? 'text-emerald-700' : 'text-red-700'
+                    result.remainingRoom > 0 ? 'text-emerald-800' : 'text-red-700'
                   }`}
                 >
                   {result.remainingRoom > 0 ? formatCurrency(result.remainingRoom) : '—'}
@@ -238,7 +238,7 @@ export function VatThresholdCalculator() {
         </div>
       </div>
 
-      <p className="text-xs text-ink/45">
+      <p className="text-xs text-ink/70">
         * אומדן בלבד. חבות המע"מ בפועל חלה ממועד חציית התקרה והמעבר לעוסק מורשה — לא על
         כל המחזור השנתי. להתאמה מדויקת התייעץ עם רואה חשבון.
       </p>

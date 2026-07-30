@@ -111,9 +111,9 @@ export function AdvancedAnalytics() {
             >
               <div className="flex items-center gap-3">
                 {computed.breakEven.isAboveBreakEven ? (
-                  <CheckCircle2 className="w-8 h-8 text-emerald-600" />
+                  <CheckCircle2 className="w-8 h-8 text-emerald-800" />
                 ) : (
-                  <AlertTriangle className="w-8 h-8 text-red-600" />
+                  <AlertTriangle className="w-8 h-8 text-red-700" />
                 )}
                 <div>
                   <h4 className="font-bold text-lg">
@@ -229,7 +229,7 @@ export function AdvancedAnalytics() {
                           style={{ backgroundColor: bg }}
                         >
                           <div className="font-medium">{fmt(cell.netProfit)}</div>
-                          <div className="text-[10px] text-ink/60">
+                          <div className="text-[10px] text-ink/70">
                             {formatPercent(cell.margin, 1)}
                           </div>
                         </td>
@@ -239,7 +239,7 @@ export function AdvancedAnalytics() {
                 ))}
               </tbody>
             </table>
-            <div className="mt-3 text-xs text-ink/60">
+            <div className="mt-3 text-xs text-ink/70">
               💡 ירוק = רווח, אדום = הפסד. עומק הצבע = גודל הסכום.
             </div>
           </div>
@@ -288,7 +288,7 @@ export function AdvancedAnalytics() {
                 <div
                   className={`w-full p-2 rounded-none text-center text-sm ${
                     computed.forecastResult.trend === 'up'
-                      ? 'bg-emerald-50 text-emerald-700'
+                      ? 'bg-emerald-50 text-emerald-800'
                       : computed.forecastResult.trend === 'down'
                         ? 'bg-red-50 text-red-700'
                         : 'bg-cream-2 text-ink/70'
@@ -409,7 +409,7 @@ export function AdvancedAnalytics() {
                   benchmark: 'יעד: 10%+',
                   bg: 'bg-emerald-50',
                   border: 'border-emerald-200',
-                  text: 'text-emerald-700',
+                  text: 'text-emerald-800',
                 },
                 {
                   label: 'מרווח EBITDA',
@@ -418,7 +418,7 @@ export function AdvancedAnalytics() {
                   benchmark: 'יעד: 20%+',
                   bg: 'bg-amber-50',
                   border: 'border-amber-200',
-                  text: 'text-amber-700',
+                  text: 'text-amber-800',
                 },
                 {
                   label: 'ROI',
@@ -466,9 +466,9 @@ export function AdvancedAnalytics() {
                     key={r.label}
                     className={`${r.bg} border-2 ${r.border} rounded-none p-3`}
                   >
-                    <div className="text-xs text-ink/60 mb-1">{r.label}</div>
+                    <div className="text-xs text-ink/70 mb-1">{r.label}</div>
                     <div className={`text-2xl font-bold ${r.text}`}>{value}</div>
-                    <div className="text-[10px] text-ink/60 mt-1">{r.benchmark}</div>
+                    <div className="text-[10px] text-ink/70 mt-1">{r.benchmark}</div>
                   </div>
                 );
               })}

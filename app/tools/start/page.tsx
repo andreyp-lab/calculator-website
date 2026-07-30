@@ -174,7 +174,7 @@ export default function StartPage() {
       <div className="border-t border-ink/15 pt-5">
         <button
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-sm text-ink/60 hover:text-ink flex items-center gap-1 mx-auto"
+          className="text-sm text-ink/70 hover:text-ink flex items-center gap-1 mx-auto"
         >
           <span>{showAdvanced ? '▾' : '▸'}</span>
           קישורים ישירים (Power Users)
@@ -271,7 +271,7 @@ function PathCard({
         </ul>
 
         <div className="flex items-center justify-between pt-3 border-t border-ink/15">
-          <span className="text-xs text-ink/60 flex items-center gap-1">
+          <span className="text-xs text-ink/70 flex items-center gap-1">
             <Clock className="w-3 h-3" />
             {duration}
           </span>
@@ -323,9 +323,9 @@ function DeepLink({
     >
       <div>
         <div className="font-medium text-ink">{label}</div>
-        <div className="text-xs text-ink/60">{description}</div>
+        <div className="text-xs text-ink/70">{description}</div>
       </div>
-      <ArrowLeft className="w-3 h-3 text-ink/45" />
+      <ArrowLeft className="w-3 h-3 text-ink/70" />
     </Link>
   );
 }

@@ -38,10 +38,10 @@ export function FuelCostCalculator() {
 
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="fuelcostcalculator-5ddf7e" className="block text-sm font-medium text-ink/70 mb-2">
               קילומטראז' חודשי (ק"מ)
             </label>
-            <input
+            <input id="fuelcostcalculator-5ddf7e"
               type="number"
               min={0}
               step={100}
@@ -49,7 +49,7 @@ export function FuelCostCalculator() {
               onChange={(e) => update('monthlyKm', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
             />
-            <p className="text-xs text-ink/60 mt-1">ממוצע ישראלי: ~1,500 ק"מ/חודש</p>
+            <p className="text-xs text-ink/70 mt-1">ממוצע ישראלי: ~1,500 ק"מ/חודש</p>
           </div>
 
           <div>
@@ -80,7 +80,7 @@ export function FuelCostCalculator() {
               onChange={(e) => update('fuelEfficiency', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {input.fuelType === 'electric'
                 ? 'רכב חשמלי ממוצע: 18 קוט"ש/100ק"מ'
                 : 'רכב משפחתי: 6-8 ל/100ק"מ, רכב גדול: 10-12'}

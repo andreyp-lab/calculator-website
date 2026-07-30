@@ -83,7 +83,7 @@ export function ExpenseManager() {
   return (
     <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
-        <TrendingDown className="w-5 h-5 text-red-600" />
+        <TrendingDown className="w-5 h-5 text-red-700" />
         <h3 className="font-bold text-lg text-ink">הוצאות</h3>
       </div>
 
@@ -128,8 +128,8 @@ export function ExpenseManager() {
         <div className={`border p-4 mb-4 ${CATEGORY_COLORS[activeCategory]}`}>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div className="col-span-2 md:col-span-3">
-              <label className="block text-xs text-ink/70 mb-1">שם ההוצאה *</label>
-              <input
+              <label htmlFor="expensemanager-6b021b" className="block text-xs text-ink/70 mb-1">שם ההוצאה *</label>
+              <input id="expensemanager-6b021b"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -159,8 +159,8 @@ export function ExpenseManager() {
 
             {!form.isPct ? (
               <div>
-                <label className="block text-xs text-ink/70 mb-1">סכום חודשי *</label>
-                <input
+                <label htmlFor="expensemanager-04c2b6" className="block text-xs text-ink/70 mb-1">סכום חודשי *</label>
+                <input id="expensemanager-04c2b6"
                   type="number"
                   value={form.amount || ''}
                   onChange={(e) => setForm({ ...form, amount: parseFloat(e.target.value) || 0 })}
@@ -170,8 +170,8 @@ export function ExpenseManager() {
             ) : (
               <>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">% מהכנסה *</label>
-                  <input
+                  <label htmlFor="expensemanager-f299ef" className="block text-xs text-ink/70 mb-1">% מהכנסה *</label>
+                  <input id="expensemanager-f299ef"
                     type="number"
                     value={form.percentage || ''}
                     onChange={(e) =>
@@ -214,8 +214,8 @@ export function ExpenseManager() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">משך (חודשים)</label>
-              <input
+              <label htmlFor="expensemanager-67702c" className="block text-xs text-ink/70 mb-1">משך (חודשים)</label>
+              <input id="expensemanager-67702c"
                 type="number"
                 value={form.duration}
                 onChange={(e) =>
@@ -274,7 +274,7 @@ export function ExpenseManager() {
 
       {/* Table */}
       {categoryExpenses.length === 0 ? (
-        <div className="text-center py-8 text-ink/60">
+        <div className="text-center py-8 text-ink/70">
           <p>אין הוצאות ב{EXPENSE_CATEGORY_LABELS[activeCategory]}</p>
         </div>
       ) : (
@@ -301,10 +301,10 @@ export function ExpenseManager() {
                       formatCurrency(exp.amount, settings.currency)
                     )}
                   </td>
-                  <td className="px-3 py-2 text-xs text-ink/60">
+                  <td className="px-3 py-2 text-xs text-ink/70">
                     {HEBREW_MONTHS[exp.startMonth]} ({exp.duration} ח')
                   </td>
-                  <td className="px-3 py-2 text-xs text-ink/60">
+                  <td className="px-3 py-2 text-xs text-ink/70">
                     {exp.paymentTerms === 0 ? 'מיידי' : `+${exp.paymentTerms}`}
                   </td>
                   <td className="px-3 py-2 font-medium text-red-700">
@@ -316,7 +316,7 @@ export function ExpenseManager() {
                   <td className="px-3 py-2 text-center">
                     <button
                       onClick={() => deleteExpense(exp.id)}
-                      className="p-1 text-red-600 hover:bg-red-50"
+                      className="p-1 text-red-700 hover:bg-red-50"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

@@ -81,9 +81,9 @@ export function LoanManager() {
     <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Banknote className="w-5 h-5 text-amber-600" />
+          <Banknote className="w-5 h-5 text-amber-800" />
           <h3 className="font-bold text-lg text-ink">הלוואות</h3>
-          <span className="text-sm text-ink/60">({budget.loans.length} פריטים)</span>
+          <span className="text-sm text-ink/70">({budget.loans.length} פריטים)</span>
         </div>
         <button
           onClick={() => {
@@ -105,15 +105,15 @@ export function LoanManager() {
       {budget.loans.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 text-xs">
           <div className="bg-cream-2 border border-ink/15 rounded-none p-2">
-            <div className="text-ink/60">קרן כוללת</div>
+            <div className="text-ink/70">קרן כוללת</div>
             <div className="font-bold text-ink">{formatCurrency(totals.outstanding)}</div>
           </div>
           <div className="bg-amber-50 border border-amber-200 rounded-none p-2">
-            <div className="text-amber-600">החזר חודשי</div>
+            <div className="text-amber-800">החזר חודשי</div>
             <div className="font-bold text-amber-900">{formatCurrency(totals.monthlyPayment)}</div>
           </div>
           <div className="bg-red-50 border border-red-200 rounded-none p-2">
-            <div className="text-red-600">סך ריבית</div>
+            <div className="text-red-700">סך ריבית</div>
             <div className="font-bold text-red-900">{formatCurrency(totals.totalInterest)}</div>
           </div>
           <div className="bg-cream-2 border border-ink/15 rounded-none p-2">
@@ -128,8 +128,8 @@ export function LoanManager() {
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mb-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-ink/70 mb-1">שם הלוואה *</label>
-              <input
+              <label htmlFor="loanmanager-a66d18" className="block text-xs text-ink/70 mb-1">שם הלוואה *</label>
+              <input id="loanmanager-a66d18"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -154,8 +154,8 @@ export function LoanManager() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">סכום קרן (₪) *</label>
-              <input
+              <label htmlFor="loanmanager-7634c8" className="block text-xs text-ink/70 mb-1">סכום קרן (₪) *</label>
+              <input id="loanmanager-7634c8"
                 type="number"
                 value={form.amount || ''}
                 onChange={(e) => setForm({ ...form, amount: Number(e.target.value) })}
@@ -164,21 +164,21 @@ export function LoanManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">תקופה (חודשים) *</label>
-              <input
+              <label htmlFor="loanmanager-981140" className="block text-xs text-ink/70 mb-1">תקופה (חודשים) *</label>
+              <input id="loanmanager-981140"
                 type="number"
                 value={form.termMonths || ''}
                 onChange={(e) => setForm({ ...form, termMonths: Number(e.target.value) })}
                 placeholder="60"
                 className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
-              <p className="text-[10px] text-ink/60 mt-0.5">
+              <p className="text-[10px] text-ink/70 mt-0.5">
                 {form.termMonths > 0 && `(${(form.termMonths / 12).toFixed(1)} שנים)`}
               </p>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">ריבית שנתית (%) *</label>
-              <input
+              <label htmlFor="loanmanager-d4a5b9" className="block text-xs text-ink/70 mb-1">ריבית שנתית (%) *</label>
+              <input id="loanmanager-d4a5b9"
                 type="number"
                 step={0.1}
                 value={form.annualRate || ''}
@@ -220,19 +220,19 @@ export function LoanManager() {
                   return (
                     <>
                       <div>
-                        <div className="text-ink/60">החזר חודשי</div>
-                        <div className="font-bold text-amber-700">
+                        <div className="text-ink/70">החזר חודשי</div>
+                        <div className="font-bold text-amber-800">
                           {formatCurrency(calc.monthlyPayment)}
                         </div>
                       </div>
                       <div>
-                        <div className="text-ink/60">סך ריבית</div>
+                        <div className="text-ink/70">סך ריבית</div>
                         <div className="font-bold text-red-700">
                           {formatCurrency(calc.totalInterest)}
                         </div>
                       </div>
                       <div>
-                        <div className="text-ink/60">סך החזר</div>
+                        <div className="text-ink/70">סך החזר</div>
                         <div className="font-bold text-ink">
                           {formatCurrency(calc.totalPayments)}
                         </div>
@@ -263,9 +263,9 @@ export function LoanManager() {
 
       {/* רשימת הלוואות */}
       {budget.loans.length === 0 ? (
-        <div className="text-center py-8 text-ink/60 text-sm">
+        <div className="text-center py-8 text-ink/70 text-sm">
           אין הלוואות כרגע. לחץ "הוסף הלוואה" כדי להתחיל.
-          <p className="text-xs mt-1 text-ink/45">
+          <p className="text-xs mt-1 text-ink/70">
             ההלוואות נכללות אוטומטית ב-P&L (ריבית) ובתזרים (תשלומים).
           </p>
         </div>
@@ -294,17 +294,17 @@ export function LoanManager() {
                           {typeInfo.label}
                         </span>
                       </div>
-                      <div className="flex flex-wrap gap-3 text-xs text-ink/60">
+                      <div className="flex flex-wrap gap-3 text-xs text-ink/70">
                         <span>קרן: <strong>{formatCurrency(loan.amount)}</strong></span>
                         <span>ריבית: <strong>{loan.annualRate}%</strong></span>
                         <span>תקופה: <strong>{loan.termMonths} חודשים</strong></span>
-                        <span>החזר/חודש: <strong className="text-amber-700">{formatCurrency(calc.monthlyPayment)}</strong></span>
+                        <span>החזר/חודש: <strong className="text-amber-800">{formatCurrency(calc.monthlyPayment)}</strong></span>
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => setExpandedId(isExpanded ? null : loan.id)}
-                        className="p-1.5 text-ink/60 hover:bg-cream-2 rounded-none"
+                        className="p-1.5 text-ink/70 hover:bg-cream-2 rounded-none"
                         title="הראה/הסתר לוח סילוקין"
                       >
                         {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -318,7 +318,7 @@ export function LoanManager() {
                       </button>
                       <button
                         onClick={() => deleteLoan(loan.id)}
-                        className="p-1.5 text-red-600 hover:bg-red-50 rounded"
+                        className="p-1.5 text-red-700 hover:bg-red-50 rounded"
                         title="מחק"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -351,7 +351,7 @@ export function LoanManager() {
                                 {HEBREW_MONTHS[entry.month % 12]}
                               </td>
                               <td className="p-1.5">{formatCurrency(entry.payment)}</td>
-                              <td className="p-1.5 text-emerald-700">
+                              <td className="p-1.5 text-emerald-800">
                                 {formatCurrency(entry.principal)}
                               </td>
                               <td className="p-1.5 text-red-700">
@@ -367,15 +367,15 @@ export function LoanManager() {
                     </div>
                     <div className="grid grid-cols-3 gap-2 mt-3 text-xs">
                       <div className="bg-paper rounded-none p-2 border border-ink/15">
-                        <div className="text-ink/60">סך החזר</div>
+                        <div className="text-ink/70">סך החזר</div>
                         <div className="font-bold">{formatCurrency(calc.totalPayments)}</div>
                       </div>
                       <div className="bg-paper rounded-none p-2 border border-red-200">
-                        <div className="text-red-600">סך ריבית</div>
+                        <div className="text-red-700">סך ריבית</div>
                         <div className="font-bold text-red-900">{formatCurrency(calc.totalInterest)}</div>
                       </div>
                       <div className="bg-paper rounded-none p-2 border border-emerald-200">
-                        <div className="text-emerald-600">% עלות</div>
+                        <div className="text-emerald-800">% עלות</div>
                         <div className="font-bold text-emerald-900">
                           {((calc.totalInterest / loan.amount) * 100).toFixed(1)}%
                         </div>

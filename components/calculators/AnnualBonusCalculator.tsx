@@ -83,7 +83,7 @@ function TabBar({ active, onChange }: { active: TabMode; onChange: (t: TabMode) 
           className={`px-3 py-1.5 rounded-none text-sm font-medium transition-all ${
             active === t.id
               ? 'bg-paper text-ink shadow-sm'
-              : 'text-ink/60 hover:text-ink hover:bg-paper/60'
+              : 'text-ink/70 hover:text-ink hover:bg-paper/60'
           }`}
         >
           <span className="hidden sm:inline">{t.label}</span>
@@ -105,9 +105,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      <label className="block text-sm font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -128,7 +130,7 @@ function SectionTitle({ title, subtitle }: { title: string; subtitle?: string })
   return (
     <div className="mb-4">
       <h2 className="text-lg font-bold text-ink">{title}</h2>
-      {subtitle && <p className="text-sm text-ink/60 mt-0.5">{subtitle}</p>}
+      {subtitle && <p className="text-sm text-ink/70 mt-0.5">{subtitle}</p>}
     </div>
   );
 }
@@ -326,7 +328,7 @@ function TabNetBonus() {
           </div>
         )}
 
-        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/60">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/70">
           {result.explanation}
         </div>
       </div>
@@ -413,25 +415,25 @@ function TabThreeMethods() {
         {methods.map((m) => (
           <div key={m.method} className="border border-ink/15 rounded-none p-4 space-y-3">
             <h3 className="font-bold text-ink text-sm">{m.label}</h3>
-            <p className="text-xs text-ink/60">{m.description}</p>
+            <p className="text-xs text-ink/70">{m.description}</p>
             <div className="space-y-1 text-sm">
               <div className="flex justify-between">
-                <span className="text-ink/60">ניכוי במקור:</span>
-                <span className="font-medium text-red-600">-{formatCurrency(m.estimatedWithheld)}</span>
+                <span className="text-ink/70">ניכוי במקור:</span>
+                <span className="font-medium text-red-700">-{formatCurrency(m.estimatedWithheld)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-ink/60">נטו מיידי:</span>
+                <span className="text-ink/70">נטו מיידי:</span>
                 <span className="font-medium">{formatCurrency(m.netImmediately)}</span>
               </div>
               {m.estimatedRefund > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-ink/60">החזר מס משוער:</span>
+                  <span className="text-ink/70">החזר מס משוער:</span>
                   <span className="font-medium text-green-600">+{formatCurrency(m.estimatedRefund)}</span>
                 </div>
               )}
               <div className="flex justify-between pt-2 border-t border-ink/15 font-bold">
                 <span>נטו סופי:</span>
-                <span className="text-emerald-700">{formatCurrency(m.netAfterRefund)}</span>
+                <span className="text-emerald-800">{formatCurrency(m.netAfterRefund)}</span>
               </div>
             </div>
             <div className="space-y-1">
@@ -519,18 +521,18 @@ function TabBonusVsRaise() {
           <h3 className="font-bold text-ink mb-3">בונוס חד-פעמי {formatCurrency(grossBonus)} ברוטו</h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-ink/60">מס הכנסה:</span>
-              <span className="text-red-600">-{formatCurrency(result.bonus.taxPaid)}</span>
+              <span className="text-ink/70">מס הכנסה:</span>
+              <span className="text-red-700">-{formatCurrency(result.bonus.taxPaid)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink/60">ב.ל. + בריאות:</span>
-              <span className="text-red-600">-{formatCurrency(result.bonus.ssPaid)}</span>
+              <span className="text-ink/70">ב.ל. + בריאות:</span>
+              <span className="text-red-700">-{formatCurrency(result.bonus.ssPaid)}</span>
             </div>
             <div className="flex justify-between pt-2 border-t border-ink/15 font-bold text-ink">
               <span>נטו לכיס:</span>
               <span>{formatCurrency(result.bonus.netReceived)}</span>
             </div>
-            <div className="text-xs text-ink/60">
+            <div className="text-xs text-ink/70">
               {result.bonus.netPercentage.toFixed(1)}% מהברוטו — קבלה מיידית
             </div>
           </div>
@@ -543,11 +545,11 @@ function TabBonusVsRaise() {
           </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-ink/60">נטו נוסף/חודש:</span>
+              <span className="text-ink/70">נטו נוסף/חודש:</span>
               <span className="text-green-700">+{formatCurrency(result.raise.netMonthlyIncrease)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink/60">נטו ל-{monthsLeft} חודשים:</span>
+              <span className="text-ink/70">נטו ל-{monthsLeft} חודשים:</span>
               <span className="font-medium">{formatCurrency(result.raise.netForRemainingYear)}</span>
             </div>
             <div className="flex justify-between pt-2 border-t border-green-200 font-bold text-green-800">
@@ -694,22 +696,22 @@ function TabThirteenth() {
 
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-sm space-y-2">
           <div className="flex justify-between">
-            <span className="text-ink/60">אמנה:</span>
+            <span className="text-ink/70">אמנה:</span>
             <span className="font-medium">{result.convention}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">ברוטו:</span>
+            <span className="text-ink/70">ברוטו:</span>
             <span className="font-medium">{formatCurrency(result.grossAmount)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">מס הכנסה:</span>
-            <span className="text-red-600">-{formatCurrency(result.taxOnAmount)}</span>
+            <span className="text-ink/70">מס הכנסה:</span>
+            <span className="text-red-700">-{formatCurrency(result.taxOnAmount)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">ב.ל. + בריאות:</span>
-            <span className="text-red-600">-{formatCurrency(result.ssOnAmount)}</span>
+            <span className="text-ink/70">ב.ל. + בריאות:</span>
+            <span className="text-red-700">-{formatCurrency(result.ssOnAmount)}</span>
           </div>
-          <div className="flex justify-between pt-2 border-t border-ink/15 font-bold text-emerald-700">
+          <div className="flex justify-between pt-2 border-t border-ink/15 font-bold text-emerald-800">
             <span>נטו:</span>
             <span>{formatCurrency(result.netAmount)}</span>
           </div>
@@ -723,7 +725,7 @@ function TabThirteenth() {
           <strong>עלות הזדמנות:</strong> {result.opportunityCost}
         </InfoBox>
 
-        <p className="text-xs text-ink/60">{result.conventionNote}</p>
+        <p className="text-xs text-ink/70">{result.conventionNote}</p>
       </div>
     </div>
   );
@@ -961,7 +963,7 @@ function TabStock102() {
                   ? v === 'capital'
                     ? 'bg-green-50 border-green-500 text-green-800'
                     : 'bg-red-50 border-red-500 text-red-800'
-                  : 'bg-cream-2 border-ink/15 text-ink/60'
+                  : 'bg-cream-2 border-ink/15 text-ink/70'
               }`}>
               <div className="font-bold">{l}</div>
               <div className="text-xs mt-0.5 opacity-75">{hint}</div>
@@ -1003,15 +1005,15 @@ function TabStock102() {
           <p className="font-medium text-ink mb-2">שלב ב׳ — רווח הון ממכירה</p>
           <div className="grid sm:grid-cols-3 gap-3 text-sm">
             <div>
-              <span className="text-ink/60">רווח הון נוסף: </span>
+              <span className="text-ink/70">רווח הון נוסף: </span>
               <span className="font-bold">{formatCurrency(result.additionalCapitalGain)}</span>
             </div>
             <div>
-              <span className="text-ink/60">מס 25%: </span>
-              <span className="font-bold text-red-600">-{formatCurrency(result.additionalTaxOnSale ?? 0)}</span>
+              <span className="text-ink/70">מס 25%: </span>
+              <span className="font-bold text-red-700">-{formatCurrency(result.additionalTaxOnSale ?? 0)}</span>
             </div>
             <div>
-              <span className="text-ink/60">נטו ממכירה: </span>
+              <span className="text-ink/70">נטו ממכירה: </span>
               <span className="font-bold text-green-700">{formatCurrency(result.netFromSale ?? 0)}</span>
             </div>
           </div>
@@ -1121,15 +1123,15 @@ function TabYearCompare() {
               </span>
             )}
             <p className="text-xl font-bold text-ink">{y.year}</p>
-            <p className="text-2xl font-bold text-emerald-700 mt-1">{formatCurrency(y.netBonus)}</p>
-            <p className="text-sm text-ink/60 mt-1">נטו לכיס ({y.netBonus > 0 ? ((y.netBonus / grossBonus) * 100).toFixed(1) : 0}%)</p>
+            <p className="text-2xl font-bold text-emerald-800 mt-1">{formatCurrency(y.netBonus)}</p>
+            <p className="text-sm text-ink/70 mt-1">נטו לכיס ({y.netBonus > 0 ? ((y.netBonus / grossBonus) * 100).toFixed(1) : 0}%)</p>
             <div className="mt-3 text-sm space-y-1">
               <div className="flex justify-between">
-                <span className="text-ink/60">מס:</span>
-                <span className="text-red-600">-{formatCurrency(y.taxOnBonus)}</span>
+                <span className="text-ink/70">מס:</span>
+                <span className="text-red-700">-{formatCurrency(y.taxOnBonus)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-ink/60">מס שולי:</span>
+                <span className="text-ink/70">מס שולי:</span>
                 <span>{Math.round(y.marginalRate * 100)}%</span>
               </div>
             </div>
@@ -1256,7 +1258,7 @@ export function AnnualBonusCalculator() {
         {activeTab === 'curve' && <TabCurve />}
       </div>
 
-      <div className="text-xs text-ink/45 border-t border-ink/15 pt-3">
+      <div className="text-xs text-ink/70 border-t border-ink/15 pt-3">
         מקורות: רשות המסים, ביטוח לאומי 2026. החישובים הם אומדן — לייעוץ מס מחייב פנה לרואה חשבון.
       </div>
     </div>

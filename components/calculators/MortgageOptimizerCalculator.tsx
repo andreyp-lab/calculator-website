@@ -164,13 +164,13 @@ function NumericInput({ label, value, onChange, min, max, step, unit, note, clas
           }`}
         />
         {unit && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/60 pointer-events-none">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/70 pointer-events-none">
             {unit}
           </span>
         )}
       </div>
-      {note && !error && <p className="text-xs text-ink/60 mt-1">{note}</p>}
-      {error && <p className="text-xs text-red-600 mt-1 font-medium">{error}</p>}
+      {note && !error && <p className="text-xs text-ink/70 mt-1">{note}</p>}
+      {error && <p className="text-xs text-red-700 mt-1 font-medium">{error}</p>}
     </div>
   );
 }
@@ -256,7 +256,7 @@ function AllocationCard({ result, title, isOptimal, badge, onSelect, showInflati
               </span>
             )}
           </div>
-          <p className="text-sm text-ink/60 mt-0.5">
+          <p className="text-sm text-ink/70 mt-0.5">
             ריבית ממוצעת: {result.weightedAvgRate.toFixed(2)}%
           </p>
         </div>
@@ -284,7 +284,7 @@ function AllocationCard({ result, title, isOptimal, badge, onSelect, showInflati
                 style={{ backgroundColor: PIE_COLORS_LIST[i % PIE_COLORS_LIST.length] }}
               />
               <span className="flex-1 text-ink/70">{a.trackName}</span>
-              <span className="text-ink/60 text-xs">{Math.round(a.percent * 100)}%</span>
+              <span className="text-ink/70 text-xs">{Math.round(a.percent * 100)}%</span>
               <span className="font-medium text-ink">{formatCurrency(a.amount)}</span>
             </div>
           ))}
@@ -321,16 +321,16 @@ function AllocationCard({ result, title, isOptimal, badge, onSelect, showInflati
       {/* תוצאות עיקריות */}
       <div className="grid grid-cols-2 gap-3 pt-3 border-t border-ink/15">
         <div className="text-center">
-          <p className="text-xs text-ink/60 mb-0.5">תשלום חודשי</p>
+          <p className="text-xs text-ink/70 mb-0.5">תשלום חודשי</p>
           <p className="font-bold text-ink">{formatCurrency(result.monthlyPayment)}</p>
         </div>
         <div className="text-center">
-          <p className="text-xs text-ink/60 mb-0.5">סה"כ ריבית</p>
-          <p className="font-bold text-amber-700">{formatCurrency(result.totalCost)}</p>
+          <p className="text-xs text-ink/70 mb-0.5">סה"כ ריבית</p>
+          <p className="font-bold text-amber-800">{formatCurrency(result.totalCost)}</p>
         </div>
         {showInflation && result.indexedPercent > 0 && (
           <div className="text-center col-span-2">
-            <p className="text-xs text-ink/60 mb-0.5">% צמוד מדד</p>
+            <p className="text-xs text-ink/70 mb-0.5">% צמוד מדד</p>
             <p className="font-medium text-ink/70">{Math.round(result.indexedPercent * 100)}%</p>
           </div>
         )}
@@ -365,7 +365,7 @@ function ThreeOptionCard({ option, onSelect, isSelected, showInflation, totalAmo
         </div>
       )}
       <h4 className="font-bold text-ink text-base mb-1">{option.label}</h4>
-      <p className="text-xs text-ink/60 mb-3">{option.description}</p>
+      <p className="text-xs text-ink/70 mb-3">{option.description}</p>
 
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
@@ -374,7 +374,7 @@ function ThreeOptionCard({ option, onSelect, isSelected, showInflation, totalAmo
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-ink/70">סה"כ ריבית</span>
-          <span className="font-bold text-amber-700">{formatCurrency(option.totalCost)}</span>
+          <span className="font-bold text-amber-800">{formatCurrency(option.totalCost)}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-ink/70">סה"כ תשלומים</span>
@@ -383,12 +383,12 @@ function ThreeOptionCard({ option, onSelect, isSelected, showInflation, totalAmo
         {showInflation && option.indexedPercent > 0 && (
           <div className="flex justify-between text-sm">
             <span className="text-ink/70">% צמוד מדד</span>
-            <span className="font-medium text-amber-600">{Math.round(option.indexedPercent * 100)}%</span>
+            <span className="font-medium text-amber-800">{Math.round(option.indexedPercent * 100)}%</span>
           </div>
         )}
         <div className="flex justify-between text-sm">
           <span className="text-ink/70">ציון סיכון</span>
-          <span className={`font-bold ${option.riskScore < 30 ? 'text-green-600' : option.riskScore < 60 ? 'text-amber-600' : 'text-red-600'}`}>
+          <span className={`font-bold ${option.riskScore < 30 ? 'text-green-600' : option.riskScore < 60 ? 'text-amber-800' : 'text-red-700'}`}>
             {option.riskScore}/100
           </span>
         </div>
@@ -582,7 +582,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       {/* V3: LTV */}
       <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <h3 className="font-bold text-ink mb-1">שווי הנכס ו-LTV</h3>
-        <p className="text-xs text-ink/60 mb-4">
+        <p className="text-xs text-ink/70 mb-4">
           הזן שווי הנכס לחישוב LTV ולקבלת ריביות מותאמות אוטומטית
         </p>
         <NumericInput
@@ -648,7 +648,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       {/* DTI */}
       <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <h3 className="font-bold text-ink mb-1">בדיקת יחס החזר-הכנסה (DTI)</h3>
-        <p className="text-xs text-ink/60 mb-4">הזן הכנסה נטו משפחתית לקבלת המלצה</p>
+        <p className="text-xs text-ink/70 mb-4">הזן הכנסה נטו משפחתית לקבלת המלצה</p>
         <NumericInput
           label="הכנסה משפחתית נטו חודשית (₪)"
           value={state.netIncome}
@@ -673,9 +673,9 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
         >
           <div>
             <h3 className="font-bold text-ink">כשירות בנקאית מלאה</h3>
-            <p className="text-xs text-ink/60">חישוב מדויק כפי שהבנק מחשב — לפי הרכב משפחה וחובות</p>
+            <p className="text-xs text-ink/70">חישוב מדויק כפי שהבנק מחשב — לפי הרכב משפחה וחובות</p>
           </div>
-          <span className="text-ink/45 text-lg">{state.showAffordability ? '▲' : '▼'}</span>
+          <span className="text-ink/70 text-lg">{state.showAffordability ? '▲' : '▼'}</span>
         </button>
 
         {state.showAffordability && (
@@ -693,8 +693,8 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">מספר ילדים</label>
-                <input
+                <label htmlFor="mortgageoptimizercalculator-0138e4" className="block text-sm font-medium text-ink/70 mb-1">מספר ילדים</label>
+                <input id="mortgageoptimizercalculator-0138e4"
                   type="number"
                   min={0} max={10}
                   value={state.numChildren}
@@ -755,18 +755,18 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                     </div>
                     <div className="flex justify-between">
                       <span>פחות הוצאות מחייה</span>
-                      <span className="font-medium text-red-600">-{formatCurrency(aff.breakdown.minusLivingExpenses)}</span>
+                      <span className="font-medium text-red-700">-{formatCurrency(aff.breakdown.minusLivingExpenses)}</span>
                     </div>
                     {aff.breakdown.minusOtherLoans > 0 && (
                       <div className="flex justify-between">
                         <span>פחות חובות אחרים</span>
-                        <span className="font-medium text-red-600">-{formatCurrency(aff.breakdown.minusOtherLoans)}</span>
+                        <span className="font-medium text-red-700">-{formatCurrency(aff.breakdown.minusOtherLoans)}</span>
                       </div>
                     )}
                     {aff.breakdown.minusInsurance > 0 && (
                       <div className="flex justify-between">
                         <span>פחות ביטוחים</span>
-                        <span className="font-medium text-red-600">-{formatCurrency(aff.breakdown.minusInsurance)}</span>
+                        <span className="font-medium text-red-700">-{formatCurrency(aff.breakdown.minusInsurance)}</span>
                       </div>
                     )}
                     <div className="flex justify-between border-t pt-1">
@@ -798,7 +798,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
           className="flex items-center justify-between w-full"
         >
           <h3 className="font-bold text-ink">עלויות נלוות לחישוב</h3>
-          <span className="text-ink/45 text-lg">{state.showClosingCosts ? '▲' : '▼'}</span>
+          <span className="text-ink/70 text-lg">{state.showClosingCosts ? '▲' : '▼'}</span>
         </button>
         {state.showClosingCosts && (
           <div className="mt-4 space-y-4">
@@ -813,11 +813,11 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                   />
                   <span className="text-sm w-12 text-left">{state.lawyerFeePercent.toFixed(2)}%</span>
                 </div>
-                <p className="text-xs text-ink/45 mt-1">= {formatCurrency((state.lawyerFeePercent / 100) * state.totalAmount)}</p>
+                <p className="text-xs text-ink/70 mt-1">= {formatCurrency((state.lawyerFeePercent / 100) * state.totalAmount)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">אגרת שמאי (₪)</label>
-                <input type="number" value={state.appraiserFee}
+                <label htmlFor="mortgageoptimizercalculator-7e696a" className="block text-sm font-medium text-ink/70 mb-1">אגרת שמאי (₪)</label>
+                <input id="mortgageoptimizercalculator-7e696a" type="number" value={state.appraiserFee}
                   onChange={(e) => onChange({ ...state, appraiserFee: Number(e.target.value) })}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
                 />
@@ -832,7 +832,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                   />
                   <span className="text-sm w-12 text-left">{state.bankOpeningFeePercent.toFixed(3)}%</span>
                 </div>
-                <p className="text-xs text-ink/45 mt-1">= {formatCurrency((state.bankOpeningFeePercent / 100) * state.totalAmount)}</p>
+                <p className="text-xs text-ink/70 mt-1">= {formatCurrency((state.bankOpeningFeePercent / 100) * state.totalAmount)}</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-ink/70 mb-1">ביטוח חיים (%/שנה)</label>
@@ -867,7 +867,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
                   <div className="flex justify-between border-t pt-1 font-bold"><span>סה"כ עלויות חד-פעמיות</span><span className="text-red-700">{formatCurrency(closingCosts.totalClosingCosts)}</span></div>
                   <div className="flex justify-between mt-1"><span className="text-ink/70">ביטוח חיים (שנתי)</span><span className="font-medium">{formatCurrency(closingCosts.lifeInsuranceAnnual)}</span></div>
                   <div className="flex justify-between"><span className="text-ink/70">ביטוח מבנה (שנתי)</span><span className="font-medium">{formatCurrency(closingCosts.buildingInsuranceAnnual)}</span></div>
-                  <div className="flex justify-between border-t pt-1 font-bold"><span>סה"כ ביטוח שנתי</span><span className="text-amber-700">{formatCurrency(closingCosts.totalAnnualInsurance)}</span></div>
+                  <div className="flex justify-between border-t pt-1 font-bold"><span>סה"כ ביטוח שנתי</span><span className="text-amber-800">{formatCurrency(closingCosts.totalAnnualInsurance)}</span></div>
                 </div>
               </div>
             )}
@@ -885,7 +885,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
               label: 'תמהיל סטנדרטי',
               desc: 'פריים + קל"צ + צמוד מדד (1/3 כל אחד)',
               risk: 'בינוני',
-              riskColor: 'text-amber-600',
+              riskColor: 'text-amber-800',
             },
             {
               id: 'conservative' as const,
@@ -899,7 +899,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
               label: 'אגרסיבי',
               desc: 'פריים + משתנה — עלות נמוכה כיום, סיכון גבוה',
               risk: 'גבוה',
-              riskColor: 'text-red-600',
+              riskColor: 'text-red-700',
             },
           ].map((opt) => (
             <button
@@ -913,7 +913,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
               }`}
             >
               <div className="font-bold text-ink text-sm">{opt.label}</div>
-              <div className="text-xs text-ink/60 mt-1">{opt.desc}</div>
+              <div className="text-xs text-ink/70 mt-1">{opt.desc}</div>
               <div className={`text-xs mt-2 font-medium ${opt.riskColor}`}>
                 סיכון: {opt.risk}
               </div>
@@ -1108,11 +1108,11 @@ function TracksTab({ tracks, defaultTermYears, maxTermYears, onChange, onNext }:
                 );
               })()}
               {(track.gracePeriodMonths ?? 0) === 0 && (
-                <p className="text-xs text-ink/45 mt-1">0 = ללא גרייס (שפיצר רגיל)</p>
+                <p className="text-xs text-ink/70 mt-1">0 = ללא גרייס (שפיצר רגיל)</p>
               )}
             </div>
 
-            <div className="flex items-center justify-between text-xs text-ink/60 pt-1 border-t border-ink/15">
+            <div className="flex items-center justify-between text-xs text-ink/70 pt-1 border-t border-ink/15">
               <span>
                 סיכון: <strong>{TRACK_RISK_LABELS[track.type]}</strong>
               </span>
@@ -1221,7 +1221,7 @@ function ObjectiveTab({
                 <div className={`font-bold text-sm ${objective === opt.id ? 'text-ink' : 'text-ink'}`}>
                   {opt.label}
                 </div>
-                <div className="text-xs text-ink/60 mt-0.5">{opt.desc}</div>
+                <div className="text-xs text-ink/70 mt-0.5">{opt.desc}</div>
               </div>
             </button>
           ))}
@@ -1242,7 +1242,7 @@ function ObjectiveTab({
               onChange={(e) => onRiskAversionChange(Number(e.target.value))}
               className="w-full accent-gold"
             />
-            <div className="flex justify-between text-xs text-ink/60">
+            <div className="flex justify-between text-xs text-ink/70">
               <span>מקסימלי — עלות נמוכה</span>
               <span className="font-medium text-ink">
                 {riskAversion < 0.3
@@ -1266,7 +1266,7 @@ function ObjectiveTab({
           <div className="flex items-center justify-between p-3 bg-cream-2 rounded-none">
             <div>
               <p className="text-sm font-medium text-ink">מינימום 33% ריבית קבועה</p>
-              <p className="text-xs text-ink/60">הוראת בנק ישראל — לא ניתן לשנות</p>
+              <p className="text-xs text-ink/70">הוראת בנק ישראל — לא ניתן לשנות</p>
             </div>
             <span className="bg-ink/20 text-ink text-xs px-3 py-1 rounded-full font-medium">
               33% מינימום
@@ -1320,7 +1320,7 @@ function ObjectiveTab({
       {/* תכנון פירעונות מוקדמים */}
       <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <h3 className="font-bold text-ink mb-2">תכנון פירעונות מוקדמים</h3>
-        <p className="text-xs text-ink/60 mb-4">
+        <p className="text-xs text-ink/70 mb-4">
           הוסף פירעונות מוקדמים מתוכננים (ירושה, קרן השתלמות, בונוס). המחשבון יחשב חיסכון בריבית ותאריך סיום מוקדם.
         </p>
 
@@ -1339,8 +1339,8 @@ function ObjectiveTab({
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-ink/70 mb-1">תיאור</label>
-                  <input
+                  <label htmlFor="mortgageoptimizercalculator-f921af" className="block text-xs font-medium text-ink/70 mb-1">תיאור</label>
+                  <input id="mortgageoptimizercalculator-f921af"
                     type="text"
                     value={pp.description}
                     onChange={(e) => updatePrepayment(pp.id, 'description', e.target.value)}
@@ -1349,8 +1349,8 @@ function ObjectiveTab({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-ink/70 mb-1">בשנה מספר</label>
-                  <input
+                  <label htmlFor="mortgageoptimizercalculator-2fc4c9" className="block text-xs font-medium text-ink/70 mb-1">בשנה מספר</label>
+                  <input id="mortgageoptimizercalculator-2fc4c9"
                     type="number"
                     value={pp.yearNumber}
                     min={1} max={30}
@@ -1359,8 +1359,8 @@ function ObjectiveTab({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-ink/70 mb-1">סכום (₪)</label>
-                  <input
+                  <label htmlFor="mortgageoptimizercalculator-f8f363" className="block text-xs font-medium text-ink/70 mb-1">סכום (₪)</label>
+                  <input id="mortgageoptimizercalculator-f8f363"
                     type="number"
                     value={pp.amount}
                     min={10000} step={10000}
@@ -1395,7 +1395,7 @@ function ObjectiveTab({
         </button>
 
         {prepayments.length > 0 && (
-          <p className="text-xs text-ink/60 mt-2">
+          <p className="text-xs text-ink/70 mt-2">
             סה"כ פירעונות מתוכננים: {formatCurrency(prepayments.reduce((s, p) => s + p.amount, 0))}
           </p>
         )}
@@ -1407,7 +1407,7 @@ function ObjectiveTab({
         disabled={isRunning}
         className={`w-full py-4 rounded-none font-bold text-lg transition ${
           isRunning
-            ? 'bg-ink/20 text-ink/50 cursor-not-allowed'
+            ? 'bg-ink/20 text-ink/70 cursor-not-allowed'
             : 'bg-ink text-cream hover:bg-ink-deep shadow-lg hover:shadow-xl'
         }`}
       >
@@ -1487,7 +1487,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
       {threeOptions && (
         <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6">
           <h3 className="text-xl font-bold text-ink mb-2">3 אפשרויות להשוואה</h3>
-          <p className="text-sm text-ink/60 mb-5">בחר את האפשרות שמתאימה לצרכים שלך</p>
+          <p className="text-sm text-ink/70 mb-5">בחר את האפשרות שמתאימה לצרכים שלך</p>
           <div className="grid md:grid-cols-3 gap-4">
             <ThreeOptionCard
               option={threeOptions.lowestMonthly}
@@ -1571,7 +1571,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
             שקול להאריך את תקופת ההלוואה או להפחית את הסכום.
           </p>
           {tracks.length > 0 && (
-            <p className="text-xs text-red-600 mt-2">
+            <p className="text-xs text-red-700 mt-2">
               לתשלום של עד {formatCurrency(maxMonthlyPayment!)}/חודש על {formatCurrency(totalAmount)}, נדרשת תקופה של לפחות{' '}
               {Math.ceil(-Math.log(1 - (totalAmount * (4.0 / 100 / 12)) / maxMonthlyPayment!) / Math.log(1 + 4.0 / 100 / 12) / 12)} שנים (בריבית ממוצעת ~4%).
             </p>
@@ -1624,7 +1624,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
                       style={{ backgroundColor: PIE_COLORS_LIST[i % PIE_COLORS_LIST.length] }}
                     />
                     <span className="flex-1 font-medium text-ink">{a.trackName}</span>
-                    <span className="text-ink/60">{Math.round(a.percent * 100)}%</span>
+                    <span className="text-ink/70">{Math.round(a.percent * 100)}%</span>
                     <span className="font-bold text-ink">{formatCurrency(a.amount)}</span>
                   </div>
                 ))}
@@ -1634,21 +1634,21 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
           {/* מדדים עיקריים */}
           <div className="space-y-3">
             <div className="bg-paper rounded-none p-4 border border-ink/15">
-              <p className="text-xs text-ink/60 mb-1">תשלום חודשי ראשוני</p>
+              <p className="text-xs text-ink/70 mb-1">תשלום חודשי ראשוני</p>
               <p className="text-3xl font-bold text-ink">{formatCurrency(optimal.monthlyPayment)}</p>
             </div>
             <div className="bg-paper rounded-none p-4 border border-amber-200">
-              <p className="text-xs text-ink/60 mb-1">סה"כ ריבית לכל חיי המשכנתא</p>
-              <p className="text-2xl font-bold text-amber-700">{formatCurrency(optimal.totalCost)}</p>
+              <p className="text-xs text-ink/70 mb-1">סה"כ ריבית לכל חיי המשכנתא</p>
+              <p className="text-2xl font-bold text-amber-800">{formatCurrency(optimal.totalCost)}</p>
             </div>
             {showInflation && optimal.indexedPercent > 0 && (
               <div className="bg-paper rounded-none p-4 border border-yellow-200">
-                <p className="text-xs text-ink/60 mb-1">% צמוד מדד (חשיפת אינפלציה)</p>
+                <p className="text-xs text-ink/70 mb-1">% צמוד מדד (חשיפת אינפלציה)</p>
                 <p className="text-2xl font-bold text-yellow-700">{Math.round(optimal.indexedPercent * 100)}%</p>
               </div>
             )}
             <div className="bg-paper rounded-none p-4 border border-ink/15">
-              <p className="text-xs text-ink/60 mb-1">ריבית ממוצעת משוקללת</p>
+              <p className="text-xs text-ink/70 mb-1">ריבית ממוצעת משוקללת</p>
               <p className="text-2xl font-bold text-ink">{optimal.weightedAvgRate.toFixed(2)}%</p>
             </div>
 
@@ -1662,13 +1662,13 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
                     : 'bg-red-50 border border-red-200'
                 }`}
               >
-                <p className="text-xs text-ink/60 mb-0.5">ציון סיכון</p>
+                <p className="text-xs text-ink/70 mb-0.5">ציון סיכון</p>
                 <p
                   className={`text-xl font-bold ${
                     optimal.riskScore < 30
                       ? 'text-green-700'
                       : optimal.riskScore < 60
-                      ? 'text-amber-700'
+                      ? 'text-amber-800'
                       : 'text-red-700'
                   }`}
                 >
@@ -1682,7 +1682,7 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
                     : 'bg-red-50 border border-red-200'
                 }`}
               >
-                <p className="text-xs text-ink/60 mb-0.5">תקנות בנק ישראל</p>
+                <p className="text-xs text-ink/70 mb-0.5">תקנות בנק ישראל</p>
                 <p
                   className={`text-lg font-bold ${
                     optimal.isRegulationCompliant ? 'text-green-700' : 'text-red-700'
@@ -1702,15 +1702,15 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
           <h3 className="text-lg font-bold text-green-900 mb-4">השפעת פירעונות מוקדמים</h3>
           <div className="grid sm:grid-cols-3 gap-4 mb-4">
             <div className="bg-paper rounded-none p-4 text-center border border-green-200">
-              <p className="text-xs text-ink/60 mb-1">חיסכון בריבית</p>
+              <p className="text-xs text-ink/70 mb-1">חיסכון בריבית</p>
               <p className="text-2xl font-bold text-green-700">{formatCurrency(prepayoffResult.totalInterestSaved)}</p>
             </div>
             <div className="bg-paper rounded-none p-4 text-center border border-green-200">
-              <p className="text-xs text-ink/60 mb-1">ריבית ללא פירעונות</p>
+              <p className="text-xs text-ink/70 mb-1">ריבית ללא פירעונות</p>
               <p className="text-xl font-bold text-ink/70">{formatCurrency(prepayoffResult.totalOriginalInterest)}</p>
             </div>
             <div className="bg-paper rounded-none p-4 text-center border border-green-200">
-              <p className="text-xs text-ink/60 mb-1">ריבית עם פירעונות</p>
+              <p className="text-xs text-ink/70 mb-1">ריבית עם פירעונות</p>
               <p className="text-xl font-bold text-green-700">{formatCurrency(prepayoffResult.totalNewInterest)}</p>
             </div>
           </div>
@@ -1757,13 +1757,13 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
           <h4 className="font-bold text-ink mb-3">ALL-IN Cost — עלות כוללת כולל הוצאות נלוות</h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between"><span className="text-ink/70">סה"כ קרן</span><span className="font-medium">{formatCurrency(totalAmount)}</span></div>
-            <div className="flex justify-between"><span className="text-ink/70">סה"כ ריבית</span><span className="font-medium text-amber-700">{formatCurrency(optimal.totalCost)}</span></div>
-            <div className="flex justify-between"><span className="text-ink/70">עלויות חד-פעמיות</span><span className="font-medium text-red-600">{formatCurrency(closingCosts.totalClosingCosts)}</span></div>
+            <div className="flex justify-between"><span className="text-ink/70">סה"כ ריבית</span><span className="font-medium text-amber-800">{formatCurrency(optimal.totalCost)}</span></div>
+            <div className="flex justify-between"><span className="text-ink/70">עלויות חד-פעמיות</span><span className="font-medium text-red-700">{formatCurrency(closingCosts.totalClosingCosts)}</span></div>
             <div className="flex justify-between border-t pt-2 font-bold text-base">
               <span>ALL-IN סה"כ</span>
               <span className="text-red-700">{formatCurrency(totalAmount + optimal.totalCost + closingCosts.totalClosingCosts)}</span>
             </div>
-            <div className="flex justify-between text-xs text-ink/60"><span>ביטוח שנתי (ממוצע)</span><span>{formatCurrency(closingCosts.totalAnnualInsurance)}/שנה</span></div>
+            <div className="flex justify-between text-xs text-ink/70"><span>ביטוח שנתי (ממוצע)</span><span>{formatCurrency(closingCosts.totalAnnualInsurance)}/שנה</span></div>
           </div>
         </div>
       )}
@@ -1782,9 +1782,9 @@ function ResultsTab({ result, totalAmount, tracks, prepayments, threeOptions, ma
           )}
           {savingsVsBank !== undefined && savingsVsBank > 0 && (
             <div className="bg-emerald-50 border-2 border-emerald-200 rounded-none p-5">
-              <p className="text-sm font-medium text-emerald-700 mb-1">חיסכון לעומת הצעת הבנק</p>
+              <p className="text-sm font-medium text-emerald-800 mb-1">חיסכון לעומת הצעת הבנק</p>
               <p className="text-3xl font-bold text-emerald-800">{formatCurrency(savingsVsBank)}</p>
-              <p className="text-xs text-emerald-600 mt-1">ריבית פחות לאורך כל חיי המשכנתא</p>
+              <p className="text-xs text-emerald-800 mt-1">ריבית פחות לאורך כל חיי המשכנתא</p>
             </div>
           )}
         </div>
@@ -1948,7 +1948,7 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
       {/* גרף תשלומים לאורך זמן */}
       <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <h3 className="text-lg font-bold text-ink mb-2">התפתחות תשלום חודשי לאורך זמן</h3>
-        <p className="text-sm text-ink/60 mb-4">
+        <p className="text-sm text-ink/70 mb-4">
           השוואת תשלומים בתרחישי ריבית{showInflation ? ' ואינפלציה' : ''} שונים
         </p>
         <div className="h-72">
@@ -1996,15 +1996,15 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
                   </td>
                   <td className={`py-2 pl-2 text-right font-medium ${
                     sc.deltaFromBase > 500
-                      ? 'text-red-600'
+                      ? 'text-red-700'
                       : sc.deltaFromBase < -500
                       ? 'text-green-600'
-                      : 'text-ink/60'
+                      : 'text-ink/70'
                   }`}>
                     {sc.deltaFromBase > 0 ? '+' : ''}
                     {formatCurrency(sc.deltaFromBase)}
                   </td>
-                  <td className="py-2 pl-2 text-right text-amber-700">
+                  <td className="py-2 pl-2 text-right text-amber-800">
                     {formatCurrency(sc.totalCost)}
                   </td>
                 </tr>
@@ -2018,7 +2018,7 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
       {result.paretoFrontier && result.paretoFrontier.length > 1 && (
         <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
           <h3 className="text-lg font-bold text-ink mb-2">קיצת פארטו: עלות vs. סיכון</h3>
-          <p className="text-sm text-ink/60 mb-4">
+          <p className="text-sm text-ink/70 mb-4">
             כל נקודה היא תמהיל שלא ניתן לשפר בשני הממדים בו-זמנית
           </p>
           <div className="h-60">
@@ -2051,7 +2051,7 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 text-center">
           <p className="text-sm text-ink/70 mb-1">ציון סיכון</p>
           <p className="text-3xl font-bold text-ink">{optimal.riskScore}/100</p>
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             {optimal.riskScore < 30
               ? 'נמוך — תמהיל מוגן'
               : optimal.riskScore < 60
@@ -2060,11 +2060,11 @@ function ScenariosTab({ result, tracks, totalAmount }: ScenariosTabProps) {
           </p>
         </div>
         <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-center">
-          <p className="text-sm text-amber-700 mb-1">% קבוע (בנק ישראל)</p>
+          <p className="text-sm text-amber-800 mb-1">% קבוע (בנק ישראל)</p>
           <p className="text-3xl font-bold text-amber-900">
             {Math.round(optimal.fixedPercent * 100)}%
           </p>
-          <p className="text-xs text-amber-600 mt-1">נדרש לפחות 33%</p>
+          <p className="text-xs text-amber-800 mt-1">נדרש לפחות 33%</p>
         </div>
         <div className="bg-green-50 border border-green-200 rounded-none p-4 text-center">
           <p className="text-sm text-green-700 mb-1">ריבית ממוצעת</p>
@@ -2089,8 +2089,8 @@ function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
   if (monthlyIncome <= 0 || monthlyPayment <= 0) {
     return (
       <div className="bg-cream-2 border-2 border-dashed border-ink/15 rounded-none p-12 text-center">
-        <p className="text-ink/60 text-lg mb-2">הזן הכנסה חודשית בטאב הגדרות</p>
-        <p className="text-ink/45 text-sm">ואחרי הרצת האופטימייזר תראה את מבחן העמידות</p>
+        <p className="text-ink/70 text-lg mb-2">הזן הכנסה חודשית בטאב הגדרות</p>
+        <p className="text-ink/70 text-sm">ואחרי הרצת האופטימייזר תראה את מבחן העמידות</p>
       </div>
     );
   }
@@ -2136,7 +2136,7 @@ function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex items-center gap-4 mt-2 text-xs text-ink/60">
+        <div className="flex items-center gap-4 mt-2 text-xs text-ink/70">
           <div className="flex items-center gap-1"><div className="w-3 h-3 bg-green-500 rounded" />עד 40% — נוח</div>
           <div className="flex items-center gap-1"><div className="w-3 h-3 bg-amber-500 rounded" />40%-55% — מאתגר</div>
           <div className="flex items-center gap-1"><div className="w-3 h-3 bg-red-500 rounded" />מעל 55% — בעייתי</div>
@@ -2155,7 +2155,7 @@ function StressTestTab({ monthlyIncome, monthlyPayment }: StressTestTabProps) {
               <div className="flex items-start justify-between mb-2">
                 <div>
                   <h4 className={`font-bold text-sm ${textColor}`}>{r.label}</h4>
-                  <p className="text-xs text-ink/60 mt-0.5">{r.description}</p>
+                  <p className="text-xs text-ink/70 mt-0.5">{r.description}</p>
                 </div>
                 <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
                   r.status === 'green' ? 'bg-green-200 text-green-800' :
@@ -2320,8 +2320,8 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
                 );
               })}
               <div>
-                <label className="block text-xs font-medium text-ink/70 mb-1">אגרת פתיחה (₪)</label>
-                <input
+                <label htmlFor="mortgageoptimizercalculator-457d02" className="block text-xs font-medium text-ink/70 mb-1">אגרת פתיחה (₪)</label>
+                <input id="mortgageoptimizercalculator-457d02"
                   type="number"
                   step={500}
                   min={0}
@@ -2387,14 +2387,14 @@ function BankCompTab({ loanAmount, baseTracks, defaultTermYears, constraints }: 
                       ) : r.rank}
                     </td>
                     <td className="py-2 px-3 font-medium text-ink">{r.offer.bankName}</td>
-                    <td className="py-2 px-2 text-center text-amber-700">{formatCurrency(r.totalInterest)}</td>
+                    <td className="py-2 px-2 text-center text-amber-800">{formatCurrency(r.totalInterest)}</td>
                     <td className="py-2 px-2 text-center text-ink/70">{formatCurrency(r.openingFeeAmount)}</td>
                     <td className="py-2 px-2 text-center font-bold text-red-700">{formatCurrency(r.totalAllInCost)}</td>
                     <td className="py-2 px-2 text-center">
                       {r.isBest ? (
                         <span className="text-green-700 font-bold">הכי זול</span>
                       ) : (
-                        <span className="text-red-600">+{formatCurrency(r.savingsVsBest ?? 0)}</span>
+                        <span className="text-red-700">+{formatCurrency(r.savingsVsBest ?? 0)}</span>
                       )}
                     </td>
                   </tr>
@@ -2435,10 +2435,10 @@ function TimelineTab() {
       </div>
 
       <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
-        <label className="block text-sm font-medium text-ink/70 mb-2">
+        <label htmlFor="mortgageoptimizercalculator-5ecabf" className="block text-sm font-medium text-ink/70 mb-2">
           תאריך קבלת מפתח מתוכנן
         </label>
-        <input
+        <input id="mortgageoptimizercalculator-5ecabf"
           type="date"
           value={keysDateStr}
           onChange={(e) => setKeysDateStr(e.target.value)}
@@ -2477,12 +2477,12 @@ function TimelineTab() {
                   <div className="flex-1 bg-paper border-2 border-ink/15 rounded-none p-4">
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <span className="text-xs font-medium text-ink/60">{stage.weekRange}</span>
+                        <span className="text-xs font-medium text-ink/70">{stage.weekRange}</span>
                         <h4 className="font-bold text-ink text-base">{stage.title}</h4>
                       </div>
-                      <div className="text-left text-xs text-ink/60">
+                      <div className="text-left text-xs text-ink/70">
                         <div>{stage.formattedStart}</div>
-                        {!isLast && <div className="text-ink/45">– {stage.formattedEnd}</div>}
+                        {!isLast && <div className="text-ink/70">– {stage.formattedEnd}</div>}
                       </div>
                     </div>
                     <ul className="space-y-1">
@@ -2669,7 +2669,7 @@ export function MortgageOptimizerCalculator() {
               }`}
             >
               <div className="font-medium text-sm whitespace-nowrap">{tab.label}</div>
-              <div className="text-xs text-ink/60 mt-0.5 whitespace-nowrap">{tab.description}</div>
+              <div className="text-xs text-ink/70 mt-0.5 whitespace-nowrap">{tab.description}</div>
             </button>
           ))}
         </div>
@@ -2728,7 +2728,7 @@ export function MortgageOptimizerCalculator() {
             />
           ) : (
             <div className="bg-cream-2 border-2 border-dashed border-ink/15 rounded-none p-12 text-center">
-              <p className="text-ink/60 text-lg mb-4">טרם הרצת אופטימיזציה</p>
+              <p className="text-ink/70 text-lg mb-4">טרם הרצת אופטימיזציה</p>
               <button
                 type="button"
                 onClick={() => setActiveTab('objective')}
@@ -2751,7 +2751,7 @@ export function MortgageOptimizerCalculator() {
             />
           ) : (
             <div className="bg-cream-2 border-2 border-dashed border-ink/15 rounded-none p-12 text-center">
-              <p className="text-ink/60 text-lg mb-4">הרץ אופטימיזציה תחילה לצפייה בתרחישים</p>
+              <p className="text-ink/70 text-lg mb-4">הרץ אופטימיזציה תחילה לצפייה בתרחישים</p>
               <button
                 type="button"
                 onClick={() => setActiveTab('objective')}

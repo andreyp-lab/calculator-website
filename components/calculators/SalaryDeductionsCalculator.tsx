@@ -119,7 +119,7 @@ export function SalaryDeductionsCalculator() {
             onChange={(e) => setCreditPointsInput(e.target.value)}
             className="w-full border border-ink/25 bg-cream px-3 py-2 text-ink focus:outline-none focus:border-gold"
           />
-          <p className="text-xs text-ink/60 mt-1">ברירת מחדל: 2.25 (תושב ישראל)</p>
+          <p className="text-xs text-ink/70 mt-1">ברירת מחדל: 2.25 (תושב ישראל)</p>
         </div>
         <div className="flex items-end pb-2">
           <label htmlFor="sd-pension" className="flex items-center gap-2 text-sm text-ink cursor-pointer">
@@ -166,7 +166,7 @@ export function SalaryDeductionsCalculator() {
                   <td className={`border border-ink/15 p-2.5 ${isNet ? '' : 'text-ink'}`}>
                     {row.label}
                     {row.note && (
-                      <span className={`block text-xs font-normal ${isNet ? 'text-cream/70' : 'text-ink/55'}`}>
+                      <span className={`block text-xs font-normal ${isNet ? 'text-cream/70' : 'text-ink/70'}`}>
                         {row.note}
                       </span>
                     )}
@@ -191,7 +191,7 @@ export function SalaryDeductionsCalculator() {
         <strong className="text-ink">{result.netPercentage.toFixed(1)}%</strong> נטו. מדרגת המס
         השולית שלך: <strong className="text-ink">{result.marginalTaxRate.toFixed(0)}%</strong>.
       </p>
-      <p className="mt-2 text-xs text-ink/55">
+      <p className="mt-2 text-xs text-ink/70">
         החישוב לפי מדרגות מס 2026, נקודת זיכוי בשווי 242 ₪ לחודש, ושיעורי ביטוח לאומי ודמי
         בריאות לשכיר. ללא קרן השתלמות וניכויים וולונטריים נוספים.
       </p>

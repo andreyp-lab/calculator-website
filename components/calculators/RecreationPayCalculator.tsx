@@ -166,13 +166,13 @@ function TenureTableWidget({ sector, partTime, currentYears }: {
                   >
                     <td className="px-3 py-2 text-right text-ink">
                       {row.tenure}
-                      {isMe && <span className="mr-2 text-emerald-700 text-xs">◀ אתה כאן</span>}
+                      {isMe && <span className="mr-2 text-emerald-800 text-xs">◀ אתה כאן</span>}
                     </td>
                     <td className="px-3 py-2 text-center text-ink/70">{row.days}</td>
                     <td className="px-3 py-2 text-center text-ink/70">
                       {formatCurrency(row.ratePerDay)}
                     </td>
-                    <td className="px-3 py-2 text-center font-medium text-emerald-700">
+                    <td className="px-3 py-2 text-center font-medium text-emerald-800">
                       {formatCurrency(row.annualGross)}
                     </td>
                   </tr>
@@ -180,7 +180,7 @@ function TenureTableWidget({ sector, partTime, currentYears }: {
               })}
             </tbody>
           </table>
-          <p className="text-xs text-ink/60 px-3 py-2">
+          <p className="text-xs text-ink/70 px-3 py-2">
             מקור: צו ההרחבה הכללי במשק 2026 | תעריף: {sector === 'public' ? '471.40' : '418'} ₪/יום
           </p>
         </div>
@@ -212,8 +212,8 @@ function SharedInputs({
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-1">שנות וותק שלמות</label>
-          <input
+          <label htmlFor="recreationpaycalculator-953d8c" className="block text-sm font-medium text-ink/70 mb-1">שנות וותק שלמות</label>
+          <input id="recreationpaycalculator-953d8c"
             type="number"
             min={0}
             max={50}
@@ -289,7 +289,7 @@ function SharedInputs({
               </option>
             ))}
           </select>
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             מקור: {INDUSTRY_RATES_2026[input.industry].source}
           </p>
         </div>
@@ -298,10 +298,10 @@ function SharedInputs({
       {showSalary && (
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">
+            <label htmlFor="recreationpaycalculator-47513a" className="block text-sm font-medium text-ink/70 mb-1">
               שכר חודשי ברוטו (₪)
             </label>
-            <input
+            <input id="recreationpaycalculator-47513a"
               type="number"
               min={0}
               max={200000}
@@ -312,8 +312,8 @@ function SharedInputs({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">נקודות זיכוי</label>
-            <input
+            <label htmlFor="recreationpaycalculator-42656f" className="block text-sm font-medium text-ink/70 mb-1">נקודות זיכוי</label>
+            <input id="recreationpaycalculator-42656f"
               type="number"
               min={0}
               max={10}
@@ -322,7 +322,7 @@ function SharedInputs({
               onChange={(e) => onChange({ creditPoints: Number(e.target.value) })}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-ink/60 mt-1">תושב ישראל: 2.25 | אישה: +0.5</p>
+            <p className="text-xs text-ink/70 mt-1">תושב ישראל: 2.25 | אישה: +0.5</p>
           </div>
         </div>
       )}
@@ -379,7 +379,7 @@ function BasicTab({ input, onChange }: {
 
       {!result.isEligible ? (
         <div className="bg-red-50 border border-red-200 rounded-none p-6 flex gap-3">
-          <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-6 h-6 text-red-700 flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="font-bold text-red-900 mb-1">לא זכאי לדמי הבראה</h3>
             <p className="text-sm text-red-800">{result.ineligibilityReason}</p>
@@ -636,13 +636,13 @@ function RetroactiveTab({ input, onChange }: {
                 <option key={y} value={y}>{y} {y === 1 ? 'שנה' : 'שנים'}</option>
               ))}
             </select>
-            <p className="text-xs text-ink/60 mt-1">מקסימום 4 שנים לפי חוק הגנת השכר</p>
+            <p className="text-xs text-ink/70 mt-1">מקסימום 4 שנים לפי חוק הגנת השכר</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">
+            <label htmlFor="recreationpaycalculator-4e0945" className="block text-sm font-medium text-ink/70 mb-1">
               כמה שנים בפועל שולמו?
             </label>
-            <input
+            <input id="recreationpaycalculator-4e0945"
               type="number"
               min={0}
               max={50}
@@ -650,7 +650,7 @@ function RetroactiveTab({ input, onChange }: {
               onChange={(e) => setYearsActuallyPaid(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-ink/60 mt-1">לחישוב הפער הצפוי</p>
+            <p className="text-xs text-ink/70 mt-1">לחישוב הפער הצפוי</p>
           </div>
         </div>
       </div>
@@ -700,11 +700,11 @@ function RetroactiveTab({ input, onChange }: {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-cream-2">
-                    <th className="px-4 py-2 text-right font-medium text-ink/60">שנה</th>
-                    <th className="px-4 py-2 text-center font-medium text-ink/60">וותק</th>
-                    <th className="px-4 py-2 text-center font-medium text-ink/60">ימים</th>
-                    <th className="px-4 py-2 text-center font-medium text-ink/60">ברוטו</th>
-                    <th className="px-4 py-2 text-center font-medium text-ink/60">עם ריבית</th>
+                    <th className="px-4 py-2 text-right font-medium text-ink/70">שנה</th>
+                    <th className="px-4 py-2 text-center font-medium text-ink/70">וותק</th>
+                    <th className="px-4 py-2 text-center font-medium text-ink/70">ימים</th>
+                    <th className="px-4 py-2 text-center font-medium text-ink/70">ברוטו</th>
+                    <th className="px-4 py-2 text-center font-medium text-ink/70">עם ריבית</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -713,20 +713,20 @@ function RetroactiveTab({ input, onChange }: {
                       <td className="px-4 py-2 text-right text-ink">{row.label}</td>
                       <td className="px-4 py-2 text-center text-ink/70">{row.yearsOfServiceThatYear} שנ'</td>
                       <td className="px-4 py-2 text-center text-ink/70">{row.daysEntitled}</td>
-                      <td className="px-4 py-2 text-center text-emerald-700 font-medium">
+                      <td className="px-4 py-2 text-center text-emerald-800 font-medium">
                         {formatCurrency(row.grossAmount)}
                       </td>
-                      <td className="px-4 py-2 text-center text-amber-700 font-medium">
+                      <td className="px-4 py-2 text-center text-amber-800 font-medium">
                         {formatCurrency(row.withInterest)}
                       </td>
                     </tr>
                   ))}
                   <tr className="bg-cream font-bold border-t-2 border-ink/15">
                     <td className="px-4 py-2 text-right" colSpan={3}>סה"כ</td>
-                    <td className="px-4 py-2 text-center text-emerald-700">
+                    <td className="px-4 py-2 text-center text-emerald-800">
                       {formatCurrency(retroResult.totalGrossClaim)}
                     </td>
-                    <td className="px-4 py-2 text-center text-amber-700">
+                    <td className="px-4 py-2 text-center text-amber-800">
                       {formatCurrency(retroResult.totalWithInterest)}
                     </td>
                   </tr>
@@ -988,9 +988,9 @@ function CompareTab({ input, onChange }: {
           <table className="w-full text-sm">
             <thead>
               <tr className="text-right border-b border-ink/15">
-                <th className="px-2 py-1 font-medium text-ink/60">ענף / מגזר</th>
-                <th className="px-2 py-1 font-medium text-ink/60 text-center">תעריף/יום</th>
-                <th className="px-2 py-1 font-medium text-ink/60">מקור</th>
+                <th className="px-2 py-1 font-medium text-ink/70">ענף / מגזר</th>
+                <th className="px-2 py-1 font-medium text-ink/70 text-center">תעריף/יום</th>
+                <th className="px-2 py-1 font-medium text-ink/70">מקור</th>
               </tr>
             </thead>
             <tbody>
@@ -998,7 +998,7 @@ function CompareTab({ input, onChange }: {
                 <tr key={r.id} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
                   <td className="px-2 py-1.5 text-ink">{r.label}</td>
                   <td className="px-2 py-1.5 text-center font-medium text-gold">{formatCurrency(r.ratePerDay)}</td>
-                  <td className="px-2 py-1.5 text-ink/60 text-xs">{r.source}</td>
+                  <td className="px-2 py-1.5 text-ink/70 text-xs">{r.source}</td>
                 </tr>
               ))}
             </tbody>
@@ -1054,7 +1054,7 @@ export function RecreationPayCalculator() {
               className={`flex-1 min-w-[120px] px-4 py-3 text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? 'bg-ink text-cream'
-                  : 'text-ink/60 hover:text-ink hover:bg-cream-2'
+                  : 'text-ink/70 hover:text-ink hover:bg-cream-2'
               }`}
             >
               {tab.label}

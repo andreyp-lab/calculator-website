@@ -153,7 +153,7 @@ export function CashFlowDistributionCharts() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-[280px] flex items-center justify-center text-ink/45 text-sm">
+            <div className="h-[280px] flex items-center justify-center text-ink/70 text-sm">
               אין הכנסות להציג
             </div>
           )}
@@ -199,7 +199,7 @@ export function CashFlowDistributionCharts() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-[280px] flex items-center justify-center text-ink/45 text-sm">
+            <div className="h-[280px] flex items-center justify-center text-ink/70 text-sm">
               אין הוצאות להציג
             </div>
           )}

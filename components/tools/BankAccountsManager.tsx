@@ -44,7 +44,7 @@ export function BankAccountsManager() {
         <div className="flex items-center gap-2">
           <Building2 className="w-5 h-5 text-ink-mid" />
           <h3 className="font-bold text-base text-ink">חשבונות בנק</h3>
-          <span className="text-xs text-ink/60">({cashFlow.accounts.length})</span>
+          <span className="text-xs text-ink/70">({cashFlow.accounts.length})</span>
         </div>
         <button
           onClick={() => (showForm && !editingId ? reset() : (reset(), setShowForm(true)))}
@@ -68,8 +68,8 @@ export function BankAccountsManager() {
         <div className="bg-cream-2 border border-ink/15 rounded-none p-3 mb-3">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             <div>
-              <label className="block text-xs text-ink/70 mb-1">שם / בנק</label>
-              <input
+              <label htmlFor="bankaccountsmanager-09089b" className="block text-xs text-ink/70 mb-1">שם / בנק</label>
+              <input id="bankaccountsmanager-09089b"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -78,8 +78,8 @@ export function BankAccountsManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">יתרה (₪)</label>
-              <input
+              <label htmlFor="bankaccountsmanager-7c8f05" className="block text-xs text-ink/70 mb-1">יתרה (₪)</label>
+              <input id="bankaccountsmanager-7c8f05"
                 type="number"
                 value={form.balance || ''}
                 onChange={(e) => setForm({ ...form, balance: Number(e.target.value) })}
@@ -87,8 +87,8 @@ export function BankAccountsManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">לתאריך</label>
-              <input
+              <label htmlFor="bankaccountsmanager-1e53b5" className="block text-xs text-ink/70 mb-1">לתאריך</label>
+              <input id="bankaccountsmanager-1e53b5"
                 type="date"
                 value={form.asOfDate}
                 onChange={(e) => setForm({ ...form, asOfDate: e.target.value })}
@@ -111,7 +111,7 @@ export function BankAccountsManager() {
       )}
 
       {cashFlow.accounts.length === 0 ? (
-        <div className="text-center py-4 text-ink/45 text-xs">
+        <div className="text-center py-4 text-ink/70 text-xs">
           אין חשבונות בנק. הוסף חשבון לבחישוב מדויק של יתרת הפתיחה.
         </div>
       ) : (
@@ -123,10 +123,10 @@ export function BankAccountsManager() {
             >
               <div className="flex-1">
                 <div className="font-semibold text-ink">{account.name}</div>
-                <div className="text-xs text-ink/60">{account.asOfDate}</div>
+                <div className="text-xs text-ink/70">{account.asOfDate}</div>
               </div>
               <div
-                className={`font-bold ${account.balance >= 0 ? 'text-emerald-700' : 'text-red-700'}`}
+                className={`font-bold ${account.balance >= 0 ? 'text-emerald-800' : 'text-red-700'}`}
               >
                 {fmt(account.balance)}
               </div>
@@ -146,7 +146,7 @@ export function BankAccountsManager() {
               </button>
               <button
                 onClick={() => deleteBankAccount(account.id)}
-                className="p-1 text-red-600 hover:bg-red-50 rounded-none"
+                className="p-1 text-red-700 hover:bg-red-50 rounded-none"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>

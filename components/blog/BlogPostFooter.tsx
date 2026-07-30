@@ -76,8 +76,8 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
                 <h4 className="font-serif text-base text-ink mb-1.5 leading-snug group-hover:text-ink-mid transition">
                   {p.title}
                 </h4>
-                <p className="text-xs text-ink/55 line-clamp-2 leading-relaxed">{p.description}</p>
-                <div className="mt-3 text-xs text-ink/40">{p.readTime}</div>
+                <p className="text-xs text-ink/70 line-clamp-2 leading-relaxed">{p.description}</p>
+                <div className="mt-3 text-xs text-ink/70">{p.readTime}</div>
               </Link>
             ))}
           </div>

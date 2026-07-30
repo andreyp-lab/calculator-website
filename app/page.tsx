@@ -136,7 +136,7 @@ export default function Home() {
               </p>
 
               {/* שורת סטטים */}
-              <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.1em] text-ink/60">
+              <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.1em] text-ink/70">
                 <span>30+ מחשבונים</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
                 <span>7 קטגוריות</span>
@@ -195,7 +195,7 @@ export default function Home() {
                 className="group flex flex-col border-b border-s border-ink/15 p-7 transition hover:bg-paper-hover"
               >
                 <div className="flex items-baseline justify-between">
-                  <span className="font-mono text-sm text-ink/40">{cat.idx}</span>
+                  <span className="font-mono text-sm text-ink/70">{cat.idx}</span>
                   <span className="font-mono text-xs uppercase tracking-[0.1em] text-gold">
                     {cat.count} כלים
                   </span>
@@ -273,7 +273,7 @@ export default function Home() {
                   className={`inline-flex w-fit items-center px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] ${
                     course.featured
                       ? 'bg-gold text-paper'
-                      : 'border border-ink/25 text-ink/60'
+                      : 'border border-ink/25 text-ink/70'
                   }`}
                 >
                   {course.badge}

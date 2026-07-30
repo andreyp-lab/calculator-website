@@ -117,7 +117,7 @@ export function AllCalculatorsGrid() {
             {/* כותרת קטגוריה */}
             <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-ink/15 pb-3">
               <h3 className="flex items-baseline gap-3 text-2xl font-black text-ink">
-                <span className="font-mono text-sm text-ink/40">
+                <span className="font-mono text-sm text-ink/70">
                   {String(groupIdx + 1).padStart(2, '0')}
                 </span>
                 {group.title}
@@ -127,7 +127,7 @@ export function AllCalculatorsGrid() {
               </h3>
               <Link
                 href={group.href}
-                className="group flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.1em] text-ink/60 transition hover:text-gold"
+                className="group flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.1em] text-ink/70 transition hover:text-gold"
               >
                 כל הקטגוריה
                 <span className="text-gold transition-transform group-hover:-translate-x-1" aria-hidden="true">

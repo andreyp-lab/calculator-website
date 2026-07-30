@@ -30,10 +30,10 @@ export function ROICalculator() {
 
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="roicalculator-89d9e5" className="block text-sm font-medium text-ink/70 mb-2">
               סכום השקעה ראשוני (ש"ח)
             </label>
-            <input
+            <input id="roicalculator-89d9e5"
               type="number"
               min={0}
               step={1000}
@@ -44,10 +44,10 @@ export function ROICalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="roicalculator-44081c" className="block text-sm font-medium text-ink/70 mb-2">
               שווי סופי / סכום שנמכר (ש"ח)
             </label>
-            <input
+            <input id="roicalculator-44081c"
               type="number"
               min={0}
               step={1000}
@@ -58,10 +58,10 @@ export function ROICalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="roicalculator-4ba53f" className="block text-sm font-medium text-ink/70 mb-2">
               תקופת ההשקעה (שנים)
             </label>
-            <input
+            <input id="roicalculator-4ba53f"
               type="number"
               min={0.1}
               max={50}
@@ -70,15 +70,15 @@ export function ROICalculator() {
               onChange={(e) => update('years', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-ink/60 mt-1">לחישוב תשואה שנתית מנורמלת</p>
+            <p className="text-xs text-ink/70 mt-1">לחישוב תשואה שנתית מנורמלת</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-3 border-t border-ink/15">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="roicalculator-3609be" className="block text-sm font-medium text-ink/70 mb-2">
                 עלויות נוספות (ש"ח)
               </label>
-              <input
+              <input id="roicalculator-3609be"
                 type="number"
                 min={0}
                 step={100}
@@ -86,13 +86,13 @@ export function ROICalculator() {
                 onChange={(e) => update('additionalCosts', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-ink/60 mt-1">עמלות, מס, תחזוקה...</p>
+              <p className="text-xs text-ink/70 mt-1">עמלות, מס, תחזוקה...</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="roicalculator-9f5c63" className="block text-sm font-medium text-ink/70 mb-2">
                 הכנסות נוספות (ש"ח)
               </label>
-              <input
+              <input id="roicalculator-9f5c63"
                 type="number"
                 min={0}
                 step={100}
@@ -100,7 +100,7 @@ export function ROICalculator() {
                 onChange={(e) => update('additionalIncome', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-ink/60 mt-1">דיבידנדים, שכ"ד...</p>
+              <p className="text-xs text-ink/70 mt-1">דיבידנדים, שכ"ד...</p>
             </div>
           </div>
         </div>

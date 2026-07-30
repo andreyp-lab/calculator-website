@@ -85,7 +85,7 @@ export function CashFlowQualityDisplay() {
       <div
         className={`bg-${qualityColor}-50 border-4 border-${qualityColor}-300 p-6 text-center`}
       >
-        <div className="text-xs text-ink/60 mb-1">ציון איכות תזרים</div>
+        <div className="text-xs text-ink/70 mb-1">ציון איכות תזרים</div>
         <div className={`text-6xl font-bold text-${qualityColor}-700 mb-2`}>
           {analysis.qualityMetrics.qualityScore}/100
         </div>
@@ -352,16 +352,16 @@ function QualityMetric({
   color: string;
 }) {
   const colorMap: Record<string, { bg: string; text: string; border: string }> = {
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
-    amber: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800', border: 'border-emerald-200' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200' },
     red: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
   };
   const c = colorMap[color];
   return (
     <div className={`${c.bg} ${c.border} border-2 p-3 text-center`}>
-      <div className="text-xs text-ink/60 mb-1">{label}</div>
+      <div className="text-xs text-ink/70 mb-1">{label}</div>
       <div className={`text-2xl font-bold ${c.text}`}>{value}</div>
-      <div className="text-[10px] text-ink/45 mt-1">יעד: {target}</div>
+      <div className="text-[10px] text-ink/70 mt-1">יעד: {target}</div>
     </div>
   );
 }
@@ -408,13 +408,13 @@ function CashFlowRow({
 
 function FCFCard({ label, value, color }: { label: string; value: string; color: string }) {
   const colorMap: Record<string, { bg: string; text: string }> = {
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800' },
     red: { bg: 'bg-red-50', text: 'text-red-700' },
   };
   const c = colorMap[color];
   return (
     <div className={`${c.bg} p-3`}>
-      <div className="text-xs text-ink/60 mb-1">{label}</div>
+      <div className="text-xs text-ink/70 mb-1">{label}</div>
       <div className={`text-xl font-bold ${c.text}`}>{value}</div>
     </div>
   );
@@ -432,7 +432,7 @@ function CoverageRow({
   inverse?: boolean;
 }) {
   const isGood = inverse ? value <= target : value >= target;
-  const color = isGood ? 'text-emerald-700' : 'text-amber-700';
+  const color = isGood ? 'text-emerald-800' : 'text-amber-800';
   return (
     <div className="bg-cream-2 p-2 flex justify-between items-center">
       <span className="text-ink/70">{label}</span>
@@ -440,7 +440,7 @@ function CoverageRow({
         <span className={`font-bold ${color}`}>
           {value > 99 ? '∞' : value.toFixed(2)}
         </span>
-        <span className="text-[10px] text-ink/45 mr-2">
+        <span className="text-[10px] text-ink/70 mr-2">
           ({inverse ? '<' : '>'}{target})
         </span>
       </div>

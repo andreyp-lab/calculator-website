@@ -30,8 +30,8 @@ export function SettingsCard() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div>
-          <label className="block text-xs text-gray-600 mb-1">שם החברה</label>
-          <input
+          <label htmlFor="settingscard-042751" className="block text-xs text-gray-600 mb-1">שם החברה</label>
+          <input id="settingscard-042751"
             type="text"
             value={settings.companyName}
             onChange={(e) => updateSettings({ companyName: e.target.value })}
@@ -40,8 +40,8 @@ export function SettingsCard() {
           />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 mb-1">חודש התחלה</label>
-          <input
+          <label htmlFor="settingscard-49a1cf" className="block text-xs text-gray-600 mb-1">חודש התחלה</label>
+          <input id="settingscard-49a1cf"
             type="month"
             value={settings.startMonth}
             onChange={(e) => updateSettings({ startMonth: e.target.value })}
@@ -76,8 +76,8 @@ export function SettingsCard() {
           </select>
         </div>
         <div>
-          <label className="block text-xs text-gray-600 mb-1">שיעור מס (%)</label>
-          <input
+          <label htmlFor="settingscard-3ba0d6" className="block text-xs text-gray-600 mb-1">שיעור מס (%)</label>
+          <input id="settingscard-3ba0d6"
             type="number"
             value={settings.taxRate}
             onChange={(e) => updateSettings({ taxRate: parseFloat(e.target.value) || 0 })}
@@ -88,8 +88,8 @@ export function SettingsCard() {
           />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 mb-1">יתרת פתיחה</label>
-          <input
+          <label htmlFor="settingscard-47bf92" className="block text-xs text-gray-600 mb-1">יתרת פתיחה</label>
+          <input id="settingscard-47bf92"
             type="number"
             value={settings.openingBalance}
             onChange={(e) => updateSettings({ openingBalance: parseFloat(e.target.value) || 0 })}
@@ -111,8 +111,8 @@ export function SettingsCard() {
           </select>
         </div>
         <div>
-          <label className="block text-xs text-gray-600 mb-1">שנת מס</label>
-          <input
+          <label htmlFor="settingscard-ca914f" className="block text-xs text-gray-600 mb-1">שנת מס</label>
+          <input id="settingscard-ca914f"
             type="number"
             value={settings.fiscalYear}
             onChange={(e) => updateSettings({ fiscalYear: parseInt(e.target.value) || 2026 })}

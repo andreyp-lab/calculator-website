@@ -118,7 +118,7 @@ export function CustomExpensesManager() {
           <h3 className="font-bold text-base text-ink">
             הוצאות מפורטות (ספקים, רשויות, שיקים, אשראי)
           </h3>
-          <span className="text-xs text-ink/60">({cashFlow.customExpenses.length})</span>
+          <span className="text-xs text-ink/70">({cashFlow.customExpenses.length})</span>
         </div>
         <button
           onClick={() => (showForm && !editingId ? reset() : (reset(), setShowForm(true)))}
@@ -162,8 +162,8 @@ export function CustomExpensesManager() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">שם / תיאור</label>
-              <input
+              <label htmlFor="customexpensesmanager-e5f9f5" className="block text-xs text-ink/70 mb-1">שם / תיאור</label>
+              <input id="customexpensesmanager-e5f9f5"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -172,8 +172,8 @@ export function CustomExpensesManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">סכום (₪)</label>
-              <input
+              <label htmlFor="customexpensesmanager-96baa5" className="block text-xs text-ink/70 mb-1">סכום (₪)</label>
+              <input id="customexpensesmanager-96baa5"
                 type="number"
                 value={form.amount || ''}
                 onChange={(e) => setForm({ ...form, amount: Number(e.target.value) })}
@@ -181,8 +181,8 @@ export function CustomExpensesManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">תאריך תשלום</label>
-              <input
+              <label htmlFor="customexpensesmanager-de0d4d" className="block text-xs text-ink/70 mb-1">תאריך תשלום</label>
+              <input id="customexpensesmanager-de0d4d"
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
@@ -190,8 +190,8 @@ export function CustomExpensesManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">ימי דחייה</label>
-              <input
+              <label htmlFor="customexpensesmanager-081f21" className="block text-xs text-ink/70 mb-1">ימי דחייה</label>
+              <input id="customexpensesmanager-081f21"
                 type="number"
                 value={form.paymentTerms}
                 onChange={(e) => setForm({ ...form, paymentTerms: Number(e.target.value) })}
@@ -275,8 +275,8 @@ export function CustomExpensesManager() {
               <div className="text-xs font-semibold text-ink mb-2">פרטי שיק</div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">מספר שיק</label>
-                  <input
+                  <label htmlFor="customexpensesmanager-547644" className="block text-xs text-ink/70 mb-1">מספר שיק</label>
+                  <input id="customexpensesmanager-547644"
                     type="text"
                     value={(form.details?.checkNumber as string) ?? ''}
                     onChange={(e) => updateDetail('checkNumber', e.target.value)}
@@ -285,8 +285,8 @@ export function CustomExpensesManager() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">נמען</label>
-                  <input
+                  <label htmlFor="customexpensesmanager-296cf4" className="block text-xs text-ink/70 mb-1">נמען</label>
+                  <input id="customexpensesmanager-296cf4"
                     type="text"
                     value={(form.details?.payee as string) ?? ''}
                     onChange={(e) => updateDetail('payee', e.target.value)}
@@ -295,8 +295,8 @@ export function CustomExpensesManager() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">בנק</label>
-                  <input
+                  <label htmlFor="customexpensesmanager-499dd5" className="block text-xs text-ink/70 mb-1">בנק</label>
+                  <input id="customexpensesmanager-499dd5"
                     type="text"
                     value={(form.details?.bank as string) ?? ''}
                     onChange={(e) => updateDetail('bank', e.target.value)}
@@ -341,8 +341,8 @@ export function CustomExpensesManager() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">4 ספרות</label>
-                  <input
+                  <label htmlFor="customexpensesmanager-16f7e2" className="block text-xs text-ink/70 mb-1">4 ספרות</label>
+                  <input id="customexpensesmanager-16f7e2"
                     type="text"
                     maxLength={4}
                     value={(form.details?.last4 as string) ?? ''}
@@ -384,7 +384,7 @@ export function CustomExpensesManager() {
       )}
 
       {cashFlow.customExpenses.length === 0 ? (
-        <div className="text-center py-4 text-ink/45 text-xs">
+        <div className="text-center py-4 text-ink/70 text-xs">
           אין הוצאות. הוסף תשלום ספק / רשות / שיק / אשראי.
         </div>
       ) : (
@@ -407,7 +407,7 @@ export function CustomExpensesManager() {
                   >
                     <div className="flex-1 min-w-0">
                       <div className="font-semibold text-ink truncate">{expense.name}</div>
-                      <div className="text-xs text-ink/60 mt-0.5 flex flex-wrap gap-x-2">
+                      <div className="text-xs text-ink/70 mt-0.5 flex flex-wrap gap-x-2">
                         <span>{expense.date}</span>
                         {expense.paymentTerms > 0 && (
                           <span>{expense.paymentTerms} ימי דחייה</span>
@@ -446,7 +446,7 @@ export function CustomExpensesManager() {
                     </button>
                     <button
                       onClick={() => deleteCustomExpense(expense.id)}
-                      className="p-1 text-red-600 hover:bg-red-50"
+                      className="p-1 text-red-700 hover:bg-red-50"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

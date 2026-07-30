@@ -72,7 +72,7 @@ function TabBar({ active, onChange }: { active: TabMode; onChange: (t: TabMode) 
           className={`flex-1 min-w-[100px] py-2 px-3 rounded-none text-sm font-medium transition-all ${
             active === tab
               ? 'bg-paper text-ink shadow font-bold'
-              : 'text-ink/60 hover:text-ink'
+              : 'text-ink/70 hover:text-ink'
           }`}
         >
           {TAB_LABELS[tab]}
@@ -119,12 +119,12 @@ function NumericInput({
           className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
         />
         {unit && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/60 pointer-events-none">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/70 pointer-events-none">
             {unit}
           </span>
         )}
       </div>
-      {note && <p className="text-xs text-ink/60 mt-1">{note}</p>}
+      {note && <p className="text-xs text-ink/70 mt-1">{note}</p>}
     </div>
   );
 }
@@ -381,17 +381,17 @@ function QuickTab() {
             </button>
           </div>
           {!showAmortization ? (
-            <div className="text-sm text-ink/60 space-y-3">
+            <div className="text-sm text-ink/70 space-y-3">
               <p>לחץ להצגת כל תשלום: קרן, ריבית ויתרה.</p>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="bg-cream-2 rounded-none p-2">
-                  <div className="text-ink/60">ריבית בחודש 1</div>
+                  <div className="text-ink/70">ריבית בחודש 1</div>
                   <div className="font-bold text-ink">
                     {formatCurrency((loanAmount * annualRate) / 100 / 12)}
                   </div>
                 </div>
                 <div className="bg-green-50 rounded-none p-2">
-                  <div className="text-ink/60">יתרה לאחר שנה</div>
+                  <div className="text-ink/70">יתרה לאחר שנה</div>
                   <div className="font-bold text-green-700">
                     {formatCurrency(result.amortizationSummary.remainingBalance12Months)}
                   </div>
@@ -403,11 +403,11 @@ function QuickTab() {
               <table className="w-full text-xs text-right">
                 <thead className="bg-cream-2 sticky top-0">
                   <tr>
-                    <th className="p-2 text-ink/60">חודש</th>
-                    <th className="p-2 text-ink/60">תשלום</th>
-                    <th className="p-2 text-ink/60">קרן</th>
-                    <th className="p-2 text-ink/60">ריבית</th>
-                    <th className="p-2 text-ink/60">יתרה</th>
+                    <th className="p-2 text-ink/70">חודש</th>
+                    <th className="p-2 text-ink/70">תשלום</th>
+                    <th className="p-2 text-ink/70">קרן</th>
+                    <th className="p-2 text-ink/70">ריבית</th>
+                    <th className="p-2 text-ink/70">יתרה</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -416,7 +416,7 @@ function QuickTab() {
                       <td className="p-2 text-ink/70">{row.month}</td>
                       <td className="p-2">{formatCurrency(row.payment)}</td>
                       <td className="p-2 text-green-700">{formatCurrency(row.principal)}</td>
-                      <td className="p-2 text-red-600">{formatCurrency(row.interest)}</td>
+                      <td className="p-2 text-red-700">{formatCurrency(row.interest)}</td>
                       <td className="p-2 font-medium">{formatCurrency(row.balance)}</td>
                     </tr>
                   ))}
@@ -535,22 +535,22 @@ function APRTab() {
           <div className="bg-paper border border-ink/15 rounded-none p-5 space-y-3">
             <h3 className="font-bold text-ink">השוואה: נומינלי vs APR אמיתי</h3>
             <div className="flex justify-between items-center py-2 border-b border-ink/10">
-              <span className="text-ink/60 text-sm">ריבית נומינלית:</span>
+              <span className="text-ink/70 text-sm">ריבית נומינלית:</span>
               <strong className="text-ink">{annualRate.toFixed(1)}%</strong>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-ink/10">
-              <span className="text-ink/60 text-sm">APR אמיתי:</span>
+              <span className="text-ink/70 text-sm">APR אמיתי:</span>
               <strong className={`text-lg ${aprDiff > 1 ? 'text-red-700' : 'text-orange-700'}`}>
                 {result.trueAPR.toFixed(2)}%
               </strong>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-ink/10">
-              <span className="text-ink/60 text-sm">הפרש APR:</span>
-              <strong className="text-red-600">+{aprDiff.toFixed(2)}%</strong>
+              <span className="text-ink/70 text-sm">הפרש APR:</span>
+              <strong className="text-red-700">+{aprDiff.toFixed(2)}%</strong>
             </div>
             <div className="flex justify-between items-center py-2">
-              <span className="text-ink/60 text-sm">סך עמלות:</span>
-              <strong className="text-red-600">{formatCurrency(result.totalFees)}</strong>
+              <span className="text-ink/70 text-sm">סך עמלות:</span>
+              <strong className="text-red-700">{formatCurrency(result.totalFees)}</strong>
             </div>
           </div>
 
@@ -667,17 +667,17 @@ function SourcesTab() {
                   </span>
                 )}
               </div>
-              <div className="text-xs text-ink/60 mb-3">
+              <div className="text-xs text-ink/70 mb-3">
                 ריבית אופיינית: {c.source.typicalRateMin}%-{c.source.typicalRateMax}%
               </div>
               <div className="space-y-1.5 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-ink/60">תשלום חודשי:</span>
+                  <span className="text-ink/70">תשלום חודשי:</span>
                   <strong>{formatCurrency(c.monthlyPayment)}</strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-ink/60">סך ריבית:</span>
-                  <strong className={isCheapest ? 'text-green-700' : 'text-red-600'}>
+                  <span className="text-ink/70">סך ריבית:</span>
+                  <strong className={isCheapest ? 'text-green-700' : 'text-red-700'}>
                     {formatCurrency(c.totalInterest)}
                   </strong>
                 </div>
@@ -688,7 +688,7 @@ function SourcesTab() {
                 )}
               </div>
               <div className="mt-3 pt-3 border-t border-ink/15">
-                <p className="text-xs text-ink/60">{c.source.tipHe}</p>
+                <p className="text-xs text-ink/70">{c.source.tipHe}</p>
               </div>
               <div className="mt-2 flex flex-wrap gap-1">
                 {c.source.pros.slice(0, 2).map((pro, i) => (
@@ -817,11 +817,11 @@ function DebtPayoffTab() {
       <div className="grid md:grid-cols-2 gap-4 bg-cream-2 border border-ink/15 rounded-none p-4 text-sm">
         <div>
           <h3 className="font-bold text-ink mb-1">שיטת Snowball (כדור שלג)</h3>
-          <p className="text-ink/60">פורע תחילה את החוב הקטן ביותר. יתרון פסיכולוגי - ניצחונות מהירים שמניעים להמשך.</p>
+          <p className="text-ink/70">פורע תחילה את החוב הקטן ביותר. יתרון פסיכולוגי - ניצחונות מהירים שמניעים להמשך.</p>
         </div>
         <div>
           <h3 className="font-bold text-green-900 mb-1">שיטת Avalanche (מפולת)</h3>
-          <p className="text-ink/60">פורע תחילה את החוב בריבית הגבוהה ביותר. מתמטית אופטימלית - חוסך הכי הרבה ריבית.</p>
+          <p className="text-ink/70">פורע תחילה את החוב בריבית הגבוהה ביותר. מתמטית אופטימלית - חוסך הכי הרבה ריבית.</p>
         </div>
       </div>
 
@@ -862,7 +862,7 @@ function DebtPayoffTab() {
                 <button
                   type="button"
                   onClick={() => removeDebt(debt.id)}
-                  className="text-red-400 hover:text-red-600"
+                  className="text-red-400 hover:text-red-700"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -931,7 +931,7 @@ function DebtPayoffTab() {
                     {i + 1}
                   </span>
                   <span className="flex-1">{item.name}</span>
-                  <span className="text-ink/60">חודש {item.payoffMonth}</span>
+                  <span className="text-ink/70">חודש {item.payoffMonth}</span>
                 </div>
               ))}
             </div>
@@ -958,7 +958,7 @@ function DebtPayoffTab() {
                     {i + 1}
                   </span>
                   <span className="flex-1">{item.name}</span>
-                  <span className="text-ink/60">חודש {item.payoffMonth}</span>
+                  <span className="text-ink/70">חודש {item.payoffMonth}</span>
                 </div>
               ))}
             </div>
@@ -1168,9 +1168,9 @@ function CreditCardVsLoanTab() {
           <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-3 text-sm">
             <h3 className="font-bold text-ink">השוואה מפורטת</h3>
             <div className="grid grid-cols-3 gap-2 text-xs">
-              <div className="text-ink/60">פריט</div>
-              <div className="text-ink/60 text-center">כרטיס אשראי</div>
-              <div className="text-ink/60 text-center">הלוואה אישית</div>
+              <div className="text-ink/70">פריט</div>
+              <div className="text-ink/70 text-center">כרטיס אשראי</div>
+              <div className="text-ink/70 text-center">הלוואה אישית</div>
 
               <div className="text-ink/70">תשלום חודשי</div>
               <div className="text-center font-medium">{formatCurrency(result.creditCard.monthlyPayment)}</div>
@@ -1179,7 +1179,7 @@ function CreditCardVsLoanTab() {
               </div>
 
               <div className="text-ink/70">סך ריבית</div>
-              <div className="text-center text-red-600">{formatCurrency(result.creditCard.totalInterest)}</div>
+              <div className="text-center text-red-700">{formatCurrency(result.creditCard.totalInterest)}</div>
               <div className="text-center text-green-700">
                 {formatCurrency(result.personalLoan.totalInterest)}
               </div>
@@ -1194,7 +1194,7 @@ function CreditCardVsLoanTab() {
             </div>
 
             {result.breakEvenMonths > 0 && (
-              <div className="text-xs text-ink/60 mt-2">
+              <div className="text-xs text-ink/70 mt-2">
                 נקודת האיזון על עמלת הפתיחה: חודש <strong>{result.breakEvenMonths}</strong>
               </div>
             )}
@@ -1272,7 +1272,7 @@ function AffordabilityTab() {
       bg: 'bg-red-50',
       border: 'border-red-300',
       textColor: 'text-red-900',
-      icon: <XCircle className="w-6 h-6 text-red-600" />,
+      icon: <XCircle className="w-6 h-6 text-red-700" />,
     },
   };
 
@@ -1346,11 +1346,11 @@ function AffordabilityTab() {
 
           <div className="bg-cream-2 rounded-none p-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-ink/60">תשלום חודשי מחושב:</span>
+              <span className="text-ink/70">תשלום חודשי מחושב:</span>
               <strong>{formatCurrency(requestedMonthlyPayment)}</strong>
             </div>
             <div className="flex justify-between mt-1">
-              <span className="text-ink/60">תשלום מקסימלי מומלץ:</span>
+              <span className="text-ink/70">תשלום מקסימלי מומלץ:</span>
               <strong className="text-green-700">{formatCurrency(result.maxRecommendedPayment)}</strong>
             </div>
           </div>

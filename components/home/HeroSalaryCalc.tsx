@@ -38,7 +38,7 @@ export function HeroSalaryCalc() {
       {/* כותרת המחשבון */}
       <div className="flex items-start justify-between gap-4 border-b border-ink/12 px-6 py-5">
         <div>
-          <h3 className="text-xl font-black text-ink leading-tight">מחשבון שכר נטו</h3>
+          <h2 className="text-xl font-black text-ink leading-tight">מחשבון שכר נטו</h2>
           <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-gold">
             GROSS → NET · 2026
           </p>
@@ -55,7 +55,7 @@ export function HeroSalaryCalc() {
           <div className="flex items-baseline justify-between">
             <label
               htmlFor="hero-gross"
-              className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/60"
+              className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/70"
             >
               שכר ברוטו חודשי
             </label>
@@ -74,7 +74,7 @@ export function HeroSalaryCalc() {
             className="mt-3 w-full cursor-pointer accent-ink"
             aria-label="שכר ברוטו חודשי"
           />
-          <div className="mt-1 flex justify-between font-mono text-[10px] text-ink/40">
+          <div className="mt-1 flex justify-between font-mono text-[10px] text-ink/70">
             <span>₪6,000</span>
             <span>₪60,000</span>
           </div>
@@ -82,7 +82,7 @@ export function HeroSalaryCalc() {
 
         {/* סטפר נקודות זיכוי */}
         <div className="flex items-center justify-between">
-          <label className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/60">
+          <label className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/70">
             נקודות זיכוי
           </label>
           <div className="flex items-center border border-ink/20">

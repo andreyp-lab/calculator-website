@@ -127,7 +127,7 @@ export function BankCreditAdvice() {
             {advice.approvalRecommendation.recommendation}
           </h4>
           <div className="text-left">
-            <div className="text-xs text-ink/60">ועדה</div>
+            <div className="text-xs text-ink/70">ועדה</div>
             <div className="font-bold">{advice.approvalRecommendation.committeeLevel}</div>
           </div>
         </div>
@@ -156,7 +156,7 @@ export function BankCreditAdvice() {
             {advice.executiveSummary.keyStrengths.length > 0 ? (
               advice.executiveSummary.keyStrengths.map((s, i) => <li key={i}>• {s}</li>)
             ) : (
-              <li className="text-ink/60">לא זוהו</li>
+              <li className="text-ink/70">לא זוהו</li>
             )}
           </ul>
         </div>
@@ -166,7 +166,7 @@ export function BankCreditAdvice() {
             {advice.executiveSummary.keyRisks.length > 0 ? (
               advice.executiveSummary.keyRisks.map((r, i) => <li key={i}>• {r}</li>)
             ) : (
-              <li className="text-ink/60">לא זוהו</li>
+              <li className="text-ink/70">לא זוהו</li>
             )}
           </ul>
         </div>
@@ -202,17 +202,17 @@ export function BankCreditAdvice() {
         <div className="p-4 bg-cream-2 border-t border-ink/15">
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div>
-              <div className="text-xs text-ink/60">קיבולת מקסימלית</div>
+              <div className="text-xs text-ink/70">קיבולת מקסימלית</div>
               <div className="font-bold text-ink">{fmt(advice.creditCapacity.grossCapacity)}</div>
             </div>
             <div>
-              <div className="text-xs text-ink/60">קיבולת זמינה</div>
-              <div className="font-bold text-emerald-700">
+              <div className="text-xs text-ink/70">קיבולת זמינה</div>
+              <div className="font-bold text-emerald-800">
                 {fmt(advice.creditCapacity.availableCapacity)}
               </div>
             </div>
           </div>
-          <div className="mt-2 text-xs text-ink/60">
+          <div className="mt-2 text-xs text-ink/70">
             ניצול נוכחי: {advice.creditCapacity.utilizationRate.toFixed(0)}%
           </div>
         </div>
@@ -234,10 +234,10 @@ export function BankCreditAdvice() {
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <h5 className="font-semibold text-ink">{p.product.name}</h5>
-                  <div className="text-xs text-ink/60">{p.product.nameEn}</div>
+                  <div className="text-xs text-ink/70">{p.product.nameEn}</div>
                 </div>
                 <div className="text-left">
-                  <div className="text-xs text-ink/60">סכום מומלץ</div>
+                  <div className="text-xs text-ink/70">סכום מומלץ</div>
                   <div className="font-bold text-ink">{fmt(p.suggestedAmount)}</div>
                 </div>
               </div>
@@ -249,10 +249,10 @@ export function BankCreditAdvice() {
                   <strong>ריבית:</strong> {p.terms.interestRate}
                 </div>
               </div>
-              <div className="mt-2 text-xs text-ink/60">
+              <div className="mt-2 text-xs text-ink/70">
                 <strong>בטחונות:</strong> {p.collateral.join(' • ')}
               </div>
-              <div className="text-xs text-ink/60">
+              <div className="text-xs text-ink/70">
                 <strong>תנאים:</strong> {p.conditions.join(' • ')}
               </div>
             </div>
@@ -275,15 +275,15 @@ export function BankCreditAdvice() {
         </div>
         <div className="p-4 grid md:grid-cols-3 gap-3 text-sm">
           <div className="bg-cream-2 rounded-none p-3">
-            <div className="text-xs text-ink/60">קצר טווח (עד 12 חודשים)</div>
+            <div className="text-xs text-ink/70">קצר טווח (עד 12 חודשים)</div>
             <div className="font-bold text-ink">{advice.pricing.shortTermRate}</div>
           </div>
           <div className="bg-cream-2 rounded-none p-3">
-            <div className="text-xs text-ink/60">בינוני (12-36 חודשים)</div>
+            <div className="text-xs text-ink/70">בינוני (12-36 חודשים)</div>
             <div className="font-bold text-ink">{advice.pricing.mediumTermRate}</div>
           </div>
           <div className="bg-cream-2 rounded-none p-3">
-            <div className="text-xs text-ink/60">ארוך טווח (36+ חודשים)</div>
+            <div className="text-xs text-ink/70">ארוך טווח (36+ חודשים)</div>
             <div className="font-bold text-ink">{advice.pricing.longTermRate}</div>
           </div>
         </div>
@@ -319,7 +319,7 @@ export function BankCreditAdvice() {
                   <td className="p-2 text-center font-semibold">{c.requirement}</td>
                   <td
                     className={`p-2 text-center font-bold ${
-                      isCompliant ? 'text-emerald-700' : 'text-red-700'
+                      isCompliant ? 'text-emerald-800' : 'text-red-700'
                     }`}
                   >
                     {c.current.toFixed(2)} {isCompliant ? '✓' : '⚠️'}
@@ -377,9 +377,9 @@ function CapacityCard({
 }) {
   return (
     <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
-      <div className="text-xs text-ink/60 mb-1">{label}</div>
+      <div className="text-xs text-ink/70 mb-1">{label}</div>
       <div className="text-xl font-bold text-ink">{value}</div>
-      <div className="text-[10px] text-ink/60 mt-1">{subtitle}</div>
+      <div className="text-[10px] text-ink/70 mt-1">{subtitle}</div>
     </div>
   );
 }

@@ -110,9 +110,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      <label className="block text-sm font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -420,7 +422,7 @@ export function CorpVsIndividualCalculator() {
                   />
                 </button>
               </div>
-              <p className="text-xs text-ink/60 -mt-2">
+              <p className="text-xs text-ink/70 -mt-2">
                 {isControllingOwner ? 'מס דיבידנד: 30%+3%=33%' : 'מס דיבידנד: 25%'}
               </p>
             </div>
@@ -470,7 +472,7 @@ export function CorpVsIndividualCalculator() {
               </Field>
               <div className="flex justify-between pt-2 border-t border-ink/15">
                 <span className="text-sm font-semibold text-ink/70">סה&quot;כ עלות שנתית:</span>
-                <span className="text-sm font-bold text-red-600">
+                <span className="text-sm font-bold text-red-700">
                   {formatCurrency(corpRunningCosts)}
                 </span>
               </div>
@@ -511,7 +513,7 @@ export function CorpVsIndividualCalculator() {
                   />
                 </button>
               </div>
-              <p className="text-xs text-ink/60">
+              <p className="text-xs text-ink/70">
                 {includeStudyFundCorp
                   ? 'יתרון לחברה: קרן השתלמות פטורה ממס על 7.5% ממשכורת'
                   : 'הפעל כדי לכלול קרן השתלמות בחישוב'}
@@ -608,27 +610,27 @@ export function CorpVsIndividualCalculator() {
                       </div>
                       <div className="space-y-1.5 text-xs">
                         <div className="flex justify-between">
-                          <span className="text-ink/60">נטו לבעלים:</span>
+                          <span className="text-ink/70">נטו לבעלים:</span>
                           <span
-                            className={`font-bold text-sm ${isRec ? 'text-emerald-700' : 'text-ink'}`}
+                            className={`font-bold text-sm ${isRec ? 'text-emerald-800' : 'text-ink'}`}
                           >
                             {formatCurrency(s.netToOwner)}
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-ink/60">שיעור מס:</span>
+                          <span className="text-ink/70">שיעור מס:</span>
                           <span className="font-medium">
                             {formatPercent(s.effectiveTaxRate, 1)}
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-ink/60">סה&quot;כ מס:</span>
-                          <span className="font-medium text-red-600">
+                          <span className="text-ink/70">סה&quot;כ מס:</span>
+                          <span className="font-medium text-red-700">
                             {formatCurrency(s.totalTax)}
                           </span>
                         </div>
                         {s.corpRunningCosts > 0 && (
-                          <div className="flex justify-between text-ink/45">
+                          <div className="flex justify-between text-ink/70">
                             <span>עלות תפעול:</span>
                             <span>{formatCurrency(s.corpRunningCosts)}</span>
                           </div>
@@ -757,7 +759,7 @@ export function CorpVsIndividualCalculator() {
                   <p className="text-3xl font-bold text-ink">{formatCurrency(annualProfit)}</p>
                   <p
                     className={`text-sm font-semibold mt-1 ${
-                      isAboveBreakEven ? 'text-emerald-600' : 'text-amber-600'
+                      isAboveBreakEven ? 'text-emerald-800' : 'text-amber-800'
                     }`}
                   >
                     {breakEven > 0
@@ -777,7 +779,7 @@ export function CorpVsIndividualCalculator() {
                       <tr className="border-b border-ink/15">
                         <th className="py-2 text-right font-semibold text-ink/70">רווח שנתי</th>
                         <th className="py-2 text-center font-semibold text-ink-mid">עוסק</th>
-                        <th className="py-2 text-center font-semibold text-emerald-700">חברה (מיקס)</th>
+                        <th className="py-2 text-center font-semibold text-emerald-800">חברה (מיקס)</th>
                         <th className="py-2 text-center font-semibold text-gold">חברה (דיב&apos;)</th>
                         <th className="py-2 text-center font-semibold text-ink/70">עדיף</th>
                         <th className="py-2 text-center font-semibold text-ink/70">חיסכון</th>
@@ -799,7 +801,7 @@ export function CorpVsIndividualCalculator() {
                           <td className="py-2 text-center text-ink-mid">
                             {formatPercent(row.individual.effectiveTaxRate, 1)}
                           </td>
-                          <td className="py-2 text-center text-emerald-700">
+                          <td className="py-2 text-center text-emerald-800">
                             {formatPercent(row.corpMix.effectiveTaxRate, 1)}
                           </td>
                           <td className="py-2 text-center text-gold">
@@ -816,7 +818,7 @@ export function CorpVsIndividualCalculator() {
                               {row.winner === 'corp' ? 'חברה' : 'עוסק'}
                             </span>
                           </td>
-                          <td className="py-2 text-center text-emerald-700 font-medium">
+                          <td className="py-2 text-center text-emerald-800 font-medium">
                             {row.savingsWithCorp > 0 ? formatCurrency(row.savingsWithCorp) : '—'}
                           </td>
                         </tr>
@@ -859,18 +861,18 @@ export function CorpVsIndividualCalculator() {
               {/* סיכום תחזית */}
               <div className="grid md:grid-cols-3 gap-3">
                 <div className="bg-paper border border-ink/15 rounded-none p-4 text-center">
-                  <p className="text-xs text-ink/60 mb-1">חיסכון בשנה 1</p>
-                  <p className="text-2xl font-bold text-emerald-700">
+                  <p className="text-xs text-ink/70 mb-1">חיסכון בשנה 1</p>
+                  <p className="text-2xl font-bold text-emerald-800">
                     {result.yearProjections[0]
                       ? formatCurrency(result.yearProjections[0].annualSaving)
                       : '—'}
                   </p>
                 </div>
                 <div className="bg-paper border border-ink/15 rounded-none p-4 text-center">
-                  <p className="text-xs text-ink/60 mb-1">
+                  <p className="text-xs text-ink/70 mb-1">
                     חיסכון בשנה {projectionYears}
                   </p>
-                  <p className="text-2xl font-bold text-emerald-700">
+                  <p className="text-2xl font-bold text-emerald-800">
                     {result.yearProjections[projectionYears - 1]
                       ? formatCurrency(result.yearProjections[projectionYears - 1].annualSaving)
                       : '—'}
@@ -878,7 +880,7 @@ export function CorpVsIndividualCalculator() {
                 </div>
                 <div className="bg-emerald-50 border-2 border-emerald-200 rounded-none p-4 text-center">
                   <p className="text-xs text-ink/70 mb-1">חיסכון מצטבר</p>
-                  <p className="text-2xl font-bold text-emerald-700">
+                  <p className="text-2xl font-bold text-emerald-800">
                     {result.yearProjections.length > 0
                       ? formatCurrency(
                           result.yearProjections[result.yearProjections.length - 1]
@@ -947,9 +949,9 @@ export function CorpVsIndividualCalculator() {
                         <th className="py-2 text-right text-ink/70">שנה</th>
                         <th className="py-2 text-center text-ink/70">רווח</th>
                         <th className="py-2 text-center text-ink-mid">עוסק נטו</th>
-                        <th className="py-2 text-center text-emerald-700">חברה נטו</th>
+                        <th className="py-2 text-center text-emerald-800">חברה נטו</th>
                         <th className="py-2 text-center text-ink/70">חיסכון שנתי</th>
-                        <th className="py-2 text-center text-emerald-700">חיסכון מצטבר</th>
+                        <th className="py-2 text-center text-emerald-800">חיסכון מצטבר</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -960,12 +962,12 @@ export function CorpVsIndividualCalculator() {
                           <td className="py-2 text-center text-ink-mid">
                             {formatCurrency(row.individualNet)}
                           </td>
-                          <td className="py-2 text-center text-emerald-700">
+                          <td className="py-2 text-center text-emerald-800">
                             {formatCurrency(row.corpNet)}
                           </td>
                           <td
                             className={`py-2 text-center font-medium ${
-                              row.annualSaving > 0 ? 'text-emerald-700' : 'text-red-600'
+                              row.annualSaving > 0 ? 'text-emerald-800' : 'text-red-700'
                             }`}
                           >
                             {row.annualSaving > 0 ? '+' : ''}
@@ -973,7 +975,7 @@ export function CorpVsIndividualCalculator() {
                           </td>
                           <td
                             className={`py-2 text-center font-bold ${
-                              row.cumulativeSaving > 0 ? 'text-emerald-700' : 'text-red-600'
+                              row.cumulativeSaving > 0 ? 'text-emerald-800' : 'text-red-700'
                             }`}
                           >
                             {row.cumulativeSaving > 0 ? '+' : ''}
@@ -1026,11 +1028,11 @@ export function CorpVsIndividualCalculator() {
                     >
                       <div>
                         <p className="text-sm font-medium text-ink">{item.label}</p>
-                        <p className="text-xs text-ink/60">{item.note}</p>
+                        <p className="text-xs text-ink/70">{item.note}</p>
                       </div>
                       <div className="flex items-center gap-3">
                         <RiskBadge level={item.risk} />
-                        <span className="text-sm font-bold text-red-600">
+                        <span className="text-sm font-bold text-red-700">
                           {formatCurrency(item.amount)}
                         </span>
                       </div>
@@ -1101,10 +1103,10 @@ export function CorpVsIndividualCalculator() {
                         { text: 'תדמית לקוחות גדולים', detail: 'חברות מעדיפות לעבוד עם חברות' },
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-2 text-xs">
-                          <span className="text-emerald-600 mt-0.5">✓</span>
+                          <span className="text-emerald-800 mt-0.5">✓</span>
                           <div>
                             <p className="font-medium text-ink">{item.text}</p>
-                            <p className="text-ink/60">{item.detail}</p>
+                            <p className="text-ink/70">{item.detail}</p>
                           </div>
                         </li>
                       ))}
@@ -1124,7 +1126,7 @@ export function CorpVsIndividualCalculator() {
                           <span className="text-gold mt-0.5">✓</span>
                           <div>
                             <p className="font-medium text-ink">{item.text}</p>
-                            <p className="text-ink/60">{item.detail}</p>
+                            <p className="text-ink/70">{item.detail}</p>
                           </div>
                         </li>
                       ))}

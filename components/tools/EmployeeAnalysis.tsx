@@ -147,7 +147,7 @@ export function EmployeeAnalysis() {
     if (eff > 1.5) return 'bg-emerald-100 text-emerald-800 border-emerald-300';
     if (eff > 0.8) return 'bg-amber-100 text-amber-800 border-amber-300';
     if (eff > 0) return 'bg-red-100 text-red-800 border-red-300';
-    return 'bg-cream-2 text-ink/60 border-ink/15';
+    return 'bg-cream-2 text-ink/70 border-ink/15';
   }
 
   function getEfficiencyLabel(eff: number) {
@@ -163,7 +163,7 @@ export function EmployeeAnalysis() {
         <div className="flex items-center gap-2 mb-4">
           <Users className="w-5 h-5 text-gold" />
           <h3 className="font-bold text-lg text-ink">ניתוח עובדים</h3>
-          <span className="text-sm text-ink/60">({analysis.totalCount} עובדים)</span>
+          <span className="text-sm text-ink/70">({analysis.totalCount} עובדים)</span>
         </div>
 
         {/* טבלת סיכום */}
@@ -188,7 +188,7 @@ export function EmployeeAnalysis() {
                   <td className="px-3 py-2 text-center">{d.count}</td>
                   <td className="px-3 py-2">{fmt(d.monthlyCost)}</td>
                   <td className="px-3 py-2">{fmt(d.annualCost)}</td>
-                  <td className="px-3 py-2 text-emerald-700">{fmt(d.revenue)}</td>
+                  <td className="px-3 py-2 text-emerald-800">{fmt(d.revenue)}</td>
                   <td className="px-3 py-2 text-center">
                     <span
                       className={`inline-block px-2 py-0.5 text-xs border ${getEfficiencyClass(
@@ -207,7 +207,7 @@ export function EmployeeAnalysis() {
                 <td className="px-3 py-2 text-center">{analysis.totalCount}</td>
                 <td className="px-3 py-2">{fmt(analysis.totalEmployeeCost / 12)}</td>
                 <td className="px-3 py-2">{fmt(analysis.totalEmployeeCost)}</td>
-                <td className="px-3 py-2 text-emerald-700">{fmt(analysis.totalIncome)}</td>
+                <td className="px-3 py-2 text-emerald-800">{fmt(analysis.totalIncome)}</td>
                 <td></td>
               </tr>
             </tfoot>

@@ -44,7 +44,7 @@ export function Breakdown({ title = 'פירוט החישוב', items, defaultOpe
                 <dt className="text-ink/70">
                   {item.label}
                   {item.note && (
-                    <span className="block text-xs text-ink/50 font-normal mt-0.5">
+                    <span className="block text-xs text-ink/70 font-normal mt-0.5">
                       {item.note}
                     </span>
                   )}

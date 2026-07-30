@@ -107,9 +107,11 @@ function InputRow({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      <label className="block text-sm font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -181,7 +183,7 @@ function SourceCard({
             style={{ backgroundColor: SOURCE_COLORS[index % SOURCE_COLORS.length] }}
           />
           <span className="font-semibold text-ink">{source.label}</span>
-          <span className="text-xs text-ink/60 bg-cream px-2 py-0.5 rounded-full">
+          <span className="text-xs text-ink/70 bg-cream px-2 py-0.5 rounded-full">
             {FUND_TYPE_LABELS[source.fundType]}
           </span>
           {source.isActive && (
@@ -189,7 +191,7 @@ function SourceCard({
           )}
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-sm text-ink/60">{formatCurrency(monthlyTotal)}/ח</span>
+          <span className="text-sm text-ink/70">{formatCurrency(monthlyTotal)}/ח</span>
           {canRemove && (
             <button
               type="button"
@@ -199,7 +201,7 @@ function SourceCard({
               <Trash2 className="w-4 h-4" />
             </button>
           )}
-          {expanded ? <ChevronUp className="w-4 h-4 text-ink/60" /> : <ChevronDown className="w-4 h-4 text-ink/60" />}
+          {expanded ? <ChevronUp className="w-4 h-4 text-ink/70" /> : <ChevronDown className="w-4 h-4 text-ink/70" />}
         </div>
       </div>
 
@@ -507,7 +509,7 @@ export function PensionCalculator() {
             onClick={() => setShowStudyFund(!showStudyFund)}
           >
             <span className="font-semibold text-amber-800">קרן השתלמות (חיסכון נלווה)</span>
-            {showStudyFund ? <ChevronUp className="w-4 h-4 text-amber-700" /> : <ChevronDown className="w-4 h-4 text-amber-700" />}
+            {showStudyFund ? <ChevronUp className="w-4 h-4 text-amber-800" /> : <ChevronDown className="w-4 h-4 text-amber-800" />}
           </div>
           {showStudyFund && (
             <div className="p-4 bg-paper">
@@ -525,7 +527,7 @@ export function PensionCalculator() {
                   <NumInput value={input.studyFundEmployeePct} onChange={(v) => updateInput('studyFundEmployeePct', v)} min={0} max={5} step={0.5} />
                 </InputRow>
               </div>
-              <div className="mt-2 text-sm text-amber-700 bg-amber-50 rounded p-2">
+              <div className="mt-2 text-sm text-amber-800 bg-amber-50 rounded p-2">
                 צפי: <strong>{formatCurrency(result.studyFundFinalBalance)}</strong> | כ-{formatCurrency(result.studyFundMonthlyEquivalent)}/חודש לאורך 20 שנה
               </div>
             </div>
@@ -539,7 +541,7 @@ export function PensionCalculator() {
               type="checkbox"
               checked={input.includNationalIns}
               onChange={(e) => updateInput('includNationalIns', e.target.checked)}
-              className="w-4 h-4 text-red-600"
+              className="w-4 h-4 text-red-700"
               id="inclNI"
             />
             <label htmlFor="inclNI" className="font-semibold text-red-800">כלול קצבת ביטוח לאומי</label>
@@ -651,7 +653,7 @@ export function PensionCalculator() {
                   }`}
                 >
                   <p className="text-sm font-semibold text-ink">{labels[opt]}</p>
-                  <p className="text-xs text-ink/60 mt-0.5">{descs[opt]}</p>
+                  <p className="text-xs text-ink/70 mt-0.5">{descs[opt]}</p>
                 </button>
               );
             })}
@@ -682,18 +684,18 @@ export function PensionCalculator() {
           {input.lumpSumFromSeverance && result.severanceLumpSum && (
             <div className="mt-3 grid grid-cols-2 gap-3">
               <div className="bg-amber-50 rounded-none p-3 text-center">
-                <p className="text-xs text-ink/60">סכום פיצויים</p>
-                <p className="text-lg font-bold text-amber-700">{formatCurrency(result.severanceLumpSum)}</p>
+                <p className="text-xs text-ink/70">סכום פיצויים</p>
+                <p className="text-lg font-bold text-amber-800">{formatCurrency(result.severanceLumpSum)}</p>
               </div>
               <div className="bg-green-50 rounded-none p-3 text-center">
-                <p className="text-xs text-ink/60">נטו (אחרי מס)</p>
+                <p className="text-xs text-ink/70">נטו (אחרי מס)</p>
                 <p className="text-lg font-bold text-green-700">
                   {formatCurrency(result.severanceLumpSumNet ?? 0)}
                 </p>
               </div>
             </div>
           )}
-          <p className="text-xs text-ink/60 mt-2">
+          <p className="text-xs text-ink/70 mt-2">
             שים לב: משיכת פיצויים מפחיתה את הצבירה הפנסיונית. מומלץ להשאיר בקרן.
           </p>
         </div>
@@ -712,19 +714,19 @@ export function PensionCalculator() {
           <h3 className="text-md font-semibold text-ink mb-3">מיסוי קצבה בפרישה (סעיף 9א)</h3>
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-cream-2 rounded-none p-3">
-              <p className="text-xs text-ink/60">קצבה ברוטו</p>
+              <p className="text-xs text-ink/70">קצבה ברוטו</p>
               <p className="text-xl font-bold text-ink">{formatCurrency(tax.grossMonthlyPension)}</p>
             </div>
             <div className="bg-green-50 rounded-none p-3">
-              <p className="text-xs text-ink/60">פטור ממס (52% עד {formatCurrency(PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling)})</p>
+              <p className="text-xs text-ink/70">פטור ממס (52% עד {formatCurrency(PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling)})</p>
               <p className="text-xl font-bold text-green-700">{formatCurrency(tax.taxExemptAmount)}</p>
             </div>
             <div className="bg-amber-50 rounded-none p-3">
-              <p className="text-xs text-ink/60">חייב במס</p>
-              <p className="text-xl font-bold text-amber-700">{formatCurrency(tax.taxableAmount)}</p>
+              <p className="text-xs text-ink/70">חייב במס</p>
+              <p className="text-xl font-bold text-amber-800">{formatCurrency(tax.taxableAmount)}</p>
             </div>
             <div className="bg-red-50 rounded-none p-3">
-              <p className="text-xs text-ink/60">מס חודשי (מדרגות הכנסה)</p>
+              <p className="text-xs text-ink/70">מס חודשי (מדרגות הכנסה)</p>
               <p className="text-xl font-bold text-red-700">{formatCurrency(tax.estimatedMonthlyTax)}</p>
             </div>
           </div>
@@ -831,7 +833,7 @@ export function PensionCalculator() {
           <div className="flex items-center gap-2 mb-3">
             {isOnTarget
               ? <TrendingUp className="w-5 h-5 text-green-600" />
-              : <AlertTriangle className="w-5 h-5 text-red-600" />
+              : <AlertTriangle className="w-5 h-5 text-red-700" />
             }
             <h3 className={`font-semibold ${isOnTarget ? 'text-green-800' : 'text-red-800'}`}>
               {isOnTarget ? 'אתה בדרך הנכונה!' : 'יש פער - נדרשת פעולה'}
@@ -839,13 +841,13 @@ export function PensionCalculator() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-paper rounded-none p-3">
-              <p className="text-xs text-ink/60">קצבה צפויה</p>
+              <p className="text-xs text-ink/70">קצבה צפויה</p>
               <p className={`text-xl font-bold ${isOnTarget ? 'text-green-700' : 'text-red-700'}`}>
                 {formatCurrency(g.currentProjected)}
               </p>
             </div>
             <div className="bg-paper rounded-none p-3">
-              <p className="text-xs text-ink/60">יעד</p>
+              <p className="text-xs text-ink/70">יעד</p>
               <p className="text-xl font-bold text-ink">{formatCurrency(g.targetMonthlyIncome)}</p>
             </div>
           </div>
@@ -882,13 +884,13 @@ export function PensionCalculator() {
         {/* חישוב גב-אל-גב */}
         <div className="bg-paper border border-ink/15 rounded-none p-4">
           <h3 className="text-md font-semibold text-ink mb-3">כמה להפקיד ליעד?</h3>
-          <p className="text-sm text-ink/60 mb-3">
+          <p className="text-sm text-ink/70 mb-3">
             ליעד של {formatCurrency(input.targetMonthlyIncome)}/חודש עם מקדם {displayConvFactor}:
           </p>
           <div className="bg-cream-2 rounded-none p-3">
-            <p className="text-sm text-ink/60">נדרש ריבית-על-ריבית חודשית:</p>
+            <p className="text-sm text-ink/70">נדרש ריבית-על-ריבית חודשית:</p>
             <p className="text-2xl font-bold text-ink">{formatCurrency(goalSeekResult)}/חודש</p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               (זה ה-PMT - הפקדה חודשית כוללת עובד+מעסיק)
             </p>
           </div>
@@ -929,7 +931,7 @@ export function PensionCalculator() {
 
         {chartView === 'accumulation' && (
           <div>
-            <p className="text-xs text-ink/60 mb-2">צבירה כוללת לפי מקורות לאורך השנים (₪)</p>
+            <p className="text-xs text-ink/70 mb-2">צבירה כוללת לפי מקורות לאורך השנים (₪)</p>
             <ResponsiveContainer width="100%" height={260}>
               <AreaChart data={accChartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e7ddc9" />
@@ -965,7 +967,7 @@ export function PensionCalculator() {
 
         {chartView === 'income' && (
           <div>
-            <p className="text-xs text-ink/60 mb-2">פירוט הכנסה חודשית בפרישה (₪)</p>
+            <p className="text-xs text-ink/70 mb-2">פירוט הכנסה חודשית בפרישה (₪)</p>
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={incomeChartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e7ddc9" />
@@ -995,7 +997,7 @@ export function PensionCalculator() {
 
         {chartView === 'comparison' && (
           <div>
-            <p className="text-xs text-ink/60 mb-2">קצבה חודשית לפי גיל פרישה (₪)</p>
+            <p className="text-xs text-ink/70 mb-2">קצבה חודשית לפי גיל פרישה (₪)</p>
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={comparisonData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e7ddc9" />
@@ -1035,7 +1037,7 @@ export function PensionCalculator() {
               className={`flex items-center gap-1.5 px-3 py-2 rounded-none text-sm font-medium transition flex-1 justify-center ${
                 activeTab === t.id
                   ? 'bg-paper text-ink shadow-sm'
-                  : 'text-ink/60 hover:text-ink'
+                  : 'text-ink/70 hover:text-ink'
               }`}
             >
               {t.icon}

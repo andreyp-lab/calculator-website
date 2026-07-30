@@ -86,7 +86,7 @@ export function RiskAssessmentDisplay() {
       <div
         className={`bg-${overallColor}-50 border-4 border-${overallColor}-300 rounded-none p-6 text-center`}
       >
-        <div className="text-xs text-ink/60 mb-1">רמת סיכון כוללת</div>
+        <div className="text-xs text-ink/70 mb-1">רמת סיכון כוללת</div>
         <div className={`text-5xl font-bold text-${overallColor}-700 mb-2`}>
           {assessment.summary.overallRiskLevel}
         </div>
@@ -157,7 +157,7 @@ export function RiskAssessmentDisplay() {
         assessment.summary.mediumCount === 0 && (
           <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-6 text-center">
             <p className="text-emerald-800 font-semibold">✅ לא זוהו סיכונים מהותיים</p>
-            <p className="text-sm text-emerald-700 mt-1">החברה במצב פיננסי בריא</p>
+            <p className="text-sm text-emerald-800 mt-1">החברה במצב פיננסי בריא</p>
           </div>
         )}
     </div>
@@ -178,7 +178,7 @@ function RiskCountCard({
   const colorMap: Record<string, { bg: string; text: string; border: string }> = {
     red: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-300' },
     orange: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-300' },
-    amber: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-300' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-300' },
     blue: { bg: 'bg-cream-2', text: 'text-ink-mid', border: 'border-ink/15' },
   };
   const c = colorMap[color];
@@ -186,7 +186,7 @@ function RiskCountCard({
     <div className={`${c.bg} ${c.border} border-2 rounded-none p-3 text-center`}>
       <Icon className={`w-6 h-6 ${c.text} mx-auto mb-1`} />
       <div className={`text-2xl font-bold ${c.text}`}>{count}</div>
-      <div className="text-xs text-ink/60">{label}</div>
+      <div className="text-xs text-ink/70">{label}</div>
     </div>
   );
 }
@@ -223,7 +223,7 @@ function RiskSection({
               )}
             </div>
             <p className="text-sm text-ink/70 mb-1">{r.description}</p>
-            <p className="text-xs text-ink/60 italic">💡 {r.recommendation}</p>
+            <p className="text-xs text-ink/70 italic">💡 {r.recommendation}</p>
           </div>
         ))}
       </div>

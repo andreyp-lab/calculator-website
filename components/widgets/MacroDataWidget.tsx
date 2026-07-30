@@ -72,13 +72,13 @@ export function MacroDataWidget() {
                   <Icon className={`w-4 h-4 ${item.color}`} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-ink/50 mb-0.5">{item.label}</p>
+                  <p className="text-xs text-ink/70 mb-0.5">{item.label}</p>
                   <p className={`text-xl font-bold ${item.color}`}>{item.value}</p>
-                  <p className="text-xs text-ink/45">{item.subLabel}</p>
+                  <p className="text-xs text-ink/70">{item.subLabel}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] text-ink/40 leading-tight">עודכן</p>
-                  <p className="text-[10px] text-ink/50 leading-tight">
+                  <p className="text-[10px] text-ink/70 leading-tight">עודכן</p>
+                  <p className="text-[10px] text-ink/70 leading-tight">
                     {formatHebrewDate(item.updatedDate).replace(' 2026', '').replace(' 2025', '')}
                   </p>
                   <ArrowLeft className="w-3 h-3 text-ink/30 group-hover:text-gold mt-1 transition mr-auto" />

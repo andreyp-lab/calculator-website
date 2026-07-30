@@ -141,7 +141,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
       {/* Simple mode */}
       {!splitMode && (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-ink/60">נטו</span>
+          <span className="text-xs text-ink/70">נטו</span>
           <input
             type="number"
             min={0}
@@ -152,7 +152,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
             }
             className="w-20 px-2 py-1 border border-ink/15 rounded-none text-sm"
           />
-          <span className="text-xs text-ink/60">ימים</span>
+          <span className="text-xs text-ink/70">ימים</span>
         </div>
       )}
 
@@ -188,8 +188,8 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
                 className="w-14 px-1 py-0.5 border border-ink/15 rounded-none text-center"
                 placeholder="%"
               />
-              <span className="text-ink/60">%</span>
-              <span className="text-ink/60">נטו</span>
+              <span className="text-ink/70">%</span>
+              <span className="text-ink/70">נטו</span>
               <input
                 type="number"
                 min={0}
@@ -200,7 +200,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
                 }
                 className="w-14 px-1 py-0.5 border border-ink/15 rounded-none text-center"
               />
-              <span className="text-ink/60">ימים</span>
+              <span className="text-ink/70">ימים</span>
               <input
                 type="text"
                 value={inst.label ?? ''}
@@ -211,7 +211,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
               <button
                 type="button"
                 onClick={() => removeInstallment(idx)}
-                className="p-1 text-red-600 hover:bg-red-50 rounded-none"
+                className="p-1 text-red-700 hover:bg-red-50 rounded-none"
               >
                 <Trash2 className="w-3 h-3" />
               </button>
@@ -231,7 +231,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
           <div
             className={`flex items-center gap-1 text-xs ${
               Math.abs(totalPct - 100) < 0.5
-                ? 'text-emerald-700'
+                ? 'text-emerald-800'
                 : 'text-red-700'
             }`}
           >
@@ -256,7 +256,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
 
       {/* Description */}
       {validation.valid && (
-        <div className="text-xs text-ink/60">
+        <div className="text-xs text-ink/70">
           📋 {describePaymentTerms(terms)}
         </div>
       )}

@@ -174,7 +174,7 @@ function RatesTab() {
                 onChange={(e) => update('partTimePercentage', Number(e.target.value))}
                 className="w-full accent-gold"
               />
-              <div className="flex justify-between text-xs text-ink/60 mt-1">
+              <div className="flex justify-between text-xs text-ink/70 mt-1">
                 <span>10%</span>
                 <span>50%</span>
                 <span>100%</span>
@@ -204,10 +204,10 @@ function RatesTab() {
         />
 
         <div className="bg-amber-50 border border-amber-200 rounded-none p-4 space-y-3">
-          <label className="block text-sm font-medium text-amber-900">
+          <label htmlFor="minimumwagecalculator-454764" className="block text-sm font-medium text-amber-900">
             השכר שאני מקבל בפועל (₪)
           </label>
-          <input
+          <input id="minimumwagecalculator-454764"
             type="number"
             min={0}
             step={100}
@@ -242,7 +242,7 @@ function RatesTab() {
         )}
 
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
-          <p className="text-xs text-ink/60 font-medium mb-2">מידע כללי</p>
+          <p className="text-xs text-ink/70 font-medium mb-2">מידע כללי</p>
           <InfoRow label="תקף מ-" value="1.4.2026" />
           <InfoRow label="שעות מלאה" value="182 שעות/חודש" />
           <InfoRow label="ימי עבודה" value="22 ימים (5 יום/שבוע)" />
@@ -279,7 +279,7 @@ function ComplianceTab() {
     result.severity === 'ok'
       ? 'text-green-700'
       : result.severity === 'warning'
-      ? 'text-amber-700'
+      ? 'text-amber-800'
       : 'text-red-700';
 
   return (
@@ -336,8 +336,8 @@ function ComplianceTab() {
         )}
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">שכר בפועל (₪)</label>
-          <input
+          <label htmlFor="minimumwagecalculator-ad0bb3" className="block text-sm font-medium text-ink/70 mb-2">שכר בפועל (₪)</label>
+          <input id="minimumwagecalculator-ad0bb3"
             type="number"
             min={0}
             step={100}
@@ -348,8 +348,8 @@ function ComplianceTab() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">שעות חודשיות</label>
-          <input
+          <label htmlFor="minimumwagecalculator-5bc630" className="block text-sm font-medium text-ink/70 mb-2">שעות חודשיות</label>
+          <input id="minimumwagecalculator-5bc630"
             type="number"
             min={1}
             max={300}
@@ -361,7 +361,7 @@ function ComplianceTab() {
 
         {/* Visual gauge */}
         <div className="mt-2">
-          <div className="flex justify-between text-xs text-ink/60 mb-1">
+          <div className="flex justify-between text-xs text-ink/70 mb-1">
             <span>0%</span>
             <span>שכר מינימום</span>
           </div>
@@ -478,10 +478,10 @@ function NetWageTab() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="minimumwagecalculator-11f59f" className="block text-sm font-medium text-ink/70 mb-2">
               נקודות זיכוי
             </label>
-            <input
+            <input id="minimumwagecalculator-11f59f"
               type="number"
               min={0}
               max={10}
@@ -490,7 +490,7 @@ function NetWageTab() {
               onChange={(e) => setCreditPoints(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none"
             />
-            <p className="text-xs text-ink/60 mt-1">ברירת מחדל: 2.25 (תושב ישראל)</p>
+            <p className="text-xs text-ink/70 mt-1">ברירת מחדל: 2.25 (תושב ישראל)</p>
           </div>
         </div>
 
@@ -603,9 +603,9 @@ function YouthTab() {
           >
             <p className="text-xs font-medium text-ink/70 mb-1">{d.label}</p>
             <p className="text-xl font-bold text-ink">{formatCurrency(d.monthlyGross)}</p>
-            <p className="text-xs text-ink/60 mt-1">{(d.multiplier * 100).toFixed(0)}% מהמינימום</p>
+            <p className="text-xs text-ink/70 mt-1">{(d.multiplier * 100).toFixed(0)}% מהמינימום</p>
             <p className="text-xs text-green-700 mt-1">נטו: ~{formatCurrency(d.netWage)}</p>
-            <p className="text-xs text-ink/60 mt-1">{formatCurrency(d.hourly182)}/שעה</p>
+            <p className="text-xs text-ink/70 mt-1">{formatCurrency(d.hourly182)}/שעה</p>
           </div>
         ))}
       </div>
@@ -647,7 +647,7 @@ function YouthTab() {
                   <td className="border border-ink/15 p-2 font-medium">{s.sector}</td>
                   <td className="border border-ink/15 p-2 text-gold font-semibold">{formatCurrency(s.minimumMonthly)}</td>
                   <td className="border border-ink/15 p-2 text-ink/70 text-xs">{s.source}</td>
-                  <td className="border border-ink/15 p-2 text-ink/60 text-xs">{s.notes}</td>
+                  <td className="border border-ink/15 p-2 text-ink/70 text-xs">{s.notes}</td>
                 </tr>
               ))}
             </tbody>
@@ -682,13 +682,13 @@ function HistoryTab() {
           >
             <p className="text-sm font-semibold text-ink/70 mb-1">{h.year}</p>
             <p className="text-2xl font-bold text-ink">{formatCurrency(h.monthly)}</p>
-            <p className="text-xs text-ink/60 mt-1">{formatCurrency(h.hourly182)}/שעה</p>
+            <p className="text-xs text-ink/70 mt-1">{formatCurrency(h.hourly182)}/שעה</p>
             {h.changePercent !== null && (
               <p className="text-xs text-green-700 font-medium mt-2">
                 +{h.changePercent.toFixed(2)}% משנה קודמת
               </p>
             )}
-            <p className="text-xs text-ink/45 mt-1">תקף מ: {h.effectiveFrom}</p>
+            <p className="text-xs text-ink/70 mt-1">תקף מ: {h.effectiveFrom}</p>
           </div>
         ))}
       </div>
@@ -851,20 +851,20 @@ function InternationalTab() {
                 >
                   <td className="border border-ink/15 p-2 text-center text-lg">{c.flag}</td>
                   <td className="border border-ink/15 p-2">{c.country.replace(' 🇮🇱', '')}</td>
-                  <td className="border border-ink/15 p-2 text-ink/60">{c.currency}</td>
+                  <td className="border border-ink/15 p-2 text-ink/70">{c.currency}</td>
                   <td className="border border-ink/15 p-2">
                     {c.monthlyLocal.toLocaleString()} {c.currency}
                   </td>
                   <td className="border border-ink/15 p-2 text-gold font-semibold">
                     ${c.monthlyUSD.toLocaleString()}
                   </td>
-                  <td className="border border-ink/15 p-2 text-ink/45">{c.year}</td>
+                  <td className="border border-ink/15 p-2 text-ink/70">{c.year}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-ink/60 mt-3">מקורות: OECD.stat, ILO Global Wage Report 2025, ממוצעים מוערכים לפי PPP</p>
+        <p className="text-xs text-ink/70 mt-3">מקורות: OECD.stat, ILO Global Wage Report 2025, ממוצעים מוערכים לפי PPP</p>
       </div>
     </div>
   );

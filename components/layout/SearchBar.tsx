@@ -48,7 +48,7 @@ export function SearchBar() {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => query && setIsOpen(true)}
           placeholder="חפש מחשבון... (משכנתא, פנסיה, רכב)"
-          className="w-full pr-9 pl-9 py-2 text-sm bg-paper border border-ink/20 rounded-none text-ink placeholder:text-ink/45 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition"
+          className="w-full pr-9 pl-9 py-2 text-sm bg-paper border border-ink/20 rounded-none text-ink placeholder:text-ink/70 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition"
         />
         {query && (
           <button

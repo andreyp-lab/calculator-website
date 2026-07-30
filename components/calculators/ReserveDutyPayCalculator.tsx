@@ -132,10 +132,10 @@ export function ReserveDutyPayCalculator() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="reservedutypaycalculator-4fca50" className="block text-sm font-medium text-ink/70 mb-1">
                 שכר ממוצע 3 חודשים (₪)
               </label>
-              <input
+              <input id="reservedutypaycalculator-4fca50"
                 type="number"
                 min={0}
                 step={500}
@@ -143,15 +143,15 @@ export function ReserveDutyPayCalculator() {
                 onChange={(e) => update('recentMonthlySalary', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg font-semibold focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 תקרה: {RESERVE_PAY_2026.MONTHLY_CAP.toLocaleString('he-IL')} ₪/חודש
               </p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="reservedutypaycalculator-b5c01e" className="block text-sm font-medium text-ink/70 mb-1">
                 שכר ממוצע 12 חודשים (₪)
               </label>
-              <input
+              <input id="reservedutypaycalculator-b5c01e"
                 type="number"
                 min={0}
                 step={500}
@@ -176,7 +176,7 @@ export function ReserveDutyPayCalculator() {
               onChange={(e) => update('partTimePercent', Number(e.target.value))}
               className="w-full"
             />
-            <div className="flex justify-between text-xs text-ink/45 mt-1">
+            <div className="flex justify-between text-xs text-ink/70 mt-1">
               <span>10%</span>
               <span>50%</span>
               <span>100% (משרה מלאה)</span>
@@ -188,8 +188,8 @@ export function ReserveDutyPayCalculator() {
       {/* Reserve Days */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-1">ימי מילואים</label>
-          <input
+          <label htmlFor="reservedutypaycalculator-b28300" className="block text-sm font-medium text-ink/70 mb-1">ימי מילואים</label>
+          <input id="reservedutypaycalculator-b28300"
             type="number"
             min={1}
             max={365}
@@ -199,8 +199,8 @@ export function ReserveDutyPayCalculator() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-1">תאריך תחילת שירות</label>
-          <input
+          <label htmlFor="reservedutypaycalculator-d292b9" className="block text-sm font-medium text-ink/70 mb-1">תאריך תחילת שירות</label>
+          <input id="reservedutypaycalculator-d292b9"
             type="date"
             value={input.serviceStartDate ?? ''}
             onChange={(e) => update('serviceStartDate', e.target.value)}
@@ -219,7 +219,7 @@ export function ReserveDutyPayCalculator() {
         />
         <div>
           <span className="text-sm font-bold text-emerald-900">שירות במסגרת חרבות ברזל (אחרי 7.10.2023)</span>
-          <p className="text-xs text-emerald-700 mt-0.5">
+          <p className="text-xs text-emerald-800 mt-0.5">
             מזכה במענקים מיוחדים: {IRON_SWORDS_BONUSES.DAILY_GRANT} ₪/יום + {IRON_SWORDS_BONUSES.GENERAL_GRANT.toLocaleString('he-IL')} ₪ מענק כללי
           </p>
         </div>
@@ -289,10 +289,10 @@ export function ReserveDutyPayCalculator() {
       {/* Key alerts */}
       {result.cappedAtMaximum && (
         <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
           <div>
             <p className="font-semibold text-amber-900 text-sm">שכר מעל תקרת ב.ל.</p>
-            <p className="text-xs text-amber-700 mt-1">
+            <p className="text-xs text-amber-800 mt-1">
               התגמול מוגבל ל-{RESERVE_PAY_2026.DAILY_CAP.toLocaleString('he-IL')} ₪/יום (
               {RESERVE_PAY_2026.MONTHLY_CAP.toLocaleString('he-IL')} ₪/חודש). ההפרש לא מפוצה על ידי ב.ל.
             </p>
@@ -424,7 +424,7 @@ export function ReserveDutyPayCalculator() {
             />
             <div>
               <span className="text-sm font-bold text-emerald-900">שירות חרבות ברזל (7.10.2023 ואילך)</span>
-              <p className="text-xs text-emerald-700 mt-0.5">מזכה בכל המענקים המפורטים למטה</p>
+              <p className="text-xs text-emerald-800 mt-0.5">מזכה בכל המענקים המפורטים למטה</p>
             </div>
           </label>
 
@@ -453,7 +453,7 @@ export function ReserveDutyPayCalculator() {
                   />
                   <div>
                     <span className="text-sm font-medium text-ink/70">עסק קטן (עד 20 עובדים)</span>
-                    <p className="text-xs text-ink/60">מזכה במענק עסק קטן עד {IRON_SWORDS_BONUSES.SMALL_BUSINESS_GRANT.toLocaleString('he-IL')} ₪</p>
+                    <p className="text-xs text-ink/70">מזכה במענק עסק קטן עד {IRON_SWORDS_BONUSES.SMALL_BUSINESS_GRANT.toLocaleString('he-IL')} ₪</p>
                   </div>
                 </label>
               )}
@@ -470,15 +470,15 @@ export function ReserveDutyPayCalculator() {
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-sm font-bold text-ink">מענק כללי חרבות ברזל</p>
-                    <p className="text-xs text-ink/60 mt-1">חד-פעמי לכל מי ששירת מאז 7.10.2023</p>
-                    <p className="text-xs text-emerald-700 mt-1 font-medium">פטור ממס</p>
+                    <p className="text-xs text-ink/70 mt-1">חד-פעמי לכל מי ששירת מאז 7.10.2023</p>
+                    <p className="text-xs text-emerald-800 mt-1 font-medium">פטור ממס</p>
                   </div>
-                  <p className={`text-xl font-bold ${wb.generalGrant > 0 ? 'text-emerald-700' : 'text-ink/45'}`}>
+                  <p className={`text-xl font-bold ${wb.generalGrant > 0 ? 'text-emerald-800' : 'text-ink/70'}`}>
                     {formatCurrency(wb.generalGrant)}
                   </p>
                 </div>
                 {wb.generalGrant === 0 && (
-                  <p className="text-xs text-red-600 mt-2">לא זכאי — נדרש לפחות יום שירות אחד</p>
+                  <p className="text-xs text-red-700 mt-2">לא זכאי — נדרש לפחות יום שירות אחד</p>
                 )}
               </div>
 
@@ -487,10 +487,10 @@ export function ReserveDutyPayCalculator() {
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-sm font-bold text-ink">מענק יומי</p>
-                    <p className="text-xs text-ink/60 mt-1">
+                    <p className="text-xs text-ink/70 mt-1">
                       {IRON_SWORDS_BONUSES.DAILY_GRANT} ₪/יום × {input.reserveDays} ימים
                     </p>
-                    <p className="text-xs text-emerald-700 mt-1 font-medium">פטור ממס</p>
+                    <p className="text-xs text-emerald-800 mt-1 font-medium">פטור ממס</p>
                   </div>
                   <p className="text-xl font-bold text-ink">{formatCurrency(wb.totalDailyGrant)}</p>
                 </div>
@@ -501,17 +501,17 @@ export function ReserveDutyPayCalculator() {
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-sm font-bold text-ink">מענק חזרה למקום עבודה</p>
-                    <p className="text-xs text-ink/60 mt-1">
+                    <p className="text-xs text-ink/70 mt-1">
                       לשכירים עם 20+ ימי שירות
                     </p>
-                    <p className="text-xs text-emerald-700 mt-1 font-medium">פטור ממס</p>
+                    <p className="text-xs text-emerald-800 mt-1 font-medium">פטור ממס</p>
                   </div>
-                  <p className={`text-xl font-bold ${wb.returnToWorkGrant > 0 ? 'text-gold' : 'text-ink/45'}`}>
+                  <p className={`text-xl font-bold ${wb.returnToWorkGrant > 0 ? 'text-gold' : 'text-ink/70'}`}>
                     {formatCurrency(wb.returnToWorkGrant)}
                   </p>
                 </div>
                 {wb.returnToWorkGrant === 0 && input.employmentStatus === 'employee' && input.reserveDays < 20 && (
-                  <p className="text-xs text-amber-600 mt-2">
+                  <p className="text-xs text-amber-800 mt-2">
                     נדרשים {20 - input.reserveDays} ימים נוספים לזכאות
                   </p>
                 )}
@@ -522,7 +522,7 @@ export function ReserveDutyPayCalculator() {
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-sm font-bold text-ink">מענק תפקיד קרבי</p>
-                    <p className="text-xs text-ink/60 mt-1">
+                    <p className="text-xs text-ink/70 mt-1">
                       {input.combatRole === 'combat'
                         ? `${IRON_SWORDS_BONUSES.COMBAT_DAILY_BONUS} ₪/יום × ${input.reserveDays} ימים`
                         : input.combatRole === 'combat_support'
@@ -530,7 +530,7 @@ export function ReserveDutyPayCalculator() {
                         : 'לא זכאי — נדרש תפקיד קרבי'}
                     </p>
                   </div>
-                  <p className={`text-xl font-bold ${wb.combatRoleGrant > 0 ? 'text-red-700' : 'text-ink/45'}`}>
+                  <p className={`text-xl font-bold ${wb.combatRoleGrant > 0 ? 'text-red-700' : 'text-ink/70'}`}>
                     {formatCurrency(wb.combatRoleGrant)}
                   </p>
                 </div>
@@ -541,7 +541,7 @@ export function ReserveDutyPayCalculator() {
             <div className="bg-paper border border-ink/15 rounded-none p-6">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="font-bold text-ink">סיכום מענקים כולל</h3>
-                <p className="text-2xl font-bold text-emerald-700">{formatCurrency(wb.totalGrants)}</p>
+                <p className="text-2xl font-bold text-emerald-800">{formatCurrency(wb.totalGrants)}</p>
               </div>
 
               {bonusBreakdownData.length > 0 && (
@@ -570,10 +570,10 @@ export function ReserveDutyPayCalculator() {
 
             {input.isSmallBusiness && input.employmentStatus === 'self-employed' && (
               <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
-                <Info className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <Info className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-amber-900 text-sm">מענק עסק קטן</p>
-                  <p className="text-xs text-amber-700 mt-1">
+                  <p className="text-xs text-amber-800 mt-1">
                     בתור עצמאי עם עסק קטן, ייתכן שמגיע לך מענק עסק קטן של עד{' '}
                     {IRON_SWORDS_BONUSES.SMALL_BUSINESS_GRANT.toLocaleString('he-IL')} ₪.
                     פנה למרכז השירות לעסקים קטנים ובינוניים.
@@ -583,7 +583,7 @@ export function ReserveDutyPayCalculator() {
             )}
           </>
         ) : (
-          <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/60">
+          <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/70">
             <p className="text-lg">סמן "שירות חרבות ברזל" לחישוב מענקים</p>
             <p className="text-sm mt-2">רלוונטי לשירות מאז 7.10.2023</p>
           </div>
@@ -616,13 +616,13 @@ export function ReserveDutyPayCalculator() {
                 <span className="text-sm font-medium text-ink/70">
                   המעסיק ממשיך לשלם שכר רגיל בזמן המילואים
                 </span>
-                <p className="text-xs text-ink/60">
+                <p className="text-xs text-ink/70">
                   רוב המעסיקים עושים זאת ואז מקבלים החזר מב.ל. (אגרת מעסיק)
                 </p>
               </div>
             </label>
           ) : (
-            <p className="text-sm text-ink/60">
+            <p className="text-sm text-ink/70">
               {input.employmentStatus === 'self-employed'
                 ? 'עצמאי — התגמול מועבר ישירות מב.ל.'
                 : 'חסר תעסוקה — התגמול מועבר ישירות מב.ל.'}
@@ -637,28 +637,28 @@ export function ReserveDutyPayCalculator() {
             <p className="text-2xl font-bold text-ink mt-1">
               {formatCurrency(er.employerPaidDuringService)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {formatCurrency(input.recentMonthlySalary / 30)}/יום × {input.reserveDays} ימים
             </p>
           </div>
 
           <div className="bg-emerald-50 border border-emerald-200 rounded-none p-4">
             <p className="text-sm font-medium text-ink/70">החזר מב.ל. למעסיק</p>
-            <p className="text-2xl font-bold text-emerald-700 mt-1">
+            <p className="text-2xl font-bold text-emerald-800 mt-1">
               {formatCurrency(er.blReimbursementToEmployer)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {formatCurrency(result.dailyPayment)}/יום × {input.reserveDays} ימים
             </p>
           </div>
 
           <div className={`rounded-none border p-4 ${er.netCostToEmployer > 0 ? 'bg-amber-50 border-amber-200' : 'bg-cream-2 border-ink/15'}`}>
             <p className="text-sm font-medium text-ink/70">עלות נטו למעסיק (לאחר החזר)</p>
-            <p className={`text-2xl font-bold mt-1 ${er.netCostToEmployer > 0 ? 'text-amber-700' : 'text-ink/60'}`}>
+            <p className={`text-2xl font-bold mt-1 ${er.netCostToEmployer > 0 ? 'text-amber-800' : 'text-ink/70'}`}>
               {formatCurrency(er.netCostToEmployer)}
             </p>
             {er.netCostToEmployer > 0 && (
-              <p className="text-xs text-amber-600 mt-1">
+              <p className="text-xs text-amber-800 mt-1">
                 המעסיק משלם יותר ממה שמוחזר (שכר מעל תקרה)
               </p>
             )}
@@ -669,7 +669,7 @@ export function ReserveDutyPayCalculator() {
             <p className="text-2xl font-bold text-gold mt-1">
               {formatCurrency(er.directBLPaymentToEmployee)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {er.directBLPaymentToEmployee > 0
                 ? 'ב.ל. משלם ישירות לעובד (מעסיק לא ממשיך לשלם)'
                 : 'ב.ל. משלם למעסיק (מעסיק מעביר לעובד)'}
@@ -716,7 +716,7 @@ export function ReserveDutyPayCalculator() {
               onChange={(e) => update('dependentChildren', Number(e.target.value))}
               className="w-full"
             />
-            <div className="flex justify-between text-xs text-ink/45 mt-1">
+            <div className="flex justify-between text-xs text-ink/70 mt-1">
               <span>0</span>
               <span>4</span>
               <span>8</span>
@@ -749,7 +749,7 @@ export function ReserveDutyPayCalculator() {
         {/* Eligibility notice */}
         {input.reserveDays < 30 && (
           <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
-            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
             <p className="text-sm text-amber-800">
               קצבות משפחה מחייבות מינימום 30 ימי שירות. נותרו{' '}
               <strong>{30 - input.reserveDays} ימים</strong> לזכאות.
@@ -761,20 +761,20 @@ export function ReserveDutyPayCalculator() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className={`rounded-none border p-4 ${fa.childAllowance > 0 ? 'bg-cream-2 border-ink/15' : 'bg-cream-2 border-ink/15'}`}>
             <p className="text-sm font-medium text-ink/70">קצבת ילדים</p>
-            <p className={`text-2xl font-bold mt-1 ${fa.childAllowance > 0 ? 'text-ink' : 'text-ink/45'}`}>
+            <p className={`text-2xl font-bold mt-1 ${fa.childAllowance > 0 ? 'text-ink' : 'text-ink/70'}`}>
               {formatCurrency(fa.childAllowance)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {input.dependentChildren} ילדים × {30} ₪/יום × {input.reserveDays} ימים
             </p>
           </div>
 
           <div className={`rounded-none border p-4 ${fa.spouseAllowance > 0 ? 'bg-cream-2 border-gold/40' : 'bg-cream-2 border-ink/15'}`}>
             <p className="text-sm font-medium text-ink/70">קצבת בן/בת זוג לא עובד/ת</p>
-            <p className={`text-2xl font-bold mt-1 ${fa.spouseAllowance > 0 ? 'text-gold' : 'text-ink/45'}`}>
+            <p className={`text-2xl font-bold mt-1 ${fa.spouseAllowance > 0 ? 'text-gold' : 'text-ink/70'}`}>
               {formatCurrency(fa.spouseAllowance)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {input.hasSpouse && !input.spouseWorks
                 ? `45 ₪/יום × ${input.reserveDays} ימים`
                 : 'לא זכאי'}
@@ -786,9 +786,9 @@ export function ReserveDutyPayCalculator() {
           <div className="bg-emerald-50 border border-emerald-200 rounded-none p-4">
             <div className="flex justify-between items-center">
               <p className="font-bold text-emerald-900">סה"כ קצבות משפחה</p>
-              <p className="text-2xl font-bold text-emerald-700">{formatCurrency(fa.totalFamilyAllowances)}</p>
+              <p className="text-2xl font-bold text-emerald-800">{formatCurrency(fa.totalFamilyAllowances)}</p>
             </div>
-            <p className="text-xs text-emerald-700 mt-1">{fa.note}</p>
+            <p className="text-xs text-emerald-800 mt-1">{fa.note}</p>
           </div>
         )}
       </div>
@@ -806,16 +806,16 @@ export function ReserveDutyPayCalculator() {
       <div className="space-y-4">
         <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
           <h2 className="text-lg font-bold text-ink">השוואת הכנסה</h2>
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             כמה הכנסה תקבל מהמילואים לעומת שכר רגיל, ומה ההפרש הצפוי?
           </p>
 
           {input.employmentStatus !== 'unemployed' && (
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="reservedutypaycalculator-69d0e5" className="block text-sm font-medium text-ink/70 mb-1">
                 שכר לפני המלחמה / שכר רגיל (₪)
               </label>
-              <input
+              <input id="reservedutypaycalculator-69d0e5"
                 type="number"
                 min={0}
                 step={500}
@@ -834,7 +834,7 @@ export function ReserveDutyPayCalculator() {
             <p className="text-2xl font-bold text-ink mt-1">
               {formatCurrency(ilp.regularSalaryForPeriod)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {formatCurrency(input.recentMonthlySalary / 30)}/יום × {input.reserveDays} ימים
             </p>
           </div>
@@ -844,17 +844,17 @@ export function ReserveDutyPayCalculator() {
             <p className="text-2xl font-bold text-ink mt-1">
               {formatCurrency(ilp.reservePayForPeriod)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {formatCurrency(result.dailyPayment)}/יום × {input.reserveDays} ימים
             </p>
           </div>
 
           <div className={`rounded-none border p-4 ${ilp.hasIncomeLoss ? 'bg-red-50 border-red-200' : 'bg-emerald-50 border-emerald-200'}`}>
             <p className="text-sm font-medium text-ink/70">הפרש</p>
-            <p className={`text-2xl font-bold mt-1 ${ilp.hasIncomeLoss ? 'text-red-700' : 'text-emerald-700'}`}>
+            <p className={`text-2xl font-bold mt-1 ${ilp.hasIncomeLoss ? 'text-red-700' : 'text-emerald-800'}`}>
               {ilp.incomeDifference >= 0 ? '+' : ''}{formatCurrency(ilp.incomeDifference)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               פיצוי: {ilp.compensationPercent.toFixed(0)}% מהשכר הרגיל
             </p>
           </div>
@@ -866,20 +866,20 @@ export function ReserveDutyPayCalculator() {
             <h3 className="font-bold text-emerald-900 text-sm mb-3">כולל מענקי חרבות ברזל</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-xs text-ink/60">תגמול יומי + מענק יומי</p>
-                <p className="text-xl font-bold text-emerald-700">
+                <p className="text-xs text-ink/70">תגמול יומי + מענק יומי</p>
+                <p className="text-xl font-bold text-emerald-800">
                   {formatCurrency(result.dailyPayment + IRON_SWORDS_BONUSES.DAILY_GRANT)}/יום
                 </p>
               </div>
               <div>
-                <p className="text-xs text-ink/60">סך הכל לתקופה</p>
-                <p className="text-xl font-bold text-emerald-700">
+                <p className="text-xs text-ink/70">סך הכל לתקופה</p>
+                <p className="text-xl font-bold text-emerald-800">
                   {formatCurrency(result.totalCompensation)}
                 </p>
               </div>
             </div>
             {result.warBonuses.generalGrant > 0 && (
-              <p className="text-xs text-emerald-700 mt-2">
+              <p className="text-xs text-emerald-800 mt-2">
                 + מענקים חד-פעמיים: {formatCurrency(result.warBonuses.generalGrant + result.warBonuses.returnToWorkGrant)}
               </p>
             )}
@@ -888,10 +888,10 @@ export function ReserveDutyPayCalculator() {
 
         {ilp.hasIncomeLoss && !input.employerContinuesPaying && (
           <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
-            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold text-amber-900 text-sm">פגיעה בהכנסה</p>
-              <p className="text-xs text-amber-700 mt-1">
+              <p className="text-xs text-amber-800 mt-1">
                 תגמולי המילואים מפצים {ilp.compensationPercent.toFixed(0)}% מהשכר הרגיל.
                 אם המעסיק ממשיך לשלם — לחץ על "המעסיק ממשיך לשלם" בטאב החזר מעסיק.
               </p>
@@ -946,7 +946,7 @@ export function ReserveDutyPayCalculator() {
       <div className="space-y-4">
         <div className="bg-paper border border-ink/15 rounded-none p-6">
           <h2 className="text-lg font-bold text-ink mb-1">לוח תשלומים חודשי</h2>
-          <p className="text-sm text-ink/60 mb-4">
+          <p className="text-sm text-ink/70 mb-4">
             {input.serviceStartDate ? 'לפי תאריך תחילת שירות' : 'חלוקה שווה על 3 חודשים (הכנס תאריך לחישוב מדויק)'}
           </p>
 
@@ -975,7 +975,7 @@ export function ReserveDutyPayCalculator() {
               </ResponsiveContainer>
             </div>
           ) : (
-            <p className="text-ink/45 text-center py-8">אין נתונים להצגה</p>
+            <p className="text-ink/70 text-center py-8">אין נתונים להצגה</p>
           )}
         </div>
 
@@ -997,10 +997,10 @@ export function ReserveDutyPayCalculator() {
               {monthlyProjection.map((m, i) => (
                 <tr key={i} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
                   <td className="px-4 py-3 text-ink">{m.month}</td>
-                  <td className="px-4 py-3 text-ink/60">{m.reserveDays}</td>
+                  <td className="px-4 py-3 text-ink/70">{m.reserveDays}</td>
                   <td className="px-4 py-3 text-ink font-medium">{formatCurrency(m.basicPay)}</td>
                   {input.isIronSwordsService && (
-                    <td className="px-4 py-3 text-emerald-700 font-medium">{formatCurrency(m.warBonus)}</td>
+                    <td className="px-4 py-3 text-emerald-800 font-medium">{formatCurrency(m.warBonus)}</td>
                   )}
                   <td className="px-4 py-3 font-bold text-ink">{formatCurrency(m.total)}</td>
                 </tr>
@@ -1011,7 +1011,7 @@ export function ReserveDutyPayCalculator() {
                 <td className="px-4 py-3 text-ink">{input.reserveDays}</td>
                 <td className="px-4 py-3 text-ink">{formatCurrency(result.totalBasicPayment)}</td>
                 {input.isIronSwordsService && (
-                  <td className="px-4 py-3 text-emerald-700">{formatCurrency(result.warBonuses.totalDailyGrant)}</td>
+                  <td className="px-4 py-3 text-emerald-800">{formatCurrency(result.warBonuses.totalDailyGrant)}</td>
                 )}
                 <td className="px-4 py-3 text-ink">{formatCurrency(result.totalCompensation)}</td>
               </tr>
@@ -1078,7 +1078,7 @@ export function ReserveDutyPayCalculator() {
               className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'border-gold text-gold'
-                  : 'border-transparent text-ink/60 hover:text-ink hover:border-ink/30'
+                  : 'border-transparent text-ink/70 hover:text-ink hover:border-ink/30'
               }`}
             >
               {tab.label}

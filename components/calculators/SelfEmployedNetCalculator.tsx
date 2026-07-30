@@ -102,17 +102,17 @@ export function SelfEmployedNetCalculator() {
             onChange={(e) => update('recognizedExpenses', Number(e.target.value))}
             className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             לאחר התאמת אחוז הכרה (רכב 45%, בית 25% וכו')
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="selfemployednetcalculator-ea2b31" className="block text-sm font-medium text-ink/70 mb-2">
               נקודות זיכוי
             </label>
-            <input
+            <input id="selfemployednetcalculator-ea2b31"
               type="number"
               min={0}
               max={10}
@@ -128,10 +128,10 @@ export function SelfEmployedNetCalculator() {
           <p className="text-sm font-medium text-ink/70">הפקדות פנסיוניות (חודשי)</p>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-ink/60 mb-1">
+              <label htmlFor="selfemployednetcalculator-65b5a9" className="block text-xs font-medium text-ink/70 mb-1">
                 פנסיה (₪/חודש)
               </label>
-              <input
+              <input id="selfemployednetcalculator-65b5a9"
                 type="number"
                 min={0}
                 step={50}
@@ -141,10 +141,10 @@ export function SelfEmployedNetCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/60 mb-1">
+              <label htmlFor="selfemployednetcalculator-b1861c" className="block text-xs font-medium text-ink/70 mb-1">
                 קרן השתלמות (₪/חודש)
               </label>
-              <input
+              <input id="selfemployednetcalculator-b1861c"
                 type="number"
                 min={0}
                 step={50}
@@ -269,14 +269,14 @@ function Row({
       } ${highlight ? 'bg-emerald-50 -mx-2 px-2 rounded-none' : ''}`}
     >
       <span
-        className={`${mute ? 'text-ink/60' : 'text-ink'} ${bold ? 'font-bold' : ''}`}
+        className={`${mute ? 'text-ink/70' : 'text-ink'} ${bold ? 'font-bold' : ''}`}
       >
         {label}
       </span>
       <span
         className={`tabular-nums ${bold ? 'font-bold text-ink' : ''} ${
-          mute ? 'text-ink/60' : ''
-        } ${positive ? 'text-emerald-700' : ''} ${negative ? 'text-red-700' : ''}`}
+          mute ? 'text-ink/70' : ''
+        } ${positive ? 'text-emerald-800' : ''} ${negative ? 'text-red-700' : ''}`}
       >
         {value}
       </span>
@@ -291,7 +291,7 @@ function PieBreakdown({
 }) {
   const base = result.initialTaxableIncome;
   if (base <= 0) {
-    return <p className="text-sm text-ink/60">לא ניתן להציג חלוקה ללא הכנסה</p>;
+    return <p className="text-sm text-ink/70">לא ניתן להציג חלוקה ללא הכנסה</p>;
   }
 
   const items = [
@@ -323,7 +323,7 @@ function PieBreakdown({
       label: 'נטו ביד',
       value: Math.max(0, result.annualNet),
       color: 'bg-emerald-500',
-      textColor: 'text-emerald-700',
+      textColor: 'text-emerald-800',
     },
   ].filter((i) => i.value > 0);
 

@@ -67,7 +67,7 @@ export function TemplatesLibrary() {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-bold text-ink text-sm">{template.name}</h4>
-                    <p className="text-xs text-ink/60 mt-0.5 line-clamp-2">
+                    <p className="text-xs text-ink/70 mt-0.5 line-clamp-2">
                       {template.description}
                     </p>
                   </div>
@@ -75,24 +75,24 @@ export function TemplatesLibrary() {
 
                 <div className="grid grid-cols-3 gap-1 mb-3 text-center">
                   <div className="bg-cream-2 rounded-none p-1">
-                    <div className="text-[10px] text-ink/60">הכנסות</div>
+                    <div className="text-[10px] text-ink/70">הכנסות</div>
                     <div className="text-xs font-semibold">{template.budget.income.length}</div>
                   </div>
                   <div className="bg-cream-2 rounded-none p-1">
-                    <div className="text-[10px] text-ink/60">הוצאות</div>
+                    <div className="text-[10px] text-ink/70">הוצאות</div>
                     <div className="text-xs font-semibold">{template.budget.expenses.length}</div>
                   </div>
                   <div className="bg-cream-2 rounded-none p-1">
-                    <div className="text-[10px] text-ink/60">עובדים</div>
+                    <div className="text-[10px] text-ink/70">עובדים</div>
                     <div className="text-xs font-semibold">{template.budget.employees.length}</div>
                   </div>
                 </div>
 
                 <div className="space-y-1 mb-3">
                   {template.notes.slice(0, 2).map((note, i) => (
-                    <div key={i} className="flex items-start gap-1 text-[11px] text-ink/60">
+                    <div key={i} className="flex items-start gap-1 text-[11px] text-ink/70">
                       <CheckCircle2 className="w-3 h-3 text-gold shrink-0 mt-0.5" />
-                      <span className="line-clamp-1 text-ink/60">{note}</span>
+                      <span className="line-clamp-1 text-ink/70">{note}</span>
                     </div>
                   ))}
                 </div>

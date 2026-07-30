@@ -21,7 +21,9 @@ export function AuthorBox({
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <h4 className="font-serif text-xl text-ink">{name}</h4>
+            {/* לא כותרת: ה-AuthorBox משובץ בעומקי מסמך שונים, ו-h4 ללא h3 שקדם לו
+                שבר את סדר הכותרות. שם המחבר נושא משמעות SEO דרך Person schema, לא דרך תג כותרת. */}
+            <p className="font-serif text-xl text-ink">{name}</p>
             <BadgeCheck className="w-4 h-4 text-gold" />
           </div>
           <p className="font-mono text-xs uppercase tracking-[0.12em] text-gold mb-2.5">

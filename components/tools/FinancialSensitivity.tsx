@@ -147,7 +147,7 @@ export function FinancialSensitivity() {
             </div>
             <div className="flex items-end">
               <div className="w-full p-2 bg-cream-2 rounded-none text-center text-xs">
-                <div className="text-ink/60">DSCR בסיס</div>
+                <div className="text-ink/70">DSCR בסיס</div>
                 <div className="text-xl font-bold text-gold">
                   {sensitivity.baseDSCR.toFixed(2)}
                 </div>
@@ -158,7 +158,7 @@ export function FinancialSensitivity() {
           {/* Break-Even Alert */}
           {sensitivity.breakEvenChange !== null && (
             <div className="bg-red-50 border border-red-300 rounded p-3 flex items-start gap-2">
-              <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-red-700 shrink-0 mt-0.5" />
               <div>
                 <div className="font-semibold text-red-800">נקודת שבירה</div>
                 <div className="text-sm text-red-700">
@@ -265,10 +265,10 @@ function ScenarioCard({
   return (
     <div className={`bg-${statusColor}-50 border-2 border-${statusColor}-200 rounded-none p-3`}>
       <h5 className={`font-semibold text-${statusColor}-900 mb-1`}>{scenario.name}</h5>
-      <p className="text-xs text-ink/60 mb-2">{scenario.description}</p>
+      <p className="text-xs text-ink/70 mb-2">{scenario.description}</p>
       <div className="grid grid-cols-3 gap-2 text-center text-xs mb-2">
         <div>
-          <div className="text-ink/60">EBITDA</div>
+          <div className="text-ink/70">EBITDA</div>
           <div className="font-bold">{fmt(scenario.scenario.ebitda)}</div>
           <div className={`text-[10px] text-${scenario.changes_metrics.ebitdaChange >= 0 ? 'emerald' : 'red'}-700`}>
             {scenario.changes_metrics.ebitdaChange >= 0 ? '+' : ''}
@@ -276,7 +276,7 @@ function ScenarioCard({
           </div>
         </div>
         <div>
-          <div className="text-ink/60">רווח נקי</div>
+          <div className="text-ink/70">רווח נקי</div>
           <div className="font-bold">{fmt(scenario.scenario.netProfit)}</div>
           <div className={`text-[10px] text-${scenario.changes_metrics.netProfitChange >= 0 ? 'emerald' : 'red'}-700`}>
             {scenario.changes_metrics.netProfitChange >= 0 ? '+' : ''}
@@ -284,11 +284,11 @@ function ScenarioCard({
           </div>
         </div>
         <div>
-          <div className="text-ink/60">DSCR</div>
+          <div className="text-ink/70">DSCR</div>
           <div className={`font-bold text-${statusColor}-700`}>
             {scenario.scenario.dscr.toFixed(2)}
           </div>
-          <div className="text-[10px] text-ink/60">
+          <div className="text-[10px] text-ink/70">
             {scenario.canRepay ? '✓ יכול' : '✗ לא יכול'}
           </div>
         </div>

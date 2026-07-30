@@ -193,7 +193,7 @@ export default function LoansPage() {
                   </p>
                   <ul className="space-y-1 mb-4">
                     {calc.features.map((f, i) => (
-                      <li key={i} className="text-sm text-ink/60 flex items-start gap-2">
+                      <li key={i} className="text-sm text-ink/70 flex items-start gap-2">
                         <span className="text-gold mt-0.5">✦</span>
                         <span>{f}</span>
                       </li>
@@ -234,12 +234,12 @@ export default function LoansPage() {
                   <h3 className="font-bold text-ink mb-1.5 group-hover:text-gold transition">
                     {calc.title}
                   </h3>
-                  <p className="text-xs text-ink/60 mb-3 leading-relaxed">
+                  <p className="text-xs text-ink/70 mb-3 leading-relaxed">
                     {calc.description}
                   </p>
                   <ul className="space-y-0.5 mb-3">
                     {calc.features.map((f, i) => (
-                      <li key={i} className="text-xs text-ink/50 flex items-start gap-1.5">
+                      <li key={i} className="text-xs text-ink/70 flex items-start gap-1.5">
                         <span className="text-gold mt-0.5">·</span>
                         <span>{f}</span>
                       </li>
@@ -410,7 +410,7 @@ export default function LoansPage() {
               <h3 className="font-bold text-ink mb-2 group-hover:text-gold transition">
                 יחס המימון (LTV) והסוד של ריביות המשכנתא
               </h3>
-              <p className="text-sm text-ink/60 leading-relaxed">
+              <p className="text-sm text-ink/70 leading-relaxed">
                 איך אחוז המימון שאתם מבקשים משפיע על הריבית שתקבלו מהבנק.
               </p>
             </Link>
@@ -422,7 +422,7 @@ export default function LoansPage() {
               <h3 className="font-bold text-ink mb-2 group-hover:text-gold transition">
                 מיחזור משכנתא — מתי ואיך
               </h3>
-              <p className="text-sm text-ink/60 leading-relaxed">
+              <p className="text-sm text-ink/70 leading-relaxed">
                 מתי מיחזור משתלם, איך מחשבים נקודת איזון ומה בודקים לפני שחותמים.
               </p>
             </Link>
@@ -434,7 +434,7 @@ export default function LoansPage() {
               <h3 className="font-bold text-ink mb-2 group-hover:text-gold transition">
                 ריבית פריים — הגדרה מלאה
               </h3>
-              <p className="text-sm text-ink/60 leading-relaxed">
+              <p className="text-sm text-ink/70 leading-relaxed">
                 מה זה פריים, איך הוא נקבע ולמה הוא חשוב לכל הלוואה בישראל.
               </p>
             </Link>

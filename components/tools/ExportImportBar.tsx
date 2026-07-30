@@ -193,10 +193,10 @@ export function ExportImportBar() {
                   onClick={handleExportExcel}
                   className="w-full text-right flex items-center gap-2 px-3 py-2 hover:bg-cream-2 text-sm"
                 >
-                  <Download className="w-4 h-4 text-emerald-600" />
+                  <Download className="w-4 h-4 text-emerald-800" />
                   <div className="flex-1">
                     <div className="font-medium">ייצוא ל-Excel</div>
-                    <div className="text-xs text-ink/60">כל הנתונים ב-9 גיליונות</div>
+                    <div className="text-xs text-ink/70">כל הנתונים ב-9 גיליונות</div>
                   </div>
                 </button>
                 <button
@@ -206,7 +206,7 @@ export function ExportImportBar() {
                   <FileDown className="w-4 h-4 text-rose-600" />
                   <div className="flex-1">
                     <div className="font-medium">ייצוא ל-PDF (מקצועי)</div>
-                    <div className="text-xs text-ink/60">דוח עם KPI + טבלאות + גרפים</div>
+                    <div className="text-xs text-ink/70">דוח עם KPI + טבלאות + גרפים</div>
                   </div>
                 </button>
                 <button
@@ -216,7 +216,7 @@ export function ExportImportBar() {
                   <Printer className="w-4 h-4 text-gold" />
                   <div className="flex-1">
                     <div className="font-medium">הדפסה (PDF דרך הדפדפן)</div>
-                    <div className="text-xs text-ink/60">חלופה - Ctrl+P</div>
+                    <div className="text-xs text-ink/70">חלופה - Ctrl+P</div>
                   </div>
                 </button>
 
@@ -230,7 +230,7 @@ export function ExportImportBar() {
                   <Upload className="w-4 h-4 text-gold" />
                   <div className="flex-1">
                     <div className="font-medium">ייבוא מ-Excel</div>
-                    <div className="text-xs text-ink/60">העלה קובץ xlsx</div>
+                    <div className="text-xs text-ink/70">העלה קובץ xlsx</div>
                   </div>
                 </button>
                 <button
@@ -240,7 +240,7 @@ export function ExportImportBar() {
                   <FileText className="w-4 h-4 text-gold" />
                   <div className="flex-1">
                     <div className="font-medium">הורד תבנית ריקה</div>
-                    <div className="text-xs text-ink/60">דוגמאות מוכנות לעריכה</div>
+                    <div className="text-xs text-ink/70">דוגמאות מוכנות לעריכה</div>
                   </div>
                 </button>
               </div>

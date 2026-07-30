@@ -104,12 +104,12 @@ function NumericInput({ label, value, onChange, min, max, step, unit, note, clas
           className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
         />
         {unit && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/60 pointer-events-none">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/70 pointer-events-none">
             {unit}
           </span>
         )}
       </div>
-      {note && <p className="text-xs text-ink/60 mt-1">{note}</p>}
+      {note && <p className="text-xs text-ink/70 mt-1">{note}</p>}
     </div>
   );
 }
@@ -119,7 +119,7 @@ function StatusBadge({ status }: { status: 'excellent' | 'good' | 'warning' | 'd
     excellent: { bg: 'bg-green-50', border: 'border-green-300', text: 'text-green-700', icon: <CheckCircle2 className="w-5 h-5 text-green-600" /> },
     good: { bg: 'bg-cream-2', border: 'border-ink/15', text: 'text-ink', icon: <Info className="w-5 h-5 text-ink" /> },
     warning: { bg: 'bg-yellow-50', border: 'border-yellow-300', text: 'text-yellow-700', icon: <AlertTriangle className="w-5 h-5 text-yellow-600" /> },
-    danger: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', icon: <XCircle className="w-5 h-5 text-red-600" /> },
+    danger: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', icon: <XCircle className="w-5 h-5 text-red-700" /> },
   };
   const c = configs[status];
   return (
@@ -239,7 +239,7 @@ function BasicTab() {
               }`}
             >
               <div className="font-medium">{t.nameHe}</div>
-              <div className={loanType === t.id ? 'text-cream/70' : 'text-ink/60'}>{t.typicalRateMin}%-{t.typicalRateMax}%</div>
+              <div className={loanType === t.id ? 'text-cream/70' : 'text-ink/70'}>{t.typicalRateMin}%-{t.typicalRateMax}%</div>
             </button>
           ))}
         </div>
@@ -527,13 +527,13 @@ function BasicTab() {
               <p>לחץ על &quot;הצג לוח מלא&quot; לפירוט כל תשלום: קרן, ריבית ויתרה.</p>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="bg-cream-2 rounded-none p-2">
-                  <div className="text-ink/60">תשלום ראשון</div>
+                  <div className="text-ink/70">תשלום ראשון</div>
                   <div className="font-bold text-ink">
                     ריבית: {amortization[0] ? formatCurrency(amortization[0].interest) : '—'}
                   </div>
                 </div>
                 <div className="bg-green-50 rounded-none p-2">
-                  <div className="text-ink/60">תשלום אחרון</div>
+                  <div className="text-ink/70">תשלום אחרון</div>
                   <div className="font-bold text-green-700">
                     ריבית: {amortization.length > 0
                       ? formatCurrency(amortization[amortization.length - 1]?.interest ?? 0)
@@ -561,7 +561,7 @@ function BasicTab() {
                       <td className="p-2 text-ink/70">{row.month}</td>
                       <td className="p-2">{formatCurrency(row.payment)}</td>
                       <td className="p-2 text-green-700">{formatCurrency(row.principal)}</td>
-                      <td className="p-2 text-red-600">{formatCurrency(row.interest)}</td>
+                      <td className="p-2 text-red-700">{formatCurrency(row.interest)}</td>
                       <td className="p-2 font-medium">{formatCurrency(row.balance)}</td>
                     </tr>
                   ))}
@@ -651,7 +651,7 @@ function CompareTab() {
                 />
               </div>
               {offers.length > 2 && (
-                <button type="button" onClick={() => removeOffer(offer.id)} className="text-red-400 hover:text-red-600">
+                <button type="button" onClick={() => removeOffer(offer.id)} className="text-red-400 hover:text-red-700">
                   <Trash2 className="w-4 h-4" />
                 </button>
               )}
@@ -739,7 +739,7 @@ function CompareTab() {
                       {r.rank === 1 && <span className="mr-2 text-xs text-green-600 font-bold">✓ הטוב ביותר</span>}
                     </td>
                     <td className="p-3">{formatCurrency(r.monthlyPayment)}</td>
-                    <td className="p-3 text-red-600">{formatCurrency(r.totalInterest)}</td>
+                    <td className="p-3 text-red-700">{formatCurrency(r.totalInterest)}</td>
                     <td className="p-3 font-medium">{r.trueAPR.toFixed(2)}%</td>
                     <td className={`p-3 font-bold ${r.rank === 1 ? 'text-green-700' : ''}`}>
                       {formatCurrency(r.totalCost)}
@@ -870,7 +870,7 @@ function ConsolidateTab() {
                   className="font-medium text-ink bg-transparent border-b border-dashed border-ink/15 focus:border-gold focus:outline-none text-sm"
                 />
                 {loans.length > 1 && (
-                  <button type="button" onClick={() => removeLoan(loan.id)} className="text-red-400 hover:text-red-600">
+                  <button type="button" onClick={() => removeLoan(loan.id)} className="text-red-400 hover:text-red-700">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 )}
@@ -992,8 +992,8 @@ function ConsolidateTab() {
                   <div key={loan.id} className="flex items-center gap-2 text-xs">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PIE_COLORS[idx % PIE_COLORS.length] }} />
                     <span className="flex-1 text-ink/70">{loan.name}</span>
-                    <span className="text-ink/60">{formatCurrency(loan.remainingBalance)}</span>
-                    <span className="font-medium text-red-600">{loan.annualRate}%</span>
+                    <span className="text-ink/70">{formatCurrency(loan.remainingBalance)}</span>
+                    <span className="font-medium text-red-700">{loan.annualRate}%</span>
                   </div>
                 ))}
               </div>
@@ -1214,7 +1214,7 @@ function AffordabilityTab() {
     excellent: { bg: 'bg-green-50', border: 'border-green-300', textColor: 'text-green-900', icon: <CheckCircle2 className="w-6 h-6 text-green-600" /> },
     good: { bg: 'bg-cream-2', border: 'border-ink/15', textColor: 'text-ink', icon: <Info className="w-6 h-6 text-ink" /> },
     warning: { bg: 'bg-yellow-50', border: 'border-yellow-300', textColor: 'text-yellow-900', icon: <AlertTriangle className="w-6 h-6 text-yellow-600" /> },
-    danger: { bg: 'bg-red-50', border: 'border-red-300', textColor: 'text-red-900', icon: <XCircle className="w-6 h-6 text-red-600" /> },
+    danger: { bg: 'bg-red-50', border: 'border-red-300', textColor: 'text-red-900', icon: <XCircle className="w-6 h-6 text-red-700" /> },
   };
 
   const cfg = statusConfigs[result.status];

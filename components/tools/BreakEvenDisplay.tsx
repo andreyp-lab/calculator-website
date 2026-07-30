@@ -75,16 +75,16 @@ export function BreakEvenDisplay() {
         {result.isAboveBreakEven ? (
           <CheckCircle2 className={`w-12 h-12 text-${safetyColor}-600 mx-auto mb-2`} />
         ) : (
-          <AlertCircle className="w-12 h-12 text-red-600 mx-auto mb-2" />
+          <AlertCircle className="w-12 h-12 text-red-700 mx-auto mb-2" />
         )}
-        <div className="text-xs text-ink/60 mb-1">
+        <div className="text-xs text-ink/70 mb-1">
           {result.isAboveBreakEven ? 'מעל נקודת איזון' : 'מתחת לנקודת איזון'}
         </div>
         <div className={`text-4xl font-bold text-${safetyColor}-700 mb-2`}>
           {(result.marginOfSafetyRatio * 100).toFixed(1)}%
         </div>
         <div className={`text-sm text-${safetyColor}-800`}>מרווח בטחון</div>
-        <div className="text-xs text-ink/60 mt-2">
+        <div className="text-xs text-ink/70 mt-2">
           {result.marginOfSafetyInterpretation.text}
         </div>
       </div>
@@ -116,11 +116,11 @@ export function BreakEvenDisplay() {
         <h4 className="font-semibold text-ink mb-3">תרומה לכיסוי</h4>
         <div className="grid md:grid-cols-2 gap-3">
           <div className="bg-cream-2 p-3">
-            <div className="text-xs text-ink/60 mb-1">תרומה לכיסוי (Contribution Margin)</div>
+            <div className="text-xs text-ink/70 mb-1">תרומה לכיסוי (Contribution Margin)</div>
             <div className="text-2xl font-bold text-gold">{fmt(result.contributionMargin)}</div>
           </div>
           <div className="bg-cream-2 p-3">
-            <div className="text-xs text-ink/60 mb-1">שיעור תרומה</div>
+            <div className="text-xs text-ink/70 mb-1">שיעור תרומה</div>
             <div className="text-2xl font-bold text-gold">
               {(result.contributionMarginRatio * 100).toFixed(1)}%
             </div>
@@ -197,15 +197,15 @@ function MetricCard({
 }) {
   const colorMap: Record<string, { bg: string; text: string; border: string }> = {
     neutral: { bg: 'bg-cream-2', text: 'text-gold', border: 'border-ink/15' },
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800', border: 'border-emerald-200' },
     red: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
   };
   const c = colorMap[color] ?? colorMap.neutral;
   return (
     <div className={`${c.bg} ${c.border} border-2 p-3 text-center`}>
-      <div className="text-xs text-ink/60 mb-1">{label}</div>
+      <div className="text-xs text-ink/70 mb-1">{label}</div>
       <div className={`text-2xl font-bold ${c.text}`}>{value}</div>
-      <div className="text-[10px] text-ink/45 mt-1">{sublabel}</div>
+      <div className="text-[10px] text-ink/70 mt-1">{sublabel}</div>
     </div>
   );
 }
@@ -217,7 +217,7 @@ function WhatIfRow({ label, value, note }: { label: string; value: string; note:
         <span className="font-medium text-ink/70">{label}</span>
         <span className="font-bold text-gold">{value}</span>
       </div>
-      <div className="text-[10px] text-ink/45 mt-0.5">{note}</div>
+      <div className="text-[10px] text-ink/70 mt-0.5">{note}</div>
     </div>
   );
 }

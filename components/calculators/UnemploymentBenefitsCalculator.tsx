@@ -144,8 +144,8 @@ const EligibilityTab = () => {
       <SectionCard title="פרטים אישיים ותעסוקתיים">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
-            <input
+            <label htmlFor="unemploymentbenefitscalculator-24ac09" className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
+            <input id="unemploymentbenefitscalculator-24ac09"
               type="number"
               min={16}
               max={70}
@@ -153,13 +153,13 @@ const EligibilityTab = () => {
               onChange={(e) => setAge(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">זכאות: גיל 20–66</p>
+            <p className="text-xs text-ink/70 mt-1">זכאות: גיל 20–66</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="unemploymentbenefitscalculator-d50617" className="block text-sm font-medium text-ink/70 mb-2">
               חודשי ביטוח ב-18 חודשים האחרונים
             </label>
-            <input
+            <input id="unemploymentbenefitscalculator-d50617"
               type="number"
               min={0}
               max={18}
@@ -167,7 +167,7 @@ const EligibilityTab = () => {
               onChange={(e) => setInsuredMonths(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               נדרש: {hasChildren ? '9' : '12'} חודשים{hasChildren ? ' (בעל/ת משפחה)' : ''}
             </p>
           </div>
@@ -182,7 +182,7 @@ const EligibilityTab = () => {
           />
           <div>
             <span className="text-sm font-medium">יש ילדים מתחת לגיל 18</span>
-            <p className="text-xs text-ink/60">
+            <p className="text-xs text-ink/70">
               משפיע על תקופת הזכאות ועל דרישת הותק (9 חודשים במקום 12)
             </p>
           </div>
@@ -260,10 +260,10 @@ const EligibilityTab = () => {
           </label>
           {isPriorClaim && (
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="unemploymentbenefitscalculator-cd7fac" className="block text-sm font-medium text-ink/70 mb-2">
                 ימי זכאות שנותרו מהתביעה הקודמת
               </label>
-              <input
+              <input id="unemploymentbenefitscalculator-cd7fac"
                 type="number"
                 min={0}
                 max={175}
@@ -292,7 +292,7 @@ const EligibilityTab = () => {
               <p className="text-xs text-ink/70">ימי זכאות מרביים</p>
             </div>
             <div className="bg-paper rounded-none p-3 border border-green-200 text-center">
-              <p className="text-2xl font-black text-amber-600">{result.waitingDays}</p>
+              <p className="text-2xl font-black text-amber-800">{result.waitingDays}</p>
               <p className="text-xs text-ink/70">ימי המתנה לפני תשלום</p>
             </div>
             <div className="bg-paper rounded-none p-3 border border-green-200 text-center">
@@ -303,7 +303,7 @@ const EligibilityTab = () => {
         </div>
       ) : (
         <div className="bg-red-50 border-2 border-red-300 rounded-none p-6 flex gap-4">
-          <AlertCircle className="w-8 h-8 text-red-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-8 h-8 text-red-700 flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="text-xl font-bold text-red-900 mb-2">אינך זכאי לדמי אבטלה</h3>
             <ul className="space-y-1">
@@ -369,7 +369,7 @@ const EligibilityTab = () => {
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-ink/60">* גיל 25+ ללא ילדים — 100 ימים גם כן</p>
+        <p className="text-xs text-ink/70">* גיל 25+ ללא ילדים — 100 ימים גם כן</p>
       </SectionCard>
     </div>
   );
@@ -438,10 +438,10 @@ const PayTab = () => {
       <SectionCard title="פרטי המשכורת">
         <div className="grid sm:grid-cols-3 gap-5">
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="unemploymentbenefitscalculator-279432" className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו ממוצע — 6 חודשים אחרונים (₪)
             </label>
-            <input
+            <input id="unemploymentbenefitscalculator-279432"
               type="number"
               min={0}
               max={100_000}
@@ -450,14 +450,14 @@ const PayTab = () => {
               onChange={(e) => setAverageSalary(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               שכר יומי: {formatCurrency(result.dailySalary, { decimals: 2 })} | שכר ממוצע
               ארצי: {formatCurrency(AVERAGE_NATIONAL_WAGE_2026)}
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
-            <input
+            <label htmlFor="unemploymentbenefitscalculator-f75bc9" className="block text-sm font-medium text-ink/70 mb-2">גיל</label>
+            <input id="unemploymentbenefitscalculator-f75bc9"
               type="number"
               min={20}
               max={66}
@@ -492,11 +492,11 @@ const PayTab = () => {
                   : 'border-ink/15 bg-paper'
               }`}
             >
-              <p className={`text-2xl font-black ${bracket.active ? 'text-gold' : 'text-ink/60'}`}>
+              <p className={`text-2xl font-black ${bracket.active ? 'text-gold' : 'text-ink/70'}`}>
                 {bracket.rate}
               </p>
               <p className="text-xs text-ink/70 mt-1">{bracket.label}</p>
-              <p className="text-xs text-ink/45">{bracket.threshold}</p>
+              <p className="text-xs text-ink/70">{bracket.threshold}</p>
             </div>
           ))}
         </div>
@@ -535,7 +535,7 @@ const PayTab = () => {
 
       {result.isCapped && (
         <div className="bg-amber-50 border-2 border-amber-300 rounded-none p-4 flex gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-amber-900">תשלום מוגבל לתקרה</h4>
             <p className="text-sm text-amber-800">{result.capNote}</p>
@@ -742,10 +742,10 @@ const WorkIncomeTab = () => {
       <SectionCard title="פרטי עבודה חלקית בתקופת האבטלה">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="unemploymentbenefitscalculator-5b5284" className="block text-sm font-medium text-ink/70 mb-2">
               שכר ממוצע לפני הפסקת עבודה (₪/חודש)
             </label>
-            <input
+            <input id="unemploymentbenefitscalculator-5b5284"
               type="number"
               min={0}
               step={500}
@@ -755,10 +755,10 @@ const WorkIncomeTab = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="unemploymentbenefitscalculator-6fd6b1" className="block text-sm font-medium text-ink/70 mb-2">
               הכנסה חודשית מעבודה חלקית חדשה (₪)
             </label>
-            <input
+            <input id="unemploymentbenefitscalculator-6fd6b1"
               type="number"
               min={0}
               step={500}
@@ -766,7 +766,7 @@ const WorkIncomeTab = () => {
               onChange={(e) => setPartTimeIncome(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               סף: {formatCurrency(halfNational)} (50% מהשכר הממוצע) — מעל זה אין זכאות
             </p>
           </div>
@@ -784,7 +784,7 @@ const WorkIncomeTab = () => {
             onChange={(e) => setPartTimePercent(Number(e.target.value))}
             className="w-full"
           />
-          <div className="flex justify-between text-xs text-ink/45 mt-1">
+          <div className="flex justify-between text-xs text-ink/70 mt-1">
             <span>10%</span>
             <span>50%</span>
             <span>100%</span>
@@ -807,7 +807,7 @@ const WorkIncomeTab = () => {
               <p className="text-xs text-ink/70">דמי אבטלה מופחתים/יום</p>
             </div>
             <div className="bg-paper rounded-none p-4 border border-green-200 text-center">
-              <p className="text-2xl font-black text-amber-700">
+              <p className="text-2xl font-black text-amber-800">
                 {formatCurrency(result.reduction, { decimals: 0 })}
               </p>
               <p className="text-xs text-ink/70">הפחתה/יום</p>
@@ -822,7 +822,7 @@ const WorkIncomeTab = () => {
         </div>
       ) : (
         <div className="bg-red-50 border-2 border-red-300 rounded-none p-6 flex gap-4">
-          <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-6 h-6 text-red-700 flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="text-lg font-bold text-red-900 mb-1">לא זכאי לדמי אבטלה</h3>
             <p className="text-sm text-red-800">{result.explanation}</p>
@@ -908,10 +908,10 @@ const TaxTab = () => {
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="unemploymentbenefitscalculator-e2bbcd" className="block text-sm font-medium text-ink/70 mb-2">
               סך דמי אבטלה שקיבלת (₪)
             </label>
-            <input
+            <input id="unemploymentbenefitscalculator-e2bbcd"
               type="number"
               min={0}
               step={1_000}
@@ -921,10 +921,10 @@ const TaxTab = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="unemploymentbenefitscalculator-de21d6" className="block text-sm font-medium text-ink/70 mb-2">
               הכנסות אחרות באותה שנה (₪)
             </label>
-            <input
+            <input id="unemploymentbenefitscalculator-de21d6"
               type="number"
               min={0}
               step={1_000}
@@ -932,7 +932,7 @@ const TaxTab = () => {
               onChange={(e) => setOtherIncome(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               שכר ממשכורת אחרת, עסק, שכירות וכד&apos; — משפיע על מדרגת המס
             </p>
           </div>

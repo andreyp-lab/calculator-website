@@ -76,7 +76,7 @@ function TabButton({
       className={`px-4 py-2 text-sm font-medium rounded-none transition-colors whitespace-nowrap ${
         active
           ? 'bg-ink text-cream shadow-sm'
-          : 'bg-paper text-ink/60 border border-ink/15 hover:border-gold hover:text-gold'
+          : 'bg-paper text-ink/70 border border-ink/15 hover:border-gold hover:text-gold'
       }`}
     >
       {label}
@@ -92,9 +92,11 @@ interface FieldProps {
 function Field({ label, hint, children }: FieldProps) {
   return (
     <div>
-      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      <label className="block text-sm font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -209,7 +211,7 @@ function TaxPieChart({ tax, net, label }: { tax: number; net: number; label?: st
           <Tooltip formatter={(value) => formatCurrency(Number(value))} />
         </PieChart>
       </ResponsiveContainer>
-      {label && <p className="text-center text-xs text-ink/60 -mt-2">{label}</p>}
+      {label && <p className="text-center text-xs text-ink/70 -mt-2">{label}</p>}
     </div>
   );
 }
@@ -418,7 +420,7 @@ function RealEstateTab() {
               <button
                 type="button"
                 onClick={() => update('useAutoCPI', !input.useAutoCPI)}
-                className={`px-3 py-2 text-xs rounded-none border ${input.useAutoCPI ? 'bg-ink border-ink text-cream' : 'bg-cream-2 border-ink/15 text-ink/60'}`}
+                className={`px-3 py-2 text-xs rounded-none border ${input.useAutoCPI ? 'bg-ink border-ink text-cream' : 'bg-cream-2 border-ink/15 text-ink/70'}`}
               >
                 {input.useAutoCPI ? 'מדד CPI אוטו' : 'הכנס ידני'}
               </button>
@@ -587,10 +589,10 @@ function FirstHomeTab() {
         {/* תקרת פטור */}
         <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm">
           <p className="font-semibold text-amber-800 mb-1">תקרת הפטור 2026</p>
-          <p className="text-amber-700">
+          <p className="text-amber-800">
             שווי מכירה עד <span className="font-bold">{formatCurrency(FIRST_HOME_EXEMPTION_CAP_2026)}</span>
           </p>
-          <p className="text-amber-600 mt-1">
+          <p className="text-amber-800 mt-1">
             השווי שלכם: <span className="font-bold">{formatCurrency(input.salePrice)}</span>
             {input.salePrice > FIRST_HOME_EXEMPTION_CAP_2026 ? ' — מעל התקרה!' : ' — בתוך התקרה'}
           </p>
@@ -692,7 +694,7 @@ function LinearTab() {
           <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/70 mb-2">
             החישוב הלינארי חל על דירות שנרכשו לפני 1 בינואר 2014. שנת הרכישה שלכם: <strong>{input.purchaseYear}</strong>
             {input.purchaseYear >= 2014 && (
-              <span className="text-red-600 font-bold"> — נרכש אחרי 2014, חישוב לינארי לא חל!</span>
+              <span className="text-red-700 font-bold"> — נרכש אחרי 2014, חישוב לינארי לא חל!</span>
             )}
           </div>
 
@@ -765,7 +767,7 @@ function LinearTab() {
               </div>
             )}
           </div>
-          <p className="text-xs text-ink/60">סה&quot;כ {result.totalYears} שנות אחזקה — {input.purchaseYear} עד {input.saleYear}</p>
+          <p className="text-xs text-ink/70">סה&quot;כ {result.totalYears} שנות אחזקה — {input.purchaseYear} עד {input.saleYear}</p>
         </div>
       </div>
 
@@ -838,7 +840,7 @@ function InheritedTab() {
       <div className="lg:col-span-3 space-y-5">
         <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm">
           <p className="font-semibold text-amber-800 mb-1">כלל ירושה במיסוי מקרקעין</p>
-          <ul className="text-amber-700 space-y-1 text-xs">
+          <ul className="text-amber-800 space-y-1 text-xs">
             <li>• ירושה מבן/בת זוג: בדרך כלל פטורה ממס שבח</li>
             <li>• ירושה מאחרים: מחושב על בסיס תאריך ומחיר רכישת המוריש</li>
             <li>• חישוב לינארי חל אם המוריש רכש לפני 2014</li>
@@ -1007,7 +1009,7 @@ function SecuritiesTab() {
               </select>
             </Field>
             <div className="flex items-end pb-2">
-              <p className="text-sm text-ink/60">
+              <p className="text-sm text-ink/70">
                 תשואה גולמית: <span className="font-bold text-gold">{roi}%</span>
               </p>
             </div>

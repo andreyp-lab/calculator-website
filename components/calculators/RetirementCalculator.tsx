@@ -200,14 +200,14 @@ export function RetirementCalculator() {
         <button
           type="button"
           onClick={() => setMainMode('planning')}
-          className={`px-4 py-2 rounded-none text-sm font-medium transition ${mainMode === 'planning' ? 'bg-paper text-ink shadow font-bold' : 'text-ink/60 hover:text-ink'}`}
+          className={`px-4 py-2 rounded-none text-sm font-medium transition ${mainMode === 'planning' ? 'bg-paper text-ink shadow font-bold' : 'text-ink/70 hover:text-ink'}`}
         >
           📋 תכנון פרישה
         </button>
         <button
           type="button"
           onClick={() => setMainMode('goal')}
-          className={`px-4 py-2 rounded-none text-sm font-medium transition ${mainMode === 'goal' ? 'bg-paper text-emerald-700 shadow font-bold' : 'text-ink/60 hover:text-ink'}`}
+          className={`px-4 py-2 rounded-none text-sm font-medium transition ${mainMode === 'goal' ? 'bg-paper text-emerald-800 shadow font-bold' : 'text-ink/70 hover:text-ink'}`}
         >
           🎯 כמה להפקיד?
         </button>
@@ -284,7 +284,7 @@ export function RetirementCalculator() {
                   {[['שמרני', 3], ['מסלול כללי', 5.5], ['מניות', 7]].map(([label, rate]) => (
                     <button key={String(label)} type="button"
                       onClick={() => update('expectedReturn', Number(rate))}
-                      className={`text-xs py-1 px-2 rounded-none transition text-center ${input.expectedReturn === Number(rate) ? 'bg-emerald-600 text-white' : 'bg-paper border border-emerald-300 text-emerald-700 hover:bg-emerald-100'}`}
+                      className={`text-xs py-1 px-2 rounded-none transition text-center ${input.expectedReturn === Number(rate) ? 'bg-emerald-600 text-white' : 'bg-paper border border-emerald-300 text-emerald-800 hover:bg-emerald-100'}`}
                     >
                       {label}: {rate}%
                     </button>
@@ -374,7 +374,7 @@ export function RetirementCalculator() {
                         <span>ב.ל. מוערך:</span>
                         <strong>{formatCurrency(estimateSocialSecurityBenefit({ retirementAge: input.retirementAge, yearsContributed: estimatorYears, averageSalary: estimatorSalary, isCouple: estimatorCouple }))}/ח</strong>
                       </div>
-                      <div className="flex justify-between text-ink/60">
+                      <div className="flex justify-between text-ink/70">
                         <span>שיעור החלפה:</span>
                         <span>{estimatePensionBenefit({ averageSalary: estimatorSalary, yearsOfContribution: estimatorYears }).replacementRate.toFixed(0)}% מהשכר</span>
                       </div>
@@ -415,7 +415,7 @@ export function RetirementCalculator() {
 
                 {/* סיכום הכנסות קבועות */}
                 <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
-                  <p className="text-xs text-ink/60 mb-2">סיכום הכנסות קבועות (בערכי היום):</p>
+                  <p className="text-xs text-ink/70 mb-2">סיכום הכנסות קבועות (בערכי היום):</p>
                   <div className="space-y-1 text-sm">
                     {[
                       { label: 'פנסיה נטו', val: input.incomeSources.pensionMonthly * (1 - input.pensionTaxRate / 100) },
@@ -424,7 +424,7 @@ export function RetirementCalculator() {
                       { label: 'עבודה חלקית', val: input.incomeSources.partTimeWork },
                     ].filter((r) => r.val > 0).map((r) => (
                       <div key={r.label} className="flex justify-between">
-                        <span className="text-ink/60">{r.label}</span>
+                        <span className="text-ink/70">{r.label}</span>
                         <span className="font-medium">{formatCurrency(Math.round(r.val))}/ח</span>
                       </div>
                     ))}
@@ -465,7 +465,7 @@ export function RetirementCalculator() {
                     onChange={(e) => update('withdrawalRate', Number(e.target.value))}
                     className="w-full accent-ink"
                   />
-                  <div className="flex justify-between text-xs text-ink/60 mt-1">
+                  <div className="flex justify-between text-xs text-ink/70 mt-1">
                     <span>2% (שמרני)</span>
                     <span className="text-gold font-medium">4% (כלל אצבע)</span>
                     <span>8% (אגרסיבי)</span>
@@ -479,9 +479,9 @@ export function RetirementCalculator() {
                       onChange={(e) => update('pensionTaxRate', Number(e.target.value))}
                       className="w-full accent-amber-500"
                     />
-                    <div className="flex justify-between text-xs text-ink/60 mt-1">
+                    <div className="flex justify-between text-xs text-ink/70 mt-1">
                       <span>0%</span>
-                      <span className="text-amber-600">{input.pensionTaxRate}%</span>
+                      <span className="text-amber-800">{input.pensionTaxRate}%</span>
                       <span>35%</span>
                     </div>
                   </Field>
@@ -492,9 +492,9 @@ export function RetirementCalculator() {
                       onChange={(e) => update('capitalGainsTaxRate', Number(e.target.value))}
                       className="w-full accent-red-500"
                     />
-                    <div className="flex justify-between text-xs text-ink/60 mt-1">
+                    <div className="flex justify-between text-xs text-ink/70 mt-1">
                       <span>0%</span>
-                      <span className="text-red-600">{input.capitalGainsTaxRate}%</span>
+                      <span className="text-red-700">{input.capitalGainsTaxRate}%</span>
                       <span>30%</span>
                     </div>
                   </Field>
@@ -541,7 +541,7 @@ export function RetirementCalculator() {
         {chartView === 'accumulation' && (
           <div>
             <h3 className="font-bold text-ink mb-1">צמיחת החיסכון עד גיל {input.retirementAge}</h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               כחול = נומינלי | ירוק מנוקד = ריאלי (אחרי {input.inflationRate}% אינפלציה)
             </p>
             <div className="h-72">
@@ -577,7 +577,7 @@ export function RetirementCalculator() {
                 <p className="font-bold text-green-800">{formatCurrency(result.realProjectedSavings)}</p>
               </div>
               <div className="bg-cream-2 rounded-none p-2">
-                <p className="text-xs text-ink/60">הפקדות בלבד</p>
+                <p className="text-xs text-ink/70">הפקדות בלבד</p>
                 <p className="font-bold text-ink/70">{formatCurrency(result.totalContributions)}</p>
               </div>
             </div>
@@ -587,7 +587,7 @@ export function RetirementCalculator() {
         {chartView === 'drawdown' && (
           <div>
             <h3 className="font-bold text-ink mb-1">תיק ההשקעות בגיל {input.retirementAge}–{input.retirementAge + input.yearsInRetirement}</h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               כחול = יתרת תיק | ירוק = הכנסה חודשית בפועל | כתום מנוקד = יעד הכנסה
             </p>
             {drawdownChartData.length > 0 ? (
@@ -607,7 +607,7 @@ export function RetirementCalculator() {
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="h-72 flex items-center justify-center text-ink/60">
+              <div className="h-72 flex items-center justify-center text-ink/70">
                 <p>הגדר יעד הכנסה ומקורות כדי לראות גרף drawdown</p>
               </div>
             )}
@@ -624,7 +624,7 @@ export function RetirementCalculator() {
         {chartView === 'income' && (
           <div>
             <h3 className="font-bold text-ink mb-1">מקורות הכנסה חודשית בפרישה</h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               כל הסכומים נומינליים — מותאמים לאינפלציה עד גיל {input.retirementAge}
             </p>
             <div className="h-72">
@@ -666,7 +666,7 @@ export function RetirementCalculator() {
         {chartView === 'scenarios' && (
           <div>
             <h3 className="font-bold text-ink mb-1">השוואת תרחישים — תשואה וגיל פרישה שונים</h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               אותה הפקדה ({formatCurrency(input.monthlyContribution)}/ח) עם נתונים שונים
             </p>
             <div className="h-72">
@@ -748,7 +748,7 @@ function PlanningResults({
         <div className="flex items-start gap-3">
           {statusColor === 'green'
             ? <CheckCircle2 className="w-7 h-7 text-green-600 flex-shrink-0" />
-            : <AlertTriangle className={`w-7 h-7 flex-shrink-0 ${statusColor === 'amber' ? 'text-amber-600' : 'text-red-500'}`} />
+            : <AlertTriangle className={`w-7 h-7 flex-shrink-0 ${statusColor === 'amber' ? 'text-amber-800' : 'text-red-500'}`} />
           }
           <div>
             <h3 className={`font-bold text-lg mb-1 ${statusTextMain}`}>
@@ -841,13 +841,13 @@ function GoalSeekingResults({
     <>
       <div className="bg-emerald-50 border border-emerald-300 rounded-none p-5">
         <div className="flex items-center gap-2 mb-2">
-          <Target className="w-5 h-5 text-emerald-600" />
+          <Target className="w-5 h-5 text-emerald-800" />
           <p className="text-sm font-medium text-emerald-800">הפקדה חודשית נדרשת ליעד</p>
         </div>
-        <p className="text-4xl font-bold text-emerald-700 tabular-nums">
+        <p className="text-4xl font-bold text-emerald-800 tabular-nums">
           {formatCurrency(Math.round(result.requiredMonthlyContributionForGoal))}
         </p>
-        <p className="text-xs text-emerald-600 mt-1">
+        <p className="text-xs text-emerald-800 mt-1">
           כדי שהחיסכון יכסה {input.yearsInRetirement} שנות פרישה
         </p>
       </div>
@@ -855,8 +855,8 @@ function GoalSeekingResults({
       {additionalNeeded > 100 ? (
         <div className="bg-amber-50 border border-amber-300 rounded-none p-4">
           <p className="text-sm font-medium text-amber-800 mb-1">צריך להוסיף</p>
-          <p className="text-2xl font-bold text-amber-700">{formatCurrency(Math.round(additionalNeeded))}/חודש</p>
-          <p className="text-xs text-amber-600 mt-1">מעל ההפקדה הנוכחית ({formatCurrency(input.monthlyContribution)}/ח)</p>
+          <p className="text-2xl font-bold text-amber-800">{formatCurrency(Math.round(additionalNeeded))}/חודש</p>
+          <p className="text-xs text-amber-800 mt-1">מעל ההפקדה הנוכחית ({formatCurrency(input.monthlyContribution)}/ח)</p>
         </div>
       ) : (
         <div className="bg-green-50 border border-green-300 rounded-none p-4">
@@ -925,38 +925,38 @@ function RetirementEducation({
         {/* כלל ה-4% */}
         <div className="bg-paper rounded-none border border-ink/15 p-4">
           <h4 className="font-bold text-ink mb-2">📐 כלל ה-4%</h4>
-          <p className="text-xs text-ink/60 mb-3">
+          <p className="text-xs text-ink/70 mb-3">
             משוך 4% מהתיק בשנה הראשונה, הגדל בהתאם לאינפלציה. מחקר Trinity (1998): הכסף מחזיק 30+ שנה ב-95% מהמקרים.
           </p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-ink/60">4% מ-{formatCurrency(result.projectedSavings)}:</span>
+              <span className="text-ink/70">4% מ-{formatCurrency(result.projectedSavings)}:</span>
             </div>
             <div className="text-lg font-bold text-ink">
               {formatCurrency(Math.round(result.projectedSavings * 0.04 / 12))}/חודש
             </div>
-            <p className="text-xs text-ink/60">זה הsustainable drawdown מהתיק</p>
+            <p className="text-xs text-ink/70">זה הsustainable drawdown מהתיק</p>
           </div>
         </div>
 
         {/* כוח הזמן */}
         <div className="bg-paper rounded-none border border-emerald-200 p-4">
           <h4 className="font-bold text-emerald-800 mb-2">⏰ כוח הזמן</h4>
-          <p className="text-xs text-ink/60 mb-3">
+          <p className="text-xs text-ink/70 mb-3">
             כל שנה נוספת של חיסכון שווה יותר מהשנה הקודמת — בגלל ריבית דריבית על הריבית.
           </p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-ink/60">חיסכון נוכחי:</span>
+              <span className="text-ink/70">חיסכון נוכחי:</span>
               <span className="font-bold">{formatCurrency(result.projectedSavings)}</span>
             </div>
             {delayBenefit && (
               <>
-                <div className="flex justify-between text-emerald-700">
+                <div className="flex justify-between text-emerald-800">
                   <span>+ 3 שנות חיסכון:</span>
                   <span className="font-bold">{formatCurrency(delayBenefit)}</span>
                 </div>
-                <div className="border-t pt-1 flex justify-between text-emerald-600">
+                <div className="border-t pt-1 flex justify-between text-emerald-800">
                   <span>תוספת:</span>
                   <span className="font-bold">+{formatCurrency(delayBenefit - result.projectedSavings)}</span>
                 </div>
@@ -968,19 +968,19 @@ function RetirementEducation({
         {/* ביטוח לאומי */}
         <div className="bg-paper rounded-none border border-amber-200 p-4">
           <h4 className="font-bold text-amber-800 mb-2">🛡️ קצבאות ישראל</h4>
-          <p className="text-xs text-ink/60 mb-3">
+          <p className="text-xs text-ink/70 mb-3">
             ביטוח לאומי: ~3,500 ₪ ביחיד, ~4,900 ₪ לזוג. פנסיה חובה: 18.5% מהשכר (עובד + מעסיק).
           </p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-ink/60">ב.ל. (זוג):</span>
-              <span className="font-bold text-amber-700">4,900 ₪/ח</span>
+              <span className="text-ink/70">ב.ל. (זוג):</span>
+              <span className="font-bold text-amber-800">4,900 ₪/ח</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink/60">פנסיה (40 שנה):</span>
-              <span className="font-bold text-amber-700">~{formatCurrency(estimatePensionBenefit({ averageSalary: 15000, yearsOfContribution: 40 }).monthlyPension)}/ח</span>
+              <span className="text-ink/70">פנסיה (40 שנה):</span>
+              <span className="font-bold text-amber-800">~{formatCurrency(estimatePensionBenefit({ averageSalary: 15000, yearsOfContribution: 40 }).monthlyPension)}/ח</span>
             </div>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               שיעור החלפה: {estimatePensionBenefit({ averageSalary: 15000, yearsOfContribution: 40 }).replacementRate.toFixed(0)}% מהשכר
             </p>
           </div>
@@ -1029,9 +1029,11 @@ function Field({ label, hint, children }: {
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      <label className="block text-sm font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -1039,11 +1041,11 @@ function Field({ label, hint, children }: {
 function Row({ label, value, bold, color }: {
   label: string; value: string; bold?: boolean; color?: 'emerald' | 'blue' | 'red' | 'amber';
 }) {
-  const colorMap = { emerald: 'text-emerald-700', blue: 'text-ink', red: 'text-red-600', amber: 'text-amber-700' };
+  const colorMap = { emerald: 'text-emerald-800', blue: 'text-ink', red: 'text-red-700', amber: 'text-amber-800' };
   const valueClass = color ? colorMap[color] : 'text-ink';
   return (
     <div className="flex justify-between py-0.5">
-      <span className={`text-ink/60 ${bold ? 'font-bold text-ink' : ''}`}>{label}</span>
+      <span className={`text-ink/70 ${bold ? 'font-bold text-ink' : ''}`}>{label}</span>
       <span className={`tabular-nums ${bold ? 'font-bold' : ''} ${valueClass}`}>{value}</span>
     </div>
   );
@@ -1077,7 +1079,7 @@ function TabButton({ active, onClick, children }: {
 }) {
   return (
     <button type="button" onClick={onClick}
-      className={`px-3 py-1.5 rounded-none text-xs font-medium transition ${active ? 'bg-ink text-cream' : 'bg-cream-2 text-ink/60 hover:bg-paper-hover'}`}>
+      className={`px-3 py-1.5 rounded-none text-xs font-medium transition ${active ? 'bg-ink text-cream' : 'bg-cream-2 text-ink/70 hover:bg-paper-hover'}`}>
       {children}
     </button>
   );

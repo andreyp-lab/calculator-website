@@ -63,7 +63,7 @@ export function ScenarioCompare() {
 
   const fmt = (v: number) => formatCurrency(v, settings.currency);
 
-  const diffClass = (v: number) => (v >= 0 ? 'text-emerald-700' : 'text-red-700');
+  const diffClass = (v: number) => (v >= 0 ? 'text-emerald-800' : 'text-red-700');
   const diffPrefix = (v: number) => (v >= 0 ? '+' : '');
 
   return (
@@ -170,7 +170,7 @@ export function ScenarioCompare() {
                         <td className="px-3 py-2 font-medium">{row.label}</td>
                         <td className="px-3 py-2">{fmt(row.a)}</td>
                         <td className="px-3 py-2">{fmt(row.b)}</td>
-                        <td className={`px-3 py-2 font-bold ${isGood ? 'text-emerald-700' : 'text-red-700'}`}>
+                        <td className={`px-3 py-2 font-bold ${isGood ? 'text-emerald-800' : 'text-red-700'}`}>
                           {diff >= 0 ? '+' : ''}
                           {fmt(diff)}
                         </td>

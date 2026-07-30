@@ -175,7 +175,7 @@ export function VehicleOwnershipCalculator() {
         <Section
           title={
             <span className="flex items-center gap-2">
-              <Wallet className="w-5 h-5 text-emerald-600" />
+              <Wallet className="w-5 h-5 text-emerald-800" />
               💰 מימון עצמי
             </span>
           }
@@ -541,9 +541,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      <label className="block text-xs font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -561,7 +563,7 @@ function ResultCard({
     leasing: 'border-gold/40 bg-cream-2',
   };
   const accentMap: Record<PaymentMethod, string> = {
-    cash: 'text-emerald-700',
+    cash: 'text-emerald-800',
     loan: 'text-ink',
     leasing: 'text-gold',
   };
@@ -582,31 +584,31 @@ function ResultCard({
       <div className={`text-3xl font-bold tabular-nums mb-1 ${accentMap[option.method]}`}>
         {formatCurrency(option.totalCost)}
       </div>
-      <p className="text-xs text-ink/60 mb-3">סך עלות לתקופה</p>
+      <p className="text-xs text-ink/70 mb-3">סך עלות לתקופה</p>
 
       <div className="space-y-1 text-sm">
         <div className="flex justify-between">
-          <span className="text-ink/60">חודשי ממוצע:</span>
+          <span className="text-ink/70">חודשי ממוצע:</span>
           <span className="font-medium tabular-nums">
             {formatCurrency(option.monthlyAverage)}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-ink/60">תשלום ב-Day 1:</span>
+          <span className="text-ink/70">תשלום ב-Day 1:</span>
           <span className="font-medium tabular-nums">{formatCurrency(option.upfrontCash)}</span>
         </div>
         {option.opportunityCost > 0 && (
           <div className="flex justify-between">
-            <span className="text-ink/60">עלות הזדמנות:</span>
-            <span className="font-medium tabular-nums text-amber-700">
+            <span className="text-ink/70">עלות הזדמנות:</span>
+            <span className="font-medium tabular-nums text-amber-800">
               {formatCurrency(option.opportunityCost)}
             </span>
           </div>
         )}
         {option.assetValueAtEnd > 0 && (
           <div className="flex justify-between">
-            <span className="text-ink/60">שווי רכב בסוף:</span>
-            <span className="font-medium tabular-nums text-emerald-700">
+            <span className="text-ink/70">שווי רכב בסוף:</span>
+            <span className="font-medium tabular-nums text-emerald-800">
               {formatCurrency(option.assetValueAtEnd)}
             </span>
           </div>
@@ -648,7 +650,7 @@ function ComparisonBar({
                 <span className="tabular-nums">
                   {formatCurrency(o.totalCost)}
                   {diff > 0 && (
-                    <span className="text-red-600 text-xs mr-2">
+                    <span className="text-red-700 text-xs mr-2">
                       (+{formatCurrency(diff)})
                     </span>
                   )}
@@ -791,19 +793,19 @@ function BreakdownCard({
         {option.breakdown.map((item, i) => (
           <div key={i} className="border-b border-ink/10 pb-1.5">
             <div className="flex justify-between">
-              <span className={item.value < 0 ? 'text-emerald-700' : 'text-ink/70'}>
+              <span className={item.value < 0 ? 'text-emerald-800' : 'text-ink/70'}>
                 {item.label}
               </span>
               <span
                 className={`tabular-nums font-medium ${
-                  item.value < 0 ? 'text-emerald-700' : ''
+                  item.value < 0 ? 'text-emerald-800' : ''
                 }`}
               >
                 {item.value < 0 ? '-' : ''}
                 {formatCurrency(Math.abs(item.value))}
               </span>
             </div>
-            {item.note && <div className="text-xs text-ink/60 mt-0.5">{item.note}</div>}
+            {item.note && <div className="text-xs text-ink/70 mt-0.5">{item.note}</div>}
           </div>
         ))}
         <div className="flex justify-between pt-2 font-bold border-t-2 border-ink/20">

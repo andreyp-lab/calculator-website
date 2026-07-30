@@ -32,10 +32,10 @@ export function CombinedIncomeCalculator() {
         <h2 className="text-xl font-bold text-ink">פרטים</h2>
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="combinedincomecalculator-dbe706" className="block text-sm font-medium text-ink/70 mb-2">
             שכר חודשי ברוטו כשכיר (₪)
           </label>
-          <input
+          <input id="combinedincomecalculator-dbe706"
             type="number"
             min={0}
             step={500}
@@ -43,16 +43,16 @@ export function CombinedIncomeCalculator() {
             onChange={(e) => update('monthlyGrossSalary', Number(e.target.value))}
             className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
           />
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             הברוטו מתלוש המשכורת — לפני ניכויי מס וב.ל.
           </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="combinedincomecalculator-6db8a5" className="block text-sm font-medium text-ink/70 mb-2">
             הכנסה שנתית חייבת כעצמאי (₪)
           </label>
-          <input
+          <input id="combinedincomecalculator-6db8a5"
             type="number"
             min={0}
             step={1000}
@@ -62,16 +62,16 @@ export function CombinedIncomeCalculator() {
             }
             className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
           />
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             המחזור מהעסק בשנה, פחות הוצאות מוכרות (ללא מע&quot;מ)
           </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="combinedincomecalculator-110d4c" className="block text-sm font-medium text-ink/70 mb-2">
             נקודות זיכוי
           </label>
-          <input
+          <input id="combinedincomecalculator-110d4c"
             type="number"
             min={0}
             max={10}
@@ -80,7 +80,7 @@ export function CombinedIncomeCalculator() {
             onChange={(e) => update('creditPoints', Number(e.target.value))}
             className="w-full px-3 py-2 border border-ink/15 rounded-none"
           />
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             תושב/ת = 2.25; הנקודות מנוצלות פעם אחת על כלל ההכנסה
           </p>
         </div>
@@ -272,7 +272,7 @@ function Row({
       } ${highlight ? 'bg-emerald-50 -mx-2 px-2 rounded-none' : ''}`}
     >
       <span
-        className={`${mute ? 'text-ink/60' : 'text-ink'} ${
+        className={`${mute ? 'text-ink/70' : 'text-ink'} ${
           bold ? 'font-bold' : ''
         }`}
       >
@@ -280,8 +280,8 @@ function Row({
       </span>
       <span
         className={`tabular-nums ${bold ? 'font-bold text-ink' : ''} ${
-          mute ? 'text-ink/60' : ''
-        } ${positive ? 'text-emerald-700' : ''} ${
+          mute ? 'text-ink/70' : ''
+        } ${positive ? 'text-emerald-800' : ''} ${
           negative ? 'text-red-700' : ''
         }`}
       >
@@ -299,7 +299,7 @@ function SideIncomeBar({
   const base = result.annualSelfEmployedIncome;
   if (base <= 0) {
     return (
-      <p className="text-sm text-ink/60">
+      <p className="text-sm text-ink/70">
         הזן הכנסה כעצמאי כדי לראות את החלוקה
       </p>
     );
@@ -322,7 +322,7 @@ function SideIncomeBar({
       label: 'נטו ביד',
       value: Math.max(0, result.netSideIncomeAnnual),
       color: 'bg-emerald-500',
-      textColor: 'text-emerald-700',
+      textColor: 'text-emerald-800',
     },
   ].filter((i) => i.value > 0);
 

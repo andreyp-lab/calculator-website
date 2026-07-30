@@ -36,10 +36,10 @@ export function WorkValueCalculator() {
         <div className="bg-cream-2 p-4 rounded-none space-y-3">
           <h4 className="font-semibold text-ink text-sm">💼 הכנסות מעבודה</h4>
           <div>
-            <label className="block text-xs font-medium text-ink/70 mb-1">
+            <label htmlFor="workvaluecalculator-816662" className="block text-xs font-medium text-ink/70 mb-1">
               שכר ברוטו חודשי (₪)
             </label>
-            <input
+            <input id="workvaluecalculator-816662"
               type="number"
               value={input.monthlyGrossSalary}
               onChange={(e) => update('monthlyGrossSalary', Number(e.target.value))}
@@ -48,8 +48,8 @@ export function WorkValueCalculator() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">שעות עבודה</label>
-              <input
+              <label htmlFor="workvaluecalculator-baa28c" className="block text-xs font-medium text-ink/70 mb-1">שעות עבודה</label>
+              <input id="workvaluecalculator-baa28c"
                 type="number"
                 value={input.monthlyWorkHours}
                 onChange={(e) => update('monthlyWorkHours', Number(e.target.value))}
@@ -57,8 +57,8 @@ export function WorkValueCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">שעות נסיעה</label>
-              <input
+              <label htmlFor="workvaluecalculator-a6f06a" className="block text-xs font-medium text-ink/70 mb-1">שעות נסיעה</label>
+              <input id="workvaluecalculator-a6f06a"
                 type="number"
                 value={input.monthlyCommutingHours}
                 onChange={(e) => update('monthlyCommutingHours', Number(e.target.value))}
@@ -160,7 +160,7 @@ export function WorkValueCalculator() {
             <span className="text-ink/70">נטו משכר (משוער):</span>
             <span className="font-medium">+{formatCurrency(result.estimatedNetSalary)}</span>
           </div>
-          <div className="flex justify-between text-emerald-700">
+          <div className="flex justify-between text-emerald-800">
             <span>הטבות מעסיק:</span>
             <span className="font-medium">+{formatCurrency(result.totalEmployerBenefits)}</span>
           </div>
@@ -172,7 +172,7 @@ export function WorkValueCalculator() {
             <span>נטו אפקטיבי:</span>
             <span>{formatCurrency(result.effectiveTakeHome)}</span>
           </div>
-          <div className="flex justify-between text-ink/60">
+          <div className="flex justify-between text-ink/70">
             <span>אלטרנטיבה:</span>
             <span>{formatCurrency(input.alternativeBenefit)}</span>
           </div>

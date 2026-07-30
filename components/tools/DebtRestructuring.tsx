@@ -56,7 +56,7 @@ export function DebtRestructuring() {
       </div>
 
       {budget.loans.length === 0 ? (
-        <div className="text-center py-4 text-ink/45 text-xs">
+        <div className="text-center py-4 text-ink/70 text-xs">
           אין הלוואות לפריסה. הוסף הלוואה ב-{`"`}תכנון תקציב{`"`} קודם.
         </div>
       ) : (
@@ -88,22 +88,22 @@ export function DebtRestructuring() {
             {loan && (
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">תקופה חדשה (חודשים)</label>
-                  <input
+                  <label htmlFor="debtrestructuring-e36de2" className="block text-xs text-ink/70 mb-1">תקופה חדשה (חודשים)</label>
+                  <input id="debtrestructuring-e36de2"
                     type="number"
                     value={newTermMonths}
                     onChange={(e) => setNewTermMonths(Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 text-sm"
                   />
-                  <p className="text-[10px] text-ink/60 mt-0.5">
+                  <p className="text-[10px] text-ink/70 mt-0.5">
                     ({(newTermMonths / 12).toFixed(1)} שנים)
                   </p>
                 </div>
                 <div>
-                  <label className="block text-xs text-ink/70 mb-1">
+                  <label htmlFor="debtrestructuring-ad3c04" className="block text-xs text-ink/70 mb-1">
                     ריבית חדשה (%) - השאר ריק כדי לא לשנות
                   </label>
-                  <input
+                  <input id="debtrestructuring-ad3c04"
                     type="number"
                     step={0.1}
                     value={newRate}
@@ -120,13 +120,13 @@ export function DebtRestructuring() {
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-2">
                 <div className="bg-cream-2 border border-ink/15 p-2">
-                  <div className="text-[10px] text-ink/60">תשלום חודשי נוכחי</div>
+                  <div className="text-[10px] text-ink/70">תשלום חודשי נוכחי</div>
                   <div className="text-base font-bold text-ink">
                     {fmt(result.originalMonthlyPayment)}
                   </div>
                 </div>
                 <div className="bg-emerald-50 border border-emerald-200 p-2">
-                  <div className="text-[10px] text-emerald-700">תשלום חודשי חדש</div>
+                  <div className="text-[10px] text-emerald-800">תשלום חודשי חדש</div>
                   <div className="text-base font-bold text-emerald-900">
                     {fmt(result.newMonthlyPayment)}
                   </div>
@@ -138,20 +138,20 @@ export function DebtRestructuring() {
                   <div className="flex items-center gap-2">
                     <ArrowLeftRight className="w-4 h-4 text-gold" />
                     <div>
-                      <div className="text-[10px] text-ink/60">חיסכון חודשי בתזרים</div>
+                      <div className="text-[10px] text-ink/70">חיסכון חודשי בתזרים</div>
                       <div
-                        className={`font-bold ${result.cashFlowReliefMonthly > 0 ? 'text-emerald-700' : 'text-red-700'}`}
+                        className={`font-bold ${result.cashFlowReliefMonthly > 0 ? 'text-emerald-800' : 'text-red-700'}`}
                       >
                         {fmt(result.cashFlowReliefMonthly)}
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Calculator className="w-4 h-4 text-amber-600" />
+                    <Calculator className="w-4 h-4 text-amber-800" />
                     <div>
-                      <div className="text-[10px] text-ink/60">תוספת ריבית כוללת</div>
+                      <div className="text-[10px] text-ink/70">תוספת ריבית כוללת</div>
                       <div
-                        className={`font-bold ${result.additionalInterestCost < 0 ? 'text-emerald-700' : 'text-red-700'}`}
+                        className={`font-bold ${result.additionalInterestCost < 0 ? 'text-emerald-800' : 'text-red-700'}`}
                       >
                         {result.additionalInterestCost > 0 ? '+' : ''}
                         {fmt(result.additionalInterestCost)}

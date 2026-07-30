@@ -190,10 +190,10 @@ const EligibilityTab = ({
       <SectionCard title="פרטי הזכאות" icon={<Baby className="w-5 h-5" />}>
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="maternitybenefitscalculator-d3ca50" className="block text-sm font-medium text-ink/70 mb-2">
               חודשים שעבדת מתוך 14 חודשים אחרונים
             </label>
-            <input
+            <input id="maternitybenefitscalculator-d3ca50"
               type="number"
               min={0}
               max={14}
@@ -201,7 +201,7 @@ const EligibilityTab = ({
               onChange={(e) => setMonthsWorked(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               10+ חודשים → חופשה מלאה (15 שב'). 6-9 חודשים → חלקית (8 שב').
             </p>
           </div>
@@ -224,10 +224,10 @@ const EligibilityTab = ({
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="maternitybenefitscalculator-4e734c" className="block text-sm font-medium text-ink/70 mb-2">
               ימי אישפוז יילוד (אם רלוונטי)
             </label>
-            <input
+            <input id="maternitybenefitscalculator-4e734c"
               type="number"
               min={0}
               max={140}
@@ -235,7 +235,7 @@ const EligibilityTab = ({
               onChange={(e) => setHospitalizationDays(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-ink/60 mt-1">7+ ימים → זכאות להארכה עד 20 שבועות</p>
+            <p className="text-xs text-ink/70 mt-1">7+ ימים → זכאות להארכה עד 20 שבועות</p>
           </div>
           <div className="flex items-center gap-3 pt-6">
             <input
@@ -247,7 +247,7 @@ const EligibilityTab = ({
             />
             <label htmlFor="premature" className="text-sm font-medium text-ink/70 cursor-pointer">
               לידה מוקדמת / פג (משקל &lt;1.5 ק"ג)
-              <span className="block text-xs text-ink/60 font-normal">+21 ימים נוספים</span>
+              <span className="block text-xs text-ink/70 font-normal">+21 ימים נוספים</span>
             </label>
           </div>
         </div>
@@ -404,10 +404,10 @@ const PayTab = ({
       <SectionCard title="פרטי השכר">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="maternitybenefitscalculator-5d9f69" className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ממוצע — 3 חודשים אחרונים (₪)
             </label>
-            <input
+            <input id="maternitybenefitscalculator-5d9f69"
               type="number"
               min={0}
               max={300000}
@@ -416,13 +416,13 @@ const PayTab = ({
               onChange={(e) => setSalary3Months(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               שכר יומי: {formatCurrency(salary3Months / 30, { decimals: 0 })}
             </p>
           </div>
           <div>
             <label className="block text-sm font-medium text-ink/70 mb-2">
-              שכר חודשי ממוצע — 6 חודשים אחרונים (₪) <span className="text-ink/45 font-normal">(אופציונלי)</span>
+              שכר חודשי ממוצע — 6 חודשים אחרונים (₪) <span className="text-ink/70 font-normal">(אופציונלי)</span>
             </label>
             <input
               type="number"
@@ -433,7 +433,7 @@ const PayTab = ({
               onChange={(e) => setSalary6Months(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-ink/60 mt-1">ב.ל. ייקח את הגבוה מבין שני החישובים</p>
+            <p className="text-xs text-ink/70 mt-1">ב.ל. ייקח את הגבוה מבין שני החישובים</p>
           </div>
         </div>
 
@@ -471,7 +471,7 @@ const PayTab = ({
             onChange={(e) => setLeaveDays(Number(e.target.value))}
             className="w-full mt-3 accent-gold"
           />
-          <p className="text-xs text-ink/60 text-center mt-1">{leaveDays} ימים ({Math.round(leaveDays / 7)} שבועות)</p>
+          <p className="text-xs text-ink/70 text-center mt-1">{leaveDays} ימים ({Math.round(leaveDays / 7)} שבועות)</p>
         </div>
 
         <InfoBox variant="pink">
@@ -529,7 +529,7 @@ const PayTab = ({
 
           {result.warning && (
             <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-4 flex gap-3">
-              <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
               <p className="text-sm text-amber-900">{result.warning}</p>
             </div>
           )}
@@ -702,8 +702,8 @@ const FatherTab = ({
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">שכר חודשי האם (₪)</label>
-            <input
+            <label htmlFor="maternitybenefitscalculator-661783" className="block text-sm font-medium text-ink/70 mb-2">שכר חודשי האם (₪)</label>
+            <input id="maternitybenefitscalculator-661783"
               type="number"
               min={0}
               max={200000}
@@ -714,8 +714,8 @@ const FatherTab = ({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">שכר חודשי האב (₪)</label>
-            <input
+            <label htmlFor="maternitybenefitscalculator-dab8db" className="block text-sm font-medium text-ink/70 mb-2">שכר חודשי האב (₪)</label>
+            <input id="maternitybenefitscalculator-dab8db"
               type="number"
               min={0}
               max={200000}
@@ -740,7 +740,7 @@ const FatherTab = ({
             onChange={(e) => setMotherLeaveDays(Number(e.target.value))}
             className="w-full accent-gold"
           />
-          <div className="flex justify-between text-xs text-ink/60 mt-1">
+          <div className="flex justify-between text-xs text-ink/70 mt-1">
             <span>8 שבועות</span>
             <span>15 שבועות</span>
           </div>
@@ -851,10 +851,10 @@ const ProtectionTab = ({
       <SectionCard title="ציר זמן הגנת המשרה" icon={<Shield className="w-5 h-5" />}>
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="maternitybenefitscalculator-a0afac" className="block text-sm font-medium text-ink/70 mb-2">
               תאריך הלידה
             </label>
-            <input
+            <input id="maternitybenefitscalculator-a0afac"
               type="date"
               value={birthDateStr}
               onChange={(e) => setBirthDateStr(e.target.value)}
@@ -1025,10 +1025,10 @@ const BreastfeedingTab = ({
       <SectionCard title="שווי שעת ההנקה" icon={<Clock className="w-5 h-5" />}>
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="maternitybenefitscalculator-a91f07" className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו (₪)
             </label>
-            <input
+            <input id="maternitybenefitscalculator-a91f07"
               type="number"
               min={0}
               max={200000}

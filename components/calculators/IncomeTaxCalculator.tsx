@@ -61,7 +61,7 @@ export function IncomeTaxCalculator() {
               onChange={(e) => updateField('creditPoints', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               תושב = 2.25, אישה = 2.75, +2.5 לכל ילד 1-5, +1 לכל ילד 6-17
             </p>
           </div>

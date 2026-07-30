@@ -95,10 +95,10 @@ export function CashFlowDashboard() {
     emerald: {
       bg: 'bg-emerald-50 border-emerald-200',
       text: 'text-emerald-900',
-      icon: 'text-emerald-600',
+      icon: 'text-emerald-800',
     },
-    red: { bg: 'bg-red-50 border-red-200', text: 'text-red-900', icon: 'text-red-600' },
-    amber: { bg: 'bg-amber-50 border-amber-200', text: 'text-amber-900', icon: 'text-amber-600' },
+    red: { bg: 'bg-red-50 border-red-200', text: 'text-red-900', icon: 'text-red-700' },
+    amber: { bg: 'bg-amber-50 border-amber-200', text: 'text-amber-900', icon: 'text-amber-800' },
   };
 
   return (
@@ -119,11 +119,11 @@ export function CashFlowDashboard() {
               className={`border-2 p-3 ${cls.bg} hover:shadow-md transition`}
             >
               <div className="flex items-start justify-between mb-2">
-                <div className="text-xs text-ink/60">{card.title}</div>
+                <div className="text-xs text-ink/70">{card.title}</div>
                 <Icon className={`w-4 h-4 ${cls.icon}`} />
               </div>
               <div className={`text-base font-bold ${cls.text} mb-1`}>{card.value}</div>
-              <div className="text-[10px] text-ink/45">{card.sub}</div>
+              <div className="text-[10px] text-ink/70">{card.sub}</div>
             </div>
           );
         })}
@@ -132,19 +132,19 @@ export function CashFlowDashboard() {
       {/* Quick Stats */}
       <div className="grid grid-cols-3 gap-3 text-sm">
         <div className="bg-cream-2 border border-ink/15 p-3">
-          <div className="text-xs text-ink/45 mb-1">חודשים שליליים</div>
+          <div className="text-xs text-ink/70 mb-1">חודשים שליליים</div>
           <div className="text-xl font-bold text-red-700">
             {kpis.negativeMonths} / {settings.monthsToShow}
           </div>
         </div>
         <div className="bg-cream-2 border border-ink/15 p-3">
-          <div className="text-xs text-ink/45 mb-1">חודשים עם תזרים +</div>
-          <div className="text-xl font-bold text-emerald-700">
+          <div className="text-xs text-ink/70 mb-1">חודשים עם תזרים +</div>
+          <div className="text-xl font-bold text-emerald-800">
             {kpis.positiveMonths} / {settings.monthsToShow}
           </div>
         </div>
         <div className="bg-cream-2 border border-ink/15 p-3">
-          <div className="text-xs text-ink/45 mb-1">יתרה ממוצעת</div>
+          <div className="text-xs text-ink/70 mb-1">יתרה ממוצעת</div>
           <div className="text-xl font-bold text-gold">{fmt(kpis.avgBalance)}</div>
         </div>
       </div>

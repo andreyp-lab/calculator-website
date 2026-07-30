@@ -48,9 +48,9 @@ export function DuPontDisplay() {
       : 'bg-cream-2 border-ink/15';
 
   const driverTextClass = dupont.primaryDriver === 'profitability'
-    ? 'text-emerald-700'
+    ? 'text-emerald-800'
     : dupont.primaryDriver === 'leverage'
-      ? 'text-amber-700'
+      ? 'text-amber-800'
       : 'text-gold';
 
   return (
@@ -72,7 +72,7 @@ export function DuPontDisplay() {
       <div
         className={`${driverBgClass} border-2 p-4 text-center`}
       >
-        <div className="text-xs text-ink/60 mb-1">המנוע העיקרי לתשואה</div>
+        <div className="text-xs text-ink/70 mb-1">המנוע העיקרי לתשואה</div>
         <div className={`text-3xl font-bold ${driverTextClass}`}>{driverLabel}</div>
         <div className="text-sm text-ink/70 mt-2">
           ROE = {(dupont.threeFactor.roe * 100).toFixed(1)}%
@@ -89,7 +89,7 @@ export function DuPontDisplay() {
             color="emerald"
             formula={dupont.threeFactor.netProfitMargin.formula}
           />
-          <span className="text-2xl text-ink/45 font-bold">×</span>
+          <span className="text-2xl text-ink/70 font-bold">×</span>
 
           <ComponentBox
             label={dupont.threeFactor.assetTurnover.label}
@@ -97,14 +97,14 @@ export function DuPontDisplay() {
             color="gold"
             formula={dupont.threeFactor.assetTurnover.formula}
           />
-          <span className="text-2xl text-ink/45 font-bold">×</span>
+          <span className="text-2xl text-ink/70 font-bold">×</span>
           <ComponentBox
             label={dupont.threeFactor.equityMultiplier.label}
             value={dupont.threeFactor.equityMultiplier.value.toFixed(2)}
             color="amber"
             formula={dupont.threeFactor.equityMultiplier.formula}
           />
-          <span className="text-2xl text-ink/45 font-bold">=</span>
+          <span className="text-2xl text-ink/70 font-bold">=</span>
           <ComponentBox
             label="ROE"
             value={`${(dupont.threeFactor.roe * 100).toFixed(2)}%`}
@@ -124,31 +124,31 @@ export function DuPontDisplay() {
             value={`${(dupont.fiveFactor.taxBurden.value * 100).toFixed(0)}%`}
             color="rose"
           />
-          <span className="text-xl text-ink/45">×</span>
+          <span className="text-xl text-ink/70">×</span>
           <ComponentBoxSm
             label="נטל ריבית"
             value={`${(dupont.fiveFactor.interestBurden.value * 100).toFixed(0)}%`}
             color="orange"
           />
-          <span className="text-xl text-ink/45">×</span>
+          <span className="text-xl text-ink/70">×</span>
           <ComponentBoxSm
             label="מרווח תפעולי"
             value={`${(dupont.fiveFactor.operatingMargin.value * 100).toFixed(2)}%`}
             color="emerald"
           />
-          <span className="text-xl text-ink/45">×</span>
+          <span className="text-xl text-ink/70">×</span>
           <ComponentBoxSm
             label="מחזור נכסים"
             value={dupont.fiveFactor.assetTurnover.value.toFixed(2)}
             color="gold"
           />
-          <span className="text-xl text-ink/45">×</span>
+          <span className="text-xl text-ink/70">×</span>
           <ComponentBoxSm
             label="מכפיל הון"
             value={dupont.fiveFactor.equityMultiplier.value.toFixed(2)}
             color="amber"
           />
-          <span className="text-xl text-ink/45">=</span>
+          <span className="text-xl text-ink/70">=</span>
           <ComponentBoxSm
             label="ROE"
             value={`${(dupont.fiveFactor.roe * 100).toFixed(2)}%`}
@@ -190,9 +190,9 @@ function ComponentBox({
   highlight?: boolean;
 }) {
   const colorMap: Record<string, { bg: string; text: string; border: string }> = {
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-300' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800', border: 'border-emerald-300' },
     gold: { bg: 'bg-cream-2', text: 'text-gold', border: 'border-ink/15' },
-    amber: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-300' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-300' },
     ink: { bg: 'bg-ink', text: 'text-cream', border: 'border-ink' },
   };
   const c = colorMap[color] ?? colorMap['gold'];
@@ -204,7 +204,7 @@ function ComponentBox({
     >
       <div className={`text-2xl font-bold ${c.text}`}>{value}</div>
       <div className="text-xs text-ink/70 mt-1 font-medium">{label}</div>
-      <div className="text-[10px] text-ink/45 mt-1">{formula}</div>
+      <div className="text-[10px] text-ink/70 mt-1">{formula}</div>
     </div>
   );
 }
@@ -221,9 +221,9 @@ function ComponentBoxSm({
   highlight?: boolean;
 }) {
   const colorMap: Record<string, { bg: string; text: string }> = {
-    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700' },
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-800' },
     gold: { bg: 'bg-cream-2', text: 'text-gold' },
-    amber: { bg: 'bg-amber-50', text: 'text-amber-700' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-800' },
     rose: { bg: 'bg-rose-50', text: 'text-rose-700' },
     orange: { bg: 'bg-orange-50', text: 'text-orange-700' },
     ink: { bg: 'bg-ink', text: 'text-cream' },
@@ -232,7 +232,7 @@ function ComponentBoxSm({
   return (
     <div className={`${c.bg} p-2 text-center ${highlight ? 'ring-2 ring-gold' : ''}`}>
       <div className={`text-base font-bold ${c.text}`}>{value}</div>
-      <div className="text-[10px] text-ink/60 mt-0.5">{label}</div>
+      <div className="text-[10px] text-ink/70 mt-0.5">{label}</div>
     </div>
   );
 }

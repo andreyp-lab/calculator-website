@@ -85,7 +85,7 @@ export function EmployeeManager() {
         <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-gold" />
           <h3 className="font-bold text-lg text-ink">עובדים</h3>
-          <span className="text-sm text-ink/60">({budget.employees.length} עובדים)</span>
+          <span className="text-sm text-ink/70">({budget.employees.length} עובדים)</span>
         </div>
         <button
           onClick={() => (showForm && !editingId ? reset() : (reset(), setShowForm(true)))}
@@ -113,8 +113,8 @@ export function EmployeeManager() {
         <div className="bg-cream-2 border border-ink/15 p-4 mb-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-ink/70 mb-1">שם עובד *</label>
-              <input
+              <label htmlFor="employeemanager-3ff869" className="block text-xs text-ink/70 mb-1">שם עובד *</label>
+              <input id="employeemanager-3ff869"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -123,8 +123,8 @@ export function EmployeeManager() {
               />
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">תפקיד</label>
-              <input
+              <label htmlFor="employeemanager-5ed603" className="block text-xs text-ink/70 mb-1">תפקיד</label>
+              <input id="employeemanager-5ed603"
                 type="text"
                 value={form.position}
                 onChange={(e) => setForm({ ...form, position: e.target.value })}
@@ -145,13 +145,13 @@ export function EmployeeManager() {
                   </option>
                 ))}
               </select>
-              <p className="text-[10px] text-ink/45 mt-0.5">
+              <p className="text-[10px] text-ink/70 mt-0.5">
                 → הוצאה ל-{DEPT_TO_CATEGORY[form.department]}
               </p>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">שכר ברוטו חודשי (₪) *</label>
-              <input
+              <label htmlFor="employeemanager-bbe7c0" className="block text-xs text-ink/70 mb-1">שכר ברוטו חודשי (₪) *</label>
+              <input id="employeemanager-bbe7c0"
                 type="number"
                 value={form.monthlySalary || ''}
                 onChange={(e) =>
@@ -215,7 +215,7 @@ export function EmployeeManager() {
       )}
 
       {budget.employees.length === 0 ? (
-        <div className="text-center py-6 text-ink/60 text-sm">
+        <div className="text-center py-6 text-ink/70 text-sm">
           <Users className="w-12 h-12 mx-auto mb-2 opacity-30" />
           <p>אין עובדים. הוסף עובד כדי לראות את עלות השכר ב-P&L.</p>
         </div>
@@ -230,7 +230,7 @@ export function EmployeeManager() {
                   >
                     {DEPARTMENT_LABELS[g.dept]}
                   </span>
-                  <span className="text-ink/60 text-xs">({g.employees.length} עובדים)</span>
+                  <span className="text-ink/70 text-xs">({g.employees.length} עובדים)</span>
                 </div>
                 <span className="font-semibold text-ink/70">{fmt(g.total)}/חודש</span>
               </div>
@@ -242,7 +242,7 @@ export function EmployeeManager() {
                   >
                     <div className="flex-1">
                       <div className="font-medium text-ink">{emp.name}</div>
-                      <div className="text-xs text-ink/60">
+                      <div className="text-xs text-ink/70">
                         {emp.position && <span>{emp.position} • </span>}
                         {HEBREW_MONTHS[emp.startMonth]}–
                         {emp.endMonth !== null ? HEBREW_MONTHS[emp.endMonth] : 'ממשיך'}
@@ -270,7 +270,7 @@ export function EmployeeManager() {
                     </button>
                     <button
                       onClick={() => deleteEmployee(emp.id)}
-                      className="p-1 text-red-600 hover:bg-red-50"
+                      className="p-1 text-red-700 hover:bg-red-50"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

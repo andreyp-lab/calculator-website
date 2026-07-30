@@ -76,14 +76,14 @@ export function AllowedExpensesCalculator() {
               עוסק מורשה
             </button>
           </div>
-          <p className="text-xs text-ink/60 mt-1">רק עוסק מורשה מקזז מע"מ תשומות.</p>
+          <p className="text-xs text-ink/70 mt-1">רק עוסק מורשה מקזז מע"מ תשומות.</p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="allowedexpensescalculator-5d16c6" className="block text-sm font-medium text-ink/70 mb-2">
             הכנסה שנתית חייבת (₪)
           </label>
-          <input
+          <input id="allowedexpensescalculator-5d16c6"
             type="number"
             min={0}
             step={5_000}
@@ -91,7 +91,7 @@ export function AllowedExpensesCalculator() {
             onChange={(e) => update('annualIncome', Number(e.target.value))}
             className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg"
           />
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             קובעת את המדרגה השולית להערכת חיסכון המס.
           </p>
         </div>
@@ -103,7 +103,7 @@ export function AllowedExpensesCalculator() {
             const rule = EXPENSE_RULES[key];
             return (
               <div key={key}>
-                <label className="block text-xs font-medium text-ink/60 mb-1">
+                <label className="block text-xs font-medium text-ink/70 mb-1">
                   {rule.label}
                 </label>
                 <input
@@ -117,7 +117,7 @@ export function AllowedExpensesCalculator() {
 
                 {key === 'cellular' && (input.expenses.cellular ?? 0) > 0 && (
                   <div className="mt-1.5">
-                    <label className="block text-xs text-ink/60 mb-1">
+                    <label className="block text-xs text-ink/70 mb-1">
                       יחס שימוש עסקי: {formatPercent(input.cellularBusinessRatio ?? 0.5, 0)}
                     </label>
                     <input
@@ -134,7 +134,7 @@ export function AllowedExpensesCalculator() {
 
                 {key === 'homeOffice' && (input.expenses.homeOffice ?? 0) > 0 && (
                   <div className="mt-1.5">
-                    <label className="block text-xs text-ink/60 mb-1">
+                    <label className="block text-xs text-ink/70 mb-1">
                       יחס שטח חדר העבודה: {formatPercent(input.homeOfficeAreaRatio ?? 0, 0)}
                     </label>
                     <input
@@ -179,12 +179,12 @@ export function AllowedExpensesCalculator() {
         <div className="bg-paper border border-ink/15 rounded-none p-5">
           <h3 className="font-bold text-ink mb-3">פירוט לפי קטגוריה</h3>
           {result.categories.length === 0 ? (
-            <p className="text-sm text-ink/60">הזן סכומי הוצאה כדי לראות פירוט.</p>
+            <p className="text-sm text-ink/70">הזן סכומי הוצאה כדי לראות פירוט.</p>
           ) : (
             <div className="overflow-x-auto -mx-1">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-right text-ink/60 border-b border-ink/15">
+                  <tr className="text-right text-ink/70 border-b border-ink/15">
                     <th className="py-2 px-1 font-medium">קטגוריה</th>
                     <th className="py-2 px-1 font-medium">הוצאה</th>
                     <th className="py-2 px-1 font-medium">% הכרה</th>
@@ -196,7 +196,7 @@ export function AllowedExpensesCalculator() {
                   {result.categories.map((c) => (
                     <tr key={c.key} className="border-b border-ink/10">
                       <td className="py-2 px-1 text-ink">{c.label}</td>
-                      <td className="py-2 px-1 tabular-nums text-ink/60">
+                      <td className="py-2 px-1 tabular-nums text-ink/70">
                         {formatCurrency(c.grossExpense)}
                       </td>
                       <td className="py-2 px-1 tabular-nums">
@@ -205,7 +205,7 @@ export function AllowedExpensesCalculator() {
                       <td className="py-2 px-1 tabular-nums font-medium text-ink">
                         {formatCurrency(c.recognizedForIncomeTax)}
                       </td>
-                      <td className="py-2 px-1 tabular-nums text-emerald-700">
+                      <td className="py-2 px-1 tabular-nums text-emerald-800">
                         {c.vatRecoverable > 0 ? formatCurrency(c.vatRecoverable) : '—'}
                       </td>
                     </tr>
@@ -219,7 +219,7 @@ export function AllowedExpensesCalculator() {
                     <td className="py-2 px-1 tabular-nums">
                       {formatCurrency(result.totalRecognizedForIncomeTax)}
                     </td>
-                    <td className="py-2 px-1 tabular-nums text-emerald-700">
+                    <td className="py-2 px-1 tabular-nums text-emerald-800">
                       {formatCurrency(result.totalVatRecoverable)}
                     </td>
                   </tr>

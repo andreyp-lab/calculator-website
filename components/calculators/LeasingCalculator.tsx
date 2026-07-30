@@ -44,8 +44,8 @@ export function LeasingCalculator() {
           <h3 className="font-bold text-ink mb-4">📋 פרטים כלליים</h3>
           <div className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">מחיר הרכב</label>
-              <input
+              <label htmlFor="leasingcalculator-60b203" className="block text-xs font-medium text-ink/70 mb-1">מחיר הרכב</label>
+              <input id="leasingcalculator-60b203"
                 type="number"
                 value={input.carPrice}
                 onChange={(e) => update('carPrice', Number(e.target.value))}
@@ -53,8 +53,8 @@ export function LeasingCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">שנות שימוש</label>
-              <input
+              <label htmlFor="leasingcalculator-64c4b2" className="block text-xs font-medium text-ink/70 mb-1">שנות שימוש</label>
+              <input id="leasingcalculator-64c4b2"
                 type="number"
                 min={1}
                 max={10}
@@ -64,8 +64,8 @@ export function LeasingCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">דלק חודשי (ש"ח)</label>
-              <input
+              <label htmlFor="leasingcalculator-226c6e" className="block text-xs font-medium text-ink/70 mb-1">דלק חודשי (ש"ח)</label>
+              <input id="leasingcalculator-226c6e"
                 type="number"
                 value={input.fuelMonthlyCost}
                 onChange={(e) => update('fuelMonthlyCost', Number(e.target.value))}
@@ -73,8 +73,8 @@ export function LeasingCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">ביטוח שנתי</label>
-              <input
+              <label htmlFor="leasingcalculator-16de67" className="block text-xs font-medium text-ink/70 mb-1">ביטוח שנתי</label>
+              <input id="leasingcalculator-16de67"
                 type="number"
                 value={input.insuranceYearly}
                 onChange={(e) => update('insuranceYearly', Number(e.target.value))}
@@ -89,8 +89,8 @@ export function LeasingCalculator() {
           <h3 className="font-bold text-ink mb-4">🚙 ליסינג</h3>
           <div className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">תשלום חודשי</label>
-              <input
+              <label htmlFor="leasingcalculator-acea55" className="block text-xs font-medium text-ink/70 mb-1">תשלום חודשי</label>
+              <input id="leasingcalculator-acea55"
                 type="number"
                 value={input.leasingMonthlyPayment}
                 onChange={(e) => update('leasingMonthlyPayment', Number(e.target.value))}
@@ -98,8 +98,8 @@ export function LeasingCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">מקדמה</label>
-              <input
+              <label htmlFor="leasingcalculator-e8934f" className="block text-xs font-medium text-ink/70 mb-1">מקדמה</label>
+              <input id="leasingcalculator-e8934f"
                 type="number"
                 value={input.leasingDownPayment}
                 onChange={(e) => update('leasingDownPayment', Number(e.target.value))}
@@ -107,10 +107,10 @@ export function LeasingCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">
+              <label htmlFor="leasingcalculator-6aec70" className="block text-xs font-medium text-ink/70 mb-1">
                 תשלום סופי (אם תקנה את הרכב)
               </label>
-              <input
+              <input id="leasingcalculator-6aec70"
                 type="number"
                 value={input.leasingFinalPayment}
                 onChange={(e) => update('leasingFinalPayment', Number(e.target.value))}
@@ -128,8 +128,8 @@ export function LeasingCalculator() {
           <h3 className="font-bold text-ink mb-4">💰 קנייה</h3>
           <div className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">מקדמה</label>
-              <input
+              <label htmlFor="leasingcalculator-10dafb" className="block text-xs font-medium text-ink/70 mb-1">מקדמה</label>
+              <input id="leasingcalculator-10dafb"
                 type="number"
                 value={input.buyingDownPayment}
                 onChange={(e) => update('buyingDownPayment', Number(e.target.value))}
@@ -137,8 +137,8 @@ export function LeasingCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">סכום הלוואה</label>
-              <input
+              <label htmlFor="leasingcalculator-41fc4b" className="block text-xs font-medium text-ink/70 mb-1">סכום הלוואה</label>
+              <input id="leasingcalculator-41fc4b"
                 type="number"
                 value={input.loanAmount}
                 onChange={(e) => update('loanAmount', Number(e.target.value))}
@@ -147,8 +147,8 @@ export function LeasingCalculator() {
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-xs font-medium text-ink/70 mb-1">תקופה (ח')</label>
-                <input
+                <label htmlFor="leasingcalculator-c0d984" className="block text-xs font-medium text-ink/70 mb-1">תקופה (ח')</label>
+                <input id="leasingcalculator-c0d984"
                   type="number"
                   value={input.loanTermMonths}
                   onChange={(e) => update('loanTermMonths', Number(e.target.value))}
@@ -156,8 +156,8 @@ export function LeasingCalculator() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-ink/70 mb-1">ריבית %</label>
-                <input
+                <label htmlFor="leasingcalculator-fb472e" className="block text-xs font-medium text-ink/70 mb-1">ריבית %</label>
+                <input id="leasingcalculator-fb472e"
                   type="number"
                   step={0.1}
                   value={input.loanRate}
@@ -167,10 +167,10 @@ export function LeasingCalculator() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">
+              <label htmlFor="leasingcalculator-2e18e1" className="block text-xs font-medium text-ink/70 mb-1">
                 תחזוקה שנתית (ש"ח)
               </label>
-              <input
+              <input id="leasingcalculator-2e18e1"
                 type="number"
                 value={input.maintenanceYearly}
                 onChange={(e) => update('maintenanceYearly', Number(e.target.value))}
@@ -178,15 +178,15 @@ export function LeasingCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">ירידת ערך שנתית %</label>
-              <input
+              <label htmlFor="leasingcalculator-775ffb" className="block text-xs font-medium text-ink/70 mb-1">ירידת ערך שנתית %</label>
+              <input id="leasingcalculator-775ffb"
                 type="number"
                 step={1}
                 value={input.carDepreciationRate}
                 onChange={(e) => update('carDepreciationRate', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
               />
-              <p className="text-xs text-ink/60 mt-1">ממוצע: 15-20% בשנה</p>
+              <p className="text-xs text-ink/70 mt-1">ממוצע: 15-20% בשנה</p>
             </div>
           </div>
         </div>
@@ -209,7 +209,7 @@ export function LeasingCalculator() {
                 ? 'text-ink'
                 : result.recommendation === 'buying'
                   ? 'text-green-600'
-                  : 'text-amber-600'
+                  : 'text-amber-800'
             }`}
           />
           <div>

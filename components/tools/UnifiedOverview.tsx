@@ -381,9 +381,9 @@ export function UnifiedOverview({ onNavigate }: Props) {
               />
             </>
           ) : (
-            <div className="text-sm text-ink/60 py-2">
+            <div className="text-sm text-ink/70 py-2">
               <p className="mb-2">מלא נתוני מאזן כדי לראות ניתוח מלא:</p>
-              <ul className="text-xs space-y-1 text-ink/50">
+              <ul className="text-xs space-y-1 text-ink/70">
                 <li>• דירוג אשראי AAA-D</li>
                 <li>• ציון בריאות 0-100</li>
                 <li>• Altman Z-Score</li>
@@ -466,9 +466,9 @@ function WorkflowStep({
       </div>
       <div className="flex-1">
         <div className="font-medium text-ink">{label}</div>
-        <div className="text-xs text-ink/60">{sublabel}</div>
+        <div className="text-xs text-ink/70">{sublabel}</div>
       </div>
-      <ArrowLeft className="w-4 h-4 text-ink/40 shrink-0" />
+      <ArrowLeft className="w-4 h-4 text-ink/70 shrink-0" />
     </button>
   );
 }
@@ -524,10 +524,10 @@ function PillarRow({
   color?: string;
 }) {
   const colorMap: Record<string, string> = {
-    emerald: 'text-emerald-700',
+    emerald: 'text-emerald-800',
     red: 'text-red-700',
     blue: 'text-ink',
-    amber: 'text-amber-700',
+    amber: 'text-amber-800',
   };
   const valueClass = color ? colorMap[color] : 'text-ink';
   return (
@@ -536,7 +536,7 @@ function PillarRow({
         highlight ? 'border-t pt-2 mt-2 font-semibold' : ''
       }`}
     >
-      <span className="text-sm text-ink/60">{label}:</span>
+      <span className="text-sm text-ink/70">{label}:</span>
       <span className={`text-sm ${highlight ? 'font-bold' : 'font-medium'} ${valueClass}`}>
         {value}
       </span>

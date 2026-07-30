@@ -173,8 +173,8 @@ export function FireCalculator() {
               {/* שורה 1 */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">גיל נוכחי</label>
-                  <input
+                  <label htmlFor="firecalculator-20069a" className="block text-sm font-medium text-ink/70 mb-1">גיל נוכחי</label>
+                  <input id="firecalculator-20069a"
                     type="number"
                     min={18}
                     max={70}
@@ -184,10 +184,10 @@ export function FireCalculator() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">
+                  <label htmlFor="firecalculator-31d8e6" className="block text-sm font-medium text-ink/70 mb-1">
                     גיל פרישה יעד
                   </label>
-                  <input
+                  <input id="firecalculator-31d8e6"
                     type="number"
                     min={30}
                     max={80}
@@ -201,10 +201,10 @@ export function FireCalculator() {
               {/* חיסכון והפקדה */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">
+                  <label htmlFor="firecalculator-038ba6" className="block text-sm font-medium text-ink/70 mb-1">
                     חיסכון / תיק נוכחי (₪)
                   </label>
-                  <input
+                  <input id="firecalculator-038ba6"
                     type="number"
                     min={0}
                     step={10_000}
@@ -212,13 +212,13 @@ export function FireCalculator() {
                     onChange={(e) => update('currentSavings', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
-                  <p className="text-xs text-ink/60 mt-1">כולל פנסיה, קרנות, כסף חופשי</p>
+                  <p className="text-xs text-ink/70 mt-1">כולל פנסיה, קרנות, כסף חופשי</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">
+                  <label htmlFor="firecalculator-09c336" className="block text-sm font-medium text-ink/70 mb-1">
                     הפקדה חודשית (₪)
                   </label>
-                  <input
+                  <input id="firecalculator-09c336"
                     type="number"
                     min={0}
                     step={500}
@@ -226,17 +226,17 @@ export function FireCalculator() {
                     onChange={(e) => update('monthlyContribution', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
-                  <p className="text-xs text-ink/60 mt-1">נטו לאחר מחיה (חיסכון + השקעה)</p>
+                  <p className="text-xs text-ink/70 mt-1">נטו לאחר מחיה (חיסכון + השקעה)</p>
                 </div>
               </div>
 
               {/* הכנסה והוצאות */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">
+                  <label htmlFor="firecalculator-53b13c" className="block text-sm font-medium text-ink/70 mb-1">
                     הכנסה חודשית ברוטו (₪)
                   </label>
-                  <input
+                  <input id="firecalculator-53b13c"
                     type="number"
                     min={0}
                     step={1_000}
@@ -244,13 +244,13 @@ export function FireCalculator() {
                     onChange={(e) => update('monthlyGrossIncome', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
-                  <p className="text-xs text-ink/60 mt-1">לחישוב שיעור חיסכון</p>
+                  <p className="text-xs text-ink/70 mt-1">לחישוב שיעור חיסכון</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">
+                  <label htmlFor="firecalculator-246797" className="block text-sm font-medium text-ink/70 mb-1">
                     הוצאות בפרישה (₪/חודש)
                   </label>
-                  <input
+                  <input id="firecalculator-246797"
                     type="number"
                     min={0}
                     step={1_000}
@@ -258,7 +258,7 @@ export function FireCalculator() {
                     onChange={(e) => update('monthlyExpensesRetirement', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
-                  <p className="text-xs text-ink/60 mt-1">
+                  <p className="text-xs text-ink/70 mt-1">
                     Lean: 10K | Regular: 20K | Fat: 40K+
                   </p>
                 </div>
@@ -267,10 +267,10 @@ export function FireCalculator() {
               {/* תשואה ואינפלציה */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">
+                  <label htmlFor="firecalculator-e498e5" className="block text-sm font-medium text-ink/70 mb-1">
                     תשואה נומינלית שנתית (%)
                   </label>
-                  <input
+                  <input id="firecalculator-e498e5"
                     type="number"
                     min={0}
                     max={20}
@@ -279,15 +279,15 @@ export function FireCalculator() {
                     onChange={(e) => update('expectedNominalReturn', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
-                  <p className="text-xs text-ink/60 mt-1">
+                  <p className="text-xs text-ink/70 mt-1">
                     S&P 500: 10% | תיק מגוון: 7-8%
                   </p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-ink/70 mb-1">
+                  <label htmlFor="firecalculator-90abe6" className="block text-sm font-medium text-ink/70 mb-1">
                     אינפלציה שנתית (%)
                   </label>
-                  <input
+                  <input id="firecalculator-90abe6"
                     type="number"
                     min={0}
                     max={10}
@@ -296,7 +296,7 @@ export function FireCalculator() {
                     onChange={(e) => update('inflationRate', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
-                  <p className="text-xs text-ink/60 mt-1">ישראל ממוצע: 3%</p>
+                  <p className="text-xs text-ink/70 mt-1">ישראל ממוצע: 3%</p>
                 </div>
               </div>
 
@@ -354,10 +354,10 @@ export function FireCalculator() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-ink/70 mb-1">
+                        <label htmlFor="firecalculator-0db70e" className="block text-sm font-medium text-ink/70 mb-1">
                           הכנסה מנדל"ן (₪/חודש)
                         </label>
-                        <input
+                        <input id="firecalculator-0db70e"
                           type="number"
                           min={0}
                           step={500}
@@ -365,15 +365,15 @@ export function FireCalculator() {
                           onChange={(e) => update('realEstateIncome', Number(e.target.value))}
                           className="w-full px-3 py-2 border border-ink/15 rounded-none"
                         />
-                        <p className="text-xs text-ink/60 mt-1">
+                        <p className="text-xs text-ink/70 mt-1">
                           שכ&quot;ד נטו מנכס השקעה (מפחית FIRE Number)
                         </p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-ink/70 mb-1">
+                        <label htmlFor="firecalculator-3e3cc4" className="block text-sm font-medium text-ink/70 mb-1">
                           Barista: עבודה חלקית (₪/חודש)
                         </label>
-                        <input
+                        <input id="firecalculator-3e3cc4"
                           type="number"
                           min={0}
                           step={500}
@@ -381,17 +381,17 @@ export function FireCalculator() {
                           onChange={(e) => update('baristaWorkIncome', Number(e.target.value))}
                           className="w-full px-3 py-2 border border-ink/15 rounded-none"
                         />
-                        <p className="text-xs text-ink/60 mt-1">
+                        <p className="text-xs text-ink/70 mt-1">
                           עבודה חלקית / קונסולטינג בפרישה
                         </p>
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-ink/70 mb-1">
+                      <label htmlFor="firecalculator-f05d56" className="block text-sm font-medium text-ink/70 mb-1">
                         שנות פרישה מתוכננות
                       </label>
-                      <input
+                      <input id="firecalculator-f05d56"
                         type="number"
                         min={10}
                         max={60}
@@ -399,7 +399,7 @@ export function FireCalculator() {
                         onChange={(e) => update('retirementDurationYears', Number(e.target.value))}
                         className="w-full px-3 py-2 border border-ink/15 rounded-none"
                       />
-                      <p className="text-xs text-ink/60 mt-1">
+                      <p className="text-xs text-ink/70 mt-1">
                         כמה שנים התיק צריך להחזיק (10 + תוחלת חיים)
                       </p>
                     </div>
@@ -434,7 +434,7 @@ export function FireCalculator() {
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
-              <div className="flex justify-between text-xs text-ink/60 mt-1">
+              <div className="flex justify-between text-xs text-ink/70 mt-1">
                 <span>{formatCurrency(input.currentSavings)}</span>
                 <span>יעד: {formatCurrency(result.fireNumber)}</span>
               </div>
@@ -505,7 +505,7 @@ export function FireCalculator() {
               </p>
               <div className="flex justify-between">
                 <span className="text-ink/70">Coast Number:</span>
-                <span className="font-bold text-amber-700">
+                <span className="font-bold text-amber-800">
                   {formatCurrency(result.coastFire.coastNumber)}
                 </span>
               </div>
@@ -514,7 +514,7 @@ export function FireCalculator() {
               ) : (
                 <div className="flex justify-between mt-1">
                   <span className="text-ink/70">חסר:</span>
-                  <span className="font-medium text-amber-700">
+                  <span className="font-medium text-amber-800">
                     {formatCurrency(result.coastFire.coastShortfall)}
                   </span>
                 </div>
@@ -612,7 +612,7 @@ export function FireCalculator() {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs text-ink/60">FIRE Number</p>
+                    <p className="text-xs text-ink/70">FIRE Number</p>
                     <p className="text-xl font-bold" style={{ color: FIRE_TYPE_COLORS[ft.type] }}>
                       {formatCurrency(ft.fireNumber)}
                     </p>
@@ -620,17 +620,17 @@ export function FireCalculator() {
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-sm border-t border-ink/10 pt-3 mt-2">
                   <div>
-                    <p className="text-xs text-ink/60">הוצאות/חודש</p>
+                    <p className="text-xs text-ink/70">הוצאות/חודש</p>
                     <p className="font-semibold">{formatCurrency(ft.monthlyExpenses)}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-ink/60">שנים ל-FIRE</p>
+                    <p className="text-xs text-ink/70">שנים ל-FIRE</p>
                     <p className="font-semibold">
                       {ft.yearsToFire < 100 ? `${ft.yearsToFire} שנים` : 'לא מגיע'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-ink/60">גיל פרישה</p>
+                    <p className="text-xs text-ink/70">גיל פרישה</p>
                     <p className="font-semibold">{ft.yearsToFire < 100 ? ft.retirementAge : '-'}</p>
                   </div>
                 </div>
@@ -707,7 +707,7 @@ export function FireCalculator() {
                 <p className="text-2xl font-bold text-ink mb-1">
                   {formatCurrency(scenario.fireNumber)}
                 </p>
-                <p className="text-xs text-ink/60 mb-3">
+                <p className="text-xs text-ink/70 mb-3">
                   מכפיל: {scenario.multiplier.toFixed(1)}× הוצאות שנתיות
                 </p>
                 <div className="text-xs text-ink/70 bg-cream-2 rounded-none p-2">
@@ -727,7 +727,7 @@ export function FireCalculator() {
                   ניתוח של 30 שנות נתוני שוק (1926-1995) הראה שמשיכה של 4% מהתיק בשנה הראשונה
                   ותיאום לאינפלציה בשנים הבאות - שרדה 96% מהמקרים ל-30 שנה.
                 </p>
-                <p className="text-xs text-ink/60">
+                <p className="text-xs text-ink/70">
                   מניות 75% + אג&quot;ח 25% | Cooley, Hubbard, Walz 1998
                 </p>
               </div>
@@ -752,7 +752,7 @@ export function FireCalculator() {
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="space-y-3">
                 <div className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold mt-0.5">⚠</span>
+                  <span className="text-amber-800 font-bold mt-0.5">⚠</span>
                   <div>
                     <p className="font-semibold text-amber-900">מס רווחי הון 25%</p>
                     <p className="text-ink/70">
@@ -806,7 +806,7 @@ export function FireCalculator() {
             <h3 className="text-base font-semibold text-ink mb-1">
               שלב המשיכה - שווי תיק לאורך הפרישה
             </h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               החל מגיל {result.fireAge} | {input.retirementDurationYears} שנות פרישה | SWR{' '}
               {result.swr}%
             </p>
@@ -925,7 +925,7 @@ export function FireCalculator() {
                     <span className={`w-2 h-10 rounded-full ${row.badge}`} />
                     <div>
                       <p className="font-semibold text-ink text-sm">{row.label}</p>
-                      <p className="text-xs text-ink/60">גיל פרישה: {row.age}</p>
+                      <p className="text-xs text-ink/70">גיל פרישה: {row.age}</p>
                     </div>
                   </div>
                   <div className="text-right">

@@ -125,13 +125,13 @@ function NumericInput({ id, label, value, onChange, min, max, step, unit, note, 
           }`}
         />
         {unit && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/60 pointer-events-none">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/70 pointer-events-none">
             {unit}
           </span>
         )}
       </div>
-      {note && !error && <p className="text-xs text-ink/60 mt-1">{note}</p>}
-      {error && <p className="text-xs text-red-600 mt-1 font-medium">{error}</p>}
+      {note && !error && <p className="text-xs text-ink/70 mt-1">{note}</p>}
+      {error && <p className="text-xs text-red-700 mt-1 font-medium">{error}</p>}
     </div>
   );
 }
@@ -373,7 +373,7 @@ function SingleTrackTab() {
                   <option value="home-replacement">מחליף דירה (LTV 70%)</option>
                   <option value="investor">משקיע (LTV 50%)</option>
                 </select>
-                <p className="text-xs text-ink/60 mt-1">מקסימום: {formatCurrency(maxLoan)}</p>
+                <p className="text-xs text-ink/70 mt-1">מקסימום: {formatCurrency(maxLoan)}</p>
               </div>
             </div>
 
@@ -411,7 +411,7 @@ function SingleTrackTab() {
             <div>
               <label className="block text-sm font-medium text-ink/70 mb-2">שיטת חישוב</label>
               <MethodToggle value={state.method} onChange={(v) => update('method', v)} />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 {state.method === 'shpitzer'
                   ? 'שפיצר: תשלום חודשי קבוע. נוח לתכנון, אבל משלמים יותר ריבית בהתחלה.'
                   : 'קרן שווה: קרן קבועה + ריבית יורדת. תשלום ראשון גבוה, אבל חוסך ריבית כוללת.'}
@@ -601,10 +601,10 @@ function MultiTrackTab() {
               <div className="font-medium text-ink text-sm group-hover:text-gold">
                 {preset.name}
               </div>
-              <div className="text-xs text-ink/60 mt-0.5">{preset.suitable}</div>
+              <div className="text-xs text-ink/70 mt-0.5">{preset.suitable}</div>
               <div className={`text-xs mt-1 font-medium ${
                 preset.riskLevel === 'low' ? 'text-green-600' :
-                preset.riskLevel === 'medium' ? 'text-amber-600' : 'text-red-600'
+                preset.riskLevel === 'medium' ? 'text-amber-800' : 'text-red-700'
               }`}>
                 סיכון: {preset.riskLevel === 'low' ? 'נמוך' : preset.riskLevel === 'medium' ? 'בינוני' : 'גבוה'}
               </div>
@@ -616,7 +616,7 @@ function MultiTrackTab() {
       {/* Regulation Warning */}
       {!result.isRegulationCompliant && totalAmount > 0 && (
         <div className="bg-red-50 border border-red-300 rounded-none p-4 flex items-start gap-3">
-          <span className="text-red-600 text-lg mt-0.5">⚠</span>
+          <span className="text-red-700 text-lg mt-0.5">⚠</span>
           <div>
             <p className="font-bold text-red-800">לא עומד בדרישות בנק ישראל</p>
             <p className="text-sm text-red-700 mt-0.5">
@@ -629,14 +629,14 @@ function MultiTrackTab() {
       {/* Inflation Warning */}
       {hasLinkedTrack && showInflationWarning && (
         <div className="bg-amber-50 border border-amber-300 rounded-none p-4 flex items-start gap-3">
-          <span className="text-amber-600 text-lg mt-0.5">📈</span>
+          <span className="text-amber-800 text-lg mt-0.5">📈</span>
           <div className="flex-1">
             <p className="font-bold text-amber-800">שים לב: מסלול צמוד מדד!</p>
-            <p className="text-sm text-amber-700 mt-0.5">
+            <p className="text-sm text-amber-800 mt-0.5">
               בהצמדה למדד הקרן גדלה עם האינפלציה. לאחר 25 שנה עם אינפלציה של 2.5%, קרן של 500,000 ₪ הופכת לכ-873,000 ₪ נומינלית — עלייה של 75%!
             </p>
           </div>
-          <button onClick={() => setShowInflationWarning(false)} className="text-amber-600 hover:text-amber-800 text-sm">✕</button>
+          <button onClick={() => setShowInflationWarning(false)} className="text-amber-800 hover:text-amber-800 text-sm">✕</button>
         </div>
       )}
 
@@ -688,7 +688,7 @@ function MultiTrackTab() {
                 <div key={tr.track.id} className="flex items-center gap-2 text-sm">
                   <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: PIE_COLORS[i % PIE_COLORS.length] }} />
                   <span className="flex-1 text-ink/70">{tr.track.name}</span>
-                  <span className="text-ink/60">{formatCurrency(tr.track.amount)}</span>
+                  <span className="text-ink/70">{formatCurrency(tr.track.amount)}</span>
                   <span className="font-medium text-ink">{formatCurrency(tr.monthlyPayment)}/חודש</span>
                 </div>
               ))}
@@ -1027,7 +1027,7 @@ function EarlyPayoffTab() {
 
             <hr className="border-ink/15" />
             <h3 className="font-bold text-ink">תוספת תשלום</h3>
-            <p className="text-sm text-ink/60">בחר אחת מהאפשרויות:</p>
+            <p className="text-sm text-ink/70">בחר אחת מהאפשרויות:</p>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <NumericInput
@@ -1102,7 +1102,7 @@ function EarlyPayoffTab() {
 
           <div className="bg-amber-50 border border-amber-200 rounded-none p-4">
             <p className="text-sm font-bold text-amber-800 mb-1">טיפ: עמלת פירעון מוקדם</p>
-            <p className="text-xs text-amber-700">
+            <p className="text-xs text-amber-800">
               בנקים גובים עמלה על מסלולים בריבית קבועה בלבד. במסלול פריים — אין עמלה. החישוב מוצג כהערכה של ~1%; הסכום המדויק תלוי בהפרש הריביות ביום הפירעון.
             </p>
           </div>
@@ -1137,8 +1137,8 @@ function AffordabilityTab() {
     result.debtToIncomeRatio > 40
       ? 'text-red-700'
       : result.debtToIncomeRatio > 30
-      ? 'text-amber-700'
-      : 'text-emerald-700';
+      ? 'text-amber-800'
+      : 'text-emerald-800';
 
   const barData = [
     { name: 'הכנסה נטו', value: input.monthlyNetIncome, color: '#102219' },
@@ -1311,7 +1311,7 @@ export function MortgageCalculator() {
               }`}
             >
               <div className="font-medium text-sm whitespace-nowrap">{tab.label}</div>
-              <div className="text-xs text-ink/60 mt-0.5 whitespace-nowrap">{tab.description}</div>
+              <div className="text-xs text-ink/70 mt-0.5 whitespace-nowrap">{tab.description}</div>
             </button>
           ))}
         </div>

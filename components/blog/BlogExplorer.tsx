@@ -106,7 +106,7 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
                   <span className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
                     ✦ {post.category}
                   </span>
-                  <span className="text-xs text-ink/50">{post.readTime}</span>
+                  <span className="text-xs text-ink/70">{post.readTime}</span>
                 </div>
                 <h3 className="text-xl text-ink mb-2 leading-snug group-hover:text-ink-mid transition">
                   {post.title}
@@ -127,7 +127,7 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
         <h2 className="text-2xl text-ink mb-6 flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-gold flex-shrink-0" />
           {selected ? `מאמרים בנושא ${selected}` : 'כל המאמרים'}
-          <span className="text-base font-normal text-ink/40 mr-1">({visible.length})</span>
+          <span className="text-base font-normal text-ink/70 mr-1">({visible.length})</span>
         </h2>
         <div className="grid md:grid-cols-2 gap-4">
           {visible.map((post) => (
@@ -140,15 +140,15 @@ export function BlogExplorer({ posts, categories, totalCount }: BlogExplorerProp
                 <span className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
                   {post.category}
                 </span>
-                <span className="text-xs text-ink/45">{post.readTime}</span>
-                <time className="text-xs text-ink/45" dateTime={post.date}>
+                <span className="text-xs text-ink/70">{post.readTime}</span>
+                <time className="text-xs text-ink/70" dateTime={post.date}>
                   {new Date(post.date).toLocaleDateString('he-IL')}
                 </time>
               </div>
               <h3 className="text-lg text-ink mb-1.5 leading-snug group-hover:text-ink-mid transition">
                 {post.title}
               </h3>
-              <p className="text-ink/60 text-sm leading-relaxed line-clamp-2">
+              <p className="text-ink/70 text-sm leading-relaxed line-clamp-2">
                 {post.description}
               </p>
               <div className="mt-3 flex items-center gap-1 text-gold text-xs font-medium">

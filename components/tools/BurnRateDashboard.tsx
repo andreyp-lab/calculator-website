@@ -104,9 +104,9 @@ export function BurnRateDashboard() {
   const { monthly, metrics } = data;
 
   const statusColors = {
-    profitable: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700', icon: CheckCircle2 },
+    profitable: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-800', icon: CheckCircle2 },
     healthy: { bg: 'bg-cream-2', border: 'border-ink/20', text: 'text-ink', icon: CheckCircle2 },
-    caution: { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-700', icon: AlertTriangle },
+    caution: { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-800', icon: AlertTriangle },
     critical: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', icon: AlertTriangle },
   };
   const sc = statusColors[metrics.status];
@@ -149,7 +149,7 @@ export function BurnRateDashboard() {
         <div className="text-sm text-ink/70 mb-3">Cash Runway</div>
         <div className={`text-base ${sc.text} font-medium`}>{metrics.recommendation}</div>
         {metrics.projectedZeroDate && (
-          <div className="mt-3 text-xs text-ink/60 flex items-center justify-center gap-1">
+          <div className="mt-3 text-xs text-ink/70 flex items-center justify-center gap-1">
             <Calendar className="w-3.5 h-3.5" />
             תאריך אזילה צפוי: {metrics.projectedZeroDate}
           </div>
@@ -233,7 +233,7 @@ function KpiCard({
     neutral: { bg: 'bg-cream-2 border-ink/15', text: 'text-ink', iconBg: 'bg-paper' },
     red: { bg: 'bg-red-50 border-red-200', text: 'text-red-700', iconBg: 'bg-red-100' },
     orange: { bg: 'bg-orange-50 border-orange-200', text: 'text-orange-700', iconBg: 'bg-orange-100' },
-    amber: { bg: 'bg-amber-50 border-amber-200', text: 'text-amber-700', iconBg: 'bg-amber-100' },
+    amber: { bg: 'bg-amber-50 border-amber-200', text: 'text-amber-800', iconBg: 'bg-amber-100' },
   };
   const c = colors[color];
   return (
@@ -242,7 +242,7 @@ function KpiCard({
         <Icon className={`w-4 h-4 ${c.text}`} />
       </div>
       <div>
-        <div className="text-[10px] text-ink/60">{label}</div>
+        <div className="text-[10px] text-ink/70">{label}</div>
         <div className={`text-lg font-bold ${c.text}`}>{value}</div>
       </div>
     </div>
@@ -275,13 +275,13 @@ function CutsCalculator({ currentCash, netBurn }: { currentCash: number; netBurn
                 {possible ? (
                   <>
                     <div className="text-sm">צריך לחתוך:</div>
-                    <div className="text-xl font-bold text-amber-700">
+                    <div className="text-xl font-bold text-amber-800">
                       ₪{Math.round(cutNeeded / 1000)}K/חודש
                     </div>
-                    <div className="text-xs text-ink/45">({cutPct.toFixed(0)}% מ-burn)</div>
+                    <div className="text-xs text-ink/70">({cutPct.toFixed(0)}% מ-burn)</div>
                   </>
                 ) : (
-                  <div className="text-sm text-emerald-700">✓ כבר מספיק!</div>
+                  <div className="text-sm text-emerald-800">✓ כבר מספיק!</div>
                 )}
               </div>
             );

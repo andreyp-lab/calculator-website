@@ -189,10 +189,10 @@ const PayTab = ({
       <SectionCard title="פרטי המחלה">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-9a8ec6" className="block text-sm font-medium text-ink/70 mb-2">
               מספר ימי מחלה
             </label>
-            <input
+            <input id="sickpaycalculator-9a8ec6"
               type="number"
               min={0}
               max={90}
@@ -200,13 +200,13 @@ const PayTab = ({
               onChange={(e) => setSickDays(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">מקסימום 90 ימים (תקרת החוק)</p>
+            <p className="text-xs text-ink/70 mt-1">מקסימום 90 ימים (תקרת החוק)</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-69b907" className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו (₪)
             </label>
-            <input
+            <input id="sickpaycalculator-69b907"
               type="number"
               min={0}
               max={200000}
@@ -216,7 +216,7 @@ const PayTab = ({
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
             {monthlySalary > 0 && (
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 שכר יומי: {formatCurrency(result.dailySalary, { decimals: 0 })}
               </p>
             )}
@@ -227,11 +227,11 @@ const PayTab = ({
           <p className="text-sm font-bold mb-2">חוק דמי מחלה — שיעורי תשלום</p>
           <div className="grid grid-cols-3 gap-2 text-center">
             <div className="bg-paper rounded-none p-2 border border-ink/15">
-              <p className="text-lg font-black text-red-600">0%</p>
+              <p className="text-lg font-black text-red-700">0%</p>
               <p className="text-xs text-ink/70">יום 1</p>
             </div>
             <div className="bg-paper rounded-none p-2 border border-ink/15">
-              <p className="text-lg font-black text-amber-600">50%</p>
+              <p className="text-lg font-black text-amber-800">50%</p>
               <p className="text-xs text-ink/70">ימים 2-3</p>
             </div>
             <div className="bg-paper rounded-none p-2 border border-ink/15">
@@ -391,10 +391,10 @@ const BalanceTab = ({
       <SectionCard title="פרטי ההעסקה">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-1d3298" className="block text-sm font-medium text-ink/70 mb-2">
               חודשי עבודה אצל המעסיק
             </label>
-            <input
+            <input id="sickpaycalculator-1d3298"
               type="number"
               min={0}
               max={600}
@@ -402,17 +402,17 @@ const BalanceTab = ({
               onChange={(e) => setMonthsWorked(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent text-xl font-bold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               {monthsWorked >= 12
                 ? `${Math.floor(monthsWorked / 12)} שנים ו-${monthsWorked % 12} חודשים`
                 : `${monthsWorked} חודשים (שנה ראשונה)`}
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-05f131" className="block text-sm font-medium text-ink/70 mb-2">
               ימי מחלה שנוצלו בסה"כ
             </label>
-            <input
+            <input id="sickpaycalculator-05f131"
               type="number"
               min={0}
               max={90}
@@ -420,7 +420,7 @@ const BalanceTab = ({
               onChange={(e) => setDaysUsed(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-ink/60 mt-1">סך ימים שנעדרת בשל מחלה</p>
+            <p className="text-xs text-ink/70 mt-1">סך ימים שנעדרת בשל מחלה</p>
           </div>
         </div>
 
@@ -461,7 +461,7 @@ const BalanceTab = ({
       <div className="bg-paper border border-ink/15 rounded-none p-5">
         <h3 className="font-bold text-ink mb-4">מצב יתרת ימי מחלה</h3>
         <SickDayProgressBar balance={result.balance} max={SICK_DAYS_MAX_BALANCE} />
-        <p className="text-xs text-ink/60 mt-3 text-center">
+        <p className="text-xs text-ink/70 mt-3 text-center">
           {result.balance.toFixed(1)} מתוך 90 ימים ({result.percentOfMax.toFixed(0)}% מהתקרה)
         </p>
       </div>
@@ -481,14 +481,14 @@ const BalanceTab = ({
               <Bar dataKey="נוצלו" fill="#f59e0b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
-          <p className="text-xs text-ink/45 text-center mt-1">הקו המקסימלי: 90 ימים</p>
+          <p className="text-xs text-ink/70 text-center mt-1">הקו המקסימלי: 90 ימים</p>
         </div>
       )}
 
       {/* אזהרה אם יתרה נמוכה */}
       {result.balance < 5 && monthsWorked > 0 && (
         <div className="bg-red-50 border-2 border-red-200 rounded-none p-4 flex gap-3">
-          <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-red-700 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-red-900 mb-1">יתרת ימי מחלה נמוכה!</h4>
             <p className="text-sm text-red-800">
@@ -579,10 +579,10 @@ const FamilyTab = ({
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-c1d420" className="block text-sm font-medium text-ink/70 mb-2">
               ימי היעדרות
             </label>
-            <input
+            <input id="sickpaycalculator-c1d420"
               type="number"
               min={1}
               max={30}
@@ -595,10 +595,10 @@ const FamilyTab = ({
 
         {relation === 'parent' && (
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-df0b7c" className="block text-sm font-medium text-ink/70 mb-2">
               גיל ההורה
             </label>
-            <input
+            <input id="sickpaycalculator-df0b7c"
               type="number"
               min={50}
               max={100}
@@ -606,17 +606,17 @@ const FamilyTab = ({
               onChange={(e) => setParentAge(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               זכאות למחלת הורה חלה רק מגיל 65
             </p>
           </div>
         )}
 
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="sickpaycalculator-1f5a55" className="block text-sm font-medium text-ink/70 mb-2">
             שכר חודשי ברוטו (₪)
           </label>
-          <input
+          <input id="sickpaycalculator-1f5a55"
             type="number"
             min={0}
             max={200000}
@@ -677,7 +677,7 @@ const FamilyTab = ({
         </>
       ) : (
         <div className="bg-red-50 border-2 border-red-200 rounded-none p-4 flex gap-3">
-          <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-red-700 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-bold text-red-900 mb-1">אינך זכאי להיעדרות מכוסה</h4>
             <p className="text-sm text-red-800">{result.ineligibilityReason}</p>
@@ -769,10 +769,10 @@ const LongIllnessTab = ({
       <SectionCard title="תרחיש מחלה ממושכת">
         <div className="grid sm:grid-cols-3 gap-5">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-de7fd5" className="block text-sm font-medium text-ink/70 mb-2">
               שנות עבודה אצל המעסיק
             </label>
-            <input
+            <input id="sickpaycalculator-de7fd5"
               type="number"
               min={0}
               max={40}
@@ -783,10 +783,10 @@ const LongIllnessTab = ({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-120811" className="block text-sm font-medium text-ink/70 mb-2">
               סך ימי מחלה
             </label>
-            <input
+            <input id="sickpaycalculator-120811"
               type="number"
               min={1}
               max={365}
@@ -796,10 +796,10 @@ const LongIllnessTab = ({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="sickpaycalculator-4b7af6" className="block text-sm font-medium text-ink/70 mb-2">
               שכר חודשי ברוטו (₪)
             </label>
-            <input
+            <input id="sickpaycalculator-4b7af6"
               type="number"
               min={0}
               max={200000}

@@ -178,11 +178,11 @@ export default function RealEstatePage() {
                 key={calc.href}
                 className="bg-cream-2 p-6 border-2 border-ink/15 flex items-start gap-4 opacity-60"
               >
-                <Calculator className="w-6 h-6 text-ink/45 flex-shrink-0 mt-1" />
+                <Calculator className="w-6 h-6 text-ink/70 flex-shrink-0 mt-1" />
                 <div className="flex-1">
                   <h3 className="font-bold text-ink/70 mb-1">{calc.title}</h3>
-                  <p className="text-sm text-ink/60">{calc.description}</p>
-                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/60 px-2 py-1">
+                  <p className="text-sm text-ink/70">{calc.description}</p>
+                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/70 px-2 py-1">
                     בקרוב
                   </span>
                 </div>
@@ -329,7 +329,7 @@ export default function RealEstatePage() {
                   <h3 className="font-bold text-ink group-hover:text-gold transition mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-ink/60">{item.description}</p>
+                  <p className="text-sm text-ink/70">{item.description}</p>
                 </div>
                 <ArrowLeft className="w-4 h-4 text-gold mt-1 opacity-0 group-hover:opacity-100 transition" />
               </Link>

@@ -134,7 +134,7 @@ export default function BudgetWizardPage() {
           <span className="text-sm font-semibold text-ink/70">
             שלב {step + 1} מתוך {STEPS.length}
           </span>
-          <span className="text-xs text-ink/60">
+          <span className="text-xs text-ink/70">
             {Math.round(((step + 1) / STEPS.length) * 100)}% הושלם
           </span>
         </div>
@@ -157,8 +157,8 @@ export default function BudgetWizardPage() {
                   isCurrent
                     ? 'text-gold font-bold'
                     : isDone
-                      ? 'text-emerald-600'
-                      : 'text-ink/45'
+                      ? 'text-emerald-800'
+                      : 'text-ink/70'
                 }`}
               >
                 <div
@@ -214,7 +214,7 @@ export default function BudgetWizardPage() {
           הקודם
         </button>
 
-        <Link href="/tools/start" className="text-sm text-ink/60 hover:text-ink">
+        <Link href="/tools/start" className="text-sm text-ink/70 hover:text-ink">
           ביטול
         </Link>
 
@@ -260,8 +260,8 @@ function IndustryStep({
       </p>
 
       <div>
-        <label className="block text-sm font-medium text-ink/70 mb-2">שם החברה</label>
-        <input
+        <label htmlFor="page-f71a74" className="block text-sm font-medium text-ink/70 mb-2">שם החברה</label>
+        <input id="page-f71a74"
           type="text"
           value={answers.companyName}
           onChange={(e) => onUpdate({ companyName: e.target.value })}
@@ -314,8 +314,8 @@ function IndustryStep({
 
       <div className="grid md:grid-cols-2 gap-3">
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">שנת מס</label>
-          <input
+          <label htmlFor="page-9b0ca8" className="block text-sm font-medium text-ink/70 mb-2">שנת מס</label>
+          <input id="page-9b0ca8"
             type="number"
             value={answers.fiscalYear}
             onChange={(e) => onUpdate({ fiscalYear: parseInt(e.target.value) || 2026 })}
@@ -323,8 +323,8 @@ function IndustryStep({
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">שיעור מס (%)</label>
-          <input
+          <label htmlFor="page-048e1d" className="block text-sm font-medium text-ink/70 mb-2">שיעור מס (%)</label>
+          <input id="page-048e1d"
             type="number"
             value={answers.taxRatePct}
             onChange={(e) => onUpdate({ taxRatePct: parseFloat(e.target.value) || 23 })}
@@ -385,17 +385,17 @@ function RevenueStep({
       {answers.incomeMode === 'simple' ? (
         <>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="page-c15ab8" className="block text-sm font-medium text-ink/70 mb-2">
               הכנסה חודשית ממוצעת (₪)
             </label>
-            <input
+            <input id="page-c15ab8"
               type="number"
               value={answers.monthlyRevenue || ''}
               onChange={(e) => onUpdate({ monthlyRevenue: parseFloat(e.target.value) || 0 })}
               placeholder="100000"
               className="w-full px-3 py-2 border border-ink/15 bg-paper text-lg"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               שנתית: ₪{(answers.monthlyRevenue * 12).toLocaleString('he-IL')}
             </p>
           </div>
@@ -419,7 +419,7 @@ function RevenueStep({
                 </button>
               ))}
             </div>
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               נחלק את הסכום בין המקורות אוטומטית. לחלוקה מדויקת השתמש ב"מפורט".
             </p>
           </div>
@@ -428,14 +428,14 @@ function RevenueStep({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">מקורות הכנסה ({answers.incomeStreams.length})</span>
-            <span className="text-sm text-ink/60">
+            <span className="text-sm text-ink/70">
               סה"כ חודשי: ₪{detailedTotal.toLocaleString('he-IL')}
             </span>
           </div>
 
           {answers.incomeStreams.length === 0 ? (
             <div className="text-center py-6 bg-cream-2 border-2 border-dashed border-ink/15">
-              <p className="text-sm text-ink/60 mb-2">עוד לא הוספת מקור הכנסה</p>
+              <p className="text-sm text-ink/70 mb-2">עוד לא הוספת מקור הכנסה</p>
               <button
                 onClick={addStream}
                 className="px-3 py-1.5 bg-ink text-cream text-sm flex items-center gap-1 mx-auto"
@@ -450,8 +450,8 @@ function RevenueStep({
                 <div key={idx} className="bg-cream-2 border border-ink/15 p-3">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-1">
                     <div className="md:col-span-2">
-                      <label className="block text-xs text-ink/60 mb-0.5">שם המקור</label>
-                      <input
+                      <label htmlFor="page-d19af0" className="block text-xs text-ink/70 mb-0.5">שם המקור</label>
+                      <input id="page-d19af0"
                         type="text"
                         value={stream.name}
                         onChange={(e) => updateStream(idx, { name: e.target.value })}
@@ -459,8 +459,8 @@ function RevenueStep({
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-ink/60 mb-0.5">סכום חודשי</label>
-                      <input
+                      <label htmlFor="page-df0842" className="block text-xs text-ink/70 mb-0.5">סכום חודשי</label>
+                      <input id="page-df0842"
                         type="number"
                         value={stream.monthlyAmount || ''}
                         onChange={(e) =>
@@ -470,7 +470,7 @@ function RevenueStep({
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-ink/60 mb-0.5">ימי תשלום</label>
+                      <label className="block text-xs text-ink/70 mb-0.5">ימי תשלום</label>
                       <select
                         value={stream.paymentTermsDays}
                         onChange={(e) =>
@@ -488,7 +488,7 @@ function RevenueStep({
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2 text-xs">
-                      <span className="text-ink/60">צמיחה חודשית:</span>
+                      <span className="text-ink/70">צמיחה חודשית:</span>
                       <input
                         type="number"
                         step="0.1"
@@ -498,11 +498,11 @@ function RevenueStep({
                         }
                         className="w-16 px-1 py-0.5 border border-ink/15 bg-paper text-center"
                       />
-                      <span className="text-ink/60">%</span>
+                      <span className="text-ink/70">%</span>
                     </div>
                     <button
                       onClick={() => removeStream(idx)}
-                      className="p-1 text-red-600 hover:bg-red-50"
+                      className="p-1 text-red-700 hover:bg-red-50"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -524,10 +524,10 @@ function RevenueStep({
       {/* Growth */}
       {answers.incomeMode === 'simple' && (
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="page-e37f6d" className="block text-sm font-medium text-ink/70 mb-2">
             צמיחה צפויה (% שנתי)
           </label>
-          <input
+          <input id="page-e37f6d"
             type="number"
             step="0.5"
             value={answers.expectedGrowthPct}
@@ -585,13 +585,13 @@ function CogsStep({
             onChange={(e) => onUpdate({ cogsPct: parseFloat(e.target.value) || 0 })}
             className="w-20 px-2 py-1 border border-ink/15 bg-paper text-center"
           />
-          <span className="text-ink/60">%</span>
+          <span className="text-ink/70">%</span>
         </div>
       </div>
 
       <div className="bg-emerald-50 border border-emerald-200 p-3 text-center">
-        <div className="text-xs text-emerald-700 mb-1">מרווח גולמי שלך</div>
-        <div className="text-3xl font-bold text-emerald-700">{grossMargin.toFixed(1)}%</div>
+        <div className="text-xs text-emerald-800 mb-1">מרווח גולמי שלך</div>
+        <div className="text-3xl font-bold text-emerald-800">{grossMargin.toFixed(1)}%</div>
         <BenchmarkHint
           label="מרווח גולמי ענפי"
           low={benchmark.grossMargin.low}
@@ -663,8 +663,8 @@ function EmployeesStep({
         <>
           <div className="grid md:grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">מספר עובדים</label>
-              <input
+              <label htmlFor="page-89c877" className="block text-sm font-medium text-ink/70 mb-2">מספר עובדים</label>
+              <input id="page-89c877"
                 type="number"
                 value={answers.numEmployees || ''}
                 onChange={(e) => onUpdate({ numEmployees: parseInt(e.target.value) || 0 })}
@@ -673,10 +673,10 @@ function EmployeesStep({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="page-43714e" className="block text-sm font-medium text-ink/70 mb-2">
                 סך כל השכר החודשי (₪)
               </label>
-              <input
+              <input id="page-43714e"
                 type="number"
                 value={answers.totalMonthlySalary || ''}
                 onChange={(e) =>
@@ -703,14 +703,14 @@ function EmployeesStep({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">עובדים ({answers.employees.length})</span>
-            <span className="text-sm text-ink/60">
+            <span className="text-sm text-ink/70">
               סה"כ שכר חודשי: ₪{detailedTotal.toLocaleString('he-IL')}
             </span>
           </div>
 
           {answers.employees.length === 0 ? (
             <div className="text-center py-6 bg-cream-2 border-2 border-dashed border-ink/15">
-              <p className="text-sm text-ink/60 mb-2">עוד לא הוספת עובדים</p>
+              <p className="text-sm text-ink/70 mb-2">עוד לא הוספת עובדים</p>
               <button
                 onClick={addEmployee}
                 className="px-3 py-1.5 bg-ink text-cream text-sm flex items-center gap-1 mx-auto"
@@ -725,8 +725,8 @@ function EmployeesStep({
                 <div key={idx} className="bg-cream-2 border border-ink/15 p-3">
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                     <div>
-                      <label className="block text-xs text-ink/60 mb-0.5">שם</label>
-                      <input
+                      <label htmlFor="page-766289" className="block text-xs text-ink/70 mb-0.5">שם</label>
+                      <input id="page-766289"
                         type="text"
                         value={emp.name}
                         onChange={(e) => updateEmployee(idx, { name: e.target.value })}
@@ -734,8 +734,8 @@ function EmployeesStep({
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-ink/60 mb-0.5">תפקיד</label>
-                      <input
+                      <label htmlFor="page-f02ba4" className="block text-xs text-ink/70 mb-0.5">תפקיד</label>
+                      <input id="page-f02ba4"
                         type="text"
                         value={emp.position}
                         onChange={(e) => updateEmployee(idx, { position: e.target.value })}
@@ -744,7 +744,7 @@ function EmployeesStep({
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-ink/60 mb-0.5">מחלקה</label>
+                      <label className="block text-xs text-ink/70 mb-0.5">מחלקה</label>
                       <select
                         value={emp.department}
                         onChange={(e) =>
@@ -760,8 +760,8 @@ function EmployeesStep({
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs text-ink/60 mb-0.5">שכר חודשי</label>
-                      <input
+                      <label htmlFor="page-ede10b" className="block text-xs text-ink/70 mb-0.5">שכר חודשי</label>
+                      <input id="page-ede10b"
                         type="number"
                         value={emp.monthlySalary || ''}
                         onChange={(e) =>
@@ -773,7 +773,7 @@ function EmployeesStep({
                     <div className="flex items-end">
                       <button
                         onClick={() => removeEmployee(idx)}
-                        className="p-1.5 text-red-600 hover:bg-red-50 w-full flex items-center justify-center"
+                        className="p-1.5 text-red-700 hover:bg-red-50 w-full flex items-center justify-center"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -857,31 +857,31 @@ function OperatingStep({
       {answers.expensesMode === 'simple' ? (
         <>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">שכירות חודשית (₪)</label>
-            <input
+            <label htmlFor="page-0ba332" className="block text-sm font-medium text-ink/70 mb-2">שכירות חודשית (₪)</label>
+            <input id="page-0ba332"
               type="number"
               value={answers.monthlyRent || ''}
               onChange={(e) => onUpdate({ monthlyRent: parseFloat(e.target.value) || 0 })}
               placeholder="0 אם אין"
               className="w-full px-3 py-2 border border-ink/15 bg-paper"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               ✨ סומן אוטומטית להחלת אינפלציה (חוזה שכ״ד מתעדכן)
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="page-fbeecc" className="block text-sm font-medium text-ink/70 mb-2">
               הוצאות תפעול אחרות (₪/חודש)
             </label>
-            <input
+            <input id="page-fbeecc"
               type="number"
               value={answers.monthlyOperating || ''}
               onChange={(e) => onUpdate({ monthlyOperating: parseFloat(e.target.value) || 0 })}
               placeholder="לדוגמה: 5000"
               className="w-full px-3 py-2 border border-ink/15 bg-paper"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               חשמל, תקשורת, תוכנות SaaS, רואה חשבון, ביטוחים, וכו'
             </p>
           </div>
@@ -890,14 +890,14 @@ function OperatingStep({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">ספקים והוצאות ({answers.suppliers.length})</span>
-            <span className="text-sm text-ink/60">
+            <span className="text-sm text-ink/70">
               סה"כ חודשי: ₪{detailedTotal.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
             </span>
           </div>
 
           {answers.suppliers.length === 0 ? (
             <div className="text-center py-6 bg-cream-2 border-2 border-dashed border-ink/15">
-              <p className="text-sm text-ink/60 mb-2">עוד לא הוספת ספק/הוצאה</p>
+              <p className="text-sm text-ink/70 mb-2">עוד לא הוספת ספק/הוצאה</p>
               <button
                 onClick={addSupplier}
                 className="px-3 py-1.5 bg-ink text-cream text-sm flex items-center gap-1 mx-auto"
@@ -912,8 +912,8 @@ function OperatingStep({
                 <div key={idx} className="bg-cream-2 border border-ink/15 p-3">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2">
                     <div className="md:col-span-2">
-                      <label className="block text-xs text-ink/60 mb-0.5">שם הספק/הוצאה</label>
-                      <input
+                      <label htmlFor="page-18be3d" className="block text-xs text-ink/70 mb-0.5">שם הספק/הוצאה</label>
+                      <input id="page-18be3d"
                         type="text"
                         value={sup.name}
                         onChange={(e) => updateSupplier(idx, { name: e.target.value })}
@@ -922,7 +922,7 @@ function OperatingStep({
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-ink/60 mb-0.5">קטגוריה</label>
+                      <label className="block text-xs text-ink/70 mb-0.5">קטגוריה</label>
                       <select
                         value={sup.category}
                         onChange={(e) =>
@@ -944,7 +944,7 @@ function OperatingStep({
                     <div className="flex items-end">
                       <button
                         onClick={() => removeSupplier(idx)}
-                        className="p-1.5 text-red-600 hover:bg-red-50 w-full flex items-center justify-center"
+                        className="p-1.5 text-red-700 hover:bg-red-50 w-full flex items-center justify-center"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -975,8 +975,8 @@ function OperatingStep({
                           }
                           className="w-20 px-2 py-1 border border-ink/15 bg-paper text-sm"
                         />
-                        <span className="text-xs text-ink/60">%</span>
-                        <span className="text-xs text-ink/60 mr-2">
+                        <span className="text-xs text-ink/70">%</span>
+                        <span className="text-xs text-ink/70 mr-2">
                           (≈ ₪
                           {Math.round(
                             ((sup.percentageOfRevenue ?? 0) / 100) * answers.monthlyRevenue,
@@ -986,7 +986,7 @@ function OperatingStep({
                       </div>
                     ) : (
                       <div className="flex items-center gap-1 flex-1">
-                        <span className="text-xs text-ink/60">סכום חודשי:</span>
+                        <span className="text-xs text-ink/70">סכום חודשי:</span>
                         <input
                           type="number"
                           value={sup.monthlyAmount || ''}
@@ -997,7 +997,7 @@ function OperatingStep({
                           }
                           className="w-32 px-2 py-1 border border-ink/15 bg-paper text-sm"
                         />
-                        <span className="text-xs text-ink/60">₪</span>
+                        <span className="text-xs text-ink/70">₪</span>
                       </div>
                     )}
                   </div>
@@ -1040,7 +1040,7 @@ function ModeToggle({
         className={`p-2 transition text-sm ${
           mode === 'simple'
             ? 'bg-paper shadow text-gold font-bold'
-            : 'text-ink/60 hover:text-ink'
+            : 'text-ink/70 hover:text-ink'
         }`}
       >
         ⚡ {simpleLabel}
@@ -1050,7 +1050,7 @@ function ModeToggle({
         className={`p-2 transition text-sm ${
           mode === 'detailed'
             ? 'bg-paper shadow text-gold font-bold'
-            : 'text-ink/60 hover:text-ink'
+            : 'text-ink/70 hover:text-ink'
         }`}
       >
         📋 {detailedLabel}
@@ -1116,7 +1116,7 @@ function MarketingStep({
               onChange={(e) => onUpdate({ marketingPct: parseFloat(e.target.value) || 0 })}
               className="w-20 px-2 py-1 border border-ink/15 bg-paper text-center"
             />
-            <span className="text-ink/60">%</span>
+            <span className="text-ink/70">%</span>
           </div>
           <BenchmarkHint
             label="שיווק ענפי"
@@ -1129,10 +1129,10 @@ function MarketingStep({
         </div>
       ) : (
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-2">
+          <label htmlFor="page-12b649" className="block text-sm font-medium text-ink/70 mb-2">
             תקציב שיווק חודשי (₪)
           </label>
-          <input
+          <input id="page-12b649"
             type="number"
             value={answers.marketingAmount || ''}
             onChange={(e) => onUpdate({ marketingAmount: parseFloat(e.target.value) || 0 })}
@@ -1180,7 +1180,7 @@ function RndStep({
             onChange={(e) => onUpdate({ rndPct: parseFloat(e.target.value) || 0 })}
             className="w-20 px-2 py-1 border border-ink/15 bg-paper text-center"
           />
-          <span className="text-ink/60">%</span>
+          <span className="text-ink/70">%</span>
         </div>
         <BenchmarkHint
           label="R&D ענפי"
@@ -1236,8 +1236,8 @@ function LoansStep({
       {answers.hasLoans && (
         <div className="space-y-3 bg-cream-2 p-4 border border-ink/15">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">סכום הלוואה (₪)</label>
-            <input
+            <label htmlFor="page-3e5de1" className="block text-sm font-medium text-ink/70 mb-1">סכום הלוואה (₪)</label>
+            <input id="page-3e5de1"
               type="number"
               value={answers.loanAmount || ''}
               onChange={(e) => onUpdate({ loanAmount: parseFloat(e.target.value) || 0 })}
@@ -1247,10 +1247,10 @@ function LoansStep({
           </div>
           <div className="grid md:grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="page-735388" className="block text-sm font-medium text-ink/70 mb-1">
                 ריבית שנתית (%)
               </label>
-              <input
+              <input id="page-735388"
                 type="number"
                 step="0.1"
                 value={answers.loanRatePct}
@@ -1259,8 +1259,8 @@ function LoansStep({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">תקופה (חודשים)</label>
-              <input
+              <label htmlFor="page-4c6bc7" className="block text-sm font-medium text-ink/70 mb-1">תקופה (חודשים)</label>
+              <input id="page-4c6bc7"
                 type="number"
                 value={answers.loanTermMonths}
                 onChange={(e) => onUpdate({ loanTermMonths: parseInt(e.target.value) || 60 })}
@@ -1328,20 +1328,20 @@ function ReviewStep({
       >
         <div className="grid md:grid-cols-2 gap-3 text-center">
           <div>
-            <div className="text-xs text-ink/60">רווח שנתי משוער</div>
+            <div className="text-xs text-ink/70">רווח שנתי משוער</div>
             <div
               className={`text-3xl font-bold ${
-                summary.estimatedAnnualProfit >= 0 ? 'text-emerald-700' : 'text-red-700'
+                summary.estimatedAnnualProfit >= 0 ? 'text-emerald-800' : 'text-red-700'
               }`}
             >
               {fmt(summary.estimatedAnnualProfit)}
             </div>
           </div>
           <div>
-            <div className="text-xs text-ink/60">מרווח נקי משוער</div>
+            <div className="text-xs text-ink/70">מרווח נקי משוער</div>
             <div
               className={`text-3xl font-bold ${
-                summary.estimatedNetMargin >= 0 ? 'text-emerald-700' : 'text-red-700'
+                summary.estimatedNetMargin >= 0 ? 'text-emerald-800' : 'text-red-700'
               }`}
             >
               {summary.estimatedNetMargin.toFixed(1)}%

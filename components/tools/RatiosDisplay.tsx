@@ -54,7 +54,7 @@ export function RatiosDisplay() {
   if (!analysis) {
     return (
       <div className="bg-amber-50 border-2 border-amber-300 rounded-none p-6 flex items-start gap-3">
-        <AlertTriangle className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
+        <AlertTriangle className="w-6 h-6 text-amber-800 flex-shrink-0 mt-1" />
         <div>
           <h3 className="font-bold text-amber-900 mb-1">חסרים נתוני מאזן</h3>
           <p className="text-amber-800 text-sm">
@@ -71,7 +71,7 @@ export function RatiosDisplay() {
   const getStatusColor = (status: 'good' | 'warning' | 'bad'): string => {
     return {
       good: 'text-green-700 bg-green-50 border-green-200',
-      warning: 'text-amber-700 bg-amber-50 border-amber-200',
+      warning: 'text-amber-800 bg-amber-50 border-amber-200',
       bad: 'text-red-700 bg-red-50 border-red-200',
     }[status];
   };
@@ -94,31 +94,31 @@ export function RatiosDisplay() {
         <div className={`border-2 rounded-none p-4 ${
           credit.investmentGrade ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'
         }`}>
-          <div className="text-xs text-ink/60 mb-1">דירוג אשראי</div>
-          <div className={`text-3xl font-bold ${credit.investmentGrade ? 'text-green-700' : 'text-amber-700'}`}>
+          <div className="text-xs text-ink/70 mb-1">דירוג אשראי</div>
+          <div className={`text-3xl font-bold ${credit.investmentGrade ? 'text-green-700' : 'text-amber-800'}`}>
             {credit.rating}
           </div>
-          <div className="text-xs text-ink/60">{credit.outlook}</div>
+          <div className="text-xs text-ink/70">{credit.outlook}</div>
         </div>
 
         <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-4">
-          <div className="text-xs text-ink/60 mb-1">ציון בריאות</div>
+          <div className="text-xs text-ink/70 mb-1">ציון בריאות</div>
           <div className="text-3xl font-bold text-ink">{health.totalScore}/100</div>
-          <div className="text-xs text-ink/60">{health.grade}</div>
+          <div className="text-xs text-ink/70">{health.grade}</div>
         </div>
 
         <div className={`border-2 rounded-none p-4 ${
           zScore.zone === 'safe' ? 'bg-green-50 border-green-300' :
           zScore.zone === 'grey' ? 'bg-amber-50 border-amber-300' : 'bg-red-50 border-red-300'
         }`}>
-          <div className="text-xs text-ink/60 mb-1">Z-Score (Altman)</div>
+          <div className="text-xs text-ink/70 mb-1">Z-Score (Altman)</div>
           <div className={`text-3xl font-bold ${
             zScore.zone === 'safe' ? 'text-green-700' :
-            zScore.zone === 'grey' ? 'text-amber-700' : 'text-red-700'
+            zScore.zone === 'grey' ? 'text-amber-800' : 'text-red-700'
           }`}>
             {formatRatio(zScore.score)}
           </div>
-          <div className="text-xs text-ink/60">
+          <div className="text-xs text-ink/70">
             {zScore.zone === 'safe' ? 'אזור בטוח' :
              zScore.zone === 'grey' ? 'אזור אפור' : 'סכנה'}
           </div>
@@ -128,14 +128,14 @@ export function RatiosDisplay() {
           ratios.dscr >= 1.5 ? 'bg-green-50 border-green-300' :
           ratios.dscr >= 1.0 ? 'bg-amber-50 border-amber-300' : 'bg-red-50 border-red-300'
         }`}>
-          <div className="text-xs text-ink/60 mb-1">DSCR</div>
+          <div className="text-xs text-ink/70 mb-1">DSCR</div>
           <div className={`text-3xl font-bold ${
             ratios.dscr >= 1.5 ? 'text-green-700' :
-            ratios.dscr >= 1.0 ? 'text-amber-700' : 'text-red-700'
+            ratios.dscr >= 1.0 ? 'text-amber-800' : 'text-red-700'
           }`}>
             {ratios.dscr > 99 ? '∞' : formatRatio(ratios.dscr)}
           </div>
-          <div className="text-xs text-ink/60">יכולת החזר חוב</div>
+          <div className="text-xs text-ink/70">יכולת החזר חוב</div>
         </div>
       </div>
 
@@ -211,9 +211,9 @@ export function RatiosDisplay() {
             };
             return (
               <div key={key} className="bg-cream-2 rounded-none p-3 text-center">
-                <div className="text-xs text-ink/60 mb-1">{labels[key]}</div>
+                <div className="text-xs text-ink/70 mb-1">{labels[key]}</div>
                 <div className={`text-2xl font-bold ${
-                  score >= 70 ? 'text-green-700' : score >= 50 ? 'text-amber-700' : 'text-red-700'
+                  score >= 70 ? 'text-green-700' : score >= 50 ? 'text-amber-800' : 'text-red-700'
                 }`}>
                   {Math.round(score)}
                 </div>
@@ -221,7 +221,7 @@ export function RatiosDisplay() {
             );
           })}
         </div>
-        <p className="text-sm text-ink/60 mt-3 text-center">
+        <p className="text-sm text-ink/70 mt-3 text-center">
           {health.interpretation}
         </p>
       </div>
@@ -240,7 +240,7 @@ function RatioRow({
 }) {
   const colors = {
     good: 'text-green-700 bg-green-50',
-    warning: 'text-amber-700 bg-amber-50',
+    warning: 'text-amber-800 bg-amber-50',
     bad: 'text-red-700 bg-red-50',
   };
   return (

@@ -53,10 +53,10 @@ export function BusinessValuationCalculator() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="businessvaluationcalculator-2d6440" className="block text-sm font-medium text-ink/70 mb-2">
                 הכנסות שנתיות (₪)
               </label>
-              <input
+              <input id="businessvaluationcalculator-2d6440"
                 type="number"
                 min={0}
                 step={100_000}
@@ -66,10 +66,10 @@ export function BusinessValuationCalculator() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="businessvaluationcalculator-75d16b" className="block text-sm font-medium text-ink/70 mb-2">
                 רווח נקי שנתי (₪)
               </label>
-              <input
+              <input id="businessvaluationcalculator-75d16b"
                 type="number"
                 min={0}
                 step={50_000}
@@ -81,10 +81,10 @@ export function BusinessValuationCalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="businessvaluationcalculator-5f5782" className="block text-sm font-medium text-ink/70 mb-2">
               EBITDA שנתי (₪)
             </label>
-            <input
+            <input id="businessvaluationcalculator-5f5782"
               type="number"
               min={0}
               step={50_000}
@@ -92,17 +92,17 @@ export function BusinessValuationCalculator() {
               onChange={(e) => update('ebitda', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               רווח לפני ריבית, מס, פחת והפחתות (Earnings Before Interest, Tax, D&A)
             </p>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">
+              <label htmlFor="businessvaluationcalculator-25e60a" className="block text-xs font-medium text-ink/70 mb-1">
                 צמיחה שנתית (%)
               </label>
-              <input
+              <input id="businessvaluationcalculator-25e60a"
                 type="number"
                 min={-20}
                 max={100}
@@ -113,10 +113,10 @@ export function BusinessValuationCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">
+              <label htmlFor="businessvaluationcalculator-ab4c3d" className="block text-xs font-medium text-ink/70 mb-1">
                 תקופה (שנים)
               </label>
-              <input
+              <input id="businessvaluationcalculator-ab4c3d"
                 type="number"
                 min={1}
                 max={10}
@@ -126,10 +126,10 @@ export function BusinessValuationCalculator() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-ink/70 mb-1">
+              <label htmlFor="businessvaluationcalculator-0ec086" className="block text-xs font-medium text-ink/70 mb-1">
                 שיעור היוון (%)
               </label>
-              <input
+              <input id="businessvaluationcalculator-0ec086"
                 type="number"
                 min={5}
                 max={30}
@@ -142,10 +142,10 @@ export function BusinessValuationCalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="businessvaluationcalculator-d29061" className="block text-sm font-medium text-ink/70 mb-2">
               מכפיל EBITDA מותאם (אופציונלי)
             </label>
-            <input
+            <input id="businessvaluationcalculator-d29061"
               type="number"
               min={0}
               max={20}
@@ -180,19 +180,19 @@ export function BusinessValuationCalculator() {
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2 text-sm">
           <h4 className="font-semibold text-ink mb-2">לפי שיטת חישוב</h4>
           <div className="flex justify-between">
-            <span className="text-ink/60">DCF (היוון תזרים):</span>
+            <span className="text-ink/70">DCF (היוון תזרים):</span>
             <span className="font-medium">{formatCurrency(result.dcfValue)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">מכפיל EBITDA × {result.appliedMultiple}:</span>
+            <span className="text-ink/70">מכפיל EBITDA × {result.appliedMultiple}:</span>
             <span className="font-medium">{formatCurrency(result.ebitdaMultipleValue)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">מכפיל הכנסות:</span>
+            <span className="text-ink/70">מכפיל הכנסות:</span>
             <span className="font-medium">{formatCurrency(result.revenueMultipleValue)}</span>
           </div>
           <div className="flex justify-between pt-2 border-t border-ink/15">
-            <span className="text-ink/60">Terminal Value:</span>
+            <span className="text-ink/70">Terminal Value:</span>
             <span className="font-medium">{formatCurrency(result.terminalValue)}</span>
           </div>
         </div>

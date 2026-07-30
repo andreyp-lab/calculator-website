@@ -261,28 +261,28 @@ export function CompoundInterestCalculator() {
                   <button
                     type="button"
                     onClick={() => update('annualRate', 3.5)}
-                    className="text-right hover:text-emerald-600 transition"
+                    className="text-right hover:text-emerald-800 transition"
                   >
                     🏦 פיקדון בנק: ~3.5%
                   </button>
                   <button
                     type="button"
                     onClick={() => update('annualRate', 5)}
-                    className="text-right hover:text-emerald-600 transition"
+                    className="text-right hover:text-emerald-800 transition"
                   >
                     📋 אג&quot;ח ממשלתי: ~5%
                   </button>
                   <button
                     type="button"
                     onClick={() => update('annualRate', 7)}
-                    className="text-right hover:text-emerald-600 transition"
+                    className="text-right hover:text-emerald-800 transition"
                   >
                     📊 תיק מגוון: ~7%
                   </button>
                   <button
                     type="button"
                     onClick={() => update('annualRate', 10)}
-                    className="text-right hover:text-emerald-600 transition"
+                    className="text-right hover:text-emerald-800 transition"
                   >
                     📈 S&amp;P 500: ~10%
                   </button>
@@ -318,9 +318,9 @@ export function CompoundInterestCalculator() {
                     onChange={(e) => update('inflationRate', Number(e.target.value))}
                     className="w-full accent-red-500"
                   />
-                  <div className="flex justify-between text-xs text-ink/60 mt-1">
+                  <div className="flex justify-between text-xs text-ink/70 mt-1">
                     <span>0%</span>
-                    <span className="text-red-600 font-medium">ישראל ממוצע: 3%</span>
+                    <span className="text-red-700 font-medium">ישראל ממוצע: 3%</span>
                     <span>8%</span>
                   </div>
                 </Field>
@@ -332,7 +332,7 @@ export function CompoundInterestCalculator() {
                       type="checkbox"
                       checked={input.applyTax ?? true}
                       onChange={(e) => update('applyTax', e.target.checked)}
-                      className="w-4 h-4 text-amber-600"
+                      className="w-4 h-4 text-amber-800"
                     />
                     <span className="text-sm font-medium text-amber-900">
                       חשב מס רווחי הון (25%)
@@ -356,7 +356,7 @@ export function CompoundInterestCalculator() {
                     <option value="monthly">חודשי (מומלץ)</option>
                     <option value="daily">יומי</option>
                   </select>
-                  <p className="text-xs text-ink/60 mt-1">
+                  <p className="text-xs text-ink/70 mt-1">
                     ההבדל בין חודשי ליומי זניח. עם הפקדות חודשיות, תמיד מחשבים חודשי.
                   </p>
                 </Field>
@@ -421,7 +421,7 @@ export function CompoundInterestCalculator() {
             <h3 className="font-bold text-ink mb-1">
               צמיחת השקעה לאורך {input.years} שנים
             </h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               ירוק = ערך נומינלי | כחול = ריאלי (אחרי אינפלציה {input.inflationRate}%) |
               כתום = אחרי מס 25%
             </p>
@@ -470,7 +470,7 @@ export function CompoundInterestCalculator() {
         {chartView === 'stacked' && (
           <div>
             <h3 className="font-bold text-ink mb-1">הפקדות מצטברות vs ריבית שנצברה</h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               כחול = סה&quot;כ הפקדות | ירוק = סה&quot;כ ריבית (הכוח האמיתי של ריבית דריבית)
             </p>
             <div className="h-72">
@@ -497,7 +497,7 @@ export function CompoundInterestCalculator() {
             <h3 className="font-bold text-ink mb-1">
               השוואת תרחישים — אותו קרן + הפקדות, ריביות שונות
             </h3>
-            <p className="text-xs text-ink/60 mb-4">
+            <p className="text-xs text-ink/70 mb-4">
               קרן: {formatCurrency(input.principal)} | הפקדה: {formatCurrency(input.monthlyContribution)}/ח
             </p>
             <div className="h-72">
@@ -549,16 +549,16 @@ export function CompoundInterestCalculator() {
                       <td className="p-2 border border-ink/15 tabular-nums text-gold">
                         {formatCurrency(s.realFinalAmount)}
                       </td>
-                      <td className="p-2 border border-ink/15 tabular-nums text-amber-700">
+                      <td className="p-2 border border-ink/15 tabular-nums text-amber-800">
                         {formatCurrency(s.afterTaxFinalAmount)}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <p className="text-xs text-ink/60 mt-2">
+              <p className="text-xs text-ink/70 mt-2">
                 ההפרש בין פיקדון לS&P 500 לאורך {input.years} שנים:{' '}
-                <strong className="text-emerald-700">
+                <strong className="text-emerald-800">
                   {formatCurrency(
                     (scenarioResults[2]?.finalAmount ?? 0) - (scenarioResults[0]?.finalAmount ?? 0),
                   )}
@@ -598,10 +598,10 @@ export function CompoundInterestCalculator() {
                       <td className="p-2 border border-ink/15 font-medium">
                         {row.year}
                         {isCrossover && (
-                          <span className="mr-1 text-emerald-600 text-xs">⭐ פלא</span>
+                          <span className="mr-1 text-emerald-800 text-xs">⭐ פלא</span>
                         )}
                       </td>
-                      <td className="p-2 border border-ink/15 tabular-nums text-emerald-700">
+                      <td className="p-2 border border-ink/15 tabular-nums text-emerald-800">
                         {formatCurrency(row.interest)}
                       </td>
                       <td className="p-2 border border-ink/15 tabular-nums">
@@ -613,7 +613,7 @@ export function CompoundInterestCalculator() {
                       <td className="p-2 border border-ink/15 tabular-nums text-gold">
                         {formatCurrency(row.realBalance)}
                       </td>
-                      <td className="p-2 border border-ink/15 tabular-nums text-amber-700">
+                      <td className="p-2 border border-ink/15 tabular-nums text-amber-800">
                         {formatCurrency(row.afterTaxBalance)}
                       </td>
                     </tr>
@@ -654,10 +654,10 @@ function ForwardResults({
       {/* כרטיס ראשי */}
       <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-5">
         <p className="text-sm font-medium text-emerald-800 mb-1">💰 סכום סופי (נומינלי)</p>
-        <p className="text-4xl font-bold text-emerald-700 tabular-nums mb-1">
+        <p className="text-4xl font-bold text-emerald-800 tabular-nums mb-1">
           {formatCurrency(result.finalAmount)}
         </p>
-        <p className="text-xs text-emerald-600">אחרי {input.years} שנים</p>
+        <p className="text-xs text-emerald-800">אחרי {input.years} שנים</p>
       </div>
 
       {/* ריאלי + אחרי מס */}
@@ -667,21 +667,21 @@ function ForwardResults({
           <p className="text-xl font-bold text-gold tabular-nums">
             {formatCurrency(result.realFinalAmount)}
           </p>
-          <p className="text-xs text-ink/60 mt-1">
+          <p className="text-xs text-ink/70 mt-1">
             אחרי אינפלציה {input.inflationRate}%/שנה
           </p>
-          <p className="text-xs text-red-600 mt-1">
+          <p className="text-xs text-red-700 mt-1">
             אינפלציה &quot;אוכלת&quot;: {formatCurrency(inflationImpact)}
           </p>
         </div>
 
         <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-4">
           <p className="text-xs font-medium text-amber-800 mb-1">🏛️ אחרי מס 25%</p>
-          <p className="text-xl font-bold text-amber-700 tabular-nums">
+          <p className="text-xl font-bold text-amber-800 tabular-nums">
             {formatCurrency(result.afterTaxFinalAmount)}
           </p>
-          <p className="text-xs text-amber-600 mt-1">מס על הרווח</p>
-          <p className="text-xs text-red-600 mt-1">
+          <p className="text-xs text-amber-800 mt-1">מס על הרווח</p>
+          <p className="text-xs text-red-700 mt-1">
             מס: {formatCurrency(result.taxAmount)}
           </p>
         </div>
@@ -838,7 +838,7 @@ function EducationalExamples({ input }: { input: CompoundInterestInput }) {
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-ink/70">התחיל בגיל 25 (40 שנה):</span>
-              <span className="font-bold text-emerald-700 tabular-nums">
+              <span className="font-bold text-emerald-800 tabular-nums">
                 {formatCurrency(early.finalAmount)}
               </span>
             </div>
@@ -849,13 +849,13 @@ function EducationalExamples({ input }: { input: CompoundInterestInput }) {
               </span>
             </div>
             <div className="border-t pt-2 flex justify-between">
-              <span className="text-red-600 text-xs">ההפרש (10 שנים):</span>
-              <span className="font-bold text-red-600 text-sm tabular-nums">
+              <span className="text-red-700 text-xs">ההפרש (10 שנים):</span>
+              <span className="font-bold text-red-700 text-sm tabular-nums">
                 -{formatCurrency(early.finalAmount - late.finalAmount)}
               </span>
             </div>
           </div>
-          <p className="text-xs text-ink/60 mt-2">
+          <p className="text-xs text-ink/70 mt-2">
             10 שנים מוקדמות = {Math.round((early.finalAmount / late.finalAmount - 1) * 100)}% יותר כסף!
           </p>
         </div>
@@ -871,9 +871,9 @@ function EducationalExamples({ input }: { input: CompoundInterestInput }) {
               <span className="text-5xl font-bold text-gold">
                 {rule72years}
               </span>
-              <p className="text-sm text-ink/60 mt-1">שנים לכפל הכסף</p>
+              <p className="text-sm text-ink/70 mt-1">שנים לכפל הכסף</p>
             </div>
-            <p className="text-xs text-ink/60">
+            <p className="text-xs text-ink/70">
               כלל 72: שנים = 72 ÷ ריבית%. זה קירוב מהיר ומדויק מאוד.
             </p>
             <div className="space-y-1 text-xs text-ink/70">
@@ -905,12 +905,12 @@ function EducationalExamples({ input }: { input: CompoundInterestInput }) {
             </div>
             <div className="flex justify-between">
               <span className="text-ink/70">S&P 500 (10%):</span>
-              <span className="font-bold text-emerald-700 tabular-nums">
+              <span className="font-bold text-emerald-800 tabular-nums">
                 {formatCurrency(scenario10.finalAmount)}
               </span>
             </div>
             <div className="border-t pt-2">
-              <p className="text-xs text-emerald-700">
+              <p className="text-xs text-emerald-800">
                 הפרש S&P vs פיקדון:{' '}
                 <strong>{formatCurrency(scenario10.finalAmount - scenario3.finalAmount)}</strong>
               </p>
@@ -959,9 +959,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      <label className="block text-sm font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }
@@ -978,10 +980,10 @@ function Row({
   color?: 'emerald' | 'blue' | 'red' | 'amber';
 }) {
   const colorMap = {
-    emerald: 'text-emerald-700',
+    emerald: 'text-emerald-800',
     blue: 'text-gold',
-    red: 'text-red-600',
-    amber: 'text-amber-700',
+    red: 'text-red-700',
+    amber: 'text-amber-800',
   };
   const valueClass = color ? colorMap[color] : 'text-ink';
   return (

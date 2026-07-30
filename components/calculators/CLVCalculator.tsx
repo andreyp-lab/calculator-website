@@ -39,10 +39,10 @@ export function CLVCalculator() {
         <div className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="clvcalculator-9fe8e6" className="block text-sm font-medium text-ink/70 mb-2">
                 ערך הזמנה ממוצעת (₪)
               </label>
-              <input
+              <input id="clvcalculator-9fe8e6"
                 type="number"
                 min={0}
                 value={input.averageOrderValue}
@@ -51,10 +51,10 @@ export function CLVCalculator() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-2">
+              <label htmlFor="clvcalculator-84d7ee" className="block text-sm font-medium text-ink/70 mb-2">
                 רכישות בשנה
               </label>
-              <input
+              <input id="clvcalculator-84d7ee"
                 type="number"
                 min={0}
                 step={0.5}
@@ -66,10 +66,10 @@ export function CLVCalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="clvcalculator-673daf" className="block text-sm font-medium text-ink/70 mb-2">
               שיעור רווח גולמי (%)
             </label>
-            <input
+            <input id="clvcalculator-673daf"
               type="number"
               min={0}
               max={100}
@@ -77,16 +77,16 @@ export function CLVCalculator() {
               onChange={(e) => update('grossMargin', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               SaaS: 70-90%, שירותים: 50-70%, מסחר: 20-40%
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="clvcalculator-5bf499" className="block text-sm font-medium text-ink/70 mb-2">
               CAC - עלות גיוס לקוח (₪)
             </label>
-            <input
+            <input id="clvcalculator-5bf499"
               type="number"
               min={0}
               step={50}
@@ -94,7 +94,7 @@ export function CLVCalculator() {
               onChange={(e) => update('customerAcquisitionCost', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
-            <p className="text-xs text-ink/60 mt-1">
+            <p className="text-xs text-ink/70 mt-1">
               פרסום + מכירות + ספקי לידים מחולק במספר לקוחות חדשים
             </p>
           </div>
@@ -113,10 +113,10 @@ export function CLVCalculator() {
             </label>
             {useChurn ? (
               <div>
-                <label className="block text-xs text-ink/70 mb-1">
+                <label htmlFor="clvcalculator-644d5e" className="block text-xs text-ink/70 mb-1">
                   Churn חודשי (%)
                 </label>
-                <input
+                <input id="clvcalculator-644d5e"
                   type="number"
                   min={0}
                   max={100}
@@ -125,14 +125,14 @@ export function CLVCalculator() {
                   onChange={(e) => update('monthlyChurnRate', Number(e.target.value))}
                   className="w-full px-3 py-1.5 border border-ink/15 rounded-none text-sm"
                 />
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/70 mt-1">
                   SaaS B2B בריא: 1-2%, חלש: 5%+
                 </p>
               </div>
             ) : (
               <div>
-                <label className="block text-xs text-ink/70 mb-1">אורך חיים (שנים)</label>
-                <input
+                <label htmlFor="clvcalculator-ab14b0" className="block text-xs text-ink/70 mb-1">אורך חיים (שנים)</label>
+                <input id="clvcalculator-ab14b0"
                   type="number"
                   min={0.1}
                   step={0.5}
@@ -164,21 +164,21 @@ export function CLVCalculator() {
 
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-ink/60">ARPU חודשי:</span>
+            <span className="text-ink/70">ARPU חודשי:</span>
             <span className="font-medium">{formatCurrency(result.monthlyArpu)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">סה"כ הכנסה ללקוח:</span>
+            <span className="text-ink/70">סה"כ הכנסה ללקוח:</span>
             <span className="font-medium">{formatCurrency(result.totalRevenuePerCustomer)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">Payback (חודשים):</span>
+            <span className="text-ink/70">Payback (חודשים):</span>
             <span className="font-medium">
               {Number.isFinite(result.paybackMonths) ? result.paybackMonths.toFixed(1) : '∞'}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-ink/60">אורך חיים אפקטיבי:</span>
+            <span className="text-ink/70">אורך חיים אפקטיבי:</span>
             <span className="font-medium">{result.effectiveLifespan.toFixed(1)} שנים</span>
           </div>
         </div>

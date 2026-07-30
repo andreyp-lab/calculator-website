@@ -349,7 +349,7 @@ export function CompanyCarBenefitCalculator() {
                     : 'הפחתת פחת (רכב ישן)'
                 }
                 value={`-${formatCurrency(result.monthlyBenefitRaw - result.monthlyBenefitAfterDiscount)}`}
-                valueClass="text-emerald-700"
+                valueClass="text-emerald-800"
               />
             )}
             <Row label="שווי חייב במס" value={formatCurrency(result.taxableBenefit)} bold />
@@ -362,7 +362,7 @@ export function CompanyCarBenefitCalculator() {
               <Row
                 label="שווי נטו לעובד"
                 value={formatCurrency(result.taxableBenefit - result.monthlyTax)}
-                valueClass="text-emerald-700"
+                valueClass="text-emerald-800"
                 bold
               />
             </div>
@@ -485,7 +485,7 @@ export function CompanyCarBenefitCalculator() {
                     <span>עלות שנתית למעסיק</span>
                     <span className="tabular-nums">{formatCurrency(result.annualCostToEmployee)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-emerald-700 font-medium mt-1">
+                  <div className="flex justify-between text-sm text-emerald-800 font-medium mt-1">
                     <span>שכר מקביל (ברוטו)</span>
                     <span className="tabular-nums">{formatCurrency(result.salaryEquivalent * 12)}/שנה</span>
                   </div>
@@ -499,7 +499,7 @@ export function CompanyCarBenefitCalculator() {
             <div className="space-y-5">
               <div>
                 <h3 className="font-bold text-ink mb-1">מס לפי מדרגות שונות</h3>
-                <p className="text-xs text-ink/60 mb-3">
+                <p className="text-xs text-ink/70 mb-3">
                   אותו רכב, אותו מחיר — כמה מס תשלם לפי מדרגת המס שלך?
                 </p>
                 <ResponsiveContainer width="100%" height={220}>
@@ -569,7 +569,7 @@ export function CompanyCarBenefitCalculator() {
                       <tr>
                         <td
                           colSpan={5}
-                          className="px-3 py-1 text-xs text-ink/60 border border-ink/15"
+                          className="px-3 py-1 text-xs text-ink/70 border border-ink/15"
                         >
                           * עלות שנתית מחושבת על בסיס מחיר אמצעי בכל קבוצה
                         </td>
@@ -594,13 +594,13 @@ export function CompanyCarBenefitCalculator() {
                     <DetailRow
                       label={input.carType === 'electric' ? 'הנחה חשמלי' : input.carType === 'hybrid' ? 'הנחה היברידי' : 'הפחתת פחת'}
                       value={`-${formatCurrency(result.monthlyBenefitRaw - result.monthlyBenefitAfterDiscount)}`}
-                      valueClass="text-emerald-700"
+                      valueClass="text-emerald-800"
                     />
                   )}
                   <DetailRow label="שווי חייב במס" value={formatCurrency(result.taxableBenefit)} bold />
                   <div className="border-t pt-2">
                     <DetailRow label={`מס שולי (${input.marginalTaxRate}%)`} value={formatCurrency(result.monthlyTax)} valueClass="text-red-700" />
-                    <DetailRow label="שווי נטו לעובד" value={formatCurrency(result.taxableBenefit - result.monthlyTax)} valueClass="text-emerald-700" bold />
+                    <DetailRow label="שווי נטו לעובד" value={formatCurrency(result.taxableBenefit - result.monthlyTax)} valueClass="text-emerald-800" bold />
                   </div>
                   {result.maintenanceBenefit > 0 && (
                     <DetailRow label="תחזוקה ממעסיק" value={formatCurrency(result.maintenanceBenefit)} valueClass="text-gold" />
@@ -618,10 +618,10 @@ export function CompanyCarBenefitCalculator() {
                     <DetailRow
                       label="חיסכון/הפסד עם רכב חברה"
                       value={formatCurrency(Math.abs(result.monthlySavingsVsPersonalCar))}
-                      valueClass={result.isCompanyCarWorthIt ? 'text-emerald-700' : 'text-red-700'}
+                      valueClass={result.isCompanyCarWorthIt ? 'text-emerald-800' : 'text-red-700'}
                       bold
                     />
-                    <p className="text-xs text-ink/60 mt-1">
+                    <p className="text-xs text-ink/70 mt-1">
                       {result.isCompanyCarWorthIt ? '✅ רכב חברה משתלם' : '⚠️ רכב פרטי + החזר עדיף'}
                     </p>
                   </div>
@@ -632,7 +632,7 @@ export function CompanyCarBenefitCalculator() {
                   <div className="space-y-2 text-sm">
                     <DetailRow label="שווי שימוש שנתי" value={formatCurrency(result.taxableBenefit * 12)} />
                     <DetailRow label="מס שנתי בתלוש" value={formatCurrency(result.annualCostToEmployee)} valueClass="text-red-700" />
-                    <DetailRow label="שכר מקביל (שנתי ברוטו)" value={formatCurrency(result.salaryEquivalent * 12)} valueClass="text-emerald-700" bold />
+                    <DetailRow label="שכר מקביל (שנתי ברוטו)" value={formatCurrency(result.salaryEquivalent * 12)} valueClass="text-emerald-800" bold />
                   </div>
                 </div>
               </div>
@@ -696,9 +696,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-ink/70 mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-ink/60 mt-0.5">{hint}</p>}
+      <label className="block text-xs font-medium text-ink/70 mb-1">
+        <span className="block">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink/70 mt-0.5">{hint}</p>}
     </div>
   );
 }
@@ -717,7 +719,7 @@ function SummaryCard({
   const styles: Record<string, string> = {
     blue: 'border-ink/15 bg-cream-2 text-ink',
     red: 'border-red-300 bg-red-50 text-red-700',
-    emerald: 'border-emerald-300 bg-emerald-50 text-emerald-700',
+    emerald: 'border-emerald-300 bg-emerald-50 text-emerald-800',
   };
   return (
     <div className={`rounded-none border p-4 ${styles[color]}`}>

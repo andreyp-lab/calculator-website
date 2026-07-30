@@ -178,19 +178,19 @@ export function CapTable() {
       {finalState && (
         <div className="grid md:grid-cols-3 gap-3">
           <div className="bg-cream-2 border-2 border-ink/15 p-3">
-            <div className="text-xs text-ink/60">סה"כ מניות (לאחר דילול)</div>
+            <div className="text-xs text-ink/70">סה"כ מניות (לאחר דילול)</div>
             <div className="text-2xl font-bold text-gold">
               {fmt(finalState.totalShares)}
             </div>
           </div>
           <div className="bg-cream-2 border-2 border-ink/15 p-3">
-            <div className="text-xs text-ink/60">Post-Money (סבב אחרון)</div>
+            <div className="text-xs text-ink/70">Post-Money (סבב אחרון)</div>
             <div className="text-2xl font-bold text-gold">
               {fmt(finalState.postMoneyValuation)}
             </div>
           </div>
           <div className="bg-cream-2 border-2 border-ink/15 p-3">
-            <div className="text-xs text-ink/60">מחיר למניה</div>
+            <div className="text-xs text-ink/70">מחיר למניה</div>
             <div className="text-2xl font-bold text-gold">
               ₪{finalState.pricePerShare.toFixed(2)}
             </div>
@@ -222,7 +222,7 @@ export function CapTable() {
                 onChange={(e) => updateFounder(s.id, { name: e.target.value })}
                 className="flex-1 px-2 py-1 border border-ink/15 text-sm"
               />
-              <span className="text-xs text-ink/45">מניות:</span>
+              <span className="text-xs text-ink/70">מניות:</span>
               <input
                 type="number"
                 value={s.shares}
@@ -231,7 +231,7 @@ export function CapTable() {
               />
               <button
                 onClick={() => removeFounder(s.id)}
-                className="p-1 text-red-600 hover:bg-red-100"
+                className="p-1 text-red-700 hover:bg-red-100"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -272,7 +272,7 @@ export function CapTable() {
                 </div>
                 <button
                   onClick={() => removeRound(round.id)}
-                  className="p-1 text-red-600 hover:bg-red-100"
+                  className="p-1 text-red-700 hover:bg-red-100"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -293,8 +293,8 @@ export function CapTable() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-ink/70 mb-0.5">משקיע</label>
-                  <input
+                  <label htmlFor="captable-9b8dcc" className="block text-ink/70 mb-0.5">משקיע</label>
+                  <input id="captable-9b8dcc"
                     type="text"
                     value={round.investorName}
                     onChange={(e) => updateRound(round.id, { investorName: e.target.value })}
@@ -302,8 +302,8 @@ export function CapTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-ink/70 mb-0.5">Pre-Money Valuation</label>
-                  <input
+                  <label htmlFor="captable-d7a89e" className="block text-ink/70 mb-0.5">Pre-Money Valuation</label>
+                  <input id="captable-d7a89e"
                     type="number"
                     value={round.preMoneyValuation}
                     onChange={(e) => updateRound(round.id, { preMoneyValuation: parseFloat(e.target.value) || 0 })}
@@ -311,8 +311,8 @@ export function CapTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-ink/70 mb-0.5">השקעה</label>
-                  <input
+                  <label htmlFor="captable-c3af65" className="block text-ink/70 mb-0.5">השקעה</label>
+                  <input id="captable-c3af65"
                     type="number"
                     value={round.investmentAmount}
                     onChange={(e) => updateRound(round.id, { investmentAmount: parseFloat(e.target.value) || 0 })}
@@ -320,8 +320,8 @@ export function CapTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-ink/70 mb-0.5">ESOP Pool % (post-funding)</label>
-                  <input
+                  <label htmlFor="captable-83b629" className="block text-ink/70 mb-0.5">ESOP Pool % (post-funding)</label>
+                  <input id="captable-83b629"
                     type="number"
                     value={round.esopPoolPct ?? 0}
                     onChange={(e) => updateRound(round.id, { esopPoolPct: parseFloat(e.target.value) || 0 })}
@@ -340,8 +340,8 @@ export function CapTable() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-ink/70 mb-0.5">Liquidation Preference (×)</label>
-                  <input
+                  <label htmlFor="captable-0abd48" className="block text-ink/70 mb-0.5">Liquidation Preference (×)</label>
+                  <input id="captable-0abd48"
                     type="number"
                     step="0.5"
                     value={round.liquidationPreference ?? 1}
@@ -463,8 +463,8 @@ export function CapTable() {
         </div>
         <div className="p-4">
           <div className="flex items-center gap-2 mb-3">
-            <label className="text-sm font-medium">ערך יציאה:</label>
-            <input
+            <label htmlFor="captable-00de5a" className="text-sm font-medium">ערך יציאה:</label>
+            <input id="captable-00de5a"
               type="number"
               value={exitValue}
               onChange={(e) => setExitValue(parseFloat(e.target.value) || 0)}
@@ -489,7 +489,7 @@ export function CapTable() {
                     <td className="p-2 font-medium">{p.shareholderName}</td>
                     <td className="p-2 text-center">{fmt(p.preferenceAmount)}</td>
                     <td className="p-2 text-center">{fmt(p.proRataAmount)}</td>
-                    <td className="p-2 text-center font-bold text-emerald-700">
+                    <td className="p-2 text-center font-bold text-emerald-800">
                       {fmt(p.totalAmount)}
                     </td>
                     <td className="p-2 text-center text-gold">
@@ -507,7 +507,7 @@ export function CapTable() {
                   <td className="p-2 text-center">
                     {fmt(waterfall.payouts.reduce((s, p) => s + p.proRataAmount, 0))}
                   </td>
-                  <td className="p-2 text-center text-emerald-700">{fmt(exitValue)}</td>
+                  <td className="p-2 text-center text-emerald-800">{fmt(exitValue)}</td>
                   <td className="p-2 text-center">100%</td>
                 </tr>
               </tfoot>

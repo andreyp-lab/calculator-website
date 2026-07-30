@@ -70,7 +70,7 @@ export function PeriodComparisonDisplay() {
       <div className="bg-amber-50 border-2 border-amber-200 rounded-none p-6 text-center">
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-2" />
         <p className="text-amber-900 mb-2">נדרשים לפחות 2 תרחישים להשוואת תקופות</p>
-        <p className="text-xs text-amber-700">
+        <p className="text-xs text-amber-800">
           צור תרחיש נוסף עם נתוני שנה קודמת/הבאה כדי לראות השוואה
         </p>
       </div>
@@ -111,7 +111,7 @@ export function PeriodComparisonDisplay() {
       <div className={`bg-${trendColor}-50 border-2 border-${trendColor}-300 rounded-none p-4`}>
         <div className="grid md:grid-cols-3 gap-3 text-center">
           <div>
-            <div className="text-xs text-ink/60">מגמה כללית</div>
+            <div className="text-xs text-ink/70">מגמה כללית</div>
             <div className={`text-2xl font-bold text-${trendColor}-700`}>
               {comparison.summary.overallTrend === 'positive'
                 ? '📈 חיובית'
@@ -121,14 +121,14 @@ export function PeriodComparisonDisplay() {
             </div>
           </div>
           <div>
-            <div className="text-xs text-ink/60">צמיחה חזקה ביותר</div>
+            <div className="text-xs text-ink/70">צמיחה חזקה ביותר</div>
             <div className="text-sm font-bold">{comparison.summary.strongestGrowth.metric}</div>
-            <div className="text-emerald-700 font-bold">
+            <div className="text-emerald-800 font-bold">
               {comparison.summary.strongestGrowth.cagr.toFixed(1)}% CAGR
             </div>
           </div>
           <div>
-            <div className="text-xs text-ink/60">ביצוע חלש ביותר</div>
+            <div className="text-xs text-ink/70">ביצוע חלש ביותר</div>
             <div className="text-sm font-bold">
               {comparison.summary.weakestPerformance.metric}
             </div>
@@ -186,7 +186,7 @@ export function PeriodComparisonDisplay() {
                 ))}
                 <td
                   className={`p-2 text-center font-bold ${
-                    m.cagr > 0 ? 'text-emerald-700' : m.cagr < 0 ? 'text-red-700' : 'text-ink/60'
+                    m.cagr > 0 ? 'text-emerald-800' : m.cagr < 0 ? 'text-red-700' : 'text-ink/70'
                   }`}
                 >
                   {m.cagr > 0 ? '+' : ''}
@@ -253,7 +253,7 @@ function YoYCell({ value }: { value: number }) {
   const color = value > 0 ? 'emerald' : value < 0 ? 'red' : 'ink';
   const Icon = value > 0 ? TrendingUp : value < 0 ? TrendingDown : null;
   return (
-    <td className={`p-2 text-center font-bold ${color === 'ink' ? 'text-ink/60' : `text-${color}-700`}`}>
+    <td className={`p-2 text-center font-bold ${color === 'ink' ? 'text-ink/70' : `text-${color}-700`}`}>
       <span className="inline-flex items-center gap-1">
         {Icon && <Icon className="w-3 h-3" />}
         {value > 0 ? '+' : ''}

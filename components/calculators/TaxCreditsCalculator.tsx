@@ -221,7 +221,7 @@ export function TaxCreditsCalculator() {
                   <div className="text-sm text-ink/70">{b.category}</div>
                   <div className="text-sm">
                     <span className="font-bold text-gold">{b.points}</span>
-                    <span className="text-xs text-ink/60"> נק'</span>
+                    <span className="text-xs text-ink/70"> נק'</span>
                   </div>
                 </div>
               ))}
@@ -267,7 +267,7 @@ function NumberField({
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full px-3 py-1.5 border border-ink/15 rounded-none text-sm"
       />
-      {hint && <p className="text-xs text-ink/60 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
   );
 }

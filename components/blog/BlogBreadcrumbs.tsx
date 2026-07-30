@@ -34,7 +34,7 @@ export function BlogBreadcrumbs() {
         ]}
       />
       {post && (
-        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-[0.1em] text-ink/55">
+        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-[0.1em] text-ink/70">
           <span>מאת אנדרי פלטונוב · רו״ח</span>
           <span aria-hidden className="text-gold">✦</span>
           <time dateTime={post.updatedDate ?? post.date}>

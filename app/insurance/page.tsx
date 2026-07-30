@@ -42,7 +42,7 @@ export default function InsurancePage() {
         </div>
 
         <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">💼 מחשבוני ביטוחים</h1>
-        <p className="text-lg text-ink/60 mb-12">
+        <p className="text-lg text-ink/70 mb-12">
           מחשבונים לתכנון פנסיוני וביטוחי. גלה כמה תקבל בפרישה וכמה ביטוח אתה צריך.
         </p>
 
@@ -59,7 +59,7 @@ export default function InsurancePage() {
                   <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition">
                     {calc.title}
                   </h3>
-                  <p className="text-sm text-ink/60">{calc.description}</p>
+                  <p className="text-sm text-ink/70">{calc.description}</p>
                 </div>
                 <ArrowLeft className="w-4 h-4 text-gold mt-2 opacity-0 group-hover:opacity-100 transition" />
               </Link>
@@ -71,8 +71,8 @@ export default function InsurancePage() {
                 <div className="text-3xl">{calc.icon}</div>
                 <div className="flex-1">
                   <h3 className="font-bold text-ink/70 mb-1">{calc.title}</h3>
-                  <p className="text-sm text-ink/60">{calc.description}</p>
-                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/60 px-2 py-1 rounded-none">
+                  <p className="text-sm text-ink/70">{calc.description}</p>
+                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/70 px-2 py-1 rounded-none">
                     בקרוב
                   </span>
                 </div>

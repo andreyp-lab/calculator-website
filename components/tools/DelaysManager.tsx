@@ -63,9 +63,9 @@ export function DelaysManager() {
     <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Clock className="w-5 h-5 text-amber-600" />
+          <Clock className="w-5 h-5 text-amber-800" />
           <h3 className="font-bold text-base text-ink">עיכובים ודחיות</h3>
-          <span className="text-xs text-ink/60">({cashFlow.delays.length})</span>
+          <span className="text-xs text-ink/70">({cashFlow.delays.length})</span>
         </div>
         <button
           onClick={() => (showForm && !editingId ? reset() : (reset(), setShowForm(true)))}
@@ -120,8 +120,8 @@ export function DelaysManager() {
               </select>
             </div>
             <div>
-              <label className="block text-xs text-ink/70 mb-1">ימי עיכוב</label>
-              <input
+              <label htmlFor="delaysmanager-ccfc12" className="block text-xs text-ink/70 mb-1">ימי עיכוב</label>
+              <input id="delaysmanager-ccfc12"
                 type="number"
                 value={form.delayDays}
                 onChange={(e) => setForm({ ...form, delayDays: Number(e.target.value) })}
@@ -153,8 +153,8 @@ export function DelaysManager() {
               </label>
               {form.splitPayment && (
                 <div className="mt-2">
-                  <label className="block text-xs text-ink/70 mb-1">מספר תשלומים</label>
-                  <input
+                  <label htmlFor="delaysmanager-106167" className="block text-xs text-ink/70 mb-1">מספר תשלומים</label>
+                  <input id="delaysmanager-106167"
                     type="number"
                     min={2}
                     max={36}
@@ -166,8 +166,8 @@ export function DelaysManager() {
               )}
             </div>
             <div className="md:col-span-2">
-              <label className="block text-xs text-ink/70 mb-1">סיבה (אופציונלי)</label>
-              <input
+              <label htmlFor="delaysmanager-77688a" className="block text-xs text-ink/70 mb-1">סיבה (אופציונלי)</label>
+              <input id="delaysmanager-77688a"
                 type="text"
                 value={form.reason ?? ''}
                 onChange={(e) => setForm({ ...form, reason: e.target.value })}
@@ -192,7 +192,7 @@ export function DelaysManager() {
       )}
 
       {cashFlow.delays.length === 0 ? (
-        <div className="text-center py-4 text-ink/45 text-xs">
+        <div className="text-center py-4 text-ink/70 text-xs">
           אין עיכובים מוגדרים. הוסף עיכוב גביה (לקוחות) או דחיית תשלום (ספקים) כדי לדמות
           תרחישים אמיתיים.
         </div>
@@ -209,14 +209,14 @@ export function DelaysManager() {
                     className={`text-[10px] px-2 py-0.5 ${
                       delay.type === 'collection_delay'
                         ? 'bg-red-100 text-red-700'
-                        : 'bg-amber-100 text-amber-700'
+                        : 'bg-amber-100 text-amber-800'
                     }`}
                   >
                     {delay.type === 'collection_delay' ? 'גביה' : 'תשלום'}
                   </span>
                   <span className="font-semibold text-ink text-sm">{getItemName(delay)}</span>
                 </div>
-                <div className="text-xs text-ink/60 mt-0.5">
+                <div className="text-xs text-ink/70 mt-0.5">
                   {delay.delayDays} ימי עיכוב
                   {delay.amountImpact ? ` • ${delay.amountImpact > 0 ? '+' : ''}${delay.amountImpact}%` : ''}
                   {delay.splitPayment ? ` • פיצול ל-${delay.splitCount} תשלומים` : ''}
@@ -243,7 +243,7 @@ export function DelaysManager() {
               </button>
               <button
                 onClick={() => deleteDelay(delay.id)}
-                className="p-1 text-red-600 hover:bg-red-50"
+                className="p-1 text-red-700 hover:bg-red-50"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>

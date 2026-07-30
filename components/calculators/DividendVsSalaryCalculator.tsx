@@ -187,13 +187,13 @@ function ScenarioDetail({
         {scenario.incomeTax > 0 && (
           <div className="flex justify-between">
             <span className="text-ink/70">מס הכנסה:</span>
-            <span className="font-medium text-red-600">−{formatCurrency(scenario.incomeTax)}</span>
+            <span className="font-medium text-red-700">−{formatCurrency(scenario.incomeTax)}</span>
           </div>
         )}
         {scenario.employeeSocialSecurity > 0 && (
           <div className="flex justify-between">
             <span className="text-ink/70">ב.ל. עובד:</span>
-            <span className="font-medium text-red-600">−{formatCurrency(scenario.employeeSocialSecurity)}</span>
+            <span className="font-medium text-red-700">−{formatCurrency(scenario.employeeSocialSecurity)}</span>
           </div>
         )}
         {scenario.employerSocialSecurity > 0 && (
@@ -205,19 +205,19 @@ function ScenarioDetail({
         {scenario.corporateTax > 0 && (
           <div className="flex justify-between">
             <span className="text-ink/70">מס חברות (23%):</span>
-            <span className="font-medium text-red-600">−{formatCurrency(scenario.corporateTax)}</span>
+            <span className="font-medium text-red-700">−{formatCurrency(scenario.corporateTax)}</span>
           </div>
         )}
         {scenario.dividendTax > 0 && (
           <div className="flex justify-between">
             <span className="text-ink/70">מס דיבידנד:</span>
-            <span className="font-medium text-red-600">−{formatCurrency(scenario.dividendTax)}</span>
+            <span className="font-medium text-red-700">−{formatCurrency(scenario.dividendTax)}</span>
           </div>
         )}
         {scenario.surtax > 0 && (
           <div className="flex justify-between">
             <span className="text-ink/70">מס יסף (3%):</span>
-            <span className="font-medium text-red-600">−{formatCurrency(scenario.surtax)}</span>
+            <span className="font-medium text-red-700">−{formatCurrency(scenario.surtax)}</span>
           </div>
         )}
         <div className="flex justify-between pt-2 border-t border-ink/15">
@@ -232,18 +232,18 @@ function ScenarioDetail({
           <span className="font-bold text-ink">נטו לבעלים:</span>
           <span
             className={`font-bold text-xl ${
-              isRecommended ? 'text-emerald-700' : 'text-ink'
+              isRecommended ? 'text-emerald-800' : 'text-ink'
             }`}
           >
             {formatCurrency(scenario.netToOwner)}
           </span>
         </div>
-        <div className="flex justify-between text-ink/60">
+        <div className="flex justify-between text-ink/70">
           <span>שיעור מס אפקטיבי:</span>
           <span>{pct(scenario.effectiveTaxRate)}</span>
         </div>
         {scenario.pensionEmployerContribution > 0 && (
-          <div className="flex justify-between text-emerald-700 bg-emerald-50 rounded px-2 py-1 mt-1">
+          <div className="flex justify-between text-emerald-800 bg-emerald-50 rounded px-2 py-1 mt-1">
             <span className="text-xs">+ הפקדת מעסיק לפנסיה:</span>
             <span className="text-xs font-medium">
               {formatCurrency(scenario.pensionEmployerContribution)}/שנה
@@ -274,7 +274,7 @@ function InputSection({
           <label className="block text-sm font-medium text-ink/70 mb-1">
             רווח שנתי לפני מס (₪)
           </label>
-          <p className="text-xs text-ink/60 mb-2">לפני משכורת בעלים ולפני מס חברות</p>
+          <p className="text-xs text-ink/70 mb-2">לפני משכורת בעלים ולפני מס חברות</p>
           <input
             type="number"
             min={0}
@@ -289,7 +289,7 @@ function InputSection({
           <label className="block text-sm font-medium text-ink/70 mb-1">
             נקודות זיכוי של הבעלים
           </label>
-          <p className="text-xs text-ink/60 mb-2">
+          <p className="text-xs text-ink/70 mb-2">
             גבר רגיל = 2.25 | אישה = 2.75 | הורה לילדים = יותר
           </p>
           <input
@@ -315,7 +315,7 @@ function InputSection({
             />
             <div>
               <div className="text-sm font-medium text-ink/70">בעל מניות מהותי (בעל שליטה)</div>
-              <div className="text-xs text-ink/60">
+              <div className="text-xs text-ink/70">
                 מחזיק 10%+ מהמניות → מס דיבידנד 30% (במקום 25%)
               </div>
             </div>
@@ -334,7 +334,7 @@ function InputSection({
             />
             <div>
               <div className="text-sm font-medium text-ink/70">כלול הפקדות פנסיה</div>
-              <div className="text-xs text-ink/60">
+              <div className="text-xs text-ink/70">
                 מעסיק 6.5% + עובד 6% + פיצויים 8.33% — הוצאה מוכרת לחברה
               </div>
             </div>
@@ -349,7 +349,7 @@ function InputSection({
             />
             <div>
               <div className="text-sm font-medium text-ink/70">כלול קרן השתלמות</div>
-              <div className="text-xs text-ink/60">
+              <div className="text-xs text-ink/70">
                 7.5% מעסיק + 2.5% עובד — חסכון מס משמעותי עד 18,840 ₪/שנה
               </div>
             </div>
@@ -366,7 +366,7 @@ function InputSection({
             />
             <div>
               <div className="text-sm font-medium text-ink/70">בן/בת זוג עובד בחברה</div>
-              <div className="text-xs text-ink/60">
+              <div className="text-xs text-ink/70">
                 מפזר הכנסה → מדרגות מס נמוכות יותר
               </div>
             </div>
@@ -375,10 +375,10 @@ function InputSection({
           {input.includeSpouseSalary && (
             <div className="space-y-3 pt-2 border-t border-ink/10">
               <div>
-                <label className="block text-xs font-medium text-ink/70 mb-1">
+                <label htmlFor="dividendvssalarycalculator-8d16ec" className="block text-xs font-medium text-ink/70 mb-1">
                   משכורת חודשית ברוטו לבן/בת זוג (₪)
                 </label>
-                <input
+                <input id="dividendvssalarycalculator-8d16ec"
                   type="number"
                   min={6_500}
                   max={100_000}
@@ -389,10 +389,10 @@ function InputSection({
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-ink/70 mb-1">
+                <label htmlFor="dividendvssalarycalculator-2ecd63" className="block text-xs font-medium text-ink/70 mb-1">
                   נקודות זיכוי של בן/בת הזוג
                 </label>
-                <input
+                <input id="dividendvssalarycalculator-2ecd63"
                   type="number"
                   min={0}
                   max={20}
@@ -551,7 +551,7 @@ function CompareTab({
                 לעומת אסטרטגיית &quot;הכל משכורת&quot;.
               </div>
               {result.recommendation === 'optimal' && (
-                <div className="mt-2 text-sm text-emerald-700">
+                <div className="mt-2 text-sm text-emerald-800">
                   המיקס האופטימלי: משכורת {formatCurrency(result.optimal.grossSalary)}/שנה (
                   {result.optimal.salaryPct.toFixed(0)}% מהרווח) + דיבידנד{' '}
                   {formatCurrency(result.optimal.dividend)}/שנה.
@@ -637,7 +637,7 @@ function OptimalMixTab({
       {/* גרף נטו לפי משכורת */}
       <div className="bg-paper border border-ink/15 rounded-none p-5">
         <h3 className="font-bold text-ink mb-1">נטו לבעלים לפי גובה המשכורת</h3>
-        <p className="text-sm text-ink/60 mb-4">
+        <p className="text-sm text-ink/70 mb-4">
           הנקודה הגבוהה ביותר = המיקס האופטימלי. מימין: הכל משכורת. משמאל: הכל דיבידנד.
         </p>
         <ResponsiveContainer width="100%" height={300}>
@@ -928,7 +928,7 @@ function SpouseTab({
           />
         </>
       ) : (
-        <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/60">
+        <div className="bg-cream-2 border border-ink/15 rounded-none p-6 text-center text-ink/70">
           <div className="text-4xl mb-3">👩‍💼</div>
           <p className="font-medium">סמן &quot;בן/בת זוג עובד בחברה&quot; בטופס הקלט כדי לראות את האנליזה</p>
         </div>
@@ -1094,23 +1094,23 @@ export function DividendVsSalaryCalculator() {
       {/* שורת סיכום עליונה */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="bg-paper border border-ink/15 rounded-none p-3 text-center">
-          <div className="text-xs text-ink/60 mb-1">רווח חברה</div>
+          <div className="text-xs text-ink/70 mb-1">רווח חברה</div>
           <div className="font-bold text-ink text-lg">{shortCurrency(profit)}</div>
         </div>
         <div className="bg-emerald-50 border border-emerald-200 rounded-none p-3 text-center">
-          <div className="text-xs text-ink/60 mb-1">נטו אופטימלי</div>
-          <div className="font-bold text-emerald-700 text-lg">
+          <div className="text-xs text-ink/70 mb-1">נטו אופטימלי</div>
+          <div className="font-bold text-emerald-800 text-lg">
             {shortCurrency(result.optimal.netToOwner)}
           </div>
         </div>
         <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-center">
-          <div className="text-xs text-ink/60 mb-1">חיסכון vs. כל-משכורת</div>
+          <div className="text-xs text-ink/70 mb-1">חיסכון vs. כל-משכורת</div>
           <div className="font-bold text-gold text-lg">
             {shortCurrency(result.taxSavings)}
           </div>
         </div>
         <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-center">
-          <div className="text-xs text-ink/60 mb-1">מס אפקטיבי (אופטימלי)</div>
+          <div className="text-xs text-ink/70 mb-1">מס אפקטיבי (אופטימלי)</div>
           <div className="font-bold text-ink text-lg">
             {pct(result.optimal.effectiveTaxRate)}
           </div>

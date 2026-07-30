@@ -75,7 +75,7 @@ export function BalanceSheetForm() {
 
       {!isBalanced && balanceSheet.totalAssets > 0 && (
         <div className="bg-amber-50 border border-amber-300 rounded-lg p-3 mb-4 flex items-start gap-2">
-          <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <AlertTriangle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
           <div className="text-sm">
             <p className="font-medium text-amber-900">המאזן לא מאוזן!</p>
             <p className="text-amber-800">
