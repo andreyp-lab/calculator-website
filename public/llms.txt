@@ -28,6 +28,7 @@
 - [מחשבון ניכויים ממשכורת 2026](https://cheshbonai.co.il/employee-rights/salary-deductions)
 - [מחשבון מענק עבודה](https://cheshbonai.co.il/employee-rights/work-grant)
 - [בדיקת זכאות למענק עבודה (מס הכנסה שלילי)](https://cheshbonai.co.il/employee-rights/work-grant/eligibility)
+- [מענק עבודה רטרואקטיבית — לאילו שנים אפשר להגיש](https://cheshbonai.co.il/employee-rights/work-grant/retroactive)
 
 ### מחשבונים פיננסיים - עצמאיים
 - [מדריך פתיחת עסק — עוסק פטור או מורשה? 2026](https://cheshbonai.co.il/self-employed/opening-business)
@@ -36,6 +37,7 @@
 - [מחשבון שכר נטו עצמאי](https://cheshbonai.co.il/self-employed/net)
 - [מחשבון ביטוח לאומי לעצמאי](https://cheshbonai.co.il/self-employed/social-security)
 - [מחשבון מע"מ](https://cheshbonai.co.il/self-employed/vat)
+- [מחשבון חילוץ מע"מ](https://cheshbonai.co.il/tools/vat-extract)
 - [מחשבון תמחור שעת עבודה לעצמאי](https://cheshbonai.co.il/self-employed/hourly-rate)
 - [מחשבון פנסיה חובה לעצמאי](https://cheshbonai.co.il/self-employed/mandatory-pension)
 - [מחשבון דיבידנד מול משכורת](https://cheshbonai.co.il/self-employed/dividend-vs-salary)

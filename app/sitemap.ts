@@ -82,6 +82,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/work-grant', 'monthly', 0.90),
     // כוונת "בדיקת זכאות" (~261 חשיפות/חודש) — URL ייעודי, לא טאב בתוך דף המענק.
     make('/employee-rights/work-grant/eligibility', 'monthly', 0.90, new Date('2026-07-30')),
+    // כוונת "מענק עבודה שנים קודמות / רטרואקטיבית" — כולל תיקון מיתוס 6 השנים (החוק: שנתיים בלבד).
+    make('/employee-rights/work-grant/retroactive', 'monthly', 0.85, new Date('2026-07-30')),
 
     // ===== מחשבונים: עצמאיים =====
     make('/self-employed/opening-business', 'monthly', 0.92, new Date('2026-07-01')), // מדריך פתיחת עסק (pillar, הורחב 7.2026)
@@ -143,6 +145,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/tools/business-valuation', 'monthly', 0.85),
     make('/tools/customer-lifetime-value', 'monthly', 0.85),
     make('/tools/capital', 'monthly', 0.85),
+    make('/tools/vat-extract', 'monthly', 0.85),
 
     // ===== עדכוני שוק (ISR) =====
     make('/news', 'weekly', 0.85),

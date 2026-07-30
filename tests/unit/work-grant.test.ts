@@ -228,9 +228,9 @@ describe('checkEligibility', () => {
     expect(result.isEligible).toBe(true);
   });
 
-  it('6 שנים אחורה', () => {
+  it('הגשה רטרואקטיבית — עד שנתיים מתום שנת המס (סעיף 6 לחוק מענק עבודה)', () => {
     const result = checkEligibility(baseInput);
-    expect(result.yearsCanFileBack).toBe(6);
+    expect(result.yearsCanFileBack).toBe(2);
   });
 });
 

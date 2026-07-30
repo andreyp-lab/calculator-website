@@ -139,7 +139,7 @@ export interface WorkGrantEligibility {
   conditions: EligibilityCondition[];
   /** סיבת חוסר זכאות ראשית */
   primaryReason?: string;
-  /** שנות ניתן להגיש אחורה */
+  /** שנים שניתן להגיש אחורה (סעיף 7(א)(1) לחוק מענק עבודה — עד שנתיים מתום שנת המס) */
   yearsCanFileBack: number;
   /** האם כדאי להגיש */
   shouldFile: boolean;
@@ -428,7 +428,7 @@ export function checkEligibility(input: WorkGrantInput): WorkGrantEligibility {
     {
       label: 'זכות לפי חוק',
       met: true,
-      note: 'מענק עבודה הוא זכות לפי חוק מס הכנסה — ניתן להגיש 6 שנים אחורה',
+      note: 'מענק עבודה הוא זכות לפי חוק — ניתן לתבוע עד שנתיים מתום שנת המס',
     },
   ];
 
@@ -451,7 +451,7 @@ export function checkEligibility(input: WorkGrantInput): WorkGrantEligibility {
     isEligible,
     conditions,
     primaryReason,
-    yearsCanFileBack: 6,
+    yearsCanFileBack: 2,
     shouldFile: isEligible && grant > 200,
   };
 }
@@ -538,7 +538,7 @@ export function calculateWorkGrant(input: WorkGrantInput): WorkGrantResult {
       const diff = lowerThreshold - input.annualWorkIncome;
       tips.push(`הכנסה נמוכה ב-${Math.round(diff).toLocaleString('he-IL')} ₪ מהסף. אם תגדיל שעות — תיכנס לטווח הזכאות.`);
     } else if (input.annualWorkIncome > upperThreshold) {
-      tips.push(`הכנסה גבוהה מהתקרה (${upperThreshold.toLocaleString('he-IL')} ₪). בדוק אם שנים קודמות מתאימות — ניתן להגיש 6 שנים אחורה.`);
+      tips.push(`הכנסה גבוהה מהתקרה (${upperThreshold.toLocaleString('he-IL')} ₪). בדוק אם שנת המס הקודמת מתאימה — ניתן להגיש עד שנתיים מתום שנת המס.`);
     }
   } else {
     if (tier.direction === 'rise') {
@@ -550,9 +550,9 @@ export function calculateWorkGrant(input: WorkGrantInput): WorkGrantResult {
       tips.push(`אתה בשלב הירידה — ככל שהרווחת יותר, המענק קטן. בדוק עם יועץ מס אם יש אסטרטגיה לחלוקת הכנסה.`);
     }
     if (annualGrant > 1_000) {
-      tips.push(`ניתן להגיש 6 שנים אחורה — בדוק שנים קודמות! מענק מצטבר אפשרי: ${Math.round(annualGrant * 5).toLocaleString('he-IL')} ₪.`);
+      tips.push('ניתן להגיש גם על שנת המס הקודמת (עד שנתיים מתום שנת המס) — אם היית זכאי גם בה, מדובר בשתי תביעות במקביל.');
     }
-    tips.push('הגשה: אתר רשות המסים → "מענק עבודה" → "הגשת בקשה". חלון ההגשה: אוגוסט-ספטמבר לשנה הנוכחית.');
+    tips.push('הגשה: אתר רשות המסים → "מענק עבודה" → "הגשת בקשה". התביעה מוגשת אחרי תום שנת המס; הגשה עד 30.6 מזכה בתשלום ראשון ב-15.7.');
   }
 
   if (input.numberOfChildren === 0 && input.age >= 21 && input.age < 23) {
@@ -577,7 +577,7 @@ export function calculateWorkGrant(input: WorkGrantInput): WorkGrantResult {
     numberOfChildren: input.numberOfChildren,
     lowerThreshold,
     upperThreshold,
-    filingDeadline: 'אוגוסט-ספטמבר 2026 (לשנת המס 2025)',
+    filingDeadline: 'לשנת המס 2025: מומלץ עד 30.6.2026 (תשלום ראשון 15.7.2026); מקוון עד סוף דצמבר 2027',
   };
 }
 
