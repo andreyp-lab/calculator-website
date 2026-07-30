@@ -1,0 +1,405 @@
+======================================================================
+CRAWLED 226  OK 226  NON-200 0  SITEMAP 162
+======================================================================
+
+## NON-200 / ERRORS
+
+## IN SITEMAP BUT NOT REACHED/OK
+
+## CRAWLED+OK BUT NOT IN SITEMAP (64)
+   https://cheshbonai.co.il/  robots=index, follow  words=796
+   https://cheshbonai.co.il/accessibility  robots=index, follow  words=944
+   https://cheshbonai.co.il/glossary/amortization-table  robots=noindex, follow  words=388
+   https://cheshbonai.co.il/glossary/annual-leave  robots=noindex, follow  words=404
+   https://cheshbonai.co.il/glossary/annuity-continuity  robots=noindex, follow  words=391
+   https://cheshbonai.co.il/glossary/authorized-dealer  robots=noindex, follow  words=394
+   https://cheshbonai.co.il/glossary/balloon  robots=noindex, follow  words=396
+   https://cheshbonai.co.il/glossary/benefit-value  robots=noindex, follow  words=400
+   https://cheshbonai.co.il/glossary/bituach-leumi  robots=noindex, follow  words=402
+   https://cheshbonai.co.il/glossary/bonus  robots=noindex, follow  words=394
+   https://cheshbonai.co.il/glossary/capital-gains-tax  robots=noindex, follow  words=409
+   https://cheshbonai.co.il/glossary/company-car  robots=noindex, follow  words=396
+   https://cheshbonai.co.il/glossary/compound-interest  robots=noindex, follow  words=396
+   https://cheshbonai.co.il/glossary/convalescence-pay  robots=noindex, follow  words=397
+   https://cheshbonai.co.il/glossary/conversion-factor  robots=noindex, follow  words=397
+   https://cheshbonai.co.il/glossary/cpi-linkage  robots=noindex, follow  words=386
+   https://cheshbonai.co.il/glossary/cpi-linked  robots=noindex, follow  words=392
+   https://cheshbonai.co.il/glossary/directive-329  robots=noindex, follow  words=391
+   https://cheshbonai.co.il/glossary/dividend  robots=noindex, follow  words=400
+   https://cheshbonai.co.il/glossary/early-repayment  robots=noindex, follow  words=401
+   https://cheshbonai.co.il/glossary/employer-cost  robots=noindex, follow  words=395
+   https://cheshbonai.co.il/glossary/equity  robots=noindex, follow  words=386
+   https://cheshbonai.co.il/glossary/exempt-dealer  robots=noindex, follow  words=397
+   https://cheshbonai.co.il/glossary/exemption-limit  robots=noindex, follow  words=400
+   https://cheshbonai.co.il/glossary/first-apartment  robots=noindex, follow  words=401
+   https://cheshbonai.co.il/glossary/fixed-unlinked  robots=noindex, follow  words=388
+   https://cheshbonai.co.il/glossary/grace  robots=noindex, follow  words=391
+   https://cheshbonai.co.il/glossary/inflation  robots=noindex, follow  words=394
+   https://cheshbonai.co.il/glossary/leasing  robots=noindex, follow  words=390
+   https://cheshbonai.co.il/glossary/llc  robots=noindex, follow  words=408
+   https://cheshbonai.co.il/glossary/ltv-percent  robots=noindex, follow  words=402
+   https://cheshbonai.co.il/glossary/marginal-tax-rate  robots=noindex, follow  words=402
+   https://cheshbonai.co.il/glossary/maternity-benefits  robots=noindex, follow  words=398
+   https://cheshbonai.co.il/glossary/maternity-leave  robots=noindex, follow  words=404
+   https://cheshbonai.co.il/glossary/minimum-wage  robots=noindex, follow  words=400
+   https://cheshbonai.co.il/glossary/mix  robots=noindex, follow  words=401
+   https://cheshbonai.co.il/glossary/net  robots=noindex, follow  words=383
+   https://cheshbonai.co.il/glossary/old-age-pension  robots=noindex, follow  words=389
+   https://cheshbonai.co.il/glossary/options-102  robots=noindex, follow  words=396
+   https://cheshbonai.co.il/glossary/pension  robots=noindex, follow  words=402
+   https://cheshbonai.co.il/glossary/preliminary-approval  robots=noindex, follow  words=396
+   https://cheshbonai.co.il/glossary/prime  robots=noindex, follow  words=403
+   https://cheshbonai.co.il/glossary/real-estate-investment  robots=noindex, follow  words=381
+   https://cheshbonai.co.il/glossary/recognized-expense  robots=noindex, follow  words=386
+   https://cheshbonai.co.il/glossary/retirement-age  robots=noindex, follow  words=391
+   https://cheshbonai.co.il/glossary/reverse-mortgage  robots=noindex, follow  words=404
+   https://cheshbonai.co.il/glossary/section-14  robots=noindex, follow  words=391
+   https://cheshbonai.co.il/glossary/severance  robots=noindex, follow  words=404
+   https://cheshbonai.co.il/glossary/sick-pay  robots=noindex, follow  words=398
+   https://cheshbonai.co.il/glossary/social-benefits  robots=noindex, follow  words=390
+   https://cheshbonai.co.il/glossary/spitzer  robots=noindex, follow  words=397
+   https://cheshbonai.co.il/glossary/study-fund  robots=noindex, follow  words=393
+   https://cheshbonai.co.il/glossary/surtax  robots=noindex, follow  words=408
+   https://cheshbonai.co.il/glossary/taml  robots=noindex, follow  words=402
+   https://cheshbonai.co.il/glossary/tax-advances  robots=noindex, follow  words=404
+   https://cheshbonai.co.il/glossary/tax-brackets  robots=noindex, follow  words=408
+   https://cheshbonai.co.il/glossary/tax-coordination  robots=noindex, follow  words=401
+   https://cheshbonai.co.il/glossary/tax-credit-points  robots=noindex, follow  words=385
+   https://cheshbonai.co.il/glossary/taxable-income  robots=noindex, follow  words=387
+   https://cheshbonai.co.il/glossary/unemployment-benefit  robots=noindex, follow  words=392
+   https://cheshbonai.co.il/glossary/vacation-redemption  robots=noindex, follow  words=402
+   https://cheshbonai.co.il/glossary/variable-5-year  robots=noindex, follow  words=408
+   https://cheshbonai.co.il/glossary/vat  robots=noindex, follow  words=405
+   https://cheshbonai.co.il/glossary/weighted-average-period  robots=noindex, follow  words=402
+
+## TITLES
+  missing: 0
+  >60 chars: 134   >65: 57
+  <30 chars: 1
+  DUPLICATE TITLES:
+    [2x] 30 מחשבונים פיננסיים חינם בעברית – כלים מעודכנים 2026
+         https://cheshbonai.co.il
+         https://cheshbonai.co.il/
+  LONGEST TITLES:
+    82  https://cheshbonai.co.il/business/office
+        כמה עולה להקים משרד (יועץ/עו&quot;ד/רו&quot;ח)? מחשבון תוכנית עסקית 2026 | חשבונאי
+    82  https://cheshbonai.co.il/business/clinic
+        כמה עולה להקים קליניקה לרפואה משלימה / אסתטיקה? מחשבון תוכנית עסקית 2026 | חשבונאי
+    75  https://cheshbonai.co.il/self-employed/tax-advances
+        מחשבון מקדמות מס לעצמאי 2026 | מס הכנסה + ביטוח לאומי + מע&quot;מ | חשבונאי
+    75  https://cheshbonai.co.il/self-employed/opening-business
+        איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או מורשה? המדריך המלא | חשבונאי
+    75  https://cheshbonai.co.il/business/food-truck
+        כמה עולה להקים פודטראק / דוכן אוכל נייד? מחשבון תוכנית עסקית 2026 | חשבונאי
+    75  https://cheshbonai.co.il/business/daycare
+        כמה עולה להקים מעון יום / גן ילדים פרטי? מחשבון תוכנית עסקית 2026 | חשבונאי
+    75  https://cheshbonai.co.il/blog/boi-directive-329-mortgage-rules
+        הוראת בנק ישראל 329 - 3 הכללים החבויים שכל לוקח משכנתא חייב להכיר | חשבונאי
+    74  https://cheshbonai.co.il/savings/personal-loan
+        מחשבון הלוואה אישית 2026 | כרטיס אשראי, Snowball, APR, כושר החזר | חשבונאי
+    74  https://cheshbonai.co.il/personal-tax/tax-credits
+        מחשבון נקודות זיכוי 2026 — איך מחשבים וכמה שווה כל נקודה (242 ₪) | חשבונאי
+    74  https://cheshbonai.co.il/glossary/taml
+        תמ&quot;ל (תגמול מלחמה) – מה זה? הסבר והגדרה | מילון פיננסי 2026 | חשבונאי
+    74  https://cheshbonai.co.il/blog/bituach-leumi-self-employed-deep-dive
+        ביטוח לאומי לעצמאי 2026 - חישוב מקיף, השוואה לשכיר, והטבת מס 52% | חשבונאי
+    73  https://cheshbonai.co.il/employee-rights/recreation-pay
+        מחשבון דמי הבראה 2026 — חישוב לפי וותק, נטו, ותביעה רטרואקטיבית | חשבונאי
+
+## META DESCRIPTIONS
+  missing: 0
+  >160: 36   <70: 0
+    DUP DESC [2x] 30 מחשבונים פיננסיים מקצועיים: מס הכנסה, משכנתא עם Solver, פיצויי פיטורין, ביטוח
+         https://cheshbonai.co.il
+         https://cheshbonai.co.il/
+
+## CANONICALS
+  missing canonical: 0
+  canonical != url: 0
+
+## ROBOTS META (noindex)
+    noindex, follow  https://cheshbonai.co.il/glossary/amortization-table
+    noindex, follow  https://cheshbonai.co.il/glossary/annual-leave
+    noindex, follow  https://cheshbonai.co.il/glossary/annuity-continuity
+    noindex, follow  https://cheshbonai.co.il/glossary/authorized-dealer
+    noindex, follow  https://cheshbonai.co.il/glossary/balloon
+    noindex, follow  https://cheshbonai.co.il/glossary/benefit-value
+    noindex, follow  https://cheshbonai.co.il/glossary/bituach-leumi
+    noindex, follow  https://cheshbonai.co.il/glossary/bonus
+    noindex, follow  https://cheshbonai.co.il/glossary/capital-gains-tax
+    noindex, follow  https://cheshbonai.co.il/glossary/company-car
+    noindex, follow  https://cheshbonai.co.il/glossary/compound-interest
+    noindex, follow  https://cheshbonai.co.il/glossary/convalescence-pay
+    noindex, follow  https://cheshbonai.co.il/glossary/conversion-factor
+    noindex, follow  https://cheshbonai.co.il/glossary/cpi-linkage
+    noindex, follow  https://cheshbonai.co.il/glossary/cpi-linked
+    noindex, follow  https://cheshbonai.co.il/glossary/directive-329
+    noindex, follow  https://cheshbonai.co.il/glossary/dividend
+    noindex, follow  https://cheshbonai.co.il/glossary/early-repayment
+    noindex, follow  https://cheshbonai.co.il/glossary/employer-cost
+    noindex, follow  https://cheshbonai.co.il/glossary/equity
+    noindex, follow  https://cheshbonai.co.il/glossary/exempt-dealer
+    noindex, follow  https://cheshbonai.co.il/glossary/exemption-limit
+    noindex, follow  https://cheshbonai.co.il/glossary/first-apartment
+    noindex, follow  https://cheshbonai.co.il/glossary/fixed-unlinked
+    noindex, follow  https://cheshbonai.co.il/glossary/grace
+    noindex, follow  https://cheshbonai.co.il/glossary/inflation
+    noindex, follow  https://cheshbonai.co.il/glossary/leasing
+    noindex, follow  https://cheshbonai.co.il/glossary/llc
+    noindex, follow  https://cheshbonai.co.il/glossary/ltv-percent
+    noindex, follow  https://cheshbonai.co.il/glossary/marginal-tax-rate
+    noindex, follow  https://cheshbonai.co.il/glossary/maternity-benefits
+    noindex, follow  https://cheshbonai.co.il/glossary/maternity-leave
+    noindex, follow  https://cheshbonai.co.il/glossary/minimum-wage
+    noindex, follow  https://cheshbonai.co.il/glossary/mix
+    noindex, follow  https://cheshbonai.co.il/glossary/net
+    noindex, follow  https://cheshbonai.co.il/glossary/old-age-pension
+    noindex, follow  https://cheshbonai.co.il/glossary/options-102
+    noindex, follow  https://cheshbonai.co.il/glossary/pension
+    noindex, follow  https://cheshbonai.co.il/glossary/preliminary-approval
+    noindex, follow  https://cheshbonai.co.il/glossary/prime
+    noindex, follow  https://cheshbonai.co.il/glossary/real-estate-investment
+    noindex, follow  https://cheshbonai.co.il/glossary/recognized-expense
+    noindex, follow  https://cheshbonai.co.il/glossary/retirement-age
+    noindex, follow  https://cheshbonai.co.il/glossary/reverse-mortgage
+    noindex, follow  https://cheshbonai.co.il/glossary/section-14
+    noindex, follow  https://cheshbonai.co.il/glossary/severance
+    noindex, follow  https://cheshbonai.co.il/glossary/sick-pay
+    noindex, follow  https://cheshbonai.co.il/glossary/social-benefits
+    noindex, follow  https://cheshbonai.co.il/glossary/spitzer
+    noindex, follow  https://cheshbonai.co.il/glossary/study-fund
+    noindex, follow  https://cheshbonai.co.il/glossary/surtax
+    noindex, follow  https://cheshbonai.co.il/glossary/taml
+    noindex, follow  https://cheshbonai.co.il/glossary/tax-advances
+    noindex, follow  https://cheshbonai.co.il/glossary/tax-brackets
+    noindex, follow  https://cheshbonai.co.il/glossary/tax-coordination
+    noindex, follow  https://cheshbonai.co.il/glossary/tax-credit-points
+    noindex, follow  https://cheshbonai.co.il/glossary/taxable-income
+    noindex, follow  https://cheshbonai.co.il/glossary/unemployment-benefit
+    noindex, follow  https://cheshbonai.co.il/glossary/vacation-redemption
+    noindex, follow  https://cheshbonai.co.il/glossary/variable-5-year
+    noindex, follow  https://cheshbonai.co.il/glossary/vat
+    noindex, follow  https://cheshbonai.co.il/glossary/weighted-average-period
+
+## H1
+  missing H1: 3
+     https://cheshbonai.co.il/tools/capital
+     https://cheshbonai.co.il/tools/cash-flow
+     https://cheshbonai.co.il/tools/cashflow-solo
+  multiple H1: 0
+
+## THIN CONTENT (word_count < 500)
+      203  https://cheshbonai.co.il/contact
+      219  https://cheshbonai.co.il/insurance
+      255  https://cheshbonai.co.il/compare
+      265  https://cheshbonai.co.il/investments
+      291  https://cheshbonai.co.il/tools/budget-wizard
+      302  https://cheshbonai.co.il/tools/forecast
+      313  https://cheshbonai.co.il/tools/cash-flow
+      318  https://cheshbonai.co.il/tools/cashflow-solo
+      339  https://cheshbonai.co.il/topics
+      348  https://cheshbonai.co.il/about
+      350  https://cheshbonai.co.il/guides
+      355  https://cheshbonai.co.il/tools/financial-analysis
+      358  https://cheshbonai.co.il/news
+      372  https://cheshbonai.co.il/news/cpi
+      373  https://cheshbonai.co.il/news/average-wage
+      381  https://cheshbonai.co.il/glossary/real-estate-investment
+      383  https://cheshbonai.co.il/glossary/net
+      385  https://cheshbonai.co.il/glossary/tax-credit-points
+      386  https://cheshbonai.co.il/glossary/cpi-linkage
+      386  https://cheshbonai.co.il/glossary/equity
+      386  https://cheshbonai.co.il/glossary/recognized-expense
+      387  https://cheshbonai.co.il/glossary/taxable-income
+      388  https://cheshbonai.co.il/glossary/amortization-table
+      388  https://cheshbonai.co.il/glossary/fixed-unlinked
+      389  https://cheshbonai.co.il/glossary/old-age-pension
+      390  https://cheshbonai.co.il/glossary/leasing
+      390  https://cheshbonai.co.il/glossary/social-benefits
+      391  https://cheshbonai.co.il/glossary/annuity-continuity
+      391  https://cheshbonai.co.il/glossary/directive-329
+      391  https://cheshbonai.co.il/glossary/grace
+
+  median words: 904
+  LONGEST:
+     2535  https://cheshbonai.co.il/guides/taxes-complete-guide-2026
+     2680  https://cheshbonai.co.il/self-employed/business-finance
+     2691  https://cheshbonai.co.il/blog
+     3426  https://cheshbonai.co.il/guides/mortgage-complete-guide-2026
+     3743  https://cheshbonai.co.il/self-employed/opening-business
+
+## SCHEMA
+     224  Organization
+     224  WebSite
+     147  BreadcrumbList
+     105  FAQPage
+      62  DefinedTerm
+      50  SoftwareApplication
+      43  BlogPosting
+      11  Article
+       6  Dataset
+       5  Course
+       3  HowTo
+       1  Person
+       1  WebPage
+       1  NewsArticle
+       1  DefinedTermSet
+  pages with NO schema: 0
+  pages with INVALID json-ld: 0
+
+## IMAGES
+  total <img>: 13   missing alt: 0
+  missing og:image: 102
+     https://cheshbonai.co.il/about
+     https://cheshbonai.co.il/business/bakery
+     https://cheshbonai.co.il/business/barbershop
+     https://cheshbonai.co.il/business/beauty-salon
+     https://cheshbonai.co.il/business/cafe
+     https://cheshbonai.co.il/business/clinic
+     https://cheshbonai.co.il/business/daycare
+     https://cheshbonai.co.il/business/dental-clinic
+     https://cheshbonai.co.il/business/food-truck
+     https://cheshbonai.co.il/business/garage
+     https://cheshbonai.co.il/business/gym
+     https://cheshbonai.co.il/business/minimarket
+     https://cheshbonai.co.il/business/office
+     https://cheshbonai.co.il/business/online-store
+     https://cheshbonai.co.il/business/photography-studio
+     https://cheshbonai.co.il/business/pilates-studio
+     https://cheshbonai.co.il/business/pizzeria
+     https://cheshbonai.co.il/business/pub
+     https://cheshbonai.co.il/business/restaurant
+     https://cheshbonai.co.il/business/retail-store
+
+## NO .answer-box (AI citability): 192 of 226
+
+## ORPHAN / LOW-INBOUND PAGES (inbound internal links)
+       0  https://cheshbonai.co.il/tools/capital
+       1  https://cheshbonai.co.il/business/pilates-studio
+       1  https://cheshbonai.co.il/business/photography-studio
+       1  https://cheshbonai.co.il/business/cafe
+       1  https://cheshbonai.co.il/business/restaurant
+       1  https://cheshbonai.co.il/business/bakery
+       1  https://cheshbonai.co.il/business/barbershop
+       1  https://cheshbonai.co.il/business/beauty-salon
+       1  https://cheshbonai.co.il/business/clinic
+       1  https://cheshbonai.co.il/business/gym
+       1  https://cheshbonai.co.il/business/daycare
+       1  https://cheshbonai.co.il/business/pub
+       1  https://cheshbonai.co.il/business/retail-store
+       1  https://cheshbonai.co.il/business/office
+       1  https://cheshbonai.co.il/business/food-truck
+       1  https://cheshbonai.co.il/business/yoga-studio
+       1  https://cheshbonai.co.il/business/dental-clinic
+       1  https://cheshbonai.co.il/business/online-store
+       1  https://cheshbonai.co.il/business/pizzeria
+       1  https://cheshbonai.co.il/business/garage
+       1  https://cheshbonai.co.il/business/minimarket
+       1  https://cheshbonai.co.il/employee-rights/salary-deductions
+       1  https://cheshbonai.co.il/real-estate/rental-income-tax
+       1  https://cheshbonai.co.il/investments/capital-gains-tax
+       1  https://cheshbonai.co.il/tools/customer-lifetime-value
+       1  https://cheshbonai.co.il/news/iron-swords
+       1  https://cheshbonai.co.il/glossary/conversion-factor
+       1  https://cheshbonai.co.il/glossary/cpi-linked
+       2  https://cheshbonai.co.il/insurance
+       2  https://cheshbonai.co.il/self-employed/invoices
+       2  https://cheshbonai.co.il/self-employed/business-setup-cost
+       2  https://cheshbonai.co.il/tools/break-even
+       2  https://cheshbonai.co.il/blog/reserve-duty-pay-iron-swords-2026
+       2  https://cheshbonai.co.il/blog/portfolio-allocation-by-age
+       2  https://cheshbonai.co.il/blog/tax-coordination-guide-2026
+
+## MOST-LINKED (top 10)
+     224  https://cheshbonai.co.il/blog
+     224  https://cheshbonai.co.il/compare
+     224  https://cheshbonai.co.il/glossary
+     224  https://cheshbonai.co.il/accessibility
+     226  https://cheshbonai.co.il
+     226  https://cheshbonai.co.il/contact
+     226  https://cheshbonai.co.il/course
+     226  https://cheshbonai.co.il/privacy
+     226  https://cheshbonai.co.il/terms
+     226  https://cheshbonai.co.il/
+
+## SLOWEST (server ms, uncached proxy)
+      1387ms     90KB  https://cheshbonai.co.il/tools/business-valuation
+       920ms    108KB  https://cheshbonai.co.il/loans
+       842ms     80KB  https://cheshbonai.co.il/business/cafe
+       823ms    105KB  https://cheshbonai.co.il/salaried
+       804ms     79KB  https://cheshbonai.co.il/business/barbershop
+       803ms     79KB  https://cheshbonai.co.il/business/minimarket
+       790ms     95KB  https://cheshbonai.co.il/real-estate
+       785ms     79KB  https://cheshbonai.co.il/business/yoga-studio
+       780ms     77KB  https://cheshbonai.co.il/business/photography-studio
+       768ms     54KB  https://cheshbonai.co.il/guides
+       761ms     99KB  https://cheshbonai.co.il/tools
+       749ms     92KB  https://cheshbonai.co.il/course
+
+## HEAVIEST HTML
+      167KB  https://cheshbonai.co.il/guides/mortgage-complete-guide-2026
+      162KB  https://cheshbonai.co.il/guides/taxes-complete-guide-2026
+      158KB  https://cheshbonai.co.il/self-employed/opening-business
+      156KB  https://cheshbonai.co.il/guides/employee-rights-complete-guide
+      155KB  https://cheshbonai.co.il/blog/business-budget-planning-2026
+      154KB  https://cheshbonai.co.il/blog/income-tax-brackets-2026-complete-guide
+      147KB  https://cheshbonai.co.il/blog
+      147KB  https://cheshbonai.co.il/blog/portfolio-allocation-by-age
+      145KB  https://cheshbonai.co.il/blog/real-estate-investment-strategy
+      144KB  https://cheshbonai.co.il/blog/business-valuation-methods
+      144KB  https://cheshbonai.co.il/blog/electric-vs-gasoline-car
+      141KB  https://cheshbonai.co.il/blog/employee-rights-israel-2026
+
+## EXTERNAL LINK DOMAINS
+      36  www.kolzchut.org.il
+      34  www.gov.il
+      23  www.btl.gov.il
+      10  www.boi.org.il
+       9  www.nevo.co.il
+       2  taxes.gov.il
+       2  www.cbs.gov.il
+       1  claudecourse.profitmargin.co.il
+       1  course.profitmargin.co.il
+       1  cfocourse.profitmargin.co.il
+       1  www.miluim.idf.il
+       1  secapp.taxes.gov.il
+       1  he.wikisource.org
+       1  bakertilly.co.il
+       1  www.greeninvoice.co.il
+       1  ica.justice.gov.il
+       1  www.misim.gov.il
+       1  www.cfainstitute.org
+       1  www.investor.gov
+       1  www.irs.gov
+       1  www.swiftness.co.il
+       1  www.sba.org.il
+       1  www.icpas.org.il
+       1  fonts.google.com
+       1  vercel.com
+
+## PAGES BY SECTION
+      63  /glossary
+      44  /blog
+      21  /business
+      18  /self-employed
+      14  /tools
+      12  /employee-rights
+       6  /personal-tax
+       6  /real-estate
+       6  /investments
+       5  /news
+       4  /guides
+       4  /savings
+       4  /vehicles
+       3  /course
+       3  /compare
+       2  /(home)
+       2  /salaried
+       2  /insurance
+       1  /about
+       1  /contact
+       1  /loans
+       1  /topics
+       1  /privacy
+       1  /terms
+       1  /accessibility

@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel.old.bak/
+
+# תוצרי סריקת SEO (crawl JSON, דוחות Lighthouse, צילומי מסך)
+cheshbonai.co.il-audit/crawl*.json
+cheshbonai.co.il-audit/lh-*.json
+cheshbonai.co.il-audit/screenshots/

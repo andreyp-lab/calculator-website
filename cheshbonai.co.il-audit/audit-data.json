@@ -1,0 +1,246 @@
+{
+  "summary": {
+    "health_score": 76,
+    "business_type": "Publisher / Tools — Hebrew financial calculators (YMYL), funnel to FinSchool courses",
+    "top_findings": [
+      "The /business cluster (21 pages) including its hub is still 'URL is unknown to Google' despite the sitemap being resubmitted and read on 26.7.2026",
+      "Mobile Lighthouse performance 66 with LCP 6.2s, against desktop 97 with LCP 1.2s",
+      "gtag.js is the single heaviest asset on the site at 167KB (22% of the 748KB page), 70KB unused, installed 26.7.2026",
+      "The 'eligibility check' intent cluster draws 261 impressions at positions 30-58 with zero clicks and has no dedicated URL",
+      "E-EA-T blocker open since 1.7: CPA license number and LinkedIn missing from Person sameAs"
+    ],
+    "quick_wins": [
+      "Add preconnect to googletagmanager.com and google-analytics.com — 302ms, one line",
+      "Shorten 57 titles over 65 characters that are truncated in the SERP",
+      "Label 3 number inputs on the work-grant calculator",
+      "Add og:image to 102 pages, mostly the /business cluster",
+      "Link /tools/capital from somewhere — it currently has zero inbound internal links"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 82,
+      "what_works": [
+        "robots.txt explicitly allows 11 AI crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot, Google-Extended)",
+        "sitemap.xml valid, 162 URLs, 0 warnings, 0 errors; resubmitted 26.7.2026 and read by Google 1.5 seconds later",
+        "HSTS max-age=63072000, HTTP/2, Vercel edge prerendering, 60ms TTFB",
+        "226 of 226 pages returned 200; zero redirect chains, zero broken internal links across ~2,400 links"
+      ],
+      "findings": [
+        {
+          "title": "The /business cluster is unknown to Google",
+          "severity": "Critical",
+          "description": "URL Inspection on 30.7.2026 returns 'URL is unknown to Google' for both /business (the hub) and /business/cafe. GSC reports indexed: 0 of 162 submitted. This is not a sitemap failure — the sitemap was read. It is a link-discovery failure: each /business/<slug> page has exactly one inbound internal link, from the hub, and the hub is not in the main navigation. Evidence that discovery works when present: /business/garage, /business/restaurant and /business/minimarket did accumulate 7, 8 and 2 impressions.",
+          "recommendation": "Request Indexing manually in GSC for the 5 top pages (user-only action), and add /business to the main navigation plus cross-links from /self-employed/opening-business and /self-employed/business-setup-cost."
+        },
+        {
+          "title": "/tools/capital is an orphan page",
+          "severity": "Medium",
+          "description": "Zero inbound internal links and no <h1>. It is in the sitemap at app/sitemap.ts:143 and has accumulated 4 impressions at position 49.",
+          "recommendation": "Add an <h1> and link it from the /tools hub."
+        },
+        {
+          "title": "Three pages have no H1",
+          "severity": "Medium",
+          "description": "/tools/capital, /tools/cash-flow and /tools/cashflow-solo render without an <h1> element.",
+          "recommendation": "Add a keyword-bearing <h1> to each."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 74,
+      "what_works": [
+        "Median 904 words per page; deepest pages reach 3,743 words (/self-employed/opening-business) and 3,426 (/guides/mortgage-complete-guide-2026)",
+        "Named CPA author with AuthorBox on every calculator page and Person schema",
+        "Primary-source citations: 36 links to kolzchut.org.il, 34 to gov.il, 23 to btl.gov.il, 10 to boi.org.il"
+      ],
+      "findings": [
+        {
+          "title": "Person sameAs is missing the CPA license number and LinkedIn",
+          "severity": "Critical",
+          "description": "Open since 1.7.2026. The LinkedIn profile (linkedin.com/in/andreypl) already appears in llms.txt but not in the Person schema, which is where Google reads it. On a YMYL site, unverified professional identity caps trust.",
+          "recommendation": "Add both to Person.sameAs in components/seo/. Requires the license number from the user."
+        },
+        {
+          "title": "All 63 glossary pages are noindexed",
+          "severity": "Medium",
+          "description": "Every /glossary/* term carries robots noindex,follow and is excluded from the sitemap. This is deliberate and well-reasoned (app/glossary/[slug]/page.tsx:24-28 — definitions under 60 words are thin content). But 0 of 63 clear the threshold, so an entire subtree yields no index value, and the /glossary hub sits at position 60.9 with 81 impressions.",
+          "recommendation": "Expand 10-15 high-demand terms past 60 words. The mechanism returns them to the index automatically."
+        },
+        {
+          "title": "Ten hub pages are thin and rank poorly",
+          "severity": "Medium",
+          "description": "/insurance 219 words, /compare 255, /investments 265, /topics 339, /guides 350, /news 358. Their positions match: /investments 86.5, /personal-tax 84.9, /real-estate 81.6.",
+          "recommendation": "Enrich each hub with an intro answer paragraph, a comparison table, and descriptive links to its children."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 72,
+      "what_works": [
+        "226 of 226 canonicals correct — zero missing, zero mismatched",
+        "Zero missing titles, zero missing meta descriptions, zero duplicate H1s",
+        "Only one duplicate title pair, and it is a crawl artifact of the homepage with and without a trailing slash"
+      ],
+      "findings": [
+        {
+          "title": "134 of 226 titles exceed 60 characters; 57 exceed 65",
+          "severity": "High",
+          "description": "The longest reach 82 characters (/business/office, /business/clinic), losing roughly 20 characters to SERP truncation. The suffix ' | חשבונאי' costs 10 characters on every page. 36 meta descriptions also exceed 160 characters.",
+          "recommendation": "Drop the brand suffix on the long pages and trim to under 60 characters."
+        },
+        {
+          "title": "Internal link equity is extremely skewed",
+          "severity": "High",
+          "description": "/privacy and /terms receive 226 inbound internal links each from the footer. All 21 /business pages, /employee-rights/salary-deductions, /real-estate/rental-income-tax, /investments/capital-gains-tax and /tools/customer-lifetime-value receive exactly one. /tools/capital receives zero.",
+          "recommendation": "Add contextual cross-links from the pillar pages and put /business into the main navigation."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 90,
+      "what_works": [
+        "Zero broken JSON-LD blocks and zero pages without schema across 226 pages",
+        "Organization and WebSite on 224 pages, BreadcrumbList on 147, FAQPage on 105, DefinedTerm on 62, SoftwareApplication on 50, BlogPosting on 43"
+      ],
+      "findings": [
+        {
+          "title": "HowTo schema is used on only 3 pages",
+          "severity": "Low",
+          "description": "The site is built around 'how do I calculate X' intent, which HowTo is designed for, but only 3 of 226 pages carry it.",
+          "recommendation": "Add HowTo to calculator pages that already contain a step-by-step worked example."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 66,
+      "what_works": [
+        "CLS is 0 on both desktop and mobile",
+        "TBT 0ms desktop, 80ms mobile",
+        "Lighthouse SEO 100 and Best Practices 100",
+        "Server response 60ms via Vercel edge prerendering"
+      ],
+      "findings": [
+        {
+          "title": "Mobile LCP is 6.2 seconds against 1.2 seconds on desktop",
+          "severity": "High",
+          "description": "Lighthouse 12.8 mobile: performance 66, FCP 3.8s, LCP 6.2s, Speed Index 5.3s. The LCP element is a text paragraph, not an image, so this is a network and font blocking issue rather than an image issue. Israeli search traffic is predominantly mobile.",
+          "recommendation": "Add preconnect hints, consider lazyOnload for analytics, and review the three loaded font families (Heebo, JetBrains_Mono, Frank_Ruhl_Libre, 85KB combined)."
+        },
+        {
+          "title": "gtag.js is the heaviest asset on the site",
+          "severity": "High",
+          "description": "167KB of a 748KB page (22%), of which 70KB is unused. Installed 26.7.2026 in app/layout.tsx:176 with strategy='afterInteractive'. Lighthouse measures 302ms wasted for lack of a preconnect to google-analytics.com.",
+          "recommendation": "Add preconnect to googletagmanager.com and google-analytics.com; evaluate strategy='lazyOnload'."
+        },
+        {
+          "title": "Three accessibility failures on a site that publishes an accessibility statement",
+          "severity": "Medium",
+          "description": "Lighthouse accessibility 91. color-contrast fails on 17 elements (mostly text-ink/60 on cream), label fails on 3 number inputs in the work-grant calculator, heading-order fails on 2 elements. The site has an /accessibility page and statement.",
+          "recommendation": "Raise text-ink/60 to text-ink/75, associate labels with the inputs, and fix the h4-without-h3 sequence."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 76,
+      "what_works": [
+        "llms.txt and llms-full.txt present and well written, including explicit guidance on when an LLM should cite the site",
+        "robots.txt explicitly allows 11 AI crawlers",
+        "FAQPage on 105 pages, DefinedTerm on 62, Dataset on 6",
+        "Evidence of AI citation: /blog/vat-complete-guide-israel at 573 impressions position 7.7 and /blog/surtax-yesef-2026-explained at 216 impressions position 10.2, both on short knowledge queries"
+      ],
+      "findings": [
+        {
+          "title": "The .answer-box pattern is on only 34 of 226 pages",
+          "severity": "High",
+          "description": "The quickAnswer slot in CalculatorLayout is the site's mechanism for featured snippets and AI Overview citation, and it is implemented on 15% of pages.",
+          "recommendation": "Add a quickAnswer paragraph to the 20 highest-impression pages first."
+        },
+        {
+          "title": "Do not treat AI fan-out zero-CTR pages as CTR failures",
+          "severity": "Info",
+          "description": "Query-level inspection confirms that the zero-click, high-impression blog pages rank on short knowledge queries that Google answers directly in an AI Overview. This is a citation signal.",
+          "recommendation": "Leave the titles on those pages alone."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 70,
+      "what_works": [
+        "13 img tags site-wide, 13 with alt text — 100%",
+        "The near-text-only design is what produces the CLS of 0"
+      ],
+      "findings": [
+        {
+          "title": "102 pages have no og:image",
+          "severity": "Medium",
+          "description": "Includes the entire /business cluster and /about. Sharing these links on WhatsApp, Facebook or LinkedIn produces an empty preview, and it weakens presentation in AI surfaces.",
+          "recommendation": "Add a dynamic opengraph-image.tsx template to cover all of them at once."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 0: Blocked on the user",
+        "timeframe": "10 minutes in GSC",
+        "items": [
+          "Request Indexing for /business, /business/cafe, /business/restaurant, /business/gym, /business/online-store",
+          "Supply the CPA license number and LinkedIn URL for Person sameAs"
+        ]
+      },
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Add preconnect to googletagmanager.com and google-analytics.com (302ms)",
+          "Evaluate strategy='lazyOnload' for gtag in app/layout.tsx:177",
+          "Label the 3 number inputs on the work-grant calculator",
+          "Add h1 to /tools/capital, /tools/cash-flow, /tools/cashflow-solo and link /tools/capital from /tools"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Build /employee-rights/work-grant/eligibility by promoting the existing eligibility tab to its own route — 261 impressions at positions 30-58, window closes in September",
+          "Add /business to main navigation and cross-link the cluster from the self-employed pillars",
+          "Shorten 57 titles over 65 characters and 36 meta descriptions over 160",
+          "Add a dynamic og:image template covering the 102 pages that lack one"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Add .answer-box to the 20 highest-impression pages that lack it",
+          "Expand 10-15 glossary terms past the 60-word threshold to auto-reindex them",
+          "Enrich 6 thin hub pages currently ranking at positions 66-87",
+          "Build /tools/vat-extract, a retroactive work-grant page, and strengthen the maternity-benefits page",
+          "Fix color contrast on 17 elements"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Off-site authority — 363 of 500 sampled queries remain at position 21+",
+          "Capture a drift baseline after Phase 1",
+          "Add a Google API key for real CrUX field data and a Moz key for backlink profile measurement"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}
