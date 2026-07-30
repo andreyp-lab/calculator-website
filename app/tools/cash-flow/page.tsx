@@ -40,14 +40,14 @@ export default function CashFlowPage() {
             <Wallet className="w-6 h-6 text-ink-mid" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-ink">ניהול תזרים מזומנים לעסק</h2>
+            <h1 className="text-2xl font-bold text-ink">ניהול תזרים מזומנים לעסק</h1>
             <p className="text-sm text-ink/70">
               כלי לעסק עם חיבור למערכת התקציב — דשבורד KPI, גרפים, חשבונות בנק, עיכובי גביה,
               פריסת חוב ותשלומים חד-פעמיים
             </p>
             <Link
               href="/tools/cashflow-solo"
-              className="text-xs text-ink/60 hover:text-gold underline underline-offset-2"
+              className="text-xs text-ink/70 hover:text-gold underline underline-offset-2"
             >
               עצמאי שמחפש כלי פשוט בלי תקציב? ←
             </Link>
@@ -61,7 +61,7 @@ export default function CashFlowPage() {
 
       {!hasBudgetData && !hasCashFlowData ? (
         <div className="bg-amber-50 border-2 border-amber-300 p-6 mt-4 flex items-start gap-3">
-          <Info className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
+          <Info className="w-6 h-6 text-amber-800 flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-bold text-amber-900 mb-1">אין נתונים עדיין</h3>
             <p className="text-amber-800 text-sm mb-3">
@@ -85,7 +85,7 @@ export default function CashFlowPage() {
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'dashboard'
                   ? 'border-b-2 border-gold text-gold -mb-0.5'
-                  : 'text-ink/60 hover:text-ink'
+                  : 'text-ink/70 hover:text-ink'
               }`}
             >
               📊 דשבורד וגרפים
@@ -95,7 +95,7 @@ export default function CashFlowPage() {
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'manage'
                   ? 'border-b-2 border-gold text-gold -mb-0.5'
-                  : 'text-ink/60 hover:text-ink'
+                  : 'text-ink/70 hover:text-ink'
               }`}
             >
               ⚙️ ניהול תזרים
@@ -105,7 +105,7 @@ export default function CashFlowPage() {
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'restructure'
                   ? 'border-b-2 border-gold text-gold -mb-0.5'
-                  : 'text-ink/60 hover:text-ink'
+                  : 'text-ink/70 hover:text-ink'
               }`}
             >
               🔄 פריסת חוב
@@ -115,7 +115,7 @@ export default function CashFlowPage() {
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'compare'
                   ? 'border-b-2 border-gold text-gold -mb-0.5'
-                  : 'text-ink/60 hover:text-ink'
+                  : 'text-ink/70 hover:text-ink'
               }`}
             >
               🔀 השוואת תרחישים
@@ -125,7 +125,7 @@ export default function CashFlowPage() {
               className={`px-4 py-2 text-sm font-medium transition ${
                 tab === 'burn'
                   ? 'border-b-2 border-gold text-gold -mb-0.5'
-                  : 'text-ink/60 hover:text-ink'
+                  : 'text-ink/70 hover:text-ink'
               }`}
             >
               🔥 Burn Rate / Runway

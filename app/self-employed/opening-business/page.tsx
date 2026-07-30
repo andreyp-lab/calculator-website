@@ -9,11 +9,13 @@ const PAGE_PATH = '/self-employed/opening-business';
 const SITE_URL = 'https://cheshbonai.co.il';
 
 export const metadata: Metadata = {
-  title: 'איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או מורשה? המדריך המלא',
+  title: { absolute: 'איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או מורשה? המדריך המלא' },
   description:
-    'איך פותחים עסק עצמאי בישראל ב-2026: עוסק פטור מול עוסק מורשה מול חברה בע"מ, תקרת 122,833 ₪, מע"מ 18%, רישום מול הרשויות צעד אחר צעד, עלויות, צ\'קליסט וטעויות שכדאי לחסוך. מדריך מעשי מרו"ח.',
+    'איך פותחים עסק עצמאי בישראל ב-2026: עוסק פטור מול מורשה מול חברה בע"מ, תקרת 122,833 ₪, מע"מ 18%, רישום מול הרשויות, עלויות וצ\'קליסט. מדריך מרו"ח.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או מורשה? המדריך המלא',
     description:
       'איך פותחים עסק עצמאי בישראל ב-2026: עוסק פטור מול עוסק מורשה מול חברה בע"מ, תקרת 122,833 ₪, מע"מ, רישום מול הרשויות, עלויות וטעויות נפוצות.',
@@ -134,7 +136,7 @@ export default function OpeningBusinessPage() {
             רישום מול הרשויות צעד אחר צעד, תקרת 122,833 ₪, מע"מ 18%, עלויות הפתיחה, צ'קליסט
             פעולות והטעויות שכדאי לחסוך כבר בהתחלה.
           </p>
-          <p className="text-sm text-ink/60 mt-3">
+          <p className="text-sm text-ink/70 mt-3">
             נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026
           </p>
         </header>
@@ -244,7 +246,7 @@ export default function OpeningBusinessPage() {
               <tr className="text-right">
                 <th className="p-3 font-bold text-ink border-b border-ink/15">קריטריון</th>
                 <th className="p-3 font-bold text-gold border-b border-ink/15">עוסק פטור</th>
-                <th className="p-3 font-bold text-emerald-700 border-b border-ink/15">עוסק מורשה</th>
+                <th className="p-3 font-bold text-emerald-800 border-b border-ink/15">עוסק מורשה</th>
                 <th className="p-3 font-bold text-ink border-b border-ink/15">חברה בע"מ</th>
               </tr>
             </thead>
@@ -470,29 +472,29 @@ export default function OpeningBusinessPage() {
                   <table className="w-full text-sm border border-ink/15 overflow-hidden bg-paper">
                     <tbody className="text-ink/70">
                       <tr className="border-b border-ink/15">
-                        <td className="p-3 font-medium text-ink/60 w-32">טופס</td>
+                        <td className="p-3 font-medium text-ink/70 w-32">טופס</td>
                         <td className="p-3 font-semibold">טופס 821 — בקשה לרישום עוסק</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
-                        <td className="p-3 font-medium text-ink/60">מסמכים</td>
+                        <td className="p-3 font-medium text-ink/70">מסמכים</td>
                         <td className="p-3">תעודת זהות · אישור ניהול חשבון בנק · חוזה שכירות / הוכחת בעלות על נכס העסק · פרטי העסק</td>
                       </tr>
                       <tr className="border-b border-ink/15">
-                        <td className="p-3 font-medium text-ink/60">איך</td>
+                        <td className="p-3 font-medium text-ink/70">איך</td>
                         <td className="p-3">אונליין דרך אתר רשות המסים, או פיזית בסניף מע"מ הקרוב</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
-                        <td className="p-3 font-medium text-ink/60">עלות</td>
-                        <td className="p-3 font-semibold text-emerald-700">חינם — אין אגרת פתיחה</td>
+                        <td className="p-3 font-medium text-ink/70">עלות</td>
+                        <td className="p-3 font-semibold text-emerald-800">חינם — אין אגרת פתיחה</td>
                       </tr>
                       <tr>
-                        <td className="p-3 font-medium text-ink/60">זמן טיפול</td>
+                        <td className="p-3 font-medium text-ink/70">זמן טיפול</td>
                         <td className="p-3">אונליין — לרוב מיידי עד ימים ספורים</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <p className="text-sm text-ink/60 mt-3">
+                <p className="text-sm text-ink/70 mt-3">
                   כאן תבחרו: <strong>עוסק פטור</strong> (מחזור עד 122,833 ₪) או <strong>עוסק מורשה</strong>.
                   ברגע שאתם מורשים — מתחייבים בדיווח מע"מ חודשי/דו-חודשי.
                 </p>
@@ -512,29 +514,29 @@ export default function OpeningBusinessPage() {
                   <table className="w-full text-sm border border-ink/15 overflow-hidden bg-paper">
                     <tbody className="text-ink/70">
                       <tr className="border-b border-ink/15">
-                        <td className="p-3 font-medium text-ink/60 w-32">טופס</td>
+                        <td className="p-3 font-medium text-ink/70 w-32">טופס</td>
                         <td className="p-3 font-semibold">טופס 5329 — דו"ח פרטים אישיים והצהרה על מקורות הכנסה</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
-                        <td className="p-3 font-medium text-ink/60">מסמכים</td>
+                        <td className="p-3 font-medium text-ink/70">מסמכים</td>
                         <td className="p-3">תעודת זהות · פרטי בנק · אישור פתיחת תיק מע"מ</td>
                       </tr>
                       <tr className="border-b border-ink/15">
-                        <td className="p-3 font-medium text-ink/60">איך</td>
+                        <td className="p-3 font-medium text-ink/70">איך</td>
                         <td className="p-3">הגשה ידנית בפקיד השומה, או דרך מייצג (רו"ח / שע"מ). חל על עוסק פטור ועוסק מורשה כאחד.</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
-                        <td className="p-3 font-medium text-ink/60">עלות</td>
-                        <td className="p-3 font-semibold text-emerald-700">חינם</td>
+                        <td className="p-3 font-medium text-ink/70">עלות</td>
+                        <td className="p-3 font-semibold text-emerald-800">חינם</td>
                       </tr>
                       <tr>
-                        <td className="p-3 font-medium text-ink/60">זמן טיפול</td>
+                        <td className="p-3 font-medium text-ink/70">זמן טיפול</td>
                         <td className="p-3">בדרך כלל עד שבוע ממועד ההגשה</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <p className="text-sm text-ink/60 mt-3">
+                <p className="text-sm text-ink/70 mt-3">
                   לאחר הפתיחה, פקיד השומה יקבע <strong>מקדמות מס</strong> חודשיות. חשוב לכייל את המקדמות
                   לפי ההכנסה הצפויה — מקדמה נמוכה מדי תגרור תשלום חוב + ריבית בסוף השנה. אפשר לאמוד
                   את המקדמה הנכונה עם{' '}
@@ -559,29 +561,29 @@ export default function OpeningBusinessPage() {
                   <table className="w-full text-sm border border-ink/15 overflow-hidden bg-paper">
                     <tbody className="text-ink/70">
                       <tr className="border-b border-ink/15">
-                        <td className="p-3 font-medium text-ink/60 w-32">טופס</td>
+                        <td className="p-3 font-medium text-ink/70 w-32">טופס</td>
                         <td className="p-3 font-semibold">טופס בל/6101 — דין וחשבון רב שנתי (מהדורה 03.2026)</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
-                        <td className="p-3 font-medium text-ink/60">מסמכים</td>
+                        <td className="p-3 font-medium text-ink/70">מסמכים</td>
                         <td className="p-3">תעודת זהות · אישורי פתיחת תיק מע"מ ומס הכנסה · פרטי חשבון בנק לחיוב</td>
                       </tr>
                       <tr className="border-b border-ink/15">
-                        <td className="p-3 font-medium text-ink/60">איך</td>
+                        <td className="p-3 font-medium text-ink/70">איך</td>
                         <td className="p-3">אונליין דרך אתר ביטוח לאומי (btl.gov.il) או בסניף הקרוב</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
-                        <td className="p-3 font-medium text-ink/60">עלות</td>
-                        <td className="p-3 font-semibold text-emerald-700">חינם — הרישום עצמו ללא אגרה</td>
+                        <td className="p-3 font-medium text-ink/70">עלות</td>
+                        <td className="p-3 font-semibold text-emerald-800">חינם — הרישום עצמו ללא אגרה</td>
                       </tr>
                       <tr>
-                        <td className="p-3 font-medium text-ink/60">זמן טיפול</td>
+                        <td className="p-3 font-medium text-ink/70">זמן טיפול</td>
                         <td className="p-3">לרוב ימים ספורים עד שבוע; מקדמות ב"ל מחושבות מיום הרישום</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <p className="text-sm text-ink/60 mt-3">
+                <p className="text-sm text-ink/70 mt-3">
                   שיעורי דמי הביטוח לעצמאי (2026): <strong>7.7%</strong> על חלק ההכנסה עד 7,703 ₪/חודש,
                   ו-<strong>18%</strong> על החלק שמעל (עד תקרה של 51,910 ₪/חודש). הרישום המוקדם חשוב —
                   עיכוב עלול לגרור תשלום רטרואקטיבי. לחישוב מדויק:{' '}
@@ -705,7 +707,7 @@ export default function OpeningBusinessPage() {
                 </tr>
               </tbody>
             </table>
-            <p className="text-xs text-ink/60 mt-2">
+            <p className="text-xs text-ink/70 mt-2">
               מדרגות מס 2026 להכנסה מיגיעה אישית. ב-2026 הורחבו מדרגות ה-20% וה-31% במסגרת "ריווח
               מדרגות המס". המס מחושב באופן מדורג — כל מדרגה חלה רק על חלק ההכנסה שבתחומה.
             </p>
@@ -922,7 +924,7 @@ export default function OpeningBusinessPage() {
               <details key={f.question} className="border border-ink/15 p-4 group">
                 <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/70 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
                 <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>

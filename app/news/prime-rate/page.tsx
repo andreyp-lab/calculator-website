@@ -22,6 +22,8 @@ export const metadata: Metadata = {
     canonical: 'https://cheshbonai.co.il/news/prime-rate',
   },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: `ריבית פריים עדכנית: ${MACRO_DATA.primeRate.value}%`,
     description: `ריבית בנק ישראל: ${MACRO_DATA.primeRate.boiBaseRate}% | עודכן: ${formatHebrewDate(MACRO_DATA.primeRate.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/prime-rate',
@@ -103,12 +105,12 @@ export default function PrimeRatePage() {
           <div className="bg-cream-2 border border-ink/15 rounded-none p-5 text-center">
             <p className="text-xs text-gold font-medium mb-2">ריבית בנק ישראל</p>
             <p className="text-4xl font-bold text-ink">{boiBaseRate}%</p>
-            <p className="text-xs text-ink/60 mt-2">הריבית הבסיסית שקובע בנק ישראל</p>
+            <p className="text-xs text-ink/70 mt-2">הריבית הבסיסית שקובע בנק ישראל</p>
           </div>
           <div className="bg-cream-2 border border-ink/15 rounded-none p-5 text-center">
             <p className="text-xs text-gold font-medium mb-2">מרווח בנקאי</p>
             <p className="text-4xl font-bold text-ink">+{bankSpread}%</p>
-            <p className="text-xs text-ink/60 mt-2">תוספת קבועה שהוסכמה ב-1994</p>
+            <p className="text-xs text-ink/70 mt-2">תוספת קבועה שהוסכמה ב-1994</p>
           </div>
           <div className="bg-ink border-2 border-ink rounded-none p-5 text-center">
             <p className="text-xs text-gold-light font-bold mb-2">ריבית פריים = סכום</p>
@@ -120,14 +122,14 @@ export default function PrimeRatePage() {
         {/* Chart */}
         <div className="bg-paper border border-ink/15 rounded-none p-6 mb-8">
           <h2 className="text-xl font-bold text-ink mb-1">היסטוריה — 12 חודשים אחרונים</h2>
-          <p className="text-sm text-ink/60 mb-6">ריבית בנק ישראל וריבית פריים</p>
+          <p className="text-sm text-ink/70 mb-6">ריבית בנק ישראל וריבית פריים</p>
           <PrimeRateChart data={[...historicalRates] as Array<{ month: string; boiRate: number; primeRate: number }>} />
         </div>
 
         {/* Next Decision Countdown */}
         <div className="bg-amber-50 border border-amber-200 rounded-none p-6 mb-8 flex items-start gap-4">
           <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-            <Calendar className="w-5 h-5 text-amber-600" />
+            <Calendar className="w-5 h-5 text-amber-800" />
           </div>
           <div>
             <h3 className="font-bold text-amber-900 mb-1">ההחלטה הבאה של בנק ישראל</h3>
@@ -149,13 +151,13 @@ export default function PrimeRatePage() {
           </p>
           <div className="grid sm:grid-cols-2 gap-4 mb-4">
             <div className="bg-paper rounded-none p-4">
-              <p className="text-xs text-ink/60 mb-1">תשלום חודשי משוער</p>
+              <p className="text-xs text-ink/70 mb-1">תשלום חודשי משוער</p>
               <p className="text-2xl font-bold text-ink">
                 ₪{Math.round(monthlyPayment).toLocaleString('he-IL')}
               </p>
             </div>
             <div className="bg-paper rounded-none p-4">
-              <p className="text-xs text-ink/60 mb-1">ריבית שנתית (שנה ראשונה)</p>
+              <p className="text-xs text-ink/70 mb-1">ריבית שנתית (שנה ראשונה)</p>
               <p className="text-2xl font-bold text-ink">
                 ₪{Math.round(yearlyInterest).toLocaleString('he-IL')}
               </p>
@@ -212,7 +214,7 @@ export default function PrimeRatePage() {
         </div>
 
         {/* Source */}
-        <div className="text-center text-xs text-ink/45">
+        <div className="text-center text-xs text-ink/70">
           <p>
             מקור:{' '}
             <a

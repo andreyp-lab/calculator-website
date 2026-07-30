@@ -3,7 +3,7 @@ import { SITE_INFO } from '@/lib/config/site-info';
 
 export const metadata = {
   alternates: { canonical: '/accessibility' },
-  title: 'הצהרת נגישות | חשבונאי',
+  title: 'הצהרת נגישות',
   description: 'הצהרת הנגישות של cheshbonai.co.il - תקן ישראלי 5568, WCAG 2.0 AA, חוק שוויון זכויות לאנשים עם מוגבלות.',
 };
 
@@ -14,7 +14,7 @@ export default function AccessibilityPage() {
 
         {/* כותרת */}
         <h1 className="text-4xl font-bold text-ink mb-2">הצהרת נגישות</h1>
-        <p className="text-sm text-ink/50 mb-8">
+        <p className="text-sm text-ink/70 mb-8">
           תאריך עדכון: {SITE_INFO.legal.accessibilityLastUpdated}
         </p>
 
@@ -46,12 +46,12 @@ export default function AccessibilityPage() {
             <div className="bg-cream-2 border border-ink/15 p-4">
               <h3 className="font-bold text-ink mb-1">תקן ישראלי</h3>
               <p className="text-ink/70 text-sm">ת&quot;י 5568 (IS-5568)</p>
-              <p className="text-ink/60 text-xs mt-1">תקן ישראלי לנגישות רשת</p>
+              <p className="text-ink/70 text-xs mt-1">תקן ישראלי לנגישות רשת</p>
             </div>
             <div className="bg-cream-2 border border-ink/15 p-4">
               <h3 className="font-bold text-ink mb-1">תקן בינלאומי</h3>
               <p className="text-ink/70 text-sm">WCAG 2.0 רמה AA</p>
-              <p className="text-ink/60 text-xs mt-1">Web Content Accessibility Guidelines</p>
+              <p className="text-ink/70 text-xs mt-1">Web Content Accessibility Guidelines</p>
             </div>
             <div className="bg-cream-2 border border-ink/15 p-4">
               <h3 className="font-bold text-ink mb-1">חוק ישראלי</h3>
@@ -132,7 +132,7 @@ export default function AccessibilityPage() {
                 <span className="text-gold text-lg flex-shrink-0 mt-0.5" aria-hidden="true">✓</span>
                 <div>
                   <strong className="text-ink">{item.title}</strong>
-                  <p className="text-sm text-ink/60 mt-0.5">{item.desc}</p>
+                  <p className="text-sm text-ink/70 mt-0.5">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -169,7 +169,7 @@ export default function AccessibilityPage() {
             ))}
           </div>
 
-          <p className="mt-4 text-sm text-ink/60">
+          <p className="mt-4 text-sm text-ink/70">
             ההגדרות נשמרות באופן מקומי בדפדפן שלך (localStorage) וישמרו בין ביקורים.
             ניתן לסגור את התפריט בלחיצה על Esc, לחיצה מחוץ לתפריט, או לחיצה חוזרת על הכפתור.
           </p>
@@ -187,26 +187,26 @@ export default function AccessibilityPage() {
           <div className="space-y-4">
             <div className="border border-amber-200 bg-amber-50 p-4">
               <h3 className="font-semibold text-amber-800 mb-2">גרפים אינטרקטיביים (Recharts)</h3>
-              <p className="text-sm text-amber-700">
+              <p className="text-sm text-amber-800">
                 הגרפים הפיננסיים (עוגה, קו, עמודות) מוצגים כאלמנטי SVG אינטרקטיביים.
                 הגישה שלהם לקוראי מסך היא חלקית בלבד — ניתן לראות את נתוני הגרף בטבלאות
                 הנתונים שלצידם (כאשר קיימות), אך חוויית הגרף עצמו אינה מלאה.
               </p>
-              <p className="text-xs text-amber-600 mt-1">סטטוס: בעבודה — מוסיפים alt-text ו-data tables לגרפים.</p>
+              <p className="text-xs text-amber-800 mt-1">סטטוס: בעבודה — מוסיפים alt-text ו-data tables לגרפים.</p>
             </div>
 
             <div className="border border-amber-200 bg-amber-50 p-4">
               <h3 className="font-semibold text-amber-800 mb-2">תוצאות מחשבונים</h3>
-              <p className="text-sm text-amber-700">
+              <p className="text-sm text-amber-800">
                 חלק מהמחשבונים מציגים תוצאות כמספרים בלבד, ללא הקשר תיאורי מספיק לקוראי מסך.
                 אנחנו עובדים על הוספת aria-live regions שיקראו את התוצאות בקול עם שינויים.
               </p>
-              <p className="text-xs text-amber-600 mt-1">סטטוס: בשיפור מתמיד.</p>
+              <p className="text-xs text-amber-800 mt-1">סטטוס: בשיפור מתמיד.</p>
             </div>
 
             <div className="border border-amber-200 bg-amber-50 p-4">
               <h3 className="font-semibold text-amber-800 mb-2">תוכן PDFs חיצוניים</h3>
-              <p className="text-sm text-amber-700">
+              <p className="text-sm text-amber-800">
                 האתר מקשר לקבצי PDF של רשויות ממשלתיות (מס הכנסה, בנק ישראל).
                 הנגשת קבצים אלה אינה בשליטתנו.
               </p>
@@ -273,7 +273,7 @@ export default function AccessibilityPage() {
               </Link>
             </li>
           </ul>
-          <p className="text-sm text-ink/60 mt-3">
+          <p className="text-sm text-ink/70 mt-3">
             <em>הערה: האתר מנוהל על ידי יחיד פרטי. אין חובה חוקית למינוי רכז נגישות, אך
             כל פנייה תקבל מענה אישי.</em>
           </p>
@@ -289,7 +289,7 @@ export default function AccessibilityPage() {
               <h3 className="font-semibold text-ink text-sm">
                 חוק שוויון זכויות לאנשים עם מוגבלות, התשנ&quot;ח-1998
               </h3>
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 הבסיס החוקי לזכות לנגישות בישראל.
               </p>
             </div>
@@ -297,7 +297,7 @@ export default function AccessibilityPage() {
               <h3 className="font-semibold text-ink text-sm">
                 תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע&quot;ג-2013
               </h3>
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 התקנות הקובעות את דרישות הנגישות לאתרי אינטרנט בישראל.
               </p>
             </div>
@@ -305,7 +305,7 @@ export default function AccessibilityPage() {
               <h3 className="font-semibold text-ink text-sm">
                 תקן ישראלי 5568 (ת&quot;י 5568)
               </h3>
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 תקן ישראלי לנגישות אתרי אינטרנט, המבוסס על WCAG 2.0.
               </p>
             </div>
@@ -313,7 +313,7 @@ export default function AccessibilityPage() {
               <h3 className="font-semibold text-ink text-sm">
                 WCAG 2.0 Level AA — Web Content Accessibility Guidelines
               </h3>
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 הקווים המנחים הבינלאומיים של ארגון W3C לנגישות תוכן ברשת.
               </p>
             </div>

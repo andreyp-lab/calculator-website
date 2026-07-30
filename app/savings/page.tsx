@@ -251,7 +251,7 @@ export default function SavingsPage() {
               <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition">
                 ריבית דריבית וקסם הזמן
               </h3>
-              <p className="text-sm text-ink/60">למה השנים הראשונות של חיסכון שוות הכי הרבה</p>
+              <p className="text-sm text-ink/70">למה השנים הראשונות של חיסכון שוות הכי הרבה</p>
             </Link>
             <Link
               href="/blog/business-budget-planning-2026"
@@ -260,7 +260,7 @@ export default function SavingsPage() {
               <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition">
                 תכנון תקציב ל-2026
               </h3>
-              <p className="text-sm text-ink/60">איך בונים תקציב שנתי שמחזיק מים</p>
+              <p className="text-sm text-ink/70">איך בונים תקציב שנתי שמחזיק מים</p>
             </Link>
             <Link
               href="/blog/inflation-and-investments"
@@ -269,12 +269,12 @@ export default function SavingsPage() {
               <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition">
                 אינפלציה והשקעות
               </h3>
-              <p className="text-sm text-ink/60">מה עליית המדד עושה לכסף שלכם ומה עושים עם זה</p>
+              <p className="text-sm text-ink/70">מה עליית המדד עושה לכסף שלכם ומה עושים עם זה</p>
             </Link>
           </div>
         </section>
 
-        <p className="mt-10 text-xs text-ink/50 leading-relaxed border-t border-ink/15 pt-4">
+        <p className="mt-10 text-xs text-ink/70 leading-relaxed border-t border-ink/15 pt-4">
           המידע בעמוד זה הוא מידע כללי בלבד ואינו מהווה ייעוץ פיננסי, ייעוץ השקעות או
           ייעוץ מס. לפני קבלת החלטות כספיות מומלץ להתייעץ עם בעל מקצוע מוסמך.
         </p>

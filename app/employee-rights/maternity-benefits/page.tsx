@@ -4,7 +4,7 @@ import { MaternityBenefitsCalculator } from '@/components/calculators/MaternityB
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון דמי לידה 2026 — איך מחשבים וכמה מקבלים? עד 1,730 ₪ ליום',
+  title: { absolute: 'מחשבון דמי לידה 2026 — איך מחשבים וכמה מקבלים? עד 1,730 ₪ ליום' },
   description:
     'חישוב דמי לידה 2026: השכר היומי הממוצע שלך, עד תקרה של 1,730.33 ₪ ליום מביטוח לאומי. כולל בדיקת זכאות, 15/8 שבועות, תאומים, אשפוז, חופשת אב ודמי לידה לעצמאית.',
   alternates: { canonical: '/employee-rights/maternity-benefits' },

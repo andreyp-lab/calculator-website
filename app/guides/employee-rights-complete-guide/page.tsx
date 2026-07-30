@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     'כל זכויות העובד בישראל 2026: שכר מינימום 6,443 ₪, פיצויים, חופשה, מחלה, לידה, מילואים, אבטלה, פנסיה. חשב פיצויים ודמי אבטלה עם מחשבונים אינטראקטיביים.',
   alternates: { canonical: '/guides/employee-rights-complete-guide' },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'זכויות עובדים בישראל 2026 – האנציקלופדיה המלאה',
     description:
       'כל זכויות העובד בישראל: שכר, פיצויים, חופשה, מחלה, לידה, מילואים, אבטלה, פנסיה.',
@@ -191,7 +193,7 @@ export default function EmployeeRightsCompleteGuide() {
                 <div key={item.stat} className="bg-paper border border-ink/15 rounded-none p-5 text-center shadow-sm">
                   <div className="text-2xl mb-1">{item.icon}</div>
                   <div className="text-2xl font-bold text-gold mb-1">{item.stat}</div>
-                  <div className="text-sm text-ink/60">{item.label}</div>
+                  <div className="text-sm text-ink/70">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -230,7 +232,7 @@ export default function EmployeeRightsCompleteGuide() {
                     <tr key={type} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
                       <td className="border border-ink/15 p-3 font-medium">{type}</td>
                       <td className="border border-ink/15 p-3 font-bold text-gold">{rate}</td>
-                      <td className="border border-ink/15 p-3 text-ink/60">{note}</td>
+                      <td className="border border-ink/15 p-3 text-ink/70">{note}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -750,7 +752,7 @@ export default function EmployeeRightsCompleteGuide() {
                   className="block bg-paper border border-ink/15 rounded-none p-4 hover:border-gold hover:shadow-md transition group"
                 >
                   <h3 className="font-bold text-gold group-hover:text-ink mb-1">{item.label}</h3>
-                  <p className="text-ink/60 text-sm">{item.desc}</p>
+                  <p className="text-ink/70 text-sm">{item.desc}</p>
                 </Link>
               ))}
             </div>

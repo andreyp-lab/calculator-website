@@ -5,7 +5,7 @@ import { PersonalLoanCalculator } from '@/components/calculators/PersonalLoanCal
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון הלוואה אישית 2026 | כרטיס אשראי, Snowball, APR, כושר החזר',
+  title: { absolute: 'מחשבון הלוואה אישית 2026 | כרטיס אשראי, Snowball, APR, כושר החזר' },
   description:
     'מחשבון הלוואה אישית 2026: חישוב APR אמיתי, השוואת בנק/קרן השתלמות/חוץ-בנקאי, שיטות Snowball ו-Avalanche לסילוק חובות ובדיקת כושר החזר. נסה חינם.',
   alternates: { canonical: '/savings/personal-loan' },

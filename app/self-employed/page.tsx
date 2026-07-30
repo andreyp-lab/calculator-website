@@ -156,7 +156,7 @@ export default function SelfEmployedPage() {
                   <h3 className="font-bold text-ink mb-1 group-hover:text-gold transition">
                     {calc.title}
                   </h3>
-                  <p className="text-sm text-ink/60">{calc.description}</p>
+                  <p className="text-sm text-ink/70">{calc.description}</p>
                 </div>
                 <ArrowLeft className="w-4 h-4 text-gold mt-2 opacity-0 group-hover:opacity-100 transition" />
               </Link>
@@ -167,9 +167,9 @@ export default function SelfEmployedPage() {
               >
                 <Calculator className="w-6 h-6 text-ink/30 flex-shrink-0 mt-1" />
                 <div className="flex-1">
-                  <h3 className="font-bold text-ink/60 mb-1">{calc.title}</h3>
-                  <p className="text-sm text-ink/40">{calc.description}</p>
-                  <span className="inline-block mt-2 text-xs bg-ink/10 text-ink/50 px-2 py-1 font-mono uppercase tracking-[0.1em]">
+                  <h3 className="font-bold text-ink/70 mb-1">{calc.title}</h3>
+                  <p className="text-sm text-ink/70">{calc.description}</p>
+                  <span className="inline-block mt-2 text-xs bg-ink/10 text-ink/70 px-2 py-1 font-mono uppercase tracking-[0.1em]">
                     בקרוב
                   </span>
                 </div>
@@ -187,7 +187,7 @@ export default function SelfEmployedPage() {
             <h2 className="text-2xl font-bold text-ink">
               מעבר למחשבונים — <span className="font-serif italic font-normal text-gold">מערכת ניהול פיננסי מלאה</span>
             </h2>
-            <p className="text-ink/60 mt-2 max-w-2xl">
+            <p className="text-ink/70 mt-2 max-w-2xl">
               תקציב שנתי, תזרים מזומנים, ניתוח דוחות וחיזוי — הכלים שבנינו לניהול הכספים של העסק,
               בלי אקסלים מסורבלים. הנתונים נשמרים מקומית אצלך.
             </p>

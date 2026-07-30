@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     'איך ממוסים הכנסה משכר דירה למגורים ב-2026? 3 המסלולים: פטור (עד 5,654 ₪/חודש), מסלול 10% ומדרגות מס. כולל פטור חלקי, דוגמאות חישוב וטיפים. מדריך מרו"ח.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'מיסוי שכר דירה 2026 — פטור, מסלול 10% ומדרגות מס',
     description:
       'שלושת מסלולי המס על הכנסה משכר דירה למגורים 2026: פטור, 10% ומדרגות. דוגמאות חישוב וטיפים מרו"ח.',
@@ -112,7 +114,7 @@ export default function RentalIncomeTaxPage() {
             משכיר דירה למגורים? יש שלוש דרכים לשלם מס — והבחירה ביניהן יכולה לחסוך לך אלפי שקלים
             בשנה. הנה כל מה שצריך לדעת על מסלול הפטור, מסלול 10% ומסלול מדרגות המס, עם דוגמאות.
           </p>
-          <p className="text-sm text-ink/60 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
+          <p className="text-sm text-ink/70 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
         </header>
 
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
@@ -175,7 +177,7 @@ export default function RentalIncomeTaxPage() {
         </div>
 
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             * אין לראות במדריך זה ייעוץ מס. הכללים מורכבים ותלויים בנסיבות אישיות — מומלץ להיוועץ
             ברואה חשבון.
           </p>
@@ -213,7 +215,7 @@ export default function RentalIncomeTaxPage() {
               <details key={f.question} className="border border-ink/15 p-4 group">
                 <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/70 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
                 <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>

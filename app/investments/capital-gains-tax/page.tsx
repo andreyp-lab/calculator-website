@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     'כמה מס משלמים על רווחים בבורסה ב-2026? 25% על רווח הון ריאלי, 25%/30% על דיבידנד, מס יסף, קיזוז הפסדים ופטורים. המדריך המלא למשקיע הישראלי מרו"ח.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'מס רווח הון על השקעות 2026 — מניות, קרנות ודיבידנד',
     description:
       '25% על רווח הון ריאלי, מס דיבידנד, מס יסף, קיזוז הפסדים ופטורים — כל מה שמשקיע ישראלי צריך לדעת ב-2026.',
@@ -112,7 +114,7 @@ export default function CapitalGainsTaxPage() {
             הרווחת בבורסה? לפני שתשמח — חלק מהרווח הולך למדינה. הנה כל מה שצריך לדעת על מיסוי
             מניות, קרנות, דיבידנד וריבית בישראל 2026, כולל קיזוז הפסדים ואפיקים פטורים ממס.
           </p>
-          <p className="text-sm text-ink/60 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
+          <p className="text-sm text-ink/70 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
         </header>
 
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
@@ -167,7 +169,7 @@ export default function CapitalGainsTaxPage() {
             <li><strong>קופת גמל להשקעה</strong> — גמישות + הטבות מס בפרישה כקצבה.</li>
           </ul>
 
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             * אין לראות במדריך זה ייעוץ מס או השקעות. מומלץ להיוועץ ברואה חשבון.
           </p>
         </div>
@@ -204,7 +206,7 @@ export default function CapitalGainsTaxPage() {
               <details key={f.question} className="border border-ink/15 p-4 group">
                 <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/70 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
                 <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>

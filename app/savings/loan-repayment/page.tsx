@@ -5,7 +5,7 @@ import { LoanRepaymentCalculator } from '@/components/calculators/LoanRepaymentC
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון הלוואה 2026 — לוח שפיצר, לוח סילוקין מלא ופירעון מוקדם',
+  title: { absolute: 'מחשבון הלוואה 2026 — לוח שפיצר, לוח סילוקין מלא ופירעון מוקדם' },
   description:
     'מחשבון שפיצר להלוואה: תשלום חודשי, לוח סילוקין חודש-בחודש, APR אמיתי, איחוד הלוואות ופירעון מוקדם. לדוגמה: 100,000 ₪ ל-5 שנים ב-7% = 1,980 ₪/חודש. חינם.',
   alternates: { canonical: '/savings/loan-repayment' },

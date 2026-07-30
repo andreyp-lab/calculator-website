@@ -56,14 +56,14 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/45 hover:text-ink text-xl"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/70 hover:text-ink text-xl"
             >
               ✕
             </button>
           )}
         </div>
         {query && (
-          <p className="text-sm text-ink/60 mt-2 text-center">
+          <p className="text-sm text-ink/70 mt-2 text-center">
             נמצאו {filtered.length} מונחים לחיפוש &quot;{query}&quot;
           </p>
         )}
@@ -109,7 +109,7 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
 
       {/* Terms display */}
       {displayLetters.length === 0 ? (
-        <div className="text-center py-16 text-ink/60">
+        <div className="text-center py-16 text-ink/70">
           <div className="text-4xl mb-4">🔍</div>
           <p className="text-xl">לא נמצאו מונחים עבור &quot;{query}&quot;</p>
           <button onClick={() => setQuery('')} className="mt-4 text-gold underline">
@@ -141,7 +141,7 @@ export function GlossaryClient({ terms, letters }: GlossaryClientProps) {
                     <p className="text-ink/70 text-sm leading-relaxed mb-3">{t.definition}</p>
                     {t.seeAlso && t.seeAlso.length > 0 && (
                       <div className="flex flex-wrap gap-2 mt-2">
-                        <span className="text-xs text-ink/60">ראה גם:</span>
+                        <span className="text-xs text-ink/70">ראה גם:</span>
                         {t.seeAlso.map((link) => (
                           <Link
                             key={link.href}

@@ -6,7 +6,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'מחשבון FIRE 2026 — פרישה מוקדמת | 5 סוגי FIRE לישראלים',
   description:
-    'מחשבון FIRE מקיף (Financial Independence, Retire Early) בהקשר ישראלי. 5 סוגי FIRE, כלל ה-4%, Coast FIRE, Barista FIRE, ניתוח SWR, ביטוח לאומי ונדל"ן. גלה מתי תוכל לפרוש.',
+    'מחשבון FIRE בהקשר ישראלי: 5 סוגי FIRE, כלל ה-4%, Coast ו-Barista FIRE, ניתוח SWR, ביטוח לאומי ונדל"ן. גלה מתי תוכל לפרוש.',
   alternates: { canonical: '/investments/fire' },
 };
 
@@ -126,7 +126,7 @@ export default function FirePage() {
                   <td className="border border-ink/15 p-2">עושר אמיתי, ללא פשרות</td>
                 </tr>
                 <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-2 font-medium text-amber-700">Coast FIRE</td>
+                  <td className="border border-ink/15 p-2 font-medium text-amber-800">Coast FIRE</td>
                   <td className="border border-ink/15 p-2">כל סכום</td>
                   <td className="border border-ink/15 p-2">תלוי בגיל</td>
                   <td className="border border-ink/15 p-2">הפסק הפקדות, ממשיך לעבוד</td>

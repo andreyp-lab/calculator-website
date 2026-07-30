@@ -5,9 +5,9 @@ import { LoanEligibilityChecker } from '@/components/calculators/LoanEligibility
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'בודק זכאות להלוואות בערבות המדינה 2026 — עסק קטן, יצואן, תעשייה',
+  title: { absolute: 'בודק זכאות להלוואות בערבות המדינה 2026 — עסק קטן, יצואן, תעשייה' },
   description:
-    'בדוק תוך דקה אם העסק שלך זכאי להלוואה בערבות המדינה. כולל מסלולי עסק קטן, יצואן, תעשייה וחרבות ברזל. סכומים, ביטחונות ותנאי החזר. השתמש במחשבון הזכאות שלנו — בחינם, ללא הרשמה.',
+    'בדוק תוך דקה אם העסק שלך זכאי להלוואה בערבות המדינה: מסלולי עסק קטן, יצואן, תעשייה וחרבות ברזל. סכומים, ביטחונות ותנאי החזר. בחינם.',
   alternates: { canonical: '/tools/loan-eligibility' },
 };
 

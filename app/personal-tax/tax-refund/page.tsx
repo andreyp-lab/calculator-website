@@ -4,7 +4,7 @@ import { TaxRefundCalculator } from '@/components/calculators/TaxRefundCalculato
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון החזר מס 2026 — בדיקת זכאות מיידית, עד 6 שנים אחורה',
+  title: { absolute: 'מחשבון החזר מס 2026 — בדיקת זכאות מיידית, עד 6 שנים אחורה' },
   description:
     'מחשבון החזר מס מקיף לשכירים. בדוק כמה מס מגיע לך בחזרה - תרומות, פנסיה, פריפריה, מצב משפחתי, עבודה חלקית, מספר מעסיקים. עד 6 שנים לאחור.',
   alternates: { canonical: '/personal-tax/tax-refund' },

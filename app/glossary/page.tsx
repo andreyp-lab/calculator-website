@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     'מילון מונחים פיננסיים מקיף לשנת 2026: 80+ מושגים מעולם המס, ההשקעות, המשכנתאות והעצמאיים. הגדרה ברורה + לינק למחשבון רלוונטי.',
   alternates: { canonical: '/glossary' },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'מילון מונחים פיננסי 2026 — כל המונחים בעברית פשוטה',
     description:
       'מילון מונחים פיננסיים מקיף: 80+ מושגים חשובים מעולם המס, ההשקעות, המשכנתאות והעצמאיים.',
@@ -62,7 +64,7 @@ export default function GlossaryPage() {
       {/* Quick links to pillar pages */}
       <div className="bg-cream-2 border-b border-ink/15 py-4 px-4">
         <div className="max-w-4xl mx-auto flex flex-wrap gap-3 justify-center text-sm">
-          <span className="text-ink/60">מדריכים מלאים:</span>
+          <span className="text-ink/70">מדריכים מלאים:</span>
           <Link href="/guides/mortgage-complete-guide-2026" className="text-gold hover:text-gold-2 underline">
             מדריך משכנתא שלם
           </Link>

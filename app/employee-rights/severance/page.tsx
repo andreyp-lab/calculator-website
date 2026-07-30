@@ -5,13 +5,15 @@ import { FAQ } from '@/components/calculator/FAQ';
 import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
 
 export const metadata: Metadata = {
-  title: 'מחשבון פיצויי פיטורין 2026 — סעיף 14, מיסוי ו-13 תרחישי סיום',
+  title: { absolute: 'מחשבון פיצויי פיטורין 2026 — סעיף 14, מיסוי ו-13 תרחישי סיום' },
   description:
     'מחשבון פיצויי פיטורין 2026: חישוב זכאות וסעיף 14, השוואת 4 אפשרויות מיסוי (רצף קצבה / פריסה), זכויות ב-13 תרחישי סיום עבודה. חסוך אלפי שקלים במס.',
   alternates: {
     canonical: '/employee-rights/severance',
   },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'מחשבון פיצויי פיטורין 2026 — סעיף 14 ומיסוי',
     description: 'חשב פיצויים, בדוק סעיף 14, השווה 4 אפשרויות מיסוי — חוסך אלפי שקלים',
     type: 'article',

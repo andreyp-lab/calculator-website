@@ -27,7 +27,7 @@ const salaryTableRows = COMMON_SALARIES.map((gross) => {
 export const metadata: Metadata = {
   title: 'מחשבון ברוטו נטו 2026 — כמה נטו יוצא מהמשכורת שלך?',
   description:
-    'חישוב ברוטו לנטו 2026: 10,000 ברוטו, 15,000, 20,000 — כמה נטו? טבלת שכר מלאה + מחשבון מדויק בכל הכיוונים (גם נטו→ברוטו ועלות מעסיק). מס הכנסה, ב.ל., פנסיה ונקודות זיכוי.',
+    'חישוב ברוטו לנטו 2026: 10,000 ברוטו כמה נטו? טבלת שכר מלאה + מחשבון בכל הכיוונים (נטו→ברוטו ועלות מעסיק), כולל ב.ל. ונקודות זיכוי.',
   alternates: { canonical: '/personal-tax/salary-net-gross' },
 };
 
@@ -222,8 +222,8 @@ export default function SalaryNetGrossPage() {
             <tbody>
               <tr><td className="border border-ink/15 p-2">עד 7,010 ₪</td><td className="border border-ink/15 p-2">10%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
               <tr className="bg-cream-2"><td className="border border-ink/15 p-2">7,011–10,060 ₪</td><td className="border border-ink/15 p-2">14%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
-              <tr className="bg-emerald-50"><td className="border border-ink/15 p-2">10,061–19,000 ₪</td><td className="border border-ink/15 p-2">20%</td><td className="border border-ink/15 p-2 font-semibold text-emerald-700">הורחב מ-16,150 ₪!</td></tr>
-              <tr className="bg-emerald-50"><td className="border border-ink/15 p-2">19,001–25,100 ₪</td><td className="border border-ink/15 p-2">31%</td><td className="border border-ink/15 p-2 font-semibold text-emerald-700">הורחב מ-22,440 ₪!</td></tr>
+              <tr className="bg-emerald-50"><td className="border border-ink/15 p-2">10,061–19,000 ₪</td><td className="border border-ink/15 p-2">20%</td><td className="border border-ink/15 p-2 font-semibold text-emerald-800">הורחב מ-16,150 ₪!</td></tr>
+              <tr className="bg-emerald-50"><td className="border border-ink/15 p-2">19,001–25,100 ₪</td><td className="border border-ink/15 p-2">31%</td><td className="border border-ink/15 p-2 font-semibold text-emerald-800">הורחב מ-22,440 ₪!</td></tr>
               <tr className="bg-cream-2"><td className="border border-ink/15 p-2">25,101–46,690 ₪</td><td className="border border-ink/15 p-2">35%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
               <tr><td className="border border-ink/15 p-2">46,691–60,130 ₪</td><td className="border border-ink/15 p-2">47%</td><td className="border border-ink/15 p-2">ללא שינוי</td></tr>
               <tr className="bg-red-50"><td className="border border-ink/15 p-2">מעל 60,130 ₪</td><td className="border border-ink/15 p-2">50%</td><td className="border border-ink/15 p-2">47% + 3% מס יסף</td></tr>

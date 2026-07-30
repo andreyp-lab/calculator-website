@@ -4,7 +4,7 @@ import { TaxAdvancesCalculator } from '@/components/calculators/TaxAdvancesCalcu
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מקדמות מס לעצמאי 2026 | מס הכנסה + ביטוח לאומי + מע"מ',
+  title: { absolute: 'מחשבון מקדמות מס לעצמאי 2026 | מס הכנסה + ביטוח לאומי + מע"מ' },
   description:
     'חשב מקדמות מס הכנסה, ביטוח לאומי ומע"מ לעצמאי בישראל. תכנון תזרים מזומנים, ריבית פיגורים, תיאום אמצע שנה והערכת גמר שנה. 2026.',
   alternates: { canonical: '/self-employed/tax-advances' },

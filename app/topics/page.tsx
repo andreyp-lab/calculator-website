@@ -11,7 +11,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/topics' },
-  title: 'מחשבונים פיננסיים לכל נושא 2026 - נדל״ן, רכב, ביטוח, השקעות',
+  title: { absolute: 'מחשבונים פיננסיים לכל נושא 2026 - נדל״ן, רכב, ביטוח, השקעות' },
   description:
     'בדוק מחשבוני מס רכישה, מס שבח, ריבית דריבית ועוד — כלים עדכניים ל-2026 למשכנתא ונדל״ן, חיסכון והשקעות, ביטוחים ופנסיה, רכב ותחבורה. ללא הרשמה, חינם לחלוטין.',
 };
@@ -159,7 +159,7 @@ export default function TopicsPage() {
                   <h3 className="font-bold text-ink group-hover:text-gold transition">
                     {calc.label}
                   </h3>
-                  <p className="text-xs text-ink/60 mt-0.5">{calc.description}</p>
+                  <p className="text-xs text-ink/70 mt-0.5">{calc.description}</p>
                 </div>
                 <ArrowLeft className="w-4 h-4 text-gold opacity-0 group-hover:opacity-100 transition mt-1" />
               </Link>
@@ -202,7 +202,7 @@ export default function TopicsPage() {
                               <div className="font-semibold text-ink text-sm group-hover:text-gold transition">
                                 {topic.label}
                               </div>
-                              <div className="text-xs text-ink/60">{topic.description}</div>
+                              <div className="text-xs text-ink/70">{topic.description}</div>
                             </div>
                           </Link>
                         </li>

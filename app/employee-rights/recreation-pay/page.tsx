@@ -4,7 +4,7 @@ import { RecreationPayCalculator } from '@/components/calculators/RecreationPayC
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון דמי הבראה 2026 — חישוב לפי וותק, נטו, ותביעה רטרואקטיבית',
+  title: { absolute: 'מחשבון דמי הבראה 2026 — חישוב לפי וותק, נטו, ותביעה רטרואקטיבית' },
   description:
     'מחשבון דמי הבראה 2026: חשב לפי וותק ומגזר, ברוטו/נטו, תביעה רטרואקטיבית עד 4 שנים. תעריף: 418 ₪/יום פרטי | 511.60 ₪/יום ציבורי. בדוק כמה מגיע לך.',
   alternates: { canonical: '/employee-rights/recreation-pay' },

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'מדריכים פיננסיים מקיפים 2026 — מסים, משכנתא וזכויות עובדים',
+  title: { absolute: 'מדריכים פיננסיים מקיפים 2026 — מסים, משכנתא וזכויות עובדים' },
   description:
     'מדריכי העומק של חשבונאי: כל המסים בישראל, המדריך השלם למשכנתא, והאנציקלופדיה לזכויות עובדים. מעודכנים לשנת 2026, עם קישור למחשבונים מדויקים.',
   alternates: { canonical: '/guides' },
@@ -47,7 +47,7 @@ export default function GuidesPage() {
   return (
     <div className="min-h-screen bg-cream">
       <div className="max-w-4xl mx-auto px-4 py-10">
-        <nav className="text-sm text-ink/50 mb-6" aria-label="breadcrumbs">
+        <nav className="text-sm text-ink/70 mb-6" aria-label="breadcrumbs">
           <Link href="/" className="hover:text-gold transition">
             דף הבית
           </Link>
@@ -83,7 +83,7 @@ export default function GuidesPage() {
                 </span>
               </div>
               <h2 className="text-lg font-bold mb-2 text-ink group-hover:text-gold transition">{g.title}</h2>
-              <p className="text-sm text-ink/60 leading-relaxed">{g.description}</p>
+              <p className="text-sm text-ink/70 leading-relaxed">{g.description}</p>
             </Link>
           ))}
         </div>

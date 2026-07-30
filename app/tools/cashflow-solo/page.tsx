@@ -131,14 +131,14 @@ export default function CashFlowSoloPage() {
             <Wallet className="w-6 h-6 text-ink-mid" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-ink">מחשבון תזרים מזומנים לעצמאי</h2>
+            <h1 className="text-2xl font-bold text-ink">מחשבון תזרים מזומנים לעצמאי</h1>
             <p className="text-sm text-ink/70">
               כלי עצמאי ופשוט לפרילנסר — הזן ישירות תקבולים ותשלומים לפי תאריכים, בלי חיבור
               לתקציב
             </p>
             <Link
               href="/tools/cash-flow"
-              className="text-xs text-ink/60 hover:text-gold underline underline-offset-2"
+              className="text-xs text-ink/70 hover:text-gold underline underline-offset-2"
             >
               מנהל עסק ומחפש תזרים מחובר לתקציב? ←
             </Link>
@@ -148,7 +148,7 @@ export default function CashFlowSoloPage() {
         <div className="flex items-center gap-2 flex-wrap">
           <Link
             href="/tools/start"
-            className="text-sm text-ink/60 hover:text-gold flex items-center gap-1"
+            className="text-sm text-ink/70 hover:text-gold flex items-center gap-1"
           >
             <ArrowLeft className="w-4 h-4" />
             חזרה למסך הראשי
@@ -167,8 +167,8 @@ export default function CashFlowSoloPage() {
       <div className="bg-paper border-2 border-ink/15 p-4 mb-4 shadow-sm">
         <div className="grid md:grid-cols-3 gap-3">
           <div>
-            <label className="block text-xs text-ink/70 mb-1">תאריך התחלה</label>
-            <input
+            <label htmlFor="page-f46f1f" className="block text-xs text-ink/70 mb-1">תאריך התחלה</label>
+            <input id="page-f46f1f"
               type="date"
               value={data.startDate}
               onChange={(e) => setData({ ...data, startDate: e.target.value })}
@@ -220,7 +220,7 @@ export default function CashFlowSoloPage() {
           </button>
         </div>
         {data.accounts.length === 0 ? (
-          <p className="text-sm text-ink/60">אין חשבונות. הוסף חשבון לקביעת יתרת פתיחה.</p>
+          <p className="text-sm text-ink/70">אין חשבונות. הוסף חשבון לקביעת יתרת פתיחה.</p>
         ) : (
           <div className="space-y-2">
             {data.accounts.map((acc) => (
@@ -243,13 +243,13 @@ export default function CashFlowSoloPage() {
                 />
                 <button
                   onClick={() => removeAccount(acc.id)}
-                  className="p-1 text-red-600 hover:bg-red-50 rounded"
+                  className="p-1 text-red-700 hover:bg-red-50 rounded"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             ))}
-            <div className="text-xs text-ink/60 text-left pt-2 border-t border-ink/15">
+            <div className="text-xs text-ink/70 text-left pt-2 border-t border-ink/15">
               סה"כ פתיחה: {fmt(data.accounts.reduce((s, a) => s + a.balance, 0))}
             </div>
           </div>
@@ -428,11 +428,11 @@ export default function CashFlowSoloPage() {
                 >
                   <td className="p-2 font-medium">{m.monthName}</td>
                   <td className="p-2 text-left">{fmt(m.openingBalance)}</td>
-                  <td className="p-2 text-left text-emerald-700">+{fmt(m.incomeReceived)}</td>
+                  <td className="p-2 text-left text-emerald-800">+{fmt(m.incomeReceived)}</td>
                   <td className="p-2 text-left text-red-700">-{fmt(m.expensesPaid)}</td>
                   <td
                     className={`p-2 text-left font-semibold ${
-                      m.netCashFlow >= 0 ? 'text-emerald-700' : 'text-red-700'
+                      m.netCashFlow >= 0 ? 'text-emerald-800' : 'text-red-700'
                     }`}
                   >
                     {m.netCashFlow >= 0 ? '+' : ''}
@@ -481,7 +481,7 @@ function KPICard({
   icon: typeof TrendingUp;
 }) {
   const colorMap: Record<string, { bg: string; border: string; text: string }> = {
-    emerald: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700' },
+    emerald: { bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-800' },
     red: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700' },
     neutral: { bg: 'bg-cream-2', border: 'border-ink/15', text: 'text-ink' },
   };
@@ -493,7 +493,7 @@ function KPICard({
         <Icon className={`w-4 h-4 ${c.text}`} />
       </div>
       <div className={`text-2xl font-bold ${c.text}`}>{value}</div>
-      {subValue && <div className="text-[10px] text-ink/60 mt-1">{subValue}</div>}
+      {subValue && <div className="text-[10px] text-ink/70 mt-1">{subValue}</div>}
     </div>
   );
 }

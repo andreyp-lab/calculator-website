@@ -3,7 +3,7 @@ import { SITE_INFO } from '@/lib/config/site-info';
 
 export const metadata = {
   alternates: { canonical: '/privacy' },
-  title: 'מדיניות פרטיות | חשבונאי',
+  title: 'מדיניות פרטיות',
   description: 'מדיניות הפרטיות של cheshbonai.co.il - אנו לא אוספים נתונים אישיים. גילוי מלא לגבי שרתי Vercel.',
 };
 
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
         {/* כותרת */}
         <h1 className="text-4xl font-bold text-ink mb-2">מדיניות פרטיות</h1>
-        <p className="text-sm text-ink/60 mb-4">
+        <p className="text-sm text-ink/70 mb-4">
           תאריך עדכון אחרון: {SITE_INFO.legal.privacyLastUpdated}
         </p>
 
@@ -106,7 +106,7 @@ export default function PrivacyPage() {
             <li>Vercel היא המעבדת (Data Processor) — אנחנו הבקר (Data Controller)</li>
           </ul>
 
-          <p className="text-sm text-ink/60 bg-cream-2 p-3 rounded-none">
+          <p className="text-sm text-ink/70 bg-cream-2 p-3 rounded-none">
             לפרטים על מדיניות הפרטיות של Vercel:{' '}
             <a
               href={SITE_INFO.hosting.privacyPolicyUrl}
@@ -162,7 +162,7 @@ export default function PrivacyPage() {
           <div className="space-y-4">
             <div className="border border-ink/15 rounded-none p-4">
               <h3 className="font-semibold text-ink">Vercel Inc. — אחסון אתר</h3>
-              <p className="text-sm text-ink/60 mt-1">
+              <p className="text-sm text-ink/70 mt-1">
                 ספק האחסון. ראה סעיף 3 למעלה. מדיניות פרטיות:{' '}
                 <a href={SITE_INFO.hosting.privacyPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
                   vercel.com/legal/privacy-policy
@@ -172,7 +172,7 @@ export default function PrivacyPage() {
 
             <div className="border border-ink/15 rounded-none p-4">
               <h3 className="font-semibold text-ink">Google Fonts — פונטים</h3>
-              <p className="text-sm text-ink/60 mt-1">
+              <p className="text-sm text-ink/70 mt-1">
                 האתר משתמש בפונט &quot;Heebo&quot; מ-Google Fonts. טעינת הפונט כרוכה בבקשה לשרתי Google,
                 אשר עשויה לכלול כתובת IP שלך. Google Fonts אינה שומרת מידע זיהוי אישי לפי
                 מדיניות Google הנוכחית.{' '}
@@ -183,7 +183,7 @@ export default function PrivacyPage() {
             </div>
           </div>
 
-          <p className="mt-4 text-sm text-ink/60">
+          <p className="mt-4 text-sm text-ink/70">
             <strong>לא</strong> משולבים: Google Analytics, Facebook SDK, Twitter SDK, LinkedIn Pixel,
             Hotjar, Intercom, Crisp Chat, או כל שירות ניתוח/פרסום אחר.
           </p>
@@ -203,7 +203,7 @@ export default function PrivacyPage() {
             מכיוון שלא נאסף מידע אישי על ידינו, <strong>אין העברת מידע אישי</strong> לצדדים שלישיים,
             לא בישראל ולא בחו&quot;ל.
           </p>
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             Vercel פועלת בהתאם לסטנדרטים של GDPR ו-SCCs (Standard Contractual Clauses)
             לצורך העברת מידע מהאיחוד האירופי לארה&quot;ב.
           </p>
@@ -225,47 +225,47 @@ export default function PrivacyPage() {
               <span className="font-bold text-gold w-8 flex-shrink-0">1.</span>
               <div>
                 <strong>זכות עיון (Right of Access)</strong> — לדעת אילו נתונים שמורים עליך.
-                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים לעיין בהם.</span>
+                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים לעיין בהם.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">2.</span>
               <div>
                 <strong>זכות תיקון (Right to Rectification)</strong> — לתקן מידע שגוי.
-                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים לתיקון.</span>
+                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים לתיקון.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">3.</span>
               <div>
                 <strong>זכות מחיקה (Right to Erasure)</strong> — &quot;הזכות להישכח&quot;.
-                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים למחיקה.</span>
+                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים למחיקה.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">4.</span>
               <div>
                 <strong>זכות אי-שימוש / התנגדות (Right to Object)</strong> — להתנגד לעיבוד.
-                <span className="text-ink/60 text-sm block">מצבנו: אין עיבוד מידע אישי.</span>
+                <span className="text-ink/70 text-sm block">מצבנו: אין עיבוד מידע אישי.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">5.</span>
               <div>
                 <strong>זכות ניוד (Data Portability)</strong> — לקבל נתוניך בפורמט מובנה.
-                <span className="text-ink/60 text-sm block">מצבנו: אין נתונים להעביר.</span>
+                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים להעביר.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">6.</span>
               <div>
                 <strong>זכות הגבלה (Right to Restrict Processing)</strong> — להגביל את השימוש.
-                <span className="text-ink/60 text-sm block">מצבנו: אין עיבוד לצמצם.</span>
+                <span className="text-ink/70 text-sm block">מצבנו: אין עיבוד לצמצם.</span>
               </div>
             </div>
           </div>
 
-          <p className="mt-4 text-sm text-ink/60">
+          <p className="mt-4 text-sm text-ink/70">
             אם ברצונך לממש זכויות אלה בנוגע למידע שנאסף על ידי <strong>Vercel</strong>,
             ניתן לפנות ישירות לפרטיות Vercel:{' '}
             <a href={SITE_INFO.hosting.privacyPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
@@ -284,7 +284,7 @@ export default function PrivacyPage() {
             מכיוון שאיננו אוספים מידע אישי כלל, אין לנו אפשרות לדעת את גיל המשתמש,
             ואין לנו צורך לדעת זאת.
           </p>
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             אם הנך הורה או אפוטרופוס וסבור שילדך מסר מידע אישי כלשהו, אנא{' '}
             <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
               פנה אלינו
@@ -302,7 +302,7 @@ export default function PrivacyPage() {
             אנחנו עשויים לעדכן מדיניות פרטיות זו מעת לעת. שינויים מהותיים יסומנו בראש הדף.
             השימוש המתמשך באתר לאחר פרסום שינויים מהווה הסכמה למדיניות המעודכנת.
           </p>
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             תאריך עדכון אחרון: <strong>{SITE_INFO.legal.privacyLastUpdated}</strong>
           </p>
         </section>
@@ -322,7 +322,7 @@ export default function PrivacyPage() {
               {SITE_INFO.contact.email}
             </a>.
           </p>
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             נשתדל להשיב בתוך 7 ימי עסקים.
           </p>
         </section>

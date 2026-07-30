@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   keywords: ['שכר ממוצע ישראל', 'שכר ממוצע 2026', 'ממוצע שכר במשק', 'שכר ברוטו ממוצע'],
   alternates: { canonical: 'https://cheshbonai.co.il/news/average-wage' },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: `שכר ממוצע: ₪${MACRO_DATA.averageWage.monthly.toLocaleString('he-IL')}/חודש`,
     description: `${MACRO_DATA.averageWage.reportPeriod} | עודכן: ${formatHebrewDate(MACRO_DATA.averageWage.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/average-wage',
@@ -90,24 +92,24 @@ export default function AverageWagePage() {
           <div className="bg-green-50 border border-green-200 p-5 text-center">
             <p className="text-xs text-green-600 font-medium mb-2">ברוטו</p>
             <p className="text-3xl font-bold text-green-700">₪{monthly.toLocaleString('he-IL')}</p>
-            <p className="text-xs text-ink/60 mt-2">לפני מסים וניכויים</p>
+            <p className="text-xs text-ink/70 mt-2">לפני מסים וניכויים</p>
           </div>
           <div className="bg-green-50 border border-green-200 p-5 text-center">
             <p className="text-xs text-green-600 font-medium mb-2">נטו משוער</p>
             <p className="text-3xl font-bold text-green-700">₪{estimatedNet.toLocaleString('he-IL')}</p>
-            <p className="text-xs text-ink/60 mt-2">אחרי מס + ב"ל + ביטוח</p>
+            <p className="text-xs text-ink/70 mt-2">אחרי מס + ב"ל + ביטוח</p>
           </div>
           <div className="bg-green-50 border border-green-200 p-5 text-center">
             <p className="text-xs text-green-600 font-medium mb-2">פי כמה משכר מינימום</p>
             <p className="text-3xl font-bold text-green-700">×{ratioToMin}</p>
-            <p className="text-xs text-ink/60 mt-2">שכר מינימום: ₪{minimumWage.toLocaleString('he-IL')}</p>
+            <p className="text-xs text-ink/70 mt-2">שכר מינימום: ₪{minimumWage.toLocaleString('he-IL')}</p>
           </div>
         </div>
 
         {/* Chart */}
         <div className="bg-paper border border-ink/15 p-6 mb-8">
           <h2 className="text-xl font-bold text-ink mb-1">מגמה — 5 רבעונים אחרונים</h2>
-          <p className="text-sm text-ink/60 mb-6">שכר ממוצע ברוטו (ירוק כהה = נוכחי)</p>
+          <p className="text-sm text-ink/70 mb-6">שכר ממוצע ברוטו (ירוק כהה = נוכחי)</p>
           <WageChart
             data={[...historicalWages] as Array<{ quarter: string; wage: number }>}
             currentWage={monthly}
@@ -120,7 +122,7 @@ export default function AverageWagePage() {
             <Users className="w-5 h-5 text-green-600" />
             <h2 className="text-lg font-bold text-green-900">פירוט ניכויים על שכר ממוצע</h2>
           </div>
-          <p className="text-sm text-ink/60 mb-4">אומדן משוער לרווק/ה ללא ילדים</p>
+          <p className="text-sm text-ink/70 mb-4">אומדן משוער לרווק/ה ללא ילדים</p>
           <div className="space-y-2 mb-4">
             {[
               { label: 'שכר ברוטו', amount: monthly, isPositive: true },
@@ -131,7 +133,7 @@ export default function AverageWagePage() {
             ].map(({ label, amount, isPositive, bold }) => (
               <div key={label} className={`flex justify-between items-center py-2 border-b border-green-100 ${bold ? 'font-bold' : ''}`}>
                 <span className={`text-sm ${bold ? 'text-green-900' : 'text-ink/70'}`}>{label}</span>
-                <span className={`text-sm font-mono ${isPositive ? 'text-green-700' : 'text-red-600'}`}>
+                <span className={`text-sm font-mono ${isPositive ? 'text-green-700' : 'text-red-700'}`}>
                   {isPositive ? '' : '-'}₪{Math.abs(amount).toLocaleString('he-IL')}
                 </span>
               </div>
@@ -183,7 +185,7 @@ export default function AverageWagePage() {
         </div>
 
         {/* Source */}
-        <div className="text-center text-xs text-ink/45">
+        <div className="text-center text-xs text-ink/70">
           <p>
             מקור:{' '}
             <a href={sourceUrl} target="_blank" rel="noopener noreferrer"

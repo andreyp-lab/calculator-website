@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     'מדריך מקיף לכל המסים בישראל 2026: מס הכנסה, ב.ל., מע"מ, מס שבח, מס רכישה ומס יסף. מדרגות, פטורים, הטבות וניכויים לשכיר ועצמאי. חשב עכשיו עם המחשבונים.',
   alternates: { canonical: '/guides/taxes-complete-guide-2026' },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'כל המסים בישראל 2026 - המדריך השלם',
     description:
       'מדריך מקיף לכל המסים בישראל: מס הכנסה, ב.ל., מע"מ, מס שבח, מס רכישה, מס יסף, מס דיבידנד. מדרגות, פטורים, הטבות.',
@@ -213,7 +215,7 @@ export default function TaxesCompleteGuide() {
               ].map((item) => (
                 <div key={item.stat} className="bg-paper border border-ink/15 rounded-none p-5 text-center shadow-sm">
                   <div className={`text-3xl font-bold ${item.color} mb-1`}>{item.stat}</div>
-                  <div className="text-sm text-ink/60">{item.label}</div>
+                  <div className="text-sm text-ink/70">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -571,12 +573,12 @@ export default function TaxesCompleteGuide() {
               <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
                 <h3 className="font-bold text-ink mb-2">בעל מניות רגיל</h3>
                 <p className="text-2xl font-bold text-gold">25%</p>
-                <p className="text-sm text-ink/60">מי שמחזיק פחות מ-10% מהחברה</p>
+                <p className="text-sm text-ink/70">מי שמחזיק פחות מ-10% מהחברה</p>
               </div>
               <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
                 <h3 className="font-bold text-ink mb-2">בעל שליטה (10%+)</h3>
                 <p className="text-2xl font-bold text-red-700">30%</p>
-                <p className="text-sm text-ink/60">מחזיק 10%+ מהחברה (רוב בעלי עסקים)</p>
+                <p className="text-sm text-ink/70">מחזיק 10%+ מהחברה (רוב בעלי עסקים)</p>
               </div>
             </div>
 
@@ -794,7 +796,7 @@ export default function TaxesCompleteGuide() {
                   className="block bg-paper border border-ink/15 rounded-none p-4 hover:border-gold hover:shadow-md transition group"
                 >
                   <h3 className="font-bold text-gold group-hover:text-ink mb-1">{item.label}</h3>
-                  <p className="text-ink/60 text-sm">{item.desc}</p>
+                  <p className="text-ink/70 text-sm">{item.desc}</p>
                 </Link>
               ))}
             </div>

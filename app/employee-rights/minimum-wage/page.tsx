@@ -102,27 +102,27 @@ export default function Page() {
               <tr>
                 <td className="border border-ink/15 p-2">חודשי (משרה מלאה)</td>
                 <td className="border border-ink/15 p-2 font-bold text-gold">6,443.85 ₪</td>
-                <td className="border border-ink/15 p-2 text-ink/60">182 שעות/חודש</td>
+                <td className="border border-ink/15 p-2 text-ink/70">182 שעות/חודש</td>
               </tr>
               <tr className="bg-cream-2">
                 <td className="border border-ink/15 p-2">שעתי (182 ש/ח)</td>
                 <td className="border border-ink/15 p-2 font-bold text-gold">35.40 ₪</td>
-                <td className="border border-ink/15 p-2 text-ink/60">5 ימי עבודה/שבוע</td>
+                <td className="border border-ink/15 p-2 text-ink/70">5 ימי עבודה/שבוע</td>
               </tr>
               <tr>
                 <td className="border border-ink/15 p-2">שעתי (186 ש/ח)</td>
                 <td className="border border-ink/15 p-2 font-bold text-gold">34.64 ₪</td>
-                <td className="border border-ink/15 p-2 text-ink/60">6 ימי עבודה/שבוע</td>
+                <td className="border border-ink/15 p-2 text-ink/70">6 ימי עבודה/שבוע</td>
               </tr>
               <tr className="bg-cream-2">
                 <td className="border border-ink/15 p-2">יומי (5 ימים/שבוע)</td>
                 <td className="border border-ink/15 p-2 font-bold text-gold">297.40 ₪</td>
-                <td className="border border-ink/15 p-2 text-ink/60">22 ימי עבודה/חודש</td>
+                <td className="border border-ink/15 p-2 text-ink/70">22 ימי עבודה/חודש</td>
               </tr>
               <tr>
                 <td className="border border-ink/15 p-2">יומי (6 ימים/שבוע)</td>
                 <td className="border border-ink/15 p-2 font-bold text-gold">257.75 ₪</td>
-                <td className="border border-ink/15 p-2 text-ink/60">25 ימי עבודה/חודש</td>
+                <td className="border border-ink/15 p-2 text-ink/70">25 ימי עבודה/חודש</td>
               </tr>
             </tbody>
           </table>

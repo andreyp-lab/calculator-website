@@ -5,7 +5,7 @@ import { AnnualLeaveCalculator } from '@/components/calculators/AnnualLeaveCalcu
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון חופשה שנתית 2026 — כמה ימים מגיעים לי? זכאות ופדיון',
+  title: { absolute: 'מחשבון חופשה שנתית 2026 — כמה ימים מגיעים לי? זכאות ופדיון' },
   description:
     'מחשבון חופשה שנתית מקיף: כמה ימי חופשה מגיעים לי לפי ותק, חישוב פדיון חופשה בעת עזיבה, צבירה, יתרה ושנת 2026 — לפי חוק חופשה שנתית תשי"א-1951.',
   alternates: { canonical: '/employee-rights/annual-leave' },

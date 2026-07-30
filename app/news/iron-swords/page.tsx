@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: 'https://cheshbonai.co.il/news/iron-swords' },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: `מענקי חרבות ברזל: ₪${MACRO_DATA.ironSwordsBonuses.generalGrant.toLocaleString('he-IL')}`,
     description: `מענק כללי, יומי וחזרה לעבודה — עודכן: ${formatHebrewDate(MACRO_DATA.ironSwordsBonuses.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/iron-swords',
@@ -40,7 +42,7 @@ const articleSchema = {
 const STATUS_LABELS = {
   active: { label: 'פעיל', color: 'bg-green-100 text-green-700 border-green-200' },
   suspended: { label: 'מושהה', color: 'bg-red-100 text-red-700 border-red-200' },
-  updated: { label: 'עודכן', color: 'bg-amber-100 text-amber-700 border-amber-200' },
+  updated: { label: 'עודכן', color: 'bg-amber-100 text-amber-800 border-amber-200' },
 };
 
 export default function IronSwordsPage() {
@@ -120,7 +122,7 @@ export default function IronSwordsPage() {
 
         {/* Notes Banner */}
         <div className="bg-amber-50 border border-amber-200 p-4 mb-8 flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
           <p className="text-sm text-amber-800">
             <strong>הערה חשובה:</strong> {notes}. לפרטים מלאים ולהגשת תביעה,{' '}
             <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">
@@ -215,7 +217,7 @@ export default function IronSwordsPage() {
         </div>
 
         {/* Source */}
-        <div className="text-center text-xs text-ink/45">
+        <div className="text-center text-xs text-ink/70">
           <p>
             מקור:{' '}
             <a href={sourceUrl} target="_blank" rel="noopener noreferrer"

@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     'תלוש המשכורת מבלבל אותך? מדריך מלא לקריאת תלוש 2026: ברוטו מול נטו, ניכויי חובה (מס, ב.ל. 12.17%, פנסיה), נקודות זיכוי, הפרשות מעסיק וטעויות שכדאי לבדוק.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'איך קוראים תלוש משכורת 2026 — המדריך המלא',
     description:
       'מברוטו לנטו: כל רכיבי תלוש המשכורת מוסברים — ניכויי חובה, נקודות זיכוי, הפרשות מעסיק וטעויות נפוצות.',
@@ -112,7 +114,7 @@ export default function PayslipGuidePage() {
             תלוש המשכורת מלא במספרים ומונחים מבלבלים — אבל ברגע שמבינים את המבנה, הכול נהיה ברור.
             הנה מדריך שורה-אחר-שורה: מברוטו לנטו, מה כל ניכוי אומר, ומה חשוב לבדוק כל חודש.
           </p>
-          <p className="text-sm text-ink/60 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
+          <p className="text-sm text-ink/70 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
         </header>
 
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
@@ -169,7 +171,7 @@ export default function PayslipGuidePage() {
             <li>שתוספות (נסיעות, שעות נוספות) משולמות כחוק.</li>
           </ul>
 
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             * אין לראות במדריך זה ייעוץ מס. לבדיקה מדויקת של הנטו שלך — השתמש במחשבון למטה.
           </p>
         </div>
@@ -206,7 +208,7 @@ export default function PayslipGuidePage() {
               <details key={f.question} className="border border-ink/15 p-4 group">
                 <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>▾</span>
+                  <span className="text-ink/70 group-open:rotate-180 transition" aria-hidden>▾</span>
                 </summary>
                 <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
               </details>

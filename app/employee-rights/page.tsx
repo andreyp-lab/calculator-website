@@ -6,7 +6,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/employee-rights' },
-  title: 'מחשבוני זכויות עובדים 2026 — פיצויים, הבראה, אבטלה ומחלה',
+  title: { absolute: 'מחשבוני זכויות עובדים 2026 — פיצויים, הבראה, אבטלה ומחלה' },
   description: 'מחשבונים לזכויות עובדים שכירים בישראל 2026: פיצויי פיטורין, דמי הבראה, חופשה שנתית, דמי לידה, דמי אבטלה, מחלה ומילואים. בדוק כמה מגיע לך עכשיו.',
 };
 
@@ -226,11 +226,11 @@ export default function EmployeeRightsPage() {
                 key={calc.href}
                 className="bg-cream-2 p-6 border-2 border-ink/15 flex items-start gap-4 opacity-60"
               >
-                <Calculator className="w-6 h-6 text-ink/45 flex-shrink-0 mt-1" />
+                <Calculator className="w-6 h-6 text-ink/70 flex-shrink-0 mt-1" />
                 <div className="flex-1">
                   <h3 className="font-bold text-ink/70 mb-1">{calc.title}</h3>
-                  <p className="text-sm text-ink/60">{calc.description}</p>
-                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/60 px-2 py-1">
+                  <p className="text-sm text-ink/70">{calc.description}</p>
+                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/70 px-2 py-1">
                     בקרוב
                   </span>
                 </div>
@@ -390,7 +390,7 @@ export default function EmployeeRightsPage() {
         </section>
 
         {/* Disclaimer */}
-        <p className="mt-12 text-xs text-ink/50 leading-relaxed border-t border-ink/10 pt-4">
+        <p className="mt-12 text-xs text-ink/70 leading-relaxed border-t border-ink/10 pt-4">
           המידע בעמוד זה הוא מידע כללי בלבד ואינו מהווה ייעוץ משפטי, ייעוץ מס או תחליף
           לייעוץ מקצועי. הזכויות בפועל תלויות בהסכם העבודה, בצווי הרחבה ובנסיבות האישיות.
         </p>

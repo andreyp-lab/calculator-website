@@ -3,7 +3,7 @@ import { SITE_INFO } from '@/lib/config/site-info';
 
 export const metadata = {
   alternates: { canonical: '/terms' },
-  title: 'תנאי שימוש | חשבונאי',
+  title: 'תנאי שימוש',
   description: 'תנאי השימוש של cheshbonai.co.il - כתב ויתור פיננסי מקיף, הגבלת אחריות, קניין רוחני.',
 };
 
@@ -14,7 +14,7 @@ export default function TermsPage() {
 
         {/* כותרת */}
         <h1 className="text-4xl font-bold text-ink mb-2">תנאי שימוש</h1>
-        <p className="text-sm text-ink/60 mb-4">
+        <p className="text-sm text-ink/70 mb-4">
           תאריך עדכון אחרון: {SITE_INFO.legal.termsLastUpdated}
         </p>
 
@@ -25,7 +25,7 @@ export default function TermsPage() {
             המידע באתר זה אינו מהווה ייעוץ פיננסי, ייעוץ השקעות, ייעוץ מס, ייעוץ משפטי או ייעוץ
             פנסיוני. אנו איננו יועצי השקעות מורשים לפי חוק הסדרת העיסוק בייעוץ השקעות, התשנ&quot;ה-1995.
           </p>
-          <p className="text-red-600 text-sm">
+          <p className="text-red-700 text-sm">
             לפני קבלת כל החלטה פיננסית — התייעץ עם רואה חשבון מוסמך, עורך דין, יועץ פנסיוני
             או יועץ השקעות מורשה.
           </p>
@@ -170,7 +170,7 @@ export default function TermsPage() {
             אין להעתיק, לשכפל, להפיץ, לשדר, לשנות, להציג פומבית או לפרסם כל חלק מהתוכן
             ללא אישור מפורש בכתב מהמפעיל.
           </p>
-          <p className="text-sm text-ink/60">
+          <p className="text-sm text-ink/70">
             לבקשות שימוש / רישיון / שיתופי פעולה:{' '}
             <a href={`mailto:${SITE_INFO.contact.email}`} className="text-gold hover:underline">
               {SITE_INFO.contact.email}
@@ -339,7 +339,7 @@ export default function TermsPage() {
               {SITE_INFO.contact.contactPage}
             </Link>
           </p>
-          <p className="text-xs text-ink/60 mt-2">
+          <p className="text-xs text-ink/70 mt-2">
             תאריך עדכון אחרון: {SITE_INFO.legal.termsLastUpdated}
           </p>
         </div>

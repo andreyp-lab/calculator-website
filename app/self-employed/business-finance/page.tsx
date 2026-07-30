@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     'ניהול כספים לעסק קטן ב-2026: הפרדת חשבון עסקי-פרטי, איך לנהל תזרים מזומנים בעסק קטן (תחזית 13 שבועות), תכנון מס ומקדמות, דוח רווח והפסד פשוט ומתי לשכור רו"ח.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'ניהול כספים לעסק קטן 2026 — המדריך המלא',
     description:
       'הפרדת חשבונות, תזרים מזומנים בשיטת 13 השבועות, תכנון מס שנתי ומקדמות, דוח רווח והפסד פשוט לעצמאי — מדריך מעשי מרו"ח.',
@@ -106,7 +108,7 @@ export default function BusinessFinancePage() {
             הזה נבנה, צעד אחר צעד, שיטה פשוטה לניהול כספים לעסק קטן: הפרדת חשבונות, תחזית תזרים
             של 13 שבועות, תכנון מקדמות מס, דוח רווח והפסד בסיסי — ומתי הגיע הזמן לצרף רו"ח.
           </p>
-          <p className="text-sm text-ink/60 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
+          <p className="text-sm text-ink/70 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
         </header>
 
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">

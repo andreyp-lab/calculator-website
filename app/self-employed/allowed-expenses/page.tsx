@@ -6,7 +6,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 export const metadata: Metadata = {
   title: 'הוצאות מוכרות לעצמאי 2026 — מחשבון + הטבלה המלאה',
   description:
-    'אילו הוצאות מוכרות לעצמאי במס הכנסה ובמע"מ? מחשבון הוצאות מוכרות 2026 + טבלה מלאה: רכב 45%, כיבוד 80%, עבודה מהבית, סלולר, ציוד ופחת, השתלמויות וקיזוז מע"מ תשומות.',
+    'אילו הוצאות מוכרות לעצמאי? מחשבון הוצאות מוכרות 2026 + טבלה: רכב 45%, כיבוד 80%, עבודה מהבית, ציוד ופחת וקיזוז מע"מ תשומות.',
   alternates: { canonical: '/self-employed/allowed-expenses' },
 };
 
@@ -203,7 +203,7 @@ export default function Page() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-ink/60">
+          <p className="text-xs text-ink/70">
             תקנה 18 לתקנות מע"מ: בהוצאה מעורבת שעיקרה עסקי — קיזוז עד 2/3; שעיקרה פרטי — עד 1/4.
           </p>
 

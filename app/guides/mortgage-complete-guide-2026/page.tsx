@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     'המדריך הכי מקיף למשכנתא: מתחיל לחלוטין עד מומחה. הוראת בנק ישראל 329, בחירת תמהיל, מסלולים, מחזור, פירעון מוקדם, LTV וכל מה שצריך.',
   alternates: { canonical: '/guides/mortgage-complete-guide-2026' },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: "המדריך השלם למשכנתא בישראל 2026 - מ-א' עד ת'",
     description:
       'המדריך הכי מקיף למשכנתא: מתחיל לחלוטין עד מומחה. הוראת בנק ישראל 329, בחירת תמהיל, מסלולים, מחזור, פירעון מוקדם, LTV וכל מה שצריך.',
@@ -266,7 +268,7 @@ export default function MortgageCompleteGuide() {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-sm text-ink/60">
+            <p className="mt-4 text-sm text-ink/70">
               למילון מונחים מלא ראה: <Link href="/glossary" className="text-gold underline">מילון מונחים פיננסי שלם ←</Link>
             </p>
           </section>
@@ -830,7 +832,7 @@ export default function MortgageCompleteGuide() {
                   className="block bg-paper border border-ink/15 rounded-none p-4 hover:border-gold hover:shadow-md transition group"
                 >
                   <h3 className="font-bold text-gold group-hover:text-ink mb-1">{item.label}</h3>
-                  <p className="text-ink/60 text-sm">{item.desc}</p>
+                  <p className="text-ink/70 text-sm">{item.desc}</p>
                 </Link>
               ))}
             </div>

@@ -14,6 +14,8 @@ export const metadata: Metadata = {
     canonical: 'https://cheshbonai.co.il/news',
   },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'עדכוני שוק ונתונים כלכליים 2026 — ריבית, מדד ושכר',
     description: 'ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — מעודכן אוטומטית לשנת 2026.',
     url: 'https://cheshbonai.co.il/news',
@@ -141,7 +143,7 @@ export default function NewsPage() {
 
                 {/* Title */}
                 <h2 className="text-lg font-bold text-ink mb-1">{card.title}</h2>
-                <p className="text-xs text-ink/60 mb-3">{card.titleEn}</p>
+                <p className="text-xs text-ink/70 mb-3">{card.titleEn}</p>
 
                 {/* Big Value */}
                 <div className={`text-4xl font-bold ${card.textColor} mb-1`}>
@@ -155,7 +157,7 @@ export default function NewsPage() {
                 </p>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between text-xs text-ink/60 pt-4 border-t border-ink/10">
+                <div className="flex items-center justify-between text-xs text-ink/70 pt-4 border-t border-ink/10">
                   <span>עודכן: {formatHebrewDate(card.lastUpdated)}</span>
                   <div className="flex items-center gap-1 text-gold opacity-0 group-hover:opacity-100 transition font-medium">
                     <span>לפרטים</span>
@@ -170,7 +172,7 @@ export default function NewsPage() {
         {/* ISR Explanation */}
         <div className="bg-cream-2 border border-ink/15 p-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <RefreshCw className="w-5 h-5 text-ink/45" />
+            <RefreshCw className="w-5 h-5 text-ink/70" />
             <h3 className="font-semibold text-ink/70">איך הנתונים מתעדכנים?</h3>
           </div>
           <p className="text-sm text-ink/70 max-w-xl mx-auto leading-relaxed">

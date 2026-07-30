@@ -147,12 +147,12 @@ export default function Page() {
             <tbody>
               <tr>
                 <td className="border border-ink/15 p-2">יום 1</td>
-                <td className="border border-ink/15 p-2 font-bold text-red-600">0%</td>
+                <td className="border border-ink/15 p-2 font-bold text-red-700">0%</td>
                 <td className="border border-ink/15 p-2 text-xs">המעסיק לא מחויב לשלם</td>
               </tr>
               <tr className="bg-cream-2">
                 <td className="border border-ink/15 p-2">ימים 2–3</td>
-                <td className="border border-ink/15 p-2 font-bold text-amber-600">50%</td>
+                <td className="border border-ink/15 p-2 font-bold text-amber-800">50%</td>
                 <td className="border border-ink/15 p-2 text-xs">חצי שכר יומי</td>
               </tr>
               <tr>

@@ -5,7 +5,7 @@ import { FAQ } from '@/components/calculator/FAQ';
 import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מע"מ 2026 – הוספה, חילוץ ודוח דו-חודשי לעוסק מורשה',
+  title: { absolute: 'מחשבון מע"מ 2026 – הוספה, חילוץ ודוח דו-חודשי לעוסק מורשה' },
   description:
     'מחשבון מע"מ מקצועי ב-18%. הוספת מע"מ, חילוץ, דוח דו-חודשי, מעקב חשבוניות, סוגי עוסקים, ענפים מיוחדים ויבוא. לעצמאיים ועוסקים מורשים.',
   alternates: { canonical: '/self-employed/vat' },

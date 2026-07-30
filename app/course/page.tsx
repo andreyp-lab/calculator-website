@@ -18,8 +18,10 @@ export const metadata: Metadata = {
   alternates: { canonical: '/course' },
   title: 'בית הספר הפיננסי FinSchool — קורסים לניהול כספי העסק',
   description:
-    'FinSchool — בית הספר הפיננסי לעצמאים ובעלי עסקים, בהדרכת רו״ח אנדרי פלטונוב. 3 קורסים פרקטיים: מע״מ ומס לעצמאים, ניהול כספים לעסקים ו-AI לאנשי כספים. גישה לכל החיים, 14 יום החזר.',
+    'FinSchool — בית הספר הפיננסי לעצמאים ובעלי עסקים בהדרכת רו״ח אנדרי פלטונוב. 3 קורסים פרקטיים, גישה לכל החיים, 14 יום החזר כספי.',
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'בית הספר הפיננסי FinSchool — קורסים לניהול כספי העסק',
     description:
       'קורסים פרקטיים מרו״ח שניהל מאות מיליוני ₪: מע״מ ומס לעצמאים, ניהול כספים לבעלי עסקים ו-Claude AI לאנשי כספים. גישה לכל החיים · 14 יום החזר מלא.',
@@ -285,10 +287,10 @@ export default function CoursePage() {
                   </ul>
 
                   <div className="mt-auto">
-                    <p className="text-xs text-ink/50 mb-1">{course.scope}</p>
+                    <p className="text-xs text-ink/70 mb-1">{course.scope}</p>
                     <p className="text-base font-semibold text-ink mb-1">{course.price}</p>
                     {course.social ? (
-                      <p className="text-xs text-ink/50 mb-4">{course.social}</p>
+                      <p className="text-xs text-ink/70 mb-4">{course.social}</p>
                     ) : (
                       <div className="mb-4" />
                     )}
@@ -378,7 +380,7 @@ export default function CoursePage() {
         </section>
 
         {/* Disclaimer — mandatory */}
-        <section className="border border-ink/15 bg-cream-2 p-4 text-xs text-ink/55 leading-relaxed text-center">
+        <section className="border border-ink/15 bg-cream-2 p-4 text-xs text-ink/70 leading-relaxed text-center">
           המידע באתר אינו מהווה ייעוץ פיננסי ואינו מחליף התייעצות עם רו״ח מוסמך. הרכישה
           וההתחייבות הן מול FinSchool.
         </section>

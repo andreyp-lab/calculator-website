@@ -4,7 +4,7 @@ import { SelfEmployedPensionCalculator } from '@/components/calculators/SelfEmpl
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון פנסיה חובה לעצמאי 2026 — שיעורים, הטבות מס, קנסות',
+  title: { absolute: 'מחשבון פנסיה חובה לעצמאי 2026 — שיעורים, הטבות מס, קנסות' },
   description:
     'חישוב פנסיה חובה לעצמאי 2026: שיעורים 4.45%/12.55%, שתי הטבות מס בו-זמנית (ניכוי + זיכוי), ניתוח קנסות אי-הפקדה, הקרנה לפרישה לפי גיל ותשואה. כלי חינמי ומדויק.',
   alternates: { canonical: '/self-employed/mandatory-pension' },

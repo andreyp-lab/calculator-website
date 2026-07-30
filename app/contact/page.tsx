@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     'יש שאלה, הצעה או דיווח על אי-דיוק במחשבון? צרו קשר עם צוות חשבונאי. אנו משיבים לכל פנייה תוך 24 שעות בימי עבודה.',
   alternates: { canonical: '/contact' },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'צור קשר — חשבונאי',
     description: 'צרו קשר עם צוות חשבונאי — מענה לכל פנייה תוך 24 שעות בימי עבודה.',
     url: '/contact',

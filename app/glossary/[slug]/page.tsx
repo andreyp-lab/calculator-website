@@ -30,11 +30,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const isThin = wordCount < 60;
 
   return {
-    title: `${term.term} – מה זה? הסבר והגדרה | מילון פיננסי 2026`,
+    // absolute: בלי זה סיומת המותג מה-template בשורש דוחפת חלק מהמונחים מעבר ל-65 תווים.
+    title: { absolute: `${term.term} – מה זה? הסבר והגדרה | מילון פיננסי 2026` },
     description,
     alternates: { canonical: `/glossary/${term.id}` },
     robots: isThin ? { index: false, follow: true } : undefined,
     openGraph: {
+      // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+      images: ['/opengraph-image'],
       title: `${term.term} – הגדרה והסבר`,
       description,
       type: 'article',
@@ -87,7 +90,7 @@ export default async function GlossaryTermPage({ params }: PageProps) {
 
       <article className="max-w-3xl mx-auto px-4 py-10">
         {/* Breadcrumbs */}
-        <nav className="text-sm text-ink/60 mb-6" aria-label="breadcrumb">
+        <nav className="text-sm text-ink/70 mb-6" aria-label="breadcrumb">
           <Link href="/" className="hover:text-gold">דף הבית</Link>
           {' › '}
           <Link href="/glossary" className="hover:text-gold">מילון מונחים</Link>
@@ -141,7 +144,7 @@ export default async function GlossaryTermPage({ params }: PageProps) {
                   className="block border border-ink/15 rounded-none p-4 hover:border-gold hover:shadow-sm transition"
                 >
                   <span className="font-bold text-ink">{t.term}</span>
-                  <span className="block text-sm text-ink/60 mt-1 line-clamp-2">
+                  <span className="block text-sm text-ink/70 mt-1 line-clamp-2">
                     {t.definition}
                   </span>
                 </Link>

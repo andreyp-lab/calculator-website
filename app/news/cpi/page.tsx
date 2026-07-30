@@ -22,6 +22,8 @@ export const metadata: Metadata = {
     canonical: 'https://cheshbonai.co.il/news/cpi',
   },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: `אינפלציה עדכנית: ${MACRO_DATA.inflation.annualRate}%`,
     description: `מדד המחירים לצרכן — שינוי שנתי | עודכן: ${formatHebrewDate(MACRO_DATA.inflation.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/cpi',
@@ -140,7 +142,7 @@ export default function CpiPage() {
             </div>
             <div className="bg-white rounded-lg p-4">
               <p className="text-xs text-gray-500 mb-1">ירידה בכוח הקנייה</p>
-              <p className="text-2xl font-bold text-red-600">
+              <p className="text-2xl font-bold text-red-700">
                 -₪{Math.round(lostPurchasingPower).toLocaleString('he-IL')}
               </p>
             </div>

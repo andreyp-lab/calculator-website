@@ -161,11 +161,11 @@ export default function PersonalTaxPage() {
                 key={calc.href}
                 className="bg-cream-2 p-6 rounded-none border-2 border-ink/15 flex items-start gap-4 opacity-60"
               >
-                <Calculator className="w-6 h-6 text-ink/45 flex-shrink-0 mt-1" />
+                <Calculator className="w-6 h-6 text-ink/70 flex-shrink-0 mt-1" />
                 <div className="flex-1">
                   <h3 className="font-bold text-ink/70 mb-1">{calc.title}</h3>
-                  <p className="text-sm text-ink/60">{calc.description}</p>
-                  <span className="inline-block mt-2 text-xs bg-ink/10 text-ink/60 px-2 py-1 rounded-none">
+                  <p className="text-sm text-ink/70">{calc.description}</p>
+                  <span className="inline-block mt-2 text-xs bg-ink/10 text-ink/70 px-2 py-1 rounded-none">
                     בקרוב
                   </span>
                 </div>
@@ -304,36 +304,36 @@ export default function PersonalTaxPage() {
               <Link href="/blog/tax-refund-complete-guide-2026" className="text-ink font-semibold hover:text-gold transition">
                 המדריך המלא להחזרי מס 2026 ←
               </Link>
-              <span className="block text-sm text-ink/60">מי זכאי, איך מגישים וכמה אפשר לקבל בחזרה</span>
+              <span className="block text-sm text-ink/70">מי זכאי, איך מגישים וכמה אפשר לקבל בחזרה</span>
             </li>
             <li>
               <Link href="/blog/salary-net-2026-complete-guide" className="text-ink font-semibold hover:text-gold transition">
                 המדריך המלא לשכר נטו 2026 ←
               </Link>
-              <span className="block text-sm text-ink/60">כל מה שיורד מהתלוש — ואיך לקרוא אותו נכון</span>
+              <span className="block text-sm text-ink/70">כל מה שיורד מהתלוש — ואיך לקרוא אותו נכון</span>
             </li>
             <li>
               <Link href="/blog/income-tax-brackets-2026-complete-guide" className="text-ink font-semibold hover:text-gold transition">
                 מדרגות מס הכנסה 2026 — המדריך המלא ←
               </Link>
-              <span className="block text-sm text-ink/60">כל המדרגות, השינויים והשלכותיהם על השכר שלכם</span>
+              <span className="block text-sm text-ink/70">כל המדרגות, השינויים והשלכותיהם על השכר שלכם</span>
             </li>
             <li>
               <Link href="/glossary/tax-credit-points" className="text-ink font-semibold hover:text-gold transition">
                 מילון מונחים: נקודות זיכוי ←
               </Link>
-              <span className="block text-sm text-ink/60">הגדרה קצרה וברורה של המונח החשוב בתלוש</span>
+              <span className="block text-sm text-ink/70">הגדרה קצרה וברורה של המונח החשוב בתלוש</span>
             </li>
             <li>
               <Link href="/glossary/tax-brackets" className="text-ink font-semibold hover:text-gold transition">
                 מילון מונחים: מדרגות מס ←
               </Link>
-              <span className="block text-sm text-ink/60">איך עובד מס פרוגרסיבי — בשפה פשוטה</span>
+              <span className="block text-sm text-ink/70">איך עובד מס פרוגרסיבי — בשפה פשוטה</span>
             </li>
           </ul>
         </section>
 
-        <p className="mt-10 text-xs text-ink/50 leading-relaxed">
+        <p className="mt-10 text-xs text-ink/70 leading-relaxed">
           המידע בדף זה הוא מידע כללי בלבד ואינו מהווה ייעוץ מס, ייעוץ משפטי או תחליף לייעוץ
           מקצועי המותאם לנסיבות האישיות שלכם.
         </p>

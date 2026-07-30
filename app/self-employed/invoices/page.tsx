@@ -8,11 +8,13 @@ const PAGE_PATH = '/self-employed/invoices';
 const SITE_URL = 'https://cheshbonai.co.il';
 
 export const metadata: Metadata = {
-  title: 'חשבונית מס, חשבונית עסקה או קבלה? המדריך המלא לעצמאים 2026',
+  title: { absolute: 'חשבונית מס, חשבונית עסקה או קבלה? המדריך המלא לעצמאים 2026' },
   description:
     'ההבדל בין חשבונית מס, חשבונית עסקה וקבלה — מי מנפיק מה ומתי. חשבוניות ישראל, מספרי הקצאה, ספי 10,000 ₪ ו-5,000 ₪, חובת שמירה 7 שנים. מדריך עדכני לעצמאים ב-2026.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    images: ['/opengraph-image'],
     title: 'חשבונית מס, חשבונית עסקה או קבלה? המדריך המלא לעצמאים 2026',
     description:
       'מי מנפיק חשבונית מס ומי לא, מספרי הקצאה בחשבוניות ישראל, חובת שמירה 7 שנים וטעויות נפוצות.',
@@ -155,7 +157,7 @@ export default function InvoicesPage() {
             איזה מסמך מנפיקים, מתי, ולמי — ומה ההבדל הקריטי בין עוסק פטור לעוסק מורשה. כולל
             מספרי הקצאה, חשבוניות ישראל וטעויות שעולות כסף.
           </p>
-          <p className="text-sm text-ink/60 mt-3">
+          <p className="text-sm text-ink/70 mt-3">
             נכתב על ידי אנדרי פלטונוב, רו&quot;ח · עודכן {lastUpdated}
           </p>
         </header>
@@ -423,7 +425,7 @@ export default function InvoicesPage() {
                     ←
                   </span>
                 </span>
-                <span className="text-sm text-ink/60">{c.desc}</span>
+                <span className="text-sm text-ink/70">{c.desc}</span>
               </Link>
             ))}
           </div>
@@ -437,7 +439,7 @@ export default function InvoicesPage() {
               <details key={f.question} className="border border-ink/15 rounded-none p-4 group">
                 <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
                   {f.question}
-                  <span className="text-ink/45 group-open:rotate-180 transition" aria-hidden>
+                  <span className="text-ink/70 group-open:rotate-180 transition" aria-hidden>
                     ▾
                   </span>
                 </summary>
@@ -450,7 +452,7 @@ export default function InvoicesPage() {
         {/* Sources */}
         <section className="mb-10 border-t border-ink/15 pt-8">
           <h2 className="text-lg font-bold text-ink/70 mb-3">מקורות</h2>
-          <ul className="text-sm text-ink/60 space-y-1 list-disc list-inside">
+          <ul className="text-sm text-ink/70 space-y-1 list-disc list-inside">
             <li>
               <a
                 href="https://www.kolzchut.org.il/he/%D7%A2%D7%95%D7%A1%D7%A7_%D7%A4%D7%98%D7%95%D7%A8"
@@ -495,7 +497,7 @@ export default function InvoicesPage() {
               </a>
             </li>
           </ul>
-          <p className="text-xs text-ink/45 mt-3">
+          <p className="text-xs text-ink/70 mt-3">
             עודכן לאחרונה: {lastUpdated}. המידע לצורכי הכוונה כללית בלבד ואינו מהווה ייעוץ משפטי
             או מיסויי. לפני החלטה — יש להתייעץ עם רואה חשבון.
           </p>

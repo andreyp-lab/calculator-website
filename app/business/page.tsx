@@ -5,9 +5,9 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'כמה עולה להקים עסק? מחשבוני עלות הקמה ותוכנית עסקית 2026',
+  title: { absolute: 'כמה עולה להקים עסק? מחשבוני עלות הקמה ותוכנית עסקית 2026' },
   description:
-    'כמה עולה להקים סטודיו, בית קפה, מספרה, חדר כושר או קליניקה? מחשבוני עלות הקמה + תוכנית עסקית לפי עיר ושטח — הקמה, הוצאות חודשיות, נקודת איזון ורזרבת חידוש. 2026.',
+    'כמה עולה להקים בית קפה, מספרה, חדר כושר או קליניקה? מחשבוני עלות הקמה לפי עיר ושטח + הוצאות חודשיות ונקודת איזון. 2026.',
   alternates: { canonical: '/business' },
 };
 
@@ -41,7 +41,7 @@ export default function BusinessHubPage() {
               <h2 className="font-bold text-ink text-lg mb-1 group-hover:text-gold transition">
                 כמה עולה להקים {bt.name}?
               </h2>
-              <p className="text-sm text-ink/60 flex-1">{bt.intro}</p>
+              <p className="text-sm text-ink/70 flex-1">{bt.intro}</p>
               <span className="mt-4 flex items-center gap-1 text-xs font-mono uppercase tracking-[0.1em] text-gold">
                 למחשבון <ArrowLeft className="w-3.5 h-3.5" />
               </span>

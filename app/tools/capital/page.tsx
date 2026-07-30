@@ -17,7 +17,7 @@ export default function CapitalPage() {
           <DollarSign className="w-6 h-6 text-ink-mid" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-ink">הון, שווי והשקעות</h2>
+          <h1 className="text-2xl font-bold text-ink">הון, שווי והשקעות — DCF ו-Cap Table</h1>
           <p className="text-sm text-ink/70">
             DCF Valuation, Cap Table ודילול, סבבי גיוס ויציאות
           </p>
