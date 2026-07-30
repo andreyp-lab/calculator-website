@@ -164,6 +164,11 @@ export default function RootLayout({
       className={`${heebo.variable} ${jetbrainsMono.variable} ${frankRuhl.variable} h-full antialiased`}
     >
       <head>
+        {/* GA4 יושב על שני מארחים שונים (טעינת הסקריפט מול שליחת ה-hits).
+            בלי preconnect ה-handshake ל-google-analytics.com עולה ~300ms
+            על הנתיב הקריטי במובייל. */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -172,11 +177,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        {/* lazyOnload ולא afterInteractive: gtag.js הוא 167KB — המשאב הכבד באתר,
+            22% ממשקל העמוד. ב-afterInteractive הוא מתחרה על ה-paint הראשון
+            ודוחף את ה-LCP במובייל ל-6.2 שניות. */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
