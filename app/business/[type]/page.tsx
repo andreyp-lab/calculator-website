@@ -23,13 +23,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { type } = await params;
   const bt = getBusinessType(type);
   if (!bt) return { title: 'לא נמצא' };
-  const title = `כמה עולה להקים ${bt.name}? מחשבון תוכנית עסקית 2026`;
-  const description = `${bt.intro} מחשבון עלות הקמה לפי עיר ושטח + תוכנית עסקית: הוצאות חודשיות, נקודת איזון, פחת ורזרבת חידוש. עדכני 2026.`;
+  // `absolute` מבטל את סיומת המותג ("| חשבונאי") מה-template בשורש — היא עלתה
+  // 10 תווים והקפיצה את הכותרות האלה עד 82 תווים, כלומר חיתוך ב-SERP.
+  const title = `כמה עולה להקים ${bt.name}? מחשבון עלויות 2026`;
+  // bt.intro הוא פסקה מלאה (2-3 משפטים). שרשור שלה הפיק תיאורים של 212-305 תווים,
+  // כלומר חיתוך של יותר ממחצית ב-SERP. נלקח המשפט הראשון בלבד, חתוך בגבול מילה.
+  const firstSentence = bt.intro.split(/(?<=[.!?])\s/)[0].trim();
+  const introShort =
+    firstSentence.length <= 85
+      ? firstSentence
+      : firstSentence.slice(0, 85).replace(/\s+\S*$/, '') + '…';
+  const description = `${introShort} מחשבון עלות הקמה לפי עיר ושטח, הוצאות חודשיות ונקודת איזון. עדכני 2026.`;
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical: `/business/${bt.slug}` },
-    openGraph: { title, description, url: `/business/${bt.slug}`, type: 'article', locale: 'he_IL' },
+    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
+    openGraph: {
+      title,
+      description,
+      url: `/business/${bt.slug}`,
+      type: 'article',
+      locale: 'he_IL',
+      images: ['/opengraph-image'],
+    },
   };
 }
 
@@ -156,6 +173,32 @@ export default async function BusinessGuidePage({ params }: PageProps) {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* קישורי אחים בתוך האשכול. לפני זה כל דף /business/<slug> קיבל קישור פנימי
+            נכנס אחד בלבד — מה-hub — וגוגל גילה את הדפים דרך ה-sitemap בלבד
+            (URL Inspection החזיר referringUrls: sitemap.xml). */}
+        <section className="mb-12">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-3">
+            ✦ כמה עולה להקים עסק אחר?
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {BUSINESS_TYPES.filter((b) => b.slug !== bt.slug).map((b) => (
+              <li key={b.slug}>
+                <Link
+                  href={`/business/${b.slug}`}
+                  className="inline-block bg-paper border border-ink/15 hover:border-gold px-3 py-2 text-sm text-ink transition"
+                >
+                  {b.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4">
+            <Link href="/business" className="text-gold hover:text-gold-2 font-medium">
+              ← לכל מחשבוני עלות ההקמה
+            </Link>
+          </p>
         </section>
 
         <section className="mb-8">

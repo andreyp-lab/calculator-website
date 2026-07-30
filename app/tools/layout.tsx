@@ -2,7 +2,21 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { ToolsProvider } from '@/lib/tools/ToolsContext';
-import { LayoutDashboard, TrendingUp, Wallet, BarChart3, Briefcase } from 'lucide-react';
+import {
+  LayoutDashboard,
+  TrendingUp,
+  Wallet,
+  BarChart3,
+  Briefcase,
+  LineChart,
+  Scale,
+  Gem,
+  PiggyBank,
+  Users,
+  Landmark,
+  Sparkles,
+  Compass,
+} from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'כלים פיננסיים מקצועיים לבעלי עסקים',
@@ -36,6 +50,71 @@ const tools = [
     label: 'ניתוח דוחות',
     icon: BarChart3,
     description: 'יחסים, Z-Score, דירוג',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  // הכלים הבאים היו נגישים רק דרך ה-sitemap: /tools/capital קיבל 0 קישורים
+  // פנימיים נכנסים, והשאר אחד בלבד. הניווט כאן הוא מקור הגילוי היחיד שלהם.
+  {
+    href: '/tools/forecast',
+    label: 'חיזוי פיננסי',
+    icon: LineChart,
+    description: 'תרחישים ותחזית רב-שנתית',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/break-even',
+    label: 'נקודת איזון',
+    icon: Scale,
+    description: 'כמה צריך למכור כדי לכסות',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/business-valuation',
+    label: 'הערכת שווי עסק',
+    icon: Gem,
+    description: 'מכפילים, DCF, שווי נכסי',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/capital',
+    label: 'הון וגיוס',
+    icon: PiggyBank,
+    description: 'DCF, Cap Table, דילול',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/customer-lifetime-value',
+    label: 'שווי לקוח (LTV)',
+    icon: Users,
+    description: 'LTV, CAC ויחס ביניהם',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/loan-eligibility',
+    label: 'כושר החזר להלוואה',
+    icon: Landmark,
+    description: 'כמה אפשר לקחת ובאיזה תנאים',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/cashflow-solo',
+    label: 'תזרים לעצמאי',
+    icon: Wallet,
+    description: 'תזרים אישי לעוסק יחיד',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/budget-wizard',
+    label: 'אשף תקציב',
+    icon: Sparkles,
+    description: 'בניית תקציב שלב אחר שלב',
+    color: 'bg-cream-2 text-ink border-ink/15',
+  },
+  {
+    href: '/tools/start',
+    label: 'מדריך התחלה',
+    icon: Compass,
+    description: 'מאיפה מתחילים',
     color: 'bg-cream-2 text-ink border-ink/15',
   },
 ];
