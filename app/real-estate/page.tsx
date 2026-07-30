@@ -4,6 +4,8 @@ import { ArrowLeft, Calculator, BookOpen } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
 import { DisclaimerBox } from '@/components/calculator/DisclaimerBox';
+import { PURCHASE_TAX_2026 } from '@/lib/constants/tax-2026';
+import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/real-estate' },
@@ -97,7 +99,7 @@ const faqItems = [
   {
     question: 'מה עדיף — מסלול פריים או ריבית קבועה במשכנתא?',
     answer:
-      'אין תשובה אחת. מסלול פריים (כיום 5.5%) זול יחסית וגמיש לפירעון מוקדם, אך חשוף לשינויי ריבית של בנק ישראל. ריבית קבועה לא צמודה נותנת ודאות מלאה בהחזר אך יקרה יותר. רוב הלווים משלבים כמה מסלולים — האופטימייזר שלנו עוזר למצוא את התמהיל המתאים לפרופיל הסיכון שלכם.',
+      `אין תשובה אחת. מסלול פריים (כיום ${MACRO_DATA.primeRate.value}%) זול יחסית וגמיש לפירעון מוקדם, אך חשוף לשינויי ריבית של בנק ישראל. ריבית קבועה לא צמודה נותנת ודאות מלאה בהחזר אך יקרה יותר. רוב הלווים משלבים כמה מסלולים — האופטימייזר שלנו עוזר למצוא את התמהיל המתאים לפרופיל הסיכון שלכם.`,
   },
   {
     question: 'מתי כדאי למחזר משכנתא?',
@@ -145,9 +147,22 @@ export default function RealEstatePage() {
         <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
           מחשבוני משכנתא ונדל&quot;ן 2026 — מס רכישה, מס שבח ומחזור
         </h1>
-        <p className="text-lg text-ink/70 mb-12">
+        <p className="text-lg text-ink/70 mb-6">
           מחשבונים מקצועיים לרוכשי ובעלי דירות בישראל
         </p>
+
+        {/* Quick answer — 25% = STANDARD_TAX_RATE, lib/calculators/capital-gains-tax.ts */}
+        <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
+          <p className="text-lg text-ink leading-relaxed">
+            כמה עולה לקנות ולמכור דירה ב-2026? רוכשי דירה יחידה פטורים ממס רכישה עד שווי של{' '}
+            {PURCHASE_TAX_2026.firstHome[0].upTo.toLocaleString('he-IL')} ₪, ומעליו המס מדורג
+            החל מ-{Math.round(PURCHASE_TAX_2026.firstHome[1].rate * 1000) / 10}%; רוכשי דירה נוספת משלמים כבר
+            מהשקל הראשון ({PURCHASE_TAX_2026.additionalHome[0].rate * 100}% ומעלה). בצד המכירה,
+            מס השבח עומד על 25% מהרווח הריאלי, בכפוף לפטור דירה יחידה. ריבית הפריים עומדת כיום
+            על {MACRO_DATA.primeRate.value}%. המחשבונים בעמוד זה מחשבים משכנתא, מס רכישה ומס
+            שבח לפי המדרגות העדכניות.
+          </p>
+        </section>
 
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
@@ -203,11 +218,11 @@ export default function RealEstatePage() {
             <p>
               משכנתא ישראלית כמעט אף פעם אינה מסלול אחד — היא תמהיל של כמה הלוואות במקביל, שלכל
               אחת מהן ריבית, הצמדה ורמת סיכון משלה. מסלול הפריים נשען על ריבית הפריים, שעומדת כיום
-              על 5.5% (ריבית בנק ישראל 4.0% בתוספת מרווח קבוע). הוא זול יחסית וגמיש לפירעון מוקדם,
+              על {MACRO_DATA.primeRate.value}% (ריבית בנק ישראל {MACRO_DATA.primeRate.boiBaseRate}% בתוספת מרווח קבוע). הוא זול יחסית וגמיש לפירעון מוקדם,
               אבל ההחזר בו משתנה עם כל החלטת ריבית. מנגד, ריבית קבועה לא צמודה נותנת ודאות מלאה —
               ההחזר לא יזוז עד סוף התקופה — ובתמורה מתומחרת גבוה יותר. באמצע נמצאים מסלולים צמודי
               מדד ומסלולים בריבית משתנה. לשם השוואה, הריבית הממוצעת על משכנתאות חדשות (מסלולים
-              מעורבים) עומדת כיום סביב 4.8%. נקודת המוצא היא <Link href="/real-estate/mortgage" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון המשכנתא</Link>{' '}
+              מעורבים) עומדת כיום סביב {MACRO_DATA.avgMortgageRate.value}%. נקודת המוצא היא <Link href="/real-estate/mortgage" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון המשכנתא</Link>{' '}
               לחישוב ההחזר, ומשם{' '}
               <Link href="/real-estate/mortgage-optimizer" className="text-gold underline underline-offset-2 hover:text-ink transition">האופטימייזר</Link>{' '}
               שמחלק את הסכום בין המסלולים לפי היעד שלכם.

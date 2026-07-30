@@ -160,6 +160,19 @@ export default function LoansPage() {
           </div>
         </div>
 
+        {/* Quick answer */}
+        <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-10" aria-label="תשובה מהירה">
+          <p className="text-lg text-ink leading-relaxed">
+            כמה עולה הלוואה ב-2026? הבסיס של רוב ההלוואות בישראל הוא ריבית הפריים, שעומדת
+            כיום על {MACRO_DATA.primeRate.value}% (ריבית בנק ישראל{' '}
+            {MACRO_DATA.primeRate.boiBaseRate}% בתוספת מרווח של{' '}
+            {MACRO_DATA.primeRate.bankSpread}%); הריבית הממוצעת על משכנתאות חדשות עומדת סביב{' '}
+            {MACRO_DATA.avgMortgageRate.value}%. העלות האמיתית של הלוואה נמדדת ב-APR — הריבית
+            בתוספת כל העמלות — ולא בהחזר החודשי בלבד. המחשבונים בעמוד זה מחשבים החזר חודשי,
+            APR, כדאיות מיחזור וכושר החזר, ללא הרשמה ובחינם.
+          </p>
+        </section>
+
         {/* Featured */}
         <section className="mb-10">
           <h2 className="text-2xl font-bold text-ink mb-5 flex items-center gap-2">

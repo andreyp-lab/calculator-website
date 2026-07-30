@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
+import { TAX_BRACKETS_2026, CREDIT_POINT_2026, SURTAX_2026 } from '@/lib/constants/tax-2026';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/personal-tax' },
@@ -120,6 +121,19 @@ export default function PersonalTaxPage() {
           כל המחשבונים לחישוב מס הכנסה לשכיר לפי מדרגות 2026: שכר נטו מברוטו, נקודות זיכוי,
           החזרי מס והשוואת שכר לקצבאות — לפי החקיקה העדכנית
         </p>
+
+        {/* Quick answer */}
+        <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
+          <p className="text-lg text-ink leading-relaxed">
+            כמה מס הכנסה משלמים ב-2026? המס מדורג: {TAX_BRACKETS_2026[0].rate * 100}% על הכנסה
+            מיגיעה אישית עד {TAX_BRACKETS_2026[0].monthlyUpTo.toLocaleString('he-IL')} ₪ בחודש,
+            ועד שיעור שולי מרבי של 47% בתוספת {SURTAX_2026.rate * 100}% מס יסף מעל{' '}
+            {SURTAX_2026.monthlyThreshold.toLocaleString('he-IL')} ₪ בחודש. מהמס המחושב מופחתות
+            נקודות זיכוי — {CREDIT_POINT_2026.monthly} ₪ לנקודה בחודש — ולכן שכר נמוך עשוי שלא
+            להתחייב במס כלל. המחשבונים בעמוד זה מחשבים נטו, מס ונקודות זיכוי לפי הנתונים
+            הרשמיים לשנת המס 2026.
+          </p>
+        </section>
 
         {/* Banner to /salaried */}
         <Link

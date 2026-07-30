@@ -3,6 +3,12 @@ import { Metadata } from 'next';
 import { ArrowLeft, Calculator, BookOpen } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  MINIMUM_WAGE_2026,
+  RECREATION_PAY_2026,
+  SEVERANCE_COMPENSATION_2026,
+  ANNUAL_LEAVE,
+} from '@/lib/constants/tax-2026';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/employee-rights' },
@@ -186,6 +192,19 @@ export default function EmployeeRightsPage() {
           מחשבונים מקצועיים לבדיקת הזכויות שמגיעות לך כעובד שכיר בישראל
         </p>
 
+        {/* Quick answer */}
+        <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
+          <p className="text-lg text-ink leading-relaxed">
+            מה מגיע לעובד שכיר בישראל ב-2026? שכר של לפחות{' '}
+            {MINIMUM_WAGE_2026.monthly.toLocaleString('he-IL')} ₪ לחודש במשרה מלאה, פיצויי
+            פיטורין של משכורת לכל שנת ותק (עם פטור ממס עד{' '}
+            {SEVERANCE_COMPENSATION_2026.annualExemptionCeiling.toLocaleString('he-IL')} ₪ לשנה),
+            דמי הבראה של {RECREATION_PAY_2026.privateSectorPerDay} ₪ ליום במגזר הפרטי, חופשה
+            שנתית, דמי מחלה ותגמולי מילואים. המחשבונים בעמוד זה בודקים בדקות ספורות, לפי
+            הנתונים הרשמיים, כמה מגיע לכם בכל אחת מהזכויות.
+          </p>
+        </section>
+
         {/* Banner to /salaried */}
         <Link
           href="/salaried"
@@ -309,6 +328,68 @@ export default function EmployeeRightsPage() {
               חרבות ברזל נוספו מענקים ייעודיים, ובהם מענק של 280 ₪ ליום שירות. מחשבון
               תגמולי המילואים שלנו מחשב את התשלום הבסיסי יחד עם המענקים.
             </p>
+          </div>
+        </section>
+
+        {/* ===== טבלת מספרי מפתח 2026 ===== */}
+        <section className="mt-14">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">
+            ✦ המספרים של 2026
+          </p>
+          <h2 className="text-2xl font-bold text-ink mb-4">זכויות עובדים 2026 — מספרי המפתח</h2>
+          <div className="overflow-x-auto border border-ink/15">
+            <table className="w-full text-sm text-right">
+              <thead>
+                <tr className="bg-ink text-cream">
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] font-normal">הזכות</th>
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] font-normal">הנתון ב-2026</th>
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] font-normal">הערה</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* כל הערכים מיובאים מ-lib/constants/tax-2026.ts */}
+                <tr className="border-t border-ink/10 bg-paper">
+                  <td className="px-4 py-3 font-semibold">
+                    <Link href="/employee-rights/minimum-wage" className="text-ink hover:text-gold transition">שכר מינימום</Link>
+                  </td>
+                  <td className="px-4 py-3 text-ink/75">
+                    {MINIMUM_WAGE_2026.monthly.toLocaleString('he-IL')} ₪ לחודש / {MINIMUM_WAGE_2026.hourly182} ₪ לשעה
+                  </td>
+                  <td className="px-4 py-3 text-ink/75">בתוקף מ-1.4.2026, משרה של 182 שעות</td>
+                </tr>
+                <tr className="border-t border-ink/10 bg-cream-2">
+                  <td className="px-4 py-3 font-semibold">
+                    <Link href="/employee-rights/severance" className="text-ink hover:text-gold transition">פיצויי פיטורין</Link>
+                  </td>
+                  <td className="px-4 py-3 text-ink/75">משכורת אחת לכל שנת ותק</td>
+                  <td className="px-4 py-3 text-ink/75">
+                    פטור ממס עד {SEVERANCE_COMPENSATION_2026.annualExemptionCeiling.toLocaleString('he-IL')} ₪ לשנת עבודה
+                  </td>
+                </tr>
+                <tr className="border-t border-ink/10 bg-paper">
+                  <td className="px-4 py-3 font-semibold">
+                    <Link href="/employee-rights/recreation-pay" className="text-ink hover:text-gold transition">דמי הבראה</Link>
+                  </td>
+                  <td className="px-4 py-3 text-ink/75">
+                    {RECREATION_PAY_2026.privateSectorPerDay} ₪ ליום (פרטי) / {RECREATION_PAY_2026.publicSectorPerDay} ₪ (ציבורי)
+                  </td>
+                  <td className="px-4 py-3 text-ink/75">
+                    {RECREATION_PAY_2026.daysByYearsOfService[0].days}–{RECREATION_PAY_2026.daysByYearsOfService[5].days} ימים בשנה לפי ותק
+                  </td>
+                </tr>
+                <tr className="border-t border-ink/10 bg-cream-2">
+                  <td className="px-4 py-3 font-semibold">
+                    <Link href="/employee-rights/annual-leave" className="text-ink hover:text-gold transition">חופשה שנתית</Link>
+                  </td>
+                  <td className="px-4 py-3 text-ink/75">
+                    {ANNUAL_LEAVE.daysPerYear} ימים קלנדריים בשנים הראשונות
+                  </td>
+                  <td className="px-4 py-3 text-ink/75">
+                    עד {ANNUAL_LEAVE.maxDays} ימים עם עליית הוותק; פדיון בסיום העסקה
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
