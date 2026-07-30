@@ -27,6 +27,7 @@
 - [מחשבון דמי הבראה](https://cheshbonai.co.il/employee-rights/recreation-pay)
 - [מחשבון ניכויים ממשכורת 2026](https://cheshbonai.co.il/employee-rights/salary-deductions)
 - [מחשבון מענק עבודה](https://cheshbonai.co.il/employee-rights/work-grant)
+- [בדיקת זכאות למענק עבודה (מס הכנסה שלילי)](https://cheshbonai.co.il/employee-rights/work-grant/eligibility)
 
 ### מחשבונים פיננסיים - עצמאיים
 - [מדריך פתיחת עסק — עוסק פטור או מורשה? 2026](https://cheshbonai.co.il/self-employed/opening-business)

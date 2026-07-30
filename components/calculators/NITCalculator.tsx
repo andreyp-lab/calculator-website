@@ -129,10 +129,11 @@ const CalculatorTab = () => {
           <SectionCard title="פרטי הגשה">
             {/* הכנסה */}
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">
+              <label htmlFor="nit-main-income" className="block text-sm font-medium text-ink/70 mb-1">
                 הכנסה שנתית מעבודה (₪)
               </label>
               <input
+                id="nit-main-income"
                 type="number"
                 min={0}
                 step={1000}
@@ -140,7 +141,7 @@ const CalculatorTab = () => {
                 onChange={(e) => setIncome(Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none text-lg font-bold focus:ring-2 focus:ring-gold focus:border-transparent"
               />
-              <p className="text-xs text-ink/60 mt-1">
+              <p className="text-xs text-ink/70 mt-1">
                 הכנסה ממשכורת / עצמאי בלבד (ללא קצבאות/שכ"ד). טווח: {WORK_GRANT_MIN_INCOME_2026.toLocaleString('he-IL')}–
                 {(children > 0 ? WORK_GRANT_MAX_INCOME_PARENT_2026 : WORK_GRANT_MAX_INCOME_SINGLE_2026).toLocaleString('he-IL')} ₪
               </p>
@@ -148,8 +149,9 @@ const CalculatorTab = () => {
 
             {/* גיל */}
             <div>
-              <label className="block text-sm font-medium text-ink/70 mb-1">גיל</label>
+              <label htmlFor="nit-main-age" className="block text-sm font-medium text-ink/70 mb-1">גיל</label>
               <input
+                id="nit-main-age"
                 type="number"
                 min={18}
                 max={80}
@@ -157,7 +159,7 @@ const CalculatorTab = () => {
                 onChange={(e) => setAge(Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
               />
-              <p className="text-xs text-ink/60 mt-1">מינימום: 23 ללא ילדים, 21 עם ילדים, 56-62 גמלאים</p>
+              <p className="text-xs text-ink/70 mt-1">מינימום: 23 ללא ילדים, 21 עם ילדים, 56-62 גמלאים</p>
             </div>
 
             {/* סוג תעסוקה */}
@@ -187,10 +189,11 @@ const CalculatorTab = () => {
             {/* ותק עבודה */}
             {(employmentType === 'salaried' || employmentType === 'both') && (
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">
+                <label htmlFor="nit-main-months" className="block text-sm font-medium text-ink/70 mb-1">
                   חודשי עבודה כשכיר
                 </label>
                 <input
+                  id="nit-main-months"
                   type="number"
                   min={0}
                   max={12}
@@ -198,16 +201,17 @@ const CalculatorTab = () => {
                   onChange={(e) => setMonthsSalaried(Number(e.target.value))}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
-                <p className="text-xs text-ink/60 mt-1">נדרש: לפחות 6 חודשים</p>
+                <p className="text-xs text-ink/70 mt-1">נדרש: לפחות 6 חודשים</p>
               </div>
             )}
 
             {(employmentType === 'self_employed' || employmentType === 'both') && (
               <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">
+                <label htmlFor="nit-main-weeks" className="block text-sm font-medium text-ink/70 mb-1">
                   שבועות עצמאי (50%+ ממש)
                 </label>
                 <input
+                  id="nit-main-weeks"
                   type="number"
                   min={0}
                   max={52}
@@ -215,7 +219,7 @@ const CalculatorTab = () => {
                   onChange={(e) => setWeeksSelfEmployed(Number(e.target.value))}
                   className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                 />
-                <p className="text-xs text-ink/60 mt-1">נדרש: לפחות 13 שבועות</p>
+                <p className="text-xs text-ink/70 mt-1">נדרש: לפחות 13 שבועות</p>
               </div>
             )}
           </SectionCard>
@@ -265,7 +269,7 @@ const CalculatorTab = () => {
                 >
                   +
                 </button>
-                <span className="text-sm text-ink/60">ילדים</span>
+                <span className="text-sm text-ink/70">ילדים</span>
               </div>
             </div>
 
@@ -279,7 +283,7 @@ const CalculatorTab = () => {
                 />
                 <div>
                   <span className="text-sm font-medium text-amber-900">הורה יחיד</span>
-                  <p className="text-xs text-amber-700">
+                  <p className="text-xs text-amber-800">
                     תוספת מענק: ~{calculateMaxGrant(children, true) - calculateMaxGrant(children, false) > 0
                       ? formatCurrency(calculateMaxGrant(children, true) - calculateMaxGrant(children, false))
                       : '2,950 ₪'}
@@ -306,13 +310,13 @@ const CalculatorTab = () => {
             <>
               <div className="bg-emerald-50 border-2 border-emerald-300 rounded-none p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0" />
+                  <CheckCircle className="w-6 h-6 text-emerald-800 flex-shrink-0" />
                   <h3 className="text-lg font-bold text-emerald-900">זכאי למענק עבודה</h3>
                 </div>
-                <p className="text-5xl font-black text-emerald-700 mb-1">
+                <p className="text-5xl font-black text-emerald-800 mb-1">
                   {formatCurrency(result.annualGrant)}
                 </p>
-                <p className="text-emerald-700 font-medium">
+                <p className="text-emerald-800 font-medium">
                   לשנה · {formatCurrency(result.monthlyEquivalent)} לחודש (משוער)
                 </p>
                 <div className="mt-4 pt-3 border-t border-emerald-200">
@@ -376,7 +380,7 @@ const CalculatorTab = () => {
                     <span className="font-medium">+{formatCurrency(result.breakdown.singleParentBonus)}</span>
                   </div>
                 )}
-                <div className="flex justify-between font-bold border-t pt-2 text-emerald-700">
+                <div className="flex justify-between font-bold border-t pt-2 text-emerald-800">
                   <span>סה"כ שנתי:</span>
                   <span>{formatCurrency(result.breakdown.totalGrant)}</span>
                 </div>
@@ -385,7 +389,7 @@ const CalculatorTab = () => {
               {/* Filing info */}
               <div className="bg-emerald-50 border border-emerald-200 rounded-none p-4 text-sm space-y-2">
                 <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="w-4 h-4 text-emerald-700" />
+                  <Calendar className="w-4 h-4 text-emerald-800" />
                   <h4 className="font-bold text-emerald-900">איך מגישים?</h4>
                 </div>
                 <ul className="space-y-1 text-emerald-800 text-xs">
@@ -401,7 +405,7 @@ const CalculatorTab = () => {
             <>
               <div className="bg-red-50 border-2 border-red-300 rounded-none p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+                  <AlertCircle className="w-6 h-6 text-red-700 flex-shrink-0" />
                   <h3 className="text-lg font-bold text-red-900">לא זכאי בתנאים הנוכחיים</h3>
                 </div>
                 {result.eligibility.primaryReason && (
@@ -454,7 +458,7 @@ const CalculatorTab = () => {
 
       {/* Grant Curve Chart */}
       <SectionCard title="עקומת המענק — איך הסכום משתנה לפי הכנסה">
-        <p className="text-xs text-ink/60 -mt-3 mb-2">
+        <p className="text-xs text-ink/70 -mt-3 mb-2">
           עלייה לשיא ב-{WORK_GRANT_PEAK_INCOME_2026.toLocaleString('he-IL')} ₪, ואז ירידה עד לאפס
         </p>
         <div className="h-56">
@@ -533,32 +537,36 @@ const EligibilityTab = () => {
       <SectionCard title="בדיקת תנאי זכאות">
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">גיל</label>
+            <label htmlFor="nit-elig-age" className="block text-sm font-medium text-ink/70 mb-1">גיל</label>
             <input
+              id="nit-elig-age"
               type="number" min={18} max={80} value={age}
               onChange={(e) => setAge(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">הכנסה שנתית (₪)</label>
+            <label htmlFor="nit-elig-income" className="block text-sm font-medium text-ink/70 mb-1">הכנסה שנתית (₪)</label>
             <input
+              id="nit-elig-income"
               type="number" min={0} step={1000} value={income}
               onChange={(e) => setIncome(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">מספר ילדים</label>
+            <label htmlFor="nit-elig-children" className="block text-sm font-medium text-ink/70 mb-1">מספר ילדים</label>
             <input
+              id="nit-elig-children"
               type="number" min={0} max={5} value={children}
               onChange={(e) => setChildren(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">חודשי עבודה (שכיר)</label>
+            <label htmlFor="nit-elig-months" className="block text-sm font-medium text-ink/70 mb-1">חודשי עבודה (שכיר)</label>
             <input
+              id="nit-elig-months"
               type="number" min={0} max={12} value={monthsSalaried}
               onChange={(e) => setMonthsSalaried(Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
@@ -576,7 +584,7 @@ const EligibilityTab = () => {
       <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <h3 className="font-bold text-ink mb-4">
           {result.eligibility.isEligible ? (
-            <span className="text-emerald-700 flex items-center gap-2">
+            <span className="text-emerald-800 flex items-center gap-2">
               <CheckCircle className="w-5 h-5" /> עומד בכל תנאי הזכאות
             </span>
           ) : (
@@ -616,7 +624,7 @@ const EligibilityTab = () => {
             <p className="text-sm font-bold text-emerald-900">
               מענק משוער: {formatCurrency(result.annualGrant)}/שנה
             </p>
-            <p className="text-xs text-emerald-700 mt-1">
+            <p className="text-xs text-emerald-800 mt-1">
               ניתן להגיש 6 שנים אחורה — בדוק שנים 2020–2025
             </p>
           </div>
@@ -684,7 +692,7 @@ const ComparisonTab = () => {
             <tr className="bg-cream-2">
               <th className="border border-ink/15 px-3 py-2 text-right font-semibold">פרמטר</th>
               <th className="border border-ink/15 px-3 py-2 text-center font-semibold">2024</th>
-              <th className="border border-ink/15 px-3 py-2 text-center font-semibold text-emerald-700">2026</th>
+              <th className="border border-ink/15 px-3 py-2 text-center font-semibold text-emerald-800">2026</th>
               <th className="border border-ink/15 px-3 py-2 text-center font-semibold text-gold">שינוי</th>
             </tr>
           </thead>
@@ -726,10 +734,10 @@ const ComparisonTab = () => {
               return (
                 <tr key={i} className="border-t border-ink/15 hover:bg-cream-2">
                   <td className="border border-ink/15 px-3 py-2">{row.label}</td>
-                  <td className="border border-ink/15 px-3 py-2 text-center text-ink/60">
+                  <td className="border border-ink/15 px-3 py-2 text-center text-ink/70">
                     {formatCurrency(row.v2024)}
                   </td>
-                  <td className="border border-ink/15 px-3 py-2 text-center font-semibold text-emerald-700">
+                  <td className="border border-ink/15 px-3 py-2 text-center font-semibold text-emerald-800">
                     {formatCurrency(row.v2026)}
                   </td>
                   <td className="border border-ink/15 px-3 py-2 text-center text-gold font-medium">
@@ -806,16 +814,18 @@ const BenefitsTab = () => {
     <div className="space-y-5">
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-1">הכנסה שנתית (₪)</label>
+          <label htmlFor="nit-cmp-income" className="block text-sm font-medium text-ink/70 mb-1">הכנסה שנתית (₪)</label>
           <input
+            id="nit-cmp-income"
             type="number" min={0} step={1000} value={income}
             onChange={(e) => setIncome(Number(e.target.value))}
             className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-ink/70 mb-1">ילדים</label>
+          <label htmlFor="nit-cmp-children" className="block text-sm font-medium text-ink/70 mb-1">ילדים</label>
           <input
+            id="nit-cmp-children"
             type="number" min={0} max={5} value={children}
             onChange={(e) => setChildren(Number(e.target.value))}
             className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
@@ -854,11 +864,11 @@ const BenefitsTab = () => {
             className="rounded-none p-4 text-center border-2"
             style={{ borderColor: item.color, backgroundColor: `${item.color}15` }}
           >
-            <p className="text-xs text-ink/60 mb-1">{item.name}</p>
+            <p className="text-xs text-ink/70 mb-1">{item.name}</p>
             <p className="text-2xl font-black" style={{ color: item.color }}>
               {formatCurrency(item.value)}
             </p>
-            <p className="text-xs text-ink/60 mt-1">{item.description}</p>
+            <p className="text-xs text-ink/70 mt-1">{item.description}</p>
           </div>
         ))}
       </div>
@@ -887,8 +897,8 @@ const TABS: { id: TabMode; label: string }[] = [
   { id: 'benefits', label: 'השוואת הטבות' },
 ];
 
-export function NITCalculator() {
-  const [activeTab, setActiveTab] = useState<TabMode>('calculator');
+export function NITCalculator({ initialTab = 'calculator' }: { initialTab?: TabMode } = {}) {
+  const [activeTab, setActiveTab] = useState<TabMode>(initialTab);
 
   return (
     <div className="space-y-4">

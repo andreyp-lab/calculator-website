@@ -5,7 +5,7 @@ import { NITCalculator } from '@/components/calculators/NITCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מענק עבודה 2026 — בדיקת זכאות מיידית וחישוב הסכום',
+  title: { absolute: 'מחשבון מענק עבודה 2026 — בדיקת זכאות מיידית וחישוב הסכום' },
   description:
     'בדיקת זכאות למענק עבודה (מס הכנסה שלילי) 2026 בחינם: הכנסה 30,240–99,960 ₪, גיל 21/23+. חישוב מדויק עד 13,100 ₪/שנה, כולל הגשה רטרואקטיבית עד 6 שנים אחורה.',
   alternates: { canonical: '/employee-rights/work-grant' },
@@ -167,6 +167,9 @@ export default function Page() {
 
           <h2>מחשבונים קשורים</h2>
           <ul>
+            <li>
+              <Link href="/employee-rights/work-grant/eligibility">בדיקת זכאות למענק עבודה</Link> — ארבעת התנאים, הטעויות הנפוצות ותשובת כן/לא
+            </li>
             <li>
               <Link href="/employee-rights/minimum-wage">מחשבון שכר מינימום 2026</Link> — בדוק אם השכר שלך עומד בדרישות החוק
             </li>
