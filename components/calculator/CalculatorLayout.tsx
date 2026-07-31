@@ -7,8 +7,6 @@ import { CalculatorSchemaClient } from '@/components/seo/CalculatorSchemaClient'
 import { RelatedCalculators } from './RelatedCalculators';
 import { CourseCTA } from '@/components/marketing/CourseCTA';
 
-const SITE_URL = 'https://cheshbonai.co.il'; // used for breadcrumb schema fallback
-
 interface CalculatorLayoutProps {
   title: string;
   description: string;
@@ -43,10 +41,13 @@ export function CalculatorLayout({
   quickAnswer,
   embed,
 }: CalculatorLayoutProps) {
-  // בנה BreadcrumbList items מה-breadcrumbs הקיימים
-  const breadcrumbSchemaItems = breadcrumbs.map((b) => ({
+  // בנה BreadcrumbList items מה-breadcrumbs הקיימים.
+  // ל-breadcrumb האחרון (הדף הנוכחי) אין href, ולכן נשתמש ב-pageUrl;
+  // בלעדיו נשמיט את item לגמרי – schema.org מתיר זאת לאיבר האחרון,
+  // וזה עדיף על נפילה לכתובת האתר שמצביעה שגויות על דף הבית.
+  const breadcrumbSchemaItems = breadcrumbs.map((b, i) => ({
     name: b.label,
-    url: b.href ?? SITE_URL,
+    url: b.href ?? (i === breadcrumbs.length - 1 ? pageUrl : undefined),
   }));
 
   // נתיב הדף הנוכחי לצורך "מחשבונים קשורים": pageUrl, או ה-href האחרון ב-breadcrumbs
@@ -134,6 +135,7 @@ export function CalculatorLayout({
         name={title}
         description={description}
         urlOverride={pageUrl}
+        lastUpdated={lastUpdated}
       />
     </article>
   );

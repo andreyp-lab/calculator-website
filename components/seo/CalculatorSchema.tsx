@@ -2,10 +2,8 @@ interface CalculatorSchemaProps {
   name: string;
   description: string;
   url: string;
-  /** Optional: defaults to 4.8 */
-  ratingValue?: string;
-  /** Optional: defaults to 120 */
-  ratingCount?: string;
+  /** תאריך עדכון אחרון (ISO, YYYY-MM-DD). סיגנל טריות מרכזי לציטוט במנועי AI. */
+  lastUpdated?: string;
 }
 
 /**
@@ -16,8 +14,7 @@ export function CalculatorSchema({
   name,
   description,
   url,
-  ratingValue = '4.8',
-  ratingCount = '120',
+  lastUpdated,
 }: CalculatorSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
@@ -33,13 +30,9 @@ export function CalculatorSchema({
       price: '0',
       priceCurrency: 'ILS',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue,
-      ratingCount,
-      bestRating: '5',
-      worstRating: '1',
-    },
+    // SoftwareApplication יורש מ-CreativeWork, ולכן dateModified תקף כאן.
+    // נפלט רק כשיש תאריך אמיתי – לא ממציאים סיגנל טריות.
+    ...(lastUpdated ? { dateModified: lastUpdated } : {}),
   };
 
   return (

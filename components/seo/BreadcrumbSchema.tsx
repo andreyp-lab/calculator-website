@@ -2,7 +2,8 @@ const SITE_URL = 'https://cheshbonai.co.il';
 
 interface BreadcrumbItem {
   name: string;
-  url: string;
+  /** נתיב יחסי או URL מלא. אופציונלי: לאיבר האחרון (הדף הנוכחי) מותר להשמיט item. */
+  url?: string;
 }
 
 interface BreadcrumbSchemaProps {
@@ -21,7 +22,9 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      item: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url}`,
+      ...(item.url
+        ? { item: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url}` }
+        : {}),
     })),
   };
 

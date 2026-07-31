@@ -9,8 +9,8 @@ interface CalculatorSchemaClientProps {
   description: string;
   /** אם סופק – ישמש כ-URL; אחרת נגזר מ-pathname הנוכחי */
   urlOverride?: string;
-  ratingValue?: string;
-  ratingCount?: string;
+  /** תאריך עדכון אחרון (ISO, YYYY-MM-DD). סיגנל טריות מרכזי לציטוט במנועי AI. */
+  lastUpdated?: string;
 }
 
 /**
@@ -22,8 +22,7 @@ export function CalculatorSchemaClient({
   name,
   description,
   urlOverride,
-  ratingValue = '4.8',
-  ratingCount = '120',
+  lastUpdated,
 }: CalculatorSchemaClientProps) {
   const pathname = usePathname();
   const resolvedPath = urlOverride ?? pathname ?? '/';
@@ -45,13 +44,9 @@ export function CalculatorSchemaClient({
       price: '0',
       priceCurrency: 'ILS',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue,
-      ratingCount,
-      bestRating: '5',
-      worstRating: '1',
-    },
+    // SoftwareApplication יורש מ-CreativeWork, ולכן dateModified תקף כאן.
+    // נפלט רק כשיש תאריך אמיתי – לא ממציאים סיגנל טריות.
+    ...(lastUpdated ? { dateModified: lastUpdated } : {}),
   };
 
   return (
