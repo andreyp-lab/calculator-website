@@ -3,6 +3,26 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { NITCalculator } from '@/components/calculators/NITCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  WORK_GRANT_MIN_INCOME_2026,
+  WORK_GRANT_PEAK_INCOME_2026,
+  WORK_GRANT_MAX_INCOME_SINGLE_2026,
+  WORK_GRANT_MAX_INCOME_PARENT_2026,
+  WORK_GRANT_BASE_MAX_2026,
+  WORK_GRANT_MIN_AGE_NO_CHILDREN,
+  WORK_GRANT_MIN_AGE_WITH_CHILDREN,
+  calculateMaxGrant,
+} from '@/lib/calculators/work-grant';
+
+// כל מספר ב-quickAnswer נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const MIN_INCOME = nis(WORK_GRANT_MIN_INCOME_2026);
+const PEAK_INCOME = nis(WORK_GRANT_PEAK_INCOME_2026);
+const MAX_INCOME_SINGLE = nis(WORK_GRANT_MAX_INCOME_SINGLE_2026);
+const MAX_INCOME_PARENT = nis(WORK_GRANT_MAX_INCOME_PARENT_2026);
+const MAX_SINGLE = nis(WORK_GRANT_BASE_MAX_2026);
+// הסכום הגבוה ביותר שהתוכנית מאפשרת: הורה יחיד ל-3 ילדים.
+const MAX_OVERALL = nis(calculateMaxGrant(3, true));
 
 export const metadata: Metadata = {
   title: { absolute: 'מחשבון מענק עבודה 2026 — בדיקת זכאות מיידית וחישוב הסכום' },
@@ -80,18 +100,26 @@ export default function Page() {
         { label: 'מענק עבודה' },
       ]}
       lastUpdated="2026-05-15"
+      pageUrl="/employee-rights/work-grant"
       calculator={<NITCalculator />}
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          <strong>
+            מענק עבודה (מס הכנסה שלילי) הוא תשלום של רשות המסים לעובדים בשכר נמוך — עד{' '}
+            {MAX_OVERALL} ₪ בשנה, פטור ממס וללא פגיעה בקצבאות.
+          </strong>{' '}
+          הזכאות ב-2026 נשענת על שלושה תנאים: הכנסה שנתית מעבודה בין {MIN_INCOME} ל-
+          {MAX_INCOME_SINGLE} ₪ ליחיד או עד {MAX_INCOME_PARENT} ₪ להורה; גיל{' '}
+          {WORK_GRANT_MIN_AGE_NO_CHILDREN}+ ללא ילדים או {WORK_GRANT_MIN_AGE_WITH_CHILDREN}+ עם
+          ילדים (וכן 56–62 בכל מקרה); ולפחות 6 חודשי עבודה כשכיר או 13 שבועות כעצמאי. הסכום אינו
+          עולה ככל שמרוויחים יותר: הוא מטפס עד הכנסה של {PEAK_INCOME} ₪ בשנה, שם הוא מגיע לשיא —{' '}
+          {MAX_SINGLE} ₪ ליחיד ללא ילדים, ויותר לכל ילד — ומשם יורד עד אפס בתקרה. גם עצמאים
+          זכאים, וניתן להגיש רטרואקטיבית עד שנתיים מתום שנת המס. המחשבון שמתחת בודק את כל התנאים
+          ומחשב את הסכום המדויק לפי ההכנסה, הגיל ומספר הילדים.
+        </p>
+      }
       content={
         <>
-          <h2>בדיקת זכאות למענק עבודה 2026 — התשובה בשורה אחת</h2>
-          <p>
-            <strong>זכאי למענק עבודה 2026 מי שעונה על שלושה תנאים:</strong> (1) הכנסה שנתית מעבודה
-            בין 30,240 ל-83,400 ₪ (יחיד) או עד 99,960 ₪ (הורה); (2) גיל 23+ ללא ילדים, 21+ עם
-            ילדים, או 56–62 בכל מקרה; (3) עבד לפחות 6 חודשים כשכיר או 13 שבועות כעצמאי. הסכום:
-            עד 13,100 ₪ בשנה, פטור ממס. המחשבון למעלה בודק את כל התנאים ומחשב את הסכום המדויק
-            תוך 30 שניות.
-          </p>
-
           <h2>מענק עבודה — הזכות הפיננסית שרבים לא מכירים</h2>
           <p>
             מענק עבודה (Earned Income Tax Credit) הוא תוכנית של רשות המסים שמשלמת כסף לעובדים בשכר

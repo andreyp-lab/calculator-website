@@ -2,6 +2,18 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FireCalculator } from '@/components/calculators/FireCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { FIRE_CONSTANTS_2026 } from '@/lib/calculators/fire';
+
+// כל מספר ב-quickAnswer נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const MULT_4 = FIRE_CONSTANTS_2026.MULTIPLIER_4PCT;
+const MULT_3_5 = FIRE_CONSTANTS_2026.MULTIPLIER_3_5PCT;
+const CGT_PCT = (FIRE_CONSTANTS_2026.CAPITAL_GAINS_TAX * 100).toFixed(0);
+const LEAN_MONTHLY = nis(FIRE_CONSTANTS_2026.LEAN_FIRE_MONTHLY);
+const REGULAR_MONTHLY = nis(FIRE_CONSTANTS_2026.REGULAR_FIRE_MONTHLY);
+const FAT_MONTHLY = nis(FIRE_CONSTANTS_2026.FAT_FIRE_MONTHLY);
+// תיק היעד למי שמוציא את סכום "Regular FIRE" בחודש, לפי כלל ה-4%.
+const REGULAR_TARGET = nis(FIRE_CONSTANTS_2026.REGULAR_FIRE_MONTHLY * 12 * MULT_4);
 
 export const metadata: Metadata = {
   title: 'מחשבון FIRE 2026 — פרישה מוקדמת | 5 סוגי FIRE לישראלים',
@@ -84,7 +96,25 @@ export default function FirePage() {
         { label: 'FIRE - פרישה מוקדמת' },
       ]}
       lastUpdated="2026-05-15"
+      pageUrl="/investments/fire"
       calculator={<FireCalculator />}
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          <strong>
+            FIRE (Financial Independence, Retire Early) הוא יעד שבו תיק ההשקעות מממן את כל הוצאות
+            המחיה. חישוב היעד: הוצאות שנתיות × {MULT_4} — כלל ה-4%.
+          </strong>{' '}
+          זוג שמוציא {REGULAR_MONTHLY} ₪ בחודש זקוק לכ-{REGULAR_TARGET}
+          {' ₪'}. הכלל מגיע ממחקר
+          Trinity האמריקאי, שמצא כי משיכה של 4% בשנה מתיק מנייתי־אג&quot;חי שרדה 30 שנה ברוב
+          המוחלט של התרחישים ההיסטוריים. לישראלים מקובל לשמור מרווח ולעבוד לפי 3.5%, כלומר מכפיל{' '}
+          {MULT_3_5}. הסולם נע בין <strong>Lean FIRE</strong> (כ-{LEAN_MONTHLY} ₪ בחודש) דרך
+          Regular ועד <strong>Fat FIRE</strong> ({FAT_MONTHLY} ₪), ולצידם Coast FIRE — שבו הצבירה
+          הקיימת תגדל לבדה עד גיל הפרישה — ו-Barista FIRE, המשלב עבודה חלקית. שתי התאמות ישראליות
+          חיוניות: מס רווחי הון של {CGT_PCT}% שמקטין את המשיכה נטו, וקצבת הזקנה מביטוח לאומי
+          שמצטרפת רק בגיל הפרישה. המחשבון שמתחת מחשב את היעד ואת שנת הפרישה הצפויה.
+        </p>
+      }
       content={
         <>
           <h2>FIRE - העצמאות הכלכלית האולטימטיבית</h2>

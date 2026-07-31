@@ -3,6 +3,17 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CapitalGainsTaxCalculator } from '@/components/calculators/CapitalGainsTaxCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  FIRST_HOME_EXEMPTION_CAP_2026,
+  STANDARD_TAX_RATE,
+  HIGH_INCOME_SURTAX,
+  LINEAR_CUTOFF_YEAR,
+} from '@/lib/calculators/capital-gains-tax';
+
+// כל מספר ב-quickAnswer נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const RATE_PCT = (STANDARD_TAX_RATE * 100).toFixed(0);
+const SURTAX_PCT = (HIGH_INCOME_SURTAX * 100).toFixed(0);
+const EXEMPTION_CAP = FIRST_HOME_EXEMPTION_CAP_2026.toLocaleString('he-IL');
 
 export const metadata: Metadata = {
   title: 'מחשבון מס שבח 2026 - חישוב מס על מכירת דירה ורווחי הון',
@@ -85,7 +96,23 @@ export default function CapitalGainsTaxPage() {
         { label: 'מס שבח' },
       ]}
       lastUpdated="2026-05-15"
+      pageUrl="/real-estate/capital-gains-tax"
       calculator={<CapitalGainsTaxCalculator />}
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          <strong>
+            מס שבח הוא מס של {RATE_PCT}% על הרווח הריאלי ממכירת נדל&quot;ן בישראל
+          </strong>{' '}
+          — לא על מחיר המכירה. השבח מחושב כהפרש בין מחיר המכירה למחיר הרכישה, בניכוי הוצאות
+          מוכרות (שכר טרחת עו&quot;ד, מתווך, מס רכישה ששולם, שיפוצים והשבחה) ובניכוי החלק
+          האינפלציוני, שפטור ממס. בעלי הכנסות גבוהות משלמים {SURTAX_PCT}% מס יסף נוסף. שתי הקלות
+          מרכזיות מקטינות את החיוב בפועל: <strong>פטור דירה יחידה</strong>, החל עד תקרת שווי של{' '}
+          {EXEMPTION_CAP} ₪, ו<strong>החישוב הלינארי המוטב</strong> — שבח שנצבר עד{' '}
+          {LINEAR_CUTOFF_YEAR} פטור ממס, וממנו ואילך חייב, כך שככל שהדירה הוחזקה זמן רב יותר לפני
+          אותו מועד, המס נמוך יותר. הדיווח לרשות המסים מוגש תוך 30 יום ממועד העסקה. המחשבון
+          שמתחת מבצע את שני המסלולים, מצמיד לפי מדד המחירים בפועל, ומראה איזה מהם משתלם לכם.
+        </p>
+      }
       content={
         <>
           <h2>מס שבח — מדריך מקיף 2026</h2>

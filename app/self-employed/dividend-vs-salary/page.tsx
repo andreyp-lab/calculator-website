@@ -2,6 +2,26 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { DividendVsSalaryCalculator } from '@/components/calculators/DividendVsSalaryCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  CORP_TAX_2026,
+  DIVIDEND_TAX_CONTROLLING,
+  DIVIDEND_TAX_REGULAR,
+  SURTAX_RATE,
+  SURTAX_THRESHOLD,
+} from '@/lib/calculators/dividend-vs-salary';
+
+// כל מספר ב-quickAnswer נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const pct = (n: number) => (n * 100).toFixed(0);
+const CORP_PCT = pct(CORP_TAX_2026);
+const DIV_CONTROLLING_PCT = pct(DIVIDEND_TAX_CONTROLLING);
+const DIV_REGULAR_PCT = pct(DIVIDEND_TAX_REGULAR);
+const SURTAX_PCT = pct(SURTAX_RATE);
+const SURTAX_MIN = SURTAX_THRESHOLD.toLocaleString('he-IL');
+// נטל המס המצטבר על דיבידנד לבעל שליטה: מס חברות ואז מס דיבידנד על היתרה.
+const COMBINED_PCT = (
+  (CORP_TAX_2026 + (1 - CORP_TAX_2026) * DIVIDEND_TAX_CONTROLLING) *
+  100
+).toFixed(1);
 
 export const metadata: Metadata = {
   title: 'דיבידנד vs משכורת - אופטימיזציית מס לבעל חברה 2026',
@@ -85,7 +105,25 @@ export default function DividendVsSalaryPage() {
           { label: 'דיבידנד vs משכורת' },
         ]}
         lastUpdated="2026-05-15"
+        pageUrl="/self-employed/dividend-vs-salary"
         calculator={<DividendVsSalaryCalculator />}
+        quickAnswer={
+          <p className="text-lg text-ink leading-relaxed">
+            <strong>
+              לבעל חברה בע&quot;מ יש שתי דרכים למשוך כסף — משכורת או דיבידנד — ובדרך כלל התשובה
+              הנכונה היא שילוב של השתיים, לא אחת מהן בלבד.
+            </strong>{' '}
+            דיבידנד ממוסה פעמיים: תחילה {CORP_PCT}% מס חברות על הרווח, ואז{' '}
+            {DIV_CONTROLLING_PCT}% מס דיבידנד לבעל מניות מהותי ({DIV_REGULAR_PCT}% למי שאינו
+            מהותי) — נטל מצטבר של כ-{COMBINED_PCT}%. משכורת, לעומת זאת, מוכרת כהוצאה לחברה
+            ומורידה את החבות במס חברות, אך חייבת במס שולי מדורג ובביטוח לאומי. מכאן נובע הכלל
+            המעשי: המדרגות הנמוכות של מס ההכנסה זולות יותר מהמסלול הדיבידנדי, ולכן משתלם למשוך
+            משכורת עד גובה מסוים ואת היתרה כדיבידנד. למשכורת יש גם ערך שאינו מסתכם במס — היא
+            מזכה בפנסיה, בקרן השתלמות ובזכויות ביטוח לאומי. שימו לב גם למס יסף של {SURTAX_PCT}%,
+            החל על הכנסה שנתית מעל {SURTAX_MIN} ₪ מכל מקור. המחשבון שמתחת מוצא את המיקס שממקסם
+            את הנטו שלכם.
+          </p>
+        }
         content={
           <>
             <h2>ההחלטה שווה עשרות אלפי שקלים בשנה</h2>

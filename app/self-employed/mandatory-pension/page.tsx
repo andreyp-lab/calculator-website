@@ -2,6 +2,31 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { SelfEmployedPensionCalculator } from '@/components/calculators/SelfEmployedPensionCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  AVERAGE_WAGE_2026,
+  HALF_AVERAGE_WAGE_2026,
+  TIER1_RATE,
+  TIER2_RATE,
+  TAX_CREDIT_CEILING_ANNUAL,
+  TAX_CREDIT_RATE,
+  MANDATORY_PENSION_YEAR,
+} from '@/lib/calculators/self-employed-pension';
+
+// כל מספר ב-quickAnswer נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL');
+const HALF_AVG = nis(HALF_AVERAGE_WAGE_2026);
+const AVG = nis(AVERAGE_WAGE_2026);
+const TIER1_PCT = (TIER1_RATE * 100).toFixed(2);
+const TIER2_PCT = (TIER2_RATE * 100).toFixed(2);
+const CREDIT_PCT = (TAX_CREDIT_RATE * 100).toFixed(0);
+const CREDIT_CEILING = nis(TAX_CREDIT_CEILING_ANNUAL);
+// הפקדת החובה החודשית המלאה למי שמרוויח את השכר הממוצע ומעלה.
+const MAX_MONTHLY_DEPOSIT = nis(
+  Math.round(
+    HALF_AVERAGE_WAGE_2026 * TIER1_RATE +
+      (AVERAGE_WAGE_2026 - HALF_AVERAGE_WAGE_2026) * TIER2_RATE,
+  ),
+);
 
 export const metadata: Metadata = {
   title: { absolute: 'מחשבון פנסיה חובה לעצמאי 2026 — שיעורים, הטבות מס, קנסות' },
@@ -79,7 +104,24 @@ export default function Page() {
         { label: 'פנסיה חובה' },
       ]}
       lastUpdated="2026-05-15"
+      pageUrl="/self-employed/mandatory-pension"
       calculator={<SelfEmployedPensionCalculator />}
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          <strong>
+            מאז {MANDATORY_PENSION_YEAR} כל עצמאי בישראל חייב להפקיד לפנסיה, בשני שיעורים לפי
+            מדרגות ההכנסה:
+          </strong>{' '}
+          {TIER1_PCT}% על החלק שעד מחצית השכר הממוצע במשק ({HALF_AVG} ₪ לחודש), ו-{TIER2_PCT}% על
+          החלק שמעל זה ועד השכר הממוצע המלא ({AVG} ₪). מעל השכר הממוצע אין חובת הפקדה. בפועל,
+          עצמאי שמרוויח את השכר הממוצע ומעלה מפקיד כ-{MAX_MONTHLY_DEPOSIT} ₪ בחודש. מה שהופך את
+          ההפקדה למשתלמת הוא שתי הטבות מס שפועלות <strong>בו-זמנית</strong>: חלק מההפקדה מוכר
+          כניכוי — כלומר יורד מההכנסה החייבת וחוסך מס בשיעור השולי שלכם — וחלק אחר מזכה בהחזר מס
+          של {CREDIT_PCT}%, עד תקרה של {CREDIT_CEILING} ₪ בשנה. מי שלא מפקיד חשוף לגבייה של הסכום
+          החסר בתוספת ריבית מצד ביטוח לאומי. המחשבון שמתחת מחשב את ההפקדה המדויקת לפי ההכנסה,
+          כמה מס היא חוסכת, ומה היא צפויה לצבור עד גיל הפרישה.
+        </p>
+      }
       content={
         <>
           <h2>פנסיה חובה לעצמאי — מה החוק אומר</h2>

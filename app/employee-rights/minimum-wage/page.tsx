@@ -2,6 +2,25 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MinimumWageCalculator } from '@/components/calculators/MinimumWageCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import { AGE_MULTIPLIERS, calculateNetMinimumWage } from '@/lib/calculators/minimum-wage';
+import { MINIMUM_WAGE_2026 } from '@/lib/constants/tax-2026';
+
+// כל מספר ב-quickAnswer נשלף מהקבועים — אתר YMYL, אין מספרים כתובים ביד.
+const nis = (n: number) => n.toLocaleString('he-IL', { minimumFractionDigits: 2 });
+const MONTHLY = nis(MINIMUM_WAGE_2026.monthly);
+const HOURLY_182 = nis(MINIMUM_WAGE_2026.hourly182);
+const HOURLY_186 = nis(MINIMUM_WAGE_2026.hourly186);
+const DAILY_5 = nis(MINIMUM_WAGE_2026.daily5DayWeek);
+const DAILY_6 = nis(MINIMUM_WAGE_2026.daily6DayWeek);
+const EFFECTIVE_FROM = new Date(MINIMUM_WAGE_2026.effectiveFrom).toLocaleDateString('he-IL');
+const YOUTH_16_17_PCT = (AGE_MULTIPLIERS['youth-16-17'].rate * 100).toFixed(0);
+const YOUTH_17_18_PCT = (AGE_MULTIPLIERS['youth-17-18'].rate * 100).toFixed(0);
+const UNDER_16_PCT = (AGE_MULTIPLIERS['under-16'].rate * 100).toFixed(0);
+const YOUTH_16_17_WAGE = nis(MINIMUM_WAGE_2026.monthly * AGE_MULTIPLIERS['youth-16-17'].rate);
+// נטו למשרה מלאה בשכר מינימום, לפי ברירת המחדל של המנוע (2.25 נק' זיכוי, פנסיה פעילה).
+const NET_DEFAULT = calculateNetMinimumWage('adult', true, 2.25);
+const NET_MONTHLY = nis(Math.round(NET_DEFAULT.netMonthly * 100) / 100);
+const NET_PERCENT = NET_DEFAULT.netPercent.toFixed(0);
 
 export const metadata: Metadata = {
   title: 'מחשבון שכר מינימום 2026 – חודשי, שעתי, יומי, נוער ונטו',
@@ -79,7 +98,24 @@ export default function Page() {
         { label: 'שכר מינימום' },
       ]}
       lastUpdated="2026-05-15"
+      pageUrl="/employee-rights/minimum-wage"
       calculator={<MinimumWageCalculator />}
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          <strong>
+            שכר המינימום בישראל ב-2026 הוא {MONTHLY} ₪ לחודש למשרה מלאה, ו-{HOURLY_182} ₪ לשעה
+          </strong>{' '}
+          (לפי חודש עבודה של 182 שעות), בתוקף מ-{EFFECTIVE_FROM}. במקומות עבודה שבהם החודש מחושב
+          לפי 186 שעות, התעריף השעתי הוא {HOURLY_186} ₪. בחישוב יומי: {DAILY_5} ₪ ליום בשבוע
+          עבודה של חמישה ימים, ו-{DAILY_6} ₪ בשבוע של שישה ימים. לנוער נקבעו שיעורים מופחתים לפי
+          חוק עבודת נוער — {UNDER_16_PCT}% משכר המינימום מתחת לגיל 16, {YOUTH_16_17_PCT}% בגילאי
+          16–17 (כ-{YOUTH_16_17_WAGE} ₪ לחודש), ו-{YOUTH_17_18_PCT}% בגילאי 17–18. שימו לב: אלו
+          סכומי <strong>ברוטו</strong>. הנטו למשרה מלאה הוא כ-{NET_MONTHLY} ₪ — כ-{NET_PERCENT}%
+          מהברוטו — אחרי ביטוח לאומי, פנסיה ומס הכנסה נמוך שנותר גם אחרי נקודות הזיכוי. המחשבון
+          שמתחת מחשב את הנטו לפי נקודות הזיכוי שלכם, בודק תאימות מול השכר שאתם מקבלים בפועל,
+          ומשווה מול תעריפי ענף.
+        </p>
+      }
       content={
         <>
           <h2>שכר מינימום בישראל 2026</h2>

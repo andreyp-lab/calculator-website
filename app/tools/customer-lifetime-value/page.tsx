@@ -65,7 +65,23 @@ export default function CLVPage() {
           { label: 'CLV / LTV' },
         ]}
         lastUpdated="2026-05-03"
+        pageUrl="/tools/customer-lifetime-value"
         calculator={<CLVCalculator />}
+        quickAnswer={
+          <p className="text-lg text-ink leading-relaxed">
+            <strong>
+              CLV (Customer Lifetime Value) הוא הרווח הכולל שלקוח מייצר לאורך כל תקופת הקשר שלו
+              עם העסק. הנוסחה: ARPU × שיעור רווח גולמי × אורך חיי הלקוח, פחות עלות הגיוס (CAC).
+            </strong>{' '}
+            כשיודעים את שיעור הנטישה החודשי אפשר לחשב ישירות: (ARPU × מרווח) ÷ Churn חודשי − CAC,
+            משום שאורך חיי הלקוח הוא בקירוב 1 חלקי שיעור הנטישה. המספר שחשוב באמת אינו ה-CLV
+            לבדו אלא <strong>היחס בין CLV ל-CAC</strong>: יחס של 3:1 ומעלה נחשב בריא, יחס נמוך
+            מ-1:1 אומר שכל לקוח חדש מפסיד כסף, ויחס גבוה מאוד עשוי דווקא לרמז שאתם משקיעים מעט
+            מדי בשיווק. מדד משלים הוא <strong>Payback Period</strong> — כמה חודשים לוקח להחזיר
+            את עלות הגיוס. הטעות הנפוצה היא חישוב CLV לפי הכנסה במקום לפי רווח גולמי, שמנפח את
+            התוצאה. המחשבון שמתחת מחשב את שלושת המדדים יחד.
+          </p>
+        }
         content={
           <>
             <h2>מה זה CLV ולמה זה הכי חשוב?</h2>

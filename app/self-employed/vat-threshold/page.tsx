@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { VatThresholdCalculator } from '@/components/calculators/VatThresholdCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
+import {
+  VAT_EXEMPT_THRESHOLD_2026,
+  VAT_STANDARD_RATE,
+} from '@/lib/calculators/vat-threshold';
+
+// כל מספר ב-quickAnswer נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
+const THRESHOLD = VAT_EXEMPT_THRESHOLD_2026.toLocaleString('he-IL');
+const THRESHOLD_MONTHLY = Math.round(VAT_EXEMPT_THRESHOLD_2026 / 12).toLocaleString('he-IL');
+const VAT_PCT = (VAT_STANDARD_RATE * 100).toFixed(0);
 
 export const metadata: Metadata = {
   title: 'תקרת עוסק פטור 2026 — מחשבון + מה לעשות כשעוברים',
@@ -74,7 +83,24 @@ export default function Page() {
         { label: 'תקרת עוסק פטור' },
       ]}
       lastUpdated="2026-06-12"
+      pageUrl="/self-employed/vat-threshold"
       calculator={<VatThresholdCalculator />}
+      quickAnswer={
+        <p className="text-lg text-ink leading-relaxed">
+          <strong>
+            תקרת עוסק פטור ב-2026 היא {THRESHOLD} ₪ מחזור שנתי — כ-{THRESHOLD_MONTHLY} ₪ בחודש
+            בממוצע.
+          </strong>{' '}
+          עוסק שמחזורו נמוך מהתקרה אינו גובה מע&quot;מ מלקוחותיו ואינו מגיש דוחות מע&quot;מ
+          תקופתיים, אך גם אינו מקזז מע&quot;מ תשומות על הוצאותיו. חשוב להבין: התקרה נבחנת על{' '}
+          <strong>המחזור השנתי כולו</strong>, לא חודש בודד — חריגה באמצע השנה מחייבת מעבר למעמד
+          עוסק מורשה, ומאותו רגע יש לגבות {VAT_PCT}% מע&quot;מ. החריגה אינה מבטלת רטרואקטיבית את
+          המעמד לכל השנה, אך על הסכום שמעל התקרה חלה חובת מע&quot;מ, ולכן כדאי לזהות את נקודת
+          החצייה מראש ולא בדיעבד. מי שמתקרב לתקרה צריך גם לשקול את הצד השני: עוסק מורשה מקזז
+          מע&quot;מ תשומות, ולכן בעסק עתיר הוצאות המעבר עשוי דווקא להשתלם. המחשבון שמתחת מזהה את
+          חודש החצייה הצפוי לפי המחזור בפועל והתחזית להמשך השנה.
+        </p>
+      }
       content={
         <>
           <h2>תקרת עוסק פטור 2026 — מה צריך לדעת</h2>
