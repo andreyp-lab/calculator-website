@@ -199,6 +199,20 @@ export default function LoanEligibilityPage() {
                 <strong>פניה לבנק לא מתאים</strong> - חלק מהבנקים מתמחים בענפים מסוימים
               </li>
             </ul>
+            <p>
+              רוב הדחיות נובעות מהכנה לקויה של הבקשה — לא מהעסק עצמו. אם ההלוואה קריטית לעסק,
+              שקלו ליווי מקצועי של{' '}
+              <a
+                href="https://profitmargin.co.il/services/%D7%92%D7%99%D7%95%D7%A1-%D7%90%D7%A9%D7%A8%D7%90%D7%99-%D7%9C%D7%A2%D7%A1%D7%A7%D7%99%D7%9D/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold hover:underline"
+              >
+                גיוס אשראי לעסקים
+              </a>{' '}
+              בהובלת רו&quot;ח — בניית התוכנית העסקית, הכנת המסמכים והצגת העסק לבנק בצורה שמעלה
+              את סיכויי האישור.
+            </p>
 
             <h2>כלים נוספים לבעלי עסקים</h2>
             <ul>
