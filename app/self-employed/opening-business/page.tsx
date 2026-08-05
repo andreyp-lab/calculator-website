@@ -748,6 +748,19 @@ export default function OpeningBusinessPage() {
               הכספים, תזרים והתנהלות מול הבנק —{' '}
               <Link href="/self-employed/business-finance">התנהלות פיננסית לעצמאים: המדריך המלא</Link>.
             </p>
+            <p>
+              ואם ההקמה עצמה דורשת מימון — ציוד, שיפוץ או הון חוזר — התחנה הראשונה היא{' '}
+              <Link href="/tools/loan-eligibility">בודק הזכאות להלוואות בערבות המדינה</Link>. מי
+              שמעדיף שלא להתמודד לבד מול הקרן והבנקים יכול להיעזר ב
+              <a
+                href="https://profitmargin.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%91%D7%A2%D7%A8%D7%91%D7%95%D7%AA-%D7%94%D7%9E%D7%93%D7%99%D7%A0%D7%94/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ליווי מקצועי בגיוס הלוואה בערבות המדינה
+              </a>{' '}
+              — מבדיקת זכאות ועד הגשת הבקשה.
+            </p>
           </div>
         </section>
 
