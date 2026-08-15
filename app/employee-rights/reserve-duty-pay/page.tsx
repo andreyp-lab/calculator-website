@@ -16,7 +16,7 @@ const DAILY_GRANT = nis(IRON_SWORDS_BONUSES.DAILY_GRANT); // 280
 const GENERAL_GRANT = nis(IRON_SWORDS_BONUSES.GENERAL_GRANT); // 5,000
 
 export const metadata: Metadata = {
-  title: { absolute: 'מחשבון תגמולי מילואים 2026 — כמה מקבלים ליום? מ-328.76 ₪ ומעלה' },
+  title: { absolute: 'מחשבון תגמולי מילואים ומענקי חרבות ברזל 2026 — כמה מקבלים ליום?' },
   description:
     'מחשבון תגמולי מילואים 2026 לשכירים, עצמאיים וחסרי תעסוקה. כולל מענקי חרבות ברזל (5,000 ₪ + 280 ₪/יום), קצבות משפחה ונקודת זיכוי מס.',
   alternates: { canonical: '/employee-rights/reserve-duty-pay' },

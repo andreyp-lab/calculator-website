@@ -378,14 +378,14 @@ export default function EmployeeRightsCompleteGuide() {
               הגנה תעסוקתית: 30 ימים לאחר חזרה ממילואים של 60+ ימים.
             </p>
 
-            <h3 className="text-xl font-bold text-ink mb-3">חופשת לידה – פטורה ממס!</h3>
+            <h3 className="text-xl font-bold text-ink mb-3">חופשת לידה ודמי לידה</h3>
             <div className="bg-cream-2 border border-ink/15 rounded-none p-5 mb-5">
               <ul className="space-y-2 text-ink/70 text-sm">
                 <li>• <strong>אורך:</strong> 26 שבועות (אפשרות להאריך ל-26 עם הסכמת מעסיק)</li>
                 <li>• <strong>תשלום מב.ל.:</strong> 15 שבועות (105 ימים) בדמי לידה מלאים</li>
                 <li>• <strong>גובה:</strong> שכר ממוצע 3 חודשים אחרונים (עד תקרה יומית)</li>
-                <li>• <strong>פטור ממס:</strong> כן! דמי לידה פטורים לחלוטין ממס הכנסה</li>
-                <li>• <strong>זכות לאב:</strong> ניתן להעביר חלק מהחופשה לאב (7 שבועות)</li>
+                <li>• <strong>מיסוי:</strong> דמי לידה חייבים במס הכנסה, ביטוח לאומי ודמי בריאות — מנוכים במקור</li>
+                <li>• <strong>זכות לאב:</strong> ניתן להעביר לאב חלק מהתקופה — רק אחרי 6 השבועות הראשונים השמורים לאם</li>
               </ul>
             </div>
 

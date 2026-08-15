@@ -11,8 +11,6 @@ import {
   WORK_GRANT_MAX_INCOME_PARENT_2026,
   WORK_GRANT_MIN_AGE_NO_CHILDREN,
   WORK_GRANT_MIN_AGE_WITH_CHILDREN,
-  WORK_GRANT_MIN_AGE_SENIORS,
-  WORK_GRANT_MAX_AGE_SENIORS,
   WORK_GRANT_MIN_MONTHS_SALARIED,
   WORK_GRANT_MIN_WEEKS_SELF_EMPLOYED,
   calculateMaxGrant,
@@ -32,7 +30,7 @@ const MAX_GRANT_SINGLE_PARENT_2 = nis(Math.round(calculateMaxGrant(2, true)));
 
 export const metadata: Metadata = {
   title: { absolute: `בדיקת זכאות למענק עבודה 2026 — מס הכנסה שלילי` },
-  description: `בדוק תוך 30 שניות אם מגיע לך מענק עבודה 2026: הכנסה ${MIN_INCOME}–${MAX_PARENT} ₪, גיל ${WORK_GRANT_MIN_AGE_WITH_CHILDREN}/${WORK_GRANT_MIN_AGE_NO_CHILDREN}+ וּותק עבודה. בדיקת זכאות חינם, כולל שנים קודמות.`,
+  description: `בדוק תוך 30 שניות אם מגיע לך מענק עבודה 2026: הכנסה ${MIN_INCOME}–${MAX_PARENT} ₪, גיל — הורה מ-${WORK_GRANT_MIN_AGE_WITH_CHILDREN}, ללא ילדים מ-${WORK_GRANT_MIN_AGE_NO_CHILDREN}. בדיקת זכאות חינם, כולל שנים קודמות.`,
   alternates: { canonical: PAGE_PATH },
   openGraph: {
     title: 'בדיקת זכאות למענק עבודה 2026 — מס הכנסה שלילי',
@@ -47,7 +45,7 @@ export const metadata: Metadata = {
 const faqItems = [
   {
     question: 'איך בודקים זכאות למענק עבודה?',
-    answer: `בדיקת הזכאות מצליבה ארבעה תנאים: תושבות ישראלית, גיל, הכנסה שנתית מעבודה וּותק תעסוקתי. הכנסה שנתית מעבודה צריכה להיות בין ${MIN_INCOME} ₪ ל-${MAX_SINGLE} ₪ ליחיד או ${MAX_PARENT} ₪ להורה; הגיל ${WORK_GRANT_MIN_AGE_NO_CHILDREN}+ ללא ילדים, ${WORK_GRANT_MIN_AGE_WITH_CHILDREN}+ עם ילדים, או ${WORK_GRANT_MIN_AGE_SENIORS}–${WORK_GRANT_MAX_AGE_SENIORS} בכל מקרה; והוותק ${WORK_GRANT_MIN_MONTHS_SALARIED} חודשים כשכיר או ${WORK_GRANT_MIN_WEEKS_SELF_EMPLOYED} שבועות כעצמאי. הכלי בדף בודק את כל התנאים יחד ומחזיר תשובה חד-משמעית.`,
+    answer: `בדיקת הזכאות מצליבה ארבעה תנאים: תושבות ישראלית, גיל, הכנסה שנתית מעבודה וּותק תעסוקתי. הכנסה שנתית מעבודה צריכה להיות בין ${MIN_INCOME} ₪ ל-${MAX_SINGLE} ₪ ליחיד או ${MAX_PARENT} ₪ להורה; הגיל — הורה מגיל ${WORK_GRANT_MIN_AGE_WITH_CHILDREN} (הורה יחיד מגיל 21), וללא ילדים רק מגיל ${WORK_GRANT_MIN_AGE_NO_CHILDREN}; והוותק ${WORK_GRANT_MIN_MONTHS_SALARIED} חודשים כשכיר או ${WORK_GRANT_MIN_WEEKS_SELF_EMPLOYED} שבועות כעצמאי. הכלי בדף בודק את כל התנאים יחד ומחזיר תשובה חד-משמעית.`,
   },
   {
     question: 'מה ההבדל בין מענק עבודה למס הכנסה שלילי?',
@@ -82,7 +80,7 @@ const faqItems = [
 const howToSteps = [
   {
     name: 'בדוק תושבות וגיל',
-    text: `צריך להיות תושב ישראל הרשום במרשם האוכלוסין, ובגיל ${WORK_GRANT_MIN_AGE_NO_CHILDREN}+ ללא ילדים, ${WORK_GRANT_MIN_AGE_WITH_CHILDREN}+ עם ילדים, או ${WORK_GRANT_MIN_AGE_SENIORS}–${WORK_GRANT_MAX_AGE_SENIORS} בכל מקרה.`,
+    text: `צריך להיות תושב ישראל הרשום במרשם האוכלוסין, ובגיל המזכה: הורה מגיל ${WORK_GRANT_MIN_AGE_WITH_CHILDREN} (הורה יחיד מגיל 21); ללא ילדים — מגיל ${WORK_GRANT_MIN_AGE_NO_CHILDREN} ומעלה.`,
   },
   {
     name: 'חשב את ההכנסה השנתית מעבודה',
@@ -126,8 +124,8 @@ export default function Page() {
         quickAnswer={
           <p>
             <strong>אתה זכאי למענק עבודה 2026 אם מתקיימים ארבעת התנאים:</strong> אתה תושב ישראל;
-            גילך {WORK_GRANT_MIN_AGE_NO_CHILDREN}+ ללא ילדים, {WORK_GRANT_MIN_AGE_WITH_CHILDREN}+
-            עם ילדים או {WORK_GRANT_MIN_AGE_SENIORS}–{WORK_GRANT_MAX_AGE_SENIORS} בכל מקרה;
+            גילך מזכה — הורה מגיל {WORK_GRANT_MIN_AGE_WITH_CHILDREN} (הורה יחיד מגיל 21), וללא
+            ילדים מגיל {WORK_GRANT_MIN_AGE_NO_CHILDREN} ומעלה;
             הכנסתך השנתית <strong>מעבודה בלבד</strong> נעה בין {MIN_INCOME} ₪ ל-{MAX_SINGLE} ₪
             (יחיד) או עד {MAX_PARENT} ₪ (הורה); ועבדת לפחות{' '}
             {WORK_GRANT_MIN_MONTHS_SALARIED} חודשים כשכיר או {WORK_GRANT_MIN_WEEKS_SELF_EMPLOYED}{' '}
@@ -157,9 +155,8 @@ export default function Page() {
                 <tr className="bg-cream-2">
                   <td className="border border-ink/15 p-2 font-semibold">גיל</td>
                   <td className="border border-ink/15 p-2">
-                    {WORK_GRANT_MIN_AGE_NO_CHILDREN}+ ללא ילדים ·{' '}
-                    {WORK_GRANT_MIN_AGE_WITH_CHILDREN}+ עם ילדים ·{' '}
-                    {WORK_GRANT_MIN_AGE_SENIORS}–{WORK_GRANT_MAX_AGE_SENIORS} בכל מקרה
+                    הורה: מגיל {WORK_GRANT_MIN_AGE_WITH_CHILDREN} (הורה יחיד: 21) ·{' '}
+                    ללא ילדים: מגיל {WORK_GRANT_MIN_AGE_NO_CHILDREN}
                   </td>
                 </tr>
                 <tr>

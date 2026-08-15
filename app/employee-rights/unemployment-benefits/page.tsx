@@ -5,7 +5,7 @@ import { UnemploymentBenefitsCalculator } from '@/components/calculators/Unemplo
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון דמי אבטלה 2026 — כמה מקבלים? עד 550.76 ₪ ליום',
+  title: 'מחשבון דמי אבטלה 2026 — תקרה, טבלה לפי גיל וימי זכאות',
   description:
     'חישוב דמי אבטלה 2026: עד 550.76 ₪ ליום ב-125 הימים הראשונים. בדיקת זכאות לפי גיל (כולל 45+ ומעל גיל 50), ימי זכאות, עבודה חלקית ומס. נתוני ביטוח לאומי מעודכנים.',
   alternates: { canonical: '/employee-rights/unemployment-benefits' },
@@ -160,7 +160,7 @@ export default function UnemploymentBenefitsPage() {
             <li>מיום 126 ואילך: עד <strong>367.17 ₪/יום</strong> (כ-2/3 מהתקרה)</li>
           </ul>
 
-          <h2>תקופת זכאות לפי גיל ומשפחה</h2>
+          <h2>טבלת דמי אבטלה לפי גיל — ימי זכאות (2026)</h2>
           <table className="w-full text-sm border-collapse my-4">
             <thead>
               <tr className="bg-ink text-cream">

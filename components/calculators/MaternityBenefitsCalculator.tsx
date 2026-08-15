@@ -628,7 +628,7 @@ const PayTab = ({
           <InfoBox variant="pink">
             <p className="text-sm font-bold mb-1">חשוב לדעת</p>
             <ul className="text-sm space-y-1">
-              <li>• דמי לידה <strong>פטורים ממס הכנסה</strong> — הנטו קרוב לברוטו</li>
+              <li>• דמי לידה <strong>חייבים במס הכנסה, ביטוח לאומי ודמי בריאות</strong> — מנוכים במקור; הסכום כאן הוא ברוטו</li>
               <li>• ייתכן ותשלמי <strong>ביטוח לאומי</strong> (כ-3.5%) גם על דמי הלידה</li>
               <li>• <strong>עצמאית</strong>: החישוב לפי הכנסה החייבת בב.ל., לא שכר</li>
               <li>• עובדת אצל <strong>מספר מעסיקים</strong>: מגישה בקשה נפרדת לכל מעסיק</li>

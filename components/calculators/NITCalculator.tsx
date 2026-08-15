@@ -159,7 +159,7 @@ const CalculatorTab = () => {
                 onChange={(e) => setAge(Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
               />
-              <p className="text-xs text-ink/70 mt-1">מינימום: 23 ללא ילדים, 21 עם ילדים, 56-62 גמלאים</p>
+              <p className="text-xs text-ink/70 mt-1">מינימום: הורה מגיל 23 (הורה יחיד מגיל 21) · ללא ילדים מגיל 55</p>
             </div>
 
             {/* סוג תעסוקה */}

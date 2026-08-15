@@ -25,9 +25,9 @@ const MAX_SINGLE = nis(WORK_GRANT_BASE_MAX_2026);
 const MAX_OVERALL = nis(calculateMaxGrant(3, true));
 
 export const metadata: Metadata = {
-  title: { absolute: 'מחשבון מענק עבודה 2026 — בדיקת זכאות מיידית וחישוב הסכום' },
+  title: { absolute: 'מחשבון מענק עבודה 2026 (מס הכנסה שלילי) — סימולטור בדיקת זכאות' },
   description:
-    'בדיקת זכאות למענק עבודה (מס הכנסה שלילי) 2026 בחינם: הכנסה 30,240–99,960 ₪, גיל 21/23+. חישוב מדויק עד 13,142 ₪/שנה, כולל הגשה רטרואקטיבית לשנים קודמות.',
+    'בדיקת זכאות למענק עבודה (מס הכנסה שלילי) 2026 בחינם: הורים מגיל 23 (הורה יחיד מגיל 21), ללא ילדים מגיל 55. חישוב מדויק, כולל הגשה רטרואקטיבית לשנים קודמות.',
   alternates: { canonical: '/employee-rights/work-grant' },
 };
 
@@ -40,12 +40,12 @@ const faqItems = [
   {
     question: 'מי זכאי למענק עבודה 2026?',
     answer:
-      'תנאי הזכאות: (1) תושב ישראל הרשום במרשם האוכלוסין; (2) גיל 23+ ללא ילדים, 21+ עם ילדים, או 56–62 ללא ילדים; (3) הכנסה שנתית מעבודה בין 30,240 ל-83,400 ₪ (יחיד) / 99,960 ₪ (הורה); (4) עבד לפחות 6 חודשים כשכיר, או 13 שבועות כעצמאי ב-50%+ מהזמן. גם עצמאים זכאים!',
+      'תנאי הזכאות: (1) תושב ישראל הרשום במרשם האוכלוסין; (2) גיל — הורה לילד אחד או יותר מגיל 23 (הורה יחיד מגיל 21); מי שאין לו ילדים זכאי רק מגיל 55 ומעלה; (3) הכנסה שנתית מעבודה בטווח המזכה (תלוי במצב המשפחתי); (4) לך, לבן/בת הזוג או לילד התלוי בך כלכלית אין זכויות במקרקעין (בארץ או בחו"ל) בשיעור העולה על 50% — למעט דירת מגורים יחידה. גם עצמאים זכאים!',
   },
   {
     question: 'כמה כסף מקבלים ממענק עבודה?',
     answer:
-      'הסכום תלוי בהכנסה ובמצב משפחתי. מקסימום 2026: יחיד ללא ילדים ~5,506 ₪; הורה לילד אחד ~7,068 ₪; הורה לשני ילדים ~8,630 ₪; הורה לשלושה ילדים ~10,192 ₪. הורה יחיד מקבל תוספת של ~2,950 ₪ נוספים. הסכום הגבוה ביותר מתקבל בהכנסה של ~67,320 ₪/שנה — אחרי זה יורד.',
+      'הסכום תלוי בהכנסה ובמצב משפחתי. מקסימום 2026 (חודשי): הורה ל-1-2 ילדים ובני 55+ — עד 585 ₪/חודש (עד 7,020 ₪ לשנת עבודה מלאה); הורה ל-3+ ילדים — עד 855 ₪/חודש (עד 10,260 ₪); הורה יחיד — מענק מוגדל של 150%. הסכום הגבוה ביותר מתקבל בהכנסה חודשית של 4,260–5,680 ₪ — מעבר לכך המענק יורד בהדרגה.',
   },
   {
     question: 'איך מגישים בקשה למענק עבודה?',
@@ -80,7 +80,7 @@ const faqItems = [
   {
     question: 'מה קורה אם הכנסתי גבוהה מדי או נמוכה מדי?',
     answer:
-      'אם הכנסתך נמוכה מ-30,240 ₪/שנה — לא זכאי. ייתכן שהגדלת שעות עבודה תביא לטווח הזכאות. אם הכנסתך גבוהה מ-83,400 ₪ (יחיד) / 99,960 ₪ (הורה) — לא זכאי. אם הכנסתך נופלת בין הסף לבין שיא ב-67,320 ₪ — אתה בשלב עלייה (כל עלייה בהכנסה מגדילה המענק). אם אתה מעל 67,320 ₪ — שלב ירידה (כל עלייה מקטינה).',
+      'המענק מחושב על ההכנסה החודשית הממוצעת: מתחת ל-2,450 ₪/חודש — אין זכאות; בין 2,450 ל-4,260 ₪ — שלב עלייה (כל שקל נוסף מגדיל את המענק); בין 4,260 ל-5,680 ₪ — טווח השיא; מעל 5,680 ₪ — שלב ירידה, עד איפוס בסביבות 7,380 ₪ (1-2 ילדים) או 8,100 ₪ (3+ ילדים). להורה יחיד הטווח רחב יותר — עד 11,190/13,660 ₪.',
   },
   {
     question: 'כמה זמן לוקח לקבל את הכסף?',
@@ -109,9 +109,9 @@ export default function Page() {
             {MAX_OVERALL} ₪ בשנה, פטור ממס וללא פגיעה בקצבאות.
           </strong>{' '}
           הזכאות ב-2026 נשענת על שלושה תנאים: הכנסה שנתית מעבודה בין {MIN_INCOME} ל-
-          {MAX_INCOME_SINGLE} ₪ ליחיד או עד {MAX_INCOME_PARENT} ₪ להורה; גיל{' '}
-          {WORK_GRANT_MIN_AGE_NO_CHILDREN}+ ללא ילדים או {WORK_GRANT_MIN_AGE_WITH_CHILDREN}+ עם
-          ילדים (וכן 56–62 בכל מקרה); ולפחות 6 חודשי עבודה כשכיר או 13 שבועות כעצמאי. הסכום אינו
+          {MAX_INCOME_SINGLE} ₪ ליחיד או עד {MAX_INCOME_PARENT} ₪ להורה; גיל — הורה מגיל{' '}
+          {WORK_GRANT_MIN_AGE_WITH_CHILDREN} (הורה יחיד מגיל 21), וללא ילדים רק מגיל{' '}
+          {WORK_GRANT_MIN_AGE_NO_CHILDREN}; ואי-החזקה בנדל״ן מעבר לדירת מגורים יחידה. הסכום אינו
           עולה ככל שמרוויחים יותר: הוא מטפס עד הכנסה של {PEAK_INCOME} ₪ בשנה, שם הוא מגיע לשיא —{' '}
           {MAX_SINGLE} ₪ ליחיד ללא ילדים, ויותר לכל ילד — ומשם יורד עד אפס בתקרה. גם עצמאים
           זכאים, וניתן להגיש רטרואקטיבית עד שנתיים מתום שנת המס. המחשבון שמתחת בודק את כל התנאים
@@ -123,7 +123,7 @@ export default function Page() {
           <h2>מענק עבודה — הזכות הפיננסית שרבים לא מכירים</h2>
           <p>
             מענק עבודה (Earned Income Tax Credit) הוא תוכנית של רשות המסים שמשלמת כסף לעובדים בשכר
-            נמוך, כדי לתמרץ עבודה על פני קבלת קצבאות. ב-2026, הסכום המקסימלי הוא כ-13,142 ₪/שנה
+            נמוך, כדי לתמרץ עבודה על פני קבלת קצבאות. ב-2026, הסכום המקסימלי הוא עד כ-15,390 ₪/שנה
             להורה יחיד עם ילדים. התביעה מוגשת באתר רשות המסים לאחר תום שנת המס — וניתן להגיש
             רטרואקטיבית עד שנתיים מתום שנת המס (ב-2026: שנות המס 2024 ו-2025).
           </p>
@@ -131,9 +131,9 @@ export default function Page() {
           <h2>מי זכאי? — 7 תנאים</h2>
           <ol>
             <li>תושב ישראל הרשום במרשם האוכלוסין</li>
-            <li>גיל 23+ (ללא ילדים), 21+ (עם ילדים), או 56–62 (בכל מקרה)</li>
-            <li>הכנסה שנתית מעבודה: 30,240–99,960 ₪ (בהתאם למצב)</li>
-            <li>עבד לפחות 6 חודשים כשכיר, או 13 שבועות כעצמאי (50%+ מהזמן)</li>
+            <li>גיל: הורה מגיל 23 (הורה יחיד מגיל 21) · ללא ילדים — רק מגיל 55</li>
+            <li>הכנסה חודשית ממוצעת מעבודה: 2,450–8,100 ₪ (הורה יחיד: 1,510–13,660 ₪)</li>
+            <li>ההכנסה החודשית הממוצעת מחושבת לפי חודשי העבודה בפועל (אין דרישת מינימום חודשים לשכיר)</li>
             <li>הכנסה ממקור עבודה (לא קצבאות/שכירות)</li>
             <li>הכנסה משקית כוללת בתוך התקרות</li>
             <li>לא קיבל כפילות מהסניפים הממשלתיים האחרים</li>
@@ -151,28 +151,28 @@ export default function Page() {
             </thead>
             <tbody>
               <tr>
-                <td className="border border-ink/15 p-2">יחיד ללא ילדים</td>
-                <td className="border border-ink/15 p-2 text-center font-semibold">~5,506 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">~459 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">83,400 ₪</td>
+                <td className="border border-ink/15 p-2">בני 55+ ללא ילדים</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">עד 7,020 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">עד 585 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">~7,380 ₪/חודש</td>
               </tr>
               <tr className="bg-cream-2">
-                <td className="border border-ink/15 p-2">הורה — ילד אחד</td>
-                <td className="border border-ink/15 p-2 text-center font-semibold">~7,068 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">~589 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">99,960 ₪</td>
+                <td className="border border-ink/15 p-2">הורה — 1-2 ילדים</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">עד 7,020 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">עד 585 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">~7,380 ₪/חודש</td>
               </tr>
               <tr>
-                <td className="border border-ink/15 p-2">הורה — שני ילדים</td>
-                <td className="border border-ink/15 p-2 text-center font-semibold">~8,630 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">~719 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">99,960 ₪</td>
+                <td className="border border-ink/15 p-2">הורה — 3+ ילדים</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">עד 10,260 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">עד 855 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">8,100 ₪/חודש</td>
               </tr>
               <tr className="bg-cream-2">
-                <td className="border border-ink/15 p-2">הורה יחיד — שני ילדים</td>
-                <td className="border border-ink/15 p-2 text-center font-semibold">~11,580 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">~965 ₪</td>
-                <td className="border border-ink/15 p-2 text-center">99,960 ₪</td>
+                <td className="border border-ink/15 p-2">הורה יחיד — 1-2 ילדים</td>
+                <td className="border border-ink/15 p-2 text-center font-semibold">עד 10,530 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">עד ~878 ₪</td>
+                <td className="border border-ink/15 p-2 text-center">11,190 ₪/חודש</td>
               </tr>
             </tbody>
           </table>
@@ -182,7 +182,7 @@ export default function Page() {
             <li>היכנס לאתר רשות המסים: taxes.gov.il</li>
             <li>חפש "מענק עבודה" ולחץ "הגשת בקשה"</li>
             <li>הזן תעודת זהות ופרטי כניסה</li>
-            <li>העלה טופס 106 (מהמעסיק) / דוח שנתי (עצמאי)</li>
+            <li>אין חובה לצרף טופס 106 — רשות המסים מצליבה מול דיווחי המעסיק</li>
             <li>הזן פרטי חשבון בנק לקבלת התשלום</li>
             <li>שלח ועקוב אחר סטטוס הבקשה</li>
           </ol>
