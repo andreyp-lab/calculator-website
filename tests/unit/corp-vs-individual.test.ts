@@ -100,9 +100,10 @@ describe('calculateAsIndividual', () => {
     expect(high.netToOwner).toBeGreaterThan(low.netToOwner);
   });
 
-  it('ב.ל. עצמאי: שיעור מופחת 6.1% עד 90,264 ₪', () => {
-    const r = calculateAsIndividual(90_264, 2.25);
-    const expectedNI = 90_264 * 0.061;
+  it('ב.ל. עצמאי: שיעור מופחת 7.70% עד סף המדרגה (תיקון 252)', () => {
+    const threshold = 7_703 * 12; // 92,436
+    const r = calculateAsIndividual(threshold, 2.25);
+    const expectedNI = threshold * 0.077;
     expect(r.socialSecurity).toBeCloseTo(expectedNI, -1); // ±10 ₪
   });
 

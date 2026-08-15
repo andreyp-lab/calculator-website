@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { blogPosts } from '@/content/blog/registry';
 import { ALL_TERMS } from '@/lib/data/glossary';
 import { BUSINESS_TYPES } from '@/lib/data/business-setup/business-types';
+import { SALARY_PAGE_AMOUNTS } from '@/lib/data/salary-pages';
 
 const SITE_URL = 'https://cheshbonai.co.il';
 
@@ -63,6 +64,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: שכירים / מסים =====
     make('/personal-tax/salary-net-gross', 'weekly', 0.95, FRESH_2026_06_12),
+    // דפי "שכר X ברוטו כמה נטו" — פרוגרמטיים, נגזרים מאותה רשימת סכומים כמו הדפים עצמם
+    ...SALARY_PAGE_AMOUNTS.map((a) => make(`/salary/${a}`, 'monthly', 0.8, new Date('2026-08-15'))),
     make('/personal-tax/tax-refund', 'weekly', 0.95),
     make('/personal-tax/income-tax', 'monthly', 0.90),
     make('/personal-tax/tax-credits', 'monthly', 0.90),
@@ -162,6 +165,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/compare', 'monthly', 0.75),
     make('/compare/employee-vs-self-employed', 'monthly', 0.85),
     make('/compare/rent-vs-buy', 'monthly', 0.85),
+    make('/compare/company-vs-osek-murshe', 'monthly', 0.85),
+    make('/compare/leasing-mimuni-vs-tifuli', 'monthly', 0.85),
+    make('/compare/keren-hishtalmut-vs-pikadon', 'monthly', 0.85),
 
     // ===== עמודי Pillar (מדריכים מקיפים) =====
     make('/guides/mortgage-complete-guide-2026', 'monthly', 0.98),

@@ -25,7 +25,11 @@
  * ============================================================
  */
 
-import { TAX_BRACKETS_2026, CREDIT_POINT_2026 } from '@/lib/constants/tax-2026';
+import {
+  TAX_BRACKETS_2026,
+  CREDIT_POINT_2026,
+  SOCIAL_SECURITY_SELF_EMPLOYED_2026,
+} from '@/lib/constants/tax-2026';
 
 // ============================================================
 // קבועים 2026
@@ -48,13 +52,16 @@ export const CORP_EFFECTIVE_ALL_DIV = 1 - (1 - CORP_TAX_2026) * (1 - DIVIDEND_TA
 export const MAX_NI_MONTHLY = 51_910;
 export const MAX_NI_ANNUAL = MAX_NI_MONTHLY * 12; // 622,920
 
-/** סף מנימלי לחישוב ב.ל. (60% מהשכר הממוצע) */
-export const NI_REDUCED_THRESHOLD_MONTHLY = 7_703;
-export const NI_REDUCED_THRESHOLD_ANNUAL = NI_REDUCED_THRESHOLD_MONTHLY * 12; // 90,264
+/** סף מנימלי לחישוב ב.ל. (60% מהשכר הממוצע) — ממקור האמת */
+export const NI_REDUCED_THRESHOLD_MONTHLY =
+  SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedThresholdMonthly; // 7,703
+export const NI_REDUCED_THRESHOLD_ANNUAL = NI_REDUCED_THRESHOLD_MONTHLY * 12; // 92,436
 
-/** שיעורי ב.ל. עצמאי */
-export const NI_SELF_EMPLOYED_REDUCED = 0.061; // 6.1%
-export const NI_SELF_EMPLOYED_FULL = 0.18; // 18%
+/** שיעורי ב.ל. עצמאי — ממקור האמת (תיקון 252: מופחת 7.70%) */
+export const NI_SELF_EMPLOYED_REDUCED =
+  SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total; // 7.70%
+export const NI_SELF_EMPLOYED_FULL =
+  SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.total; // 18%
 
 /** שיעורי ב.ל. שכיר - עובד */
 export const NI_EMPLOYEE_REDUCED = 0.0427; // 4.27%
