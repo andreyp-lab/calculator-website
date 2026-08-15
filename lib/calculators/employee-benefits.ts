@@ -99,15 +99,16 @@ export function calculateAnnualLeave(input: AnnualLeaveInput): AnnualLeaveResult
  * טבלת זכאות ימי חופשה לפי ותק
  * מקור: חוק חופשה שנתית תשי"א-1951, סעיף 3 (נכון 2026)
  *
+ * ימי עבודה בפועל (נטו, ללא ימי מנוחה) — לפי ימי הלוח שבחוק (16/18/21/22...28):
+ *
  * 5 ימי עבודה בשבוע:
- *   שנות 1-4: 12, שנה 5: 15, שנה 6: 16, שנה 7: 17,
- *   שנים 8-9: 18, שנה 10: 19, שנה 11: 20, שנה 12: 21,
- *   שנה 13: 22, שנה 14+: 23
+ *   שנות 1-5: 12, שנה 6: 14, שנה 7: 15, שנה 8: 16,
+ *   שנה 9: 17, שנה 10: 18, שנה 11: 19, שנים 12-14+: 20
  *
  * 6 ימי עבודה בשבוע:
- *   שנות 1-4: 14, שנה 5: 16, שנה 6: 18, שנה 7: 21,
- *   שנים 8-9: 22, שנה 10: 22, שנה 11: 23, שנה 12: 24,
- *   שנה 13: 26, שנה 14+: 28
+ *   שנות 1-5: 14, שנה 6: 16, שנה 7: 18, שנה 8: 19,
+ *   שנה 9: 20, שנה 10: 21, שנה 11: 22, שנה 12: 23,
+ *   שנים 13-14+: 24
  */
 export function getVacationDaysByTenure(
   yearsOfService: number,
@@ -115,27 +116,24 @@ export function getVacationDaysByTenure(
 ): number {
   const y = Math.max(0, yearsOfService);
   if (workDaysPerWeek === 5) {
-    if (y <= 4) return 12;
-    if (y === 5) return 15;
-    if (y === 6) return 16;
-    if (y === 7) return 17;
-    if (y <= 9) return 18;
-    if (y === 10) return 19;
-    if (y === 11) return 20;
-    if (y === 12) return 21;
-    if (y === 13) return 22;
-    return 23;
+    if (y <= 5) return 12;
+    if (y === 6) return 14;
+    if (y === 7) return 15;
+    if (y === 8) return 16;
+    if (y === 9) return 17;
+    if (y === 10) return 18;
+    if (y === 11) return 19;
+    return 20;
   } else {
-    if (y <= 4) return 14;
-    if (y === 5) return 16;
-    if (y === 6) return 18;
-    if (y === 7) return 21;
-    if (y <= 9) return 22;
-    if (y === 10) return 22;
-    if (y === 11) return 23;
-    if (y === 12) return 24;
-    if (y === 13) return 26;
-    return 28;
+    if (y <= 5) return 14;
+    if (y === 6) return 16;
+    if (y === 7) return 18;
+    if (y === 8) return 19;
+    if (y === 9) return 20;
+    if (y === 10) return 21;
+    if (y === 11) return 22;
+    if (y === 12) return 23;
+    return 24;
   }
 }
 

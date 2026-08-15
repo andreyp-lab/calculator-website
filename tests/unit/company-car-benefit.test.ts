@@ -114,14 +114,14 @@ describe('calculateUsageValue', () => {
     expect(afterDiscount).toBeCloseTo(Math.max(0, raw - 560), 0);
   });
 
-  it('רכב ישן: effectivePrice נמוך מהמקורי', () => {
+  it('רכב משומש: שווי שימוש לפי המחירון כחדש — ללא הפחתת גיל', () => {
     const { effectivePrice } = calculateUsageValue(200_000, 'used', 1, 5);
-    expect(effectivePrice).toBeLessThan(200_000);
+    expect(effectivePrice).toBe(200_000);
   });
 
-  it('רכב ישן: effectivePrice לא יורד מתחת ל-20% מהמקורי', () => {
+  it('רכב משומש ותיק מאוד: עדיין לפי המחירון המקורי המלא', () => {
     const { effectivePrice } = calculateUsageValue(200_000, 'used', 1, 30);
-    expect(effectivePrice).toBeGreaterThanOrEqual(200_000 * 0.2);
+    expect(effectivePrice).toBe(200_000);
   });
 });
 
@@ -134,15 +134,12 @@ describe('calculateEffectivePriceForUsed', () => {
     expect(calculateEffectivePriceForUsed(200_000, 0)).toBe(200_000);
   });
 
-  it('גיל 1 → ~78,000 מ-100,000', () => {
-    const p = calculateEffectivePriceForUsed(100_000, 1);
-    expect(p).toBeCloseTo(78_000, -2);
+  it('גיל 1 → מחיר מקורי (אין פחת בדין)', () => {
+    expect(calculateEffectivePriceForUsed(100_000, 1)).toBe(100_000);
   });
 
-  it('גיל 5 → ירידה משמעותית', () => {
-    const p = calculateEffectivePriceForUsed(200_000, 5);
-    expect(p).toBeLessThan(130_000);
-    expect(p).toBeGreaterThan(40_000);
+  it('גיל 5 → מחיר מקורי (אין פחת בדין)', () => {
+    expect(calculateEffectivePriceForUsed(200_000, 5)).toBe(200_000);
   });
 });
 

@@ -127,19 +127,27 @@ function calculateIncomeTaxBrackets(taxableIncome: number): number {
   return tax;
 }
 
-function calculateBituachLeumi(annualIncome: number): number {
+function calculateBituachLeumi(annualIncome: number): {
+  total: number;
+  nationalInsuranceOnly: number;
+} {
   const monthly = annualIncome / 12;
-  const reducedCeiling = 7_703;
+  const reducedCeiling = SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedThresholdMonthly;
   const fullCeiling = SOCIAL_SECURITY_SELF_EMPLOYED_2026.maxThresholdMonthly;
 
   const reducedPart = Math.min(monthly, reducedCeiling);
   const fullPart = Math.max(0, Math.min(monthly, fullCeiling) - reducedCeiling);
 
-  const monthlyAmount =
+  const monthlyTotal =
     reducedPart * SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total +
     fullPart * SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.total;
 
-  return monthlyAmount * 12;
+  // הניכוי לפי סעיף 47א חל רק על רכיב דמי הביטוח הלאומי — לא על דמי הבריאות
+  const monthlyNIOnly =
+    reducedPart * SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.nationalInsurance +
+    fullPart * SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.nationalInsurance;
+
+  return { total: monthlyTotal * 12, nationalInsuranceOnly: monthlyNIOnly * 12 };
 }
 
 function calculatePensionDeductionAndCredit(
@@ -198,9 +206,10 @@ export function calculateSelfEmployedNet(
     initialTaxableIncome,
   );
 
-  // 6. ב.ל. + ניכוי
-  const bituachLeumi = calculateBituachLeumi(initialTaxableIncome);
-  const bituachLeumiDeduction = bituachLeumi * BL_DEDUCTIBLE;
+  // 6. ב.ל. + ניכוי — 52% מרכיב הב.ל. בלבד (סעיף 47א), לא מדמי הבריאות
+  const blResult = calculateBituachLeumi(initialTaxableIncome);
+  const bituachLeumi = blResult.total;
+  const bituachLeumiDeduction = blResult.nationalInsuranceOnly * BL_DEDUCTIBLE;
 
   // 7. הכנסה חייבת סופית
   const finalTaxableIncome = Math.max(

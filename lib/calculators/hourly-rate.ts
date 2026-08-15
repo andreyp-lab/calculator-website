@@ -17,6 +17,8 @@
  *  - בנצ'מארק ענפי 2026
  */
 
+import { SOCIAL_SECURITY_SELF_EMPLOYED_2026 as SS_SELF_EMPLOYED } from '@/lib/constants/tax-2026';
+
 // ============================================================
 // קבועים
 // ============================================================
@@ -38,12 +40,12 @@ const TAX_BRACKETS_2026 = [
   { upTo: Infinity, rate: 0.50 },
 ];
 
-/** ביטוח לאומי + בריאות לעצמאי 2026 (שיעורים מצרפיים: ב.ל.+בריאות) */
+/** ביטוח לאומי + בריאות לעצמאי 2026 — נגזר ממקור האמת בקובץ הקבועים */
 const SOCIAL_SECURITY_SELF_EMPLOYED_2026 = {
-  reducedThresholdMonthly: 7_703,
-  maxThresholdMonthly: 51_910,
-  reducedRate: 0.0610,   // עד הסף המופחת (2.87% ב.ל. + 3.23% בריאות)
-  fullRate: 0.18,        // מהסף המופחת ועד התקרה (12.83% ב.ל. + 5.17% בריאות)
+  reducedThresholdMonthly: SS_SELF_EMPLOYED.reducedThresholdMonthly,
+  maxThresholdMonthly: SS_SELF_EMPLOYED.maxThresholdMonthly,
+  reducedRate: SS_SELF_EMPLOYED.reducedRate.total, // 7.70% (4.47% ב.ל. + 3.23% בריאות)
+  fullRate: SS_SELF_EMPLOYED.fullRate.total, // 18% (12.83% ב.ל. + 5.17% בריאות)
 };
 
 /** שיעורי פנסיה מינימום לעצמאי 2026 */
@@ -684,7 +686,7 @@ function _calcSelfEmployedSocialSecurity(monthlyIncome: number): number {
   const belowReduced = Math.min(monthlyIncome, reducedThresh);
   const aboveReduced = Math.max(0, Math.min(monthlyIncome, maxThresh) - reducedThresh);
 
-  // שיעורים מצרפיים (ב.ל. + בריאות): 6.10% עד הסף המופחת, 18% מעליו ועד התקרה
+  // שיעורים מצרפיים (ב.ל. + בריאות): 7.70% עד הסף המופחת, 18% מעליו ועד התקרה
   const reducedPortion = belowReduced * ss.reducedRate;
   const fullPortion = aboveReduced * ss.fullRate;
 

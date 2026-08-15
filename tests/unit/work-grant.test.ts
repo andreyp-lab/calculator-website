@@ -12,8 +12,7 @@ import {
   WORK_GRANT_MAX_INCOME_SINGLE_2026,
   WORK_GRANT_MAX_INCOME_PARENT_2026,
   WORK_GRANT_BASE_MAX_2026,
-  WORK_GRANT_PER_CHILD_2026,
-  WORK_GRANT_SINGLE_PARENT_BONUS_2026,
+  WORK_GRANT_LARGE_FAMILY_MAX_2026,
   WORK_GRANT_MIN_AGE_NO_CHILDREN,
   WORK_GRANT_MIN_AGE_WITH_CHILDREN,
   type WorkGrantInput,
@@ -24,31 +23,35 @@ import {
 // ====================================================================
 describe('קבועים 2026', () => {
   it('הכנסה מינימלית', () => {
-    expect(WORK_GRANT_MIN_INCOME_2026).toBe(30_240);
+    expect(WORK_GRANT_MIN_INCOME_2026).toBe(29_400);
   });
 
   it('הכנסה לשיא', () => {
-    expect(WORK_GRANT_PEAK_INCOME_2026).toBe(67_320);
+    expect(WORK_GRANT_PEAK_INCOME_2026).toBe(51_120);
   });
 
   it('תקרה יחיד', () => {
-    expect(WORK_GRANT_MAX_INCOME_SINGLE_2026).toBe(83_400);
+    expect(WORK_GRANT_MAX_INCOME_SINGLE_2026).toBe(88_560);
   });
 
   it('תקרה הורה', () => {
-    expect(WORK_GRANT_MAX_INCOME_PARENT_2026).toBe(99_960);
+    expect(WORK_GRANT_MAX_INCOME_PARENT_2026).toBe(97_200);
   });
 
-  it('מענק בסיס מקסימלי', () => {
-    expect(WORK_GRANT_BASE_MAX_2026).toBe(5_506);
+  it('מענק שנתי מקסימלי — 1-2 ילדים / 55+ (585 ₪ × 12)', () => {
+    expect(WORK_GRANT_BASE_MAX_2026).toBe(7_020);
+  });
+
+  it('מענק שנתי מקסימלי — 3+ ילדים (855 ₪ × 12)', () => {
+    expect(WORK_GRANT_LARGE_FAMILY_MAX_2026).toBe(10_260);
   });
 
   it('גיל מינימלי ללא ילדים', () => {
-    expect(WORK_GRANT_MIN_AGE_NO_CHILDREN).toBe(23);
+    expect(WORK_GRANT_MIN_AGE_NO_CHILDREN).toBe(55);
   });
 
   it('גיל מינימלי עם ילדים', () => {
-    expect(WORK_GRANT_MIN_AGE_WITH_CHILDREN).toBe(21);
+    expect(WORK_GRANT_MIN_AGE_WITH_CHILDREN).toBe(23);
   });
 });
 
@@ -60,19 +63,20 @@ describe('calculateMaxGrant', () => {
     expect(calculateMaxGrant(0, false)).toBe(WORK_GRANT_BASE_MAX_2026);
   });
 
-  it('הורה לילד אחד', () => {
-    const expected = WORK_GRANT_BASE_MAX_2026 + WORK_GRANT_PER_CHILD_2026;
-    expect(calculateMaxGrant(1, false)).toBe(expected);
+  it('הורה לילד אחד — אותה רמת שיא כמו 1-2 ילדים', () => {
+    expect(calculateMaxGrant(1, false)).toBe(WORK_GRANT_BASE_MAX_2026);
   });
 
-  it('הורה לשני ילדים', () => {
-    const expected = WORK_GRANT_BASE_MAX_2026 + 2 * WORK_GRANT_PER_CHILD_2026;
-    expect(calculateMaxGrant(2, false)).toBe(expected);
+  it('הורה לשני ילדים — אותה רמת שיא כמו ילד אחד', () => {
+    expect(calculateMaxGrant(2, false)).toBe(WORK_GRANT_BASE_MAX_2026);
   });
 
-  it('הורה יחיד עם ילד', () => {
-    const expected = WORK_GRANT_BASE_MAX_2026 + WORK_GRANT_PER_CHILD_2026 + WORK_GRANT_SINGLE_PARENT_BONUS_2026;
-    expect(calculateMaxGrant(1, true)).toBe(expected);
+  it('הורה ל-3 ילדים — רמת שיא מוגדלת', () => {
+    expect(calculateMaxGrant(3, false)).toBe(WORK_GRANT_LARGE_FAMILY_MAX_2026);
+  });
+
+  it('הורה יחיד עם ילד — מענק מוגדל 150%', () => {
+    expect(calculateMaxGrant(1, true)).toBe(Math.round(WORK_GRANT_BASE_MAX_2026 * 1.5));
   });
 
   it('ללא ילדים — הורה יחיד לא נחשב', () => {
@@ -151,8 +155,8 @@ describe('checkEligibility', () => {
   const baseInput: WorkGrantInput = {
     annualWorkIncome: 55_000,
     age: 35,
-    familyStatus: 'single',
-    numberOfChildren: 0,
+    familyStatus: 'married',
+    numberOfChildren: 1,
     isSingleParent: false,
     employmentType: 'salaried',
     monthsAsSalaried: 12,
@@ -166,14 +170,16 @@ describe('checkEligibility', () => {
     expect(result.conditions.every(c => c.met)).toBe(true);
   });
 
-  it('מתחת לגיל 23 ללא ילדים — לא זכאי', () => {
-    const result = checkEligibility({ ...baseInput, age: 22 });
+  it('גיל 35 ללא ילדים — לא זכאי (זכאות ללא ילדים רק מגיל 55)', () => {
+    const result = checkEligibility({ ...baseInput, numberOfChildren: 0 });
     expect(result.isEligible).toBe(false);
     expect(result.conditions.find(c => c.label === 'גיל מינימלי')?.met).toBe(false);
   });
 
-  it('גיל 21 עם ילדים — זכאי', () => {
-    const result = checkEligibility({ ...baseInput, age: 21, numberOfChildren: 1 });
+  it('גיל 21 הורה יחיד — זכאי; גיל 22 הורה לא-יחיד — לא זכאי', () => {
+    const notSingle = checkEligibility({ ...baseInput, age: 22, numberOfChildren: 1 });
+    expect(notSingle.conditions.find((c) => c.label === 'גיל מינימלי')?.met).toBe(false);
+    const result = checkEligibility({ ...baseInput, age: 21, numberOfChildren: 1, isSingleParent: true });
     expect(result.conditions.find((c) => c.label === 'גיל מינימלי')?.met).toBe(true);
     expect(result.isEligible).toBe(true);
   });
@@ -183,8 +189,8 @@ describe('checkEligibility', () => {
     expect(result.isEligible).toBe(false);
   });
 
-  it('הכנסה גבוהה מדי (יחיד) — לא זכאי', () => {
-    const result = checkEligibility({ ...baseInput, annualWorkIncome: 90_000 });
+  it('הכנסה גבוהה מדי (יחיד ללא ילדים, גיל 58) — לא זכאי', () => {
+    const result = checkEligibility({ ...baseInput, numberOfChildren: 0, age: 58, annualWorkIncome: 90_000 });
     expect(result.isEligible).toBe(false);
   });
 
@@ -218,13 +224,13 @@ describe('checkEligibility', () => {
     expect(result.isEligible).toBe(false);
   });
 
-  it('שכיר עם 4 חודשים בלבד — לא זכאי', () => {
+  it('שכיר עם 4 חודשים — עדיין זכאי (אין דרישת מינימום חודשים בחוק)', () => {
     const result = checkEligibility({ ...baseInput, monthsAsSalaried: 4 });
-    expect(result.isEligible).toBe(false);
+    expect(result.isEligible).toBe(true);
   });
 
-  it('גיל 58 ללא ילדים — זכאי (גמלאים)', () => {
-    const result = checkEligibility({ ...baseInput, age: 58 });
+  it('גיל 58 ללא ילדים — זכאי (55+)', () => {
+    const result = checkEligibility({ ...baseInput, numberOfChildren: 0, age: 58 });
     expect(result.isEligible).toBe(true);
   });
 
@@ -241,8 +247,8 @@ describe('calculateWorkGrant', () => {
   const baseInput: WorkGrantInput = {
     annualWorkIncome: 55_000,
     age: 35,
-    familyStatus: 'single',
-    numberOfChildren: 0,
+    familyStatus: 'married',
+    numberOfChildren: 1,
     isSingleParent: false,
     employmentType: 'salaried',
     monthsAsSalaried: 12,
@@ -288,11 +294,12 @@ describe('calculateWorkGrant', () => {
     expect(result.tier.direction).toBe('fall');
   });
 
-  it('פירוט ילדים — bonus תקין', () => {
-    const noKids = calculateWorkGrant({ ...baseInput, annualWorkIncome: WORK_GRANT_PEAK_INCOME_2026 });
-    const withKids = calculateWorkGrant({ ...baseInput, annualWorkIncome: WORK_GRANT_PEAK_INCOME_2026, numberOfChildren: 2 });
-    expect(withKids.breakdown.childrenBonus).toBeGreaterThan(0);
-    expect(withKids.annualGrant).toBeGreaterThan(noKids.annualGrant);
+  it('פירוט ילדים — תוספת רק ממשפחה גדולה (3+ ילדים)', () => {
+    const twoKids = calculateWorkGrant({ ...baseInput, annualWorkIncome: WORK_GRANT_PEAK_INCOME_2026, numberOfChildren: 2 });
+    const threeKids = calculateWorkGrant({ ...baseInput, annualWorkIncome: WORK_GRANT_PEAK_INCOME_2026, numberOfChildren: 3 });
+    expect(twoKids.breakdown.childrenBonus).toBe(0);
+    expect(threeKids.breakdown.childrenBonus).toBeGreaterThan(0);
+    expect(threeKids.annualGrant).toBeGreaterThan(twoKids.annualGrant);
   });
 
   it('הורה יחיד — bonus נוסף', () => {

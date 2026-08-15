@@ -29,11 +29,10 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 // Initial state
 // ─────────────────────────────────────────────
 
-const CAR_TYPE_LABELS: Record<CarType, string> = {
-  regular: 'רגיל (בנזין / דיזל)',
-  hybrid: 'היברידי (70% שווי)',
-  electric: 'חשמלי (50% שווי)',
-  used: 'משומש / ישן',
+const CAR_TYPE_LABELS: Partial<Record<CarType, string>> = {
+  regular: 'רגיל (בנזין / דיזל) — כולל משומש',
+  hybrid: 'היברידי (הפחתה 560 ₪)',
+  electric: 'חשמלי (הפחתה 1,350 ₪)',
 };
 
 const initialInput: CompanyCarInput = {
@@ -189,18 +188,7 @@ export function CompanyCarBenefitCalculator() {
                 )}
               </div>
 
-              {input.carType === 'used' && (
-                <Field label="גיל הרכב (שנים)" hint="לצורך חישוב מחיר אפקטיבי">
-                  <input
-                    type="number"
-                    min={0}
-                    max={20}
-                    value={input.carAgeYears ?? 0}
-                    onChange={(e) => update('carAgeYears', Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
-                  />
-                </Field>
-              )}
+              {/* רכב משומש מחויב לפי מחיר המחירון כחדש — אין שדה גיל */}
             </div>
           </Section>
 
@@ -343,10 +331,10 @@ export function CompanyCarBenefitCalculator() {
               <Row
                 label={
                   input.carType === 'electric'
-                    ? 'הנחה חשמלי (50%)'
+                    ? 'הפחתת רכב חשמלי'
                     : input.carType === 'hybrid'
-                    ? 'הנחה היברידי (30%)'
-                    : 'הפחתת פחת (רכב ישן)'
+                    ? 'הפחתת רכב היברידי'
+                    : 'הפחתה'
                 }
                 value={`-${formatCurrency(result.monthlyBenefitRaw - result.monthlyBenefitAfterDiscount)}`}
                 valueClass="text-emerald-800"
@@ -592,7 +580,7 @@ export function CompanyCarBenefitCalculator() {
                   <DetailRow label="שווי שימוש גולמי" value={formatCurrency(result.monthlyBenefitRaw)} />
                   {input.carType !== 'regular' && (
                     <DetailRow
-                      label={input.carType === 'electric' ? 'הנחה חשמלי' : input.carType === 'hybrid' ? 'הנחה היברידי' : 'הפחתת פחת'}
+                      label={input.carType === 'electric' ? 'הפחתת רכב חשמלי' : input.carType === 'hybrid' ? 'הפחתת רכב היברידי' : 'הפחתה'}
                       value={`-${formatCurrency(result.monthlyBenefitRaw - result.monthlyBenefitAfterDiscount)}`}
                       valueClass="text-emerald-800"
                     />

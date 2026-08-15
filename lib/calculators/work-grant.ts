@@ -7,28 +7,28 @@
  * מקור: רשות המסים, חוק מס הכנסה (ניכוי, זיכוי והחזר), תיקון 185
  * עדכון: 2026-05-15
  *
- * === טיירים ומדרגות 2026 ===
+ * === נוסחת 2026 (חודשית, לפי רשות המסים) ===
  *
- * יחיד ללא ילדים (גיל 23+, או 56-62 ללא ילדים):
- *   עלייה: 30,240 → 67,320 ₪
- *   שיא:   67,320 ₪ → מקסימום 5,506 ₪/שנה
- *   ירידה: 67,320 → 83,400 ₪
+ * החישוב נעשה על ההכנסה החודשית הממוצעת (הכנסה שנתית מעבודה ÷ חודשי עבודה):
  *
- * הורה לילד אחד:
- *   עלייה: 30,240 → 67,320 ₪
- *   שיא:   67,320 ₪ → מקסימום 7,056 ₪/שנה
- *   ירידה: 67,320 → 99,960 ₪
- *
- * הורה לשני ילדים:
- *   מקסימום: ~8,618 ₪/שנה
+ * הורה ל-1-2 ילדים, וכן בני 55+ (גם ללא ילדים):
+ *   עד 2,450 ₪ — אין מענק
+ *   2,450–4,260 ₪ — 150 ₪ + 24.15% מההכנסה שמעל 2,450
+ *   4,260–5,680 ₪ — שיא: 585 ₪/חודש
+ *   מעל 5,680 ₪ — ירידה של 34.5% מהעודף, עד אפס (~7,380 ₪)
  *
  * הורה ל-3+ ילדים:
- *   מקסימום: ~10,168 ₪/שנה
+ *   2,450–4,260 ₪ — 210 ₪ + 35.25% מההכנסה שמעל 2,450
+ *   4,260–5,680 ₪ — שיא: 855 ₪/חודש
+ *   מעל 5,680 ₪ — ירידה של 35.25% מהעודף, עד אפס (~8,100 ₪)
  *
- * הורה יחיד: תוספת ~3,000 ₪ על הסכום הבסיסי
+ * הורה יחיד — מענק מוגדל 150% וטווח הכנסה רחב:
+ *   1,510–11,190 ₪ (1-2 ילדים) / 1,510–13,660 ₪ (3+ ילדים).
+ *   שלב הביניים ממומש כאינטרפולציה ליניארית בין נקודות העיגון
+ *   המפורסמות (התחלה, רמת השיא ×1.5, נקודת האפס) — קירוב.
  *
- * === זכאות עצמאי ===
- * עצמאי עם לפחות 13 שבועות שעבד 50%+ זמן → זכאי
+ * הערה: "מענק עבודה נוסף" להורה לפעוט מתחת לגיל 3 (מענק פעוטות) והשפעת
+ * הכנסת בן/בת הזוג אינם כלולים במחשבון — מצוין למשתמש כהערה.
  *
  * מקורות:
  * - https://www.gov.il/he/departments/guides/earned_income_tax_credit
@@ -40,38 +40,51 @@
 // קבועים 2026
 // ====================================================================
 
-/** הכנסה מינימלית לזכאות (שכיר / עצמאי) */
-export const WORK_GRANT_MIN_INCOME_2026 = 30_240;
+/**
+ * פרמטרי הנוסחה החודשית 2026 (רשות המסים).
+ * standard — הורה ל-1-2 ילדים וכן בני 55+ (גם ללא ילדים).
+ * large — הורה ל-3+ ילדים.
+ */
+export const WORK_GRANT_MONTHLY_2026 = {
+  minIncome: 2_450,
+  riseEnd: 4_260,
+  plateauEnd: 5_680,
+  standard: { base: 150, riseRate: 0.2415, peak: 585, phaseOutRate: 0.345 },
+  large: { base: 210, riseRate: 0.3525, peak: 855, phaseOutRate: 0.3525 },
+  singleParent: {
+    minIncome: 1_510,
+    multiplier: 1.5,
+    maxIncomeUpTo2Children: 11_190,
+    maxIncome3Plus: 13_660,
+  },
+} as const;
 
-/** הכנסה שבה מגיעים לשיא המענק */
-export const WORK_GRANT_PEAK_INCOME_2026 = 67_320;
+/** הכנסה שנתית מינימלית לזכאות (2,450 ₪ × 12) */
+export const WORK_GRANT_MIN_INCOME_2026 = 29_400;
 
-/** הכנסה מקסימלית ליחיד ללא ילדים */
-export const WORK_GRANT_MAX_INCOME_SINGLE_2026 = 83_400;
+/** הכנסה שנתית שבה מתחיל טווח השיא (4,260 ₪ × 12) */
+export const WORK_GRANT_PEAK_INCOME_2026 = 51_120;
 
-/** הכנסה מקסימלית להורה */
-export const WORK_GRANT_MAX_INCOME_PARENT_2026 = 99_960;
+/** הכנסה שנתית מקסימלית להורה ל-1-2 ילדים ולבני 55+ ללא ילדים (~7,380 ₪ × 12) */
+export const WORK_GRANT_MAX_INCOME_SINGLE_2026 = 88_560;
 
-/** מענק בסיס מקסימלי ליחיד */
-export const WORK_GRANT_BASE_MAX_2026 = 5_506;
+/** הכנסה שנתית מקסימלית להורה ל-3+ ילדים (8,100 ₪ × 12) */
+export const WORK_GRANT_MAX_INCOME_PARENT_2026 = 97_200;
 
-/** תוספת בכל ילד */
-export const WORK_GRANT_PER_CHILD_2026 = 1_562;
+/** מענק שנתי מקסימלי — הורה ל-1-2 ילדים / בני 55+ (585 ₪ × 12) */
+export const WORK_GRANT_BASE_MAX_2026 = 7_020;
 
-/** תוספת הורה יחיד */
-export const WORK_GRANT_SINGLE_PARENT_BONUS_2026 = 2_950;
+/** מענק שנתי מקסימלי — הורה ל-3+ ילדים (855 ₪ × 12) */
+export const WORK_GRANT_LARGE_FAMILY_MAX_2026 = 10_260;
 
-/** גיל מינימלי ללא ילדים */
-export const WORK_GRANT_MIN_AGE_NO_CHILDREN = 23;
+/** גיל מינימלי ללא ילדים — זכאות ללא ילדים קיימת רק מגיל 55 */
+export const WORK_GRANT_MIN_AGE_NO_CHILDREN = 55;
 
-/** גיל מינימלי עם ילדים */
-export const WORK_GRANT_MIN_AGE_WITH_CHILDREN = 21;
+/** גיל מינימלי להורה עם ילדים */
+export const WORK_GRANT_MIN_AGE_WITH_CHILDREN = 23;
 
-/** גיל מינימלי לגמלאים ללא ילדים */
-export const WORK_GRANT_MIN_AGE_SENIORS = 56;
-
-/** גיל מקסימלי לגמלאים ללא ילדים (עד פרישה) */
-export const WORK_GRANT_MAX_AGE_SENIORS = 62;
+/** גיל מינימלי להורה יחיד */
+export const WORK_GRANT_MIN_AGE_SINGLE_PARENT = 21;
 
 /** חודשי עבודה מינימליים לשכיר */
 export const WORK_GRANT_MIN_MONTHS_SALARIED = 6;
@@ -82,15 +95,17 @@ export const WORK_GRANT_MIN_WEEKS_SELF_EMPLOYED = 13;
 /** שנת מס (לגרף השוואתי) */
 export const WORK_GRANT_YEAR = 2026;
 
-// 2024 data (for comparison)
+/**
+ * נתוני 2024 להשוואה גרפית בלבד — קירוב: פרמטרי 2026 בהפחתת ~4%
+ * (עדכון המדד בין השנים). אינם משמשים לחישוב המענק בפועל.
+ */
 export const WORK_GRANT_2024 = {
-  minIncome: 29_208,
-  peakIncome: 65_076,
-  maxIncomeSingle: 80_604,
-  maxIncomeParent: 96_612,
-  baseMax: 5_022,
-  perChild: 1_424,
-  singleParentBonus: 2_792,
+  minIncome: 28_224,
+  peakIncome: 49_075,
+  maxIncomeSingle: 85_018,
+  maxIncomeParent: 93_312,
+  standardPeakMonthly: 562,
+  largePeakMonthly: 821,
 };
 
 // ====================================================================
@@ -221,17 +236,62 @@ export function calculateMaxGrant(
   isSingleParent: boolean,
   year: 2024 | 2026 = 2026,
 ): number {
-  const data = year === 2024 ? WORK_GRANT_2024 : {
-    baseMax: WORK_GRANT_BASE_MAX_2026,
-    perChild: WORK_GRANT_PER_CHILD_2026,
-    singleParentBonus: WORK_GRANT_SINGLE_PARENT_BONUS_2026,
-  };
+  const children = Math.max(0, numberOfChildren);
+  const peakMonthly =
+    year === 2024
+      ? children >= 3
+        ? WORK_GRANT_2024.largePeakMonthly
+        : WORK_GRANT_2024.standardPeakMonthly
+      : children >= 3
+        ? WORK_GRANT_MONTHLY_2026.large.peak
+        : WORK_GRANT_MONTHLY_2026.standard.peak;
 
-  const children = Math.max(0, Math.min(5, numberOfChildren));
-  let max = data.baseMax;
-  max += children * data.perChild;
-  if (isSingleParent && children > 0) max += data.singleParentBonus;
-  return max;
+  const multiplier =
+    isSingleParent && children > 0 ? WORK_GRANT_MONTHLY_2026.singleParent.multiplier : 1;
+
+  return Math.round(peakMonthly * multiplier * 12);
+}
+
+/**
+ * מענק חודשי לפי ההכנסה החודשית הממוצעת — הנוסחה הרשמית של רשות המסים 2026.
+ */
+export function calculateMonthlyGrant2026(
+  monthlyIncome: number,
+  numberOfChildren: number,
+  isSingleParent: boolean,
+): number {
+  const cfg = WORK_GRANT_MONTHLY_2026;
+  const isLarge = numberOfChildren >= 3;
+  const scale = isLarge ? cfg.large : cfg.standard;
+
+  if (isSingleParent && numberOfChildren > 0) {
+    // הורה יחיד: מענק מוגדל 150% וטווח רחב — אינטרפולציה בין נקודות העיגון
+    // המפורסמות: תחילת זכאות 1,510 ₪, רמת שיא 4,260–5,680 ₪ בגובה ×1.5,
+    // ואפס בתקרה (11,190 / 13,660 ₪).
+    const sp = cfg.singleParent;
+    const peak = scale.peak * sp.multiplier;
+    const maxIncome = isLarge ? sp.maxIncome3Plus : sp.maxIncomeUpTo2Children;
+
+    if (monthlyIncome <= sp.minIncome || monthlyIncome >= maxIncome) return 0;
+    if (monthlyIncome < cfg.riseEnd) {
+      return (peak * (monthlyIncome - sp.minIncome)) / (cfg.riseEnd - sp.minIncome);
+    }
+    if (monthlyIncome <= cfg.plateauEnd) return peak;
+    return Math.max(
+      0,
+      (peak * (maxIncome - monthlyIncome)) / (maxIncome - cfg.plateauEnd),
+    );
+  }
+
+  if (monthlyIncome <= cfg.minIncome) return 0;
+  if (monthlyIncome < cfg.riseEnd) {
+    return Math.min(
+      scale.peak,
+      scale.base + scale.riseRate * (monthlyIncome - cfg.minIncome),
+    );
+  }
+  if (monthlyIncome <= cfg.plateauEnd) return scale.peak;
+  return Math.max(0, scale.peak - scale.phaseOutRate * (monthlyIncome - cfg.plateauEnd));
 }
 
 /**
@@ -242,37 +302,21 @@ export function calculateRawGrant(
   numberOfChildren: number,
   isSingleParent: boolean,
   year: 2024 | 2026 = 2026,
+  workMonths = 12,
 ): number {
-  const data = year === 2026 ? {
-    minIncome: WORK_GRANT_MIN_INCOME_2026,
-    peakIncome: WORK_GRANT_PEAK_INCOME_2026,
-    maxIncomeSingle: WORK_GRANT_MAX_INCOME_SINGLE_2026,
-    maxIncomeParent: WORK_GRANT_MAX_INCOME_PARENT_2026,
-  } : {
-    minIncome: WORK_GRANT_2024.minIncome,
-    peakIncome: WORK_GRANT_2024.peakIncome,
-    maxIncomeSingle: WORK_GRANT_2024.maxIncomeSingle,
-    maxIncomeParent: WORK_GRANT_2024.maxIncomeParent,
-  };
+  const months = Math.min(12, Math.max(1, Math.round(workMonths)));
+  const monthlyIncome = annualIncome / months;
 
-  const maxIncome = numberOfChildren > 0 ? data.maxIncomeParent : data.maxIncomeSingle;
-  const maxGrant = calculateMaxGrant(numberOfChildren, isSingleParent, year);
+  let monthlyGrant = calculateMonthlyGrant2026(
+    monthlyIncome,
+    numberOfChildren,
+    isSingleParent,
+  );
 
-  if (annualIncome < data.minIncome || annualIncome > maxIncome) return 0;
+  // 2024 — קירוב להשוואה גרפית בלבד: הפחתת ~4% מערכי 2026
+  if (year === 2024) monthlyGrant *= 0.96;
 
-  let grant: number;
-
-  if (annualIncome <= data.peakIncome) {
-    // שלב עלייה לינארי
-    const ratio = (annualIncome - data.minIncome) / (data.peakIncome - data.minIncome);
-    grant = maxGrant * ratio;
-  } else {
-    // שלב ירידה לינארי
-    const ratio = (maxIncome - annualIncome) / (maxIncome - data.peakIncome);
-    grant = maxGrant * ratio;
-  }
-
-  return Math.max(0, Math.min(maxGrant, grant));
+  return Math.round(monthlyGrant * months);
 }
 
 /**
@@ -340,33 +384,60 @@ export function getYearComparison(): YearComparison[] {
   });
 }
 
+/**
+ * טווח ההכנסה השנתית המזכה לפי הקטגוריה (ילדים / הורה יחיד).
+ */
+export function getAnnualIncomeWindow(
+  numberOfChildren: number,
+  isSingleParent: boolean,
+): { lower: number; upper: number } {
+  const cfg = WORK_GRANT_MONTHLY_2026;
+  if (isSingleParent && numberOfChildren > 0) {
+    const upperMonthly =
+      numberOfChildren >= 3
+        ? cfg.singleParent.maxIncome3Plus
+        : cfg.singleParent.maxIncomeUpTo2Children;
+    return { lower: cfg.singleParent.minIncome * 12, upper: upperMonthly * 12 };
+  }
+  return {
+    lower: WORK_GRANT_MIN_INCOME_2026,
+    upper:
+      numberOfChildren >= 3
+        ? WORK_GRANT_MAX_INCOME_PARENT_2026
+        : WORK_GRANT_MAX_INCOME_SINGLE_2026,
+  };
+}
+
 // ====================================================================
 // פונקציית בדיקת זכאות
 // ====================================================================
 
 export function checkEligibility(input: WorkGrantInput): WorkGrantEligibility {
   const hasChildren = input.numberOfChildren > 0;
-  const minAge = hasChildren ? WORK_GRANT_MIN_AGE_WITH_CHILDREN : WORK_GRANT_MIN_AGE_NO_CHILDREN;
-  const isSenior = input.age >= WORK_GRANT_MIN_AGE_SENIORS && input.age <= WORK_GRANT_MAX_AGE_SENIORS;
+  const minAge = hasChildren
+    ? input.isSingleParent
+      ? WORK_GRANT_MIN_AGE_SINGLE_PARENT
+      : WORK_GRANT_MIN_AGE_WITH_CHILDREN
+    : WORK_GRANT_MIN_AGE_NO_CHILDREN;
 
-  const ageOk = input.age >= minAge || isSenior;
+  const ageOk = input.age >= minAge;
   const residentOk = input.isIsraeliResident;
 
-  const upperThreshold = hasChildren
-    ? WORK_GRANT_MAX_INCOME_PARENT_2026
-    : WORK_GRANT_MAX_INCOME_SINGLE_2026;
+  const window = getAnnualIncomeWindow(input.numberOfChildren, input.isSingleParent);
+  const upperThreshold = window.upper;
 
   const incomeRangeOk =
-    input.annualWorkIncome >= WORK_GRANT_MIN_INCOME_2026 &&
+    input.annualWorkIncome >= window.lower &&
     input.annualWorkIncome <= upperThreshold;
 
-  // תנאי עבודה
+  // תנאי עבודה — אינפורמטיבי בלבד: אין בחוק דרישת מינימום חודשי עבודה לשכיר;
+  // מספר החודשים משמש לחישוב ההכנסה החודשית הממוצעת.
   let workConditionOk = false;
   let workNote = '';
   if (input.employmentType === 'salaried' || input.employmentType === 'both') {
-    if (input.monthsAsSalaried >= WORK_GRANT_MIN_MONTHS_SALARIED) {
+    if (input.monthsAsSalaried >= 1) {
       workConditionOk = true;
-      workNote = `עבדת ${input.monthsAsSalaried} חודשים כשכיר (נדרש: ${WORK_GRANT_MIN_MONTHS_SALARIED}+)`;
+      workNote = `עבדת ${input.monthsAsSalaried} חודשים כשכיר — ההכנסה הממוצעת מחושבת לפי חודשי העבודה בפועל`;
     }
   }
   if (input.employmentType === 'self_employed' || input.employmentType === 'both') {
@@ -382,13 +453,15 @@ export function checkEligibility(input: WorkGrantInput): WorkGrantEligibility {
   // תנאי הכנסה
   const incomeNote = incomeRangeOk
     ? `הכנסה ${input.annualWorkIncome.toLocaleString('he-IL')} ₪ — בתוך טווח הזכאות`
-    : input.annualWorkIncome < WORK_GRANT_MIN_INCOME_2026
-      ? `הכנסה נמוכה מהסף (${WORK_GRANT_MIN_INCOME_2026.toLocaleString('he-IL')} ₪)`
+    : input.annualWorkIncome < window.lower
+      ? `הכנסה נמוכה מהסף (${window.lower.toLocaleString('he-IL')} ₪)`
       : `הכנסה גבוהה מהתקרה (${upperThreshold.toLocaleString('he-IL')} ₪)`;
 
   const ageNote = ageOk
-    ? `גיל ${input.age} — עומד בתנאי (${minAge}+${isSenior ? ' או 56-62' : ''})`
-    : `גיל ${input.age} — נדרש: ${minAge}+${!hasChildren ? ' ללא ילדים, או 56-62' : ''}`;
+    ? `גיל ${input.age} — עומד בתנאי (${minAge}+)`
+    : hasChildren
+      ? `גיל ${input.age} — נדרש: ${minAge}+ להורה`
+      : `גיל ${input.age} — ללא ילדים הזכאות מתחילה בגיל ${WORK_GRANT_MIN_AGE_NO_CHILDREN}`;
 
   const conditions: EligibilityCondition[] = [
     {
@@ -464,10 +537,9 @@ export function calculateWorkGrant(input: WorkGrantInput): WorkGrantResult {
   const eligibility = checkEligibility(input);
   const hasChildren = input.numberOfChildren > 0;
 
-  const lowerThreshold = WORK_GRANT_MIN_INCOME_2026;
-  const upperThreshold = hasChildren
-    ? WORK_GRANT_MAX_INCOME_PARENT_2026
-    : WORK_GRANT_MAX_INCOME_SINGLE_2026;
+  const window = getAnnualIncomeWindow(input.numberOfChildren, input.isSingleParent);
+  const lowerThreshold = window.lower;
+  const upperThreshold = window.upper;
 
   // חישוב מקסימום
   const maxPossibleGrant = calculateMaxGrant(
@@ -555,9 +627,10 @@ export function calculateWorkGrant(input: WorkGrantInput): WorkGrantResult {
     tips.push('הגשה: אתר רשות המסים → "מענק עבודה" → "הגשת בקשה". התביעה מוגשת אחרי תום שנת המס; הגשה עד 30.6 מזכה בתשלום ראשון ב-15.7.');
   }
 
-  if (input.numberOfChildren === 0 && input.age >= 21 && input.age < 23) {
-    tips.push('עם ילד אחד, הזכאות מתחילה מגיל 21. שקול זאת אם רלוונטי.');
+  if (input.numberOfChildren === 0 && input.age < WORK_GRANT_MIN_AGE_NO_CHILDREN) {
+    tips.push('ללא ילדים הזכאות מתחילה רק בגיל 55. הורה לילד זכאי מגיל 23 (הורה יחיד — מגיל 21).');
   }
+  tips.push('שימו לב: "מענק עבודה נוסף" להורה לפעוט מתחת לגיל 3 (מענק פעוטות) והשפעת הכנסת בן/בת הזוג אינם כלולים בחישוב — בדקו בסימולטור רשות המסים.');
 
   return {
     isEligible: eligibility.isEligible,

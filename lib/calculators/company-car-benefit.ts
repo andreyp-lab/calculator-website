@@ -173,9 +173,6 @@ export const HYBRID_USAGE_REDUCTION = 560;
 /** עלות פחת+ביטוח לרכב פרטי (₪/ק"מ) — אומדן להשוואה בלבד. */
 const PERSONAL_CAR_DEPRECIATION_INSURANCE_PER_KM = 0.5;
 
-/** שיעור פחת שנתי לרכב בשימוש (לחישוב מחיר מקורי אפקטיבי) */
-const ANNUAL_DEPRECIATION_RATE = 0.12;
-
 // ─────────────────────────────────────────────
 // Core Functions
 // ─────────────────────────────────────────────
@@ -201,21 +198,15 @@ export function getCarGroupInfo(group: CarGroup): CarGroupInfo {
 }
 
 /**
- * מחשב את מחיר הרכב האפקטיבי לצורך שווי שימוש (לרכב משומש)
- * רכב ישן: המחיר הקטלוגי המקורי מופחת פחת
+ * שווי שימוש לרכב משומש (רכב שנרשם מ-2010) מחושב לפי המחיר הקטלוגי של הדגם
+ * כחדש — הדין אינו מכיר בהפחתת פחת בגין גיל הרכב. הפונקציה נשמרת לתאימות
+ * לאחור ומחזירה את המחיר ללא שינוי.
  */
 export function calculateEffectivePriceForUsed(
   catalogPrice: number,
-  ageYears: number,
+  _ageYears: number,
 ): number {
-  if (ageYears <= 0) return catalogPrice;
-  // פחת: שנה 1 – 22%, שנים הבאות – 12% מהשאר
-  let price = catalogPrice;
-  for (let y = 0; y < ageYears; y++) {
-    const rate = y === 0 ? 0.22 : ANNUAL_DEPRECIATION_RATE;
-    price = price * (1 - rate);
-  }
-  return Math.max(price, catalogPrice * 0.2); // מינימום 20% מהמחיר המקורי
+  return catalogPrice;
 }
 
 /**

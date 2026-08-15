@@ -49,13 +49,14 @@ import {
 // קבועים מקומיים
 // ============================================================
 
-/** סף המדרגה המופחתת בב"ל (60% מהשכר הממוצע) — חודשי */
-const BL_REDUCED_THRESHOLD_MONTHLY = 7_703;
+/** סף המדרגה המופחתת בב"ל (60% מהשכר הממוצע) — חודשי, ממקור האמת */
+const BL_REDUCED_THRESHOLD_MONTHLY =
+  SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedThresholdMonthly; // 7,703
 /** תקרת ב"ל משותפת (שכיר+עצמאי) — חודשי (מאומת: ה.1) */
 const BL_MAX_THRESHOLD_MONTHLY =
   SOCIAL_SECURITY_SELF_EMPLOYED_2026.maxThresholdMonthly; // 51,910
 
-const BL_REDUCED_RATE = SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total; // 6.1%
+const BL_REDUCED_RATE = SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.total; // 7.7%
 const BL_FULL_RATE = SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.total; // 18%
 
 /** שיעור דמי הב"ל המוכר כניכוי מההכנסה החייבת (סעיף 47א לפקודה) */
@@ -173,6 +174,7 @@ export function calculateSelfEmployedBituachWithSalary(
   annualSelfEmployedIncome: number,
 ): CombinedIncomeResult['bituachLeumiBreakdown'] & {
   total: number;
+  nationalInsuranceOnly: number;
   capReached: boolean;
 } {
   const salary = Math.max(0, monthlyGrossSalary);
@@ -196,6 +198,11 @@ export function calculateSelfEmployedBituachWithSalary(
   const reducedAmountMonthly = reducedMonthly * BL_REDUCED_RATE;
   const fullAmountMonthly = fullMonthly * BL_FULL_RATE;
 
+  // רכיב דמי הביטוח הלאומי בלבד (ללא דמי בריאות) — לצורך ניכוי סעיף 47א
+  const niOnlyMonthly =
+    reducedMonthly * SOCIAL_SECURITY_SELF_EMPLOYED_2026.reducedRate.nationalInsurance +
+    fullMonthly * SOCIAL_SECURITY_SELF_EMPLOYED_2026.fullRate.nationalInsurance;
+
   return {
     reducedTierIncome: reducedMonthly * 12,
     reducedTierAmount: reducedAmountMonthly * 12,
@@ -203,6 +210,7 @@ export function calculateSelfEmployedBituachWithSalary(
     fullTierAmount: fullAmountMonthly * 12,
     exemptIncome: exemptMonthly * 12,
     total: (reducedAmountMonthly + fullAmountMonthly) * 12,
+    nationalInsuranceOnly: niOnlyMonthly * 12,
     capReached,
   };
 }
@@ -226,10 +234,10 @@ export function calculateCombinedIncome(
     annualSE,
   );
 
-  // ניכוי 52% מדמי הב"ל מההכנסה החייבת (סעיף 47א לפקודה).
+  // ניכוי 52% לפי סעיף 47א חל רק על רכיב דמי הביטוח הלאומי — לא על דמי הבריאות.
   // הניכוי מיוחס להכנסה הצדדית — לכן רק ההכנסה המשולבת מופחתת בו,
   // והשכר בלבד (taxOnSalaryOnly) נשאר ללא שינוי.
-  const bituachLeumiDeduction = bl.total * BL_DEDUCTIBLE;
+  const bituachLeumiDeduction = bl.nationalInsuranceOnly * BL_DEDUCTIBLE;
 
   // --- מס הכנסה: ההכנסה העצמאית יושבת על השכר ---
   const taxOnSalaryOnly = calculateBracketTax(annualSalary);

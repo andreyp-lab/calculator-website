@@ -19,38 +19,38 @@ describe('getVacationDaysByTenure', () => {
     it('שנה 4 — 12 ימים', () => {
       expect(getVacationDaysByTenure(4, 5)).toBe(12);
     });
-    it('שנה 5 — 15 ימים', () => {
-      expect(getVacationDaysByTenure(5, 5)).toBe(15);
+    it('שנה 5 — 12 ימים', () => {
+      expect(getVacationDaysByTenure(5, 5)).toBe(12);
     });
-    it('שנה 6 — 16 ימים', () => {
-      expect(getVacationDaysByTenure(6, 5)).toBe(16);
+    it('שנה 6 — 14 ימים', () => {
+      expect(getVacationDaysByTenure(6, 5)).toBe(14);
     });
-    it('שנה 7 — 17 ימים', () => {
-      expect(getVacationDaysByTenure(7, 5)).toBe(17);
+    it('שנה 7 — 15 ימים', () => {
+      expect(getVacationDaysByTenure(7, 5)).toBe(15);
     });
-    it('שנה 8 — 18 ימים', () => {
-      expect(getVacationDaysByTenure(8, 5)).toBe(18);
+    it('שנה 8 — 16 ימים', () => {
+      expect(getVacationDaysByTenure(8, 5)).toBe(16);
     });
-    it('שנה 9 — 18 ימים', () => {
-      expect(getVacationDaysByTenure(9, 5)).toBe(18);
+    it('שנה 9 — 17 ימים', () => {
+      expect(getVacationDaysByTenure(9, 5)).toBe(17);
     });
-    it('שנה 10 — 19 ימים', () => {
-      expect(getVacationDaysByTenure(10, 5)).toBe(19);
+    it('שנה 10 — 18 ימים', () => {
+      expect(getVacationDaysByTenure(10, 5)).toBe(18);
     });
-    it('שנה 11 — 20 ימים', () => {
-      expect(getVacationDaysByTenure(11, 5)).toBe(20);
+    it('שנה 11 — 19 ימים', () => {
+      expect(getVacationDaysByTenure(11, 5)).toBe(19);
     });
-    it('שנה 12 — 21 ימים', () => {
-      expect(getVacationDaysByTenure(12, 5)).toBe(21);
+    it('שנה 12 — 20 ימים', () => {
+      expect(getVacationDaysByTenure(12, 5)).toBe(20);
     });
-    it('שנה 13 — 22 ימים', () => {
-      expect(getVacationDaysByTenure(13, 5)).toBe(22);
+    it('שנה 13 — 20 ימים', () => {
+      expect(getVacationDaysByTenure(13, 5)).toBe(20);
     });
-    it('שנה 14 — 23 ימים', () => {
-      expect(getVacationDaysByTenure(14, 5)).toBe(23);
+    it('שנה 14 — 20 ימים', () => {
+      expect(getVacationDaysByTenure(14, 5)).toBe(20);
     });
-    it('שנה 20 — 23 ימים (לא עולה מעל 23)', () => {
-      expect(getVacationDaysByTenure(20, 5)).toBe(23);
+    it('שנה 20 — 20 ימים (לא עולה מעל 20)', () => {
+      expect(getVacationDaysByTenure(20, 5)).toBe(20);
     });
     it('שנה 0 — 12 ימים (מינימום)', () => {
       expect(getVacationDaysByTenure(0, 5)).toBe(12);
@@ -64,35 +64,35 @@ describe('getVacationDaysByTenure', () => {
     it('שנה 4 — 14 ימים', () => {
       expect(getVacationDaysByTenure(4, 6)).toBe(14);
     });
-    it('שנה 5 — 16 ימים', () => {
-      expect(getVacationDaysByTenure(5, 6)).toBe(16);
+    it('שנה 5 — 14 ימים', () => {
+      expect(getVacationDaysByTenure(5, 6)).toBe(14);
     });
-    it('שנה 6 — 18 ימים', () => {
-      expect(getVacationDaysByTenure(6, 6)).toBe(18);
+    it('שנה 6 — 16 ימים', () => {
+      expect(getVacationDaysByTenure(6, 6)).toBe(16);
     });
-    it('שנה 7 — 21 ימים', () => {
-      expect(getVacationDaysByTenure(7, 6)).toBe(21);
+    it('שנה 7 — 18 ימים', () => {
+      expect(getVacationDaysByTenure(7, 6)).toBe(18);
     });
-    it('שנה 8 — 22 ימים', () => {
-      expect(getVacationDaysByTenure(8, 6)).toBe(22);
+    it('שנה 8 — 19 ימים', () => {
+      expect(getVacationDaysByTenure(8, 6)).toBe(19);
     });
-    it('שנה 10 — 22 ימים', () => {
-      expect(getVacationDaysByTenure(10, 6)).toBe(22);
+    it('שנה 10 — 21 ימים', () => {
+      expect(getVacationDaysByTenure(10, 6)).toBe(21);
     });
-    it('שנה 11 — 23 ימים', () => {
-      expect(getVacationDaysByTenure(11, 6)).toBe(23);
+    it('שנה 11 — 22 ימים', () => {
+      expect(getVacationDaysByTenure(11, 6)).toBe(22);
     });
-    it('שנה 12 — 24 ימים', () => {
-      expect(getVacationDaysByTenure(12, 6)).toBe(24);
+    it('שנה 12 — 23 ימים', () => {
+      expect(getVacationDaysByTenure(12, 6)).toBe(23);
     });
-    it('שנה 13 — 26 ימים', () => {
-      expect(getVacationDaysByTenure(13, 6)).toBe(26);
+    it('שנה 13 — 24 ימים', () => {
+      expect(getVacationDaysByTenure(13, 6)).toBe(24);
     });
-    it('שנה 14 — 28 ימים', () => {
-      expect(getVacationDaysByTenure(14, 6)).toBe(28);
+    it('שנה 14 — 24 ימים', () => {
+      expect(getVacationDaysByTenure(14, 6)).toBe(24);
     });
-    it('שנה 30 — 28 ימים (מקסימום)', () => {
-      expect(getVacationDaysByTenure(30, 6)).toBe(28);
+    it('שנה 30 — 24 ימים (מקסימום)', () => {
+      expect(getVacationDaysByTenure(30, 6)).toBe(24);
     });
   });
 });
@@ -134,9 +134,9 @@ describe('calculateAnnualLeaveFull', () => {
       daysUsedLastYear: 0,
       isTermination: false,
     });
-    expect(r.annualEntitlement).toBe(15);
+    expect(r.annualEntitlement).toBe(12);
     expect(r.dailyWageValue).toBeCloseTo(15000 / 21.67, 0);
-    expect(r.remainingDays).toBe(15);
+    expect(r.remainingDays).toBe(12);
   });
 
   it('משרה 50% — זכאות מחצית', () => {
@@ -179,7 +179,7 @@ describe('calculateAnnualLeaveFull', () => {
       daysUsedLastYear: 0,
       isTermination: false,
     });
-    expect(r.remainingDays).toBe(10); // 15 - 5
+    expect(r.remainingDays).toBe(7); // 12 - 5
   });
 
   it('סיום עבודה — פדיון מחושב', () => {
@@ -269,10 +269,10 @@ describe('calculateAccumulation', () => {
       totalDaysUsed: 0,
       partTimePercent: 100,
     });
-    // 12+12+12+12+15 = 63
-    expect(r.totalAccumulated).toBeCloseTo(63, 0);
+    // 12+12+12+12+12 = 60
+    expect(r.totalAccumulated).toBeCloseTo(60, 0);
     expect(r.totalUsed).toBe(0);
-    expect(r.balance).toBeCloseTo(63, 0);
+    expect(r.balance).toBeCloseTo(60, 0);
   });
 
   it('3 שנות ניצול — מפחית מהיתרה', () => {
@@ -320,9 +320,9 @@ describe('calculatePartialYear', () => {
       workDaysPerWeek: 5,
       partTimePercent: 100,
     });
-    // 15 × 6/12 = 7.5
-    expect(r.proRatedEntitlement).toBeCloseTo(7.5, 1);
-    expect(r.fullYearEntitlement).toBe(15);
+    // 12 × 6/12 = 6
+    expect(r.proRatedEntitlement).toBeCloseTo(6, 1);
+    expect(r.fullYearEntitlement).toBe(12);
   });
 
   it('12 חודשים — שנה מלאה', () => {
@@ -353,8 +353,8 @@ describe('calculatePartialYear', () => {
       workDaysPerWeek: 6,
       partTimePercent: 100,
     });
-    expect(r.fullYearEntitlement).toBe(28);
-    expect(r.proRatedEntitlement).toBe(28);
+    expect(r.fullYearEntitlement).toBe(24);
+    expect(r.proRatedEntitlement).toBe(24);
   });
 
   it('breakown string מכיל מידע מהחישוב', () => {
