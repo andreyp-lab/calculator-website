@@ -6,8 +6,10 @@ import { usePathname } from 'next/navigation';
  * באנר קידום קורסי FinSchool — מוצג רק בעמודי מחשבונים רלוונטיים.
  *
  * מיפוי:
- * - עמודי בעלי עסקים (חברה, דיבידנד, עלות מעסיק) → קורס "מנהל הכספים" (CFO)
- * - שאר עמודי /self-employed → קורס "הכסף של העסק בידיים שלך" (CPA)
+ * - עמודי בעלי עסקים (חברה, דיבידנד, עלות מעסיק) וכלי ניהול עסקיים
+ *   (/tools, /business) → קורס "מנהל הכספים" (CFO)
+ * - שאר עמודי /self-employed ועמודי מס אישי (/personal-tax) → קורס
+ *   "הכסף של העסק בידיים שלך" (CPA)
  * - בכל עמוד אחר הרכיב לא מרונדר כלל.
  *
  * עקרון מסר (לפי קו הקרייטיבים של FinSchool): eyebrow → headline → support → CTA.
@@ -18,6 +20,12 @@ const CFO_PATHS = [
   '/self-employed/dividend-vs-salary',
   '/self-employed/employer-cost',
 ];
+
+/** קטגוריות שקהל היעד שלהן הוא בעלי עסקים → קורס CFO */
+const CFO_PREFIXES = ['/tools/', '/business/'];
+
+/** קטגוריות שקהל היעד שלהן הוא עצמאים/יחידים → קורס CPA */
+const CPA_PREFIXES = ['/self-employed/', '/personal-tax/'];
 
 const COURSES = {
   cpa: {
@@ -42,9 +50,15 @@ const COURSES = {
 export function CourseCTA() {
   const pathname = usePathname();
 
-  if (!pathname?.startsWith('/self-employed/')) return null;
+  if (!pathname) return null;
 
-  const course = CFO_PATHS.includes(pathname) ? COURSES.cfo : COURSES.cpa;
+  const isCfo =
+    CFO_PATHS.includes(pathname) || CFO_PREFIXES.some((p) => pathname.startsWith(p));
+  const isCpa = !isCfo && CPA_PREFIXES.some((p) => pathname.startsWith(p));
+
+  if (!isCfo && !isCpa) return null;
+
+  const course = isCfo ? COURSES.cfo : COURSES.cpa;
 
   return (
     <aside

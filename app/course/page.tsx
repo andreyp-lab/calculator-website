@@ -130,7 +130,7 @@ const COURSES: Course[] = [
     price: '397 ₪ מחיר השקה (עולה ל-500 ₪)',
     priceValue: '397',
     social: '100+ בוגרים · דירוג 4.9',
-    baseUrl: 'https://claudecourse.profitmargin.co.il/',
+    baseUrl: 'https://claudecourse.co.il/course',
     campaign: 'ai-course',
     schemaDescription:
       'קורס דיגיטלי לאנשי כספים: רתימת Claude AI לעבודה הפיננסית היומית — דוחות, מצגות, אוטומציה ודאשבורדים. 12 מודולים מהבסיס ועד צוותי סוכנים, כולל 10 Plugins & Skills מוכנים. 8 שעות תוכן.',
