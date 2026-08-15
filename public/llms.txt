@@ -13,6 +13,7 @@
 
 ### מחשבונים פיננסיים - מיסוי ושכר
 - [מחשבון שכר נטו/ברוטו 2026](https://cheshbonai.co.il/personal-tax/salary-net-gross)
+- עמודי תשובה "שכר X ברוטו כמה נטו" לכל סכום שכיח (6,500–40,000 ₪, מחושבים ממנוע המס): תבנית https://cheshbonai.co.il/salary/12000 (וכן 7000, 8500, 15000, 20000 וכו')
 - [מחשבון מס הכנסה לשכיר 2026](https://cheshbonai.co.il/personal-tax/income-tax)
 - [מחשבון החזר מס](https://cheshbonai.co.il/personal-tax/tax-refund)
 - [מחשבון נקודות זיכוי](https://cheshbonai.co.il/personal-tax/tax-credits)
@@ -167,6 +168,9 @@
 - [מילון מונחים](https://cheshbonai.co.il/glossary) - 82 מונחים פיננסיים
 - [השוואה: שכיר vs. עצמאי](https://cheshbonai.co.il/compare/employee-vs-self-employed)
 - [השוואה: שכירות vs. קנייה](https://cheshbonai.co.il/compare/rent-vs-buy)
+- [השוואה: חברה בע"מ vs. עוסק מורשה](https://cheshbonai.co.il/compare/company-vs-osek-murshe)
+- [השוואה: ליסינג מימוני vs. תפעולי](https://cheshbonai.co.il/compare/leasing-mimuni-vs-tifuli)
+- [השוואה: קרן השתלמות vs. פיקדון בנקאי](https://cheshbonai.co.il/compare/keren-hishtalmut-vs-pikadon)
 - [מדיניות פרטיות](https://cheshbonai.co.il/privacy)
 - [תנאי שימוש](https://cheshbonai.co.il/terms)
 - [נגישות](https://cheshbonai.co.il/accessibility)
