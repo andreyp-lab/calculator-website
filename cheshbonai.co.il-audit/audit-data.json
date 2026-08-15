@@ -1,172 +1,159 @@
 {
   "summary": {
-    "health_score": 76,
-    "business_type": "Publisher / Tools — Hebrew financial calculators (YMYL), funnel to FinSchool courses",
+    "health_score": 82,
+    "business_type": "Publisher / Tools — Hebrew financial calculators (YMYL) with a digital-course funnel",
     "top_findings": [
-      "The /business cluster (21 pages) including its hub is still 'URL is unknown to Google' despite the sitemap being resubmitted and read on 26.7.2026",
-      "Mobile Lighthouse performance 66 with LCP 6.2s, against desktop 97 with LCP 1.2s",
-      "gtag.js is the single heaviest asset on the site at 167KB (22% of the 748KB page), 70KB unused, installed 26.7.2026",
-      "The 'eligibility check' intent cluster draws 261 impressions at positions 30-58 with zero clicks and has no dedicated URL",
-      "E-EA-T blocker open since 1.7: CPA license number and LinkedIn missing from Person sameAs"
+      "5.05 MB hero PNG is the LCP element on both course sales pages — mobile LCP 6.5s, Google's 'poor' band",
+      "CourseCTA is gated to /self-employed/* and hidden from ~10,450 impressions of top-traffic pages",
+      "Course-intent search demand is effectively zero (7 impressions, 0 clicks, positions 22-59) — promotion must convert calculator traffic instead",
+      "/employee-rights/work-grant cluster already ranks 7.4-11.4 for core commercial queries; supporting sub-pages have only 2 inbound links each",
+      "Course sales pages miss the site's schema and accessibility baseline (Course node only; a11y 92 vs 98-100)"
     ],
     "quick_wins": [
-      "Add preconnect to googletagmanager.com and google-analytics.com — 302ms, one line",
-      "Shorten 57 titles over 65 characters that are truncated in the SERP",
-      "Label 3 number inputs on the work-grant calculator",
-      "Add og:image to 102 pages, mostly the /business cluster",
-      "Link /tools/capital from somewhere — it currently has zero inbound internal links"
+      "Compress and self-host the hero portrait (5.05 MB -> ~50 KB) + fetchpriority=high",
+      "Extend the CourseCTA path gate to include /tools/ — one line",
+      "Add BreadcrumbList + Organization JSON-LD to both LP files",
+      "Link work-grant/eligibility and /retroactive from the parent page and each other",
+      "Add /accessibility to the sitemap or noindex it deliberately"
     ]
   },
   "categories": [
     {
       "name": "Technical SEO",
-      "score": 82,
+      "score": 95,
       "what_works": [
-        "robots.txt explicitly allows 11 AI crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot, Google-Extended)",
-        "sitemap.xml valid, 162 URLs, 0 warnings, 0 errors; resubmitted 26.7.2026 and read by Google 1.5 seconds later",
-        "HSTS max-age=63072000, HTTP/2, Vercel edge prerendering, 60ms TTFB",
-        "226 of 226 pages returned 200; zero redirect chains, zero broken internal links across ~2,400 links"
+        "0 non-200 across 229 pages",
+        "0 missing canonicals",
+        "0 orphan pages",
+        "0 sitemap URLs unreachable",
+        "robots.txt allows all AI crawlers; Disallow /lp/ correctly does not block the rewritten course pages",
+        "48 glossary pages noindex+excluded from sitemap, fully consistent"
       ],
       "findings": [
         {
-          "title": "The /business cluster is unknown to Google",
-          "severity": "Critical",
-          "description": "URL Inspection on 30.7.2026 returns 'URL is unknown to Google' for both /business (the hub) and /business/cafe. GSC reports indexed: 0 of 162 submitted. This is not a sitemap failure — the sitemap was read. It is a link-discovery failure: each /business/<slug> page has exactly one inbound internal link, from the hub, and the hub is not in the main navigation. Evidence that discovery works when present: /business/garage, /business/restaurant and /business/minimarket did accumulate 7, 8 and 2 impressions.",
-          "recommendation": "Request Indexing manually in GSC for the 5 top pages (user-only action), and add /business to the main navigation plus cross-links from /self-employed/opening-business and /self-employed/business-setup-cost."
-        },
-        {
-          "title": "/tools/capital is an orphan page",
-          "severity": "Medium",
-          "description": "Zero inbound internal links and no <h1>. It is in the sitemap at app/sitemap.ts:143 and has accumulated 4 impressions at position 49.",
-          "recommendation": "Add an <h1> and link it from the /tools hub."
-        },
-        {
-          "title": "Three pages have no H1",
-          "severity": "Medium",
-          "description": "/tools/capital, /tools/cash-flow and /tools/cashflow-solo render without an <h1> element.",
-          "recommendation": "Add a keyword-bearing <h1> to each."
+          "title": "/accessibility indexable but missing from sitemap",
+          "severity": "Low",
+          "description": "942 words, returns 200, no noindex, absent from sitemap. The only page in this state.",
+          "recommendation": "Add to sitemap or apply noindex deliberately."
         }
       ]
     },
     {
       "name": "Content Quality",
-      "score": 74,
+      "score": 85,
       "what_works": [
-        "Median 904 words per page; deepest pages reach 3,743 words (/self-employed/opening-business) and 3,426 (/guides/mortgage-complete-guide-2026)",
-        "Named CPA author with AuthorBox on every calculator page and Person schema",
-        "Primary-source citations: 36 links to kolzchut.org.il, 34 to gov.il, 23 to btl.gov.il, 10 to boi.org.il"
+        "Credentialed CPA author with sameAs on every calculator",
+        "Organization schema names the founder",
+        "Official sources cited (רשות המסים, ביטוח לאומי)",
+        "Only 2 pages under 300 words (was 4)",
+        "80 pages carry a front-loaded answer block (was 35)"
       ],
       "findings": [
         {
-          "title": "Person sameAs is missing the CPA license number and LinkedIn",
-          "severity": "Critical",
-          "description": "Open since 1.7.2026. The LinkedIn profile (linkedin.com/in/andreypl) already appears in llms.txt but not in the Person schema, which is where Google reads it. On a YMYL site, unverified professional identity caps trust.",
-          "recommendation": "Add both to Person.sameAs in components/seo/. Requires the license number from the user."
-        },
-        {
-          "title": "All 63 glossary pages are noindexed",
+          "title": "Course sales pages have no structured answer content",
           "severity": "Medium",
-          "description": "Every /glossary/* term carries robots noindex,follow and is excluded from the sitemap. This is deliberate and well-reasoned (app/glossary/[slug]/page.tsx:24-28 — definitions under 60 words are thin content). But 0 of 63 clear the threshold, so an entire subtree yields no index value, and the /glossary hub sits at position 60.9 with 81 impressions.",
-          "recommendation": "Expand 10-15 high-demand terms past 60 words. The mechanism returns them to the index automatically."
-        },
-        {
-          "title": "Ten hub pages are thin and rank poorly",
-          "severity": "Medium",
-          "description": "/insurance 219 words, /compare 255, /investments 265, /topics 339, /guides 350, /news 358. Their positions match: /investments 86.5, /personal-tax 84.9, /real-estate 81.6.",
-          "recommendation": "Enrich each hub with an intro answer paragraph, a comparison table, and descriptive links to its children."
+          "description": "1,332 and 1,294 words of sales copy, no FAQ block, no answer box, no schema depth.",
+          "recommendation": "Add an FAQPage block and a front-loaded answer section to both LPs."
         }
       ]
     },
     {
       "name": "On-Page SEO",
-      "score": 72,
+      "score": 78,
       "what_works": [
-        "226 of 226 canonicals correct — zero missing, zero mismatched",
-        "Zero missing titles, zero missing meta descriptions, zero duplicate H1s",
-        "Only one duplicate title pair, and it is a crawl artifact of the homepage with and without a trailing slash"
+        "0 missing titles, meta descriptions, h1s or og:images",
+        "0 pages with multiple h1",
+        "0 orphan pages"
       ],
       "findings": [
         {
-          "title": "134 of 226 titles exceed 60 characters; 57 exceed 65",
+          "title": "Course CTA hidden from the site's highest-traffic pages",
           "severity": "High",
-          "description": "The longest reach 82 characters (/business/office, /business/clinic), losing roughly 20 characters to SERP truncation. The suffix ' | חשבונאי' costs 10 characters on every page. 36 meta descriptions also exceed 160 characters.",
-          "recommendation": "Drop the brand suffix on the long pages and trim to under 60 characters."
+          "description": "components/marketing/CourseCTA.tsx returns null unless pathname starts with /self-employed/. Renders on 18 of 53 calculators; only 40 pages site-wide link to a course page. The top six pages by impressions (~10,450) carry no CTA. /tools/* is the CFO course's exact audience and is excluded.",
+          "recommendation": "Extend the gate to /tools/; keep /employee-rights/ excluded; test /vehicles/company-car-benefit separately."
         },
         {
-          "title": "Internal link equity is extremely skewed",
-          "severity": "High",
-          "description": "/privacy and /terms receive 226 inbound internal links each from the footer. All 21 /business pages, /employee-rights/salary-deductions, /real-estate/rental-income-tax, /investments/capital-gains-tax and /tools/customer-lifetime-value receive exactly one. /tools/capital receives zero.",
-          "recommendation": "Add contextual cross-links from the pillar pages and put /business into the main navigation."
+          "title": "69 titles exceed 60 characters, 8 exceed 65",
+          "severity": "Medium",
+          "description": "Root title.template appends ' | חשבונאי' (10 chars). Unchanged from 2026-07-30.",
+          "recommendation": "Shorten the 8 worst; the rest are marginal."
+        },
+        {
+          "title": "15 sitemap URLs have fewer than 3 internal inbound links",
+          "severity": "Low",
+          "description": "Includes work-grant/eligibility and /retroactive, which support the site's strongest cluster.",
+          "recommendation": "Link them from the parent work-grant page and from each other."
+        },
+        {
+          "title": "11 meta descriptions exceed 160 characters",
+          "severity": "Low",
+          "description": "Was 10 on 2026-07-30.",
+          "recommendation": "Trim to under 160."
         }
       ]
     },
     {
       "name": "Schema / Structured Data",
-      "score": 90,
+      "score": 85,
       "what_works": [
-        "Zero broken JSON-LD blocks and zero pages without schema across 226 pages",
-        "Organization and WebSite on 224 pages, BreadcrumbList on 147, FAQPage on 105, DefinedTerm on 62, SoftwareApplication on 50, BlogPosting on 43"
+        "0 validation errors across 229 pages",
+        "dateModified now on all 53 SoftwareApplication nodes",
+        "Fabricated aggregateRating removed from all 53 calculators",
+        "Breadcrumb final item no longer points at the homepage"
       ],
       "findings": [
         {
-          "title": "HowTo schema is used on only 3 pages",
+          "title": "Course sales pages emit only a Course node",
+          "severity": "Medium",
+          "description": "public/lp/cfo.html and cpa.html lack BreadcrumbList, Organization and FAQPage, all of which the Next.js pages emit automatically.",
+          "recommendation": "Add the missing nodes to both LP files."
+        },
+        {
+          "title": "DefinedTerm entries carry name but no description",
           "severity": "Low",
-          "description": "The site is built around 'how do I calculate X' intent, which HowTo is designed for, but only 3 of 226 pages carry it.",
-          "recommendation": "Add HowTo to calculator pages that already contain a step-by-step worked example."
+          "description": "Glossary schema is minimal. Note 48 of 62 glossary pages are noindex, so only the 14 indexed ones can benefit.",
+          "recommendation": "Add description and inDefinedTermSet to the 14 indexed glossary pages."
         }
       ]
     },
     {
       "name": "Performance (CWV)",
-      "score": 66,
+      "score": 62,
       "what_works": [
-        "CLS is 0 on both desktop and mobile",
-        "TBT 0ms desktop, 80ms mobile",
-        "Lighthouse SEO 100 and Best Practices 100",
-        "Server response 60ms via Vercel edge prerendering"
+        "Calculators at mobile Performance 96, LCP 2.6s after yesterday's fixes",
+        "TBT 0ms and CLS 0 on the course pages — once the image is fixed they should score very well"
       ],
       "findings": [
         {
-          "title": "Mobile LCP is 6.2 seconds against 1.2 seconds on desktop",
-          "severity": "High",
-          "description": "Lighthouse 12.8 mobile: performance 66, FCP 3.8s, LCP 6.2s, Speed Index 5.3s. The LCP element is a text paragraph, not an image, so this is a network and font blocking issue rather than an image issue. Israeli search traffic is predominantly mobile.",
-          "recommendation": "Add preconnect hints, consider lazyOnload for analytics, and review the three loaded font families (Heebo, JetBrains_Mono, Frank_Ruhl_Libre, 85KB combined)."
+          "title": "5.05 MB hero PNG is the LCP element on both course sales pages",
+          "severity": "Critical",
+          "description": "Hot-linked cross-origin from profitmargin.co.il, displayed at 468x584, no fetchpriority. LCP breakdown: TTFB 206ms, load delay 19ms, resource load 2009ms, render delay 45ms. Mobile Performance 66 / LCP 6.5s; desktop 73 / LCP 6.7s — Google's 'poor' band, the only pages on the site in it.",
+          "recommendation": "Resize to rendered dimensions, convert to WebP, serve from /public on the same origin, add fetchpriority='high'. Expect ~50 KB and LCP under 2.5s."
         },
         {
-          "title": "gtag.js is the heaviest asset on the site",
-          "severity": "High",
-          "description": "167KB of a 748KB page (22%), of which 70KB is unused. Installed 26.7.2026 in app/layout.tsx:176 with strategy='afterInteractive'. Lighthouse measures 302ms wasted for lack of a preconnect to google-analytics.com.",
-          "recommendation": "Add preconnect to googletagmanager.com and google-analytics.com; evaluate strategy='lazyOnload'."
-        },
-        {
-          "title": "Three accessibility failures on a site that publishes an accessibility statement",
-          "severity": "Medium",
-          "description": "Lighthouse accessibility 91. color-contrast fails on 17 elements (mostly text-ink/60 on cream), label fails on 3 number inputs in the work-grant calculator, heading-order fails on 2 elements. The site has an /accessibility page and statement.",
-          "recommendation": "Raise text-ink/60 to text-ink/75, associate labels with the inputs, and fix the h4-without-h3 sequence."
+          "title": "Calculator CLS rose from 0 to 0.048",
+          "severity": "Low",
+          "description": "Carried over from 2026-07-30; caused by moving GA to lazyOnload. Inside the 0.1 threshold.",
+          "recommendation": "Monitor; revert to afterInteractive if it exceeds 0.1."
         }
       ]
     },
     {
       "name": "AI Search Readiness",
-      "score": 76,
+      "score": 80,
       "what_works": [
-        "llms.txt and llms-full.txt present and well written, including explicit guidance on when an LLM should cite the site",
-        "robots.txt explicitly allows 11 AI crawlers",
-        "FAQPage on 105 pages, DefinedTerm on 62, Dataset on 6",
-        "Evidence of AI citation: /blog/vat-complete-guide-israel at 573 impressions position 7.7 and /blog/surtax-yesef-2026-explained at 216 impressions position 10.2, both on short knowledge queries"
+        "All AI crawlers allowed",
+        "llms.txt and llms-full.txt present and well-formed",
+        "SSR verified by fetching as OAI-SearchBot",
+        "80 pages with 116-132 word self-contained answer blocks",
+        "Real dateModified freshness signals on all 53 calculators"
       ],
       "findings": [
         {
-          "title": "The .answer-box pattern is on only 34 of 226 pages",
+          "title": "No off-site entity presence on Reddit, YouTube or Wikipedia",
           "severity": "High",
-          "description": "The quickAnswer slot in CalculatorLayout is the site's mechanism for featured snippets and AI Overview citation, and it is implemented on 15% of pages.",
-          "recommendation": "Add a quickAnswer paragraph to the 20 highest-impression pages first."
-        },
-        {
-          "title": "Do not treat AI fan-out zero-CTR pages as CTR failures",
-          "severity": "Info",
-          "description": "Query-level inspection confirms that the zero-click, high-impression blog pages rank on short knowledge queries that Google answers directly in an AI Overview. This is a citation signal.",
-          "recommendation": "Leave the titles on those pages alone."
+          "description": "Brand mentions correlate ~3x more strongly with AI citations than backlinks. Reddit drives 46.7% of Perplexity citations and 11.3% of ChatGPT's; YouTube mentions carry the strongest single correlation (~0.737). This caps the ChatGPT and Perplexity scores and has no code-side fix.",
+          "recommendation": "Genuine participation in Israeli finance subreddits and short explainer videos per top calculator. Not link-dropping."
         }
       ]
     },
@@ -174,15 +161,14 @@
       "name": "Images",
       "score": 70,
       "what_works": [
-        "13 img tags site-wide, 13 with alt text — 100%",
-        "The near-text-only design is what produces the CLS of 0"
+        "0 images missing alt across all 229 pages"
       ],
       "findings": [
         {
-          "title": "102 pages have no og:image",
+          "title": "All LP imagery is hot-linked cross-origin from the WordPress site",
           "severity": "Medium",
-          "description": "Includes the entire /business cluster and /about. Sharing these links on WhatsApp, Facebook or LinkedIn produces an empty preview, and it weakens presentation in AI surfaces.",
-          "recommendation": "Add a dynamic opengraph-image.tsx template to cover all of them at once."
+          "description": "8 distinct images served from profitmargin.co.il rather than /public, so none pass through Next.js image optimization. One is 5.05 MB.",
+          "recommendation": "Move to /public and optimize; see the Critical performance finding."
         }
       ]
     }
@@ -190,51 +176,38 @@
   "action_plan": {
     "phases": [
       {
-        "name": "Phase 0: Blocked on the user",
-        "timeframe": "10 minutes in GSC",
-        "items": [
-          "Request Indexing for /business, /business/cafe, /business/restaurant, /business/gym, /business/online-store",
-          "Supply the CPA license number and LinkedIn URL for Person sameAs"
-        ]
-      },
-      {
         "name": "Phase 1: Critical Fixes",
         "timeframe": "Week 1",
         "items": [
-          "Add preconnect to googletagmanager.com and google-analytics.com (302ms)",
-          "Evaluate strategy='lazyOnload' for gtag in app/layout.tsx:177",
-          "Label the 3 number inputs on the work-grant calculator",
-          "Add h1 to /tools/capital, /tools/cash-flow, /tools/cashflow-solo and link /tools/capital from /tools"
+          "Compress and self-host the 5.05 MB course hero image + fetchpriority",
+          "Extend CourseCTA path gate to /tools/"
         ]
       },
       {
         "name": "Phase 2: High-Impact Improvements",
         "timeframe": "Weeks 2-3",
         "items": [
-          "Build /employee-rights/work-grant/eligibility by promoting the existing eligibility tab to its own route — 261 impressions at positions 30-58, window closes in September",
-          "Add /business to main navigation and cross-link the cluster from the self-employed pillars",
-          "Shorten 57 titles over 65 characters and 36 meta descriptions over 160",
-          "Add a dynamic og:image template covering the 102 pages that lack one"
+          "Push the work-grant cluster from page 2 to page 1 (internal links to /eligibility and /retroactive, cover the 'סימולטור' intent)",
+          "Add BreadcrumbList + Organization + FAQPage to both course LPs and fix their a11y failures"
         ]
       },
       {
         "name": "Phase 3: Content & Authority",
         "timeframe": "Month 2",
         "items": [
-          "Add .answer-box to the 20 highest-impression pages that lack it",
-          "Expand 10-15 glossary terms past the 60-word threshold to auto-reindex them",
-          "Enrich 6 thin hub pages currently ranking at positions 66-87",
-          "Build /tools/vat-extract, a retroactive work-grant page, and strengthen the maternity-benefits page",
-          "Fix color contrast on 17 elements"
+          "Build genuine Reddit and YouTube presence",
+          "Decide the strategy for the 48 noindexed glossary pages",
+          "Wire course ratings to a data source"
         ]
       },
       {
         "name": "Phase 4: Monitoring & Iteration",
         "timeframe": "Ongoing",
         "items": [
-          "Off-site authority — 363 of 500 sampled queries remain at position 21+",
-          "Capture a drift baseline after Phase 1",
-          "Add a Google API key for real CrUX field data and a Moz key for backlink profile measurement"
+          "Shorten the 8 titles over 65 chars",
+          "Resolve /accessibility sitemap status",
+          "Monitor calculator CLS against the 0.1 threshold",
+          "Request re-indexing for the 53 pages updated today"
         ]
       }
     ]

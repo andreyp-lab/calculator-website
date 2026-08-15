@@ -123,14 +123,16 @@ This violates Google's structured-data review-snippet policy. The realistic down
 
 **Done:** removed from both components along with the `ratingValue` / `ratingCount` props. Verified across all 179 sitemap URLs — 0 calculator pages emit `aggregateRating`.
 
-**Open remainder — needs a decision, not a code fix.** Two more pages still carry ratings, and they are not part of the calculator system:
+**Resolved (2026-07-31).** Two more pages carry ratings, and they are not part of the calculator system:
 
 | Page | Served from | Rating |
 |---|---|---|
 | `/course/business` | `public/lp/cfo.html:31` (rewrite in `next.config.ts:22`) | 4.9 / 64 |
 | `/course/self-employed` | `public/lp/cpa.html:31` (rewrite in `next.config.ts:21`) | 4.9 / 87 |
 
-These are hardcoded in static landing-page HTML on `Course` schema. Unlike the calculator rating, the counts differ per course, so they may correspond to real course feedback. If they do, they should be sourced from the actual review data. If they don't, they carry the same policy risk as the calculator rating and should be removed. **Left in place pending confirmation.**
+These are hardcoded in static landing-page HTML on `Course` schema. Unlike the calculator rating — one default value repeated across all 53 pages — the counts differ per course. The site owner confirmed on 2026-07-31 that these reflect **real course feedback**, so they stay. No policy exposure: Google's review-snippet rules require that ratings be genuine, not that they be rendered from a live data source.
+
+One follow-up worth doing when convenient: the values are hardcoded in the HTML, so they will drift as more feedback comes in. Sourcing them from wherever the course feedback actually lives would keep them accurate without manual edits.
 
 ### 2. Add `dateModified` to calculator schema — the single biggest AI-citation lever ✅ done
 Content under 3 months old is ~3x more likely to be cited; pages stale 6+ months lose eligibility (SE Ranking, 1.3M citations).
