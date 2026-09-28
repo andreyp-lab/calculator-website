@@ -153,16 +153,6 @@ export interface TerminationRights {
   importantDeadline?: string;
 }
 
-export interface LatePaymentResult {
-  originalAmount: number;
-  daysLate: number;
-  delayPenaltyRate: number;          // 8% ראשוני
-  monthlyInterestRate: number;       // 1.5% לחודש נוסף
-  totalPenalty: number;
-  totalDue: number;
-  legalBasis: string;
-}
-
 export interface SalaryBasisResult {
   lastMonth: number;
   average3m: number;
@@ -858,54 +848,6 @@ export function getTerminationRights(reason: TerminationReason): TerminationRigh
   };
 
   return rights[reason];
-}
-
-// ============================================================
-// Late Payment Penalty: הלנת פיצויים
-// ============================================================
-
-export function calculateLatePaymentPenalty(
-  originalAmount: number,
-  daysLate: number,
-): LatePaymentResult {
-  // חוק הגנת השכר: עד 15 ימים — ריבית 5% על כל חודש עיכוב
-  // לפיצויים: 8% ראשוני + 1.5% לכל חודש נוסף
-  const INITIAL_PENALTY_RATE = 0.08; // 8% על הסכום המלא
-  const MONTHLY_DELAY_RATE = 0.015; // 1.5% לחודש נוסף
-
-  if (daysLate <= 0) {
-    return {
-      originalAmount,
-      daysLate: 0,
-      delayPenaltyRate: 0,
-      monthlyInterestRate: 0,
-      totalPenalty: 0,
-      totalDue: originalAmount,
-      legalBasis: 'שולם בזמן — אין עיכוב',
-    };
-  }
-
-  // 15 ימים הם פרק הזמן החוקי לתשלום
-  const lateBeyondGrace = Math.max(0, daysLate - 15);
-  const additionalMonths = Math.ceil(lateBeyondGrace / 30);
-
-  const initialPenalty = daysLate > 15 ? originalAmount * INITIAL_PENALTY_RATE : 0;
-  const monthlyPenalty = additionalMonths > 0
-    ? originalAmount * MONTHLY_DELAY_RATE * additionalMonths
-    : 0;
-
-  const totalPenalty = initialPenalty + monthlyPenalty;
-  const totalDue = originalAmount + totalPenalty;
-
-  return {
-    originalAmount,
-    daysLate,
-    delayPenaltyRate: INITIAL_PENALTY_RATE,
-    monthlyInterestRate: MONTHLY_DELAY_RATE,
-    totalPenalty: Math.round(totalPenalty),
-    totalDue: Math.round(totalDue),
-    legalBasis: 'חוק הגנת השכר, תשי"ח-1958, סעיף 20',
-  };
 }
 
 // ============================================================

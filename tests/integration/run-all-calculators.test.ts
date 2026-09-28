@@ -5,7 +5,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateSeverance } from '@/lib/calculators/severance';
 import { calculateIncomeTax } from '@/lib/calculators/income-tax';
-import { calculateRecreationPay } from '@/lib/calculators/recreation-pay';
+import { calculatePrivateRecreationEstimate } from '@/lib/calculators/recreation-pay-verified';
 import { calculateVat } from '@/lib/calculators/vat';
 import { calculateMortgage, getMaxLoanAmount } from '@/lib/calculators/mortgage';
 import { formatCurrency } from '@/lib/utils/formatters';
@@ -57,19 +57,15 @@ describe('🎯 רצף בדיקה: כל המחשבונים יחד', () => {
   });
 
   it('3️⃣ מחשבון דמי הבראה - עובד 7 שנים, משרה מלאה', () => {
-    const result = calculateRecreationPay({
-      yearsOfService: 7,
-      partTimePercentage: 100,
-      sector: 'private',
-    });
+    const result = calculatePrivateRecreationEstimate(7, 100);
 
     console.log('\n🏖️ דמי הבראה:');
     console.log(`   ימי הבראה: ${result.daysEntitled}`);
-    console.log(`   תעריף: ${formatCurrency(result.payPerDay)}/יום`);
-    console.log(`   סך לתשלום: ${formatCurrency(result.finalAmount)}`);
+    console.log(`   תעריף: ${formatCurrency(result.dayRate)}/יום`);
+    console.log(`   אומדן ברוטו: ${formatCurrency(result.grossEstimate)}`);
 
     expect(result.daysEntitled).toBe(7);
-    expect(result.finalAmount).toBe(2926); // 7 × 418
+    expect(result.grossEstimate).toBe(2926); // 7 × 418
   });
 
   it('4️⃣ מחשבון מע"מ - חשבונית של 5,000 ₪', () => {
@@ -137,12 +133,8 @@ describe('🎯 רצף בדיקה: כל המחשבונים יחד', () => {
     console.log(`   נטו: ${formatCurrency(severance.netSeverance)}`);
 
     // שלב 2: דמי הבראה אחרונים
-    const recreation = calculateRecreationPay({
-      yearsOfService: 8,
-      partTimePercentage: 100,
-      sector: 'private',
-    });
-    console.log(`   + דמי הבראה: ${formatCurrency(recreation.finalAmount)}`);
+    const recreation = calculatePrivateRecreationEstimate(8, 100);
+    console.log(`   + אומדן הבראה ברוטו: ${formatCurrency(recreation.grossEstimate)}`);
 
     // שלב 3: יוצאת לעצמאית, שולחת חשבונית
     const invoice = calculateVat({ amount: 30_000, mode: 'add', rate: 0.18 });
@@ -152,7 +144,7 @@ describe('🎯 רצף בדיקה: כל המחשבונים יחד', () => {
 
     // שלב 4: השתמשה בפיצויים כהון עצמי לדירה
     const propertyValue = 2_400_000;
-    const equity = severance.netSeverance + recreation.finalAmount;
+    const equity = severance.netSeverance + recreation.grossEstimate;
     const loanNeeded = propertyValue - equity;
     const maxLoan = getMaxLoanAmount(propertyValue, 'first-home');
 
@@ -178,7 +170,7 @@ describe('🎯 רצף בדיקה: כל המחשבונים יחד', () => {
     console.log('\n═══════════════════════════════════════\n');
 
     expect(severance.isEligible).toBe(true);
-    expect(recreation.isEligible).toBe(true);
+    expect(recreation.daysEntitled).toBe(7);
     expect(invoice.amountWithVat).toBeGreaterThan(invoice.amountWithoutVat);
   });
 });

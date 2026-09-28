@@ -101,7 +101,7 @@ const RIGHTS: Calc[] = [
   },
   {
     title: 'דמי לידה',
-    description: 'גובה דמי לידה מהביטוח הלאומי + הארכות לתאומים, לידה מוקדמת ועוד.',
+    description: 'תנאי זכאות, תקרה וקישור לחישוב האישי של הביטוח הלאומי.',
     href: '/employee-rights/maternity-benefits',
     icon: Baby,
   },
@@ -113,7 +113,7 @@ const RIGHTS: Calc[] = [
   },
   {
     title: 'תגמולי מילואים',
-    description: 'תשלום בסיסי + מענקי חרבות ברזל (₪280/יום נוספים).',
+    description: 'בדיקת תגמול מילואים והטבות לפי זכאות אישית.',
     href: '/employee-rights/reserve-duty-pay',
     icon: Award,
   },

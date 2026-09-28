@@ -230,7 +230,7 @@ export default function MortgagePage() {
               </li>
               <li>
                 <Link href="/real-estate/capital-gains-tax" className="text-gold hover:underline">
-                  מחשבון מס שבח
+                  בדיקת מס שבח
                 </Link>{' '}
                 — חשב את מס השבח על מכירת דירה
               </li>

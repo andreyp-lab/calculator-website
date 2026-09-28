@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!bt) return { title: 'לא נמצא' };
   // `absolute` מבטל את סיומת המותג ("| חשבונאי") מה-template בשורש — היא עלתה
   // 10 תווים והקפיצה את הכותרות האלה עד 82 תווים, כלומר חיתוך ב-SERP.
-  const title = `כמה עולה להקים ${bt.name}? מחשבון עלויות 2026`;
+  const title = `כמה עולה להקים ${bt.name}? תרחיש עלויות`;
   // bt.intro הוא פסקה מלאה (2-3 משפטים). שרשור שלה הפיק תיאורים של 212-305 תווים,
   // כלומר חיתוך של יותר ממחצית ב-SERP. נלקח המשפט הראשון בלבד, חתוך בגבול מילה.
   const firstSentence = bt.intro.split(/(?<=[.!?])\s/)[0].trim();
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     firstSentence.length <= 85
       ? firstSentence
       : firstSentence.slice(0, 85).replace(/\s+\S*$/, '') + '…';
-  const description = `${introShort} מחשבון עלות הקמה לפי עיר ושטח, הוצאות חודשיות ונקודת איזון. עדכני 2026.`;
+  const description = `${introShort} תרחיש להערכת הקמה לפי עיר ושטח; החליפו הנחות בהצעות מחיר ונתוני העסק שלכם.`;
   return {
     title: { absolute: title },
     description,
@@ -94,14 +94,15 @@ export default async function BusinessGuidePage({ params }: PageProps) {
             ✦ מחשבון עלות הקמה + תוכנית עסקית
           </p>
           <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
-            כמה עולה להקים {bt.name}? <span className="text-gold">2026</span>
+            כמה עולה להקים {bt.name}? <span className="text-gold">תרחיש תכנון</span>
           </h1>
           <p className="text-lg text-ink/70 leading-relaxed">{bt.intro}</p>
+          <p className="mt-4 border-r-4 border-gold bg-cream-2 p-4 text-sm leading-relaxed">הסכומים בעמוד ובמחשבון הם הנחות לדוגמה לצורכי תכנון, ללא אימות להצעות מחיר או צו ארנונה עבור העסק שלכם. לפני החלטה בדקו ספקים, נכס, רישוי וצו ארנונה של הרשות המקומית.</p>
         </header>
 
         {/* Quick answer */}
         <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
-          <p className="text-lg text-ink leading-relaxed">{bt.faq[0].a}</p>
+          <p className="text-lg text-ink leading-relaxed">בדקו תרחיש הקמה ל{bt.name} באמצעות המחשבון למטה. מחירי הציוד, העבודה, השכירות, הארנונה והרישוי הם הנחות ראשוניות; בקשו הצעות מחיר ובדקו דרישות רישוי ברשות המקומית.</p>
         </section>
 
         {/* Calculator */}
@@ -120,7 +121,7 @@ export default async function BusinessGuidePage({ params }: PageProps) {
             רוב מי שמקים עסק מתמקד בעלות ההקמה ובהוצאות החודשיות — ושוכח שהציוד והשיפוץ{' '}
             <strong>מתבלים ויצטרכו חידוש</strong>. אם לא מפרישים כל חודש סכום לרזרבה, העסק ייראה רווחי
             על הנייר — אבל בעוד כמה שנים, כשצריך לחדש את הסטודיו או להחליף ציוד, לא יהיה מאיפה. המחשבון
-            למעלה מחשב את הפחת החודשי ואת הרזרבה המומלצת, ומציג את הרווח <em>האמיתי</em> — אחרי ההפרשה.
+            למעלה מציג אומדן פחת ורזרבה, וכן תרחיש רווח לאחר ההפרשה.
           </p>
         </section>
 

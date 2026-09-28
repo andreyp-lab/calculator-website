@@ -90,7 +90,7 @@ const POPULAR: Array<{ href: string; label: string; description: string; emoji: 
   },
   {
     href: '/real-estate/capital-gains-tax',
-    label: 'מחשבון מס שבח',
+    label: 'בדיקת מס שבח',
     description: 'מכירת דירה - חישוב מס',
     emoji: '💰',
   },

@@ -37,8 +37,8 @@ const calculators = [
     badge: undefined as string | undefined,
   },
   {
-    title: 'מחשבון מס שבח',
-    description: 'מכירת דירה - פטור דירה יחידה + חישוב לינארי מוטב',
+    title: 'בדיקת מס שבח',
+    description: 'בדיקת פטור וחישוב שומה עצמית ברשות המסים',
     href: '/real-estate/capital-gains-tax',
     available: true,
     badge: undefined as string | undefined,
@@ -72,10 +72,10 @@ const comparisonRows = [
     output: 'סכום המס המדויק לפי מדרגות 2026',
   },
   {
-    tool: 'מחשבון מס שבח',
+    tool: 'בדיקת מס שבח',
     href: '/real-estate/capital-gains-tax',
     when: 'לפני מכירת דירה — בדיקת פטור דירה יחידה וחישוב לינארי מוטב',
-    output: 'אומדן מס השבח והפטורים הרלוונטיים',
+    output: 'הפניה לשומה העצמית של רשות המסים',
   },
   {
     tool: 'מדריך מיסוי שכירות',
@@ -151,7 +151,7 @@ export default function RealEstatePage() {
           מחשבונים מקצועיים לרוכשי ובעלי דירות בישראל
         </p>
 
-        {/* Quick answer — 25% = STANDARD_TAX_RATE, lib/calculators/capital-gains-tax.ts */}
+        {/* Summary of purchase tax and the official capital-gains self-assessment route. */}
         <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
           <p className="text-lg text-ink leading-relaxed">
             כמה עולה לקנות ולמכור דירה ב-2026? רוכשי דירה יחידה פטורים ממס רכישה עד שווי של{' '}
@@ -159,8 +159,8 @@ export default function RealEstatePage() {
             החל מ-{Math.round(PURCHASE_TAX_2026.firstHome[1].rate * 1000) / 10}%; רוכשי דירה נוספת משלמים כבר
             מהשקל הראשון ({PURCHASE_TAX_2026.additionalHome[0].rate * 100}% ומעלה). בצד המכירה,
             מס השבח עומד על 25% מהרווח הריאלי, בכפוף לפטור דירה יחידה. ריבית הפריים עומדת כיום
-            על {MACRO_DATA.primeRate.value}%. המחשבונים בעמוד זה מחשבים משכנתא, מס רכישה ומס
-            שבח לפי המדרגות העדכניות.
+            על {MACRO_DATA.primeRate.value}%. הכלים בעמוד זה מחשבים משכנתא ומס רכישה, ומפנים
+            לשומה העצמית הרשמית של רשות המסים לבדיקת מס שבח.
           </p>
         </section>
 
@@ -255,8 +255,8 @@ export default function RealEstatePage() {
               2014 קיים &quot;חישוב לינארי מוטב&quot; שמפחית דרמטית את המס — ככל שהרכישה ישנה
               יותר, חלק גדול יותר מהשבח פטור. גם הוצאות מוכרות (שכ&quot;ט עו&quot;ד, תיווך, שיפוצים,
               ואפילו מס הרכישה ששילמתם בזמנו) מקטינות את השבח החייב.{' '}
-              <Link href="/real-estate/capital-gains-tax" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון מס השבח</Link>{' '}
-              עושה את החישוב המלא כולל בדיקת הפטורים.
+              <Link href="/real-estate/capital-gains-tax" className="text-gold underline underline-offset-2 hover:text-ink transition">בדיקת מס השבח</Link>{' '}
+              מפנה לשומה העצמית של רשות המסים לבדיקת הנתונים האישיים והפטורים.
             </p>
           </div>
 

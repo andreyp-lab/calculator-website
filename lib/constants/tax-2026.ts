@@ -1,7 +1,7 @@
 /**
- * קבועים פיננסיים לשנת המס 2026 - מאומתים ממקורות רשמיים
+ * קבועים פיננסיים לשנת המס 2026 — יש לבדוק כל ערך בהקשר שלו
  *
- * תאריך אימות אחרון: 2026-05-03
+ * בדיקת ערכי מפתח: 2026-09-28; לא כל השדות אומתו. ראו docs/data-verification-2026-09-28.md
  *
  * מקורות עיקריים:
  * - רשות המסים: https://www.gov.il/he/departments/israel_tax_authority
@@ -78,35 +78,11 @@ export const SURTAX_2026 = {
 // ============================================================
 // נקודות זיכוי 2026
 // מקור: כל-זכות, רשות המסים
-// אומת: 2026-05-03
+// מקור ותנאים אישיים דורשים בדיקה נפרדת
 // ============================================================
 export const CREDIT_POINT_2026 = {
   monthly: 242, // ₪
   annual: 2_904, // ₪ (242 × 12)
-} as const;
-
-// נקודות זיכוי לפי מצב אישי (לחישוב סופי הכנס סכום הזיכוי)
-export const CREDIT_POINTS_BY_STATUS = {
-  // בסיסי
-  resident: 2.25, // תושב ישראל
-  woman: 0.5, // אישה - תוספת לנקודות הבסיס
-  // ילדים (לפי גיל)
-  childAge0: 1.5, // ילד בשנת לידתו
-  childAge1to5: 2.5, // ילד בני 1-5
-  childAge6to17: 1, // ילד בני 6-17
-  childAge18: 0.5, // ילד בן 18
-  // מצבים מיוחדים
-  singleParent: 1, // הורה יחיד
-  disabledChild: 1, // ילד נכה
-  newImmigrant: {
-    // מבנה עולים ותיק (טרם רפורמת 2022): 18/18/18 חודשים
-    year1to1_5: 3, // חודשים 1-18 (18 חודשים ראשונים)
-    year1_5to3: 2, // חודשים 19-36
-    year3to4_5: 1, // חודשים 37-54
-  },
-  releasedSoldier: 2, // חייל משוחרר (3 שנים אחרי שחרור)
-  bachelorDegree: 1, // תואר ראשון (עד שנה אחת)
-  masterDegree: 0.5, // תואר שני (עד שנה אחת)
 } as const;
 
 // ============================================================
@@ -121,7 +97,7 @@ export const SOCIAL_SECURITY_EMPLOYEE_2026 = {
     healthInsurance: 0.0323, // 3.23%
     total: 0.0427, // 4.27%
   },
-  // שיעור מלא - על חלק השכר מ-7,523 ₪ ועד התקרה
+  // שיעור מלא - על חלק השכר מ-7,703 ₪ ועד התקרה
   fullRate: {
     nationalInsurance: 0.07, // 7%
     healthInsurance: 0.0517, // 5.17%
@@ -162,7 +138,7 @@ export const SOCIAL_SECURITY_SELF_EMPLOYED_2026 = {
 // ============================================================
 // פיצויי פיטורין 2026
 // מקור: רשות המסים, חוק פיצויי פיטורים התשכ"ג-1963
-// אומת: 2026-05-03
+// מקור ותנאים אישיים דורשים בדיקה נפרדת
 // ============================================================
 export const SEVERANCE_COMPENSATION_2026 = {
   annualExemptionCeiling: 13_750, // ₪ - תקרת פטור לכל שנת עבודה
@@ -189,7 +165,7 @@ export const MINIMUM_WAGE_2026 = {
 // ============================================================
 export const RECREATION_PAY_2026 = {
   privateSectorPerDay: 418, // ₪ (העלאה ל-451.5 סוכמה אך טרם הורחבה בצו הרחבה — 418 עדיין המחייב)
-  publicSectorPerDay: 511.60, // ₪ (עודכן מ-1.6.2026, היה 471.40)
+  // תעריפים ציבוריים וענפיים תלויים בהסכם החל ואינם ערך כללי יחיד.
   // ימי הבראה לפי ותק (מגזר פרטי)
   daysByYearsOfService: [
     { years: 1, days: 5 },
@@ -275,7 +251,6 @@ export const CONSTANTS_2026 = {
   TAX_BRACKETS: TAX_BRACKETS_2026,
   SURTAX: SURTAX_2026,
   CREDIT_POINT: CREDIT_POINT_2026,
-  CREDIT_POINTS_BY_STATUS,
   SOCIAL_SECURITY_EMPLOYEE: SOCIAL_SECURITY_EMPLOYEE_2026,
   SOCIAL_SECURITY_SELF_EMPLOYED: SOCIAL_SECURITY_SELF_EMPLOYED_2026,
   SEVERANCE: SEVERANCE_COMPENSATION_2026,

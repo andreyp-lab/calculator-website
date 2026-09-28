@@ -151,7 +151,7 @@ export default function FuelCostPage() {
             </li>
             <li>
               <Link href="/vehicles/company-car-benefit" className="text-gold hover:underline">
-                מחשבון שווי שימוש ברכב — חישוב הטבת רכב צמוד לעובד ולמעביד
+                בדיקת שווי שימוש ברכב לפי דגם
               </Link>
             </li>
           </ul>

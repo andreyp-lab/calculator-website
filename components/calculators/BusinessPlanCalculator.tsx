@@ -223,7 +223,7 @@ export function BusinessPlanCalculator({ businessSlug }: Props) {
       </div>
 
       <p className="px-5 sm:px-6 py-3 text-xs text-ink/70 border-t border-ink/15">
-        ⚠️ אומדן בקירוב בלבד לפי טווחי שוק 2026 — לא תחליף לתוכנית עסקית מקצועית או להצעות מחיר.
+        המספרים הם הנחות לדוגמה ללא אימות מחירי שוק, שכירות או ארנונה לנכס. החליפו בהצעות מחיר, בחוזה שכירות ובצו הארנונה הרלוונטי לפני החלטה.
       </p>
     </div>
   );

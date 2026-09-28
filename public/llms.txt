@@ -21,7 +21,7 @@
 
 ### מחשבונים פיננסיים - זכויות עובד
 - [מחשבון פיצויי פיטורין](https://cheshbonai.co.il/employee-rights/severance)
-- [מחשבון דמי לידה ואמהות](https://cheshbonai.co.il/employee-rights/maternity-benefits)
+- [בדיקת דמי לידה ואמהות](https://cheshbonai.co.il/employee-rights/maternity-benefits)
 - [מחשבון דמי אבטלה](https://cheshbonai.co.il/employee-rights/unemployment-benefits)
 - [מחשבון שכר מילואים](https://cheshbonai.co.il/employee-rights/reserve-duty-pay)
 - [מחשבון שכר מינימום](https://cheshbonai.co.il/employee-rights/minimum-wage)
@@ -55,7 +55,7 @@
 - [מחשבון משכנתא](https://cheshbonai.co.il/real-estate/mortgage)
 - [אופטימייזר משכנתא Solver-Style](https://cheshbonai.co.il/real-estate/mortgage-optimizer)
 - [מחשבון מס רכישה 2026](https://cheshbonai.co.il/real-estate/purchase-tax)
-- [מחשבון מס שבח](https://cheshbonai.co.il/real-estate/capital-gains-tax)
+- [בדיקת מס שבח ברשות המסים](https://cheshbonai.co.il/real-estate/capital-gains-tax)
 
 ### מחשבונים פיננסיים - השקעות וחיסכון
 - [מחשבון ריבית דריבית](https://cheshbonai.co.il/investments/compound-interest)

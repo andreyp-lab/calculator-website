@@ -216,7 +216,7 @@ export default function SeverancePage() {
                 <a href="/employee-rights/recreation-pay">מחשבון דמי הבראה</a> — תעריף 2026 לפי וותק ומגזר
               </li>
               <li>
-                <a href="/employee-rights/maternity-benefits">מחשבון דמי לידה</a> — חישוב מהביטוח הלאומי והארכות
+                <a href="/employee-rights/maternity-benefits">בדיקת דמי לידה</a> — קישור לחישוב האישי של הביטוח הלאומי
               </li>
               <li>
                 <a href="/employee-rights/reserve-duty-pay">מחשבון תגמולי מילואים</a> — תשלום בסיסי ומענקים

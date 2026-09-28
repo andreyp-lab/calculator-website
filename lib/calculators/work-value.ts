@@ -20,7 +20,7 @@
 
 export interface WorkValueInput {
   /** שכר ברוטו חודשי (₪) */
-  monthlyGrossSalary: number;
+  monthlyNetSalary: number;
   /** שעות עבודה חודשיות (לא כולל נסיעה) */
   monthlyWorkHours: number;
   /** שעות נסיעה חודשיות */
@@ -50,7 +50,7 @@ export interface WorkValueInput {
 }
 
 export interface WorkValueResult {
-  /** נטו מהשכר (משוער) */
+  /** נטו כפי שהוזן על ידי המשתמש */
   estimatedNetSalary: number;
   /** ערך הטבות מעסיק (פנסיה + ק.ה. + הטבות) */
   totalEmployerBenefits: number;
@@ -71,10 +71,7 @@ export interface WorkValueResult {
 }
 
 export function calculateWorkValue(input: WorkValueInput): WorkValueResult {
-  // אומדן נטו (פשטני - 65% מהברוטו)
-  // למעשה לפי מדרגות, אבל זו הערכה מהירה
-  const estimatedTaxRate = input.monthlyGrossSalary > 25_000 ? 0.45 : 0.30;
-  const estimatedNetSalary = input.monthlyGrossSalary * (1 - estimatedTaxRate);
+  const estimatedNetSalary = Math.max(0, input.monthlyNetSalary);
 
   // הטבות מעסיק
   const totalEmployerBenefits =
@@ -90,8 +87,8 @@ export function calculateWorkValue(input: WorkValueInput): WorkValueResult {
     input.workMeals +
     input.otherWorkExpenses;
 
-  // הכנסה אפקטיבית מעבודה (נטו + הטבות - הוצאות)
-  const effectiveTakeHome = estimatedNetSalary + totalEmployerBenefits - totalWorkExpenses;
+  // תזרים פנוי: הפקדות מעסיק והטבות שאינן במזומן מוצגות בנפרד.
+  const effectiveTakeHome = estimatedNetSalary - totalWorkExpenses;
 
   // הפרש מול האלטרנטיבה
   const differenceVsAlternative = effectiveTakeHome - input.alternativeBenefit;
@@ -104,19 +101,8 @@ export function calculateWorkValue(input: WorkValueInput): WorkValueResult {
     totalEffectiveHours > 0 ? effectiveTakeHome / totalEffectiveHours : 0;
 
   // ההמלצה
-  let recommendation = '';
-  let isWorthWorking = differenceVsAlternative > 0;
-
-  if (differenceVsAlternative <= 0) {
-    isWorthWorking = false;
-    recommendation = `העבודה לא משתלמת - האלטרנטיבה מניבה ${Math.abs(differenceVsAlternative).toFixed(0)} ₪ יותר. שקול לוותר על העבודה או לדרוש שכר גבוה יותר.`;
-  } else if (effectiveHourlyWage < 30) {
-    recommendation = `שווי שעה אפקטיבי נמוך מאוד (${effectiveHourlyWage.toFixed(0)} ₪/שעה). העבודה משתלמת מעט מהאלטרנטיבה.`;
-  } else if (effectiveHourlyWage < 60) {
-    recommendation = `שווי שעה סביר (${effectiveHourlyWage.toFixed(0)} ₪/שעה). העבודה משתלמת מעבר לקצבה.`;
-  } else {
-    recommendation = `שווי שעה טוב (${effectiveHourlyWage.toFixed(0)} ₪/שעה). העבודה משתלמת בבירור.`;
-  }
+  const isWorthWorking = differenceVsAlternative > 0;
+  const recommendation = 'זו השוואה כספית לפי הסכומים שהזנתם. בדקו את הזכאות להכנסה החלופית בנפרד ואת השפעת השינוי על פנסיה, זכויות ועתיד מקצועי.';
 
   return {
     estimatedNetSalary,

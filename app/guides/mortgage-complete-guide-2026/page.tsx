@@ -397,9 +397,8 @@ export default function MortgageCompleteGuide() {
 
             <h3 className="text-xl font-bold text-ink mb-3">חישוב ראלי: מה אחוז ה-LTV הנכון לך?</h3>
             <p className="text-ink/70 mb-5">
-              גם אם הבנק מוכן לתת 75% – לא תמיד כדאי לקחת את המקסימום. LTV גבוה = יותר ריבית
-              לאורך שנים + פחות גמישות. ממליצים להשאיר לפחות 10%–15% &quot;כרית&quot; מתחת לאחוז המקסימלי
-              המותר.
+              גם אם הבנק מוכן לתת 75% – לא תמיד כדאי לקחת את המקסימום. שיעור מימון גבוה משנה את סכום ההלוואה ואת חשיפתכם לסיכון. הריבית תלויה בהצעה שתקבלו בפועל;
+              השוו הצעות לסכומי הלוואה שונים ושמרו יתרת נזילות שמתאימה לצרכים שלכם.
             </p>
 
             <Link
@@ -822,7 +821,7 @@ export default function MortgageCompleteGuide() {
                 { href: '/real-estate/mortgage', label: 'מחשבון משכנתא בסיסי', desc: 'חשב החזר חודשי, ריבית כוללת ולוח סילוקין מלא לכל מסלול.' },
                 { href: '/real-estate/mortgage-optimizer', label: 'אופטימייזר תמהיל משכנתא', desc: 'הכלי המתקדם ביותר בישראל – Solver-style לתמהיל האופטימלי לפרופיל שלך.' },
                 { href: '/real-estate/purchase-tax', label: 'מחשבון מס רכישה', desc: 'חשב את מס הרכישה לפי סוג רוכש, מחיר ומצב משפחתי.' },
-                { href: '/real-estate/capital-gains-tax', label: 'מחשבון מס שבח', desc: 'מכירת דירה? חשב את מס השבח לפי הלינאריות.' },
+                { href: '/real-estate/capital-gains-tax', label: 'בדיקת מס שבח', desc: 'מכירת דירה? גשו לשומה העצמית של רשות המסים.' },
                 { href: '/tools/loan-eligibility', label: 'מחשבון כשירות הלוואה', desc: 'בדוק כמה תוכל לקבל לפי הכנסה, התחייבויות ו-LTV.' },
                 { href: '/compare/rent-vs-buy', label: 'השוואה: שכירות vs. קנייה', desc: 'ניתוח מלא – מתי כדאי לקנות ומתי לשכור.' },
               ].map((item) => (
@@ -842,7 +841,7 @@ export default function MortgageCompleteGuide() {
               {[
                 { href: '/blog/mortgage-tracks-guide-2026', label: 'מסלולי המשכנתא - המדריך המלא 2026' },
                 { href: '/blog/boi-directive-329-mortgage-rules', label: 'הוראת בנק ישראל 329 - הסבר מלא' },
-                { href: '/blog/ltv-mortgage-rates-secret', label: 'LTV וריביות - הסוד שהבנקים לא אומרים' },
+                { href: '/blog/ltv-mortgage-rates-secret', label: 'שיעור מימון והצעות ריבית' },
                 { href: '/blog/mortgage-refinance-when-and-how', label: 'מחזור משכנתא - מתי וכיצד' },
                 { href: '/blog/purchase-tax-2026-complete-guide', label: 'מדריך מס רכישה 2026' },
                 { href: '/blog/capital-gains-tax-property-2026', label: 'מס שבח על נדל"ן 2026' },

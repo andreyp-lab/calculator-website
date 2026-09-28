@@ -4,7 +4,6 @@ import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CompoundInterestCalculator } from '@/components/calculators/CompoundInterestCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 import { STUDY_FUND_2026 } from '@/lib/constants/tax-2026';
-import { STANDARD_TAX_RATE } from '@/lib/calculators/capital-gains-tax';
 
 // ============================================================
 // נתוני מס נגזרים מקבועי האתר ככל האפשר.
@@ -12,7 +11,7 @@ import { STANDARD_TAX_RATE } from '@/lib/calculators/capital-gains-tax';
 // מקור: פקודת מס הכנסה סעיף 125ג; אומת מול bizportal/kolzchut 2026-08-15.
 // ============================================================
 const DEPOSIT_TAX_NOMINAL = 0.15; // ריבית נומינלית, פיקדון שקלי לא צמוד
-const DEPOSIT_TAX_REAL = STANDARD_TAX_RATE; // 25% ריאלי - פיקדון צמוד מדד/מט"ח
+const DEPOSIT_TAX_REAL = 0.25; // 25% ריאלי - פיקדון צמוד מדד/מט"ח
 
 const pct = (v: number) =>
   `${(v * 100).toLocaleString('he-IL', { maximumFractionDigits: 2 })}%`;

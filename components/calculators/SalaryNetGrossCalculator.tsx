@@ -20,14 +20,12 @@ import {
   calculateNetFromEmployerCost,
   calculateYearComparison,
   calculateBonusNet,
-  calculateCreditPoints,
   calculateSalaryCurve,
   PENSION_RATES,
   type SalaryNetGrossInput,
   type CalculatorMode,
   type TaxYear,
   type PensionLevel,
-  type CreditPointsProfile,
 } from '@/lib/calculators/salary-net-gross';
 import { formatCurrency, formatPercent } from '@/lib/utils/formatters';
 
@@ -43,20 +41,6 @@ const defaultOptions: Omit<SalaryNetGrossInput, 'grossSalary'> = {
   disabilityInsuranceRate: 0,
   monthlyWorkHours: 182,
   taxYear: '2026',
-};
-
-const defaultProfile: CreditPointsProfile = {
-  gender: 'male',
-  childrenAge0: 0,
-  childrenAge1to5: 0,
-  childrenAge6to17: 0,
-  childrenAge18: 0,
-  singleParent: false,
-  disabledChildren: 0,
-  newImmigrantYears: 0,
-  releasedSoldier: false,
-  bachelorDegree: false,
-  masterDegree: false,
 };
 
 type ChartView = 'pie' | 'bar' | 'curve';
@@ -80,9 +64,7 @@ export function SalaryNetGrossCalculator() {
   // תצוגות נוספות
   const [showYearCompare, setShowYearCompare] = useState(false);
   const [showBonus, setShowBonus] = useState(false);
-  const [showCreditWizard, setShowCreditWizard] = useState(false);
   const [bonusAmount, setBonusAmount] = useState(10_000);
-  const [creditProfile, setCreditProfile] = useState<CreditPointsProfile>(defaultProfile);
   const [chartView, setChartView] = useState<ChartView>('pie');
 
   function updateOpts<K extends keyof typeof opts>(k: K, v: (typeof opts)[K]) {
@@ -118,11 +100,6 @@ export function SalaryNetGrossCalculator() {
     [showBonus, bonusAmount, mainResult.annualGross, opts],
   );
 
-  // נקודות זיכוי
-  const creditResult = useMemo(
-    () => (showCreditWizard ? calculateCreditPoints(creditProfile) : null),
-    [showCreditWizard, creditProfile],
-  );
 
   // עקומת שכר
   const salaryCurve = useMemo(
@@ -285,13 +262,7 @@ export function SalaryNetGrossCalculator() {
                     onChange={(e) => updateOpts('creditPoints', Number(e.target.value))}
                     className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowCreditWizard(!showCreditWizard)}
-                    className="mt-1 text-xs text-emerald-800 hover:underline"
-                  >
-                    חשב נקודות זיכוי אישית
-                  </button>
+                  <a className="mt-2 block text-xs text-emerald-800 underline" href="https://www.gov.il/he/service/tax-credit" target="_blank" rel="noopener noreferrer">בדיקת נקודות הזיכוי בסימולטור רשות המסים ↗</a>
                 </Field>
                 <Field label="שעות / חודש" hint="182 = משרה מלאה">
                   <input
@@ -521,16 +492,6 @@ export function SalaryNetGrossCalculator() {
           </div>
         </div>
       </div>
-
-      {/* ===== Credit Points Wizard ===== */}
-      {showCreditWizard && (
-        <CreditPointsWizard
-          profile={creditProfile}
-          setProfile={setCreditProfile}
-          creditResult={creditResult}
-          onApply={(points) => updateOpts('creditPoints', points)}
-        />
-      )}
 
       {/* ===== Year Comparison ===== */}
       {showYearCompare && yearComparison && (
@@ -836,160 +797,6 @@ function BonusPanel({
 // ============================================================
 // Credit Points Wizard
 // ============================================================
-
-function CreditPointsWizard({
-  profile,
-  setProfile,
-  creditResult,
-  onApply,
-}: {
-  profile: CreditPointsProfile;
-  setProfile: (p: CreditPointsProfile) => void;
-  creditResult: ReturnType<typeof calculateCreditPoints> | null;
-  onApply: (points: number) => void;
-}) {
-  function updateProfile<K extends keyof CreditPointsProfile>(k: K, v: CreditPointsProfile[K]) {
-    setProfile({ ...profile, [k]: v });
-  }
-
-  return (
-    <div className="bg-paper border border-emerald-200 rounded-none p-5">
-      <h3 className="font-bold text-ink text-lg mb-1">מחשבון נקודות זיכוי אישי</h3>
-      <p className="text-sm text-ink/70 mb-4">
-        מלא את הפרטים שלך — המחשבון ימצא את מספר נקודות הזיכוי הנכון
-      </p>
-
-      <div className="grid md:grid-cols-2 gap-5">
-        <div className="space-y-3">
-          <div>
-            <label className="text-sm font-medium text-ink/70 block mb-1">מין</label>
-            <div className="flex gap-3">
-              {(['male', 'female'] as const).map((g) => (
-                <label key={g} className="flex items-center gap-1.5 cursor-pointer text-sm">
-                  <input
-                    type="radio"
-                    checked={profile.gender === g}
-                    onChange={() => updateProfile('gender', g)}
-                    className="w-4 h-4"
-                  />
-                  {g === 'male' ? 'גבר' : 'אישה'}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <NumberField
-              label="ילדים שנת לידה"
-              value={profile.childrenAge0}
-              onChange={(v) => updateProfile('childrenAge0', v)}
-              hint="1.5 נק' לילד"
-            />
-            <NumberField
-              label="ילדים גיל 1-5"
-              value={profile.childrenAge1to5}
-              onChange={(v) => updateProfile('childrenAge1to5', v)}
-              hint="2.5 נק' לילד"
-            />
-            <NumberField
-              label="ילדים גיל 6-17"
-              value={profile.childrenAge6to17}
-              onChange={(v) => updateProfile('childrenAge6to17', v)}
-              hint="1 נק' לילד"
-            />
-            <NumberField
-              label="ילד גיל 18"
-              value={profile.childrenAge18}
-              onChange={(v) => updateProfile('childrenAge18', v)}
-              hint="0.5 נק' לילד"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <NumberField
-              label="ילדים נכים"
-              value={profile.disabledChildren}
-              onChange={(v) => updateProfile('disabledChildren', v)}
-              hint="1 נק' לילד"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <ToggleField
-            label="הורה יחיד"
-            hint="+1 נקודה"
-            value={profile.singleParent}
-            onChange={(v) => updateProfile('singleParent', v)}
-          />
-          <ToggleField
-            label="חייל משוחרר (עד 3 שנים)"
-            hint="+2 נקודות"
-            value={profile.releasedSoldier}
-            onChange={(v) => updateProfile('releasedSoldier', v)}
-          />
-          <ToggleField
-            label="תואר ראשון (שנה ראשונה)"
-            hint="+1 נקודה"
-            value={profile.bachelorDegree}
-            onChange={(v) => updateProfile('bachelorDegree', v)}
-          />
-          <ToggleField
-            label="תואר שני (שנה ראשונה)"
-            hint="+0.5 נקודה"
-            value={profile.masterDegree}
-            onChange={(v) => updateProfile('masterDegree', v)}
-          />
-
-          <div>
-            <label className="text-sm font-medium text-ink/70 block mb-1">עולה חדש</label>
-            <select
-              value={profile.newImmigrantYears}
-              onChange={(e) => updateProfile('newImmigrantYears', Number(e.target.value) as 0 | 1 | 2 | 3)}
-              className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
-            >
-              <option value={0}>לא עולה חדש</option>
-              <option value={1}>שנה 1-1.5 (+3 נק')</option>
-              <option value={2}>שנה 1.5-3 (+2 נק')</option>
-              <option value={3}>שנה 3-4.5 (+1 נק')</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {creditResult && (
-        <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-none p-4">
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <p className="font-bold text-emerald-900 text-lg">
-                {creditResult.totalPoints.toFixed(2)} נקודות זיכוי
-              </p>
-              <p className="text-sm text-emerald-800">
-                = {formatCurrency(creditResult.monthlyCredit)}/חודש | {formatCurrency(creditResult.annualCredit)}/שנה פחות מס
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => onApply(creditResult.totalPoints)}
-              className="bg-emerald-600 text-white px-4 py-2 rounded-none text-sm font-medium hover:bg-emerald-700 transition"
-            >
-              החל על המחשבון
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-1 text-xs">
-            {creditResult.breakdown.map((item, i) => (
-              <div key={i} className="flex justify-between text-ink/70">
-                <span>{item.label}</span>
-                <span className="font-medium tabular-nums">{item.points.toFixed(2)}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ============================================================
 // Helper UI Components

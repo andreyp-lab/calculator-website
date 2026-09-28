@@ -36,8 +36,8 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון דמי לידה',
-    description: 'חישוב גובה דמי לידה מהביטוח הלאומי + הארכות לתאומים',
+    title: 'בדיקת דמי לידה',
+    description: 'הסבר וקישור למחשבון דמי הלידה הרשמי של הביטוח הלאומי',
     href: '/employee-rights/maternity-benefits',
     available: true,
   },
@@ -49,7 +49,7 @@ const calculators = [
   },
   {
     title: 'מחשבון תגמולי מילואים',
-    description: 'תשלום בסיסי + מענקי חרבות ברזל (280 ₪/יום)',
+    description: 'בדיקת תגמול מילואים במחשבון הביטוח הלאומי',
     href: '/employee-rights/reserve-duty-pay',
     available: true,
   },
@@ -109,7 +109,7 @@ const faqItems = [
   {
     question: 'מה ההבדל בין דמי הבראה במגזר הפרטי לציבורי?',
     answer:
-      'התעריף ליום הבראה שונה: במגזר הפרטי 418 ₪ ליום, ובמגזר הציבורי 511.60 ₪ ליום (2026). מספר הימים נקבע לפי ותק — מ-5 ימים בשנה הראשונה ועד 10 ימים למי שצבר 20 שנות ותק ומעלה. הזכאות לדמי הבראה מתחילה לאחר השלמת שנת עבודה ראשונה.',
+      'לפי הצו הכללי במגזר הפרטי, תעריף הבסיס הוא 418 ₪ ליום והימים גדלים עם הוותק. במגזר הציבורי ובענפים שונים עשויים לחול הסכמים אחרים; יש לבדוק את ההסכם החל. הזכאות לפי הצו הכללי מתחילה לאחר שנת עבודה.',
   },
 ];
 
@@ -297,8 +297,8 @@ export default function EmployeeRightsPage() {
           <div className="space-y-4 text-ink/75 leading-relaxed">
             <p>
               דמי הבראה משולמים אחת לשנה (בדרך כלל בין יוני לספטמבר) לכל עובד שהשלים שנת
-              עבודה. התעריף ב-2026: 418 ₪ ליום במגזר הפרטי ו-511.60 ₪ ליום במגזר
-              הציבורי. מספר הימים גדל עם הוותק — 5 ימים בשנה הראשונה, ועד 10 ימים למי
+              עבודה. תעריף הבסיס לפי הצו הכללי במגזר הפרטי הוא 418 ₪ ליום; במגזר הציבורי
+              ובענפים אחרים יש לבדוק את ההסכם החל. מספר הימים גדל עם הוותק — 5 ימים בשנה הראשונה, ועד 10 ימים למי
               שצבר 20 שנות ותק ומעלה. עובד במשרה חלקית זכאי לדמי הבראה באופן יחסי להיקף
               המשרה.
             </p>
@@ -371,7 +371,7 @@ export default function EmployeeRightsPage() {
                     <Link href="/employee-rights/recreation-pay" className="text-ink hover:text-gold transition">דמי הבראה</Link>
                   </td>
                   <td className="px-4 py-3 text-ink/75">
-                    {RECREATION_PAY_2026.privateSectorPerDay} ₪ ליום (פרטי) / {RECREATION_PAY_2026.publicSectorPerDay} ₪ (ציבורי)
+                    {RECREATION_PAY_2026.privateSectorPerDay} ₪ ליום לפי הצו הכללי במגזר הפרטי; תעריף אחר לפי הסכם חל
                   </td>
                   <td className="px-4 py-3 text-ink/75">
                     {RECREATION_PAY_2026.daysByYearsOfService[0].days}–{RECREATION_PAY_2026.daysByYearsOfService[5].days} ימים בשנה לפי ותק

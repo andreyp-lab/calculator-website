@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { calculateSalaryNetGross } from '@/lib/calculators/salary-net-gross';
 import { calculateCompanyCarBenefitLegacy } from '@/lib/calculators/company-car-benefit';
-import { calculateMinimumWage } from '@/lib/calculators/minimum-wage';
 import { calculateTaxAdvances } from '@/lib/calculators/tax-advances';
 import {
   calculateAnnualLeave,
@@ -65,38 +64,6 @@ describe('Company Car Benefit', () => {
     // הפחתה חודשית קבועה (לא אחוז): חשמלי −1,350; שווי = 4,960 − 1,350 = 3,610
     expect(r.electricDiscount).toBe(1_350);
     expect(r.taxableBenefit).toBe(3_610);
-  });
-});
-
-describe('Minimum Wage', () => {
-  it('שכר חודשי בוגר - 6,443.85', () => {
-    const r = calculateMinimumWage({
-      workType: 'monthly',
-      ageGroup: 'adult',
-      partTimePercentage: 100,
-    });
-    expect(r.minimumWageFullTime).toBe(6_443.85);
-    expect(r.adjustedMinimumWage).toBe(6_443.85);
-  });
-
-  it('שכר נער 16-17 - 70%', () => {
-    const r = calculateMinimumWage({
-      workType: 'monthly',
-      ageGroup: 'youth-16-17',
-      partTimePercentage: 100,
-    });
-    expect(r.adjustedMinimumWage).toBeCloseTo(6_443.85 * 0.7, 2);
-  });
-
-  it('בדיקה אם שכר מספק', () => {
-    const r = calculateMinimumWage({
-      workType: 'monthly',
-      ageGroup: 'adult',
-      partTimePercentage: 100,
-      actualWage: 5_000,
-    });
-    expect(r.isAboveMinimum).toBe(false);
-    expect(r.shortfall).toBeGreaterThan(0);
   });
 });
 

@@ -240,7 +240,7 @@ export default function LeasingMimuniVsTifuliPage() {
               ללא קשר לשאלה אם הרכב בליסינג תפעולי, מימוני או בבעלות מלאה. לרכב חשמלי, פלאג-אין
               והיברידי יש הפחתות בסכום קבוע.{' '}
               <Link href="/vehicles/company-car-benefit" className="text-gold underline">
-                מחשבון שווי שימוש ברכב חברה
+                בדיקת שווי שימוש ברכב חברה
               </Link>{' '}
               מראה כמה מס זה מוסיף לתלוש בפועל.
             </p>
@@ -272,7 +272,7 @@ export default function LeasingMimuniVsTifuliPage() {
               </li>
               <li>
                 <Link href="/vehicles/company-car-benefit" className="text-gold underline">
-                  מחשבון שווי שימוש רכב חברה
+                  בדיקת שווי שימוש רכב חברה
                 </Link>{' '}
                 - כמה עולה רכב צמוד בתלוש.
               </li>

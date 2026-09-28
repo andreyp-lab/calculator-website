@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const calculators = [
   {
-    title: 'מחשבון שווי שימוש ברכב צמוד',
+    title: 'בדיקת שווי שימוש ברכב צמוד',
     description: 'התוספת החודשית לשכר החייבת במס על רכב מהעבודה — לפי קבוצת מחיר הרכב',
     href: '/vehicles/company-car-benefit',
     available: true,

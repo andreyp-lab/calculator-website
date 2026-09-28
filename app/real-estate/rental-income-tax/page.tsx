@@ -188,7 +188,7 @@ export default function RentalIncomeTaxPage() {
           <h2 className="text-2xl font-bold text-ink mb-4">כלים ומדריכים רלוונטיים</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { href: '/real-estate/capital-gains-tax', label: 'מחשבון מס שבח' },
+              { href: '/real-estate/capital-gains-tax', label: 'בדיקת מס שבח' },
               { href: '/real-estate/purchase-tax', label: 'מחשבון מס רכישה' },
               { href: '/real-estate/mortgage', label: 'מחשבון משכנתא' },
               { href: '/personal-tax/income-tax', label: 'מחשבון מס הכנסה' },

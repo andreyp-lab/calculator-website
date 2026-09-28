@@ -6,7 +6,7 @@ import { formatCurrency } from '@/lib/utils/formatters';
 import { ResultCard } from '@/components/calculator/ResultCard';
 
 const initial: WorkValueInput = {
-  monthlyGrossSalary: 12_000,
+  monthlyNetSalary: 9_000,
   monthlyWorkHours: 180,
   monthlyCommutingHours: 20,
   alternativeBenefit: 5_000,
@@ -37,12 +37,12 @@ export function WorkValueCalculator() {
           <h4 className="font-semibold text-ink text-sm">💼 הכנסות מעבודה</h4>
           <div>
             <label htmlFor="workvaluecalculator-816662" className="block text-xs font-medium text-ink/70 mb-1">
-              שכר ברוטו חודשי (₪)
+              שכר נטו חודשי צפוי (₪) — לפי תלוש או בדיקה אישית
             </label>
             <input id="workvaluecalculator-816662"
               type="number"
-              value={input.monthlyGrossSalary}
-              onChange={(e) => update('monthlyGrossSalary', Number(e.target.value))}
+              value={input.monthlyNetSalary}
+              onChange={(e) => update('monthlyNetSalary', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
             />
           </div>
@@ -139,7 +139,7 @@ export function WorkValueCalculator() {
           }`}
         >
           <div className="text-sm opacity-90 mb-1">
-            {result.isWorthWorking ? 'משתלם לעבוד! ✓' : 'לא משתלם 😟'}
+            {result.isWorthWorking ? 'פער כספי חיובי בתרחיש' : 'פער כספי שלילי בתרחיש'}
           </div>
           <div className="text-3xl font-bold mb-1">
             {result.differenceVsAlternative >= 0 ? '+' : ''}
@@ -149,7 +149,7 @@ export function WorkValueCalculator() {
         </div>
 
         <ResultCard
-          title="שווי שעת עבודה אמיתי"
+          title="שווי שעה לפי הנתונים שהוזנו"
           value={`${result.effectiveHourlyWage.toFixed(0)} ₪/שעה`}
           subtitle="כולל זמני נסיעה והוצאות"
           variant="primary"
@@ -157,11 +157,11 @@ export function WorkValueCalculator() {
 
         <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-ink/70">נטו משכר (משוער):</span>
+            <span className="text-ink/70">נטו משכר שהוזן:</span>
             <span className="font-medium">+{formatCurrency(result.estimatedNetSalary)}</span>
           </div>
           <div className="flex justify-between text-emerald-800">
-            <span>הטבות מעסיק:</span>
+            <span>הטבות מעסיק (מחוץ לפער המזומן):</span>
             <span className="font-medium">+{formatCurrency(result.totalEmployerBenefits)}</span>
           </div>
           <div className="flex justify-between text-red-700">

@@ -4,7 +4,6 @@ import {
   calculateSection14Detail,
   compareSeveranceTaxOptions,
   getTerminationRights,
-  calculateLatePaymentPenalty,
   calculateSalaryBasis,
 } from '@/lib/calculators/severance';
 
@@ -367,51 +366,6 @@ describe('getTerminationRights', () => {
       expect(Array.isArray(rights.notes)).toBe(true);
       expect(rights.notes.length).toBeGreaterThan(0);
     }
-  });
-});
-
-// ============================================================
-// Late Payment Tests
-// ============================================================
-
-describe('calculateLatePaymentPenalty', () => {
-  it('שולם בזמן — אין עיכוב', () => {
-    const result = calculateLatePaymentPenalty(50_000, 0);
-    expect(result.totalPenalty).toBe(0);
-    expect(result.totalDue).toBe(50_000);
-  });
-
-  it('14 ימי עיכוב — בתוך חסד, אין קנס', () => {
-    const result = calculateLatePaymentPenalty(50_000, 14);
-    expect(result.totalPenalty).toBe(0);
-    expect(result.totalDue).toBe(50_000);
-  });
-
-  it('30 ימי עיכוב — קנס 8% + חודש אחד', () => {
-    const result = calculateLatePaymentPenalty(100_000, 30);
-    // 8% ראשוני = 8,000; 1 חודש × 1.5% = 1,500
-    expect(result.totalPenalty).toBe(9_500);
-    expect(result.totalDue).toBe(109_500);
-  });
-
-  it('90 ימי עיכוב — קנס 8% + 3 חודשים', () => {
-    const result = calculateLatePaymentPenalty(100_000, 90);
-    // 8,000 + (3 × 1,500) = 8,000 + 4,500 = 12,500
-    expect(result.totalPenalty).toBe(12_500);
-    expect(result.totalDue).toBe(112_500);
-  });
-
-  it('365 ימי עיכוב — קנס משמעותי', () => {
-    const result = calculateLatePaymentPenalty(50_000, 365);
-    expect(result.totalPenalty).toBeGreaterThan(0);
-    expect(result.totalDue).toBeGreaterThan(50_000);
-    expect(result.legalBasis).toContain('הגנת השכר');
-  });
-
-  it('תשלום מאוחר שלא נדרש — דוגמת ערך 0', () => {
-    const result = calculateLatePaymentPenalty(0, 30);
-    expect(result.totalPenalty).toBe(0);
-    expect(result.totalDue).toBe(0);
   });
 });
 

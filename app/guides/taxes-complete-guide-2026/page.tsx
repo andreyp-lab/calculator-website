@@ -538,7 +538,7 @@ export default function TaxesCompleteGuide() {
 
             <div className="flex gap-3 flex-wrap">
               <Link href="/real-estate/capital-gains-tax" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
-                מחשבון מס שבח ←
+                בדיקת מס שבח ←
               </Link>
               <Link href="/blog/capital-gains-tax-property-2026" className="text-gold underline text-sm inline-flex items-center">
                 מדריך מס שבח 2026 ←
@@ -820,7 +820,7 @@ export default function TaxesCompleteGuide() {
                 { href: '/self-employed/tax-advances', label: 'מחשבון מקדמות מס', desc: 'חשב מקדמות מס חודשיות.' },
                 { href: '/self-employed/year-end-tax-simulator', label: 'סימולטור מס שנתי', desc: 'מה יהיה המס שלך בסוף השנה?' },
                 { href: '/self-employed/dividend-vs-salary', label: 'דיבידנד vs. שכר', desc: 'מה עדיף לבעל שליטה?' },
-                { href: '/real-estate/capital-gains-tax', label: 'מחשבון מס שבח', desc: 'חשב מס שבח על מכירת נדל"ן.' },
+                { href: '/real-estate/capital-gains-tax', label: 'בדיקת מס שבח', desc: 'חשב מס שבח על מכירת נדל"ן.' },
                 { href: '/real-estate/purchase-tax', label: 'מחשבון מס רכישה', desc: 'מס רכישה לפי סוג רוכש ומחיר.' },
               ].map((item) => (
                 <Link

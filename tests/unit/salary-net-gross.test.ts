@@ -5,14 +5,12 @@ import {
   calculateNetFromEmployerCost,
   calculateYearComparison,
   calculateBonusNet,
-  calculateCreditPoints,
   calculateSalaryCurve,
   getMarginalBracketInfoPublic,
   TAX_BRACKETS_2024,
   TAX_BRACKETS_2025,
   PENSION_RATES,
   type SalaryNetGrossInput,
-  type CreditPointsProfile,
 } from '@/lib/calculators/salary-net-gross';
 
 // ============================================================
@@ -218,64 +216,6 @@ describe('calculateBonusNet', () => {
     const result = calculateBonusNet(10_000, 180_000, defaultOpts());
     expect(result.effectiveBonusRate).toBeGreaterThan(50);
     expect(result.effectiveBonusRate).toBeLessThan(100);
-  });
-});
-
-// ============================================================
-// 6. calculateCreditPoints
-// ============================================================
-
-describe('calculateCreditPoints', () => {
-  it('גבר בסיסי — 2.25 נקודות', () => {
-    const profile: CreditPointsProfile = {
-      gender: 'male', childrenAge0: 0, childrenAge1to5: 0, childrenAge6to17: 0,
-      childrenAge18: 0, singleParent: false, disabledChildren: 0, newImmigrantYears: 0,
-      releasedSoldier: false, bachelorDegree: false, masterDegree: false,
-    };
-    const result = calculateCreditPoints(profile);
-    expect(result.totalPoints).toBeCloseTo(2.25, 2);
-  });
-
-  it('אישה בסיסית — 2.75 נקודות', () => {
-    const profile: CreditPointsProfile = {
-      gender: 'female', childrenAge0: 0, childrenAge1to5: 0, childrenAge6to17: 0,
-      childrenAge18: 0, singleParent: false, disabledChildren: 0, newImmigrantYears: 0,
-      releasedSoldier: false, bachelorDegree: false, masterDegree: false,
-    };
-    const result = calculateCreditPoints(profile);
-    expect(result.totalPoints).toBeCloseTo(2.75, 2);
-  });
-
-  it('גבר + 2 ילדים 1-5 = 2.25 + 5 = 7.25 נקודות', () => {
-    const profile: CreditPointsProfile = {
-      gender: 'male', childrenAge0: 0, childrenAge1to5: 2, childrenAge6to17: 0,
-      childrenAge18: 0, singleParent: false, disabledChildren: 0, newImmigrantYears: 0,
-      releasedSoldier: false, bachelorDegree: false, masterDegree: false,
-    };
-    const result = calculateCreditPoints(profile);
-    expect(result.totalPoints).toBeCloseTo(7.25, 2);
-  });
-
-  it('חייל משוחרר — מוסיף 2 נקודות', () => {
-    const profileBase: CreditPointsProfile = {
-      gender: 'male', childrenAge0: 0, childrenAge1to5: 0, childrenAge6to17: 0,
-      childrenAge18: 0, singleParent: false, disabledChildren: 0, newImmigrantYears: 0,
-      releasedSoldier: false, bachelorDegree: false, masterDegree: false,
-    };
-    const profileSoldier = { ...profileBase, releasedSoldier: true };
-    const base = calculateCreditPoints(profileBase);
-    const soldier = calculateCreditPoints(profileSoldier);
-    expect(soldier.totalPoints - base.totalPoints).toBeCloseTo(2, 2);
-  });
-
-  it('זיכוי חודשי = נקודות × 242', () => {
-    const profile: CreditPointsProfile = {
-      gender: 'male', childrenAge0: 0, childrenAge1to5: 0, childrenAge6to17: 0,
-      childrenAge18: 0, singleParent: false, disabledChildren: 0, newImmigrantYears: 0,
-      releasedSoldier: false, bachelorDegree: false, masterDegree: false,
-    };
-    const result = calculateCreditPoints(profile);
-    expect(result.monthlyCredit).toBeCloseTo(result.totalPoints * 242, 1);
   });
 });
 

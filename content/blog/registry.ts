@@ -99,16 +99,16 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'tax-reduction-25-legal-ways',
-    title: 'איך להפחית מס באופן חוקי - 25 דרכים מוכחות 2026',
+    title: 'בדיקות להפחתת מס כחוק: נקודות זיכוי, תיאום והחזר',
     description:
-      'אסטרטגיות להפחתת מס לשכירים, עצמאיים ובעלי עסקים - הפקדות מוטבות, הוצאות מוכרות, פטורים, ועוד. עם דוגמאות מספריות.',
+      'שירותים רשמיים לבדיקת נקודות זיכוי, תיאום מס, החזר ותרומות מוכרות לפי הנתונים האישיים.',
     category: 'מיסוי אישי',
-    readTime: '25 דקות',
+    readTime: '4 דקות',
     date: '2026-05-04',
     featured: true,
     relatedCalculator: {
       href: '/personal-tax/tax-refund',
-      label: 'חשב את ההחזר',
+      label: 'בדיקת החזר מס',
     },
     related: ['pension-deduction-self-employed-2026', 'study-fund-self-employed-strategy'],
   },
@@ -206,16 +206,16 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'recreation-pay-2026',
-    title: 'דמי הבראה 2026: כמה מגיע לך וכמתי?',
+    title: 'דמי הבראה 2026: כמה ימים ואיזה תעריף חל?',
     description:
-      '418 ₪ ליום לוותיק. אבל כמה ימים מגיעים לך? איך מבקשים? מה ההבדל בין המגזר הציבורי לפרטי? כל המידע.',
+      'הסבר בסיסי על ותק, היקף משרה ותעריף לפי הצו הכללי, עם קישור לצווי ההרחבה הרשמיים.',
     category: 'זכויות עובדים',
     readTime: '6 דקות',
     date: '2026-05-14',
     featured: false,
     relatedCalculator: {
       href: '/employee-rights/recreation-pay',
-      label: 'מחשבון דמי הבראה',
+      label: 'אומדן דמי הבראה',
     },
     related: ['severance-pay-complete-guide', 'employee-rights-israel-2026'],
   },
@@ -255,7 +255,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'tax-credit-points-2026',
     title: 'נקודות זיכוי 2026 - איך לחשב נכון ולא לאבד אלפי שקלים',
     description:
-      'כל נקודות הזיכוי לשנת 2026: 2,904 ₪/שנה לנקודה, חישוב לפי מצב משפחתי, ילדים, עולה חדש, חייל משוחרר. כולל טעויות נפוצות שעולות כסף.',
+      'שווי נקודה ב-2026 וקישורים לבדיקת זכאות אישית בשירותי רשות המסים.',
     category: 'מיסוי אישי',
     readTime: '12 דקות',
     date: '2026-05-16',
@@ -347,9 +347,9 @@ export const blogPosts: BlogPost[] = [
   // ===== אשכול C - משכנתא =====
   {
     slug: 'boi-directive-329-mortgage-rules',
-    title: 'הוראת בנק ישראל 329 - 3 הכללים החבויים שכל לוקח משכנתא חייב להכיר',
+    title: 'הוראת בנק ישראל 329 — מגבלות מימון ותמהיל משכנתא',
     description:
-      'הוראה 329 (מאי 2013) קובעת מה הבנק חייב לאשר ומה אסור: 1/3 קבוע, 2/3 משתנה, 1/3 פריים. במאמר: כל הכללים עם דוגמאות מספריות + טעויות נפוצות.',
+      'סקירת מגבלות שיעור מימון ותמהיל לפי הוראת בנק ישראל 329; ההוראה העדכנית אינה קובעת מגבלת שליש נפרדת לפריים.',
     category: 'נדל"ן ומשכנתאות',
     readTime: '11 דקות',
     date: '2026-05-16',
@@ -362,9 +362,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'ltv-mortgage-rates-secret',
-    title: 'LTV - הסוד שיכול לחסוך לך 100,000 ₪ במשכנתא',
+    title: 'שיעור מימון במשכנתא: תקרות, חישוב והשוואת הצעות',
     description:
-      'LTV (Loan-to-Value) הוא היחס בין המשכנתא לשווי הנכס. ככל שיש לך יותר הון עצמי - הבנק מציע ריבית טובה יותר. במאמר: הטבלה המדויקת + חישוב חיסכון.',
+      'כך מחשבים שיעור מימון, בודקים את מגבלות בנק ישראל ומשווים הצעות ריבית בפועל.',
     category: 'נדל"ן ומשכנתאות',
     readTime: '10 דקות',
     date: '2026-05-16',
@@ -394,16 +394,16 @@ export const blogPosts: BlogPost[] = [
   // ===== אשכול D - זכויות עובד =====
   {
     slug: 'maternity-benefits-complete-guide-2026',
-    title: 'דמי לידה 2026 - חישוב מלא, זכויות הארכה, וחופשת אב',
+    title: 'דמי לידה 2026 - תקופת זכאות, חישוב וניכויים',
     description:
-      'המדריך המלא לדמי לידה 2026: 15 שבועות + הארכות לתאומים/פגות, חישוב לפי שכר, חופשת אב 7 ימים, ושעת הנקה. עם דוגמאות מספריות.',
+      'תנאי זכאות, חישוב השכר לפי הביטוח הלאומי, תקרה וניכויים, עם קישור למחשבון הרשמי.',
     category: 'זכויות עובדים',
-    readTime: '13 דקות',
+    readTime: '4 דקות',
     date: '2026-05-16',
     featured: true,
     relatedCalculator: {
       href: '/employee-rights/maternity-benefits',
-      label: 'מחשבון דמי לידה',
+      label: 'בדיקת דמי לידה',
     },
     related: ['severance-pay-tax-strategies', 'recreation-pay-2026', 'employee-rights-israel-2026'],
   },
@@ -424,16 +424,16 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'reserve-duty-pay-iron-swords-2026',
-    title: 'תגמולי מילואים חרבות ברזל 2026 - 4 המענקים שמגיעים לך',
+    title: 'תגמולי מילואים 2026 — חישוב וזכויות',
     description:
-      'מילואים בתקופת חרבות ברזל: מענק כללי 5,000 ₪, מענק יומי 280 ₪, מענק חזרה לעבודה 5,000 ₪. במאמר: כל הזכויות, חישוב מדויק, ופטור ממס.',
+      'תגמול השירות מחושב בביטוח הלאומי לפי השכר ומשך השירות. מענקים נוספים כפופים למסלול ולתנאי זכאות; בדקו במקור הרשמי.',
     category: 'זכויות עובדים',
     readTime: '11 דקות',
     date: '2026-05-16',
     featured: false,
     relatedCalculator: {
       href: '/employee-rights/reserve-duty-pay',
-      label: 'מחשבון תגמולי מילואים',
+      label: 'בדיקת תגמולי מילואים',
     },
     related: ['severance-pay-tax-strategies', 'employee-rights-israel-2026', 'tax-refund-complete-guide-2026'],
   },
@@ -488,9 +488,9 @@ export const blogPosts: BlogPost[] = [
   // ===== אשכול F - נדל"ן מתקדם =====
   {
     slug: 'purchase-tax-2026-complete-guide',
-    title: 'מס רכישה 2026 - מדריך מלא ל-8 סוגי רוכשים',
+    title: 'מס רכישה 2026 — מדרגות וזכאות אישית',
     description:
-      'מס רכישה 2026: מדרגות לדירה ראשונה (0% עד 1.98M ₪), משקיע (8% מהראשון), עולה חדש (0.5%), נכה - 8 סוגי רוכשים עם דוגמאות וטיפים.',
+      'מס רכישה 2026: מדרגות לדירה יחידה, דירה נוספת והקלה לעולה זכאי, עם הפניה לסימולטור רשות המסים.',
     category: 'נדל"ן ומשכנתאות',
     readTime: '13 דקות',
     date: '2026-05-16',
@@ -503,16 +503,16 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'capital-gains-tax-property-2026',
-    title: 'מס שבח 2026 - איך לחסוך עשרות אלפי שקלים בעת מכירת דירה',
+    title: 'מס שבח במכירת דירה: בדיקה נכונה לפני עסקה',
     description:
-      'מס שבח על מכירת דירה: מס לינארי לדירות לפני 2014 (חיסכון של עד 50%!), פטור דירה יחידה עד 5M, חישוב מדויק עם דוגמאות. עדכני 2026.',
+      'מתי יש לבדוק פטור, חישוב לינארי, הוצאות ומועד רכישה באמצעות השומה העצמית של רשות המסים.',
     category: 'נדל"ן ומשכנתאות',
-    readTime: '14 דקות',
+    readTime: '4 דקות',
     date: '2026-05-16',
     featured: true,
     relatedCalculator: {
       href: '/real-estate/capital-gains-tax',
-      label: 'מחשבון מס שבח',
+      label: 'בדיקת מס שבח',
     },
     related: ['purchase-tax-2026-complete-guide', 'real-estate-investment-strategy', 'inflation-and-investments'],
   },
@@ -597,24 +597,24 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'company-car-tax-2026',
-    title: 'שווי שימוש ברכב מעסיק 2026 - 8 קבוצות + הטבת חשמלי 50%',
+    title: 'שווי שימוש ברכב מעסיק: בדיקה לפי דגם ושכר',
     description:
-      'שווי שימוש ברכב מעסיק 2026: 8 קבוצות (2.04%-5.14%), הטבת רכב חשמלי 50%, היברידי 70%, חישוב מס מלא. כולל השוואה לרכב פרטי.',
+      'איך בודקים שווי שימוש לרכב צמוד ברשות המסים ומשווים את השפעתו על השכר לחלופות.',
     category: 'רכב',
     readTime: '12 דקות',
     date: '2026-05-16',
     featured: true,
     relatedCalculator: {
       href: '/vehicles/company-car-benefit',
-      label: 'מחשבון שווי שימוש ברכב מעסיק',
+      label: 'בדיקת שווי שימוש ברכב מעסיק',
     },
     related: ['leasing-vs-buying-vs-cash-decision', 'electric-vs-gasoline-car', 'salary-net-2026-complete-guide'],
   },
   {
     slug: 'electric-vs-gasoline-car',
-    title: 'רכב חשמלי vs בנזין 2026 - השוואה מקיפה של עלות בעלות',
+    title: 'רכב חשמלי מול בנזין: כך משווים עלות בעלות',
     description:
-      'האם רכב חשמלי באמת זול יותר? השוואה מקיפה: מחיר רכישה, דלק/חשמל, תחזוקה, ירידת ערך, סוללה ושווי שימוש. כולל break-even analysis.',
+      'איסוף הנתונים ונוסחאות להשוואת עלות הבעלות של שני דגמי רכב על סמך הצעות אישיות.',
     category: 'רכב',
     readTime: '13 דקות',
     date: '2026-05-16',

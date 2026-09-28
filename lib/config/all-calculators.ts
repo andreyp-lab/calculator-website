@@ -95,11 +95,11 @@ export const allCalculators: CalculatorEntry[] = [
   // נדל"ן
   {
     id: 'capital-gains-tax',
-    title: 'מחשבון מס שבח',
+    title: 'בדיקת מס שבח',
     href: '/real-estate/capital-gains-tax',
     category: 'משכנתא ונדל"ן',
     categoryHref: '/real-estate',
-    description: 'מס על מכירת דירה - פטור דירה יחידה + לינארי מוטב',
+    description: 'הסבר והפניה לשומה העצמית של רשות המסים',
     icon: '🏘️',
     keywords: [
       'מס שבח',
@@ -114,11 +114,11 @@ export const allCalculators: CalculatorEntry[] = [
   // זכויות עובדים
   {
     id: 'maternity-benefits',
-    title: 'מחשבון דמי לידה',
+    title: 'בדיקת דמי לידה',
     href: '/employee-rights/maternity-benefits',
     category: 'זכויות עובדים',
     categoryHref: '/employee-rights',
-    description: 'תשלום מהביטוח הלאומי בחופשת לידה',
+    description: 'הסבר וקישור לחישוב האישי של הביטוח הלאומי',
     icon: '👶',
     keywords: ['דמי לידה', 'חופשת לידה', 'ב.ל.', 'תאומים', 'הריון', 'לידה'],
   },
@@ -138,7 +138,7 @@ export const allCalculators: CalculatorEntry[] = [
     href: '/employee-rights/reserve-duty-pay',
     category: 'זכויות עובדים',
     categoryHref: '/employee-rights',
-    description: 'תשלום + מענק חרבות ברזל 280 ₪/יום',
+    description: 'בדיקת תגמול מילואים והטבות לפי המסלול הרשמי',
     icon: '🪖',
     keywords: ['מילואים', 'תגמולי מילואים', 'חרבות ברזל', 'reserve duty', 'צה"ל'],
   },

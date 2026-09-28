@@ -6,7 +6,6 @@ import {
   calculateSection14Detail,
   compareSeveranceTaxOptions,
   getTerminationRights,
-  calculateLatePaymentPenalty,
   calculateSalaryBasis,
   type SeveranceInput,
   type TerminationReason,
@@ -87,9 +86,6 @@ export function SeveranceCalculator() {
   const [section14Coverage, setSection14Coverage] = useState(100);
   const [accumulatedInFund, setAccumulatedInFund] = useState(0);
 
-  // --- Late payment ---
-  const [daysLate, setDaysLate] = useState(30);
-
   // --- Salary basis ---
   const [lastMonthSalary, setLastMonthSalary] = useState(12000);
   const [avg3mSalary, setAvg3mSalary] = useState(11500);
@@ -142,11 +138,6 @@ export function SeveranceCalculator() {
   }, [accumulatedInFund, baseSeverance, adjustedSalary, years, section14Coverage, section14Percentage]);
 
   const terminationRights = useMemo(() => getTerminationRights(terminationReason), [terminationReason]);
-
-  const latePaymentResult = useMemo(() => {
-    const amount = baseSeverance > 0 ? baseSeverance : monthlySalary * 5;
-    return calculateLatePaymentPenalty(amount, daysLate);
-  }, [baseSeverance, monthlySalary, daysLate]);
 
   const salaryBasisResult = useMemo(() =>
     calculateSalaryBasis(lastMonthSalary, avg3mSalary, avg12mSalary),
@@ -784,7 +775,7 @@ export function SeveranceCalculator() {
             <div>
               <h3 className="font-bold text-ink">{terminationRights.label}</h3>
               <p className={`text-sm font-medium ${terminationRights.isEntitled ? 'text-emerald-800' : 'text-red-700'}`}>
-                {terminationRights.isEntitled ? 'זכאי לפיצויי פיטורין' : 'לא זכאי לפיצויי פיטורין'}
+                {terminationRights.isEntitled ? 'ייתכן שקיימת זכאות לפיצויי פיטורים — בדקו את התנאים' : 'יש לבדוק זכאות לפי נסיבות סיום העבודה וההפקדות לקרן'}
               </p>
             </div>
           </div>
@@ -1044,118 +1035,10 @@ export function SeveranceCalculator() {
   // TAB: Late Payment
   // ============================================================
   const LatePaymentTab = () => (
-    <div className="space-y-4">
-      <div className="bg-red-50 border border-red-200 rounded-none p-4">
-        <h3 className="font-bold text-red-900 mb-2">הלנת פיצויים — מה מגיע לי?</h3>
-        <p className="text-sm text-red-800">
-          לפי חוק הגנת השכר (סעיף 20), מעסיק שלא שילם פיצויים תוך 15 ימים מסיום העבודה
-          חייב בפיצויי הלנה: <strong>8%</strong> ראשוני על הסכום המלא +
-          <strong> 1.5%</strong> לכל חודש נוסף של עיכוב.
-        </p>
-      </div>
-
-      <div className="bg-paper border border-ink/15 rounded-none p-6 space-y-4">
-        <h2 className="text-lg font-bold text-ink">פרטי העיכוב</h2>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="severancecalculator-e363c5" className="block text-sm font-medium text-ink/70 mb-1">
-              סכום פיצויים שלא שולם (₪)
-            </label>
-            <input id="severancecalculator-e363c5"
-              type="number"
-              min={0}
-              step={1000}
-              value={basicResult.isEligible ? basicResult.baseSeverance : monthlySalary * 5}
-              readOnly
-              className="w-full px-3 py-2 border border-ink/15 rounded-none bg-cream-2 text-lg font-semibold cursor-not-allowed"
-            />
-            <p className="text-xs text-ink/70 mt-1">לפי חישוב בטאב "חישוב פיצויים"</p>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-ink/70 mb-1">
-              כמה ימים מאוחר? ({daysLate} ימים)
-            </label>
-            <input
-              type="range"
-              min={0}
-              max={365}
-              step={1}
-              value={daysLate}
-              onChange={(e) => setDaysLate(Number(e.target.value))}
-              className="w-full mt-3"
-            />
-            <div className="flex justify-between text-xs text-ink/70 mt-1">
-              <span>0</span>
-              <span>30 ימים</span>
-              <span>365 ימים</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {daysLate === 0 ? (
-        <div className="bg-emerald-50 border border-emerald-200 rounded-none p-4 flex gap-3">
-          <CheckCircle2 className="w-5 h-5 text-emerald-800 flex-shrink-0" />
-          <p className="text-sm text-emerald-800 font-medium">שולם בזמן — אין פיצויי הלנה</p>
-        </div>
-      ) : daysLate <= 15 ? (
-        <div className="bg-amber-50 border border-amber-200 rounded-none p-4 flex gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-800 flex-shrink-0" />
-          <p className="text-sm text-amber-800">
-            בתוך 15 הימים הראשונים — עדיין בחסד. פיצויי הלנה חלים רק לאחר 15 ימים.
-          </p>
-        </div>
-      ) : (
-        <>
-          <div className="grid sm:grid-cols-3 gap-4">
-            <ResultCard
-              title="פיצוי הלנה"
-              value={formatCurrency(latePaymentResult.totalPenalty, { decimals: 0 })}
-              subtitle={`8% + ${Math.ceil((daysLate - 15) / 30)} חודשים × 1.5%`}
-              variant="warning"
-            />
-            <ResultCard
-              title="פיצויים מקוריים"
-              value={formatCurrency(latePaymentResult.originalAmount, { decimals: 0 })}
-              subtitle="ללא ריבית הלנה"
-              variant="primary"
-            />
-            <ResultCard
-              title="סה״כ מגיע לך"
-              value={formatCurrency(latePaymentResult.totalDue, { decimals: 0 })}
-              subtitle="פיצויים + פיצויי הלנה"
-              variant="success"
-            />
-          </div>
-
-          <Breakdown
-            title="פירוט פיצויי הלנה"
-            defaultOpen
-            items={[
-              { label: 'פיצויים מקוריים', value: formatCurrency(latePaymentResult.originalAmount) },
-              { label: 'ימי עיכוב', value: `${daysLate} ימים (${Math.ceil((daysLate - 15) / 30)} חודשי עיכוב נוסף)` },
-              { label: 'פיצוי ראשוני (8%)', value: formatCurrency(latePaymentResult.originalAmount * 0.08) },
-              {
-                label: `ריבית חודשית (1.5% × ${Math.ceil((daysLate - 15) / 30)} חודשים)`,
-                value: formatCurrency(latePaymentResult.originalAmount * 0.015 * Math.ceil((daysLate - 15) / 30)),
-              },
-              { label: 'סך פיצויי הלנה', value: formatCurrency(latePaymentResult.totalPenalty) },
-              { label: 'סה"כ מגיע', value: formatCurrency(latePaymentResult.totalDue), bold: true },
-            ]}
-          />
-
-          <div className="bg-cream-2 border border-ink/15 rounded-none p-4 space-y-2">
-            <h4 className="text-sm font-bold text-ink">כיצד לפעול?</h4>
-            <ul className="text-xs text-ink/70 space-y-1.5">
-              <li>1. <strong>שלח מכתב דרישה</strong> בכתב (מייל + דואר רשום) עם סכום מדויק וחישוב הלנה</li>
-              <li>2. <strong>בקר בהסתדרות</strong> לייעוץ ראשוני חינמי (זכות עובד)</li>
-              <li>3. <strong>הגש תלונה</strong> לאגף פיקוח על עבודה (משרד העבודה) — בחינם</li>
-              <li>4. <strong>תביעה בבית הדין לעבודה</strong> — הצלחה גבוהה, ללא הצורך בעורך דין עד 50,000 ₪</li>
-              <li>5. <strong>תקופת התיישנות</strong>: 7 שנים לתביעת פיצויים רגילים</li>
-            </ul>
-          </div>
-        </>
-      )}
+    <div className="border-r-4 border-gold bg-cream-2 p-5">
+      <h3 className="mb-3 text-lg font-bold">תשלום פיצויי פיטורים באיחור</h3>
+      <p className="leading-relaxed">מועד התשלום, חישוב פיצויי ההלנה והאפשרות להפחתתם תלויים בדין ובנסיבות. לא ניתן לקבוע סכום הלנה מסכום הפיצויים ומספר ימי העיכוב בלבד.</p>
+      <a href="https://www.gov.il/he/service/claim_employee_dismissal_compensation_or_social_rights" target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-semibold text-gold underline">שירות הגשת תביעה לזכויות עובדים באתר הממשלה ↗</a>
     </div>
   );
 

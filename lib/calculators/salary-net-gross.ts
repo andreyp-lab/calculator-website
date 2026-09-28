@@ -22,7 +22,6 @@ import {
   TAX_BRACKETS_2026,
   CREDIT_POINT_2026,
   SOCIAL_SECURITY_EMPLOYEE_2026,
-  CREDIT_POINTS_BY_STATUS,
 } from '@/lib/constants/tax-2026';
 
 // ============================================================
@@ -124,27 +123,6 @@ export interface BonusResult {
   effectiveBonusRate: number;
   taxOnBonus: number;
   socialSecurityOnBonus: number;
-}
-
-export interface CreditPointsProfile {
-  gender: 'male' | 'female';
-  childrenAge0: number;         // ילדים בשנת לידה
-  childrenAge1to5: number;      // ילדים 1-5
-  childrenAge6to17: number;     // ילדים 6-17
-  childrenAge18: number;        // ילדים 18
-  singleParent: boolean;
-  disabledChildren: number;
-  newImmigrantYears: 0 | 1 | 2 | 3; // 0=לא עולה, 1=שנה 1-1.5, 2=שנה 1.5-3, 3=שנה 3-4.5
-  releasedSoldier: boolean;
-  bachelorDegree: boolean;
-  masterDegree: boolean;
-}
-
-export interface CreditPointsResult {
-  totalPoints: number;
-  monthlyCredit: number;
-  annualCredit: number;
-  breakdown: { label: string; points: number }[];
 }
 
 // ============================================================
@@ -495,74 +473,6 @@ export function calculateBonusNet(
     taxOnBonus,
     socialSecurityOnBonus: ssOnBonus,
   };
-}
-
-// ============================================================
-// מחשבון נקודות זיכוי
-// ============================================================
-
-export function calculateCreditPoints(profile: CreditPointsProfile): CreditPointsResult {
-  const breakdown: { label: string; points: number }[] = [];
-
-  // בסיס: תושב ישראל
-  breakdown.push({ label: 'תושב ישראל', points: CREDIT_POINTS_BY_STATUS.resident });
-
-  // אישה
-  if (profile.gender === 'female') {
-    breakdown.push({ label: 'אישה', points: CREDIT_POINTS_BY_STATUS.woman });
-  }
-
-  // ילדים
-  for (let i = 0; i < profile.childrenAge0; i++) {
-    breakdown.push({ label: `ילד שנת לידה #${i + 1}`, points: CREDIT_POINTS_BY_STATUS.childAge0 });
-  }
-  for (let i = 0; i < profile.childrenAge1to5; i++) {
-    breakdown.push({ label: `ילד 1-5 #${i + 1}`, points: CREDIT_POINTS_BY_STATUS.childAge1to5 });
-  }
-  for (let i = 0; i < profile.childrenAge6to17; i++) {
-    breakdown.push({ label: `ילד 6-17 #${i + 1}`, points: CREDIT_POINTS_BY_STATUS.childAge6to17 });
-  }
-  for (let i = 0; i < profile.childrenAge18; i++) {
-    breakdown.push({ label: `ילד 18 #${i + 1}`, points: CREDIT_POINTS_BY_STATUS.childAge18 });
-  }
-
-  // הורה יחיד
-  if (profile.singleParent) {
-    breakdown.push({ label: 'הורה יחיד', points: CREDIT_POINTS_BY_STATUS.singleParent });
-  }
-
-  // ילדים נכים
-  for (let i = 0; i < profile.disabledChildren; i++) {
-    breakdown.push({ label: `ילד נכה #${i + 1}`, points: CREDIT_POINTS_BY_STATUS.disabledChild });
-  }
-
-  // עולה חדש
-  if (profile.newImmigrantYears === 1) {
-    breakdown.push({ label: 'עולה חדש (שנה 1-1.5)', points: CREDIT_POINTS_BY_STATUS.newImmigrant.year1to1_5 });
-  } else if (profile.newImmigrantYears === 2) {
-    breakdown.push({ label: 'עולה חדש (שנה 1.5-3)', points: CREDIT_POINTS_BY_STATUS.newImmigrant.year1_5to3 });
-  } else if (profile.newImmigrantYears === 3) {
-    breakdown.push({ label: 'עולה חדש (שנה 3-4.5)', points: CREDIT_POINTS_BY_STATUS.newImmigrant.year3to4_5 });
-  }
-
-  // חייל משוחרר
-  if (profile.releasedSoldier) {
-    breakdown.push({ label: 'חייל משוחרר', points: CREDIT_POINTS_BY_STATUS.releasedSoldier });
-  }
-
-  // השכלה
-  if (profile.bachelorDegree) {
-    breakdown.push({ label: 'תואר ראשון', points: CREDIT_POINTS_BY_STATUS.bachelorDegree });
-  }
-  if (profile.masterDegree) {
-    breakdown.push({ label: 'תואר שני', points: CREDIT_POINTS_BY_STATUS.masterDegree });
-  }
-
-  const totalPoints = breakdown.reduce((sum, b) => sum + b.points, 0);
-  const monthlyCredit = totalPoints * CREDIT_POINT_2026.monthly;
-  const annualCredit = totalPoints * CREDIT_POINT_2026.annual;
-
-  return { totalPoints, monthlyCredit, annualCredit, breakdown };
 }
 
 // ============================================================

@@ -39,17 +39,11 @@ import {
   calculateStagedPayoffForMix,
   calculateThreeOptions,
   meetsBudgetConstraint,
-  calculateBankGradeAffordability,
   runIncomeStressTest,
   compareBankOffers,
   calculateTimeline,
-  getLTVRateAdjustment,
-  getLTVBandLabel,
-  calculateSavingsFromHigherDownPayment,
-  applyLTVAdjustmentToTracks,
   MORTGAGE_TIMELINE_STAGES,
   DEFAULT_STRESS_SCENARIOS,
-  LTV_RATE_ADJUSTMENTS_2026,
   type OptimizerTrack,
   type OptimizerTrackType,
   type OptimizationObjective,
@@ -63,10 +57,7 @@ import {
   type ThreeOptionsResult,
   type BankOffer,
   type RankedOffer,
-  type AffordabilityProfile,
-  type BankAffordabilityResult,
   type StressTestResult,
-  type FamilyStatus,
 } from '@/lib/calculators/mortgage-optimizer';
 import { formatCurrency } from '@/lib/utils/formatters';
 import { ResultCard } from '@/components/calculator/ResultCard';
@@ -454,13 +445,7 @@ interface SetupState {
   buildingInsuranceAnnual: number;
   // V3: LTV
   propertyValue: number;
-  applyLTVAdjustment: boolean;
   // V3: Bank-grade affordability
-  familyStatus: FamilyStatus;
-  numChildren: number;
-  otherLoanPayments: number;
-  monthlyInsurance: number;
-  showAffordability: boolean;
 }
 
 interface SetupTabProps {
@@ -494,7 +479,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
           הסיכון, או התשלום החודשי.
         </p>
         <div className="mt-2 flex flex-wrap gap-1.5">
-          {['כשירות בנקאית', 'ריביות LTV', 'תקופת גרייס', 'מבחן עמידות', 'השוואת בנקים', 'לוח זמנים'].map((f) => (
+          {['חישוב שיעור מימון', 'תקופת גרייס', 'מבחן עמידות', 'השוואת בנקים', 'לוח זמנים'].map((f) => (
             <span key={f} className="bg-ink/10 text-ink text-xs px-2 py-0.5 rounded-full font-medium">{f}</span>
           ))}
         </div>
@@ -583,7 +568,7 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
       <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
         <h3 className="font-bold text-ink mb-1">שווי הנכס ו-LTV</h3>
         <p className="text-xs text-ink/70 mb-4">
-          הזן שווי הנכס לחישוב LTV ולקבלת ריביות מותאמות אוטומטית
+          הזן שווי נכס כדי לחשב את שיעור המימון. הזן ריביות מתוך הצעות הבנקים בנפרד.
         </p>
         <NumericInput
           label="שווי הנכס (₪)"
@@ -594,55 +579,11 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
           placeholder="לדוגמה: 2,500,000"
         />
 
-        {state.propertyValue > 0 && state.totalAmount > 0 && (() => {
-          const ltv = state.totalAmount / state.propertyValue;
-          const adj = getLTVRateAdjustment(ltv);
-          const bandLabel = getLTVBandLabel(ltv);
-          const adjColor = adj < 0 ? 'text-green-700' : adj > 0 ? 'text-red-700' : 'text-ink/70';
-          const bandBg = adj < -0.25 ? 'bg-green-50 border-green-200' : adj < 0 ? 'bg-cream-2 border-ink/15' : adj === 0 ? 'bg-cream-2 border-ink/15' : 'bg-orange-50 border-orange-200';
-          return (
-            <div className={`mt-3 border rounded-none p-4 ${bandBg}`}>
-              <div className="flex items-center justify-between mb-1">
-                <span className="font-bold text-sm text-ink">LTV: {(ltv * 100).toFixed(1)}%</span>
-                <span className={`text-sm font-bold ${adjColor}`}>
-                  {adj > 0 ? '+' : ''}{adj.toFixed(2)}% לריבית
-                </span>
-              </div>
-              <p className="text-xs text-ink/70">{bandLabel}</p>
-              <div className="mt-2 flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="applyLTV"
-                  checked={state.applyLTVAdjustment}
-                  onChange={(e) => onChange({ ...state, applyLTVAdjustment: e.target.checked })}
-                  className="accent-gold"
-                />
-                <label htmlFor="applyLTV" className="text-xs text-ink/70 cursor-pointer">
-                  החל התאמת LTV אוטומטית על כל המסלולים
-                </label>
-              </div>
-
-              {/* הצעת הון עצמי נוסף */}
-              {ltv > 0.45 && (
-                (() => {
-                  const extra = 200_000;
-                  const savings = calculateSavingsFromHigherDownPayment(
-                    state.totalAmount, state.propertyValue, extra,
-                    DEFAULT_TRACKS_2026, 25
-                  );
-                  if (savings.estimatedSavings > 0) {
-                    return (
-                      <div className="mt-2 bg-green-50 border border-green-200 rounded-none p-3 text-xs text-green-800">
-                        <strong>טיפ:</strong> הוספת {formatCurrency(extra)} הון עצמי (LTV יורד ל-{(savings.newLtv * 100).toFixed(0)}%) תחסוך כ-{formatCurrency(savings.estimatedSavings)} לאורך חיי המשכנתא.
-                      </div>
-                    );
-                  }
-                  return null;
-                })()
-              )}
-            </div>
-          );
-        })()}
+        {state.propertyValue > 0 && state.totalAmount > 0 && (
+          <p className="mt-3 text-sm text-ink/70">
+            שיעור המימון: {((state.totalAmount / state.propertyValue) * 100).toFixed(1)}%. בדקו את תקרת המימון בהתאם לסוג העסקה והשוו הצעות ריבית מהבנקים.
+          </p>
+        )}
       </div>
 
       {/* DTI */}
@@ -660,132 +601,6 @@ function SetupTab({ state, onChange, onTracksChanged, onNext, dti, closingCosts 
         {dti && dti.netIncome > 0 && (
           <div className="mt-3">
             <DTIBadge dti={dti} />
-          </div>
-        )}
-      </div>
-
-      {/* V3: Bank-Grade Affordability */}
-      <div className="bg-paper border-2 border-ink/15 rounded-none p-6">
-        <button
-          type="button"
-          onClick={() => onChange({ ...state, showAffordability: !state.showAffordability })}
-          className="flex items-center justify-between w-full"
-        >
-          <div>
-            <h3 className="font-bold text-ink">כשירות בנקאית מלאה</h3>
-            <p className="text-xs text-ink/70">חישוב מדויק כפי שהבנק מחשב — לפי הרכב משפחה וחובות</p>
-          </div>
-          <span className="text-ink/70 text-lg">{state.showAffordability ? '▲' : '▼'}</span>
-        </button>
-
-        {state.showAffordability && (
-          <div className="mt-4 space-y-4">
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-ink/70 mb-1">מצב משפחתי</label>
-                <select
-                  value={state.familyStatus}
-                  onChange={(e) => onChange({ ...state, familyStatus: e.target.value as FamilyStatus })}
-                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
-                >
-                  <option value="single">יחיד/ה</option>
-                  <option value="couple">זוג</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="mortgageoptimizercalculator-0138e4" className="block text-sm font-medium text-ink/70 mb-1">מספר ילדים</label>
-                <input id="mortgageoptimizercalculator-0138e4"
-                  type="number"
-                  min={0} max={10}
-                  value={state.numChildren}
-                  onChange={(e) => onChange({ ...state, numChildren: Number(e.target.value) })}
-                  className="w-full px-3 py-2 border border-ink/15 rounded-none text-sm"
-                />
-              </div>
-              <NumericInput
-                label="תשלומי חובות אחרים (₪/חודש)"
-                value={state.otherLoanPayments}
-                onChange={(v) => onChange({ ...state, otherLoanPayments: v })}
-                min={0}
-                step={500}
-                placeholder="0"
-                note="הלוואות רכב, הלוואות אישיות וכו'"
-              />
-              <NumericInput
-                label="ביטוחים חודשיים (₪/חודש)"
-                value={state.monthlyInsurance}
-                onChange={(v) => onChange({ ...state, monthlyInsurance: v })}
-                min={0}
-                step={100}
-                placeholder="0"
-                note="ביטוח חיים, בריאות וכו'"
-              />
-            </div>
-
-            {state.netIncome > 0 && (() => {
-              const profile: AffordabilityProfile = {
-                netIncome: state.netIncome,
-                familyStatus: state.familyStatus,
-                numChildren: state.numChildren,
-                otherLoanPayments: state.otherLoanPayments,
-                monthlyInsurance: state.monthlyInsurance,
-                loanAmount: state.totalAmount,
-                propertyValue: state.propertyValue,
-              };
-              const estimated = calculateMonthlyPayment(state.totalAmount, 4.0, state.defaultTermYears);
-              const aff = calculateBankGradeAffordability(profile, estimated);
-
-              const bgColor = aff.profileColor === 'green' ? 'bg-green-50 border-green-200' :
-                              aff.profileColor === 'red' ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200';
-              const textColor = aff.profileColor === 'green' ? 'text-green-800' :
-                                aff.profileColor === 'red' ? 'text-red-800' : 'text-amber-800';
-
-              return (
-                <div className={`border rounded-none p-4 ${bgColor}`}>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`font-bold text-sm ${textColor}`}>{aff.profileLabel}</span>
-                    <span className={`text-xl font-bold ${textColor}`}>
-                      כשירות: {formatCurrency(aff.maxMonthlyPayment)}/חודש
-                    </span>
-                  </div>
-                  <div className="space-y-1 text-xs text-ink/70">
-                    <div className="flex justify-between">
-                      <span>הכנסה נטו</span>
-                      <span className="font-medium">{formatCurrency(aff.breakdown.netIncome)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>פחות הוצאות מחייה</span>
-                      <span className="font-medium text-red-700">-{formatCurrency(aff.breakdown.minusLivingExpenses)}</span>
-                    </div>
-                    {aff.breakdown.minusOtherLoans > 0 && (
-                      <div className="flex justify-between">
-                        <span>פחות חובות אחרים</span>
-                        <span className="font-medium text-red-700">-{formatCurrency(aff.breakdown.minusOtherLoans)}</span>
-                      </div>
-                    )}
-                    {aff.breakdown.minusInsurance > 0 && (
-                      <div className="flex justify-between">
-                        <span>פחות ביטוחים</span>
-                        <span className="font-medium text-red-700">-{formatCurrency(aff.breakdown.minusInsurance)}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between border-t pt-1">
-                      <span className="font-medium">זמין למשכנתא</span>
-                      <span className="font-bold">{formatCurrency(aff.breakdown.availableForMortgage)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>גבול DTI ({aff.breakdown.dtiLimitPercent.toFixed(0)}%)</span>
-                      <span className="font-bold text-ink">{formatCurrency(aff.maxMonthlyPayment)}/חודש</span>
-                    </div>
-                  </div>
-                  {aff.warningMessage && (
-                    <div className="mt-2 bg-red-100 border border-red-300 rounded-none p-2 text-xs text-red-800 font-medium">
-                      {aff.warningMessage}
-                    </div>
-                  )}
-                </div>
-              );
-            })()}
           </div>
         )}
       </div>
@@ -2546,12 +2361,6 @@ export function MortgageOptimizerCalculator() {
     buildingInsuranceAnnual: 900,
     // V3
     propertyValue: 0,
-    applyLTVAdjustment: false,
-    familyStatus: 'couple',
-    numChildren: 0,
-    otherLoanPayments: 0,
-    monthlyInsurance: 0,
-    showAffordability: false,
   });
 
   const [tracks, setTracks] = useState<OptimizerTrack[]>(
@@ -2600,24 +2409,13 @@ export function MortgageOptimizerCalculator() {
     { id: 'timeline', label: TAB_LABELS.timeline, description: 'תהליך מ-A ל-Z' },
   ];
 
-  // V3: LTV
-  const ltv = useMemo(() => {
-    if (!setupState.propertyValue || setupState.propertyValue <= 0) return undefined;
-    return setupState.totalAmount / setupState.propertyValue;
-  }, [setupState.totalAmount, setupState.propertyValue]);
-
-  // הגבלת תקופת מסלולים לפי maxTermYears + LTV adjustment
   const effectiveTracks = useMemo(() => {
-    let t = tracks;
-    if (setupState.maxTermYears && setupState.maxTermYears > 0) {
-      t = t.map((tr) => ({ ...tr, termYears: Math.min(tr.termYears, setupState.maxTermYears) }));
-    }
-    // V3: החלת LTV
-    if (setupState.applyLTVAdjustment && ltv !== undefined) {
-      t = applyLTVAdjustmentToTracks(t, ltv);
-    }
-    return t;
-  }, [tracks, setupState.maxTermYears, setupState.applyLTVAdjustment, ltv]);
+    if (!setupState.maxTermYears || setupState.maxTermYears <= 0) return tracks;
+    return tracks.map((track) => ({
+      ...track,
+      termYears: Math.min(track.termYears, setupState.maxTermYears),
+    }));
+  }, [tracks, setupState.maxTermYears]);
 
   const runOptimizer = useCallback(() => {
     setIsRunning(true);
