@@ -7,7 +7,7 @@ interface RelatedCalculatorsProps {
 }
 
 /**
- * RelatedCalculators — בלוק "מחשבונים קשורים" המוצג אוטומטית בתחתית דפי מחשבון.
+ * RelatedCalculators — קישורים לכלים ומדריכים קשורים בתחתית דפי התוכן.
  * מחזק קישוריות פנימית (internal PageRank) ומגדיל pages-per-session.
  */
 export function RelatedCalculators({ currentPath }: RelatedCalculatorsProps) {
@@ -17,7 +17,7 @@ export function RelatedCalculators({ currentPath }: RelatedCalculatorsProps) {
   return (
     <section className="mb-12" aria-labelledby="related-calculators-heading">
       <h2 id="related-calculators-heading" className="text-2xl text-ink mb-6">
-        מחשבונים קשורים
+        כלים ומדריכים נוספים
       </h2>
       <div className="grid sm:grid-cols-2 gap-3">
         {related.map((c) => (

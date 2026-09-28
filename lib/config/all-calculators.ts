@@ -19,11 +19,11 @@ export const allCalculators: CalculatorEntry[] = [
   // זכויות עובדים
   {
     id: 'severance',
-    title: 'מחשבון פיצויי פיטורין',
+    title: 'מדריך בדיקת פיצויי פיטורין',
     href: '/employee-rights/severance',
     category: 'זכויות עובדים',
     categoryHref: '/employee-rights',
-    description: 'חישוב פיצויים לפי החוק כולל פטור ממס',
+    description: 'בדיקת זכאות, הפקדות וטופס 161 לפי נסיבות סיום העבודה',
     icon: '💼',
     keywords: ['פיטורין', 'פיצויים', 'חוק פיצויי פיטורים', 'סיום עבודה'],
   },
@@ -390,11 +390,11 @@ export const allCalculators: CalculatorEntry[] = [
   },
   {
     id: 'loan-eligibility',
-    title: 'בודק זכאות להלוואות בערבות המדינה',
+    title: 'מדריך הלוואות בערבות המדינה',
     href: '/tools/loan-eligibility',
     category: 'כלים לבעלי עסקים',
     categoryHref: '/tools',
-    description: 'בדיקת זכאות להלוואה בערבות מדינה - 6 מסלולים',
+    description: 'תנאי המסלולים והנתונים הנדרשים לבדיקת זכאות מול הקרן',
     icon: '🏦',
     keywords: [
       'הלוואה',
@@ -421,11 +421,11 @@ export const allCalculators: CalculatorEntry[] = [
   },
   {
     id: 'business-valuation',
-    title: 'מחשבון שווי עסק',
+    title: 'מדריך הערכת שווי עסק',
     href: '/tools/business-valuation',
     category: 'כלים לבעלי עסקים',
     categoryHref: '/tools',
-    description: 'הערכת שווי - DCF, מכפיל EBITDA, מכפיל הכנסות',
+    description: 'נתונים ושיטות לבדיקת שווי עסק, DCF ומכפילים',
     icon: '💎',
     keywords: ['שווי עסק', 'הערכת שווי', 'EBITDA', 'DCF', 'מכפיל', 'מכירת עסק', 'M&A'],
   },
@@ -441,11 +441,11 @@ export const allCalculators: CalculatorEntry[] = [
   },
   {
     id: 'allowed-expenses',
-    title: 'מחשבון הוצאות מוכרות לעצמאי',
+    title: 'מדריך הוצאות עסקיות לעצמאי',
     href: '/self-employed/allowed-expenses',
     category: 'עצמאיים',
     categoryHref: '/self-employed',
-    description: 'אילו הוצאות מוכרות במס וכמה — רכב, טלפון, חדר עבודה, כיבוד ועוד',
+    description: 'איך לסווג ולתעד הוצאות ולבדוק ניכוי במס וקיזוז מע״מ',
     icon: '🧾',
     keywords: [
       'הוצאות מוכרות',
@@ -478,11 +478,11 @@ export const allCalculators: CalculatorEntry[] = [
   },
   {
     id: 'employee-and-self-employed',
-    title: 'מחשבון שכיר + עצמאי',
+    title: 'מדריך שכיר ועצמאי',
     href: '/self-employed/employee-and-self-employed',
     category: 'עצמאיים',
     categoryHref: '/self-employed',
-    description: 'עובד גם כשכיר וגם כפרילנסר? כמה באמת נשאר מההכנסה המשולבת אחרי מס וב.ל.',
+    description: 'נתונים לבדיקת מס הכנסה ודמי ביטוח למי שמשלב משכורת ועסק',
     icon: '🔀',
     keywords: [
       'שכיר ועצמאי',

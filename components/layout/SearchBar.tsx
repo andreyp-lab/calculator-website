@@ -7,20 +7,9 @@ import { searchCalculators, type CalculatorEntry } from '@/lib/config/all-calcul
 
 export function SearchBar() {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<CalculatorEntry[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // עדכון תוצאות בעת הקלדה
-  useEffect(() => {
-    if (query.trim().length >= 1) {
-      setResults(searchCalculators(query));
-      setIsOpen(true);
-    } else {
-      setResults([]);
-      setIsOpen(false);
-    }
-  }, [query]);
+  const results: CalculatorEntry[] = query.trim() ? searchCalculators(query) : [];
 
   // סגירה כשלוחצים מחוץ
   useEffect(() => {
@@ -45,14 +34,20 @@ export function SearchBar() {
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setIsOpen(Boolean(e.target.value.trim()));
+          }}
           onFocus={() => query && setIsOpen(true)}
-          placeholder="חפש מחשבון... (משכנתא, פנסיה, רכב)"
+          placeholder="חפש כלי או מדריך... (משכנתא, פנסיה, רכב)"
           className="w-full pr-9 pl-9 py-2 text-sm bg-paper border border-ink/20 rounded-none text-ink placeholder:text-ink/70 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition"
         />
         {query && (
           <button
-            onClick={() => setQuery('')}
+            onClick={() => {
+              setQuery('');
+              setIsOpen(false);
+            }}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
             aria-label="נקה חיפוש"
           >
@@ -66,7 +61,7 @@ export function SearchBar() {
         <div className="absolute top-full mt-1 w-full bg-paper border border-ink/20 rounded-none shadow-lg z-50 max-h-96 overflow-y-auto">
           {results.length === 0 ? (
             <div className="p-4 text-center text-sm text-gray-500">
-              לא נמצאו מחשבונים. נסה: &quot;משכנתא&quot;, &quot;פנסיה&quot;, &quot;ROI&quot;
+              לא נמצאו תוצאות. נסה: &quot;משכנתא&quot;, &quot;פנסיה&quot;, &quot;ROI&quot;
             </div>
           ) : (
             <>

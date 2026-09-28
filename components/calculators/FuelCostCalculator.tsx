@@ -29,6 +29,10 @@ export function FuelCostCalculator() {
     setInput((prev) => ({ ...prev, [field]: value }));
   }
 
+  function changeFuelType(fuelType: FuelType) {
+    setInput((prev) => ({ ...prev, fuelType, customPrice: FUEL_PRICES_2026[fuelType] }));
+  }
+
   const fuelUnit = input.fuelType === 'electric' ? 'קוט"ש' : 'ליטר';
 
   return (
@@ -39,7 +43,7 @@ export function FuelCostCalculator() {
         <div className="space-y-5">
           <div>
             <label htmlFor="fuelcostcalculator-5ddf7e" className="block text-sm font-medium text-ink/70 mb-2">
-              קילומטראז' חודשי (ק"מ)
+              קילומטראז&apos; חודשי (ק&quot;מ)
             </label>
             <input id="fuelcostcalculator-5ddf7e"
               type="number"
@@ -49,19 +53,19 @@ export function FuelCostCalculator() {
               onChange={(e) => update('monthlyKm', Number(e.target.value))}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
             />
-            <p className="text-xs text-ink/70 mt-1">ממוצע ישראלי: ~1,500 ק"מ/חודש</p>
+            <p className="text-xs text-ink/70 mt-1">הזינו את מספר הקילומטרים שאתם נוסעים בפועל.</p>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-ink/70 mb-2">סוג דלק</label>
             <select
               value={input.fuelType}
-              onChange={(e) => update('fuelType', e.target.value as FuelType)}
+              onChange={(e) => changeFuelType(e.target.value as FuelType)}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             >
               {(Object.keys(FUEL_LABELS) as FuelType[]).map((type) => (
                 <option key={type} value={type}>
-                  {FUEL_LABELS[type]} ({FUEL_PRICES_2026[type]} ₪/{type === 'electric' ? 'קוט"ש' : 'ל'})
+                  {FUEL_LABELS[type]} ({FUEL_PRICES_2026[type]} ₪/{type === 'electric' ? 'קוט"ש' : 'ל'}{type === 'gasoline_95' ? ', מחיר שפורסם בספטמבר 2026' : ', הנחת דוגמה'})
                 </option>
               ))}
             </select>
@@ -69,7 +73,7 @@ export function FuelCostCalculator() {
 
           <div>
             <label className="block text-sm font-medium text-ink/70 mb-2">
-              צריכת דלק ({fuelUnit}/100 ק"מ)
+              צריכת דלק ({fuelUnit}/100 ק&quot;מ)
             </label>
             <input
               type="number"
@@ -81,9 +85,7 @@ export function FuelCostCalculator() {
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
             />
             <p className="text-xs text-ink/70 mt-1">
-              {input.fuelType === 'electric'
-                ? 'רכב חשמלי ממוצע: 18 קוט"ש/100ק"מ'
-                : 'רכב משפחתי: 6-8 ל/100ק"מ, רכב גדול: 10-12'}
+              בדקו את נתוני הצריכה של הדגם שלכם ואת הצריכה בנסיעה בפועל.
             </p>
           </div>
 
@@ -95,7 +97,7 @@ export function FuelCostCalculator() {
                 onChange={(e) => update('useCustomPrice', e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm font-medium">השתמש במחיר מותאם אישית</span>
+              <span className="text-sm font-medium">השתמש במחיר בפועל (מומלץ)</span>
             </label>
             {input.useCustomPrice && (
               <input
@@ -111,12 +113,12 @@ export function FuelCostCalculator() {
           </div>
 
           <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
-            <p className="text-xs text-ink/70 mb-2 font-medium">⛽ מחירי דלק 2026:</p>
+            <p className="text-xs text-ink/70 mb-2 font-medium">מחיר בנזין 95 שפורסם בספטמבר 2026, ושאר ערכי דוגמה הניתנים לשינוי:</p>
             <div className="grid grid-cols-2 gap-1 text-xs">
               <div>בנזין 95: {FUEL_PRICES_2026.gasoline_95} ₪/ל׳ (7.9.2026)</div>
-              <div>בנזין 98: 7.85 ₪/ל'</div>
-              <div>סולר: 6.95 ₪/ל'</div>
-              <div>חשמל: 0.55 ₪/קוט"ש</div>
+              <div>בנזין 98: {FUEL_PRICES_2026.gasoline_98} ₪/ל׳ (דוגמה)</div>
+              <div>סולר: {FUEL_PRICES_2026.diesel} ₪/ל׳ (דוגמה)</div>
+              <div>חשמל: {FUEL_PRICES_2026.electric} ₪/קוט״ש (דוגמה)</div>
             </div>
           </div>
         </div>

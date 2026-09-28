@@ -25,7 +25,7 @@ const GROUPS: CalcGroup[] = [
       { title: 'שכר נטו / ברוטו', href: '/personal-tax/salary-net-gross' },
       { title: 'מס הכנסה', href: '/personal-tax/income-tax' },
       { title: 'נקודות זיכוי', href: '/personal-tax/tax-credits' },
-      { title: 'מענק עבודה', href: '/personal-tax/work-value' },
+      { title: 'מה שווה לי לעבוד?', href: '/personal-tax/work-value' },
     ],
   },
   {
@@ -34,15 +34,15 @@ const GROUPS: CalcGroup[] = [
     href: '/employee-rights',
     color: 'green',
     calcs: [
-      { title: 'פיצויי פיטורין', href: '/employee-rights/severance' },
-      { title: 'דמי לידה', href: '/employee-rights/maternity-benefits' },
+      { title: 'מדריך פיצויי פיטורין', href: '/employee-rights/severance' },
+      { title: 'בדיקת דמי לידה', href: '/employee-rights/maternity-benefits' },
       { title: 'דמי אבטלה', href: '/employee-rights/unemployment-benefits' },
       { title: 'תשלום מילואים', href: '/employee-rights/reserve-duty-pay' },
       { title: 'שכר מינימום', href: '/employee-rights/minimum-wage' },
       { title: 'דמי הבראה', href: '/employee-rights/recreation-pay' },
-      { title: 'חופשה שנתית', href: '/employee-rights/annual-leave' },
+      { title: 'מדריך חופשה שנתית', href: '/employee-rights/annual-leave' },
       { title: 'בונוס שנתי', href: '/employee-rights/annual-bonus' },
-      { title: 'דמי מחלה', href: '/employee-rights/sick-pay' },
+      { title: 'מדריך דמי מחלה', href: '/employee-rights/sick-pay' },
       { title: 'מענק עבודה', href: '/employee-rights/work-grant' },
     ],
   },
@@ -52,19 +52,19 @@ const GROUPS: CalcGroup[] = [
     href: '/self-employed',
     color: 'purple',
     calcs: [
-      { title: 'סימולטור מס שנתי', href: '/self-employed/year-end-tax-simulator', badge: 'מומלץ' },
-      { title: 'נטו לעצמאי', href: '/self-employed/net' },
-      { title: 'ביטוח לאומי', href: '/self-employed/social-security' },
+      { title: 'מדריך סוף שנת מס', href: '/self-employed/year-end-tax-simulator' },
+      { title: 'בדיקת הכנסה פנויה לעצמאי', href: '/self-employed/net' },
+      { title: 'מדריך ביטוח לאומי', href: '/self-employed/social-security' },
       { title: 'מחשבון מע"מ', href: '/self-employed/vat' },
-      { title: 'מקדמות מס', href: '/self-employed/tax-advances' },
-      { title: 'הוצאות מוכרות', href: '/self-employed/allowed-expenses', badge: 'חדש' },
+      { title: 'מדריך מקדמות מס', href: '/self-employed/tax-advances' },
+      { title: 'מדריך הוצאות עסקיות', href: '/self-employed/allowed-expenses' },
       { title: 'תקרת עוסק פטור', href: '/self-employed/vat-threshold', badge: 'חדש' },
-      { title: 'שכיר + עצמאי', href: '/self-employed/employee-and-self-employed', badge: 'חדש' },
+      { title: 'מדריך שכיר ועצמאי', href: '/self-employed/employee-and-self-employed' },
       { title: 'תמחור שעת עבודה', href: '/self-employed/hourly-rate' },
       { title: 'עלות מעסיק', href: '/self-employed/employer-cost' },
-      { title: 'פנסיה חובה', href: '/self-employed/mandatory-pension' },
-      { title: 'חברה מול עצמאי', href: '/self-employed/corporation-vs-individual' },
-      { title: 'דיבידנד מול משכורת', href: '/self-employed/dividend-vs-salary' },
+      { title: 'מדריך פנסיה חובה', href: '/self-employed/mandatory-pension' },
+      { title: 'השוואת חברה מול עצמאי', href: '/self-employed/corporation-vs-individual' },
+      { title: 'מדריך דיבידנד מול משכורת', href: '/self-employed/dividend-vs-salary' },
     ],
   },
   {
@@ -76,7 +76,7 @@ const GROUPS: CalcGroup[] = [
       { title: 'מחשבון משכנתא', href: '/real-estate/mortgage', badge: 'מומלץ' },
       { title: 'אופטימייזר תמהיל', href: '/real-estate/mortgage-optimizer', badge: 'חדש' },
       { title: 'מס רכישה', href: '/real-estate/purchase-tax' },
-      { title: 'מס שבח', href: '/real-estate/capital-gains-tax' },
+      { title: 'בדיקת מס שבח', href: '/real-estate/capital-gains-tax' },
     ],
   },
   {
@@ -86,13 +86,13 @@ const GROUPS: CalcGroup[] = [
     color: 'emerald',
     calcs: [
       { title: 'ריבית דריבית', href: '/investments/compound-interest' },
-      { title: 'תכנון פרישה', href: '/investments/retirement' },
-      { title: 'FIRE - עצמאות פיננסית', href: '/investments/fire' },
+      { title: 'מדריך תכנון פרישה', href: '/investments/retirement' },
+      { title: 'מדריך FIRE', href: '/investments/fire' },
       { title: 'תשואה (ROI)', href: '/investments/roi' },
       { title: 'תקציב משפחתי', href: '/savings/family-budget' },
       { title: 'הלוואה אישית', href: '/savings/personal-loan' },
       { title: 'השוואת הלוואות', href: '/savings/loan-repayment' },
-      { title: 'פנסיה', href: '/insurance/pension' },
+      { title: 'מדריך בדיקת פנסיה', href: '/insurance/pension' },
     ],
   },
   {
@@ -136,7 +136,7 @@ export function AllCalculatorsGrid() {
               </Link>
             </div>
 
-            {/* גריד תאי מחשבונים */}
+            {/* גריד כלים ומדריכים */}
             <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {group.calcs.map((calc) => (
                 <li key={calc.href}>

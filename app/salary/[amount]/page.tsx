@@ -307,8 +307,8 @@ export default async function SalaryAmountPage({ params }: PageProps) {
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
               { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו/ברוטו מלא' },
-              { href: '/personal-tax/tax-credits', label: 'מחשבון נקודות זיכוי' },
-              { href: '/personal-tax/tax-refund', label: 'מחשבון החזר מס' },
+              { href: '/personal-tax/tax-credits', label: 'בדיקת נקודות זיכוי' },
+              { href: '/personal-tax/tax-refund', label: 'בדיקת החזר מס' },
               { href: '/salaried/payslip-guide', label: 'מדריך קריאת תלוש שכר' },
             ].map((l) => (
               <li key={l.href}>
@@ -328,7 +328,8 @@ export default async function SalaryAmountPage({ params }: PageProps) {
         <section className="mb-8 bg-cream-2 border border-ink/15 p-4">
           <p className="text-sm text-ink/75 leading-relaxed">
             החישוב משוער ומבוסס על מדרגות המס, נקודות הזיכוי וביטוח לאומי לשנת 2026, בהנחות המפורטות
-            בעמוד. הנטו בפועל תלוי בנתונים האישיים ובהרכב התלוש. אין לראות בתוכן ייעוץ מס — הוא אינו
+            בעמוד. חישוב הנטו עם פנסיה אינו כולל זיכוי מס אפשרי בגין הפקדת העובד לפנסיה.
+            הנטו בפועל תלוי בנתונים האישיים ובהרכב התלוש. אין לראות בתוכן ייעוץ מס — הוא אינו
             תחליף לייעוץ מקצועי אישי.
           </p>
         </section>

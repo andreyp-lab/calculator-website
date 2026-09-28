@@ -45,11 +45,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "חשבונאי - 30 מחשבונים פיננסיים בעברית | מעודכן 2026",
+    default: "חשבונאי - מחשבונים ומדריכים פיננסיים בעברית",
     template: "%s | חשבונאי",
   },
   description:
-    "30 מחשבונים פיננסיים מקצועיים בעברית: מס הכנסה, משכנתא (אופטימייזר Solver), השקעות, ב.ל. לעצמאי, פיצויי פיטורין, רכב ועוד. עדכני 2026, בחינם.",
+    "מחשבונים ומדריכים פיננסיים בעברית: שכר ומסים, זכויות עובדים, משכנתא, השקעות וניהול כספים לעצמאים. מידע וכלים לשימוש בחינם.",
   keywords: [
     "מחשבון מס הכנסה",
     "מחשבון משכנתא",
@@ -82,9 +82,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "he_IL",
     url: SITE_URL,
-    title: "חשבונאי - 30 מחשבונים פיננסיים בעברית | מעודכן 2026",
+    title: "חשבונאי - מחשבונים ומדריכים פיננסיים בעברית",
     description:
-      "30 מחשבונים פיננסיים מקצועיים: מס הכנסה, משכנתא עם אופטימייזר Solver-Style, השקעות, פיצויים, רכב ועוד. בחינם וב-2026.",
+      "מחשבונים ומדריכים פיננסיים בעברית: שכר ומסים, זכויות עובדים, משכנתא, השקעות וניהול כספים לעצמאים.",
     siteName: "חשבונאי",
     // NOTE: images is intentionally NOT set here.
     // app/opengraph-image.tsx auto-generates the OG image and cascades to all child routes
@@ -94,8 +94,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "חשבונאי - 30 מחשבונים פיננסיים בעברית",
-    description: "מס הכנסה, משכנתא, השקעות, פיצויים ועוד 26 מחשבונים מעודכנים 2026",
+    title: "חשבונאי - מחשבונים ומדריכים פיננסיים בעברית",
+    description: "כלים ומדריכים לשכר, מסים, משכנתא, השקעות, זכויות עובדים וניהול כספים לעצמאים",
     // NOTE: images is intentionally NOT set here — auto-cascades from app/opengraph-image.tsx
   },
   robots: {

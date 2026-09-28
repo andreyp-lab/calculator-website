@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
-import { SeveranceCalculator } from '@/components/calculators/SeveranceCalculator';
 
 export const metadata: Metadata = {
-  title: 'מחשבון פיצויי פיטורין — גרסה להטמעה',
-  description: 'גרסה להטמעה (embed) של מחשבון פיצויי הפיטורין של חשבונאי.',
+  title: 'בדיקת פיצויי פיטורים — גרסה להטמעה',
+  description: 'בדיקת הזכאות לפיצויי פיטורים דורשת שכר קובע, תקופות העסקה ונתוני הפקדות; הסבר וקישור למקורות הרשמיים.',
   robots: { index: false, follow: true },
   alternates: { canonical: '/employee-rights/severance' },
 };
@@ -22,9 +21,23 @@ export default function SeveranceEmbedPage() {
     <>
       <style dangerouslySetInnerHTML={{ __html: embedStyles }} />
       <div className="bg-paper p-3 sm:p-4">
-        <SeveranceCalculator />
+        <section dir="rtl" className="border border-ink/15 p-5 text-ink">
+          <h1 className="text-xl font-bold mb-3">בדיקת פיצויי פיטורים</h1>
+          <p className="leading-relaxed">
+            הזכאות והסכום תלויים בסיבת סיום העבודה, בשכר הקובע, בתקופות ההעסקה,
+            בהפקדות בפועל ובתחולת סעיף 14. בדקו את הסכם העבודה, דוח הקרן וטופס 161.
+          </p>
+          <a
+            className="mt-4 inline-block font-semibold text-gold underline"
+            href="https://cheshbonai.co.il/employee-rights/severance"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            הנחיות ומקורות רשמיים לבדיקת הפיצויים ↗
+          </a>
+        </section>
         <p className="mt-4 pt-3 border-t border-ink/15 text-center font-mono text-xs text-ink/70">
-          המחשבון באדיבות{' '}
+          המידע באדיבות{' '}
           <a
             href="https://cheshbonai.co.il/employee-rights/severance"
             target="_blank"

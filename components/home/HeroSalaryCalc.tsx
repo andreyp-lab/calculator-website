@@ -114,7 +114,7 @@ export function HeroSalaryCalc() {
         <div className="bg-ink px-6 py-6 text-cream">
           <div className="flex items-baseline justify-between">
             <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-cream/60">
-              נטו לתשלום
+              נטו משוער לפני ניכוי פנסיה
             </span>
             <span className="font-mono text-xs text-gold-light">
               {result.netPercentage.toFixed(1)}%
@@ -123,6 +123,10 @@ export function HeroSalaryCalc() {
           <div className="mt-2 font-serif text-4xl font-black text-gold-light">
             {formatILS(result.netSalary)}
           </div>
+          <p className="mt-2 text-xs leading-relaxed text-cream/70">
+            הדגמה לפי שכר ונקודות זיכוי בלבד, ללא ניכוי פנסיה וקרן השתלמות.
+            התלוש האישי עשוי להיות שונה.
+          </p>
 
           <div className="mt-5 grid grid-cols-2 gap-px border-t border-cream/15 pt-px">
             <div className="pt-4 pe-4">
@@ -149,7 +153,7 @@ export function HeroSalaryCalc() {
           href="/personal-tax/salary-net-gross"
           className="group flex items-center justify-between border-t border-ink/12 pt-5 text-sm font-medium text-ink hover:text-gold transition"
         >
-          <span>חישוב מלא + עוד 29 מחשבונים</span>
+          <span>למחשבון המלא ולהנחות נוספות</span>
           <span className="text-gold transition-transform group-hover:-translate-x-1" aria-hidden="true">
             ←
           </span>

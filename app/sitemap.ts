@@ -182,6 +182,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ).map((t) => make(`/glossary/${t.id}`, 'yearly', 0.5)),
 
     // ===== משפטי =====
+    make('/accessibility', 'yearly', 0.3),
     make('/privacy', 'yearly', 0.3),
     make('/terms', 'yearly', 0.3),
   ];

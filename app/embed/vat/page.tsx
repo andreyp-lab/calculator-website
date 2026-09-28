@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import { VatCalculator } from '@/components/calculators/VatCalculator';
+import { VatBasicCalculator } from '@/components/calculators/VatBasicCalculator';
 
 export const metadata: Metadata = {
-  title: 'מחשבון מע"מ — גרסה להטמעה',
-  description: 'גרסה להטמעה (embed) של מחשבון המע"מ של חשבונאי.',
+  title: 'מחשבון הוספה וחילוץ מע"מ — גרסה להטמעה',
+  description: 'חישוב הוספה או חילוץ מע"מ בסיסי בשיעור 18%; הגרסה להטמעה של חשבונאי.',
   robots: { index: false, follow: true },
   alternates: { canonical: '/self-employed/vat' },
 };
@@ -22,7 +22,7 @@ export default function VatEmbedPage() {
     <>
       <style dangerouslySetInnerHTML={{ __html: embedStyles }} />
       <div className="bg-paper p-3 sm:p-4">
-        <VatCalculator />
+        <VatBasicCalculator />
         <p className="mt-4 pt-3 border-t border-ink/15 text-center font-mono text-xs text-ink/70">
           המחשבון באדיבות{' '}
           <a

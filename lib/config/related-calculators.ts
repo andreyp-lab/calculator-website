@@ -42,7 +42,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/self-employed/mandatory-pension', label: 'פנסיה חובה לעצמאי', group: 'self-employed' },
   { path: '/self-employed/corporation-vs-individual', label: 'חברה מול עוסק', group: 'self-employed' },
   { path: '/self-employed/dividend-vs-salary', label: 'דיבידנד מול שכר', group: 'self-employed' },
-  { path: '/self-employed/year-end-tax-simulator', label: 'סימולטור מס סוף שנה', group: 'self-employed' },
+  { path: '/self-employed/year-end-tax-simulator', label: 'בדיקת סוף שנת מס', group: 'self-employed' },
   { path: '/self-employed/allowed-expenses', label: 'הוצאות מוכרות לעצמאי', group: 'self-employed' },
   { path: '/self-employed/vat-threshold', label: 'תקרת עוסק פטור', group: 'self-employed' },
   { path: '/self-employed/employee-and-self-employed', label: 'שכיר + עצמאי', group: 'self-employed' },

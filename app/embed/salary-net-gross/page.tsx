@@ -23,6 +23,9 @@ export default function SalaryNetGrossEmbedPage() {
       <style dangerouslySetInnerHTML={{ __html: embedStyles }} />
       <div className="bg-paper p-3 sm:p-4">
         <SalaryNetGrossCalculator />
+        <p className="mt-3 text-center text-xs text-ink/70">
+          אומדן בלבד: אינו כולל זיכוי מס אפשרי על הפקדת העובד לפנסיה או הטבות אישיות אחרות.
+        </p>
         <p className="mt-4 pt-3 border-t border-ink/15 text-center font-mono text-xs text-ink/70">
           המחשבון באדיבות{' '}
           <a

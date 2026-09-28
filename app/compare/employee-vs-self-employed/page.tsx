@@ -72,7 +72,7 @@ export default function EmployeeVsSelfEmployedComparePage() {
       </section>
 
       <div className="mt-10 flex flex-wrap gap-5">
-        <Link href="/self-employed/net" className="font-semibold text-gold underline underline-offset-4">מחשבון נטו לעצמאי</Link>
+        <Link href="/self-employed/net" className="font-semibold text-gold underline underline-offset-4">מדריך נטו לעצמאי</Link>
         <Link href="/self-employed/mandatory-pension" className="font-semibold text-gold underline underline-offset-4">מדריך פנסיה חובה</Link>
         <Link href="/course/self-employed" className="font-semibold text-gold underline underline-offset-4">הקורס לעצמאים</Link>
       </div>

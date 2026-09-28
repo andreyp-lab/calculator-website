@@ -94,7 +94,7 @@ export function CourseCTA() {
           {course.cta} ←
         </a>
         <span className="text-xs text-cream/50">
-          FinSchool · רו״ח אנדרי פלטונוב, בוגר PwC · 14 יום החזר כספי מלא
+          FinSchool · רו״ח אנדרי פלטונוב, בוגר PwC
         </span>
       </div>
     </aside>

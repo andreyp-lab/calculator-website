@@ -46,9 +46,9 @@ interface Calc {
 
 const TAX_AND_SALARY: Calc[] = [
   {
-    title: '🌟 החזר מס',
+    title: '🌟 בדיקת החזר מס',
     description:
-      'בדוק כמה מס מגיע לך בחזרה — תרומות, פנסיה, פריפריה, נסיעות, הוצאות מוכרות. ממוצע: ₪3,500 לשנה.',
+      'בדקו אם ייתכן שנוכה מס ביתר והכינו את המסמכים לבדיקה ולהגשה ברשות המסים.',
     href: '/personal-tax/tax-refund',
     icon: Receipt,
     highlight: true,
@@ -62,19 +62,19 @@ const TAX_AND_SALARY: Calc[] = [
   },
   {
     title: 'מחשבון מס הכנסה',
-    description: 'חישוב מס הכנסה מדויק לפי מדרגות 2026 כולל נקודות זיכוי וב.ל.',
+    description: 'אומדן מס הכנסה לפי מדרגות 2026, נקודות זיכוי וביטוח לאומי בהנחות המחשבון.',
     href: '/personal-tax/income-tax',
     icon: Calculator,
   },
   {
-    title: 'נקודות זיכוי',
-    description: 'בדוק כמה נקודות זיכוי מגיעות לך לפי מצב משפחתי, ילדים, עולה חדש ועוד.',
+    title: 'בדיקת נקודות זיכוי',
+    description: 'הסבר על נקודות זיכוי וקישור לסימולטור הרשמי לפי מצב משפחתי.',
     href: '/personal-tax/tax-credits',
     icon: Award,
   },
   {
     title: 'מה שווה לי לעבוד?',
-    description: 'השוואה: שכר vs דמי לידה / אבטלה / קצבה — שווי אמיתי של חודש עבודה.',
+    description: 'השוואת הכנסה נטו מעבודה להכנסה חלופית שכבר בדקתם את הזכאות לה.',
     href: '/personal-tax/work-value',
     icon: TrendingUp,
   },
@@ -89,7 +89,7 @@ const TAX_AND_SALARY: Calc[] = [
 const RIGHTS: Calc[] = [
   {
     title: 'פיצויי פיטורין',
-    description: 'חישוב פיצויים לפי חוק פיצויי פיטורים — שכר אחרון × שנות ותק.',
+    description: 'מה צריך לבדוק בזכאות לפיצויים, בהפקדות ובטופס 161.',
     href: '/employee-rights/severance',
     icon: Shield,
   },
@@ -107,7 +107,7 @@ const RIGHTS: Calc[] = [
   },
   {
     title: 'דמי אבטלה',
-    description: 'חישוב גובה דמי אבטלה ותקופת זכאות לפי גיל, ותק ושכר.',
+    description: 'תנאי זכאות וקישור לחישוב האישי בביטוח הלאומי.',
     href: '/employee-rights/unemployment-benefits',
     icon: Briefcase,
   },
@@ -119,13 +119,13 @@ const RIGHTS: Calc[] = [
   },
   {
     title: 'דמי מחלה',
-    description: 'חישוב תשלום ימי מחלה לפי חוק (50%/75%/100%).',
+    description: 'הסדר התשלום הכללי: יום ראשון ללא תשלום, שני ושלישי 50%, ומהרביעי 100%.',
     href: '/employee-rights/sick-pay',
     icon: Heart,
   },
   {
     title: 'חופשה שנתית',
-    description: 'כמה ימי חופשה מגיעים לך לפי שנות ותק ויום עבודה בשבוע.',
+    description: 'בדיקת ימי חופשה לפי הוותק, מתכונת העבודה והימים שעבדתם בפועל.',
     href: '/employee-rights/annual-leave',
     icon: Calendar,
   },
@@ -137,7 +137,7 @@ const RIGHTS: Calc[] = [
   },
   {
     title: 'מענק שנתי / בונוס',
-    description: 'חישוב מס על מענק (חד-פעמי) — איך הוא מתחלק ומה ייקבע מהמס.',
+    description: 'מה לבדוק בתלוש ובניכויי מס וביטוח על בונוס.',
     href: '/employee-rights/annual-bonus',
     icon: DollarSign,
   },
@@ -172,10 +172,10 @@ export default function SalariedPage() {
         <div className="bg-ink-deep border border-cream/15 p-6 md:p-10 text-cream mb-8 relative overflow-hidden">
           <div className="relative z-10">
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
-              // מרכז שכירים ✦
+              {'// מרכז שכירים ✦'}
             </p>
             <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
-              כל המחשבונים שעובד שכיר זקוק להם
+              כלים ומדריכים לעובד שכיר
               <br />
               <span className="text-gold-light italic font-normal font-serif">
                 במקום אחד
@@ -183,8 +183,8 @@ export default function SalariedPage() {
             </h1>
             <p className="text-cream/70 text-base md:text-lg mb-5 max-w-3xl">
               החזר מס, נטו/ברוטו, פיצויים, דמי הבראה, דמי לידה, מילואים, אבטלה ועוד —{' '}
-              <strong className="text-cream">{TAX_AND_SALARY.length + RIGHTS.length} כלים</strong>{' '}
-              לפי החקיקה העדכנית 2026.
+              <strong className="text-cream">{TAX_AND_SALARY.length + RIGHTS.length} דפים</strong>{' '}
+              עם מידע, אומדנים והפניות לבדיקה אישית.
             </p>
             <Link
               href="/personal-tax/tax-refund"
@@ -204,7 +204,7 @@ export default function SalariedPage() {
               <Receipt className="w-6 h-6 text-ink-mid" />
             </div>
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">// מיסוי ושכר</p>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">{'// מיסוי ושכר'}</p>
               <h2 className="text-2xl font-bold text-ink">החזר מס, חישוב נטו/ברוטו, נקודות זיכוי</h2>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function SalariedPage() {
               <Shield className="w-6 h-6 text-ink-mid" />
             </div>
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">// זכויות עובד</p>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">{'// זכויות עובד'}</p>
               <h2 className="text-2xl font-bold text-ink">פיצויי פיטורין, הבראה, חופשה, מחלה, דמי לידה, מילואים, אבטלה</h2>
             </div>
           </div>
@@ -242,7 +242,7 @@ export default function SalariedPage() {
               <TrendingUp className="w-6 h-6 text-ink-mid" />
             </div>
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">// השוואות</p>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">{'// השוואות'}</p>
               <h2 className="text-2xl font-bold text-ink">השוואה בין מסלולי תעסוקה</h2>
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function SalariedPage() {
             <div className="border-r border-ink/10 pl-4 last:border-r-0">
               <strong className="text-ink">💰 כסף מגיע לך</strong>
               <p className="text-ink/70 mt-1">
-                לפי רשות המסים, רק כ-50% מהזכאים מגישים החזר מס — בממוצע ₪3,500 לשנה. אתה משאיר כסף על השולחן.
+                אם נוכה ממך מס ביתר, אפשר לבדוק זכאות להחזר ולהגיש בקשה ברשות המסים בצירוף הנתונים השנתיים.
               </p>
             </div>
             <div className="border-r border-ink/10 pl-4 last:border-r-0">

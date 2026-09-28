@@ -142,8 +142,7 @@ export const SOCIAL_SECURITY_SELF_EMPLOYED_2026 = {
 // ============================================================
 export const SEVERANCE_COMPENSATION_2026 = {
   annualExemptionCeiling: 13_750, // ₪ - תקרת פטור לכל שנת עבודה
-  exemptionMultiplier: 1.5, // משכורות × 1.5 לכל שנת ותק
-  yearsRequired: 1, // שנה מינימלית לזכאות
+  // הזכאות וגובה הפטור בפועל תלויים בשכר, בתקופת העבודה ובנסיבות הפרישה.
 } as const;
 
 // ============================================================
@@ -182,11 +181,10 @@ export const RECREATION_PAY_2026 = {
 // מקור: חוק חופשה שנתית התשי"א-1951
 // ============================================================
 export const ANNUAL_LEAVE = {
-  daysPerYear: 16, // 16 ימי חופשה בסיסיים בשנה (כולל ש"ק)
-  netDaysPerYear: 14, // 14 ימי חופשה נטו (לא כולל ש"ק)
-  minYearsService: 5,
-  additionalDayPerYearAfter5: 1, // יום נוסף לכל שנה אחרי 5 שנים
-  maxDays: 28, // מקסימום ימי חופשה
+  firstFiveYearsCalendarDays: 16, // מינימום בחמש השנים הראשונות, כולל ימי מנוחה שבועית
+  firstFiveYearsWorkdaysFiveDayWeek: 12,
+  firstFiveYearsWorkdaysSixDayWeek: 14,
+  // מעבר לכך יש לבדוק ותק, ימי עבודה בפועל והסכם מיטיב; אין תוספת שנתית אחידה.
 } as const;
 
 // ============================================================
@@ -225,9 +223,8 @@ export const PURCHASE_TAX_2026 = {
 // מקור: רשות המסים
 // ============================================================
 export const STUDY_FUND_2026 = {
-  maxAnnualDeposit: 20_566, // ₪ הפקדה מוטבת מקסימלית (חוברת ניכויים 2026, סעיף 9(16א))
+  maxAnnualDeposit: 20_566, // ₪ תקרת הפקדה מוטבת לפטור על רווחים; נפרדת מתקרת הניכוי
   taxDeductionPercentage: 0.045, // 4.5% מההכנסה
-  exemptDepositPercentage: 0.025, // 2.5% פטור ממס
   incomeCeilingSelfEmployed: 293_397, // ₪/שנה - תקרת הכנסה קובעת לעצמאי (סעיף 17(5א))
 } as const;
 

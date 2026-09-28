@@ -10,7 +10,7 @@ import {
 
 export const metadata: Metadata = {
   alternates: { canonical: '/employee-rights' },
-  title: { absolute: 'מחשבוני זכויות עובדים 2026 — פיצויים, הבראה, אבטלה ומחלה' },
+  title: { absolute: 'זכויות עובדים 2026 — מידע, אומדנים ובדיקה רשמית' },
   description: 'מידע וכלים לבדיקת זכויות עובדים בישראל: פיצויי פיטורים, חופשה, הבראה, אבטלה, מחלה ומילואים, עם הפניות למקורות רשמיים.',
 };
 
@@ -46,7 +46,7 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון תגמולי מילואים',
+    title: 'בדיקת תגמולי מילואים',
     description: 'בדיקת תגמול מילואים במחשבון הביטוח הלאומי',
     href: '/employee-rights/reserve-duty-pay',
     available: true,
@@ -64,7 +64,7 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון שכר מינימום',
+    title: 'שכר מינימום 2026',
     description: 'בדיקת עמידה בשכר מינימום 2026: 6,443.85 ₪/חודש',
     href: '/employee-rights/minimum-wage',
     available: true,
@@ -184,10 +184,10 @@ export default function EmployeeRightsPage() {
         </div>
 
         <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
-          מחשבוני זכויות עובדים 2026 — פיצויים, הבראה, אבטלה ומחלה
+          זכויות עובדים 2026 — מידע, אומדנים ובדיקה רשמית
         </h1>
         <p className="text-lg text-ink/70 mb-6">
-          מחשבונים מקצועיים לבדיקת הזכויות שמגיעות לך כעובד שכיר בישראל
+          מידע וכלים לבדיקת הזכויות לפי נתוני ההעסקה שלך, עם הפניות למקורות רשמיים
         </p>
 
         {/* Quick answer */}

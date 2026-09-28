@@ -13,6 +13,11 @@
 
 import { SEVERANCE_COMPENSATION, TAX_BRACKETS_2026 } from '@/lib/constants/tax-2026';
 
+// מנוע מורשת שאינו מחובר לדף הציבורי. ההנחות הללו אינן כלל זכאות או פטור אוניברסלי.
+// יש לאמת את נסיבות העובד מול הדין וטופס 161 לפני שימוש בחישוב אישי.
+const LEGACY_EXEMPTION_MULTIPLIER = 1.5;
+const LEGACY_MIN_SERVICE_YEARS = 1;
+
 // ============================================================
 // Types & Enums
 // ============================================================
@@ -221,7 +226,7 @@ function calculateExemptionCeiling(
   //   (ב) תקרה שנתית קבועה (13,750 ₪ ל-2026) × שנות ותק
   // הערה: ''ה-150%'' הוא מקדם השכר (סעיף ב), ולא הכפלה של התקרה הקבועה.
   const byCeiling = SEVERANCE_COMPENSATION.annualExemptionCeiling * years;
-  const bySalary = adjustedSalary * SEVERANCE_COMPENSATION.exemptionMultiplier * years;
+  const bySalary = adjustedSalary * LEGACY_EXEMPTION_MULTIPLIER * years;
 
   // אין מקדם 150% אוטומטי מגיל 50 על התקרה הקבועה. הגדלת פטור עד 150%
   // מהשכר הקובע (החל מ-25.7.2010) היא בסמכות פקיד השומה ומותנית בתנאים —
@@ -273,7 +278,7 @@ export function calculateSeverance(input: SeveranceInput): SeveranceResult {
 
   const { years, months } = calculateYearsOfService(start, end);
 
-  if (years < SEVERANCE_COMPENSATION.yearsRequired) {
+  if (years < LEGACY_MIN_SERVICE_YEARS) {
     return {
       isEligible: false,
       ineligibilityReason: `נדרש ותק של שנה לפחות. ותק נוכחי: ${years.toFixed(1)} שנים`,
@@ -314,7 +319,7 @@ export function calculateSeverance(input: SeveranceInput): SeveranceResult {
   const baseSeverance = adjustedSalary * years;
 
   const exemptionByCeiling = SEVERANCE_COMPENSATION.annualExemptionCeiling * years;
-  const exemptionBySalary = adjustedSalary * SEVERANCE_COMPENSATION.exemptionMultiplier * years;
+  const exemptionBySalary = adjustedSalary * LEGACY_EXEMPTION_MULTIPLIER * years;
   const taxExemptAmount = Math.min(baseSeverance, exemptionByCeiling, exemptionBySalary);
 
   const taxableAmount = Math.max(0, baseSeverance - taxExemptAmount);

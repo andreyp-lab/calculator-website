@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/tools' },
   title: 'מערכת פיננסית לבעלי עסקים 2026 - תקציב, תזרים, DCF ועוד',
   description:
-    'המערכת המקיפה ביותר בישראל לתכנון פיננסי: תקציב, תזרים, ניתוח דוחות, חיזוי 5 שנים, הערכת שווי DCF, Cap Table. עברית מלאה, ללא הרשמה. | חינם.',
+    'כלי תכנון פיננסי לעסק: תקציב, תזרים, ניתוח דוחות ותרחישים. עברית מלאה וללא הרשמה.',
 };
 
 interface Tool {
@@ -35,9 +35,9 @@ const STANDALONE_CALCULATORS: Tool[] = [
     href: '/tools/loan-eligibility',
     title: 'הלוואות בערבות מדינה',
     emoji: '🏦',
-    description: 'בדוק זכאות תוך דקה - 6 מסלולים שונים כולל חרבות ברזל',
+    description: 'בדיקת מסלולים, תנאים ומועדי הגשה באתר הרשמי של הקרן',
     icon: Landmark,
-    features: ['עסק בהקמה / קטן / בינוני', 'מסלול יצואן ותעשייה', 'מסלול חרבות ברזל'],
+    features: ['תנאים עדכניים', 'מועדי הגשה', 'קישור לקרן הרשמית'],
   },
   {
     href: '/tools/break-even',
@@ -49,11 +49,11 @@ const STANDALONE_CALCULATORS: Tool[] = [
   },
   {
     href: '/tools/business-valuation',
-    title: 'הערכת שווי עסק (פשוט)',
+    title: 'מדריך להערכת שווי עסק',
     emoji: '💎',
-    description: '3 שיטות מהירות: DCF, מכפיל EBITDA, מכפיל הכנסות',
+    description: 'אילו נתונים דרושים וכיצד בוחנים היוון תזרים ומכפילים',
     icon: Gem,
-    features: ['מכפילים ענפיים 2026', 'Terminal Value', 'טווח שווי'],
+    features: ['שיטות הערכה', 'נתוני עסק', 'מגבלות ההנחות'],
   },
   {
     href: '/tools/customer-lifetime-value',
@@ -77,7 +77,7 @@ export default function ToolsLandingPage() {
             </p>
 
             <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-cream">
-              המערכת הפיננסית המקיפה ביותר
+              כלים לתכנון פיננסי
               <br />
               <span className="text-gold-light italic font-normal font-serif">
                 לעסקים בישראל
@@ -120,7 +120,7 @@ export default function ToolsLandingPage() {
         <FeatureCard
           icon={BarChart3}
           title="בנצ'מרק ענפי"
-          description="10 ענפים × 15 מדדים. רואה את עצמך מול הממוצע (Q1/חציון/Q3). מבוסס על דוחות בורסה, Damodaran, ו-D&B 2025/2026."
+          description="נתוני השוואה לדוגמה לצורך בחינת תרחישים. בדקו את מקורות הנתונים ואת התאמתם לעסק לפני שימוש בהחלטה."
         />
       </div>
 
@@ -183,7 +183,7 @@ export default function ToolsLandingPage() {
           <span className="font-mono text-xs text-ink/70 uppercase tracking-[0.1em]">לא חלק מהמערכת המאוחדת</span>
         </div>
         <p className="text-sm text-ink/70 mb-5">
-          מחשבונים מהירים לבדיקות נקודתיות — מתאימים אם אתה לא רוצה לפתוח פרויקט שלם.
+          כלים ומדריכים לבדיקות נקודתיות — מתאימים אם אתה לא רוצה לפתוח פרויקט שלם.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {STANDALONE_CALCULATORS.map((tool) => {

@@ -99,11 +99,11 @@ const taxesFaqItems = [
   },
   {
     question: 'מה זה מס יסף ומי משלם אותו?',
-    answer: 'מס יסף הוא 3% נוסף על הכנסה שנתית מעל 721,560 ₪ (כ-60,130 ₪/חודש). חל על שכר גבוה, דיבידנדים ורווחי הון.',
+    answer: 'מס יסף בשיעור 3% עשוי לחול על הכנסה חייבת מעל הסף השנתי. החל מ-2025 נוסף מס יסף של 2% על הכנסה ממקור הוני מעל הסף, לפי תנאי הדין. בדקו את פירוט ההכנסות בדוח השנתי.',
   },
   {
     question: 'האם עצמאי יכול לבחור בין חברה לעוסק מורשה?',
-    answer: 'כן. פתיחת חברה בע"מ עדיפה בדרך כלל מהכנסה שנתית של כ-600,000 ₪ ומעלה בגלל שיעורי מס נמוכים יותר לחברות.',
+    answer: 'בחירת מבנה העסק תלויה ברווח, במשיכות, בעלויות ניהול, באחריות ובמס על חלוקת רווחים. אין סף הכנסה אחד שבו חברה עדיפה לכל עסק.',
   },
 ];
 
@@ -220,12 +220,13 @@ export default function TaxesCompleteGuide() {
                 אלה המסים העיקריים שמשלם יחיד בישראל ב-2026: מס הכנסה בשבע מדרגות, מ-
                 {TAX_MIN_PCT}% ועד {TAX_TOP_PCT}%
               </strong>{' '}
-              (ומס יסף של {SURTAX_PCT}% נוסף על הכנסה שנתית מעל {SURTAX_THRESHOLD} ₪), ביטוח
+              (ומס יסף של {SURTAX_PCT}% נוסף מעל {SURTAX_THRESHOLD} ₪ להכנסה חייבת, ובמקרים
+              המתאימים עוד 2% על הכנסה ממקור הוני), ביטוח
               לאומי ודמי בריאות בשיעורים מדורגים, ומע&quot;מ של {VAT_PCT}% על צריכה. מנגד,
               כל נקודת זיכוי שווה {CREDIT_POINT_MONTHLY} ₪ בחודש שמפחיתים ישירות מהמס.
               בנדל&quot;ן נוספים מס רכישה לקונה ומס שבח למוכר, ובהשקעות — מס רווחי הון.
               המדריך שלפניך מפרט כל מס: מי משלם, כמה, אילו פטורים והטבות קיימים — עם קישור
-              למחשבון מדויק לכל אחד מהם.
+              למדריכים ולכלים המתאימים לבדיקת הנתונים האישיים.
             </p>
           </section>
 
@@ -235,23 +236,9 @@ export default function TaxesCompleteGuide() {
               1. למה זה חשוב: ישראלים מאבדים מיליארדים
             </h2>
             <p className="text-ink/70 mb-5 text-lg">
-              מחקר של רשות המסים הראה שישראלים מאבדים מאות אלפי שקלים לאורך חיי העבודה שלהם
-              על מסים שאפשר היה לחסוך בצורה חוקית לחלוטין. החזרי מס לא נדרשים, ניכויים שלא נוצלו,
-              פטורים שלא ידעו עליהם – אלה לא חוקי מס מתוחכמים. אלה זכויות בסיסיות.
+              כדאי לבדוק אם נוצלו נקודות זיכוי, ניכויים, פטורים והחזרים שמגיעים לפי נסיבותיכם.
+              סכום ההחזר האפשרי משתנה מאדם לאדם ויש לאמת זכאות מול רשות המסים.
             </p>
-
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
-              {[
-                { stat: '2.5B₪', label: 'החזרי מס שלא נדרשו ב-2024', color: 'text-red-700' },
-                { stat: '800K', label: 'שכירים זכאים שלא ביקשו החזר מס', color: 'text-gold' },
-                { stat: '40K₪', label: 'ממוצע החזר מס שנתי אפשרי לעצמאי', color: 'text-green-700' },
-              ].map((item) => (
-                <div key={item.stat} className="bg-paper border border-ink/15 rounded-none p-5 text-center shadow-sm">
-                  <div className={`text-3xl font-bold ${item.color} mb-1`}>{item.stat}</div>
-                  <div className="text-sm text-ink/70">{item.label}</div>
-                </div>
-              ))}
-            </div>
 
             <p className="text-ink/70">
               מטרת המדריך הזה: לתת לך ידע מלא על כל מס בישראל, כך שתוכל לתכנן נכון ולא לשלם
@@ -322,7 +309,7 @@ export default function TaxesCompleteGuide() {
             <h3 className="text-xl font-bold text-ink mb-3">מי זכאי להחזר מס?</h3>
             <p className="text-ink/70 mb-5">
               שכיר שעבד אצל יותר ממעסיק אחד, היה בחל&quot;ת חלקי, נולד לו ילד, עלה לישראל, למד,
-              תרם, או שיש לו הוצאות מוכרות – עשוי לקבל החזר של 5,000–25,000 ₪. ניתן לדרוש
+              תרם, או שיש לו הוצאות מוכרות – עשוי להיות זכאי להחזר, בהתאם לנתוניו. ניתן לדרוש
               עד 6 שנים אחורה! בדוק:
             </p>
             <Link href="/personal-tax/tax-refund" className="inline-block bg-ink text-cream px-5 py-2.5 rounded-none hover:bg-ink-deep font-medium mb-4">
@@ -350,14 +337,14 @@ export default function TaxesCompleteGuide() {
             <h3 className="text-xl font-bold text-ink mb-3">הוצאות מוכרות עיקריות</h3>
             <div className="grid md:grid-cols-2 gap-3 mb-6">
               {[
-                { expense: 'שכר דירה לעסק', rate: '100% (עסק נפרד) / 25% (בית)' },
-                { expense: 'רכב עסקי', rate: 'לפי נסיעות / 45% על שווי שימוש' },
-                { expense: 'ציוד ומחשבים', rate: '100% (מחשב) / לפי פחת' },
-                { expense: 'טלפון', rate: '50%–80% לפי שימוש עסקי' },
-                { expense: 'השתלמות מקצועית', rate: '100% בתחום העיסוק' },
-                { expense: 'ביטוחים עסקיים', rate: '100%' },
-                { expense: 'פנסיה עצמאי', rate: '16.5% מהרווח (ניכוי + זיכוי)' },
-                { expense: 'קרן השתלמות עצמאי', rate: '4.5% מהרווח (עד תקרה)' },
+                { expense: 'שכר דירה לעסק', rate: 'לפי השימוש, המסמכים ותנאי ההכרה' },
+                { expense: 'רכב עסקי', rate: 'לפי סוג הרכב ותקנות ניכוי הוצאות רכב' },
+                { expense: 'ציוד ומחשבים', rate: 'לפי סיווג ההוצאה וכללי הפחת' },
+                { expense: 'טלפון', rate: 'לפי אופי השימוש והכללים החלים' },
+                { expense: 'השתלמות מקצועית', rate: 'לפי הזיקה לעיסוק ותנאי הדין' },
+                { expense: 'ביטוחים עסקיים', rate: 'לפי סוג הביטוח והקשר לעסק' },
+                { expense: 'פנסיה עצמאי', rate: 'ניכוי וזיכוי לפי תקרות ותנאי זכאות' },
+                { expense: 'קרן השתלמות עצמאי', rate: 'ניכוי לפי ההכנסה והתקרה הרלוונטית' },
               ].map((item) => (
                 <div key={item.expense} className="bg-cream-2 border border-ink/15 rounded-none p-3">
                   <div className="font-medium text-ink text-sm">{item.expense}</div>
@@ -368,20 +355,20 @@ export default function TaxesCompleteGuide() {
 
             <h3 className="text-xl font-bold text-ink mb-3">מקדמות מס – מה הן ואיך מחשבים?</h3>
             <p className="text-ink/70 mb-5">
-              עצמאי משלם מקדמות מס כל חודש (עד ה-15 לחודש העוקב). גובה המקדמה נקבע
-              לפי % מהמחזור, בהתאם לתחום. הכנסות גבוהות מהצפי → ישנם מנגנוני עדכון.
-              בסוף השנה מגישים דוח שנתי ומחשבים מס אמיתי.
+              מקדמות מס הכנסה משולמות לפי הדרישה והתקופה שנקבעו בתיק. אם גובה הדרישה אינו
+              תואם את הנתונים, אפשר לבדוק בקשת הקטנה בטופס 2216א׳ של רשות המסים. הדוח
+              השנתי משמש לקביעת החבות לאחר הבאת המקדמות בחשבון.
             </p>
 
             <div className="flex gap-3 flex-wrap">
               <Link href="/self-employed/net" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
-                מחשבון נטו עצמאי ←
+                מדריך נטו עצמאי ←
               </Link>
               <Link href="/self-employed/tax-advances" className="bg-paper border border-ink text-ink px-4 py-2 rounded-none hover:bg-paper-hover text-sm font-medium">
-                מחשבון מקדמות מס ←
+                מדריך מקדמות מס ←
               </Link>
               <Link href="/self-employed/year-end-tax-simulator" className="bg-paper border border-ink text-ink px-4 py-2 rounded-none hover:bg-paper-hover text-sm font-medium">
-                סימולטור מס שנתי ←
+                מדריך מס שנתי ←
               </Link>
             </div>
 
@@ -420,14 +407,14 @@ export default function TaxesCompleteGuide() {
             </div>
 
             <p className="text-ink/70 mb-5">
-              <strong>ההבדל הגדול:</strong> שכיר עם שכר 20,000 ₪ ישלם ב.ל. ~700 ₪/חודש.
-              עצמאי עם הכנסה זהה ישלם ~3,300 ₪/חודש (כולל חלק מעסיק שמשלם לבד). סה&quot;כ
-              הפרש: ~2,600 ₪/חודש = 31,200 ₪ לשנה.
+              <strong>השוואה אישית:</strong> בסיס הביטוח לעצמאי אינו בהכרח זהה לשכר ברוטו של
+              שכיר באותו סכום. הביטוח הלאומי מבצע התאמות להכנסה המבוטחת, ולכן יש לבדוק כל
+              מעמד ואת ההכנסות הנוספות במחשבון הרשמי.
             </p>
 
             <div className="flex gap-3 flex-wrap">
               <Link href="/self-employed/social-security" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
-                מחשבון ב.ל. לעצמאי ←
+                מדריך ב.ל. לעצמאי ←
               </Link>
               <Link href="/blog/bituach-leumi-self-employed-deep-dive" className="text-gold underline text-sm inline-flex items-center">
                 מדריך מעמיק לב.ל. לעצמאי ←
@@ -485,26 +472,29 @@ export default function TaxesCompleteGuide() {
           {/* Section 6 */}
           <section id="surtax" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              6. מס יסף 3% – מי חייב ואיך מחשבים
+              6. מס יסף – בדיקת הכנסות מעל הסף
             </h2>
 
             <p className="text-ink/70 mb-5">
-              מס יסף (Surtax) הוא תוספת של 3% על הכנסה חייבת מעל 721,560 ₪ לשנה (2026).
-              מדובר על כלל ההכנסות: שכר, עסק, שכר דירה, רווחי הון, דיבידנד – הכל מצטרף.
+              מס יסף בשיעור 3% חל על הכנסה חייבת מעל הסף השנתי לפי תנאי הדין. החל משנת 2025
+              חל גם מס נוסף של 2% על חלק מההכנסה ממקור הוני שעולה על הסף. אופן צירוף
+              ההכנסות והחריגים מפורטים בהוראת הביצוע של רשות המסים.
             </p>
 
             <div className="bg-red-50 border border-red-200 rounded-none p-5 mb-5">
               <h3 className="font-bold text-red-900 mb-2">מי חייב?</h3>
               <p className="text-red-800 text-sm">
-                כל מי שהכנסתו הכוללת (מכל המקורות) עולה על 721,560 ₪ לשנה.
-                שים לב: גם רווח ממכירת נכס (מס שבח) יכול לדחוף להכנסה הכוללת מעל הסף.
+                בדקו את ההכנסה החייבת מכל מקור ואת אופי ההכנסה ההונית לפני חישוב.
+                בחלק מעסקאות המקרקעין חלים כללים מיוחדים.
               </p>
             </div>
 
             <h3 className="text-xl font-bold text-ink mb-3">דוגמה מספרית</h3>
             <p className="text-ink/70 mb-5">
-              שכר שנתי 800,000 ₪ → 800,000 – 721,560 = 78,440 ₪ חייב במס יסף → 78,440 × 3% =
-              2,353 ₪ מס יסף שנתי (בנוסף למס ה-47% השולי; יחד: 50% על הפרוסה מעל הסף).
+              אם ההכנסה החייבת היא שכר בלבד בסך 800,000 ₪ והסף הרלוונטי הוא 721,560 ₪,
+              ההפרש הוא 78,440 ₪. מס היסף בשיעור 3% על ההפרש הוא 2,353.20 ₪, לפני בדיקת
+              נסיבות נוספות. ראו את{' '}
+              <a href="https://www.gov.il/BlobFolder/policy/inst-05-2025/he/IncomeTax_inst-05-2025.pdf" className="text-gold underline">הוראת הביצוע של רשות המסים</a>.
             </p>
 
             <Link href="/blog/surtax-yesef-2026-explained" className="text-gold underline text-sm">
@@ -668,7 +658,7 @@ export default function TaxesCompleteGuide() {
               <h3 className="font-bold text-green-900 mb-3 text-lg">למה זאת ההטבה הטובה ביותר בישראל?</h3>
               <ul className="space-y-2 text-green-800 text-sm">
                 <li>• <strong>שכיר:</strong> מעסיק מפקיד 7.5% (פטור ממס הכנסה לעובד!)</li>
-                <li>• <strong>שכיר:</strong> עובד מפקיד 2.5% (ניכוי ממס הכנסה)</li>
+                <li>• <strong>שכיר:</strong> הפקדת העובד היא חלק מתנאי הקרן ואינה ניכוי מס גורף לעצמה</li>
                 <li>• <strong>תשואה:</strong> הכסף מושקע בשוק ההון ומשיג תשואה</li>
                 <li>• <strong>משיכה לאחר 6 שנים:</strong> פטור מלא ממס רווחי הון!</li>
                 <li>• <strong>תקרה פטורה לשכיר:</strong> 15,712 ₪ הכנסה × 7.5% = 1,178 ₪/חודש</li>
@@ -677,8 +667,8 @@ export default function TaxesCompleteGuide() {
 
             <h3 className="text-xl font-bold text-ink mb-3">קרן השתלמות לעצמאי</h3>
             <p className="text-ink/70 mb-5">
-              עצמאי יכול להפקיד עד 4.5% מהרווח (עד ~20,566 ₪ לשנה) ולקבל ניכוי ממס הכנסה.
-              כמו כן – הכנסות מהשקעות בקרן פטורות ממס רווחי הון לאחר 6 שנים.
+              עצמאי עשוי לקבל ניכוי על הפקדות עד 4.5% מההכנסה הקובעת בכפוף לתקרה.
+              תקרת ההפקדה לצורך פטור רווחי הון שונה מתקרת הניכוי, והפטור כפוף לתנאי המשיכה.
             </p>
 
             <Link href="/blog/study-fund-self-employed-strategy" className="text-gold underline text-sm">
@@ -784,11 +774,11 @@ export default function TaxesCompleteGuide() {
 
             <div className="space-y-4">
               {[
-                { mistake: 'לא לדרוש החזר מס', cost: 'עד 25,000 ₪ לשנה!', fix: 'בדוק זכאות לשנים אחורה – ניתן לדרוש עד 6 שנים.' },
-                { mistake: 'לא לעדכן נקודות זיכוי', cost: '3,000–15,000 ₪ לשנה', fix: 'עדכן ילד חדש, תואר, עלייה לישראל – מיד!' },
+                { mistake: 'לא לבדוק זכאות להחזר מס', cost: 'תלוי בנתונים', fix: 'בדוק את שנות המס שבהן ניתן להגיש בקשה.' },
+                { mistake: 'לא לעדכן נקודות זיכוי', cost: 'תלוי בזכאות', fix: 'עדכן שינוי במצב משפחתי וזכאות לתואר או להטבות אחרות.' },
                 { mistake: 'לא לבצע תיאום מס', cost: 'אלפי שקלים ינוכו יותר', fix: 'אם יש 2 מעסיקים – תיאום מס הכרחי.' },
-                { mistake: 'לא לנצל קרן השתלמות', cost: 'אובדן תשואה פטורה ממס', fix: 'הפקד את המקסימום – הכי טוב תשואה נטו בישראל.' },
-                { mistake: 'לא לנכות פנסיה כעצמאי', cost: '5,000–15,000 ₪ מס נוסף', fix: 'הפקד לפנסיה ודרוש ניכוי מלא בדוח.' },
+                { mistake: 'לא לבדוק תנאי קרן השתלמות', cost: 'הטבה אפשרית', fix: 'בדוק תקרות, תנאי משיכה והתאמה לצורכי נזילות.' },
+                { mistake: 'לא לבדוק הטבת פנסיה כעצמאי', cost: 'תלוי בתקרה', fix: 'בדוק ניכוי וזיכוי לפי אישורי ההפקדה וההכנסה.' },
                 { mistake: 'שכחת לרשום הוצאות', cost: 'תשלום מס על הכנסה בה לא חייב', fix: 'שמור כל קבלה ורשום הוצאות מוכרות.' },
               ].map((item, i) => (
                 <div key={i} className="border border-red-200 rounded-none p-5 bg-red-50">
@@ -805,7 +795,7 @@ export default function TaxesCompleteGuide() {
           {/* Section 16 */}
           <section id="calculators" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              16. כל המחשבונים שלנו
+              16. מחשבונים ומדריכים
             </h2>
 
             <div className="grid md:grid-cols-2 gap-4">
@@ -814,11 +804,11 @@ export default function TaxesCompleteGuide() {
                 { href: '/personal-tax/tax-refund', label: 'מחשבון החזר מס לשכיר', desc: 'גלה אם מגיע לך החזר מס וכמה.' },
                 { href: '/personal-tax/income-tax', label: 'מחשבון מס הכנסה', desc: 'חישוב מס הכנסה מדויק לפי מדרגות 2026.' },
                 { href: '/personal-tax/tax-credits', label: 'מחשבון נקודות זיכוי', desc: 'בדוק כמה נקודות זיכוי מגיעות לך.' },
-                { href: '/self-employed/net', label: 'מחשבון נטו עצמאי', desc: 'חשב כמה תקח הביתה כעצמאי.' },
-                { href: '/self-employed/social-security', label: 'מחשבון ב.ל. עצמאי', desc: 'ביטוח לאומי ובריאות לעצמאים.' },
+                { href: '/self-employed/net', label: 'מדריך נטו עצמאי', desc: 'הכן את הנתונים לבדיקה אישית של התזרים הפנוי.' },
+                { href: '/self-employed/social-security', label: 'מדריך ב.ל. עצמאי', desc: 'בדוק בסיס חיוב ושיעורים באתר ביטוח לאומי.' },
                 { href: '/self-employed/vat', label: 'מחשבון מע"מ', desc: 'חישוב מע"מ עוסק מורשה/פטור.' },
-                { href: '/self-employed/tax-advances', label: 'מחשבון מקדמות מס', desc: 'חשב מקדמות מס חודשיות.' },
-                { href: '/self-employed/year-end-tax-simulator', label: 'סימולטור מס שנתי', desc: 'מה יהיה המס שלך בסוף השנה?' },
+                { href: '/self-employed/tax-advances', label: 'מדריך מקדמות מס', desc: 'בדוק את הדרישה בתיק ואת אפשרות עדכונה.' },
+                { href: '/self-employed/year-end-tax-simulator', label: 'מדריך מס שנתי', desc: 'רכז נתונים לדוח השנתי ולהערכת החבות.' },
                 { href: '/self-employed/dividend-vs-salary', label: 'דיבידנד מול שכר', desc: 'מה לבדוק לפני בחירת דרך משיכה?' },
                 { href: '/real-estate/capital-gains-tax', label: 'בדיקת מס שבח', desc: 'חשב מס שבח על מכירת נדל"ן.' },
                 { href: '/real-estate/purchase-tax', label: 'מחשבון מס רכישה', desc: 'מס רכישה לפי סוג רוכש ומחיר.' },
@@ -867,7 +857,7 @@ export default function TaxesCompleteGuide() {
               {[
                 {
                   q: 'מה שיעור מס הכנסה המינימלי בישראל?',
-                  a: '10% על הכנסה עד 84,120 ₪ לשנה. אך בפועל, בגלל נקודות זיכוי (2.25 לפחות לכל אחד = 5,418 ₪ זיכוי שנתי), שכיר עם שכר עד ~6,500 ₪/חודש לא ישלם מס הכנסה כלל.',
+                  a: 'שיעור המדרגה הראשונה הוא 10%. המס בפועל תלוי בהכנסה השנתית, בנקודות הזיכוי ובנתונים האישיים; אין סף הכנסה נטול מס זהה לכולם.',
                 },
                 {
                   q: 'האם צריך להגיש דוח שנתי כשכיר?',
@@ -895,11 +885,11 @@ export default function TaxesCompleteGuide() {
                 },
                 {
                   q: 'האם עצמאי חייב לשלם מס גם אם לא הרוויח?',
-                  a: 'לא מס הכנסה אם אין רווח. אך לב.ל. יש תשלום מינימלי (~1,000 ₪/חודש) גם אם אין הכנסה, אלא אם העצמאי סגר את עסקו.',
+                  a: 'החבות במס הכנסה ובביטוח לאומי תלויה במקורות הכנסה אחרים, במעמד הביטוחי ובבסיס החיוב. בדקו את הדרישה האישית ברשות המסים ובביטוח הלאומי.',
                 },
                 {
                   q: 'מתי כדאי לפתוח חברה בע"מ?',
-                  a: 'ככלל אצבע: כשהרווח השנתי עולה על 400,000–500,000 ₪. מתחת לסכום זה, עוסק מורשה כדאי יותר (חוסכים הוצאות חשבונאות ועלויות ניהול חברה).',
+                  a: 'אין רווח שנתי יחיד שממנו חברה בע״מ עדיפה. השוו רווח, משיכות, מס חברות ומס דיבידנד, אחריות ועלויות ניהול עם איש מקצוע.',
                 },
                 {
                   q: 'האם עלות ילד במעון מוכרת לניכוי?',
@@ -942,7 +932,7 @@ export default function TaxesCompleteGuide() {
           <div className="bg-ink text-cream rounded-none p-8 text-center">
             <h2 className="text-2xl font-bold mb-3">מוכן לחסוך מסים?</h2>
             <p className="text-cream/80 mb-6">
-              השתמש בכלים שלנו לחישוב מס מדויק ומציאת הזדמנויות חיסכון
+              בדוק את הזכויות והנתונים האישיים שלך בעזרת המדריכים והמקורות הרשמיים
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link
@@ -955,7 +945,7 @@ export default function TaxesCompleteGuide() {
                 href="/self-employed/year-end-tax-simulator"
                 className="bg-ink-deep text-cream px-6 py-3 rounded-none font-bold hover:bg-ink transition border border-cream/20"
               >
-                סימולטור מס שנתי ←
+                מדריך מס שנתי ←
               </Link>
             </div>
           </div>

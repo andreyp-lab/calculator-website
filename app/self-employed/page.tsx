@@ -57,8 +57,8 @@ const calculators = [
     available: true,
   },
   {
-    title: '🆕 מחשבון תקרת עוסק פטור',
-    description: 'בדוק אם חצית את תקרת 122,833 ₪ — מה קורה בחריגה ומתי חובה לעבור לעוסק מורשה',
+    title: 'תקרת עוסק פטור — מדריך',
+    description: 'בדקו את המחזור מול תקרת 2026 ואת שלבי העדכון מול רשות המסים',
     href: '/self-employed/vat-threshold',
     available: true,
   },
@@ -75,8 +75,8 @@ const calculators = [
     available: true,
   },
   {
-    title: '🆕 כמה עולה לפתוח עסק?',
-    description: 'כל עלויות פתיחת העסק בשקלים — אגרות, רו"ח, ביטוחים וציוד',
+    title: 'כמה עולה לפתוח עסק?',
+    description: 'רכיבי עלות לפתיחת עסק והיכן בודקים אגרות רשמיות והצעות מחיר',
     href: '/self-employed/business-setup-cost',
     available: true,
   },
@@ -105,8 +105,8 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון עלות מעסיק',
-    description: 'כמה עולה להעסיק עובד - שכר + ביטוח לאומי + פנסיה + הטבות',
+    title: 'עלות מעסיק — רכיבים לבדיקה',
+    description: 'מה צריך לכלול בתקציב העסקה לפני חישוב אישי עם חשב שכר',
     href: '/self-employed/employer-cost',
     available: true,
   },

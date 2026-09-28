@@ -43,7 +43,7 @@ const faqItems = [
   },
   {
     question: 'מתי צריך לחלץ מע"מ בפועל?',
-    answer: `בעיקר כשמקבלים מחיר "כולל מע"מ" וצריך את הבסיס: הפקת חשבונית מס מסכום סופי שסוכם עם לקוח, רישום הוצאה בהנהלת חשבונות (מע"מ תשומות לקיזוז), או השוואת הצעות מחיר שחלקן כוללות מע"מ וחלקן לא. עוסק מורשה מקזז את רכיב המע"מ שחולץ מהוצאות עסקיות מוכרות.`,
+    answer: `כשמקבלים מחיר "כולל מע"מ" וצריך לדעת מהו הסכום לפני המע"מ ומהו רכיב המע"מ. חילוץ מתמטי של רכיב המע"מ אינו קובע אם מותר לנכות מס תשומות: הזכאות תלויה בסוג ההוצאה, בשימוש ובמסמכים הנדרשים לפי הדין.`,
   },
 ];
 
@@ -58,7 +58,7 @@ export default function VatExtractPage() {
         { label: 'חילוץ מע"מ' },
       ]}
       pageUrl="/tools/vat-extract"
-      lastUpdated="2026-07-30"
+      lastUpdated="2026-09-28"
       quickAnswer={
         <p className="text-lg text-ink leading-relaxed">
           כדי לחלץ מע&quot;מ מסכום שכולל מע&quot;מ — <strong>מחלקים ב-{DIVISOR}</strong>: סכום
@@ -136,22 +136,22 @@ export default function VatExtractPage() {
         <ul className="space-y-2 text-gold">
           <li>
             <a
-              href="https://www.gov.il/he/departments/israel_tax_authority"
+              href="https://www.gov.il/BlobFolder/dynamiccollectorresultitem/represent-info-051224-2/he/vat_represent-info-051224-2.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              רשות המסים — מע&quot;מ
+              רשות המסים — שינוי שיעור המע&quot;מ ל־18%
             </a>
           </li>
           <li>
             <a
-              href="https://www.kolzchut.org.il/he/%D7%9E%D7%A1_%D7%A2%D7%A8%D7%9A_%D7%9E%D7%95%D7%A1%D7%A3_(%D7%9E%D7%A2%22%D7%9E)"
+              href="https://www.gov.il/he/pages/vat-to-the-new-dealer?chapterIndex=14"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              כל-זכות: מע&quot;מ
+              רשות המסים — מדריך לעוסק חדש וניכוי מס תשומות
             </a>
           </li>
         </ul>

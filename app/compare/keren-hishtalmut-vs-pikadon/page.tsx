@@ -232,9 +232,9 @@ export default function KerenHishtalmutVsPikadonPage() {
               שנים, אותה תשואה שנתית מניבה בקרן השתלמות עשרות אחוזים יותר נטו. לעצמאי מתווספת
               הטבה שנייה: ניכוי ההפקדה מההכנסה החייבת מקטין את המס כבר השנה —{' '}
               <Link href="/self-employed/net" className="text-gold underline">
-                מחשבון הנטו לעצמאי
+                מדריך הנטו לעצמאי
               </Link>{' '}
-              מראה את ההשפעה המדויקת.
+              מסביר אילו נתונים דרושים לבדיקת השפעת הניכוי.
             </p>
 
             <h2>מתי לבחור מה?</h2>
@@ -285,9 +285,9 @@ export default function KerenHishtalmutVsPikadonPage() {
               </li>
               <li>
                 <Link href="/self-employed/net" className="text-gold underline">
-                  מחשבון נטו לעצמאי
+                  מדריך נטו לעצמאי
                 </Link>{' '}
-                - כולל השפעת ניכוי קרן ההשתלמות על המס.
+                - מסביר מה נדרש לבדיקה אישית של ניכוי קרן ההשתלמות.
               </li>
               <li>
                 <Link href="/blog/study-fund-self-employed-strategy" className="text-gold underline">

@@ -22,7 +22,6 @@
 import {
   SOCIAL_SECURITY_EMPLOYEE_2026,
   RECREATION_PAY_2026,
-  ANNUAL_LEAVE,
   MINIMUM_WAGE_2026,
 } from '@/lib/constants/tax-2026';
 

@@ -4,64 +4,57 @@ import { AllCalculatorsGrid } from '@/components/home/AllCalculatorsGrid';
 import { HeroSalaryCalc } from '@/components/home/HeroSalaryCalc';
 
 export const metadata: Metadata = {
-  title: '30 מחשבונים פיננסיים חינם בעברית – כלים מעודכנים 2026',
+  title: 'מחשבונים ומדריכים פיננסיים חינם בעברית',
   description:
-    '30 מחשבונים פיננסיים מקצועיים: מס הכנסה, משכנתא עם Solver, פיצויי פיטורין, ביטוח לאומי לעצמאי, FIRE, מס רכישה ועוד. עדכני 2026, בחינם.',
+    'כלים ומדריכים פיננסיים בעברית לשכר, מסים, זכויות עובדים, עצמאים, משכנתא והשקעות. גישה חופשית לכלים ולמידע.',
   alternates: { canonical: '/' },
 };
 
 // ============================================================
-// 7 קטגוריות ראשיות — שם, ספירת כלים וקישור פנימי
+// 7 קטגוריות ראשיות — שם וקישור פנימי
 // ============================================================
 const CATEGORIES = [
   {
     idx: '01',
     label: 'מסים אישיים',
-    count: 5,
     href: '/personal-tax',
     description: 'החזר מס, שכר נטו/ברוטו, מס הכנסה, נקודות זיכוי ומענק עבודה.',
   },
   {
     idx: '02',
     label: 'זכויות עובדים',
-    count: 10,
     href: '/employee-rights',
     description: 'פיצויי פיטורין, דמי לידה ואבטלה, מילואים, הבראה, חופשה ומחלה.',
   },
   {
     idx: '03',
     label: 'עצמאיים ועסקים',
-    count: 13,
     href: '/self-employed',
     description: 'מע״מ, מקדמות מס, ביטוח לאומי, תמחור שעה ומבנה עסקי אופטימלי.',
   },
   {
     idx: '04',
     label: 'משכנתא ונדל״ן',
-    count: 4,
     href: '/real-estate',
     description: 'מחשבון משכנתא, אופטימייזר תמהיל, מס רכישה ומס שבח.',
   },
   {
     idx: '05',
     label: 'השקעות וחיסכון',
-    count: 8,
     href: '/investments',
     description: 'ריבית דריבית, תכנון פרישה, FIRE, תשואה ותקציב משפחתי.',
   },
   {
     idx: '06',
     label: 'רכב ותחבורה',
-    count: 3,
     href: '/vehicles',
     description: 'ליסינג מול קנייה, עלות דלק שנתית ושווי שימוש ברכב.',
   },
   {
     idx: '07',
     label: 'הקמת עסק',
-    count: 20,
     href: '/business',
-    description: 'כמה עולה להקים סטודיו, בית קפה, מספרה או קליניקה — תוכנית עסקית מלאה.',
+    description: 'מדריכי פתיחת עסק לסטודיו, בית קפה, מספרה, קליניקה ועוד.',
   },
 ] as const;
 
@@ -75,7 +68,7 @@ const COURSE_CARDS = [
     name: 'הכסף של העסק בידיים שלך',
     audience: 'עצמאים / פרילנסרים',
     description:
-      'מע״מ, מס הכנסה וביטוח לאומי — בשפה שכולם מבינים. תפסיק לשלם ביתר ותנהל את הכסף של העסק בביטחון מלא.',
+      'מע״מ, מס הכנסה וביטוח לאומי — הסברים וכלים לניהול הכסף של העסק.',
     href: '/course/self-employed',
     featured: true,
   },
@@ -85,7 +78,7 @@ const COURSE_CARDS = [
     name: 'מנהל הכספים של העסק שלך',
     audience: 'בעלי עסקים מבוססים, חברות',
     description:
-      'תזרים מזומנים, תקציב שנתי, הון חוזר, בנקים ואשראי — לנהל את העסק כמו מנהל כספים, בלי לשכור אחד.',
+      'תזרים מזומנים, תקציב שנתי, הון חוזר, בנקים ואשראי — כלים לניהול כספי העסק.',
     href: '/course/business',
     featured: false,
   },
@@ -122,7 +115,7 @@ export default function Home() {
             {/* קופי */}
             <div>
               <span className="inline-flex items-center gap-2 border border-gold/40 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-gold">
-                ✦ 30+ מחשבונים · עדכני לחוק 2026
+                ✦ מחשבונים ומדריכים פיננסיים בעברית
               </span>
 
               <h1 className="mt-7 text-5xl font-black leading-[1.05] md:text-6xl">
@@ -133,14 +126,14 @@ export default function Home() {
               </h1>
 
               <p className="mt-7 max-w-lg text-lg leading-relaxed text-ink/70">
-                ספרייה של מחשבונים פיננסיים מקצועיים — מס הכנסה, משכנתא, פיצויים,
-                ביטוח לאומי, השקעות ועוד. כל חישוב בנוי לפי החוק הישראלי ומעודכן
-                לשנת המס 2026.
+                כלים ומדריכים פיננסיים לשכר ומסים, משכנתא, זכויות עובדים,
+                ביטוח לאומי, השקעות וניהול עסק. בעמודים תמצאו הסברים וקישורים
+                למקורות המתאימים לנושא.
               </p>
 
               {/* שורת סטטים */}
               <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.1em] text-ink/70">
-                <span>30+ מחשבונים</span>
+                <span>מחשבונים ומדריכים</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
                 <span>7 קטגוריות</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
@@ -155,7 +148,7 @@ export default function Home() {
                   href="#calculators"
                   className="bg-ink px-8 py-3.5 text-sm font-medium text-cream transition hover:bg-ink-deep"
                 >
-                  עיין במחשבונים ←
+                  עיין בכלים ←
                 </Link>
                 <Link
                   href="/course"
@@ -199,9 +192,6 @@ export default function Home() {
               >
                 <div className="flex items-baseline justify-between">
                   <span className="font-mono text-sm text-ink/70">{cat.idx}</span>
-                  <span className="font-mono text-xs uppercase tracking-[0.1em] text-gold">
-                    {cat.count} כלים
-                  </span>
                 </div>
                 <h3 className="mt-5 text-xl font-black text-ink transition group-hover:text-gold">
                   {cat.label}
@@ -223,9 +213,9 @@ export default function Home() {
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold">
             ✦ הספרייה המלאה ✦
           </p>
-          <h2 className="mt-3 text-3xl font-black md:text-4xl">כל המחשבונים שלנו</h2>
+          <h2 className="mt-3 text-3xl font-black md:text-4xl">הכלים והמדריכים שלנו</h2>
           <p className="mx-auto mt-3 max-w-2xl text-ink/70">
-            כל הכלים, מסודרים לפי קטגוריה. עדכני לחוק 2026, בחינם וללא הרשמה.
+            כלים ומדריכים מסודרים לפי נושא, בגישה חופשית וללא הרשמה.
           </p>
         </div>
         <AllCalculatorsGrid />
@@ -257,8 +247,8 @@ export default function Home() {
               </span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-cream/70">
-              3 קורסים פרקטיים בהדרכת רו״ח — מע״מ ומס לעצמאים, ניהול כספים לבעלי
-              עסקים, ו-AI לעבודה הפיננסית. גישה לכל החיים, 14 יום החזר כספי מלא.
+              שלושה מסלולי לימוד על מע״מ ומס לעצמאים, ניהול כספים לבעלי עסקים,
+              ו-AI לעבודה הפיננסית. בדקו את הסילבוס, פרטי הגישה ותנאי הרכישה בכל מסלול.
             </p>
           </div>
 
@@ -310,8 +300,8 @@ export default function Home() {
                 אנדרי פלטונוב — רו״ח &amp; סמנכ״ל כספים
               </p>
               <p className="mt-1 max-w-xl text-sm leading-relaxed text-cream/65">
-                בוגר PwC, 15+ שנות ניסיון וניהול של כ-400 מיליון ₪ בשנה. הקורסים
-                בנויים על ידע פרקטי מהשטח.
+                בוגר PwC, בעל ניסיון בניהול כספים. הקורסים בנויים על דוגמאות
+                מהעבודה הפיננסית היומיומית.
               </p>
             </div>
           </div>
@@ -341,7 +331,7 @@ export default function Home() {
               href="#calculators"
               className="bg-ink px-8 py-3.5 text-sm font-medium text-cream transition hover:bg-ink-deep"
             >
-              עיין במחשבונים ←
+              עיין בכלים ←
             </Link>
             <Link
               href="/course"
