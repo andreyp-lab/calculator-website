@@ -9,7 +9,7 @@ export const revalidate = 21600; // ISR: 6 שעות
 export const metadata: Metadata = {
   title: 'עדכוני שוק ונתונים כלכליים 2026 — ריבית, מדד ושכר',
   description:
-    'ריבית פריים עדכנית, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — נתונים כלכליים מעודכנים אוטומטית לשנת 2026.',
+    'ריבית פריים, שיעור אינפלציה שנתי והשכר הממוצע לפי חוק הביטוח הלאומי — נתונים שנבדקו ידנית וקישור למקורות הרשמיים.',
   alternates: {
     canonical: 'https://cheshbonai.co.il/news',
   },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'עדכוני שוק ונתונים כלכליים 2026 — ריבית, מדד ושכר',
-    description: 'ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל — מעודכן אוטומטית לשנת 2026.',
+    description: 'ריבית פריים, אינפלציה ושכר ממוצע — תאריך אימות וקישור למקורות.',
     url: 'https://cheshbonai.co.il/news',
   },
 };
@@ -36,7 +36,7 @@ const cards = [
     bgLight: 'bg-cream-2',
     border: 'border-ink/20',
     textColor: 'text-ink',
-    badge: 'מתעדכן ~8 פעמים בשנה',
+    badge: 'אימות ידני',
     description: 'ריבית הפריים קובעת את עלות המשכנתא, ההלוואות והחסכונות שלך.',
   },
   {
@@ -44,7 +44,7 @@ const cards = [
     title: 'מדד המחירים לצרכן',
     titleEn: 'CPI / Inflation',
     value: `${MACRO_DATA.inflation.annualRate}%`,
-    subtitle: `שינוי חודשי: ${MACRO_DATA.inflation.monthlyRate >= 0 ? '+' : ''}${MACRO_DATA.inflation.monthlyRate}%`,
+    subtitle: 'שינוי ב־12 החודשים האחרונים',
     lastUpdated: MACRO_DATA.inflation.lastUpdated,
     color: 'orange',
     icon: DollarSign,
@@ -52,15 +52,15 @@ const cards = [
     bgLight: 'bg-orange-50',
     border: 'border-orange-200',
     textColor: 'text-orange-700',
-    badge: 'מתעדכן מדי חודש',
+    badge: 'אימות ידני',
     description: 'שיעור האינפלציה השנתי משפיע על כוח הקנייה, המשכנתא והחסכון.',
   },
   {
     href: '/news/average-wage',
-    title: 'שכר ממוצע',
+    title: 'שכר ממוצע לפי חוק',
     titleEn: 'Average Wage',
     value: `₪${MACRO_DATA.averageWage.monthly.toLocaleString('he-IL')}`,
-    subtitle: `לחודש ברוטו — ${MACRO_DATA.averageWage.reportPeriod}`,
+    subtitle: `לחודש — ${MACRO_DATA.averageWage.reportPeriod}`,
     lastUpdated: MACRO_DATA.averageWage.lastUpdated,
     color: 'green',
     icon: Users,
@@ -68,24 +68,8 @@ const cards = [
     bgLight: 'bg-green-50',
     border: 'border-green-200',
     textColor: 'text-green-700',
-    badge: 'מתעדכן רבעוני',
-    description: 'השכר הממוצע במשק קובע זכאות לקצבאות, ביטוח לאומי ותנאים סוציאליים.',
-  },
-  {
-    href: '/news/iron-swords',
-    title: 'מענקי חרבות ברזל',
-    titleEn: 'Iron Swords Grants',
-    value: `₪${MACRO_DATA.ironSwordsBonuses.generalGrant.toLocaleString('he-IL')}`,
-    subtitle: `מענק כללי | יומי: ₪${MACRO_DATA.ironSwordsBonuses.dailyGrant}`,
-    lastUpdated: MACRO_DATA.ironSwordsBonuses.lastUpdated,
-    color: 'red',
-    icon: Shield,
-    gradient: 'from-red-500 to-rose-600',
-    bgLight: 'bg-red-50',
-    border: 'border-red-200',
-    textColor: 'text-red-700',
-    badge: MACRO_DATA.ironSwordsBonuses.status === 'active' ? 'פעיל' : 'מושהה',
-    description: 'מענקים ממשלתיים לשמורי מילואים ולעסקים שנפגעו ממלחמת חרבות ברזל.',
+    badge: 'לשנת 2026',
+    description: 'הסכום הסטטוטורי לפי סעיף 2 לחוק הביטוח הלאומי; אינו ממוצע נטו.',
   },
 ];
 
@@ -110,13 +94,13 @@ export default function NewsPage() {
         <div className="mb-10 text-center">
           <div className="inline-flex items-center gap-2 bg-cream-2 text-ink px-4 py-1.5 text-sm font-medium mb-4">
             <RefreshCw className="w-4 h-4" />
-            מתעדכן אוטומטית כל 6 שעות
+            נתונים שנבדקו מול מקורות רשמיים
           </div>
           <h1 className="text-3xl md:text-5xl font-bold text-ink mb-4">
             נתונים כלכליים עדכניים
           </h1>
           <p className="text-lg text-ink/70 max-w-2xl mx-auto">
-            ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל —
+            ריבית פריים, אינפלציה שנתית ושכר ממוצע לפי חוק הביטוח הלאומי —
             כל הנתונים הכלכליים שמשפיעים עליך, במקום אחד.
           </p>
         </div>
@@ -169,16 +153,15 @@ export default function NewsPage() {
           })}
         </div>
 
-        {/* ISR Explanation */}
+        {/* Data provenance */}
         <div className="bg-cream-2 border border-ink/15 p-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-3">
             <RefreshCw className="w-5 h-5 text-ink/70" />
             <h3 className="font-semibold text-ink/70">איך הנתונים מתעדכנים?</h3>
           </div>
           <p className="text-sm text-ink/70 max-w-xl mx-auto leading-relaxed">
-            אנו משתמשים ב-ISR (Incremental Static Regeneration) של Next.js — האתר בונה מחדש את
-            הדפים אוטומטית כל 6 שעות, ומשלב נתונים מעודכנים מהמקורות הרשמיים.
-            לנתונים שמשתנים לעיתים רחוקות (כגון ריבית פריים), מתבצע גם עדכון ידני מאומת.
+            הנתונים נבדקים ומוזנים ידנית. תאריך הבדיקה מופיע בכל כרטיס. טעינה מחדש של הדף
+            אינה מושכת נתונים חדשים מהמקורות; לפני החלטה כספית יש לעיין בקישור למקור הרשמי.
           </p>
         </div>
 
@@ -219,7 +202,7 @@ export default function NewsPage() {
               '@type': 'WebPage',
               name: 'עדכוני שוק ונתונים כלכליים',
               url: 'https://cheshbonai.co.il/news',
-              description: 'ריבית פריים, מדד המחירים לצרכן, שכר ממוצע ומענקי חרבות ברזל',
+              description: 'ריבית פריים, מדד המחירים לצרכן ושכר ממוצע לפי חוק הביטוח הלאומי',
               inLanguage: 'he-IL',
               publisher: {
                 '@type': 'Organization',
