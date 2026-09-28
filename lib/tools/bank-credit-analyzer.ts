@@ -12,6 +12,7 @@
  */
 
 import type { CreditRating, FinancialRatios } from './types';
+import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 // ============================================================
 // PRODUCT CONFIGURATIONS
@@ -212,7 +213,7 @@ function isProductAvailable(productKey: string, rating: string): boolean {
 function getInterestRate(rating: string, term: 'short' | 'medium' | 'long'): string {
   const spreads = INTEREST_SPREADS[rating];
   if (!spreads) return 'לא זמין';
-  const primeRate = 6.0; // הנחה
+  const primeRate = MACRO_DATA.primeRate.value;
   return `פריים + ${spreads[term]}% (${(primeRate + spreads[term]).toFixed(2)}%)`;
 }
 
@@ -530,7 +531,7 @@ export function analyzeBankCredit(input: BankCreditInput): BankCreditResult {
     recommendedProducts: recommendedProducts.sort((a, b) => a.priority - b.priority),
     totalRecommendedCredit,
     pricing: {
-      primeRate: 6.0,
+      primeRate: MACRO_DATA.primeRate.value,
       shortTermRate: getInterestRate(rating, 'short'),
       mediumTermRate: getInterestRate(rating, 'medium'),
       longTermRate: getInterestRate(rating, 'long'),
