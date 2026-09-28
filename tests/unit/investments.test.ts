@@ -599,22 +599,20 @@ describe('estimateSocialSecurityBenefit', () => {
       averageSalary: 15_000,
       isCouple: false,
     });
-    expect(benefit).toBe(3_500); // קצבת בסיס
+    expect(benefit).toBe(1_838); // קצבת בסיס 2026
   });
 
   it('לזוג — יותר מליחיד', () => {
     const single = estimateSocialSecurityBenefit({ retirementAge: 67, yearsContributed: 30, averageSalary: 15_000, isCouple: false });
     const couple = estimateSocialSecurityBenefit({ retirementAge: 67, yearsContributed: 30, averageSalary: 15_000, isCouple: true });
     expect(couple).toBeGreaterThan(single);
-    expect(couple).toBe(4_900);
+    expect(couple).toBe(2_762);
   });
 
-  it('פרישה מוקדמת — קצבה קטנה יותר', () => {
+  it('גיל פרישה מוקדמת אינו מקטין קצבת בסיס; גיל זכאות נבדק בנפרד', () => {
     const early = estimateSocialSecurityBenefit({ retirementAge: 62, yearsContributed: 30, averageSalary: 15_000, isCouple: false });
     const standard = estimateSocialSecurityBenefit({ retirementAge: 67, yearsContributed: 30, averageSalary: 15_000, isCouple: false });
-    expect(early).toBeLessThan(standard);
-    // 5 שנות פרישה מוקדמת = 5*12*0.5% = 30% הפחתה
-    expect(early).toBeCloseTo(3_500 * 0.70, 0);
+    expect(early).toBe(standard);
   });
 
   it('קצבה לא שלילית', () => {

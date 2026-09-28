@@ -518,7 +518,7 @@ describe('calculateWithInflation', () => {
 
 describe('קבועים', () => {
   it('BANK_OF_ISRAEL_PRIME_2026 נכון', () => {
-    expect(BANK_OF_ISRAEL_PRIME_2026).toBe(5.25);
+    expect(BANK_OF_ISRAEL_PRIME_2026).toBe(4.75);
   });
 
   it('AVG_INFLATION_ISRAEL נכון', () => {
