@@ -12,7 +12,7 @@ interface CalculatorLayoutProps {
   description: string;
   breadcrumbs: Breadcrumb[];
   lastUpdated?: string;
-  calculator: ReactNode;
+  calculator?: ReactNode;
   content?: ReactNode;
   faq?: ReactNode;
   sources?: ReactNode;
@@ -84,7 +84,7 @@ export function CalculatorLayout({
         )}
 
         {/* Calculator (above the fold) */}
-        <section className="mb-12">{calculator}</section>
+        {calculator && <section className="mb-12">{calculator}</section>}
 
         {/* Disclaimer */}
         <div className="mb-8">
@@ -131,12 +131,14 @@ export function CalculatorLayout({
 
       {/* SEO Schemas – BreadcrumbList + SoftwareApplication */}
       <BreadcrumbSchema items={breadcrumbSchemaItems} />
-      <CalculatorSchemaClient
-        name={title}
-        description={description}
-        urlOverride={pageUrl}
-        lastUpdated={lastUpdated}
-      />
+      {calculator && (
+        <CalculatorSchemaClient
+          name={title}
+          description={description}
+          urlOverride={pageUrl}
+          lastUpdated={lastUpdated}
+        />
+      )}
     </article>
   );
 }
