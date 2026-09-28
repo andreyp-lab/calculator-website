@@ -548,7 +548,7 @@ export function PensionCalculator() {
           </div>
           {input.includNationalIns && (
             <div className="grid grid-cols-2 gap-3">
-              <InputRow label="קצבת ב.ל.ל (₪/חודש)" hint="יחיד: ~3,465 | זוג: ~5,090">
+              <InputRow label="קצבת ב.ל.ל (₪/חודש)" hint="קצבת בסיס 2026: יחיד 1,838 | זוג זכאי אחד 2,762; תוספות אישיות בנפרד">
                 <NumInput
                   value={input.nationalInsAmount}
                   onChange={(v) => updateInput('nationalInsAmount', v)}
