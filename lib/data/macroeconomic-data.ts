@@ -23,11 +23,11 @@ export const MACRO_DATA = {
     nextScheduledDecision: '2026-10-21',
     historicalRates: [
       // ערכי סוף חודש מאז אוגוסט 2025, עבור גרף היסטורי
-      { month: '2025-08', boiRate: 4.25, primeRate: 5.75 },
-      { month: '2025-09', boiRate: 4.25, primeRate: 5.75 },
-      { month: '2025-10', boiRate: 4.25, primeRate: 5.75 },
-      { month: '2025-11', boiRate: 4.0, primeRate: 5.5 },
-      { month: '2025-12', boiRate: 4.0, primeRate: 5.5 },
+      { month: '2025-08', boiRate: 4.5, primeRate: 6.0 },
+      { month: '2025-09', boiRate: 4.5, primeRate: 6.0 },
+      { month: '2025-10', boiRate: 4.5, primeRate: 6.0 },
+      { month: '2025-11', boiRate: 4.25, primeRate: 5.75 },
+      { month: '2025-12', boiRate: 4.25, primeRate: 5.75 },
       { month: '2026-01', boiRate: 4.0, primeRate: 5.5 },
       { month: '2026-02', boiRate: 4.0, primeRate: 5.5 },
       { month: '2026-03', boiRate: 4.0, primeRate: 5.5 },
