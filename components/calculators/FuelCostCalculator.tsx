@@ -16,7 +16,7 @@ const initialInput: FuelCostInput = {
   monthlyKm: 1500,
   fuelEfficiency: 7,
   fuelType: 'gasoline_95',
-  customPrice: 7.45,
+  customPrice: FUEL_PRICES_2026.gasoline_95,
   useCustomPrice: false,
 };
 
@@ -113,7 +113,7 @@ export function FuelCostCalculator() {
           <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
             <p className="text-xs text-ink/70 mb-2 font-medium">⛽ מחירי דלק 2026:</p>
             <div className="grid grid-cols-2 gap-1 text-xs">
-              <div>בנזין 95: 7.45 ₪/ל'</div>
+              <div>בנזין 95: {FUEL_PRICES_2026.gasoline_95} ₪/ל׳ (7.9.2026)</div>
               <div>בנזין 98: 7.85 ₪/ל'</div>
               <div>סולר: 6.95 ₪/ל'</div>
               <div>חשמל: 0.55 ₪/קוט"ש</div>
