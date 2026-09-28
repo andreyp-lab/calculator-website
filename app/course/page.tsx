@@ -29,8 +29,6 @@ export const metadata: Metadata = {
   },
 };
 
-const SCHOOL_URL = 'https://school.profitmargin.co.il';
-
 /** בונה קישור חיצוני עם UTM אחיד לפי פורמט הקמפיין. */
 function utm(
   baseUrl: string,
@@ -138,12 +136,12 @@ const COURSES: Course[] = [
 ];
 
 const SCHOOL_FACTS = [
-  { icon: GraduationCap, label: '3 קורסים פרקטיים · 200+ שיעורים' },
-  { icon: Clock, label: '20+ שעות תוכן · גישה לכל החיים' },
+  { icon: GraduationCap, label: '3 קורסים פרקטיים · לימוד בקצב אישי' },
+  { icon: Clock, label: 'שיעורים מוקלטים · גישה לכל החיים' },
   { icon: ShieldCheck, label: '14 יום החזר כספי מלא · תמיכה ב-WhatsApp' },
 ];
 
-const TRUST_BAND = ['200+ שיעורים', '3 קורסים', 'גישה לכל החיים', '14 יום החזר'];
+const TRUST_BAND = ['שיעורים מוקלטים', '3 קורסים', 'גישה לכל החיים', '14 יום החזר'];
 
 const PERSONAS = [
   {
@@ -199,7 +197,7 @@ export default function CoursePage() {
         {/* Hero — ink + gold */}
         <section className="bg-ink p-6 sm:p-10 text-cream mb-10">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
-            // בית הספר הפיננסי לעצמאים ובעלי עסקים · בהדרכת רו״ח אנדרי פלטונוב
+            {'// בית הספר הפיננסי לעצמאים ובעלי עסקים · בהדרכת רו״ח אנדרי פלטונוב'}
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
             בית הספר הפיננסי FinSchool
