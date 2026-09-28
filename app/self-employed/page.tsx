@@ -69,8 +69,8 @@ const calculators = [
     available: true,
   },
   {
-    title: '🆕 מחשבון שכיר + עצמאי',
-    description: 'עובד גם כשכיר וגם כפרילנסר? כמה באמת נשאר מההכנסה המשולבת אחרי מס וב.ל.',
+    title: 'שכיר ועצמאי במקביל',
+    description: 'אילו נתונים להכין לבדיקת מס הכנסה ודמי ביטוח כשיש גם משכורת וגם עסק',
     href: '/self-employed/employee-and-self-employed',
     available: true,
   },
