@@ -22,7 +22,7 @@ export function MacroDataWidget() {
     {
       label: 'אינפלציה שנתית',
       value: `${MACRO_DATA.inflation.annualRate}%`,
-      subLabel: `חודשי: ${MACRO_DATA.inflation.monthlyRate >= 0 ? '+' : ''}${MACRO_DATA.inflation.monthlyRate}%`,
+      subLabel: '12 החודשים האחרונים',
       updatedDate: MACRO_DATA.inflation.lastUpdated,
       href: '/news/cpi',
       icon: DollarSign,
