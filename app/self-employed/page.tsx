@@ -16,7 +16,7 @@ const businessTools = [
 export const metadata: Metadata = {
   alternates: { canonical: '/self-employed' },
   title: 'מחשבונים לעצמאים ועסקים 2026 - מע"מ, ב.ל., מס ונטו',
-  description: 'מחשבונים מקצועיים לעצמאיים ופרילנסרים 2026: מע"מ 18%, ביטוח לאומי, מקדמות מס הכנסה, נטו, תמחור שעה ועוד. גלה כמה נשאר לך ביד — חינמי ומדויק.',
+  description: 'כלים ומדריכים לעצמאים ופרילנסרים: מע״מ, ביטוח לאומי, מקדמות מס הכנסה, תזרים ותמחור שעה, עם הפניות לחישוב אישי במקורות הרשמיים.',
 };
 
 const calculators = [
@@ -45,8 +45,8 @@ const calculators = [
     available: true,
   },
   {
-    title: '💰 מחשבון נטו לעצמאי',
-    description: 'כמה כסף נשאר ביד בסוף החודש? המרה מהירה ממחזור לנטו אחרי מס, ב.ל., מע"מ ופנסיה',
+    title: '💰 בדיקת הכנסה פנויה לעצמאי',
+    description: 'אילו נתונים צריך לאסוף כדי להעריך רווח, מסים ותזרים בלי להניח שיעור הוצאה אחיד',
     href: '/self-employed/net',
     available: true,
   },
@@ -63,8 +63,8 @@ const calculators = [
     available: true,
   },
   {
-    title: '🆕 מחשבון הוצאות מוכרות לעצמאי',
-    description: 'אילו הוצאות מוכרות במס וכמה — רכב 45%, טלפון, חדר עבודה, כיבוד 80% ועוד',
+    title: 'בדיקת הוצאות עסקיות לעצמאי',
+    description: 'איך לסווג ולתעד הוצאות ולבדוק בנפרד ניכוי במס וקיזוז מע״מ',
     href: '/self-employed/allowed-expenses',
     available: true,
   },
@@ -87,8 +87,8 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון ביטוח לאומי לעצמאי',
-    description: 'חישוב ב.ל. + בריאות, השוואה לשכיר, הטבת מס 52%, תיאום שנתי וזכויות',
+    title: 'ביטוח לאומי לעצמאי — הסבר ומחשבון רשמי',
+    description: 'שיעורי 2026, הסבר על בסיס החיוב וקישור למחשבון הביטוח הלאומי',
     href: '/self-employed/social-security',
     available: true,
   },
@@ -135,7 +135,7 @@ export default function SelfEmployedPage() {
         {/* Hero */}
         <div className="bg-ink-deep border border-cream/15 p-6 md:p-10 text-cream mb-8">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
-            // מרכז עצמאיים ✦
+            {'// מרכז עצמאיים ✦'}
           </p>
           <h1 className="text-3xl md:text-4xl font-bold text-cream mb-3">מחשבונים לעצמאיים</h1>
           <p className="text-cream/70 text-lg mb-0">
