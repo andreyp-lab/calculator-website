@@ -18,16 +18,13 @@ import {
   calculateSalaryNetGross,
   calculateGrossFromNet,
   calculateNetFromEmployerCost,
-  calculateYearComparison,
-  calculateBonusNet,
   calculateSalaryCurve,
   PENSION_RATES,
   type SalaryNetGrossInput,
   type CalculatorMode,
-  type TaxYear,
   type PensionLevel,
 } from '@/lib/calculators/salary-net-gross';
-import { formatCurrency, formatPercent } from '@/lib/utils/formatters';
+import { formatCurrency } from '@/lib/utils/formatters';
 
 // ============================================================
 // ערכי ברירת מחדל
@@ -62,9 +59,6 @@ export function SalaryNetGrossCalculator() {
   const [opts, setOpts] = useState(defaultOptions);
 
   // תצוגות נוספות
-  const [showYearCompare, setShowYearCompare] = useState(false);
-  const [showBonus, setShowBonus] = useState(false);
-  const [bonusAmount, setBonusAmount] = useState(10_000);
   const [chartView, setChartView] = useState<ChartView>('pie');
 
   function updateOpts<K extends keyof typeof opts>(k: K, v: (typeof opts)[K]) {
@@ -81,25 +75,6 @@ export function SalaryNetGrossCalculator() {
       return calculateNetFromEmployerCost(employerCostInput, opts).result;
     }
   }, [mode, grossInput, netInput, employerCostInput, opts]);
-
-  // השוואת שנים
-  const yearComparison = useMemo(
-    () =>
-      showYearCompare
-        ? calculateYearComparison({ ...opts, grossSalary: mainResult.grossSalary }, ['2024', '2025', '2026'])
-        : null,
-    [showYearCompare, opts, mainResult.grossSalary],
-  );
-
-  // בונוס
-  const bonusResult = useMemo(
-    () =>
-      showBonus
-        ? calculateBonusNet(bonusAmount, mainResult.annualGross, opts)
-        : null,
-    [showBonus, bonusAmount, mainResult.annualGross, opts],
-  );
-
 
   // עקומת שכר
   const salaryCurve = useMemo(
@@ -138,7 +113,6 @@ export function SalaryNetGrossCalculator() {
   }, [mainResult]);
 
   const r = mainResult;
-  const gross = r.grossSalary;
 
   return (
     <div className="space-y-6" dir="rtl">
@@ -297,7 +271,7 @@ export function SalaryNetGrossCalculator() {
               {opts.pensionEnabled && (
                 <div className="mr-6 space-y-2">
                   <p className="text-xs text-ink/70 mb-2">רמת הפרשה:</p>
-                  {(['minimum', 'recommended', 'maximum'] as PensionLevel[]).map((level) => (
+                  {(['minimum', 'recommended'] as PensionLevel[]).map((level) => (
                     <label key={level} className="flex items-start gap-2 cursor-pointer">
                       <input
                         type="radio"
@@ -308,8 +282,8 @@ export function SalaryNetGrossCalculator() {
                         className="mt-0.5 w-4 h-4 accent-ink"
                       />
                       <div>
-                        <span className="text-sm font-medium">{PENSION_RATES[level].label}</span>
-                        <p className="text-xs text-ink/70">{PENSION_RATES[level].description}</p>
+                        <span className="text-sm font-medium">{level === 'minimum' ? 'עובד 6% / מעסיק 6.5%' : 'עובד 7% / מעסיק 7.5%'}</span>
+                        <p className="text-xs text-ink/70">שיעורי חישוב לדוגמה; הבסיס והשיעור בפועל נקבעים לפי ההסכם.</p>
                       </div>
                     </label>
                   ))}
@@ -323,7 +297,7 @@ export function SalaryNetGrossCalculator() {
                       {(PENSION_RATES[opts.pensionLevel ?? 'minimum'].employee * 100).toFixed(0)}%)
                     </p>
                     <p className="text-emerald-800">
-                      חיסכון שנתי במסלול מינימום:{' '}
+                      הפרשת מעסיק משוערת לשנה:{' '}
                       <strong>{formatCurrency(r.employerPension * 12)}</strong> מהמעסיק
                     </p>
                   </div>
@@ -348,7 +322,7 @@ export function SalaryNetGrossCalculator() {
                   <p>ניכוי עובד: <strong>{formatCurrency(r.studyFundDeduction)}/ח</strong></p>
                   <p>הפרשת מעסיק: <strong>{formatCurrency(r.employerStudyFund)}/ח</strong></p>
                   <p className="text-emerald-800 mt-1">
-                    סה"כ שנתי בקרן: <strong>{formatCurrency((r.studyFundDeduction + r.employerStudyFund) * 12)}</strong> (פטור ממס!)
+                    סך שנתי בקרן: <strong>{formatCurrency((r.studyFundDeduction + r.employerStudyFund) * 12)}</strong> (כפוף לתקרות ולתנאי המס)
                   </p>
                 </div>
               )}
@@ -359,17 +333,6 @@ export function SalaryNetGrossCalculator() {
           <Section title="הגדרות נוספות" color="gray">
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <Field label="שנת מס">
-                  <select
-                    value={opts.taxYear}
-                    onChange={(e) => updateOpts('taxYear', e.target.value as TaxYear)}
-                    className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
-                  >
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026 (נוכחית)</option>
-                  </select>
-                </Field>
                 <Field
                   label={`ביטוח אובדן כושר: ${opts.disabilityInsuranceRate}%`}
                   hint="בדרך כלל 1-2% מהברוטו"
@@ -392,31 +355,6 @@ export function SalaryNetGrossCalculator() {
                 </Field>
               </div>
 
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="yearCompare"
-                  checked={showYearCompare}
-                  onChange={(e) => setShowYearCompare(e.target.checked)}
-                  className="w-4 h-4"
-                />
-                <label htmlFor="yearCompare" className="text-sm cursor-pointer">
-                  הצג השוואת שנים (2024 / 2025 / 2026)
-                </label>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="showBonus"
-                  checked={showBonus}
-                  onChange={(e) => setShowBonus(e.target.checked)}
-                  className="w-4 h-4"
-                />
-                <label htmlFor="showBonus" className="text-sm cursor-pointer">
-                  חשב נטו על בונוס / חודש 13
-                </label>
-              </div>
             </div>
           </Section>
         </div>
@@ -425,10 +363,10 @@ export function SalaryNetGrossCalculator() {
         <div className="lg:col-span-2 space-y-4">
           {/* כרטיס נטו */}
           <div className="bg-emerald-50 border border-emerald-300 rounded-none p-5">
-            <p className="text-sm font-medium text-emerald-800 mb-1">שכר נטו (לכיס)</p>
+            <p className="text-sm font-medium text-emerald-800 mb-1">אומדן נטו (ללא זיכוי מס על הפקדה לפנסיה)</p>
             <p className="text-4xl font-bold text-emerald-800 tabular-nums">{formatCurrency(r.netSalary)}</p>
             <p className="text-sm text-emerald-800 mt-1">
-              {r.netPercentage.toFixed(1)}% מהברוטו
+              {r.netPercentage.toFixed(1)}% מהברוטו; בדקו רכיבי תלוש והטבות מס אישיות.
             </p>
           </div>
 
@@ -492,21 +430,6 @@ export function SalaryNetGrossCalculator() {
           </div>
         </div>
       </div>
-
-      {/* ===== Year Comparison ===== */}
-      {showYearCompare && yearComparison && (
-        <YearComparisonPanel comparison={yearComparison} grossSalary={r.grossSalary} />
-      )}
-
-      {/* ===== Bonus Calculator ===== */}
-      {showBonus && (
-        <BonusPanel
-          bonusAmount={bonusAmount}
-          setBonusAmount={setBonusAmount}
-          bonusResult={bonusResult}
-          marginalRate={r.marginalTaxRate}
-        />
-      )}
 
       {/* ===== Charts ===== */}
       <div className="bg-paper border border-ink/15 rounded-none p-5">
@@ -652,153 +575,6 @@ function MarginalBracketCard({ result }: { result: ReturnType<typeof calculateSa
 }
 
 // ============================================================
-// Year Comparison Panel
-// ============================================================
-
-function YearComparisonPanel({
-  comparison,
-  grossSalary,
-}: {
-  comparison: ReturnType<typeof calculateYearComparison>;
-  grossSalary: number;
-}) {
-  const result2026 = comparison.find((c) => c.year === '2026');
-  const result2025 = comparison.find((c) => c.year === '2025');
-  const benefitFrom2026 = result2026 && result2025
-    ? (result2026.netSalary - result2025.netSalary) * 12
-    : 0;
-
-  return (
-    <div className="bg-paper border border-ink/15 rounded-none p-5">
-      <h3 className="font-bold text-ink text-lg mb-1">השוואת שנים — אותו ברוטו ({formatCurrency(grossSalary)})</h3>
-      <p className="text-sm text-ink/70 mb-4">
-        ב-2026 הורחבו מדרגות 20% ו-31% — מי שמשתכר 19,000-25,100 ₪/חודש נהנה הכי הרבה
-      </p>
-
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm border-collapse">
-          <thead>
-            <tr className="bg-cream-2">
-              <th className="text-right p-2 border border-ink/15">שנה</th>
-              <th className="text-right p-2 border border-ink/15">נטו חודשי</th>
-              <th className="text-right p-2 border border-ink/15">מס הכנסה</th>
-              <th className="text-right p-2 border border-ink/15">שיעור אפקטיבי</th>
-              <th className="text-right p-2 border border-ink/15">מדרגה שולית</th>
-            </tr>
-          </thead>
-          <tbody>
-            {comparison.map((row, i) => (
-              <tr key={row.year} className={`${i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'} ${row.year === '2026' ? 'ring-2 ring-inset ring-emerald-400' : ''}`}>
-                <td className="p-2 border border-ink/15 font-bold">
-                  {row.year}
-                  {row.year === '2026' && <span className="mr-1 text-emerald-800 text-xs">✓ נוכחי</span>}
-                </td>
-                <td className="p-2 border border-ink/15 tabular-nums font-medium text-emerald-800">
-                  {formatCurrency(row.netSalary)}
-                </td>
-                <td className="p-2 border border-ink/15 tabular-nums text-red-700">
-                  {formatCurrency(row.incomeTax)}
-                </td>
-                <td className="p-2 border border-ink/15 tabular-nums">
-                  {row.netPercentage.toFixed(1)}%
-                </td>
-                <td className="p-2 border border-ink/15 tabular-nums">
-                  {row.marginalRate.toFixed(0)}%
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {benefitFrom2026 > 0 && (
-        <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-none p-3 text-sm text-emerald-900">
-          <strong>הרווחת מהשינוי ב-2026:</strong> {formatCurrency(benefitFrom2026)} יותר בשנה (לעומת 2025)
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ============================================================
-// Bonus Panel
-// ============================================================
-
-function BonusPanel({
-  bonusAmount,
-  setBonusAmount,
-  bonusResult,
-  marginalRate,
-}: {
-  bonusAmount: number;
-  setBonusAmount: (v: number) => void;
-  bonusResult: ReturnType<typeof calculateBonusNet> | null;
-  marginalRate: number;
-}) {
-  return (
-    <div className="bg-paper border border-ink/15 rounded-none p-5">
-      <h3 className="font-bold text-ink text-lg mb-1">מחשבון בונוס / חודש 13</h3>
-      <p className="text-sm text-ink/70 mb-4">
-        הבונוס ממוסה בשיעור המדרגה <strong>השולית</strong> ({marginalRate.toFixed(0)}%) — לא הממוצעת.
-        לכן הנטו על בונוס נמוך יותר מהצפוי.
-      </p>
-
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <label htmlFor="salarynetgrosscalculator-b42571" className="block text-sm font-medium text-ink/70 mb-1">סכום הבונוס (₪)</label>
-          <input id="salarynetgrosscalculator-b42571"
-            type="number"
-            min={0}
-            step={1000}
-            value={bonusAmount}
-            onChange={(e) => setBonusAmount(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
-          />
-          <div className="flex flex-wrap gap-1 mt-1">
-            {[5_000, 10_000, 20_000, 30_000].map((v) => (
-              <button
-                key={v}
-                type="button"
-                onClick={() => setBonusAmount(v)}
-                className="text-xs px-2 py-0.5 bg-amber-100 text-amber-800 rounded hover:bg-amber-200"
-              >
-                {v.toLocaleString('he-IL')}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {bonusResult && (
-          <div className="bg-amber-50 border border-amber-200 rounded-none p-3 text-sm space-y-1">
-            <p className="font-semibold text-amber-800 mb-2">תוצאה:</p>
-            <Row label="ברוטו בונוס" value={formatCurrency(bonusResult.grossBonus)} />
-            <Row label={`מס (${(bonusResult.marginalRate * 100).toFixed(0)}% שולי)`} value={`-${formatCurrency(bonusResult.taxOnBonus)}`} color="red" />
-            <Row label="ב.ל." value={`-${formatCurrency(bonusResult.socialSecurityOnBonus)}`} color="amber" />
-            <div className="pt-1 border-t">
-              <Row label="נטו מהבונוס" value={formatCurrency(bonusResult.netBonus)} bold color="emerald" />
-              <p className="text-xs text-ink/70 mt-1">
-                {bonusResult.effectiveBonusRate.toFixed(1)}% מהבונוס הגיע לכיס
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {bonusResult && (
-        <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs text-ink/80">
-          <strong>למה הנטו על הבונוס נמוך?</strong> הבונוס נחשב כהכנסה נוספת ומחויב במס שולי (
-          {(bonusResult.marginalRate * 100).toFixed(0)}%) — לא בשיעור הממוצע. זה פחות ממה שרוב האנשים מצפים.
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ============================================================
-// Credit Points Wizard
-// ============================================================
-
-// ============================================================
 // Helper UI Components
 // ============================================================
 
@@ -841,58 +617,6 @@ function Field({
       </label>
       {hint && <p className="text-xs text-ink/70 mt-1">{hint}</p>}
     </div>
-  );
-}
-
-function NumberField({
-  label,
-  value,
-  onChange,
-  hint,
-}: {
-  label: string;
-  value: number;
-  onChange: (v: number) => void;
-  hint?: string;
-}) {
-  return (
-    <Field label={label} hint={hint}>
-      <input
-        type="number"
-        min={0}
-        max={20}
-        value={value}
-        onChange={(e) => onChange(Math.max(0, Math.round(Number(e.target.value))))}
-        className="w-full px-3 py-1.5 border border-ink/15 rounded-none text-sm focus:ring-2 focus:ring-gold"
-      />
-    </Field>
-  );
-}
-
-function ToggleField({
-  label,
-  hint,
-  value,
-  onChange,
-}: {
-  label: string;
-  hint: string;
-  value: boolean;
-  onChange: (v: boolean) => void;
-}) {
-  return (
-    <label className="flex items-center gap-2 cursor-pointer">
-      <input
-        type="checkbox"
-        checked={value}
-        onChange={(e) => onChange(e.target.checked)}
-        className="w-4 h-4 accent-ink"
-      />
-      <div>
-        <span className="text-sm font-medium text-ink/70">{label}</span>
-        <span className="text-xs text-ink/70 mr-1">{hint}</span>
-      </div>
-    </label>
   );
 }
 
