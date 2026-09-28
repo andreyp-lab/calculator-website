@@ -39,8 +39,8 @@ const calculators = [
     available: true,
   },
   {
-    title: '⭐ סימולטור הערכת מס לסוף שנה',
-    description: 'הכלי המקיף ביותר: הכנסות + הוצאות + פנסיה + ב.ל. + מקדמות - הערכת חבות מס מלאה לסוף השנה',
+    title: 'בדיקת נתונים לקראת דוח סוף שנה',
+    description: 'אילו אסמכתאות לאסוף כדי לבדוק הכנסות, הוצאות, הפקדות ומקדמות מול השומה',
     href: '/self-employed/year-end-tax-simulator',
     available: true,
   },
@@ -93,8 +93,8 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון מקדמות מס',
-    description: 'מקדמות מס הכנסה + ב.ל. + מע"מ - חישוב מלא, תזרים מזומנים, תיאום אמצע שנה',
+    title: 'בדיקת מקדמות ותיקון חיובים',
+    description: 'איך לבדוק תשלומי מס הכנסה וביטוח לאומי בנפרד ולבקש תיקון לפי ההכנסה',
     href: '/self-employed/tax-advances',
     available: true,
   },
