@@ -22,6 +22,7 @@
  */
 
 import { VAT_2026 } from '@/lib/constants/tax-2026';
+import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 export type PaymentMethod = 'cash' | 'loan' | 'leasing';
 export type FuelType = 'gasoline_95' | 'gasoline_98' | 'diesel' | 'electric' | 'hybrid';
@@ -31,11 +32,11 @@ export type CarSegment = 'mini' | 'family' | 'executive' | 'suv' | 'luxury';
 // קבועים - מחירי שוק 2026
 // ===========================================================
 export const FUEL_PRICES_2026 = {
-  gasoline_95: 7.45, // ₪/ליטר
+  gasoline_95: MACRO_DATA.fuelPrices.gasoline95, // מחיר מרבי בפיקוח, יש לוודא לקראת תדלוק
   gasoline_98: 7.85,
   diesel: 6.95,
   electric: 0.55, // ₪/קוט"ש (תעריף בית)
-  hybrid: 7.45, // hybrid uses gasoline 95
+  hybrid: MACRO_DATA.fuelPrices.gasoline95, // hybrid uses gasoline 95
 } as const;
 
 export const FUEL_LABELS: Record<FuelType, string> = {

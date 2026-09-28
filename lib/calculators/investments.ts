@@ -908,9 +908,7 @@ export function calculateComprehensiveRetirement(
 }
 
 /**
- * חישוב קצבת ביטוח לאומי מוערכת לפי גיל ומשכורת
- * מבוסס על מחשבון ב.ל. 2026
- * קצבת בסיס: כ-3,500 ₪/חודש לאחד, 4,900 ₪ לזוג
+ * קצבת בסיס 2026 בלבד; תוספות ותק, דחייה, מבחן הכנסה וגיל זכאות אינם מחושבים.
  */
 export function estimateSocialSecurityBenefit(options: {
   retirementAge: number;
@@ -918,22 +916,7 @@ export function estimateSocialSecurityBenefit(options: {
   averageSalary: number;    // שכר ממוצע ב-5 שנים אחרונות
   isCouple: boolean;
 }): number {
-  const BASE_SINGLE = 3_500;  // ₪/חודש
-  const BASE_COUPLE = 4_900;  // ₪/חודש
-  const EARLY_RETIREMENT_DEDUCTION = 0.5; // 0.5% לכל חודש לפני גיל הפרישה
-
-  const base = options.isCouple ? BASE_COUPLE : BASE_SINGLE;
-  const standardRetirementAge = 67;
-
-  let benefit = base;
-
-  // הפחתה לפרישה מוקדמת
-  if (options.retirementAge < standardRetirementAge) {
-    const monthsEarly = (standardRetirementAge - options.retirementAge) * 12;
-    benefit = benefit * (1 - EARLY_RETIREMENT_DEDUCTION * monthsEarly / 100);
-  }
-
-  return Math.max(0, Math.round(benefit));
+  return options.isCouple ? 2_762 : 1_838;
 }
 
 /**

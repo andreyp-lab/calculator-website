@@ -21,8 +21,10 @@
 // קבועים
 // ============================================================
 
-export const BANK_OF_ISRAEL_PRIME_2026 = 5.25;
-export const BOI_BASE_RATE_2026 = 3.75;
+import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
+
+export const BANK_OF_ISRAEL_PRIME_2026 = MACRO_DATA.primeRate.value;
+export const BOI_BASE_RATE_2026 = MACRO_DATA.primeRate.boiBaseRate;
 export const AVG_INFLATION_ISRAEL = 2.5;
 
 /**
@@ -31,15 +33,12 @@ export const AVG_INFLATION_ISRAEL = 2.5;
  * שלושת הכללים:
  *   1. לפחות 33.3% במסלול ריבית קבועה (קל"צ או צמוד מדד קבועה)
  *   2. לכל היותר 66.7% במסלולי ריבית משתנה (כלל המשתנים מצטברים)
- *   3. לכל היותר 33.3% במסלולים שמשתנים בתדירות גבוהה מ-5 שנים
- *      (פריים, משתנה לא צמוד שמשתנה כל שנה/רבעון/חודש)
- *
- * הכלל השלישי הוא הסיבה שאי-אפשר לקחת 50%+ פריים גם אם השאר קל"צ.
- * מקור: הוראה 329 + תיקון מאי 2013.
+ * הוראה 329 העדכנית אינה מגבילה פריים בנפרד לשליש; כל הריביות המשתנות יחד מוגבלות ל-66.66%.
+ * מקור: בנק ישראל, הוראת ניהול בנקאי תקין 329, סעיף 7.
  */
 export const MIN_FIXED_PERCENT_BOI = 1 / 3; // לפחות 1/3 קבוע (33.33%)
 export const MAX_VARIABLE_PERCENT_BOI = 2 / 3; // עד 2/3 משתנה (66.67%)
-export const MAX_HIGH_FREQUENCY_VARIABLE_BOI = 1 / 3; // עד 1/3 פריים + משתנים תדירים
+export const MAX_HIGH_FREQUENCY_VARIABLE_BOI = 2 / 3; // תקרת המשתנות הכוללת; אין תקרת פריים נפרדת
 
 // ============================================================
 // טיפוסים
@@ -74,7 +73,7 @@ export interface OptimizerConstraints {
   // רגולציה בנק ישראל (חובה) - הוראה 329
   minFixedPercent: number; // ברירת מחדל: 0.33 - לפחות 1/3 קבוע
   maxVariablePercent: number; // ברירת מחדל: 0.67 - עד 2/3 משתנה
-  maxHighFrequencyVariablePercent?: number; // ברירת מחדל: 0.33 - עד 1/3 פריים+משתנים תדירים
+  maxHighFrequencyVariablePercent?: number; // מגבלה אישית אופציונלית, ברירת מחדל: 2/3
 
   // אילוצי משתמש (אופציונלי)
   maxPerTrackPercent?: number; // מקסימום % למסלול בודד (ברירת מחדל: 1.0)
@@ -154,7 +153,7 @@ export const DEFAULT_TRACKS_2026: OptimizerTrack[] = [
     id: 'prime',
     name: 'פריים',
     type: 'prime',
-    rate: BANK_OF_ISRAEL_PRIME_2026 - 0.5, // 4.75%
+    rate: BANK_OF_ISRAEL_PRIME_2026 - 0.5, // דוגמה: פריים מינוס 0.5; אינה הצעה בנקאית
     termYears: 25,
     isLinked: false,
     rateVolatility: 2.0, // ±2% שינוי אפשרי
@@ -314,7 +313,7 @@ export function checkConstraints(
 
   if (variablePercent > constraints.maxVariablePercent + 0.001) return false;
 
-  // אחוז מקסימלי למשתנים בתדירות גבוהה (כלל 3 של הוראה 329)
+  // מגבלת סיכון אופציונלית למסלולים שמשתנים בתדירות גבוהה
   // פריים + משתנה לא צמוד שמשתנה תכופות. משתנה 5y לא נכלל.
   const highFreqVariableTypes: OptimizerTrackType[] = ['prime', 'variable_unlinked'];
   const highFreqVariablePercent = percents
