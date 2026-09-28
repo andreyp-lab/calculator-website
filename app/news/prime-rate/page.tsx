@@ -121,7 +121,7 @@ export default function PrimeRatePage() {
 
         {/* Chart */}
         <div className="bg-paper border border-ink/15 rounded-none p-6 mb-8">
-          <h2 className="text-xl font-bold text-ink mb-1">היסטוריה — 12 חודשים אחרונים</h2>
+          <h2 className="text-xl font-bold text-ink mb-1">היסטוריית הריבית מאז אוגוסט 2025</h2>
           <p className="text-sm text-ink/70 mb-6">ריבית בנק ישראל וריבית פריים</p>
           <PrimeRateChart data={[...historicalRates] as Array<{ month: string; boiRate: number; primeRate: number }>} />
         </div>
