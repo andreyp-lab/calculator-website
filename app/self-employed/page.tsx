@@ -112,13 +112,13 @@ const calculators = [
   },
   {
     title: 'חברה בע"מ vs עוסק מורשה',
-    description: 'השוואת מס מצרפי - איזה מבנה עסקי משתלם יותר',
+    description: 'שיקולים לבחירת מבנה העסק לפי הנתונים האישיים',
     href: '/self-employed/corporation-vs-individual',
     available: true,
   },
   {
     title: 'דיבידנד vs משכורת',
-    description: 'אופטימיזציית מס לבעל חברה - מציאת המיקס האופטימלי',
+    description: 'מה לבדוק לפני בחירה בדרך למשיכת כסף מחברה',
     href: '/self-employed/dividend-vs-salary',
     available: true,
   },

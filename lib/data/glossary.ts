@@ -87,7 +87,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ג',
     definition:
       'גיל פרישה חובה בישראל: 67 לגברים, 65 לנשים (מדורג עד 67 בשנים הקרובות). גיל זכאות לפנסיה מב.ל.: 67 לגברים, 62 לנשים (מדורג). ניתן לדחות גיל פרישה ולהגדיל קצבה.',
-    seeAlso: [{ label: 'מחשבון פנסיה', href: '/insurance/pension' }],
+    seeAlso: [{ label: 'מדריך בדיקת פנסיה', href: '/insurance/pension' }],
   },
   {
     id: 'grace',
@@ -135,9 +135,9 @@ export const ALL_TERMS: GlossaryTerm[] = [
     term: 'דיבידנד',
     letter: 'ד',
     definition:
-      'חלוקת רווחי חברה לבעלי מניות. מס על דיבידנד: 25% לבעל מניות רגיל, 30% לבעל שליטה (10%+). משולם אחרי מס חברות (23%). מס אפקטיבי: ~46%.',
+      'חלוקת רווחי חברה לבעלי מניות בהתאם לדין. על החלוקה עשוי לחול מס לפי שיעור ההחזקה והנסיבות, נוסף על המס ששילמה החברה על רווחיה. שיעור המס הכולל אינו קבוע לכל בעל מניות; בדקו את כללי שנת המס ואת הנתונים האישיים.',
     seeAlso: [
-      { label: 'מחשבון דיבידנד vs. שכר', href: '/self-employed/dividend-vs-salary' },
+      { label: 'מדריך דיבידנד מול שכר', href: '/self-employed/dividend-vs-salary' },
       { label: 'מדריך מסים', href: '/guides/taxes-complete-guide-2026' },
     ],
   },
@@ -319,7 +319,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'מ',
     definition:
       'הגורם שמחשב את הקצבה החודשית מתוך הצבירה בפנסיה. נקבע על ידי חברת הביטוח/קרן הפנסיה לפי לוחות תמותה וריבית. מקדם נמוך = קצבה גבוהה יותר.',
-    seeAlso: [{ label: 'מחשבון פנסיה', href: '/insurance/pension' }],
+    seeAlso: [{ label: 'מדריך בדיקת פנסיה', href: '/insurance/pension' }],
   },
   // נ
   {
@@ -424,7 +424,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     definition:
       'חיסכון פנסיוני חובה. שכיר: 6% עובד + 6.5% מעסיק (תגמולים) + 6% מעסיק (פיצויים). עצמאי: הפקדת חובה מינימלית לפי גיל. פנסיה = קצבה חודשית בגיל פרישה + ביטוח נכות/שארים.',
     seeAlso: [
-      { label: 'מחשבון פנסיה', href: '/insurance/pension' },
+      { label: 'מדריך בדיקת פנסיה', href: '/insurance/pension' },
       { label: 'פנסיה עצמאי', href: '/self-employed/mandatory-pension' },
     ],
   },
@@ -492,7 +492,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ק',
     definition:
       'קצבה מב.ל. לאחר גיל פרישה. גובה: תלוי בוותק ביטוחי ובנסיבות. 2026: קצבה בסיסית ~4,500 ₪. ניתן לדחות גיל פרישה ולקבל קצבה גבוהה יותר.',
-    seeAlso: [{ label: 'מחשבון פרישה', href: '/investments/retirement' }],
+    seeAlso: [{ label: 'מדריך תכנון פרישה', href: '/investments/retirement' }],
   },
   // ר
   {
@@ -511,7 +511,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     term: 'רכב חברה',
     letter: 'ר',
     definition:
-      'רכב שהמעסיק נותן לעובד לשימוש פרטי. נחשב "שווי שימוש" = הכנסת עבודה החייבת במס. גובה: לפי קבוצת מחיר הרכב. רכב חשמלי: הנחה של 30% בשווי שימוש.',
+      'רכב שהמעסיק מעמיד לרשות העובד גם לשימוש פרטי. שווי השימוש נזקף כהכנסת עבודה לצורכי מס. הסכום החודשי תלוי בדגם ובכללי שנת המס; לרכב חשמלי עשויה לחול הפחתה בסכום שקלי, לא הנחה אחוזית קבועה. בדקו את הדגם בסימולטור רשות המסים.',
     seeAlso: [
       { label: 'בדיקת שווי שימוש', href: '/vehicles/company-car-benefit' },
       { label: 'מדריך רכב חברה', href: '/blog/company-car-tax-2026' },

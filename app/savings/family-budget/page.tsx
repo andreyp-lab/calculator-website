@@ -143,7 +143,7 @@ export default function FamilyBudgetPage() {
               <Link href="/savings/personal-loan">מחשבון הלוואה אישית</Link> — השוואת מקורות הלוואה ו-APR אמיתי
             </li>
             <li>
-              <Link href="/insurance/pension">מחשבון פנסיה</Link> — תכנון חיסכון לפרישה
+              <Link href="/insurance/pension">מדריך בדיקת פנסיה</Link> — עיון בדוח האישי לקראת פרישה
             </li>
           </ul>
         </>

@@ -227,8 +227,8 @@ export default function OpeningBusinessPage() {
           </p>
           <p>
             לרוב העצמאים בתחילת הדרך, עוסק (פטור או מורשה) הוא נקודת ההתחלה הנכונה — ותמיד אפשר
-            להתאגד כחברה בהמשך כשהרווחים מצדיקים זאת. להשוואה מספרית מלאה בין המסלולים:{' '}
-            <Link href="/self-employed/corporation-vs-individual">מחשבון חברה בע"מ מול עוסק</Link>{' '}
+            להתאגד כחברה בהמשך כשהנסיבות מצדיקות זאת. לבחינת השיקולים:{' '}
+            <Link href="/self-employed/corporation-vs-individual">מדריך חברה בע"מ מול עוסק</Link>{' '}
             והמדריך המורחב{' '}
             <Link href="/blog/company-vs-self-employed-ultimate-guide">
               חברה בע"מ או עצמאי — המדריך האולטימטיבי
@@ -798,9 +798,9 @@ export default function OpeningBusinessPage() {
                 מעבר מסורבל באמצע השנה. בהמשך, כשהרווח יטפס למדרגות המס הגבוהות, שווה לבחון
                 התאגדות כחברה בע"מ —{' '}
                 <Link href="/self-employed/corporation-vs-individual" className="text-gold hover:underline">
-                  מחשבון חברה בע"מ מול עוסק
+                  מדריך חברה בע"מ מול עוסק
                 </Link>{' '}
-                מראה את נקודת האיזון.
+                מפרט את הנתונים שכדאי לבדוק.
               </p>
             </div>
             <div className="border border-ink/15 bg-cream-2 p-5">

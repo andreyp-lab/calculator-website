@@ -9,9 +9,9 @@ import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/investments' },
-  title: 'מחשבוני השקעות וחיסכון 2026 — ריבית דריבית, ROI ופרישה',
+  title: 'השקעות וחיסכון — מחשבונים ומדריכי פרישה',
   description:
-    'מחשבונים להשקעות וחיסכון לטווח ארוך: ריבית דריבית, ROI, תכנון פרישה ו-FIRE. גלה כמה הכסף שלך יגדל ומתי תוכל לפרוש בעצמאות כלכלית. חשב עכשיו בחינם.',
+    'כלים לתרחישי ריבית דריבית ותשואה לצד מדריכים לבדיקת פנסיה ופרישה מוקדמת.',
 };
 
 const calculators = [
@@ -30,15 +30,15 @@ const calculators = [
     icon: '💹',
   },
   {
-    title: 'מחשבון תכנון פרישה',
-    description: 'בדוק האם אתה במסלול לחיסכון מספיק לפרישה',
+    title: 'מדריך תכנון פרישה',
+    description: 'מיפוי הוצאות, קצבאות וחסכונות לקראת פרישה',
     href: '/investments/retirement',
     available: true,
     icon: '🏖️',
   },
   {
-    title: 'מחשבון FIRE - פרישה מוקדמת',
-    description: 'תוך כמה שנים תוכל לפרוש בעצמאות כלכלית? כלל ה-4% וניתוח Lean/Regular/Fat',
+    title: 'מדריך FIRE - פרישה מוקדמת',
+    description: 'בדיקת הוצאות, חסכונות וסיכונים לפרישה מוקדמת',
     href: '/investments/fire',
     available: true,
     icon: '🔥',
@@ -58,7 +58,7 @@ const faqItems = [
     // 25% = INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE (lib/calculators/investments.ts);
     // מס דיבידנד 25% = dividendTaxRate (lib/calculators/capital-gains-tax.ts);
     // סף מס יסף = SURTAX_2026.annualThreshold (lib/constants/tax-2026.ts)
-    answer: `מס רווח הון בישראל הוא ${INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE * 100}% על הרווח הריאלי — כלומר על הרווח בניכוי עליית המדד, ולא על כל הרווח הנומינלי. גם דיבידנדים ממוסים ב-25% לתושב ישראל. המס משולם רק במימוש (מכירה), ולכן דחיית מכירה דוחה את המס ומשאירה יותר כסף שממשיך לצבור ריבית דריבית. מעל הכנסה שנתית של ${SURTAX_2026.annualThreshold.toLocaleString('he-IL')} ₪ מתווסף גם מס יסף.`,
+    answer: 'מיסוי השקעות תלוי בסוג הנכס, באופן ההחזקה ובנתונים האישיים. רווח הון ממכירת ניירות ערך עשוי להיות ממוסה בשיעור שונה מריבית או מדיבידנד; גם בעל מניות מהותי וכללי מס יסף דורשים בדיקה נפרדת. בדקו את נתוני הפעולה ואת דוח הניכויים לפני קבלת החלטה.',
   },
   {
     question: 'מה זה ריבית דריבית ולמה היא כל כך משמעותית?',
@@ -68,7 +68,7 @@ const faqItems = [
   {
     question: 'מהו כלל ה-4% לפרישה מוקדמת (FIRE)?',
     answer:
-      'כלל ה-4%, שמקורו במחקר Trinity Study, קובע שאפשר למשוך כ-4% משווי תיק ההשקעות בשנה הראשונה לפרישה (ולהצמיד למדד בהמשך) בסיכוי גבוה שהתיק ישרוד עשרות שנים. המשמעות המעשית: היעד לעצמאות כלכלית הוא בערך פי 25 מההוצאה השנתית שלכם. מחשבון ה-FIRE שלנו מחשב את היעד ואת מספר השנים עד אליו, כולל תרחישים שמרניים יותר של 3%.',
+      'כלל ה-4% הוא דוגמה לשיעור משיכה במחקרי עבר, ולא הבטחה לכך שתיק אישי יממן פרישה מוקדמת. תקופת המשיכה, הרכב התיק, מיסוי, אינפלציה וסדר התשואות משנים את התוצאה. מדריך ה-FIRE מסייע לזהות מה צריך לבדוק לפני קבלת החלטה.',
   },
   {
     question: 'איך אינפלציה משפיעה על החיסכון שלי?',
@@ -88,19 +88,15 @@ export default function InvestmentsPage() {
           📈 מחשבוני השקעות וחיסכון
         </h1>
         <p className="text-lg text-ink/70 mb-6">
-          מחשבונים מקצועיים לתכנון פיננסי לטווח ארוך - ריבית דריבית, ROI, פרישה
+          מחשבוני תרחישים ומדריכים לבדיקת חיסכון ופרישה
         </p>
 
         {/* Quick answer */}
         <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
           <p className="text-lg text-ink leading-relaxed">
-            כמה הכסף שלכם יגדל? התשובה תלויה בשלושה משתנים: תשואה שנתית, משך ההשקעה וגובה
-            ההפקדות — וריבית דריבית הופכת אותם לגידול מעריכי, לא ליניארי. אבל תשואה ברוטו היא
-            לא מה שנשאר ביד: על הרווח הריאלי משולם מס רווח הון של{' '}
-            {INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE * 100}%, והאינפלציה (כיום{' '}
-            {MACRO_DATA.inflation.annualRate}% בשנה) שוחקת את כוח הקנייה. המחשבונים בעמוד זה
-            מציגים גם ערך נומינלי, גם ערך ריאלי וגם ערך אחרי מס — כדי שתתכננו לפי מספרים
-            אמיתיים.
+            תרחישי צמיחה תלויים בהפקדות, בתשואה ובמשך ההשקעה. התוצאה בפועל מושפעת
+            גם מדמי ניהול, אינפלציה, הפסדים ומיסוי אישי. בדקו את ההנחות במחשבונים
+            והשתמשו בדוחות האישיים לתכנון פרישה.
           </p>
         </section>
 
@@ -157,11 +153,10 @@ export default function InvestmentsPage() {
             </p>
             <p>
               לתכנון ארוך טווח:{' '}
-              <Link href="/investments/retirement" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון תכנון הפרישה</Link>{' '}
-              בודק אם קצב החיסכון הנוכחי שלכם יספיק לרמת החיים שאתם רוצים בפרישה, ו
-              <Link href="/investments/fire" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון ה-FIRE</Link>{' '}
-              מחשב תוך כמה שנים תגיעו לעצמאות כלכלית לפי כלל ה-4%, בתרחישי Lean, Regular
-              ו-Fat. ולפני מכירת ניירות ערך, שווה לעבור על{' '}
+              <Link href="/investments/retirement" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך תכנון הפרישה</Link>{' '}
+              מסייע למפות הוצאות, קצבאות וחסכונות, ו
+              <Link href="/investments/fire" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך ה-FIRE</Link>{' '}
+              מפרט אילו סיכונים לבדוק לפני פרישה מוקדמת. ולפני מכירת ניירות ערך, שווה לעבור על{' '}
               <Link href="/investments/capital-gains-tax" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך מס רווח הון</Link>{' '}
               — קיזוז הפסדים ותזמון מכירה נכון יכולים לחסוך אלפי שקלים.
             </p>

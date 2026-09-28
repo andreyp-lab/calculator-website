@@ -154,7 +154,7 @@ export default function Page() {
               <Link href="/savings/loan-repayment">מחשבון החזרי הלוואה</Link> — חישוב תשלום חודשי וסילוק מואץ
             </li>
             <li>
-              <Link href="/insurance/pension">מחשבון פנסיה</Link> — תכנון חיסכון לפרישה
+              <Link href="/insurance/pension">מדריך בדיקת פנסיה</Link> — עיון בדוח האישי לקראת פרישה
             </li>
           </ul>
         </>

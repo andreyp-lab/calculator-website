@@ -54,12 +54,12 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'company-vs-self-employed-ultimate-guide',
-    title: 'חברה בע"מ או עוסק מורשה - המדריך הסופי 2026',
+    title: 'חברה בע"מ או עוסק מורשה — איך בוחנים את מבנה העסק?',
     description:
-      'ההחלטה שכל פרילנסר ובעל עסק חייב להבין. ניתוח מקיף של המסים, ההטבות והעלויות בכל מסלול.',
+      'שיקולי מס, משיכות, עלויות ניהול ואחריות לפני בחירת המבנה העסקי; אין סף הכנסה אחיד שמתאים לכל עסק.',
     category: 'עצמאיים',
-    readTime: '18 דקות',
-    date: '2026-05-04',
+    readTime: '5 דקות',
+    date: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/self-employed/corporation-vs-individual',
@@ -270,12 +270,12 @@ export const blogPosts: BlogPost[] = [
   // ===== מאמרים חדשים מאי 2026 =====
   {
     slug: 'inflation-and-investments',
-    title: 'אינפלציה והשקעות 2026 - איך לא לאבד 30% מהכסף שלך',
+    title: 'אינפלציה והשקעות — בדיקת כוח קנייה ותשואה ריאלית',
     description:
-      'אינפלציה שוחקת את ערך הכסף בשקט. מדריך מעמיק על הגנת החסכונות, ריבית דריבית ריאלית, ואסטרטגיות השקעה שמנצחות את האינפלציה.',
+      'איך משווים ערך כסף ותשואה לאורך זמן בעזרת מדד המחירים לצרכן ומחשבון הלמ״ס.',
     category: 'השקעות',
-    readTime: '10 דקות',
-    date: '2026-05-15',
+    readTime: '3 דקות',
+    date: '2026-09-28',
     featured: false,
     relatedCalculator: {
       href: '/investments/compound-interest',
@@ -456,16 +456,16 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'fire-strategy-israel',
-    title: 'FIRE בישראל 2026 - איך לפרוש מוקדם ב-5 דרכים שונות',
+    title: 'FIRE בישראל — איך בוחנים פרישה מוקדמת',
     description:
-      'תנועת FIRE (Financial Independence Retire Early) בישראל: 5 סוגי FIRE עם דוגמאות מספריות לישראלי ממוצע. כולל בידול חברתי ופיתרונות לביטוח לאומי.',
+      'מפת בדיקה לתכנון פרישה מוקדמת: הוצאות, חסכונות, קצבאות, מס וסיכון השקעה.',
     category: 'השקעות',
-    readTime: '15 דקות',
-    date: '2026-05-16',
+    readTime: '4 דקות',
+    date: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/investments/fire',
-      label: 'מחשבון FIRE',
+      label: 'מדריך FIRE',
     },
     related: ['compound-interest-and-time-magic', 'study-fund-self-employed-strategy', 'pension-self-employed-11-percent'],
   },

@@ -138,7 +138,7 @@ export default function Page() {
             <li>
               <strong>הפקדה מקסימלית לפנסיה+ק"ש</strong>: גם אם זה "כואב" - זה חיסכון
               שלך + הקטנת מס.{' '}
-              <Link href="/self-employed/mandatory-pension" className="text-gold hover:underline">מחשבון פנסיה לעצמאי</Link>
+              <Link href="/self-employed/mandatory-pension" className="text-gold hover:underline">מדריך פנסיה לעצמאי</Link>
             </li>
             <li>
               <strong>מקדמה מתוקנת</strong>: אם ההכנסה השתנתה - בקש "תיקון מקדמה" באתר

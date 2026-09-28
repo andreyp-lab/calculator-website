@@ -1,194 +1,72 @@
-import { Metadata } from 'next';
-import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
-import { SelfEmployedPensionCalculator } from '@/components/calculators/SelfEmployedPensionCalculator';
-import { FAQ } from '@/components/calculator/FAQ';
-import {
-  AVERAGE_WAGE_2026,
-  HALF_AVERAGE_WAGE_2026,
-  TIER1_RATE,
-  TIER2_RATE,
-  TAX_CREDIT_CEILING_ANNUAL,
-  TAX_CREDIT_RATE,
-  MANDATORY_PENSION_YEAR,
-} from '@/lib/calculators/self-employed-pension';
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
-// כל מספר ב-quickAnswer נשלף מקבועי המנוע — אתר YMYL, אין מספרים כתובים ביד.
-const nis = (n: number) => n.toLocaleString('he-IL');
-const HALF_AVG = nis(HALF_AVERAGE_WAGE_2026);
-const AVG = nis(AVERAGE_WAGE_2026);
-const TIER1_PCT = (TIER1_RATE * 100).toFixed(2);
-const TIER2_PCT = (TIER2_RATE * 100).toFixed(2);
-const CREDIT_PCT = (TAX_CREDIT_RATE * 100).toFixed(0);
-const CREDIT_CEILING = nis(TAX_CREDIT_CEILING_ANNUAL);
-// הפקדת החובה החודשית המלאה למי שמרוויח את השכר הממוצע ומעלה.
-const MAX_MONTHLY_DEPOSIT = nis(
-  Math.round(
-    HALF_AVERAGE_WAGE_2026 * TIER1_RATE +
-      (AVERAGE_WAGE_2026 - HALF_AVERAGE_WAGE_2026) * TIER2_RATE,
-  ),
-);
+const PENSION_GUIDE = 'https://www.gov.il/he/pages/independent-must-pension';
+const DEPOSIT_REPORT = 'https://www.gov.il/he/service/pension-deposit-report';
 
 export const metadata: Metadata = {
-  title: { absolute: 'מחשבון פנסיה חובה לעצמאי 2026 — שיעורים, הטבות מס, קנסות' },
+  title: 'פנסיה חובה לעצמאים — כללי ההפקדה ובדיקה אישית',
   description:
-    'חישוב פנסיה חובה לעצמאי 2026: שיעורים 4.45%/12.55%, שתי הטבות מס בו-זמנית (ניכוי + זיכוי), ניתוח קנסות אי-הפקדה, הקרנה לפרישה לפי גיל ותשואה. כלי חינמי ומדויק.',
+    'שיעורי חובת ההפקדה לפנסיה לעצמאים, מצבים הדורשים בדיקה אישית, והפניה למידע ולדיווח הרשמיים.',
   alternates: { canonical: '/self-employed/mandatory-pension' },
 };
 
-const faqItems = [
-  {
-    question: 'מה חובת הפנסיה לעצמאי?',
-    answer:
-      'מאז 2017 — עצמאי חייב להפקיד לפנסיה. החישוב לפי השכר הממוצע במשק (13,769 ₪ ב-2026): שלב 1 — 4.45% עד מחצית השכר (6,884 ₪); שלב 2 — 12.55% עד השכר הממוצע. מעל זה — אין חובה (אבל מומלץ).',
-  },
-  {
-    question: 'מה הקנס אם לא מפקידים?',
-    answer:
-      'ביטוח לאומי גובה את הסכום החסר + ריבית עיכוב. הקנס מצטבר מ-2017. עצמאי שלא הפקיד 5 שנים עשוי להתמודד עם חוב של עשרות אלפי שקלים. פנה לביטוח לאומי לאסדרת פיגורים בהקדם האפשרי.',
-  },
-  {
-    question: 'מה הטבות המס שעצמאי מקבל על הפנסיה?',
-    answer:
-      'שתי הטבות בו-זמנית: (1) ניכוי — ההפקדה מורידה מההכנסה החייבת; חיסכון = סכום × מס שולי. (2) זיכוי — 35% החזר מס על 35% מההפקדה (עד תקרה 13,736 ₪/שנה). שילוב — החזר אפקטיבי של 50%–70% מסכום ההפקדה! עצמאי ב-35% מס — על כל 1,000 ₪ שמפקיד, המדינה מחזירה ~550 ₪.',
-  },
-  {
-    question: 'האם להפקיד מעבר לחובה?',
-    answer:
-      'בהחלט מומלץ. תקרת ההפקדה לזיכוי מס: 13,736 ₪/שנה (~1,145 ₪/חודש). כל ₪ עד התקרה מקבל הטבת מס גבוהה. ככל שהמס השולי גבוה יותר — הטבה גדולה יותר. דוגמה: עצמאי ב-47% מס שמפקיד 1,000 ₪ — חוסך ~620 ₪ מס.',
-  },
-  {
-    question: 'היכן כדאי להפקיד — קרן פנסיה, קופת גמל או ביטוח מנהלים?',
-    answer:
-      'השוואה: קרן פנסיה חדשה — עמלות נמוכות (0.1%-0.5%), ביטוחי נכות + שאירים מובנים, תשואה ממוצעת היסטורית 5%-7%. קופת גמל להשקעה — גמישות גבוהה (ניתן למשוך), אין ביטוחים. ביטוח מנהלים — עמלות גבוהות (1%-2%), לרוב פחות אטרקטיבי. למרבית העצמאים — קרן פנסיה חדשה היא הבחירה האופטימלית.',
-  },
-  {
-    question: 'מה קורה לפנסיה אם עובר לשכיר?',
-    answer:
-      'הקרן ממשיכה לצבור — המעסיק החדש מפקיד 12.5% (6.5% פנסיה + 6% פיצויים). הצבירה מהתקופה כעצמאי נשמרת ומתחברת. חשוב: אל תעצור הפקדות בתקופת המעבר. אם עברת לשכיר — תנסה לאחד קרנות ישנות בעתיד.',
-  },
-  {
-    question: 'כיצד מחשבים את הקצבה החודשית בפרישה?',
-    answer:
-      'הקצבה = שווי הקרן ÷ מקדם קצבה. מקדם הקצבה הממוצע: 200 (200 חודשי תשלום = ~16.7 שנה). דוגמה: קרן של 1,000,000 ₪ → קצבה 5,000 ₪/חודש. ככל שמפקידים יותר מוקדם יותר, גדל הסכום בזכות הריבית דה-ריבית.',
-  },
-  {
-    question: 'האם עצמאי שעובד גם כשכיר חייב להפקיד גם לעצמאי?',
-    answer:
-      'תלוי. אם השכיר מפקיד עבורך לפנסיה, ייתכן שחובת העצמאי מופחתת. יש לחשב בנפרד. המנגנון מורכב — מומלץ להתייעץ עם רואה חשבון שמכיר תיקים מעורבים.',
-  },
-  {
-    question: 'מה ההפקדה החודשית הממוצעת לעצמאי?',
-    answer:
-      'לפי השכר הממוצע: עצמאי בהכנסה 10,000 ₪/חודש — חובה ~790 ₪/חודש. עצמאי בהכנסה 15,000 ₪/חודש — חובה ~1,170 ₪/חודש (שיא החובה). עצמאי בהכנסה 20,000 ₪/חודש — חובה זהה (מעל השכר הממוצע, לא גדל). הפקדה אופטימלית לפי תקרת המס: ~1,145 ₪/חודש.',
-  },
-  {
-    question: 'האם ניתן לפדות כסף מפנסיה עצמאי לפני גיל 67?',
-    answer:
-      'לרוב לא — פנסיה חדשה נועדה לצבירה לפרישה. מקרים מיוחדים: נכות מוחלטת, פטירה (לשאירים), מחלה קשה. קופת גמל להשקעה (לא פנסיה) — ניתנת למשיכה בכל עת (אבל אז אין הטבות פנסיה). אפשרות ביניים: הלוואה על חשבון הקרן (עד 30%-50% מהצבירה).',
-  },
-  {
-    question: 'מה שיעור ההפקדה הממוצע בישראל לעצמאים?',
-    answer:
-      'נכון ל-2026, כ-60% מהעצמאים מפקידים לפנסיה כחוק. כ-40% עדיין לא מסדירים את החובה. ממוצע ההפקדה בפועל: ~900 ₪/חודש. ממוצע החובה לפי השכר הממוצע: ~1,100 ₪/חודש — פער שמצביע על חשיפה קנסות.',
-  },
-];
-
-export default function Page() {
+export default function MandatoryPensionPage() {
   return (
-    <CalculatorLayout
-      title="מחשבון פנסיה חובה לעצמאי 2026"
-      description="חישוב ההפקדה החובה לפי החוק + תכנון הפקדה רצונית עם הטבות מס + הקרנה לפרישה + ניתוח קנסות."
-      breadcrumbs={[
-        { label: 'דף הבית', href: '/' },
-        { label: 'עצמאיים', href: '/self-employed' },
-        { label: 'פנסיה חובה' },
-      ]}
-      lastUpdated="2026-05-15"
-      pageUrl="/self-employed/mandatory-pension"
-      calculator={<SelfEmployedPensionCalculator />}
-      quickAnswer={
-        <p className="text-lg text-ink leading-relaxed">
-          <strong>
-            מאז {MANDATORY_PENSION_YEAR} כל עצמאי בישראל חייב להפקיד לפנסיה, בשני שיעורים לפי
-            מדרגות ההכנסה:
-          </strong>{' '}
-          {TIER1_PCT}% על החלק שעד מחצית השכר הממוצע במשק ({HALF_AVG} ₪ לחודש), ו-{TIER2_PCT}% על
-          החלק שמעל זה ועד השכר הממוצע המלא ({AVG} ₪). מעל השכר הממוצע אין חובת הפקדה. בפועל,
-          עצמאי שמרוויח את השכר הממוצע ומעלה מפקיד כ-{MAX_MONTHLY_DEPOSIT} ₪ בחודש. מה שהופך את
-          ההפקדה למשתלמת הוא שתי הטבות מס שפועלות <strong>בו-זמנית</strong>: חלק מההפקדה מוכר
-          כניכוי — כלומר יורד מההכנסה החייבת וחוסך מס בשיעור השולי שלכם — וחלק אחר מזכה בהחזר מס
-          של {CREDIT_PCT}%, עד תקרה של {CREDIT_CEILING} ₪ בשנה. מי שלא מפקיד חשוף לגבייה של הסכום
-          החסר בתוספת ריבית מצד ביטוח לאומי. המחשבון שמתחת מחשב את ההפקדה המדויקת לפי ההכנסה,
-          כמה מס היא חוסכת, ומה היא צפויה לצבור עד גיל הפרישה.
+    <main dir="rtl" className="mx-auto max-w-4xl px-5 py-12 text-ink">
+      <nav aria-label="פירורי לחם" className="mb-8 text-sm text-ink/60">
+        <Link href="/">דף הבית</Link> / <Link href="/self-employed">עצמאים</Link> / פנסיה חובה
+      </nav>
+
+      <h1 className="mb-5 text-3xl font-bold md:text-4xl">פנסיה חובה לעצמאים</h1>
+      <p className="mb-8 text-lg leading-relaxed">
+        מאז 2017 חלה חובת הפקדה לחיסכון פנסיוני על עצמאים העומדים בתנאי החוק. שיעור ההפקדה הוא
+        4.45% מחלק ההכנסה החייבת בהפקדה שעד מחצית השכר הממוצע במשק, ו־12.55% מהחלק שמעל מחצית
+        השכר הממוצע ועד השכר הממוצע. תחולת החובה והסכום האישי תלויים בגיל, בהכנסה ובנסיבות נוספות.
+      </p>
+
+      <section className="border-r-4 border-gold bg-cream-2 p-6">
+        <h2 className="mb-3 text-xl font-bold">בדקו את החובה לפי הנתונים שלכם</h2>
+        <p className="mb-5 leading-relaxed">
+          סכומי השכר הממוצע, תקרות הטבות המס ונתוני ההכנסה עשויים להשתנות. לפני הפקדה או החלטת מס,
+          בדקו את הכללים העדכניים ואת הדוח האישי שלכם. אין לחשב קנס, החזר מס או קצבה עתידית מתוך
+          שיעורי ההפקדה לבדם.
         </p>
-      }
-      content={
-        <>
-          <h2>פנסיה חובה לעצמאי — מה החוק אומר</h2>
-          <p>
-            מאז 2017, חוק פנסיה חובה חל גם על עצמאים. ההפקדה מחושבת לפי השכר הממוצע במשק
-            (13,769 ₪ ב-2026). עצמאי שלא מפקיד חשוף לקנסות מביטוח לאומי ולאובדן הטבות מס.
-          </p>
+        <a href={PENSION_GUIDE} target="_blank" rel="noopener noreferrer" className="inline-block bg-ink px-6 py-3 font-semibold text-cream hover:bg-ink-deep">
+          למדריך פנסיה חובה לעצמאים של משרד האוצר ↗
+        </a>
+      </section>
 
-          <h2>שיעורי ההפקדה (2026)</h2>
-          <table className="w-full text-sm border-collapse my-4">
-            <thead>
-              <tr className="bg-cream-2">
-                <th className="border border-ink/15 p-2 text-right">שלב</th>
-                <th className="border border-ink/15 p-2 text-right">הכנסה</th>
-                <th className="border border-ink/15 p-2 text-right">שיעור</th>
-                <th className="border border-ink/15 p-2 text-right">דוגמה (15K ₪/חודש)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-ink/15 p-2">1</td>
-                <td className="border border-ink/15 p-2">עד 6,884 ₪/חודש</td>
-                <td className="border border-ink/15 p-2 font-semibold">4.45%</td>
-                <td className="border border-ink/15 p-2">306 ₪</td>
-              </tr>
-              <tr className="bg-cream-2/50">
-                <td className="border border-ink/15 p-2">2</td>
-                <td className="border border-ink/15 p-2">6,885–13,769 ₪/חודש</td>
-                <td className="border border-ink/15 p-2 font-semibold">12.55%</td>
-                <td className="border border-ink/15 p-2">864 ₪</td>
-              </tr>
-              <tr>
-                <td className="border border-ink/15 p-2">3</td>
-                <td className="border border-ink/15 p-2">מעל 13,769 ₪/חודש</td>
-                <td className="border border-ink/15 p-2">לא חובה (מומלץ)</td>
-                <td className="border border-ink/15 p-2">—</td>
-              </tr>
-            </tbody>
-          </table>
+      <section className="mt-10 space-y-4 leading-relaxed">
+        <h2 className="text-2xl font-bold">מה קורה אם לא הופקד הסכום הנדרש?</h2>
+        <p>
+          אי־עמידה בחובת ההפקדה עלולה לגרור קנס בהתאם לתנאים שבחוק. אין בכך חוב אוטומטי לביטוח
+          הלאומי בגובה כל ההפקדות החסרות ובתוספת ריבית. אם קיבלתם הודעה, בדקו את שנת המס,
+          ההכנסה וההפקדות שכבר בוצעו. שירות הממשלה מאפשר לדווח למרכז לגביית קנסות על הפקדות
+          לפנסיה כדי לברר את החיוב.
+        </p>
+        <a href={DEPOSIT_REPORT} target="_blank" rel="noopener noreferrer" className="font-semibold text-gold underline underline-offset-4">
+          לדיווח על הפקדות למרכז לגביית קנסות ↗
+        </a>
+      </section>
 
-          <h2>הטבות המס — מדוע כדאי מאוד להפקיד</h2>
-          <p>
-            לכל עצמאי שמפקיד לפנסיה יש שתי הטבות מס בו-זמנית: ניכוי (הפחתת הכנסה חייבת) וזיכוי
-            (החזר מס ישיר). ביחד, עצמאי ב-35% מס מקבל בחזרה כ-55% מסכום ההפקדה מהמדינה.
-          </p>
+      <section className="mt-10">
+        <h2 className="mb-4 text-2xl font-bold">מה להכין לבדיקה?</h2>
+        <ul className="list-disc space-y-3 pr-6 leading-relaxed">
+          <li>הכנסה חייבת מהעסק לפי שנת המס הרלוונטית, ולא מחזור ההכנסות בלבד.</li>
+          <li>אישורי ההפקדה השנתיים לקופת גמל לקצבה ודוח המס השנתי.</li>
+          <li>פרטים על הכנסה כשכיר והפקדות מעסיק, אם אתם גם עובדים כשכירים.</li>
+          <li>מועד תחילת הפעילות והגיל בשנת המס, לצורך בדיקת תחולת החובה.</li>
+        </ul>
+      </section>
 
-          <h2>חובה מ-2017 — בדוק שלא צברת חוב</h2>
-          <p>
-            אם אתה עצמאי מ-2017 ולא הפקדת — ייתכן שיש לך חוב לביטוח לאומי. טאב "קנסות
-            אי-הפקדה" מציג הערכת החשיפה שלך ומה ניתן לעשות.
-          </p>
-
-          <h2>מחשבונים קשורים</h2>
-          <ul>
-            <li>
-              <a href="/self-employed/social-security">מחשבון ביטוח לאומי עצמאי</a> — חישוב ב.ל. ובריאות לצד הפנסיה
-            </li>
-            <li>
-              <a href="/self-employed/net">מחשבון נטו לעצמאי</a> — הכנסה נטו לאחר מס, ב.ל. ופנסיה
-            </li>
-            <li>
-              <a href="/self-employed/year-end-tax-simulator">סימולטור מס סוף שנה</a> — תכנון מס שנתי מלא כולל הפקדות פנסיה
-            </li>
-          </ul>
-        </>
-      }
-      faq={<FAQ items={faqItems} />}
-    />
+      <aside className="mt-12 border border-ink/15 bg-cream-2 p-6">
+        <h2 className="mb-2 text-xl font-bold">לומדים לנהל את כספי העסק</h2>
+        <p className="mb-4">למי שרוצה להעמיק בתכנון העסקי והפיננסי, אפשר להכיר את הקורס לעצמאים.</p>
+        <Link href="/course/self-employed" className="font-semibold text-gold underline underline-offset-4">
+          לפרטי הקורס לעצמאים
+        </Link>
+      </aside>
+    </main>
   );
 }

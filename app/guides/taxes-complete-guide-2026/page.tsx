@@ -623,7 +623,7 @@ export default function TaxesCompleteGuide() {
 
             <div className="flex gap-3">
               <Link href="/self-employed/dividend-vs-salary" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
-                מחשבון דיבידנד vs. שכר ←
+                מדריך דיבידנד מול שכר ←
               </Link>
             </div>
           </section>
@@ -715,7 +715,7 @@ export default function TaxesCompleteGuide() {
 
             <div className="flex gap-3 flex-wrap">
               <Link href="/insurance/pension" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
-                מחשבון פנסיה ←
+                מדריך בדיקת פנסיה ←
               </Link>
               <Link href="/self-employed/mandatory-pension" className="bg-paper border border-ink text-ink px-4 py-2 rounded-none hover:bg-paper-hover text-sm font-medium">
                 פנסיה חובה לעצמאי ←
@@ -819,7 +819,7 @@ export default function TaxesCompleteGuide() {
                 { href: '/self-employed/vat', label: 'מחשבון מע"מ', desc: 'חישוב מע"מ עוסק מורשה/פטור.' },
                 { href: '/self-employed/tax-advances', label: 'מחשבון מקדמות מס', desc: 'חשב מקדמות מס חודשיות.' },
                 { href: '/self-employed/year-end-tax-simulator', label: 'סימולטור מס שנתי', desc: 'מה יהיה המס שלך בסוף השנה?' },
-                { href: '/self-employed/dividend-vs-salary', label: 'דיבידנד vs. שכר', desc: 'מה עדיף לבעל שליטה?' },
+                { href: '/self-employed/dividend-vs-salary', label: 'דיבידנד מול שכר', desc: 'מה לבדוק לפני בחירת דרך משיכה?' },
                 { href: '/real-estate/capital-gains-tax', label: 'בדיקת מס שבח', desc: 'חשב מס שבח על מכירת נדל"ן.' },
                 { href: '/real-estate/purchase-tax', label: 'מחשבון מס רכישה', desc: 'מס רכישה לפי סוג רוכש ומחיר.' },
               ].map((item) => (

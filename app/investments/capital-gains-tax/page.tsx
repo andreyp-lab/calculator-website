@@ -181,7 +181,7 @@ export default function CapitalGainsTaxPage() {
             {[
               { href: '/investments/compound-interest', label: 'מחשבון ריבית דריבית' },
               { href: '/investments/roi', label: 'מחשבון תשואה (ROI)' },
-              { href: '/investments/fire', label: 'מחשבון FIRE' },
+              { href: '/investments/fire', label: 'מדריך FIRE' },
               { href: '/blog/fire-strategy-israel', label: 'אסטרטגיית FIRE בישראל' },
               { href: '/blog/inflation-and-investments', label: 'אינפלציה והשקעות' },
               { href: '/glossary/surtax', label: 'מס יסף — הגדרה' },

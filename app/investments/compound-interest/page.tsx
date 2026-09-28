@@ -171,10 +171,10 @@ export default function CompoundInterestPage() {
           <h2>מחשבונים קשורים</h2>
           <ul>
             <li>
-              <a href="/investments/retirement">מחשבון תכנון פרישה</a> — בדוק האם אתה חוסך מספיק לפרישה
+              <a href="/investments/retirement">מדריך תכנון פרישה</a> — מיפוי מקורות הכנסה והוצאות
             </li>
             <li>
-              <a href="/investments/fire">מחשבון FIRE — פרישה מוקדמת</a> — חשב מתי תגיע לעצמאות כלכלית
+              <a href="/investments/fire">מדריך FIRE — פרישה מוקדמת</a> — בחינת סיכונים ותרחישים
             </li>
             <li>
               <a href="/investments/roi">מחשבון ROI</a> — חשב תשואה על השקעה ספציפית

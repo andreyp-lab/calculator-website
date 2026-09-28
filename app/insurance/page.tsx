@@ -1,20 +1,20 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { ArrowLeft, Calculator } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
 import { PENSION_CONSTANTS_2026 } from '@/lib/calculators/pension';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/insurance' },
-  title: 'מחשבוני ביטוחים ופנסיה 2026 – חישוב קצבה ועלות ביטוח',
-  description: 'חשב את הפנסיה הצפויה שלך לפי שכר וותק, סכום ביטוח החיים הנדרש למשפחה ועלות ביטוח רכב. מחשבונים מקצועיים לתכנון פיננסי, עדכניים ל-2026 — חינם ומיידי.',
+  title: 'ביטוחים ופנסיה — כלים ומדריכים',
+  description: 'מידע לבדיקת הפנסיה בדוח האישי, מסלול הפרישה ודמי הניהול, לצד כלים לתכנון פיננסי.',
 };
 
 const calculators = [
   {
-    title: 'מחשבון פנסיה צפויה',
-    description: 'חשב את הקצבה החודשית שתקבל בפרישה',
+    title: 'מדריך בדיקת פנסיה צפויה',
+    description: 'בדקו את הדוח האישי ואת מסלולי הקצבה',
     href: '/insurance/pension',
     available: true,
     icon: '👴',
@@ -39,17 +39,16 @@ const faqItems = [
   {
     question: 'כמה מפרישים לפנסיה מהשכר ב-2026?',
     // שיעורי הפרשה = PENSION_CONSTANTS_2026.minContribRates / maxContribRates (lib/calculators/pension.ts)
-    answer: `ההפרשה המינימלית לפי צו ההרחבה היא ${PENSION_CONSTANTS_2026.minContribRates.total}% מהשכר: ${PENSION_CONSTANTS_2026.minContribRates.employee}% ניכוי מהעובד, ${PENSION_CONSTANTS_2026.minContribRates.employer}% תגמולי מעסיק ו-${PENSION_CONSTANTS_2026.minContribRates.severance}% לרכיב פיצויים. ניתן להגדיל עד ${PENSION_CONSTANTS_2026.maxContribRates.total}% (${PENSION_CONSTANTS_2026.maxContribRates.employee}% עובד, ${PENSION_CONSTANTS_2026.maxContribRates.employer}% מעסיק ו-${PENSION_CONSTANTS_2026.maxContribRates.severance}% פיצויים). ההבדל בין המינימום למקסימום מצטבר למאות אלפי שקלים לאורך קריירה.`,
+    answer: `לפי צו ההרחבה הכללי שיעור ההפקדה המינימלי הוא ${PENSION_CONSTANTS_2026.minContribRates.total}% מהשכר הקובע: ${PENSION_CONSTANTS_2026.minContribRates.employee}% עובד, ${PENSION_CONSTANTS_2026.minContribRates.employer}% תגמולי מעסיק ו-${PENSION_CONSTANTS_2026.minContribRates.severance}% לרכיב פיצויים. הסכם מיטיב, שכר קובע ותקרות יכולים לשנות את ההפקדה האישית; בדקו בתלוש ובדוח הקרן.`,
   },
   {
     question: 'מהו מקדם המרה ואיך הוא קובע את הקצבה?',
-    // מקדמים = PENSION_CONSTANTS_2026.conversionFactors / conversionFactorsWithSpouse (lib/calculators/pension.ts)
-    answer: `הקצבה החודשית בפרישה מחושבת פשוט: הצבירה הכוללת חלקי מקדם ההמרה. בגיל 67 המקדם עומד על כ-${PENSION_CONSTANTS_2026.conversionFactors[67]} ללא הבטחת קצבת שאירים, וכ-${PENSION_CONSTANTS_2026.conversionFactorsWithSpouse[67]} עם קצבת שאירים לבן/בת הזוג. לדוגמה, המשמעות היא שכל 100,000 ₪ צבורים מתורגמים לכמה מאות שקלים של קצבה חודשית — ולכן דחיית פרישה, שמקטינה את המקדם ומגדילה את הצבירה, מעלה את הקצבה משני הכיוונים.`,
+    answer: 'מקדם ההמרה משמש לחישוב הקצבה מתוך הצבירה. הוא אינו מספר אחיד לגיל פרישה מסוים: תקנון הקרן, גיל הפורש, מסלול השאירים ופרטי בן או בת הזוג עשויים להשפיע. בקשו מהקרן הצעה לפי הנתונים שלכם.',
   },
   {
     question: 'האם קצבת הפנסיה חייבת במס?',
     // פטור קצבה = PENSION_CONSTANTS_2026.pensionTaxExemptionPct / pensionEligibleCeiling / pensionTaxExemptionCeiling (lib/calculators/pension.ts)
-    answer: `קצבת פנסיה נחשבת הכנסה חייבת, אבל מגיל 67 קיים פטור משמעותי לפי סעיף 9א: ${PENSION_CONSTANTS_2026.pensionTaxExemptionPct}% מ"הקצבה המזכה" פטורים ממס, עד תקרת קצבה מזכה של ${PENSION_CONSTANTS_2026.pensionEligibleCeiling.toLocaleString('he-IL')} ₪ בחודש — פטור מרבי של כ-${PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling.toLocaleString('he-IL')} ₪ בחודש ב-2026. על היתרה חלות מדרגות המס הרגילות, בקיזוז נקודות זיכוי.`,
+    answer: `קצבת פנסיה עשויה להיות חייבת במס. בשנת 2026 שיעור הפטור המרבי על קצבה מזכה הוא ${PENSION_CONSTANTS_2026.pensionTaxExemptionPct}% מתקרה של ${PENSION_CONSTANTS_2026.pensionEligibleCeiling.toLocaleString('he-IL')} ₪ בחודש, עד ${PENSION_CONSTANTS_2026.pensionTaxExemptionCeiling.toLocaleString('he-IL')} ₪ בחודש. הזכאות האישית תלויה בגיל הזכאות, במענקי פרישה ובהחלטות קיבוע זכויות; בדקו ברשות המסים.`,
   },
   {
     question: 'כמה קצבת אזרח ותיק מקבלים מביטוח לאומי?',
@@ -66,23 +65,21 @@ export default function InsurancePage() {
           <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'ביטוחים' }]} />
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">💼 מחשבוני ביטוחים</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">💼 ביטוח ופנסיה</h1>
         <p className="text-lg text-ink/70 mb-6">
-          מחשבונים לתכנון פנסיוני וביטוחי. גלה כמה תקבל בפרישה וכמה ביטוח אתה צריך.
+          מידע לבדיקת הדוח הפנסיוני, ההפקדות והאפשרויות לקראת פרישה.
         </p>
 
         {/* Quick answer */}
         <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
           <p className="text-lg text-ink leading-relaxed">
-            כמה פנסיה תקבלו בפרישה? הקצבה החודשית היא הצבירה הפנסיונית חלקי מקדם ההמרה —
-            בגיל 67 המקדם עומד על כ-{PENSION_CONSTANTS_2026.conversionFactors[67]} ללא קצבת
-            שאירים. הצבירה עצמה נבנית מהפרשה חודשית של{' '}
+            כמה פנסיה תקבלו בפרישה? בדקו בדוח הקרן את הצבירה ואת אומדן הקצבה לפי המסלול האישי.
+            שיעורי ההפקדה לפי הצו הכללי הם{' '}
             {PENSION_CONSTANTS_2026.minContribRates.total}% מהשכר לפחות (
             {PENSION_CONSTANTS_2026.minContribRates.employee}% עובד,{' '}
             {PENSION_CONSTANTS_2026.minContribRates.employer}% מעסיק ו-
-            {PENSION_CONSTANTS_2026.minContribRates.severance}% פיצויים), ומושפעת דרמטית
-            מדמי הניהול ומהתשואה לאורך עשרות שנים. מחשבון הפנסיה בעמוד זה מתרגם את הנתונים
-            שלכם לקצבה צפויה — ומראה מה משנה כל אחוז.
+            {PENSION_CONSTANTS_2026.minContribRates.severance}% פיצויים), בכפוף לשכר הקובע
+            ולהסדר החל. דמי ניהול, תשואות ומסלול קצבה משפיעים על התוצאה; אין מקדם אחיד לכל פורש.
           </p>
         </section>
 
@@ -130,15 +127,15 @@ export default function InsurancePage() {
           <div className="space-y-4 text-ink/75 leading-relaxed">
             <p>
               נקודת ההתחלה היא{' '}
-              <Link href="/insurance/pension" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון הפנסיה הצפויה</Link>
-              : מזינים שכר, גיל, צבירה קיימת ודמי ניהול, ומקבלים את הקצבה החודשית הצפויה
-              בפרישה — כולל השוואה בין תרחישי תשואה והמחשה של עלות דמי הניהול לאורך השנים.
-              זהו הכלי החשוב ביותר בעמוד, כי פערים קטנים היום מתורגמים לפערי ענק בקצבה.
+              <Link href="/insurance/pension" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך בדיקת הפנסיה</Link>
+              : בודקים בדוח האישי את הצבירה, ההפקדות ודמי הניהול, ופונים לקרן לקבלת אומדן
+              קצבה לפי מסלול הפרישה והנתונים האישיים.
+              זו נקודת התחלה לקבלת תמונה אישית לפני החלטות על הפקדות או פרישה.
             </p>
             <p>
               לתכנון רחב יותר של הפרישה, המשיכו ל
-              <Link href="/investments/retirement" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון תכנון הפרישה</Link>{' '}
-              שבודק אם סך החיסכון שלכם (פנסיה + השקעות) יספיק לרמת החיים הרצויה, ול
+              <Link href="/investments/retirement" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך תכנון הפרישה</Link>{' '}
+              שמסייע למפות מקורות הכנסה, צרכים והתחייבויות, ול
               <Link href="/investments/compound-interest" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון ריבית דריבית</Link>{' '}
               כדי לראות כמה שווה כל הפקדה נוספת לאורך זמן. שכירים שרוצים להבין כמה בדיוק
               מנוכה מהתלוש לפנסיה ולביטוחים ימצאו פירוט שורה-שורה ב
@@ -160,7 +157,6 @@ export default function InsurancePage() {
                 <tr className="bg-ink text-cream">
                   <th className="px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] font-normal">רכיב</th>
                   <th className="px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] font-normal">מינימום (צו הרחבה)</th>
-                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] font-normal">מקסימום מוטב</th>
                 </tr>
               </thead>
               <tbody>
@@ -168,29 +164,25 @@ export default function InsurancePage() {
                 <tr className="border-t border-ink/10 bg-paper">
                   <td className="px-4 py-3 font-semibold text-ink">ניכוי עובד (תגמולים)</td>
                   <td className="px-4 py-3 text-ink/75">{PENSION_CONSTANTS_2026.minContribRates.employee}%</td>
-                  <td className="px-4 py-3 text-ink/75">{PENSION_CONSTANTS_2026.maxContribRates.employee}%</td>
                 </tr>
                 <tr className="border-t border-ink/10 bg-cream-2">
                   <td className="px-4 py-3 font-semibold text-ink">הפרשת מעסיק (תגמולים)</td>
                   <td className="px-4 py-3 text-ink/75">{PENSION_CONSTANTS_2026.minContribRates.employer}%</td>
-                  <td className="px-4 py-3 text-ink/75">{PENSION_CONSTANTS_2026.maxContribRates.employer}%</td>
                 </tr>
                 <tr className="border-t border-ink/10 bg-paper">
                   <td className="px-4 py-3 font-semibold text-ink">הפרשת מעסיק (פיצויים)</td>
                   <td className="px-4 py-3 text-ink/75">{PENSION_CONSTANTS_2026.minContribRates.severance}%</td>
-                  <td className="px-4 py-3 text-ink/75">{PENSION_CONSTANTS_2026.maxContribRates.severance}%</td>
                 </tr>
                 <tr className="border-t border-ink/15 bg-cream-2">
                   <td className="px-4 py-3 font-bold text-ink">סה&quot;כ מהשכר</td>
                   <td className="px-4 py-3 font-bold text-ink">{PENSION_CONSTANTS_2026.minContribRates.total}%</td>
-                  <td className="px-4 py-3 font-bold text-ink">{PENSION_CONSTANTS_2026.maxContribRates.total}%</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="mt-3 text-sm text-ink/70 leading-relaxed">
             הטבות המס על ההפקדות תלויות בתקרות, במעמד ובסוג ההפקדה. בדקו את התקרה המתאימה
-            לכם לפני שינוי ההפקדה; המחשבון מאפשר להשוות תרחישים לפי הנתונים שהזנתם.
+            לכם לפני שינוי ההפקדה.
           </p>
         </section>
 

@@ -1,238 +1,81 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
-import { CorpVsIndividualCalculator } from '@/components/calculators/CorpVsIndividualCalculator';
 
 export const metadata: Metadata = {
-  title: 'שכיר מול עצמאי - השוואה מקיפה, חישוב נטו ומחשבון 2026',
+  title: 'שכיר או עצמאי — מה כדאי להשוות לפני שמחליטים?',
   description:
-    'השוואה מלאה בין שכיר לעצמאי לשנת 2026: מס הכנסה, ביטוח לאומי, פנסיה, קרן השתלמות, חופשה, פיצויים ופוטנציאל הכנסה. כולל מחשבון נטו אינטראקטיבי.',
+    'השוואה בין עבודה כשכיר לעבודה כעצמאי: הכנסה נטו, הפרשות, זכויות, הוצאות עסקיות וסיכונים. ההחלטה תלויה בנתונים האישיים.',
   alternates: { canonical: '/compare/employee-vs-self-employed' },
 };
 
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: 'שכיר vs עצמאי - השוואה מקיפה 2026',
-  description:
-    'ההחלטה הגדולה: לעבוד בתור שכיר עם הטבות וביטחון, או לפתוח עצמאי עם הכנסה גבוהה יותר ופחות מסים? השוואה מלאה.',
-  url: 'https://cheshbonai.co.il/compare/employee-vs-self-employed',
-  inLanguage: 'he-IL',
-  datePublished: '2026-05-04',
-  dateModified: '2026-05-04',
-  author: {
-    '@type': 'Organization',
-    name: 'חשבונאי',
-    url: 'https://cheshbonai.co.il',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'חשבונאי',
-    url: 'https://cheshbonai.co.il',
-  },
-};
+const rows = [
+  ['בסיס ההשוואה', 'שכר וחלק המעסיק בעלויות העסקה', 'הכנסות פחות הוצאות עסקיות, מסים ועלויות ניהול'],
+  ['חיסכון פנסיוני', 'הפרשות העובד והמעסיק לפי ההסדר החל', 'הפקדה עצמית לפי תנאי חובת ההפקדה'],
+  ['זכויות בתקופות היעדרות', 'חופשה, מחלה, הבראה וזכויות נוספות לפי הדין וההסכם', 'יש לתכנן מימון עצמי לתקופות שבהן אין הכנסה'],
+  ['דמי ביטוח לאומי ובריאות', 'ניכוי עובד והשתתפות מעסיק לפי מדרגות', 'תשלום לפי המעמד וההכנסה המדווחת'],
+  ['הוצאות עסקיות', 'אין לנכות באופן גורף את הוצאות העבודה מהשכר', 'ניכוי הוצאות מותרות לפי סוג ההוצאה והכללים החלים'],
+  ['סיכון ותזרים', 'השכר נקבע לפי הסכם העבודה', 'ההכנסות והתשלומים תלויים בלקוחות ובעסק'],
+] as const;
 
 export default function EmployeeVsSelfEmployedComparePage() {
   return (
-    <>
-    <CalculatorLayout
-      title="שכיר vs עצמאי - השוואה מקיפה"
-      description="ההחלטה הגדולה: לעבוד בתור שכיר עם הטבות וביטחון, או לפתוח עצמאי עם הכנסה גבוהה יותר ופחות מסים? השוואה מלאה."
-      breadcrumbs={[
-        { label: 'דף הבית', href: '/' },
-        { label: 'דפי השוואה', href: '/compare' },
-        { label: 'שכיר vs עצמאי' },
-      ]}
-      lastUpdated="2026-05-04"
-      pageUrl="/compare/employee-vs-self-employed"
-      calculator={<CorpVsIndividualCalculator />}
-      quickAnswer={
-        <p className="text-lg text-ink leading-relaxed">
-          <strong>
-            התשובה תלויה כמעט לחלוטין ברמת ההכנסה: עד כ-12,000 ₪ בחודש שכיר יוצא מרוויח יותר,
-            ומעל כ-25,000 ₪ עצמאי — ובהמשך חברה בע&quot;מ — משתלמים יותר.
-          </strong>{' '}
-          הסיבה היא שבהכנסות נמוכות ההטבות הסוציאליות שהמעסיק מממן שוות הרבה יחסית לשכר: הפרשות
-          לפנסיה ולפיצויים, קרן השתלמות, ימי חופשה, מחלה והבראה, וכן ביטוח לאומי שהמעסיק נושא
-          בחלקו. בהכנסות גבוהות התמונה מתהפכת, משום שעצמאי מקזז הוצאות מוכרות שמקטינות את ההכנסה
-          החייבת, ושיעור המס המצרפי שלו נמוך יותר. חשוב להשוות נכון: הבסיס להשוואה אינו הברוטו
-          של השכיר מול המחזור של העצמאי, אלא <strong>עלות המעסיק</strong> מול המחזור — אחרת
-          העצמאי נראה טוב יותר ממה שהוא באמת. מעבר למספרים יש גם פער בסיכון: לשכיר יש הכנסה
-          יציבה ודמי אבטלה, לעצמאי יש גמישות ותקרה גבוהה יותר. המחשבון שמתחת משווה את הנטו בפועל.
+    <main dir="rtl" className="mx-auto max-w-5xl px-5 py-12 text-ink">
+      <nav aria-label="פירורי לחם" className="mb-8 text-sm text-ink/60">
+        <Link href="/">דף הבית</Link> / <Link href="/compare">השוואות</Link> / שכיר או עצמאי
+      </nav>
+      <h1 className="mb-5 text-3xl font-bold md:text-4xl">שכיר או עצמאי — איך משווים נכון?</h1>
+      <p className="mb-8 text-lg leading-relaxed">
+        אין רמת הכנסה אחידה שבה אחד המסלולים משתלם יותר לכולם. מחזור של עסק אינו מקביל לשכר
+        ברוטו: יש להביא בחשבון הוצאות, שעות עבודה, מסים, הפרשות, זכויות וסיכון. ההשוואה שלהלן
+        עוזרת לאסוף את הנתונים לפני החלטה אישית.
+      </p>
+
+      <div className="overflow-x-auto border border-ink/15">
+        <table className="w-full min-w-[650px] border-collapse text-right text-sm">
+          <thead className="bg-ink text-cream">
+            <tr><th className="p-4">נושא</th><th className="p-4">שכיר</th><th className="p-4">עצמאי</th></tr>
+          </thead>
+          <tbody>
+            {rows.map(([label, employee, selfEmployed]) => (
+              <tr key={label} className="border-t border-ink/15 even:bg-cream-2">
+                <th scope="row" className="p-4 font-semibold">{label}</th>
+                <td className="p-4">{employee}</td>
+                <td className="p-4">{selfEmployed}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <section className="mt-10 space-y-4 leading-relaxed">
+        <h2 className="text-2xl font-bold">נתונים שכדאי לבדוק לפני מעבר</h2>
+        <ul className="list-disc space-y-3 pr-6">
+          <li>השוו את עלות ההעסקה הכוללת להכנסה העסקית הצפויה לאחר הוצאות בפועל.</li>
+          <li>בדקו זכאות אישית לחופשה, מחלה, לידה ואבטלה לפי המעמד והנסיבות. אין זכאות אוטומטית זהה לכל עובד או עצמאי.</li>
+          <li>הביאו בחשבון הפקדות לפנסיה, הטבות מס לפי תנאי הזכאות, ודמי ביטוח לאומי ובריאות.</li>
+          <li>בחנו את זמן הגבייה מלקוחות, עלויות הנהלת חשבונות ותקופות ללא עבודה.</li>
+        </ul>
+        <p>
+          אם שוקלים הקמת חברה, אין מחזור מכירות שמבטיח יתרון מס. בדקו רווח, משיכות, מס חברות
+          ודיבידנד ועלויות ניהול עם איש מקצוע. אפשר להתחיל ב{' '}
+          <Link href="/self-employed/corporation-vs-individual" className="font-semibold text-gold underline underline-offset-4">השוואת חברה מול עוסק</Link>.
         </p>
-      }
-      content={
-        <>
-          <h2>השאלה הגדולה: שכיר או עצמאי?</h2>
-          <p>
-            זוהי אחת ההחלטות החשובות ביותר בקריירה. ההחלטה משפיעה על המס שתשלם, על היציבות
-            הכלכלית שלך, על הזמן הפנוי, ועל הפוטנציאל הכלכלי לטווח ארוך. הנה השוואה מלאה
-            לפי כל הקריטריונים החשובים.
-          </p>
+      </section>
 
-          <h2>השוואה מקיפה - שכיר מול עצמאי</h2>
+      <section className="mt-10 border-r-4 border-gold bg-cream-2 p-6">
+        <h2 className="mb-3 text-xl font-bold">בדיקה לפי המקורות הרשמיים</h2>
+        <p className="mb-4">לשיעורים ולזכאות המעודכנים בדקו את המידע הרשמי ואת פרטי המקרה שלכם.</p>
+        <ul className="list-disc space-y-2 pr-6">
+          <li><a href="https://www.btl.gov.il/Insurance/National%20Insurance/type_list/Self_Employed/Pages/rates.aspx" target="_blank" rel="noopener noreferrer" className="text-gold underline">שיעורי הביטוח הלאומי לעצמאים ↗</a></li>
+          <li><a href="https://www.gov.il/he/pages/independent-must-pension" target="_blank" rel="noopener noreferrer" className="text-gold underline">פנסיה חובה לעצמאים במשרד האוצר ↗</a></li>
+        </ul>
+      </section>
 
-          <div className="overflow-x-auto my-6">
-            <table className="w-full text-sm border-collapse">
-              <thead>
-                <tr className="bg-ink text-cream">
-                  <th className="border border-ink/20 p-3 text-right font-bold">קריטריון</th>
-                  <th className="border border-ink/20 p-3 text-right font-bold text-cream">
-                    👔 שכיר
-                  </th>
-                  <th className="border border-ink/20 p-3 text-right font-bold text-cream">
-                    💼 עצמאי
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">מס הכנסה</td>
-                  <td className="border border-ink/15 p-3">10%-50% (לפי מדרגות)</td>
-                  <td className="border border-ink/15 p-3">10%-50% (זהה)</td>
-                </tr>
-                <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-3 font-semibold">ביטוח לאומי</td>
-                  <td className="border border-ink/15 p-3">~5% (עובד)</td>
-                  <td className="border border-ink/15 p-3">מופחת 7.70% / מלא 18% (לבד)</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">פנסיה חובה</td>
-                  <td className="border border-ink/15 p-3">12.5% מהמעסיק</td>
-                  <td className="border border-ink/15 p-3">חובה להפקיד עצמית</td>
-                </tr>
-                <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-3 font-semibold">קרן השתלמות</td>
-                  <td className="border border-ink/15 p-3">7.5% מהמעסיק (פטור ממס)</td>
-                  <td className="border border-ink/15 p-3">עצמאית - תקרה 20,566 ₪</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">פיצויי פיטורין</td>
-                  <td className="border border-ink/15 p-3">חובה - חודש לכל שנה</td>
-                  <td className="border border-ink/15 p-3">אין</td>
-                </tr>
-                <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-3 font-semibold">דמי הבראה</td>
-                  <td className="border border-ink/15 p-3">5-10 ימים בשנה</td>
-                  <td className="border border-ink/15 p-3">אין</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">חופשה</td>
-                  <td className="border border-ink/15 p-3">14-28 ימים בתשלום (16 ברוטו / 14 נטו בשנים הראשונות, עד 28)</td>
-                  <td className="border border-ink/15 p-3">חופשה ללא תשלום</td>
-                </tr>
-                <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-3 font-semibold">דמי מחלה</td>
-                  <td className="border border-ink/15 p-3">18 ימים מהמעסיק</td>
-                  <td className="border border-ink/15 p-3">דמי מחלה מב.ל. (עם תקופת המתנה)</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">דמי לידה</td>
-                  <td className="border border-ink/15 p-3">15 שבועות בתשלום מלא</td>
-                  <td className="border border-ink/15 p-3">לפי הצהרת הכנסות (לרוב נמוך)</td>
-                </tr>
-                <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-3 font-semibold">דמי אבטלה</td>
-                  <td className="border border-ink/15 p-3">זכאי אחרי 360 ימי עבודה</td>
-                  <td className="border border-ink/15 p-3">אין</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">הוצאות מוכרות</td>
-                  <td className="border border-ink/15 p-3">לא רלוונטי</td>
-                  <td className="border border-ink/15 p-3">חלק גדול מהוצאות הופך מוכר</td>
-                </tr>
-                <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-3 font-semibold">יציבות הכנסה</td>
-                  <td className="border border-ink/15 p-3">גבוהה מאוד</td>
-                  <td className="border border-ink/15 p-3">תנודתית</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">פוטנציאל הכנסה</td>
-                  <td className="border border-ink/15 p-3">תקרה לרוב 30K-50K/חודש</td>
-                  <td className="border border-ink/15 p-3">בלתי מוגבל - לפי המאמץ</td>
-                </tr>
-                <tr className="bg-cream-2">
-                  <td className="border border-ink/15 p-3 font-semibold">בירוקרטיה</td>
-                  <td className="border border-ink/15 p-3">המעסיק עושה הכל</td>
-                  <td className="border border-ink/15 p-3">הרבה ניירת + רואה חשבון</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-3 font-semibold">חופש בעבודה</td>
-                  <td className="border border-ink/15 p-3">מוגבל - יש בוס</td>
-                  <td className="border border-ink/15 p-3">חופש מלא</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h2>נטו לכיס - מי משתלם יותר?</h2>
-          <p>
-            הכלל הפשוט: ב<strong>הכנסות נמוכות (עד 12K/חודש)</strong> - שכיר משתלם יותר, כי
-            הטבות הסוציאליות שווה הרבה יחסית. ב<strong>הכנסות גבוהות (מעל 25K)</strong> -
-            עצמאי או חברה בע"מ משתלמים יותר, כי שיעור המס המצרפי נמוך יותר וניתן להזרים יותר
-            הוצאות.
-          </p>
-
-          <h2>שיקולים שאינם פיננסיים</h2>
-          <h3>בעד שכיר</h3>
-          <ul>
-            <li>יציבות הכנסה - משכורת חודשית קבועה</li>
-            <li>ביטחון - לא תלוי בלקוחות</li>
-            <li>קצב חיים - שעות עבודה מוגדרות</li>
-            <li>אין בעלות על הסיכונים העסקיים</li>
-            <li>קצבאות חברתיות גבוהות (לידה, אבטלה)</li>
-          </ul>
-
-          <h3>בעד עצמאי</h3>
-          <ul>
-            <li>חופש - בחירת לקוחות, פרויקטים, שעות</li>
-            <li>פוטנציאל הכנסה גבוה</li>
-            <li>הטבות מס - הוצאות מוכרות</li>
-            <li>קריירה אישית - בניית מותג</li>
-            <li>אפשרות לסיב את העסק (בנייה לטווח ארוך)</li>
-          </ul>
-
-          <h2>מחשבונים רלוונטיים לעצמאים</h2>
-          <ul>
-            <li>
-              <Link href="/self-employed/net" className="text-gold underline">
-                מחשבון נטו לעצמאי
-              </Link>{' '}
-              - חשב את ההכנסה נטו לאחר מס הכנסה וב.ל.
-            </li>
-            <li>
-              <Link href="/self-employed/mandatory-pension" className="text-gold underline">
-                מחשבון פנסיה חובה לעצמאי
-              </Link>{' '}
-              - חשב את ההפקדות המינימליות הנדרשות בחוק.
-            </li>
-          </ul>
-
-          <h2>מתי לעבור מעצמאי לחברה בע"מ?</h2>
-          <p>
-            בהכנסות שנתיות מעל 350K-450K ₪, חברה בע"מ הופכת ליעילה יותר ממס. ראה את{' '}
-            <Link href="/self-employed/corporation-vs-individual" className="text-gold underline">
-              המחשבון המפורט
-            </Link>{' '}
-            להחלטה.
-          </p>
-
-          <h2>איך עוברים מעצמאי לשכיר (וההפך)?</h2>
-          <p>
-            <strong>משכיר לעצמאי</strong>: התפטרות, הקמת תיק במס הכנסה, מע"מ, ב.ל., פתיחת
-            חשבון בנק עסקי. זמן: 2-4 שבועות.
-          </p>
-          <p>
-            <strong>מעצמאי לשכיר</strong>: סגירת תיקים (במהלך 6 חודשים), המשך הפקדות פנסיה
-            וקרן השתלמות בלבד. זמן: 1-3 חודשים.
-          </p>
-        </>
-      }
-    />
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-    />
-    </>
+      <div className="mt-10 flex flex-wrap gap-5">
+        <Link href="/self-employed/net" className="font-semibold text-gold underline underline-offset-4">מחשבון נטו לעצמאי</Link>
+        <Link href="/self-employed/mandatory-pension" className="font-semibold text-gold underline underline-offset-4">מדריך פנסיה חובה</Link>
+        <Link href="/course/self-employed" className="font-semibold text-gold underline underline-offset-4">הקורס לעצמאים</Link>
+      </div>
+    </main>
   );
 }

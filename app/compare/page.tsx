@@ -25,11 +25,11 @@ const COMPARISONS = [
     color: 'bg-ink-deep',
   },
   {
-    href: '/compare/company-vs-osek-murshe',
+    href: '/self-employed/corporation-vs-individual',
     title: 'חברה בע"מ vs עוסק מורשה',
     icon: '🏢',
     description:
-      'להתאגד כחברה או להישאר עוסק מורשה? השוואת מיסוי, ביטוח לאומי, אחריות משפטית, עלויות ומשיכת כסף.',
+      'להתאגד כחברה או להישאר עוסק מורשה? שאלות מס, אחריות ועלויות שצריך לבדוק לפי הנתונים האישיים.',
     color: 'bg-ink-deep',
   },
   {

@@ -387,7 +387,7 @@ export default function BusinessFinancePage() {
               <strong>צמתים שמחייבים ייעוץ נקודתי</strong> גם אם אתם מתנהלים לבד: מעבר מעוסק פטור
               למורשה, העסקת עובד ראשון, רכישת ציוד או רכב משמעותי, ושקילת התאגדות כחברה בע"מ (
               <Link href="/self-employed/corporation-vs-individual">
-                השוו במחשבון חברה בע"מ מול עוסק
+                קראו על שיקולי חברה בע"מ מול עוסק
               </Link>
               ).
             </li>

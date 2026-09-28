@@ -185,7 +185,7 @@ export default function PayslipGuidePage() {
               { href: '/personal-tax/tax-credits', label: 'מחשבון נקודות זיכוי' },
               { href: '/personal-tax/tax-refund', label: 'מחשבון החזר מס' },
               { href: '/employee-rights/severance', label: 'מחשבון פיצויי פיטורין' },
-              { href: '/insurance/pension', label: 'מחשבון פנסיה' },
+              { href: '/insurance/pension', label: 'מדריך בדיקת פנסיה' },
               { href: '/glossary/net', label: 'נטו — הגדרה' },
             ].map((c) => (
               <Link

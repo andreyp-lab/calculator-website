@@ -56,7 +56,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/investments/retirement', label: 'תכנון פרישה', group: 'investments' },
   { path: '/investments/fire', label: 'FIRE – עצמאות כלכלית', group: 'investments' },
   { path: '/investments/roi', label: 'תשואה על השקעה (ROI)', group: 'investments' },
-  { path: '/insurance/pension', label: 'מחשבון פנסיה', group: 'investments' },
+  { path: '/insurance/pension', label: 'מדריך בדיקת פנסיה', group: 'investments' },
   // הלוואות וחיסכון
   { path: '/savings/family-budget', label: 'תקציב משפחתי', group: 'loans' },
   { path: '/savings/loan-repayment', label: 'החזרי הלוואה', group: 'loans' },
