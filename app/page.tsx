@@ -66,18 +66,9 @@ const CATEGORIES = [
 ] as const;
 
 // ============================================================
-// 3 כרטיסי קורס — כולם מקשרים פנימה ל-/course
+// כרטיסי הקורסים מובילים לדף המכירה של הקורס שנבחר.
 // ============================================================
 const COURSE_CARDS = [
-  {
-    id: 'ai',
-    badge: 'הכי פופולרי',
-    name: 'Claude AI לאנשי כספים',
-    audience: 'בעלי עסקים, מנהלי כספים, רואי חשבון',
-    description:
-      'לרתום את Claude לעבודה הפיננסית היומית — דוחות, מצגות, אוטומציה ודאשבורדים. מהבסיס ועד צוותי סוכנים.',
-    featured: true,
-  },
   {
     id: 'cpa',
     badge: 'לעצמאים ופרילנסרים',
@@ -85,7 +76,8 @@ const COURSE_CARDS = [
     audience: 'עצמאים / פרילנסרים',
     description:
       'מע״מ, מס הכנסה וביטוח לאומי — בשפה שכולם מבינים. תפסיק לשלם ביתר ותנהל את הכסף של העסק בביטחון מלא.',
-    featured: false,
+    href: '/course/self-employed',
+    featured: true,
   },
   {
     id: 'cfo',
@@ -94,6 +86,17 @@ const COURSE_CARDS = [
     audience: 'בעלי עסקים מבוססים, חברות',
     description:
       'תזרים מזומנים, תקציב שנתי, הון חוזר, בנקים ואשראי — לנהל את העסק כמו מנהל כספים, בלי לשכור אחד.',
+    href: '/course/business',
+    featured: false,
+  },
+  {
+    id: 'ai',
+    badge: 'לאנשי כספים',
+    name: 'Claude AI לאנשי כספים',
+    audience: 'בעלי עסקים, מנהלי כספים, רואי חשבון',
+    description:
+      'לרתום את Claude לעבודה הפיננסית היומית — דוחות, מצגות, אוטומציה ודאשבורדים. מהבסיס ועד צוותי סוכנים.',
+    href: '/course',
     featured: false,
   },
 ] as const;
@@ -259,12 +262,12 @@ export default function Home() {
             </p>
           </div>
 
-          {/* 3 כרטיסי קורס */}
+          {/* כרטיסים עם קישור ישיר לדפי המכירה הקיימים */}
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {COURSE_CARDS.map((course) => (
               <Link
                 key={course.id}
-                href="/course"
+                href={course.href}
                 className={`group relative flex flex-col bg-paper p-7 transition hover:bg-paper-hover ${
                   course.featured ? 'border-2 border-gold' : 'border border-ink/15'
                 }`}
