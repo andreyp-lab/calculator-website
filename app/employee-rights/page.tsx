@@ -58,8 +58,8 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון דמי מחלה',
-    description: 'חישוב דמי מחלה, ימים צבורים ומחלת בן משפחה',
+    title: 'בדיקת דמי מחלה',
+    description: 'שיעורי תשלום, יתרה בתלוש ותנאי היעדרות בשל מחלת בן משפחה',
     href: '/employee-rights/sick-pay',
     available: true,
   },
@@ -140,7 +140,7 @@ const comparisonRows = [
     calc: 'דמי מחלה',
     href: '/employee-rights/sick-pay',
     when: 'היעדרות עקב מחלה שלכם או של בן משפחה',
-    input: 'ימי מחלה צבורים + שכר',
+    input: 'יתרה בתלוש + מועדי היעדרות + הסכם',
   },
   {
     calc: 'תגמולי מילואים',
