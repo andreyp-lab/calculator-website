@@ -767,6 +767,7 @@ button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
   width:100%;height:100%;object-fit:cover;object-position:center 20%;
   filter:contrast(1.02) saturate(.95);
 }
+.portrait img[hidden],.instr-photo img[hidden]{display:none}
 .portrait::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 50%,rgba(10,24,18,.6));
@@ -995,6 +996,11 @@ button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
 }
 .instr-photo{
   background:var(--g900);aspect-ratio:1/1.1;position:relative;overflow:hidden;
+}
+.instr-photo::before{
+  content:'AP';position:absolute;inset:0;display:grid;place-items:center;
+  font-family:var(--serif);font-size:clamp(5rem,16vw,9rem);font-weight:900;
+  color:var(--gold-lt);opacity:.55;
 }
 .instr-photo img{
   width:100%;height:100%;object-fit:cover;object-position:center 30%;
@@ -1827,7 +1833,7 @@ footer{background:var(--g950);color:rgba(255,255,255,.45);padding:48px 0 32px;fo
   <div class="wrap">
     <div class="instr-grid reveal">
       <div class="instr-photo">
-        <img src="https://profitmargin.co.il/wp-content/uploads/2026/06/%D7%A4%D7%A8%D7%95%D7%A4%D7%99%D7%9C-%D7%97%D7%93%D7%A9-scaled.jpg" alt="אנדרי פלטונוב">
+        <img src="https://profitmargin.co.il/wp-content/uploads/2026/06/%D7%A4%D7%A8%D7%95%D7%A4%D7%99%D7%9C-%D7%97%D7%93%D7%A9-scaled.jpg" alt="אנדרי פלטונוב" onerror="this.hidden=true">
         <div class="sig">- אנדרי</div>
       </div>
       <div class="instr-content">
