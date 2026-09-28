@@ -31,7 +31,7 @@ export function ROICalculator() {
         <div className="space-y-5">
           <div>
             <label htmlFor="roicalculator-89d9e5" className="block text-sm font-medium text-ink/70 mb-2">
-              סכום השקעה ראשוני (ש"ח)
+              סכום השקעה ראשוני (₪)
             </label>
             <input id="roicalculator-89d9e5"
               type="number"
@@ -45,7 +45,7 @@ export function ROICalculator() {
 
           <div>
             <label htmlFor="roicalculator-44081c" className="block text-sm font-medium text-ink/70 mb-2">
-              שווי סופי / סכום שנמכר (ש"ח)
+              שווי סופי / סכום שנמכר (₪)
             </label>
             <input id="roicalculator-44081c"
               type="number"
@@ -76,7 +76,7 @@ export function ROICalculator() {
           <div className="grid grid-cols-2 gap-3 pt-3 border-t border-ink/15">
             <div>
               <label htmlFor="roicalculator-3609be" className="block text-sm font-medium text-ink/70 mb-2">
-                עלויות נוספות (ש"ח)
+                עלויות נוספות (₪)
               </label>
               <input id="roicalculator-3609be"
                 type="number"
@@ -86,11 +86,11 @@ export function ROICalculator() {
                 onChange={(e) => update('additionalCosts', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-ink/70 mt-1">עמלות, מס, תחזוקה...</p>
+              <p className="text-xs text-ink/70 mt-1">הזינו עלויות ששולמו בפועל, לרבות מס אם ידוע</p>
             </div>
             <div>
               <label htmlFor="roicalculator-9f5c63" className="block text-sm font-medium text-ink/70 mb-2">
-                הכנסות נוספות (ש"ח)
+                הכנסות נוספות (₪)
               </label>
               <input id="roicalculator-9f5c63"
                 type="number"
@@ -100,7 +100,7 @@ export function ROICalculator() {
                 onChange={(e) => update('additionalIncome', Number(e.target.value))}
                 className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
               />
-              <p className="text-xs text-ink/70 mt-1">דיבידנדים, שכ"ד...</p>
+              <p className="text-xs text-ink/70 mt-1">דיבידנדים, שכר דירה ועוד</p>
             </div>
           </div>
         </div>
@@ -110,19 +110,19 @@ export function ROICalculator() {
         <ResultCard
           title="ROI כולל"
           value={formatPercent(result.roi / 100, 1)}
-          subtitle={result.isPositive ? '✓ השקעה רווחית' : '✗ השקעה הפסידה'}
+          subtitle={result.isPositive ? 'רווח לפי הנתונים שהוזנו' : 'הפסד לפי הנתונים שהוזנו'}
           variant={result.isPositive ? 'success' : 'warning'}
         />
 
         <ResultCard
-          title="תשואה שנתית מנורמלת"
+          title="קצב שנתי שקול לתקופה"
           value={formatPercent(result.annualizedROI / 100, 2)}
           subtitle={`לפי ${input.years} שנים`}
           variant="primary"
         />
 
         <ResultCard
-          title="רווח/הפסד נטו"
+          title="רווח/הפסד לפי הנתונים"
           value={formatCurrency(result.netProfit)}
           subtitle={`מתוך ${formatCurrency(input.initialInvestment)} השקעה`}
           variant={result.isPositive ? 'success' : 'warning'}
@@ -142,16 +142,16 @@ export function ROICalculator() {
             { label: 'שווי סופי', value: formatCurrency(input.finalValue) },
             { label: 'הכנסות נוספות', value: formatCurrency(input.additionalIncome) },
             { label: 'סך תמורה', value: formatCurrency(result.totalReturn), bold: true },
-            { label: 'רווח נטו', value: formatCurrency(result.netProfit), bold: true },
+            { label: 'רווח לאחר העלויות שהוזנו', value: formatCurrency(result.netProfit), bold: true },
           ]}
         />
 
         <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-xs">
-          <p className="font-medium text-ink mb-1">💡 איך לפרש את התוצאה:</p>
+          <p className="font-medium text-ink mb-1">איך לפרש את התוצאה:</p>
           <ul className="text-ink/70 space-y-0.5">
-            <li>• ROI שנתי 7-10% = השקעה סבירה (כמו S&P 500)</li>
-            <li>• ROI שנתי מעל 15% = השקעה מצוינת אבל בדוק סיכון</li>
-            <li>• ROI שלילי = השקעה כושלת - בחן מה השתבש</li>
+            <li>השיעור השנתי שקול לשינוי בין הסכום הכולל שהושקע לתמורה הסופית.</li>
+            <li>אם היו תזרימי כסף במועדים שונים, השיעור אינו IRR ואינו מתאים להשוואה מדויקת.</li>
+            <li>בדקו סיכון, אינפלציה, עלויות ומס שלא הוזנו לפני קבלת החלטה.</li>
           </ul>
         </div>
       </div>

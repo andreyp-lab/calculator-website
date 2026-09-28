@@ -441,12 +441,12 @@ export const blogPosts: BlogPost[] = [
   // ===== אשכול E - השקעות =====
   {
     slug: 'compound-interest-and-time-magic',
-    title: 'ריבית דריבית: למה זמן חשוב יותר מסכום ההפקדה',
+    title: 'ריבית דריבית — איך זמן והפקדות משנים תרחיש',
     description:
-      'ריבית דריבית היא הכוח הפיננסי החזק ביותר. במאמר: דוגמאות מספריות שיהממו אותך, מה זה Rule of 72, ולמה להתחיל בגיל 25 שווה פי 2 מגיל 35.',
+      'הנוסחה של ריבית דריבית, ההבדל בין סכום נומינלי לריאלי והדרך לקרוא תרחיש חיסכון.',
     category: 'השקעות',
-    readTime: '12 דקות',
-    date: '2026-05-16',
+    readTime: '3 דקות',
+    date: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/investments/compound-interest',
@@ -471,12 +471,12 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'portfolio-allocation-by-age',
-    title: 'תיק השקעות לפי גיל - כלל "120 פחות גיל" והאמת מאחוריו',
+    title: 'הרכב תיק השקעות לפי גיל — מה עוד צריך לבדוק',
     description:
-      'איך לבנות תיק השקעות לפי הגיל שלך: 120 פחות גיל ל-מניות, ההמרה הריאלית בישראל, ו-5 תיקי השקעות לדוגמא ב-2026 לכל קבוצת גיל.',
+      'גיל הוא רק חלק מהתמונה: מטרות, אופק השקעה, נזילות, פיזור, עלויות ויכולת לשאת הפסדים.',
     category: 'השקעות',
-    readTime: '13 דקות',
-    date: '2026-05-16',
+    readTime: '3 דקות',
+    date: '2026-09-28',
     featured: false,
     relatedCalculator: {
       href: '/investments/compound-interest',

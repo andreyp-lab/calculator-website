@@ -3,9 +3,6 @@ import { Metadata } from 'next';
 import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
-import { INVESTMENT_CONSTANTS_2026 } from '@/lib/calculators/investments';
-import { SURTAX_2026, STUDY_FUND_2026 } from '@/lib/constants/tax-2026';
-import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/investments' },
@@ -17,14 +14,14 @@ export const metadata: Metadata = {
 const calculators = [
   {
     title: 'מחשבון ריבית דריבית',
-    description: 'גלה כמה הכסף שלך יגדל עם הזמן עם ריבית דריבית והפקדות חודשיות',
+    description: 'השווה תרחישי צמיחה לפי הפקדות והנחות תשואה ואינפלציה',
     href: '/investments/compound-interest',
     available: true,
     icon: '📈',
   },
   {
     title: 'מחשבון ROI',
-    description: 'חשב תשואה על השקעה וקבל ROI שנתי מנורמל',
+    description: 'חשב רווח ביחס לעלות ושיעור שנתי שקול לתקופה',
     href: '/investments/roi',
     available: true,
     icon: '💹',
@@ -45,7 +42,7 @@ const calculators = [
   },
   {
     title: '📘 מדריך מס רווח הון',
-    description: 'כמה מס על רווחים בבורסה? 25% על מניות, מס דיבידנד, קיזוז הפסדים ואפיקים פטורים',
+    description: 'בדיקת סוג הכנסה, ניכויים וזכאות אישית',
     href: '/investments/capital-gains-tax',
     available: true,
     icon: '🧾',
@@ -55,15 +52,12 @@ const calculators = [
 const faqItems = [
   {
     question: 'כמה מס משלמים על רווחים בבורסה?',
-    // 25% = INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE (lib/calculators/investments.ts);
-    // מס דיבידנד 25% = dividendTaxRate (lib/calculators/capital-gains-tax.ts);
-    // סף מס יסף = SURTAX_2026.annualThreshold (lib/constants/tax-2026.ts)
     answer: 'מיסוי השקעות תלוי בסוג הנכס, באופן ההחזקה ובנתונים האישיים. רווח הון ממכירת ניירות ערך עשוי להיות ממוסה בשיעור שונה מריבית או מדיבידנד; גם בעל מניות מהותי וכללי מס יסף דורשים בדיקה נפרדת. בדקו את נתוני הפעולה ואת דוח הניכויים לפני קבלת החלטה.',
   },
   {
     question: 'מה זה ריבית דריבית ולמה היא כל כך משמעותית?',
     answer:
-      'ריבית דריבית היא ריבית שמחושבת גם על הריבית שנצברה בעבר, לא רק על הקרן. בשנים הראשונות ההשפעה צנועה, אבל ככל שעוברות שנים הרווחים עצמם מייצרים רווחים והצמיחה מואצת. בהשקעות ארוכות מגיעה "נקודת ההצטלבות" שבה הריבית השנתית שנצברת עולה על סך ההפקדות השנתיות — מחשבון ריבית דריבית שלנו מציג את השנה שבה זה קורה בתיק שלכם.',
+      'ריבית דריבית היא צמיחה שבה תשואה שנצברה משפיעה גם על התקופות הבאות. המחשבון מציג תרחיש לפי שיעורים שהוזנו; הוא אינו מנבא תשואה עתידית.',
   },
   {
     question: 'מהו כלל ה-4% לפרישה מוקדמת (FIRE)?',
@@ -72,7 +66,7 @@ const faqItems = [
   },
   {
     question: 'איך אינפלציה משפיעה על החיסכון שלי?',
-    answer: `אינפלציה שוחקת את כוח הקנייה של הכסף: תשואה נומינלית של 7% בשנה עם אינפלציה של ${MACRO_DATA.inflation.annualRate}% (הקצב השנתי הנוכחי בישראל) משאירה תשואה ריאלית נמוכה בהרבה. לכן כסף שיושב בעו"ש מפסיד ערך כל שנה, והשוואה נכונה בין אפיקים חייבת להיעשות במונחים ריאליים. המחשבונים בעמוד זה מציגים לצד הערך הנומינלי גם את הערך הריאלי המותאם לאינפלציה.`,
+    answer: 'שינוי המחירים משפיע על כוח הקנייה של סכום עתידי. במחשבון ריבית דריבית אפשר להזין הנחת אינפלציה כדי לראות ערך ריאלי משוער; לשינוי מדד שכבר התרחש משתמשים בנתוני הלמ״ס לפי תאריכים.',
   },
 ];
 
@@ -145,11 +139,11 @@ export default function InvestmentsPage() {
             <p>
               נקודת ההתחלה של רוב החוסכים היא{' '}
               <Link href="/investments/compound-interest" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון ריבית דריבית</Link>
-              : מזינים סכום התחלתי, הפקדה חודשית ותשואה משוערת, ומקבלים את התמונה המלאה —
-              כולל ערך ריאלי אחרי אינפלציה וערך נטו אחרי מס רווח הון. מי שכבר ביצע השקעה
+              : מזינים סכום התחלתי, הפקדה חודשית והנחות תשואה ואינפלציה, ומשווים
+              תוצאות מתמטיות אפשריות. מי שכבר ביצע השקעה
               ורוצה למדוד אותה בדיעבד ישתמש ב
               <Link href="/investments/roi" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון ה-ROI</Link>
-              , שמנרמל את התשואה לבסיס שנתי ומאפשר להשוות בין השקעות בתקופות שונות.
+              , שמציג רווח ביחס לעלות ושיעור שנתי שקול. תזרימים במועדים שונים דורשים חישוב נפרד.
             </p>
             <p>
               לתכנון ארוך טווח:{' '}
@@ -182,27 +176,23 @@ export default function InvestmentsPage() {
                 <tr className="border-t border-ink/10 bg-paper">
                   <td className="px-4 py-3 font-semibold text-ink">תיק השקעות ממוסה (בורסה)</td>
                   <td className="px-4 py-3 text-ink/75">
-                    {/* 25% = INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE */}
-                    {INVESTMENT_CONSTANTS_2026.CAPITAL_GAINS_TAX_RATE * 100}% על הרווח הריאלי
-                    במימוש; מעל הכנסה שנתית של{' '}
-                    {SURTAX_2026.annualThreshold.toLocaleString('he-IL')} ₪ מתווסף מס יסף
+                    תלוי בסוג נייר הערך, בסוג ההכנסה ובמעמד המשקיע; בדקו ניכוי במקור ומס יסף אם רלוונטי
                   </td>
                   <td className="px-4 py-3 text-ink/75">מלאה — מכירה בכל עת</td>
                 </tr>
                 <tr className="border-t border-ink/10 bg-cream-2">
                   <td className="px-4 py-3 font-semibold text-ink">קרן השתלמות</td>
                   <td className="px-4 py-3 text-ink/75">
-                    רווחים פטורים ממס במשיכה כדין; לעצמאי — הפקדה מוטבת עד{' '}
-                    {STUDY_FUND_2026.maxAnnualDeposit.toLocaleString('he-IL')} ₪ בשנה
+                    הטבות מס בתנאים ובתקרות משתנות; בדקו את המוצר ואת ההפקדות שלכם
                   </td>
-                  <td className="px-4 py-3 text-ink/75">נזילה לאחר 6 שנות ותק</td>
+                  <td className="px-4 py-3 text-ink/75">מועד משיכה כדין תלוי בנסיבות ובוותק</td>
                 </tr>
                 <tr className="border-t border-ink/10 bg-paper">
                   <td className="px-4 py-3 font-semibold text-ink">חיסכון פנסיוני</td>
                   <td className="px-4 py-3 text-ink/75">
-                    הטבות מס בהפקדה; הקצבה ממוסה חלקית בפרישה
+                    הפקדות וקצבה כפופות לכללי מס ולזכאות אישית
                   </td>
-                  <td className="px-4 py-3 text-ink/75">רק בגיל פרישה (משיכה מוקדמת כרוכה בקנס מס)</td>
+                  <td className="px-4 py-3 text-ink/75">תנאי משיכה ומיסוי לפי המוצר והנסיבות</td>
                 </tr>
               </tbody>
             </table>

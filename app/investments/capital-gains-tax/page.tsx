@@ -1,223 +1,57 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
-import { AuthorBox } from '@/components/calculator/AuthorBox';
-
-const PAGE_PATH = '/investments/capital-gains-tax';
-const SITE_URL = 'https://cheshbonai.co.il';
 
 export const metadata: Metadata = {
-  title: 'מס רווח הון על השקעות 2026 — מניות, קרנות ודיבידנד',
-  description:
-    'כמה מס משלמים על רווחים בבורסה ב-2026? 25% על רווח הון ריאלי, 25%/30% על דיבידנד, מס יסף, קיזוז הפסדים ופטורים. המדריך המלא למשקיע הישראלי מרו"ח.',
-  alternates: { canonical: PAGE_PATH },
-  openGraph: {
-    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
-    images: ['/opengraph-image'],
-    title: 'מס רווח הון על השקעות 2026 — מניות, קרנות ודיבידנד',
-    description:
-      '25% על רווח הון ריאלי, מס דיבידנד, מס יסף, קיזוז הפסדים ופטורים — כל מה שמשקיע ישראלי צריך לדעת ב-2026.',
-    type: 'article',
-    locale: 'he_IL',
-  },
+  title: 'מס רווח הון על השקעות — בדיקת סוג הכנסה ודיווח',
+  description: 'מה לבדוק לפני חישוב מס על ניירות ערך, ריבית ודיבידנד: סוג הכנסה, ניכוי במקור, הפסדים וזכאות אישית.',
+  alternates: { canonical: '/investments/capital-gains-tax' },
 };
 
-const faqItems = [
-  {
-    question: 'כמה מס משלמים על רווח ממניות?',
-    answer:
-      'על רווח הון ממכירת ניירות ערך סחירים משלמים 25% על הרווח הריאלי (הרווח לאחר ניכוי עליית המדד). השיעור חל על מניות, קרנות נאמנות, ETF ואג"ח. בחשבון ישראלי המס מנוכה אוטומטית במקור בעת המכירה.',
-  },
-  {
-    question: 'מהו מס דיבידנד ב-2026?',
-    answer:
-      'מס על דיבידנד הוא 25% למשקיע רגיל, ו-30% ל"בעל מניות מהותי" (מי שמחזיק 10% או יותר מהחברה). גם על ריבית מאיגרות חוב חל בדרך כלל 25%.',
-  },
-  {
-    question: 'מה זה מס יסף על השקעות?',
-    answer:
-      'מס יסף הוא תוספת מס על הכנסה גבוהה. החל מ-2025 הוא חל גם על הכנסה פסיבית (רווחי הון, דיבידנד, ריבית, שכר דירה). מי שסך הכנסתו השנתית עולה על 721,560 ₪ (2026) משלם תוספת — על הכנסה פסיבית השיעור הכולל מגיע ל-5% (3% + 2%).',
-  },
-  {
-    question: 'אפשר לקזז הפסדים בבורסה?',
-    answer:
-      'כן. הפסד הון ניתן לקזז כנגד רווח הון, וכך להקטין את המס. ניתן לקזז הפסדים מאותה שנה, ובמקרים מסוימים להעביר הפסדים לשנים הבאות. זהו כלי חשוב לתכנון מס — לעיתים כדאי לממש הפסד "על הנייר" כדי לקזז רווח.',
-  },
-  {
-    question: 'אילו אפיקי השקעה פטורים ממס?',
-    answer:
-      'קרן השתלמות (לאחר 6 שנים) פטורה ממס רווחי הון, וכך גם חיסכון פנסיוני בתנאים מסוימים. קופת גמל להשקעה מאפשרת דחיית מס והטבות בפרישה. אלו מהכלים היעילים ביותר מבחינת מס למשקיע הישראלי.',
-  },
-];
-
 export default function CapitalGainsTaxPage() {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: 'מס רווח הון על השקעות 2026 — מניות, קרנות ודיבידנד',
-    description: 'מדריך מלא למיסוי רווחי הון ודיבידנד על השקעות בישראל 2026.',
-    inLanguage: 'he-IL',
-    datePublished: '2026-06-01',
-    dateModified: '2026-06-01',
-    author: { '@type': 'Person', name: 'אנדרי פלטונוב', jobTitle: 'רואה חשבון' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'חשבונאי',
-      url: SITE_URL,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.png` },
-    },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${PAGE_PATH}` },
-  };
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqItems.map((f) => ({
-      '@type': 'Question',
-      name: f.question,
-      acceptedAnswer: { '@type': 'Answer', text: f.answer },
-    })),
-  };
-
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'דף הבית', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'השקעות', item: `${SITE_URL}/investments` },
-      { '@type': 'ListItem', position: 3, name: 'מס רווח הון', item: `${SITE_URL}${PAGE_PATH}` },
-    ],
-  };
-
   return (
-    <div className="min-h-screen bg-paper" dir="rtl">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-
-      <article className="max-w-3xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <Breadcrumbs
-            items={[
-              { label: 'דף הבית', href: '/' },
-              { label: 'השקעות', href: '/investments' },
-              { label: 'מס רווח הון' },
-            ]}
-          />
-        </div>
-
-        <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
-            מס רווח הון על השקעות 2026
-          </h1>
-          <p className="text-lg text-ink/70 leading-relaxed">
-            הרווחת בבורסה? לפני שתשמח — חלק מהרווח הולך למדינה. הנה כל מה שצריך לדעת על מיסוי
-            מניות, קרנות, דיבידנד וריבית בישראל 2026, כולל קיזוז הפסדים ואפיקים פטורים ממס.
-          </p>
-          <p className="text-sm text-ink/70 mt-3">נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026</p>
-        </header>
-
-        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
-          <h2>שיעורי המס על השקעות — 2026</h2>
-        </div>
-
-        <div className="overflow-x-auto my-6 not-prose">
-          <table className="w-full text-sm border border-ink/15 overflow-hidden">
-            <thead className="bg-cream-2">
-              <tr className="text-right">
-                <th className="p-3 font-bold text-ink border-b border-ink/15">סוג הכנסה</th>
-                <th className="p-3 font-bold text-ink border-b border-ink/15">שיעור מס</th>
-                <th className="p-3 font-bold text-ink border-b border-ink/15">הערות</th>
-              </tr>
-            </thead>
-            <tbody className="text-ink/70">
-              <tr><td className="p-3 border-b border-ink/10 font-medium">רווח הון (מניות, קרנות, ETF, אג"ח)</td><td className="p-3 border-b border-ink/10">25%</td><td className="p-3 border-b border-ink/10">על הרווח הריאלי (בניכוי מדד)</td></tr>
-              <tr className="bg-cream-2/50"><td className="p-3 border-b border-ink/10 font-medium">דיבידנד — משקיע רגיל</td><td className="p-3 border-b border-ink/10">25%</td><td className="p-3 border-b border-ink/10">מחזיק מתחת ל-10%</td></tr>
-              <tr><td className="p-3 border-b border-ink/10 font-medium">דיבידנד — בעל מניות מהותי</td><td className="p-3 border-b border-ink/10">30%</td><td className="p-3 border-b border-ink/10">מחזיק 10% ומעלה</td></tr>
-              <tr className="bg-cream-2/50"><td className="p-3 border-b border-ink/10 font-medium">ריבית (אג"ח, פיקדונות)</td><td className="p-3 border-b border-ink/10">25%</td><td className="p-3 border-b border-ink/10">לרוב</td></tr>
-              <tr><td className="p-3 font-medium">מס יסף (הכנסה פסיבית גבוהה)</td><td className="p-3">+2% (סה"כ 5%)</td><td className="p-3">מעל 721,560 ₪/שנה</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className="prose prose-lg max-w-none text-ink leading-relaxed">
-          <h2>"רווח ריאלי" — למה זה חשוב?</h2>
-          <p>
-            המס חל על <strong>הרווח הריאלי</strong> — כלומר הרווח לאחר ניכוי עליית מדד המחירים
-            לצרכן לאורך תקופת ההחזקה. בתקופות אינפלציה גבוהה זה מקטין את המס בפועל, מכיוון שחלק
-            מ"הרווח" הוא רק שמירה על ערך הכסף ולא רווח אמיתי.
-          </p>
-
-          <h2>קיזוז הפסדים — הכלי שמשקיעים מפספסים</h2>
-          <p>
-            הפסד הון ניתן לקזז כנגד רווח הון ולהקטין את המס. אם מכרת נייר ברווח ויש לך נייר אחר
-            בהפסד — מימוש ההפסד יכול לקזז את הרווח החייב. בסוף השנה כדאי לבדוק אם יש "הפסדים על
-            הנייר" שכדאי לממש לצורכי קיזוז (Tax Loss Harvesting).
-          </p>
-
-          <h2>איך משלמים את המס?</h2>
-          <p>
-            בחשבון השקעות <strong>ישראלי</strong>, הברוקר/הבנק מנכה את המס במקור אוטומטית בעת
-            המכירה — אינך צריך לעשות דבר. בחשבון אצל ברוקר <strong>זר</strong> (כמו Interactive
-            Brokers), המס אינו מנוכה אוטומטית ועליך לדווח ולשלם בעצמך, לרוב במקדמות חצי-שנתיות.
-          </p>
-
-          <h2>אפיקים פטורים / דחויי מס</h2>
-          <ul>
-            <li><strong>קרן השתלמות</strong> — פטורה ממס רווחי הון לאחר 6 שנים.</li>
-            <li><strong>חיסכון פנסיוני</strong> — דחיית מס והטבות בפרישה.</li>
-            <li><strong>קופת גמל להשקעה</strong> — גמישות + הטבות מס בפרישה כקצבה.</li>
-          </ul>
-
-          <p className="text-sm text-ink/70">
-            * אין לראות במדריך זה ייעוץ מס או השקעות. מומלץ להיוועץ ברואה חשבון.
-          </p>
-        </div>
-
-        {/* Related */}
-        <section className="my-10">
-          <h2 className="text-2xl font-bold text-ink mb-4">כלים ומדריכים רלוונטיים</h2>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {[
-              { href: '/investments/compound-interest', label: 'מחשבון ריבית דריבית' },
-              { href: '/investments/roi', label: 'מחשבון תשואה (ROI)' },
-              { href: '/investments/fire', label: 'מדריך FIRE' },
-              { href: '/blog/fire-strategy-israel', label: 'אסטרטגיית FIRE בישראל' },
-              { href: '/blog/inflation-and-investments', label: 'אינפלציה והשקעות' },
-              { href: '/glossary/surtax', label: 'מס יסף — הגדרה' },
-            ].map((c) => (
-              <Link
-                key={c.href}
-                href={c.href}
-                className="group flex items-center justify-between gap-2 border border-ink/15 p-4 hover:border-gold hover:shadow-sm transition"
-              >
-                <span className="font-medium text-ink group-hover:text-gold transition">{c.label}</span>
-                <span className="text-gold group-hover:-translate-x-1 transition" aria-hidden>←</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות</h2>
-          <div className="space-y-4">
-            {faqItems.map((f) => (
-              <details key={f.question} className="border border-ink/15 p-4 group">
-                <summary className="font-bold text-ink cursor-pointer list-none flex items-center justify-between">
-                  {f.question}
-                  <span className="text-ink/70 group-open:rotate-180 transition" aria-hidden>▾</span>
-                </summary>
-                <p className="text-ink/70 mt-3 leading-relaxed">{f.answer}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <AuthorBox />
-        </section>
-      </article>
-    </div>
+    <main dir="rtl" className="mx-auto max-w-4xl px-5 py-12 text-ink">
+      <nav aria-label="פירורי לחם" className="mb-8 text-sm text-ink/60">
+        <Link href="/">דף הבית</Link> / <Link href="/investments">השקעות</Link> / מס רווח הון
+      </nav>
+      <h1 className="mb-5 text-3xl font-bold md:text-4xl">איך בודקים מס על השקעות?</h1>
+      <p className="mb-8 text-lg leading-relaxed">
+        שיעור המס ובסיס החישוב תלויים בסוג נייר הערך, בסוג ההכנסה, בהצמדה,
+        במעמד המשקיע ובנסיבות נוספות. אין שיעור אחיד שאפשר להחיל על כל מניה, אג״ח,
+        פיקדון או דיבידנד. גם מס יסף וקיזוז הפסדים נבדקים מול כלל נתוני שנת המס.
+      </p>
+      <section className="border-r-4 border-gold bg-cream-2 p-6">
+        <h2 className="mb-3 text-xl font-bold">מה להכין לבדיקה?</h2>
+        <ol className="list-decimal space-y-3 pr-6 leading-relaxed">
+          <li>דוח פעולות ואישור ניכוי מס במקור מהבנק או מהברוקר, לרבות עסקאות בחו״ל.</li>
+          <li>סוג ההכנסה: רווח ממכירה, ריבית או דיבידנד, וסוג הנייר או המוצר.</li>
+          <li>עלות רכישה, תמורה, תאריכים, עמלות, הצמדה ומטבע לפי המסמכים.</li>
+          <li>הפסדים בני קיזוז, הכנסות אחרות ונתונים שעשויים להשפיע על מס יסף.</li>
+        </ol>
+      </section>
+      <section className="mt-10 space-y-4 leading-relaxed">
+        <h2 className="text-2xl font-bold">ניכוי במקור ודיווח</h2>
+        <p>
+          ניכוי מס במקור אינו תשובה אוטומטית לשאלת חובת הדיווח או לסכום המס הסופי.
+          בדקו אם כל הפעולות נכללות באישורים ואם יש עסקאות שלא נוכה מהן מס,
+          הפסדים מועברים או הכנסות מחו״ל. טופסי הדוח השנתי של רשות המסים מבחינים
+          בין סוגי עסקאות ושיעורי מס. אם הנתונים מורכבים, בדקו אותם עם איש מקצוע.
+        </p>
+        <p>
+          לפני מימוש הפסד לצורך קיזוז, בדקו את כללי הקיזוז והדיווח הרלוונטיים
+          למועד העסקה ולהכנסה שכנגדה מבקשים לקזז. אין להסיק מהפסד ״על הנייר״
+          שהוא כבר זמין לקיזוז.
+        </p>
+      </section>
+      <section className="mt-10 space-y-3 leading-relaxed">
+        <h2 className="text-2xl font-bold">מקורות רשמיים</h2>
+        <p><a href="https://www.gov.il/he/service/reporting-and-payment-2025-annual-tax-report-for-individuals" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — דוח שנתי ונספחי רווח הון מניירות ערך ↗</a></p>
+        <p><a href="https://www.gov.il/BlobFolder/service/reporting-and-payment-2025-annual-tax-report-for-individuals/he/Service_Pages_Income_tax_annual-report-2026_1325-2025.pdf" target="_blank" rel="noopener noreferrer" className="text-gold underline">הוראות נספח רווח הון מניירות ערך סחירים ↗</a></p>
+        <p><a href="https://www.gov.il/BlobFolder/generalpage/income-tax-monthly-deductions-booklet/he/generalInformation_income-tax-monthly-deductions-booklet_monthly-deductions-booklet-2026.pdf" target="_blank" rel="noopener noreferrer" className="text-gold underline">לוח הניכויים לשנת 2026 ↗</a></p>
+      </section>
+      <div className="mt-10 flex flex-wrap gap-5">
+        <Link href="/investments/roi" className="font-semibold text-gold underline underline-offset-4">חישוב ROI לפי נתונים שהוזנו</Link>
+        <Link href="/investments/compound-interest" className="font-semibold text-gold underline underline-offset-4">תרחישי ריבית דריבית</Link>
+      </div>
+    </main>
   );
 }

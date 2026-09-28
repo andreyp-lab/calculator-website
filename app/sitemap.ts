@@ -115,11 +115,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate/rental-income-tax', 'monthly', 0.9), // מדריך מיסוי שכר דירה (pillar)
 
     // ===== מחשבונים: השקעות =====
-    make('/investments/compound-interest', 'monthly', 0.95),
+    make('/investments/compound-interest', 'monthly', 0.95, new Date('2026-09-28')),
     make('/investments/retirement', 'monthly', 0.90, new Date('2026-09-28')),
     make('/investments/fire', 'monthly', 0.90, new Date('2026-09-28')),
-    make('/investments/roi', 'monthly', 0.85),
-    make('/investments/capital-gains-tax', 'monthly', 0.9), // מדריך מס רווח הון (pillar)
+    make('/investments/roi', 'monthly', 0.85, new Date('2026-09-28')),
+    make('/investments/capital-gains-tax', 'monthly', 0.9, new Date('2026-09-28')),
 
     // ===== מחשבונים: חיסכון / הלוואות =====
     make('/savings/family-budget', 'monthly', 0.90),
