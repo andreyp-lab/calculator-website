@@ -22,7 +22,7 @@ export const MACRO_DATA = {
     sourceUrl: 'https://www.boi.org.il/he/economic-roles/markets/interest-rates/interest-rates-of-bank-of-israel/',
     nextScheduledDecision: '2026-10-21',
     historicalRates: [
-      // 12 חודשים אחרונים - עבור גרף היסטורי
+      // ערכי סוף חודש מאז אוגוסט 2025, עבור גרף היסטורי
       { month: '2025-08', boiRate: 4.25, primeRate: 5.75 },
       { month: '2025-09', boiRate: 4.25, primeRate: 5.75 },
       { month: '2025-10', boiRate: 4.25, primeRate: 5.75 },
@@ -63,14 +63,6 @@ export const MACRO_DATA = {
     lastUpdated: '2026-09-07',
     source: 'משרד האנרגיה והתשתיות',
     sourceUrl: 'https://www.gov.il/he/pages/fuel-september-7-2026',
-  },
-
-
-  avgMortgageRate: {
-    value: 4.8,              // % ריבית משכנתא ממוצעת (מסלולים מעורבים)
-    lastUpdated: '2026-05-21',
-    source: 'בנק ישראל — דוח ריביות משכנתא',
-    sourceUrl: 'https://www.boi.org.il/information/interestrates/mortgage/',
   },
 } as const;
 
