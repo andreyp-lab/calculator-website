@@ -758,6 +758,11 @@ button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
   aspect-ratio:4/5;
   overflow:hidden;
 }
+.portrait::before{
+  content:'AP';position:absolute;inset:0;display:grid;place-items:center;
+  font-family:var(--serif);font-size:clamp(5rem,16vw,9rem);font-weight:900;
+  color:var(--gold-lt);opacity:.55;
+}
 .portrait img{
   width:100%;height:100%;object-fit:cover;object-position:center 20%;
   filter:contrast(1.02) saturate(.95);
@@ -1581,8 +1586,8 @@ footer{background:var(--g950);color:rgba(255,255,255,.45);padding:48px 0 32px;fo
             <span>התחל לנהל נכון</span>
             <span class="arr">←</span>
           </a>
-          <a href="#modules" class="btn-sec">
-            <span>ראה תוכן הקורס</span>
+          <a href="#preview" class="btn-sec">
+            <span>צפה בשיעור ניסיון חינם</span>
             <span>↓</span>
           </a>
         </div>
@@ -1596,7 +1601,7 @@ footer{background:var(--g950);color:rgba(255,255,255,.45);padding:48px 0 32px;fo
       <div class="hero-card">
         <div class="portrait">
           <span class="portrait-tag">המנחה</span>
-          <img src="https://profitmargin.co.il/wp-content/uploads/2023/03/Z72_1867-Edit.png" alt="אנדרי פלטונוב - רואה חשבון">
+          <img src="https://profitmargin.co.il/wp-content/uploads/2023/03/Z72_1867-Edit.png" alt="אנדרי פלטונוב - רואה חשבון" onerror="this.hidden=true">
           <div class="portrait-overlay">
             <div class="portrait-name">אנדרי פלטונוב</div>
             <div class="portrait-role">רו״ח · ניהל 400M ₪ בשנה</div>
@@ -1804,7 +1809,7 @@ footer{background:var(--g950);color:rgba(255,255,255,.45);padding:48px 0 32px;fo
 </section>
 
 <!-- VIDEO -->
-<section class="section deep">
+<section class="section deep" id="preview">
   <div class="wrap">
     <div class="video-block reveal">
       <div class="vlabel">▸ שיעור ניסיון חינם</div>
@@ -2226,6 +2231,6 @@ window.addEventListener('resize',()=>{
   setTimeout(report,400);setTimeout(report,1200);setTimeout(report,2500);
 })();
 </script>
-
+<script src="/lp/course-analytics.js" defer data-course-id="cfo"></script>
 
 </body></html>
