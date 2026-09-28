@@ -50,13 +50,11 @@ export async function Ticker() {
   const usdIls = await fetchUsdIls();
 
   const minWage = Math.round(MINIMUM_WAGE_2026.monthly).toLocaleString('he-IL');
-  const monthlyCpi = MACRO_DATA.inflation.monthlyRate;
-  const cpiLabel = `${monthlyCpi >= 0 ? '+' : ''}${monthlyCpi.toFixed(1)}%`;
 
   const items: { label: string; value: string }[] = [
     { label: 'דולר', value: `₪${usdIls.toFixed(2)}` },
     { label: 'פריים', value: `${MACRO_DATA.primeRate.value.toFixed(1)}%` },
-    { label: 'מדד', value: cpiLabel },
+    { label: 'אינפלציה שנתית', value: `${MACRO_DATA.inflation.annualRate.toFixed(1)}%` },
     { label: 'שכר מינ׳', value: `₪${minWage}` },
     { label: 'משכנתא', value: `${MORTGAGE_RATE.toFixed(1)}%` },
   ];
@@ -65,13 +63,13 @@ export async function Ticker() {
     <div className="site-ticker bg-ink-deep text-cream border-b border-cream/15">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-3 py-2 font-mono text-[11.5px] tracking-[0.02em] overflow-x-auto whitespace-nowrap">
-          {/* LIVE_DATA label with blinking gold dot */}
+          {/* Some figures are verified manually; dates appear on the linked detail pages. */}
           <span className="flex items-center gap-1.5 flex-shrink-0 text-gold-light uppercase tracking-[0.14em]">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping bg-gold-light opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 bg-gold-light" />
             </span>
-            // LIVE_DATA
+            // נתונים מאומתים
           </span>
 
           {items.map((item, i) => (
