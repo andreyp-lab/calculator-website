@@ -37,7 +37,7 @@ const datasetSchema = {
   description: `ריבית הפריים העדכנית בישראל: ${MACRO_DATA.primeRate.value}% (ריבית בנק ישראל ${MACRO_DATA.primeRate.boiBaseRate}% + מרווח ${MACRO_DATA.primeRate.bankSpread}%)`,
   url: 'https://cheshbonai.co.il/news/prime-rate',
   inLanguage: 'he-IL',
-  temporalCoverage: '2025-06/2026-05',
+  temporalCoverage: '2025-08/2026-09',
   creator: {
     '@type': 'Organization',
     name: 'חשבונאי',
