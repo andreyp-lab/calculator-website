@@ -40,7 +40,7 @@ const DEFAULT_INPUT: ComprehensiveRetirementInput = {
   inflationRate: 3,
   incomeSources: {
     pensionMonthly: 5_000,
-    socialSecurityMonthly: 3_500,
+    socialSecurityMonthly: 1_838,
     rentalIncome: 0,
     partTimeWork: 0,
     investmentPortfolio: 0,
@@ -393,7 +393,7 @@ export function RetirementCalculator() {
                       className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
                     />
                   </Field>
-                  <Field label="ב.ל. — קצבת זקנה (₪/ח)" hint="פטור ממס (כ-3,500 ₪)">
+                  <Field label="ב.ל. — קצבת זקנה (₪/ח)" hint="קצבת בסיס ליחיד: 1,838 ₪ (2026); זכאות ותוספות אישיות בנפרד">
                     <input type="number" min={0} step={100} value={input.incomeSources.socialSecurityMonthly}
                       onChange={(e) => updateIncomeSources('socialSecurityMonthly', Number(e.target.value))}
                       className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-sm"
@@ -969,7 +969,7 @@ function RetirementEducation({
         <div className="bg-paper rounded-none border border-amber-200 p-4">
           <h4 className="font-bold text-amber-800 mb-2">🛡️ קצבאות ישראל</h4>
           <p className="text-xs text-ink/70 mb-3">
-            ביטוח לאומי: ~3,500 ₪ ביחיד, ~4,900 ₪ לזוג. פנסיה חובה: 18.5% מהשכר (עובד + מעסיק).
+            קצבת בסיס ביטוח לאומי 2026: 1,838 ₪ ליחיד, 2,762 ₪ לזוג שבו זכאי אחד בכפוף לתנאים. זכאות ותוספות אישיות בנפרד.
           </p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
