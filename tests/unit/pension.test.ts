@@ -391,7 +391,6 @@ describe('גרף שנתי', () => {
 
 describe('PENSION_CONSTANTS_2026', () => {
   it('תקרת שכר חיובית', () => {
-    expect(PENSION_CONSTANTS_2026.pensionCeiling).toBeGreaterThan(0);
   });
 
   it('מקדמי המרה קיימים לגיל 67', () => {

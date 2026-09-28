@@ -221,8 +221,7 @@ export default function RealEstatePage() {
               על {MACRO_DATA.primeRate.value}% (ריבית בנק ישראל {MACRO_DATA.primeRate.boiBaseRate}% בתוספת מרווח קבוע). הוא זול יחסית וגמיש לפירעון מוקדם,
               אבל ההחזר בו משתנה עם כל החלטת ריבית. מנגד, ריבית קבועה לא צמודה נותנת ודאות מלאה —
               ההחזר לא יזוז עד סוף התקופה — ובתמורה מתומחרת גבוה יותר. באמצע נמצאים מסלולים צמודי
-              מדד ומסלולים בריבית משתנה. לשם השוואה, הריבית הממוצעת על משכנתאות חדשות (מסלולים
-              מעורבים) עומדת כיום סביב {MACRO_DATA.avgMortgageRate.value}%. נקודת המוצא היא <Link href="/real-estate/mortgage" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון המשכנתא</Link>{' '}
+              מדד ומסלולים בריבית משתנה. הריבית בפועל תלויה במסלול, בתקופה ובפרופיל הלווה. נקודת המוצא היא <Link href="/real-estate/mortgage" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון המשכנתא</Link>{' '}
               לחישוב ההחזר, ומשם{' '}
               <Link href="/real-estate/mortgage-optimizer" className="text-gold underline underline-offset-2 hover:text-ink transition">האופטימייזר</Link>{' '}
               שמחלק את הסכום בין המסלולים לפי היעד שלכם.

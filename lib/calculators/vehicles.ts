@@ -9,14 +9,16 @@
 // 1. FUEL COST CALCULATOR
 // ============================================================
 
+import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
+
 export type FuelType = 'gasoline_95' | 'gasoline_98' | 'diesel' | 'electric';
 
-// מחירי דלק ממוצעים בישראל 2026 (ש"ח לליטר/קוט"ש)
+// בנזין 95: מחיר מרבי בפיקוח מ-7.9.2026; היתר הנחות דוגמה להחלפה בקלט המשתמש
 export const FUEL_PRICES_2026: Record<FuelType, number> = {
-  gasoline_95: 7.45, // בנזין 95
-  gasoline_98: 7.85, // בנזין 98
-  diesel: 6.95, // סולר
-  electric: 0.55, // חשמל לקוט"ש
+  gasoline_95: MACRO_DATA.fuelPrices.gasoline95,
+  gasoline_98: MACRO_DATA.fuelPrices.gasoline98,
+  diesel: MACRO_DATA.fuelPrices.diesel,
+  electric: MACRO_DATA.fuelPrices.electric,
 };
 
 export const FUEL_LABELS: Record<FuelType, string> = {

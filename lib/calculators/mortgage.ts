@@ -6,7 +6,7 @@
  * - חוקי הפיקוח על הבנקים בישראל
  *
  * נתונים מרכזיים 2026:
- * - ריבית פריים (Prim): 5.25% (ריבית בנק ישראל 3.75% + מרווח 1.5%)
+ * - ריבית פריים: נגזרת מהנתון הידני המאומת בקובץ macroeconomic-data.ts
  * - LTV דירה ראשונה: עד 75%
  * - LTV מחליפי דירה: עד 70%
  * - LTV משקיעים: עד 50%
@@ -23,8 +23,10 @@
 // קבועים
 // ============================================================
 
-export const BANK_OF_ISRAEL_PRIME_2026 = 5.25; // ריבית פריים יוני 2026 (=ריבית בנק ישראל 3.75% + מרווח 1.5%)
-export const BOI_BASE_RATE_2026 = 3.75; // ריבית בנק ישראל יוני 2026
+import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
+
+export const BANK_OF_ISRAEL_PRIME_2026 = MACRO_DATA.primeRate.value;
+export const BOI_BASE_RATE_2026 = MACRO_DATA.primeRate.boiBaseRate;
 export const AVG_INFLATION_ISRAEL = 2.5; // אינפלציה ממוצעת ישראל
 
 // ============================================================

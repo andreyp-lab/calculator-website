@@ -54,7 +54,7 @@ const faqItems = [
   {
     question: 'כמה קצבת אזרח ותיק מקבלים מביטוח לאומי?',
     // קצבת אזרח ותיק = PENSION_CONSTANTS_2026.nationalInsurancePension (lib/calculators/pension.ts)
-    answer: `קצבת אזרח ותיק בסיסית עומדת ב-2026 על כ-${PENSION_CONSTANTS_2026.nationalInsurancePension.single.toLocaleString('he-IL')} ₪ בחודש ליחיד וכ-${PENSION_CONSTANTS_2026.nationalInsurancePension.couple.toLocaleString('he-IL')} ₪ לזוג, ומי שדוחה את קבלתה לגיל 70 מקבל תוספת דחייה. הקצבה משולמת בנוסף לפנסיה התעסוקתית — אבל היא לבדה רחוקה מלהספיק לשמירה על רמת החיים, ולכן חשוב לבדוק במחשבון הפנסיה מה צפויה להיות הקצבה הכוללת שלכם.`,
+    answer: `קצבת אזרח ותיק בסיסית עומדת ב-2026 על ${PENSION_CONSTANTS_2026.nationalInsurancePension.single.toLocaleString('he-IL')} ₪ בחודש ליחיד. סכום לזוג שבו רק אחד זכאי לקצבה, הכולל תוספת בן/בת זוג בכפוף לתנאים, הוא ${PENSION_CONSTANTS_2026.nationalInsurancePension.couple.toLocaleString('he-IL')} ₪. תוספות ותק ודחייה משנות את הסכום האישי. לבדיקת זכאות מדויקת יש להשתמש במחשבון ביטוח לאומי.`,
   },
 ];
 
@@ -189,10 +189,8 @@ export default function InsurancePage() {
             </table>
           </div>
           <p className="mt-3 text-sm text-ink/70 leading-relaxed">
-            ההפרשות מזכות בהטבות מס עד תקרת שכר של{' '}
-            {PENSION_CONSTANTS_2026.pensionCeiling.toLocaleString('he-IL')} ₪ בחודש. הפער בין
-            המסלול המינימלי למקסימלי נראה קטן על תלוש בודד, אבל על פני 30–40 שנות עבודה הוא
-            משנה את הקצבה בעשרות אחוזים — בדקו את שני התרחישים במחשבון הפנסיה.
+            הטבות המס על ההפקדות תלויות בתקרות, במעמד ובסוג ההפקדה. בדקו את התקרה המתאימה
+            לכם לפני שינוי ההפקדה; המחשבון מאפשר להשוות תרחישים לפי הנתונים שהזנתם.
           </p>
         </section>
 

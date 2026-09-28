@@ -37,7 +37,7 @@ const datasetSchema = {
   description: `ריבית הפריים העדכנית בישראל: ${MACRO_DATA.primeRate.value}% (ריבית בנק ישראל ${MACRO_DATA.primeRate.boiBaseRate}% + מרווח ${MACRO_DATA.primeRate.bankSpread}%)`,
   url: 'https://cheshbonai.co.il/news/prime-rate',
   inLanguage: 'he-IL',
-  temporalCoverage: '2025-06/2026-05',
+  temporalCoverage: '2025-08/2026-09',
   creator: {
     '@type': 'Organization',
     name: 'חשבונאי',
@@ -121,7 +121,7 @@ export default function PrimeRatePage() {
 
         {/* Chart */}
         <div className="bg-paper border border-ink/15 rounded-none p-6 mb-8">
-          <h2 className="text-xl font-bold text-ink mb-1">היסטוריה — 12 חודשים אחרונים</h2>
+          <h2 className="text-xl font-bold text-ink mb-1">היסטוריית הריבית מאז אוגוסט 2025</h2>
           <p className="text-sm text-ink/70 mb-6">ריבית בנק ישראל וריבית פריים</p>
           <PrimeRateChart data={[...historicalRates] as Array<{ month: string; boiRate: number; primeRate: number }>} />
         </div>
