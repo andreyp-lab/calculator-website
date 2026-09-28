@@ -49,7 +49,7 @@ const calculators = [
   },
   {
     title: 'מחשבון תגמולי מילואים',
-    description: 'תשלום בסיסי + מענקי חרבות ברזל (280 ₪/יום)',
+    description: 'בדיקת תגמול מילואים במחשבון הביטוח הלאומי',
     href: '/employee-rights/reserve-duty-pay',
     available: true,
   },
