@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
  * מיפוי:
  * - עמודי בעלי עסקים (חברה, דיבידנד, עלות מעסיק) וכלי ניהול עסקיים
  *   (/tools, /business) → קורס "מנהל הכספים" (CFO)
- * - שאר עמודי /self-employed ועמודי מס אישי (/personal-tax) → קורס
+ * - שאר עמודי /self-employed וכלי חילוץ מע״מ → קורס
  *   "הכסף של העסק בידיים שלך" (CPA)
  * - בכל עמוד אחר הרכיב לא מרונדר כלל.
  *
@@ -21,11 +21,13 @@ const CFO_PATHS = [
   '/self-employed/employer-cost',
 ];
 
+const CPA_PATHS = ['/tools/vat-extract'];
+
 /** קטגוריות שקהל היעד שלהן הוא בעלי עסקים → קורס CFO */
 const CFO_PREFIXES = ['/tools/', '/business/'];
 
 /** קטגוריות שקהל היעד שלהן הוא עצמאים/יחידים → קורס CPA */
-const CPA_PREFIXES = ['/self-employed/', '/personal-tax/'];
+const CPA_PREFIXES = ['/self-employed/'];
 
 const COURSES = {
   cpa: {
@@ -52,9 +54,11 @@ export function CourseCTA() {
 
   if (!pathname) return null;
 
+  const isCpa =
+    CPA_PATHS.includes(pathname) ||
+    (!CFO_PATHS.includes(pathname) && CPA_PREFIXES.some((p) => pathname.startsWith(p)));
   const isCfo =
-    CFO_PATHS.includes(pathname) || CFO_PREFIXES.some((p) => pathname.startsWith(p));
-  const isCpa = !isCfo && CPA_PREFIXES.some((p) => pathname.startsWith(p));
+    !isCpa && (CFO_PATHS.includes(pathname) || CFO_PREFIXES.some((p) => pathname.startsWith(p)));
 
   if (!isCfo && !isCpa) return null;
 
@@ -66,7 +70,7 @@ export function CourseCTA() {
       className="my-12 bg-ink border border-gold-light/30 p-6 sm:p-8 text-cream"
     >
       <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
-        // {course.eyebrow}
+        {'// '}{course.eyebrow}
       </p>
       <p className="font-serif text-xl sm:text-2xl mb-3 leading-snug text-cream">{course.headline}</p>
       <p className="text-sm sm:text-base text-cream/70 leading-relaxed mb-5 max-w-2xl">
@@ -75,6 +79,16 @@ export function CourseCTA() {
       <div className="flex flex-wrap items-center gap-4">
         <a
           href={course.url}
+          onClick={() => {
+            const analytics = window as Window & {
+              gtag?: (...args: unknown[]) => void;
+            };
+            analytics.gtag?.('event', 'course_cta_click', {
+              course_id: isCfo ? 'cfo' : 'cpa',
+              placement: 'calculator',
+              source_path: pathname,
+            });
+          }}
           className="inline-block bg-gold px-8 py-3.5 text-sm font-bold text-paper transition hover:bg-gold-2"
         >
           {course.cta} ←
