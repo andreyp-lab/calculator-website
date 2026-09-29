@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = `שכר ${fmt(amount)} ₪ ברוטו — כמה נטו? (2026)`;
   const description = `שכר ${fmt(amount)} ₪ ברוטו = כ-${fmt(data.noPension.netSalary)} ₪ נטו ללא פנסיה, או כ-${fmt(
     data.withPension.netSalary,
-  )} ₪ עם פנסיה 6% (רווק/ה, 2.25 נקודות זיכוי). פירוט מס הכנסה וביטוח לאומי, עדכני 2026.`;
+  )} ₪ עם פנסיה 6% (תושב עם 2.25 נקודות זיכוי, לפני זיכוי אפשרי על הפקדת פנסיה). אומדן לפי מדרגות 2026.`;
 
   return {
     title,
@@ -70,9 +70,9 @@ export default async function SalaryAmountPage({ params }: PageProps) {
   const faqItems = [
     {
       question: `כמה נטו נשאר משכר ${fmt(amount)} ₪ ברוטו?`,
-      answer: `לרווק/ה עם 2.25 נקודות זיכוי: כ-${fmt(noPension.netSalary)} ₪ נטו ללא הפרשה לפנסיה, וכ-${fmt(
+      answer: `לתושב עם 2.25 נקודות זיכוי: כ-${fmt(noPension.netSalary)} ₪ נטו ללא הפרשה לפנסיה, וכ-${fmt(
         withPension.netSalary,
-      )} ₪ נטו עם הפרשת עובד לפנסיה של 6%. הסכום המדויק תלוי בנקודות הזיכוי ובהפרשות בתלוש.`,
+      )} ₪ נטו עם הפרשת עובד לפנסיה של 6%. זהו אומדן שאינו כולל זיכוי מס אפשרי על הפקדת העובד לפנסיה; הנטו בפועל תלוי גם בשכר המבוטח ובנתוני התלוש.`,
     },
     {
       question: `כמה מס הכנסה משלמים על ${fmt(amount)} ₪ ברוטו?`,
@@ -123,7 +123,7 @@ export default async function SalaryAmountPage({ params }: PageProps) {
         {/* Quick answer */}
         <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
           <p className="text-lg text-ink leading-relaxed">
-            משכר של <strong>{fmt(amount)} ₪ ברוטו</strong> נשארים לרווק/ה עם 2.25 נקודות זיכוי{' '}
+            משכר של <strong>{fmt(amount)} ₪ ברוטו</strong> נשארים לתושב עם 2.25 נקודות זיכוי{' '}
             <strong>כ-{fmt(noPension.netSalary)} ₪ נטו</strong> ללא הפרשה לפנסיה, או{' '}
             <strong>כ-{fmt(withPension.netSalary)} ₪ נטו</strong> עם הפרשת עובד לפנסיה של 6%. זהו{' '}
             {noPension.netPercentage.toFixed(0)}% מהברוטו (ללא פנסיה), לפי מדרגות המס וביטוח לאומי 2026.
@@ -172,7 +172,8 @@ export default async function SalaryAmountPage({ params }: PageProps) {
             </table>
           </div>
           <p className="mt-3 text-sm text-ink/70">
-            רווק/ה, 2.25 נקודות זיכוי, ללא קרן השתלמות וללא ביטוח אובדן כושר עבודה.
+            תושב עם 2.25 נקודות זיכוי, ללא קרן השתלמות וביטוח אובדן כושר עבודה. הונח שכל הברוטו
+            מבוטח לפנסיה; זיכוי מס אפשרי על הפקדת העובד לפנסיה אינו כלול, ולכן זהו אומדן בלבד.
           </p>
         </section>
 
@@ -211,7 +212,7 @@ export default async function SalaryAmountPage({ params }: PageProps) {
                   <td className="p-3 text-left font-mono">−{fmt(Math.min(credit, grossTaxBeforeCredit))} ₪</td>
                 </tr>
                 <tr className="bg-cream-2 font-bold">
-                  <td className="p-3">מס הכנסה בפועל</td>
+                  <td className="p-3">מס הכנסה באומדן</td>
                   <td className="p-3" />
                   <td className="p-3" />
                   <td className="p-3 text-left font-mono">{fmt(noPension.incomeTax)} ₪</td>
@@ -260,7 +261,7 @@ export default async function SalaryAmountPage({ params }: PageProps) {
         {/* CTA to full calculator */}
         <section className="mb-10 bg-ink p-6 text-cream">
           <p className="font-serif text-xl mb-3 leading-snug">
-            רוצים חישוב מדויק למצב שלכם? ילדים, קרן השתלמות, נטו→ברוטו ועוד
+            רוצים לבדוק תרחישים נוספים של שכר, נקודות זיכוי ונטו→ברוטו?
           </p>
           <Link
             href="/personal-tax/salary-net-gross"
@@ -331,6 +332,10 @@ export default async function SalaryAmountPage({ params }: PageProps) {
             בעמוד. חישוב הנטו עם פנסיה אינו כולל זיכוי מס אפשרי בגין הפקדת העובד לפנסיה.
             הנטו בפועל תלוי בנתונים האישיים ובהרכב התלוש. אין לראות בתוכן ייעוץ מס — הוא אינו
             תחליף לייעוץ מקצועי אישי.
+          </p>
+          <p className="mt-3 text-sm text-ink/75">
+            מקורות: <a className="text-gold underline" href="https://www.gov.il/BlobFolder/generalpage/income-tax-monthly-deductions-booklet/he/generalInformation_income-tax-monthly-deductions-booklet_monthly-deductions-booklet-2026.pdf" target="_blank" rel="noopener noreferrer">לוח ניכויים 2026 של רשות המסים</a>,{' '}
+            <a className="text-gold underline" href="https://www.btl.gov.il/Insurance/Rates/Pages/%D7%9C%D7%A2%D7%95%D7%91%D7%93%D7%99%D7%9D%20%D7%A9%D7%9B%D7%99%D7%A8%D7%99%D7%9D.aspx" target="_blank" rel="noopener noreferrer">שיעורי דמי ביטוח לשכיר</a>.
           </p>
         </section>
 

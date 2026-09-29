@@ -19,7 +19,7 @@ export const MACRO_DATA = {
     bankSpread: 1.5,         // % מרווח בנקאי סטנדרטי (פריים = בסיס + 1.5%)
     lastUpdated: '2026-09-28',
     source: 'בנק ישראל',
-    sourceUrl: 'https://www.boi.org.il/he/economic-roles/markets/interest-rates/interest-rates-of-bank-of-israel/',
+    sourceUrl: 'https://www.boi.org.il/',
     nextScheduledDecision: '2026-10-21',
     historicalRates: [
       // ערכי סוף חודש מאז אוגוסט 2025, עבור גרף היסטורי

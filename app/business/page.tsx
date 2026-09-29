@@ -5,9 +5,9 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: { absolute: 'כמה עולה להקים עסק? מחשבוני עלות הקמה ותוכנית עסקית 2026' },
+  title: { absolute: 'הקמת עסק — מדריכים לתכנון לפי סוג פעילות' },
   description:
-    'כמה עולה להקים בית קפה, מספרה, חדר כושר או קליניקה? מחשבוני עלות הקמה לפי עיר ושטח + הוצאות חודשיות ונקודת איזון. 2026.',
+    'מדריכים לתכנון פתיחת עסק לפי סוג פעילות: ציוד, מקום, ספקים, הוצאות שוטפות ושאלות שיש לברר לפני קבלת הצעות מחיר.',
   alternates: { canonical: '/business' },
 };
 
@@ -21,12 +21,12 @@ export default function BusinessHubPage() {
 
         <div className="bg-ink-deep border border-cream/15 p-6 md:p-10 text-cream mb-8">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
-            // מחשבוני הקמת עסק ✦
+            {'// '}מדריכי הקמת עסק ✦
           </p>
           <h1 className="text-3xl md:text-4xl font-bold text-cream mb-3">כמה עולה להקים עסק?</h1>
           <p className="text-cream/70 text-lg mb-0">
-            בחרו סוג עסק וקבלו תוכנית עסקית מלאה: עלות הקמה לפי עיר ושטח, הוצאות חודשיות, נקודת איזון,
-            פחת ורזרבת חידוש — כמה באמת צריך כדי לפתוח ולהחזיק.
+            בחרו סוג פעילות ועברו על השאלות שצריך לברר לפני פתיחת העסק. עלויות הקמה
+            והוצאות שוטפות יש לבסס על נכס, ספקים והצעות מחיר שמתאימים לתוכנית שלכם.
           </p>
         </div>
 
@@ -39,11 +39,11 @@ export default function BusinessHubPage() {
             >
               <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-gold mb-2">{bt.category}</p>
               <h2 className="font-bold text-ink text-lg mb-1 group-hover:text-gold transition">
-                כמה עולה להקים {bt.name}?
+                תכנון הקמת {bt.name}
               </h2>
-              <p className="text-sm text-ink/70 flex-1">{bt.intro}</p>
+              <p className="text-sm text-ink/70 flex-1">נקודות לבדיקה לפני בחירת מקום, ציוד, ספקים ומודל פעילות.</p>
               <span className="mt-4 flex items-center gap-1 text-xs font-mono uppercase tracking-[0.1em] text-gold">
-                למחשבון <ArrowLeft className="w-3.5 h-3.5" />
+                למדריך <ArrowLeft className="w-3.5 h-3.5" />
               </span>
             </Link>
           ))}

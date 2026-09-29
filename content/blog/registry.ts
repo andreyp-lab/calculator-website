@@ -39,16 +39,17 @@ export const blogPosts: BlogPost[] = [
   // ===== מאמרי עוגן קיימים =====
   {
     slug: 'tax-refund-complete-guide-2026',
-    title: 'המדריך השלם להחזר מס לשכירים 2026',
+    title: 'החזר מס לשכירים: איך בודקים ומגישים בקשה',
     description:
-      'כל מה שצריך לדעת כדי לקבל את החזר המס המקסימלי שמגיע לך - 12 סיבות לזכאות, איך מגישים, ומה החשוב לדעת. כולל דוגמאות מספריות.',
+      'בדיקת זכאות להחזר מס לשכירים מול רשות המסים, הכנת מסמכים והגשת טופס 135.',
     category: 'מיסוי אישי',
     readTime: '15 דקות',
     date: '2026-05-04',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/personal-tax/tax-refund',
-      label: 'חשב את ההחזר שמגיע לך',
+      label: 'בדיקת זכאות להחזר מס',
     },
     related: ['tax-reduction-25-legal-ways', 'tax-changes-2026'],
   },
@@ -85,12 +86,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'employee-rights-israel-2026',
-    title: 'זכויות עובדים בישראל 2026 - המדריך המלא',
+    title: 'זכויות עובדים בישראל 2026: בדיקה לפי תלוש ותנאי העסקה',
     description:
-      'פיצויים, דמי הבראה, חופשה, מחלה, לידה, מילואים. כל הזכויות לפי החוק עם דוגמאות חישוב.',
+      'בדיקת שכר מינימום, חופשה, מחלה, הבראה, פנסיה ופיצויים מול מקורות רשמיים.',
     category: 'זכויות עובדים',
     readTime: '20 דקות',
     date: '2026-05-04',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/salaried',
@@ -197,16 +199,17 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'severance-pay-complete-guide',
-    title: 'פיצויי פיטורין 2026: חישוב מלא, מס וזכויות',
+    title: 'פיצויי פיטורים: זכאות, חישוב וטופס 161',
     description:
-      'כמה פיצויים מגיע לך? איך מחושבים, מתי פטורים ממס, ומה ההבדל בין סעיף 14 לפיצויים רגילים. מדריך מלא עם דוגמאות.',
+      'בדיקת זכאות לפיצויים, הפקדות לרכיב הפיצויים, סעיף 14 ומיסוי הפרישה.',
     category: 'זכויות עובדים',
     readTime: '11 דקות',
     date: '2026-05-14',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/employee-rights/severance',
-      label: 'מחשבון פיצויי פיטורין',
+      label: 'מדריך בדיקת פיצויים',
     },
     related: ['employee-rights-israel-2026', 'recreation-pay-2026'],
   },
@@ -293,9 +296,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'mortgage-tracks-guide-2026',
-    title: 'מסלולי משכנתא 2026 - פריים, קל"צ, צמוד מדד: מה לבחור?',
+    title: 'מסלולי משכנתא: איך משווים פריים, קבועה והצמדה',
     description:
-      'מדריך מקיף לכל 5 מסלולי המשכנתא בישראל. מתי כדאי פריים? מתי קל"צ? דוגמאות מספריות, השוואות וטיפים לחיסכון עשרות אלפי שקלים.',
+      'בדיקת ריבית, הצמדה, שינויי תשלום וסיכונים לפי ההצעות האישיות של הבנקים.',
     category: 'נדל"ן ומשכנתאות',
     readTime: '15 דקות',
     date: '2026-05-15',
@@ -308,12 +311,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'salary-net-2026-complete-guide',
-    title: 'המדריך המלא לשכר נטו 2026 - מדרגות מס חדשות, נטו → ברוטו',
+    title: 'שכר נטו 2026: מה משפיע על התלוש',
     description:
-      'מדרגות מס הכנסה 2026 המעודכנות, חישוב שכר נטו מברוטו ובכיוון הפוך, השפעת הפנסיה ודמי הבריאות. מדריך מלא עם דוגמאות מספריות.',
+      'שיטת בדיקה של ניכויי מס הכנסה, ביטוח לאומי, בריאות ופנסיה מול המקורות הרשמיים.',
     category: 'מיסוי אישי',
     readTime: '12 דקות',
     date: '2026-05-15',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/personal-tax/salary-net-gross',
@@ -323,27 +327,29 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'vacation-redemption-guide',
-    title: 'פדיון חופשה - איך לחשב כמה כסף מגיע לך',
+    title: 'פדיון חופשה בסיום עבודה: יתרה, חישוב ומס',
     description:
-      'מדריך מלא לפדיון ימי חופשה בישראל. מתי מגיע פדיון, איך מחשבים את הסכום, מה ההבדל בין פיטורים להתפטרות, ואיך לא לפספס אלפי שקלים.',
+      'בדיקת יתרת חופשה לפדיון בסיום עבודה, התעריף והמסמכים הדרושים.',
     category: 'זכויות עובדים',
     readTime: '8 דקות',
     date: '2026-05-15',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/employee-rights/annual-leave',
-      label: 'מחשבון חופשה שנתית',
+      label: 'מדריך חופשה שנתית',
     },
     related: ['severance-pay-complete-guide', 'recreation-pay-2026'],
   },
   {
     slug: 'vehicle-tco-guide',
-    title: 'כמה רכב באמת עולה לכם? המדריך השלם לעלות בעלות אמיתית',
+    title: 'עלות בעלות על רכב: אילו נתונים צריך להשוות',
     description:
-      'TCO (Total Cost of Ownership) - הדרך הנכונה לחשוב על עלות רכב. השוואה בין מזומן, הלוואה וליסינג, עם כל העלויות הנסתרות ועלות הזדמנות.',
+      'מחיר רכישה, מימון, דלק, ביטוח, תחזוקה וערך מכירה לאורך תקופת החזקה.',
     category: 'רכב',
     readTime: '12 דקות',
     date: '2026-05-15',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/vehicles/leasing-vs-buying',
@@ -364,7 +370,7 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
-      label: 'אופטימייזר תמהיל משכנתא',
+      label: 'מדריך השוואת תמהילים',
     },
     related: ['ltv-mortgage-rates-secret', 'mortgage-tracks-guide-2026', 'mortgage-refinance-when-and-how'],
   },
@@ -385,16 +391,16 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'mortgage-refinance-when-and-how',
-    title: 'מחזור משכנתא 2026 - מתי, איך, וכמה אתה יכול לחסוך',
+    title: 'מיחזור משכנתא: איך בודקים אם ההצעה החדשה משתלמת?',
     description:
-      'מחזור משכנתא יכול לחסוך עשרות אלפי שקלים, אבל עלויות 5-15K. במאמר: מתי שווה, חישוב breakeven מדויק, טעויות נפוצות, ואיך לבחור בנק חדש.',
+      'בקשת יתרת סילוק והשוואת הצעה חדשה כולל ריבית, מסלולים, עמלות ועלויות נוספות.',
     category: 'נדל"ן ומשכנתאות',
     readTime: '12 דקות',
     date: '2026-05-16',
     featured: false,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
-      label: 'אופטימייזר תמהיל משכנתא',
+      label: 'מדריך השוואת תמהילים',
     },
     related: ['boi-directive-329-mortgage-rules', 'ltv-mortgage-rates-secret', 'mortgage-tracks-guide-2026'],
   },
@@ -417,16 +423,17 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'severance-pay-tax-strategies',
-    title: 'פיצויי פיטורין 2026 - 4 אסטרטגיות מס שיכולות לחסוך 100,000 ₪',
+    title: 'מיסוי פיצויי פיטורים: פטור, רצף ופריסה',
     description:
-      'פיצויי פיטורין יכולים להגיע למאות אלפי שקלים, אבל מס יכול לקחת חצי. 4 אסטרטגיות מס חוקיות: פטור מיידי, רצף קצבה, פריסה, שילוב. עם דוגמאות.',
+      'בחירות מס בעת סיום עבודה: טופס 161, פטור על מענק פרישה, רצף ופריסת הכנסה.',
     category: 'זכויות עובדים',
     readTime: '14 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/employee-rights/severance',
-      label: 'מחשבון פיצויי פיטורין',
+      label: 'מדריך בדיקת פיצויים',
     },
     related: ['maternity-benefits-complete-guide-2026', 'recreation-pay-2026', 'vacation-redemption-guide', 'employee-rights-israel-2026'],
   },
@@ -543,12 +550,13 @@ export const blogPosts: BlogPost[] = [
   // ===== אשכול G - כלים לעסקים =====
   {
     slug: 'business-budget-planning-2026',
-    title: 'תקציב לעסק קטן 2026 - איך לבנות תקציב שמחזיק לכל השנה',
+    title: 'איך בונים תקציב לעסק קטן ומעדכנים אותו',
     description:
-      'תכנון תקציב לעסק קטן: P&L, חזוי הוצאות, מודל גידול, וטיפים למניעת תרחישי חוסר בכסף. כולל תבנית מעשית וחישובי תזרים מזומנים.',
+      'בניית תקציב הכנסות, הוצאות ותזרים לפי נתוני העסק, והשוואת התכנון לביצוע לאורך השנה.',
     category: 'תקציב וחיסכון',
     readTime: '12 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/tools/budget',
@@ -558,12 +566,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'cash-flow-forecast-business',
-    title: 'תזרים מזומנים לעסק - איך להימנע מקריסה תזרימית',
+    title: 'תחזית תזרים מזומנים לעסק: איך בונים ומעדכנים',
     description:
-      'תזרים מזומנים הוא הגורם #1 לכישלון עסקי. במאמר: איך לבנות תחזית תזרים, לזהות איתותי אזהרה, וטכניקות תכנון. עם תבנית 12 חודשים.',
+      'תחזית תקבולים ותשלומים לפי מועדים, הבחנה בין רווח למזומן ועדכון חודשי של תרחישים.',
     category: 'תקציב וחיסכון',
     readTime: '13 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/tools/cash-flow',
@@ -573,16 +582,17 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'business-valuation-methods',
-    title: 'הערכת שווי עסק - 4 שיטות שכל בעל עסק חייב להכיר',
+    title: 'הערכת שווי עסק: תזרים, עסקאות השוואה ונכסים',
     description:
-      'איך להעריך שווי של עסק לפני מכירה / שותפות / מיזוג: שיטת DCF, מכפילי שוק, NAV ושיטת ההכנסה. כולל דוגמאות לעסקים קטנים בישראל.',
+      'גישת הכנסה, גישת שוק וגישת עלות: נתוני העסק וההנחות הדרושות להערכת שווי.',
     category: 'תקציב וחיסכון',
     readTime: '14 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/tools/business-valuation',
-      label: 'מחשבון הערכת שווי עסק',
+      label: 'מדריך הערכת שווי עסק',
     },
     related: ['business-budget-planning-2026', 'cash-flow-forecast-business', 'company-vs-self-employed-ultimate-guide'],
   },
@@ -590,12 +600,13 @@ export const blogPosts: BlogPost[] = [
   // ===== אשכול H - רכב =====
   {
     slug: 'leasing-vs-buying-vs-cash-decision',
-    title: 'ליסינג vs קנייה vs מימון עצמי - מה משתלם באמת ב-2026?',
+    title: 'ליסינג, הלוואה או קניית רכב במזומן: כך משווים',
     description:
-      'השוואה מקיפה בין 3 דרכים לרכוש רכב: ליסינג, הלוואה, מימון עצמי. חישוב TCO מלא כולל עלות הזדמנות, ירידת ערך, ועלויות תפעול. עדכני 2026.',
+      'השוואה לפי הצעות אישיות: תשלומים, ריבית, שירותים בחוזה, ערך הרכב בסוף התקופה ועלויות שימוש.',
     category: 'רכב',
     readTime: '14 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/vehicles/leasing-vs-buying',
@@ -669,12 +680,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'tax-coordination-guide-2026',
-    title: 'תיאום מס 2026 — מי חייב, איך עושים אונליין, וכמה זה חוסך',
+    title: 'תיאום מס 2026: מתי עושים ואיך מגישים',
     description:
-      'בלי תיאום מס המעסיק מנכה 47% מהמשכורת. מדריך מעשי: מי חייב לבצע תיאום מס, צעד אחר צעד בפורטל רשות המסים, ומתי הוא מתעדכן.',
+      'תיאום מס לשכירים ולבעלי עסק זעיר דרך השירות המקוון של רשות המסים.',
     category: 'עצמאיים',
     readTime: '10 דקות',
     date: '2026-06-12',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/self-employed/employee-and-self-employed',

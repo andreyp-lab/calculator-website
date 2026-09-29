@@ -4,7 +4,7 @@ import { SITE_INFO } from '@/lib/config/site-info';
 export const metadata = {
   alternates: { canonical: '/privacy' },
   title: 'מדיניות פרטיות',
-  description: 'מדיניות הפרטיות של cheshbonai.co.il - אנו לא אוספים נתונים אישיים. גילוי מלא לגבי שרתי Vercel.',
+  description: 'מדיניות הפרטיות של cheshbonai.co.il: נתוני שימוש, Google Analytics, Vercel Analytics, אחסון וקישורים לקורסים.',
 };
 
 export default function PrivacyPage() {
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
           </h2>
           <p className="mb-3">
             ברוכים הבאים ל-<strong>{SITE_INFO.name}</strong> ({SITE_INFO.domain}).
-            אתר זה מציע מחשבונים פיננסיים חינמיים בעברית, ללא כל הרשמה, חברות או תשלום.
+            אתר זה מציע כלים ומדריכים פיננסיים חינמיים בעברית וקישורים לקורסים בתשלום.
           </p>
           <p className="mb-3">
             האתר מנוהל על ידי יחיד פרטי (להלן: &quot;מפעיל האתר&quot;).
@@ -33,12 +33,8 @@ export default function PrivacyPage() {
             כתובת: {SITE_INFO.owner.address}.
           </p>
           <p className="mb-3">
-            מדיניות פרטיות זו מתארת בשקיפות מלאה אילו נתונים, אם בכלל, נאספים בעת ביקורך באתר,
-            על ידי מי, ולאיזה מטרה. היא חלה על כל משתמשי האתר, לרבות תושבי ישראל ותושבי האיחוד האירופי.
-          </p>
-          <p>
-            המדיניות עומדת בדרישות <strong>חוק הגנת הפרטיות, התשמ&quot;א-1981</strong> ותקנותיו,
-            וכן ב-<strong>תקנת הגנת המידע הכללית של האיחוד האירופי (GDPR)</strong>.
+            מדיניות פרטיות זו מתארת אילו נתוני שימוש נשלחים לספקי האחסון והניתוח,
+            ואילו פרטים אתם בוחרים לשלוח בפנייה בדוא״ל או ברכישת קורס באתר חיצוני.
           </p>
         </section>
 
@@ -50,30 +46,27 @@ export default function PrivacyPage() {
 
           <div className="bg-green-50 border border-green-300 rounded-none p-5 mb-4">
             <h3 className="text-lg font-bold text-green-800 mb-2">
-              התשובה הקצרה: כמעט כלום.
+              נתוני שימוש ופרטים שאתם בוחרים למסור
             </h3>
             <p className="text-green-700">
-              אנחנו <strong>לא</strong> מפעילים מסד נתונים. אנחנו <strong>לא</strong> שומרים שום
-              מידע על המשתמשים שלנו. אין הרשמה, אין חשבון משתמש, אין עוגיות ניתוח (Analytics),
-              ואין פיקסל פרסומי (Facebook Pixel, Google Ads וכד&apos;).
+              אין באתר חשבון משתמש או הרשמה להפעלת הכלים. האתר משתמש ב־Google Analytics
+              וב־Vercel Web Analytics למדידת ביקורים ופעולות באתר. פרטים שתשלחו אלינו בדוא״ל
+              יופיעו בתיבת הדוא״ל, ורכישת קורס מתבצעת אצל ספק הקורס החיצוני.
             </p>
           </div>
 
           <h3 className="text-lg font-semibold text-ink mb-2">2.1 מידע שאתה מזין במחשבונים</h3>
           <p className="mb-3">
-            נתונים שאתה מזין במחשבונים (סכומי כסף, שכר, תאריכים וכו&apos;) <strong>אינם נשלחים לשרת</strong>.
-            כל החישובים מתבצעים <strong>בדפדפן שלך בלבד</strong>, בזיכרון זמני.
-            הנתונים לא נשמרים, לא מועברים, ולא מנותחים על ידינו.
+            המחשבונים באתר מבצעים את החישוב בדפדפן. אין צורך בחשבון משתמש כדי להשתמש בהם.
+            במקביל, ספקי הניתוח עשויים לקבל נתונים על ביקור בדף ועל לחיצה על קישור לקורס;
+            אין להזין פרטים אישיים בשדות שאינם מיועדים לכך.
           </p>
 
-          <h3 className="text-lg font-semibold text-ink mb-2">2.2 אנחנו לא אוספים</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">2.2 מידע שלא נדרש להפעלת המחשבונים</h3>
           <ul className="list-disc list-inside space-y-1 mb-3 mr-2">
-            <li>שם, כתובת דוא&quot;ל, מספר טלפון</li>
-            <li>מידע פיננסי אישי</li>
-            <li>מיקום גיאוגרפי מדויק</li>
-            <li>היסטוריית גלישה (מעבר לבקשת הדף הנוכחי)</li>
-            <li>עוגיות פרסומיות או ניתוחיות</li>
-            <li>פרופיל משתמש מכל סוג</li>
+            <li>אין צורך למסור שם, כתובת דוא&quot;ל או מספר טלפון לשימוש בכלים.</li>
+            <li>אין צורך לפתוח חשבון משתמש באתר.</li>
+            <li>מסירת פרטים בדוא״ל או באתר רכישת הקורס היא פעולה נפרדת שתבחרו לבצע.</li>
           </ul>
         </section>
 
@@ -91,7 +84,7 @@ export default function PrivacyPage() {
 
           <h3 className="text-lg font-semibold text-ink mb-2">3.1 מה יומני Vercel כוללים (בדרך כלל):</h3>
           <ul className="list-disc list-inside space-y-1 mb-3 mr-2">
-            <li>כתובת IP של המבקר (מוסתרת/מקוצרת בדרך כלל)</li>
+            <li>כתובת IP של המבקר</li>
             <li>סוג דפדפן ומערכת הפעלה (User-Agent)</li>
             <li>תאריך ושעת הבקשה</li>
             <li>כתובת הדף המבוקש</li>
@@ -100,10 +93,8 @@ export default function PrivacyPage() {
 
           <h3 className="text-lg font-semibold text-ink mb-2">3.2 חשוב לדעת:</h3>
           <ul className="list-disc list-inside space-y-1 mb-3 mr-2">
-            <li>מידע זה <strong>אינו מקושר לזהות אישית</strong></li>
-            <li>אנחנו <strong>לא ניגשים</strong> ליומנים אלה בשגרה</li>
-            <li>הנתונים נשמרים לפרק זמן מוגבל על ידי Vercel</li>
-            <li>Vercel היא המעבדת (Data Processor) — אנחנו הבקר (Data Controller)</li>
+            <li>המידע עשוי לשמש לתפעול, אבטחה, איתור תקלות וניתוח שימוש באתר.</li>
+            <li>משך השמירה והטיפול בנתונים נקבעים גם לפי הגדרות ספק האחסון.</li>
           </ul>
 
           <p className="text-sm text-ink/70 bg-cream-2 p-3 rounded-none">
@@ -125,24 +116,25 @@ export default function PrivacyPage() {
             4. עוגיות (Cookies)
           </h2>
           <p className="mb-3">
-            אנחנו <strong>לא</strong> משתמשים בעוגיות לצורכי ניתוח, שיווק או מעקב.
+            האתר טוען את Google Analytics למדידת שימוש. לפי תיעוד Google, התג עשוי להציב
+            עוגיות כגון _ga לצורך זיהוי ביקורים ומפגשים. Vercel Web Analytics מודד ביקורים
+            ללא עוגיות צד שלישי.
           </p>
 
-          <h3 className="text-lg font-semibold text-ink mb-2">4.1 עוגיות פונקציונליות (אופציונלי)</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">4.1 העדפות נגישות בדפדפן</h3>
           <p className="mb-3">
-            ייתכן שהאתר שומר העדפות מקומיות (כגון הגדרות נגישות) ב-<strong>localStorage</strong> של
-            הדפדפן שלך — זה שמור אצלך בלבד, ולא נשלח לשרת.
+            האתר שומר העדפות נגישות ב־<strong>localStorage</strong> של הדפדפן שלך.
+            ההעדפות נשמרות במכשיר ואינן נשלחות לשרת כחלק מתכונת הנגישות.
           </p>
 
-          <h3 className="text-lg font-semibold text-ink mb-2">4.2 עוגיות תשתית (Vercel)</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">4.2 עוגיות תשתית</h3>
           <p className="mb-3">
-            Vercel עשויה להציב עוגיות טכניות הכרחיות לתפעול השרת (ניהול עומסים, אבטחה).
-            אלה <strong>אינן עוגיות שיווקיות</strong> ואינן עוקבות אחר פעילותך באתרים אחרים.
+            ספק האחסון עשוי להשתמש במנגנונים טכניים לתפעול ולאבטחת האתר.
+            מידע על סוגי עוגיות נוספים ותוקפן מופיע במדיניות הספקים המקושרות להלן.
           </p>
 
-          <h3 className="text-lg font-semibold text-ink mb-2">4.3 מה אנחנו לא עושים:</h3>
+          <h3 className="text-lg font-semibold text-ink mb-2">4.3 שירותי פרסום שלא שולבו בקוד האתר:</h3>
           <ul className="list-disc list-inside space-y-1 mr-2">
-            <li>אין Google Analytics</li>
             <li>אין Facebook Pixel</li>
             <li>אין TikTok Pixel</li>
             <li>אין Hotjar, Clarity, או כלי הקלטת משתמשים</li>
@@ -171,11 +163,35 @@ export default function PrivacyPage() {
             </div>
 
             <div className="border border-ink/15 rounded-none p-4">
+              <h3 className="font-semibold text-ink">Google Analytics — מדידת שימוש</h3>
+              <p className="text-sm text-ink/70 mt-1">
+                תג Google נטען בדפי האתר ובדפי הקורסים. הוא מודד צפיות בדפים ובחלק מהדפים
+                גם לחיצות על קישורים לדפי קורס ולרכישה. מידע על עוגיות ושימוש בנתונים מופיע ב
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">מדיניות הפרטיות של Google</a>.
+              </p>
+            </div>
+
+            <div className="border border-ink/15 rounded-none p-4">
+              <h3 className="font-semibold text-ink">Vercel Web Analytics — מדידת ביקורים</h3>
+              <p className="text-sm text-ink/70 mt-1">
+                רכיב המדידה של Vercel שולח נתוני צפייה בדפים לצורך נתונים סטטיסטיים מצטברים.
+                לפי תיעוד Vercel, רכיב זה אינו משתמש בעוגיות לזיהוי מבקרים.
+              </p>
+            </div>
+
+            <div className="border border-ink/15 rounded-none p-4">
+              <h3 className="font-semibold text-ink">אתרי הקורסים החיצוניים</h3>
+              <p className="text-sm text-ink/70 mt-1">
+                לחיצה על רכישת קורס מעבירה לאתר Schooler; קורס Claude AI מקושר לאתר קורס חיצוני.
+                בעת מעבר לאתר חיצוני חלה גם מדיניות הפרטיות שלו.
+              </p>
+            </div>
+
+            <div className="border border-ink/15 rounded-none p-4">
               <h3 className="font-semibold text-ink">Google Fonts — פונטים</h3>
               <p className="text-sm text-ink/70 mt-1">
-                האתר משתמש בפונט &quot;Heebo&quot; מ-Google Fonts. טעינת הפונט כרוכה בבקשה לשרתי Google,
-                אשר עשויה לכלול כתובת IP שלך. Google Fonts אינה שומרת מידע זיהוי אישי לפי
-                מדיניות Google הנוכחית.{' '}
+                האתר משתמש בפונטים ממאגר Google Fonts באמצעות next/font; קובצי הפונט מוגשים
+                מתוך האתר. פרטים על הגופנים במאגר:{' '}
                 <a href="https://fonts.google.com/about" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
                   קרא עוד
                 </a>
@@ -183,10 +199,6 @@ export default function PrivacyPage() {
             </div>
           </div>
 
-          <p className="mt-4 text-sm text-ink/70">
-            <strong>לא</strong> משולבים: Google Analytics, Facebook SDK, Twitter SDK, LinkedIn Pixel,
-            Hotjar, Intercom, Crisp Chat, או כל שירות ניתוח/פרסום אחר.
-          </p>
         </section>
 
         {/* 6. העברת מידע לחו"ל */}
@@ -195,17 +207,12 @@ export default function PrivacyPage() {
             6. העברת מידע לחו&quot;ל
           </h2>
           <p className="mb-3">
-            השרתים שמאחסנים את האתר ממוקמים ב<strong>ארצות הברית</strong> (Vercel).
-            בגלישה באתר, בקשות ה-HTTP שלך מגיעות לשרתים אלה — זוהי ה&quot;העברה&quot; היחידה של מידע
-            טכני לחו&quot;ל.
+            נתוני גלישה וניתוח עשויים להישלח אל ספקי השירות המפורטים לעיל, לרבות Vercel ו־Google,
+            ולעבור עיבוד מחוץ לישראל לפי תנאי השירות וההגדרות של כל ספק.
           </p>
           <p className="mb-3">
-            מכיוון שלא נאסף מידע אישי על ידינו, <strong>אין העברת מידע אישי</strong> לצדדים שלישיים,
-            לא בישראל ולא בחו&quot;ל.
-          </p>
-          <p className="text-sm text-ink/70">
-            Vercel פועלת בהתאם לסטנדרטים של GDPR ו-SCCs (Standard Contractual Clauses)
-            לצורך העברת מידע מהאיחוד האירופי לארה&quot;ב.
+            אם תעברו לאתר רכישה חיצוני או תפנו אלינו בדוא״ל, המידע שתמסרו יטופל גם לפי מדיניות
+            השירות החיצוני שבו בחרתם להשתמש.
           </p>
         </section>
 
@@ -215,9 +222,8 @@ export default function PrivacyPage() {
             7. זכויותיך על פי חוק
           </h2>
           <p className="mb-4">
-            חוק הגנת הפרטיות הישראלי ו-GDPR מעניקים לך זכויות שונות בנוגע למידע אישי.
-            מכיוון שאיננו אוספים מידע אישי, רוב הזכויות הבאות אינן ישימות מעשית — אך אנו
-            מפרטים אותן לשלמות:
+            זכויות ביחס למידע אישי תלויות בדין החל ובנסיבות. לפנייה לגבי מידע שנמסר אלינו
+            בדוא״ל או לגבי נתוני שימוש באתר, השתמשו בפרטי הקשר שבסוף הדף.
           </p>
 
           <div className="space-y-3">
@@ -225,52 +231,43 @@ export default function PrivacyPage() {
               <span className="font-bold text-gold w-8 flex-shrink-0">1.</span>
               <div>
                 <strong>זכות עיון (Right of Access)</strong> — לדעת אילו נתונים שמורים עליך.
-                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים לעיין בהם.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">2.</span>
               <div>
                 <strong>זכות תיקון (Right to Rectification)</strong> — לתקן מידע שגוי.
-                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים לתיקון.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">3.</span>
               <div>
                 <strong>זכות מחיקה (Right to Erasure)</strong> — &quot;הזכות להישכח&quot;.
-                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים למחיקה.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">4.</span>
               <div>
                 <strong>זכות אי-שימוש / התנגדות (Right to Object)</strong> — להתנגד לעיבוד.
-                <span className="text-ink/70 text-sm block">מצבנו: אין עיבוד מידע אישי.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">5.</span>
               <div>
                 <strong>זכות ניוד (Data Portability)</strong> — לקבל נתוניך בפורמט מובנה.
-                <span className="text-ink/70 text-sm block">מצבנו: אין נתונים להעביר.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <span className="font-bold text-gold w-8 flex-shrink-0">6.</span>
               <div>
                 <strong>זכות הגבלה (Right to Restrict Processing)</strong> — להגביל את השימוש.
-                <span className="text-ink/70 text-sm block">מצבנו: אין עיבוד לצמצם.</span>
               </div>
             </div>
           </div>
 
           <p className="mt-4 text-sm text-ink/70">
-            אם ברצונך לממש זכויות אלה בנוגע למידע שנאסף על ידי <strong>Vercel</strong>,
-            ניתן לפנות ישירות לפרטיות Vercel:{' '}
-            <a href={SITE_INFO.hosting.privacyPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
-              vercel.com/legal/privacy-policy
-            </a>.
+            לפניות הנוגעות למידע שעשוי להימצא אצל ספקים חיצוניים, אפשר לעיין גם במדיניות
+            הפרטיות שלהם או לפנות אלינו באמצעות פרטי הקשר להלן.
           </p>
         </section>
 
@@ -280,9 +277,7 @@ export default function PrivacyPage() {
             8. קטינים
           </h2>
           <p className="mb-3">
-            האתר אינו מיועד לילדים מתחת לגיל 13. אנחנו לא אוספים במודע מידע מקטינים.
-            מכיוון שאיננו אוספים מידע אישי כלל, אין לנו אפשרות לדעת את גיל המשתמש,
-            ואין לנו צורך לדעת זאת.
+            האתר אינו מיועד לילדים מתחת לגיל 13. אין צורך למסור פרטים אישיים כדי להשתמש בכלים.
           </p>
           <p className="text-sm text-ink/70">
             אם הנך הורה או אפוטרופוס וסבור שילדך מסר מידע אישי כלשהו, אנא{' '}
@@ -315,7 +310,7 @@ export default function PrivacyPage() {
           <p className="mb-3">
             לשאלות, הערות או בקשות בנוגע למדיניות פרטיות זו, אנא{' '}
             <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline font-medium">
-              פנה אלינו דרך טופס יצירת הקשר
+              פנה אלינו דרך דף יצירת הקשר
             </Link>
             {' '}או ישירות לכתובת:{' '}
             <a href={`mailto:${SITE_INFO.contact.email}`} className="text-gold hover:underline">
@@ -330,8 +325,8 @@ export default function PrivacyPage() {
         {/* תחתית */}
         <div className="bg-cream-2 border border-ink/15 rounded-none p-5 mt-10">
           <p className="text-sm text-ink/70">
-            <strong>סיכום:</strong> האתר {SITE_INFO.domain} אינו אוסף נתונים אישיים. המידע הטכני היחיד
-            שנאסף הוא יומני שרת סטנדרטיים של Vercel (IP, User-Agent, Timestamp), שאינם מקושרים לזהות אישית.
+            <strong>סיכום:</strong> באתר {SITE_INFO.domain} פועלים Google Analytics ו־Vercel Web Analytics,
+            וספק האחסון עשוי לעבד נתוני בקשות. שימוש בכלים אינו דורש חשבון משתמש.
             לשאלות:{' '}
             <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
               {SITE_INFO.contact.contactPage}

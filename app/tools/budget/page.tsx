@@ -12,8 +12,6 @@ import { PLSummary } from '@/components/tools/PLSummary';
 import { ExportImportBar } from '@/components/tools/ExportImportBar';
 import { BudgetCharts } from '@/components/tools/BudgetCharts';
 import { EmployeeAnalysis } from '@/components/tools/EmployeeAnalysis';
-import { AdvancedAnalytics } from '@/components/tools/AdvancedAnalytics';
-import { IndustryBenchmarks } from '@/components/tools/IndustryBenchmarks';
 import { TemplatesLibrary } from '@/components/tools/TemplatesLibrary';
 import { WorkingCapitalOptimizer } from '@/components/tools/WorkingCapitalOptimizer';
 import { GoalsTracker } from '@/components/tools/GoalsTracker';
@@ -21,8 +19,6 @@ import {
   TrendingUp,
   ChartBar,
   Users,
-  Sparkles,
-  Trophy,
   Layout,
   Settings as SettingsIcon,
   Target,
@@ -32,8 +28,6 @@ type AnalyticsTab =
   | 'templates'
   | 'charts'
   | 'employees'
-  | 'advanced'
-  | 'benchmarks'
   | 'wc'
   | 'goals';
 
@@ -100,20 +94,6 @@ export default function BudgetPage() {
             color="purple"
           />
           <TabButton
-            active={analyticsTab === 'advanced'}
-            onClick={() => setAnalyticsTab('advanced')}
-            icon={Sparkles}
-            label="אנליזה מתקדמת"
-            color="indigo"
-          />
-          <TabButton
-            active={analyticsTab === 'benchmarks'}
-            onClick={() => setAnalyticsTab('benchmarks')}
-            icon={Trophy}
-            label="בנצ'מרק ענפי"
-            color="emerald"
-          />
-          <TabButton
             active={analyticsTab === 'wc'}
             onClick={() => setAnalyticsTab('wc')}
             icon={SettingsIcon}
@@ -132,8 +112,6 @@ export default function BudgetPage() {
         {analyticsTab === 'templates' && <TemplatesLibrary />}
         {analyticsTab === 'charts' && <BudgetCharts />}
         {analyticsTab === 'employees' && <EmployeeAnalysis />}
-        {analyticsTab === 'advanced' && <AdvancedAnalytics />}
-        {analyticsTab === 'benchmarks' && <IndustryBenchmarks />}
         {analyticsTab === 'wc' && <WorkingCapitalOptimizer />}
         {analyticsTab === 'goals' && <GoalsTracker />}
       </div>
@@ -145,19 +123,20 @@ export default function BudgetPage() {
         </h1>
         <p className="text-ink/70 mb-4">
           כלי תכנון התקציב של חשבונאי מאפשר לבעלי עסקים, מנהלי כספים ויזמים לבנות תקציב שנתי
-          או חודשי מפורט בזמן אמת. הזינו הכנסות ממקורות שונים, הוצאות קבועות ומשתנות, עלויות
-          עובדים והלוואות — וקבלו דוח רווח והפסד (P&L) מיידי עם גרפים, ניתוח עובדים ובנצ׳מרק ענפי.
+          או חודשי בזמן אמת. הזינו הכנסות ממקורות שונים, הוצאות קבועות ומשתנות, שכר
+          עובדים והלוואות — וקבלו אומדן רווח והפסד עם גרפים וניתוח שכר.
         </p>
         <p className="text-ink/70 mb-4">
-          המחשבון מעודכן לנתוני 2026: שכר מינימום 6,443.85 ₪ (מ-1.4.2026), מע״מ 18%, ודמי ביטוח
-          לאומי עדכניים. כל השינויים בחקיקה ובתעריפים משתקפים אוטומטית בחישובי עלות העובד.
+          הכלי מחבר את הסכומים שהזנתם ומחשב ריבית על ההלוואות לפי הנתונים שתבחרו. בשורת העובדים
+          נכלל השכר החודשי שהוזן בלבד; יש להוסיף בנפרד הפרשות מעסיק, דמי ביטוח, הבראה והוצאות נוספות
+          החלות בפועל. שיעור המס הוא הנחה שאתם מזינים, ולא חישוב חבות מס אישית.
         </p>
 
         <h2 className="text-xl font-semibold text-ink mt-6 mb-2">כיצד להשתמש בכלי התקציב?</h2>
         <ol className="list-decimal list-inside text-ink/70 space-y-1 mb-4">
           <li>הוסיפו שורות הכנסה תחת &quot;הכנסות&quot; — ניתן לפלח לפי מוצר, לקוח או ערוץ.</li>
           <li>הזינו הוצאות קבועות (שכר דירה, ביטוחים) והוצאות משתנות (חומרי גלם, שיווק).</li>
-          <li>הוסיפו עובדים עם שכר ברוטו — המחשבון יחשב את עלות המעסיק כולל ביטוח לאומי.</li>
+          <li>הוסיפו עובדים עם שכר ברוטו; הוסיפו את עלויות המעסיק הנוספות כשורות הוצאה נפרדות.</li>
           <li>הזינו הלוואות ואשראי לצורך חישוב הון חוזר.</li>
           <li>עברו ללשונית &quot;גרפים פיננסיים&quot; לצפייה בתרשימי מגמה ופילוח הוצאות.</li>
         </ol>
@@ -167,7 +146,7 @@ export default function BudgetPage() {
         </h2>
         <ul className="list-disc list-inside text-ink/70 space-y-1 mb-4">
           <li>
-            <strong>שכר מינימום:</strong> 6,443.85 ₪ לחודש (182 שעות) החל מ-1.4.2026.
+            <strong>שכר מינימום:</strong> 6,443.85 ₪ לחודש למשרה מלאה החל מ־1.4.2026.
           </li>
           <li>
             <strong>עלות מעסיק — ביטוח לאומי:</strong> 4.51% על שכר עד 7,703 ₪, 7.6% על החלק שמעל.
@@ -176,7 +155,7 @@ export default function BudgetPage() {
             <strong>מע״מ:</strong> 18% החל מ-1.1.2025 (עלה מ-17%).
           </li>
           <li>
-            <strong>דמי הבראה:</strong> 418 ₪ ליום לפי הצו הכללי במגזר הפרטי; בדקו תעריף ענפי או הסכם קיבוצי חל.
+            <strong>דמי הבראה:</strong> 451.50 ₪ ליום עבור שנת ההבראה 2026 לפי צו ההרחבה, בכפוף להוראותיו. הצו אינו חל על עובדי השירות הציבורי, עובדים ששכרם מוצמד להסכמי שכר בשירות הציבורי ועובדי מפעלים מוגנים. בדקו גם הסדר ענפי או קיבוצי חל.
           </li>
           <li>
             <strong>פיצויי פיטורין:</strong> תקרת פטור 13,750 ₪ לשנת עבודה.
@@ -190,8 +169,8 @@ export default function BudgetPage() {
               האם המחשבון מתחשב במע״מ בחישוב ההכנסות וההוצאות?
             </h3>
             <p className="text-ink/70">
-              ניתן לבחור בהגדרות האם לעבוד עם מחירים כולל מע״מ (18%) או ללא מע״מ. המערכת
-              מציגה את הנתונים בהתאמה כך שה-P&L יהיה עקבי.
+              הכלי אינו מפריד מע״מ אוטומטית. הזינו הכנסות והוצאות על אותו בסיס, ללא מע״מ או
+              כולל מע״מ, ובדקו את הטיפול החשבונאי הנכון עם גורם מקצועי.
             </p>
           </div>
           <div>
@@ -199,8 +178,8 @@ export default function BudgetPage() {
               כיצד מחושבת עלות העובד הכוללת?
             </h3>
             <p className="text-ink/70">
-              עלות המעסיק כוללת את השכר ברוטו, דמי ביטוח לאומי (4.51% או 7.6% בהתאם לשכר),
-              הפרשות לפנסיה, דמי הבראה וחופשה שנתית. לחישוב מפורט ראו את{' '}
+              בשורת העובדים נכלל רק השכר החודשי שהזנתם. יש להזין בנפרד דמי ביטוח לאומי של המעסיק,
+              הפקדות לפנסיה ולפיצויים והוצאות נוספות שחלות בפועל. למידע על רכיבי השכר ראו את{' '}
               <Link href="/personal-tax/salary-net-gross" className="text-gold underline">
                 מחשבון שכר ברוטו נטו
               </Link>
@@ -240,13 +219,13 @@ export default function BudgetPage() {
         <ul className="list-disc list-inside text-ink/70 space-y-1">
           <li>
             <Link href="/personal-tax/salary-net-gross" className="text-gold underline">
-              מחשבון שכר ברוטו נטו
+              מדריך שכר ברוטו נטו
             </Link>{' '}
-            — חשבו את עלות העובד המדויקת לכל תפקיד.
+              — בדקו רכיבי שכר וניכויים לפני הכנסתם לתקציב.
           </li>
           <li>
             <Link href="/employee-rights/severance" className="text-gold underline">
-              מחשבון פיצויי פיטורין
+              מדריך פיצויי פיטורין
             </Link>{' '}
             — תכננו את עתודות הפיצויים בתקציב.
           </li>
@@ -254,7 +233,7 @@ export default function BudgetPage() {
             <Link href="/employee-rights/recreation-pay" className="text-gold underline">
               מחשבון דמי הבראה
             </Link>{' '}
-            — 418 ₪ ליום במגזר הפרטי ב-2026.
+            — 451.50 ₪ ליום עבור שנת ההבראה 2026 למי שחל עליו הצו הכללי במגזר הפרטי, בכפוף להוראותיו.
           </li>
           <li>
             <Link href="/self-employed/vat" className="text-gold underline">

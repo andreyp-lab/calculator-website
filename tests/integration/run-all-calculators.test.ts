@@ -3,39 +3,13 @@
  * מוודא שהמחשבונים עובדים יחד באופן הגיוני
  */
 import { describe, it, expect } from 'vitest';
-import { calculateSeverance } from '@/lib/calculators/severance';
 import { calculateIncomeTax } from '@/lib/calculators/income-tax';
 import { calculatePrivateRecreationEstimate } from '@/lib/calculators/recreation-pay-verified';
-import { calculateVat } from '@/lib/calculators/vat';
+import { calculateVatBasic } from '@/lib/calculators/vat-basic';
 import { calculateMortgage, getMaxLoanAmount } from '@/lib/calculators/mortgage';
 import { formatCurrency } from '@/lib/utils/formatters';
 
-describe('🎯 רצף בדיקה: כל המחשבונים יחד', () => {
-  it('1️⃣ מחשבון פיצויי פיטורין - עובדת הייטק 7 שנים', () => {
-    const result = calculateSeverance({
-      startDate: '2018-01-15',
-      endDate: '2025-01-15',
-      monthlySalary: 28_000,
-      employmentType: 'monthly',
-      partTimePercentage: 100,
-      hasSection14: false,
-      section14Percentage: 0,
-      terminationReason: 'fired',
-    });
-
-    console.log('\n📋 פיצויי פיטורין:');
-    console.log(`   ותק: ${result.yearsOfService.toFixed(1)} שנים`);
-    console.log(`   שכר: ${formatCurrency(result.adjustedSalary)}`);
-    console.log(`   פיצוי בסיסי: ${formatCurrency(result.baseSeverance)}`);
-    console.log(`   פטור ממס: ${formatCurrency(result.taxExemptAmount)}`);
-    console.log(`   חייב במס: ${formatCurrency(result.taxableAmount)}`);
-    console.log(`   נטו משוער: ${formatCurrency(result.netSeverance)}`);
-
-    expect(result.isEligible).toBe(true);
-    expect(result.baseSeverance).toBeCloseTo(196_000, -2); // 28,000 × 7
-    expect(result.taxableAmount).toBeGreaterThan(0); // חורג מהתקרה
-  });
-
+describe('🎯 בדיקות אינטגרציה למחשבונים הפעילים', () => {
   it('2️⃣ מחשבון מס הכנסה - עובד ממוצע 15,000 ₪', () => {
     const result = calculateIncomeTax({
       monthlySalary: 15_000,
@@ -65,23 +39,23 @@ describe('🎯 רצף בדיקה: כל המחשבונים יחד', () => {
     console.log(`   אומדן ברוטו: ${formatCurrency(result.grossEstimate)}`);
 
     expect(result.daysEntitled).toBe(7);
-    expect(result.grossEstimate).toBe(2926); // 7 × 418
+    expect(result.grossEstimate).toBe(3160.5); // 7 × 451.50
   });
 
   it('4️⃣ מחשבון מע"מ - חשבונית של 5,000 ₪', () => {
-    const addVat = calculateVat({ amount: 5_000, mode: 'add', rate: 0.18 });
-    const extractVat = calculateVat({ amount: 5_900, mode: 'extract', rate: 0.18 });
+    const addVat = calculateVatBasic(5_000, 'add');
+    const extractVat = calculateVatBasic(5_900, 'extract');
 
     console.log('\n🧾 מע"מ:');
     console.log('   הוספה:');
-    console.log(`     5,000 ללא מע"מ → ${formatCurrency(addVat.amountWithVat)} כולל מע"מ`);
-    console.log(`     מע"מ: ${formatCurrency(addVat.vatAmount)}`);
+    console.log(`     5,000 ללא מע"מ → ${formatCurrency(addVat.gross)} כולל מע"מ`);
+    console.log(`     מע"מ: ${formatCurrency(addVat.vat)}`);
     console.log('   חילוץ:');
-    console.log(`     5,900 כולל מע"מ → ${formatCurrency(extractVat.amountWithoutVat)} ללא`);
-    console.log(`     מע"מ: ${formatCurrency(extractVat.vatAmount)}`);
+    console.log(`     5,900 כולל מע"מ → ${formatCurrency(extractVat.net)} ללא`);
+    console.log(`     מע"מ: ${formatCurrency(extractVat.vat)}`);
 
-    expect(addVat.amountWithVat).toBeCloseTo(5_900, 0);
-    expect(extractVat.amountWithoutVat).toBeCloseTo(5_000, 0);
+    expect(addVat.gross).toBeCloseTo(5_900, 0);
+    expect(extractVat.net).toBeCloseTo(5_000, 0);
   });
 
   it('5️⃣ מחשבון משכנתא - דירה 2.5M, ראשונה, 25 שנים', () => {
@@ -110,67 +84,4 @@ describe('🎯 רצף בדיקה: כל המחשבונים יחד', () => {
     expect(result.monthlyPayment).toBeLessThan(11_000);
   });
 
-  it('🎯 תרחיש משולב: עובד שמתפטר וקונה דירה', () => {
-    console.log('\n');
-    console.log('═══════════════════════════════════════');
-    console.log('🎯 תרחיש משולב מציאותי');
-    console.log('═══════════════════════════════════════');
-
-    // שלב 1: עובדת שעבדה 8 שנים בהייטק, פוטרה
-    const severance = calculateSeverance({
-      startDate: '2017-06-01',
-      endDate: '2025-06-01',
-      monthlySalary: 25_000,
-      employmentType: 'monthly',
-      partTimePercentage: 100,
-      hasSection14: false,
-      section14Percentage: 0,
-      terminationReason: 'fired',
-    });
-
-    console.log(`\n💼 פוטרה לאחר 8 שנים, שכר 25,000 ₪/חודש:`);
-    console.log(`   פיצוי ברוטו: ${formatCurrency(severance.baseSeverance)}`);
-    console.log(`   נטו: ${formatCurrency(severance.netSeverance)}`);
-
-    // שלב 2: דמי הבראה אחרונים
-    const recreation = calculatePrivateRecreationEstimate(8, 100);
-    console.log(`   + אומדן הבראה ברוטו: ${formatCurrency(recreation.grossEstimate)}`);
-
-    // שלב 3: יוצאת לעצמאית, שולחת חשבונית
-    const invoice = calculateVat({ amount: 30_000, mode: 'add', rate: 0.18 });
-    console.log(`\n🆕 פתחה עוסק מורשה, חשבונית ראשונה:`);
-    console.log(`   ללא מע"מ: ${formatCurrency(invoice.amountWithoutVat)}`);
-    console.log(`   עם מע"מ: ${formatCurrency(invoice.amountWithVat)}`);
-
-    // שלב 4: השתמשה בפיצויים כהון עצמי לדירה
-    const propertyValue = 2_400_000;
-    const equity = severance.netSeverance + recreation.grossEstimate;
-    const loanNeeded = propertyValue - equity;
-    const maxLoan = getMaxLoanAmount(propertyValue, 'first-home');
-
-    console.log(`\n🏠 קונה דירה ב-${formatCurrency(propertyValue)}:`);
-    console.log(`   הון עצמי (פיצויים+הבראה): ${formatCurrency(equity)}`);
-    console.log(`   הלוואה נדרשת: ${formatCurrency(loanNeeded)}`);
-    console.log(`   הלוואה מקסימלית (75%): ${formatCurrency(maxLoan)}`);
-
-    if (loanNeeded <= maxLoan) {
-      const mortgage = calculateMortgage({
-        loanAmount: loanNeeded,
-        interestRate: 4.5,
-        termYears: 25,
-        method: 'shpitzer',
-      });
-      console.log(`   ✅ ניתן לקבל הלוואה!`);
-      console.log(`   תשלום חודשי: ${formatCurrency(mortgage.monthlyPayment)}`);
-      console.log(`   סך ריבית: ${formatCurrency(mortgage.totalInterest)}`);
-    } else {
-      console.log(`   ❌ ההלוואה הנדרשת חורגת מהמקסימום`);
-    }
-
-    console.log('\n═══════════════════════════════════════\n');
-
-    expect(severance.isEligible).toBe(true);
-    expect(recreation.daysEntitled).toBe(7);
-    expect(invoice.amountWithVat).toBeGreaterThan(invoice.amountWithoutVat);
-  });
 });

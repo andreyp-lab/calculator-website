@@ -12,7 +12,7 @@ export function VerifiedRecreationPayCalculator() {
   return (
     <section className="border border-ink/20 bg-cream-2 p-6" aria-label="אומדן דמי הבראה במגזר הפרטי">
       <h2 className="mb-2 text-xl font-bold">אומדן ברוטו לפי הצו הכללי למגזר הפרטי</h2>
-      <p className="mb-5 text-sm leading-relaxed">התעריף ההתחלתי הוא 418 ₪ ליום. אם חל עליכם הסכם ענפי או קיבוצי, בדקו את התעריף והימים הרלוונטיים והזינו תעריף יום בהתאם. האומדן אינו מחשב נטו, זכאות רטרואקטיבית, חל״ת או הסדרים מיוחדים.</p>
+      <p className="mb-5 text-sm leading-relaxed">התעריף ההתחלתי לשנת ההבראה 2026 לפי צו ההרחבה הוא {PRIVATE_DAY_RATE.toFixed(2)} ₪ ליום, לעובדים שעליהם הצו חל. אם חל עליכם הסכם ענפי, קיבוצי או ציבורי אחר, בדקו את התעריף והימים הרלוונטיים והזינו תעריף יום בהתאם. האומדן אינו מחשב נטו, זכאות רטרואקטיבית, חל״ת או הסדרים מיוחדים.</p>
       <div className="grid gap-4 sm:grid-cols-3">
         <label className="block text-sm">שנות ותק שהושלמו אצל המעסיק<input className="mt-1 w-full border border-ink/25 bg-paper p-2" type="number" min="0" step="1" value={years} onChange={e => setYears(Number(e.target.value))} /></label>
         <label className="block text-sm">היקף משרה באחוזים<input className="mt-1 w-full border border-ink/25 bg-paper p-2" type="number" min="0" max="100" value={positionPercent} onChange={e => setPositionPercent(Number(e.target.value))} /></label>

@@ -1,5 +1,7 @@
-/** Base private-sector convalescence-pay illustration. Collective agreements can override it. */
-export const PRIVATE_DAY_RATE = 418;
+import { RECREATION_PAY_2026 } from '@/lib/constants/tax-2026';
+
+/** Base private-sector rate for the 2026 recreation year. Other agreements can apply. */
+export const PRIVATE_DAY_RATE = RECREATION_PAY_2026.privateSectorPerDay;
 
 export function privateDaysForCompletedYears(years: number): number {
   if (!Number.isFinite(years) || years < 1) return 0;
@@ -11,7 +13,7 @@ export function privateDaysForCompletedYears(years: number): number {
   return 10;
 }
 
-export function calculatePrivateRecreationEstimate(years: number, positionPercent: number, dayRate = PRIVATE_DAY_RATE) {
+export function calculatePrivateRecreationEstimate(years: number, positionPercent: number, dayRate: number = PRIVATE_DAY_RATE) {
   const daysEntitled = privateDaysForCompletedYears(years);
   const percent = Math.min(100, Math.max(0, Number.isFinite(positionPercent) ? positionPercent : 0));
   const rate = Math.max(0, Number.isFinite(dayRate) ? dayRate : 0);

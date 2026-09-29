@@ -27,17 +27,17 @@ const faqItems = [
   {
     question: 'מה ההבדל בין חשבונית מס לחשבונית עסקה?',
     answer:
-      'חשבונית מס מנפיקה רק עוסק מורשה או חברה — היא מאפשרת ללקוח לקזז מע"מ תשומות. חשבונית עסקה היא דרישת תשלום (כמו הצעת מחיר מחייבת) שיכולה להנפיק גם עוסק פטור, אך אינה מזכה את מקבלה בקיזוז מע"מ.',
+      'חשבונית מס מנפיק עוסק הרשום כמורשה או חברה, והיא עשויה לשמש לניכוי מס תשומות אם העסקה והקונה עומדים בתנאים. חשבונית עסקה היא דרישת תשלום שיכול להנפיק גם עוסק פטור, והיא אינה מסמך לניכוי מע"מ.',
   },
   {
     question: 'האם עוסק פטור יכול להנפיק חשבונית מס?',
     answer:
-      'לא. עוסק פטור אינו גובה מע"מ ולכן אינו מנפיק חשבונית מס. הוא מנפיק קבלה ו/או חשבונית עסקה. לקוחות עסקיים שמעוניינים לקזז מע"מ יצטרכו לקנות מעוסק מורשה.',
+      'לא. עוסק פטור אינו גובה מע"מ ולכן אינו מנפיק חשבונית מס. הוא מנפיק קבלה עם קבלת התשלום, ויכול להוציא חשבונית עסקה לפי הצורך. אין מס תשומות לניכוי במסמכים אלה.',
   },
   {
     question: 'מהו מספר הקצאה ומה הסף שלו ב-2026?',
     answer:
-      'מספר הקצאה הוא אישור שמנפיקה רשות המסים לכל חשבונית מס מעל סכום מסוים. מ-1.1.2026 — חשבוניות מס מעל 10,000 ₪ (לפני מע"מ) חייבות במספר הקצאה. מ-1.6.2026 הסף יורד ל-5,000 ₪. חשבונית מעל הסף ללא מספר הקצאה עלולה להיפסל ולמנוע קיזוז מע"מ אצל הקונה.',
+      'מספר הקצאה מנפיקה רשות המסים לחשבוניות מס העומדות בתנאי המודל. מ-1.1.2026 סף העסקה הוא מעל 10,000 ₪ לפני מע"מ, ומ-1.6.2026 הוא מעל 5,000 ₪. כאשר המספר נדרש והוא חסר, הקונה עלול שלא להיות זכאי לניכוי מס תשומות. יש לבדוק את תנאי התחולה ברשות המסים.',
   },
   {
     question: 'מה זה חשבונית מס-קבלה?',
@@ -57,7 +57,7 @@ const faqItems = [
   {
     question: 'אפשר להנפיק חשבוניות דיגיטליות?',
     answer:
-      'כן. מסמכים דיגיטליים (PDF שנוצר בתוכנה מוסמכת ונשמר במקור דיגיטלי) מוכרים כחוקיים לחלוטין. חשוב שהמסמך יכלול את כל הפרטים הנדרשים (שם, ח.פ./ע.מ., סכומים, מספר הקצאה אם נדרש) ושיישמר בצורה שמאפשרת לאחזרו בביקורת.',
+      'אפשר להנפיק ולשמור מסמכים דיגיטליים בהתאם להוראות ניהול הספרים ולכללי מסמך ממוחשב. יש לבדוק שהתוכנה, אופן המסירה והשמירה עומדים בדרישות ושאפשר לאחזר את המסמך המקורי בעת ביקורת.',
   },
   {
     question: 'מה קורה אם נדרש מספר הקצאה והוא חסר?',
@@ -239,9 +239,9 @@ export default function InvoicesPage() {
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>חשבוניות ישראל — מספרי הקצאה 2026</h2>
           <p>
-            מ-2024 רשות המסים מחייבת קבלת <strong>מספר הקצאה</strong> (אישור ממחולל חשבוניות
-            ישראל) עבור חשבוניות מס מעל סכומים מסוימים. ללא מספר ההקצאה, הקונה לא יוכל לקזז
-            את מע&quot;מ התשומות.
+            במודל חשבוניות ישראל, <strong>מספר הקצאה</strong> נדרש בתנאים שקבעה רשות המסים
+            לגבי חשבוניות מס מעל הסף. כאשר התנאים חלים, היעדר המספר עשוי למנוע מהקונה
+            ניכוי של מע&quot;מ התשומות.
           </p>
         </div>
 
@@ -265,7 +265,7 @@ export default function InvoicesPage() {
                 <td className="p-3 border-b font-medium text-ink">1.1.2026 – 31.5.2026</td>
                 <td className="p-3 border-b font-bold text-ink">10,000 ₪</td>
                 <td className="p-3 border-b">
-                  חשבונית מס מעל 10,000 ₪ חייבת במספר הקצאה לפני הנפקה
+                  מספר הקצאה נדרש לחשבונית מס מעל הסף בתנאי המודל
                 </td>
               </tr>
               <tr>
@@ -291,8 +291,9 @@ export default function InvoicesPage() {
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>מסמכים דיגיטליים — מה מותר?</h2>
           <p>
-            חשבוניות ומסמכים שנוצרו דיגיטלית (PDF שנשמר בצורה מקורית) מוכרים לחלוטין. אין
-            צורך להדפיס ולשמור פיזית — אבל יש כמה תנאים:
+            אפשר להפיק ולשמור מסמכים ממוחשבים לפי הוראות ניהול הספרים. קובץ PDF לבדו
+            אינו מוכיח עמידה בכל הדרישות; בדקו את התוכנה, אופן המסירה והשמירה. בין הנתונים
+            שיש לבדוק:
           </p>
           <ul>
             <li>
@@ -301,8 +302,8 @@ export default function InvoicesPage() {
               המע&quot;מ, סך הכל לתשלום.
             </li>
             <li>
-              <strong>מספר הקצאה:</strong> חובה על מסמכים מעל הסף — חייב להופיע על גבי
-              החשבונית.
+              <strong>מספר הקצאה:</strong> יש לבדוק אם נדרש לפי סוג החשבונית, סכומה ותנאי
+              מודל חשבוניות ישראל.
             </li>
             <li>
               <strong>שמירה:</strong> גיבוי ענן אמין שמאפשר שחזור בביקורת.
@@ -452,49 +453,11 @@ export default function InvoicesPage() {
         <section className="mb-10 border-t border-ink/15 pt-8">
           <h2 className="text-lg font-bold text-ink/70 mb-3">מקורות</h2>
           <ul className="text-sm text-ink/70 space-y-1 list-disc list-inside">
-            <li>
-              <a
-                href="https://www.kolzchut.org.il/he/%D7%A2%D7%95%D7%A1%D7%A7_%D7%A4%D7%98%D7%95%D7%A8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-ink"
-              >
-                כל-זכות — עוסק פטור
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.greeninvoice.co.il/magazine/israel-invoice/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-ink"
-              >
-                Green Invoice — חשבוניות ישראל ומספרי הקצאה 2026
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://bakertilly.co.il/blog-invoices-2026.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-ink"
-              >
-                Baker Tilly — חשבוניות ישראל 2026
-              </a>
-            </li>
+            <li><a href="https://www.gov.il/he/pages/vat-to-the-new-dealer?chapterIndex=14" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">רשות המסים — מדריך מע״מ לעוסק החדש</a></li>
             <li>
               <a href="https://www.gov.il/he/pages/minisite-israel-invoice-200324" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">רשות המסים — חשבוניות ישראל וספי מספר הקצאה</a>
             </li>
-            <li>
-              <a
-                href="https://www.kolzchut.org.il/he/%D7%9E%D7%A1_%D7%AA%D7%A9%D7%95%D7%9E%D7%95%D7%AA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-ink"
-              >
-                כל-זכות — מס תשומות
-              </a>
-            </li>
+            <li><a href="https://www.gov.il/he/service/itc-software-registry-for-computerized-accounting-systems" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">רשות המסים — בדיקת רישום תוכנה לניהול ספרים</a></li>
           </ul>
           <p className="text-xs text-ink/70 mt-3">
             עודכן לאחרונה: {lastUpdated}. המידע לצורכי הכוונה כללית בלבד ואינו מהווה ייעוץ משפטי

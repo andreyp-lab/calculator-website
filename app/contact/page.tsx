@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_INFO } from '@/lib/config/site-info';
 
 export const metadata: Metadata = {
   // הערה: ה-template ב-root layout מוסיף "| חשבונאי" — לא לכלול את המותג כאן (כפילות)
@@ -26,7 +27,7 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-ink mb-6">כתבו לנו</h2>
             <p className="text-ink/70 mb-6">יש שאלה על כלי באתר או גיליתם נתון שדורש תיקון? שלחו הודעה לכתובת הדוא״ל שלנו.</p>
             <a
-              href="mailto:info@cheshbonai.co.il?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%90%D7%AA%D7%A8%20%D7%97%D7%A9%D7%91%D7%95%D7%A0%D7%90%D7%99"
+              href={`mailto:${SITE_INFO.contact.email}?subject=%D7%A4%D7%A0%D7%99%D7%99%D7%94%20%D7%9E%D7%90%D7%AA%D7%A8%20%D7%97%D7%A9%D7%91%D7%95%D7%A0%D7%90%D7%99`}
               className="inline-block bg-ink text-cream px-6 py-3 hover:bg-ink-deep transition font-medium"
             >
               פתח הודעת דוא״ל
@@ -42,17 +43,9 @@ export default function Contact() {
               <div>
                 <h3 className="font-bold text-ink mb-2">דוא&quot;ל</h3>
                 <p className="text-ink/70">
-                  <a href="mailto:info@cheshbonai.co.il" className="hover:text-gold">
-                    info@cheshbonai.co.il
+                  <a href={`mailto:${SITE_INFO.contact.email}`} className="hover:text-gold">
+                    {SITE_INFO.contact.email}
                   </a>
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-ink mb-2">שעות פעילות</h3>
-                <p className="text-ink/70">
-                  ראשון - חמישי: 9:00 - 17:00<br />
-                  שישי וחגים: סגור
                 </p>
               </div>
 

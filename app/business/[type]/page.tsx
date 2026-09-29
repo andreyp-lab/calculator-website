@@ -2,210 +2,221 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BUSINESS_TYPES, getBusinessType } from '@/lib/data/business-setup/business-types';
-import { BusinessPlanCalculator } from '@/components/calculators/BusinessPlanCalculator';
-import { FAQ } from '@/components/calculator/FAQ';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
-import { ArrowLeft } from 'lucide-react';
-
-const SITE_URL = 'https://cheshbonai.co.il';
 
 interface PageProps {
   params: Promise<{ type: string }>;
 }
 
+const QUESTIONS: Record<string, string[]> = {
+  'pilates-studio': [
+    'איזה סוגי שיעורים תציעו, ואיזה ציוד דרוש לכל שיעור?',
+    'כמה משתתפים אפשר לשרת בכל שיעור לפי תכנון החלל והצוות?',
+    'אילו הצעות מחיר דרושות לציוד, לתחזוקה ולביטוח?',
+  ],
+  'photography-studio': [
+    'איזה סוג צילום יתקיים בסטודיו, ואיזה חלל ותאורה הוא דורש?',
+    'מה צריך לתקצב לציוד צילום, עריכה, גיבוי ואחסון קבצים?',
+    'איך יתומחרו ימי צילום וזמן העריכה שלאחריהם?',
+  ],
+  cafe: [
+    'איזה תפריט תציעו, ואיזה ציוד הכנה ואחסון הוא דורש?',
+    'איך תבדקו את התאמת הנכס לפעילות ולהיתרים הנדרשים?',
+    'אילו הצעות מחיר צריך לקבל עבור חומרי גלם, צוות ופינוי פסולת?',
+  ],
+  restaurant: [
+    'איזה סוג שירות תציעו: ישיבה, איסוף, משלוחים או שילוב שלהם?',
+    'מה דורש התפריט מבחינת מטבח, אחסון, צוות וספקים?',
+    'אילו בדיקות נדרשות בנכס לפני חתימה על חוזה?',
+  ],
+  bakery: [
+    'אילו מוצרים ייוצרו במקום, ומה דרוש לייצור ולאחסון שלהם?',
+    'איך יתוכננו שעות עבודה, מלאי וחומרי גלם מתכלים?',
+    'אילו הצעות מחיר דרושות לציוד אפייה, קירור והתאמת הנכס?',
+  ],
+  barbershop: [
+    'כמה עמדות עבודה מתוכננות ואיזה ציוד דרוש לכל עמדה?',
+    'איך ייקבעו תורים, משך טיפול ומחיר השירות?',
+    'אילו עלויות יש לברר עבור חומרים, ניקיון והתאמת החלל?',
+  ],
+  'beauty-salon': [
+    'אילו טיפולים יינתנו ואיזה ציוד וחומרים דרושים לכל טיפול?',
+    'אילו הכשרות, אישורים וביטוחים צריך לבדוק לפי סוג הטיפול?',
+    'איך יתוכננו מלאי חומרים, תורים וחדרי טיפול?',
+  ],
+  clinic: [
+    'אילו שירותים יינתנו ובאילו חללים נפרדים יידרש להשתמש?',
+    'אילו דרישות מקצועיות, פרטיות וביטוח יש לבדוק לפני פתיחה?',
+    'איך יתוכננו תורים, ציוד, חומרים ומעקב אחר הוצאות?',
+  ],
+  gym: [
+    'איזה סוג אימונים יוצע ואיזה ציוד נדרש לכל אזור?',
+    'איך יתוכננו תחזוקת ציוד, בטיחות והכשרת צוות?',
+    'אילו הצעות מחיר דרושות להתאמת החלל ולשירותים שוטפים?',
+  ],
+  daycare: [
+    'לאילו קבוצות גיל מיועד המעון ואיך יתוכנן החלל עבורן?',
+    'אילו דרישות רישוי, בטיחות וכוח אדם חלות על הפעילות המתוכננת?',
+    'איך יתוכננו ציוד, מזון, ניקיון וימי פעילות?',
+  ],
+  pub: [
+    'איזה תפריט משקאות ומזון תציעו, ואילו ספקים דרושים?',
+    'אילו תנאי רישוי ושעות פעילות יש לברר לגבי הנכס?',
+    'איך יתוכננו צוות, אבטחה, מלאי ופחת מוצרים?',
+  ],
+  'retail-store': [
+    'איזה מגוון מוצרים תציעו ואיך תיקבע כמות מלאי הפתיחה?',
+    'איך ישפיעו מיקום החנות ותנאי השכירות על התוכנית?',
+    'אילו הצעות מחיר דרושות למדפים, קופה, שילוט וספקים?',
+  ],
+  office: [
+    'אילו שירותים יינתנו מהמשרד והאם נדרשות פגישות לקוחות במקום?',
+    'איזו תשתית תקשורת, אבטחת מידע ואחסון מסמכים דרושה?',
+    'איך תבדקו את עלויות החלל והציוד מול אפשרות עבודה מרחוק?',
+  ],
+  'food-truck': [
+    'איזה תפריט מתאים לציוד ולשטח העבודה ברכב המתוכנן?',
+    'אילו היתרים ומקומות פעילות יש לבדוק בכל רשות רלוונטית?',
+    'איך יתוכננו קירור, אספקה, דלק ותחזוקת הרכב?',
+  ],
+  'yoga-studio': [
+    'איזה סוגי שיעורים תציעו וכמה מקום דרוש לכל משתתף?',
+    'איך ייקבע לוח השיעורים בהתאם לזמינות המדריכים?',
+    'אילו הצעות מחיר דרושות לחלל, ציוד, ניקיון וביטוח?',
+  ],
+  'dental-clinic': [
+    'אילו טיפולים יינתנו ואיזה ציוד דרוש לכל חדר טיפול?',
+    'אילו דרישות מקצועיות, סטריליזציה ורישוי יש לבדוק?',
+    'איך יתוכננו צוות, חומרים, תחזוקת ציוד ותורים?',
+  ],
+  'online-store': [
+    'אילו מוצרים יימכרו ואיך ינוהלו מלאי, אריזה ומשלוחים?',
+    'אילו מערכות דרושות לתשלום, שירות לקוחות והחזרות?',
+    'איך יתומחרו המוצר, השיווק ועלות אספקתו ללקוח?',
+  ],
+  pizzeria: [
+    'איזה תפריט יוגש במקום ואיזה ציוד הכנה וקירור דרוש?',
+    'איזה חלק מהפעילות צפוי להיות ישיבה, איסוף או משלוחים?',
+    'אילו הצעות מחיר דרושות לחומרי גלם, אריזות וצוות?',
+  ],
+  garage: [
+    'אילו סוגי טיפול יוצעו ואיזה ציוד נדרש לכל אחד מהם?',
+    'אילו דרישות מקצועיות, רישוי ופינוי חומרים יש לבדוק?',
+    'איך יתוכננו מלאי חלפים, תורי עבודה ותחזוקת הציוד?',
+  ],
+  minimarket: [
+    'אילו קבוצות מוצרים יימכרו וכיצד ינוהל מלאי מתכלה?',
+    'מה דרוש לקירור, אחסון, מדפים וקופה?',
+    'איך ייבדקו תנאי הספקים, שעות הפתיחה והצוות?',
+  ],
+};
+
 export function generateStaticParams() {
-  return BUSINESS_TYPES.map((b) => ({ type: b.slug }));
+  return BUSINESS_TYPES.map((business) => ({ type: business.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { type } = await params;
-  const bt = getBusinessType(type);
-  if (!bt) return { title: 'לא נמצא' };
-  // `absolute` מבטל את סיומת המותג ("| חשבונאי") מה-template בשורש — היא עלתה
-  // 10 תווים והקפיצה את הכותרות האלה עד 82 תווים, כלומר חיתוך ב-SERP.
-  const title = `כמה עולה להקים ${bt.name}? תרחיש עלויות`;
-  // bt.intro הוא פסקה מלאה (2-3 משפטים). שרשור שלה הפיק תיאורים של 212-305 תווים,
-  // כלומר חיתוך של יותר ממחצית ב-SERP. נלקח המשפט הראשון בלבד, חתוך בגבול מילה.
-  const firstSentence = bt.intro.split(/(?<=[.!?])\s/)[0].trim();
-  const introShort =
-    firstSentence.length <= 85
-      ? firstSentence
-      : firstSentence.slice(0, 85).replace(/\s+\S*$/, '') + '…';
-  const description = `${introShort} תרחיש להערכת הקמה לפי עיר ושטח; החליפו הנחות בהצעות מחיר ונתוני העסק שלכם.`;
+  const business = getBusinessType((await params).type);
+  if (!business) return { title: 'עמוד לא נמצא' };
+  const title = 'תכנון הקמת ' + business.name + ' — שאלות לפני פתיחה';
+  const description = 'מדריך תכנון להקמת ' + business.name + ': שאלות על פעילות, מקום, ציוד, ספקים והוצאות שיש לברר מול בעלי מקצוע והצעות מחיר.';
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: `/business/${bt.slug}` },
-    // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
-    openGraph: {
-      title,
-      description,
-      url: `/business/${bt.slug}`,
-      type: 'article',
-      locale: 'he_IL',
-      images: ['/opengraph-image'],
-    },
+    alternates: { canonical: '/business/' + business.slug },
+    openGraph: { title, description, url: '/business/' + business.slug, type: 'article', locale: 'he_IL', images: ['/opengraph-image'] },
   };
 }
 
 export default async function BusinessGuidePage({ params }: PageProps) {
-  const { type } = await params;
-  const bt = getBusinessType(type);
-  if (!bt) notFound();
-
-  const faqItems = bt.faq.map((f) => ({ question: f.q, answer: f.a }));
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: bt.faq.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
+  const business = getBusinessType((await params).type);
+  if (!business) notFound();
+  const questions = QUESTIONS[business.slug];
 
   return (
-    <div className="min-h-screen bg-cream" dir="rtl">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <BreadcrumbSchema
-        items={[
-          { name: 'דף הבית', url: '/' },
-          { name: 'כמה עולה להקים עסק', url: '/business' },
-          { name: bt.name, url: `/business/${bt.slug}` },
-        ]}
-      />
+    <main className="min-h-screen bg-cream" dir="rtl">
+      <BreadcrumbSchema items={[
+        { name: 'דף הבית', url: '/' },
+        { name: 'מדריכי הקמת עסק', url: '/business' },
+        { name: business.name, url: '/business/' + business.slug },
+      ]} />
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <Breadcrumbs items={[
+          { label: 'דף הבית', href: '/' },
+          { label: 'הקמת עסק', href: '/business' },
+          { label: business.name },
+        ]} />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <Breadcrumbs
-            items={[
-              { label: 'דף הבית', href: '/' },
-              { label: 'הקמת עסק', href: '/business' },
-              { label: bt.name },
-            ]}
-          />
-        </div>
-
-        <header className="mb-8 pb-6 border-b border-ink/15">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-3">
-            ✦ מחשבון עלות הקמה + תוכנית עסקית
+        <header className="my-8 border-b border-ink/15 pb-6">
+          <p className="mb-3 font-mono text-xs text-gold">✦ מדריך תכנון · {business.category}</p>
+          <h1 className="mb-4 text-3xl font-bold text-ink md:text-4xl">תכנון הקמת {business.name}</h1>
+          <p className="text-lg leading-relaxed text-ink/75">
+            עלות ההקמה תלויה במקום, בהיקף הפעילות, בציוד ובספקים שתבחרו.
+            השאלות כאן יעזרו להכין רשימת בדיקה לפני בקשת הצעות מחיר ובניית תקציב.
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
-            כמה עולה להקים {bt.name}? <span className="text-gold">תרחיש תכנון</span>
-          </h1>
-          <p className="text-lg text-ink/70 leading-relaxed">{bt.intro}</p>
-          <p className="mt-4 border-r-4 border-gold bg-cream-2 p-4 text-sm leading-relaxed">הסכומים בעמוד ובמחשבון הם הנחות לדוגמה לצורכי תכנון, ללא אימות להצעות מחיר או צו ארנונה עבור העסק שלכם. לפני החלטה בדקו ספקים, נכס, רישוי וצו ארנונה של הרשות המקומית.</p>
         </header>
 
-        {/* Quick answer */}
-        <section className="answer-box bg-cream-2 border-r-4 border-gold p-5 mb-8" aria-label="תשובה מהירה">
-          <p className="text-lg text-ink leading-relaxed">בדקו תרחיש הקמה ל{bt.name} באמצעות המחשבון למטה. מחירי הציוד, העבודה, השכירות, הארנונה והרישוי הם הנחות ראשוניות; בקשו הצעות מחיר ובדקו דרישות רישוי ברשות המקומית.</p>
+        <section className="mb-10 border-r-4 border-gold bg-cream-2 p-6">
+          <h2 className="mb-4 text-xl font-bold text-ink">מה לבדוק במיוחד בעסק הזה?</h2>
+          <ul className="list-disc space-y-3 pr-5 leading-relaxed text-ink/80">
+            {questions.map((question) => <li key={question}>{question}</li>)}
+          </ul>
         </section>
 
-        {/* Calculator */}
-        <section className="mb-12">
-          <BusinessPlanCalculator businessSlug={bt.slug} />
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold text-ink">רשימת בדיקה לתקציב הראשוני</h2>
+          <p className="mb-4 leading-relaxed text-ink/75">
+            רשמו לכל סעיף את ההצעה שקיבלתם, מועד התשלום והאם זו הוצאה חד־פעמית או שוטפת.
+            בדקו את תנאי הנכס ואת הדרישות החלות על סוג הפעילות מול הרשות ובעלי המקצוע המתאימים.
+          </p>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {[
+              'מקום: שכירות, התאמות, ארנונה ותנאי החוזה',
+              'ציוד, ריהוט, מערכות ומלאי פתיחה',
+              'רישוי, ביטוח ושירותים מקצועיים לפי הצורך',
+              'שכר עובדים, ספקים והוצאות שוטפות',
+              'שיווק, גבייה ומימון תקופת ההקמה',
+              'רזרבה לתקלות ולחודשים הראשונים',
+            ].map((item) => <li key={item} className="border border-ink/15 bg-paper p-4 text-ink/80">{item}</li>)}
+          </ul>
         </section>
 
-        {/* Guide */}
-        <section className="prose prose-lg max-w-none mb-12 text-ink leading-relaxed">
-          <h2>המדריך: איך מקימים {bt.name} נכון</h2>
-          {bt.guide.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
-          <h3>אל תשכחו את הפחת ורזרבת החידוש</h3>
-          <p>
-            רוב מי שמקים עסק מתמקד בעלות ההקמה ובהוצאות החודשיות — ושוכח שהציוד והשיפוץ{' '}
-            <strong>מתבלים ויצטרכו חידוש</strong>. אם לא מפרישים כל חודש סכום לרזרבה, העסק ייראה רווחי
-            על הנייר — אבל בעוד כמה שנים, כשצריך לחדש את הסטודיו או להחליף ציוד, לא יהיה מאיפה. המחשבון
-            למעלה מציג אומדן פחת ורזרבה, וכן תרחיש רווח לאחר ההפרשה.
+        <aside className="my-12 border border-gold-light/30 bg-ink p-6 text-cream sm:p-8">
+          <h2 className="mb-3 font-serif text-2xl">לומדים לנהל את כספי העסק</h2>
+          <p className="mb-5 max-w-2xl leading-relaxed text-cream/75">
+            קורס מנהל הכספים של העסק שלך עוסק בתזרים מזומנים, תקציב, הון חוזר והתנהלות מול בנקים ואשראי.
+            הסילבוס ותנאי הרכישה מפורטים בדף הקורס.
           </p>
-        </section>
-
-        {/* Course CTA — CFO course */}
-        <aside className="my-12 bg-ink border border-gold-light/30 p-6 sm:p-8 text-cream">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
-            // קורס דיגיטלי לבעלי עסקים · בהדרכת רו״ח ✦
-          </p>
-          <p className="font-serif text-xl sm:text-2xl mb-3 leading-snug text-cream">
-            תוכנית עסקית זה רק ההתחלה. תלמד לנהל את הכסף לאורך זמן.
-          </p>
-          <p className="text-sm sm:text-base text-cream/70 leading-relaxed mb-5 max-w-2xl">
-            תזרים מזומנים, תקציב, הון חוזר, פחת ורזרבות, ועבודה מול הבנק — כל מה שצריך כדי שהעסק החדש
-            שלך לא רק ייפתח, אלא יחזיק ויצמח. עם כלי Excel מוכנים, בהדרכת רו"ח אנדרי פלטונוב.
-          </p>
-          <Link
-            href="/course/business"
-            className="inline-block bg-gold px-8 py-3.5 text-sm font-bold text-paper transition hover:bg-gold-2"
-          >
-            לקורס "מנהל הכספים של העסק שלך" ←
+          <Link href="/course/business" className="inline-block bg-gold px-7 py-3 font-bold text-paper hover:bg-gold-2">
+            לפרטי הקורס ←
           </Link>
         </aside>
 
-        {/* FAQ */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-ink mb-6">שאלות נפוצות — הקמת {bt.name}</h2>
-          <FAQ items={faqItems} />
-        </section>
-
-        {/* Internal links */}
-        <section className="mb-12">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-3">✦ כלים ומדריכים רלוונטיים</p>
-          <ul className="grid sm:grid-cols-2 gap-3">
-            {[
-              { href: '/self-employed/opening-business', label: 'מדריך פתיחת עסק — עוסק פטור או מורשה?' },
-              { href: '/self-employed/business-finance', label: 'ניהול כספים לעסק קטן' },
-              { href: '/tools/loan-eligibility', label: 'איך תממנו את ההקמה? זכאות להלוואה בערבות המדינה' },
-              { href: '/savings/loan-repayment', label: 'מחשבון הלוואה — כמה יעלה ההחזר החודשי?' },
-              { href: '/self-employed/employer-cost', label: 'מחשבון עלות מעסיק (לשכירת עובדים)' },
-              { href: '/self-employed/vat', label: 'מחשבון מע"מ' },
-            ].map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="group flex items-center justify-between gap-2 bg-paper border border-ink/15 hover:bg-paper-hover p-4 transition"
-                >
-                  <span className="text-ink font-medium">{l.label}</span>
-                  <ArrowLeft className="w-4 h-4 text-gold opacity-0 group-hover:opacity-100 transition" />
-                </Link>
-              </li>
-            ))}
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold text-ink">להמשך בדיקה</h2>
+          <ul className="list-disc space-y-2 pr-5 text-gold">
+            <li><Link href="/self-employed/opening-business" className="underline">מדריך פתיחת עסק</Link></li>
+            <li><Link href="/self-employed/business-finance" className="underline">מדריך ניהול כספים לעסק קטן</Link></li>
+            <li><Link href="/tools/loan-eligibility" className="underline">מידע על מסלולי מימון</Link></li>
           </ul>
         </section>
 
-        {/* קישורי אחים בתוך האשכול. לפני זה כל דף /business/<slug> קיבל קישור פנימי
-            נכנס אחד בלבד — מה-hub — וגוגל גילה את הדפים דרך ה-sitemap בלבד
-            (URL Inspection החזיר referringUrls: sitemap.xml). */}
-        <section className="mb-12">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-3">
-            ✦ כמה עולה להקים עסק אחר?
-          </p>
-          <ul className="flex flex-wrap gap-2">
-            {BUSINESS_TYPES.filter((b) => b.slug !== bt.slug).map((b) => (
-              <li key={b.slug}>
-                <Link
-                  href={`/business/${b.slug}`}
-                  className="inline-block bg-paper border border-ink/15 hover:border-gold px-3 py-2 text-sm text-ink transition"
-                >
-                  {b.name}
-                </Link>
-              </li>
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold text-ink">מדריכים לסוגי עסקים נוספים</h2>
+          <div className="flex flex-wrap gap-2">
+            {BUSINESS_TYPES.filter((item) => item.slug !== business.slug).map((item) => (
+              <Link key={item.slug} href={'/business/' + item.slug} className="border border-ink/15 bg-paper px-3 py-2 text-sm text-ink hover:border-gold">
+                {item.name}
+              </Link>
             ))}
-          </ul>
-          <p className="mt-4">
-            <Link href="/business" className="text-gold hover:text-gold-2 font-medium">
-              ← לכל מחשבוני עלות ההקמה
-            </Link>
-          </p>
+          </div>
+          <Link href="/business" className="mt-5 inline-block text-gold underline">לכל מדריכי הקמת העסק</Link>
         </section>
 
-        <section className="mb-8">
-          <AuthorBox />
-        </section>
+        <AuthorBox />
       </div>
-    </div>
+    </main>
   );
 }

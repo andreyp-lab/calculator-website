@@ -16,22 +16,7 @@ const calculators = [
     title: 'מדריך בדיקת פנסיה צפויה',
     description: 'בדקו את הדוח האישי ואת מסלולי הקצבה',
     href: '/insurance/pension',
-    available: true,
     icon: '👴',
-  },
-  {
-    title: 'מחשבון ביטוח חיים',
-    description: 'חישוב סכום ביטוח נדרש למשפחה',
-    href: '/insurance/life',
-    available: false,
-    icon: '🛡️',
-  },
-  {
-    title: 'מחשבון ביטוח רכב',
-    description: 'השוואת ביטוח חובה ומקיף',
-    href: '/insurance/car',
-    available: false,
-    icon: '🚗',
   },
 ];
 
@@ -84,8 +69,7 @@ export default function InsurancePage() {
         </section>
 
         <div className="grid md:grid-cols-2 gap-4">
-          {calculators.map((calc) =>
-            calc.available ? (
+          {calculators.map((calc) => (
               <Link
                 key={calc.href}
                 href={calc.href}
@@ -100,22 +84,7 @@ export default function InsurancePage() {
                 </div>
                 <ArrowLeft className="w-4 h-4 text-gold mt-2 opacity-0 group-hover:opacity-100 transition" />
               </Link>
-            ) : (
-              <div
-                key={calc.href}
-                className="bg-cream-2 p-6 rounded-none border-2 border-ink/15 flex items-start gap-4 opacity-60"
-              >
-                <div className="text-3xl">{calc.icon}</div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-ink/70 mb-1">{calc.title}</h3>
-                  <p className="text-sm text-ink/70">{calc.description}</p>
-                  <span className="inline-block mt-2 text-xs bg-cream-2 text-ink/70 px-2 py-1 rounded-none">
-                    בקרוב
-                  </span>
-                </div>
-              </div>
-            ),
-          )}
+          ))}
         </div>
 
         {/* ===== איך בוחרים את הכלי הנכון ===== */}
@@ -137,10 +106,10 @@ export default function InsurancePage() {
               <Link href="/investments/retirement" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך תכנון הפרישה</Link>{' '}
               שמסייע למפות מקורות הכנסה, צרכים והתחייבויות, ול
               <Link href="/investments/compound-interest" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון ריבית דריבית</Link>{' '}
-              כדי לראות כמה שווה כל הפקדה נוספת לאורך זמן. שכירים שרוצים להבין כמה בדיוק
-              מנוכה מהתלוש לפנסיה ולביטוחים ימצאו פירוט שורה-שורה ב
+              כדי לראות תרחישים אפשריים של הפקדה לאורך זמן. שכירים שרוצים להבין את
+              רכיבי הניכוי בתלוש לפנסיה ולביטוחים ימצאו הסבר ב
               <Link href="/employee-rights/salary-deductions" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון הניכויים ממשכורת</Link>
-              . מחשבוני ביטוח החיים וביטוח הרכב יתווספו לעמוד בקרוב.
+              .
             </p>
           </div>
         </section>

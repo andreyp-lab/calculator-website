@@ -22,9 +22,6 @@ import {
   convertBudgetToBaseYear,
 } from '@/lib/tools/three-statement-model';
 import { useTools } from '@/lib/tools/ToolsContext';
-import {
-  INDUSTRY_BENCHMARKS,
-} from '@/lib/tools/industry-benchmarks';
 import { exportForecastPDF, exportForecastExcel } from '@/lib/tools/forecast-export';
 import type {
   AnnualStatements,
@@ -32,7 +29,6 @@ import type {
   ThreeStatementModel as Model,
   AnnualPnL,
   AnnualBalanceSheet,
-  Industry,
 } from '@/lib/tools/types';
 import { formatCurrency } from '@/lib/tools/format';
 import {
@@ -219,7 +215,6 @@ export function ThreeStatementModelUI() {
           onChange={setAssumptions}
           onAutoSuggest={autoSuggest}
           hasHistorical={historical.length > 0 && historical[0].pnl.revenue > 0}
-          industry={settings?.industry ?? 'services'}
         />
       )}
 
@@ -439,7 +434,6 @@ interface AssumptionsProps {
   onChange: (a: ForecastAssumptions) => void;
   onAutoSuggest: () => void;
   hasHistorical: boolean;
-  industry: Industry;
 }
 
 function AssumptionsTab({
@@ -447,9 +441,7 @@ function AssumptionsTab({
   onChange,
   onAutoSuggest,
   hasHistorical,
-  industry,
 }: AssumptionsProps) {
-  const bench = INDUSTRY_BENCHMARKS[industry];
   function update(patch: Partial<ForecastAssumptions>) {
     onChange({ ...assumptions, ...patch });
   }
@@ -499,9 +491,6 @@ function AssumptionsTab({
       <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
           <h4 className="font-semibold text-ink">צמיחה ומרווחים (% לשנה)</h4>
-          <span className="text-xs text-ink/70">
-            השוואה לענף: {bench.industryLabel}
-          </span>
         </div>
         <div className="space-y-3">
           <ArrayField
@@ -509,35 +498,30 @@ function AssumptionsTab({
             values={assumptions.revenueGrowthPct}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('revenueGrowthPct', idx, v)}
-            benchmark={bench.revenueGrowthPct}
           />
           <ArrayField
             label="מרווח גולמי"
             values={assumptions.grossMarginPct ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('grossMarginPct', idx, v)}
-            benchmark={bench.grossMargin}
           />
           <ArrayField
             label="R&D מהכנסות"
             values={assumptions.rndPctOfRevenue ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('rndPctOfRevenue', idx, v)}
-            benchmark={bench.rndPctOfRevenue}
           />
           <ArrayField
             label="שיווק מהכנסות"
             values={assumptions.marketingPctOfRevenue ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('marketingPctOfRevenue', idx, v)}
-            benchmark={bench.marketingPctOfRevenue}
           />
           <ArrayField
             label="תפעול מהכנסות"
             values={assumptions.operatingPctOfRevenue ?? []}
             years={assumptions.yearsToProject}
             onChange={(idx, v) => updateArr('operatingPctOfRevenue', idx, v)}
-            benchmark={bench.operatingPctOfRevenue}
           />
         </div>
       </div>
@@ -550,19 +534,16 @@ function AssumptionsTab({
             label="DSO - ימי גבייה"
             value={assumptions.dso}
             onChange={(v) => update({ dso: v })}
-            benchHint={`ענף: ${Math.round(bench.dso.median)} ימים (Q1-Q3: ${Math.round(bench.dso.low)}-${Math.round(bench.dso.high)})`}
           />
           <SimpleField
             label="DPO - ימי תשלום"
             value={assumptions.dpo}
             onChange={(v) => update({ dpo: v })}
-            benchHint={`ענף: ${Math.round(bench.dpo.median)} ימים`}
           />
           <SimpleField
             label="DIO - ימי מלאי"
             value={assumptions.dio}
             onChange={(v) => update({ dio: v })}
-            benchHint={`ענף: ${Math.round(bench.dio.median)} ימים`}
           />
         </div>
       </div>
@@ -647,35 +628,17 @@ function ArrayField({
   years,
   onChange,
   isCurrency,
-  benchmark,
 }: {
   label: string;
   values: number[];
   years: number;
   onChange: (idx: number, v: number) => void;
   isCurrency?: boolean;
-  benchmark?: { low: number; median: number; high: number };
 }) {
-  // הצג הערכת מיקום ביחס ל-benchmark
-  const firstValue = values[0];
-  let positionLabel = '';
-  if (benchmark && firstValue !== undefined && !isCurrency) {
-    if (firstValue < benchmark.low) positionLabel = '⚠️ מתחת לטווח הענפי';
-    else if (firstValue < benchmark.median) positionLabel = '🟡 מתחת לחציון';
-    else if (firstValue < benchmark.high) positionLabel = '🟢 מעל החציון';
-    else positionLabel = '✨ מעל אחוזון 75';
-  }
-
   return (
     <div>
       <div className="flex items-baseline justify-between mb-1">
         <label className="text-xs text-ink/70">{label}</label>
-        {benchmark && !isCurrency && (
-          <span className="text-[10px] text-emerald-800">
-            ענף: {benchmark.low.toFixed(0)}–{benchmark.high.toFixed(0)}% (חציון{' '}
-            {benchmark.median.toFixed(0)}%) {positionLabel}
-          </span>
-        )}
       </div>
       <div className="grid grid-cols-5 gap-1">
         {Array.from({ length: years }, (_, i) => (

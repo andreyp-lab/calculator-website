@@ -48,7 +48,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/self-employed/employee-and-self-employed', label: 'שכיר + עצמאי', group: 'self-employed' },
   // נדל"ן ומשכנתאות
   { path: '/real-estate/mortgage', label: 'מחשבון משכנתא', group: 'real-estate' },
-  { path: '/real-estate/mortgage-optimizer', label: 'אופטימייזר תמהיל', group: 'real-estate' },
+  { path: '/real-estate/mortgage-optimizer', label: 'מדריך השוואת תמהילים', group: 'real-estate' },
   { path: '/real-estate/purchase-tax', label: 'מס רכישה', group: 'real-estate' },
   { path: '/real-estate/capital-gains-tax', label: 'מס שבח', group: 'real-estate' },
   // השקעות וחיסכון

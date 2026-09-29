@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'דף לא נמצא (404) | חשבונאי',
-  description: 'הדף שחיפשת לא קיים. גלה את 30 המחשבונים הפיננסיים שלנו.',
+  description: 'הדף שחיפשת לא קיים. אפשר להמשיך לכלים ולמדריכים הפיננסיים באתר.',
   robots: { index: false, follow: false },
 };
 
@@ -11,7 +11,7 @@ const popularLinks = [
   { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו/ברוטו 2026' },
   { href: '/personal-tax/income-tax', label: 'מחשבון מס הכנסה לשכיר' },
   { href: '/employee-rights/severance', label: 'מחשבון פיצויי פיטורין' },
-  { href: '/real-estate/mortgage-optimizer', label: 'אופטימייזר משכנתא' },
+  { href: '/real-estate/mortgage', label: 'מחשבון משכנתא' },
   { href: '/self-employed/year-end-tax-simulator', label: 'סימולטור מס לעצמאי' },
   { href: '/investments/compound-interest', label: 'מחשבון ריבית דריבית' },
 ];
@@ -25,7 +25,7 @@ export default function NotFound() {
 
         <h1 className="text-2xl font-bold text-ink mb-3">הדף לא נמצא</h1>
         <p className="text-ink/70 mb-8">
-          ייתכן שהכתובת שגויה או שהדף הוסר. אנחנו כאן כדי לעזור — בחר מהמחשבונים הפופולריים:
+          ייתכן שהכתובת שגויה או שהדף הוסר. בחרו כלי או מדריך להמשך:
         </p>
 
         {/* Popular calculators */}

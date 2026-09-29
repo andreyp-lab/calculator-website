@@ -1,317 +1,54 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
-import { CompoundInterestCalculator } from '@/components/calculators/CompoundInterestCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
-import { STUDY_FUND_2026 } from '@/lib/constants/tax-2026';
 
-// ============================================================
-// נתוני מס נגזרים מקבועי האתר ככל האפשר.
-// מס על ריבית פיקדון שקלי לא-צמוד: 15% נומינלי; פיקדון צמוד: 25% ריאלי.
-// מקור: פקודת מס הכנסה סעיף 125ג; אומת מול bizportal/kolzchut 2026-08-15.
-// ============================================================
-const DEPOSIT_TAX_NOMINAL = 0.15; // ריבית נומינלית, פיקדון שקלי לא צמוד
-const DEPOSIT_TAX_REAL = 0.25; // 25% ריאלי - פיקדון צמוד מדד/מט"ח
-
-const pct = (v: number) =>
-  `${(v * 100).toLocaleString('he-IL', { maximumFractionDigits: 2 })}%`;
-const fmt = (n: number) => Math.round(n).toLocaleString('he-IL');
-
-const MAX_DEPOSIT = fmt(STUDY_FUND_2026.maxAnnualDeposit); // תקרת הפקדה מוטבת לעצמאי
-const DEDUCTION_PCT = pct(STUDY_FUND_2026.taxDeductionPercentage); // 4.5% ניכוי
-const INCOME_CEILING = fmt(STUDY_FUND_2026.incomeCeilingSelfEmployed); // תקרת הכנסה קובעת
-const DEDUCTION_CAP = fmt(
-  STUDY_FUND_2026.taxDeductionPercentage * STUDY_FUND_2026.incomeCeilingSelfEmployed,
-); // תקרת ניכוי בפועל
-const NOMINAL_TAX_PCT = pct(DEPOSIT_TAX_NOMINAL);
-const REAL_TAX_PCT = pct(DEPOSIT_TAX_REAL);
+const taxGuide = 'https://www.gov.il/BlobFolder/generalpage/income-tax-guide-knowyourright/he/Guides_IncomeTax_da-2025.pdf';
+const fundGuide = 'https://www.gov.il/he/pages/training-fund';
+const depositComparison = 'https://www.boi.org.il/information/bank-paymnts/financial-education/campaigns/boi-equator/deposit/';
 
 export const metadata: Metadata = {
-  title: 'קרן השתלמות מול פיקדון בנקאי - איפה לשים את הכסף?',
-  description:
-    `קרן השתלמות או פיקדון בנקאי? השוואה מלאה 2026: פטור ממס רווח הון עד תקרת הפקדה מול מס ${pct(DEPOSIT_TAX_NOMINAL)}/${pct(DEPOSIT_TAX_REAL)} על פיקדון, נזילות, תשואה ולמי מתאים כל אפיק.`,
+  title: 'קרן השתלמות מול פיקדון — מס, נזילות וסיכון',
+  description: 'השוואה בין קרן השתלמות לפיקדון בנקאי לפי תנאי משיכה, מיסוי, עלויות ורמת סיכון, עם מקורות רשמיים וללא הנחת תשואה מובטחת.',
   alternates: { canonical: '/compare/keren-hishtalmut-vs-pikadon' },
 };
 
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: 'קרן השתלמות מול פיקדון בנקאי - השוואה מקיפה 2026',
-  description:
-    'השוואה בין קרן השתלמות לפיקדון בנקאי: הטבות מס, נזילות, תשואה צפויה ורמת סיכון - למי מתאים כל אפיק חיסכון.',
-  url: 'https://cheshbonai.co.il/compare/keren-hishtalmut-vs-pikadon',
-  inLanguage: 'he-IL',
-  datePublished: '2026-08-15',
-  dateModified: '2026-08-15',
-  author: {
-    '@type': 'Organization',
-    name: 'חשבונאי',
-    url: 'https://cheshbonai.co.il',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'חשבונאי',
-    url: 'https://cheshbonai.co.il',
-  },
-};
-
-const faqItems = [
-  {
-    question: 'מה הטבת המס בקרן השתלמות לעומת פיקדון?',
-    answer:
-      'הרווחים בקרן השתלמות פטורים לגמרי ממס רווח הון, כל עוד ההפקדה השנתית לא עברה את התקרה המוטבת (' +
-      MAX_DEPOSIT +
-      ' ₪ לעצמאי ב-2026) והמשיכה נעשית במועד כדין (אחרי 6 שנים). בפיקדון בנקאי, לעומת זאת, הריבית ממוסה: ' +
-      NOMINAL_TAX_PCT +
-      ' על הרווח הנומינלי בפיקדון שקלי לא צמוד, או ' +
-      REAL_TAX_PCT +
-      ' על הרווח הריאלי בפיקדון צמוד מדד או מט"ח. עצמאי מקבל בנוסף ניכוי מההכנסה החייבת על חלק מההפקדה.',
-  },
-  {
-    question: 'כמה כדאי לעצמאי להפקיד לקרן השתלמות ב-2026?',
-    answer:
-      'התקרה המוטבת להפקדה היא ' +
-      MAX_DEPOSIT +
-      ' ₪ בשנה - עד סכום זה הרווחים פטורים ממס רווח הון. בנוסף, הפקדה של עד ' +
-      DEDUCTION_PCT +
-      ' מההכנסה החייבת (עד תקרת הכנסה של ' +
-      INCOME_CEILING +
-      ' ₪, כלומר ניכוי מרבי של כ-' +
-      DEDUCTION_CAP +
-      ' ₪) מוכרת כניכוי שמקטין את המס השוטף. מי שיכול - כדאי לו לנצל את מלוא התקרה המוטבת, כי זה אפיק החיסכון היחיד לטווח בינוני עם פטור מלא ממס רווח הון.',
-  },
-  {
-    question: 'מתי אפשר למשוך קרן השתלמות בלי לשלם מס?',
-    answer:
-      'אחרי 6 שנים מההפקדה הראשונה בקרן - הכסף נזיל לכל מטרה, כולל הרווחים, בפטור ממס. אחרי 3 שנים בלבד אפשר למשוך בפטור לצורך השתלמות או לימודים מוכרים, או אם הגעת לגיל פרישה. משיכה מוקדמת שלא בתנאים אלה מחויבת במס שולי על הרווחים ועל הפקדות שקיבלו הטבה - ולכן כמעט אף פעם לא כדאית.',
-  },
-  {
-    question: 'האם קרן השתלמות מסוכנת יותר מפיקדון?',
-    answer:
-      'כן, ברמת התנודתיות - וזה חלק מהעסקה. פיקדון בנקאי מבטיח ריבית ידועה מראש וקרן מובטחת. קרן השתלמות מושקעת בשוק ההון (אפשר לבחור מסלול: מנייתי, כללי, אג"ח או אפילו כספי סולידי), ולכן יכולה לרדת בטווח הקצר אבל היסטורית הניבה תשואה גבוהה משמעותית מפיקדונות לאורך שנים. מי שרוצה סיכון מינימלי יכול לבחור מסלול כספי בקרן ההשתלמות - וליהנות מהפטור ממס גם על תשואה סולידית.',
-  },
-  {
-    question: 'למי בכלל מותר לפתוח קרן השתלמות?',
-    answer:
-      'רק לשכירים שהמעסיק מפריש עבורם (בהסכמתו) ולעצמאים - עוסק פטור, עוסק מורשה או שותף. מי שאינו עצמאי ואין לו מעסיק שמפריש - לא יכול לפתוח קרן השתלמות באופן עצמאי, ובשבילו ההשוואה הרלוונטית היא פיקדון מול תיק השקעות ממוסה. לשכיר, הפרשת המעסיק (בדרך כלל 7.5% מהשכר מול 2.5% מהעובד) היא הטבה ששווה לדרוש במשא ומתן - זו למעשה תוספת שכר פטורה ממס עד התקרה.',
-  },
-];
-
 export default function KerenHishtalmutVsPikadonPage() {
   return (
-    <>
-      <CalculatorLayout
-        title="קרן השתלמות מול פיקדון בנקאי - איפה לחסוך?"
-        description="שני אפיקים לכסף פנוי לטווח בינוני: קרן השתלמות עם פטור מלא ממס רווח הון, מול פיקדון בנקאי בטוח ונזיל. השוואה מלאה של מס, נזילות, תשואה וסיכון."
-        breadcrumbs={[
-          { label: 'דף הבית', href: '/' },
-          { label: 'דפי השוואה', href: '/compare' },
-          { label: 'קרן השתלמות מול פיקדון' },
-        ]}
-        lastUpdated="2026-08-15"
-        pageUrl="/compare/keren-hishtalmut-vs-pikadon"
-        calculator={<CompoundInterestCalculator />}
-        quickAnswer={
-          <p className="text-lg text-ink leading-relaxed">
-            <strong>
-              קרן השתלמות היא אפיק החיסכון היחיד בישראל לטווח בינוני שהרווחים בו פטורים לחלוטין
-              ממס רווח הון — עד תקרת הפקדה שנתית של {MAX_DEPOSIT} ₪ לעצמאי ב-2026. פיקדון בנקאי,
-              לעומת זאת, ממוסה: {NOMINAL_TAX_PCT} על הרווח הנומינלי בפיקדון שקלי לא צמוד, או{' '}
-              {REAL_TAX_PCT} על הרווח הריאלי בפיקדון צמוד.
-            </strong>{' '}
-            המחיר של ההטבה הוא נזילות: כספי קרן השתלמות נעולים 6 שנים (3 שנים למטרת השתלמות או
-            בגיל פרישה), בעוד פיקדון נזיל בתום תקופתו — ולעיתים בתחנות יציאה. גם התשואה שונה
-            במהותה: פיקדון מבטיח ריבית ידועה מראש, וקרן השתלמות מושקעת בשוק ההון עם תנודתיות אך
-            תשואה היסטורית גבוהה יותר. לכסף שלא תצטרכו בשנים הקרובות — קרן השתלמות עד התקרה היא
-            כמעט תמיד הצעד הראשון; פיקדון מתאים לכסף שצריך להישאר זמין ובטוח.
-          </p>
-        }
-        content={
-          <>
-            <h2>שני פתרונות לאותה שאלה: מה לעשות עם כסף פנוי?</h2>
-            <p>
-              גם קרן השתלמות וגם פיקדון בנקאי הם דרכים לחסוך כסף לטווח של כמה שנים. אבל הם
-              שונים כמעט בכל פרמטר: מיסוי, נזילות, תשואה, סיכון ומי בכלל רשאי להשתמש בהם. הנה
-              ההשוואה המלאה — ובעזרת{' '}
-              <Link href="/investments/compound-interest" className="text-gold underline">
-                מחשבון הריבית דריבית
-              </Link>{' '}
-              שמתחת אפשר לראות כמה ההבדל במס ובתשואה שווה לאורך שנים.
-            </p>
-
-            <h2>טבלת השוואה - קרן השתלמות מול פיקדון בנקאי</h2>
-
-            <div className="overflow-x-auto my-6">
-              <table className="w-full text-sm border-collapse">
-                <thead>
-                  <tr className="bg-ink text-cream">
-                    <th className="border border-ink/20 p-3 text-right font-bold">קריטריון</th>
-                    <th className="border border-ink/20 p-3 text-right font-bold text-cream">
-                      🎓 קרן השתלמות
-                    </th>
-                    <th className="border border-ink/20 p-3 text-right font-bold text-cream">
-                      🏦 פיקדון בנקאי
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-ink/15 p-3 font-semibold">מס על הרווחים</td>
-                    <td className="border border-ink/15 p-3">
-                      פטור מלא ממס רווח הון עד תקרת ההפקדה; מעל התקרה - {REAL_TAX_PCT} על הרווח
-                      הריאלי
-                    </td>
-                    <td className="border border-ink/15 p-3">
-                      {NOMINAL_TAX_PCT} נומינלי (שקלי לא צמוד) או {REAL_TAX_PCT} ריאלי (צמוד
-                      מדד/מט&quot;ח)
-                    </td>
-                  </tr>
-                  <tr className="bg-cream-2">
-                    <td className="border border-ink/15 p-3 font-semibold">הטבת מס בהפקדה</td>
-                    <td className="border border-ink/15 p-3">
-                      לעצמאי: ניכוי עד {DEDUCTION_PCT} מההכנסה (עד כ-{DEDUCTION_CAP} ₪); לשכיר:
-                      הפרשת מעסיק פטורה ממס עד התקרה
-                    </td>
-                    <td className="border border-ink/15 p-3">אין</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-ink/15 p-3 font-semibold">נזילות</td>
-                    <td className="border border-ink/15 p-3">
-                      נעולה 6 שנים (3 שנים להשתלמות/גיל פרישה); אחר כך נזילה לכל מטרה
-                    </td>
-                    <td className="border border-ink/15 p-3">
-                      לפי תקופת הפיקדון: יומי, חודשי, שנתי; לעיתים תחנות יציאה
-                    </td>
-                  </tr>
-                  <tr className="bg-cream-2">
-                    <td className="border border-ink/15 p-3 font-semibold">תשואה</td>
-                    <td className="border border-ink/15 p-3">
-                      תלוית שוק ההון ומסלול (מנייתי/כללי/אג&quot;ח/כספי); לא מובטחת
-                    </td>
-                    <td className="border border-ink/15 p-3">
-                      ריבית ידועה מראש, נגזרת מריבית בנק ישראל
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border border-ink/15 p-3 font-semibold">סיכון</td>
-                    <td className="border border-ink/15 p-3">
-                      תנודתיות בטווח קצר; ניתן לבחור מסלול סולידי
-                    </td>
-                    <td className="border border-ink/15 p-3">קרן מובטחת על ידי הבנק</td>
-                  </tr>
-                  <tr className="bg-cream-2">
-                    <td className="border border-ink/15 p-3 font-semibold">מי יכול להשתמש</td>
-                    <td className="border border-ink/15 p-3">
-                      עצמאים, ושכירים שהמעסיק מפריש עבורם
-                    </td>
-                    <td className="border border-ink/15 p-3">כל אחד</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-ink/15 p-3 font-semibold">תקרת הפקדה</td>
-                    <td className="border border-ink/15 p-3">
-                      {MAX_DEPOSIT} ₪ בשנה לעצמאי (להטבה מלאה); אפשר להפקיד מעבר ללא פטור
-                    </td>
-                    <td className="border border-ink/15 p-3">ללא הגבלה</td>
-                  </tr>
-                  <tr className="bg-cream-2">
-                    <td className="border border-ink/15 p-3 font-semibold">דמי ניהול</td>
-                    <td className="border border-ink/15 p-3">
-                      קיימים (ניתנים למיקוח, בדרך כלל שברי אחוז מהצבירה)
-                    </td>
-                    <td className="border border-ink/15 p-3">אין</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <h2>למה הפטור ממס שווה כל כך הרבה?</h2>
-            <p>
-              ההבדל בין &quot;פטור ממס&quot; ל&quot;מס של {REAL_TAX_PCT}&quot; נראה קטן בשנה
-              אחת, אבל הוא מצטבר דרמטית בזכות ריבית דריבית: המס בפיקדון נגבה מכל הרווח, ולכן
-              מקטין את הסכום שממשיך לצבור תשואה. בקרן השתלמות כל הרווח ממשיך לעבוד. על עשרות
-              שנים, אותה תשואה שנתית מניבה בקרן השתלמות עשרות אחוזים יותר נטו. לעצמאי מתווספת
-              הטבה שנייה: ניכוי ההפקדה מההכנסה החייבת מקטין את המס כבר השנה —{' '}
-              <Link href="/self-employed/net" className="text-gold underline">
-                מדריך הנטו לעצמאי
-              </Link>{' '}
-              מסביר אילו נתונים דרושים לבדיקת השפעת הניכוי.
-            </p>
-
-            <h2>מתי לבחור מה?</h2>
-            <h3>קרן השתלמות עדיפה כש...</h3>
-            <ul>
-              <li>אתם עצמאים או שכירים עם הפרשת מעסיק — וטרם ניצלתם את התקרה השנתית</li>
-              <li>הכסף לא נחוץ ב-6 השנים הקרובות</li>
-              <li>אתם רוצים חשיפה לשוק ההון בעטיפת המס הטובה בישראל</li>
-              <li>גם שונאי סיכון — מסלול כספי בקרן נותן תשואה דמוית פיקדון עם פטור ממס</li>
-            </ul>
-
-            <h3>פיקדון בנקאי עדיף כש...</h3>
-            <ul>
-              <li>הכסף מיועד למטרה קרובה: דירה, רכב, אירוע — ואסור שיהיה נעול</li>
-              <li>אין לכם מעמד עצמאי או מעסיק שמפריש — קרן השתלמות פשוט לא זמינה לכם</li>
-              <li>כבר מיציתם את תקרת ההפקדה המוטבת השנה, ואתם רוצים אפס סיכון</li>
-              <li>זו כרית ביטחון שחייבת להישאר ודאית ומובטחת</li>
-            </ul>
-
-            <h2>האסטרטגיה המקובלת: קודם התקרה, אחר כך השאר</h2>
-            <p>
-              לרוב החוסכים סדר הפעולות הנכון הוא: למלא קודם את תקרת ההפקדה המוטבת בקרן
-              ההשתלמות ({MAX_DEPOSIT} ₪ לעצמאי), ורק אחר כך להחליט מה לעשות עם יתרת הכסף —
-              פיקדון לכסף קצר-טווח, ותיק השקעות ממוסה לכסף ארוך-טווח. השוו גם עם{' '}
-              <Link href="/investments/capital-gains-tax" className="text-gold underline">
-                מחשבון מס רווח הון
-              </Link>{' '}
-              כדי להבין כמה מס תשלמו על השקעה רגילה, וקראו את{' '}
-              <Link href="/blog/study-fund-self-employed-strategy" className="text-gold underline">
-                המדריך לאסטרטגיית קרן השתלמות לעצמאים
-              </Link>
-              .
-            </p>
-
-            <h2>מחשבונים ומדריכים רלוונטיים</h2>
-            <ul>
-              <li>
-                <Link href="/investments/compound-interest" className="text-gold underline">
-                  מחשבון ריבית דריבית
-                </Link>{' '}
-                - כמה שווה הפטור ממס לאורך שנים.
-              </li>
-              <li>
-                <Link href="/investments/capital-gains-tax" className="text-gold underline">
-                  מחשבון מס רווח הון
-                </Link>{' '}
-                - המס על השקעות מחוץ לקרן.
-              </li>
-              <li>
-                <Link href="/self-employed/net" className="text-gold underline">
-                  מדריך נטו לעצמאי
-                </Link>{' '}
-                - מסביר מה נדרש לבדיקה אישית של ניכוי קרן ההשתלמות.
-              </li>
-              <li>
-                <Link href="/blog/study-fund-self-employed-strategy" className="text-gold underline">
-                  אסטרטגיית קרן השתלמות לעצמאים
-                </Link>{' '}
-                - מדריך מעמיק.
-              </li>
-            </ul>
-
-            <p>
-              עצמאים: הטבות המס על קרן השתלמות ופנסיה הן חלק מתכנון פיננסי שלם של העסק.{' '}
-              <Link href="/course/business" className="text-gold underline">
-                קורס ניהול פיננסי לבעלי עסקים
-              </Link>{' '}
-              מסדר את כל התמונה — ממיסים ועד תזרים.
-            </p>
-          </>
-        }
-        faq={<FAQ items={faqItems} />}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-    </>
+    <CalculatorLayout
+      title="קרן השתלמות מול פיקדון בנקאי"
+      description="איך משווים תנאי חיסכון, מיסוי, נזילות וסיכון לפני שבוחרים היכן להפקיד."
+      breadcrumbs={[{ label: 'דף הבית', href: '/' }, { label: 'דפי השוואה', href: '/compare' }, { label: 'קרן השתלמות מול פיקדון' }]}
+      lastUpdated="2026-09-29"
+      pageUrl="/compare/keren-hishtalmut-vs-pikadon"
+      quickAnswer={<p>קרן השתלמות עשויה להעניק הטבות מס להפקדה ולרווחים, בכפוף לתקרות, למעמד החוסך ולתנאי המשיכה. תשואתה תלויה במסלול ובשוק ואינה מובטחת. פיקדון בנקאי פועל לפי ריבית, תקופה ותנאי משיכה שסוכמו עם הבנק; גם הריבית עשויה להיות משתנה, והמס על הריבית תלוי בסוג הפיקדון ובנתוני החוסך. כדי להשוות ביניהם יש להשתמש בהצעות אישיות, בעלויות ובמועד שבו תזדקקו לכסף.</p>}
+      content={<>
+        <h2>מה לבדוק בכל מוצר?</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead><tr><th className="border p-2 text-right">נושא</th><th className="border p-2 text-right">קרן השתלמות</th><th className="border p-2 text-right">פיקדון בנקאי</th></tr></thead>
+            <tbody>
+              <tr><td className="border p-2">תשואה ועלויות</td><td className="border p-2">תשואה לא מובטחת לפי מסלול ההשקעה; בדקו דמי ניהול.</td><td className="border p-2">ריבית קבועה או משתנה לפי ההצעה; בדקו תקופת חישוב ותנאי שינוי.</td></tr>
+              <tr><td className="border p-2">מיסוי</td><td className="border p-2">הטבות מס אפשריות לפי מעמד החוסך, תקרות ותנאי משיכה. סכומים מעל תקרה עשויים להתחייב במס.</td><td className="border p-2">מס על הריבית לפי סוג הפיקדון והנסיבות; פיקדון לא צמוד ופיקדון צמוד עשויים להיות ממוסים בבסיס ובשיעור שונים.</td></tr>
+              <tr><td className="border p-2">נזילות</td><td className="border p-2">משיכה פטורה לכל מטרה מתאפשרת בדרך כלל לאחר שש שנות ותק; קיימים חריגים ותנאים מיוחדים.</td><td className="border p-2">מועד המשיכה, תחנות יציאה ועלות יציאה מוקדמת נקבעים בהסכם הפיקדון.</td></tr>
+              <tr><td className="border p-2">סיכון</td><td className="border p-2">ערך החיסכון עשוי לעלות או לרדת לפי הנכסים במסלול.</td><td className="border p-2">בדקו את תנאי הפיקדון, ההצמדה והריבית; כוח הקנייה עלול להישחק אם הריבית נטו נמוכה מהאינפלציה.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>השוואה שמתאימה לנתונים שלכם</h2>
+        <p>בקרן השתלמות יש להפריד בין הטבת ניכוי לעצמאי לבין פטור אפשרי על רווחים. התקרות אינן זהות, ושכיר שהוא גם עצמאי נדרש לבדיקה נוספת. בפיקדון, השוו את הריבית האפקטיבית, אפשרות המשיכה, ההצמדה והמס. אין להניח מראש שקרן השתלמות תניב יותר מפיקדון באותה תקופה.</p>
+        <p>השוו הצעות פיקדון ב<a href={depositComparison} target="_blank" rel="noopener noreferrer">קו המשווה של בנק ישראל</a>, ובדקו דמי ניהול ומסלול השקעה בקרן. להשוואת תרחישים מתמטיים לפי הנחות שלכם בלבד השתמשו ב<Link href="/investments/compound-interest">מחשבון ריבית דריבית</Link>; הוא אינו מחשב את המס האישי או משווה מוצרי חיסכון.</p>
+      </>}
+      faq={<FAQ items={[
+        { question: 'האם כל רווח מקרן השתלמות פטור ממס?', answer: 'לא. הפטור תלוי בתקרות ההפקדה, במעמד החוסך ובתנאי המשיכה. יש לבדוק בנפרד כספים שהופקדו מעל תקרה.' },
+        { question: 'האם ריבית הפיקדון תמיד ידועה מראש?', answer: 'לא. קיימים פיקדונות בריבית קבועה ומשתנה, צמודים ולא צמודים. יש לבדוק את ההצעה ואת תנאי השינוי והמשיכה.' },
+        { question: 'האם קיימת בחירה שטובה תמיד לכל חוסך?', answer: 'לא. התוצאה תלויה בנזילות הדרושה, בהטבות המס האישיות, בתנאי הפיקדון, במסלול הקרן ובסיכון שמתאים לחוסך.' },
+      ]} />}
+      sources={<ul>
+        <li><a href={fundGuide} target="_blank" rel="noopener noreferrer">משרד האוצר — קרן השתלמות</a></li>
+        <li><a href={taxGuide} target="_blank" rel="noopener noreferrer">רשות המסים — מדריך מיסוי פיקדונות וקרנות השתלמות</a></li>
+        <li><a href={depositComparison} target="_blank" rel="noopener noreferrer">בנק ישראל — השוואת פיקדונות</a></li>
+      </ul>}
+    />
   );
 }

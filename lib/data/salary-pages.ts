@@ -105,9 +105,9 @@ export const CREDIT_POINT_VARIANTS = [2.25, 2.75, 3.5] as const;
 
 export interface SalaryPageData {
   amount: number;
-  /** רווק/ה, 2.25 נ"ז, ללא פנסיה */
+  /** תושב עם 2.25 נ"ז, ללא הפקדת עובד לפנסיה */
   noPension: SalaryNetGrossResult;
-  /** רווק/ה, 2.25 נ"ז, פנסיה 6% */
+  /** תושב עם 2.25 נ"ז, הפקדת עובד לפנסיה 6% וללא זיכוי מס עליה */
   withPension: SalaryNetGrossResult;
   /** וריאציות נקודות זיכוי: 2.25 / 2.75 / 3.5 */
   variants: { creditPoints: number; noPensionNet: number; withPensionNet: number }[];

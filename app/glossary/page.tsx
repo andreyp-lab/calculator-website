@@ -6,14 +6,14 @@ import { ALL_TERMS, HEBREW_ALPHABET } from '@/lib/data/glossary';
 export const metadata: Metadata = {
   title: 'מילון מונחים פיננסי 2026 — כל המונחים בעברית פשוטה',
   description:
-    'מילון מונחים פיננסיים מקיף לשנת 2026: 80+ מושגים מעולם המס, ההשקעות, המשכנתאות והעצמאיים. הגדרה ברורה + לינק למחשבון רלוונטי.',
+    `מילון מונחים פיננסיים: ${ALL_TERMS.length} מושגים מעולם המס, ההשקעות, המשכנתאות והעצמאיים, עם הגדרות וקישורים למידע נוסף.`,
   alternates: { canonical: '/glossary' },
   openGraph: {
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'מילון מונחים פיננסי 2026 — כל המונחים בעברית פשוטה',
     description:
-      'מילון מונחים פיננסיים מקיף: 80+ מושגים חשובים מעולם המס, ההשקעות, המשכנתאות והעצמאיים.',
+      `מילון מונחים פיננסיים: ${ALL_TERMS.length} מושגים מעולם המס, ההשקעות, המשכנתאות והעצמאיים.`,
     type: 'website',
     locale: 'he_IL',
   },
@@ -31,7 +31,7 @@ export default function GlossaryPage() {
             '@context': 'https://schema.org',
             '@type': 'DefinedTermSet',
             name: 'מילון מונחים פיננסיים',
-            description: 'מילון מונחים פיננסיים מקיף: 80+ מושגים חשובים מעולם המס, ההשקעות, המשכנתאות והעצמאיים.',
+            description: `מילון מונחים פיננסיים: ${ALL_TERMS.length} מושגים מעולם המס, ההשקעות, המשכנתאות והעצמאיים.`,
             url: 'https://cheshbonai.co.il/glossary',
             inLanguage: 'he',
           }),
@@ -50,13 +50,12 @@ export default function GlossaryPage() {
             מילון מונחים פיננסיים
           </h1>
           <p className="text-lg text-cream/80 max-w-2xl mx-auto mb-4">
-            80+ מונחים מעולם המס, המשכנתאות, ההשקעות וזכויות העובד – הגדרה ברורה בעברית פשוטה,
-            עם לינק למחשבון הרלוונטי.
+            {ALL_TERMS.length} מונחים מעולם המס, המשכנתאות, ההשקעות וזכויות העובד — הגדרות בעברית
+            וקישורים למידע נוסף בהתאם לנושא.
           </p>
           <div className="flex flex-wrap gap-4 justify-center text-sm text-cream/60">
             <span>📚 {ALL_TERMS.length} מונחים</span>
             <span>🔍 חיפוש ואינדקס אלפביתי</span>
-            <span>📅 מעודכן מאי 2026</span>
           </div>
         </div>
       </div>

@@ -4,10 +4,9 @@
  * בדיקת ערכי מפתח: 2026-09-28; לא כל השדות אומתו. ראו docs/data-verification-2026-09-28.md
  *
  * מקורות עיקריים:
- * - רשות המסים: https://www.gov.il/he/departments/israel_tax_authority
- * - ביטוח לאומי: https://www.btl.gov.il
- * - כל-זכות: https://www.kolzchut.org.il
- * - לוח עזר לחישוב מס הכנסה ממשכורת ושכר עבודה
+ * - רשות המסים, לוח עזר 2026: https://www.gov.il/BlobFolder/generalpage/income-tax-monthly-deductions-booklet/he/generalInformation_income-tax-monthly-deductions-booklet_monthly-deductions-booklet-2026.pdf
+ * - ביטוח לאומי, נתונים כלליים ושיעורי דמי ביטוח: https://www.btl.gov.il
+ * - מקורות פרטניים והגבלות מופיעים ב-docs/data-verification-2026-09-28.md
  *
  * הערה: ערכים אלה צריכים להיות מעודכנים בתחילת כל שנת מס.
  * שכר המינימום מתעדכן לרוב באפריל.
@@ -15,7 +14,7 @@
 
 // ============================================================
 // מדרגות מס הכנסה 2026 - הכנסה מיגיעה אישית
-// מקור: כל-זכות, רשות המסים
+// מקור: לוח עזר של רשות המסים לשנת 2026 והודעת ריווח המדרגות ממארס 2026
 // הערה: בעקבות "ריווח מדרגות המס" 2026 - מדרגות 20% ו-31% הורחבו
 // ============================================================
 export const TAX_BRACKETS_2026 = [
@@ -77,7 +76,7 @@ export const SURTAX_2026 = {
 
 // ============================================================
 // נקודות זיכוי 2026
-// מקור: כל-זכות, רשות המסים
+// מקור: לוח עזר של רשות המסים לשנת 2026
 // מקור ותנאים אישיים דורשים בדיקה נפרדת
 // ============================================================
 export const CREDIT_POINT_2026 = {
@@ -160,10 +159,10 @@ export const MINIMUM_WAGE_2026 = {
 
 // ============================================================
 // דמי הבראה 2026
-// מקור: כל-זכות, צו ההרחבה
+// מקור: ילקוט הפרסומים 14863, צו הרחבה מ־18.8.2026 לשנת ההבראה 2026
 // ============================================================
 export const RECREATION_PAY_2026 = {
-  privateSectorPerDay: 418, // ₪ (העלאה ל-451.5 סוכמה אך טרם הורחבה בצו הרחבה — 418 עדיין המחייב)
+  privateSectorPerDay: 451.5, // ₪ לשנת ההבראה 2026 לפי צו ההרחבה שפורסם ב־18.8.2026
   // תעריפים ציבוריים וענפיים תלויים בהסכם החל ואינם ערך כללי יחיד.
   // ימי הבראה לפי ותק (מגזר פרטי)
   daysByYearsOfService: [
@@ -261,18 +260,6 @@ export const CONSTANTS_2026 = {
 } as const;
 
 // ============================================================
-// תאימות לאחור (deprecated aliases)
-// ============================================================
-export const SEVERANCE_COMPENSATION = SEVERANCE_COMPENSATION_2026;
-export const SOCIAL_SECURITY_EMPLOYEE = {
-  reducedRate: SOCIAL_SECURITY_EMPLOYEE_2026.reducedRate.total,
-  fullRate: SOCIAL_SECURITY_EMPLOYEE_2026.fullRate.total,
-  reducedThreshold: SOCIAL_SECURITY_EMPLOYEE_2026.reducedThresholdMonthly,
-  maxThreshold: SOCIAL_SECURITY_EMPLOYEE_2026.maxThresholdMonthly,
-} as const;
-export const VAT = VAT_2026;
-
-// ============================================================
 // פונקציות עזר לחישוב מס
 // ============================================================
 
@@ -294,89 +281,4 @@ export function calculateAnnualIncomeTax(annualIncome: number): number {
   }
 
   return tax;
-}
-
-/**
- * חישוב מס הכנסה חודשי - על שכר חודשי
- */
-export function calculateMonthlyIncomeTax(monthlySalary: number): number {
-  const annualIncome = monthlySalary * 12;
-  return calculateAnnualIncomeTax(annualIncome) / 12;
-}
-
-/**
- * חישוב סכום זיכוי שנתי לפי מספר נקודות זיכוי
- */
-export function calculateCreditAmount(creditPoints: number): number {
-  return creditPoints * CREDIT_POINT_2026.annual;
-}
-
-/**
- * חישוב ביטוח לאומי + בריאות לשכיר על שכר חודשי
- */
-export function calculateEmployeeSocialSecurity(monthlySalary: number): {
-  reduced: number;
-  full: number;
-  total: number;
-} {
-  const cap = SOCIAL_SECURITY_EMPLOYEE_2026.maxThresholdMonthly;
-  const threshold = SOCIAL_SECURITY_EMPLOYEE_2026.reducedThresholdMonthly;
-  const cappedSalary = Math.min(monthlySalary, cap);
-
-  const reducedPart = Math.min(cappedSalary, threshold);
-  const fullPart = Math.max(0, cappedSalary - threshold);
-
-  const reducedAmount = reducedPart * SOCIAL_SECURITY_EMPLOYEE_2026.reducedRate.total;
-  const fullAmount = fullPart * SOCIAL_SECURITY_EMPLOYEE_2026.fullRate.total;
-
-  return {
-    reduced: reducedAmount,
-    full: fullAmount,
-    total: reducedAmount + fullAmount,
-  };
-}
-
-/**
- * חישוב מס רכישה לדירה ראשונה
- */
-export function calculatePurchaseTaxFirstHome(propertyValue: number): number {
-  let tax = 0;
-  let previousLimit = 0;
-
-  for (const bracket of PURCHASE_TAX_2026.firstHome) {
-    if (propertyValue <= previousLimit) break;
-
-    const taxableInBracket = Math.min(propertyValue, bracket.upTo) - previousLimit;
-    tax += taxableInBracket * bracket.rate;
-
-    if (propertyValue <= bracket.upTo) break;
-    previousLimit = bracket.upTo;
-  }
-
-  return tax;
-}
-
-/**
- * חישוב נטו לעובד שכיר (פשוט - רק מס הכנסה + ב.ל.)
- */
-export function calculateNetSalary(grossMonthlySalary: number, creditPoints: number = 2.25): {
-  gross: number;
-  incomeTax: number;
-  creditAmount: number;
-  socialSecurity: number;
-  net: number;
-} {
-  const monthlyTax = calculateMonthlyIncomeTax(grossMonthlySalary);
-  const monthlyCreditAmount = (creditPoints * CREDIT_POINT_2026.annual) / 12;
-  const adjustedTax = Math.max(0, monthlyTax - monthlyCreditAmount);
-  const socialSecurity = calculateEmployeeSocialSecurity(grossMonthlySalary).total;
-  const net = grossMonthlySalary - adjustedTax - socialSecurity;
-
-  return {
-    gross: grossMonthlySalary,
-    incomeTax: adjustedTax,
-    creditAmount: monthlyCreditAmount,
-    socialSecurity,
-    net,
-  };
 }

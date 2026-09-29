@@ -532,14 +532,6 @@ export function summarizeWizard(answers: WizardAnswers): WizardSummary {
 
   const warnings: string[] = [];
 
-  // Sanity checks against industry benchmarks
-  const bench = INDUSTRY_BENCHMARKS[answers.industry];
-  const grossMargin = 100 - answers.cogsPct;
-  if (grossMargin < bench.grossMargin.low) {
-    warnings.push(
-      `מרווח גולמי (${grossMargin.toFixed(0)}%) נמוך מהאחוזון התחתון בענף (${bench.grossMargin.low.toFixed(0)}%)`,
-    );
-  }
   if (annualSalaries / annualRevenue > 0.6) {
     warnings.push(`עלות שכר ${((annualSalaries / annualRevenue) * 100).toFixed(0)}% מההכנסות - גבוה`);
   }

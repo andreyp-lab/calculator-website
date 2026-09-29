@@ -95,7 +95,7 @@ const RIGHTS: Calc[] = [
   },
   {
     title: 'דמי הבראה',
-    description: 'חישוב דמי הבראה לפי שנות ותק (תעריף 2026: ₪418/יום במגזר הפרטי).',
+    description: 'אומדן דמי הבראה לפי ותק והיקף משרה; 451.50 ₪ ליום בשנת ההבראה 2026 למי שחל עליו צו ההרחבה.',
     href: '/employee-rights/recreation-pay',
     icon: Heart,
   },

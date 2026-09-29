@@ -74,7 +74,6 @@ const GROUPS: CalcGroup[] = [
     color: 'amber',
     calcs: [
       { title: 'מחשבון משכנתא', href: '/real-estate/mortgage', badge: 'מומלץ' },
-      { title: 'אופטימייזר תמהיל', href: '/real-estate/mortgage-optimizer', badge: 'חדש' },
       { title: 'מס רכישה', href: '/real-estate/purchase-tax' },
       { title: 'בדיקת מס שבח', href: '/real-estate/capital-gains-tax' },
     ],

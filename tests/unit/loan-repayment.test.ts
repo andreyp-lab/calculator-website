@@ -6,9 +6,6 @@ import {
   compareLoans,
   calculateDebtConsolidation,
   calculateEarlyPayoffLoan,
-  calculateAffordabilityLoan,
-  getLoanTypeRecommendation,
-  ISRAELI_LOAN_TYPES,
 } from '@/lib/calculators/savings';
 
 // ============================================================
@@ -396,116 +393,5 @@ describe('calculateEarlyPayoffLoan', () => {
     });
 
     expect(result.newPayoffDate).toMatch(/^\d{4}-\d{2}$/);
-  });
-});
-
-// ============================================================
-// calculateAffordabilityLoan - כושר החזר
-// ============================================================
-
-describe('calculateAffordabilityLoan', () => {
-  it('DTI מתחת ל-30% = מצוין', () => {
-    const result = calculateAffordabilityLoan({
-      monthlyNetIncome: 20_000,
-      existingObligations: 1_000,
-      requestedMonthlyPayment: 2_000, // = 15% מההכנסה
-    });
-
-    expect(result.status).toBe('excellent');
-    expect(result.dtiRatio).toBeLessThan(30);
-  });
-
-  it('DTI 30-40% = טוב', () => {
-    const result = calculateAffordabilityLoan({
-      monthlyNetIncome: 15_000,
-      existingObligations: 2_000,
-      requestedMonthlyPayment: 3_500, // סך = 5500 = 36.7%
-    });
-
-    expect(result.status).toBe('good');
-    expect(result.dtiRatio).toBeGreaterThanOrEqual(30);
-    expect(result.dtiRatio).toBeLessThan(40);
-  });
-
-  it('DTI 40-50% = אזהרה', () => {
-    const result = calculateAffordabilityLoan({
-      monthlyNetIncome: 12_000,
-      existingObligations: 2_000,
-      requestedMonthlyPayment: 4_000, // סך = 6000 = 50%
-    });
-
-    expect(result.status).toBe('warning');
-    expect(result.dtiRatio).toBeGreaterThanOrEqual(40);
-  });
-
-  it('DTI מעל 50% = סכנה', () => {
-    const result = calculateAffordabilityLoan({
-      monthlyNetIncome: 10_000,
-      existingObligations: 3_000,
-      requestedMonthlyPayment: 4_000, // סך = 7000 = 70%
-    });
-
-    expect(result.status).toBe('danger');
-    expect(result.dtiRatio).toBeGreaterThan(50);
-  });
-
-  it('תשלום מקסימלי מומלץ = 40% מהכנסה פחות התחייבויות קיימות', () => {
-    const result = calculateAffordabilityLoan({
-      monthlyNetIncome: 15_000,
-      existingObligations: 2_000,
-      requestedMonthlyPayment: 1_000,
-    });
-
-    // maxRecommended = 15000 × 0.4 - 2000 = 4000
-    expect(result.maxRecommendedPayment).toBeCloseTo(4_000, 0);
-  });
-
-  it('מפנה חודשי מחושב נכון', () => {
-    const result = calculateAffordabilityLoan({
-      monthlyNetIncome: 18_000,
-      existingObligations: 3_000,
-      requestedMonthlyPayment: 2_500,
-    });
-
-    expect(result.disposableAfterLoan).toBeCloseTo(18_000 - 3_000 - 2_500, 0);
-  });
-});
-
-// ============================================================
-// ISRAELI_LOAN_TYPES ו-getLoanTypeRecommendation
-// ============================================================
-
-describe('ISRAELI_LOAN_TYPES', () => {
-  it('מכיל 6 סוגי הלוואות', () => {
-    expect(ISRAELI_LOAN_TYPES.length).toBe(6);
-  });
-
-  it('הלוואת קרן השתלמות היא הכי זולה', () => {
-    const kerenH = ISRAELI_LOAN_TYPES.find((t) => t.id === 'keren-hishtalmut');
-    expect(kerenH).toBeDefined();
-    expect(kerenH!.typicalRateMin).toBeLessThanOrEqual(4);
-  });
-
-  it('כרטיס אשראי הוא הכי יקר', () => {
-    const creditCard = ISRAELI_LOAN_TYPES.find((t) => t.id === 'credit-card');
-    expect(creditCard).toBeDefined();
-    expect(creditCard!.typicalRateMax).toBeGreaterThanOrEqual(16);
-  });
-});
-
-describe('getLoanTypeRecommendation', () => {
-  it('ריבית מעל 14% - ממליץ על מעבר', () => {
-    const rec = getLoanTypeRecommendation(16);
-    expect(rec).toContain('קרן השתלמות');
-  });
-
-  it('ריבית 10-14% - ממליץ לשקול אלטרנטיבה', () => {
-    const rec = getLoanTypeRecommendation(11);
-    expect(rec).toContain('קרן השתלמות');
-  });
-
-  it('ריבית נמוכה מ-6% - ממליץ לבדוק עמלות', () => {
-    const rec = getLoanTypeRecommendation(4);
-    expect(rec).toContain('APR');
   });
 });

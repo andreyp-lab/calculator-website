@@ -69,7 +69,7 @@ const comparisonRows = [
     tool: 'מחשבון מס רכישה',
     href: '/real-estate/purchase-tax',
     when: 'לפני חתימת חוזה רכישה — כמה מס תשלמו על הדירה (ראשונה או נוספת)',
-    output: 'סכום המס המדויק לפי מדרגות 2026',
+    output: 'אומדן מס לפי מדרגות 2026 וסיווג העסקה שהוזנו',
   },
   {
     tool: 'בדיקת מס שבח',
@@ -145,10 +145,10 @@ export default function RealEstatePage() {
         </div>
 
         <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
-          מחשבוני משכנתא ונדל&quot;ן 2026 — מס רכישה, מס שבח ומחזור
+          כלים ומדריכים למשכנתא ונדל&quot;ן 2026
         </h1>
         <p className="text-lg text-ink/70 mb-6">
-          מחשבונים מקצועיים לרוכשי ובעלי דירות בישראל
+          אומדנים והפניות למקורות רשמיים לרוכשי ובעלי דירות בישראל
         </p>
 
         {/* Summary of purchase tax and the official capital-gains self-assessment route. */}

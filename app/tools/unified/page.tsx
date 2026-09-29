@@ -15,7 +15,6 @@ import { EmployeeManager } from '@/components/tools/EmployeeManager';
 import { PLSummary } from '@/components/tools/PLSummary';
 import { BudgetCharts } from '@/components/tools/BudgetCharts';
 import { EmployeeAnalysis } from '@/components/tools/EmployeeAnalysis';
-import { AdvancedAnalytics } from '@/components/tools/AdvancedAnalytics';
 import { TemplatesLibrary } from '@/components/tools/TemplatesLibrary';
 import { WorkingCapitalOptimizer } from '@/components/tools/WorkingCapitalOptimizer';
 import { GoalsTracker } from '@/components/tools/GoalsTracker';
@@ -44,7 +43,6 @@ import { CashFlowQualityDisplay } from '@/components/tools/CashFlowQualityDispla
 import { FinancialSensitivity } from '@/components/tools/FinancialSensitivity';
 import { MultiMethodForecastDisplay } from '@/components/tools/MultiMethodForecastDisplay';
 import { PeriodComparisonDisplay } from '@/components/tools/PeriodComparisonDisplay';
-import { IndustryBenchmarks } from '@/components/tools/IndustryBenchmarks';
 
 // Forecast & Capital
 import { ThreeStatementModelUI } from '@/components/tools/ThreeStatementModel';
@@ -63,7 +61,6 @@ import {
   // Budget sub-icons
   Layout,
   Users,
-  Trophy,
   Target,
   Settings as SettingsIcon,
   // Cashflow sub-icons
@@ -91,8 +88,6 @@ type BudgetSubTab =
   | 'templates'
   | 'charts'
   | 'employees'
-  | 'advanced'
-  | 'benchmarks'
   | 'wc'
   | 'goals';
 
@@ -108,8 +103,7 @@ type AnalysisSubTab =
   | 'cashflow'
   | 'sensitivity'
   | 'forecast'
-  | 'comparison'
-  | 'benchmark';
+  | 'comparison';
 
 type ForecastSubTab = 'three-statement' | 'monte-carlo' | 'cohort' | 'dcf' | 'captable';
 
@@ -193,9 +187,9 @@ export default function UnifiedToolPage() {
         <UnifiedOverview
           onNavigate={(target) => {
             setMasterTab(target.master);
-            if (target.budget) setBudgetTab(target.budget);
+            if (target.budget) setBudgetTab(target.budget === 'benchmarks' || target.budget === 'advanced' ? 'inputs' : target.budget);
             if (target.cashflow) setCashflowTab(target.cashflow);
-            if (target.analysis) setAnalysisTab(target.analysis);
+            if (target.analysis) setAnalysisTab(target.analysis === 'benchmark' ? 'data' : target.analysis);
             if (target.forecast) setForecastTab(target.forecast);
           }}
         />
@@ -209,8 +203,6 @@ export default function UnifiedToolPage() {
             <SubTab active={budgetTab === 'templates'} onClick={() => setBudgetTab('templates')} icon={Layout} label="תבניות" color="violet" />
             <SubTab active={budgetTab === 'charts'} onClick={() => setBudgetTab('charts')} icon={BarChart3} label="גרפים" color="blue" />
             <SubTab active={budgetTab === 'employees'} onClick={() => setBudgetTab('employees')} icon={Users} label="ניתוח עובדים" color="purple" />
-            <SubTab active={budgetTab === 'advanced'} onClick={() => setBudgetTab('advanced')} icon={Sparkles} label="אנליזה מתקדמת" color="indigo" />
-            <SubTab active={budgetTab === 'benchmarks'} onClick={() => setBudgetTab('benchmarks')} icon={Trophy} label="בנצ'מרק" color="emerald" />
             <SubTab active={budgetTab === 'wc'} onClick={() => setBudgetTab('wc')} icon={SettingsIcon} label="הון חוזר" color="cyan" />
             <SubTab active={budgetTab === 'goals'} onClick={() => setBudgetTab('goals')} icon={Target} label="יעדים" color="rose" />
           </SubTabNav>
@@ -233,8 +225,6 @@ export default function UnifiedToolPage() {
           {budgetTab === 'templates' && <TemplatesLibrary />}
           {budgetTab === 'charts' && <BudgetCharts />}
           {budgetTab === 'employees' && <EmployeeAnalysis />}
-          {budgetTab === 'advanced' && <AdvancedAnalytics />}
-          {budgetTab === 'benchmarks' && <IndustryBenchmarks />}
           {budgetTab === 'wc' && <WorkingCapitalOptimizer />}
           {budgetTab === 'goals' && <GoalsTracker />}
         </div>
@@ -286,7 +276,6 @@ export default function UnifiedToolPage() {
             <SubTab active={analysisTab === 'sensitivity'} onClick={() => setAnalysisTab('sensitivity')} icon={Activity} label="רגישות" color="purple" />
             <SubTab active={analysisTab === 'forecast'} onClick={() => setAnalysisTab('forecast')} icon={Sparkles} label="חיזוי" color="amber" />
             <SubTab active={analysisTab === 'comparison'} onClick={() => setAnalysisTab('comparison')} icon={GitCompare} label="השוואת תקופות" color="violet" />
-            <SubTab active={analysisTab === 'benchmark'} onClick={() => setAnalysisTab('benchmark')} icon={Trophy} label="בנצ'מרק ענפי" color="emerald" />
           </SubTabNav>
 
           {analysisTab === 'data' && (
@@ -304,7 +293,6 @@ export default function UnifiedToolPage() {
           {analysisTab === 'sensitivity' && <FinancialSensitivity />}
           {analysisTab === 'forecast' && <MultiMethodForecastDisplay />}
           {analysisTab === 'comparison' && <PeriodComparisonDisplay />}
-          {analysisTab === 'benchmark' && <IndustryBenchmarks />}
         </div>
       )}
 

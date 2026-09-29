@@ -14,7 +14,6 @@ import { CashFlowQualityDisplay } from '@/components/tools/CashFlowQualityDispla
 import { FinancialSensitivity } from '@/components/tools/FinancialSensitivity';
 import { MultiMethodForecastDisplay } from '@/components/tools/MultiMethodForecastDisplay';
 import { PeriodComparisonDisplay } from '@/components/tools/PeriodComparisonDisplay';
-import { IndustryBenchmarks } from '@/components/tools/IndustryBenchmarks';
 import {
   BarChart3,
   Sparkles,
@@ -25,7 +24,6 @@ import {
   Droplets,
   Activity,
   GitCompare,
-  Trophy,
   ChartBar,
 } from 'lucide-react';
 
@@ -39,8 +37,7 @@ type Tab =
   | 'cashflow'
   | 'sensitivity'
   | 'forecast'
-  | 'comparison'
-  | 'benchmark';
+  | 'comparison';
 
 export default function FinancialAnalysisPage() {
   const [tab, setTab] = useState<Tab>('data');
@@ -54,7 +51,7 @@ export default function FinancialAnalysisPage() {
         <div>
           <h1 className="text-2xl font-bold text-ink">ניתוח דוחות כספיים מלא</h1>
           <p className="text-sm text-ink/70">
-            11 כלי ניתוח: יחסים, DuPont, DSCR מתקדם, Break-Even, סיכונים, אשראי בנקאי, ועוד
+            כלי ניתוח: יחסים, DuPont, DSCR מתקדם, Break-Even, סיכונים, אשראי בנקאי, ועוד
           </p>
         </div>
       </div>
@@ -134,13 +131,6 @@ export default function FinancialAnalysisPage() {
           label="השוואת תקופות"
           color="violet"
         />
-        <TabButton
-          active={tab === 'benchmark'}
-          onClick={() => setTab('benchmark')}
-          icon={Trophy}
-          label="בנצ'מרק ענפי"
-          color="emerald"
-        />
       </div>
 
       {/* Tab Content */}
@@ -164,7 +154,6 @@ export default function FinancialAnalysisPage() {
       {tab === 'sensitivity' && <FinancialSensitivity />}
       {tab === 'forecast' && <MultiMethodForecastDisplay />}
       {tab === 'comparison' && <PeriodComparisonDisplay />}
-      {tab === 'benchmark' && <IndustryBenchmarks />}
     </div>
   );
 }

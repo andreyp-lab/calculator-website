@@ -12,9 +12,7 @@ import {
   createDefaultAnswers,
   generateBudgetFromWizard,
   summarizeWizard,
-  suggestDefaults,
 } from '@/lib/tools/budget-wizard-engine';
-import { INDUSTRY_BENCHMARKS } from '@/lib/tools/industry-benchmarks';
 import { formatCurrency } from '@/lib/tools/format';
 import type { Industry, Department } from '@/lib/tools/types';
 import {
@@ -84,15 +82,11 @@ export default function BudgetWizardPage() {
   }, [answers]);
 
   const summary = useMemo(() => summarizeWizard(answers), [answers]);
-  const benchmark = INDUSTRY_BENCHMARKS[answers.industry];
-  const fmt = (v: number) => formatCurrency(v, 'ILS');
 
   const update = (updates: Partial<WizardAnswers>) => setAnswers((a) => ({ ...a, ...updates }));
 
-  // When industry changes, suggest defaults
   function handleIndustryChange(industry: Industry) {
-    const defaults = suggestDefaults(industry);
-    update({ industry, ...defaults });
+    update({ industry });
   }
 
   function next() {
@@ -192,12 +186,12 @@ export default function BudgetWizardPage() {
         </div>
         <div className="p-6">
           {step === 0 && <IndustryStep answers={answers} onUpdate={update} onIndustryChange={handleIndustryChange} />}
-          {step === 1 && <RevenueStep answers={answers} onUpdate={update} benchmark={benchmark} />}
-          {step === 2 && <CogsStep answers={answers} onUpdate={update} benchmark={benchmark} />}
+          {step === 1 && <RevenueStep answers={answers} onUpdate={update} />}
+          {step === 2 && <CogsStep answers={answers} onUpdate={update} />}
           {step === 3 && <EmployeesStep answers={answers} onUpdate={update} />}
           {step === 4 && <OperatingStep answers={answers} onUpdate={update} />}
-          {step === 5 && <MarketingStep answers={answers} onUpdate={update} benchmark={benchmark} />}
-          {step === 6 && <RndStep answers={answers} onUpdate={update} benchmark={benchmark} />}
+          {step === 5 && <MarketingStep answers={answers} onUpdate={update} />}
+          {step === 6 && <RndStep answers={answers} onUpdate={update} />}
           {step === 7 && <LoansStep answers={answers} onUpdate={update} />}
           {step === 8 && <ReviewStep answers={answers} summary={summary} onApply={applyAndContinue} />}
         </div>
@@ -339,11 +333,9 @@ function IndustryStep({
 function RevenueStep({
   answers,
   onUpdate,
-  benchmark,
 }: {
   answers: WizardAnswers;
   onUpdate: (u: Partial<WizardAnswers>) => void;
-  benchmark: { revenueGrowthPct: { median: number; low: number; high: number } };
 }) {
   function addStream() {
     onUpdate({
@@ -534,14 +526,6 @@ function RevenueStep({
             onChange={(e) => onUpdate({ expectedGrowthPct: parseFloat(e.target.value) || 0 })}
             className="w-full px-3 py-2 border border-ink/15 bg-paper"
           />
-          <BenchmarkHint
-            label="צמיחה ענפית"
-            low={benchmark.revenueGrowthPct.low}
-            median={benchmark.revenueGrowthPct.median}
-            high={benchmark.revenueGrowthPct.high}
-            unit="%"
-            value={answers.expectedGrowthPct}
-          />
         </div>
       )}
     </div>
@@ -551,11 +535,9 @@ function RevenueStep({
 function CogsStep({
   answers,
   onUpdate,
-  benchmark,
 }: {
   answers: WizardAnswers;
   onUpdate: (u: Partial<WizardAnswers>) => void;
-  benchmark: { grossMargin: { median: number; low: number; high: number } };
 }) {
   const grossMargin = 100 - answers.cogsPct;
 
@@ -592,14 +574,6 @@ function CogsStep({
       <div className="bg-emerald-50 border border-emerald-200 p-3 text-center">
         <div className="text-xs text-emerald-800 mb-1">מרווח גולמי שלך</div>
         <div className="text-3xl font-bold text-emerald-800">{grossMargin.toFixed(1)}%</div>
-        <BenchmarkHint
-          label="מרווח גולמי ענפי"
-          low={benchmark.grossMargin.low}
-          median={benchmark.grossMargin.median}
-          high={benchmark.grossMargin.high}
-          unit="%"
-          value={grossMargin}
-        />
       </div>
     </div>
   );
@@ -1062,11 +1036,9 @@ function ModeToggle({
 function MarketingStep({
   answers,
   onUpdate,
-  benchmark,
 }: {
   answers: WizardAnswers;
   onUpdate: (u: Partial<WizardAnswers>) => void;
-  benchmark: { marketingPctOfRevenue: { median: number; low: number; high: number } };
 }) {
   return (
     <div className="space-y-4">
@@ -1118,14 +1090,6 @@ function MarketingStep({
             />
             <span className="text-ink/70">%</span>
           </div>
-          <BenchmarkHint
-            label="שיווק ענפי"
-            low={benchmark.marketingPctOfRevenue.low}
-            median={benchmark.marketingPctOfRevenue.median}
-            high={benchmark.marketingPctOfRevenue.high}
-            unit="%"
-            value={answers.marketingPct}
-          />
         </div>
       ) : (
         <div>
@@ -1148,11 +1112,9 @@ function MarketingStep({
 function RndStep({
   answers,
   onUpdate,
-  benchmark,
 }: {
   answers: WizardAnswers;
   onUpdate: (u: Partial<WizardAnswers>) => void;
-  benchmark: { rndPctOfRevenue: { median: number; low: number; high: number } };
 }) {
   return (
     <div className="space-y-4">
@@ -1182,14 +1144,6 @@ function RndStep({
           />
           <span className="text-ink/70">%</span>
         </div>
-        <BenchmarkHint
-          label="R&D ענפי"
-          low={benchmark.rndPctOfRevenue.low}
-          median={benchmark.rndPctOfRevenue.median}
-          high={benchmark.rndPctOfRevenue.high}
-          unit="%"
-          value={answers.rndPct}
-        />
       </div>
 
       <div className="bg-amber-50 border border-amber-200 rounded p-3 text-xs text-amber-900">
@@ -1389,45 +1343,6 @@ function SummaryRow({
     >
       <span className="text-sm text-ink/70">{label}:</span>
       <span className="text-sm font-semibold">{value}</span>
-    </div>
-  );
-}
-
-function BenchmarkHint({
-  label,
-  low,
-  median,
-  high,
-  unit,
-  value,
-}: {
-  label: string;
-  low: number;
-  median: number;
-  high: number;
-  unit: string;
-  value: number;
-}) {
-  let position = 'median';
-  let color = 'emerald';
-  if (value < low) {
-    position = 'מתחת לטווח';
-    color = 'red';
-  } else if (value < median) {
-    position = 'מתחת לחציון';
-    color = 'amber';
-  } else if (value < high) {
-    position = 'מעל החציון';
-    color = 'emerald';
-  } else {
-    position = 'מעל אחוזון 75';
-    color = 'emerald';
-  }
-
-  return (
-    <div className={`mt-2 text-xs text-${color}-700`}>
-      📊 {label}: Q1 {low.toFixed(0)}{unit} | חציון {median.toFixed(0)}{unit} | Q3 {high.toFixed(0)}
-      {unit} → אתה: <strong>{position}</strong>
     </div>
   );
 }

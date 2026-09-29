@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ExternalLink, Calendar, TrendingDown, Home, ArrowLeft } from 'lucide-react';
+import { ExternalLink, Calendar, TrendingDown, Home } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { MACRO_DATA, formatHebrewDate, daysUntilNextDecision } from '@/lib/data/macroeconomic-data';
@@ -170,13 +170,6 @@ export default function PrimeRatePage() {
             >
               <Home className="w-4 h-4" />
               מחשבון משכנתא
-            </Link>
-            <Link
-              href="/real-estate/mortgage-optimizer"
-              className="inline-flex items-center gap-1.5 bg-paper border border-ink/15 text-gold px-4 py-2 rounded-none text-sm font-medium hover:bg-cream-2 transition"
-            >
-              אופטימייזר תמהיל
-              <ArrowLeft className="w-4 h-4" />
             </Link>
           </div>
         </div>

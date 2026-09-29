@@ -15,7 +15,7 @@ const businessTools = [
 
 export const metadata: Metadata = {
   alternates: { canonical: '/self-employed' },
-  title: 'מחשבונים לעצמאים ועסקים 2026 - מע"מ, ב.ל., מס ונטו',
+  title: 'כלים ומדריכים לעצמאים ועסקים 2026 - מע"מ, ביטוח לאומי ומס',
   description: 'כלים ומדריכים לעצמאים ופרילנסרים: מע״מ, ביטוח לאומי, מקדמות מס הכנסה, תזרים ותמחור שעה, עם הפניות לחישוב אישי במקורות הרשמיים.',
 };
 
@@ -27,9 +27,9 @@ const calculators = [
     available: true,
   },
   {
-    title: '🏗️ כמה עולה להקים עסק? מחשבון תוכנית עסקית',
-    description: 'סטודיו, בית קפה, מספרה, קליניקה ועוד — עלות הקמה לפי עיר ושטח, הוצאות חודשיות, נקודת איזון ורזרבת חידוש',
-    href: '/business',
+    title: '🏗️ כמה עולה להקים עסק? מדריך לתקציב פתיחה',
+    description: 'רכיבי ההשקעה וההוצאות שיש לאסוף לקראת תכנון תקציב, עם קישורים לאגרות הרשמיות',
+    href: '/self-employed/business-setup-cost',
     available: true,
   },
   {
@@ -75,12 +75,6 @@ const calculators = [
     available: true,
   },
   {
-    title: 'כמה עולה לפתוח עסק?',
-    description: 'רכיבי עלות לפתיחת עסק והיכן בודקים אגרות רשמיות והצעות מחיר',
-    href: '/self-employed/business-setup-cost',
-    available: true,
-  },
-  {
     title: '🆕 חשבונית מס, חשבונית עסקה או קבלה?',
     description: 'המדריך המלא לסוגי המסמכים — מה מוציאים, מתי, וההבדלים בין עוסק פטור למורשה',
     href: '/self-employed/invoices',
@@ -99,8 +93,8 @@ const calculators = [
     available: true,
   },
   {
-    title: 'מחשבון תמחור שעת עבודה',
-    description: 'חישוב מחיר שעה לפרילנסר/יועץ - שכר רצוי + הוצאות + רווח',
+    title: 'כלי לתכנון יעד הכנסה לשעת חיוב',
+    description: 'חלוקת יעד הכנסות בשעות חיוב צפויות, לאחר איסוף עלויות ובדיקת מס אישית',
     href: '/self-employed/hourly-rate',
     available: true,
   },

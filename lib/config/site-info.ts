@@ -20,9 +20,9 @@ export const SITE_INFO = {
 
   legal: {
     jurisdictionCity: 'תל אביב', // העיר שבה הסמכות
-    privacyLastUpdated: '17.5.2026',
+    privacyLastUpdated: '29.9.2026',
     termsLastUpdated: '17.5.2026',
-    accessibilityLastUpdated: '17.5.2026',
+    accessibilityLastUpdated: '29.9.2026',
   },
 
   contact: {

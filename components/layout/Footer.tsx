@@ -26,7 +26,7 @@ export function Footer() {
           {/* 1. שכירים */}
           <div>
             <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
-              // שכירים
+              {'// '}שכירים
             </h3>
             <ul className="space-y-2.5">
               <li>
@@ -55,7 +55,7 @@ export function Footer() {
           {/* 2. עצמאיים */}
           <div>
             <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
-              // עצמאיים
+              {'// '}עצמאיים
             </h3>
             <ul className="space-y-2.5">
               <li>
@@ -84,7 +84,7 @@ export function Footer() {
           {/* 3. הלוואות ונדל"ן */}
           <div>
             <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
-              // הלוואות ונדל&quot;ן
+              {'// '}הלוואות ונדל&quot;ן
             </h3>
             <ul className="space-y-2.5">
               <li>
@@ -98,11 +98,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/real-estate/mortgage-optimizer" className="font-mono text-[11px] text-cream/55 hover:text-gold-light transition-colors">
-                  אופטימייזר תמהיל
-                </Link>
-              </li>
-              <li>
                 <Link href="/savings/personal-loan" className="font-mono text-[11px] text-cream/55 hover:text-gold-light transition-colors">
                   הלוואה אישית
                 </Link>
@@ -113,7 +108,7 @@ export function Footer() {
           {/* 4. על האתר */}
           <div>
             <h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light mb-4">
-              // על האתר
+              {'// '}על האתר
             </h3>
             <ul className="space-y-2.5">
               <li>
@@ -185,7 +180,7 @@ export function Footer() {
           <div className="flex flex-wrap items-start gap-x-8 gap-y-4">
 
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light">// כלים לעסקים</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light">{'// '}כלים לעסקים</span>
               <Link href="/tools" className="font-mono text-[11px] text-cream/55 hover:text-gold-light transition-colors">
                 מרכז הכלים
               </Link>
@@ -204,7 +199,7 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light">// עדכוני שוק</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold-light">{'// '}עדכוני שוק</span>
               <Link href="/news/prime-rate" className="font-mono text-[11px] text-cream/55 hover:text-gold-light transition-colors">
                 פריים
               </Link>

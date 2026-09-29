@@ -145,8 +145,9 @@ export default function OpeningBusinessPage() {
         <div className="border border-ink/15 bg-cream-2 p-5 mb-8">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">בקצרה</p>
           <p className="text-ink/80 leading-relaxed text-sm">
-            פתיחת עסק עצמאי בישראל = שלושה רישומים: <strong>מע"מ ← מס הכנסה ← ביטוח לאומי</strong>.
-            בדקו בשירותי הרשויות את אופן הרישום ולוחות הזמנים לפי סוג הפעילות. אחת ההחלטות היא הסיווג:{' '}
+            בפתיחת עסק יש לבדוק רישום במע״מ, במס הכנסה ובביטוח הלאומי. בקשת הרישום המקוונת
+            לעוסק פטור ברשות המסים כוללת פתיחת תיק במע״מ ובמס הכנסה; במקרים אחרים מסלול
+            הרישום שונה. בדקו בשירותי הרשויות את אופן הרישום לפי סוג הפעילות. אחת ההחלטות היא הסיווג:{' '}
             <strong>עוסק פטור</strong> (מחזור עד 122,833 ₪ בשנה, בלי גביית מע"מ, מינימום בירוקרטיה)
             או <strong>עוסק מורשה</strong> (גובה מע״מ בעסקאות החייבות, בודק זכאות לניכוי תשומות
             ומדווח לפי תקופת הדיווח שנקבעה לו).
@@ -450,7 +451,7 @@ export default function OpeningBusinessPage() {
 
         {/* Step-by-step registration section */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-ink mb-6">פתיחת תיק ברשויות — צעד אחר צעד</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">פתיחת תיק ברשויות — מה צריך לבדוק</h2>
           <p className="text-ink/70 mb-6 leading-relaxed">
             להלן שלושת הגופים שיש לבדוק מולם את הרישום ואת המעמד: מע"מ, מס הכנסה וביטוח לאומי.
           </p>
@@ -468,15 +469,15 @@ export default function OpeningBusinessPage() {
                     <tbody className="text-ink/70">
                       <tr className="border-b border-ink/15">
                         <td className="p-3 font-medium text-ink/70 w-32">טופס</td>
-                        <td className="p-3 font-semibold">טופס 821 — בקשה לרישום עוסק</td>
+                        <td className="p-3 font-semibold">בקשה מקוונת לעוסק פטור; טופס 821 לעוסק מורשה</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
                         <td className="p-3 font-medium text-ink/70">מסמכים</td>
-                        <td className="p-3">תעודת זהות · אישור ניהול חשבון בנק · חוזה שכירות / הוכחת בעלות על נכס העסק · פרטי העסק</td>
+                        <td className="p-3">לפי המסלול ותנאי השירות: פרטי זהות, פרטי העסק, אישור חשבון בנק ומסמכים נוספים לפי הנדרש</td>
                       </tr>
                       <tr className="border-b border-ink/15">
                         <td className="p-3 font-medium text-ink/70">איך</td>
-                        <td className="p-3">אונליין דרך אתר רשות המסים, או פיזית בסניף מע"מ הקרוב</td>
+                        <td className="p-3">לעוסק פטור — שירות מקוון הכולל גם פתיחת תיק מס הכנסה; לעוסק מורשה — בדקו את שירות טופס 821</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
                         <td className="p-3 font-medium text-ink/70">עלות</td>
@@ -484,7 +485,7 @@ export default function OpeningBusinessPage() {
                       </tr>
                       <tr>
                         <td className="p-3 font-medium text-ink/70">זמן טיפול</td>
-                        <td className="p-3">אונליין — לרוב מיידי עד ימים ספורים</td>
+                        <td className="p-3">לפי בדיקת הבקשה ואופן הרישום ברשות המסים</td>
                       </tr>
                     </tbody>
                   </table>
@@ -510,15 +511,15 @@ export default function OpeningBusinessPage() {
                     <tbody className="text-ink/70">
                       <tr className="border-b border-ink/15">
                         <td className="p-3 font-medium text-ink/70 w-32">טופס</td>
-                        <td className="p-3 font-semibold">טופס 5329 — דו"ח פרטים אישיים והצהרה על מקורות הכנסה</td>
+                        <td className="p-3 font-semibold">טופס 5329 או מסלול פתיחת תיק אחר בהתאם לסיווג</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
                         <td className="p-3 font-medium text-ink/70">מסמכים</td>
-                        <td className="p-3">תעודת זהות · פרטי בנק · אישור פתיחת תיק מע"מ</td>
+                        <td className="p-3">לפי הדרישות שמופיעות בשירות הרלוונטי ברשות המסים</td>
                       </tr>
                       <tr className="border-b border-ink/15">
                         <td className="p-3 font-medium text-ink/70">איך</td>
-                        <td className="p-3">הגשה ידנית בפקיד השומה, או דרך מייצג (רו"ח / שע"מ). חל על עוסק פטור ועוסק מורשה כאחד.</td>
+                        <td className="p-3">לעוסק פטור הבקשה המקוונת פותחת גם את תיק מס הכנסה; במקרים אחרים בדקו את שירות טופס 5329 או פנו למייצג</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
                         <td className="p-3 font-medium text-ink/70">עלות</td>
@@ -573,7 +574,7 @@ export default function OpeningBusinessPage() {
                       </tr>
                       <tr>
                         <td className="p-3 font-medium text-ink/70">זמן טיפול</td>
-                        <td className="p-3">לרוב ימים ספורים עד שבוע; מקדמות ב"ל מחושבות מיום הרישום</td>
+                        <td className="p-3">לפי בדיקת הבקשה בביטוח הלאומי; מועד החיוב ייקבע לפי נתוני הפעילות והמעמד</td>
                       </tr>
                     </tbody>
                   </table>
@@ -842,8 +843,8 @@ export default function OpeningBusinessPage() {
               מחיר עם לקוח ראשון.
             </li>
             <li>
-              <strong>התעלמות מתקרת עוסק פטור</strong> — חציית 122,833 ₪ בלי מעבר מסודר לעוסק
-              מורשה היא עבירה על החוק וגוררת חיוב מע"מ בדיעבד.
+              <strong>התעלמות מתקרת עוסק פטור</strong> — אם המחזור צפוי לחצות את תקרת 122,833 ₪,
+              בדקו בהקדם עם רשות המסים כיצד לעדכן את הסיווג ומהן חובות הדיווח והמע״מ.
             </li>
           </ul>
         </div>
@@ -856,7 +857,7 @@ export default function OpeningBusinessPage() {
               לפני הפתיחה
             </p>
             <ul className="space-y-2 text-sm text-ink/80 leading-relaxed mb-6">
-              <li>☐ הגדרתם מה העסק מוכר, למי, ובאיזה מחיר (בדקו עם <Link href="/self-employed/hourly-rate" className="text-gold hover:underline">מחשבון התמחור</Link>)</li>
+              <li>☐ הגדרתם מה העסק מוכר, למי, ובאיזה מחיר (היעזרו ב<Link href="/self-employed/hourly-rate" className="text-gold hover:underline">כלי לתכנון יעד הכנסה לשעת חיוב</Link>)</li>
               <li>☐ אמדתם את המחזור השנתי הצפוי — מעל או מתחת ל-122,833 ₪?</li>
               <li>☐ בחרתם סיווג: עוסק פטור / עוסק מורשה (או חברה בע"מ)</li>
               <li>☐ תקצבתם את עלויות הפתיחה (<Link href="/self-employed/business-setup-cost" className="text-gold hover:underline">מדריך רכיבי העלות</Link>)</li>
@@ -866,8 +867,8 @@ export default function OpeningBusinessPage() {
               שבוע הפתיחה
             </p>
             <ul className="space-y-2 text-sm text-ink/80 leading-relaxed mb-6">
-              <li>☐ פתיחת תיק מע"מ — טופס 821 (אונליין או בסניף)</li>
-              <li>☐ פתיחת תיק מס הכנסה — טופס 5329</li>
+              <li>☐ בדיקת מסלול הרישום במע״מ: בקשה מקוונת לעוסק פטור או טופס 821 לעוסק מורשה</li>
+              <li>☐ וידוא פתיחת תיק מס הכנסה במסלול המתאים; הבקשה המקוונת לעוסק פטור כוללת גם אותו</li>
               <li>☐ רישום כעצמאי בביטוח לאומי — טופס בל/6101</li>
               <li>☐ הסדרת תוכנה להפקת חשבוניות/קבלות (<Link href="/self-employed/invoices" className="text-gold hover:underline">איזה מסמך מפיקים למי?</Link>)</li>
             </ul>
@@ -895,10 +896,9 @@ export default function OpeningBusinessPage() {
               { href: '/self-employed/social-security', label: 'ביטוח לאומי לעצמאי — מדריך ומחשבון רשמי' },
               { href: '/self-employed/tax-advances', label: 'מדריך מקדמות מס' },
               { href: '/self-employed/vat-threshold', label: 'מדריך תקרת עוסק פטור' },
-              { href: '/self-employed/hourly-rate', label: 'מחשבון תמחור שעת עבודה' },
+              { href: '/self-employed/hourly-rate', label: 'כלי לתכנון יעד הכנסה לשעת חיוב' },
               { href: '/self-employed/corporation-vs-individual', label: 'חברה בע"מ מול עוסק' },
               { href: '/self-employed/business-setup-cost', label: 'כמה עולה לפתוח עסק?' },
-              { href: '/business', label: '🏗️ כמה עולה להקים סטודיו / בית קפה / קליניקה — לפי סוג עסק' },
               { href: '/self-employed/invoices', label: 'חשבונית מס מול קבלה — המדריך' },
               { href: '/self-employed/business-finance', label: 'התנהלות פיננסית לעצמאים' },
             ].map((c) => (
@@ -938,6 +938,7 @@ export default function OpeningBusinessPage() {
           <ul className="list-disc space-y-2 pr-5">
             <li><a href="https://www.gov.il/he/service/request-open-exempt-dealer-via-internet" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — פתיחת תיק עוסק פטור ותנאי הרישום</a></li>
             <li><a href="https://www.gov.il/he/service/vat-821" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — פתיחת תיק עוסק מורשה</a></li>
+            <li><a href="https://www.gov.il/he/service/itc5329" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — טופס 5329 לפתיחת תיק עצמאי</a></li>
             <li><a href="https://www.gov.il/he/service/report-and-payment-for-micro-business-owner" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — דיווח מקוצר לבעל עסק זעיר</a></li>
             <li><a href="https://www.btl.gov.il/Insurance/National%20Insurance/type_list/Self_Employed/Pages/rates.aspx" target="_blank" rel="noopener noreferrer" className="text-gold underline">הביטוח הלאומי — שיעורי דמי ביטוח לעצמאי</a></li>
           </ul>

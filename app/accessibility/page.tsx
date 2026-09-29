@@ -37,10 +37,10 @@ export default function AccessibilityPage() {
           </p>
         </section>
 
-        {/* 2. רמת תאימות */}
+        {/* 2. תקנים והנחיות רלוונטיים */}
         <section className="mb-8">
           <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
-            2. רמת תאימות
+            2. תקנים והנחיות רלוונטיים
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-cream-2 border border-ink/15 p-4">
@@ -67,76 +67,18 @@ export default function AccessibilityPage() {
         {/* 3. מה הונגש */}
         <section className="mb-8">
           <h2 className="text-2xl font-bold text-ink mb-4 pb-2 border-b border-ink/15">
-            3. מה הונגש באתר
+            3. אמצעי נגישות באתר
           </h2>
           <p className="mb-4">
-            הפעולות הבאות בוצעו לשיפור נגישות האתר:
+            בקוד האתר קיימים אמצעי נגישות אלה. הרשימה אינה אישור לעמידה מלאה בתקן; לא בוצעה בדיקת תאימות מקיפה לכל דפי האתר והתרחישים.
           </p>
 
-          <div className="space-y-3">
-            {[
-              {
-                title: 'ניווט מקלדת מלא',
-                desc: 'ניתן לנווט בכל האתר באמצעות מקלדת (Tab, Enter, Esc, מקשי חצים). כל האלמנטים האינטרקטיביים נגישים ממקלדת.',
-              },
-              {
-                title: 'קוראי מסך',
-                desc: 'האתר תואם לקוראי מסך מובילים: NVDA, JAWS, VoiceOver (Mac/iOS), TalkBack (Android).',
-              },
-              {
-                title: 'ניגודיות צבעים',
-                desc: 'יחס ניגודיות של לפחות 4.5:1 לטקסט רגיל ו-3:1 לטקסט גדול, בהתאם לדרישות WCAG AA.',
-              },
-              {
-                title: 'קישור דילוג לתוכן (Skip to Content)',
-                desc: 'קישור "דלג לתוכן הראשי" מופיע בראש כל דף בעת ניווט מקלדת, המאפשר לדלג על ניווט חוזר.',
-              },
-              {
-                title: 'תוויות ARIA',
-                desc: 'כל הכפתורים, הקישורים, הטפסים ושדות הקלט מסומנים עם תוויות ARIA (aria-label, aria-describedby, role) ברורות.',
-              },
-              {
-                title: 'שפה וכיוון',
-                desc: 'האתר מוגדר כהלכה עם lang="he" ו-dir="rtl" ב-HTML, כך שקוראי המסך ידעו שמדובר בעברית RTL.',
-              },
-              {
-                title: 'גודל טקסט גמיש',
-                desc: 'ניתן להגדיל את גודל הטקסט עד 200% ללא אובדן תוכן או פונקציונליות.',
-              },
-              {
-                title: 'תפריט נגישות צף',
-                desc: 'תפריט נגישות צף (ראה סעיף 4) מאפשר התאמות אישיות: גודל טקסט, ניגודיות, פונט קריא ועוד.',
-              },
-              {
-                title: 'אינדיקטורי פוקוס (Focus Indicators)',
-                desc: 'כל האלמנטים הפוקוסים מסומנים בגבול ברור וגלוי, להנחיית משתמשי מקלדת.',
-              },
-              {
-                title: 'היררכיית כותרות',
-                desc: 'כל הדפים מיושמים עם היררכיית כותרות תקנית: H1 אחד לדף, H2 לסעיפים ראשיים, H3 לתתי-סעיפים.',
-              },
-              {
-                title: 'תיאורי תמונות (Alt Text)',
-                desc: 'לכל התמונות, האייקונים והגרפים יש תיאור alt טקסטואלי משמעותי.',
-              },
-              {
-                title: 'תוויות טפסים',
-                desc: 'כל שדות הקלט בטפסים ובמחשבונים מקושרים לתוויות (labels) ברורות ומפורשות.',
-              },
-              {
-                title: 'אזהרת קישורים חדשים',
-                desc: 'קישורים הנפתחים בחלון חדש מסומנים בהתאם (aria-label, אייקון), להפחתת בלבול.',
-              },
-            ].map((item) => (
-              <div key={item.title} className="flex gap-3 items-start">
-                <span className="text-gold text-lg flex-shrink-0 mt-0.5" aria-hidden="true">✓</span>
-                <div>
-                  <strong className="text-ink">{item.title}</strong>
-                  <p className="text-sm text-ink/70 mt-0.5">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ul className="list-disc space-y-3 pr-6 text-ink/70">
+            <li>קישור דילוג לתוכן הראשי מופיע בעת ניווט במקלדת.</li>
+            <li>האתר מוגדר בעברית ובכיוון ימין לשמאל ברמת מסמך ה־HTML.</li>
+            <li>רכיב התאמות נגישות מאפשר שינוי גודל טקסט, ניגודיות והדגשת קישורים וכותרות.</li>
+            <li>העדפות ההתאמה נשמרות בדפדפן המקומי באמצעות localStorage.</li>
+          </ul>
         </section>
 
         {/* 4. תפריט נגישות */}
@@ -232,7 +174,7 @@ export default function AccessibilityPage() {
           </p>
           <ul className="space-y-2 mb-4">
             <li>
-              <strong>טופס יצירת קשר:</strong>{' '}
+              <strong>דף יצירת קשר:</strong>{' '}
               <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
                 {SITE_INFO.domain}{SITE_INFO.contact.contactPage}
               </Link>
@@ -267,15 +209,14 @@ export default function AccessibilityPage() {
               </a>
             </li>
             <li>
-              טופס יצירת קשר:{' '}
+              דף יצירת קשר:{' '}
               <Link href={SITE_INFO.contact.contactPage} className="text-gold hover:underline">
                 {SITE_INFO.contact.contactPage}
               </Link>
             </li>
           </ul>
           <p className="text-sm text-ink/70 mt-3">
-            <em>הערה: האתר מנוהל על ידי יחיד פרטי. אין חובה חוקית למינוי רכז נגישות, אך
-            כל פנייה תקבל מענה אישי.</em>
+            <em>האתר מנוהל על ידי יחיד פרטי. ניתן לפנות בנושא נגישות לכתובת הדוא״ל לעיל.</em>
           </p>
         </section>
 
@@ -328,7 +269,6 @@ export default function AccessibilityPage() {
           <ul className="space-y-2 text-sm">
             <li><strong>תאריך הצהרת נגישות:</strong> {SITE_INFO.legal.accessibilityLastUpdated}</li>
             <li><strong>תאריך עדכון אחרון:</strong> {SITE_INFO.legal.accessibilityLastUpdated}</li>
-            <li><strong>מועד נגישות מערכת:</strong> {SITE_INFO.legal.accessibilityLastUpdated}</li>
           </ul>
         </section>
 

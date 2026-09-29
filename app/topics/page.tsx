@@ -11,9 +11,9 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/topics' },
-  title: { absolute: 'מחשבונים פיננסיים לכל נושא 2026 - נדל״ן, רכב, ביטוח, השקעות' },
+  title: { absolute: 'כלים ומדריכים לפי נושא — נדל״ן, רכב, ביטוח והשקעות' },
   description:
-    'בדוק מחשבוני מס רכישה, מס שבח, ריבית דריבית ועוד — כלים עדכניים ל-2026 למשכנתא ונדל״ן, חיסכון והשקעות, ביטוחים ופנסיה, רכב ותחבורה. ללא הרשמה, חינם לחלוטין.',
+    'כלים ומדריכים על נדל״ן, חיסכון, השקעות, פנסיה ורכב, בגישה חופשית וללא הרשמה.',
 };
 
 interface Group {
@@ -57,12 +57,12 @@ const GROUPS: Group[] = [
       {
         href: '/investments',
         label: 'השקעות',
-        description: 'ריבית דריבית, ROI, תיק השקעות, תכנון פרישה',
+        description: 'ריבית דריבית, תשואה ותכנון פרישה',
       },
       {
         href: '/insurance',
         label: 'ביטוחים ופנסיה',
-        description: 'פנסיה צפויה, ביטוח חיים, קרן השתלמות',
+        description: 'בדיקת פנסיה, הפקדות והכנה לפרישה',
       },
     ],
   },
@@ -145,7 +145,7 @@ export default function TopicsPage() {
         <section className="mb-10">
           <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
             <PiggyBank className="w-5 h-5 text-gold" />
-            <span>מחשבונים פופולריים</span>
+          <span>כלים ומדריכים נבחרים</span>
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {POPULAR.map((calc) => (

@@ -6,7 +6,7 @@ describe('private-sector recreation pay baseline', () => {
     expect(privateDaysForCompletedYears(0.99)).toBe(0);
   });
   it('uses the private-sector tenure table and part-time proportion', () => {
-    expect(calculatePrivateRecreationEstimate(5, 60)).toEqual({ daysEntitled: 7, dayRate: 418, grossEstimate: 1755.6 });
+    expect(calculatePrivateRecreationEstimate(5, 60)).toEqual({ daysEntitled: 7, dayRate: 451.5, grossEstimate: 1896.3 });
   });
   it('lets users enter their applicable collective-agreement day rate', () => {
     expect(calculatePrivateRecreationEstimate(5, 100, 500).grossEstimate).toBe(3500);
