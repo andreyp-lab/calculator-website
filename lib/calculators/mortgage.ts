@@ -378,7 +378,8 @@ export function calculateMultiTrackMortgage(
     .filter((t) => fixedTrackTypes.includes(t.trackType))
     .reduce((sum, t) => sum + t.amount, 0);
   const fixedTrackPercentage = totalLoanAmount > 0 ? (fixedAmount / totalLoanAmount) * 100 : 0;
-  const isRegulationCompliant = fixedTrackPercentage >= 33;
+  // בדיקת השליש הקבוע בלבד; אישור משכנתא תלוי במגבלות נוספות ובבדיקת הבנק.
+  const isRegulationCompliant = totalLoanAmount > 0 && fixedAmount / totalLoanAmount >= 1 / 3 - 1e-10;
 
   return {
     tracks: trackResults,
@@ -659,7 +660,6 @@ export function calculateEarlyPayoff(input: EarlyPayoffInput): EarlyPayoffResult
   // עמלת פירעון מוקדם - הערכה לפי כללי בנק ישראל
   // הנוסחה הרשמית מורכבת; הערכה: ~0.5%-1.5% מסכום הפירעון המוקדם
   // בפועל תלויה בהפרש הריביות. נשתמש בהערכה של 1%
-  const totalEarlyPayoff = lumpSum + extraMonthlyPayment * newMonthsRemaining;
   const estimatedPenalty = lumpSum > 0 ? lumpSum * 0.01 : 0; // ~1% על הסכום החד-פעמי
 
   const interestSaved = originalResult.totalInterest - newTotalInterest;
@@ -732,7 +732,7 @@ export function calculateAffordability(input: AffordabilityInput): Affordability
   // מ-M = P × r(1+r)^n / ((1+r)^n - 1) נגזור P
   const r = interestRate / 100 / 12;
   const n = termYears * 12;
-  const factor = r === 0 ? n : (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  const factor = n > 0 ? (r === 0 ? 1 / n : (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)) : 0;
 
   const maxLoanAtComfort = factor > 0 ? comfortableForMortgage / factor : 0;
   const maxLoanAtBank = factor > 0 ? availableForMortgage / factor : 0;
@@ -749,7 +749,9 @@ export function calculateAffordability(input: AffordabilityInput): Affordability
   });
 
   const monthlyPaymentForFullLoan = fullLtvResult.firstPayment;
-  const debtToIncomeRatio = ((monthlyPaymentForFullLoan + otherObligations) / monthlyNetIncome) * 100;
+  const debtToIncomeRatio = monthlyNetIncome > 0
+    ? ((monthlyPaymentForFullLoan + otherObligations) / monthlyNetIncome) * 100
+    : 0;
 
   let recommendation = '';
   if (!isAffordable) {
@@ -820,7 +822,6 @@ export function calculateWithInflation(input: InflationTrackInput): InflationTra
   // חישוב עם הצמדה - הקרן גדלה עם מדד
   const monthlyInflation = inflationRate / 100 / 12;
   const r = nominalRate / 100 / 12;
-  const n = termYears * 12;
 
   let balance = loanAmount; // יתרה נומינלית (גדלה עם מדד)
   let cpiIndex = 100;
@@ -830,7 +831,6 @@ export function calculateWithInflation(input: InflationTrackInput): InflationTra
   // בשפיצר עם הצמדה: כל חודש הקרן גדלה במדד, ואז מחשבים ריבית ותשלום
   // התשלום מחושב מחדש כל שנה על יתרת הקרן המצומדת
   for (let year = 1; year <= termYears; year++) {
-    let yearlyNominalBalance = balance;
     let yearPayments = 0;
 
     // חישוב תשלום על פי יתרה מצומדת בתחילת שנה

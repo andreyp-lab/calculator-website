@@ -137,9 +137,9 @@ export default function Home() {
                 <span className="text-gold" aria-hidden="true">✦</span>
                 <span>7 קטגוריות</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
-                <span>100% בעברית</span>
+                <span>בעברית</span>
                 <span className="text-gold" aria-hidden="true">✦</span>
-                <span>₪0</span>
+                <span>הכלים חינם</span>
               </div>
 
               {/* כפתורים */}
@@ -178,7 +178,7 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-black md:text-4xl">
             שבע קטגוריות.{' '}
             <span className="font-serif font-normal italic text-gold">
-              כל מצב פיננסי.
+              מהשכר ועד ניהול העסק.
             </span>
           </h2>
 
@@ -240,10 +240,10 @@ export default function Home() {
               ✦ בית הספר הפיננסי FinSchool ✦
             </p>
             <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-cream md:text-4xl">
-              הכלים נותנים לכם תשובה.
+              הכלים עוזרים להבין את המספרים.
               <br />
               <span className="font-serif font-normal italic text-gold-light">
-                הקורסים נותנים לכם שליטה.
+                הקורסים מציעים לימוד מעמיק.
               </span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-cream/70">
@@ -319,12 +319,12 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-black leading-tight md:text-4xl">
             מהמחשבונים — עד{' '}
             <span className="font-serif font-normal italic text-gold">
-              האוטומציה המלאה.
+              עבודה עם AI.
             </span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-ink/70">
             התחילו עם הכלים החינמיים, ותעלו רמה עם הקורסים של FinSchool — מהבנת
-            המספרים ועד ניהול כספי העסק בביטחון מלא.
+            המספרים ועד ללימוד ניהול כספי העסק.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Link

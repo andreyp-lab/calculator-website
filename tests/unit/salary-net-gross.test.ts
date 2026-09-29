@@ -3,12 +3,9 @@ import {
   calculateSalaryNetGross,
   calculateGrossFromNet,
   calculateNetFromEmployerCost,
-  calculateYearComparison,
   calculateBonusNet,
   calculateSalaryCurve,
   getMarginalBracketInfoPublic,
-  TAX_BRACKETS_2024,
-  TAX_BRACKETS_2025,
   PENSION_RATES,
   type SalaryNetGrossInput,
 } from '@/lib/calculators/salary-net-gross';
@@ -166,30 +163,33 @@ describe('calculateNetFromEmployerCost', () => {
 });
 
 // ============================================================
-// 4. calculateYearComparison
+// 4. 2026 official boundaries and unsupported historical years
 // ============================================================
 
-describe('calculateYearComparison', () => {
-  it('2026 נותן נטו גבוה יותר מ-2024 לשכר בינוני (19,000 ₪)', () => {
-    const comparison = calculateYearComparison({ ...defaultInput, grossSalary: 19_000 });
-    const net2026 = comparison.find((c) => c.year === '2026')!.netSalary;
-    const net2024 = comparison.find((c) => c.year === '2024')!.netSalary;
-    // ב-2026 מדרגת 20% הורחבה — 19,000 ₪/חודש במדרגה 20% בשניהם אבל...
-    // למעשה ב-2024: 19,000 × 12 = 228,000 מעל 193,800 → חלק ב-31%. ב-2026: עד 228,000 הכל ב-20%
-    expect(net2026).toBeGreaterThanOrEqual(net2024 - 1); // לפחות שווה
+describe('2026 salary boundaries', () => {
+  it('2026: מדרגת הביטוח המופחתת מסתיימת ב־7,703 ₪', () => {
+    const below = calculateSalaryNetGross({ ...defaultInput, grossSalary: 7_703, pensionEnabled: false });
+    const above = calculateSalaryNetGross({ ...defaultInput, grossSalary: 7_704, pensionEnabled: false });
+    expect(below.socialSecurity).toBeCloseTo(7_703 * 0.0427, 5);
+    expect(above.socialSecurity - below.socialSecurity).toBeCloseTo(0.1217, 5);
   });
 
-  it('מחזיר 3 שנים', () => {
-    const comparison = calculateYearComparison(defaultInput);
-    expect(comparison).toHaveLength(3);
-    expect(comparison.map((c) => c.year)).toEqual(['2024', '2025', '2026']);
+  it('2026: מס לפני זיכויים על 19,000 ₪ הוא 2,916 ₪ לחודש', () => {
+    const result = calculateSalaryNetGross({ ...defaultInput, grossSalary: 19_000, creditPoints: 0, pensionEnabled: false });
+    expect(result.incomeTax).toBeCloseTo(2_916, 5);
   });
 
-  it('2024 ו-2025 זהים (אותן מדרגות)', () => {
-    const comparison = calculateYearComparison({ ...defaultInput, grossSalary: 20_000 });
-    const net2024 = comparison.find((c) => c.year === '2024')!.netSalary;
-    const net2025 = comparison.find((c) => c.year === '2025')!.netSalary;
-    expect(net2024).toBeCloseTo(net2025, 0);
+  it('שנת מס היסטורית אינה מחושבת עם נתוני הביטוח של 2026', () => {
+    expect(() => calculateSalaryNetGross({ ...defaultInput, taxYear: '2025' as SalaryNetGrossInput['taxYear'] }))
+      .toThrow(RangeError);
+  });
+
+  it('בשכר שנמצא בדיוק בסוף מדרגה, השקל הבא שייך למדרגה הבאה', () => {
+    const atFirstBoundary = calculateSalaryNetGross({ ...defaultInput, grossSalary: 7_010, pensionEnabled: false });
+    const atThirdBoundary = calculateSalaryNetGross({ ...defaultInput, grossSalary: 19_000, pensionEnabled: false });
+    expect(atFirstBoundary.marginalTaxRate).toBeCloseTo(14, 8);
+    expect(atFirstBoundary.marginalBracketInfo.distanceToNextMonthly).toBe(10_060 - 7_010);
+    expect(atThirdBoundary.marginalTaxRate).toBeCloseTo(31, 8);
   });
 });
 
@@ -259,22 +259,6 @@ describe('getMarginalBracketInfoPublic', () => {
     const info = getMarginalBracketInfoPublic(800_000);
     expect(info.currentRate).toBe(0.50);
     expect(info.nextRate).toBeNull();
-  });
-});
-
-// ============================================================
-// 9. קבועים היסטוריים
-// ============================================================
-
-describe('TAX_BRACKETS_2024 / 2025', () => {
-  it('2024 ו-2025 זהים', () => {
-    expect(TAX_BRACKETS_2024).toBe(TAX_BRACKETS_2025);
-  });
-
-  it('2024: מדרגה 3 = 193,800 (צרה יותר מ-2026)', () => {
-    const bracket3 = TAX_BRACKETS_2024[2];
-    expect(bracket3.upTo).toBe(193_800);
-    expect(bracket3.rate).toBe(0.20);
   });
 });
 

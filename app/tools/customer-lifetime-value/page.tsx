@@ -1,217 +1,41 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
-import { CLVCalculator } from '@/components/calculators/CLVCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
 export const metadata: Metadata = {
-  title: 'מחשבון CLV / LTV – שווי לקוח לטווח ארוך לעסקים 2026',
-  description:
-    'חשב את ה-Customer Lifetime Value (CLV/LTV) של הלקוחות שלך. כולל יחס LTV/CAC, Payback Period ובנצ\'מארק לתעשיות. מדד מפתח לעסקי SaaS, שירותים ו-E-commerce.',
+  title: 'שווי לקוח (CLV) — נתונים, חישוב ומגבלות',
+  description: 'מדריך לחישוב שווי לקוח ועלות גיוס: איך בוחרים תקופת מדידה, מחשבים רווח גולמי ומפרשים את התוצאה בלי בנצ׳מארק אחיד.',
   alternates: { canonical: '/tools/customer-lifetime-value' },
 };
 
-const faqItems = [
-  {
-    question: 'מה זה CLV / LTV?',
-    answer:
-      'Customer Lifetime Value (LTV) הוא הרווח הגולמי הכולל שלקוח מייצר במהלך כל זמן היותו לקוח שלך. זהו אחד המדדים המרכזיים בכל עסק שירותים, SaaS, מסחר חוזר, או Subscription. הוא עוזר להחליט: כמה להשקיע בגיוס לקוח? אילו לקוחות שווה לטפח? איזה ערוצי שיווק רווחיים?',
-  },
-  {
-    question: 'מה ההבדל בין CLV ל-LTV?',
-    answer:
-      'אין הבדל אמיתי - זה אותו מדד. CLV (Customer Lifetime Value) הוא המונח הפורמלי, LTV נפוץ יותר בקרב מנהלי שיווק. שניהם מתייחסים לרווח הגולמי הכולל ללקוח לאורך חייו. לפעמים LTV מתייחס להכנסה ברוטו ו-CLV לרווח גולמי - אבל זו לא חוקיות.',
-  },
-  {
-    question: 'מהו יחס LTV/CAC הבריא?',
-    answer:
-      'בנצ\'מארקים לפי תעשייה: SaaS B2B - 3-5x = בריא, 5+x = מצוין; E-commerce - 2-3x; שירותים מקצועיים - 4-10x; Mobile apps - 2-4x. יחס מתחת ל-1 = העסק מפסיד על כל לקוח. יחס 1-3 = רווחי אבל לא יעיל. יחס 3+ = עסק בריא שיכול לגדול. יחס 8+ = אולי לא משקיעים מספיק בשיווק.',
-  },
-  {
-    question: 'איך מחשבים CAC?',
-    answer:
-      'CAC = (סך הוצאות שיווק + מכירות) ÷ (מספר לקוחות חדשים). כללו: פרסום בכל הערוצים, משכורות אנשי שיווק ומכירות, כלים ותוכנות (CRM, Marketing automation), עמלות סוכנים, אירועים והדגמות. אל תכללו: שירות לקוחות (לא חלק מהגיוס), ניהול חשבונות קיימים.',
-  },
-  {
-    question: 'מה זה Payback Period?',
-    answer:
-      'מספר החודשים עד שהלקוח החזיר את עלות הגיוס שלו. אם CAC = 1,000 ₪ והרווח הגולמי החודשי מהלקוח = 100 ₪ → Payback = 10 חודשים. בריא: SaaS 12-18 חודש, E-commerce 6-12, שירותים 3-6. Payback ארוך = העסק זקוק להון תפעול גדול לתמיכה בצמיחה.',
-  },
-  {
-    question: 'איך משפרים את ה-LTV?',
-    answer:
-      'דרכים להעלות LTV: (1) Upsell - מכירת תוכניות יקרות יותר ללקוחות קיימים; (2) Cross-sell - מכירת מוצרים נוספים; (3) הקטנת Churn (שימור לקוחות) - בעיקר ב-SaaS; (4) הגדלת תדירות רכישה (E-commerce); (5) שיפור Margin - יעילות, מחיר; (6) Premium pricing למוצר משופר.',
-  },
-  {
-    question: 'מה זה Churn Rate ואיך זה מתחבר ל-LTV?',
-    answer:
-      'Churn = אחוז הלקוחות שעוזבים בכל תקופה. אם Churn חודשי = 5%, ממוצע שלקוח נשאר = 1/0.05 = 20 חודשים. בנוסחת LTV: LTV = ARPU × Margin / Churn_Rate. למשל: ARPU 200 ₪/חודש, מרגיני 70%, Churn 5% → LTV = 200×0.70/0.05 = 2,800 ₪. SaaS בריא: Churn חודשי <2%.',
-  },
-  {
-    question: 'מתי המחשבון לא רלוונטי?',
-    answer:
-      'במצבים הבאים LTV פחות שימושי: (1) עסק עם מוצר חד-פעמי (לא חוזר) - רק "שווי הזמנה" משמעותי; (2) פרויקטים גדולים B2B עם מחזור ארוך מאוד (חוזה אחד שנמשך שנים); (3) שוק עם תחלופה גבוהה מאוד (LTV לא משמעותי בכל מקרה). במצבים אלה - מדד אחר כמו "Order Value" או "Gross Profit per Project" עדיף.',
-  },
-];
-
 export default function CLVPage() {
   return (
-    <>
-      <CalculatorLayout
-        title="מחשבון Customer Lifetime Value"
-        description="חשב את שווי הלקוח לטווח ארוך - LTV/CAC, Payback Period, ועוד מדדים מרכזיים. כלי חיוני לעסקי SaaS, שירותים, Subscription ו-E-commerce."
-        breadcrumbs={[
-          { label: 'דף הבית', href: '/' },
-          { label: 'כלים לבעלי עסקים', href: '/tools' },
-          { label: 'CLV / LTV' },
-        ]}
-        lastUpdated="2026-05-03"
-        pageUrl="/tools/customer-lifetime-value"
-        calculator={<CLVCalculator />}
-        quickAnswer={
-          <p className="text-lg text-ink leading-relaxed">
-            <strong>
-              CLV (Customer Lifetime Value) הוא הרווח הכולל שלקוח מייצר לאורך כל תקופת הקשר שלו
-              עם העסק. הנוסחה: ARPU × שיעור רווח גולמי × אורך חיי הלקוח, פחות עלות הגיוס (CAC).
-            </strong>{' '}
-            כשיודעים את שיעור הנטישה החודשי אפשר לחשב ישירות: (ARPU × מרווח) ÷ Churn חודשי − CAC,
-            משום שאורך חיי הלקוח הוא בקירוב 1 חלקי שיעור הנטישה. המספר שחשוב באמת אינו ה-CLV
-            לבדו אלא <strong>היחס בין CLV ל-CAC</strong>: יחס של 3:1 ומעלה נחשב בריא, יחס נמוך
-            מ-1:1 אומר שכל לקוח חדש מפסיד כסף, ויחס גבוה מאוד עשוי דווקא לרמז שאתם משקיעים מעט
-            מדי בשיווק. מדד משלים הוא <strong>Payback Period</strong> — כמה חודשים לוקח להחזיר
-            את עלות הגיוס. הטעות הנפוצה היא חישוב CLV לפי הכנסה במקום לפי רווח גולמי, שמנפח את
-            התוצאה. המחשבון שמתחת מחשב את שלושת המדדים יחד.
-          </p>
-        }
-        content={
-          <>
-            <h2>מה זה CLV ולמה זה הכי חשוב?</h2>
-            <p>
-              Customer Lifetime Value (CLV) הוא המדד הכי חשוב בעסק data-driven. הוא עונה על
-              השאלה: "כמה ₪ אני יכול להוציא על גיוס לקוח חדש ועדיין להרוויח?". בעסקי SaaS,
-              שירותים ו-E-commerce, CLV הוא הבסיס לכל החלטות השיווק, התמחור, ושימור הלקוחות.
-            </p>
-
-            <h2>הנוסחה</h2>
-            <div className="bg-cream-2 border-r-4 border-gold p-4 my-4">
-              <p className="font-mono text-base text-ink">
-                CLV = ARPU × Gross Margin × Customer Lifespan - CAC
-              </p>
-              <p className="text-sm text-ink/70 mt-2">
-                או עם Churn: CLV = (ARPU × Margin) / Monthly Churn Rate - CAC
-              </p>
-            </div>
-
-            <h2>המדדים החשובים</h2>
-            <ul>
-              <li>
-                <strong>ARPU</strong> (Average Revenue Per User) - הכנסה ממוצעת ללקוח/חודש
-              </li>
-              <li>
-                <strong>Gross Margin</strong> - שיעור הרווח הגולמי
-              </li>
-              <li>
-                <strong>Customer Lifespan</strong> - אורך חיים ממוצע של לקוח
-              </li>
-              <li>
-                <strong>CAC</strong> (Customer Acquisition Cost) - עלות גיוס לקוח
-              </li>
-              <li>
-                <strong>Churn Rate</strong> - אחוז לקוחות שעוזבים (חודשי/שנתי)
-              </li>
-              <li>
-                <strong>LTV/CAC Ratio</strong> - יחס שווי לעלות (היעד 3+)
-              </li>
-              <li>
-                <strong>Payback Period</strong> - זמן עד החזר ההשקעה (חודשים)
-              </li>
-            </ul>
-
-            <h2>בנצ\'מארקים לפי תעשייה</h2>
-            <table className="w-full text-sm border-collapse my-4">
-              <thead>
-                <tr className="bg-cream-2">
-                  <th className="border border-ink/15 p-2 text-right">תעשייה</th>
-                  <th className="border border-ink/15 p-2 text-right">LTV/CAC יעד</th>
-                  <th className="border border-ink/15 p-2 text-right">Payback יעד</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-ink/15 p-2">SaaS B2B</td>
-                  <td className="border border-ink/15 p-2">3-5x</td>
-                  <td className="border border-ink/15 p-2">12-18 חודשים</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-2">E-commerce</td>
-                  <td className="border border-ink/15 p-2">2-3x</td>
-                  <td className="border border-ink/15 p-2">6-12 חודשים</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-2">Mobile App</td>
-                  <td className="border border-ink/15 p-2">2-4x</td>
-                  <td className="border border-ink/15 p-2">3-9 חודשים</td>
-                </tr>
-                <tr>
-                  <td className="border border-ink/15 p-2">שירותים מקצועיים</td>
-                  <td className="border border-ink/15 p-2">4-10x</td>
-                  <td className="border border-ink/15 p-2">3-6 חודשים</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h2>איך משפרים LTV/CAC?</h2>
-            <h3>הגדלת LTV</h3>
-            <ol>
-              <li>Upselling - מעבר לתוכניות יקרות יותר</li>
-              <li>Cross-selling - הוספת מוצרים נוספים</li>
-              <li>הקטנת Churn - שימור לקוחות (עיקר ב-SaaS)</li>
-              <li>הגדלת Order Frequency (E-commerce)</li>
-              <li>שיפור Gross Margin - יעילות תפעולית</li>
-              <li>Premium tiers עם ערך מוסף</li>
-            </ol>
-
-            <h3>הקטנת CAC</h3>
-            <ol>
-              <li>אופטימיזציה של ערוצי שיווק (קיצוץ בערוצים יקרים)</li>
-              <li>הגדלת Conversion Rate בכל שלב במשפך</li>
-              <li>Referral Programs - לקוחות מביאים לקוחות</li>
-              <li>SEO ותוכן (טווח ארוך - CAC נמוך)</li>
-              <li>אוטומציה במכירות</li>
-              <li>פוקוס על ICP (Ideal Customer Profile) במקום הרחבה</li>
-            </ol>
-
-            <h2>כלים קשורים</h2>
-            <ul>
-              <li>
-                <a href="/tools/forecast" className="text-gold hover:underline">
-                  מחשבון חיזוי הכנסות
-                </a>{' '}
-                — חזה הכנסות עתידיות לפי מגמות
-              </li>
-              <li>
-                <a href="/tools/financial-analysis" className="text-gold hover:underline">
-                  ניתוח דוחות פיננסיים
-                </a>{' '}
-                — ניתוח מאזן, רווח והפסד ותזרים
-              </li>
-              <li>
-                <a href="/tools/unified" className="text-gold hover:underline">
-                  מערכת ניהול פיננסית מאוחדת
-                </a>{' '}
-                — כל הכלים הפיננסיים במקום אחד
-              </li>
-            </ul>
-          </>
-        }
-        faq={<FAQ items={faqItems} />}
-        sources={
-          <ul className="space-y-2 text-gold">
-            <li>
-              <span>בנצ\'מארקים מבוססי דוחות SaaS Capital, Bain & Co, OpenView Partners</span>
-            </li>
-          </ul>
-        }
-      />
-    </>
+    <CalculatorLayout
+      title="שווי לקוח (CLV) — איך מחשבים"
+      description="הנתונים הדרושים לבדיקת תרומת לקוח לאורך זמן, עלות הגיוס ומגבלות ההערכה."
+      breadcrumbs={[{ label: 'דף הבית', href: '/' }, { label: 'כלים לבעלי עסקים', href: '/tools' }, { label: 'שווי לקוח' }]}
+      lastUpdated="2026-09-29"
+      pageUrl="/tools/customer-lifetime-value"
+      quickAnswer={<p>שווי לקוח אינו מספר אחיד לכל עסק. אומדן בסיסי מחבר את הרווח הגולמי מהעסקאות של לקוח לאורך תקופת המדידה; כדי להעריך את התרומה לאחר גיוס מפחיתים ממנו את עלות גיוס הלקוח. תחזית המבוססת על שיעור נטישה דורשת הנחות על דפוס הנטישה, התנהגות הלקוחות והשתנות המרווח. יחס בין שווי לקוח לעלות הגיוס מועיל להשוואה פנימית, אך אין לו סף בריאות אוניברסלי.</p>}
+      content={<>
+        <h2>אילו נתונים יש לאסוף?</h2>
+        <ul>
+          <li>הכנסה מעסקאות עם לקוחות בקבוצה שהצטרפה באותה תקופה (cohort), כולל החזרים וזיכויים.</li>
+          <li>עלות המוצרים או השירותים שסופקו, כדי לחשב רווח גולמי ולא להציג הכנסה כרווח.</li>
+          <li>הוצאות שיווק ומכירות המיוחסות לגיוס לקוחות חדשים ומספר הלקוחות החדשים באותה תקופה.</li>
+          <li>משך הקשר והמשך רכישה לאורך זמן; כשמשתמשים בתחזית, יש להפריד בין נתונים שנמדדו להנחות.</li>
+        </ul>
+        <h2>חישוב בסיסי</h2>
+        <p>בתקופת מדידה מוגדרת, אפשר לחשב רווח גולמי מצטבר ללקוח כהכנסות המצטברות פחות העלויות הישירות, ולחלק במספר הלקוחות בקבוצה. עלות גיוס ממוצעת ללקוח (CAC) היא הוצאות הגיוס הרלוונטיות חלקי מספר הלקוחות החדשים. הפחתת CAC מהרווח הגולמי נותנת אומדן תרומה לאחר הוצאות גיוס, לפני הוצאות תפעול נוספות.</p>
+        <p>לדוגמה חשבונית בלבד: אם ההכנסה המצטברת מלקוח היא 1,000 ₪ והעלות הישירה היא 400 ₪, הרווח הגולמי הוא 600 ₪. אם עלות הגיוס היא 250 ₪, התרומה לאחר עלות גיוס היא 350 ₪, לפני עלויות נוספות. הדוגמה אינה יעד ענפי.</p>
+        <h2>כיצד לקרוא את התוצאה?</h2>
+        <p>חשוב להשוות תקופות וקבוצות לקוחות עקביות. יחס CLV/CAC לבדו אינו אומר אם העסק רווחי: הוא אינו מציג בהכרח תזמון גבייה, עלויות שירות ותפעול, החזרות או את רמת אי הוודאות בתחזית. חישוב אורך חיים לפי 1 חלקי שיעור נטישה הוא קירוב שמתאים רק להנחות מסוימות על נטישה קבועה, ולא תיאור מובטח של לקוחות העסק.</p>
+      </>}
+      faq={<FAQ items={[
+        { question: 'מה ההבדל בין הכנסה מלקוח לרווח מלקוח?', answer: 'הכנסה אינה מנכה את עלות המוצר או השירות. לצורך אומדן תרומה יש להתחיל לפחות ברווח הגולמי ולבחון גם הוצאות נוספות שאינן כלולות בו.' },
+        { question: 'האם יחס CLV/CAC של 3 הוא תמיד יעד טוב?', answer: 'לא. אין סף אחיד לכל ענף ומודל עסקי. משמעות היחס תלויה בהגדרת המדדים, במשך ההחזר, בעלויות שאינן כלולות ובתזרים המזומנים.' },
+        { question: 'האם אפשר לדעת מראש כמה זמן לקוח יישאר?', answer: 'לא בוודאות. תחזית הנשענת על שיעור נטישה או על קבוצות לקוחות היסטוריות היא הערכה שיש לעדכן כשהנתונים החדשים מגיעים.' },
+      ]} />}
+    />
   );
 }

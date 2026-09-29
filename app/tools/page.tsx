@@ -59,9 +59,9 @@ const STANDALONE_CALCULATORS: Tool[] = [
     href: '/tools/customer-lifetime-value',
     title: 'שווי לקוח (CLV/LTV)',
     emoji: '👤',
-    description: 'מדד מפתח ל-SaaS וE-commerce - LTV/CAC, Payback',
+    description: 'מדריך לחישוב תרומת לקוח, עלות גיוס ומגבלות תחזית',
     icon: Users,
-    features: ['LTV/CAC ratio', 'Payback period', 'בנצ\'מארק לתעשיות'],
+    features: ['רווח גולמי ללקוח', 'עלות גיוס (CAC)', 'בדיקת הנחות'],
   },
 ];
 

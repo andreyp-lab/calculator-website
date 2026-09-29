@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, RefreshCw, TrendingUp, DollarSign, Users, Shield } from 'lucide-react';
+import { ArrowLeft, RefreshCw, TrendingUp, DollarSign, Users } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 
@@ -151,6 +151,17 @@ export default function NewsPage() {
               </Link>
             );
           })}
+        </div>
+
+        <div className="mb-12 border border-ink/15 bg-cream-2 p-6">
+          <h2 className="mb-2 text-lg font-bold text-ink">מידע על זכויות בעקבות אירועי אוקטובר 2023</h2>
+          <p className="mb-4 text-sm leading-relaxed text-ink/70">
+            מסלולי הסיוע בעקבות מלחמת חרבות ברזל משתנים לפי נסיבות ומועדי הגשה. ריכזנו
+            הפניה למידע הרשמי של הביטוח הלאומי, שנבדקה ב־29.9.2026.
+          </p>
+          <Link href="/news/iron-swords" className="font-medium text-gold underline underline-offset-4">
+            למידע על מסלולי הסיוע ←
+          </Link>
         </div>
 
         {/* Data provenance */}

@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 
-const sourceUrl = 'https://www.btl.gov.il/Benefits/OperationIronSwords/Pages/default.aspx';
+const sourceUrl = 'https://www.btl.gov.il/HaravotBarzel1/Pages/default.aspx';
 
 export const metadata: Metadata = {
-  title: 'סיוע בעקבות מלחמת חרבות ברזל — בדיקת זכאות',
-  description: 'מידע על מסלולי סיוע ותגמולי מילואים וקישור למקור הרשמי לבדיקת סכומים ותנאי זכאות.',
+  title: 'סיוע בעקבות מלחמת חרבות ברזל — מידע ומקורות רשמיים',
+  description: 'מידע כללי על מסלולי סיוע ותגמולי מילואים בעקבות אירועי אוקטובר 2023, וקישורים למקור הרשמי לבדיקת תנאי זכאות מעודכנים.',
   alternates: { canonical: 'https://cheshbonai.co.il/news/iron-swords' },
 };
 
@@ -19,6 +19,7 @@ export default function IronSwordsPage() {
         <div className="bg-ink text-cream p-8 my-8">
           <h1 className="text-3xl font-bold">סיוע ותגמולים בעקבות מלחמת חרבות ברזל</h1>
           <p className="mt-4 text-cream/80">גובה הסיוע ותנאי הזכאות תלויים במסלול, בתקופת השירות או הפגיעה ובמעמד הזכאי. אין סכום מענק אחיד שמתאים לכל המקרים.</p>
+          <p className="mt-3 text-sm text-cream/60">הקישור למידע הרשמי נבדק ב־29.9.2026; בדקו שם את התנאים ומועדי ההגשה התקפים למקרה שלכם.</p>
         </div>
         <section className="space-y-5 text-ink/80 leading-relaxed">
           <p>לפני הגשת בקשה, בדקו באתר הביטוח הלאומי מהו מסלול הזכאות המתאים לכם ומהם המסמכים הנדרשים. המידע הרשמי מתעדכן בהתאם להוראות ולמועדים החלים על כל מסלול.</p>

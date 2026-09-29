@@ -122,7 +122,7 @@ export function AllCalculatorsGrid() {
                 </span>
                 {group.title}
                 <span className="font-mono text-xs uppercase tracking-[0.1em] text-gold">
-                  {group.calcs.length} כלים
+                  {group.calcs.length} כלים ומדריכים
                 </span>
               </h3>
               <Link

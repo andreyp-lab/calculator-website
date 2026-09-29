@@ -17,17 +17,17 @@ export const metadata: Metadata = {
 const calculators = [
   {
     title: 'מחשבון משכנתא',
-    description: 'חישוב תשלום חודשי, לוח סילוקין שפיצר/קרן שווה, גרף שנתי',
+    description: 'אומדן למסלול אחד בריבית קבועה, בשיטת שפיצר או קרן שווה',
     href: '/real-estate/mortgage',
     available: true,
     badge: undefined as string | undefined,
   },
   {
-    title: 'אופטימייזר תמהיל משכנתא',
-    description: 'בדיקת תרחישי חלוקה בין מסלולים לפי תנאי ההצעה והנחות שתזינו',
+    title: 'מדריך להשוואת תמהילי משכנתא',
+    description: 'מה לבדוק בכל מסלול ובהצעות שקיבלתם מהבנקים',
     href: '/real-estate/mortgage-optimizer',
     available: true,
-    badge: 'חדש' as string | undefined,
+    badge: undefined as string | undefined,
   },
   {
     title: 'מחשבון מס רכישה',
@@ -56,14 +56,14 @@ const comparisonRows = [
   {
     tool: 'מחשבון משכנתא',
     href: '/real-estate/mortgage',
-    when: 'לפני פגישה עם הבנק — כמה יעלה ההחזר החודשי ומה סך הריבית לאורך חיי ההלוואה',
-    output: 'החזר חודשי, לוח סילוקין מלא, סך ריבית',
+    when: 'לפני פגישה עם הבנק — בחינת מסלול אחד בריבית קבועה לפי הנחות שתזינו',
+    output: 'תשלום ראשון, סך תשלומים וסך ריבית בתרחיש קבוע',
   },
   {
-    tool: 'אופטימייזר תמהיל',
+    tool: 'מדריך תמהילים',
     href: '/real-estate/mortgage-optimizer',
     when: 'כשמתלבטים איך לחלק את ההלוואה בין פריים, קבועה וצמודה',
-    output: 'תרחישי חלוקה בין מסלולים לפי הנחות המשתמש',
+    output: 'רשימת נתונים להשוואת הצעות ותנאי מסלולים',
   },
   {
     tool: 'מחשבון מס רכישה',
@@ -104,7 +104,7 @@ const faqItems = [
   {
     question: 'מתי כדאי למחזר משכנתא?',
     answer:
-      'כשריבית השוק ירדה משמעותית מהריבית שאתם משלמים, כשהתזרים המשפחתי השתנה, או כשמסלולים צמודי מדד "התנפחו". הבדיקה פשוטה: מריצים את יתרת ההלוואה במחשבון המשכנתא בתנאים החדשים ומשווים לסך התשלומים שנותר במסלול הקיים, כולל עמלות פירעון מוקדם אם ישנן.',
+      'כדאי לבקש הצעה חדשה ולבדוק את יתרת התשלומים בהלוואה הקיימת מול התשלומים בהצעה החדשה, כולל עמלות פירעון מוקדם, עלויות פתיחה ושינויי הצמדה או ריבית. מחשבון המסלול היחיד אינו מכריע בכדאיות מיחזור של תמהיל משכנתא.',
   },
   {
     question: 'האם צריך לשלם מס על הכנסה משכר דירה?',
@@ -220,9 +220,9 @@ export default function RealEstatePage() {
               אחת מהן ריבית, הצמדה ורמת סיכון משלה. מסלול הפריים נשען על ריבית הפריים, שעומדת כיום
               על {MACRO_DATA.primeRate.value}% (ריבית בנק ישראל {MACRO_DATA.primeRate.boiBaseRate}% בתוספת מרווח קבוע), לפני המרווח בהצעה שלכם. ההחזר במסלול פריים משתנה עם שינוי ריבית הפריים. ריבית קבועה לא צמודה אינה משתנה עם המדד והריבית לאחר העמדת ההלוואה, בכפוף לתנאי המסלול. לצד אלה יש מסלולים צמודי
               מדד ומסלולים בריבית משתנה. הריבית בפועל תלויה במסלול, בתקופה ובפרופיל הלווה. נקודת המוצא היא <Link href="/real-estate/mortgage" className="text-gold underline underline-offset-2 hover:text-ink transition">מחשבון המשכנתא</Link>{' '}
-              לחישוב ההחזר, ומשם{' '}
-              <Link href="/real-estate/mortgage-optimizer" className="text-gold underline underline-offset-2 hover:text-ink transition">כלי תרחישי התמהיל</Link>{' '}
-              שממחיש חלוקות שונות לפי ההנחות שהוזנו.
+              להמחשת מסלול אחד בריבית קבועה, ומשם{' '}
+              <Link href="/real-estate/mortgage-optimizer" className="text-gold underline underline-offset-2 hover:text-ink transition">המדריך להשוואת תמהילים</Link>{' '}
+              מפרט מה לבדוק בהצעות שקיבלתם.
             </p>
           </div>
 
@@ -282,7 +282,7 @@ export default function RealEstatePage() {
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">
             ✦ מפת דרכים
           </p>
-          <h2 className="text-2xl font-bold text-ink mb-6">איזה מחשבון מתאים לכם?</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">איזה כלי מתאים לכם?</h2>
           <div className="overflow-x-auto border border-ink/15">
             <table className="w-full text-sm text-right">
               <thead>

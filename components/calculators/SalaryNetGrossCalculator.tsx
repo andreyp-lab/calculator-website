@@ -131,12 +131,12 @@ export function SalaryNetGrossCalculator() {
 
       {mode === 'net-to-gross' && (
         <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-sm text-ink/80">
-          <strong>מצב הפוך:</strong> הכנס את הנטו שאתה רוצה לקבל — המחשבון ימצא את הברוטו הדרוש
+          <strong>מצב הפוך:</strong> הכנס את הנטו שאתה רוצה לקבל — המחשבון יחשב אומדן ברוטו לפי ההנחות שהוזנו
         </div>
       )}
       {mode === 'employer-to-net' && (
         <div className="bg-cream-2 border border-gold/40 rounded-none p-3 text-sm text-ink/80">
-          <strong>מצב מעסיק:</strong> הכנס את עלות המעסיק הכוללת — המחשבון יחשב את ברוטו העובד ואת הנטו שלו
+          <strong>מצב מעסיק:</strong> הכנס אומדן עלות מעסיק לפי הנחות המחשבון — יתקבל אומדן ברוטו ונטו לעובד
         </div>
       )}
 
@@ -264,7 +264,7 @@ export function SalaryNetGrossCalculator() {
                   className="w-4 h-4 accent-ink"
                 />
                 <label htmlFor="pension" className="text-sm font-medium cursor-pointer">
-                  הפרשה לפנסיה (חובה לפי חוק)
+                  הפרשה לפנסיה לפי ההסדר החל
                 </label>
               </div>
 
@@ -282,7 +282,7 @@ export function SalaryNetGrossCalculator() {
                         className="mt-0.5 w-4 h-4 accent-ink"
                       />
                       <div>
-                        <span className="text-sm font-medium">{level === 'minimum' ? 'עובד 6% / מעסיק 6.5%' : 'עובד 7% / מעסיק 7.5%'}</span>
+                        <span className="text-sm font-medium">{level === 'minimum' ? 'עובד 6% / מעסיק 6.5%' : 'תרחיש מוגדל: עובד 7% / מעסיק 7.5%'}</span>
                         <p className="text-xs text-ink/70">שיעורי חישוב לדוגמה; הבסיס והשיעור בפועל נקבעים לפי ההסכם.</p>
                       </div>
                     </label>
@@ -416,7 +416,7 @@ export function SalaryNetGrossCalculator() {
 
           {/* עלות מעסיק */}
           <div className="bg-cream-2 border border-gold/40 rounded-none p-4 text-sm space-y-1.5">
-            <h4 className="font-semibold text-ink mb-2">עלות מעסיק כוללת</h4>
+            <h4 className="font-semibold text-ink mb-2">אומדן עלות מעסיק לפי הנחות המחשבון</h4>
             <p className="text-2xl font-bold text-gold tabular-nums">
               {formatCurrency(r.totalEmployerCost)}
             </p>
@@ -424,6 +424,7 @@ export function SalaryNetGrossCalculator() {
             <Row label="פנסיה מעסיק" value={formatCurrency(r.employerPension)} />
             {r.employerStudyFund > 0 && <Row label="קרן השתלמות מעסיק" value={formatCurrency(r.employerStudyFund)} />}
             <Row label="פיצויים (8.33%)" value={formatCurrency(r.employerCompensation)} />
+            <p className="text-xs text-ink/70">האומדן מניח הפקדת פיצויים של 8.33% על כל הברוטו; בפועל הבסיס והשיעור עשויים להיות שונים.</p>
             <p className="text-xs text-ink/70 pt-1 border-t border-gold/30">
               יחס עלות/נטו: {r.costToNetRatio.toFixed(2)}× (על כל ₪1 נטו, מעסיק משלם ₪{r.costToNetRatio.toFixed(2)})
             </p>

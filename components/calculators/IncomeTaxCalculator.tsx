@@ -32,7 +32,7 @@ export function IncomeTaxCalculator() {
           {/* Monthly Salary */}
           <div>
             <label htmlFor="salary" className="block text-sm font-medium text-ink/70 mb-2">
-              משכורת חודשית ברוטו (ש"ח)
+              משכורת חודשית ברוטו (ש&quot;ח)
             </label>
             <input
               id="salary"
@@ -62,7 +62,7 @@ export function IncomeTaxCalculator() {
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold focus:border-transparent"
             />
             <p className="text-xs text-ink/70 mt-1">
-              תושב = 2.25, אישה = 2.75, +2.5 לכל ילד 1-5, +1 לכל ילד 6-17
+              הזינו את מספר הנקודות שנקבע לפי נסיבותיכם. זכאות בגין ילדים משתנה לפי גילם וזהות ההורה.
             </p>
           </div>
 
@@ -96,6 +96,10 @@ export function IncomeTaxCalculator() {
                 />
               </div>
             )}
+            <p className="text-xs text-ink/70 mt-2">
+              הפקדת העובד מחושבת כאן כאחוז מכל הברוטו. החישוב אינו כולל זיכוי מס אפשרי
+              על ההפקדה; בדקו את השכר המבוטח ואת הזיכוי בתלוש.
+            </p>
           </div>
         </div>
       </div>
@@ -103,7 +107,7 @@ export function IncomeTaxCalculator() {
       {/* Results */}
       <div className="lg:col-span-2 space-y-4">
         <ResultCard
-          title="שכר נטו חודשי"
+          title="אומדן שכר נטו חודשי"
           value={formatCurrency(result.monthlyNet)}
           subtitle={`מתוך ברוטו ${formatCurrency(result.monthlyGross)}`}
           variant="success"
@@ -114,7 +118,7 @@ export function IncomeTaxCalculator() {
               <span className="font-medium">{formatPercent(result.effectiveTaxRate, 2)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink/70">סה"כ ניכויים חודשי:</span>
+              <span className="text-ink/70">סה&quot;כ ניכויים חודשי:</span>
               <span className="font-medium">
                 {formatCurrency(
                   result.monthlyTaxAfterCredits +

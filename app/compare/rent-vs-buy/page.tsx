@@ -1,186 +1,52 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MortgageCalculator } from '@/components/calculators/MortgageCalculator';
 
 export const metadata: Metadata = {
-  title: 'שכירות מול קנייה - מה משתלם יותר בישראל 2026?',
-  description:
-    'השוואה מתמטית בין שכירות לקנייה של דירה בישראל 2026. כולל משכנתא, ארנונה, מס רכישה, עליית שווי ועלויות נלוות. ניתוח לטווח ארוך. חשב עכשיו ובחר נכון.',
+  title: 'שכירות מול קניית דירה — מדריך להשוואת ההחלטה',
+  description: 'אילו נתונים צריך לבדוק כשמשווים שכירות לקניית דירה: תזרים, משכנתא, מס רכישה, תחזוקה, הון עצמי וסיכונים.',
   alternates: { canonical: '/compare/rent-vs-buy' },
 };
 
 export default function RentVsBuyComparePage() {
-  return (
-    <CalculatorLayout
-      title="שכירות vs קנייה - איזה יותר משתלם?"
-      description="ההחלטה הגדולה: לקנות דירה או להמשיך לשכור? השוואה מקיפה כולל עלויות, יתרונות וחסרונות לטווח קצר וארוך."
-      breadcrumbs={[
-        { label: 'דף הבית', href: '/' },
-        { label: 'דפי השוואה', href: '/compare' },
-        { label: 'שכירות vs קנייה' },
-      ]}
-      lastUpdated="2026-05-04"
-      pageUrl="/compare/rent-vs-buy"
-      calculator={<MortgageCalculator />}
-      quickAnswer={
-        <p className="text-lg text-ink leading-relaxed">
-          <strong>
-            כלל האצבע להכרעה בין שכירות לקנייה הוא יחס 5x: אם העלות השנתית של הבעלות — משכנתא,
-            ארנונה, ועד בית, תחזוקה וביטוח — גבוהה מפי חמישה משכר הדירה השנתי, השכירות משתלמת;
-            אם היא נמוכה מכך, הקנייה עדיפה בטווח הארוך.
-          </strong>{' '}
-          בדוגמה מספרית: דירה ב-2.5 מיליון ₪ שהשכירות המקבילה לה היא 8,000 ₪ בחודש (96,000 ₪
-          בשנה), מול עלות בעלות שנתית של כ-150,000 ₪, מניבה יחס של כ-1.56 — כלומר קנייה. אבל
-          שני גורמים שהנוסחה לא כוללת מכריעים לא פחות. הראשון הוא <strong>עלות ההזדמנות</strong>{' '}
-          של ההון העצמי: כסף שיושב בדירה אינו מושקע בשוק ההון. השני הוא <strong>אופק הזמן</strong>{' '}
-          — עלויות העסקה בקנייה ובמכירה גבוהות, ולכן מי שצפוי לעבור דירה תוך פחות מחמש שנים
-          כמעט תמיד עדיף לו לשכור, גם כשהיחס מצביע אחרת. המחשבון שמתחת מאפשר להזין את הנתונים
-          שלכם ולראות את ההשוואה לאורך שנים.
-        </p>
-      }
-      content={
-        <>
-          <h2>הדילמה הגדולה של כל ישראלי</h2>
-          <p>
-            לקנות דירה זה החלום הישראלי. אבל האם זה תמיד משתלם כלכלית? עלייה גבוהה במחירי
-            הדירות, ריבית גבוהה על משכנתא, ומחירי שכירות שעולים - כל אלה משפיעים על ההחלטה.
-            הנה השוואה מפורטת.
-          </p>
-
-          <h2>השוואת עלויות חודשיות (דירה 2.5M ₪)</h2>
-          <table className="w-full text-sm border-collapse my-4">
-            <thead>
-              <tr className="bg-cream-2">
-                <th className="border border-ink/15 p-3 text-right">סעיף</th>
-                <th className="border border-ink/15 p-3 text-right">קנייה</th>
-                <th className="border border-ink/15 p-3 text-right">שכירות</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-ink/15 p-3">משכנתא חודשית</td>
-                <td className="border border-ink/15 p-3">~10,500 ₪ (פריים+1.5%)</td>
-                <td className="border border-ink/15 p-3">-</td>
-              </tr>
-              <tr className="bg-cream-2">
-                <td className="border border-ink/15 p-3">שכר דירה</td>
-                <td className="border border-ink/15 p-3">-</td>
-                <td className="border border-ink/15 p-3">~7,500-8,500 ₪</td>
-              </tr>
-              <tr>
-                <td className="border border-ink/15 p-3">ארנונה</td>
-                <td className="border border-ink/15 p-3">~600-1,200 ₪</td>
-                <td className="border border-ink/15 p-3">~600-1,200 ₪</td>
-              </tr>
-              <tr className="bg-cream-2">
-                <td className="border border-ink/15 p-3">ועד בית</td>
-                <td className="border border-ink/15 p-3">~250-500 ₪</td>
-                <td className="border border-ink/15 p-3">~250-500 ₪</td>
-              </tr>
-              <tr>
-                <td className="border border-ink/15 p-3">תחזוקה ותיקונים</td>
-                <td className="border border-ink/15 p-3">~500-1,000 ₪</td>
-                <td className="border border-ink/15 p-3">בעל הבית</td>
-              </tr>
-              <tr className="bg-cream-2">
-                <td className="border border-ink/15 p-3">ביטוח דירה</td>
-                <td className="border border-ink/15 p-3">~150 ₪</td>
-                <td className="border border-ink/15 p-3">~50 ₪ (תכולה)</td>
-              </tr>
-              <tr className="bg-ink text-cream font-bold">
-                <td className="border border-ink/20 p-3">סה"כ חודשי משוער</td>
-                <td className="border border-ink/20 p-3">~12,000-13,500 ₪</td>
-                <td className="border border-ink/20 p-3">~8,500-10,000 ₪</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h2>אבל זה לא רק העלות החודשית!</h2>
-
-          <h3>יתרונות הקנייה</h3>
-          <ul>
-            <li>
-              <strong>בניית הון</strong> - חלק מהמשכנתא הופך להון אישי
-            </li>
-            <li>
-              <strong>עלייה בשווי</strong> - היסטורית: 5-7%/שנה (בערך)
-            </li>
-            <li>
-              <strong>יציבות</strong> - אין סיכון פינוי
-            </li>
-            <li>
-              <strong>גמישות שימוש</strong> - שיפוצים, הרחבות
-            </li>
-            <li>
-              <strong>הגנה מאינפלציה</strong> - הנכס "צמוד" למחיר השוק
-            </li>
-          </ul>
-
-          <h3>יתרונות השכירות</h3>
-          <ul>
-            <li>
-              <strong>ניידות</strong> - קל להחליף עיר/שכונה
-            </li>
-            <li>
-              <strong>תזרים פנוי</strong> - אין הון מושקע
-            </li>
-            <li>
-              <strong>אין סיכון</strong> - בעל הבית מתקן
-            </li>
-            <li>
-              <strong>אפשרויות השקעה אחרות</strong> - 500K הון עצמי שמושקע במניות יכול לתת תשואה דומה
-            </li>
-            <li>
-              <strong>פחות התחייבויות</strong> - חופש מבחינה כלכלית
-            </li>
-          </ul>
-
-          <h2>חישוב מתמטי - מתי קנייה משתלמת?</h2>
-          <p>
-            הכלל המקובל: <strong>5x Rule</strong>. אם המחיר השנתי לקנייה (משכנתא + ארנונה +
-            תחזוקה + מס) הוא יותר מ-5 פעמים שכר הדירה השנתי - השכירות משתלמת. אם פחות מ-5x -
-            עדיף לקנות.
-          </p>
-
-          <div className="bg-cream-2 border-r-4 border-ink p-4 my-4 text-sm">
-            <p className="font-semibold mb-2">דוגמה:</p>
-            <p>
-              דירה 2.5M ₪. שכ"ד דומה: 8,000 ₪/חודש = 96,000 ₪/שנה. עלות שנתית של קנייה: ~150K
-              ₪. יחס = 150K / 96K = 1.56x. <strong>פחות מ-5x = קנייה משתלמת בטווח ארוך.</strong>
-            </p>
-          </div>
-
-          <h2>שיקולים נוספים</h2>
-          <h3>אופק זמן</h3>
-          <ul>
-            <li>פחות מ-5 שנים → שכירות (עלויות עסקה גבוהות)</li>
-            <li>5-10 שנים → תלוי במחירים</li>
-            <li>10+ שנים → קנייה לרוב משתלמת</li>
-          </ul>
-
-          <h3>גורמי סיכון</h3>
-          <ul>
-            <li>אינפלציה גבוהה - מטיב עם בעלי דירות</li>
-            <li>ירידת מחירים - מסכן בעלי דירות</li>
-            <li>אובדן עבודה - שכירות בטוחה יותר</li>
-            <li>שינוי אישי (גירושים, מעבר) - שכירות גמישה</li>
-          </ul>
-
-          <h2>חישוב מדויק</h2>
-          <p>
-            השתמש ב<Link href="/real-estate/mortgage" className="text-gold underline">מחשבון המשכנתא</Link>{' '}
-            למטה כדי לחשב בדיוק כמה תשלם בקנייה. אחר כך השווה לשכר דירה שמתאים לאותה דירה
-            באותה שכונה.
-          </p>
-          <p>
-            שים לב: בעת רכישת דירה חל גם <Link href="/real-estate/purchase-tax" className="text-gold underline">מס רכישה</Link>{' '}
-            — לרוכשי דירה ראשונה הפטור עד 1,978,745 ₪, ולאחר מכן מדרגות עד 10%. השתמש ב
-            <Link href="/real-estate/purchase-tax" className="text-gold underline">מחשבון מס הרכישה</Link>{' '}
-            לחישוב מדויק.
-          </p>
-        </>
-      }
-    />
-  );
+  return <CalculatorLayout
+    title="שכירות מול קניית דירה"
+    description="מדריך לאיסוף נתונים ולהשוואת החלופות לפי הדירה והנסיבות שלכם."
+    breadcrumbs={[
+      { label: 'דף הבית', href: '/' },
+      { label: 'דפי השוואה', href: '/compare' },
+      { label: 'שכירות מול קנייה' },
+    ]}
+    lastUpdated="2026-09-29"
+    pageUrl="/compare/rent-vs-buy"
+    quickAnswer={<p>כדאיות השכירות או הקנייה תלויה במחיר הדירה ובשכר הדירה של דירות דומות, בהון העצמי, בתנאי המימון, בעלויות העסקה והתחזוקה ובמשך הזמן שאתם צפויים להתגורר במקום. השוו גם תרחישים שבהם מחיר הדירה, שכר הדירה, הריבית או התשואה על החיסכון משתנים. אין יחס מספרי אחד או מספר שנים קבוע שקובעים איזו חלופה עדיפה.</p>}
+    calculator={<section aria-labelledby="mortgage-estimate-title" className="space-y-4">
+      <h2 id="mortgage-estimate-title" className="text-2xl font-bold text-ink">אומדן החזר למסלול משכנתא אחד</h2>
+      <p className="leading-relaxed text-ink/75">המחשבון הבא מציג החזר למסלול יחיד בריבית קבועה שהזנתם. הוא אינו משווה את עלות הקנייה לשכירות, אינו מחשב הצמדה למדד או שינויי ריבית, ואינו כולל את יתר עלויות העסקה והבעלות.</p>
+      <MortgageCalculator />
+    </section>}
+    content={<>
+      <h2>נתונים שצריך לאסוף</h2>
+      <table>
+        <thead><tr><th>נתון</th><th>שכירות</th><th>קנייה</th></tr></thead>
+        <tbody>
+          <tr><td>תשלום שוטף</td><td>דמי שכירות ותנאי עדכון בחוזה</td><td>החזרי משכנתא לפי האישור העקרוני, ביטוחים ותשלומים שוטפים</td></tr>
+          <tr><td>תשלום ראשוני</td><td>פיקדון ועלויות מעבר לפי החוזה</td><td>הון עצמי, מס רכישה אם חל ועלויות עסקה</td></tr>
+          <tr><td>תחזוקה</td><td>חלוקת האחריות לתיקונים לפי החוזה</td><td>תחזוקת בעלים ותיקונים צפויים</td></tr>
+          <tr><td>בסוף התקופה</td><td>התשלומים ששולמו וההון שנותר להשקעה</td><td>שווי מכירה אפשרי בניכוי יתרת הלוואה ועלויות מכירה</td></tr>
+        </tbody>
+      </table>
+      <p>בדקו את המחירים והתנאים בפועל לדירות דומות ובאותה שכונה. תשלום המשכנתא כולל החזר קרן וריבית; אין להשוות את מלוא התשלום לדמי שכירות כאילו כולו הוצאה שאינה יוצרת הון. מנגד, שווי מכירה עתידי או תשואת השקעה חלופית אינם מובטחים.</p>
+      <h2>איך בונים תרחישים?</h2>
+      <ol>
+        <li>קבעו תקופת השוואה שמתאימה לתוכניות האישיות שלכם.</li>
+        <li>השוו את התזרים והיתרה בסוף התקופה, כולל הוצאות חד פעמיות, תחזוקה ויתרת המשכנתא.</li>
+        <li>בדקו תרחיש בסיס ולצדו שינויי ריבית, שכר דירה, מחיר מכירה והוצאות בלתי צפויות.</li>
+        <li>ודאו שהחלופה שתבחרו משאירה מרווח בטוח בהוצאות השוטפות.</li>
+      </ol>
+      <h2>מקורות וכלים לבדיקת הנתונים</h2>
+      <p>התחילו ב<a href="https://haotzarsheli.mof.gov.il/LifeState/Pages/Apartment-Price.aspx" target="_blank" rel="noopener noreferrer">מדריך משרד האוצר לעלויות רכישת דירה</a>. את תנאי המשכנתא השוו באמצעות אישור עקרוני והמידע על מסלולים וריביות ב<a href="https://www.boi.org.il/information/bank-paymnts/financial-education/%D7%94%D7%A8%D7%A4%D7%95%D7%A8%D7%9E%D7%94-%D7%9C%D7%94%D7%92%D7%91%D7%A8%D7%AA-%D7%A9%D7%A7%D7%99%D7%A4%D7%95%D7%AA-%D7%94%D7%9E%D7%99%D7%93%D7%A2-%D7%95%D7%94%D7%AA%D7%97%D7%A8%D7%95%D7%AA-%D7%91%D7%9E%D7%A9%D7%9B%D7%A0%D7%AA%D7%90%D7%95%D7%AA/" target="_blank" rel="noopener noreferrer">מדריך בנק ישראל להשוואת משכנתאות</a>. לבדיקת מס רכישה לפי פרטי העסקה אפשר להיעזר ב<Link href="/real-estate/purchase-tax">מדרגות ובמחשבון מס הרכישה</Link> ולאמת את הזכאות והסכום ב<a href="https://www.gov.il/he/service/real_eatate_taxsimulator" target="_blank" rel="noopener noreferrer">סימולטור רשות המסים</a>.</p>
+    </>}
+  />;
 }

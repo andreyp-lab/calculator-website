@@ -651,16 +651,16 @@ export default function TaxesCompleteGuide() {
           {/* Section 11 */}
           <section id="study-fund" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              11. קרן השתלמות – ההטבה המטורפת
+              11. קרן השתלמות – ניכוי ופטור מותנה
             </h2>
 
             <div className="bg-green-50 border border-green-200 rounded-none p-6 mb-5">
-              <h3 className="font-bold text-green-900 mb-3 text-lg">למה זאת ההטבה הטובה ביותר בישראל?</h3>
+              <h3 className="font-bold text-green-900 mb-3 text-lg">מה כדאי לבדוק בקרן השתלמות?</h3>
               <ul className="space-y-2 text-green-800 text-sm">
                 <li>• <strong>שכיר:</strong> מעסיק מפקיד 7.5% (פטור ממס הכנסה לעובד!)</li>
                 <li>• <strong>שכיר:</strong> הפקדת העובד היא חלק מתנאי הקרן ואינה ניכוי מס גורף לעצמה</li>
-                <li>• <strong>תשואה:</strong> הכסף מושקע בשוק ההון ומשיג תשואה</li>
-                <li>• <strong>משיכה לאחר 6 שנים:</strong> פטור מלא ממס רווחי הון!</li>
+                <li>• <strong>תשואה:</strong> תלויה במסלול ובביצועי ההשקעות ואינה מובטחת</li>
+                <li>• <strong>משיכה:</strong> פטור על הרווחים כפוף לתקרה, לוותק ולתנאי המשיכה</li>
                 <li>• <strong>תקרה פטורה לשכיר:</strong> 15,712 ₪ הכנסה × 7.5% = 1,178 ₪/חודש</li>
               </ul>
             </div>
@@ -679,7 +679,7 @@ export default function TaxesCompleteGuide() {
           {/* Section 12 */}
           <section id="pension-tax" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              12. פנסיה – 11% ניכוי + 5.5% זיכוי לעצמאי
+              12. פנסיה – חובת הפקדה והטבות מס
             </h2>
 
             <div className="grid md:grid-cols-2 gap-5 mb-5">
@@ -689,16 +689,16 @@ export default function TaxesCompleteGuide() {
                   <li>• עובד מפקיד: 6%</li>
                   <li>• מעסיק מפקיד: 6.5% (פנסיה) + 6% (פיצויים)</li>
                   <li>• סה&quot;כ: 18.5% מהשכר</li>
-                  <li>• עובד: ניכוי מס על 7% מהשכר (עד תקרה)</li>
+                  <li>• הטבת מס להפקדת עובד: נבדקת לפי תנאי הזיכוי והתקרות</li>
                 </ul>
               </div>
               <div className="border border-ink/15 rounded-none p-5">
                 <h3 className="font-bold text-ink mb-3">עצמאי</h3>
                 <ul className="space-y-1 text-sm text-ink/70">
-                  <li>• חובת הפקדה מינימלית: לפי גיל וסכום</li>
-                  <li>• ניכוי: 11% מהרווח (עד 9,024 ₪/שנה)</li>
-                  <li>• זיכוי: 5.5% מהרווח (עד 5,460 ₪/שנה)</li>
-                  <li>• סה&quot;כ חיסכון מס: עד ~15,000 ₪/שנה</li>
+                  <li>• חובת הפקדה: לפי ההכנסה והתנאים האישיים</li>
+                  <li>• ניכוי: מקטין הכנסה חייבת בכפוף לתקרה</li>
+                  <li>• זיכוי: מקטין את המס לפי תנאי הזכאות</li>
+                  <li>• הטבת המס האישית: תלויה בהכנסה ובהפקדות בפועל</li>
                 </ul>
               </div>
             </div>

@@ -202,6 +202,13 @@ describe('Edge cases - calculateMortgage', () => {
 // ============================================================
 
 describe('calculateMultiTrackMortgage', () => {
+  it('requires a full third of the principal at a fixed rate', () => {
+    const belowThird = calculateMultiTrackMortgage({ tracks: [
+      { id: 'variable', name: 'Prime', trackType: 'prime', amount: 667_000, interestRate: 4, termYears: 20, method: 'shpitzer' },
+      { id: 'fixed', name: 'Fixed', trackType: 'fixed-unlinked', amount: 333_000, interestRate: 4, termYears: 20, method: 'shpitzer' },
+    ] });
+    expect(belowThird.isRegulationCompliant).toBe(false);
+  });
   it('שלושה מסלולים - סכום חודשי = סכום כל מסלול בנפרד', () => {
     const prime = calculateMortgage({ loanAmount: 500_000, interestRate: 5.0, termYears: 25, method: 'shpitzer' });
     const kalatz = calculateMortgage({ loanAmount: 500_000, interestRate: 4.2, termYears: 25, method: 'shpitzer' });
@@ -407,6 +414,18 @@ describe('calculateEarlyPayoff', () => {
 // ============================================================
 
 describe('calculateAffordability', () => {
+  it('converts a zero-rate payment budget into the full principal', () => {
+    const result = calculateAffordability({
+      monthlyNetIncome: 20_000,
+      otherObligations: 0,
+      propertyValue: 5_000_000,
+      buyerType: 'first-home',
+      termYears: 10,
+      interestRate: 0,
+    });
+    expect(result.maxLoanAtComfort).toBe(20_000 * 0.30 * 120);
+    expect(result.maxLoanAtBank).toBe(20_000 * 0.40 * 120);
+  });
   it('כושר החזר סביר - המלצה חיובית', () => {
     const result = calculateAffordability({
       monthlyNetIncome: 25_000,

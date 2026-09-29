@@ -106,7 +106,7 @@ export function calculateIncomeTax(input: IncomeTaxInput): IncomeTaxResult {
   const socialSecurityFull = fullPart * SOCIAL_SECURITY_EMPLOYEE_2026.fullRate.total;
   const monthlySocialSecurity = socialSecurityReduced + socialSecurityFull;
 
-  // פנסיה (לא חיוב חובה לחישוב, אלא ניכוי וולונטרי)
+  // תרחיש פנסיה: ניכוי עובד משכר שהוזן; ללא זיכוי המס האפשרי על ההפקדה
   const monthlyPension = input.hasPension
     ? monthlySalary * (input.pensionPercentage / 100)
     : 0;

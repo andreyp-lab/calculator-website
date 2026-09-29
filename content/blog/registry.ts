@@ -69,12 +69,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'vat-complete-guide-israel',
-    title: 'מע"מ 2026 — 18%: חילוץ מע"מ, החזרים, חוק מע"מ ודיווח לעוסק',
+    title: 'מע״מ בישראל 2026: שיעור, עוסק פטור וניכוי תשומות',
     description:
-      'שיעור המע"מ בישראל 2026: 18%. איך מחלצים מע"מ מסכום כולל (÷1.18), מתי מגיע החזר מע"מ (גם על דלק ורכב), חובות דיווח ופטורים לעוסק פטור. דוגמאות מספריות.',
+      'שיעור מע״מ 2026, תקרת עוסק פטור, חישוב הוספה וחילוץ, דיווח תקופתי וכללי ניכוי מס תשומות.',
     category: 'עצמאיים',
     readTime: '12 דקות',
     date: '2026-05-04',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/self-employed/vat',
@@ -114,12 +115,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'tax-changes-2026',
-    title: 'מה השתנה במדרגות מס הכנסה ב-2026? המדריך המלא',
+    title: 'שינוי מדרגות מס הכנסה ב־2026: מה רווח ומה צריך לבדוק',
     description:
-      'סקירה מקיפה של השינויים במדרגות המס לשנת 2026 והשפעתם על השכר נטו.',
+      'ריווח מדרגות המס בשיעורי 20% ו־31%, עם קישורים ללוח הרשמי ולבדיקה אישית.',
     category: 'מיסוי אישי',
     readTime: '8 דקות',
     date: '2026-05-01',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/personal-tax/income-tax',
@@ -163,12 +165,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'pension-deduction-self-employed-2026',
-    title: 'ניכוי פנסיה לעצמאי 2026: 11%, 5.5% וזיכוי 35% — איך זה עובד?',
+    title: 'הפקדות לפנסיה לעצמאי: חובת הפקדה והטבות מס',
     description:
-      'המדריך המעשי להבנת הטבות המס בהפקדה לפנסיה לעצמאי. מתי כדאי להפקיד את המקסימום, איך משלבים עם קרן השתלמות, ודוגמאות מספריות.',
+      'איך להבחין בין חובת ההפקדה לפנסיה לבין ניכוי וזיכוי ממס, ומה לבדוק לפי הנתונים האישיים.',
     category: 'עצמאיים',
     readTime: '9 דקות',
     date: '2026-05-14',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/self-employed/year-end-tax-simulator',
@@ -178,12 +181,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'study-fund-self-employed-strategy',
-    title: 'קרן השתלמות לעצמאי: הטבת המס הגדולה ביותר שלא ניצלת',
+    title: 'קרן השתלמות לעצמאי 2026: ניכוי, פטור ונזילות',
     description:
-      'ניכוי 4.5% + פטור ממס רווחי הון = ההטבה המשתלמת ביותר לעצמאי. איך זה עובד, כמה להפקיד, ומתי משתלם?',
+      'ההבדל בין ניכוי הפקדה לבין פטור אפשרי על רווחים, ואילו תקרות ותנאי משיכה צריך לבדוק.',
     category: 'עצמאיים',
     readTime: '8 דקות',
     date: '2026-05-14',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/self-employed/year-end-tax-simulator',
@@ -225,12 +229,13 @@ export const blogPosts: BlogPost[] = [
   // ===== אשכול TAX 2026 =====
   {
     slug: 'income-tax-brackets-2026-complete-guide',
-    title: 'מדרגות מס הכנסה 2026 - המדריך המלא והשינויים מהשנים הקודמות',
+    title: 'מדרגות מס הכנסה 2026: איך קוראים את הלוח הרשמי',
     description:
-      'כל מדרגות המס לשנת 2026: 7 מדרגות מ-10% עד 50%, השינויים לעומת 2024-2025, חישובים לפי שכר ונקודות זיכוי. עדכני ומאומת.',
+      'ריווח שתי מדרגות המס ב־2026, הסבר על חישוב מדורג ובדיקת זיכויים ומס יסף לפי נתונים אישיים.',
     category: 'מיסוי אישי',
     readTime: '15 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/personal-tax/salary-net-gross',
@@ -240,12 +245,13 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'surtax-yesef-2026-explained',
-    title: 'מס יסף 3% (2026) - מי משלם, כמה זה עולה, ואיך להפחית?',
+    title: 'מס יסף 2026: שיעור 3% ומס נוסף על הכנסה הונית',
     description:
-      'מס יסף 3% הוא חבות מס נוספת על הכנסה שנתית מעל 721,560 ₪. מי חייב, חישוב מדויק, פטורים ואסטרטגיות הפחתה חוקיות.',
+      'מתי בודקים מס יסף על הכנסה חייבת גבוהה, ומהו המס הנוסף על הכנסה ממקור הוני.',
     category: 'מיסוי אישי',
     readTime: '10 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/personal-tax/salary-net-gross',
@@ -647,16 +653,17 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'pension-self-employed-11-percent',
-    title: 'פנסיה לעצמאי 2026 - 11% או 16.5%? המדריך המלא להטבת המס',
+    title: 'פנסיה לעצמאי 2026: איך בודקים חובת הפקדה והטבת מס',
     description:
-      'המדריך המעשי להפקדה לפנסיה לעצמאי: ניכוי 11%, זיכוי 5.5%, חובת הפקדה מינימלית, ושילוב עם קרן השתלמות. עדכני 2026 עם דוגמאות.',
+      'שיעורי חובת ההפקדה, ההבדל בין ניכוי לזיכוי והנתונים הדרושים לבדיקת הזכאות האישית.',
     category: 'עצמאיים',
     readTime: '13 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/self-employed/year-end-tax-simulator',
-      label: 'סימולטור הערכת מס לסוף שנה',
+      label: 'מדריך בדיקת מס לסוף שנה',
     },
     related: ['bituach-leumi-self-employed-deep-dive', 'study-fund-self-employed-strategy', 'pension-deduction-self-employed-2026'],
   },

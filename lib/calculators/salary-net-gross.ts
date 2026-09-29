@@ -5,10 +5,9 @@
  * - חישוב ברוטו → נטו (סטנדרטי)
  * - חישוב נטו → ברוטו (Binary Search)
  * - חישוב עלות מעסיק → נטו
- * - השוואת שנים (2024 / 2025 / 2026)
  * - מס הכנסה לפי מדרגות
  * - ביטוח לאומי + בריאות (שכיר)
- * - ניכוי פנסיה (6% / 7% / 16.5%)
+ * - ניכוי פנסיה לפי שני תרחישי הפקדה בסיסיים
  * - ניכוי קרן השתלמות
  * - ביטוח אובדן כושר עבודה
  * - נקודות זיכוי (כולל wizard לחישוב)
@@ -24,25 +23,9 @@ import {
   SOCIAL_SECURITY_EMPLOYEE_2026,
 } from '@/lib/constants/tax-2026';
 
-// ============================================================
-// מדרגות מס היסטוריות - לצורך השוואת שנים
-// ============================================================
-
-export const TAX_BRACKETS_2024 = [
-  { upTo: 84_120, rate: 0.10 },
-  { upTo: 120_720, rate: 0.14 },
-  { upTo: 193_800, rate: 0.20 }, // צר יותר מ-2026
-  { upTo: 269_280, rate: 0.31 }, // צר יותר מ-2026
-  { upTo: 560_280, rate: 0.35 },
-  { upTo: 721_560, rate: 0.47 },
-  { upTo: Infinity, rate: 0.50 },
-] as const;
-
-export const TAX_BRACKETS_2025 = TAX_BRACKETS_2024; // אותן מדרגות כמו 2024
-
 export type TaxBracket = { upTo: number; rate: number };
-export type TaxYear = '2024' | '2025' | '2026';
-export type PensionLevel = 'minimum' | 'recommended' | 'maximum';
+export type TaxYear = '2026';
+export type PensionLevel = 'minimum' | 'recommended';
 export type CalculatorMode = 'gross-to-net' | 'net-to-gross' | 'employer-to-net';
 
 // ============================================================
@@ -107,15 +90,6 @@ export interface MarginalBracketInfo {
   currentBracketLabel: string;
 }
 
-export interface YearComparisonResult {
-  year: TaxYear;
-  netSalary: number;
-  incomeTax: number;
-  totalDeductions: number;
-  netPercentage: number;
-  marginalRate: number;
-}
-
 export interface BonusResult {
   grossBonus: number;
   marginalRate: number;
@@ -134,27 +108,14 @@ export const PENSION_RATES: Record<PensionLevel, { employee: number; employer: n
     employee: 0.06,
     employer: 0.065,
     label: 'מינימום (6% + 6.5%)',
-    description: 'חובה לפי צו הרחבה — מינימום החוק',
+    description: 'תרחיש בסיס: 6% עובד ו־6.5% מעסיק מהשכר שהוזן',
   },
   recommended: {
     employee: 0.07,
     employer: 0.075,
-    label: 'מומלץ (7% + 7.5%)',
-    description: 'מומלץ לאיזון בין נטו גבוה לחיסכון טוב',
+    label: 'תרחיש מוגדל (7% + 7.5%)',
+    description: 'תרחיש מוגדל לדוגמה; אינו המלצה אישית',
   },
-  maximum: {
-    employee: 0.07,      // 7% עובד (מעל 7% לא מוכר כהוצ' מוכרת)
-    employer: 0.075,
-    label: 'מקסימום הטבה (7% + 7.5% + 5.5%)',
-    description: 'כולל 5.5% תגמולים נוספים — מקסום הטבת מס',
-  },
-  // note: maximum = same as recommended from employee side, employer adds 5.5%
-};
-
-const PENSION_EXTRA_EMPLOYER: Record<PensionLevel, number> = {
-  minimum: 0,
-  recommended: 0,
-  maximum: 0.055,
 };
 
 // ============================================================
@@ -179,14 +140,6 @@ function calcIncomeTaxWithBrackets(
   }
   const creditAmount = creditPoints * CREDIT_POINT_2026.annual;
   return Math.max(0, tax - creditAmount);
-}
-
-function calcIncomeTax2026(annualIncome: number, creditPoints: number): number {
-  return calcIncomeTaxWithBrackets(annualIncome, creditPoints, TAX_BRACKETS_2026);
-}
-
-function calcIncomeTax2024(annualIncome: number, creditPoints: number): number {
-  return calcIncomeTaxWithBrackets(annualIncome, creditPoints, TAX_BRACKETS_2024);
 }
 
 function calcEmployeeSS(monthlyGross: number): number {
@@ -216,17 +169,16 @@ function calcEmployerSS(monthlyGross: number): number {
 function getMarginalRate(annualIncome: number): number {
   const brackets = TAX_BRACKETS_2026;
   for (const b of brackets) {
-    if (annualIncome <= b.upTo) return b.rate;
+    if (annualIncome < b.upTo || b.upTo === Infinity) return b.rate;
   }
   return brackets[brackets.length - 1].rate;
 }
 
 function getMarginalBracketInfo(annualIncome: number): MarginalBracketInfo {
   const brackets = [...TAX_BRACKETS_2026];
-  let prev = 0;
   for (let i = 0; i < brackets.length; i++) {
     const b = brackets[i];
-    if (annualIncome <= b.upTo) {
+    if (annualIncome < b.upTo || b.upTo === Infinity) {
       const nextBracket = brackets[i + 1] ?? null;
       const distanceToNext = b.upTo === Infinity ? 0 : b.upTo - annualIncome;
       return {
@@ -237,7 +189,6 @@ function getMarginalBracketInfo(annualIncome: number): MarginalBracketInfo {
         currentBracketLabel: `${(b.rate * 100).toFixed(0)}%`,
       };
     }
-    prev = b.upTo;
   }
   return {
     currentRate: 0.5,
@@ -257,11 +208,10 @@ function computeNetFromGross(
   },
 ): number {
   const annual = gross * 12;
-  const taxYear = opts.taxYear ?? '2026';
   const pensionLevel = opts.pensionLevel ?? 'minimum';
   const disabilityInsuranceRate = opts.disabilityInsuranceRate ?? 0;
-  const brackets = taxYear === '2026' ? TAX_BRACKETS_2026 : TAX_BRACKETS_2024;
-  const incomeTax = calcIncomeTaxWithBrackets(annual, opts.creditPoints, brackets) / 12;
+  if (opts.taxYear && opts.taxYear !== '2026') throw new RangeError('Only tax year 2026 is supported');
+  const incomeTax = calcIncomeTaxWithBrackets(annual, opts.creditPoints, TAX_BRACKETS_2026) / 12;
   const ss = calcEmployeeSS(gross);
   const pensionRates = PENSION_RATES[pensionLevel];
   const pension = opts.pensionEnabled ? gross * pensionRates.employee : 0;
@@ -278,13 +228,12 @@ export function calculateSalaryNetGross(input: SalaryNetGrossInput): SalaryNetGr
   const gross = Math.max(0, input.grossSalary);
   const annual = gross * 12;
   // ברירות מחדל לשדות אופציונליים
-  const taxYear = input.taxYear ?? '2026';
   const pensionLevel = input.pensionLevel ?? 'minimum';
   const disabilityInsuranceRate = input.disabilityInsuranceRate ?? 0;
-  const brackets = taxYear === '2026' ? TAX_BRACKETS_2026 : TAX_BRACKETS_2024;
+  if (input.taxYear && input.taxYear !== '2026') throw new RangeError('Only tax year 2026 is supported');
 
   const creditAmount = input.creditPoints * CREDIT_POINT_2026.annual;
-  const incomeTax = calcIncomeTaxWithBrackets(annual, input.creditPoints, brackets) / 12;
+  const incomeTax = calcIncomeTaxWithBrackets(annual, input.creditPoints, TAX_BRACKETS_2026) / 12;
   const socialSecurity = calcEmployeeSS(gross);
 
   const pensionRates = PENSION_RATES[pensionLevel];
@@ -303,7 +252,7 @@ export function calculateSalaryNetGross(input: SalaryNetGrossInput): SalaryNetGr
 
   // עלויות מעסיק
   const employerSS = calcEmployerSS(gross);
-  const employerPension = input.pensionEnabled ? gross * (pensionRates.employer + PENSION_EXTRA_EMPLOYER[pensionLevel]) : 0;
+  const employerPension = input.pensionEnabled ? gross * pensionRates.employer : 0;
   const employerStudyFund = input.studyFundEnabled ? gross * 0.075 : 0;
   const employerCompensation = gross * 0.0833;
   const totalEmployerCost = gross + employerSS + employerPension + employerStudyFund + employerCompensation;
@@ -404,27 +353,6 @@ export function calculateNetFromEmployerCost(
   const gross = Math.round(lo * 100) / 100;
   const result = calculateSalaryNetGross({ ...options, grossSalary: gross });
   return { grossSalary: gross, result };
-}
-
-// ============================================================
-// השוואת שנים
-// ============================================================
-
-export function calculateYearComparison(
-  input: SalaryNetGrossInput,
-  years: TaxYear[] = ['2024', '2025', '2026'],
-): YearComparisonResult[] {
-  return years.map((year) => {
-    const result = calculateSalaryNetGross({ ...input, taxYear: year });
-    return {
-      year,
-      netSalary: result.netSalary,
-      incomeTax: result.incomeTax,
-      totalDeductions: result.totalDeductions,
-      netPercentage: result.netPercentage,
-      marginalRate: result.marginalTaxRate,
-    };
-  });
 }
 
 // ============================================================
