@@ -21,6 +21,12 @@ export const metadata: Metadata = {
 
 const calculators = [
   {
+    title: 'עוסק פטור או עוסק מורשה — מה ההבדל?',
+    description: 'השוואה בין המעמדות במע״מ: גבייה, מס תשומות, מסמכים ודיווחים, וההבדל ממסלול בעל עסק זעיר.',
+    href: '/compare/osek-patur-vs-murshe',
+    available: true,
+  },
+  {
     title: '📘 מדריך פתיחת עסק — עוסק פטור או מורשה?',
     description: 'מתחילים עסק? המדריך המלא לבחירה בין עוסק פטור למורשה, רישום מול הרשויות, תקרת 122,833 ₪ וטעויות נפוצות',
     href: '/self-employed/opening-business',
@@ -131,9 +137,9 @@ export default function SelfEmployedPage() {
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
             {'// מרכז עצמאיים ✦'}
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-cream mb-3">מחשבונים לעצמאיים</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-cream mb-3">פתיחת עסק וניהול כספים לעצמאים</h1>
           <p className="text-cream/70 text-lg mb-0">
-            מחשבונים מקצועיים לעצמאיים, פרילנסרים ובעלי עסקים קטנים
+            מדריכים וכלים לעצמאים: בחירת סוג העוסק, רישום העסק, חשבוניות, מסים ותכנון התזרים
           </p>
         </div>
 

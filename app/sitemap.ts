@@ -163,6 +163,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== דפי השוואה =====
     make('/compare', 'monthly', 0.75),
+    make('/compare/osek-patur-vs-murshe', 'monthly', 0.85, new Date('2026-10-01')),
     make('/compare/employee-vs-self-employed', 'monthly', 0.85, new Date('2026-09-28')),
     make('/compare/rent-vs-buy', 'monthly', 0.85),
     make('/compare/leasing-mimuni-vs-tifuli', 'monthly', 0.85),

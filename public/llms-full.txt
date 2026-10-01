@@ -24,6 +24,8 @@
 
 - [מרכז העצמאים](https://cheshbonai.co.il/self-employed)
 - [פתיחת עסק](https://cheshbonai.co.il/self-employed/opening-business)
+- [עוסק פטור מול עוסק מורשה](https://cheshbonai.co.il/compare/osek-patur-vs-murshe)
+- [תקרת עוסק פטור](https://cheshbonai.co.il/self-employed/vat-threshold)
 - [מע״מ](https://cheshbonai.co.il/self-employed/vat)
 - [הכנסה פנויה לעצמאי](https://cheshbonai.co.il/self-employed/net)
 - [ביטוח לאומי לעצמאי](https://cheshbonai.co.il/self-employed/social-security)

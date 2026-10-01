@@ -11,6 +11,13 @@ export const metadata: Metadata = {
 
 const COMPARISONS = [
   {
+    href: '/compare/osek-patur-vs-murshe',
+    title: 'עוסק פטור מול עוסק מורשה',
+    icon: '📋',
+    description: 'מה ההבדל במע״מ, במסמכים ובדיווחים, ומה בודקים לפני פתיחת העסק או שינוי המעמד?',
+    color: 'bg-ink',
+  },
+  {
     href: '/compare/employee-vs-self-employed',
     title: 'שכיר vs עצמאי',
     icon: '👔',
