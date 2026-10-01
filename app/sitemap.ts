@@ -96,7 +96,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed/social-security', 'monthly', 0.95),
     make('/self-employed/vat', 'monthly', 0.90),
     make('/self-employed/tax-advances', 'monthly', 0.90),
-    make('/self-employed/hourly-rate', 'monthly', 0.90),
+    make('/self-employed/hourly-rate', 'monthly', 0.90, new Date('2026-10-02')),
     make('/self-employed/employer-cost', 'monthly', 0.90),
     make('/self-employed/mandatory-pension', 'monthly', 0.90, new Date('2026-09-28')),
     make('/self-employed/corporation-vs-individual', 'monthly', 0.90, new Date('2026-09-28')),
@@ -105,7 +105,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed/vat-threshold', 'monthly', 0.9, new Date('2026-10-01')),
     make('/self-employed/invoices', 'monthly', 0.9, new Date('2026-10-01')),
     make('/self-employed/withholding-tax', 'monthly', 0.85, new Date('2026-10-01')),
-    make('/self-employed/business-setup-cost', 'monthly', 0.9, FRESH_2026_06_12),
+    make('/self-employed/business-setup-cost', 'monthly', 0.9, new Date('2026-10-02')),
     make('/self-employed/employee-and-self-employed', 'monthly', 0.9, new Date('2026-10-01')),
 
     // ===== מחשבונים: נדל"ן =====
@@ -165,6 +165,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== דפי השוואה =====
     make('/compare', 'monthly', 0.75, new Date('2026-10-01')),
     make('/compare/osek-patur-vs-murshe', 'monthly', 0.85, new Date('2026-10-01')),
+    make('/compare/esek-zeir-vs-osek-patur', 'monthly', 0.85, new Date('2026-10-02')),
     make('/compare/employee-vs-self-employed', 'monthly', 0.85, new Date('2026-09-28')),
     make('/compare/rent-vs-buy', 'monthly', 0.85),
     make('/compare/leasing-mimuni-vs-tifuli', 'monthly', 0.85),

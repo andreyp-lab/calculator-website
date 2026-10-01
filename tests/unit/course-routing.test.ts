@@ -43,6 +43,7 @@ describe('course routing', () => {
     expect(getCourseRouting('/guides/taxes-complete-guide-2026')?.courseId).toBe('cpa');
     expect(getCourseRouting('/compare/employee-vs-self-employed')?.courseId).toBe('cpa');
     expect(getCourseRouting('/compare/osek-patur-vs-murshe')?.courseId).toBe('cpa');
+    expect(getCourseRouting('/compare/esek-zeir-vs-osek-patur')?.courseId).toBe('cpa');
     expect(getCourseRouting('/compare/company-vs-osek-murshe')?.courseId).toBe('cfo');
     expect(getCourseRouting('/blog/company-vs-self-employed-ultimate-guide')?.courseId).toBe(
       'cfo',

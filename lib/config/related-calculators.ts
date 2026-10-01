@@ -34,6 +34,8 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/employee-rights/salary-deductions', label: 'ניכויים ממשכורת', group: 'employee' },
   // עצמאיים
   { path: '/self-employed/opening-business', label: 'פתיחת עסק — רישום ומסמכים', group: 'self-employed' },
+  { path: '/self-employed/business-setup-cost', label: 'תקציב פתיחת עסק', group: 'self-employed' },
+  { path: '/compare/esek-zeir-vs-osek-patur', label: 'בעל עסק זעיר מול עוסק פטור', group: 'self-employed' },
   { path: '/self-employed/invoices', label: 'חשבוניות וקבלות', group: 'self-employed' },
   { path: '/self-employed/withholding-tax', label: 'ניכוי מס במקור וניהול ספרים', group: 'self-employed' },
   { path: '/self-employed/net', label: 'נטו לעצמאי', group: 'self-employed' },
@@ -92,7 +94,9 @@ const CURATED: Record<string, string[]> = {
   '/employee-rights/severance': ['/employee-rights/recreation-pay', '/employee-rights/annual-leave', '/personal-tax/salary-net-gross', '/insurance/pension'],
   '/vehicles/leasing-vs-buying': ['/vehicles/fuel-cost', '/vehicles/company-car-benefit', '/self-employed/employer-cost'],
   // קישור אשכול הקמת-עסק מהדפים הנסרקים ביותר (GSC, יולי 2026) — פתרון לבעיית ה-discovery
-  '/self-employed/hourly-rate': ['/business', '/self-employed/net', '/self-employed/employer-cost', '/self-employed/vat-threshold'],
+  '/self-employed/hourly-rate': ['/self-employed/business-setup-cost', '/self-employed/net', '/self-employed/employer-cost', '/compare/esek-zeir-vs-osek-patur'],
+  '/self-employed/business-setup-cost': ['/self-employed/opening-business', '/compare/osek-patur-vs-murshe', '/compare/esek-zeir-vs-osek-patur', '/self-employed/hourly-rate'],
+  '/compare/esek-zeir-vs-osek-patur': ['/compare/osek-patur-vs-murshe', '/self-employed/vat-threshold', '/self-employed/allowed-expenses', '/self-employed/opening-business'],
   '/self-employed/employer-cost': ['/business', '/self-employed/hourly-rate', '/self-employed/corporation-vs-individual', '/employee-rights/severance'],
   '/employee-rights/unemployment-benefits': ['/employee-rights/work-grant', '/business', '/personal-tax/salary-net-gross', '/savings/family-budget'],
   '/savings/loan-repayment': ['/tools/loan-eligibility', '/real-estate/mortgage', '/savings/personal-loan', '/business'],

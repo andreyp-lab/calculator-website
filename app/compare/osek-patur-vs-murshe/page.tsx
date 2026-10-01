@@ -450,6 +450,15 @@ export default function OsekPaturVsMurshePage() {
                 עדיין אינו מנכה מס תשומות, ועוסק מורשה ממשיך לפעול לפי כללי המע״מ החלים עליו.{' '}
                 <SourceRef href={sources.microBusiness}>רשות המסים — רפורמת בעל עסק זעיר, יוני 2026</SourceRef>
               </p>
+              <p>
+                לבדיקת התנאים, הדיווח וארבעת השילובים האפשריים בין שני הסיווגים, עברו ל
+                <Link
+                  href="/compare/esek-zeir-vs-osek-patur"
+                  className="text-gold underline underline-offset-4"
+                >
+                  מדריך בעל עסק זעיר מול עוסק פטור
+                </Link>.
+              </p>
             </div>
           </section>
         </div>

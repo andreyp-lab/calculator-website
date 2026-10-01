@@ -55,7 +55,11 @@ const EXACT_RULES: readonly ExactRule[] = [
   {
     courseId: 'cpa',
     placement: 'comparison',
-    paths: ['/compare/employee-vs-self-employed', '/compare/osek-patur-vs-murshe'],
+    paths: [
+      '/compare/employee-vs-self-employed',
+      '/compare/osek-patur-vs-murshe',
+      '/compare/esek-zeir-vs-osek-patur',
+    ],
   },
   {
     courseId: 'cpa',

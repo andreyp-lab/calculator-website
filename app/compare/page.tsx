@@ -11,6 +11,13 @@ export const metadata: Metadata = {
 
 const COMPARISONS = [
   {
+    href: '/compare/esek-zeir-vs-osek-patur',
+    title: 'בעל עסק זעיר מול עוסק פטור',
+    icon: '🧾',
+    description: 'מה שייך למס הכנסה ומה שייך למע״מ, מי יכול לשלב בין המסלולים ומה משתנה בדיווח ובהוצאות?',
+    color: 'bg-ink-deep',
+  },
+  {
     href: '/compare/osek-patur-vs-murshe',
     title: 'עוסק פטור מול עוסק מורשה',
     icon: '📋',

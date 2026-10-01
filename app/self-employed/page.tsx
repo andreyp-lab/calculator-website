@@ -23,6 +23,13 @@ export const metadata: Metadata = {
 const calculators = [
   {
     stage: 'start',
+    title: 'בעל עסק זעיר או עוסק פטור — מה ההבדל?',
+    description: 'מסלול במס הכנסה מול סיווג במע״מ, והמצבים שבהם אפשר להיות בשניהם במקביל',
+    href: '/compare/esek-zeir-vs-osek-patur',
+    available: true,
+  },
+  {
+    stage: 'start',
     title: 'עוסק פטור או עוסק מורשה — מה ההבדל?',
     description: 'השוואה בין המעמדות במע״מ: גבייה, מס תשומות, מסמכים ודיווחים, וההבדל ממסלול בעל עסק זעיר.',
     href: '/compare/osek-patur-vs-murshe',

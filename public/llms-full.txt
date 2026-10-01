@@ -25,6 +25,7 @@
 - [מרכז העצמאים](https://cheshbonai.co.il/self-employed)
 - [פתיחת עסק](https://cheshbonai.co.il/self-employed/opening-business)
 - [עוסק פטור מול עוסק מורשה](https://cheshbonai.co.il/compare/osek-patur-vs-murshe)
+- [בעל עסק זעיר מול עוסק פטור](https://cheshbonai.co.il/compare/esek-zeir-vs-osek-patur)
 - [תקרת עוסק פטור](https://cheshbonai.co.il/self-employed/vat-threshold)
 - [חשבוניות וקבלות](https://cheshbonai.co.il/self-employed/invoices)
 - [ניכוי מס במקור ואישור ניהול ספרים](https://cheshbonai.co.il/self-employed/withholding-tax)
@@ -34,6 +35,8 @@
 - [הכנסה פנויה לעצמאי](https://cheshbonai.co.il/self-employed/net)
 - [ביטוח לאומי לעצמאי](https://cheshbonai.co.il/self-employed/social-security)
 - [ניהול כספים לעסק קטן](https://cheshbonai.co.il/self-employed/business-finance)
+- [תמחור שעת עבודה לעצמאי](https://cheshbonai.co.il/self-employed/hourly-rate)
+- [תקציב ועלויות פתיחת עסק](https://cheshbonai.co.il/self-employed/business-setup-cost)
 - [מדריכי הקמת עסק לפי סוג פעילות](https://cheshbonai.co.il/business)
 
 ## נדל״ן, חיסכון והשקעות
