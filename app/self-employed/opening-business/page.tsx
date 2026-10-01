@@ -145,7 +145,7 @@ export default function OpeningBusinessPage() {
             וצ׳קליסט מסודר ליום שאחרי הפתיחה.
           </p>
           <p className="text-sm text-ink/70 mt-3">
-            נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026
+            נכתב על ידי אנדרי פלטונוב, רו״ח · עודכן ל-2026
           </p>
         </header>
 
@@ -202,7 +202,7 @@ export default function OpeningBusinessPage() {
           <h2>שלושת הרישומים שצריך להסדיר</h2>
           <ol>
             <li>
-              <strong>פתיחת תיק במע"מ</strong> — בחירת סיווג: עוסק פטור או עוסק מורשה. זהו הצעד
+              <strong>פתיחת תיק במע״מ</strong> — בחירת סיווג: עוסק פטור או עוסק מורשה. זהו הצעד
               שקובע את אופן ההתנהלות מול רשות המסים.
             </li>
             <li>
@@ -229,7 +229,7 @@ export default function OpeningBusinessPage() {
             במקום זאת הוא מגיש הצהרת מחזור שנתית.
           </p>
           <p>
-            חשוב להבין: "פטור" מתייחס <strong>רק למע"מ</strong>. עוסק פטור עדיין משלם מס הכנסה
+            חשוב להבין: ״פטור״ מתייחס <strong>רק למע״מ</strong>. עוסק פטור עדיין משלם מס הכנסה
             ודמי ביטוח לפי הכנסתו ומעמדו. סוג הדיווח למס הכנסה תלוי בסוג התיק ובנסיבות.
           </p>
           <p>
@@ -248,45 +248,45 @@ export default function OpeningBusinessPage() {
 
           <h2>עוסק מורשה — למי זה מתאים?</h2>
           <p>
-            <strong>עוסק מורשה</strong> גובה מע"מ בשיעור <strong>{VAT_RATE_PERCENT}</strong> מלקוחותיו, מעביר
+            <strong>עוסק מורשה</strong> גובה מע״מ בשיעור <strong>{VAT_RATE_PERCENT}</strong> מלקוחותיו, מעביר
             אותו לרשות המסים, ועשוי לנכות מע״מ תשומות על הוצאות לפי תנאי הדין. הוא מדווח למע״מ
             לפי תקופת הדיווח שנקבעה לו. עוסק מורשה נדרש כאשר המחזור עובר {VAT_THRESHOLD} ₪, וגם במקצועות מסוימים
             ללא קשר למחזור.
           </p>
           <p>
-            לקוח עסקי עשוי להיות זכאי לנכות מע"מ תשומות, בכפוף לסוג העסקה, לחשבונית תקינה
-            ולכללי הניכוי. לקוח פרטי אינו מנכה מע"מ תשומות. השפעת המע"מ על מחיר השוק ועל הרווח
+            לקוח עסקי עשוי להיות זכאי לנכות מע״מ תשומות, בכפוף לסוג העסקה, לחשבונית תקינה
+            ולכללי הניכוי. לקוח פרטי אינו מנכה מע״מ תשומות. השפעת המע״מ על מחיר השוק ועל הרווח
             תלויה במחיר הכולל שמסכימים עליו ובסוג הלקוחות.
           </p>
           <p>
             <strong>דוגמה מספרית:</strong> נניח ששני מעצבים גובים {VAT_EXAMPLE_BASE.toLocaleString('he-IL')} ₪ על פרויקט. העוסק הפטור
             מפיק קבלה על {VAT_EXAMPLE_BASE.toLocaleString('he-IL')} ₪ — זה המחיר הסופי. העוסק המורשה מפיק חשבונית מס על אותו בסיס בתוספת
-            מע"מ {VAT_RATE_PERCENT}, כלומר {VAT_EXAMPLE_TOTAL.toLocaleString('he-IL')} ₪. לקוח <strong>פרטי</strong> ישלם למורשה {VAT_EXAMPLE_TAX.toLocaleString('he-IL')} ₪ יותר על אותה
+            מע״מ {VAT_RATE_PERCENT}, כלומר {VAT_EXAMPLE_TOTAL.toLocaleString('he-IL')} ₪. לקוח <strong>פרטי</strong> ישלם למורשה {VAT_EXAMPLE_TAX.toLocaleString('he-IL')} ₪ יותר על אותה
             עבודה רק אם שני בעלי העסק קובעים אותו מחיר בסיס. לקוח <strong>עסקי</strong> עשוי לנכות
-            את מע"מ התשומות אם מתקיימים כל התנאים, אך אין בכך קיזוז אוטומטי בכל עסקה. זהות
+            את מע״מ התשומות אם מתקיימים כל התנאים, אך אין בכך קיזוז אוטומטי בכל עסקה. זהות
             הלקוחות היא שיקול אחד לצד מחיר, סוג העסקאות וההוצאות. לחישוב החשבוני —{' '}
-            <Link href="/self-employed/vat">מחשבון המע"מ</Link> באתר.
+            <Link href="/self-employed/vat">מחשבון המע״מ</Link> באתר.
           </p>
 
-          <h2>ומה עם חברה בע"מ?</h2>
+          <h2>ומה עם חברה בע״מ?</h2>
           <p>
-            האפשרות השלישית היא <strong>חברה בע"מ</strong> — ישות משפטית נפרדת שנרשמת ברשם החברות
+            האפשרות השלישית היא <strong>חברה בע״מ</strong> — ישות משפטית נפרדת שנרשמת ברשם החברות
             (בתשלום אגרה, בניגוד לרישום עוסק שהוא חינמי). לחברה יתרונות של הפרדה בין הנכסים
             האישיים לעסקיים ותכנון מס גמיש יותר ברווחים גבוהים: החברה משלמת מס חברות על הרווח,
             ובעל המניות עשוי לשלם מס נוסף לפי דרך המשיכה והכללים החלים. מנגד — עלויות ההקמה והתפעול גבוהות
-            משמעותית: הנהלת חשבונות כפולה, דוחות מבוקרים על ידי רו"ח ואגרה שנתית.
+            משמעותית: הנהלת חשבונות כפולה, דוחות מבוקרים על ידי רו״ח ואגרה שנתית.
           </p>
           <p>
             סוג ההתאגדות המתאים תלוי בנתוני הפעילות, המשיכות, הבעלות והסיכון המשפטי. לבחינת השיקולים:{' '}
-            <Link href="/self-employed/corporation-vs-individual">מדריך חברה בע"מ מול עוסק</Link>{' '}
+            <Link href="/self-employed/corporation-vs-individual">מדריך חברה בע״מ מול עוסק</Link>{' '}
             והמדריך המורחב{' '}
             <Link href="/blog/company-vs-self-employed-ultimate-guide">
-              חברה בע"מ או עצמאי — המדריך האולטימטיבי
+              חברה בע״מ או עצמאי — המדריך האולטימטיבי
             </Link>
             .
           </p>
 
-          <h2>עוסק פטור מול עוסק מורשה מול חברה בע"מ — טבלת השוואה</h2>
+          <h2>עוסק פטור מול עוסק מורשה מול חברה בע״מ — טבלת השוואה</h2>
         </div>
 
         {/* Comparison table */}
@@ -297,7 +297,7 @@ export default function OpeningBusinessPage() {
                 <th className="p-3 font-bold text-ink border-b border-ink/15">קריטריון</th>
                 <th className="p-3 font-bold text-gold border-b border-ink/15">עוסק פטור</th>
                 <th className="p-3 font-bold text-emerald-800 border-b border-ink/15">עוסק מורשה</th>
-                <th className="p-3 font-bold text-ink border-b border-ink/15">חברה בע"מ</th>
+                <th className="p-3 font-bold text-ink border-b border-ink/15">חברה בע״מ</th>
               </tr>
             </thead>
             <tbody className="text-ink/70">
@@ -308,19 +308,19 @@ export default function OpeningBusinessPage() {
                 <td className="p-3 border-b border-ink/15">ללא הגבלה</td>
               </tr>
               <tr className="bg-cream-2/50">
-                <td className="p-3 border-b border-ink/15 font-medium">גביית מע"מ</td>
+                <td className="p-3 border-b border-ink/15 font-medium">גביית מע״מ</td>
                 <td className="p-3 border-b border-ink/15">לא גובה</td>
                 <td className="p-3 border-b border-ink/15">גובה {VAT_RATE_PERCENT}</td>
                 <td className="p-3 border-b border-ink/15">גובה {VAT_RATE_PERCENT}</td>
               </tr>
               <tr>
-                <td className="p-3 border-b border-ink/15 font-medium">קיזוז מע"מ תשומות</td>
+                <td className="p-3 border-b border-ink/15 font-medium">קיזוז מע״מ תשומות</td>
                 <td className="p-3 border-b border-ink/15">לא</td>
                 <td className="p-3 border-b border-ink/15">בכפוף לכללי הניכוי</td>
                 <td className="p-3 border-b border-ink/15">בכפוף לכללי הניכוי</td>
               </tr>
               <tr className="bg-cream-2/50">
-                <td className="p-3 border-b border-ink/15 font-medium">דיווח מע"מ</td>
+                <td className="p-3 border-b border-ink/15 font-medium">דיווח מע״מ</td>
                 <td className="p-3 border-b border-ink/15">הצהרת מחזור שנתית למע״מ</td>
                 <td className="p-3 border-b border-ink/15">לפי תקופת הדיווח שנקבעה</td>
                 <td className="p-3 border-b border-ink/15">לפי תקופת הדיווח שנקבעה</td>
@@ -375,8 +375,8 @@ export default function OpeningBusinessPage() {
               <ul className="space-y-2 text-sm text-ink/70 leading-relaxed">
                 <li>✦ המחזור הצפוי נמוך בבירור מ-{VAT_THRESHOLD} ₪ בשנה, והעיסוק אינו מחייב מורשה.</li>
                 <li>✦ הלקוחות הם בעיקר <strong>אנשים פרטיים</strong> — בדקו כיצד סיווג המע״מ משפיע על המחיר הסופי שתוכלו להציע.</li>
-                <li>✦ ההוצאות העסקיות קטנות — אין הרבה מע"מ תשומות "להפסיד".</li>
-                <li>✦ אתם רוצים מינימום בירוקרטיה: בלי דיווחי מע"מ שוטפים, רק הצהרה שנתית.</li>
+                <li>✦ ההוצאות העסקיות קטנות — אין הרבה מע״מ תשומות ״להפסיד״.</li>
+                <li>✦ אתם רוצים מינימום בירוקרטיה: בלי דיווחי מע״מ שוטפים, רק הצהרה שנתית.</li>
               </ul>
             </div>
             <div className="border border-ink/15 bg-cream-2 p-5">
@@ -387,7 +387,7 @@ export default function OpeningBusinessPage() {
                 <li>✦ רוב הלקוחות הם <strong>עסקים</strong> — חלקם עשויים להיות זכאים לנכות מע״מ תשומות לפי תנאי העסקה.</li>
                 <li>✦ יש השקעה ראשונית גדולה — בדקו בנפרד אם המע״מ על כל רכישה ניתן לניכוי.</li>
                 <li>✦ המחזור צפוי לעבור את התקרה כבר בשנת הפתיחה — כדאי לברר מראש את הסיווג הנכון.</li>
-                <li>✦ המקצוע שלכם מחייב עוסק מורשה על פי דין (למשל עו"ד, רופא, רו"ח, אדריכל).</li>
+                <li>✦ המקצוע שלכם מחייב עוסק מורשה על פי דין (למשל עו״ד, רופא, רו״ח, אדריכל).</li>
               </ul>
             </div>
           </div>
@@ -410,14 +410,14 @@ export default function OpeningBusinessPage() {
           </ul>
           <p>
             המעבר עצמו נעשה מול רשות המסים בעדכון סיווג התיק. מרגע המעבר, מתחילים להפיק חשבוניות
-            מס (במקום קבלות בלבד) ולדווח מע"מ באופן שוטף. על ההבדל בין המסמכים —{' '}
+            מס (במקום קבלות בלבד) ולדווח מע״מ באופן שוטף. על ההבדל בין המסמכים —{' '}
             <Link href="/self-employed/invoices">חשבונית מס מול קבלה: המדריך המלא</Link>.
           </p>
 
           <h3>מה קורה כשעוברים את התקרה באמצע השנה?</h3>
           <p>
             תקרת עוסק פטור אינה המלצה. כשהמחזור מתקרב אליה או צפוי לעבור אותה, פנו לרשות המסים
-            לברר שינוי סיווג ואת מועד החיוב במע"מ בעסקאות הרלוונטיות. אל תניחו שכל הסכום שמעבר
+            לברר שינוי סיווג ואת מועד החיוב במע״מ בעסקאות הרלוונטיות. אל תניחו שכל הסכום שמעבר
             לתקרה חייב באותו אופן בלי לבדוק את מועד העסקאות ומסמכיהן. עקבו אחרי המחזור המצטבר
             והתחזית לאורך השנה. <Link href="/self-employed/vat-threshold">מדריך תקרת עוסק פטור</Link>
             מסביר אילו נתונים להכין לבדיקה.
@@ -435,13 +435,13 @@ export default function OpeningBusinessPage() {
           </p>
           <ul>
             <li>
-              <strong>הרישום זהה</strong> — פותחים תיק מע"מ, מס הכנסה וביטוח לאומי בדיוק כמו עצמאי
-              "מלא". עבודה צדדית אינה הופכת את העסק אוטומטית לעוסק פטור; בודקים את המחזור הצפוי
+              <strong>הרישום זהה</strong> — פותחים תיק מע״מ, מס הכנסה וביטוח לאומי בדיוק כמו עצמאי
+              ״מלא״. עבודה צדדית אינה הופכת את העסק אוטומטית לעוסק פטור; בודקים את המחזור הצפוי
               ואת סוג העיסוק כמו בכל פעילות אחרת.
             </li>
             <li>
               <strong>מס הכנסה מחושב על סך ההכנסות</strong> — השכר מהמשרה וההכנסה מהעסק מצטרפים
-              לאותן מדרגות מס. המשמעות: אם השכר שלכם כבר "ממלא" את המדרגות הנמוכות, ההכנסה מהעסק
+              לאותן מדרגות מס. המשמעות: אם השכר שלכם כבר ״ממלא״ את המדרגות הנמוכות, ההכנסה מהעסק
               תמוסה מהשקל הראשון במדרגה השולית הגבוהה שלכם.
             </li>
             <li>
@@ -503,7 +503,7 @@ export default function OpeningBusinessPage() {
         <section className="mb-10">
           <h2 className="text-2xl font-bold text-ink mb-6">פתיחת תיק ברשויות — מה צריך לבדוק</h2>
           <p className="text-ink/70 mb-6 leading-relaxed">
-            להלן שלושת הגופים שיש לבדוק מולם את הרישום ואת המעמד: מע"מ, מס הכנסה וביטוח לאומי.
+            להלן שלושת הגופים שיש לבדוק מולם את הרישום ואת המעמד: מע״מ, מס הכנסה וביטוח לאומי.
           </p>
 
           {/* Step 1: VAT */}
@@ -513,7 +513,7 @@ export default function OpeningBusinessPage() {
                 1
               </span>
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-ink mb-3">פתיחת תיק מע"מ</h3>
+                <h3 className="text-xl font-bold text-ink mb-3">פתיחת תיק מע״מ</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm border border-ink/15 overflow-hidden bg-paper">
                     <tbody className="text-ink/70">
@@ -667,8 +667,8 @@ export default function OpeningBusinessPage() {
             <ul>
               <li>
                 <strong>תיעוד כל הכנסה</strong> — על כל תקבול מפיקים מסמך: עוסק פטור מפיק קבלה,
-                עוסק מורשה מפיק חשבונית מס וקבלה (או חשבונית מס/קבלה משולבת). אסור לקבל כסף "מתחת
-                לשולחן" — גם לא סכומים קטנים. פירוט מלא של סוגי המסמכים ומתי מפיקים כל אחד —{' '}
+                עוסק מורשה מפיק חשבונית מס וקבלה (או חשבונית מס/קבלה משולבת). אסור לקבל כסף ״מתחת
+                לשולחן״ — גם לא סכומים קטנים. פירוט מלא של סוגי המסמכים ומתי מפיקים כל אחד —{' '}
                 <Link href="/self-employed/invoices">במדריך החשבוניות</Link>.
               </li>
               <li>
@@ -689,7 +689,7 @@ export default function OpeningBusinessPage() {
               זמן הטיפול תלוי במסלול ובבדיקת הבקשה, ולכן אין לבנות על מספר ימים קבוע. הכינו מראש
               את תיאור הפעילות, המחזור הצפוי, תאריך תחילת הפעילות, אישור ניהול חשבון והסכם שכירות
               או מסמכים נוספים אם הם נדרשים בדף השירות. במקביל הגדירו תמחור, אופן הפקת מסמכים
-              ומעקב תזרים. סדר הפעולות המלא מחכה בצ'קליסט שבהמשך העמוד.
+              ומעקב תזרים. סדר הפעולות המלא מחכה בצ׳קליסט שבהמשך העמוד.
             </p>
           </div>
         </section>
@@ -786,9 +786,9 @@ export default function OpeningBusinessPage() {
                 מפתח עם חוזה ראשון מול חברת הייטק בהיקף חודשי קבוע — המחזור השנתי הצפוי יעבור את
                 התקרה כבר בחודשים הראשונים. במקרה כזה יש לבדוק רישום כעוסק מורשה מראש,
                 ללא קשר ליכולת של לקוח מסוים לנכות מע״מ. בהמשך, אם נתוני העסק ישתנו, אפשר לבחון
-                התאגדות כחברה בע"מ —{' '}
+                התאגדות כחברה בע״מ —{' '}
                 <Link href="/self-employed/corporation-vs-individual" className="text-gold hover:underline">
-                  מדריך חברה בע"מ מול עוסק
+                  מדריך חברה בע״מ מול עוסק
                 </Link>{' '}
                 מפרט את הנתונים שכדאי לבדוק.
               </p>
@@ -822,7 +822,7 @@ export default function OpeningBusinessPage() {
               מהנדרש.
             </li>
             <li>
-              <strong>הזנחת מקדמות מס</strong> — מקדמה נמוכה מדי מובילה ל"הפתעה" של חוב גדול
+              <strong>הזנחת מקדמות מס</strong> — מקדמה נמוכה מדי מובילה ל״הפתעה״ של חוב גדול
               (בתוספת ריבית והצמדה) בסוף השנה.
             </li>
             <li>
@@ -835,7 +835,7 @@ export default function OpeningBusinessPage() {
             </li>
             <li>
               <strong>אי-הפרשה שוטפת למס ולפנסיה</strong> — עצמאי מקבל ברוטו ושוכח שחלק מהכסף
-              אינו שלו; חשוב "לשלם לרשויות קודם" בכל חודש.
+              אינו שלו; חשוב ״לשלם לרשויות קודם״ בכל חודש.
             </li>
             <li>
               <strong>תמחור לפי אינטואיציה</strong> — שכחת עלויות המס, הביטוח הלאומי, הפנסיה
@@ -852,7 +852,7 @@ export default function OpeningBusinessPage() {
 
         {/* Checklist */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-ink mb-4">צ'קליסט פתיחת עסק — כל הפעולות בסדר הנכון</h2>
+          <h2 className="text-2xl font-bold text-ink mb-4">צ׳קליסט פתיחת עסק — כל הפעולות בסדר הנכון</h2>
           <div className="border border-ink/15 bg-cream-2 p-6">
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-4">
               לפני הפתיחה
@@ -860,7 +860,7 @@ export default function OpeningBusinessPage() {
             <ul className="space-y-2 text-sm text-ink/80 leading-relaxed mb-6">
               <li>☐ הגדרתם מה העסק מוכר, למי, ובאיזה מחיר (היעזרו ב<Link href="/self-employed/hourly-rate" className="text-gold hover:underline">כלי לתכנון יעד הכנסה לשעת חיוב</Link>)</li>
               <li>☐ אמדתם את מחזור העסקאות השנתי הצפוי — מעל או מתחת ל-{VAT_THRESHOLD} ₪?</li>
-              <li>☐ בחרתם סיווג: עוסק פטור / עוסק מורשה (או חברה בע"מ)</li>
+              <li>☐ בחרתם סיווג: עוסק פטור / עוסק מורשה (או חברה בע״מ)</li>
               <li>☐ תקצבתם את עלויות הפתיחה (<Link href="/self-employed/business-setup-cost" className="text-gold hover:underline">מדריך רכיבי העלות</Link>)</li>
               <li>☐ הגדרתם דרך להפריד ולתעד את תנועות העסק</li>
             </ul>
@@ -881,7 +881,7 @@ export default function OpeningBusinessPage() {
               <li>☐ בדיקת מקדמות ביטוח לאומי (<Link href="/self-employed/social-security" className="text-gold hover:underline">מדריך ב״ל לעצמאי</Link>)</li>
               <li>☐ פתיחת קופת פנסיה — חובת הפקדה לעצמאים</li>
               <li>☐ שמירת כל קבלה והוצאה עסקית מסודרת</li>
-              <li>☐ הפרשה חודשית בצד למס, ב"ל ופנסיה — לפני שמושכים כסף הביתה (<Link href="/self-employed/business-finance" className="text-gold hover:underline">מדריך ההתנהלות הפיננסית</Link>)</li>
+              <li>☐ הפרשה חודשית בצד למס, ב״ל ופנסיה — לפני שמושכים כסף הביתה (<Link href="/self-employed/business-finance" className="text-gold hover:underline">מדריך ההתנהלות הפיננסית</Link>)</li>
               <li>☐ מעקב רבעוני אחרי המחזור מול תקרת עוסק פטור (<Link href="/self-employed/vat-threshold" className="text-gold hover:underline">מדריך התקרה</Link>)</li>
             </ul>
           </div>
