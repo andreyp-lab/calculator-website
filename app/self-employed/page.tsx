@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator, LayoutDashboard, Wallet, TrendingUp, BarChart3, LineChart, Target } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
+import { CourseCTA } from '@/components/marketing/CourseCTA';
 
 /** כלים מתקדמים לניהול פיננסי של העסק (B2B) */
 const businessTools = [
@@ -137,7 +138,7 @@ export default function SelfEmployedPage() {
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
             {'// מרכז עצמאיים ✦'}
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-cream mb-3">פתיחת עסק וניהול כספים לעצמאים</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-cream mb-3">מדריכים וכלים לעצמאים ובעלי עסקים</h1>
           <p className="text-cream/70 text-lg mb-0">
             מדריכים וכלים לעצמאים: בחירת סוג העוסק, רישום העסק, חשבוניות, מסים ותכנון התזרים
           </p>
@@ -226,6 +227,7 @@ export default function SelfEmployedPage() {
             </Link>
           </div>
         </section>
+        <CourseCTA />
       </div>
     </div>
   );
