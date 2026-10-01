@@ -22,107 +22,145 @@ export const metadata: Metadata = {
 
 const calculators = [
   {
+    stage: 'start',
     title: 'עוסק פטור או עוסק מורשה — מה ההבדל?',
     description: 'השוואה בין המעמדות במע״מ: גבייה, מס תשומות, מסמכים ודיווחים, וההבדל ממסלול בעל עסק זעיר.',
     href: '/compare/osek-patur-vs-murshe',
     available: true,
   },
   {
+    stage: 'start',
     title: '📘 מדריך פתיחת עסק — עוסק פטור או מורשה?',
-    description: 'מתחילים עסק? המדריך המלא לבחירה בין עוסק פטור למורשה, רישום מול הרשויות, תקרת 122,833 ₪ וטעויות נפוצות',
+    description: 'רישום מול הרשויות, מסמכים להכנה ומה עושים אחרי שהתיק נפתח',
     href: '/self-employed/opening-business',
     available: true,
   },
   {
+    stage: 'start',
     title: '🏗️ כמה עולה להקים עסק? מדריך לתקציב פתיחה',
     description: 'רכיבי ההשקעה וההוצאות שיש לאסוף לקראת תכנון תקציב, עם קישורים לאגרות הרשמיות',
     href: '/self-employed/business-setup-cost',
     available: true,
   },
   {
+    stage: 'growth',
     title: '📗 מדריך ניהול כספים לעסק קטן',
     description: 'השיטה המלאה: הפרדת חשבון עסקי-פרטי, תזרים מזומנים 13 שבועות, תכנון מס ומקדמות, דוח רווח והפסד ומתי לשכור רו"ח',
     href: '/self-employed/business-finance',
     available: true,
   },
   {
+    stage: 'tax',
     title: 'בדיקת נתונים לקראת דוח סוף שנה',
     description: 'אילו אסמכתאות לאסוף כדי לבדוק הכנסות, הוצאות, הפקדות ומקדמות מול השומה',
     href: '/self-employed/year-end-tax-simulator',
     available: true,
   },
   {
+    stage: 'tax',
     title: '💰 בדיקת הכנסה פנויה לעצמאי',
     description: 'אילו נתונים צריך לאסוף כדי להעריך רווח, מסים ותזרים בלי להניח שיעור הוצאה אחיד',
     href: '/self-employed/net',
     available: true,
   },
   {
+    stage: 'daily',
     title: 'מחשבון מע"מ',
     description: 'הוספת או חילוץ מע"מ (18% ב-2026)',
     href: '/self-employed/vat',
     available: true,
   },
   {
+    stage: 'start',
     title: 'תקרת עוסק פטור — מדריך',
     description: 'בדקו את המחזור מול תקרת 2026 ואת שלבי העדכון מול רשות המסים',
     href: '/self-employed/vat-threshold',
     available: true,
   },
   {
-    title: 'בדיקת הוצאות עסקיות לעצמאי',
-    description: 'איך לסווג ולתעד הוצאות ולבדוק בנפרד ניכוי במס וקיזוז מע״מ',
+    stage: 'daily',
+    title: 'הוצאות מוכרות לעצמאי — מה בודקים?',
+    description: 'הוצאות עסקיות ומעורבות, תיעוד, פחת וההבדל בין מס הכנסה למע״מ',
     href: '/self-employed/allowed-expenses',
     available: true,
   },
   {
+    stage: 'start',
     title: 'שכיר ועצמאי במקביל',
     description: 'אילו נתונים להכין לבדיקת מס הכנסה ודמי ביטוח כשיש גם משכורת וגם עסק',
     href: '/self-employed/employee-and-self-employed',
     available: true,
   },
   {
-    title: '🆕 חשבונית מס, חשבונית עסקה או קבלה?',
+    stage: 'daily',
+    title: 'חשבונית מס, חשבונית עסקה או קבלה?',
     description: 'המדריך המלא לסוגי המסמכים — מה מוציאים, מתי, וההבדלים בין עוסק פטור למורשה',
     href: '/self-employed/invoices',
     available: true,
   },
   {
+    stage: 'daily',
+    title: 'ניכוי מס במקור ואישור ניהול ספרים',
+    description: 'מה שולחים ללקוח, איך בודקים אישור ואילו אסמכתאות שומרים כשהלקוח מנכה מס',
+    href: '/self-employed/withholding-tax',
+    available: true,
+  },
+  {
+    stage: 'tax',
     title: 'ביטוח לאומי לעצמאי — הסבר ומחשבון רשמי',
     description: 'שיעורי 2026, הסבר על בסיס החיוב וקישור למחשבון הביטוח הלאומי',
     href: '/self-employed/social-security',
     available: true,
   },
   {
+    stage: 'tax',
     title: 'בדיקת מקדמות ותיקון חיובים',
     description: 'איך לבדוק תשלומי מס הכנסה וביטוח לאומי בנפרד ולבקש תיקון לפי ההכנסה',
     href: '/self-employed/tax-advances',
     available: true,
   },
   {
+    stage: 'tax',
+    title: 'פנסיה חובה לעצמאי — מה צריך לבדוק?',
+    description: 'תנאי החובה, נתוני הכנסה והפקדות להכנה לפני בדיקה אישית',
+    href: '/self-employed/mandatory-pension',
+    available: true,
+  },
+  {
+    stage: 'growth',
     title: 'כלי לתכנון יעד הכנסה לשעת חיוב',
     description: 'חלוקת יעד הכנסות בשעות חיוב צפויות, לאחר איסוף עלויות ובדיקת מס אישית',
     href: '/self-employed/hourly-rate',
     available: true,
   },
   {
+    stage: 'growth',
     title: 'עלות מעסיק — רכיבים לבדיקה',
     description: 'מה צריך לכלול בתקציב העסקה לפני חישוב אישי עם חשב שכר',
     href: '/self-employed/employer-cost',
     available: true,
   },
   {
+    stage: 'growth',
     title: 'חברה בע"מ vs עוסק מורשה',
     description: 'שיקולים לבחירת מבנה העסק לפי הנתונים האישיים',
     href: '/self-employed/corporation-vs-individual',
     available: true,
   },
   {
+    stage: 'growth',
     title: 'דיבידנד vs משכורת',
     description: 'מה לבדוק לפני בחירה בדרך למשיכת כסף מחברה',
     href: '/self-employed/dividend-vs-salary',
     available: true,
   },
+];
+
+const stages = [
+  { id: 'start', title: 'פתיחת עסק ובחירת מסלול', description: 'עוד לפני העסקה הראשונה: בוחרים מעמד, מכינים מסמכים ומתכננים את עלויות הפתיחה.' },
+  { id: 'daily', title: 'חשבוניות, הוצאות וקבלת תשלום', description: 'ניהול העבודה השוטפת: איזה מסמך להפיק, איך לתעד הוצאות ומה לשלוח ללקוח שמבקש אישורים.' },
+  { id: 'tax', title: 'מסים, ביטוח לאומי וסוף השנה', description: 'אוספים נתונים לבדיקת חיובים והפקדות, בלי לבלבל בין מחזור, רווח והכסף שנשאר בבנק.' },
+  { id: 'growth', title: 'תמחור, תזרים וצמיחת העסק', description: 'מתקדמים מתכנון ההכנסה לניהול כספים, העסקת עובדים ובדיקת מבנה העסק.' },
 ];
 
 export default function SelfEmployedPage() {
@@ -144,8 +182,20 @@ export default function SelfEmployedPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4">
-          {calculators.map((calc) =>
+        <nav aria-label="מדריכים לפי שלב בעסק" className="mb-10 flex flex-wrap gap-3">
+          {stages.map((stage) => (
+            <a key={stage.id} href={`#${stage.id}`} className="border border-ink/20 bg-paper px-4 py-3 text-sm text-ink underline-offset-4 hover:underline">
+              {stage.title}
+            </a>
+          ))}
+        </nav>
+
+        {stages.map((stage) => (
+          <section key={stage.id} id={stage.id} aria-labelledby={`${stage.id}-heading`} className="mb-12 scroll-mt-40">
+            <h2 id={`${stage.id}-heading`} className="mb-2 text-2xl font-bold text-ink">{stage.title}</h2>
+            <p className="mb-5 text-ink/70">{stage.description}</p>
+            <div className="grid md:grid-cols-2 gap-4">
+          {calculators.filter((calc) => calc.stage === stage.id).map((calc) =>
             calc.available ? (
               <Link
                 key={calc.href}
@@ -177,7 +227,9 @@ export default function SelfEmployedPage() {
               </div>
             )
           )}
-        </div>
+            </div>
+          </section>
+        ))}
 
         {/* כלים מתקדמים לניהול העסק (B2B) */}
         <section className="mt-14">

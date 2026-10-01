@@ -101,11 +101,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed/mandatory-pension', 'monthly', 0.90, new Date('2026-09-28')),
     make('/self-employed/corporation-vs-individual', 'monthly', 0.90, new Date('2026-09-28')),
     make('/self-employed/dividend-vs-salary', 'monthly', 0.90, new Date('2026-09-28')),
-    make('/self-employed/allowed-expenses', 'monthly', 0.9, FRESH_2026_06_12),
+    make('/self-employed/allowed-expenses', 'monthly', 0.9, new Date('2026-10-01')),
     make('/self-employed/vat-threshold', 'monthly', 0.9, new Date('2026-10-01')),
-    make('/self-employed/invoices', 'monthly', 0.9, FRESH_2026_06_12),
+    make('/self-employed/invoices', 'monthly', 0.9, new Date('2026-10-01')),
+    make('/self-employed/withholding-tax', 'monthly', 0.85, new Date('2026-10-01')),
     make('/self-employed/business-setup-cost', 'monthly', 0.9, FRESH_2026_06_12),
-    make('/self-employed/employee-and-self-employed', 'monthly', 0.9, FRESH_2026_06_12),
+    make('/self-employed/employee-and-self-employed', 'monthly', 0.9, new Date('2026-10-01')),
 
     // ===== מחשבונים: נדל"ן =====
     make('/real-estate/mortgage', 'weekly', 0.95),

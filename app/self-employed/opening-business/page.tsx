@@ -666,14 +666,16 @@ export default function OpeningBusinessPage() {
             </p>
             <ul>
               <li>
-                <strong>תיעוד כל הכנסה</strong> — על כל תקבול מפיקים מסמך: עוסק פטור מפיק קבלה,
-                עוסק מורשה מפיק חשבונית מס וקבלה (או חשבונית מס/קבלה משולבת). אסור לקבל כסף ״מתחת
+                <strong>תיעוד תקבולים</strong> — קבלת תשלום מחייבת תיעוד בקבלה בהתאם להוראות החלות.
+                עוסק מורשה בודק בנפרד את מועד חשבונית המס; אם כבר הופקה, אין להפיק חשבונית מס כפולה.
+                מסמך משולב מתאים כשהמועדים חופפים. אסור לקבל כסף ״מתחת
                 לשולחן״ — גם לא סכומים קטנים. פירוט מלא של סוגי המסמכים ומתי מפיקים כל אחד —{' '}
                 <Link href="/self-employed/invoices">במדריך החשבוניות</Link>.
               </li>
               <li>
                 <strong>תיעוד הוצאות</strong> — שמרו מסמך מתאים עבור כל הוצאה עסקית. הזכאות לניכוי
                 במס הכנסה או לקיזוז מע״מ נבדקת בנפרד לפי ההוצאה והמסמך; לא כל רכישה מזכה בשניהם.
+                {' '}ראו <Link href="/self-employed/allowed-expenses">מדריך הוצאות מוכרות לעצמאי</Link>.
               </li>
               <li>
                 <strong>הפקה דיגיטלית</strong> — אם בוחרים מערכת להפקת מסמכים, ודאו שהיא מתאימה
@@ -684,6 +686,11 @@ export default function OpeningBusinessPage() {
                 הגשת הדוח, לצורך ביקורת עתידית אפשרית של רשות המסים.
               </li>
             </ul>
+            <p>
+              לקוח עסקי עשוי לבקש אישורים עוד לפני התשלום הראשון. אלה אינם אישורי פתיחת התיק:
+              בדקו בנפרד <Link href="/self-employed/withholding-tax">אישור ניכוי מס במקור ואישור ניהול ספרים</Link>,
+              את תוקפם ואת התנאים הרשומים בהם.
+            </p>
             <h3>לוח זמנים ריאלי: מהחלטה לעסק פעיל</h3>
             <p>
               זמן הטיפול תלוי במסלול ובבדיקת הבקשה, ולכן אין לבנות על מספר ימים קבוע. הכינו מראש
@@ -879,7 +886,7 @@ export default function OpeningBusinessPage() {
             <ul className="space-y-2 text-sm text-ink/80 leading-relaxed">
               <li>☐ בדיקת מקדמות מס הכנסה לפי ההכנסה בפועל (<Link href="/self-employed/tax-advances" className="text-gold hover:underline">מדריך מקדמות</Link>)</li>
               <li>☐ בדיקת מקדמות ביטוח לאומי (<Link href="/self-employed/social-security" className="text-gold hover:underline">מדריך ב״ל לעצמאי</Link>)</li>
-              <li>☐ פתיחת קופת פנסיה — חובת הפקדה לעצמאים</li>
+              <li>☐ בדיקת <Link href="/self-employed/mandatory-pension" className="text-gold hover:underline">חובת ההפקדה לפנסיה</Link> והפקדות קיימות, לרבות כשיש גם משכורת</li>
               <li>☐ שמירת כל קבלה והוצאה עסקית מסודרת</li>
               <li>☐ הפרשה חודשית בצד למס, ב״ל ופנסיה — לפני שמושכים כסף הביתה (<Link href="/self-employed/business-finance" className="text-gold hover:underline">מדריך ההתנהלות הפיננסית</Link>)</li>
               <li>☐ מעקב רבעוני אחרי המחזור מול תקרת עוסק פטור (<Link href="/self-employed/vat-threshold" className="text-gold hover:underline">מדריך התקרה</Link>)</li>
@@ -901,6 +908,8 @@ export default function OpeningBusinessPage() {
               { href: '/self-employed/corporation-vs-individual', label: 'חברה בע"מ מול עוסק' },
               { href: '/self-employed/business-setup-cost', label: 'כמה עולה לפתוח עסק?' },
               { href: '/self-employed/invoices', label: 'חשבונית מס מול קבלה — המדריך' },
+              { href: '/self-employed/withholding-tax', label: 'אישור ניכוי מס במקור וניהול ספרים' },
+              { href: '/self-employed/employee-and-self-employed', label: 'שכיר ועצמאי במקביל' },
               { href: '/self-employed/business-finance', label: 'התנהלות פיננסית לעצמאים' },
             ].map((c) => (
               <Link

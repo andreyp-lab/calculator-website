@@ -139,6 +139,40 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Opt-in long-form guide typography. Direct children keep tables, navigation,
+   and independently styled callouts unchanged. No typography plugin required. */
+.guide-copy {
+  line-height: 1.85;
+}
+.guide-copy > h2 {
+  margin-block: 2.5rem 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.guide-copy > h3 {
+  margin-block: 1.75rem 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.guide-copy > p,
+.guide-copy > ul,
+.guide-copy > ol {
+  margin-block: 1rem;
+}
+.guide-copy > ul,
+.guide-copy > ol {
+  padding-inline-start: 1.5rem;
+}
+.guide-copy > ul { list-style: disc; }
+.guide-copy > ol { list-style: decimal; }
+.guide-copy > :is(ul, ol) > li { margin-block: 0.5rem; }
+.guide-copy > :is(p, ul, ol) a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
