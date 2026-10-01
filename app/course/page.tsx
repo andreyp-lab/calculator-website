@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { CourseSchema } from '@/components/seo/CourseSchema';
@@ -301,9 +302,13 @@ export default function CoursePage() {
         {/* About the instructor */}
         <section className="bg-ink text-cream p-6 sm:p-8 mb-10">
           <div className="flex flex-col sm:flex-row items-start gap-5">
-            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center bg-gold text-2xl font-bold text-paper">
-              א
-            </div>
+            <Image
+              src="/images/andrey-platonov.jpg"
+              alt="אנדרי פלטונוב"
+              width={64}
+              height={64}
+              className="h-16 w-16 flex-shrink-0 object-cover object-top"
+            />
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h2 className="text-xl font-bold">אנדרי פלטונוב</h2>

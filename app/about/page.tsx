@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const SITE_URL = 'https://cheshbonai.co.il';
 
 export const metadata = {
@@ -51,9 +53,13 @@ export default function About() {
         {/* כרטיס מנחה */}
         <div className="bg-ink p-8 mb-8 text-cream">
           <div className="flex items-start gap-5">
-            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center bg-gold text-2xl font-black text-ink">
-              א
-            </div>
+            <Image
+              src="/images/andrey-platonov.jpg"
+              alt="אנדרי פלטונוב"
+              width={64}
+              height={64}
+              className="h-16 w-16 flex-shrink-0 object-cover object-top"
+            />
             <div>
               <h2 className="text-2xl font-bold">אנדרי פלטונוב</h2>
               <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-gold-light">

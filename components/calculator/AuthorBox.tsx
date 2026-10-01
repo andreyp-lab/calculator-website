@@ -1,4 +1,5 @@
 import { BadgeCheck } from 'lucide-react';
+import Image from 'next/image';
 
 interface AuthorBoxProps {
   name?: string;
@@ -16,9 +17,13 @@ export function AuthorBox({
   return (
     <div className="bg-paper border border-ink/15 p-6">
       <div className="flex items-start gap-4">
-        <div className="w-16 h-16 bg-gold flex items-center justify-center text-cream text-2xl font-serif font-bold flex-shrink-0">
-          {name.charAt(0)}
-        </div>
+        <Image
+          src="/images/andrey-platonov.jpg"
+          alt={name}
+          width={64}
+          height={64}
+          className="h-16 w-16 flex-shrink-0 object-cover object-top"
+        />
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
             {/* לא כותרת: ה-AuthorBox משובץ בעומקי מסמך שונים, ו-h4 ללא h3 שקדם לו

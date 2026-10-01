@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { AllCalculatorsGrid } from '@/components/home/AllCalculatorsGrid';
 import { HeroSalaryCalc } from '@/components/home/HeroSalaryCalc';
@@ -292,9 +293,13 @@ export default function Home() {
 
           {/* שורת מנחה */}
           <div className="mt-12 flex flex-col items-center gap-4 border-t border-cream/15 pt-10 sm:flex-row sm:items-center sm:justify-center sm:gap-5 sm:text-start">
-            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center border border-gold-light/40 font-serif text-lg font-black text-gold-light">
-              AP
-            </div>
+            <Image
+              src="/images/andrey-platonov.jpg"
+              alt="אנדרי פלטונוב"
+              width={56}
+              height={56}
+              className="h-14 w-14 flex-shrink-0 border border-gold-light/40 object-cover object-top"
+            />
             <div className="text-center sm:text-start">
               <p className="font-bold text-cream">
                 אנדרי פלטונוב — רו״ח &amp; סמנכ״ל כספים
