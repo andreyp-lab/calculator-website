@@ -9,7 +9,6 @@ import {
   GraduationCap,
   ShieldCheck,
   Clock,
-  Star,
   BadgeCheck,
 } from 'lucide-react';
 
@@ -138,8 +137,6 @@ const SCHOOL_FACTS = [
   { icon: ShieldCheck, label: 'פרטי גישה ורכישה בכל דף קורס' },
 ];
 
-const TRUST_BAND = ['שיעורים מוקלטים', '3 קורסים', 'לימוד בקצב אישי'];
-
 const PERSONAS = [
   {
     title: 'עצמאי חדש',
@@ -164,7 +161,7 @@ const FAQ_ITEMS = [
   {
     question: 'לכמה זמן יש לי גישה לקורס?',
     answer:
-      'בדפי הקורסים מצוינת גישה ללא הגבלת זמן. בדקו בכל דף קורס מה כלול ברכישה ובעדכוני התוכן.',
+      'בדקו את משך הגישה ואת תנאי עדכון התוכן בדף ההרשמה של הקורס שבחרתם לפני התשלום.',
   },
   {
     question: 'צריך ידע מוקדם בחשבונאות או במספרים?',
@@ -174,7 +171,7 @@ const FAQ_ITEMS = [
   {
     question: 'איך נרשמים ומתחילים?',
     answer:
-      'נכנסים לעמוד הקורס דרך כפתור "לפרטי הקורס" ובודקים שם את אופן הרכישה, הגישה לשיעורים ותנאי הקורס.',
+      'בוחרים קורס, צופים בסילבוס ובשיעור לדוגמה אם הוא זמין, ואז ממשיכים לדף ההרשמה דרך כפתור הרכישה. שם מוצגים פרטי התשלום והגישה.',
   },
   {
     question: 'מי מעביר את הקורסים?',
@@ -186,7 +183,7 @@ const FAQ_ITEMS = [
 export default function CoursePage() {
   return (
     <div className="bg-cream">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Breadcrumbs items={[{ label: 'דף הבית', href: '/' }, { label: 'הקורסים' }]} />
         </div>
@@ -197,28 +194,15 @@ export default function CoursePage() {
             {'// בית הספר הפיננסי לעצמאים ובעלי עסקים · בהדרכת רו״ח אנדרי פלטונוב'}
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
-            בית הספר הפיננסי FinSchool
+            איזה קורס פיננסי מתאים לכם?
           </h1>
           <p className="text-base sm:text-lg text-cream/70 leading-relaxed max-w-2xl mb-6">
-            קורסים על מסים לעצמאים, ניהול כספים בעסק ועבודה עם Claude AI.
-            בחרו מסלול לפי הנושא שאתם רוצים ללמוד, ועיינו בתוכן ובתנאים של כל קורס.
+            מתחילים כעצמאים? התחילו עם מע״מ, מס הכנסה וביטוח לאומי. מנהלים עסק?
+            למדו תזרים, תקציב ואשראי. עובדים בכספים? עיינו בקורס Claude AI.
           </p>
-
-          {/* רצועת אמון */}
-          <ul className="flex flex-wrap gap-x-3 gap-y-2 mb-6">
-            {TRUST_BAND.map((item) => (
-              <li
-                key={item}
-                className="inline-flex items-center gap-2 border border-cream/15 px-4 py-1.5 text-sm text-cream/85"
-              >
-                <CheckCircle2
-                  className="w-4 h-4 text-gold-light flex-shrink-0"
-                  aria-hidden="true"
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <a href="#courses" className="mb-7 inline-block bg-gold px-6 py-3 text-sm font-bold text-paper transition hover:bg-gold-2">
+            השוו בין הקורסים ↓
+          </a>
 
           <ul className="grid gap-2 sm:grid-cols-3">
             {SCHOOL_FACTS.map(({ icon: Icon, label }) => (
@@ -231,7 +215,7 @@ export default function CoursePage() {
         </section>
 
         {/* Courses */}
-        <section className="mb-10">
+        <section id="courses" className="mb-10 scroll-mt-24">
           <h2 className="text-2xl font-bold text-ink mb-2">שלושת הקורסים של FinSchool</h2>
           <p className="text-ink/70 mb-6">
             בחרו את הקורס שמתאים לשלב שבו אתם נמצאים — מעצמאי שמתחיל ועד איש כספים מנוסה.
@@ -254,11 +238,6 @@ export default function CoursePage() {
                     <span className="inline-block border border-gold/40 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-gold">
                       {course.badge}
                     </span>
-                    {course.featured && (
-                      <span className="inline-flex items-center gap-1 bg-gold px-3 py-1 text-xs font-bold text-paper">
-                        <Star className="w-3 h-3" aria-hidden="true" /> הכי פופולרי לעצמאים
-                      </span>
-                    )}
                   </div>
 
                   <h3 className="text-xl font-bold text-ink mb-1 leading-snug">{course.name}</h3>
@@ -290,7 +269,7 @@ export default function CoursePage() {
                       {...(course.internal ? {} : { target: '_blank', rel: 'noopener' })}
                       className="block w-full bg-gold px-6 py-3 text-center text-sm font-bold text-paper transition hover:bg-gold-2"
                     >
-                      לפרטי הקורס ←
+                      {course.internal ? 'לסילבוס ולשיעור לדוגמה ←' : 'לפרטי הקורס ←'}
                     </a>
                   </div>
                 </article>
@@ -375,8 +354,8 @@ export default function CoursePage() {
 
         {/* Disclaimer — mandatory */}
         <section className="border border-ink/15 bg-cream-2 p-4 text-xs text-ink/70 leading-relaxed text-center">
-          המידע באתר אינו מהווה ייעוץ פיננסי ואינו מחליף התייעצות עם רו״ח מוסמך. הרכישה
-          וההתחייבות הן מול FinSchool.
+          המידע באתר אינו מהווה ייעוץ פיננסי ואינו מחליף התייעצות עם רו״ח מוסמך.
+          בדקו את פרטי הרכישה והתנאים בדף ההרשמה של הקורס שבחרתם.
         </section>
       </div>
 
