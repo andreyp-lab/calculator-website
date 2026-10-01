@@ -4,21 +4,31 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
 import { DisclaimerBox } from '@/components/calculator/DisclaimerBox';
 import { CourseCTA } from '@/components/marketing/CourseCTA';
+import { VAT_2026 } from '@/lib/constants/tax-2026';
 
 const PAGE_PATH = '/self-employed/opening-business';
 const SITE_URL = 'https://cheshbonai.co.il';
+const VAT_THRESHOLD = VAT_2026.smallBusinessThreshold.toLocaleString('he-IL');
+const VAT_RATE_PERCENT = `${VAT_2026.standard * 100}%`;
+const VAT_EXAMPLE_BASE = 10_000;
+const VAT_EXAMPLE_TAX = VAT_EXAMPLE_BASE * VAT_2026.standard;
+const VAT_EXAMPLE_TOTAL = VAT_EXAMPLE_BASE + VAT_EXAMPLE_TAX;
+const EXEMPT_REGISTRATION = 'https://www.gov.il/he/service/request-open-exempt-dealer-via-internet';
+const LICENSED_REGISTRATION = 'https://www.gov.il/he/service/vat-821';
+const NATIONAL_INSURANCE_REGISTRATION =
+  'https://www.btl.gov.il/Insurance/National%20Insurance/type_list/Self_Employed/Pages/howtoregister.aspx';
 
 export const metadata: Metadata = {
-  title: { absolute: 'איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או מורשה? המדריך המלא' },
+  title: { absolute: 'פתיחת עסק עצמאי ב-2026: עוסק פטור או מורשה' },
   description:
-    'איך פותחים עסק עצמאי בישראל ב-2026: עוסק פטור מול מורשה מול חברה בע"מ, תקרת 122,833 ₪, מע"מ 18%, רישום מול הרשויות, עלויות וצ\'קליסט. מדריך מרו"ח.',
+    'איך לפתוח עוסק פטור או עוסק מורשה ב-2026: בחירת סיווג, מסמכים, רישום במע״מ, מס הכנסה וביטוח לאומי, תקרת המחזור וצ׳קליסט מעשי.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
-    title: 'איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או מורשה? המדריך המלא',
+    title: 'פתיחת עסק עצמאי ב-2026: עוסק פטור או מורשה',
     description:
-      'איך פותחים עסק עצמאי בישראל ב-2026: עוסק פטור מול עוסק מורשה מול חברה בע"מ, תקרת 122,833 ₪, מע"מ, רישום מול הרשויות, עלויות וטעויות נפוצות.',
+      'מדריך מעשי לפתיחת עוסק פטור או מורשה: איך לבחור סיווג, אילו מסמכים להכין ואיך להירשם ברשויות.',
     type: 'article',
     locale: 'he_IL',
   },
@@ -37,13 +47,12 @@ const faqItems = [
   },
   {
     question: 'מהי תקרת עוסק פטור ב-2026?',
-    answer:
-      'תקרת המחזור לעוסק פטור ב-2026 היא 122,833 ₪ לשנה. אם המחזור עובר את הסכום הזה — חובה לעבור לעוסק מורשה. התקרה מתעדכנת מדי שנה לפי מדד המחירים לצרכן.',
+    answer: `תקרת מחזור העסקאות הצפוי לפתיחת עוסק פטור ב-2026 היא ${VAT_THRESHOLD} ₪. התקרה מתייחסת למחזור העסקאות ולא לרווח לאחר הוצאות. אם המחזור בפועל גבוה מהסכום הקובע, יש לפנות למשרד מע״מ האזורי לשינוי הסיווג.`,
   },
   {
     question: 'איך פותחים עסק בישראל?',
     answer:
-      'נרשמים במע״מ ובמס הכנסה, ובודקים את המעמד בביטוח הלאומי. בשירות המקוון לפתיחת עוסק פטור, פרטי הבקשה עשויים לעבור אוטומטית לביטוח הלאומי אם נדרש פתיחת תיק. לעוסק מורשה יש מסלול רישום נפרד ברשות המסים.',
+      'בוחרים סיווג מתאים, נרשמים במע״מ ובמס הכנסה ומסדירים את המעמד בביטוח הלאומי. בשירות המקוון לפתיחת עוסק פטור מזינים נתונים שלפיהם נקבע אם צריך לפתוח גם תיק בביטוח הלאומי; אם כן, הבקשה מועברת אליו אוטומטית. לעוסק מורשה יש מסלול רישום נפרד ברשות המסים.',
   },
   {
     question: 'האם כדאי להיות עוסק פטור?',
@@ -71,12 +80,11 @@ export default function OpeningBusinessPage() {
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או מורשה? המדריך המלא',
-    description:
-      'מדריך מעשי לפתיחת עסק עצמאי בישראל 2026: עוסק פטור מול מורשה מול חברה בע"מ, תקרת 122,833 ₪, מע"מ, רישום מול הרשויות, עלויות וצ\'קליסט.',
+    headline: 'פתיחת עסק עצמאי בישראל ב-2026 — עוסק פטור או עוסק מורשה',
+    description: `מדריך מעשי לפתיחת עסק עצמאי בישראל ב-2026: עוסק פטור מול מורשה, תקרת ${VAT_THRESHOLD} ₪, רישום מול הרשויות וצ׳קליסט.`,
     inLanguage: 'he-IL',
     datePublished: '2026-06-01',
-    dateModified: '2026-09-29',
+    dateModified: '2026-10-01',
     author: { '@type': 'Person', name: 'אנדרי פלטונוב', jobTitle: 'רואה חשבון' },
     publisher: {
       '@type': 'Organization',
@@ -129,12 +137,12 @@ export default function OpeningBusinessPage() {
             המדריך המלא לעצמאים · 2026
           </p>
           <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
-            איך לפתוח עסק עצמאי בישראל 2026 — עוסק פטור או עוסק מורשה?
+            פתיחת עסק עצמאי בישראל ב-2026 — עוסק פטור או עוסק מורשה?
           </h1>
           <p className="text-lg text-ink/70 leading-relaxed">
-            פותחים עסק עצמאי בישראל? המדריך המלא לבחירה בין עוסק פטור, עוסק מורשה וחברה בע"מ,
-            רישום מול הרשויות צעד אחר צעד, תקרת 122,833 ₪, מע"מ 18%, עלויות הפתיחה, צ'קליסט
-            פעולות והטעויות שכדאי לחסוך כבר בהתחלה.
+            רוצים לפתוח עוסק פטור או עוסק מורשה? כאן תמצאו את ההחלטה שצריך לקבל לפני ההגשה,
+            את המסמכים והקישורים הרשמיים, את סדר הרישום במע״מ, במס הכנסה ובביטוח הלאומי,
+            וצ׳קליסט מסודר ליום שאחרי הפתיחה.
           </p>
           <p className="text-sm text-ink/70 mt-3">
             נכתב על ידי אנדרי פלטונוב, רו"ח · עודכן ל-2026
@@ -145,18 +153,53 @@ export default function OpeningBusinessPage() {
         <div className="border border-ink/15 bg-cream-2 p-5 mb-8">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">בקצרה</p>
           <p className="text-ink/80 leading-relaxed text-sm">
-            בפתיחת עסק יש לבדוק רישום במע״מ, במס הכנסה ובביטוח הלאומי. בקשת הרישום המקוונת
-            לעוסק פטור ברשות המסים כוללת פתיחת תיק במע״מ ובמס הכנסה; במקרים אחרים מסלול
-            הרישום שונה. בדקו בשירותי הרשויות את אופן הרישום לפי סוג הפעילות. אחת ההחלטות היא הסיווג:{' '}
-            <strong>עוסק פטור</strong> (מחזור עד 122,833 ₪ בשנה, בלי גביית מע"מ, מינימום בירוקרטיה)
-            או <strong>עוסק מורשה</strong> (גובה מע״מ בעסקאות החייבות, בודק זכאות לניכוי תשומות
-            ומדווח לפי תקופת הדיווח שנקבעה לו).
-            בחירת חברה בע"מ דורשת בדיקה נפרדת של מסים, עלויות, משיכות ואחריות משפטית.
+            לפני שממלאים טופס, בדקו שני תנאי סף: האם מחזור העסקאות השנתי הצפוי גבוה מ-
+            <strong>{VAT_THRESHOLD} ₪</strong>, והאם סוג העיסוק מחייב רישום כעוסק מורשה. אם לא,
+            אפשר לבחון עוסק פטור מול מורשה לפי סוג הלקוחות, המחיר וההוצאות. לאחר הבחירה מסדירים
+            מע״מ, מס הכנסה וביטוח לאומי; חברה בע״מ היא החלטת התאגדות נפרדת.
           </p>
         </div>
 
+        <section className="mb-10" aria-labelledby="choose-opening-route">
+          <h2 id="choose-opening-route" className="text-2xl font-bold text-ink mb-4">
+            לאיזה מסלול הגעתם?
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div className="border border-ink/15 bg-cream-2 p-5">
+              <h3 className="font-bold text-ink mb-2">פתיחת עוסק פטור</h3>
+              <p className="text-sm leading-relaxed text-ink/70 mb-3">
+                המחזור הצפוי עד התקרה והעיסוק אינו מחייב עוסק מורשה? בדקו את תנאי השירות והגישו
+                בקשה מקוונת לפתיחת תיק במע״מ ובמס הכנסה.
+              </p>
+              <a href={EXEMPT_REGISTRATION} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-gold underline">
+                לשירות הרשמי ברשות המסים ↗
+              </a>
+            </div>
+            <div className="border border-ink/15 bg-cream-2 p-5">
+              <h3 className="font-bold text-ink mb-2">פתיחת עוסק מורשה</h3>
+              <p className="text-sm leading-relaxed text-ink/70 mb-3">
+                המחזור צפוי לעבור את התקרה או שהעיסוק נכלל בתקנה 13? עברו למסלול טופס 821 והכינו
+                את המסמכים המפורטים בדף השירות.
+              </p>
+              <a href={LICENSED_REGISTRATION} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-gold underline">
+                לטופס 821 ולהוראות ההגשה ↗
+              </a>
+            </div>
+            <div className="border border-ink/15 bg-cream-2 p-5">
+              <h3 className="font-bold text-ink mb-2">עדיין לא בטוחים</h3>
+              <p className="text-sm leading-relaxed text-ink/70 mb-3">
+                התחילו מתקרת המחזור ומהמקצוע, ואז השוו את השפעת המע״מ על מחיר המכירה, התשומות
+                וההתנהלות השוטפת.
+              </p>
+              <Link href="/compare/osek-patur-vs-murshe" className="text-sm font-semibold text-gold underline">
+                להשוואת עוסק פטור מול מורשה ←
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
-          <h2>3 הצעדים לפתיחת עסק בישראל</h2>
+          <h2>שלושת הרישומים שצריך להסדיר</h2>
           <ol>
             <li>
               <strong>פתיחת תיק במע"מ</strong> — בחירת סיווג: עוסק פטור או עוסק מורשה. זהו הצעד
@@ -168,40 +211,46 @@ export default function OpeningBusinessPage() {
             </li>
             <li>
               <strong>בדיקת מעמד בביטוח הלאומי</strong> — החיוב והזכויות תלויים בהיקף העבודה,
-              בהכנסה ובמעמד שנקבע. בפתיחת עוסק פטור מקוונת ייתכן שמידע הדרוש לפתיחת תיק יועבר
-              לרשות אוטומטית.
+              בהכנסה ובמעמד שנקבע. בתהליך הדיגיטלי אפשר לבקש גם פתיחת תיק בביטוח הלאומי;
+              אם כבר נפתח תיק ברשות המסים, משתמשים במסלול הדיווח של הביטוח הלאומי.
             </li>
           </ol>
           <p>
             בדקו את אופן הרישום בכל מסלול באתר הרשות המתאימה. בהמשך המדריך — פירוט של כל
-            שלב, כולל טפסים, מסמכים וזמני טיפול. לפני כן, נעצור בהחלטה שמשפיעה על כל ההתנהלות
+            שלב, כולל טפסים ומסמכים. לפני כן, נעצור בהחלטה שמשפיעה על כל ההתנהלות
             הכספית שלכם: <strong>איזה סוג עוסק להיות</strong>.
           </p>
 
           <h2>עוסק פטור — למי זה מתאים?</h2>
           <p>
-            <strong>עוסק פטור</strong> הוא עסק קטן שמחזורו השנתי אינו עולה על{' '}
-            <strong>122,833 ₪ (2026)</strong>. היתרון: אינו גובה מע"מ ואינו מדווח מע"מ שוטף —
-            פחות בירוקרטיה. החיסרון: אינו יכול לקזז מע"מ תשומות על הוצאות, ולקוחות עסקיים אינם
-            יכולים לקזז ממנו מע"מ.
+            <strong>עוסק פטור</strong> הוא סיווג במע״מ לעוסק שמחזור העסקאות הצפוי שלו אינו עולה על{' '}
+            <strong>{VAT_THRESHOLD} ₪ (2026)</strong> ושעיסוקו אינו מחייב רישום כעוסק מורשה.
+            הוא אינו גובה מע״מ בעסקאותיו, אינו מגיש דוחות מע״מ תקופתיים ואינו מנכה מס תשומות;
+            במקום זאת הוא מגיש הצהרת מחזור שנתית.
           </p>
           <p>
             חשוב להבין: "פטור" מתייחס <strong>רק למע"מ</strong>. עוסק פטור עדיין משלם מס הכנסה
             ודמי ביטוח לפי הכנסתו ומעמדו. סוג הדיווח למס הכנסה תלוי בסוג התיק ובנסיבות.
           </p>
           <p>
-            שימו לב שהתקרה נמדדת לפי <strong>מחזור</strong> (סך ההכנסות), לא לפי רווח. עסק עם
-            מחזור של 130,000 ₪ ורווח של 40,000 ₪ — כבר מעבר לתקרה וחייב במעבר לעוסק מורשה. אם
+            שימו לב שהתקרה נמדדת לפי <strong>מחזור העסקאות</strong>, לא לפי רווח. עסק עם
+            מחזור של 130,000 ₪ ורווח של 40,000 ₪ — כבר מעבר לתקרה, ולכן יש לפנות למע״מ לשינוי
+            הסיווג. אם
             אתם מתקרבים לתקרה, מומלץ להיערך מראש —{' '}
             <Link href="/self-employed/vat-threshold">מדריך תקרת עוסק פטור</Link> מסביר כיצד
             להשוות את המחזור לתקרה ולהיערך לבדיקת הסיווג.
           </p>
+          <p>
+            רוצים השוואה ממוקדת לפני ההחלטה? עברו ל
+            <Link href="/compare/osek-patur-vs-murshe">עוסק פטור מול עוסק מורשה</Link>, כולל
+            שאלות שכדאי להביא לרואה החשבון.
+          </p>
 
           <h2>עוסק מורשה — למי זה מתאים?</h2>
           <p>
-            <strong>עוסק מורשה</strong> גובה מע"מ בשיעור <strong>18%</strong> מלקוחותיו, מעביר
+            <strong>עוסק מורשה</strong> גובה מע"מ בשיעור <strong>{VAT_RATE_PERCENT}</strong> מלקוחותיו, מעביר
             אותו לרשות המסים, ועשוי לנכות מע״מ תשומות על הוצאות לפי תנאי הדין. הוא מדווח למע״מ
-            לפי תקופת הדיווח שנקבעה לו. עוסק מורשה נדרש כאשר המחזור עובר 122,833 ₪, וגם במקצועות מסוימים
+            לפי תקופת הדיווח שנקבעה לו. עוסק מורשה נדרש כאשר המחזור עובר {VAT_THRESHOLD} ₪, וגם במקצועות מסוימים
             ללא קשר למחזור.
           </p>
           <p>
@@ -210,9 +259,9 @@ export default function OpeningBusinessPage() {
             תלויה במחיר הכולל שמסכימים עליו ובסוג הלקוחות.
           </p>
           <p>
-            <strong>דוגמה מספרית:</strong> נניח ששני מעצבים גובים 10,000 ₪ על פרויקט. העוסק הפטור
-            מפיק קבלה על 10,000 ₪ — זה המחיר הסופי. העוסק המורשה מפיק חשבונית מס על 10,000 ₪ בתוספת
-            מע"מ 18%, כלומר 11,800 ₪. לקוח <strong>פרטי</strong> ישלם למורשה 1,800 ₪ יותר על אותה
+            <strong>דוגמה מספרית:</strong> נניח ששני מעצבים גובים {VAT_EXAMPLE_BASE.toLocaleString('he-IL')} ₪ על פרויקט. העוסק הפטור
+            מפיק קבלה על {VAT_EXAMPLE_BASE.toLocaleString('he-IL')} ₪ — זה המחיר הסופי. העוסק המורשה מפיק חשבונית מס על אותו בסיס בתוספת
+            מע"מ {VAT_RATE_PERCENT}, כלומר {VAT_EXAMPLE_TOTAL.toLocaleString('he-IL')} ₪. לקוח <strong>פרטי</strong> ישלם למורשה {VAT_EXAMPLE_TAX.toLocaleString('he-IL')} ₪ יותר על אותה
             עבודה רק אם שני בעלי העסק קובעים אותו מחיר בסיס. לקוח <strong>עסקי</strong> עשוי לנכות
             את מע"מ התשומות אם מתקיימים כל התנאים, אך אין בכך קיזוז אוטומטי בכל עסקה. זהות
             הלקוחות היא שיקול אחד לצד מחיר, סוג העסקאות וההוצאות. לחישוב החשבוני —{' '}
@@ -254,27 +303,27 @@ export default function OpeningBusinessPage() {
             <tbody className="text-ink/70">
               <tr>
                 <td className="p-3 border-b border-ink/15 font-medium">תקרת מחזור</td>
-                <td className="p-3 border-b border-ink/15">עד 122,833 ₪/שנה</td>
+                <td className="p-3 border-b border-ink/15">עד {VAT_THRESHOLD} ₪/שנה</td>
                 <td className="p-3 border-b border-ink/15">ללא הגבלה</td>
                 <td className="p-3 border-b border-ink/15">ללא הגבלה</td>
               </tr>
               <tr className="bg-cream-2/50">
                 <td className="p-3 border-b border-ink/15 font-medium">גביית מע"מ</td>
                 <td className="p-3 border-b border-ink/15">לא גובה</td>
-                <td className="p-3 border-b border-ink/15">גובה 18%</td>
-                <td className="p-3 border-b border-ink/15">גובה 18%</td>
+                <td className="p-3 border-b border-ink/15">גובה {VAT_RATE_PERCENT}</td>
+                <td className="p-3 border-b border-ink/15">גובה {VAT_RATE_PERCENT}</td>
               </tr>
               <tr>
                 <td className="p-3 border-b border-ink/15 font-medium">קיזוז מע"מ תשומות</td>
                 <td className="p-3 border-b border-ink/15">לא</td>
-                <td className="p-3 border-b border-ink/15">כן</td>
-                <td className="p-3 border-b border-ink/15">כן</td>
+                <td className="p-3 border-b border-ink/15">בכפוף לכללי הניכוי</td>
+                <td className="p-3 border-b border-ink/15">בכפוף לכללי הניכוי</td>
               </tr>
               <tr className="bg-cream-2/50">
                 <td className="p-3 border-b border-ink/15 font-medium">דיווח מע"מ</td>
-                <td className="p-3 border-b border-ink/15">הצהרה שנתית בלבד</td>
-                <td className="p-3 border-b border-ink/15">חודשי / דו-חודשי</td>
-                <td className="p-3 border-b border-ink/15">חודשי / דו-חודשי</td>
+                <td className="p-3 border-b border-ink/15">הצהרת מחזור שנתית למע״מ</td>
+                <td className="p-3 border-b border-ink/15">לפי תקופת הדיווח שנקבעה</td>
+                <td className="p-3 border-b border-ink/15">לפי תקופת הדיווח שנקבעה</td>
               </tr>
               <tr>
                 <td className="p-3 border-b border-ink/15 font-medium">מיסוי הרווח</td>
@@ -324,7 +373,7 @@ export default function OpeningBusinessPage() {
                 עוסק פטור כדאי כאשר…
               </p>
               <ul className="space-y-2 text-sm text-ink/70 leading-relaxed">
-                <li>✦ המחזור הצפוי נמוך בבירור מ-122,833 ₪ בשנה — למשל עבודה צדדית לצד משרה כשכיר.</li>
+                <li>✦ המחזור הצפוי נמוך בבירור מ-{VAT_THRESHOLD} ₪ בשנה, והעיסוק אינו מחייב מורשה.</li>
                 <li>✦ הלקוחות הם בעיקר <strong>אנשים פרטיים</strong> — בדקו כיצד סיווג המע״מ משפיע על המחיר הסופי שתוכלו להציע.</li>
                 <li>✦ ההוצאות העסקיות קטנות — אין הרבה מע"מ תשומות "להפסיד".</li>
                 <li>✦ אתם רוצים מינימום בירוקרטיה: בלי דיווחי מע"מ שוטפים, רק הצהרה שנתית.</li>
@@ -337,7 +386,7 @@ export default function OpeningBusinessPage() {
               <ul className="space-y-2 text-sm text-ink/70 leading-relaxed">
                 <li>✦ רוב הלקוחות הם <strong>עסקים</strong> — חלקם עשויים להיות זכאים לנכות מע״מ תשומות לפי תנאי העסקה.</li>
                 <li>✦ יש השקעה ראשונית גדולה — בדקו בנפרד אם המע״מ על כל רכישה ניתן לניכוי.</li>
-                <li>✦ המחזור צפוי לעבור את התקרה תוך שנה-שנתיים — מעבר באמצע שנה מסורבל יותר מפתיחה נכונה מראש.</li>
+                <li>✦ המחזור צפוי לעבור את התקרה כבר בשנת הפתיחה — כדאי לברר מראש את הסיווג הנכון.</li>
                 <li>✦ המקצוע שלכם מחייב עוסק מורשה על פי דין (למשל עו"ד, רופא, רו"ח, אדריכל).</li>
               </ul>
             </div>
@@ -353,11 +402,11 @@ export default function OpeningBusinessPage() {
         </section>
 
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
-          <h2>מתי כדאי לעבור מעוסק פטור למורשה?</h2>
+          <h2>מתי חייבים לעבור למורשה, ומתי רק כדאי לבדוק?</h2>
           <ul>
-            <li>המחזור השנתי מתקרב או עובר את <strong>122,833 ₪</strong> (אז המעבר חובה).</li>
-            <li>רוב הלקוחות הם <strong>עסקים</strong> שזקוקים לחשבונית מס לצורך קיזוז.</li>
-            <li>יש <strong>הוצאות גדולות עם מע"מ</strong> (ציוד, שכירות, רכב) שכדאי לקזז.</li>
+            <li><strong>חובה לבדוק שינוי סיווג</strong> כשהמחזור בפועל גבוה מהסכום הקובע או כשהפעילות משתנה לעיסוק המחייב מורשה.</li>
+            <li><strong>שיקול מסחרי</strong> כשלקוחות עסקיים מבקשים חשבונית מס — אך עצם הבקשה שלהם אינה מחליפה את תנאי הדין.</li>
+            <li><strong>שיקול כלכלי</strong> כשיש רכישות עם מע״מ — לאחר שבודקים אם מס התשומות אכן ניתן לניכוי ומה תהיה ההשפעה על מחיר המכירה.</li>
           </ul>
           <p>
             המעבר עצמו נעשה מול רשות המסים בעדכון סיווג התיק. מרגע המעבר, מתחילים להפיק חשבוניות
@@ -387,7 +436,8 @@ export default function OpeningBusinessPage() {
           <ul>
             <li>
               <strong>הרישום זהה</strong> — פותחים תיק מע"מ, מס הכנסה וביטוח לאומי בדיוק כמו עצמאי
-              "מלא". ברוב המקרים עבודה צדדית מתחילה כעוסק פטור, כי המחזור נמוך מהתקרה.
+              "מלא". עבודה צדדית אינה הופכת את העסק אוטומטית לעוסק פטור; בודקים את המחזור הצפוי
+              ואת סוג העיסוק כמו בכל פעילות אחרת.
             </li>
             <li>
               <strong>מס הכנסה מחושב על סך ההכנסות</strong> — השכר מהמשרה וההכנסה מהעסק מצטרפים
@@ -415,8 +465,8 @@ export default function OpeningBusinessPage() {
         <section className="mb-10">
           <h2 className="text-2xl font-bold text-ink mb-4">כמה עולה לפתוח עסק עצמאי?</h2>
           <p className="text-ink/70 leading-relaxed mb-4">
-            החדשות הטובות: <strong>הרישום עצמו חינם</strong>. פתיחת תיק במע"מ, במס הכנסה ובביטוח
-            לאומי אינה כרוכה באגרות. העלויות האמיתיות של פתיחת עסק הן עקיפות, והן משתנות מאוד
+            שירותי רשות המסים לפתיחת עוסק פטור ועוסק מורשה ניתנים ללא עלות. לצד הרישום עשויות
+            להיות עלויות של ליווי, ציוד, תוכנה, ביטוחים, רישוי ענפי והיערכות תזרימית — והן משתנות
             מעסק לעסק:
           </p>
           <ul className="space-y-2 text-ink/70 leading-relaxed mb-5 list-disc pr-6">
@@ -477,7 +527,12 @@ export default function OpeningBusinessPage() {
                       </tr>
                       <tr className="border-b border-ink/15">
                         <td className="p-3 font-medium text-ink/70">איך</td>
-                        <td className="p-3">לעוסק פטור — שירות מקוון הכולל גם פתיחת תיק מס הכנסה; לעוסק מורשה — בדקו את שירות טופס 821</td>
+                        <td className="p-3">
+                          לעוסק פטור —{' '}
+                          <a href={EXEMPT_REGISTRATION} target="_blank" rel="noopener noreferrer">שירות מקוון</a>{' '}
+                          הכולל גם פתיחת תיק מס הכנסה; לעוסק מורשה —{' '}
+                          <a href={LICENSED_REGISTRATION} target="_blank" rel="noopener noreferrer">שירות טופס 821</a>
+                        </td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
                         <td className="p-3 font-medium text-ink/70">עלות</td>
@@ -491,8 +546,8 @@ export default function OpeningBusinessPage() {
                   </table>
                 </div>
                 <p className="text-sm text-ink/70 mt-3">
-                  כאן תבחרו: <strong>עוסק פטור</strong> (מחזור עד 122,833 ₪) או <strong>עוסק מורשה</strong>.
-                  ברגע שאתם מורשים — מתחייבים בדיווח מע"מ חודשי/דו-חודשי.
+                  כאן תבחרו: <strong>עוסק פטור</strong> (מחזור עד {VAT_THRESHOLD} ₪ ובכפוף לסוג
+                  העיסוק) או <strong>עוסק מורשה</strong>. עוסק מורשה מדווח לפי תקופת הדיווח שנקבעה לתיק.
                 </p>
               </div>
             </div>
@@ -533,8 +588,8 @@ export default function OpeningBusinessPage() {
                   </table>
                 </div>
                 <p className="text-sm text-ink/70 mt-3">
-                  לאחר הפתיחה, פקיד השומה יקבע <strong>מקדמות מס</strong> חודשיות. חשוב לכייל את המקדמות
-                  לפי ההכנסה הצפויה. פער בין המקדמות לחיוב השנתי עשוי ליצור יתרה לתשלום או החזר.
+                  לאחר הפתיחה עשויות להיקבע <strong>מקדמות מס</strong> לפי נתוני התיק. חשוב להשוות אותן
+                  להכנסה הצפויה. פער בין המקדמות לחיוב השנתי עשוי ליצור יתרה לתשלום או החזר.
                   לבדיקת הנתונים ודרך בקשת שינוי ראו את{' '}
                   <Link href="/self-employed/tax-advances" className="text-gold hover:underline">
                     מדריך מקדמות המס
@@ -558,15 +613,15 @@ export default function OpeningBusinessPage() {
                     <tbody className="text-ink/70">
                       <tr className="border-b border-ink/15">
                         <td className="p-3 font-medium text-ink/70 w-32">טופס</td>
-                        <td className="p-3 font-semibold">טופס בל/6101 — דין וחשבון רב שנתי (מהדורה 03.2026)</td>
+                        <td className="p-3 font-semibold">תהליך משולב בעת פתיחת התיק ברשות המסים, או דין וחשבון רב-שנתי אם התיק ברשות המסים כבר נפתח</td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
                         <td className="p-3 font-medium text-ink/70">מסמכים</td>
-                        <td className="p-3">תעודת זהות · אישורי פתיחת תיק מע"מ ומס הכנסה · פרטי חשבון בנק לחיוב</td>
+                        <td className="p-3">פרטים אישיים, היקף העבודה וההכנסה הצפויים, ומסמכים נוספים לפי מסלול השירות</td>
                       </tr>
                       <tr className="border-b border-ink/15">
                         <td className="p-3 font-medium text-ink/70">איך</td>
-                        <td className="p-3">אונליין דרך אתר ביטוח לאומי (btl.gov.il) או בסניף הקרוב</td>
+                        <td className="p-3"><a href={NATIONAL_INSURANCE_REGISTRATION} target="_blank" rel="noopener noreferrer">לפי הוראות פתיחת תיק עצמאי באתר הביטוח הלאומי</a></td>
                       </tr>
                       <tr className="border-b border-ink/15 bg-cream-2/50">
                         <td className="p-3 font-medium text-ink/70">עלות</td>
@@ -594,7 +649,9 @@ export default function OpeningBusinessPage() {
           {/* Summary notice */}
           <div className="bg-amber-50 border border-amber-200 p-4 mt-2">
             <p className="text-sm text-amber-800 leading-relaxed">
-              <strong>טיפ מעשי:</strong> ניתן לפתוח את שלושת התיקים באותו שבוע. אם עובדים עם רואה חשבון — רוב המשרדים מבצעים את הפתיחה במלואה. אם מטפלים לבד, כדאי להיעזר בשער הממשלתי המאוחד.
+              <strong>טיפ מעשי:</strong> שמרו את אישורי ההגשה והפתיחה מכל רשות, ואל תניחו שהגשה
+              למערכת אחת השלימה אוטומטית את כל הרישומים. בדקו באזור האישי או מול הרשות שהתיק
+              אכן נפתח ושנתוני ההכנסה והיקף העבודה נקלטו נכון.
             </p>
           </div>
         </section>
@@ -619,9 +676,8 @@ export default function OpeningBusinessPage() {
                 במס הכנסה או לקיזוז מע״מ נבדקת בנפרד לפי ההוצאה והמסמך; לא כל רכישה מזכה בשניהם.
               </li>
               <li>
-                <strong>הפקה דיגיטלית</strong> — תוכנות הנהלת החשבונות והחשבוניות בענן הפכו את
-                התיעוד לפשוט: המסמכים ממוספרים אוטומטית, נשמרים בענן וזמינים לדוח השנתי. לרוב
-                העצמאים החדשים זו הדרך המומלצת מהיום הראשון.
+                <strong>הפקה דיגיטלית</strong> — אם בוחרים מערכת להפקת מסמכים, ודאו שהיא מתאימה
+                לסוג העוסק ולמסמכים שעליכם להפיק, ושמרו גיבוי וגישה לנתונים.
               </li>
               <li>
                 <strong>שמירת מסמכים לאורך שנים</strong> — את ספרי העסק והמסמכים יש לשמור גם אחרי
@@ -630,11 +686,10 @@ export default function OpeningBusinessPage() {
             </ul>
             <h3>לוח זמנים ריאלי: מהחלטה לעסק פעיל</h3>
             <p>
-              בניגוד לתדמית, הבירוקרטיה של פתיחת עסק בישראל קצרה: את פתיחת תיק המע"מ אפשר להשלים
-              אונליין תוך זמן קצר, ואת שלושת הרישומים — בתוך שבוע. מה שלוקח זמן הוא דווקא ההכנה
-              שלפני: הגדרת השירות והתמחור, בדיקת כדאיות הסיווג, פתיחת חשבון בנק נפרד ובחירת תוכנת
-              חשבוניות. ההמלצה המעשית: הקדישו שבוע-שבועיים לתכנון עם המחשבונים באתר (תמחור, נטו,
-              עלויות פתיחה), ורק אז גשו לרישומים — סדר הפעולות המלא מחכה לכם בצ'קליסט שבהמשך העמוד.
+              זמן הטיפול תלוי במסלול ובבדיקת הבקשה, ולכן אין לבנות על מספר ימים קבוע. הכינו מראש
+              את תיאור הפעילות, המחזור הצפוי, תאריך תחילת הפעילות, אישור ניהול חשבון והסכם שכירות
+              או מסמכים נוספים אם הם נדרשים בדף השירות. במקביל הגדירו תמחור, אופן הפקת מסמכים
+              ומעקב תזרים. סדר הפעולות המלא מחכה בצ'קליסט שבהמשך העמוד.
             </p>
           </div>
         </section>
@@ -645,66 +700,13 @@ export default function OpeningBusinessPage() {
           <div className="prose prose-lg max-w-none text-ink leading-relaxed">
             <h3>מס הכנסה — מדרגות, מקדמות ודוח שנתי</h3>
             <p>
-              עצמאי משלם מס הכנסה על ה<strong>רווח</strong> (הכנסות פחות הוצאות מוכרות) לפי מדרגות
-              המס האישיות — מ-10% על החלק הראשון של ההכנסה (עד 7,010 ₪/חודש ב-2026) ועד 50% בהכנסות
-              הגבוהות ביותר (כולל מס יסף 3%). כל תושב ישראל נהנה מנקודות זיכוי — 2.25 נקודות בסיס
-              (ואישה מקבלת 0.5 נוספת), כשכל נקודה שווה 242 ₪ הפחתת מס בחודש. במהלך השנה משלמים{' '}
-              <Link href="/self-employed/tax-advances">מקדמות מס</Link> חודשיות או דו-חודשיות,
+              מס הכנסה לעצמאי נבדק לפי ההכנסה החייבת השנתית, המדרגות, נקודות הזיכוי והנתונים
+              האישיים — לא לפי סיווג פטור או מורשה במע״מ. במהלך השנה עשויות להידרש{' '}
+              <Link href="/self-employed/tax-advances">מקדמות מס</Link>,
               ובסוף שנת המס בודקים את חובת הדיווח לפי סוג התיק. מי שאושר במסלול בעל עסק זעיר
-              ועומד בתנאיו עשוי להגיש דיווח מקוצר במקום דוח שנתי רגיל.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto my-6 not-prose">
-            <table className="w-full text-sm border border-ink/15 overflow-hidden">
-              <thead className="bg-cream-2">
-                <tr className="text-right">
-                  <th className="p-3 font-bold text-ink border-b border-ink/15">מדרגה</th>
-                  <th className="p-3 font-bold text-ink border-b border-ink/15">הכנסה חודשית (רווח)</th>
-                  <th className="p-3 font-bold text-gold border-b border-ink/15">שיעור המס</th>
-                </tr>
-              </thead>
-              <tbody className="text-ink/70">
-                <tr>
-                  <td className="p-3 border-b border-ink/15">1</td>
-                  <td className="p-3 border-b border-ink/15">עד 7,010 ₪</td>
-                  <td className="p-3 border-b border-ink/15 font-semibold">10%</td>
-                </tr>
-                <tr className="bg-cream-2/50">
-                  <td className="p-3 border-b border-ink/15">2</td>
-                  <td className="p-3 border-b border-ink/15">7,011–10,060 ₪</td>
-                  <td className="p-3 border-b border-ink/15 font-semibold">14%</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-ink/15">3</td>
-                  <td className="p-3 border-b border-ink/15">10,061–19,000 ₪</td>
-                  <td className="p-3 border-b border-ink/15 font-semibold">20%</td>
-                </tr>
-                <tr className="bg-cream-2/50">
-                  <td className="p-3 border-b border-ink/15">4</td>
-                  <td className="p-3 border-b border-ink/15">19,001–25,100 ₪</td>
-                  <td className="p-3 border-b border-ink/15 font-semibold">31%</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-ink/15">5</td>
-                  <td className="p-3 border-b border-ink/15">25,101–46,690 ₪</td>
-                  <td className="p-3 border-b border-ink/15 font-semibold">35%</td>
-                </tr>
-                <tr className="bg-cream-2/50">
-                  <td className="p-3 border-b border-ink/15">6</td>
-                  <td className="p-3 border-b border-ink/15">46,691–60,130 ₪</td>
-                  <td className="p-3 border-b border-ink/15 font-semibold">47%</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border-b border-ink/15">7</td>
-                  <td className="p-3 border-b border-ink/15">מעל 60,130 ₪</td>
-                  <td className="p-3 border-b border-ink/15 font-semibold">50% (כולל מס יסף 3%)</td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="text-xs text-ink/70 mt-2">
-              מדרגות מס 2026 להכנסה מיגיעה אישית. ב-2026 הורחבו מדרגות ה-20% וה-31% במסגרת "ריווח
-              מדרגות המס". המס מחושב באופן מדורג — כל מדרגה חלה רק על חלק ההכנסה שבתחומה.
+              ועומד בתנאיו עשוי להגיש דיווח מקוצר במקום דוח שנתי רגיל. לחישוב מדרגות עדכני עברו
+              ל<Link href="/personal-tax/income-tax">מחשבון מס הכנסה</Link> במקום להסתמך על מספר
+              כללי בתוך מדריך הפתיחה.
             </p>
           </div>
 
@@ -756,7 +758,7 @@ export default function OpeningBusinessPage() {
 
         {/* Persona examples */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold text-ink mb-4">שלוש דוגמאות מהשטח: איזה מסלול מתאים למי?</h2>
+          <h2 className="text-2xl font-bold text-ink mb-4">שלושה תרחישים להמחשת הבחירה</h2>
           <p className="text-ink/70 leading-relaxed mb-5">
             התיאוריה ברורה — אבל הכי קל להבין את ההחלטה דרך מקרים טיפוסיים. שימו לב: אלו דוגמאות
             להמחשת שיקולים, לא תחליף לבדיקה פרטנית של המספרים שלכם.
@@ -812,9 +814,8 @@ export default function OpeningBusinessPage() {
           <h2>הטעויות הנפוצות של עצמאים חדשים</h2>
           <ul>
             <li>
-              <strong>בחירת סיווג שגוי בהתחלה</strong> — פתיחת עוסק פטור כשרוב הלקוחות עסקיים, או
-              מורשה כשעסק קטן היה מסתדר בלי דיווחי מע"מ. התוצאה: תשלום מע"מ מיותר או החמצת קיזוז
-              תשומות.
+              <strong>בחירת סיווג לפי כלל אצבע בלבד</strong> — סוג הלקוחות והיקף ההוצאות הם שיקולים,
+              אבל קודם בודקים את התקרה ואת סוג העיסוק, ורק אחר כך את מחיר המכירה וניכוי התשומות.
             </li>
             <li>
               <strong>אי-ניצול הוצאות מוכרות</strong> — בלי קבלות ותיעוד, הרווח החייב במס גבוה
@@ -829,8 +830,8 @@ export default function OpeningBusinessPage() {
               חיוב רטרואקטיבי, וחמור מכך: פגיעה בעבודה לפני הרישום עלולה לפגוע בזכאות לגמלה.
             </li>
             <li>
-              <strong>ערבוב בין חשבון בנק פרטי לעסקי</strong> — מקשה על מעקב, על הדוח השנתי ועל
-              כל ביקורת עתידית.
+              <strong>ערבוב בין תנועות פרטיות לעסקיות</strong> — מקשה על מעקב, על הדוח השנתי ועל
+              כל ביקורת עתידית. הגדירו דרך ברורה להפרדה ולתיעוד.
             </li>
             <li>
               <strong>אי-הפרשה שוטפת למס ולפנסיה</strong> — עצמאי מקבל ברוטו ושוכח שחלק מהכסף
@@ -843,7 +844,7 @@ export default function OpeningBusinessPage() {
               מחיר עם לקוח ראשון.
             </li>
             <li>
-              <strong>התעלמות מתקרת עוסק פטור</strong> — אם המחזור צפוי לחצות את תקרת 122,833 ₪,
+              <strong>התעלמות מתקרת עוסק פטור</strong> — אם המחזור צפוי לחצות את תקרת {VAT_THRESHOLD} ₪,
               בדקו בהקדם עם רשות המסים כיצד לעדכן את הסיווג ומהן חובות הדיווח והמע״מ.
             </li>
           </ul>
@@ -858,10 +859,10 @@ export default function OpeningBusinessPage() {
             </p>
             <ul className="space-y-2 text-sm text-ink/80 leading-relaxed mb-6">
               <li>☐ הגדרתם מה העסק מוכר, למי, ובאיזה מחיר (היעזרו ב<Link href="/self-employed/hourly-rate" className="text-gold hover:underline">כלי לתכנון יעד הכנסה לשעת חיוב</Link>)</li>
-              <li>☐ אמדתם את המחזור השנתי הצפוי — מעל או מתחת ל-122,833 ₪?</li>
+              <li>☐ אמדתם את מחזור העסקאות השנתי הצפוי — מעל או מתחת ל-{VAT_THRESHOLD} ₪?</li>
               <li>☐ בחרתם סיווג: עוסק פטור / עוסק מורשה (או חברה בע"מ)</li>
               <li>☐ תקצבתם את עלויות הפתיחה (<Link href="/self-employed/business-setup-cost" className="text-gold hover:underline">מדריך רכיבי העלות</Link>)</li>
-              <li>☐ פתחתם חשבון בנק נפרד לפעילות העסקית</li>
+              <li>☐ הגדרתם דרך להפריד ולתעד את תנועות העסק</li>
             </ul>
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-4">
               שבוע הפתיחה
@@ -869,7 +870,7 @@ export default function OpeningBusinessPage() {
             <ul className="space-y-2 text-sm text-ink/80 leading-relaxed mb-6">
               <li>☐ בדיקת מסלול הרישום במע״מ: בקשה מקוונת לעוסק פטור או טופס 821 לעוסק מורשה</li>
               <li>☐ וידוא פתיחת תיק מס הכנסה במסלול המתאים; הבקשה המקוונת לעוסק פטור כוללת גם אותו</li>
-              <li>☐ רישום כעצמאי בביטוח לאומי — טופס בל/6101</li>
+              <li>☐ וידוא רישום בביטוח הלאומי במסלול המשולב או בדין וחשבון רב-שנתי, לפי המקרה</li>
               <li>☐ הסדרת תוכנה להפקת חשבוניות/קבלות (<Link href="/self-employed/invoices" className="text-gold hover:underline">איזה מסמך מפיקים למי?</Link>)</li>
             </ul>
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-4">
@@ -936,11 +937,11 @@ export default function OpeningBusinessPage() {
         <section className="mb-8 text-sm leading-relaxed">
           <h2 className="mb-3 text-lg font-bold">מקורות רשמיים לבדיקת הסיווג והדיווח</h2>
           <ul className="list-disc space-y-2 pr-5">
-            <li><a href="https://www.gov.il/he/service/request-open-exempt-dealer-via-internet" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — פתיחת תיק עוסק פטור ותנאי הרישום</a></li>
-            <li><a href="https://www.gov.il/he/service/vat-821" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — פתיחת תיק עוסק מורשה</a></li>
+            <li><a href={EXEMPT_REGISTRATION} target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — פתיחת תיק עוסק פטור ותנאי הרישום</a></li>
+            <li><a href={LICENSED_REGISTRATION} target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — פתיחת תיק עוסק מורשה</a></li>
             <li><a href="https://www.gov.il/he/service/itc5329" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — טופס 5329 לפתיחת תיק עצמאי</a></li>
             <li><a href="https://www.gov.il/he/service/report-and-payment-for-micro-business-owner" target="_blank" rel="noopener noreferrer" className="text-gold underline">רשות המסים — דיווח מקוצר לבעל עסק זעיר</a></li>
-            <li><a href="https://www.btl.gov.il/Insurance/National%20Insurance/type_list/Self_Employed/Pages/rates.aspx" target="_blank" rel="noopener noreferrer" className="text-gold underline">הביטוח הלאומי — שיעורי דמי ביטוח לעצמאי</a></li>
+            <li><a href={NATIONAL_INSURANCE_REGISTRATION} target="_blank" rel="noopener noreferrer" className="text-gold underline">הביטוח הלאומי — פתיחת תיק עצמאי והמסלול המשולב</a></li>
           </ul>
         </section>
 
