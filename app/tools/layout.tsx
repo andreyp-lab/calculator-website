@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { ToolsProvider } from '@/lib/tools/ToolsContext';
+import { CourseCTA } from '@/components/marketing/CourseCTA';
 import {
   LayoutDashboard,
   TrendingUp,
@@ -161,6 +162,10 @@ export default function ToolsLayout({ children }: { children: ReactNode }) {
 
         {/* Tool Content */}
         <main className="max-w-7xl mx-auto px-4 py-6">{children}</main>
+
+        <div className="mx-auto max-w-4xl px-4">
+          <CourseCTA suppressIfPromoted />
+        </div>
       </div>
     </ToolsProvider>
   );

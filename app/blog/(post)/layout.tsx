@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { BlogBreadcrumbs } from '@/components/blog/BlogBreadcrumbs';
 import { BlogArticleSchema } from '@/components/blog/BlogArticleSchema';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
+import { CourseCTA } from '@/components/marketing/CourseCTA';
 
 export default function BlogPostLayout({ children }: { children: ReactNode }) {
   return (
@@ -24,6 +25,8 @@ export default function BlogPostLayout({ children }: { children: ReactNode }) {
         >
           {children}
         </div>
+
+        <CourseCTA suppressIfPromoted />
 
         <div className="mt-12 pt-8 border-t border-ink/15">
           <AuthorBox />
