@@ -45,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== Hubs קטגוריות =====
     make('/salaried', 'weekly', 0.95),
     make('/salaried/payslip-guide', 'monthly', 0.9), // מדריך קריאת תלוש (pillar)
-    make('/self-employed', 'weekly', 0.95),
+    make('/self-employed', 'weekly', 0.95, new Date('2026-10-01')),
     make('/loans', 'weekly', 0.95),
     make('/topics', 'weekly', 0.85),
     make('/guides', 'weekly', 0.85),
@@ -89,7 +89,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/work-grant/retroactive', 'monthly', 0.85, new Date('2026-07-30')),
 
     // ===== מחשבונים: עצמאיים =====
-    make('/self-employed/opening-business', 'monthly', 0.92, new Date('2026-07-01')), // מדריך פתיחת עסק (pillar, הורחב 7.2026)
+    make('/self-employed/opening-business', 'monthly', 0.92, new Date('2026-10-01')), // רענון מדריך הרישום והקישוריות
     make('/self-employed/business-finance', 'monthly', 0.92, new Date('2026-07-01')), // מדריך ניהול כספים לעסק קטן (pillar חדש)
     make('/self-employed/year-end-tax-simulator', 'weekly', 0.95),
     make('/self-employed/net', 'weekly', 0.95),
@@ -102,7 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed/corporation-vs-individual', 'monthly', 0.90, new Date('2026-09-28')),
     make('/self-employed/dividend-vs-salary', 'monthly', 0.90, new Date('2026-09-28')),
     make('/self-employed/allowed-expenses', 'monthly', 0.9, FRESH_2026_06_12),
-    make('/self-employed/vat-threshold', 'monthly', 0.9, FRESH_2026_06_12),
+    make('/self-employed/vat-threshold', 'monthly', 0.9, new Date('2026-10-01')),
     make('/self-employed/invoices', 'monthly', 0.9, FRESH_2026_06_12),
     make('/self-employed/business-setup-cost', 'monthly', 0.9, FRESH_2026_06_12),
     make('/self-employed/employee-and-self-employed', 'monthly', 0.9, FRESH_2026_06_12),
@@ -162,7 +162,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogEntries, // 44 פוסטי בלוג מתוך registry
 
     // ===== דפי השוואה =====
-    make('/compare', 'monthly', 0.75),
+    make('/compare', 'monthly', 0.75, new Date('2026-10-01')),
     make('/compare/osek-patur-vs-murshe', 'monthly', 0.85, new Date('2026-10-01')),
     make('/compare/employee-vs-self-employed', 'monthly', 0.85, new Date('2026-09-28')),
     make('/compare/rent-vs-buy', 'monthly', 0.85),
