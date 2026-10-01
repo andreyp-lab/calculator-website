@@ -4,10 +4,12 @@ import { AuthorBox } from '@/components/calculator/AuthorBox';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { DisclaimerBox } from '@/components/calculator/DisclaimerBox';
 import { CourseCTA } from '@/components/marketing/CourseCTA';
+import { VAT_2026 } from '@/lib/constants/tax-2026';
 
 const PAGE_PATH = '/compare/osek-patur-vs-murshe';
 const SITE_URL = 'https://cheshbonai.co.il';
 const LAST_UPDATED = '1 באוקטובר 2026';
+const VAT_THRESHOLD = VAT_2026.smallBusinessThreshold.toLocaleString('he-IL');
 
 const sources = {
   exemptRegistration: 'https://www.gov.il/he/service/request-open-exempt-dealer-via-internet',
@@ -52,13 +54,18 @@ const comparisonRows = [
   },
   {
     topic: 'מחזור עסקאות',
-    exempt: 'אפשרי רק כשהמחזור עומד בתקרה התקפה וביתר תנאי הרישום.',
+    exempt: `עד ${VAT_THRESHOLD} ₪ בשנת 2026, ובכפוף לסוג העיסוק וליתר תנאי הרישום.`,
     authorized: 'אינו כפוף לתקרת עוסק פטור; עשוי להיות חובה בגלל המחזור או סוג העיסוק.',
   },
   {
     topic: 'מע״מ מהלקוחות',
     exempt: 'לא גובה מע״מ על עסקאותיו כעוסק פטור.',
     authorized: 'גובה מע״מ בעסקאות חייבות בהתאם לדין.',
+  },
+  {
+    topic: 'חשבונית מס וקבלה',
+    exempt: 'אינו מוציא חשבונית מס. מוציא קבלה על תקבול ומסמכים נוספים לפי חובותיו.',
+    authorized: 'מוציא חשבונית מס וקבלה בהתאם לעסקה, למועד החיוב ולמועד קבלת התשלום.',
   },
   {
     topic: 'מס תשומות על רכישות',
@@ -228,6 +235,12 @@ export default function OsekPaturVsMurshePage() {
             פטור תלויה בתקרת המחזור התקפה ובסוג העיסוק — יש מקצועות שחייבים עוסק מורשה גם במחזור
             נמוך.{' '}
             <SourceRef href={sources.exemptRegistration}>תנאי הרישום ברשות המסים</SourceRef>
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-ink/70">
+            לתקרת {VAT_THRESHOLD} ₪ ב־2026 ולצעדים במקרה של חריגה ראו את{' '}
+            <Link href="/self-employed/vat-threshold" className="text-gold underline underline-offset-4">
+              מדריך תקרת עוסק פטור
+            </Link>.
           </p>
         </section>
 
@@ -468,6 +481,14 @@ export default function OsekPaturVsMurshePage() {
             <Link href="/self-employed/vat-threshold" className="group border border-ink/15 bg-paper p-5 transition hover:bg-paper-hover hover:shadow-sm">
               <span className="block font-bold text-ink transition group-hover:text-gold">תקרת עוסק פטור</span>
               <span className="mt-1 block text-sm leading-relaxed text-ink/60">הסכום המעודכן ומעקב אחר המחזור</span>
+            </Link>
+            <Link href="/self-employed/invoices" className="group border border-ink/15 bg-paper p-5 transition hover:bg-paper-hover hover:shadow-sm">
+              <span className="block font-bold text-ink transition group-hover:text-gold">חשבונית מס, חשבונית עסקה וקבלה</span>
+              <span className="mt-1 block text-sm leading-relaxed text-ink/60">איזה מסמך מפיקים ומתי</span>
+            </Link>
+            <Link href="/self-employed/allowed-expenses" className="group border border-ink/15 bg-paper p-5 transition hover:bg-paper-hover hover:shadow-sm">
+              <span className="block font-bold text-ink transition group-hover:text-gold">הוצאות מוכרות לעצמאי</span>
+              <span className="mt-1 block text-sm leading-relaxed text-ink/60">בדיקת הוצאה לצורכי מס הכנסה בנפרד מניכוי מע״מ</span>
             </Link>
           </div>
         </section>
