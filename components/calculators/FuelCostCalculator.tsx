@@ -65,7 +65,7 @@ export function FuelCostCalculator() {
             >
               {(Object.keys(FUEL_LABELS) as FuelType[]).map((type) => (
                 <option key={type} value={type}>
-                  {FUEL_LABELS[type]} ({FUEL_PRICES_2026[type]} ₪/{type === 'electric' ? 'קוט"ש' : 'ל'}{type === 'gasoline_95' ? ', מחיר שפורסם בספטמבר 2026' : ', הנחת דוגמה'})
+                  {FUEL_LABELS[type]} ({FUEL_PRICES_2026[type]} ₪/{type === 'electric' ? 'קוט"ש' : 'ל'}{type === 'gasoline_95' ? ', מחיר מרבי מאוקטובר 2026' : ', הנחת דוגמה'})
                 </option>
               ))}
             </select>
@@ -113,9 +113,9 @@ export function FuelCostCalculator() {
           </div>
 
           <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
-            <p className="text-xs text-ink/70 mb-2 font-medium">מחיר בנזין 95 שפורסם בספטמבר 2026, ושאר ערכי דוגמה הניתנים לשינוי:</p>
+            <p className="text-xs text-ink/70 mb-2 font-medium">מחיר בנזין 95 המרבי מאוקטובר 2026, ושאר ערכי דוגמה הניתנים לשינוי:</p>
             <div className="grid grid-cols-2 gap-1 text-xs">
-              <div>בנזין 95: {FUEL_PRICES_2026.gasoline_95} ₪/ל׳ (7.9.2026)</div>
+              <div>בנזין 95: {FUEL_PRICES_2026.gasoline_95} ₪/ל׳ (מ־1.10.2026)</div>
               <div>בנזין 98: {FUEL_PRICES_2026.gasoline_98} ₪/ל׳ (דוגמה)</div>
               <div>סולר: {FUEL_PRICES_2026.diesel} ₪/ל׳ (דוגמה)</div>
               <div>חשמל: {FUEL_PRICES_2026.electric} ₪/קוט״ש (דוגמה)</div>

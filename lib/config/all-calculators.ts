@@ -308,9 +308,9 @@ export const allCalculators: CalculatorEntry[] = [
     href: '/savings/loan-repayment',
     category: 'חיסכון וחובות',
     categoryHref: '/savings',
-    description: 'חישוב החזרים + סילוק מואץ',
+    description: 'אומדן החזר בסיסי להלוואה בריבית קבועה ולא צמודה',
     icon: '💳',
-    keywords: ['הלוואה', 'החזר', 'סילוק מוקדם', 'ריבית', 'PMT'],
+    keywords: ['הלוואה', 'החזר', 'ריבית', 'PMT'],
   },
 
   // רכב

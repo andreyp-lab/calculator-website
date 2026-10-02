@@ -3,7 +3,7 @@
  *
  * ערכים ידניים. ISR טוען מחדש את הקובץ לאחר פריסה אך אינו מושך נתונים מהמקורות.
  *
- * תאריך אימות אחרון לערכים שאומתו: 2026-09-28
+ * תאריך אימות אחרון לערכים שאומתו: 2026-10-02
  *
  * מקורות:
  * - בנק ישראל: https://www.boi.org.il/he/economic-roles/markets/interest-rates/
@@ -56,13 +56,13 @@ export const MACRO_DATA = {
   },
 
   fuelPrices: {
-    gasoline95: 7.75,        // ₪/ליטר - מחיר מרבי 95 בשירות עצמי מ-7.9.2026
+    gasoline95: 8.27,        // ₪/ליטר - מחיר מרבי 95 בשירות עצמי מ-1.10.2026
     gasoline98: 7.85,        // ₪/ליטר - הנחת דוגמה בלבד, לא מחיר בפיקוח
     diesel: 6.95,            // ₪/ליטר - הנחת דוגמה בלבד, לא מחיר בפיקוח
     electric: 0.55,          // ₪/kWh - הנחת דוגמה בלבד
-    lastUpdated: '2026-09-07',
+    lastUpdated: '2026-10-01',
     source: 'משרד האנרגיה והתשתיות',
-    sourceUrl: 'https://www.gov.il/he/pages/fuel-september-7-2026',
+    sourceUrl: 'https://www.gov.il/BlobFolder/news/fuel-october-2026/he/fuel-october-2026.pdf',
   },
 } as const;
 

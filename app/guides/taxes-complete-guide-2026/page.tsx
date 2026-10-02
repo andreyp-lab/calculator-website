@@ -389,7 +389,7 @@ export default function TaxesCompleteGuide() {
               <div className="bg-cream-2 border border-ink/15 rounded-none p-5">
                 <h3 className="font-bold text-ink mb-3">שכיר</h3>
                 <ul className="space-y-2 text-sm text-ink/70">
-                  <li>• ב.ל. עובד: 4.27% (עד 7,703 ₪) + 12.17% (מעל)</li>
+                  <li>• ב.ל. ובריאות לעובד רגיל בגיל העבודה: 4.27% עד 7,703 ₪ ו־12.17% מעליו, עד תקרה של 51,910 ₪</li>
                   <li>• ב.ל. מעסיק: 4.51% + 7.6%</li>
                   <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
                   <li>• כל הניכויים אוטומטיים מהשכר</li>
@@ -800,7 +800,7 @@ export default function TaxesCompleteGuide() {
 
             <div className="grid md:grid-cols-2 gap-4">
               {[
-                { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו-ברוטו', desc: 'חשב שכר נטו מדויק כולל מס, ב.ל. ופנסיה.' },
+                { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו-ברוטו', desc: 'קבלו אומדן לפי מדרגות המס, ב.ל. והנחות הפנסיה המוצגות.' },
                 { href: '/personal-tax/tax-refund', label: 'מחשבון החזר מס לשכיר', desc: 'גלה אם מגיע לך החזר מס וכמה.' },
                 { href: '/personal-tax/income-tax', label: 'מחשבון מס הכנסה', desc: 'חישוב מס הכנסה מדויק לפי מדרגות 2026.' },
                 { href: '/personal-tax/tax-credits', label: 'מחשבון נקודות זיכוי', desc: 'בדוק כמה נקודות זיכוי מגיעות לך.' },

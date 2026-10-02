@@ -239,8 +239,8 @@ export default async function SalaryAmountPage({ params }: PageProps) {
                   <tr key={v.creditPoints} className="border-b border-ink/10">
                     <td className="p-3">
                       {v.creditPoints}
-                      {v.creditPoints === 2.25 && ' (רווק)'}
-                      {v.creditPoints === 2.75 && ' (רווקה)'}
+                      {v.creditPoints === 2.25 && ' (תרחיש בסיס 1)'}
+                      {v.creditPoints === 2.75 && ' (תרחיש בסיס 2)'}
                     </td>
                     <td className="p-3 text-left font-mono">{fmt(v.noPensionNet)} ₪</td>
                     <td className="p-3 text-left font-mono">{fmt(v.withPensionNet)} ₪</td>

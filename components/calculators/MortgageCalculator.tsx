@@ -19,8 +19,9 @@ export function MortgageCalculator() {
       <label className="block text-sm font-medium">סכום ההלוואה (₪)
         <input className="mt-2 w-full border border-ink/25 px-3 py-2 text-lg" type="number" min="1" step="10000" value={amount} onChange={(event) => setAmount(Number(event.target.value))} />
       </label>
-      <label className="block text-sm font-medium">ריבית שנתית לפי ההצעה (%)
+      <label className="block text-sm font-medium">ריבית שנתית נומינלית לפי ההצעה (%)
         <input className="mt-2 w-full border border-ink/25 px-3 py-2 text-lg" type="number" min="0" step="0.1" value={annualRate} onChange={(event) => setAnnualRate(Number(event.target.value))} />
+        <span className="mt-1 block text-xs font-normal text-ink/70">המנוע מחלק את הריבית הנומינלית ב־12. אין להזין ריבית אפקטיבית שנתית בלי להמיר אותה תחילה.</span>
       </label>
       <label className="block text-sm font-medium">תקופה בשנים
         <input className="mt-2 w-full border border-ink/25 px-3 py-2 text-lg" type="number" min="1" max="30" step="1" value={years} onChange={(event) => setYears(Number(event.target.value))} />

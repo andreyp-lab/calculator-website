@@ -64,12 +64,59 @@ describe('calculateSalaryNetGross', () => {
     expect(r.incomeTax).toBeLessThan(200);
   });
 
-  it('שכר גבוה (100,000 ₪) — מס הכנסה חודשי משמעותי ומדרגה שולית 50%', () => {
-    const r = calculateSalaryNetGross({ ...defaultInput, grossSalary: 100_000, pensionEnabled: false });
-    // מס חודשי: ~8,006 ₪ (אפקטיבי ~8% מהברוטו הגולמי לפני קרדיטים)
-    expect(r.incomeTax).toBeGreaterThan(7_000);
-    expect(r.incomeTax).toBeLessThan(20_000);
+  it('שכר גבוה (100,000 ₪) — מס הכנסה כולל את כל המדרגות ומס היסף', () => {
+    const r = calculateSalaryNetGross({
+      ...defaultInput,
+      grossSalary: 100_000,
+      creditPoints: 0,
+      pensionEnabled: false,
+    });
+    expect(r.incomeTax).toBeCloseTo(38_615.3, 1);
     expect(r.marginalTaxRate).toBe(50); // מעל 60,130 → 50%
+  });
+
+  it('המס רציף סביב סף מס היסף 60,130 ₪', () => {
+    const atThreshold = calculateSalaryNetGross({
+      ...defaultInput,
+      grossSalary: 60_130,
+      creditPoints: 0,
+      pensionEnabled: false,
+    });
+    const aboveThreshold = calculateSalaryNetGross({
+      ...defaultInput,
+      grossSalary: 60_131,
+      creditPoints: 0,
+      pensionEnabled: false,
+    });
+
+    expect(atThreshold.incomeTax).toBeCloseTo(18_680.3, 1);
+    expect(aboveThreshold.incomeTax).toBeCloseTo(18_680.8, 1);
+    expect(aboveThreshold.incomeTax - atThreshold.incomeTax).toBeCloseTo(0.5, 2);
+  });
+
+  it.each([
+    [7_010, 0.14],
+    [10_060, 0.20],
+    [19_000, 0.31],
+    [25_100, 0.35],
+    [46_690, 0.47],
+    [60_130, 0.50],
+  ])('המס נשאר מונוטוני ורציף מעל מדרגת %s ₪', (monthlyBoundary, nextRate) => {
+    const atBoundary = calculateSalaryNetGross({
+      ...defaultInput,
+      grossSalary: monthlyBoundary,
+      creditPoints: 0,
+      pensionEnabled: false,
+    });
+    const oneShekelAbove = calculateSalaryNetGross({
+      ...defaultInput,
+      grossSalary: monthlyBoundary + 1,
+      creditPoints: 0,
+      pensionEnabled: false,
+    });
+
+    expect(oneShekelAbove.incomeTax).toBeGreaterThan(atBoundary.incomeTax);
+    expect(oneShekelAbove.incomeTax - atBoundary.incomeTax).toBeCloseTo(nextRate, 2);
   });
 
   it('פנסיה מינימום — ניכוי 6%', () => {

@@ -12,7 +12,7 @@ import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 export type FuelType = 'gasoline_95' | 'gasoline_98' | 'diesel' | 'electric';
 
-// בנזין 95: מחיר מרבי בפיקוח מ-7.9.2026; היתר הנחות דוגמה להחלפה בקלט המשתמש
+// בנזין 95: מחיר מרבי בפיקוח מ-1.10.2026; היתר הנחות דוגמה להחלפה בקלט המשתמש
 export const FUEL_PRICES_2026: Record<FuelType, number> = {
   gasoline_95: MACRO_DATA.fuelPrices.gasoline95,
   gasoline_98: MACRO_DATA.fuelPrices.gasoline98,

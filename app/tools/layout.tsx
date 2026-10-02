@@ -93,9 +93,9 @@ const tools = [
   },
   {
     href: '/tools/loan-eligibility',
-    label: 'כושר החזר להלוואה',
+    label: 'הלוואה בערבות המדינה',
     icon: Landmark,
-    description: 'כמה אפשר לקחת ובאיזה תנאים',
+    description: 'מדריך מסלולים, תנאים והגשה באתר הקרן',
     color: 'bg-cream-2 text-ink border-ink/15',
   },
   {

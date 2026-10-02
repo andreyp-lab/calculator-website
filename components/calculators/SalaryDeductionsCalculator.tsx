@@ -70,7 +70,7 @@ export function SalaryDeductionsCalculator() {
     ...(pensionEnabled
       ? [{
           label: 'פנסיה — חלק עובד',
-          note: `${(pensionEmployeeRate * 100).toFixed(0)}% מהברוטו (מינימום לפי צו ההרחבה)`,
+          note: `תרחיש של ${(pensionEmployeeRate * 100).toFixed(0)}% מכל הברוטו שהוזן; בסיס ההפקדה בפועל עשוי להיות שונה`,
           amount: result.pensionDeduction,
           isDeduction: true,
         } satisfies Row]

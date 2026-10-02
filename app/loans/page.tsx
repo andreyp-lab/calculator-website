@@ -12,8 +12,8 @@ const tools = [
   { href: '/real-estate/mortgage', title: 'אומדן החזר משכנתא', description: 'חישוב לפי סכום, תקופה וריבית שתזינו. השוו את התוצאה לאישור העקרוני.' },
   { href: '/real-estate/mortgage-optimizer', title: 'מדריך להשוואת תמהילי משכנתא', description: 'רשימת הנתונים שצריך לבדוק בכל מסלול ובכל הצעה של בנק.' },
   { href: '/savings/personal-loan', title: 'הלוואה אישית', description: 'בדיקת החזרים והצעות מימון לפי תנאי ההלוואה.' },
-  { href: '/savings/loan-repayment', title: 'השוואת הלוואות', description: 'השוואת תשלומים לאורך התקופה והשלכות שינוי התנאים.' },
-  { href: '/tools/loan-eligibility', title: 'אומדן יכולת החזר', description: 'בחינת ההכנסה וההתחייבויות לצורכי תכנון. אישור ההלוואה נתון למלווה.' },
+  { href: '/savings/loan-repayment', title: 'אומדן החזר הלוואה', description: 'חישוב הלוואה אחת בריבית קבועה ולא צמודה, לפי הסכום, הריבית והתקופה שתזינו.' },
+  { href: '/tools/loan-eligibility', title: 'הלוואה בערבות המדינה', description: 'מדריך למסלולים, לתנאים ולמסמכים, עם הפניה לאתר הרשמי של הקרן.' },
 ];
 
 export default function LoansPage() {

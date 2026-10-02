@@ -353,7 +353,7 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     relatedCalculator: {
       href: '/vehicles/leasing-vs-buying',
-      label: 'מחשבון ליסינג vs קנייה',
+      label: 'מדריך ליסינג מול קנייה',
     },
     related: ['mortgage-tracks-guide-2026'],
   },
@@ -385,7 +385,7 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
-      label: 'אופטימייזר תמהיל משכנתא',
+      label: 'מדריך להשוואת תמהילי משכנתא',
     },
     related: ['boi-directive-329-mortgage-rules', 'mortgage-refinance-when-and-how', 'mortgage-tracks-guide-2026'],
   },
@@ -542,7 +542,7 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
-      label: 'אופטימייזר תמהיל משכנתא',
+      label: 'מדריך להשוואת תמהילי משכנתא',
     },
     related: ['purchase-tax-2026-complete-guide', 'capital-gains-tax-property-2026', 'compound-interest-and-time-magic'],
   },
@@ -610,7 +610,7 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     relatedCalculator: {
       href: '/vehicles/leasing-vs-buying',
-      label: 'מחשבון ליסינג vs קנייה',
+      label: 'מדריך ליסינג מול קנייה',
     },
     related: ['company-car-tax-2026', 'electric-vs-gasoline-car', 'vehicle-tco-guide'],
   },
@@ -640,7 +640,7 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     relatedCalculator: {
       href: '/vehicles/leasing-vs-buying',
-      label: 'מחשבון ליסינג vs קנייה',
+      label: 'מדריך ליסינג מול קנייה',
     },
     related: ['leasing-vs-buying-vs-cash-decision', 'company-car-tax-2026', 'vehicle-tco-guide'],
   },

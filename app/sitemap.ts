@@ -59,7 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate', 'weekly', 0.90),
     make('/investments', 'weekly', 0.90),
     make('/savings', 'weekly', 0.90),
-    make('/vehicles', 'weekly', 0.90, new Date('2026-07-10')), // הורחב ל-pillar (שווי שימוש/דלק/ליסינג)
+    make('/vehicles', 'weekly', 0.90, new Date('2026-10-02')), // מחיר בנזין 95 עודכן לפרסום אוקטובר
     make('/insurance', 'weekly', 0.85),
 
     // ===== מחשבונים: שכירים / מסים =====
@@ -129,7 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: רכב =====
     make('/vehicles/leasing-vs-buying', 'monthly', 0.95),
-    make('/vehicles/fuel-cost', 'monthly', 0.90),
+    make('/vehicles/fuel-cost', 'monthly', 0.90, new Date('2026-10-02')),
     make('/vehicles/company-car-benefit', 'monthly', 0.90),
 
     // ===== מחשבונים: ביטוחים =====

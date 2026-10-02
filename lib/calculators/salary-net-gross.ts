@@ -132,7 +132,10 @@ function calcIncomeTaxWithBrackets(
   let prev = 0;
   for (const b of brackets) {
     if (remaining <= 0) break;
-    const sz = (b.upTo === Infinity ? remaining : b.upTo) - prev;
+    // In the open-ended bracket, `remaining` is already the taxable amount
+    // above the previous ceiling. Subtracting `prev` again would erase most
+    // (or all) of the tax above the surtax threshold.
+    const sz = b.upTo === Infinity ? remaining : b.upTo - prev;
     const t = Math.min(remaining, sz);
     tax += t * b.rate;
     remaining -= t;

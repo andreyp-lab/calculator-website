@@ -37,9 +37,9 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-2">
                 ✦ כלי מעשי
               </p>
-              <h3 className="font-serif text-lg text-cream mb-1">רוצה לחשב בעצמך?</h3>
+              <h3 className="font-serif text-lg text-cream mb-1">רוצים להמשיך לבדיקה מעשית?</h3>
               <p className="text-sm text-cream/65 mb-4 leading-relaxed">
-                המחשבון המקצועי שלנו יבצע את החישוב במדויק לפי הנתונים שלך — בחינם.
+                עברו לכלי או למדריך הרלוונטי, בדקו את ההנחות והשוו את התוצאה למסמכים האישיים שלכם.
               </p>
               <Link
                 href={post.relatedCalculator.href}

@@ -62,7 +62,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ב',
     definition:
       'בונוס הוא תשלום נוסף לעובד מעבר לשכר הבסיס. הזכאות ואופן החישוב תלויים בחוזה, בהסכם קיבוצי ובנסיבות ההעסקה; אין מספר שנות תשלום קבוע שהופך כל בונוס אוטומטית לזכות. התשלום עשוי להיחשב הכנסת עבודה לצורכי מס וביטוח לאומי, בהתאם לסיווגו.',
-    seeAlso: [{ label: 'מחשבון בונוס', href: '/employee-rights/annual-bonus' }],
+    seeAlso: [{ label: 'מדריך לבדיקת בונוס', href: '/employee-rights/annual-bonus' }],
   },
   {
     id: 'bituach-leumi',
@@ -92,7 +92,10 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ג',
     definition:
       'יש להבחין בין גיל פרישת חובה מעבודה, גיל פרישה לקבלת קצבת אזרח ותיק בכפוף למבחן הכנסות, וגיל הזכאות לקצבה ללא מבחן הכנסות. גיל הפרישה לגברים הוא 67; גיל הפרישה לנשים תלוי בתאריך הלידה ועולה בהדרגה עד 65. גיל פרישת החובה מעבודה הוא בדרך כלל 67 לנשים ולגברים, בכפוף לחריגים.',
-    seeAlso: [{ label: 'מדריך בדיקת פנסיה', href: '/insurance/pension' }],
+    seeAlso: [
+      { label: 'מדריך בדיקת פנסיה', href: '/insurance/pension' },
+      { label: 'חוק גיל פרישה — הכנסת', href: 'https://fs.knesset.gov.il/16/law/16_lsr_300990.pdf' },
+    ],
   },
   {
     id: 'grace',
@@ -133,7 +136,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ד',
     definition:
       'תשלום בעת מחלה: יום ראשון ללא תשלום, ימים 2–3 ב-50%, מהיום 4 ב-100%. צבירה: 1.5 יום/חודש עד 90 ימים. מחייב תעודת מחלה מרופא.',
-    seeAlso: [{ label: 'מחשבון דמי מחלה', href: '/employee-rights/sick-pay' }],
+    seeAlso: [{ label: 'מדריך דמי מחלה', href: '/employee-rights/sick-pay' }],
   },
   {
     id: 'dividend',
@@ -230,7 +233,11 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ח',
     definition:
       'תקופת לידה והורות עשויה להימשך עד 26 שבועות, בהתאם לוותק ולנסיבות. דמי לידה משולמים בדרך כלל עבור 15 שבועות או 8 שבועות לפי תקופת האכשרה, וחייבים בניכויים. החלפת האם באב כפופה לתנאים.',
-    seeAlso: [{ label: 'בדיקת דמי לידה', href: '/employee-rights/maternity-benefits' }],
+    seeAlso: [
+      { label: 'בדיקת דמי לידה', href: '/employee-rights/maternity-benefits' },
+      { label: 'משרד העבודה — תקופת לידה והורות', href: 'https://www.gov.il/he/pages/workers-rights-during-maternity-leave?chapterIndex=1' },
+      { label: 'ביטוח לאומי — דמי לידה לאב', href: 'https://www.btl.gov.il/benefits/maternity/dmeLedaLaav/Pages/meshech_av.aspx' },
+    ],
   },
   // ל
   {
@@ -301,7 +308,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     definition:
       'מס שבח הוא מס על השבח החייב במכירת זכות במקרקעין. שיעור המס, דרך חישוב השבח והזכאות לפטור תלויים בסוג הנכס, בתקופות ההחזקה ובנסיבות המוכר. פטור במכירת דירת מגורים יחידה מחייב עמידה בכמה תנאים מצטברים; החזקה של 18 חודשים לבדה אינה מספיקה.',
     seeAlso: [
-      { label: 'מחשבון מס שבח', href: '/real-estate/capital-gains-tax' },
+      { label: 'מדריך לבדיקת מס שבח', href: '/real-estate/capital-gains-tax' },
       { label: 'מדריך מס שבח', href: '/blog/capital-gains-tax-property-2026' },
     ],
   },
@@ -337,7 +344,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     definition:
       'נקודות זיכוי מפחיתות את מס ההכנסה המחושב, עד גובה המס לתשלום. שווי נקודה בשנת 2026 הוא 242 ₪ לחודש או 2,904 ₪ לשנה. מספר הנקודות בגין ילדים משתנה לפי גיל הילד, זהות ההורה והמצב המשפחתי; אי אפשר להצמיד מספר אחיד לכל גילאי 1–5 או 6–17. בדקו זכאות בסימולטור רשות המסים ובתלוש השכר לפני בקשה להחזר.',
     seeAlso: [
-      { label: 'מחשבון נקודות זיכוי', href: '/personal-tax/tax-credits' },
+      { label: 'מדריך נקודות זיכוי', href: '/personal-tax/tax-credits' },
       { label: 'מאמר נקודות זיכוי', href: '/blog/tax-credit-points-2026' },
       { label: 'סימולטור רשות המסים', href: 'https://www.gov.il/he/service/tax-credit' },
     ],
@@ -350,7 +357,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
       'שכר נטו הוא הסכום שמשולם לעובד לאחר ניכויי חובה וניכויים אחרים המופיעים בתלוש. אצל עצמאי יש להבחין בין מחזור, רווח עסקי ותזרים פנוי לאחר מסים והפקדות; אין להם הגדרת ״נטו״ אחת הזהה לשכר שכיר.',
     seeAlso: [
       { label: 'מחשבון שכר נטו', href: '/personal-tax/salary-net-gross' },
-      { label: 'מחשבון נטו עצמאי', href: '/self-employed/net' },
+      { label: 'מדריך הכנסה פנויה לעצמאי', href: '/self-employed/net' },
     ],
   },
   {
@@ -371,7 +378,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     definition:
       'סעיף 14 לחוק פיצויי פיטורים מאפשר, בתנאים שנקבעו, שהפקדות המעסיק לרכיב הפיצויים יבואו במקום חבות פיצויי פיטורים בגין השכר והתקופות שכוסו. הפקדה של 8.33% עשויה לכסות את מלוא החבות לתקופה הרלוונטית, בעוד הפקדה של 6% עשויה להשאיר חובת השלמה בעת זכאות לפיצויים. הזכות לכספים שנצברו ותנאי משיכתם תלויים בדין ובהסדר החל; בדקו את ההסכם ואת נתוני ההפקדות.',
     seeAlso: [
-      { label: 'מחשבון פיצויים', href: '/employee-rights/severance' },
+      { label: 'מדריך פיצויים', href: '/employee-rights/severance' },
       { label: 'מדריך זכויות', href: '/guides/employee-rights-complete-guide' },
     ],
   },
@@ -422,7 +429,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     definition:
       'פיצויי פיטורים עשויים להגיע לעובד שפוטר לאחר שנת עבודה וכן במצבים נוספים שהדין מכיר בהם. החישוב מושפע מהשכר הקובע, מהוותק, מהיקף העבודה ומהפקדות המעסיק לרכיב הפיצויים, לרבות תחולת סעיף 14. לעניין מס, תקרת הפטור למענק פרישה בשנת 2026 היא 13,750 ₪ לכל שנת עבודה, אך הפטור האישי תלוי גם בשכר ובבחירות המס בעת הפרישה. לפני משיכה יש לבדוק את טופס 161 ואת השפעת ההחלטה על זכויות הקצבה.',
     seeAlso: [
-      { label: 'מחשבון פיצויים', href: '/employee-rights/severance' },
+      { label: 'מדריך בדיקת פיצויים', href: '/employee-rights/severance' },
       { label: 'מדריך פיצויים', href: '/blog/severance-pay-complete-guide' },
     ],
   },
@@ -536,7 +543,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ר',
     definition:
       'רצף קצבה הוא בחירה להשאיר כספי פיצויים בקופת גמל לקצבה במקום למשוך אותם כמענק פרישה. בחירה זו משנה את מועד ואופן המיסוי; הקצבה העתידית אינה פטורה ממס באופן אוטומטי. יש לבדוק את תנאי הבחירה ואת זכאות הפטור האישית לפי הנחיות רשות המסים.',
-    seeAlso: [{ label: 'מחשבון פיצויים', href: '/employee-rights/severance' }],
+    seeAlso: [{ label: 'מדריך בדיקת פיצויים', href: '/employee-rights/severance' }],
   },
   // ש
   {
@@ -553,7 +560,7 @@ export const ALL_TERMS: GlossaryTerm[] = [
     letter: 'ש',
     definition:
       'שכר המינימום הוא הרצפה החוקית לשכר עבודה בישראל, והוא זכות קוגנטית — עובד אינו יכול לוותר עליה גם בהסכמה מפורשת בחוזה. נכון ל-2026 (בתוקף מ-1.4.2026): 6,443.85 ₪ בחודש למשרה מלאה. השכר השעתי תלוי בהיקף המשרה במקום העבודה: 34.64 ₪ לפי 186 שעות חודשיות, או 35.40 ₪ לפי 182 שעות. שכר יומי: 297.40 ₪ בשבוע עבודה של 5 ימים, 257.75 ₪ בשבוע של 6 ימים. חשוב לבדיקת תלוש: תוספות כמו נסיעות, שעות נוספות ודמי הבראה אינן חלק מהשכר לבדיקת עמידה במינימום. מעסיק שמשלם פחות חשוף לקנסות מנהליים, לעבירה פלילית ולתביעת הפרשים.',
-    seeAlso: [{ label: 'מחשבון שכר מינימום', href: '/employee-rights/minimum-wage' }],
+    seeAlso: [{ label: 'מדריך שכר מינימום', href: '/employee-rights/minimum-wage' }],
   },
   {
     id: 'spitzer',
