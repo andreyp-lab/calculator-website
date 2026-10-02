@@ -2,7 +2,11 @@
 
 import { useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
-import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
+import {
+  calculateAllMonths,
+  calculateBudgetTotals,
+  getLoanDebtServiceForPeriod,
+} from '@/lib/tools/budget-engine';
 import {
   calculateRatios,
   calculateZScore,
@@ -19,15 +23,7 @@ export function RiskAssessmentDisplay() {
 
     const monthly = calculateAllMonths(budget, settings);
     const totals = calculateBudgetTotals(monthly);
-    const annualDebtPayment = budget.loans.reduce((sum, loan) => {
-      const monthlyR = loan.annualRate / 100 / 12;
-      const n = loan.termMonths;
-      const monthlyPmt =
-        monthlyR === 0
-          ? loan.amount / n
-          : (loan.amount * (monthlyR * Math.pow(1 + monthlyR, n))) / (Math.pow(1 + monthlyR, n) - 1);
-      return sum + monthlyPmt * 12;
-    }, 0);
+    const annualDebtPayment = getLoanDebtServiceForPeriod(budget.loans).total;
 
     const input: RatioInputData = {
       revenue: totals.income,

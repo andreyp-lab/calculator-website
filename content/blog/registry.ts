@@ -61,6 +61,7 @@ export const blogPosts: BlogPost[] = [
     category: 'עצמאיים',
     readTime: '5 דקות',
     date: '2026-09-28',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/self-employed/corporation-vs-individual',
@@ -108,6 +109,7 @@ export const blogPosts: BlogPost[] = [
     category: 'מיסוי אישי',
     readTime: '4 דקות',
     date: '2026-05-04',
+    updatedDate: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/personal-tax/tax-refund',
@@ -221,6 +223,7 @@ export const blogPosts: BlogPost[] = [
     category: 'זכויות עובדים',
     readTime: '6 דקות',
     date: '2026-05-14',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/employee-rights/recreation-pay',
@@ -270,6 +273,7 @@ export const blogPosts: BlogPost[] = [
     category: 'מיסוי אישי',
     readTime: '12 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-28',
     featured: false,
     relatedCalculator: {
       href: '/personal-tax/salary-net-gross',
@@ -287,6 +291,7 @@ export const blogPosts: BlogPost[] = [
     category: 'השקעות',
     readTime: '3 דקות',
     date: '2026-09-28',
+    updatedDate: '2026-09-28',
     featured: false,
     relatedCalculator: {
       href: '/investments/compound-interest',
@@ -302,6 +307,7 @@ export const blogPosts: BlogPost[] = [
     category: 'נדל"ן ומשכנתאות',
     readTime: '15 דקות',
     date: '2026-05-15',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/real-estate/mortgage',
@@ -367,6 +373,7 @@ export const blogPosts: BlogPost[] = [
     category: 'נדל"ן ומשכנתאות',
     readTime: '11 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
@@ -382,6 +389,7 @@ export const blogPosts: BlogPost[] = [
     category: 'נדל"ן ומשכנתאות',
     readTime: '10 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
@@ -397,6 +405,7 @@ export const blogPosts: BlogPost[] = [
     category: 'נדל"ן ומשכנתאות',
     readTime: '12 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
@@ -414,6 +423,7 @@ export const blogPosts: BlogPost[] = [
     category: 'זכויות עובדים',
     readTime: '4 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/employee-rights/maternity-benefits',
@@ -445,6 +455,7 @@ export const blogPosts: BlogPost[] = [
     category: 'זכויות עובדים',
     readTime: '11 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-28',
     featured: false,
     relatedCalculator: {
       href: '/employee-rights/reserve-duty-pay',
@@ -462,6 +473,7 @@ export const blogPosts: BlogPost[] = [
     category: 'השקעות',
     readTime: '3 דקות',
     date: '2026-09-28',
+    updatedDate: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/investments/compound-interest',
@@ -477,6 +489,7 @@ export const blogPosts: BlogPost[] = [
     category: 'השקעות',
     readTime: '4 דקות',
     date: '2026-09-28',
+    updatedDate: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/investments/fire',
@@ -492,6 +505,7 @@ export const blogPosts: BlogPost[] = [
     category: 'השקעות',
     readTime: '3 דקות',
     date: '2026-09-28',
+    updatedDate: '2026-09-28',
     featured: false,
     relatedCalculator: {
       href: '/investments/compound-interest',
@@ -509,6 +523,7 @@ export const blogPosts: BlogPost[] = [
     category: 'נדל"ן ומשכנתאות',
     readTime: '13 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/real-estate/purchase-tax',
@@ -524,6 +539,7 @@ export const blogPosts: BlogPost[] = [
     category: 'נדל"ן ומשכנתאות',
     readTime: '4 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-28',
     featured: true,
     relatedCalculator: {
       href: '/real-estate/capital-gains-tax',
@@ -539,6 +555,7 @@ export const blogPosts: BlogPost[] = [
     category: 'נדל"ן ומשכנתאות',
     readTime: '15 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/real-estate/mortgage-optimizer',
@@ -622,6 +639,7 @@ export const blogPosts: BlogPost[] = [
     category: 'רכב',
     readTime: '12 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: true,
     relatedCalculator: {
       href: '/vehicles/company-car-benefit',
@@ -637,6 +655,7 @@ export const blogPosts: BlogPost[] = [
     category: 'רכב',
     readTime: '13 דקות',
     date: '2026-05-16',
+    updatedDate: '2026-09-29',
     featured: false,
     relatedCalculator: {
       href: '/vehicles/leasing-vs-buying',

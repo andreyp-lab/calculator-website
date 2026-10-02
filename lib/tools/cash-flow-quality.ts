@@ -151,7 +151,9 @@ export function analyzeCashFlowQuality(
   // === Free Cash Flow ===
   const taxRate = input.netProfit !== 0 ? safeDiv(input.taxExpense, input.netProfit + input.taxExpense) : 0.23;
   const nopat = input.ebit * (1 - taxRate);
-  const fcff = nopat + input.depreciation + input.amortization - input.capex - totalWCChange;
+  // totalWCChange is already expressed as the cash impact (for example, an
+  // increase in receivables is negative), so it must be added to FCFF.
+  const fcff = nopat + input.depreciation + input.amortization - input.capex + totalWCChange;
   const fcfe = fcff - input.interestExpense * (1 - taxRate) + (input.debtIssuance - input.debtRepayment);
   const unleveredFCF = cashFromOperations - input.capex;
   const leveredFCF = unleveredFCF - input.interestExpense - input.debtRepayment;

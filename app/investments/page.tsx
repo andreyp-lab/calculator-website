@@ -152,7 +152,8 @@ export default function InvestmentsPage() {
               <Link href="/investments/fire" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך ה-FIRE</Link>{' '}
               מפרט אילו סיכונים לבדוק לפני פרישה מוקדמת. ולפני מכירת ניירות ערך, שווה לעבור על{' '}
               <Link href="/investments/capital-gains-tax" className="text-gold underline underline-offset-2 hover:text-ink transition">מדריך מס רווח הון</Link>{' '}
-              — קיזוז הפסדים ותזמון מכירה נכון יכולים לחסוך אלפי שקלים.
+              — קיזוז הפסדים ועיתוי עסקאות עשויים לשנות את התוצאה החייבת; יש לבדוק את הנכסים,
+              שנות המס, חובת הדיווח וסוגי ההכנסה שמולם מותר הקיזוז.
             </p>
           </div>
         </section>

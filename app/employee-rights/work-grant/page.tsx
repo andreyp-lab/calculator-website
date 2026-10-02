@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
 
 export const metadata: Metadata = {
-  title: 'מענק עבודה — בדיקת זכאות וסכום ברשות המסים',
+  title: 'סימולטור מענק עבודה — בדיקה רשמית',
   description: 'בדיקת זכאות ומענק עבודה לפי שנת המס והמצב האישי בשירות הרשמי של רשות המסים.',
   alternates: { canonical: '/employee-rights/work-grant' },
 };
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function WorkGrantPage() {
   return (
     <OfficialBenefitPage
-      title="מענק עבודה — בדיקת זכאות וסכום"
+      title="סימולטור מענק עבודה — בדיקה רשמית"
       description="מענק עבודה נקבע לפי שנת המס, הכנסה, מצב משפחתי ונתונים נוספים. נכון לספטמבר 2026 רשות המסים מפרסמת מדריך לשנת הזכאות 2025. אין באתר זה נוסחה מאומתת לחישוב מענק לשנת הזכאות 2026."
       sourceUrl="https://www.gov.il/he/service/check-eligibility-for-job-grant"
       sourceLabel="לבדיקת זכאות וסכום ברשות המסים"

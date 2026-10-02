@@ -16,6 +16,7 @@ import type {
   Department,
 } from './types';
 import { INDUSTRY_BENCHMARKS } from './industry-benchmarks';
+import { getEmployeeCostForMonth, getExpenseForMonth, getIncomeForMonth } from './budget-engine';
 
 // ============================================================
 // DETAILED ENTRY ITEMS (for individual entry mode)
@@ -32,6 +33,7 @@ export interface EmployeeDetail {
   name: string;
   position: string;
   department: Department;
+  /** עלות מעסיק חודשית כוללת שהמשתמש בחר. */
   monthlySalary: number;
 }
 
@@ -68,7 +70,7 @@ export interface WizardAnswers {
   /** Mode: simple (count + total) or detailed (list per employee) */
   employeesMode: 'simple' | 'detailed';
   numEmployees: number; // simple
-  totalMonthlySalary: number; // simple
+  totalMonthlySalary: number; // simple: total monthly employer cost
   employees: EmployeeDetail[]; // detailed
   /** Distribution by department (used in simple mode) */
   employeeDistribution?: Record<Department, number>;
@@ -174,7 +176,7 @@ function generateIncome(answers: WizardAnswers): IncomeItem[] {
       amount: monthlyRevenue,
       startMonth: 0,
       duration: 12,
-      growthPct: expectedGrowthPct / 12,
+      growthPct: annualGrowthToMonthlyPct(expectedGrowthPct),
       paymentTerms: getDefaultPaymentTerms(industry),
       status: 'expected',
     });
@@ -187,7 +189,7 @@ function generateIncome(answers: WizardAnswers): IncomeItem[] {
         amount: monthlyRevenue * weights[i],
         startMonth: 0,
         duration: 12,
-        growthPct: expectedGrowthPct / 12,
+        growthPct: annualGrowthToMonthlyPct(expectedGrowthPct),
         paymentTerms: getDefaultPaymentTerms(industry),
         status: 'expected',
       });
@@ -195,6 +197,12 @@ function generateIncome(answers: WizardAnswers): IncomeItem[] {
   }
 
   return items;
+}
+
+/** ממיר שיעור צמיחה שנתי לשיעור חודשי שקול בריבית דריבית. */
+export function annualGrowthToMonthlyPct(annualGrowthPct: number): number {
+  if (annualGrowthPct <= -100) return -100;
+  return (Math.pow(1 + annualGrowthPct / 100, 1 / 12) - 1) * 100;
 }
 
 function getDefaultIncomeName(industry: Industry, index: number): string {
@@ -512,17 +520,33 @@ export interface WizardSummary {
 }
 
 export function summarizeWizard(answers: WizardAnswers): WizardSummary {
-  const annualRevenue = answers.monthlyRevenue * 12;
-  const annualCOGS = (annualRevenue * answers.cogsPct) / 100;
-  const annualSalaries = answers.totalMonthlySalary * 12;
-  const annualRent = answers.monthlyRent * 12;
-  const annualOperating = answers.monthlyOperating * 12;
-  const annualOpEx = annualRent + annualOperating + annualSalaries;
-  const annualMarketing =
-    answers.marketingType === 'pct'
-      ? (annualRevenue * answers.marketingPct) / 100
-      : answers.marketingAmount * 12;
-  const annualRnD = (annualRevenue * answers.rndPct) / 100;
+  const budget = generateBudgetFromWizard(answers);
+  const months = Array.from({ length: 12 }, (_, monthIdx) => monthIdx);
+  const annualRevenue = months.reduce(
+    (total, monthIdx) =>
+      total + budget.income.reduce((sum, income) => sum + getIncomeForMonth(income, monthIdx), 0),
+    0,
+  );
+  const expenseTotalForCategory = (category: ExpenseCategory) =>
+    months.reduce(
+      (total, monthIdx) =>
+        total +
+        budget.expenses
+          .filter((expense) => expense.category === category && !expense.isAuto)
+          .reduce(
+            (sum, expense) => sum + getExpenseForMonth(expense, monthIdx, budget.income),
+            0,
+          ),
+      0,
+    );
+  const annualSalaries = months.reduce(
+    (total, monthIdx) => total + getEmployeeCostForMonth(budget.employees, monthIdx),
+    0,
+  );
+  const annualCOGS = expenseTotalForCategory('cogs');
+  const annualMarketing = expenseTotalForCategory('marketing');
+  const annualRnD = expenseTotalForCategory('rnd');
+  const annualOpEx = expenseTotalForCategory('operating') + annualSalaries;
 
   const totalCosts = annualCOGS + annualOpEx + annualMarketing + annualRnD;
   const profitBeforeTax = annualRevenue - totalCosts;

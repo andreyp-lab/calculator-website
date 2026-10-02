@@ -71,7 +71,7 @@ export default function Page() {
         ו-50% מעל (47% + 3% מס יסף). מהמס שמתקבל מקזזים <strong>נקודות זיכוי</strong> — 242 ₪
         לחודש לכל נקודה, כשכל תושב ישראל מתחיל מ-2.25 נקודות. לכן במשכורות נמוכות ייתכן שלא
         ינוכה מס הכנסה כלל. לחישוב הנקודות המלא —{' '}
-        <Link href="/personal-tax/tax-credits" className="text-gold underline">מחשבון נקודות זיכוי</Link>.
+        <Link href="/personal-tax/tax-credits" className="text-gold underline">בדיקת נקודות זיכוי ברשות המסים</Link>.
       </p>
 
       <h2>ביטוח לאומי ודמי בריאות — שני ניכויים, מנגנון אחד</h2>

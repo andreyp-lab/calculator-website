@@ -4,7 +4,7 @@ import { calculateAdvancedDSCR } from '@/lib/tools/dscr-advanced';
 import { calculateBreakEven, calculateWhatIf } from '@/lib/tools/break-even-analyzer';
 import { identifyRisks } from '@/lib/tools/risk-identifier';
 import { analyzeCashFlowQuality } from '@/lib/tools/cash-flow-quality';
-import { forecastMultiMethod } from '@/lib/tools/forecast-multi-method';
+import { aggregateMonthlyValuesToAnnual, forecastMultiMethod } from '@/lib/tools/forecast-multi-method';
 import { calculateSensitivity, calculateAllQuickScenarios } from '@/lib/tools/sensitivity-financial';
 import { comparePeriods } from '@/lib/tools/period-comparison';
 
@@ -76,35 +76,6 @@ describe('Advanced DSCR', () => {
     expect(result.freeCashFlow.value).toBeCloseTo(1.875, 1);
   });
 
-  it('approves with high DSCR', () => {
-    const result = calculateAdvancedDSCR({
-      ebitda: 1000000,
-      operatingCashFlow: 900000,
-      netProfit: 500000,
-      depreciation: 100000,
-      interestExpense: 50000,
-      principalPayment: 100000,
-      capitalExpenditure: 50000,
-      taxRate: 23,
-    });
-    expect(result.bankAssessment.approval).toContain('מומלץ');
-    expect(result.bankAssessment.maxLTV).toBeGreaterThanOrEqual(70);
-  });
-
-  it('rejects with DSCR < 1', () => {
-    const result = calculateAdvancedDSCR({
-      ebitda: 50000,
-      operatingCashFlow: 30000,
-      netProfit: 10000,
-      depreciation: 20000,
-      interestExpense: 30000,
-      principalPayment: 50000,
-      capitalExpenditure: 20000,
-      taxRate: 23,
-    });
-    expect(result.bankAssessment.approval).toContain('לא');
-    expect(result.bankAssessment.maxLTV).toBe(0);
-  });
 });
 
 describe('Break-Even Analyzer', () => {
@@ -283,6 +254,12 @@ describe('Multi-Method Forecast', () => {
         result.confidenceIntervals.high.lower[i],
       );
     }
+  });
+
+  it('aggregates only complete years and never relabels quarters as years', () => {
+    const result = aggregateMonthlyValuesToAnnual(Array(25).fill(100), 2025);
+    expect(result.years).toEqual([2025, 2026]);
+    expect(result.values).toEqual([1200, 1200]);
   });
 });
 

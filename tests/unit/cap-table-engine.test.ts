@@ -119,6 +119,30 @@ describe('cap-table-engine', () => {
       expect(vc?.preferenceAmount).toBeCloseTo(1000000, 0);
     });
 
+    it('lets non-participating preferred convert when pro-rata is higher', () => {
+      const snapshot: CapTableSnapshot = {
+        initialShareholders: [
+          { id: 'f', name: 'Founder', shareClass: 'common', shares: 9000000 },
+        ],
+        rounds: [
+          {
+            id: 'r1',
+            name: 'Seed',
+            shareClass: 'preferred_seed',
+            preMoneyValuation: 9000000,
+            investmentAmount: 1000000,
+            investorName: 'VC',
+            liquidationPreference: 1,
+            participating: false,
+          },
+        ],
+      };
+      const waterfall = calculateExitWaterfall(snapshot, 100000000);
+      const vc = waterfall.payouts.find((p) => p.shareholderName === 'VC');
+      expect(vc?.preferenceAmount).toBe(0);
+      expect(vc?.totalAmount).toBeCloseTo(10000000, -2);
+    });
+
     it('total payout sums to exit value', () => {
       const sample = createSampleCapTable();
       const wf = calculateExitWaterfall(sample, 50000000);

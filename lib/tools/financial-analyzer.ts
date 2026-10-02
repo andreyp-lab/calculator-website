@@ -4,12 +4,11 @@
  * מבוסס על Finance Pro Advanced עם שיפורים:
  * - חישובים מלאים ב-TypeScript
  * - Altman Z-Score (private + public + service)
- * - Credit Rating (AAA-D)
  * - 20+ יחסים פיננסיים
  * - DSCR מתקדם
  */
 
-import { BalanceSheetData, FinancialRatios, CreditRating, ZScoreResult } from './types';
+import { BalanceSheetData, FinancialRatios, ZScoreResult } from './types';
 
 // ============================================================
 // FINANCIAL RATIOS - 20+ יחסים פיננסיים
@@ -35,7 +34,8 @@ export interface RatioInputData {
  * חישוב כל היחסים הפיננסיים
  */
 export function calculateRatios(data: RatioInputData): FinancialRatios {
-  const safeDiv = (n: number, d: number, def: number = 0) => (d > 0 ? n / d : def);
+  const safeDiv = (n: number, d: number, def: number = 0) =>
+    Math.abs(d) > 0.000001 ? n / d : def;
 
   // נזילות
   const currentRatio = safeDiv(data.balance.currentAssets, data.balance.currentLiabilities);
@@ -53,7 +53,10 @@ export function calculateRatios(data: RatioInputData): FinancialRatios {
   const returnOnEquity = safeDiv(data.netProfit, data.balance.totalEquity) * 100;
 
   // מינוף
-  const debtToEquity = safeDiv(data.balance.totalLiabilities, data.balance.totalEquity);
+  const debtToEquity =
+    data.balance.totalEquity <= 0 && data.balance.totalLiabilities > 0
+      ? Number.POSITIVE_INFINITY
+      : safeDiv(data.balance.totalLiabilities, data.balance.totalEquity);
   const debtToAssets = safeDiv(data.balance.totalLiabilities, data.balance.totalAssets);
   const interestCoverage =
     data.interestExpense > 0 ? data.operatingProfit / data.interestExpense : 999;
@@ -145,13 +148,13 @@ export function calculateZScore(data: RatioInputData, type: CompanyType = 'priva
 
   if (score > safeThreshold) {
     zone = 'safe';
-    bankruptcyProbability = 'פחות מ-5%';
+    bankruptcyProbability = 'לא מחושב — אזור בטוח לפי מודל Altman';
   } else if (score > distressThreshold) {
     zone = 'grey';
-    bankruptcyProbability = '15%-30%';
+    bankruptcyProbability = 'לא מחושב — אזור אפור לפי מודל Altman';
   } else {
     zone = 'distress';
-    bankruptcyProbability = 'מעל 50%';
+    bankruptcyProbability = 'לא מחושב — אזור מצוקה לפי מודל Altman';
   }
 
   return {
@@ -260,75 +263,6 @@ export function calculateHealthScore(ratios: FinancialRatios): HealthScore {
     breakdown: { profitability, liquidity, leverage, coverage, efficiency },
     grade,
     interpretation,
-  };
-}
-
-// ============================================================
-// CREDIT RATING
-// ============================================================
-
-const CREDIT_RATING_THRESHOLDS = [
-  { rating: 'AAA' as const, minScore: 95, maxDte: 0.3, minDscr: 3.0, minCr: 2.5 },
-  { rating: 'AA' as const, minScore: 85, maxDte: 0.5, minDscr: 2.5, minCr: 2.0 },
-  { rating: 'A' as const, minScore: 75, maxDte: 0.8, minDscr: 2.0, minCr: 1.8 },
-  { rating: 'BBB' as const, minScore: 65, maxDte: 1.2, minDscr: 1.5, minCr: 1.5 },
-  { rating: 'BB' as const, minScore: 55, maxDte: 1.8, minDscr: 1.25, minCr: 1.3 },
-  { rating: 'B' as const, minScore: 45, maxDte: 2.5, minDscr: 1.1, minCr: 1.1 },
-  { rating: 'CCC' as const, minScore: 35, maxDte: 3.5, minDscr: 1.0, minCr: 0.9 },
-  { rating: 'CC' as const, minScore: 25, maxDte: 5.0, minDscr: 0.8, minCr: 0.7 },
-  { rating: 'C' as const, minScore: 15, maxDte: 7.0, minDscr: 0.5, minCr: 0.5 },
-];
-
-const RATING_DESCRIPTIONS: Record<string, { desc: string; prob: string }> = {
-  AAA: { desc: 'איכות אשראי מעולה - סיכון מינימלי', prob: '0.01%' },
-  AA: { desc: 'איכות אשראי גבוהה מאוד', prob: '0.05%' },
-  A: { desc: 'איכות אשראי גבוהה', prob: '0.10%' },
-  BBB: { desc: 'איכות אשראי טובה', prob: '0.30%' },
-  BB: { desc: 'איכות אשראי בינונית', prob: '1.00%' },
-  B: { desc: 'איכות אשראי נמוכה - סיכון גבוה', prob: '3.00%' },
-  CCC: { desc: 'איכות אשראי חלשה', prob: '10.00%' },
-  CC: { desc: 'איכות אשראי חלשה מאוד', prob: '25.00%' },
-  C: { desc: 'סיכון קריטי', prob: '50.00%' },
-  D: { desc: 'חדלות פירעון', prob: '100%' },
-};
-
-/**
- * חישוב דירוג אשראי פנימי
- */
-export function calculateCreditRating(
-  ratios: FinancialRatios,
-  healthScore: HealthScore,
-): CreditRating {
-  let rating: CreditRating['rating'] = 'D';
-  for (const t of CREDIT_RATING_THRESHOLDS) {
-    if (
-      healthScore.totalScore >= t.minScore &&
-      ratios.debtToEquity <= t.maxDte &&
-      ratios.dscr >= t.minDscr &&
-      ratios.currentRatio >= t.minCr
-    ) {
-      rating = t.rating;
-      break;
-    }
-  }
-
-  const investmentGrade = ['AAA', 'AA', 'A', 'BBB'].includes(rating);
-
-  // Outlook
-  let outlook: CreditRating['outlook'] = 'יציב';
-  if (healthScore.totalScore > 75 && ratios.dscr > 2 && ratios.netProfitMargin > 8) {
-    outlook = 'חיובי';
-  } else if (healthScore.totalScore < 50 || ratios.dscr < 1 || ratios.netProfitMargin < 0) {
-    outlook = 'שלילי';
-  }
-
-  return {
-    rating,
-    score: healthScore.totalScore,
-    investmentGrade,
-    description: RATING_DESCRIPTIONS[rating]?.desc ?? 'לא זמין',
-    defaultProbability: RATING_DESCRIPTIONS[rating]?.prob ?? 'N/A',
-    outlook,
   };
 }
 

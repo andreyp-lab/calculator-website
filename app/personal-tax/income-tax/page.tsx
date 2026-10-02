@@ -175,7 +175,7 @@ export default function IncomeTaxPage() {
               </Link>
               . לבדיקת החזר מס, ראה{' '}
               <Link href="/personal-tax/tax-refund" className="text-gold hover:underline">
-                מחשבון החזר מס
+                מדריך החזר מס והגשה ברשות המסים
               </Link>
               :
             </p>

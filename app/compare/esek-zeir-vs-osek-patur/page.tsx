@@ -158,7 +158,7 @@ export default function EsekZeirVsOsekPaturPage() {
       '@type': 'Organization',
       name: 'חשבונאי',
       url: SITE_URL,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon-512.png` },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/brand-logo.svg`, width: 512, height: 512 },
     },
     image: `${SITE_URL}/opengraph-image`,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${PAGE_PATH}` },

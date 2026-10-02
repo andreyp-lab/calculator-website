@@ -7,10 +7,8 @@
  * 4. Free Cash Flow DSCR (FCF / Debt Service - אחרי CapEx)
  * 5. After-Tax DSCR (תזרים אחרי מס - הסטנדרט הבנקאי)
  *
- * הפלט כולל:
- * - DSCR משוקלל (ממוצע של כל השיטות עם משקלים)
- * - הערכת בנק (האם מומלץ לאישור)
- * - יכולת חוב מקסימלית
+ * הפלט כולל DSCR משוקלל ומדדי DSCR מחמש זוויות. הוא אינו מפיק
+ * המלצת אשראי, LTV או קיבולת חוב ללא מודל חיתום מכויל של מלווה.
  */
 
 export interface DSCRInput {
@@ -46,17 +44,6 @@ export interface AdvancedDSCRResult {
     totalDebtService: number;
     principalPayment: number;
     interestExpense: number;
-  };
-  bankAssessment: {
-    approval: string;
-    confidence: 'גבוהה' | 'בינונית-גבוהה' | 'בינונית' | 'נמוכה' | 'ללא';
-    maxLTV: number; // %
-    comments: string[];
-  };
-  maxDebtCapacity: {
-    aggressive: number; // DSCR 1.0
-    moderate: number; // DSCR 1.35
-    conservative: number; // DSCR 1.5
   };
 }
 
@@ -115,59 +102,6 @@ export function calculateAdvancedDSCR(input: DSCRInput): AdvancedDSCRResult {
     dscrNetIncome * 0.1 +
     dscrFCF * 0.05;
 
-  // Bank Assessment
-  let approval: string;
-  let confidence: AdvancedDSCRResult['bankAssessment']['confidence'];
-  let maxLTV: number;
-  const comments: string[] = [];
-
-  if (primaryDSCR >= 2.0 && dscrFCF >= 1.5) {
-    approval = 'מומלץ לאישור';
-    confidence = 'גבוהה';
-    maxLTV = 80;
-    comments.push('יכולת החזר חוב מעולה במספר שיטות מדידה');
-  } else if (primaryDSCR >= 1.5 && dscrFCF >= 1.2) {
-    approval = 'ניתן לאישור בתנאים';
-    confidence = 'בינונית-גבוהה';
-    maxLTV = 70;
-    comments.push('יכולת החזר טובה - נדרשים בטחונות סטנדרטיים');
-  } else if (primaryDSCR >= 1.25 && dscrFCF >= 1.0) {
-    approval = 'אישור בכפוף לבטחונות מוגברים';
-    confidence = 'בינונית';
-    maxLTV = 60;
-    comments.push('יכולת החזר מספקת - נדרשים בטחונות מוגברים');
-    if (dscrCashFlow < dscrEbitda * 0.8) {
-      comments.push('פער בין EBITDA לתזרים תפעולי - בדוק איכות רווחים');
-    }
-  } else if (primaryDSCR >= 1.0) {
-    approval = 'בעייתי - נדרשת בחינה מעמיקה';
-    confidence = 'נמוכה';
-    maxLTV = 50;
-    comments.push('יכולת החזר מוגבלת');
-    comments.push('סיכון לחוסר עמידה בקובננטים');
-  } else {
-    approval = 'לא מומלץ לאישור';
-    confidence = 'ללא';
-    maxLTV = 0;
-    comments.push('חוסר יכולת לשרת חוב נוסף');
-    if (primaryDSCR < 0.5) {
-      comments.push('🚨 סיכון משמעותי לחדלות פירעון');
-    }
-  }
-
-  if (dscrFCF < 1 && dscrEbitda > 1.5) {
-    comments.push('⚠️ FCF DSCR נמוך - CapEx גבוה מנטרל את היתרון מ-EBITDA');
-  }
-
-  // Max debt capacity
-  // מבוסס EBITDA × multiple, כשה-multiple = years_of_amortization / target_DSCR
-  const yearsAmortization = 5; // הנחה סטנדרטית
-  const maxDebtCapacity = {
-    aggressive: ebitda > 0 ? (ebitda / 1.0) * yearsAmortization : 0,
-    moderate: ebitda > 0 ? (ebitda / 1.35) * yearsAmortization : 0,
-    conservative: ebitda > 0 ? (ebitda / 1.5) * yearsAmortization : 0,
-  };
-
   return {
     primary: {
       value: primaryDSCR,
@@ -213,12 +147,5 @@ export function calculateAdvancedDSCR(input: DSCRInput): AdvancedDSCRResult {
       principalPayment,
       interestExpense,
     },
-    bankAssessment: {
-      approval,
-      confidence,
-      maxLTV,
-      comments,
-    },
-    maxDebtCapacity,
   };
 }

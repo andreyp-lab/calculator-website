@@ -5,12 +5,14 @@ import { useTools } from '@/lib/tools/ToolsContext';
 import {
   calculateRatios,
   calculateZScore,
-  calculateHealthScore,
-  calculateCreditRating,
   RatioInputData,
 } from '@/lib/tools/financial-analyzer';
-import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
-import { formatCurrency, formatPercent, formatRatio, formatDays } from '@/lib/tools/format';
+import {
+  calculateAllMonths,
+  calculateBudgetTotals,
+  getLoanDebtServiceForPeriod,
+} from '@/lib/tools/budget-engine';
+import { formatPercent, formatRatio, formatDays } from '@/lib/tools/format';
 import { ChartBar, Shield, TrendingUp, AlertTriangle } from 'lucide-react';
 
 export function RatiosDisplay() {
@@ -23,12 +25,7 @@ export function RatiosDisplay() {
     const monthly = calculateAllMonths(budget, settings);
     const totals = calculateBudgetTotals(monthly);
 
-    const annualDebtPayment = budget.loans.reduce((sum, loan) => {
-      const monthlyR = loan.annualRate / 100 / 12;
-      const n = loan.termMonths;
-      const monthlyPmt = monthlyR === 0 ? loan.amount / n : (loan.amount * (monthlyR * Math.pow(1 + monthlyR, n))) / (Math.pow(1 + monthlyR, n) - 1);
-      return sum + monthlyPmt * 12;
-    }, 0);
+    const annualDebtPayment = getLoanDebtServiceForPeriod(budget.loans).total;
 
     const input: RatioInputData = {
       revenue: totals.income,
@@ -44,11 +41,9 @@ export function RatiosDisplay() {
     };
 
     const ratios = calculateRatios(input);
-    const health = calculateHealthScore(ratios);
-    const credit = calculateCreditRating(ratios, health);
     const zScore = calculateZScore(input, 'private');
 
-    return { ratios, health, credit, zScore };
+    return { ratios, zScore };
   }, [budget, settings, balanceSheet]);
 
   if (!analysis) {
@@ -65,16 +60,7 @@ export function RatiosDisplay() {
     );
   }
 
-  const { ratios, health, credit, zScore } = analysis;
-
-  // Helpers for status colors
-  const getStatusColor = (status: 'good' | 'warning' | 'bad'): string => {
-    return {
-      good: 'text-green-700 bg-green-50 border-green-200',
-      warning: 'text-amber-800 bg-amber-50 border-amber-200',
-      bad: 'text-red-700 bg-red-50 border-red-200',
-    }[status];
-  };
+  const { ratios, zScore } = analysis;
 
   const ratioStatus = (val: number, good: number, bad: number, higherBetter: boolean = true) => {
     if (higherBetter) {
@@ -90,23 +76,7 @@ export function RatiosDisplay() {
   return (
     <div className="space-y-4">
       {/* KPI Cards - Top */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className={`border-2 rounded-none p-4 ${
-          credit.investmentGrade ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'
-        }`}>
-          <div className="text-xs text-ink/70 mb-1">דירוג אשראי</div>
-          <div className={`text-3xl font-bold ${credit.investmentGrade ? 'text-green-700' : 'text-amber-800'}`}>
-            {credit.rating}
-          </div>
-          <div className="text-xs text-ink/70">{credit.outlook}</div>
-        </div>
-
-        <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-4">
-          <div className="text-xs text-ink/70 mb-1">ציון בריאות</div>
-          <div className="text-3xl font-bold text-ink">{health.totalScore}/100</div>
-          <div className="text-xs text-ink/70">{health.grade}</div>
-        </div>
-
+      <div className="grid grid-cols-2 gap-3">
         <div className={`border-2 rounded-none p-4 ${
           zScore.zone === 'safe' ? 'bg-green-50 border-green-300' :
           zScore.zone === 'grey' ? 'bg-amber-50 border-amber-300' : 'bg-red-50 border-red-300'
@@ -176,7 +146,7 @@ export function RatiosDisplay() {
             יחסי מינוף
           </h4>
           <div className="space-y-2 text-sm">
-            <RatioRow label="חוב להון" value={formatRatio(ratios.debtToEquity)} status={ratioStatus(ratios.debtToEquity, 1.0, 2.0, false)} />
+            <RatioRow label="חוב להון" value={Number.isFinite(ratios.debtToEquity) ? formatRatio(ratios.debtToEquity) : 'הון שלילי'} status={ratioStatus(ratios.debtToEquity, 1.0, 2.0, false)} />
             <RatioRow label="חוב לנכסים" value={formatRatio(ratios.debtToAssets)} status={ratioStatus(ratios.debtToAssets, 0.4, 0.7, false)} />
             <RatioRow label="כיסוי ריבית" value={ratios.interestCoverage > 99 ? '∞' : formatRatio(ratios.interestCoverage)} status={ratioStatus(ratios.interestCoverage, 5, 1.5)} />
           </div>
@@ -197,34 +167,6 @@ export function RatiosDisplay() {
         </div>
       </div>
 
-      {/* Health Score Breakdown */}
-      <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
-        <h4 className="font-bold text-ink mb-3">פירוט ציון בריאות</h4>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-          {Object.entries(health.breakdown).map(([key, score]) => {
-            const labels: Record<string, string> = {
-              profitability: 'רווחיות',
-              liquidity: 'נזילות',
-              leverage: 'מינוף',
-              coverage: 'כיסוי',
-              efficiency: 'יעילות',
-            };
-            return (
-              <div key={key} className="bg-cream-2 rounded-none p-3 text-center">
-                <div className="text-xs text-ink/70 mb-1">{labels[key]}</div>
-                <div className={`text-2xl font-bold ${
-                  score >= 70 ? 'text-green-700' : score >= 50 ? 'text-amber-800' : 'text-red-700'
-                }`}>
-                  {Math.round(score)}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <p className="text-sm text-ink/70 mt-3 text-center">
-          {health.interpretation}
-        </p>
-      </div>
     </div>
   );
 }

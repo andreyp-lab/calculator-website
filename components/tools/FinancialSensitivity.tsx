@@ -2,7 +2,11 @@
 
 import { useMemo, useState } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
-import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
+import {
+  calculateAllMonths,
+  calculateBudgetTotals,
+  getLoanDebtServiceForPeriod,
+} from '@/lib/tools/budget-engine';
 import {
   calculateSensitivity,
   calculateAllQuickScenarios,
@@ -20,7 +24,7 @@ import {
   Tooltip,
   ReferenceLine,
 } from 'recharts';
-import { Activity, Zap, TrendingDown, Percent, AlertTriangle } from 'lucide-react';
+import { Activity, Zap, TrendingDown, AlertTriangle } from 'lucide-react';
 
 export function FinancialSensitivity() {
   const { budget, settings } = useTools();
@@ -31,17 +35,7 @@ export function FinancialSensitivity() {
     if (!budget || !settings) return null;
     const monthly = calculateAllMonths(budget, settings);
     const totals = calculateBudgetTotals(monthly);
-    const annualPrincipal = budget.loans.reduce((sum, loan) => {
-      const monthlyR = loan.annualRate / 100 / 12;
-      const n = loan.termMonths;
-      const monthlyPmt =
-        monthlyR === 0
-          ? loan.amount / n
-          : (loan.amount * (monthlyR * Math.pow(1 + monthlyR, n))) / (Math.pow(1 + monthlyR, n) - 1);
-      const totalPaid = monthlyPmt * 12;
-      const interestPortion = loan.amount * (loan.annualRate / 100);
-      return sum + Math.max(0, totalPaid - interestPortion);
-    }, 0);
+    const annualPrincipal = getLoanDebtServiceForPeriod(budget.loans).principal;
 
     return {
       revenue: totals.income,

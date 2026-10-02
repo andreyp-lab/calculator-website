@@ -204,6 +204,37 @@ export function getLoanPaymentsForMonth(loans: Loan[], monthIdx: number): number
   return total;
 }
 
+export interface LoanDebtService {
+  principal: number;
+  interest: number;
+  total: number;
+}
+
+/**
+ * שירות חוב בפועל בתוך חלון חודשים נתון. בניגוד להכפלת PMT ב-12,
+ * החישוב מכבד את חודש תחילת ההלוואה ואת מספר התשלומים האמיתי.
+ */
+export function getLoanDebtServiceForPeriod(
+  loans: Loan[],
+  periodStartMonth: number = 0,
+  periodMonths: number = 12,
+): LoanDebtService {
+  const periodEndMonth = periodStartMonth + Math.max(0, periodMonths);
+  let principal = 0;
+  let interest = 0;
+
+  for (const loan of loans) {
+    for (const payment of calculateLoan(loan).schedule) {
+      if (payment.month >= periodStartMonth && payment.month < periodEndMonth) {
+        principal += payment.principal;
+        interest += payment.interest;
+      }
+    }
+  }
+
+  return { principal, interest, total: principal + interest };
+}
+
 /**
  * ריבית הלוואה בחודש מסויים (לחישובים פיננסיים)
  */

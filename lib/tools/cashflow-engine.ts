@@ -15,8 +15,7 @@ import {
   MonthlyCashFlow,
   PeriodSettings,
   HEBREW_MONTHS,
-  IncomeItem,
-  ExpenseItem,
+  CashFlowExpense,
 } from './types';
 import {
   getIncomeForMonth,
@@ -102,7 +101,7 @@ export function getCashInForMonth(
 
   // קבלת הלוואות (חד-פעמית בתחילת החודש שלהן)
   for (const loan of budget.loans) {
-    if (loan.startMonth === monthIdx + loanReceiptMonth - 1) {
+    if (loan.startMonth + loanReceiptMonth === monthIdx) {
       total += loan.amount;
     }
   }
@@ -119,9 +118,10 @@ export function getCashInForMonth(
  */
 export function getCashOutForMonth(
   budget: BudgetData,
-  customExpenses: CashFlowExpenseLite[],
+  customExpenses: CashFlowExpense[],
   monthIdx: number,
   delays: CashFlowDelay[],
+  projectionStart: string = '1970-01',
 ): number {
   let total = 0;
 
@@ -174,8 +174,7 @@ export function getCashOutForMonth(
 
   // הוצאות מותאמות אישית מהתזרים
   for (const exp of customExpenses) {
-    const expMonth = getMonthIndexFromDate(exp.date);
-    if (expMonth === monthIdx) {
+    if (isCustomExpenseDueInMonth(exp, projectionStart, monthIdx)) {
       total += exp.amount;
     }
   }
@@ -211,7 +210,13 @@ export function calculateCashFlow(
     const opening = runningBalance;
     const incomeReceived = getCashInForMonth(budget, m, cashFlowData.delays);
     const customCashOut = cashFlowData.customExpenses ?? [];
-    const expensesPaidGross = getCashOutForMonth(budget, customCashOut, m, cashFlowData.delays);
+    const expensesPaidGross = getCashOutForMonth(
+      budget,
+      customCashOut,
+      m,
+      cashFlowData.delays,
+      settings.startMonth,
+    );
     const loanPayments = getLoanPaymentsForMonth(budget.loans, m);
     const expensesPaid = expensesPaidGross; // כבר כולל הלוואות
 
@@ -239,16 +244,71 @@ export function calculateCashFlow(
 // HELPER: Date → Month Index
 // ============================================================
 
-interface CashFlowExpenseLite {
-  id: string;
-  amount: number;
-  date: string;
+function parseIsoDate(dateStr: string): Date | null {
+  const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(dateStr);
+  if (!match) return null;
+  const year = Number(match[1]);
+  const month = Number(match[2]) - 1;
+  const day = Number(match[3] ?? 1);
+  const date = new Date(Date.UTC(year, month, day));
+  return date.getUTCFullYear() === year && date.getUTCMonth() === month && date.getUTCDate() === day
+    ? date
+    : null;
 }
 
-function getMonthIndexFromDate(_dateStr: string): number {
-  // פישוט: מחזיר -1 כי הוצאות מותאמות אישיות נדירות
-  // (אפשר להרחיב בעתיד עם getStartMonth מ-settings)
-  return -1;
+function addDaysUtc(date: Date, days: number): Date {
+  const result = new Date(date);
+  result.setUTCDate(result.getUTCDate() + days);
+  return result;
+}
+
+function addCalendarMonthsUtc(date: Date, months: number): Date {
+  const result = new Date(date);
+  const originalDay = result.getUTCDate();
+  result.setUTCDate(1);
+  result.setUTCMonth(result.getUTCMonth() + months);
+  const lastDay = new Date(
+    Date.UTC(result.getUTCFullYear(), result.getUTCMonth() + 1, 0),
+  ).getUTCDate();
+  result.setUTCDate(Math.min(originalDay, lastDay));
+  return result;
+}
+
+function relativeMonthIndex(date: Date, projectionStart: Date): number {
+  return (
+    (date.getUTCFullYear() - projectionStart.getUTCFullYear()) * 12 +
+    date.getUTCMonth() -
+    projectionStart.getUTCMonth()
+  );
+}
+
+function isCustomExpenseDueInMonth(
+  expense: CashFlowExpense,
+  projectionStart: string,
+  monthIdx: number,
+): boolean {
+  const chargeDate = parseIsoDate(expense.date);
+  const startDate = parseIsoDate(projectionStart);
+  if (!chargeDate || !startDate || monthIdx < 0) return false;
+
+  const interval =
+    expense.frequency === 'monthly'
+      ? 1
+      : expense.frequency === 'quarterly'
+        ? 3
+        : expense.frequency === 'yearly'
+          ? 12
+          : 0;
+
+  for (let occurrence = chargeDate, guard = 0; guard < 1200; guard++) {
+    const dueDate = addDaysUtc(occurrence, Math.max(0, expense.paymentTerms || 0));
+    const dueMonth = relativeMonthIndex(dueDate, startDate);
+    if (dueMonth === monthIdx) return true;
+    if (dueMonth > monthIdx || interval === 0) return false;
+    occurrence = addCalendarMonthsUtc(occurrence, interval);
+  }
+
+  return false;
 }
 
 // ============================================================

@@ -7,23 +7,24 @@
 
 import { useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
-import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
+import {
+  calculateAllMonths,
+  calculateBudgetTotals,
+  getLoanDebtServiceForPeriod,
+} from '@/lib/tools/budget-engine';
 import { calculateCashFlow, generateCashFlowInsights } from '@/lib/tools/cashflow-engine';
 import {
   calculateRatios,
   calculateZScore,
-  calculateHealthScore,
-  calculateCreditRating,
   type RatioInputData,
 } from '@/lib/tools/financial-analyzer';
-import { formatCurrency, formatPercent } from '@/lib/tools/format';
+import { formatCurrency } from '@/lib/tools/format';
 import {
   TrendingUp,
   Wallet,
   BarChart3,
   CheckCircle2,
   ArrowLeft,
-  AlertTriangle,
   Target,
   Sparkles,
   Activity,
@@ -73,15 +74,7 @@ export function UnifiedOverview({ onNavigate }: Props) {
 
     let analysis = null;
     if (balanceSheet && balanceSheet.totalAssets > 0) {
-      const annualDebtPayment = budget.loans.reduce((sum, loan) => {
-        const r = loan.annualRate / 100 / 12;
-        const n = loan.termMonths;
-        const pmt =
-          r === 0
-            ? loan.amount / n
-            : (loan.amount * (r * Math.pow(1 + r, n))) / (Math.pow(1 + r, n) - 1);
-        return sum + pmt * 12;
-      }, 0);
+      const annualDebtPayment = getLoanDebtServiceForPeriod(budget.loans).total;
 
       const input: RatioInputData = {
         revenue: totals.income,
@@ -97,10 +90,8 @@ export function UnifiedOverview({ onNavigate }: Props) {
       };
 
       const ratios = calculateRatios(input);
-      const health = calculateHealthScore(ratios);
-      const credit = calculateCreditRating(ratios, health);
       const zScore = calculateZScore(input, 'private');
-      analysis = { ratios, health, credit, zScore };
+      analysis = { ratios, zScore };
     }
 
     const finalBalance =
@@ -195,19 +186,6 @@ export function UnifiedOverview({ onNavigate }: Props) {
     });
   }
 
-  // Investment grade success
-  if (data.analysis && data.analysis.credit.investmentGrade && !data.hasNegativeMonths) {
-    crossInsights.push({
-      type: 'success',
-      title: '✅ חברה במצב Investment Grade',
-      description: `דירוג ${data.analysis.credit.rating} - יכולת גיוס מימון בתנאים טובים`,
-      action: {
-        label: 'בדוק קיבולת אשראי',
-        target: { master: 'analysis', analysis: 'bank' },
-      },
-    });
-  }
-
   // Combine cash insights
   for (const insight of data.cashInsights.slice(0, 3)) {
     crossInsights.push({
@@ -243,7 +221,7 @@ export function UnifiedOverview({ onNavigate }: Props) {
           <WorkflowStep
             num={3}
             label="ניתוח דוחות"
-            sublabel={hasAnalysis ? `דירוג ${data.analysis!.credit.rating}` : 'מלא נתוני מאזן'}
+            sublabel={hasAnalysis ? 'יחסים פיננסיים מחושבים' : 'מלא נתוני מאזן'}
             done={hasAnalysis}
             onClick={() => onNavigate({ master: 'analysis', analysis: 'data' })}
           />
@@ -339,16 +317,6 @@ export function UnifiedOverview({ onNavigate }: Props) {
           {data.analysis ? (
             <>
               <PillarRow
-                label="דירוג אשראי"
-                value={data.analysis.credit.rating}
-                highlight
-                color={data.analysis.credit.investmentGrade ? 'emerald' : 'amber'}
-              />
-              <PillarRow
-                label="ציון בריאות"
-                value={`${data.analysis.health.totalScore}/100`}
-              />
-              <PillarRow
                 label="Z-Score"
                 value={data.analysis.zScore.score.toFixed(2)}
                 color={
@@ -384,8 +352,6 @@ export function UnifiedOverview({ onNavigate }: Props) {
             <div className="text-sm text-ink/70 py-2">
               <p className="mb-2">מלא נתוני מאזן כדי לראות ניתוח מלא:</p>
               <ul className="text-xs space-y-1 text-ink/70">
-                <li>• דירוג אשראי AAA-D</li>
-                <li>• ציון בריאות 0-100</li>
                 <li>• Altman Z-Score</li>
                 <li>• 20+ יחסים פיננסיים</li>
               </ul>

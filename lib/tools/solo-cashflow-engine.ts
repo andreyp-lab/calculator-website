@@ -32,14 +32,24 @@ function getMonthsBetween(start: string, end: string): number {
 }
 
 function addMonths(date: string, months: number): string {
-  const d = new Date(date);
-  d.setMonth(d.getMonth() + months);
+  const d = new Date(`${date}T00:00:00Z`);
+  const originalDay = d.getUTCDate();
+  const originalLastDay = new Date(
+    Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0),
+  ).getUTCDate();
+  const preserveMonthEnd = originalDay === originalLastDay;
+  d.setUTCDate(1);
+  d.setUTCMonth(d.getUTCMonth() + months);
+  const targetLastDay = new Date(
+    Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0),
+  ).getUTCDate();
+  d.setUTCDate(preserveMonthEnd ? targetLastDay : Math.min(originalDay, targetLastDay));
   return d.toISOString().split('T')[0];
 }
 
 function addDays(date: string, days: number): string {
-  const d = new Date(date);
-  d.setDate(d.getDate() + days);
+  const d = new Date(`${date}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().split('T')[0];
 }
 
@@ -100,7 +110,7 @@ export function expandRecurringItem(
  * הרחב את כל הפריטים החוזרים בנתונים.
  */
 export function expandAllItems(data: SoloCashFlowData): SoloCashFlowItem[] {
-  const projectionEnd = addMonths(data.startDate, data.monthsToProject);
+  const projectionEnd = addDays(addMonths(data.startDate, data.monthsToProject), -1);
   return data.items.flatMap((item) => expandRecurringItem(item, data.startDate, projectionEnd));
 }
 

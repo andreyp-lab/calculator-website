@@ -3,34 +3,8 @@
 import { useState, useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
 import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
-import type { WorkingCapitalScenario } from '@/lib/tools/types';
-import { Settings, TrendingUp, AlertCircle, Sparkles } from 'lucide-react';
-
-/**
- * חישוב הון חוזר נטו ו-CCC לפי DSO/DPO/DIO.
- * נכסים שוטפים = AR + Inventory; התחייבויות שוטפות = AP.
- * NWC = AR + Inv − AP
- * CCC = DSO + DIO − DPO
- */
-function calcScenario(
-  revenue: number,
-  cogs: number,
-  dso: number,
-  dpo: number,
-  dio: number,
-): WorkingCapitalScenario {
-  const ar = (revenue / 365) * dso;
-  const inv = (cogs / 365) * dio;
-  const ap = (cogs / 365) * dpo;
-  return {
-    dso,
-    dpo,
-    dio,
-    cashImpact: 0, // נחשב חיצונית
-    ccc: dso + dio - dpo,
-    netWorkingCapital: ar + inv - ap,
-  };
-}
+import { calculateWorkingCapitalScenario } from '@/lib/tools/working-capital';
+import { Settings, AlertCircle, Sparkles } from 'lucide-react';
 
 export function WorkingCapitalOptimizer() {
   const { budget, settings } = useTools();
@@ -39,20 +13,15 @@ export function WorkingCapitalOptimizer() {
     if (!budget || !settings) return null;
     const monthly = calculateAllMonths(budget, settings);
     const totals = calculateBudgetTotals(monthly);
-    // הערכת DSO/DPO/DIO על בסיס יחסים סטנדרטיים מהתקציב
-    const dso = 45; // ברירת מחדל
-    const dpo = 30;
-    const dio = totals.cogs > 0 ? 30 : 0;
     return {
       revenue: totals.income,
       cogs: totals.cogs,
-      baseDSO: dso,
-      baseDPO: dpo,
-      baseDIO: dio,
-      baseScenario: calcScenario(totals.income, totals.cogs, dso, dpo, dio),
     };
   }, [budget, settings]);
 
+  const [baseDso, setBaseDso] = useState(45);
+  const [baseDpo, setBaseDpo] = useState(30);
+  const [baseDio, setBaseDio] = useState(30);
   const [dso, setDso] = useState(45);
   const [dpo, setDpo] = useState(30);
   const [dio, setDio] = useState(30);
@@ -66,8 +35,15 @@ export function WorkingCapitalOptimizer() {
     );
   }
 
-  const optimized = calcScenario(baseline.revenue, baseline.cogs, dso, dpo, dio);
-  const cashImpact = baseline.baseScenario.netWorkingCapital - optimized.netWorkingCapital;
+  const baseScenario = calculateWorkingCapitalScenario(
+    baseline.revenue,
+    baseline.cogs,
+    baseDso,
+    baseDpo,
+    baseDio,
+  );
+  const optimized = calculateWorkingCapitalScenario(baseline.revenue, baseline.cogs, dso, dpo, dio);
+  const cashImpact = baseScenario.netWorkingCapital - optimized.netWorkingCapital;
 
   const fmt = (v: number) =>
     Math.abs(v) > 1000000
@@ -86,7 +62,7 @@ export function WorkingCapitalOptimizer() {
             אופטימיזציית הון חוזר
           </h3>
           <p className="text-xs text-cream/60">
-            "מה יקרה אם DSO ירד מ-60 ל-45?" — חישוב מזומן שמשתחרר
+            השוואה בין שני תרחישים שבחרתם — ללא הנחה שזהו המצב בפועל
           </p>
         </div>
       </div>
@@ -99,7 +75,7 @@ export function WorkingCapitalOptimizer() {
             : 'bg-red-50 border-red-300'
         }`}
       >
-        <div className="text-sm text-ink/70 mb-1">השפעה על מזומן (vs מצב נוכחי)</div>
+        <div className="text-sm text-ink/70 mb-1">הפרש מזומן בין התרחישים</div>
         <div
           className={`text-4xl font-bold ${
             cashImpact >= 0 ? 'text-emerald-800' : 'text-red-700'
@@ -119,13 +95,53 @@ export function WorkingCapitalOptimizer() {
 
       {/* Sliders */}
       <div className="bg-paper border-2 border-ink/15 p-5 space-y-4">
-        <h4 className="font-semibold text-ink mb-2">פרמטרים</h4>
+        <h4 className="font-semibold text-ink mb-2">תרחיש בסיס לבחירתכם</h4>
+        <p className="text-xs text-ink/70">
+          ערכי 45/30/30 הם דוגמה התחלתית בלבד. החליפו אותם בנתוני הנהלת החשבונות שלכם.
+        </p>
+        <SliderRow
+          label="DSO בסיס"
+          description="ימי גבייה בתרחיש הבסיס"
+          value={baseDso}
+          baseline={baseDso}
+          onChange={setBaseDso}
+          min={0}
+          max={180}
+          color="gold"
+          impactDirection="lower-better"
+        />
+        <SliderRow
+          label="DPO בסיס"
+          description="ימי תשלום בתרחיש הבסיס"
+          value={baseDpo}
+          baseline={baseDpo}
+          onChange={setBaseDpo}
+          min={0}
+          max={180}
+          color="amber"
+          impactDirection="higher-better"
+        />
+        <SliderRow
+          label="DIO בסיס"
+          description="ימי מלאי בתרחיש הבסיס"
+          value={baseDio}
+          baseline={baseDio}
+          onChange={setBaseDio}
+          min={0}
+          max={180}
+          color="amber"
+          impactDirection="lower-better"
+        />
+      </div>
+
+      <div className="bg-paper border-2 border-ink/15 p-5 space-y-4">
+        <h4 className="font-semibold text-ink mb-2">תרחיש יעד</h4>
 
         <SliderRow
           label="DSO - ימי גבייה"
           description="כמה זמן עד שהלקוחות משלמים"
           value={dso}
-          baseline={baseline.baseDSO}
+          baseline={baseDso}
           onChange={setDso}
           min={0}
           max={180}
@@ -136,7 +152,7 @@ export function WorkingCapitalOptimizer() {
           label="DPO - ימי תשלום לספקים"
           description="כמה זמן אנחנו לוקחים לשלם"
           value={dpo}
-          baseline={baseline.baseDPO}
+          baseline={baseDpo}
           onChange={setDpo}
           min={0}
           max={180}
@@ -147,7 +163,7 @@ export function WorkingCapitalOptimizer() {
           label="DIO - ימי מלאי"
           description="כמה זמן המלאי יושב"
           value={dio}
-          baseline={baseline.baseDIO}
+          baseline={baseDio}
           onChange={setDio}
           min={0}
           max={180}
@@ -162,36 +178,36 @@ export function WorkingCapitalOptimizer() {
           <thead className="bg-cream-2">
             <tr>
               <th className="text-right p-3">מדד</th>
-              <th className="text-center p-3">מצב נוכחי</th>
-              <th className="text-center p-3">תרחיש מותאם</th>
+              <th className="text-center p-3">תרחיש בסיס</th>
+              <th className="text-center p-3">תרחיש יעד</th>
               <th className="text-center p-3">שינוי</th>
             </tr>
           </thead>
           <tbody>
             <ComparisonRow
               label="DSO (ימי גבייה)"
-              base={baseline.baseDSO}
+              base={baseDso}
               optimized={dso}
               unit="ימים"
               lowerBetter
             />
             <ComparisonRow
               label="DPO (ימי תשלום)"
-              base={baseline.baseDPO}
+              base={baseDpo}
               optimized={dpo}
               unit="ימים"
               lowerBetter={false}
             />
             <ComparisonRow
               label="DIO (ימי מלאי)"
-              base={baseline.baseDIO}
+              base={baseDio}
               optimized={dio}
               unit="ימים"
               lowerBetter
             />
             <ComparisonRow
               label="CCC (מחזור מזומן)"
-              base={baseline.baseScenario.ccc}
+              base={baseScenario.ccc}
               optimized={optimized.ccc}
               unit="ימים"
               lowerBetter
@@ -199,7 +215,7 @@ export function WorkingCapitalOptimizer() {
             />
             <ComparisonRow
               label="הון חוזר נטו"
-              base={baseline.baseScenario.netWorkingCapital}
+              base={baseScenario.netWorkingCapital}
               optimized={optimized.netWorkingCapital}
               unit="₪"
               lowerBetter
@@ -217,18 +233,18 @@ export function WorkingCapitalOptimizer() {
           טיפים אופרטיביים
         </h4>
         <ul className="text-sm text-ink space-y-1">
-          {dso < baseline.baseDSO && (
-            <li>✓ קצר את DSO ב-{baseline.baseDSO - dso} ימים: בקש מקדמות, תן הנחה לתשלום מהיר</li>
+          {dso < baseDso && (
+            <li>✓ קצר את DSO ב-{baseDso - dso} ימים: בקש מקדמות, תן הנחה לתשלום מהיר</li>
           )}
-          {dpo > baseline.baseDPO && (
-            <li>✓ הארך DPO ב-{dpo - baseline.baseDPO} ימים: משא ומתן עם ספקים ל-נטו 60+</li>
+          {dpo > baseDpo && (
+            <li>✓ הארך DPO ב-{dpo - baseDpo} ימים: משא ומתן עם ספקים ל-נטו 60+</li>
           )}
-          {dio < baseline.baseDIO && (
-            <li>✓ הקטן מלאי ב-{baseline.baseDIO - dio} ימים: JIT, טייט מנעולי הזמנה</li>
+          {dio < baseDio && (
+            <li>✓ הקטן מלאי ב-{baseDio - dio} ימים: JIT, טייט מנעולי הזמנה</li>
           )}
           {cashImpact > baseline.revenue * 0.05 && (
             <li className="font-bold text-emerald-800">
-              💡 שיפור משמעותי: {fmt(cashImpact)} ש"ח מזומן משתחרר — שווה השקעה בתהליכים
+              💡 שיפור משמעותי: {fmt(cashImpact)} ש&quot;ח מזומן משתחרר — שווה השקעה בתהליכים
             </li>
           )}
         </ul>

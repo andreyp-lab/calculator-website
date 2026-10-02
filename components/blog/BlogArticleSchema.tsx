@@ -44,7 +44,9 @@ export function BlogArticleSchema() {
       url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/og-default.png`,
+        url: `${SITE_URL}/brand-logo.svg`,
+        width: 512,
+        height: 512,
       },
     },
   };

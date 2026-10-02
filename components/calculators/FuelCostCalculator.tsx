@@ -57,8 +57,9 @@ export function FuelCostCalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">סוג דלק</label>
+            <label htmlFor="fuel-type" className="block text-sm font-medium text-ink/70 mb-2">סוג דלק</label>
             <select
+              id="fuel-type"
               value={input.fuelType}
               onChange={(e) => changeFuelType(e.target.value as FuelType)}
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold"
@@ -72,10 +73,11 @@ export function FuelCostCalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink/70 mb-2">
+            <label htmlFor="fuel-efficiency" className="block text-sm font-medium text-ink/70 mb-2">
               צריכת דלק ({fuelUnit}/100 ק&quot;מ)
             </label>
             <input
+              id="fuel-efficiency"
               type="number"
               min={0}
               max={50}
@@ -90,8 +92,9 @@ export function FuelCostCalculator() {
           </div>
 
           <div className="bg-cream-2 border border-ink/15 rounded-none p-3">
-            <label className="flex items-center gap-2 cursor-pointer mb-2">
+            <label htmlFor="use-custom-fuel-price" className="flex items-center gap-2 cursor-pointer mb-2">
               <input
+                id="use-custom-fuel-price"
                 type="checkbox"
                 checked={input.useCustomPrice}
                 onChange={(e) => update('useCustomPrice', e.target.checked)}
@@ -101,6 +104,7 @@ export function FuelCostCalculator() {
             </label>
             {input.useCustomPrice && (
               <input
+                aria-label={`מחיר בפועל ל-${fuelUnit}`}
                 type="number"
                 min={0}
                 step={0.01}

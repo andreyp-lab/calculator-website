@@ -47,7 +47,7 @@ const tocItems = [
   { id: 'investment-gains', label: 'מס רווחי הון' },
   { id: 'study-fund', label: 'קרן השתלמות' },
   { id: 'pension-tax', label: 'פנסיה וניכויים' },
-  { id: 'donations', label: 'תרומות - 35% החזר' },
+  { id: 'donations', label: 'זיכוי מס על תרומות' },
   { id: 'annual-planning', label: 'תכנון מס שנתי' },
   { id: 'mistakes', label: 'טעויות יקרות' },
   { id: 'calculators', label: 'כל המחשבונים' },
@@ -78,12 +78,12 @@ const taxesHowToSteps = [
   },
   {
     name: 'הבן מסי נדל"ן (שבח ורכישה)',
-    text: 'מוכר דירה? חשב מס שבח. קונה? חשב מס רכישה לפי סוג רוכש ומחיר הנכס.',
+    text: 'מוכר או קונה זכות במקרקעין? הכיר את נתוני העסקה והסיווג הנדרשים, ובדוק את החבות בשירותי השומה העצמית הרשמיים.',
     url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026#capital-gains',
   },
   {
     name: 'תכנן מס שנתי ובדוק זכאות להחזר',
-    text: 'זהה ניכויים והטבות שמגיעים לך: קרן השתלמות, תרומות (35% החזר), נקודות זיכוי, ופנסיה.',
+    text: 'זהה ניכויים והטבות שעשויים לחול: קרן השתלמות, תרומות למוסד מאושר, נקודות זיכוי ופנסיה.',
     url: 'https://cheshbonai.co.il/guides/taxes-complete-guide-2026#annual-planning',
   },
 ];
@@ -131,7 +131,7 @@ export default function TaxesCompleteGuide() {
             description:
               'מדריך מקיף לכל המסים בישראל: מס הכנסה, ב.ל., מע"מ, מס שבח, מס רכישה, מס יסף, מס דיבידנד.',
             datePublished: '2026-05-16',
-            dateModified: '2026-05-16',
+            dateModified: '2026-10-02',
             author: { '@type': 'Organization', name: 'חשבונאי' },
             publisher: { '@type': 'Organization', name: 'חשבונאי' },
             inLanguage: 'he',
@@ -181,7 +181,7 @@ export default function TaxesCompleteGuide() {
           </p>
           <div className="flex flex-wrap gap-4 text-sm text-cream/60">
             <span>⏱ זמן קריאה: ~50 דקות</span>
-            <span>📅 עודכן: מאי 2026</span>
+            <span>📅 עודכן: אוקטובר 2026</span>
             <span>📖 ~7,800 מילים</span>
           </div>
         </div>
@@ -233,7 +233,7 @@ export default function TaxesCompleteGuide() {
           {/* Section 1 */}
           <section id="why" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              1. למה זה חשוב: ישראלים מאבדים מיליארדים
+              1. למה חשוב לבדוק זכאות אישית
             </h2>
             <p className="text-ink/70 mb-5 text-lg">
               כדאי לבדוק אם נוצלו נקודות זיכוי, ניכויים, פטורים והחזרים שמגיעים לפי נסיבותיכם.
@@ -282,29 +282,13 @@ export default function TaxesCompleteGuide() {
               </table>
             </div>
 
-            <h3 className="text-xl font-bold text-ink mb-3">נקודות זיכוי – הכלי הכי לא ידוע</h3>
+            <h3 className="text-xl font-bold text-ink mb-3">נקודות זיכוי – בדיקה לפי המצב האישי</h3>
             <p className="text-ink/70 mb-4">
-              נקודת זיכוי שווה 242 ₪ לחודש (2,904 ₪ לשנה). כולם מקבלים 2.25 נקודות בסיס,
-              ויש עשרות סיבות לנקודות נוספות. הנה הנפוצות:
+              נקודת זיכוי שווה 242 ₪ לחודש (2,904 ₪ לשנה). מספר הנקודות תלוי בין היתר
+              בתושבות, במין, בשנת הלידה של הילדים, בזהות ההורה, בחזקה, במצב המשפחתי,
+              בשירות, בלימודים ובמעמד העלייה. אין טבלה אחידה שמתאימה לכל הורה או לכל שנה.
+              בדקו את הנתונים ב<a href="https://www.gov.il/he/service/tax-credit" target="_blank" rel="noopener noreferrer" className="text-gold underline">סימולטור נקודות הזיכוי הרשמי</a>.
             </p>
-            <div className="grid md:grid-cols-2 gap-3 mb-5">
-              {[
-                { who: 'תושב ישראל', points: '2.25' },
-                { who: 'אישה עובדת', points: '0.5' },
-                { who: 'הורה לילד בשנת לידתו', points: '1.5' },
-                { who: 'הורה לילד 1–5', points: '2.5 לכל ילד' },
-                { who: 'הורה לילד 6–17', points: '1.0 לכל ילד' },
-                { who: 'הורה יחיד', points: '1.0' },
-                { who: 'אזרח חדש (3 שנים ראשונות)', points: 'עד 3.0' },
-                { who: 'שינוי תושבות', points: 'תלוי מוצא' },
-                { who: 'תואר אקדמי', points: '0.5–1.0' },
-              ].map((item) => (
-                <div key={item.who} className="bg-cream-2 border border-ink/15 rounded-none p-3 flex justify-between">
-                  <span className="text-ink text-sm">{item.who}</span>
-                  <span className="font-bold text-gold text-sm">{item.points} נקודות</span>
-                </div>
-              ))}
-            </div>
 
             <h3 className="text-xl font-bold text-ink mb-3">מי זכאי להחזר מס?</h3>
             <p className="text-ink/70 mb-5">
@@ -313,7 +297,7 @@ export default function TaxesCompleteGuide() {
               עד 6 שנים אחורה! בדוק:
             </p>
             <Link href="/personal-tax/tax-refund" className="inline-block bg-ink text-cream px-5 py-2.5 rounded-none hover:bg-ink-deep font-medium mb-4">
-              מחשבון החזר מס לשכיר ←
+              מדריך ובדיקה ברשות המסים ←
             </Link>
 
             <div className="mt-3">
@@ -390,8 +374,8 @@ export default function TaxesCompleteGuide() {
                 <h3 className="font-bold text-ink mb-3">שכיר</h3>
                 <ul className="space-y-2 text-sm text-ink/70">
                   <li>• ב.ל. ובריאות לעובד רגיל בגיל העבודה: 4.27% עד 7,703 ₪ ו־12.17% מעליו, עד תקרה של 51,910 ₪</li>
-                  <li>• ב.ל. מעסיק: 4.51% + 7.6%</li>
-                  <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
+                  <li>• חלק המעסיק: 4.51% במדרגה המופחתת ו־7.6% במדרגה הגבוהה</li>
+                  <li>• רכיב הבריאות בחלק העובד: 3.23% ו־5.17% בהתאמה</li>
                   <li>• כל הניכויים אוטומטיים מהשכר</li>
                 </ul>
               </div>
@@ -400,7 +384,7 @@ export default function TaxesCompleteGuide() {
                 <ul className="space-y-2 text-sm text-ink/70">
                   <li>• ב.ל. (הכנסות עד 7,703 ₪): 7.70%</li>
                   <li>• ב.ל. (הכנסות מעל עד 51,910 ₪): 18%</li>
-                  <li>• השיעורים כוללים ביטוח בריאות: 3.23% + 5.17%</li>
+                  <li>• רכיב הבריאות בתוך השיעורים: 3.23% ו־5.17% בהתאמה</li>
                   <li>• תשלום דרך פנקס המקדמות</li>
                 </ul>
               </div>
@@ -431,8 +415,8 @@ export default function TaxesCompleteGuide() {
             <div className="bg-yellow-50 border border-yellow-200 rounded-none p-5 mb-6">
               <p className="font-bold text-yellow-900 mb-2">שיעור מע&quot;מ 2026: 18%</p>
               <p className="text-yellow-800 text-sm">
-                מע&quot;מ עלה מ-17% ל-18% ב-1 בינואר 2025. המשמעות: כל עסק מורשה גובה 18% מע&quot;מ על
-                מחיר השירות/מוצר ומעביר לרשות המסים.
+                מע&quot;מ עלה מ-17% ל-18% ב-1 בינואר 2025. עוסק מורשה גובה מע&quot;מ על עסקאות חייבות
+                בשיעור החל עליהן ומדווח לרשות המסים; יש גם עסקאות פטורות או בשיעור אפס לפי הדין.
               </p>
             </div>
 
@@ -440,21 +424,19 @@ export default function TaxesCompleteGuide() {
               <div className="border border-ink/15 rounded-none p-5">
                 <h3 className="font-bold text-ink mb-3">עוסק פטור</h3>
                 <ul className="space-y-1 text-sm text-ink/70">
-                  <li>• מחזור עד 122,833 ₪ לשנה</li>
+                  <li>• מחזור צפוי עד 122,833 ₪ לשנה, בכפוף לסוג העיסוק ולתנאי הרישום</li>
                   <li>• פטור מגביית מע&quot;מ מלקוחות</li>
-                  <li>• אינו מחזיר מע&quot;מ תשומות</li>
-                  <li>• דיווח שנתי בלבד</li>
-                  <li>• <strong>חיסרון:</strong> בלתי מועדף על ידי עסקים (אין חשבונית מע&quot;מ)</li>
+                  <li>• אינו מנכה מס תשומות</li>
+                  <li>• מגיש הצהרה שנתית למע&quot;מ; חובות דיווח אחרות נבדקות בנפרד</li>
                 </ul>
               </div>
               <div className="border border-ink/15 rounded-none p-5">
                 <h3 className="font-bold text-ink mb-3">עוסק מורשה</h3>
                 <ul className="space-y-1 text-sm text-ink/70">
-                  <li>• מחזור מעל 122,833 ₪ לשנה (חובה)</li>
-                  <li>• גובה 18% מע&quot;מ מלקוחות</li>
-                  <li>• מחזיר מע&quot;מ על הוצאות עסק</li>
-                  <li>• דיווח דו-חודשי / חודשי</li>
-                  <li>• <strong>יתרון:</strong> לקוחות עסקיים מעדיפים (ניכוי מע&quot;מ)</li>
+                  <li>• נדרש מעל התקרה או בעיסוקים שחייבים ברישום מורשה</li>
+                  <li>• גובה מע&quot;מ בעסקאות חייבות בשיעור החל</li>
+                  <li>• עשוי לנכות מס תשומות רק בהתקיים תנאי הדין ובמסמך תקין</li>
+                  <li>• תקופת הדיווח נקבעת בתיק</li>
                 </ul>
               </div>
             </div>
@@ -509,21 +491,22 @@ export default function TaxesCompleteGuide() {
             </h2>
 
             <p className="text-ink/70 mb-5">
-              מס שבח = מס על הרווח ממכירת נדל&quot;ן. שיעורו 25%, אך קיימות פטורים ומנגנון לינארי.
+              מס שבח נבדק על השבח במכירת זכות במקרקעין. שיעור המס, ההוצאות המותרות,
+              הפטורים והחישוב הלינארי תלויים בסוג הנכס, במועדי הרכישה והמכירה ובנתוני המוכר.
             </p>
 
             <h3 className="text-xl font-bold text-ink mb-3">פטור דירת מגורים</h3>
             <p className="text-ink/70 mb-5">
-              מי שמוכר דירת מגורים יחידה, גר בה לפחות 18 חודשים מ-4 השנים האחרונות, ולא מכר
-              דירה בפטור ב-18 החודשים האחרונים – זכאי לפטור מלא. אם מכר – שיעור מס מופחת לפי
-              חישוב לינארי (לפי יחס השנים לפני 2014 ואחריהן).
+              פטור לדירת מגורים יחידה כפוף לתנאים מצטברים. בין היתר נבדקים מעמד הדירה כדירת
+              מגורים מזכה, בעלות של 18 חודשים לפחות מהמועד שבו הייתה לדירת מגורים, היותה דירה
+              יחידה והיעדר שימוש בפטור זה ב־18 החודשים הקודמים, לצד חריגים וכללים נוספים.
             </p>
 
             <h3 className="text-xl font-bold text-ink mb-3">מס לינארי (דירה שנייה+)</h3>
             <p className="text-ink/70 mb-5">
-              שבח מחולק לשניים: חלק עד 2014 (שיעור 0%) + חלק אחרי 2014 (שיעור 25%).
-              דוגמה: קנייה ב-2010, מכירה ב-2026 = 16 שנים סה&quot;כ. 4 שנים עד 2014 = 4/16 פטור.
-              12 שנים אחרי 2014 = 12/16 × 25% = 18.75% מס אפקטיבי על כלל השבח.
+              בחלק מהמקרים חל חישוב לינארי מוטב המחלק את השבח לפי תקופות, אך התוצאה אינה
+              נקבעת לפי מספר השנים בלבד. יש להביא בחשבון יום רכישה ומכירה, הוצאות מוכרות,
+              פחת, זכויות בנייה, פטורים ונתונים נוספים. אמתו את התוצאה ב<a href="https://www.gov.il/he/service/real_estate_selfshuma" target="_blank" rel="noopener noreferrer" className="text-gold underline">שומה העצמית הרשמית</a>.
             </p>
 
             <div className="flex gap-3 flex-wrap">
@@ -539,38 +522,15 @@ export default function TaxesCompleteGuide() {
           {/* Section 8 */}
           <section id="purchase-tax" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              8. מס רכישה – 8 סוגי רוכשים
+              8. מס רכישה – מדרגות וסיווג הרוכש
             </h2>
 
             <p className="text-ink/70 mb-5">
-              מס רכישה משלמים בעת קניית נדל&quot;ן. השיעורים משתנים לפי סוג הרוכש ומחיר הנכס:
+              מס רכישה מחושב במדרגות ובהתאם לסוג הזכות, שווי העסקה וסיווג הרוכש. דירה יחידה,
+              דירה נוספת, זכות שאינה דירת מגורים והקלות אישיות כפופות למסלולים ולתנאים שונים.
+              אין לפצל את כל המסלולים סביב סף יחיד, ואין להחיל את השיעור העליון על מלוא השווי
+              כאשר הדין קובע מדרגות. בדקו את הנתונים ב<a href="https://www.gov.il/he/service/real_eatate_taxsimulator" target="_blank" rel="noopener noreferrer" className="text-gold underline">סימולטור מס הרכישה הרשמי</a>.
             </p>
-
-            <div className="overflow-x-auto mb-5">
-              <table className="w-full border-collapse text-sm">
-                <thead>
-                  <tr className="bg-ink text-cream">
-                    <th className="border border-ink/20 p-3 text-right">סוג רוכש</th>
-                    <th className="border border-ink/20 p-3 text-right">מס עד 1.99M₪</th>
-                    <th className="border border-ink/20 p-3 text-right">מס מ-1.99M₪ ואילך</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ['דירה ראשונה (יחידה)', '0% עד 1,978,745 ₪ | 3.5% עד 2,347,040 | 5% עד 6,055,070 | 8%+ מעל', '5%–10%'],
-                    ['דירה שנייה (משקיע)', '8% מהשקל הראשון', '10% על כל השווי'],
-                    ['דירה יחידה – עולה חדש', 'מדרגות מופחתות מיוחדות', '5%'],
-                    ['מגרש / נכס מסחרי', '6%', '6%'],
-                  ].map(([type, low, high], i) => (
-                    <tr key={type} className={i % 2 === 0 ? 'bg-paper' : 'bg-cream-2'}>
-                      <td className="border border-ink/15 p-3 font-medium">{type}</td>
-                      <td className="border border-ink/15 p-3 text-green-700">{low}</td>
-                      <td className="border border-ink/15 p-3 text-red-700">{high}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
 
             <div className="flex gap-3 flex-wrap">
               <Link href="/real-estate/purchase-tax" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium">
@@ -585,7 +545,7 @@ export default function TaxesCompleteGuide() {
           {/* Section 9 */}
           <section id="dividend-tax" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              9. מס דיבידנד – 25%/30% לבעל שליטה
+              9. מס דיבידנד – שיעור רגיל ובעל מניות מהותי
             </h2>
 
             <p className="text-ink/70 mb-5">
@@ -599,16 +559,16 @@ export default function TaxesCompleteGuide() {
                 <p className="text-sm text-ink/70">מי שמחזיק פחות מ-10% מהחברה</p>
               </div>
               <div className="bg-cream-2 border border-ink/15 rounded-none p-4">
-                <h3 className="font-bold text-ink mb-2">בעל שליטה (10%+)</h3>
+                <h3 className="font-bold text-ink mb-2">בעל מניות מהותי</h3>
                 <p className="text-2xl font-bold text-red-700">30%</p>
-                <p className="text-sm text-ink/70">מחזיק 10%+ מהחברה (רוב בעלי עסקים)</p>
+                <p className="text-sm text-ink/70">ככלל, מחזיק במישרין או בעקיפין 10% לפחות באמצעי שליטה</p>
               </div>
             </div>
 
             <p className="text-ink/70 mb-5">
-              <strong>מס על מס:</strong> חברה שילמה 23% מס חברות על הרווח. מה שנשאר מחולק
-              כדיבידנד ומשלם עוד 30%. מס אפקטיבי כולל: 23% + (77% × 30%) = ~46.1%.
-              לכן בעלי שליטה רבים מעדיפים לקחת שכר (עד מדרגת 47%) ולא דיבידנד.
+              <strong>מיסוי דו־שלבי:</strong> החברה משלמת מס חברות על רווחיה, ובחלוקת דיבידנד
+              עשוי לחול מס נוסף אצל בעל המניות. השוואת שכר ודיבידנד תלויה גם בדמי ביטוח,
+              בניכוי ההוצאה בחברה, במס יסף ובכללי משיכה מחברה; אין העדפה אחידה לכל בעל עסק.
             </p>
 
             <div className="flex gap-3">
@@ -621,26 +581,27 @@ export default function TaxesCompleteGuide() {
           {/* Section 10 */}
           <section id="investment-gains" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              10. מס רווחי הון – 25% על השקעות
+              10. מס רווחי הון – לפי הנכס והנישום
             </h2>
 
             <p className="text-ink/70 mb-5">
-              רווח ממכירת ניירות ערך, קרנות נאמנות, קריפטו, אופציות – חייב ב-25% מס רווחי הון.
-              בעל שליטה בחברה שמשקיע דרכה: 30%.
+              שיעור המס ובסיס החישוב משתנים לפי סוג הנכס, אופן ההחזקה, זהות הנישום, הצמדה,
+              מועד הרכישה והוראות מיוחדות. אין שיעור אוניברסלי אחד לכל נייר ערך, קרן, קריפטו
+              או אופציה, ויש לבדוק גם מס יסף וחובת דיווח.
             </p>
 
             <h3 className="text-xl font-bold text-ink mb-3">מה מחשבים?</h3>
             <ul className="list-disc list-inside text-ink/70 space-y-2 mb-5">
-              <li>רווח = מחיר מכירה – מחיר קנייה (מתואם לאינפלציה)</li>
-              <li>הפסדים ניתן לקזז מול רווחים באותה שנה</li>
-              <li>הפסד שלא קוזז: אפשר להעביר 3 שנים קדימה</li>
-              <li>פטור: קרן השתלמות, פנסיה, קופות גמל</li>
+              <li>בסיס הרווח וההתאמה למדד תלויים בסוג הנכס ובהוראות החלות</li>
+              <li>קיזוז הפסדים מותר רק מול הכנסות ובהתאם לתנאי סעיף 92</li>
+              <li>הפסד הון כשיר עשוי לעבור לשנים הבאות בכפוף לדיווח ולתנאי הדין</li>
+              <li>המיסוי בחיסכון פנסיוני, קופת גמל וקרן השתלמות כפוף למסלול, לתקרות ולתנאי המשיכה</li>
             </ul>
 
             <h3 className="text-xl font-bold text-ink mb-3">אופציות 102 – הטבה מרכזית</h3>
             <p className="text-ink/70 mb-5">
-              עובדים שמקבלים אופציות במסלול 102 יכולים לשלם מס רווחי הון (25%) במקום מס
-              הכנסה (47%+). תנאי: החזקת האופציות לפחות 24 חודש לאחר ההקצאה (או הבשלה).
+              במסלול רווח הון לפי סעיף 102 חלים תנאים מהותיים על ההקצאה, הנאמן והחברה.
+              תקופת 24 החודשים נמדדת ככלל ממועד ההקצאה וההפקדה אצל הנאמן, ולא ממועד ההבשלה.
             </p>
 
             <Link href="/investments/compound-interest" className="bg-ink text-cream px-4 py-2 rounded-none hover:bg-ink-deep text-sm font-medium inline-block">
@@ -657,7 +618,7 @@ export default function TaxesCompleteGuide() {
             <div className="bg-green-50 border border-green-200 rounded-none p-6 mb-5">
               <h3 className="font-bold text-green-900 mb-3 text-lg">מה כדאי לבדוק בקרן השתלמות?</h3>
               <ul className="space-y-2 text-green-800 text-sm">
-                <li>• <strong>שכיר:</strong> מעסיק מפקיד 7.5% (פטור ממס הכנסה לעובד!)</li>
+                <li>• <strong>שכיר:</strong> כאשר קיים הסדר קרן, הפקדות מעסיק שעומדות ביחס ובתקרה עשויות לקבל טיפול מס מועדף</li>
                 <li>• <strong>שכיר:</strong> הפקדת העובד היא חלק מתנאי הקרן ואינה ניכוי מס גורף לעצמה</li>
                 <li>• <strong>תשואה:</strong> תלויה במסלול ובביצועי ההשקעות ואינה מובטחת</li>
                 <li>• <strong>משיכה:</strong> פטור על הרווחים כפוף לתקרה, לוותק ולתנאי המשיכה</li>
@@ -719,25 +680,25 @@ export default function TaxesCompleteGuide() {
           {/* Section 13 */}
           <section id="donations" className="mb-14 scroll-mt-8">
             <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6 pb-2 border-b-2 border-ink/20">
-              13. תרומות – 35% החזר ממס
+              13. תרומות – זיכוי מס בכפוף לתנאים
             </h2>
 
             <p className="text-ink/70 mb-5">
-              תרומה לגוף ציבורי מוכר (סעיף 46 לפקודת מס הכנסה) מזכה בזיכוי מס של 35% מסכום
-              התרומה. לא ניכוי – זיכוי. כלומר, הממשלה מממנת 35% מהתרומה שלך.
+              יחיד עשוי לקבל זיכוי של עד 35% מתרומה למוסד בעל אישור תקף לפי סעיף 46,
+              בכפוף למס ששולם, לסכום המזערי ולתקרות השנתיות. יש לבדוק את האישור והקבלה
+              במערכת התרומות של רשות המסים.
             </p>
 
             <div className="bg-cream-2 border border-ink/15 rounded-none p-4 mb-4">
               <p className="text-ink/70 text-sm">
-                <strong>דוגמה:</strong> תרמת 10,000 ₪ לעמוסי ישראל →
-                10,000 × 35% = 3,500 ₪ זיכוי ממס הכנסה שתקבל בהחזר.
-                עלות התרומה האפקטיבית: 6,500 ₪.
+                <strong>דוגמה מותנית:</strong> תרומה של 10,000 ₪ עשויה להקנות זיכוי של עד
+                3,500 ₪ רק אם המוסד מאושר, התרומה עומדת בתנאים ויש לנישום די מס לקיזוז.
               </p>
             </div>
 
             <p className="text-ink/70 mb-3">
-              <strong>תנאים:</strong> מינימום תרומה 207 ₪ בשנה. הסכום המוכר: עד 30% מההכנסה החייבת
-              (לשכירים) / 30% מהרווח (לעצמאיים).
+              הסכום המזערי והתקרות מתעדכנים. בדקו את הערכים לשנת המס ואת יתרת המס לתשלום
+              ב<a href="https://www.gov.il/he/pages/faq-digital-donation-system" target="_blank" rel="noopener noreferrer" className="text-gold underline">הנחיות רשות המסים</a>.
             </p>
           </section>
 
@@ -749,12 +710,12 @@ export default function TaxesCompleteGuide() {
 
             <div className="space-y-4">
               {[
-                { month: 'ינואר', action: 'בדיקת תיאום מס – אם עובד אצל 2+ מעסיקים, בצע תיאום מס כדי לא לשלם מקדמות גבוהות.' },
-                { month: 'פברואר–מרץ', action: 'הגשת דוח שנתי לשנה הקודמת (עצמאים ועובדים עם הכנסות נוספות).' },
-                { month: 'אפריל–יוני', action: 'בדיקת זכאות להחזר מס לשנה הקודמת (שכירים). טופס 135 או הגשה אוטומטית.' },
+                { month: 'ינואר', action: 'בדקו אם נדרש תיאום מס לפי מקורות ההכנסה והמשלמים שלכם.' },
+                { month: 'במהלך השנה', action: 'בדקו את המועד שפרסמה רשות המסים לשנת המס ולשיטת ההגשה הרלוונטית.' },
+                { month: 'לאחר קבלת האישורים', action: 'בדקו זכאות להחזר מס ואת מסלול ההגשה המתאים.' },
                 { month: 'יולי–ספטמבר', action: 'עדכון מקדמות מס לעצמאים (אם ההכנסה שונה מהצפוי).' },
                 { month: 'ספטמבר–נובמבר', action: 'תכנון שנתי: האם לפרוע הוצאות בשנה הנוכחית? לקנות ציוד? להפקיד לקרן השתלמות?' },
-                { month: 'נובמבר–דצמבר', action: 'הפקדה מקסימלית לקרן השתלמות ולפנסיה לפני סוף שנה. בדיקת הפסדים לקיזוז.' },
+                { month: 'נובמבר–דצמבר', action: 'בדקו תקרות שלא נוצלו, צורכי נזילות ואפשרות קיזוז הפסדים לפני פעולה.' },
               ].map((item) => (
                 <div key={item.month} className="flex gap-4 bg-paper border border-ink/15 rounded-none p-4">
                   <div className="flex-shrink-0 bg-ink text-cream rounded-none px-3 py-2 text-xs font-bold text-center min-w-[80px]">
@@ -776,7 +737,7 @@ export default function TaxesCompleteGuide() {
               {[
                 { mistake: 'לא לבדוק זכאות להחזר מס', cost: 'תלוי בנתונים', fix: 'בדוק את שנות המס שבהן ניתן להגיש בקשה.' },
                 { mistake: 'לא לעדכן נקודות זיכוי', cost: 'תלוי בזכאות', fix: 'עדכן שינוי במצב משפחתי וזכאות לתואר או להטבות אחרות.' },
-                { mistake: 'לא לבצע תיאום מס', cost: 'אלפי שקלים ינוכו יותר', fix: 'אם יש 2 מעסיקים – תיאום מס הכרחי.' },
+                { mistake: 'לא לבדוק צורך בתיאום מס', cost: 'ניכוי גבוה אפשרי', fix: 'משלם משני עשוי לנכות בשיעור גבוה; בדקו אם תיאום מס חל.' },
                 { mistake: 'לא לבדוק תנאי קרן השתלמות', cost: 'הטבה אפשרית', fix: 'בדוק תקרות, תנאי משיכה והתאמה לצורכי נזילות.' },
                 { mistake: 'לא לבדוק הטבת פנסיה כעצמאי', cost: 'תלוי בתקרה', fix: 'בדוק ניכוי וזיכוי לפי אישורי ההפקדה וההכנסה.' },
                 { mistake: 'שכחת לרשום הוצאות', cost: 'תשלום מס על הכנסה בה לא חייב', fix: 'שמור כל קבלה ורשום הוצאות מוכרות.' },
@@ -801,16 +762,16 @@ export default function TaxesCompleteGuide() {
             <div className="grid md:grid-cols-2 gap-4">
               {[
                 { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו-ברוטו', desc: 'קבלו אומדן לפי מדרגות המס, ב.ל. והנחות הפנסיה המוצגות.' },
-                { href: '/personal-tax/tax-refund', label: 'מחשבון החזר מס לשכיר', desc: 'גלה אם מגיע לך החזר מס וכמה.' },
-                { href: '/personal-tax/income-tax', label: 'מחשבון מס הכנסה', desc: 'חישוב מס הכנסה מדויק לפי מדרגות 2026.' },
-                { href: '/personal-tax/tax-credits', label: 'מחשבון נקודות זיכוי', desc: 'בדוק כמה נקודות זיכוי מגיעות לך.' },
+                { href: '/personal-tax/tax-refund', label: 'מדריך החזר מס ובדיקה רשמית', desc: 'הכינו נתונים ועברו לשירות רשות המסים.' },
+                { href: '/personal-tax/income-tax', label: 'מדריך מס הכנסה', desc: 'הבינו את המדרגות ועברו לבדיקה הרשמית.' },
+                { href: '/personal-tax/tax-credits', label: 'בדיקת נקודות זיכוי', desc: 'הכינו את הנתונים ובדקו בסימולטור הרשמי.' },
                 { href: '/self-employed/net', label: 'מדריך נטו עצמאי', desc: 'הכן את הנתונים לבדיקה אישית של התזרים הפנוי.' },
                 { href: '/self-employed/social-security', label: 'מדריך ב.ל. עצמאי', desc: 'בדוק בסיס חיוב ושיעורים באתר ביטוח לאומי.' },
                 { href: '/self-employed/vat', label: 'מחשבון מע"מ', desc: 'חישוב מע"מ עוסק מורשה/פטור.' },
                 { href: '/self-employed/tax-advances', label: 'מדריך מקדמות מס', desc: 'בדוק את הדרישה בתיק ואת אפשרות עדכונה.' },
                 { href: '/self-employed/year-end-tax-simulator', label: 'מדריך מס שנתי', desc: 'רכז נתונים לדוח השנתי ולהערכת החבות.' },
                 { href: '/self-employed/dividend-vs-salary', label: 'דיבידנד מול שכר', desc: 'מה לבדוק לפני בחירת דרך משיכה?' },
-                { href: '/real-estate/capital-gains-tax', label: 'בדיקת מס שבח', desc: 'חשב מס שבח על מכירת נדל"ן.' },
+                { href: '/real-estate/capital-gains-tax', label: 'הפניה לשומה העצמית הרשמית', desc: 'הכינו נתוני מכירה והוצאות לבדיקת מס שבח.' },
                 { href: '/real-estate/purchase-tax', label: 'מחשבון מס רכישה', desc: 'מס רכישה לפי סוג רוכש ומחיר.' },
               ].map((item) => (
                 <Link
@@ -861,15 +822,15 @@ export default function TaxesCompleteGuide() {
                 },
                 {
                   q: 'האם צריך להגיש דוח שנתי כשכיר?',
-                  a: 'לרוב השכירים – לא. הגשת דוח חובה רק אם יש הכנסות נוספות (שכ"ד, דיבידנד, עסק צדדי). אך מומלץ לבדוק זכאות להחזר מס (ניתן לדרוש בלי להגיש דוח מלא).',
+                  a: 'חובת ההגשה תלויה בסוגי ההכנסה, בסכומים, בניכוי במקור, בנכסים ובפטורים. שכיר שאינו חייב בדוח עשוי עדיין להגיש בקשה להחזר במסלול המתאים.',
                 },
                 {
                   q: 'האם שכר דירה חייב במס?',
-                  a: 'כן, אבל יש פטור. דמי שכירות עד 5,654 ₪/חודש (2026) על דירה למגורים – פטורים ממס. מעל הסף: שיטת מיסוי מיוחדת. שכ"ד מנכסים מסחריים: חייב במלואו.',
+                  a: 'הטיפול תלוי בסוג הנכס והשימוש, בזהות השוכר, בסכום הכולל ובמסלול שנבחר. גם מסלול הפטור לדירת מגורים כפוף לתנאים, לתיעוד ולצבירת הכנסות השכירות.',
                 },
                 {
                   q: 'מה ההבדל בין ניכוי מס לבין זיכוי מס?',
-                  a: 'ניכוי = מפחית את ההכנסה החייבת (חוסך לך % המס השולי שלך). זיכוי = מפחית ישירות את המס שתשלם (שקל לשקל). זיכוי עדיף – חוסך יותר.',
+                  a: 'ניכוי מפחית את ההכנסה החייבת; זיכוי מפחית את המס המחושב. הערך בפועל תלוי בשיעור המס, בתקרות ובמס שניתן לקזז, ולכן אין לקבוע שאחד תמיד עדיף.',
                 },
                 {
                   q: 'כמה אחורה ניתן לדרוש החזר מס?',
@@ -893,27 +854,23 @@ export default function TaxesCompleteGuide() {
                 },
                 {
                   q: 'האם עלות ילד במעון מוכרת לניכוי?',
-                  a: 'לא ישירות כהוצאה. אבל יש נקודות זיכוי על ילדים עד גיל 5 (2 נקודות לכל ילד) שמקטינות את המס. בנוסף – ישנה הכרה בתשלום למוסד חינוכי בתנאים מסוימים.',
+                  a: 'אין להסיק מתשלום למעון מספר קבוע של נקודות זיכוי. נקודות בגין ילדים תלויות בשנת הלידה, בזהות ההורה, בחזקה ובמצב המשפחתי; בדקו בסימולטור הרשמי.',
                 },
                 {
                   q: 'האם ניתן לבטל מקדמות מס?',
-                  a: 'ניתן לבקש הפחתת מקדמות אם ההכנסה ירדה משמעותית. ניתן גם לדחות תשלום בנסיבות מיוחדות. פנה לרשות המסים.',
+                  a: 'ניתן להגיש בקשה להקטנת מקדמות כאשר השיעור שנקבע גבוה מהמס הצפוי, בהתאם לתנאי השירות ולמסמכים הנדרשים.',
                 },
                 {
                   q: 'מה הרישוי הנדרש לפתיחת עסק?',
-                  a: 'רשות המסים: פתיחת תיק עוסק. הרשות המקומית: רישיון עסק (לחלק מסוגי העסקים). ביטוח לאומי: פתיחת תיק עצמאי. זה בסה"כ 2–3 ימי עבודה.',
+                  a: 'הרישומים תלויים בסוג הפעילות: מע״מ ומס הכנסה, מעמד בביטוח הלאומי ולעיתים רישיון עסק או אישורים מקצועיים. זמני הטיפול משתנים לפי המסלול והמסמכים.',
                 },
                 {
                   q: 'האם אפשר להגיש דוח שנתי בעצמי?',
-                  a: 'כן, דרך אתר רשות המסים (מערכת e-file). לדוח פשוט (הכנסה ממקור אחד) – ממש לא קשה. לדוח מורכב (מספר מקורות, שכ"ד, נדל"ן) – עדיף רואה חשבון.',
-                },
-                {
-                  q: 'מה ההבדל בין "מחיר למשתכן" ל"מחיר מופחת"?',
-                  a: 'מחיר למשתכן: תוכנית ממשלתית לרוכשי דירה ראשונה – קנייה ב-75%–80% ממחיר שוק. בחלק מהפרויקטים – מס רכישה מופחת (0% על חלק ממחיר).',
+                  a: 'ניתן להגיש באופן מקוון כאשר שירות רשות המסים מאפשר זאת. הטפסים והנספחים תלויים במקורות ההכנסה ובנכסים; במקרה מורכב כדאי לקבל סיוע מקצועי.',
                 },
                 {
                   q: 'האם הפרשות לפנסיה פטורות ממס?',
-                  a: 'הפרשות המעסיק לפנסיה: פטורות ממס בידי העובד בעת ההפקדה. הפקדות עצמיות: מזכות בניכוי (7% מהשכר עד תקרה). משיכת פנסיה בגיל פרישה: חייבת בחלקה, אבל יש פטור של עד 5,422 ₪/חודש (2026) — 57.5% מתקרת קצבה מזכה של 9,430 ₪/חודש.',
+                  a: 'הפקדות מעסיק ועובד מקבלות טיפול מס רק בתוך התקרות ובכפוף לתנאים. הפטור על קצבה בגיל פרישה הוא אישי ועשוי להיות מושפע מקיבוע זכויות וממענקים שנמשכו בעבר.',
                 },
               ].map((item, i) => (
                 <details key={i} className="border border-ink/15 rounded-none overflow-hidden">
@@ -930,7 +887,7 @@ export default function TaxesCompleteGuide() {
 
           {/* Bottom CTA */}
           <div className="bg-ink text-cream rounded-none p-8 text-center">
-            <h2 className="text-2xl font-bold mb-3">מוכן לחסוך מסים?</h2>
+            <h2 className="text-2xl font-bold mb-3">רוצה לבדוק את נתוני המס?</h2>
             <p className="text-cream/80 mb-6">
               בדוק את הזכויות והנתונים האישיים שלך בעזרת המדריכים והמקורות הרשמיים
             </p>
@@ -939,7 +896,7 @@ export default function TaxesCompleteGuide() {
                 href="/personal-tax/tax-refund"
                 className="bg-cream text-ink px-6 py-3 rounded-none font-bold hover:bg-paper-hover transition"
               >
-                מחשבון החזר מס ←
+                מדריך החזר מס ←
               </Link>
               <Link
                 href="/self-employed/year-end-tax-simulator"

@@ -595,7 +595,7 @@ function Section({
   };
   return (
     <div className={`rounded-none border p-5 ${bgMap[color]}`}>
-      <h3 className="font-bold text-ink text-base mb-4">{title}</h3>
+      <h2 className="font-bold text-ink text-base mb-4">{title}</h2>
       {children}
     </div>
   );

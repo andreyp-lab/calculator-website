@@ -64,7 +64,7 @@ export default function PayslipGuidePage() {
       '@type': 'Organization',
       name: 'חשבונאי',
       url: SITE_URL,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.png` },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/brand-logo.svg`, width: 512, height: 512 },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${PAGE_PATH}` },
   };
@@ -182,8 +182,8 @@ export default function PayslipGuidePage() {
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו / ברוטו' },
-              { href: '/personal-tax/tax-credits', label: 'מחשבון נקודות זיכוי' },
-              { href: '/personal-tax/tax-refund', label: 'מחשבון החזר מס' },
+              { href: '/personal-tax/tax-credits', label: 'בדיקת נקודות זיכוי ברשות המסים' },
+              { href: '/personal-tax/tax-refund', label: 'מדריך החזר מס והגשה רשמית' },
               { href: '/employee-rights/severance', label: 'מחשבון פיצויי פיטורין' },
               { href: '/insurance/pension', label: 'מדריך בדיקת פנסיה' },
               { href: '/glossary/net', label: 'נטו — הגדרה' },

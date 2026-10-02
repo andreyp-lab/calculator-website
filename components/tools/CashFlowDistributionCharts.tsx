@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
+import { getLoanDebtServiceForPeriod } from '@/lib/tools/budget-engine';
 import { formatCurrency } from '@/lib/tools/format';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { PieChart as PieIcon } from 'lucide-react';
@@ -33,11 +34,11 @@ export function CashFlowDistributionCharts() {
   }, [budget]);
 
   const expensesData = useMemo(() => {
-    if (!budget || !cashFlow) return [];
+    if (!budget || !cashFlow || !settings) return [];
 
     const breakdown: Record<string, number> = {
       'הוצאות תפעוליות': 0,
-      'שכר עובדים': 0,
+      'עלות מעסיק': 0,
       'הלוואות': 0,
       'ספקים': 0,
       'רשויות': 0,
@@ -54,21 +55,17 @@ export function CashFlowDistributionCharts() {
 
     // עובדים
     for (const emp of budget.employees) {
-      const months = emp.endMonth ? emp.endMonth - emp.startMonth : 12;
-      breakdown['שכר עובדים'] += emp.monthlySalary * months;
+      const finalMonth = Math.min(emp.endMonth ?? settings.monthsToShow - 1, settings.monthsToShow - 1);
+      const months = Math.max(0, finalMonth - emp.startMonth + 1);
+      breakdown['עלות מעסיק'] += emp.monthlySalary * months;
     }
 
     // הלוואות
-    for (const loan of budget.loans) {
-      const monthlyR = loan.annualRate / 100 / 12;
-      const monthlyPmt =
-        monthlyR === 0
-          ? loan.amount / loan.termMonths
-          : (loan.amount * (monthlyR * Math.pow(1 + monthlyR, loan.termMonths))) /
-            (Math.pow(1 + monthlyR, loan.termMonths) - 1);
-      const annualPmt = monthlyPmt * Math.min(12, loan.termMonths);
-      breakdown['הלוואות'] += annualPmt;
-    }
+    breakdown['הלוואות'] += getLoanDebtServiceForPeriod(
+      budget.loans,
+      0,
+      settings.monthsToShow,
+    ).total;
 
     // הוצאות מפורטות (CashFlow customExpenses)
     for (const exp of cashFlow.customExpenses) {
@@ -88,7 +85,7 @@ export function CashFlowDistributionCharts() {
         check: 'שיקים',
         creditcard: 'אשראי',
         loan: 'הלוואות',
-        employee: 'שכר עובדים',
+        employee: 'עלות מעסיק',
         other: 'אחר',
       };
       const cat = catLabels[exp.category] ?? 'אחר';
@@ -98,7 +95,7 @@ export function CashFlowDistributionCharts() {
     return Object.entries(breakdown)
       .filter(([, v]) => v > 0)
       .map(([name, value]) => ({ name, value }));
-  }, [budget, cashFlow]);
+  }, [budget, cashFlow, settings]);
 
   if (!settings) return null;
   const fmt = (v: number) => formatCurrency(v, settings.currency);
@@ -119,7 +116,7 @@ export function CashFlowDistributionCharts() {
             <PieIcon className="w-5 h-5" />
             התפלגות הכנסות לפי מקור
           </h3>
-          <p className="text-xs text-white/70">סה"כ: {fmt(totalIncome)}</p>
+          <p className="text-xs text-white/70">סה&quot;כ: {fmt(totalIncome)}</p>
         </div>
         <div className="p-3">
           {incomeData.length > 0 ? (
@@ -167,7 +164,7 @@ export function CashFlowDistributionCharts() {
             <PieIcon className="w-5 h-5" />
             התפלגות הוצאות לפי קטגוריה
           </h3>
-          <p className="text-xs text-white/70">סה"כ: {fmt(totalExpenses)}</p>
+          <p className="text-xs text-white/70">סה&quot;כ: {fmt(totalExpenses)}</p>
         </div>
         <div className="p-3">
           {expensesData.length > 0 ? (

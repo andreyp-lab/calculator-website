@@ -8,7 +8,7 @@ const SITE_URL = 'https://cheshbonai.co.il';
 
 // תאריך עדכון תוכן יציב (anchored) — מונע מ-Google לראות את כל הדפים כאילו "עודכנו עכשיו"
 // בכל crawl (סיגנל freshness מזויף). מעדכנים ידנית כשמרעננים תוכן בפועל.
-const CONTENT_UPDATED = new Date('2026-06-01');
+const CONTENT_UPDATED = new Date('2026-09-29');
 // רענון תוכן ייעודי לעמודים שהורחבו ב-12.6 (בלוק בידול) — סיגנל סריקה-מחדש אמיתי
 const FRESH_2026_06_12 = new Date('2026-06-12');
 
@@ -30,17 +30,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // אוטומטית מ-Registry
   const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) =>
-    make(`/blog/${post.slug}`, 'monthly', post.featured ? 0.85 : 0.75, new Date(post.date)),
+    make(`/blog/${post.slug}`, 'monthly', post.featured ? 0.85 : 0.75, new Date(post.updatedDate ?? post.date)),
   );
 
   return [
     // ===== עמודי בית =====
     make('', 'weekly', 1.0),
-    make('/about', 'monthly', 0.6),
-    make('/contact', 'monthly', 0.5),
+    make('/about', 'monthly', 0.6, new Date('2026-06-01')),
+    make('/contact', 'monthly', 0.5, new Date('2026-09-29')),
     make('/course', 'monthly', 0.7), // דף נחיתה — קורסי FinSchool
-    make('/course/self-employed', 'monthly', 0.8, new Date('2026-07-06')), // דף מכירה קורס עצמאים (משולב)
-    make('/course/business', 'monthly', 0.8, new Date('2026-07-06')), // דף מכירה קורס בעלי עסקים (משולב)
+    make('/course/self-employed', 'monthly', 0.8, new Date('2026-10-02')), // דף מכירה קורס עצמאים (משולב)
+    make('/course/business', 'monthly', 0.8, new Date('2026-10-02')), // דף מכירה קורס בעלי עסקים (משולב)
 
     // ===== Hubs קטגוריות =====
     make('/salaried', 'weekly', 0.95),
@@ -50,8 +50,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/topics', 'weekly', 0.85),
     make('/guides', 'weekly', 0.85),
     make('/tools', 'weekly', 0.90),
-    make('/business', 'weekly', 0.90, new Date('2026-07-10')), // hub: כמה עולה להקים עסק
-    ...BUSINESS_TYPES.map((b) => make(`/business/${b.slug}`, 'monthly', 0.85, new Date('2026-07-10'))),
+    make('/business', 'weekly', 0.90, new Date('2026-09-29')), // hub: כמה עולה להקים עסק
+    ...BUSINESS_TYPES.map((b) => make(`/business/${b.slug}`, 'monthly', 0.85, new Date('2026-09-29'))),
 
     // ===== קטגוריות משנה =====
     make('/employee-rights', 'weekly', 0.90),
@@ -75,14 +75,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/severance', 'monthly', 0.95),
     make('/employee-rights/salary-deductions', 'weekly', 0.95, new Date('2026-07-01')), // מחשבון ניכויים ממשכורת (חדש)
     make('/employee-rights/maternity-benefits', 'monthly', 0.90),
-    make('/employee-rights/unemployment-benefits', 'monthly', 0.90, FRESH_2026_06_12),
+    make('/employee-rights/unemployment-benefits', 'monthly', 0.90, new Date('2026-10-02')),
     make('/employee-rights/reserve-duty-pay', 'monthly', 0.90),
     make('/employee-rights/minimum-wage', 'monthly', 0.90),
     make('/employee-rights/recreation-pay', 'monthly', 0.90),
     make('/employee-rights/annual-leave', 'monthly', 0.85),
     make('/employee-rights/annual-bonus', 'monthly', 0.85),
     make('/employee-rights/sick-pay', 'monthly', 0.85),
-    make('/employee-rights/work-grant', 'monthly', 0.90),
+    make('/employee-rights/work-grant', 'monthly', 0.90, new Date('2026-10-02')),
     // כוונת "בדיקת זכאות" (~261 חשיפות/חודש) — URL ייעודי, לא טאב בתוך דף המענק.
     make('/employee-rights/work-grant/eligibility', 'monthly', 0.90, new Date('2026-07-30')),
     // כוונת "מענק עבודה שנים קודמות / רטרואקטיבית" — כולל תיקון מיתוס 6 השנים (החוק: שנתיים בלבד).
@@ -173,7 +173,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== עמודי Pillar (מדריכים מקיפים) =====
     make('/guides/mortgage-complete-guide-2026', 'monthly', 0.98),
-    make('/guides/taxes-complete-guide-2026', 'monthly', 0.98),
+    make('/guides/taxes-complete-guide-2026', 'monthly', 0.98, new Date('2026-10-02')),
     make('/guides/employee-rights-complete-guide', 'monthly', 0.98),
 
     // ===== מילון מונחים =====
@@ -185,8 +185,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ).map((t) => make(`/glossary/${t.id}`, 'yearly', 0.5)),
 
     // ===== משפטי =====
-    make('/accessibility', 'yearly', 0.3),
-    make('/privacy', 'yearly', 0.3),
-    make('/terms', 'yearly', 0.3),
+    make('/accessibility', 'yearly', 0.3, new Date('2026-06-01')),
+    make('/privacy', 'yearly', 0.3, new Date('2026-06-01')),
+    make('/terms', 'yearly', 0.3, new Date('2026-06-01')),
   ];
 }

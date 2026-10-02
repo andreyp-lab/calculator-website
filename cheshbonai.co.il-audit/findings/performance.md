@@ -1,38 +1,30 @@
-## Performance — 66
+# ביצועים ונגישות — 2.10.2026
 
-Lighthouse 12.8, מדידה מקומית (PSI API היה rate-limited ללא מפתח; אין נתוני CrUX שדה).
+המדידות הן Lighthouse מקומי ולא נתוני CrUX שדה. ציוני Performance משתנים בין הרצות ולכן יש להתייחס למדדים ולכשלים, לא לציון יחיד.
 
-| | דסקטופ | מובייל |
-|---|---|---|
-| Performance | **97** | **66** |
-| FCP | 0.8s | 3.8s |
-| **LCP** | 1.2s | **6.2s** ❌ |
-| TBT | 0ms | 80ms |
-| **CLS** | **0** ✅ | **0** ✅ |
-| Accessibility | 91 | 91 |
-| SEO | 100 | — |
-| Best Practices | 100 | — |
+## לפני התיקון
 
-CLS 0 ו-TBT 80ms מצוינים. הבעיה היחידה היא **זמן טעינה ראשוני במובייל**, ורכיב ה-LCP הוא פסקת טקסט — כלומר זה חסם רשת/פונטים, לא תמונה.
+- `/course/business`: Performance 55, נגישות 92, Best Practices 96, SEO 100; LCP/FCP כ־13.5 שניות בהרצה הבעייתית.
+- `/vehicles/fuel-cost`: Performance 81, נגישות 89, Best Practices 100, SEO 100.
+- דף הבית: Performance 49, נגישות/Best Practices/SEO 100; LCP 6.3 שניות ו־TBT 790ms.
 
-### הגורם המרכזי: gtag.js
-| משאב | גודל | לא בשימוש |
-|---|---|---|
-| `googletagmanager.com/gtag/js` | **167 KB** | 70 KB |
-| chunk `0f918l78~8~xp.js` | 108 KB | 46 KB |
-| chunk `16~dd7dj-fqnh.js` | 72 KB | 25 KB |
-| פונט woff2 #1 | 44 KB | — |
-| פונט woff2 #2 | 41 KB | — |
+בדפי הקורס נמצאו פונטים חוסמי render, בקשות יחסיות לקובצי UUID שאינם קיימים, landmark חסר, סדר כותרות וניגודיות.
 
-**סה"כ עמוד: 748 KB, מהם 167 KB (22%) הם GA4** — שהותקן ב-26.7 (`app/layout.tsx:176`, `strategy="afterInteractive"`). Lighthouse מזהה 302ms בזבוז על היעדר `preconnect` ל-`google-analytics.com`.
+## אחרי התיקון המקומי
 
-3 משפחות פונטים נטענות (`Heebo`, `JetBrains_Mono`, `Frank_Ruhl_Libre`) — 85 KB.
+- `/course/business`: Performance נע בין 83 ל־98, נגישות 100, Best Practices 100, SEO 100; אין שגיאות console וכשלי main/heading/contrast עברו.
+- `/vehicles/fuel-cost`: Performance 90, נגישות 100, SEO 100. Best Practices 96 בסביבת הפיתוח בלבד בגלל בקשת Vercel Insights שאינה זמינה מקומית.
 
-### נגישות — 91, ו-3 כשלים אמיתיים
-- **`color-contrast`: 17 אלמנטים** — בעיקר `text-ink/60` על רקע cream.
-- **`label`: 3 שדות** — `<input type="number">` במחשבון מענק עבודה ללא `<label>` משויך.
-- **`heading-order`: 2** — `<h4>` ללא `<h3>` שקדם לו.
+## פעולות שבוצעו
 
-לאתר יש דף `/accessibility` והצהרת נגישות. הפער בין ההצהרה למימוש הוא חשיפה רגולטורית, לא רק ניקוד.
+- הוסרו טעינות Google Fonts והצהרות פונט שבורות משני דפי הקורס.
+- נוספו `main`, היררכיית כותרות וצבעים נגישים יותר.
+- נוספו labels/aria-labels במחשבון הדלק ובחיפוש המשותף.
+- תוקן סדר כותרת ברכיב disclaimer וברכיב השכר.
 
----
+## נשאר למעקב
+
+- למדוד INP ו־LCP שדה לאחר הפריסה; long tasks נצפו בדף הבית, בקורס ובכלים אינטראקטיביים.
+- להוסיף מידות או aspect-ratio ל־14 תמונות בדפי הקורס.
+- לבדוק את תרומת Analytics ו־Recharts ל־JavaScript לא בשימוש.
+- אזהרות ResponsiveContainer ב־prerender נשארו; build מצליח ואין עדיין הוכחה לכשל runtime.

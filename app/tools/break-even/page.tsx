@@ -153,7 +153,7 @@ export default function BreakEvenPage() {
             <ul>
               <li>
                 <a href="/tools/business-valuation" className="text-gold hover:underline">
-                  מחשבון שווי עסק
+                  מדריך לשיטות הערכת שווי עסק
                 </a>{' '}
                 — הערכת שווי עסק לפי DCF, EBITDA ומכפיל הכנסות
               </li>

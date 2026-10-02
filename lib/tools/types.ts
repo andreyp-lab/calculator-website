@@ -113,6 +113,7 @@ export interface Employee {
   id: string;
   name: string;
   department: Department;
+  /** עלות מעסיק חודשית כוללת שהמשתמש הזין (לא שכר ברוטו). */
   monthlySalary: number;
   startMonth: number; // 0-11
   endMonth: number | null; // null = ongoing

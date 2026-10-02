@@ -98,13 +98,13 @@ export function EmployeeManager() {
 
       {budget.employees.length > 0 && (
         <div className="bg-cream-2 border border-ink/15 p-2 mb-4 text-sm flex justify-between">
-          <span className="text-ink/70">סה"כ שכר חודשי:</span>
+          <span className="text-ink/70">סה&quot;כ עלות מעסיק חודשית:</span>
           <span className="font-bold text-ink">{fmt(totalMonthly)}</span>
         </div>
       )}
 
       <div className="bg-cream-2 border border-ink/15 p-2 mb-3 text-xs text-ink">
-        💡 שכר העובדים מתווסף אוטומטית ל-P&L לפי המחלקה: <strong>מכירות/מנהל → תפעול</strong>,{' '}
+        💡 יש להזין עלות מעסיק כוללת: ברוטו, ביטוח לאומי מעסיק, פנסיה, פיצויים והטבות לפי נתוני העובד. העלות מתווספת ל-P&amp;L לפי המחלקה: <strong>מכירות/מנהל → תפעול</strong>,{' '}
         <strong>שיווק → שיווק</strong>, <strong>פיתוח → R&D</strong>,{' '}
         <strong>תפעול → COGS</strong>
       </div>
@@ -150,7 +150,7 @@ export function EmployeeManager() {
               </p>
             </div>
             <div>
-              <label htmlFor="employeemanager-bbe7c0" className="block text-xs text-ink/70 mb-1">שכר ברוטו חודשי (₪) *</label>
+              <label htmlFor="employeemanager-bbe7c0" className="block text-xs text-ink/70 mb-1">עלות מעסיק חודשית כוללת (₪) *</label>
               <input id="employeemanager-bbe7c0"
                 type="number"
                 value={form.monthlySalary || ''}
@@ -217,7 +217,7 @@ export function EmployeeManager() {
       {budget.employees.length === 0 ? (
         <div className="text-center py-6 text-ink/70 text-sm">
           <Users className="w-12 h-12 mx-auto mb-2 opacity-30" />
-          <p>אין עובדים. הוסף עובד כדי לראות את עלות השכר ב-P&L.</p>
+          <p>אין עובדים. הוסף עובד כדי לראות את עלות המעסיק ב-P&amp;L.</p>
         </div>
       ) : (
         <div className="space-y-3">

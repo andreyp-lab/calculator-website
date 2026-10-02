@@ -51,6 +51,22 @@ export interface MultiMethodForecastResult {
   insights: string[];
 }
 
+/** Aggregate monthly values into real calendar/fiscal-year buckets. */
+export function aggregateMonthlyValuesToAnnual(
+  values: number[],
+  firstYear: number,
+): { values: number[]; years: number[] } {
+  const annualValues: number[] = [];
+  const years: number[] = [];
+  const completeYears = Math.floor(values.length / 12);
+  for (let yearIndex = 0; yearIndex < completeYears; yearIndex++) {
+    const offset = yearIndex * 12;
+    years.push(firstYear + Math.floor(offset / 12));
+    annualValues.push(values.slice(offset, offset + 12).reduce((sum, value) => sum + value, 0));
+  }
+  return { values: annualValues, years };
+}
+
 // ============================================================
 // STATISTICAL HELPERS
 // ============================================================

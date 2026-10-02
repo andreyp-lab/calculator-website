@@ -27,7 +27,7 @@ export default function IronSwordsPage() {
           <div className="border border-ink/20 p-6">
             <h2 className="text-xl font-bold text-ink mb-2">שירתתם במילואים?</h2>
             <p>אפשר לאמוד את תגמול המילואים לפי ההכנסה והימים ששירתתם. בדקו זכאות וסכום סופי מול הביטוח הלאומי.</p>
-            <Link className="inline-block mt-4 underline text-gold" href="/employee-rights/reserve-duty-pay">מחשבון תגמולי מילואים</Link>
+            <Link className="inline-block mt-4 underline text-gold" href="/employee-rights/reserve-duty-pay">מדריך והפניה למחשבון תגמולי מילואים</Link>
           </div>
         </section>
         <BreadcrumbSchema items={[{ name: 'דף הבית', url: 'https://cheshbonai.co.il' }, { name: 'עדכוני שוק', url: 'https://cheshbonai.co.il/news' }, { name: 'סיוע בעקבות המלחמה', url: 'https://cheshbonai.co.il/news/iron-swords' }]} />

@@ -90,7 +90,7 @@ export default function OpeningBusinessPage() {
       '@type': 'Organization',
       name: 'חשבונאי',
       url: SITE_URL,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.png` },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/brand-logo.svg`, width: 512, height: 512 },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${PAGE_PATH}` },
   };
@@ -751,7 +751,7 @@ export default function OpeningBusinessPage() {
             </p>
             <p>
               ואם ההקמה עצמה דורשת מימון — ציוד, שיפוץ או הון חוזר — התחנה הראשונה היא{' '}
-              <Link href="/tools/loan-eligibility">בודק הזכאות להלוואות בערבות המדינה</Link>. מי
+              <Link href="/tools/loan-eligibility">מדריך למסלולים ולתנאים בקרן בערבות המדינה</Link>. מי
               שמעדיף שלא להתמודד לבד מול הקרן והבנקים יכול להיעזר ב
               <a
                 href="https://profitmargin.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%91%D7%A2%D7%A8%D7%91%D7%95%D7%AA-%D7%94%D7%9E%D7%93%D7%99%D7%A0%D7%94/"

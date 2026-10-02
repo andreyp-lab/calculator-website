@@ -6,14 +6,14 @@ import { FUEL_PRICES_2026 } from '@/lib/calculators/vehicles';
 import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 export const metadata: Metadata = {
-  title: 'מחשבון עלות נסיעה — בנזין, סולר וחשמל',
-  description: 'הזינו קילומטרים בחודש, צריכת אנרגיה ומחיר בפועל כדי להעריך עלות חודשית ושנתית של נסיעה.',
+  title: 'מחשבון דלק 2026 — עלות נסיעה לק״מ',
+  description: 'מחשבון דלק ועלות נסיעה: הזינו קילומטרים, צריכה ומחיר בפועל לקבלת אומדן חודשי ושנתי לבנזין, סולר או חשמל.',
   alternates: { canonical: '/vehicles/fuel-cost' },
 };
 
 export default function FuelCostPage() {
   return <CalculatorLayout
-    title="מחשבון עלות נסיעה"
+    title="מחשבון דלק ועלות נסיעה"
     description="אומדן הוצאה לפי נסועה, צריכה ומחיר ליחידת אנרגיה."
     breadcrumbs={[
       { label: 'דף הבית', href: '/' },

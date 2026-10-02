@@ -35,7 +35,7 @@ export function simulateCapTable(snapshot: CapTableSnapshot): CapTableState {
   const perRound: CapTableState['perRound'] = [];
 
   // Initial state
-  let shareholders: Shareholder[] = snapshot.initialShareholders.map((s) => ({ ...s }));
+  const shareholders: Shareholder[] = snapshot.initialShareholders.map((s) => ({ ...s }));
 
   // Initial snapshot (before any round)
   const initialTotal = shareholders.reduce((s, sh) => s + sh.shares, 0);
@@ -173,6 +173,20 @@ export function calculateExitWaterfall(
     'esop',
   ];
 
+  // Non-participating preferred must be allowed to convert to common when the
+  // as-converted proceeds exceed its contractual preference.
+  const convertsToCommon = new Set(
+    shareholders
+      .filter((sh) => {
+        const round = roundsByClass.get(sh.shareClass);
+        if (!round || round.participating || !round.liquidationPreference) return false;
+        const preference = round.investmentAmount * round.liquidationPreference;
+        const asConverted = totalShares > 0 ? exitValue * (sh.shares / totalShares) : 0;
+        return asConverted > preference;
+      })
+      .map((sh) => sh.id),
+  );
+
   // STEP 1: Liquidation preferences (preferred only, latest first)
   for (const cls of orderedClasses) {
     if (cls === 'common' || cls === 'esop') continue;
@@ -181,6 +195,7 @@ export function calculateExitWaterfall(
 
     const lpShareholders = shareholders.filter((s) => s.shareClass === cls);
     for (const sh of lpShareholders) {
+      if (convertsToCommon.has(sh.id)) continue;
       const lpAmount = round.investmentAmount * round.liquidationPreference;
       const actual = Math.min(lpAmount, remainingValue);
       payouts.push({
@@ -200,6 +215,7 @@ export function calculateExitWaterfall(
     // Determine who participates in pro-rata
     const participants = shareholders.filter((sh) => {
       if (sh.shareClass === 'common' || sh.shareClass === 'esop') return true;
+      if (convertsToCommon.has(sh.id)) return true;
       const round = roundsByClass.get(sh.shareClass);
       return round?.participating === true;
     });

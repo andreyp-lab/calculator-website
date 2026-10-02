@@ -64,7 +64,7 @@ export default function RentalIncomeTaxPage() {
       '@type': 'Organization',
       name: 'חשבונאי',
       url: SITE_URL,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.png` },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/brand-logo.svg`, width: 512, height: 512 },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${PAGE_PATH}` },
   };

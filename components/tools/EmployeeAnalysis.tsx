@@ -2,22 +2,9 @@
 
 import { useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
-import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
 import { formatCurrency } from '@/lib/tools/format';
-import {
-  PieChart,
-  Pie,
-  Cell,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
-import { Users, TrendingUp } from 'lucide-react';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { Users } from 'lucide-react';
 import type { Department } from '@/lib/tools/types';
 
 const DEPARTMENT_LABELS: Record<Department, string> = {
@@ -36,250 +23,102 @@ const DEPARTMENT_COLORS: Record<Department, string> = {
   administration: '#ef4444',
 };
 
-// אחוזי השקעה משוערים בהכנסות לפי מחלקה
-const REVENUE_ATTRIBUTION: Record<Department, number> = {
-  sales: 0.4,
-  marketing: 0.3,
-  development: 0.2,
-  operations: 0.1,
-  administration: 0,
-};
-
 export function EmployeeAnalysis() {
   const { budget, settings } = useTools();
 
   const analysis = useMemo(() => {
-    if (!budget || !settings) return null;
-    if (budget.employees.length === 0) return null;
+    if (!budget || !settings || budget.employees.length === 0) return null;
+    const byDept = new Map<Department, { count: number; monthlyCost: number; periodCost: number }>();
 
-    const monthly = calculateAllMonths(budget, settings);
-    const totals = calculateBudgetTotals(monthly);
-    const totalIncome = totals.income;
-
-    // קיבוץ לפי מחלקות
-    const byDept: Record<Department, {
-      count: number;
-      monthlyCost: number;
-      annualCost: number;
-      revenue: number;
-      efficiency: number;
-    }> = {
-      sales: { count: 0, monthlyCost: 0, annualCost: 0, revenue: 0, efficiency: 0 },
-      marketing: { count: 0, monthlyCost: 0, annualCost: 0, revenue: 0, efficiency: 0 },
-      development: { count: 0, monthlyCost: 0, annualCost: 0, revenue: 0, efficiency: 0 },
-      operations: { count: 0, monthlyCost: 0, annualCost: 0, revenue: 0, efficiency: 0 },
-      administration: { count: 0, monthlyCost: 0, annualCost: 0, revenue: 0, efficiency: 0 },
-    };
-
-    for (const emp of budget.employees) {
-      const dept = byDept[emp.department];
-      dept.count++;
-      const months = emp.endMonth ?? settings.monthsToShow - 1;
-      const duration = Math.max(0, Math.min(months, settings.monthsToShow - 1) - emp.startMonth + 1);
-      dept.monthlyCost += emp.monthlySalary;
-      dept.annualCost += emp.monthlySalary * duration;
+    for (const employee of budget.employees) {
+      const current = byDept.get(employee.department) ?? {
+        count: 0,
+        monthlyCost: 0,
+        periodCost: 0,
+      };
+      const finalMonth = Math.min(
+        employee.endMonth ?? settings.monthsToShow - 1,
+        settings.monthsToShow - 1,
+      );
+      const duration = Math.max(0, finalMonth - employee.startMonth + 1);
+      current.count += 1;
+      current.monthlyCost += employee.monthlySalary;
+      current.periodCost += employee.monthlySalary * duration;
+      byDept.set(employee.department, current);
     }
 
-    // הקצאת הכנסות + יחס יעילות
-    let totalEmployeeCost = 0;
-    for (const dept of Object.keys(byDept) as Department[]) {
-      byDept[dept].revenue = totalIncome * REVENUE_ATTRIBUTION[dept];
-      byDept[dept].efficiency =
-        byDept[dept].annualCost > 0 ? byDept[dept].revenue / byDept[dept].annualCost : 0;
-      totalEmployeeCost += byDept[dept].annualCost;
-    }
-
-    const totalCount = budget.employees.length;
-    const otherCosts = totals.totalExpenses - totalEmployeeCost;
-    const profit = totalIncome - totals.totalExpenses;
-
+    const departments = Array.from(byDept.entries());
     return {
-      byDept,
-      totalCount,
-      totalEmployeeCost,
-      otherCosts,
-      profit,
-      totalIncome,
+      departments,
+      totalCount: budget.employees.length,
+      totalPeriodCost: departments.reduce((sum, [, dept]) => sum + dept.periodCost, 0),
     };
   }, [budget, settings]);
 
   if (!analysis || !settings) return null;
-
-  const fmt = (v: number) => formatCurrency(v, settings.currency);
-
-  const activeDepts = (Object.entries(analysis.byDept) as [Department, typeof analysis.byDept[Department]][])
-    .filter(([, d]) => d.count > 0);
-
-  // Department distribution data
-  const distributionData = activeDepts.map(([dept, d]) => ({
-    name: DEPARTMENT_LABELS[dept],
-    value: d.count,
-    color: DEPARTMENT_COLORS[dept],
+  const fmt = (value: number) => formatCurrency(value, settings.currency);
+  const distributionData = analysis.departments.map(([department, data]) => ({
+    name: DEPARTMENT_LABELS[department],
+    value: data.count,
+    color: DEPARTMENT_COLORS[department],
   }));
-
-  // Efficiency data
-  const efficiencyData = activeDepts.map(([dept, d]) => ({
-    name: DEPARTMENT_LABELS[dept],
-    efficiency: Number(d.efficiency.toFixed(2)),
-    color: DEPARTMENT_COLORS[dept],
-  }));
-
-  // Cost vs Revenue
-  const costRevenueData = [
-    {
-      name: 'עלויות עובדים',
-      value: Math.max(0, analysis.totalEmployeeCost),
-      color: '#102219',
-    },
-    {
-      name: 'עלויות אחרות',
-      value: Math.max(0, analysis.otherCosts),
-      color: '#ef4444',
-    },
-    {
-      name: 'רווח',
-      value: Math.max(0, analysis.profit),
-      color: '#10b981',
-    },
-  ].filter((d) => d.value > 0);
-
-  function getEfficiencyClass(eff: number) {
-    if (eff > 1.5) return 'bg-emerald-100 text-emerald-800 border-emerald-300';
-    if (eff > 0.8) return 'bg-amber-100 text-amber-800 border-amber-300';
-    if (eff > 0) return 'bg-red-100 text-red-800 border-red-300';
-    return 'bg-cream-2 text-ink/70 border-ink/15';
-  }
-
-  function getEfficiencyLabel(eff: number) {
-    if (eff > 1.5) return 'גבוה';
-    if (eff > 0.8) return 'בינוני';
-    if (eff > 0) return 'נמוך';
-    return '—';
-  }
 
   return (
     <div className="space-y-4">
       <div className="bg-paper border-2 border-ink/15 p-5 shadow-sm">
         <div className="flex items-center gap-2 mb-4">
           <Users className="w-5 h-5 text-gold" />
-          <h3 className="font-bold text-lg text-ink">ניתוח עובדים</h3>
+          <h3 className="font-bold text-lg text-ink">ניתוח עלויות מעסיק</h3>
           <span className="text-sm text-ink/70">({analysis.totalCount} עובדים)</span>
         </div>
-
-        {/* טבלת סיכום */}
-        <div className="overflow-x-auto mb-4">
+        <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-cream-2">
               <tr>
                 <th className="text-right px-3 py-2">מחלקה</th>
                 <th className="text-center px-3 py-2">עובדים</th>
-                <th className="text-right px-3 py-2">עלות חודשית</th>
-                <th className="text-right px-3 py-2">עלות שנתית</th>
-                <th className="text-right px-3 py-2">תרומה להכנסות</th>
-                <th className="text-center px-3 py-2">יעילות</th>
+                <th className="text-right px-3 py-2">עלות מעסיק חודשית</th>
+                <th className="text-right px-3 py-2">עלות בתקופה</th>
               </tr>
             </thead>
             <tbody>
-              {activeDepts.map(([dept, d]) => (
-                <tr key={dept} className="border-b border-ink/10 hover:bg-cream-2">
-                  <td className="px-3 py-2 font-medium" style={{ color: DEPARTMENT_COLORS[dept] }}>
-                    {DEPARTMENT_LABELS[dept]}
-                  </td>
-                  <td className="px-3 py-2 text-center">{d.count}</td>
-                  <td className="px-3 py-2">{fmt(d.monthlyCost)}</td>
-                  <td className="px-3 py-2">{fmt(d.annualCost)}</td>
-                  <td className="px-3 py-2 text-emerald-800">{fmt(d.revenue)}</td>
-                  <td className="px-3 py-2 text-center">
-                    <span
-                      className={`inline-block px-2 py-0.5 text-xs border ${getEfficiencyClass(
-                        d.efficiency,
-                      )}`}
-                    >
-                      {getEfficiencyLabel(d.efficiency)} ({d.efficiency.toFixed(2)}x)
-                    </span>
-                  </td>
+              {analysis.departments.map(([department, data]) => (
+                <tr key={department} className="border-b border-ink/10">
+                  <td className="px-3 py-2 font-medium">{DEPARTMENT_LABELS[department]}</td>
+                  <td className="px-3 py-2 text-center">{data.count}</td>
+                  <td className="px-3 py-2">{fmt(data.monthlyCost)}</td>
+                  <td className="px-3 py-2">{fmt(data.periodCost)}</td>
                 </tr>
               ))}
             </tbody>
             <tfoot className="bg-cream-2 font-bold">
               <tr>
-                <td className="px-3 py-2">סה"כ</td>
+                <td className="px-3 py-2">סה&quot;כ</td>
                 <td className="px-3 py-2 text-center">{analysis.totalCount}</td>
-                <td className="px-3 py-2">{fmt(analysis.totalEmployeeCost / 12)}</td>
-                <td className="px-3 py-2">{fmt(analysis.totalEmployeeCost)}</td>
-                <td className="px-3 py-2 text-emerald-800">{fmt(analysis.totalIncome)}</td>
-                <td></td>
+                <td className="px-3 py-2">—</td>
+                <td className="px-3 py-2">{fmt(analysis.totalPeriodCost)}</td>
               </tr>
             </tfoot>
           </table>
         </div>
       </div>
 
-      {/* גרפים */}
-      <div className="grid md:grid-cols-3 gap-4">
-        {/* Distribution */}
-        <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
-          <h4 className="font-semibold text-ink mb-2 text-sm">חלוקת עובדים</h4>
-          <ResponsiveContainer width="100%" height={220}>
-            <PieChart>
-              <Pie
-                data={distributionData}
-                dataKey="value"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label={(e) => e.name}
-              >
-                {distributionData.map((d, i) => (
-                  <Cell key={i} fill={d.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Efficiency */}
-        <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
-          <h4 className="font-semibold text-ink mb-2 text-sm">יחס יעילות (הכנסות/עלות)</h4>
-          <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={efficiencyData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip formatter={(v) => `${v}x`} />
-              <Bar dataKey="efficiency" fill="#8E6824" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Cost Structure */}
-        <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
-          <h4 className="font-semibold text-ink mb-2 text-sm">מבנה עלויות</h4>
-          <ResponsiveContainer width="100%" height={220}>
-            <PieChart>
-              <Pie
-                data={costRevenueData}
-                dataKey="value"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label={(e) => `${((Number(e.value) / analysis.totalIncome) * 100).toFixed(0)}%`}
-              >
-                {costRevenueData.map((d, i) => (
-                  <Cell key={i} fill={d.color} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(v) => fmt(Number(v))} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+      <div className="bg-paper border-2 border-ink/15 p-4 shadow-sm">
+        <h4 className="font-semibold text-ink mb-2 text-sm">חלוקת עובדים לפי מחלקה</h4>
+        <ResponsiveContainer width="100%" height={220}>
+          <PieChart>
+            <Pie data={distributionData} dataKey="value" cx="50%" cy="50%" outerRadius={80} label={(entry) => entry.name}>
+              {distributionData.map((entry) => (
+                <Cell key={entry.name} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
       </div>
 
       <div className="bg-cream-2 border border-ink/15 p-3 text-xs text-ink">
-        💡 <strong>הערה:</strong> תרומת ההכנסות מבוססת על אחוזי הקצאה מקובלים: מכירות 40%,
-        שיווק 30%, פיתוח 20%, תפעול 10%. ניתן להתאים זאת לעסק שלך.
+        הנתונים מציגים עלויות שהוזנו בלבד. אין ייחוס שרירותי של הכנסות או תפוקה למחלקות.
       </div>
     </div>
   );

@@ -1,12 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import {
   calculateSoloCashFlow,
+  expandAllItems,
   expandRecurringItem,
   getCategoryBreakdown,
   createSampleSoloData,
 } from '@/lib/tools/solo-cashflow-engine';
 import {
   generateBudgetFromWizard,
+  annualGrowthToMonthlyPct,
   summarizeWizard,
   createDefaultAnswers,
   suggestDefaults,
@@ -46,6 +48,46 @@ describe('Solo Cash Flow Engine', () => {
         '2026-12-31',
       );
       expect(items).toHaveLength(12);
+    });
+
+    it('preserves month-end recurrence without drifting into later months', () => {
+      const items = expandRecurringItem(
+        {
+          id: 'month-end',
+          date: '2026-01-31',
+          type: 'in',
+          amount: 100,
+          category: 'sales',
+          description: 'Month end',
+          recurring: 'monthly',
+        },
+        '2026-01-01',
+        '2026-04-30',
+      );
+      expect(items.map((item) => item.date)).toEqual([
+        '2026-01-31',
+        '2026-02-28',
+        '2026-03-31',
+        '2026-04-30',
+      ]);
+    });
+
+    it('keeps a 12-month projection to exactly 12 monthly occurrences', () => {
+      const data = createSampleSoloData();
+      data.startDate = '2026-01-01';
+      data.monthsToProject = 12;
+      data.items = [
+        {
+          id: 'monthly',
+          date: '2026-01-01',
+          type: 'in',
+          amount: 100,
+          category: 'sales',
+          description: 'Monthly',
+          recurring: 'monthly',
+        },
+      ];
+      expect(expandAllItems(data)).toHaveLength(12);
     });
 
     it('expands quarterly to 4 occurrences in a year', () => {
@@ -168,8 +210,36 @@ describe('Budget Wizard Engine', () => {
     it('calculates annual revenue correctly', () => {
       const answers = createDefaultAnswers();
       answers.monthlyRevenue = 50000;
+      answers.expectedGrowthPct = 0;
       const summary = summarizeWizard(answers);
       expect(summary.totalAnnualRevenue).toBe(600000);
+    });
+
+    it('uses detailed entries in the review summary', () => {
+      const answers = createDefaultAnswers();
+      answers.incomeMode = 'detailed';
+      answers.incomeStreams = [
+        { name: 'A', monthlyAmount: 1000, paymentTermsDays: 0, growthPctMonthly: 0 },
+        { name: 'B', monthlyAmount: 2000, paymentTermsDays: 0, growthPctMonthly: 0 },
+      ];
+      answers.employeesMode = 'detailed';
+      answers.employees = [
+        {
+          name: 'Employee',
+          position: 'Role',
+          department: 'administration',
+          monthlySalary: 500,
+        },
+      ];
+      const summary = summarizeWizard(answers);
+      expect(summary.totalAnnualRevenue).toBe(36000);
+      expect(summary.totalAnnualSalaries).toBe(6000);
+    });
+
+    it('converts annual growth to the equivalent compounded monthly rate', () => {
+      const monthly = annualGrowthToMonthlyPct(12);
+      expect(monthly).toBeCloseTo(0.948879, 5);
+      expect(Math.pow(1 + monthly / 100, 12) - 1).toBeCloseTo(0.12, 10);
     });
 
     it('flags low margin', () => {

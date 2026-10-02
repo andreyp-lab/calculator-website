@@ -7,24 +7,23 @@
 
 import { useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
-import { calculateAllMonths, calculateBudgetTotals } from '@/lib/tools/budget-engine';
+import {
+  calculateAllMonths,
+  calculateBudgetTotals,
+  getLoanDebtServiceForPeriod,
+} from '@/lib/tools/budget-engine';
 import { calculateCashFlow } from '@/lib/tools/cashflow-engine';
 import {
   calculateRatios,
   calculateZScore,
-  calculateHealthScore,
-  calculateCreditRating,
   type RatioInputData,
 } from '@/lib/tools/financial-analyzer';
-import { formatCurrency } from '@/lib/tools/format';
 import {
   TrendingUp,
   TrendingDown,
   Wallet,
   Banknote,
-  Trophy,
   Shield,
-  Activity,
 } from 'lucide-react';
 
 export function UnifiedKPIBar() {
@@ -41,15 +40,7 @@ export function UnifiedKPIBar() {
 
     let analysis = null;
     if (balanceSheet && balanceSheet.totalAssets > 0) {
-      const annualDebtPayment = budget.loans.reduce((sum, loan) => {
-        const r = loan.annualRate / 100 / 12;
-        const n = loan.termMonths;
-        const pmt =
-          r === 0
-            ? loan.amount / n
-            : (loan.amount * (r * Math.pow(1 + r, n))) / (Math.pow(1 + r, n) - 1);
-        return sum + pmt * 12;
-      }, 0);
+      const annualDebtPayment = getLoanDebtServiceForPeriod(budget.loans).total;
 
       const input: RatioInputData = {
         revenue: totals.income,
@@ -65,10 +56,8 @@ export function UnifiedKPIBar() {
       };
 
       const ratios = calculateRatios(input);
-      const health = calculateHealthScore(ratios);
-      const credit = calculateCreditRating(ratios, health);
       const zScore = calculateZScore(input, 'private');
-      analysis = { ratios, health, credit, zScore };
+      analysis = { ratios, zScore };
     }
 
     return {
@@ -85,7 +74,6 @@ export function UnifiedKPIBar() {
 
   if (!data || !settings) return null;
 
-  const fmt = (v: number) => formatCurrency(v, settings.currency);
   const fmtCompact = (v: number) => {
     const abs = Math.abs(v);
     if (abs >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`;
@@ -109,12 +97,6 @@ export function UnifiedKPIBar() {
         ? 'amber'
         : 'red';
 
-  const ratingColor = !data.analysis
-    ? 'gray'
-    : data.analysis.credit.investmentGrade
-      ? 'emerald'
-      : 'amber';
-
   const zScoreColor = !data.analysis
     ? 'gray'
     : data.analysis.zScore.zone === 'safe'
@@ -131,7 +113,7 @@ export function UnifiedKPIBar() {
           {settings.companyName || 'החברה'} • {settings.fiscalYear}
         </span>
       </div>
-      <div className="grid grid-cols-3 md:grid-cols-6 gap-0 divide-x divide-cream/10">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-0 divide-x divide-cream/10">
         <KPI
           icon={TrendingUp}
           label="הכנסות"
@@ -160,13 +142,6 @@ export function UnifiedKPIBar() {
           }
           subValue="כיסוי חוב"
           color={dscrColor}
-        />
-        <KPI
-          icon={Trophy}
-          label="דירוג אשראי"
-          value={data.analysis?.credit.rating ?? '-'}
-          subValue={data.analysis?.credit.outlook ?? 'מלא מאזן'}
-          color={ratingColor}
         />
         <KPI
           icon={Shield}

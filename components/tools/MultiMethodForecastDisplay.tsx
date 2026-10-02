@@ -3,7 +3,10 @@
 import { useMemo, useState } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
 import { calculateAllMonths } from '@/lib/tools/budget-engine';
-import { forecastMultiMethod } from '@/lib/tools/forecast-multi-method';
+import {
+  aggregateMonthlyValuesToAnnual,
+  forecastMultiMethod,
+} from '@/lib/tools/forecast-multi-method';
 import { formatCurrency } from '@/lib/tools/format';
 import {
   ResponsiveContainer,
@@ -31,48 +34,18 @@ export function MultiMethodForecastDisplay() {
     const monthly = calculateAllMonths(budget, settings);
     if (monthly.length < 2) return null;
 
-    // Aggregate to annual values
-    const valuesByYear: Record<number, number[]> = {};
-    monthly.forEach((m) => {
-      const year = settings.fiscalYear + Math.floor(m.monthIndex / 12);
-      if (!valuesByYear[year]) valuesByYear[year] = [];
-      const value =
-        metric === 'revenue' ? m.income : metric === 'netProfit' ? m.netProfit : m.ebitda;
-      valuesByYear[year].push(value);
-    });
-
-    const annualValues: number[] = [];
-    const sortedYears = Object.keys(valuesByYear)
-      .map(Number)
-      .sort((a, b) => a - b);
-    sortedYears.forEach((y) => {
-      annualValues.push(valuesByYear[y].reduce((s, v) => s + v, 0));
-    });
+    const monthlyValues = monthly.map((m) =>
+      metric === 'revenue' ? m.income : metric === 'netProfit' ? m.netProfit : m.ebitda,
+    );
+    const annual = aggregateMonthlyValuesToAnnual(monthlyValues, settings.fiscalYear);
 
     // Need at least 2 years for forecast
-    if (annualValues.length < 2) {
-      // Use monthly trend instead - take last 12 months and project
-      const last12 = monthly.slice(-12).map((m) =>
-        metric === 'revenue' ? m.income : metric === 'netProfit' ? m.netProfit : m.ebitda,
-      );
-      // For monthly forecast, use 4 quarters as data points
-      const quarters = [0, 1, 2, 3].map((q) => last12.slice(q * 3, (q + 1) * 3).reduce((s, v) => s + v, 0));
-      try {
-        return forecastMultiMethod(
-          quarters,
-          settings.fiscalYear,
-          yearsAhead,
-          metric === 'revenue' ? 'הכנסות' : metric === 'netProfit' ? 'רווח נקי' : 'EBITDA',
-        );
-      } catch {
-        return null;
-      }
-    }
+    if (annual.values.length < 2) return null;
 
     try {
       return forecastMultiMethod(
-        annualValues,
-        sortedYears[0],
+        annual.values,
+        annual.years[0],
         yearsAhead,
         metric === 'revenue' ? 'הכנסות' : metric === 'netProfit' ? 'רווח נקי' : 'EBITDA',
       );
@@ -85,7 +58,7 @@ export function MultiMethodForecastDisplay() {
     return (
       <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6 text-center">
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-2" />
-        <p className="text-amber-900">חסרים נתונים לחיזוי - דרושות לפחות 2 נקודות זמן</p>
+        <p className="text-amber-900">חסרים נתונים לחיזוי - דרושות לפחות 2 שנים מלאות</p>
       </div>
     );
   }

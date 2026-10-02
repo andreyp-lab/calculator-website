@@ -193,7 +193,7 @@ export default function BudgetWizardPage() {
           {step === 5 && <MarketingStep answers={answers} onUpdate={update} />}
           {step === 6 && <RndStep answers={answers} onUpdate={update} />}
           {step === 7 && <LoansStep answers={answers} onUpdate={update} />}
-          {step === 8 && <ReviewStep answers={answers} summary={summary} onApply={applyAndContinue} />}
+          {step === 8 && <ReviewStep answers={answers} summary={summary} />}
         </div>
       </div>
 
@@ -412,7 +412,7 @@ function RevenueStep({
               ))}
             </div>
             <p className="text-xs text-ink/70 mt-1">
-              נחלק את הסכום בין המקורות אוטומטית. לחלוקה מדויקת השתמש ב"מפורט".
+              נחלק את הסכום בין המקורות אוטומטית. לחלוקה מדויקת השתמש ב&quot;מפורט&quot;.
             </p>
           </div>
         </>
@@ -421,7 +421,7 @@ function RevenueStep({
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">מקורות הכנסה ({answers.incomeStreams.length})</span>
             <span className="text-sm text-ink/70">
-              סה"כ חודשי: ₪{detailedTotal.toLocaleString('he-IL')}
+              סה&quot;כ חודשי: ₪{detailedTotal.toLocaleString('he-IL')}
             </span>
           </div>
 
@@ -544,7 +544,7 @@ function CogsStep({
   return (
     <div className="space-y-4">
       <p className="text-ink/70 text-sm">
-        עלות המכר היא העלויות הישירות של ייצור המוצר/שירות (חומרי גלם, תשלומים לספקים, עמלות וכו').
+        עלות המכר היא העלויות הישירות של ייצור המוצר/שירות (חומרי גלם, תשלומים לספקים, עמלות וכו&apos;).
       </p>
 
       <div>
@@ -648,7 +648,7 @@ function EmployeesStep({
             </div>
             <div>
               <label htmlFor="page-43714e" className="block text-sm font-medium text-ink/70 mb-2">
-                סך כל השכר החודשי (₪)
+                סך עלות המעסיק החודשית (₪)
               </label>
               <input id="page-43714e"
                 type="number"
@@ -665,7 +665,7 @@ function EmployeesStep({
           {answers.numEmployees > 0 && (
             <div className="bg-cream-2 border border-ink/15 p-3">
               <div className="text-sm text-ink">
-                שכר ממוצע לעובד: ₪{avgSalary.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
+                עלות מעסיק ממוצעת לעובד: ₪{avgSalary.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
               </div>
               <div className="text-xs text-ink/70 mt-1">
                 נחלק את העובדים אוטומטית למחלקות לפי הענף. עבור למצב מפורט לשליטה מדויקת.
@@ -678,7 +678,7 @@ function EmployeesStep({
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">עובדים ({answers.employees.length})</span>
             <span className="text-sm text-ink/70">
-              סה"כ שכר חודשי: ₪{detailedTotal.toLocaleString('he-IL')}
+              סה&quot;כ עלות מעסיק חודשית: ₪{detailedTotal.toLocaleString('he-IL')}
             </span>
           </div>
 
@@ -734,7 +734,7 @@ function EmployeesStep({
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="page-ede10b" className="block text-xs text-ink/70 mb-0.5">שכר חודשי</label>
+                      <label htmlFor="page-ede10b" className="block text-xs text-ink/70 mb-0.5">עלות מעסיק חודשית כוללת</label>
                       <input id="page-ede10b"
                         type="number"
                         value={emp.monthlySalary || ''}
@@ -856,7 +856,7 @@ function OperatingStep({
               className="w-full px-3 py-2 border border-ink/15 bg-paper"
             />
             <p className="text-xs text-ink/70 mt-1">
-              חשמל, תקשורת, תוכנות SaaS, רואה חשבון, ביטוחים, וכו'
+              חשמל, תקשורת, תוכנות SaaS, רואה חשבון, ביטוחים, וכו&apos;
             </p>
           </div>
         </>
@@ -865,7 +865,7 @@ function OperatingStep({
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">ספקים והוצאות ({answers.suppliers.length})</span>
             <span className="text-sm text-ink/70">
-              סה"כ חודשי: ₪{detailedTotal.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
+              סה&quot;כ חודשי: ₪{detailedTotal.toLocaleString('he-IL', { maximumFractionDigits: 0 })}
             </span>
           </div>
 
@@ -1231,11 +1231,9 @@ function LoansStep({
 function ReviewStep({
   answers,
   summary,
-  onApply,
 }: {
   answers: WizardAnswers;
   summary: ReturnType<typeof summarizeWizard>;
-  onApply: () => void;
 }) {
   const fmt = (v: number) => formatCurrency(v, 'ILS');
 
@@ -1246,13 +1244,19 @@ function ReviewStep({
       <div className="grid md:grid-cols-2 gap-3">
         <SummaryRow label="חברה" value={answers.companyName || '—'} />
         <SummaryRow label="ענף" value={INDUSTRY_LABELS[answers.industry]} />
-        <SummaryRow label="הכנסה חודשית" value={fmt(answers.monthlyRevenue)} />
+        <SummaryRow label="הכנסה חודשית ממוצעת" value={fmt(summary.totalAnnualRevenue / 12)} />
         <SummaryRow label="הכנסה שנתית" value={fmt(summary.totalAnnualRevenue)} highlight />
-        <SummaryRow label="מספר מקורות הכנסה" value={String(answers.numIncomeStreams)} />
+        <SummaryRow
+          label="מספר מקורות הכנסה"
+          value={String(answers.incomeMode === 'detailed' ? answers.incomeStreams.length : answers.numIncomeStreams)}
+        />
         <SummaryRow label="עלות מכר" value={`${answers.cogsPct}% (${fmt(summary.totalAnnualCOGS)})`} />
-        <SummaryRow label="מספר עובדים" value={String(answers.numEmployees)} />
-        <SummaryRow label="שכר שנתי" value={fmt(summary.totalAnnualSalaries)} />
-        <SummaryRow label="שכירות שנתית" value={fmt(answers.monthlyRent * 12)} />
+        <SummaryRow
+          label="מספר עובדים"
+          value={String(answers.employeesMode === 'detailed' ? answers.employees.length : answers.numEmployees)}
+        />
+        <SummaryRow label="עלות מעסיק שנתית" value={fmt(summary.totalAnnualSalaries)} />
+        <SummaryRow label="הוצאות תפעול ועלויות מעסיק" value={fmt(summary.totalAnnualOpEx)} />
         <SummaryRow
           label="שיווק"
           value={
