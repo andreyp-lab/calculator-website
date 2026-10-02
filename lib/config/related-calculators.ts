@@ -18,6 +18,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/personal-tax/salary-net-gross', label: 'שכר נטו / ברוטו', group: 'tax' },
   { path: '/personal-tax/income-tax', label: 'מס הכנסה', group: 'tax' },
   { path: '/personal-tax/tax-refund', label: 'החזר מס', group: 'tax' },
+  { path: '/personal-tax/tax-return-full', label: 'תחשיב מס מלא', group: 'tax' },
   { path: '/personal-tax/tax-credits', label: 'נקודות זיכוי', group: 'tax' },
   { path: '/personal-tax/work-value', label: 'כמה שווה לעבוד', group: 'tax' },
   // זכויות עובדים

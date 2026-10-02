@@ -9,10 +9,19 @@ import {
   type TaxRefundYear,
 } from '@/lib/calculators/tax-refund';
 import { calculateRefundChildPoints } from '@/lib/calculators/tax-refund-entitlements';
+import { buildCreditPointsLedger, type CreditPointsProfile } from '@/lib/calculators/tax-credit-points';
+import {
+  calculateFullReturn,
+  FULL_RETURN_YEAR_RULES,
+  type CapitalIncomeInput,
+  type FullReturnResult,
+  type ResidentialRentalTrack,
+} from '@/lib/calculators/tax-full-return';
 import { formatCurrency, formatPercent } from '@/lib/utils/formatters';
 import { ResultCard } from '@/components/calculator/ResultCard';
 import { Breakdown } from '@/components/calculator/Breakdown';
 import { PROFESSIONAL_ADVICE_NOTICE } from '@/lib/config/disclaimers';
+import { trackEvent } from '@/lib/analytics/events';
 
 interface DraftIncomeSource {
   id: number;
@@ -31,11 +40,6 @@ interface DraftChild {
   id: number;
   birthYear: string;
 }
-
-type AnalyticsWindow = Window & {
-  dataLayer?: unknown[];
-  gtag?: (...args: unknown[]) => void;
-};
 
 const YEARS = [...Object.keys(TAX_REFUND_YEAR_RULES)].reverse() as TaxRefundYear[];
 
@@ -59,22 +63,79 @@ function isValidChildBirthYear(taxYear: TaxRefundYear, value: string): boolean {
   return Number.isInteger(birthYear) && birthYear >= year - 18 && birthYear <= year;
 }
 
-function trackCalculation() {
-  const analytics = window as AnalyticsWindow;
-  analytics.dataLayer = analytics.dataLayer || [];
-  analytics.gtag = analytics.gtag || function gtag(...args: unknown[]) {
-    analytics.dataLayer?.push(args);
-  };
-  analytics.gtag('event', 'tax_refund_calculation');
+/** סיווג גס של הודעת שגיאה לשלב בטופס — לצורך מדידת נטישה, בלי תוכן הנתונים. */
+function classifyError(message: string): string {
+  if (message.includes('לאשר') || message.includes('אישור')) return 'confirmation';
+  if (message.includes('פנסיה')) return 'pension';
+  if (message.includes('ילד') || message.includes('לידה')) return 'children';
+  if (message.includes('נקודות')) return 'credit_points';
+  if (message.includes('הכנסה') || message.includes('מס שנוכה') || message.includes('מקור')) return 'income';
+  return 'other';
 }
 
-export function TaxRefundCalculator() {
+interface TaxRefundCalculatorProps {
+  /** simple: האומדן הרגיל. full: תחשיב מלא עם זכויות נוספות ופירוט שורה-שורה. */
+  mode?: 'simple' | 'full';
+}
+
+const MONTH_OPTIONS = Array.from({ length: 12 }, (_, index) => index + 1);
+
+const CAPITAL_FIELDS: readonly (readonly [keyof CapitalIncomeInput, string])[] = [
+  ['depositInterestUnlinked', 'ריבית מפיקדון בנקאי / תכנית חיסכון (לא צמודה)'],
+  ['otherInterestUnlinked', 'ריבית לא צמודה מאג״ח (נייר ערך)'],
+  ['interestLinked', 'ריבית צמודה למדד או למטבע חוץ'],
+  ['dividends', 'דיבידנד'],
+  ['dividendsSubstantial', 'דיבידנד כבעל מניות מהותי (10% ומעלה)'],
+  ['gainsRegular', 'רווח הון ריאלי (מניות, קרנות, תעודות סל)'],
+  ['gainsSubstantial', 'רווח הון ריאלי כבעל מניות מהותי'],
+  ['gainsUnlinkedBonds', 'רווח הון באג״ח לא צמודות'],
+  ['mutualFundDistributions', 'רווחים שחילקה קרן נאמנות'],
+  ['currentYearLoss', 'הפסד הון שוטף מניירות ערך בישראל'],
+  ['carriedForwardLoss', 'הפסד הון מועבר משנים קודמות'],
+  ['taxWithheld', 'מס שנוכה במקור מהכנסות הוניות (טופס 867)'],
+];
+
+const FOREIGN_CAPITAL_FIELDS: readonly (readonly [keyof CapitalIncomeInput, string])[] = [
+  ['foreignDividends', 'דיבידנד מחו״ל (בשקלים)'],
+  ['foreignDividendsTax', 'מס זר ששולם על הדיבידנד'],
+  ['foreignInterest', 'ריבית מחו״ל'],
+  ['foreignInterestTax', 'מס זר ששולם על הריבית'],
+  ['foreignGains', 'רווח הון מחו״ל (נטו לאחר הפסדי חו״ל)'],
+  ['foreignGainsTax', 'מס זר ששולם על רווח ההון'],
+];
+
+function NumberField({ id, label, value, onChange, help }: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  help?: string;
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-xs font-medium text-ink/70 mb-1">{label}</label>
+      <input
+        id={id}
+        type="number"
+        inputMode="decimal"
+        min="0"
+        step="any"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full border border-ink/20 px-3 py-2"
+      />
+      {help ? <p className="mt-1 text-xs leading-relaxed text-ink/60">{help}</p> : null}
+    </div>
+  );
+}
+
+export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProps = {}) {
   const nextId = useRef(2);
   const nextChildId = useRef(1);
   const resultRef = useRef<HTMLElement>(null);
   const [taxYear, setTaxYear] = useState<TaxRefundYear>('2025');
   const [sources, setSources] = useState<DraftIncomeSource[]>([initialSource]);
-  const [creditPointMode, setCreditPointMode] = useState<CreditPointMode>('');
+  const [creditPointMode, setCreditPointMode] = useState<CreditPointMode>(mode === 'full' ? 'basic-with-children' : '');
   const [basicResidentMode, setBasicResidentMode] = useState<BasicResidentMode>('');
   const [manualCreditPoints, setManualCreditPoints] = useState('');
   const [children, setChildren] = useState<DraftChild[]>([]);
@@ -88,9 +149,49 @@ export function TaxRefundCalculator() {
   const [simpleCaseConfirmed, setSimpleCaseConfirmed] = useState(false);
   const [result, setResult] = useState<TaxRefundResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const startedRef = useRef(false);
+  const [soldierOn, setSoldierOn] = useState(false);
+  const [soldierType, setSoldierType] = useState<'army' | 'national'>('army');
+  const [soldierMonths, setSoldierMonths] = useState('');
+  const [dischargeYear, setDischargeYear] = useState('');
+  const [dischargeMonth, setDischargeMonth] = useState('');
+  const [degreeOn, setDegreeOn] = useState(false);
+  const [degreeKind, setDegreeKind] = useState<'first' | 'second'>('first');
+  const [degreeCompletionYear, setDegreeCompletionYear] = useState('');
+  const [degreeStudyYears, setDegreeStudyYears] = useState('');
+  const [immigrantOn, setImmigrantOn] = useState(false);
+  const [aliyahYear, setAliyahYear] = useState('');
+  const [aliyahMonth, setAliyahMonth] = useState('');
+  const [noPauseConfirmed, setNoPauseConfirmed] = useState(false);
+  const [settlementRate, setSettlementRate] = useState('');
+  const [settlementCeiling, setSettlementCeiling] = useState('');
+  const [extraPoints, setExtraPoints] = useState('');
+  const [age60, setAge60] = useState(false);
+  const [rentalTrack, setRentalTrack] = useState<'' | ResidentialRentalTrack>('');
+  const [rentalMonthly, setRentalMonthly] = useState('');
+  const [rentalMonths, setRentalMonths] = useState('12');
+  const [rentalNet, setRentalNet] = useState('');
+  const [rentalOwnRent, setRentalOwnRent] = useState('');
+  const [rentalTaxPaid, setRentalTaxPaid] = useState('');
+  const [foreignRentalTrack, setForeignRentalTrack] = useState<'' | 'fifteen-percent' | 'regular'>('');
+  const [foreignRentGross, setForeignRentGross] = useState('');
+  const [foreignRentDepreciation, setForeignRentDepreciation] = useState('');
+  const [foreignRentNet, setForeignRentNet] = useState('');
+  const [foreignRentForeignTax, setForeignRentForeignTax] = useState('');
+  const [foreignRentTaxPaid, setForeignRentTaxPaid] = useState('');
+  const [otherPassive, setOtherPassive] = useState('');
+  const [capitalDraft, setCapitalDraft] = useState<Partial<Record<keyof CapitalIncomeInput, string>>>({});
+  const [spouseIncome, setSpouseIncome] = useState('');
+  const [interestAgeDeduction, setInterestAgeDeduction] = useState<'none' | 'single' | 'couple'>('none');
+  const [fullResult, setFullResult] = useState<FullReturnResult | null>(null);
 
   useEffect(() => {
-    if (!result) return;
+    if (error) trackEvent('tax_refund_error', { step: classifyError(error), tax_year: taxYear });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+
+  useEffect(() => {
+    if (!result && !fullResult) return;
 
     const animationFrame = window.requestAnimationFrame(() => {
       resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -98,10 +199,11 @@ export function TaxRefundCalculator() {
     });
 
     return () => window.cancelAnimationFrame(animationFrame);
-  }, [result]);
+  }, [result, fullResult]);
 
   function invalidateResult(resetConfirmations = true) {
     setResult(null);
+    setFullResult(null);
     setError(null);
     if (resetConfirmations) {
       setAllDocumentsConfirmed(false);
@@ -187,6 +289,7 @@ export function TaxRefundCalculator() {
     }
 
     let pointsForCalculation: number;
+    let creditsProfile: Omit<CreditPointsProfile, 'taxYear'> | null = null;
 
     if (creditPointMode === 'verified-total') {
       if (manualCreditPoints.trim() === '') {
@@ -225,17 +328,54 @@ export function TaxRefundCalculator() {
       }
 
       try {
-        const childPoints = children.reduce(
-          (sum, child) =>
-            sum +
-            calculateRefundChildPoints(
-              taxYear,
-              Number(child.birthYear),
-              basicResidentMode === 'resident-2.75' ? 'mother' : 'father',
-            ),
-          0,
-        );
-        pointsForCalculation = (basicResidentMode === 'resident-2.25' ? 2.25 : 2.75) + childPoints;
+        if (mode === 'full') {
+          const num = (value: string) => Number(value);
+          if (soldierOn && (soldierMonths.trim() === '' || dischargeYear.trim() === '' || dischargeMonth === '')) {
+            throw new Error('יש להשלים את פרטי השירות: אורך שירות, שנת שחרור וחודש שחרור.');
+          }
+          if (degreeOn && (degreeCompletionYear.trim() === '' || degreeStudyYears.trim() === '')) {
+            throw new Error('יש להשלים את פרטי התואר: שנת סיום ומספר שנות לימוד.');
+          }
+          if (immigrantOn && (aliyahYear.trim() === '' || aliyahMonth === '')) {
+            throw new Error('יש להשלים את פרטי העלייה: שנה וחודש.');
+          }
+          if (immigrantOn && !noPauseConfirmed) {
+            throw new Error('חישוב עולה חדש אוטומטי דורש אישור שלא היה שירות סדיר או לימודים על-תיכוניים בתקופת הזכאות. אחרת הזינו סך נקודות מאומת.');
+          }
+          const profile: Omit<CreditPointsProfile, 'taxYear'> = {
+            gender: basicResidentMode === 'resident-2.75' ? 'female' : 'male',
+            childBirthYears: children.map((child) => Number(child.birthYear)),
+            marriedWholeYear: marriedParentConfirmed,
+            soldier: soldierOn
+              ? {
+                  serviceType: soldierType,
+                  serviceMonths: num(soldierMonths),
+                  dischargeYear: num(dischargeYear),
+                  dischargeMonth: num(dischargeMonth),
+                }
+              : undefined,
+            degree: degreeOn
+              ? { degree: degreeKind, completionYear: num(degreeCompletionYear), studyYears: num(degreeStudyYears) }
+              : undefined,
+            immigrant: immigrantOn ? { aliyahYear: num(aliyahYear), aliyahMonth: num(aliyahMonth) } : undefined,
+            additionalVerifiedPoints: asNumber(extraPoints),
+          };
+          const built = buildCreditPointsLedger({ ...profile, taxYear });
+          creditsProfile = profile;
+          pointsForCalculation = built.total;
+        } else {
+          const childPoints = children.reduce(
+            (sum, child) =>
+              sum +
+              calculateRefundChildPoints(
+                taxYear,
+                Number(child.birthYear),
+                basicResidentMode === 'resident-2.75' ? 'mother' : 'father',
+              ),
+            0,
+          );
+          pointsForCalculation = (basicResidentMode === 'resident-2.25' ? 2.25 : 2.75) + childPoints;
+        }
       } catch (childError) {
         setError(childError instanceof Error ? childError.message : 'לא ניתן לחשב את נקודות הילדים.');
         setResult(null);
@@ -314,6 +454,77 @@ export function TaxRefundCalculator() {
       return;
     }
 
+    if (mode === 'full' && creditsProfile) {
+      const capital: CapitalIncomeInput = {};
+      for (const [key] of [...CAPITAL_FIELDS, ...FOREIGN_CAPITAL_FIELDS]) {
+        const raw = capitalDraft[key];
+        if (raw && raw.trim() !== '') capital[key] = asNumber(raw);
+      }
+      try {
+        if (rentalTrack && (rentalMonthly.trim() === '' || rentalMonths.trim() === '')) {
+          throw new Error('יש להזין דמי שכירות חודשיים ומספר חודשי השכרה.');
+        }
+        if (rentalTrack === 'regular' && rentalNet.trim() === '') {
+          throw new Error('במסלול השכירות הרגיל יש להזין הכנסה נטו לאחר הוצאות ופחת.');
+        }
+        if (foreignRentalTrack === 'regular' && foreignRentNet.trim() === '') {
+          throw new Error('בשכירות מחו״ל במסלול רגיל יש להזין הכנסה נטו לאחר הוצאות.');
+        }
+        const full = calculateFullReturn({
+          taxYear,
+          wageSources: incomeSources,
+          credits: creditsProfile,
+          age60OrOver: age60,
+          recognizedDeductions: asNumber(recognizedDeductions),
+          pensionCreditMode,
+          manualPensionCredit: pensionCreditMode === 'manual' ? asNumber(manualPensionCredit) : undefined,
+          donations: asNumber(donations),
+          additionalTaxCredits: asNumber(additionalTaxCredits),
+          settlement:
+            settlementRate.trim() !== '' || settlementCeiling.trim() !== ''
+              ? { ratePercent: Number(settlementRate), ceiling: Number(settlementCeiling) }
+              : undefined,
+          residentialRental: rentalTrack
+            ? {
+                track: rentalTrack,
+                monthlyRent: asNumber(rentalMonthly),
+                months: asNumber(rentalMonths),
+                regularNetIncome: asNumber(rentalNet),
+                rentPaidForOwnHome: asNumber(rentalOwnRent),
+                taxPaid: asNumber(rentalTaxPaid),
+              }
+            : undefined,
+          foreignRental: foreignRentalTrack
+            ? {
+                track: foreignRentalTrack,
+                grossRent: asNumber(foreignRentGross),
+                depreciation: asNumber(foreignRentDepreciation),
+                regularNetIncome: asNumber(foreignRentNet),
+                foreignTaxPaid: asNumber(foreignRentForeignTax),
+                taxPaid: asNumber(foreignRentTaxPaid),
+              }
+            : undefined,
+          otherPassiveIncome: asNumber(otherPassive),
+          capital,
+          spouseTaxableIncome: asNumber(spouseIncome),
+          interestAgeDeduction,
+        });
+        setFullResult(full);
+        setResult(null);
+        setError(null);
+        trackEvent('tax_refund_calculation', {
+          tax_year: taxYear,
+          mode,
+          outcome: full.estimatedRefund > 0 ? 'refund' : full.estimatedBalanceDue > 0 ? 'balance_due' : 'even',
+          credit_mode: creditPointMode,
+        });
+      } catch (fullError) {
+        setError(fullError instanceof Error ? fullError.message : 'לא ניתן להשלים את התחשיב. בדקו את הנתונים.');
+        setFullResult(null);
+      }
+      return;
+    }
+
     try {
       const calculation = calculateTaxRefund({
         taxYear,
@@ -329,7 +540,17 @@ export function TaxRefundCalculator() {
 
       setResult(calculation);
       setError(null);
-      trackCalculation();
+      trackEvent('tax_refund_calculation', {
+        tax_year: taxYear,
+        mode,
+        outcome:
+          calculation.estimatedRefund > 0
+            ? 'refund'
+            : calculation.estimatedBalanceDue > 0
+              ? 'balance_due'
+              : 'even',
+        credit_mode: creditPointMode,
+      });
     } catch (calculationError) {
       setError(
         calculationError instanceof Error
@@ -385,7 +606,14 @@ export function TaxRefundCalculator() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={submit} className="bg-paper border-2 border-ink/15 p-5 md:p-6 space-y-7">
+      <form
+        onSubmit={submit}
+        onChange={() => {
+          if (startedRef.current) return;
+          startedRef.current = true;
+          trackEvent('tax_refund_start', { tax_year: taxYear });
+        }}
+        className="bg-paper border-2 border-ink/15 p-5 md:p-6 space-y-7">
         <div>
           <h2 className="text-xl font-bold text-ink">הזנת נתונים מטופס 106</h2>
           <p className="mt-2 text-sm leading-relaxed text-ink/70">
@@ -446,7 +674,7 @@ export function TaxRefundCalculator() {
             >
               <option value="">בחרו אפשרות</option>
               <option value="basic-with-children">בסיס תושב/ת + ילדים במקרה הפשוט</option>
-              <option value="verified-total">מספר נקודות כולל שאומת לשנת המס</option>
+              {mode === 'simple' ? <option value="verified-total">מספר נקודות כולל שאומת לשנת המס</option> : null}
             </select>
             <p id="refund-credit-point-mode-help" className="mt-1 text-xs leading-relaxed text-ink/65">
               במצב הבסיס מחברים 2.25 או 2.75 לנקודות ילדים פשוטות. הזנה ידנית מחליפה את
@@ -592,7 +820,151 @@ export function TaxRefundCalculator() {
               ) : null}
             </fieldset>
 
-            {basicResidentMode ? (
+            {mode === 'full' ? (
+              <fieldset className="space-y-5 border border-ink/15 bg-white p-4">
+                <legend className="px-1 font-bold text-ink">זכויות נוספות לנקודות זיכוי והנחות</legend>
+                <p className="text-sm leading-relaxed text-ink/70">
+                  סמנו רק מה שרלוונטי. כל זכות מחושבת לפי חודשי הזכאות בשנת המס שנבחרה ומוצגת בנפרד בתחשיב.
+                </p>
+
+                <div className="space-y-3">
+                  <label className="flex items-center gap-3 text-sm font-medium text-ink">
+                    <input type="checkbox" className="h-4 w-4" checked={soldierOn}
+                      onChange={(event) => { setSoldierOn(event.target.checked); invalidateResult(); }} />
+                    חייל/ת משוחרר/ת או בן/בת שירות לאומי-אזרחי
+                  </label>
+                  {soldierOn ? (
+                    <div className="grid gap-3 md:grid-cols-4">
+                      <div>
+                        <label htmlFor="full-soldier-type" className="block text-xs font-medium text-ink/70 mb-1">סוג שירות</label>
+                        <select id="full-soldier-type" value={soldierType} className="w-full border border-ink/20 bg-white px-3 py-2"
+                          onChange={(event) => { setSoldierType(event.target.value as 'army' | 'national'); invalidateResult(); }}>
+                          <option value="army">שירות צבאי</option>
+                          <option value="national">שירות לאומי-אזרחי</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label htmlFor="full-soldier-months" className="block text-xs font-medium text-ink/70 mb-1">אורך שירות (חודשים)</label>
+                        <input id="full-soldier-months" type="number" inputMode="numeric" min="12" step="1" value={soldierMonths}
+                          className="w-full border border-ink/20 px-3 py-2"
+                          onChange={(event) => { setSoldierMonths(event.target.value); invalidateResult(); }} />
+                      </div>
+                      <div>
+                        <label htmlFor="full-discharge-year" className="block text-xs font-medium text-ink/70 mb-1">שנת שחרור</label>
+                        <input id="full-discharge-year" type="number" inputMode="numeric" step="1" value={dischargeYear}
+                          className="w-full border border-ink/20 px-3 py-2"
+                          onChange={(event) => { setDischargeYear(event.target.value); invalidateResult(); }} />
+                      </div>
+                      <div>
+                        <label htmlFor="full-discharge-month" className="block text-xs font-medium text-ink/70 mb-1">חודש שחרור</label>
+                        <select id="full-discharge-month" value={dischargeMonth} className="w-full border border-ink/20 bg-white px-3 py-2"
+                          onChange={(event) => { setDischargeMonth(event.target.value); invalidateResult(); }}>
+                          <option value="">בחרו</option>
+                          {MONTH_OPTIONS.map((month) => <option key={month} value={month}>{month}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="space-y-3">
+                  <label className="flex items-center gap-3 text-sm font-medium text-ink">
+                    <input type="checkbox" className="h-4 w-4" checked={degreeOn}
+                      onChange={(event) => { setDegreeOn(event.target.checked); invalidateResult(); }} />
+                    סיום תואר אקדמי (מסיימי 2023 ואילך)
+                  </label>
+                  {degreeOn ? (
+                    <div className="grid gap-3 md:grid-cols-3">
+                      <div>
+                        <label htmlFor="full-degree-kind" className="block text-xs font-medium text-ink/70 mb-1">תואר</label>
+                        <select id="full-degree-kind" value={degreeKind} className="w-full border border-ink/20 bg-white px-3 py-2"
+                          onChange={(event) => { setDegreeKind(event.target.value as 'first' | 'second'); invalidateResult(); }}>
+                          <option value="first">ראשון</option>
+                          <option value="second">שני</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label htmlFor="full-degree-year" className="block text-xs font-medium text-ink/70 mb-1">שנת סיום הלימודים</label>
+                        <input id="full-degree-year" type="number" inputMode="numeric" step="1" value={degreeCompletionYear}
+                          className="w-full border border-ink/20 px-3 py-2"
+                          onChange={(event) => { setDegreeCompletionYear(event.target.value); invalidateResult(); }} />
+                      </div>
+                      <div>
+                        <label htmlFor="full-degree-length" className="block text-xs font-medium text-ink/70 mb-1">שנות לימוד אקדמיות</label>
+                        <input id="full-degree-length" type="number" inputMode="numeric" min="1" step="1" value={degreeStudyYears}
+                          className="w-full border border-ink/20 px-3 py-2"
+                          onChange={(event) => { setDegreeStudyYears(event.target.value); invalidateResult(); }} />
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="space-y-3">
+                  <label className="flex items-center gap-3 text-sm font-medium text-ink">
+                    <input type="checkbox" className="h-4 w-4" checked={immigrantOn}
+                      onChange={(event) => { setImmigrantOn(event.target.checked); invalidateResult(); }} />
+                    עולה חדש
+                  </label>
+                  {immigrantOn ? (
+                    <div className="space-y-3">
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <div>
+                          <label htmlFor="full-aliyah-year" className="block text-xs font-medium text-ink/70 mb-1">שנת קבלת תעודת עולה</label>
+                          <input id="full-aliyah-year" type="number" inputMode="numeric" step="1" value={aliyahYear}
+                            className="w-full border border-ink/20 px-3 py-2"
+                            onChange={(event) => { setAliyahYear(event.target.value); invalidateResult(); }} />
+                        </div>
+                        <div>
+                          <label htmlFor="full-aliyah-month" className="block text-xs font-medium text-ink/70 mb-1">חודש העלייה</label>
+                          <select id="full-aliyah-month" value={aliyahMonth} className="w-full border border-ink/20 bg-white px-3 py-2"
+                            onChange={(event) => { setAliyahMonth(event.target.value); invalidateResult(); }}>
+                            <option value="">בחרו</option>
+                            {MONTH_OPTIONS.map((month) => <option key={month} value={month}>{month}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                      <label className="flex items-start gap-3 text-sm leading-relaxed text-ink">
+                        <input type="checkbox" className="mt-1 h-4 w-4 flex-none" checked={noPauseConfirmed}
+                          onChange={(event) => { setNoPauseConfirmed(event.target.checked); invalidateResult(); }} />
+                        <span>לא שירתתי שירות סדיר בצה״ל ולא למדתי במוסד על-תיכוני בתקופת הזכאות (תקופות כאלה מקפיאות את הזכאות).</span>
+                      </label>
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  <div>
+                    <label htmlFor="full-settlement-rate" className="block text-sm font-medium text-ink mb-1">הנחת יישוב מוטב — שיעור (%)</label>
+                    <input id="full-settlement-rate" type="number" inputMode="decimal" min="0" max="20" step="any" value={settlementRate}
+                      className="w-full border border-ink/20 px-3 py-2"
+                      onChange={(event) => { setSettlementRate(event.target.value); invalidateResult(); }} />
+                  </div>
+                  <div>
+                    <label htmlFor="full-settlement-ceiling" className="block text-sm font-medium text-ink mb-1">תקרת הכנסה להנחה (₪)</label>
+                    <input id="full-settlement-ceiling" type="number" inputMode="decimal" min="0" step="any" value={settlementCeiling}
+                      className="w-full border border-ink/20 px-3 py-2"
+                      onChange={(event) => { setSettlementCeiling(event.target.value); invalidateResult(); }} />
+                  </div>
+                  <p className="text-xs leading-relaxed text-ink/65 md:col-span-2">
+                    את השיעור והתקרה של היישוב ושל שנת המס מוצאים ב
+                    <a className="text-gold underline" href={TAX_REFUND_YEAR_RULES[taxYear].sourceUrl} target="_blank" rel="noopener noreferrer">רשימת היישובים המוטבים בלוח העזר של רשות המסים</a>.
+                    ההנחה מחושבת על הכנסה מיגיעה אישית עד התקרה.
+                  </p>
+                </div>
+
+                <div>
+                  <label htmlFor="full-extra-points" className="block text-sm font-medium text-ink mb-1">נקודות נוספות שאומתו (אופציונלי)</label>
+                  <input id="full-extra-points" type="number" inputMode="decimal" min="0" step="0.25" value={extraPoints}
+                    className="w-full border border-ink/20 px-3 py-2 md:w-1/2"
+                    onChange={(event) => { setExtraPoints(event.target.value); invalidateResult(); }} />
+                  <p className="mt-1 text-xs leading-relaxed text-ink/65">
+                    למשל הורה יחיד, נכות, תושב חוזר. הסכום מתווסף לשאר הנקודות ומוצג בנפרד.
+                  </p>
+                </div>
+              </fieldset>
+            ) : null}
+
+            {basicResidentMode && mode === 'simple' ? (
               <div aria-live="polite" className="border-r-4 border-gold bg-paper p-4">
                 <p className="font-bold text-ink">פירוט נקודות הזיכוי המחושבות</p>
                 <dl className="mt-3 space-y-2 text-sm text-ink/75">
@@ -903,6 +1275,145 @@ export function TaxRefundCalculator() {
           </div>
         </details>
 
+        {mode === 'full' ? (
+          <section aria-labelledby="full-extra-income-title" className="space-y-6 border border-ink/15 bg-paper p-4">
+            <div>
+              <p className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-gold">שלב 3ב</p>
+              <h3 id="full-extra-income-title" className="mt-1 text-lg font-bold text-ink">הכנסות נוספות שאינן משכר</h3>
+              <p className="mt-1 text-sm leading-relaxed text-ink/70">
+                מלאו רק מה שהיה לכם בשנת המס. הסכומים שנתיים, בשקלים, של היחיד בלבד.
+              </p>
+            </div>
+
+            <label className="flex items-start gap-3 text-sm text-ink">
+              <input type="checkbox" className="mt-1 h-4 w-4 flex-none" checked={age60}
+                onChange={(event) => { setAge60(event.target.checked); invalidateResult(); }} />
+              <span>מלאו לי 60 שנה עד סוף שנת המס (מדרגות מס מופחתות על הכנסה שאינה מעבודה — סעיף 121(ב)).</span>
+            </label>
+
+            <fieldset className="space-y-3">
+              <legend className="font-bold text-ink">שכר דירה מדירות מגורים בישראל</legend>
+              <div className="grid gap-3 md:grid-cols-3">
+                <div>
+                  <label htmlFor="full-rental-track" className="block text-xs font-medium text-ink/70 mb-1">מסלול מיסוי</label>
+                  <select id="full-rental-track" value={rentalTrack} className="w-full border border-ink/20 bg-white px-3 py-2"
+                    onChange={(event) => { setRentalTrack(event.target.value as '' | ResidentialRentalTrack); invalidateResult(); }}>
+                    <option value="">אין הכנסה משכירות</option>
+                    <option value="exempt">מסלול פטור</option>
+                    <option value="ten-percent">מסלול 10%</option>
+                    <option value="regular">מסלול רגיל (לפי מדרגות)</option>
+                  </select>
+                </div>
+                {rentalTrack ? (
+                  <>
+                    <NumberField id="full-rental-monthly" label="דמי שכירות חודשיים (כל הדירות)" value={rentalMonthly}
+                      onChange={(v) => { setRentalMonthly(v); invalidateResult(); }}
+                      help={rentalTrack === 'exempt' ? `תקרת הפטור ב-${taxYear}: ${FULL_RETURN_YEAR_RULES[taxYear].rentalExemptionMonthly.toLocaleString('he-IL')} ₪ לחודש` : undefined} />
+                    <NumberField id="full-rental-months" label="חודשי השכרה בשנה" value={rentalMonths}
+                      onChange={(v) => { setRentalMonths(v); invalidateResult(); }} />
+                  </>
+                ) : null}
+                {rentalTrack === 'regular' ? (
+                  <NumberField id="full-rental-net" label="הכנסה נטו לאחר הוצאות ופחת" value={rentalNet}
+                    onChange={(v) => { setRentalNet(v); invalidateResult(); }} />
+                ) : null}
+                {rentalTrack === 'ten-percent' ? (
+                  <NumberField id="full-rental-own" label="שכירות ששילמתם למגוריכם (דירה יחידה בלבד)" value={rentalOwnRent}
+                    onChange={(v) => { setRentalOwnRent(v); invalidateResult(); }}
+                    help="סעיף 122(ו): מנוכה עד 90,000 ₪, רק כשמשכירים את הדירה היחידה." />
+                ) : null}
+                {rentalTrack && rentalTrack !== 'exempt' ? (
+                  <NumberField id="full-rental-paid" label="מס ששולם כבר על השכירות" value={rentalTaxPaid}
+                    onChange={(v) => { setRentalTaxPaid(v); invalidateResult(); }} />
+                ) : null}
+              </div>
+            </fieldset>
+
+            <fieldset className="space-y-3">
+              <legend className="font-bold text-ink">שכר דירה מנכס בחו״ל</legend>
+              <div className="grid gap-3 md:grid-cols-3">
+                <div>
+                  <label htmlFor="full-foreign-rental-track" className="block text-xs font-medium text-ink/70 mb-1">מסלול מיסוי</label>
+                  <select id="full-foreign-rental-track" value={foreignRentalTrack} className="w-full border border-ink/20 bg-white px-3 py-2"
+                    onChange={(event) => { setForeignRentalTrack(event.target.value as '' | 'fifteen-percent' | 'regular'); invalidateResult(); }}>
+                    <option value="">אין</option>
+                    <option value="fifteen-percent">מסלול 15% (סעיף 122א)</option>
+                    <option value="regular">מסלול רגיל עם זיכוי מס זר</option>
+                  </select>
+                </div>
+                {foreignRentalTrack ? (
+                  <NumberField id="full-foreign-rent-gross" label="דמי שכירות שנתיים (בשקלים)" value={foreignRentGross}
+                    onChange={(v) => { setForeignRentGross(v); invalidateResult(); }} />
+                ) : null}
+                {foreignRentalTrack === 'fifteen-percent' ? (
+                  <NumberField id="full-foreign-rent-dep" label="פחת (הניכוי היחיד המותר)" value={foreignRentDepreciation}
+                    onChange={(v) => { setForeignRentDepreciation(v); invalidateResult(); }} />
+                ) : null}
+                {foreignRentalTrack === 'regular' ? (
+                  <>
+                    <NumberField id="full-foreign-rent-net" label="הכנסה נטו לאחר הוצאות" value={foreignRentNet}
+                      onChange={(v) => { setForeignRentNet(v); invalidateResult(); }} />
+                    <NumberField id="full-foreign-rent-tax" label="מס זר ששולם על השכירות" value={foreignRentForeignTax}
+                      onChange={(v) => { setForeignRentForeignTax(v); invalidateResult(); }} />
+                  </>
+                ) : null}
+                {foreignRentalTrack ? (
+                  <NumberField id="full-foreign-rent-paid" label="מס ששולם בישראל על השכירות" value={foreignRentTaxPaid}
+                    onChange={(v) => { setForeignRentTaxPaid(v); invalidateResult(); }} />
+                ) : null}
+              </div>
+            </fieldset>
+
+            <div className="md:w-1/2">
+              <NumberField id="full-other-passive" label="הכנסה אחרת שאינה מעבודה (נטו) — תמלוגים, שכירות מסחרית וכד׳" value={otherPassive}
+                onChange={(v) => { setOtherPassive(v); invalidateResult(); }} />
+            </div>
+
+            <fieldset className="space-y-3">
+              <legend className="font-bold text-ink">ריבית, דיבידנד ורווחי הון בישראל</legend>
+              <p className="text-xs leading-relaxed text-ink/65">
+                הסכומים מופיעים בטופס 867 מהבנק או בדוח השנתי מבית ההשקעות. הזינו רווח ריאלי, לא נומינלי.
+              </p>
+              <div className="grid gap-3 md:grid-cols-2">
+                {CAPITAL_FIELDS.map(([key, label]) => (
+                  <NumberField key={key} id={`full-capital-${key}`} label={label} value={capitalDraft[key] ?? ''}
+                    onChange={(v) => { setCapitalDraft((current) => ({ ...current, [key]: v })); invalidateResult(); }} />
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset className="space-y-3">
+              <legend className="font-bold text-ink">הכנסות הוניות מחו״ל</legend>
+              <div className="grid gap-3 md:grid-cols-2">
+                {FOREIGN_CAPITAL_FIELDS.map(([key, label]) => (
+                  <NumberField key={key} id={`full-capital-${key}`} label={label} value={capitalDraft[key] ?? ''}
+                    onChange={(v) => { setCapitalDraft((current) => ({ ...current, [key]: v })); invalidateResult(); }} />
+                ))}
+              </div>
+            </fieldset>
+
+            {(capitalDraft.depositInterestUnlinked ?? '').trim() !== '' ? (
+              <fieldset className="space-y-3">
+                <legend className="font-bold text-ink">ניכוי מריבית פיקדון (סעיף 125ד)</legend>
+                <div className="grid gap-3 md:grid-cols-2">
+                  <NumberField id="full-spouse-income" label="הכנסה חייבת של בן/בת הזוג" value={spouseIncome}
+                    onChange={(v) => { setSpouseIncome(v); invalidateResult(); }}
+                    help={`ניכוי למעוטי הכנסה כשההכנסה המשותפת עד ${FULL_RETURN_YEAR_RULES[taxYear].interestPreferredCeiling.toLocaleString('he-IL')} ₪`} />
+                  <div>
+                    <label htmlFor="full-interest-age" className="block text-xs font-medium text-ink/70 mb-1">ניכוי גיל (גיל פרישת חובה ו-55 ביום 1.1.2003)</label>
+                    <select id="full-interest-age" value={interestAgeDeduction} className="w-full border border-ink/20 bg-white px-3 py-2"
+                      onChange={(event) => { setInterestAgeDeduction(event.target.value as 'none' | 'single' | 'couple'); invalidateResult(); }}>
+                      <option value="none">לא רלוונטי</option>
+                      <option value="single">יחיד או אחד מבני הזוג</option>
+                      <option value="couple">שני בני הזוג</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+            ) : null}
+          </section>
+        ) : null}
+
         <section aria-labelledby="refund-step-4" className="space-y-3 border-r-4 border-gold bg-gold/8 p-4 text-sm leading-relaxed text-ink">
           <div>
             <p className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-gold">שלב 4</p>
@@ -933,9 +1444,9 @@ export function TaxRefundCalculator() {
               className="mt-1 h-4 w-4 flex-none"
             />
             <span>
-              זהו אומדן לשכיר/ה המבוסס על הכנסה מיגיעה אישית בלבד. אין בחישוב עסק עצמאי,
-              רווחי הון, הכנסות מחו״ל, שכירות במסלול המחייב חישוב נפרד, אירוע פרישה או חובת דיווח
-              מיוחדת עם בן או בת זוג.
+              {mode === 'full'
+                ? 'זהו תחשיב ליחיד תושב ישראל ששכרו מעבודה כשכיר/ה. אין בו הכנסה מעסק או ממשלח יד, מענקי פרישה או פיצויים חייבים, תושבות חלקית או חישוב משותף עם בן או בת זוג, וכל ההכנסות הנוספות הוזנו בשדות המתאימים.'
+                : 'זהו אומדן לשכיר/ה המבוסס על הכנסה מיגיעה אישית בלבד. אין בחישוב עסק עצמאי, רווחי הון, הכנסות מחו״ל, שכירות במסלול המחייב חישוב נפרד, אירוע פרישה או חובת דיווח מיוחדת עם בן או בת זוג.'}
               {pensionCreditMode === 'automatic' ? (
                 <span className="mt-1 block">
                   במסלול הפנסיה האוטומטי, כל מקור הכנסה עם הפקדות הוא שכר שמבוטח במלואו ואין
@@ -955,6 +1466,67 @@ export function TaxRefundCalculator() {
           חשב אומדן הפרש מס
         </button>
       </form>
+
+      {fullResult ? (
+        <section
+          ref={resultRef}
+          tabIndex={-1}
+          aria-labelledby="full-result-title"
+          className="space-y-5 border-2 border-ink/15 bg-paper p-5 md:p-6"
+        >
+          <h2 id="full-result-title" className="text-2xl font-bold text-ink">תחשיב המס לשנת {fullResult.taxYear}</h2>
+          <p className="border-r-4 border-gold bg-cream-2 p-3 text-sm leading-relaxed text-ink" role="note">{PROFESSIONAL_ADVICE_NOTICE}</p>
+          {fullResult.estimatedRefund > 0 ? (
+            <ResultCard title="אומדן החזר מס" value={formatCurrency(fullResult.estimatedRefund)} subtitle="סכום חיובי אינו אישור זכאות ואינו כולל הצמדה" variant="success" />
+          ) : fullResult.estimatedBalanceDue > 0 ? (
+            <ResultCard title="אומדן יתרת מס לתשלום" value={formatCurrency(fullResult.estimatedBalanceDue)} subtitle="המס ששולם נמוך מהחבות המחושבת" variant="warning" />
+          ) : (
+            <ResultCard title="אומדן הפרש המס" value={formatCurrency(0)} subtitle="לפי הנתונים שהוזנו לא נמצא הפרש" />
+          )}
+
+          {([
+            ['income', 'הכנסות'],
+            ['tax', 'חישוב המס'],
+            ['credit', 'זיכויים והנחות'],
+            ['summary', 'סיכום'],
+          ] as const).map(([group, title]) => {
+            const items = fullResult.lines
+              .filter((l) => l.group === group)
+              .map((l) => ({
+                label: l.label,
+                value: `${l.sign === -1 ? '-' : ''}${formatCurrency(l.value)}`,
+                note: l.note,
+                bold: l.bold,
+              }));
+            if (group === 'credit') {
+              items.unshift(...fullResult.ledger.lines.map((l) => ({
+                label: `נקודות — ${l.label}`,
+                value: l.points.toFixed(2),
+                note: l.note,
+                bold: false,
+              })));
+            }
+            return items.length > 0 ? <Breakdown key={group} title={title} defaultOpen items={items} /> : null;
+          })}
+
+          {fullResult.lossCarryForward > 0 || fullResult.foreignCreditExcess > 0 ? (
+            <div className="border border-ink/15 bg-cream-2 p-4 text-sm leading-relaxed text-ink/80">
+              {fullResult.lossCarryForward > 0 ? (
+                <p>הפסד הון של {formatCurrency(fullResult.lossCarryForward)} לא קוזז השנה. ניתן להעבירו לשנים הבאות מול רווחי הון בלבד, בתנאי שמוגש דוח לשנה זו.</p>
+              ) : null}
+              {fullResult.foreignCreditExcess > 0 ? (
+                <p>מס זר של {formatCurrency(fullResult.foreignCreditExcess)} לא זוכה השנה. לפי סעיף 205א ניתן להעבירו חמש שנים מול הכנסות מאותו מקור.</p>
+              ) : null}
+            </div>
+          ) : null}
+
+          <div className="border-r-4 border-gold bg-cream-2 p-4 text-sm leading-relaxed text-ink/75">
+            התחשיב אינו כולל ריבית והצמדה ואינו מחליף שומה. סדר הקיזוז והייחוס של זיכויים בין סוגי
+            הכנסה מבוסס על הנחות עבודה שמרניות המפורטות בעמוד. לפני הגשה יש להשוות לטופסי 106, 867
+            ולאישורים הרלוונטיים, ולהיוועץ באיש מקצוע.
+          </div>
+        </section>
+      ) : null}
 
       {result ? (
         <section
@@ -1067,6 +1639,7 @@ export function TaxRefundCalculator() {
               { label: 'מס שנוכה בפועל', value: formatCurrency(result.totalTaxWithheld), bold: true },
             ]}
           />
+
 
           <div className="border-r-4 border-gold bg-cream-2 p-4 text-sm leading-relaxed text-ink/75">
             התוצאה אינה כוללת ריבית והצמדה ואינה מחליפה את הדמיית המס של רשות המסים. לפני הגשה יש

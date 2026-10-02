@@ -258,6 +258,19 @@ export default async function SalaryAmountPage({ params }: PageProps) {
           </p>
         </section>
 
+        {/* קישור קונטקסטואלי להחזר מס — קהל שכירים שעבד בשנים קודמות */}
+        <section className="mb-10 border-r-4 border-gold bg-cream-2 p-5" aria-label="בדיקת החזר מס">
+          <p className="font-bold text-ink mb-1">שילמתם יותר מס מהנדרש בשנים קודמות?</p>
+          <p className="text-sm leading-relaxed text-ink/75">
+            החלפת עבודה, עבודה בחלק מהשנה או נקודות זיכוי שלא נוצלו יכולות ליצור החזר. ניתן לבדוק
+            עד שש שנים אחורה, בלי להעלות מסמכים.{' '}
+            <Link href="/personal-tax/tax-refund" className="font-bold text-gold underline">
+              לבדיקה מהירה והסימולטור לפי טופס 106
+            </Link>
+            .
+          </p>
+        </section>
+
         {/* CTA to full calculator */}
         <section className="mb-10 bg-ink p-6 text-cream">
           <p className="font-serif text-xl mb-3 leading-snug">

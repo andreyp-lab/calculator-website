@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 import { TaxRefundCalculator } from '@/components/calculators/TaxRefundCalculator';
+import { TaxRefundQuickCheck } from '@/components/calculators/TaxRefundQuickCheck';
 import { calculateTaxRefund, TAX_REFUND_YEAR_RULES } from '@/lib/calculators/tax-refund';
 import { formatCurrency } from '@/lib/utils/formatters';
 
@@ -77,7 +78,7 @@ const faqItems = [
   {
     question: 'האם האתר שומר את נתוני השכר?',
     answer:
-      'לא. החישוב מתבצע מקומית בדפדפן. הסכומים שהוזנו אינם נשלחים לשרת ואינם נשמרים באתר. אירוע המדידה, אם פעיל, מסמן רק שבוצע חישוב, ללא נתוני הטופס או התוצאה.',
+      'לא. החישוב מתבצע מקומית בדפדפן. הסכומים שהוזנו אינם נשלחים לשרת ואינם נשמרים באתר. אירועי המדידה, אם פעילים, מסמנים רק התקדמות בשלבי הטופס (למשל התחלה, שגיאת שלב, סוג התוצאה הכללי — החזר, חיוב או אפס) ושנת המס, ללא נתוני הטופס או סכומי התוצאה.',
   },
 ];
 
@@ -103,7 +104,17 @@ export default function TaxRefundPage() {
           מעסק, שוק ההון, שכירות, חו״ל או אירוע מס מורכב מחייבות בדיקה רחבה יותר.
         </p>
       }
-      calculator={<TaxRefundCalculator />}
+      calculator={
+        <div className="space-y-8">
+          <TaxRefundQuickCheck
+            oldestYear="2020"
+            oldestYearDeadline={TAX_REFUND_YEAR_RULES['2020'].claimDeadline}
+          />
+          <div id="refund-calculator" className="scroll-mt-24">
+            <TaxRefundCalculator />
+          </div>
+        </div>
+      }
       disclaimerText="החישוב מיועד להכנסות שכיר רגילות וכולל נקודות בסיס, נקודות ילדים במסלול המוסבר וזיכוי תרומות מוכרות. זיכוי פנסיה אוטומטי מוגבל לשכר שכולו מבוטח, ללא ניכויים נוספים או הפקדות פרטיות. במקרים אחרים מזינים סכום זיכוי שנתי מאומת. אינו כולל עסק, הון, שכירות, חו״ל, ריבית והצמדה או החזרי ביטוח לאומי. רשות המסים קובעת את השומה וההחזר."
       content={
         <>
@@ -161,6 +172,20 @@ export default function TaxRefundPage() {
             . מספר הנקודות הוא הזכאות הכוללת שלכם לאותה שנה, ולא סכום הנקודות שנרשם אצל
             כל המעסיקים יחד.
           </p>
+          <h3>מצבים נפוצים שכדאי לבדוק ביחס לנקודות זיכוי</h3>
+          <p>
+            הסימולטור הרגיל אינו מחשב את הזכויות הבאות. את חייל משוחרר, שירות לאומי, תואר ראשון
+            ושני ועולה חדש אפשר לחשב אוטומטית ב
+            <Link href="/personal-tax/tax-return-full" className="text-gold underline">תחשיב המס המלא</Link>, עם פירוט שורה-שורה.
+            לשאר המצבים חשבו את סך הנקודות לשנה בסימולטור הרשמי והזינו אותו במצב &quot;מספר נקודות כולל שאומת&quot;:
+          </p>
+          <ul>
+            <li><strong>שירות צבאי או לאומי:</strong> נקודות זיכוי בתקופה שלאחר השחרור.</li>
+            <li><strong>תואר אקדמי או תעודת מקצוע:</strong> נקודות בשנה שלאחר סיום הלימודים, בכפוף לסוג התואר.</li>
+            <li><strong>עלייה לישראל:</strong> נקודות בשנות העלייה הראשונות.</li>
+            <li><strong>הורה יחיד, חי בנפרד או הורה לילד עם מוגבלות:</strong> נקודות נוספות לפי המצב המשפחתי.</li>
+            <li><strong>מגורים ביישוב זכאי:</strong> הנחה על המס, הניתנת בנפרד מנקודות הזיכוי ואינה מחושבת כאן.</li>
+          </ul>
 
           <h2>דוגמה לחישוב החזר מס לפי נתוני 106</h2>
           <p>

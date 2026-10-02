@@ -71,6 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // דפי "שכר X ברוטו כמה נטו" — פרוגרמטיים, נגזרים מאותה רשימת סכומים כמו הדפים עצמם
     ...SALARY_PAGE_AMOUNTS.map((a) => make(`/salary/${a}`, 'monthly', 0.8, new Date('2026-08-15'))),
     make('/personal-tax/tax-refund', 'weekly', 0.95, new Date('2026-10-02')),
+    make('/personal-tax/tax-return-full', 'weekly', 0.9, new Date('2026-10-02')),
     make('/personal-tax/income-tax', 'monthly', 0.90),
     make('/personal-tax/tax-credits', 'monthly', 0.90),
     make('/personal-tax/work-value', 'monthly', 0.85),

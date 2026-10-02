@@ -66,7 +66,7 @@ export interface TaxRefundResult {
   claimDeadline: string;
 }
 
-interface TaxRefundYearRule {
+export interface TaxRefundYearRule {
   brackets: readonly { upTo: number; rate: number }[];
   creditPointMonthly: number;
   surtaxThreshold: number;
@@ -156,8 +156,32 @@ export const TAX_REFUND_YEAR_RULES: Record<TaxRefundYear, TaxRefundYearRule> = {
   },
 };
 
-function nonNegative(value: number | undefined): number {
+export function nonNegative(value: number | undefined): number {
   return Number.isFinite(value) ? Math.max(0, value ?? 0) : 0;
+}
+
+/**
+ * מס על פרוסת הכנסה [from, to) לפי מדרגות השנה. rateFor מאפשר להחליף שיעור מדרגה —
+ * למשל רצפה של 31% להכנסה שאינה מיגיעה אישית (סעיף 121(א)) או תקרה לרווח הון (סעיף 91(ב)).
+ */
+export function taxOnSlice(
+  brackets: TaxRefundYearRule['brackets'],
+  from: number,
+  to: number,
+  rateFor: (bracketRate: number) => number = (rate) => rate,
+): number {
+  if (to <= from) return 0;
+  let tax = 0;
+  let lower = 0;
+  for (const bracket of brackets) {
+    const upper = bracket.upTo;
+    const start = Math.max(from, lower);
+    const end = Math.min(to, upper);
+    if (end > start) tax += (end - start) * rateFor(bracket.rate);
+    if (upper >= to) break;
+    lower = upper;
+  }
+  return tax;
 }
 
 export function calculateTaxRefund(input: TaxRefundInput): TaxRefundResult {
