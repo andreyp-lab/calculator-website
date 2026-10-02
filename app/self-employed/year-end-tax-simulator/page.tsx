@@ -27,6 +27,7 @@ const faqItems = [
 export default function Page() {
   return (
     <CalculatorLayout
+      pageUrl="/self-employed/year-end-tax-simulator"
       title="סוף שנת מס לעצמאי — הכנת הנתונים"
       description="רשימת בדיקות לקראת הדוח השנתי והשוואת תשלומים לחבות שתיקבע לפי הנתונים האישיים."
       breadcrumbs={[

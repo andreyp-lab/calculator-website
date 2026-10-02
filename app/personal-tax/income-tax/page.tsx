@@ -58,6 +58,7 @@ export default function IncomeTaxPage() {
   return (
     <>
       <CalculatorLayout
+        pageUrl="/personal-tax/income-tax"
         title="מחשבון מס הכנסה לשכיר 2026"
         description="אומדן מס הכנסה לפי מדרגות המס לשנת 2026, כולל ריווח מדרגות 20% ו-31%, נקודות זיכוי, ביטוח לאומי ובריאות."
         breadcrumbs={[

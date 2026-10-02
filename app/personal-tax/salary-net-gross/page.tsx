@@ -34,6 +34,7 @@ const faqItems = [
 export default function SalaryNetGrossPage() {
   return (
     <CalculatorLayout
+      pageUrl="/personal-tax/salary-net-gross"
       title="מחשבון שכר נטו ברוטו 2026"
       description="אומדן ברוטו→נטו, נטו→ברוטו ועלות מעסיק לפי הנחות שתזינו. התוצאה אינה תלוש שכר אישי."
       breadcrumbs={[
@@ -76,6 +77,7 @@ export default function SalaryNetGrossPage() {
           </p>
           <h2>מחשבונים קשורים</h2>
           <ul>
+            <li><Link href="/salary">טבלת ברוטו נטו לפי סכום שכר</Link></li>
             <li><Link href="/personal-tax/income-tax">מחשבון מס הכנסה</Link></li>
             <li><Link href="/personal-tax/tax-credits">בדיקת נקודות זיכוי</Link></li>
             <li><Link href="/employee-rights/salary-deductions">פירוט ניכויים ממשכורת</Link></li>

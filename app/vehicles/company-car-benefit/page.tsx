@@ -13,6 +13,7 @@ const official = 'https://www.gov.il/he/service/itc-mm_usecar10';
 export default function Page() {
   return (
     <CalculatorLayout
+      pageUrl="/vehicles/company-car-benefit"
       title="שווי שימוש ברכב צמוד"
       description="בדיקה לפי דגם הרכב בסימולטור של רשות המסים והשוואה לתלוש השכר."
       breadcrumbs={[{ label: 'דף הבית', href: '/' }, { label: 'רכב', href: '/vehicles' }, { label: 'שווי שימוש ברכב' }]}

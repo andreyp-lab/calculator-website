@@ -27,6 +27,7 @@ const faqItems = [
 export default function Page() {
   return (
     <CalculatorLayout
+      pageUrl="/self-employed/social-security"
       title="ביטוח לאומי לעצמאי — בדיקת החיוב"
       description="בדקו את שיעורי 2026 ואת בסיס החיוב, ואז חשבו את התשלום האישי במחשבון הביטוח הלאומי."
       breadcrumbs={[

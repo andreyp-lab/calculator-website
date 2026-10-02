@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 
 export default function FuelCostPage() {
   return <CalculatorLayout
+    pageUrl="/vehicles/fuel-cost"
     title="מחשבון דלק ועלות נסיעה"
     description="אומדן הוצאה לפי נסועה, צריכה ומחיר ליחידת אנרגיה."
     breadcrumbs={[

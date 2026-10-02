@@ -51,6 +51,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/self-employed/allowed-expenses', label: 'הוצאות מוכרות לעצמאי', group: 'self-employed' },
   { path: '/self-employed/vat-threshold', label: 'תקרת עוסק פטור', group: 'self-employed' },
   { path: '/self-employed/employee-and-self-employed', label: 'שכיר + עצמאי', group: 'self-employed' },
+  { path: '/compare/osek-patur-vs-murshe', label: 'עוסק פטור מול עוסק מורשה', group: 'self-employed' },
   // נדל"ן ומשכנתאות
   { path: '/real-estate/mortgage', label: 'מחשבון משכנתא', group: 'real-estate' },
   { path: '/real-estate/mortgage-optimizer', label: 'מדריך השוואת תמהילים', group: 'real-estate' },
@@ -62,6 +63,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/investments/fire', label: 'FIRE – עצמאות כלכלית', group: 'investments' },
   { path: '/investments/roi', label: 'תשואה על השקעה (ROI)', group: 'investments' },
   { path: '/insurance/pension', label: 'מדריך בדיקת פנסיה', group: 'investments' },
+  { path: '/compare/keren-hishtalmut-vs-pikadon', label: 'קרן השתלמות מול פיקדון', group: 'investments' },
   // הלוואות וחיסכון
   { path: '/savings/family-budget', label: 'תקציב משפחתי', group: 'loans' },
   { path: '/savings/loan-repayment', label: 'החזרי הלוואה', group: 'loans' },
@@ -70,6 +72,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/vehicles/leasing-vs-buying', label: 'ליסינג מול קנייה', group: 'vehicles' },
   { path: '/vehicles/fuel-cost', label: 'עלות דלק', group: 'vehicles' },
   { path: '/vehicles/company-car-benefit', label: 'שווי שימוש ברכב', group: 'vehicles' },
+  { path: '/compare/leasing-mimuni-vs-tifuli', label: 'ליסינג מימוני מול תפעולי', group: 'vehicles' },
   // הקמת עסק ומימון (group ייעודי — מופיעים רק דרך CURATED, לא כ-fallback)
   { path: '/business', label: 'כמה עולה להקים עסק?', group: 'business-setup' },
   { path: '/tools/loan-eligibility', label: 'זכאות להלוואה בערבות המדינה', group: 'business-setup' },
@@ -82,7 +85,7 @@ const CURATED: Record<string, string[]> = {
   '/personal-tax/income-tax': ['/personal-tax/salary-net-gross', '/personal-tax/tax-credits', '/personal-tax/tax-refund', '/self-employed/net'],
   '/self-employed/net': ['/self-employed/social-security', '/self-employed/vat', '/self-employed/tax-advances', '/self-employed/employee-and-self-employed'],
   '/self-employed/allowed-expenses': ['/self-employed/invoices', '/self-employed/year-end-tax-simulator', '/self-employed/net', '/self-employed/vat'],
-  '/self-employed/opening-business': ['/self-employed/invoices', '/self-employed/withholding-tax', '/self-employed/allowed-expenses', '/self-employed/employee-and-self-employed'],
+  '/self-employed/opening-business': ['/compare/osek-patur-vs-murshe', '/self-employed/invoices', '/self-employed/withholding-tax', '/self-employed/allowed-expenses'],
   '/self-employed/invoices': ['/self-employed/withholding-tax', '/self-employed/allowed-expenses', '/self-employed/vat', '/self-employed/vat-threshold'],
   '/self-employed/withholding-tax': ['/self-employed/invoices', '/self-employed/tax-advances', '/self-employed/year-end-tax-simulator', '/self-employed/opening-business'],
   '/self-employed/tax-advances': ['/self-employed/allowed-expenses', '/self-employed/year-end-tax-simulator', '/self-employed/social-security', '/self-employed/withholding-tax'],
@@ -92,7 +95,7 @@ const CURATED: Record<string, string[]> = {
   '/real-estate/mortgage': ['/real-estate/mortgage-optimizer', '/real-estate/purchase-tax', '/savings/loan-repayment', '/real-estate/capital-gains-tax'],
   '/real-estate/purchase-tax': ['/real-estate/mortgage', '/real-estate/capital-gains-tax', '/real-estate/mortgage-optimizer'],
   '/employee-rights/severance': ['/employee-rights/recreation-pay', '/employee-rights/annual-leave', '/personal-tax/salary-net-gross', '/insurance/pension'],
-  '/vehicles/leasing-vs-buying': ['/vehicles/fuel-cost', '/vehicles/company-car-benefit', '/self-employed/employer-cost'],
+  '/vehicles/leasing-vs-buying': ['/compare/leasing-mimuni-vs-tifuli', '/vehicles/fuel-cost', '/vehicles/company-car-benefit', '/self-employed/employer-cost'],
   // קישור אשכול הקמת-עסק מהדפים הנסרקים ביותר (GSC, יולי 2026) — פתרון לבעיית ה-discovery
   '/self-employed/hourly-rate': ['/self-employed/business-setup-cost', '/self-employed/net', '/self-employed/employer-cost', '/compare/esek-zeir-vs-osek-patur'],
   '/self-employed/business-setup-cost': ['/self-employed/opening-business', '/compare/osek-patur-vs-murshe', '/compare/esek-zeir-vs-osek-patur', '/self-employed/hourly-rate'],
@@ -100,7 +103,7 @@ const CURATED: Record<string, string[]> = {
   '/self-employed/employer-cost': ['/business', '/self-employed/hourly-rate', '/self-employed/corporation-vs-individual', '/employee-rights/severance'],
   '/employee-rights/unemployment-benefits': ['/employee-rights/work-grant', '/business', '/personal-tax/salary-net-gross', '/savings/family-budget'],
   '/savings/loan-repayment': ['/tools/loan-eligibility', '/real-estate/mortgage', '/savings/personal-loan', '/business'],
-  '/investments/compound-interest': ['/investments/retirement', '/investments/fire', '/insurance/pension', '/investments/roi'],
+  '/investments/compound-interest': ['/compare/keren-hishtalmut-vs-pikadon', '/investments/retirement', '/investments/fire', '/insurance/pension'],
 };
 
 const BY_PATH = new Map(CALCULATORS.map((c) => [c.path, c]));

@@ -8,7 +8,7 @@
 - [שכר נטו וברוטו](https://cheshbonai.co.il/personal-tax/salary-net-gross)
 - [מס הכנסה](https://cheshbonai.co.il/personal-tax/income-tax)
 - [נקודות זיכוי](https://cheshbonai.co.il/personal-tax/tax-credits)
-- [סימולטור החזר מס לשכירים 2020–2025](https://cheshbonai.co.il/personal-tax/tax-refund)
+- [מחשבון החזר מס לשכירים לפי טופס 106, 2020–2025](https://cheshbonai.co.il/personal-tax/tax-refund): נתוני 158/172, 042, 244/245, 045/086 בהזנה ידנית. חישוב מס שנתי, נקודות ילדים בתנאים המוגדרים, פנסיה ותרומות. מקרים מורכבים דורשים סכומים מאומתים. המידע אינו המלצה או ייעוץ אישי; יש להתייעץ עם יועץ מס, רואה חשבון או עורך דין לפי העניין.
 - [מדריך תלוש שכר](https://cheshbonai.co.il/salaried/payslip-guide)
 
 ## זכויות עובדים

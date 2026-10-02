@@ -27,6 +27,7 @@ const faqItems = [
 export default function Page() {
   return (
     <CalculatorLayout
+      pageUrl="/employee-rights/sick-pay"
       title="דמי מחלה — בדיקת זכאות ותשלום"
       description="השוו את יתרת ימי המחלה בתלוש למועדי ההיעדרות, לאישור המחלה ולהסדר החל במקום העבודה."
       breadcrumbs={[

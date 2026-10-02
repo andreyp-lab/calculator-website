@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 export default function MortgageOptimizerPage() {
   return <CalculatorLayout
+    pageUrl="/real-estate/mortgage-optimizer"
     title="השוואת תמהילי משכנתא"
     description="בדיקת הצעות הבנקים והסיכונים בכל מסלול לפני בחירת תמהיל."
     breadcrumbs={[

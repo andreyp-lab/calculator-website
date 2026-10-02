@@ -153,6 +153,16 @@ export default function PersonalTaxPage() {
           </div>
         </Link>
 
+        <Link
+          href="/salary"
+          className="block border border-ink/15 bg-paper p-4 mb-8 hover:border-gold transition"
+        >
+          <span className="font-semibold text-ink">ברוטו נטו לפי סכום שכר ←</span>
+          <span className="block text-sm text-ink/70 mt-1">
+            עמודי חישוב מ־6,500 עד 40,000 ₪, עם פירוט ניכויים והנחות אחידות לשנת 2026
+          </span>
+        </Link>
+
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
             calc.available ? (

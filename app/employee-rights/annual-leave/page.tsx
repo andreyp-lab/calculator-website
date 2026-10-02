@@ -27,6 +27,7 @@ const faqItems = [
 export default function Page() {
   return (
     <CalculatorLayout
+      pageUrl="/employee-rights/annual-leave"
       title="חופשה שנתית — בדיקת הזכאות והיתרה"
       description="בדקו את זכאותכם לפי חוק חופשה שנתית, שבוע העבודה, הוותק והימים שעבדתם בפועל."
       breadcrumbs={[

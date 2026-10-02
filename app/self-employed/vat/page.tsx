@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export default function VatPage() {
   return (
     <CalculatorLayout
+      pageUrl="/self-employed/vat"
       title="מחשבון מע״מ 2026"
       description="הוספה וחילוץ של מע״מ בשיעור הרגיל. לפני דיווח או הפקת חשבונית, בדקו את כללי העסקה והמועד מול רשות המסים."
       breadcrumbs={[{ label: 'דף הבית', href: '/' }, { label: 'עצמאים', href: '/self-employed' }, { label: 'מע״מ' }]}

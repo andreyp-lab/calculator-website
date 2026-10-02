@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function MortgagePage() {
   return <CalculatorLayout
+    pageUrl="/real-estate/mortgage"
     title="מחשבון משכנתא 2026"
     description="אומדן החזר למסלול אחד לפי סכום, ריבית קבועה ותקופה שתזינו."
     breadcrumbs={[

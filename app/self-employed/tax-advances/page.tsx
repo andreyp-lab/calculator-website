@@ -27,6 +27,7 @@ const faqItems = [
 export default function Page() {
   return (
     <CalculatorLayout
+      pageUrl="/self-employed/tax-advances"
       title="מקדמות לעצמאי — בדיקת החיובים"
       description="בדקו את דרישות התשלום ואת האפשרות לתקן מקדמות לפי נתוני התיק וההכנסה בפועל."
       breadcrumbs={[

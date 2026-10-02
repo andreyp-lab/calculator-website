@@ -44,7 +44,7 @@ export default async function OGImage() {
             lineHeight: 1.3,
           }}
         >
-          30 מחשבונים פיננסיים בעברית
+          מחשבונים פיננסיים בעברית
         </div>
         <div
           style={{

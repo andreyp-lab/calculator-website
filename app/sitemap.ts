@@ -67,6 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: שכירים / מסים =====
     make('/personal-tax/salary-net-gross', 'weekly', 0.95, FRESH_2026_06_12),
+    make('/salary', 'weekly', 0.9, new Date('2026-10-02')),
     // דפי "שכר X ברוטו כמה נטו" — פרוגרמטיים, נגזרים מאותה רשימת סכומים כמו הדפים עצמם
     ...SALARY_PAGE_AMOUNTS.map((a) => make(`/salary/${a}`, 'monthly', 0.8, new Date('2026-08-15'))),
     make('/personal-tax/tax-refund', 'weekly', 0.95, new Date('2026-10-02')),

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 export default function LeasingMimuniVsTifuliPage() {
   return <CalculatorLayout
+    pageUrl="/compare/leasing-mimuni-vs-tifuli"
     title="ליסינג מימוני מול ליסינג תפעולי"
     description="מדריך להשוואת הצעות כתובות לאותו רכב ולאותה תקופת שימוש."
     breadcrumbs={[

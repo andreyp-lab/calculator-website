@@ -123,7 +123,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: "חשבונאי",
   url: SITE_URL,
-  description: "30 מחשבונים פיננסיים מקצועיים בעברית עם נתונים מעודכנים ל-2026",
+  description: "מחשבונים ומדריכים פיננסיים בעברית, עם מקורות ושנות מס מפורטות בכל כלי",
   inLanguage: "he-IL",
   areaServed: "IL",
   knowsAbout: [

@@ -27,6 +27,7 @@ const faqItems = [
 export default function Page() {
   return (
     <CalculatorLayout
+      pageUrl="/self-employed/net"
       title="כמה נשאר לעצמאי? הכנת הנתונים לחישוב נטו"
       description="אספו את המחזור, הוצאות העסק, המקדמות וההפקדות, ובדקו את החבות מול הדוחות והחשבונות האישיים."
       breadcrumbs={[

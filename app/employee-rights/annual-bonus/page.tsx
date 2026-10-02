@@ -13,6 +13,7 @@ const insurance = 'https://www.btl.gov.il/Insurance/Maasik/Pages/hacnasaHacayeve
 
 export default function Page() {
   return <CalculatorLayout
+    pageUrl="/employee-rights/annual-bonus"
     title="בונוס שנתי: בדיקת מס וניכויים"
     description="הבונוס מצטרף להכנסה. בדקו את אופן הניכוי בתלוש ואת הנתונים האישיים מול המקורות הרשמיים."
     breadcrumbs={[{ label: 'דף הבית', href: '/' }, { label: 'זכויות עובדים', href: '/employee-rights' }, { label: 'בונוס שנתי' }]}

@@ -27,6 +27,7 @@ const faqItems = [
 export default function SeverancePage() {
   return (
     <CalculatorLayout
+      pageUrl="/employee-rights/severance"
       title="פיצויי פיטורים — כך בודקים את הזכאות"
       description="בדקו את תקופת העבודה, השכר הקובע, ההפקדות בפועל והדיווח בטופס 161 לפני החלטה על כספי הפיצויים."
       breadcrumbs={[

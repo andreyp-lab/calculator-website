@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function LeasingVsBuyingPage() {
   return (
     <CalculatorLayout
+      pageUrl="/vehicles/leasing-vs-buying"
       title="ליסינג, הלוואה או קנייה במזומן"
       description="השוואה בין הצעות רכב על בסיס תנאי החוזה והעלות הכוללת לאורך תקופת השימוש."
       breadcrumbs={[
