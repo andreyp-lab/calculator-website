@@ -32,8 +32,8 @@ const calculators = [
     available: true,
   },
   {
-    title: 'בדיקת החזר מס',
-    description: 'הכנת נתונים ובדיקת זכאות להחזר באתר רשות המסים',
+    title: 'סימולטור החזר מס לשכירים',
+    description: 'אומדן שנתי לפי טופסי 106, מס שנוכה ונקודות זיכוי בשנים 2020–2025',
     href: '/personal-tax/tax-refund',
     available: true,
   },
@@ -65,10 +65,10 @@ const calculatorComparison = [
     output: 'קישור לבדיקה אישית ברשות המסים',
   },
   {
-    name: 'בדיקת החזר מס',
+    name: 'סימולטור החזר מס',
     href: '/personal-tax/tax-refund',
     when: 'החלפת עבודה, עבדת חלק משנה או הפקדת לפנסיה/תרומות',
-    output: 'הנחיות לבדיקה ולהגשה ברשות המסים',
+    output: 'אומדן החזר או יתרת מס עם פירוט שנתי',
   },
   {
     name: 'מה שווה לי לעבוד?',

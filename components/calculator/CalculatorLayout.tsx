@@ -26,6 +26,8 @@ interface CalculatorLayoutProps {
   quickAnswer?: ReactNode;
   /** בלוק "הטמע באתר שלך" (EmbedCodeBox) — מוצג אחרי המחשבונים הקשורים */
   embed?: ReactNode;
+  /** כתב ויתור ייעודי למחשבון רגיש; ללא ערך מוצג הנוסח הכללי. */
+  disclaimerText?: string;
 }
 
 export function CalculatorLayout({
@@ -40,6 +42,7 @@ export function CalculatorLayout({
   pageUrl,
   quickAnswer,
   embed,
+  disclaimerText,
 }: CalculatorLayoutProps) {
   // בנה BreadcrumbList items מה-breadcrumbs הקיימים.
   // ל-breadcrumb האחרון (הדף הנוכחי) אין href, ולכן נשתמש ב-pageUrl;
@@ -88,7 +91,7 @@ export function CalculatorLayout({
 
         {/* Disclaimer */}
         <div className="mb-8">
-          <DisclaimerBox />
+          <DisclaimerBox text={disclaimerText} />
         </div>
 
         {/* קידום קורסי FinSchool — מיד אחרי התוצאה והדיסקליימר, לפני התוכן */}

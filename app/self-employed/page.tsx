@@ -44,6 +44,13 @@ const calculators = [
   },
   {
     stage: 'start',
+    title: '90 הימים הראשונים אחרי פתיחת עוסק',
+    description: 'סדר פעולות מעשי לחשבוניות, תיעוד, דיווחים, מקדמות ובדיקת החיובים הראשונים',
+    href: '/self-employed/first-90-days',
+    available: true,
+  },
+  {
+    stage: 'start',
     title: '🏗️ כמה עולה להקים עסק? מדריך לתקציב פתיחה',
     description: 'רכיבי ההשקעה וההוצאות שיש לאסוף לקראת תכנון תקציב, עם קישורים לאגרות הרשמיות',
     href: '/self-employed/business-setup-cost',

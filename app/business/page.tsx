@@ -4,6 +4,24 @@ import { BUSINESS_TYPES } from '@/lib/data/business-setup/business-types';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { ArrowLeft } from 'lucide-react';
 
+const FINANCE_GUIDES = [
+  {
+    href: '/business/profit-and-loss-guide',
+    title: 'איך לקרוא דוח רווח והפסד',
+    description: 'מה בודקים בהכנסות, בעלות המכר ובהוצאות — ואיך מחברים את הדוח לתזרים.',
+  },
+  {
+    href: '/business/working-capital-guide',
+    title: 'הון חוזר לעסק קטן',
+    description: 'לקוחות, מלאי וספקים: נוסחה, דוגמה וסימנים שמחייבים בדיקה.',
+  },
+  {
+    href: '/business/business-credit-preparation',
+    title: 'הכנה לבקשת אשראי עסקי',
+    description: 'המסמכים והנתונים שכדאי לארגן לפני פנייה לבנק או לקרן.',
+  },
+] as const;
+
 export const metadata: Metadata = {
   title: { absolute: 'הקמת עסק — מדריכים לתכנון לפי סוג פעילות' },
   description:
@@ -30,6 +48,33 @@ export default function BusinessHubPage() {
           </p>
         </div>
 
+        <section className="mb-10" aria-labelledby="finance-guides-title">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">
+            {'// '}ניהול כספי העסק
+          </p>
+          <h2 id="finance-guides-title" className="text-2xl font-bold text-ink mb-4">
+            מדריכים לבעלי עסק פעיל
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {FINANCE_GUIDES.map((guide) => (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className="group flex flex-col border border-ink/15 bg-paper p-5 transition hover:bg-paper-hover"
+              >
+                <h3 className="font-bold text-ink mb-2 group-hover:text-gold transition">
+                  {guide.title}
+                </h3>
+                <p className="text-sm text-ink/70 flex-1">{guide.description}</p>
+                <span className="mt-4 flex items-center gap-1 text-xs font-mono uppercase tracking-[0.1em] text-gold">
+                  למדריך <ArrowLeft className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <h2 className="text-2xl font-bold text-ink mb-4">מדריכי הקמה לפי סוג פעילות</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {BUSINESS_TYPES.map((bt) => (
             <Link

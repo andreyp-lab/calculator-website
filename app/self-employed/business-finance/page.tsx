@@ -4,6 +4,7 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
 import { DisclaimerBox } from '@/components/calculator/DisclaimerBox';
 import { FAQ } from '@/components/calculator/FAQ';
+import { CourseCTA } from '@/components/marketing/CourseCTA';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 
 const PAGE_PATH = '/self-employed/business-finance';
@@ -507,6 +508,9 @@ export default function BusinessFinancePage() {
           <h2 className="text-2xl font-bold text-ink mb-4">הכלים שילוו אתכם ביישום</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
+              { href: '/business/profit-and-loss-guide', label: 'איך לקרוא דוח רווח והפסד לבעל עסק' },
+              { href: '/business/working-capital-guide', label: 'הון חוזר לעסק קטן — נוסחה וסימני אזהרה' },
+              { href: '/business/business-credit-preparation', label: 'הכנה לבקשת אשראי עסקי' },
               { href: '/tools/cash-flow', label: 'תזרים מזומנים לעסק — מעקב והתראות' },
               { href: '/tools/budget', label: 'תכנון תקציב ורווח והפסד' },
               { href: '/self-employed/tax-advances', label: 'מדריך מקדמות מס' },
@@ -528,31 +532,8 @@ export default function BusinessFinancePage() {
           </div>
         </section>
 
-        {/* Course CTA */}
-        <aside
-          aria-label="קורס דיגיטלי מומלץ"
-          className="my-12 bg-ink border border-gold-light/30 p-6 sm:p-8 text-cream"
-        >
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-3">
-            // קורס דיגיטלי לבעלי עסקים · בהדרכת רו״ח ✦
-          </p>
-          <p className="font-serif text-xl sm:text-2xl mb-3 leading-snug text-cream">
-            רוצה שיטה מסודרת לנהל את כספי העסק? קורס CFO של FinSchool
-          </p>
-          <p className="text-sm sm:text-base text-cream/70 leading-relaxed mb-5 max-w-2xl">
-            כל מה שקראתם במדריך — תזרים מזומנים, תקציב שנתי, רווח והפסד והתנהלות מול הבנק — בקורס
-            מעשי אחד, עם כלי עבודה מוכנים ובהדרכת רו"ח.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href="/course/business"
-              className="inline-block bg-gold px-8 py-3.5 text-sm font-bold text-paper transition hover:bg-gold-2"
-            >
-              לפרטי הקורס ←
-            </Link>
-            <span className="text-xs text-cream/50">FinSchool · רו״ח אנדרי פלטונוב</span>
-          </div>
-        </aside>
+        {/* Course CTA — uses the shared contextual copy and analytics events. */}
+        <CourseCTA path={PAGE_PATH} courseId="cfo" placement="guide" />
 
         {/* FAQ */}
         <section className="mb-10">

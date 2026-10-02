@@ -8,7 +8,7 @@
 - [שכר נטו וברוטו](https://cheshbonai.co.il/personal-tax/salary-net-gross)
 - [מס הכנסה](https://cheshbonai.co.il/personal-tax/income-tax)
 - [נקודות זיכוי](https://cheshbonai.co.il/personal-tax/tax-credits)
-- [החזר מס](https://cheshbonai.co.il/personal-tax/tax-refund)
+- [סימולטור החזר מס לשכירים 2020–2025](https://cheshbonai.co.il/personal-tax/tax-refund)
 - [מדריך תלוש שכר](https://cheshbonai.co.il/salaried/payslip-guide)
 
 ## זכויות עובדים
@@ -24,6 +24,7 @@
 
 - [מרכז העצמאים](https://cheshbonai.co.il/self-employed)
 - [פתיחת עסק](https://cheshbonai.co.il/self-employed/opening-business)
+- [90 הימים הראשונים אחרי פתיחת עוסק](https://cheshbonai.co.il/self-employed/first-90-days)
 - [עוסק פטור מול עוסק מורשה](https://cheshbonai.co.il/compare/osek-patur-vs-murshe)
 - [בעל עסק זעיר מול עוסק פטור](https://cheshbonai.co.il/compare/esek-zeir-vs-osek-patur)
 - [תקרת עוסק פטור](https://cheshbonai.co.il/self-employed/vat-threshold)
@@ -35,6 +36,9 @@
 - [הכנסה פנויה לעצמאי](https://cheshbonai.co.il/self-employed/net)
 - [ביטוח לאומי לעצמאי](https://cheshbonai.co.il/self-employed/social-security)
 - [ניהול כספים לעסק קטן](https://cheshbonai.co.il/self-employed/business-finance)
+- [איך לקרוא דוח רווח והפסד](https://cheshbonai.co.il/business/profit-and-loss-guide)
+- [הון חוזר לעסק קטן](https://cheshbonai.co.il/business/working-capital-guide)
+- [הכנה לבקשת אשראי עסקי](https://cheshbonai.co.il/business/business-credit-preparation)
 - [תמחור שעת עבודה לעצמאי](https://cheshbonai.co.il/self-employed/hourly-rate)
 - [תקציב ועלויות פתיחת עסק](https://cheshbonai.co.il/self-employed/business-setup-cost)
 - [מדריכי הקמת עסק לפי סוג פעילות](https://cheshbonai.co.il/business)
@@ -66,5 +70,5 @@
 - [מילון מונחים](https://cheshbonai.co.il/glossary)
 - [השוואות](https://cheshbonai.co.il/compare)
 - [הקורסים של FinSchool](https://cheshbonai.co.il/course)
-- [קורס לעצמאים](https://cheshbonai.co.il/course/self-employed)
-- [קורס לבעלי עסקים](https://cheshbonai.co.il/course/business)
+- [קורס לעצמאים: מע״מ, מס הכנסה וביטוח לאומי](https://cheshbonai.co.il/course/self-employed)
+- [קורס CFO וניהול כספים לבעלי עסקים](https://cheshbonai.co.il/course/business)

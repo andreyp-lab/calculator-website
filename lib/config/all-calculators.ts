@@ -61,11 +61,11 @@ export const allCalculators: CalculatorEntry[] = [
   },
   {
     id: 'tax-refund',
-    title: 'מדריך החזר מס לשכירים',
+    title: 'סימולטור החזר מס לשכירים',
     href: '/personal-tax/tax-refund',
     category: 'מיסוי אישי',
     categoryHref: '/personal-tax',
-    description: 'תנאי בדיקה והפניה לשירות רשות המסים',
+    description: 'אומדן שנתי לפי טופסי 106, מס שנוכה ונקודות זיכוי',
     icon: '💸',
     keywords: [
       'החזר מס',

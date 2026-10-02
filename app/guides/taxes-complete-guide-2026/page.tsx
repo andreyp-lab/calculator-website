@@ -762,7 +762,7 @@ export default function TaxesCompleteGuide() {
             <div className="grid md:grid-cols-2 gap-4">
               {[
                 { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו-ברוטו', desc: 'קבלו אומדן לפי מדרגות המס, ב.ל. והנחות הפנסיה המוצגות.' },
-                { href: '/personal-tax/tax-refund', label: 'מדריך החזר מס ובדיקה רשמית', desc: 'הכינו נתונים ועברו לשירות רשות המסים.' },
+                { href: '/personal-tax/tax-refund', label: 'סימולטור החזר מס לשכירים', desc: 'אומדן שנתי לפי טופסי 106, מס שנוכה ונקודות זיכוי.' },
                 { href: '/personal-tax/income-tax', label: 'מדריך מס הכנסה', desc: 'הבינו את המדרגות ועברו לבדיקה הרשמית.' },
                 { href: '/personal-tax/tax-credits', label: 'בדיקת נקודות זיכוי', desc: 'הכינו את הנתונים ובדקו בסימולטור הרשמי.' },
                 { href: '/self-employed/net', label: 'מדריך נטו עצמאי', desc: 'הכן את הנתונים לבדיקה אישית של התזרים הפנוי.' },
@@ -896,7 +896,7 @@ export default function TaxesCompleteGuide() {
                 href="/personal-tax/tax-refund"
                 className="bg-cream text-ink px-6 py-3 rounded-none font-bold hover:bg-paper-hover transition"
               >
-                מדריך החזר מס ←
+                סימולטור החזר מס ←
               </Link>
               <Link
                 href="/self-employed/year-end-tax-simulator"

@@ -309,7 +309,7 @@ export default async function SalaryAmountPage({ params }: PageProps) {
             {[
               { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו/ברוטו מלא' },
               { href: '/personal-tax/tax-credits', label: 'בדיקת נקודות זיכוי' },
-              { href: '/personal-tax/tax-refund', label: 'בדיקת החזר מס' },
+              { href: '/personal-tax/tax-refund', label: 'סימולטור החזר מס לשכירים' },
               { href: '/salaried/payslip-guide', label: 'מדריך קריאת תלוש שכר' },
             ].map((l) => (
               <li key={l.href}>

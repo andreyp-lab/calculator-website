@@ -901,6 +901,7 @@ export default function OpeningBusinessPage() {
           <h2 className="text-2xl font-bold text-ink mb-4">מחשבונים ומדריכים שיעזרו לך להתחיל</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
+              { href: '/self-employed/first-90-days', label: '90 הימים הראשונים אחרי פתיחת עוסק' },
               { href: '/self-employed/vat', label: 'מחשבון מע"מ' },
               { href: '/self-employed/net', label: 'מדריך הכנסה פנויה לעצמאי' },
               { href: '/self-employed/social-security', label: 'ביטוח לאומי לעצמאי — מדריך ומחשבון רשמי' },

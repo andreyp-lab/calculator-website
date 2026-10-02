@@ -5,6 +5,7 @@ import { BUSINESS_TYPES, getBusinessType } from '@/lib/data/business-setup/busin
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
+import { CourseCTA } from '@/components/marketing/CourseCTA';
 
 interface PageProps {
   params: Promise<{ type: string }>;
@@ -183,22 +184,20 @@ export default async function BusinessGuidePage({ params }: PageProps) {
           </ul>
         </section>
 
-        <aside className="my-12 border border-gold-light/30 bg-ink p-6 text-cream sm:p-8">
-          <h2 className="mb-3 font-serif text-2xl">לומדים לנהל את כספי העסק</h2>
-          <p className="mb-5 max-w-2xl leading-relaxed text-cream/75">
-            קורס מנהל הכספים של העסק שלך עוסק בתזרים מזומנים, תקציב, הון חוזר והתנהלות מול בנקים ואשראי.
-            הסילבוס ותנאי הרכישה מפורטים בדף הקורס.
-          </p>
-          <Link href="/course/business" className="inline-block bg-gold px-7 py-3 font-bold text-paper hover:bg-gold-2">
-            לפרטי הקורס ←
-          </Link>
-        </aside>
+        <CourseCTA
+          path={`/business/${business.slug}`}
+          courseId="cfo"
+          placement="business"
+        />
 
         <section className="mb-10">
           <h2 className="mb-4 text-xl font-bold text-ink">להמשך בדיקה</h2>
           <ul className="list-disc space-y-2 pr-5 text-gold">
             <li><Link href="/self-employed/opening-business" className="underline">מדריך פתיחת עסק</Link></li>
             <li><Link href="/self-employed/business-finance" className="underline">מדריך ניהול כספים לעסק קטן</Link></li>
+            <li><Link href="/business/profit-and-loss-guide" className="underline">איך לקרוא דוח רווח והפסד</Link></li>
+            <li><Link href="/business/working-capital-guide" className="underline">הון חוזר לעסק קטן</Link></li>
+            <li><Link href="/business/business-credit-preparation" className="underline">הכנה לבקשת אשראי עסקי</Link></li>
             <li><Link href="/tools/loan-eligibility" className="underline">מידע על מסלולי מימון</Link></li>
           </ul>
         </section>

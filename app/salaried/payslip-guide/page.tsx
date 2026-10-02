@@ -183,7 +183,7 @@ export default function PayslipGuidePage() {
             {[
               { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר נטו / ברוטו' },
               { href: '/personal-tax/tax-credits', label: 'בדיקת נקודות זיכוי ברשות המסים' },
-              { href: '/personal-tax/tax-refund', label: 'מדריך החזר מס והגשה רשמית' },
+              { href: '/personal-tax/tax-refund', label: 'סימולטור החזר מס לפי טופסי 106' },
               { href: '/employee-rights/severance', label: 'מחשבון פיצויי פיטורין' },
               { href: '/insurance/pension', label: 'מדריך בדיקת פנסיה' },
               { href: '/glossary/net', label: 'נטו — הגדרה' },

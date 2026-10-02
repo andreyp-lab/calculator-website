@@ -52,6 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/tools', 'weekly', 0.90),
     make('/business', 'weekly', 0.90, new Date('2026-09-29')), // hub: כמה עולה להקים עסק
     ...BUSINESS_TYPES.map((b) => make(`/business/${b.slug}`, 'monthly', 0.85, new Date('2026-09-29'))),
+    make('/business/profit-and-loss-guide', 'monthly', 0.88, new Date('2026-10-02')),
+    make('/business/working-capital-guide', 'monthly', 0.88, new Date('2026-10-02')),
+    make('/business/business-credit-preparation', 'monthly', 0.86, new Date('2026-10-02')),
 
     // ===== קטגוריות משנה =====
     make('/employee-rights', 'weekly', 0.90),
@@ -66,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/personal-tax/salary-net-gross', 'weekly', 0.95, FRESH_2026_06_12),
     // דפי "שכר X ברוטו כמה נטו" — פרוגרמטיים, נגזרים מאותה רשימת סכומים כמו הדפים עצמם
     ...SALARY_PAGE_AMOUNTS.map((a) => make(`/salary/${a}`, 'monthly', 0.8, new Date('2026-08-15'))),
-    make('/personal-tax/tax-refund', 'weekly', 0.95),
+    make('/personal-tax/tax-refund', 'weekly', 0.95, new Date('2026-10-02')),
     make('/personal-tax/income-tax', 'monthly', 0.90),
     make('/personal-tax/tax-credits', 'monthly', 0.90),
     make('/personal-tax/work-value', 'monthly', 0.85),
@@ -90,6 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: עצמאיים =====
     make('/self-employed/opening-business', 'monthly', 0.92, new Date('2026-10-01')), // רענון מדריך הרישום והקישוריות
+    make('/self-employed/first-90-days', 'monthly', 0.90, new Date('2026-10-02')),
     make('/self-employed/business-finance', 'monthly', 0.92, new Date('2026-07-01')), // מדריך ניהול כספים לעסק קטן (pillar חדש)
     make('/self-employed/year-end-tax-simulator', 'weekly', 0.95),
     make('/self-employed/net', 'weekly', 0.95),

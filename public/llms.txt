@@ -28,7 +28,7 @@
 
 ## קורסים
 
-- [קורס לעצמאים: הכסף של העסק בידיים שלך](https://cheshbonai.co.il/course/self-employed)
-- [קורס לבעלי עסקים: מנהל הכספים של העסק שלך](https://cheshbonai.co.il/course/business)
+- [קורס לעצמאים: מע״מ, מס הכנסה וביטוח לאומי](https://cheshbonai.co.il/course/self-employed)
+- [קורס CFO וניהול כספים לבעלי עסקים](https://cheshbonai.co.il/course/business)
 
 [אינדקס מורחב](https://cheshbonai.co.il/llms-full.txt)

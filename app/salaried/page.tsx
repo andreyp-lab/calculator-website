@@ -46,9 +46,9 @@ interface Calc {
 
 const TAX_AND_SALARY: Calc[] = [
   {
-    title: '🌟 בדיקת החזר מס',
+    title: '🌟 סימולטור החזר מס',
     description:
-      'בדקו אם ייתכן שנוכה מס ביתר והכינו את המסמכים לבדיקה ולהגשה ברשות המסים.',
+      'הזינו נתונים שנתיים מטופסי 106 וקבלו אומדן החזר או יתרת מס לשנים 2020–2025.',
     href: '/personal-tax/tax-refund',
     icon: Receipt,
     highlight: true,
@@ -191,7 +191,7 @@ export default function SalariedPage() {
               className="inline-flex items-center gap-2 bg-gold text-paper px-8 py-3.5 hover:bg-gold-2 transition font-bold"
             >
               <Receipt className="w-5 h-5" />
-              <span>בדוק החזר מס שלך — חינם</span>
+              <span>חשב אומדן החזר מס — חינם</span>
               <ArrowLeft className="w-4 h-4" />
             </Link>
           </div>
