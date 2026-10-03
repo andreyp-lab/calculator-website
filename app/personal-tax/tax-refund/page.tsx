@@ -176,7 +176,7 @@ export default function TaxRefundPage() {
           <p>
             הסימולטור הרגיל אינו מחשב את הזכויות הבאות. את חייל משוחרר, שירות לאומי, תואר ראשון
             ושני ועולה חדש אפשר לחשב אוטומטית ב
-            <Link href="/personal-tax/tax-return-full" className="text-gold underline">תחשיב המס המלא</Link>, עם פירוט שורה-שורה.
+            <Link href="/personal-tax/tax-return-full" className="text-gold underline">תחשיב המס המורחב</Link>, עם פירוט שורה-שורה.
             לשאר המצבים חשבו את סך הנקודות לשנה בסימולטור הרשמי והזינו אותו במצב &quot;מספר נקודות כולל שאומת&quot;:
           </p>
           <ul>

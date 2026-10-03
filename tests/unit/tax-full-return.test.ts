@@ -40,6 +40,11 @@ describe('שכר דירה למגורים', () => {
     const r = calculateFullReturn(base({ residentialRental: { track: 'ten-percent', monthlyRent: 6_000, months: 12, rentPaidForOwnHome: 30_000 } }));
     expect(line(r, 'מס 10% על שכירות למגורים (סעיף 122)')).toBe(4_200);
   });
+  it('אינו מחיל את ניכוי סעיף 122(ו) לפני שנת המס 2023', () => {
+    const r = calculateFullReturn(base({ taxYear: '2022', residentialRental: { track: 'ten-percent', monthlyRent: 6_000, months: 12, rentPaidForOwnHome: 30_000 } }));
+    expect(line(r, 'מס 10% על שכירות למגורים (סעיף 122)')).toBe(7_200);
+    expect(line(r, 'דמי שכירות ששולמו למגורי המשכיר (סעיף 122(ו))')).toBeUndefined();
+  });
   it('נקודות זיכוי אינן מקוזזות מול מס 10%', () => {
     const r = calculateFullReturn(base({ wageSources: [], residentialRental: { track: 'ten-percent', monthlyRent: 6_000, months: 12 } }));
     expect(r.finalTax).toBe(7_200);
@@ -101,6 +106,27 @@ describe('זיכוי מס זר (סעיף 204)', () => {
     const r = calculateFullReturn(base({ capital: { foreignDividends: 10_000, foreignDividendsTax: 3_000 } }));
     expect(line(r, 'זיכוי מס זר — דיבידנד מחו״ל')).toBe(2_500);
     expect(r.foreignCreditExcess).toBe(500);
+  });
+  it('מדווח כעודף גם זיכוי שמותר עקרונית אך לא נוצל לאחר זיכויים אישיים', () => {
+    const r = calculateFullReturn(base({
+      wageSources: [],
+      credits: { gender: 'male', immigrant: { aliyahYear: 2023, aliyahMonth: 1 } },
+      capital: { foreignDividends: 10_000, foreignDividendsTax: 2_500 },
+    }));
+    expect(line(r, 'זיכוי מס זר — דיבידנד מחו״ל')).toBe(0);
+    expect(r.foreignCreditExcess).toBe(2_500);
+  });
+  it('דוחה שכירות מחו״ל ללא סכום ברוטו במקום להשמיט אותה בשקט', () => {
+    expect(() => calculateFullReturn(base({
+      foreignRental: { track: 'regular', grossRent: 0, regularNetIncome: 50_000, foreignTaxPaid: 5_000 },
+    }))).toThrow('דמי שכירות שנתיים ברוטו');
+  });
+});
+
+describe('תרומות', () => {
+  it('מחזיר את החלק שלא נוצל בשל תקרת 30% לצורך הצגה למשתמש', () => {
+    const r = calculateFullReturn(base({ wageSources: [wage(100_000)], donations: 40_000 }));
+    expect(r.donationExcess).toBe(10_000);
   });
 });
 

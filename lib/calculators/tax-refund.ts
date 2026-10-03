@@ -73,7 +73,6 @@ export interface TaxRefundYearRule {
   claimDeadline: string;
   sourceUrl: string;
   pensionIncomeCeilingAnnual: number;
-  pensionMinimumBase: number;
   donationMinimum: number;
   donationMaximum: number;
 }
@@ -91,7 +90,6 @@ export const TAX_REFUND_YEAR_RULES: Record<TaxRefundYear, TaxRefundYearRule> = {
     brackets: brackets([75_960, 108_960, 174_960, 243_120, 505_920, Infinity]),
     creditPointMonthly: 219,
     pensionIncomeCeilingAnnual: 105_600,
-    pensionMinimumBase: 2_040,
     donationMinimum: 190,
     donationMaximum: 9_350_000,
     surtaxThreshold: 651_600,
@@ -102,7 +100,6 @@ export const TAX_REFUND_YEAR_RULES: Record<TaxRefundYear, TaxRefundYearRule> = {
     brackets: brackets([75_480, 108_360, 173_880, 241_680, 502_920, Infinity]),
     creditPointMonthly: 218,
     pensionIncomeCeilingAnnual: 104_400,
-    pensionMinimumBase: 2_028,
     donationMinimum: 190,
     donationMaximum: 9_294_000,
     surtaxThreshold: 647_640,
@@ -113,7 +110,6 @@ export const TAX_REFUND_YEAR_RULES: Record<TaxRefundYear, TaxRefundYearRule> = {
     brackets: brackets([77_400, 110_880, 178_080, 247_440, 514_920, Infinity]),
     creditPointMonthly: 223,
     pensionIncomeCeilingAnnual: 106_800,
-    pensionMinimumBase: 2_076,
     donationMinimum: 190,
     donationMaximum: 9_517_000,
     surtaxThreshold: 663_240,
@@ -124,7 +120,6 @@ export const TAX_REFUND_YEAR_RULES: Record<TaxRefundYear, TaxRefundYearRule> = {
     brackets: brackets([81_480, 116_760, 187_440, 260_520, 542_160, Infinity]),
     creditPointMonthly: 235,
     pensionIncomeCeilingAnnual: 112_800,
-    pensionMinimumBase: 2_196,
     donationMinimum: 200,
     donationMaximum: 10_019_808,
     surtaxThreshold: 698_280,
@@ -135,7 +130,6 @@ export const TAX_REFUND_YEAR_RULES: Record<TaxRefundYear, TaxRefundYearRule> = {
     brackets: brackets([84_120, 120_720, 193_800, 269_280, 560_280, Infinity]),
     creditPointMonthly: 242,
     pensionIncomeCeilingAnnual: 116_400,
-    pensionMinimumBase: 2_268,
     donationMinimum: 207,
     donationMaximum: 10_354_816,
     surtaxThreshold: 721_560,
@@ -147,7 +141,6 @@ export const TAX_REFUND_YEAR_RULES: Record<TaxRefundYear, TaxRefundYearRule> = {
     brackets: brackets([84_120, 120_720, 193_800, 269_280, 560_280, Infinity]),
     creditPointMonthly: 242,
     pensionIncomeCeilingAnnual: 116_400,
-    pensionMinimumBase: 2_268,
     donationMinimum: 207,
     donationMaximum: 10_354_816,
     surtaxThreshold: 721_560,
@@ -248,8 +241,7 @@ export function calculateTaxRefund(input: TaxRefundInput): TaxRefundResult {
   }
   const pensionEligibleContributions = Math.min(
     pensionContributions,
-    Math.max(rule.pensionMinimumBase,
-      Math.min(insuredIncome, totalIncomeBeforeDeductions, rule.pensionIncomeCeilingAnnual) * 0.07),
+    Math.min(insuredIncome, totalIncomeBeforeDeductions, rule.pensionIncomeCeilingAnnual) * 0.07,
   );
   const pensionTaxCredit = input.pensionCreditMode === 'manual'
     ? nonNegative(input.manualPensionCredit)

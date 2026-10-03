@@ -74,7 +74,7 @@ function classifyError(message: string): string {
 }
 
 interface TaxRefundCalculatorProps {
-  /** simple: האומדן הרגיל. full: תחשיב מלא עם זכויות נוספות ופירוט שורה-שורה. */
+  /** simple: האומדן הרגיל. full: תחשיב מורחב עם זכויות נוספות ופירוט שורה-שורה. */
   mode?: 'simple' | 'full';
 }
 
@@ -116,6 +116,7 @@ function NumberField({ id, label, value, onChange, help }: {
       <label htmlFor={id} className="block text-xs font-medium text-ink/70 mb-1">{label}</label>
       <input
         id={id}
+        aria-describedby={help ? `${id}-help` : undefined}
         type="number"
         inputMode="decimal"
         min="0"
@@ -124,7 +125,7 @@ function NumberField({ id, label, value, onChange, help }: {
         onChange={(event) => onChange(event.target.value)}
         className="w-full border border-ink/20 px-3 py-2"
       />
-      {help ? <p className="mt-1 text-xs leading-relaxed text-ink/60">{help}</p> : null}
+      {help ? <p id={`${id}-help`} className="mt-1 text-xs leading-relaxed text-ink/60">{help}</p> : null}
     </div>
   );
 }
@@ -261,7 +262,7 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
     event.preventDefault();
 
     if (!allDocumentsConfirmed || !simpleCaseConfirmed) {
-      setError('יש לאשר שכל הנתונים הוזנו ושהמקרה מתאים לאומדן הפשוט לפני החישוב.');
+      setError(`יש לאשר שכל הנתונים הוזנו ושהמקרה מתאים לתחשיב ${mode === 'full' ? 'המורחב' : 'הפשוט'} לפני החישוב.`);
       setResult(null);
       return;
     }
@@ -469,6 +470,9 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
         }
         if (foreignRentalTrack === 'regular' && foreignRentNet.trim() === '') {
           throw new Error('בשכירות מחו״ל במסלול רגיל יש להזין הכנסה נטו לאחר הוצאות.');
+        }
+        if (foreignRentalTrack && asNumber(foreignRentGross) <= 0) {
+          throw new Error('בשכירות מחו״ל יש להזין דמי שכירות שנתיים ברוטו הגדולים מאפס.');
         }
         const full = calculateFullReturn({
           taxYear,
@@ -743,9 +747,10 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
               <p id="refund-children-help" className="text-sm leading-relaxed text-ink/70">
                 החישוב האוטומטי מיועד רק לאם או אב שהיו נשואים לאורך כל שנת המס, ללא שינוי
                 משמורת וללא דחיית נקודה משנת הלידה. במקרה של הורה יחיד, משמורת מיוחדת,
-                ילדים שאינם בחזקה, שינוי מצב משפחתי או דחיית נקודת לידה — בחרו במספר כולל מאומת.
+                ילדים שאינם בחזקה, שינוי מצב משפחתי או דחיית נקודת לידה — הכלי המורחב אינו מתאים;
+                השתמשו בסימולטור הרגיל ובחרו שם מספר כולל מאומת.
                 גם להורים מאותו מין, שבהם תפקיד ההורה המקבל קצבת ילדים עשוי להשפיע על החלוקה,
-                יש לבחור בשלב זה מספר נקודות כולל מאומת.
+                יש להשתמש במסלול הנקודות המאומתות בסימולטור הרגיל.
               </p>
 
               {children.map((child, index) => (
@@ -954,7 +959,7 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
 
                 <div>
                   <label htmlFor="full-extra-points" className="block text-sm font-medium text-ink mb-1">נקודות נוספות שאומתו (אופציונלי)</label>
-                  <input id="full-extra-points" type="number" inputMode="decimal" min="0" step="0.25" value={extraPoints}
+                  <input id="full-extra-points" type="number" inputMode="decimal" min="0" step="any" value={extraPoints}
                     className="w-full border border-ink/20 px-3 py-2 md:w-1/2"
                     onChange={(event) => { setExtraPoints(event.target.value); invalidateResult(); }} />
                   <p className="mt-1 text-xs leading-relaxed text-ink/65">
@@ -1204,7 +1209,7 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
           <div className="mt-4 grid gap-5 md:grid-cols-2">
             <div>
               <label htmlFor="refund-deductions" className="block text-sm font-medium text-ink mb-2">
-                ניכויים מוכרים מההכנסה (₪)
+                {mode === 'full' ? 'ניכויים מוכרים המיוחסים לשכר בלבד (₪)' : 'ניכויים מוכרים מההכנסה (₪)'}
               </label>
               <input
                 id="refund-deductions"
@@ -1223,6 +1228,7 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
               <p id="refund-deductions-help" className="mt-1 text-xs text-ink/65">
                 סכום ניכוי שכבר חושב ואומת, לא סכום ההפקדה או ההוצאה. אין להזין כאן
                 הפקדות פנסיה או זיכוי פנסיה.
+                {mode === 'full' ? ' אין להזין ניכוי השייך לעסק, לביטוח לאומי כעצמאי או למקור הכנסה אחר.' : ''}
               </p>
             </div>
             <div>
@@ -1317,10 +1323,10 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
                   <NumberField id="full-rental-net" label="הכנסה נטו לאחר הוצאות ופחת" value={rentalNet}
                     onChange={(v) => { setRentalNet(v); invalidateResult(); }} />
                 ) : null}
-                {rentalTrack === 'ten-percent' ? (
+                {rentalTrack === 'ten-percent' && Number(taxYear) >= 2023 ? (
                   <NumberField id="full-rental-own" label="שכירות ששילמתם למגוריכם (דירה יחידה בלבד)" value={rentalOwnRent}
                     onChange={(v) => { setRentalOwnRent(v); invalidateResult(); }}
-                    help="סעיף 122(ו): מנוכה עד 90,000 ₪, רק כשמשכירים את הדירה היחידה." />
+                    help="סעיף 122(ו): החל משנת המס 2023 מנוכה עד 90,000 ₪, רק כשמשכירים את הדירה היחידה." />
                 ) : null}
                 {rentalTrack && rentalTrack !== 'exempt' ? (
                   <NumberField id="full-rental-paid" label="מס ששולם כבר על השכירות" value={rentalTaxPaid}
@@ -1509,13 +1515,16 @@ export function TaxRefundCalculator({ mode = 'simple' }: TaxRefundCalculatorProp
             return items.length > 0 ? <Breakdown key={group} title={title} defaultOpen items={items} /> : null;
           })}
 
-          {fullResult.lossCarryForward > 0 || fullResult.foreignCreditExcess > 0 ? (
+          {fullResult.lossCarryForward > 0 || fullResult.foreignCreditExcess > 0 || fullResult.donationExcess > 0 ? (
             <div className="border border-ink/15 bg-cream-2 p-4 text-sm leading-relaxed text-ink/80">
               {fullResult.lossCarryForward > 0 ? (
                 <p>הפסד הון של {formatCurrency(fullResult.lossCarryForward)} לא קוזז השנה. ניתן להעבירו לשנים הבאות מול רווחי הון בלבד, בתנאי שמוגש דוח לשנה זו.</p>
               ) : null}
               {fullResult.foreignCreditExcess > 0 ? (
                 <p>מס זר של {formatCurrency(fullResult.foreignCreditExcess)} לא זוכה השנה. לפי סעיף 205א ניתן להעבירו חמש שנים מול הכנסות מאותו מקור.</p>
+              ) : null}
+              {fullResult.donationExcess > 0 ? (
+                <p>תרומות בסך {formatCurrency(fullResult.donationExcess)} לא נוצלו השנה בשל התקרה. ייתכן שניתן להעבירן לשלוש שנות המס הבאות, בכפוף לתנאי סעיף 46 ולאישורים.</p>
               ) : null}
             </div>
           ) : null}

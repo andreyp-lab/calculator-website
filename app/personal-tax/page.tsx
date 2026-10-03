@@ -38,6 +38,12 @@ const calculators = [
     available: true,
   },
   {
+    title: 'תחשיב מס שנתי מורחב לשכירים',
+    description: 'אומדן מפורט למקורות נתמכים: שכר, שכירות והכנסות הוניות, עם זיכויים וקיזוזים',
+    href: '/personal-tax/tax-return-full',
+    available: true,
+  },
+  {
     title: 'מחשבון "מה שווה לי לעבוד?"',
     description: 'השוואה כספית על בסיס שכר נטו והכנסה חלופית שכבר נבדקה זכאותה',
     href: '/personal-tax/work-value',
@@ -69,6 +75,12 @@ const calculatorComparison = [
     href: '/personal-tax/tax-refund',
     when: 'החלפת עבודה, עבדת חלק משנה או הפקדת לפנסיה/תרומות',
     output: 'אומדן החזר או יתרת מס עם פירוט שנתי',
+  },
+  {
+    name: 'תחשיב מס שנתי מורחב',
+    href: '/personal-tax/tax-return-full',
+    when: 'יש לצד השכר גם שכירות, ריבית, דיבידנד או רווחי הון מהמקורות הנתמכים',
+    output: 'אומדן שורה־שורה לפי סוג הכנסה וזיכויים',
   },
   {
     name: 'מה שווה לי לעבוד?',

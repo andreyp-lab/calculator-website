@@ -1,5 +1,5 @@
 /**
- * תחשיב מס שנתי מלא ליחיד תושב ישראל שהוא שכיר — שנות המס 2020–2025.
+ * תחשיב מס שנתי מורחב ליחיד תושב ישראל שהוא שכיר — שנות המס 2020–2025.
  *
  * מעבר למנוע ההחזר הבסיסי (tax-refund.ts), המנוע מחשב:
  * - שכר דירה למגורים בישראל: פטור (חוק הפטור, התש״ן–1990), 10% (סעיף 122), או מסלול רגיל.
@@ -156,6 +156,8 @@ export interface FullReturnResult {
   lossCarryForward: number;
   /** עודף מס זר שלא זוכה (סעיף 205א — ניתן להעברה 5 שנים מאותו מקור). */
   foreignCreditExcess: number;
+  /** תרומות שלא נוצלו השנה בשל תקרת 30% או התקרה השנתית. */
+  donationExcess: number;
   claimDeadline: string;
 }
 
@@ -222,7 +224,10 @@ export function calculateFullReturn(input: FullReturnInput): FullReturnResult {
         note: `תקרה חודשית ${ceiling.toLocaleString('he-IL')} ₪; מעליה התקרה מופחתת בסכום החריגה`,
       });
     } else if (rr.track === 'ten-percent') {
-      const ownRent = Math.min(nonNegative(rr.rentPaidForOwnHome), 90_000, gross);
+      // סעיף 122(ו) נוסף בתיקון 264 וחל על הכנסה שהופקה מתחילת שנת המס 2023.
+      const ownRent = Number(year) >= 2023
+        ? Math.min(nonNegative(rr.rentPaidForOwnHome), 90_000, gross)
+        : 0;
       rentalTenPercentBase = gross - ownRent;
       if (ownRent > 0) lines.push({ group: 'income', label: 'דמי שכירות ששולמו למגורי המשכיר (סעיף 122(ו))', value: ownRent, sign: -1 });
     } else {
@@ -236,7 +241,10 @@ export function calculateFullReturn(input: FullReturnInput): FullReturnResult {
   let foreignRentalFifteenBase = 0;
   let foreignRentalOrdinaryForeignTax = 0;
   const fr = input.foreignRental;
-  if (fr && nonNegative(fr.grossRent) > 0) {
+  if (fr) {
+    if (nonNegative(fr.grossRent) <= 0) {
+      throw new Error('בשכירות מחו״ל יש להזין דמי שכירות שנתיים ברוטו הגדולים מאפס.');
+    }
     rentalTaxPaid += nonNegative(fr.taxPaid);
     lines.push({ group: 'income', label: 'דמי שכירות מחו״ל', value: nonNegative(fr.grossRent) });
     if (fr.track === 'fifteen-percent') {
@@ -472,6 +480,9 @@ export function calculateFullReturn(input: FullReturnInput): FullReturnResult {
     ? Math.min(donations, totalTaxableIncome * 0.3, rule.donationMaximum)
     : 0;
   const donationCredit = donationEligible * 0.35;
+  const donationExcess = donations > rule.donationMinimum
+    ? Math.max(0, donations - donationEligible)
+    : 0;
   creditLine('זיכוי תרומות (סעיף 46)', donationCredit, take(donationCredit, ['ordinary', 'capital']), `35% מ-${Math.round(donationEligible).toLocaleString('he-IL')} ₪`);
 
   const extra = nonNegative(input.additionalTaxCredits);
@@ -483,8 +494,9 @@ export function calculateFullReturn(input: FullReturnInput): FullReturnResult {
     if (item.foreignTax <= 0) continue;
     const israeliTax = capitalTaxByItem.get(item.key) ?? 0;
     const allowed = Math.min(item.foreignTax, israeliTax);
-    foreignCreditExcess += item.foreignTax - allowed;
-    creditLine(`זיכוי מס זר — ${item.label}`, item.foreignTax, take(allowed, ['capital']), 'עד גובה המס בישראל על אותה הכנסה (סעיף 204(ב))');
+    const used = take(allowed, ['capital']);
+    foreignCreditExcess += item.foreignTax - used;
+    creditLine(`זיכוי מס זר — ${item.label}`, item.foreignTax, used, 'עד גובה המס בישראל על אותה הכנסה (סעיף 204(ב))');
   }
   // הכנסה רגילה מחו״ל: עד יחס ההכנסה × המס על ההכנסה הרגילה (סעיף 204(א)).
   if (foreignRentalOrdinaryForeignTax > 0 && ordinaryIncome > 0) {
@@ -492,8 +504,9 @@ export function calculateFullReturn(input: FullReturnInput): FullReturnResult {
     const ordinaryTaxAfterPersonalCredits = Math.max(0, Math.min(ordinaryRegularTax, ordinaryPool));
     const ceilingCredit = (foreignRentalOrdinary / ordinaryIncome) * ordinaryTaxAfterPersonalCredits;
     const allowed = Math.min(foreignRentalOrdinaryForeignTax, ceilingCredit);
-    foreignCreditExcess += foreignRentalOrdinaryForeignTax - allowed;
-    creditLine('זיכוי מס זר — שכירות מחו״ל', foreignRentalOrdinaryForeignTax, take(allowed, ['ordinary']), 'עד חלקה היחסי של ההכנסה במס על ההכנסה הרגילה (סעיף 204(א))');
+    const used = take(allowed, ['ordinary']);
+    foreignCreditExcess += foreignRentalOrdinaryForeignTax - used;
+    creditLine('זיכוי מס זר — שכירות מחו״ל', foreignRentalOrdinaryForeignTax, used, 'עד חלקה היחסי של ההכנסה במס על ההכנסה הרגילה (סעיף 204(א))');
   }
 
   const finalTax = Math.max(0, taxBeforeCredits - totalCredits);
@@ -520,6 +533,7 @@ export function calculateFullReturn(input: FullReturnInput): FullReturnResult {
     estimatedBalanceDue: Math.max(0, -difference),
     lossCarryForward,
     foreignCreditExcess,
+    donationExcess,
     claimDeadline: rule.claimDeadline,
   };
 }

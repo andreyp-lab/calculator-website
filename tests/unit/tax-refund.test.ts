@@ -74,20 +74,12 @@ describe('calculateTaxRefund', () => {
     expect(result.estimatedRefund).toBeCloseTo(4_142, 6);
   });
 
-  it.each([
-    ['2020', 2040], ['2021', 2028], ['2022', 2076],
-    ['2023', 2196], ['2024', 2268], ['2025', 2268],
-  ] as const)('מחיל בסיס זיכוי מזערי בשנת %s עד ההפקדה בפועל', (taxYear, minimum) => {
-    const base = { taxYear, creditPoints: 0 };
-    const result = calculateTaxRefund({ ...base,
+  it('מגביל הפקדת שכיר ל-7% מההכנסה המבוטחת גם בשכר נמוך', () => {
+    const result = calculateTaxRefund({ taxYear: '2025', creditPoints: 0,
       incomeSources: [{ taxableIncome: 20_000, taxWithheld: 0, insuredIncome: 20_000, employeePensionContributions: 3_000 }],
     });
-    expect(result.pensionEligibleContributions).toBe(minimum);
-    expect(result.pensionTaxCredit).toBeCloseTo(minimum * 0.35, 6);
-    const small = calculateTaxRefund({ ...base,
-      incomeSources: [{ taxableIncome: 20_000, taxWithheld: 0, insuredIncome: 20_000, employeePensionContributions: 500 }],
-    });
-    expect(small.pensionEligibleContributions).toBe(500);
+    expect(result.pensionEligibleContributions).toBeCloseTo(1_400, 6);
+    expect(result.pensionTaxCredit).toBeCloseTo(490, 6);
   });
 
   it('לא מאפשר למקורות שגויים להתקזז ולהיראות כשכר מבוטח מלא', () => {
