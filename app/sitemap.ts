@@ -87,6 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/annual-leave', 'monthly', 0.85),
     make('/employee-rights/annual-bonus', 'monthly', 0.85),
     make('/employee-rights/sick-pay', 'monthly', 0.85),
+    make('/employee-rights/overtime', 'monthly', 0.85, new Date('2026-10-13')),
     make('/employee-rights/work-grant', 'monthly', 0.90, new Date('2026-10-02')),
     // כוונת "בדיקת זכאות" (~261 חשיפות/חודש) — URL ייעודי, לא טאב בתוך דף המענק.
     make('/employee-rights/work-grant/eligibility', 'monthly', 0.90, new Date('2026-07-30')),

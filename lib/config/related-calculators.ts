@@ -31,6 +31,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/employee-rights/annual-leave', label: 'חופשה שנתית', group: 'employee' },
   { path: '/employee-rights/annual-bonus', label: 'בונוס שנתי', group: 'employee' },
   { path: '/employee-rights/sick-pay', label: 'דמי מחלה', group: 'employee' },
+  { path: '/employee-rights/overtime', label: 'שעות נוספות', group: 'employee' },
   { path: '/employee-rights/work-grant', label: 'מענק עבודה', group: 'employee' },
   { path: '/employee-rights/salary-deductions', label: 'ניכויים ממשכורת', group: 'employee' },
   // עצמאיים
