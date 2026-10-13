@@ -16,7 +16,6 @@ const GA_MEASUREMENT_ID = "G-LQGTH0XT3M";
 const heebo = Heebo({
   variable: "--font-heebo",
   subsets: ["hebrew", "latin"],
-  weight: ["400", "500", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -28,7 +27,6 @@ const jetbrainsMono = JetBrains_Mono({
 const frankRuhl = Frank_Ruhl_Libre({
   variable: "--font-frank-ruhl",
   subsets: ["hebrew", "latin"],
-  weight: ["400", "500", "700", "900"],
 });
 
 // Canonical domain is the apex (matches GSC property, sitemap.ts, robots.txt, site-info.ts).
