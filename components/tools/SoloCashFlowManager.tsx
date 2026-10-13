@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   type SoloCashFlowData,
   type SoloCashFlowItem,
   type SoloIncomeCategory,
   type SoloExpenseCategory,
-  type SoloItemType,
   type SoloRecurringFrequency,
 } from '@/lib/tools/types';
 import {

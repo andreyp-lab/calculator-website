@@ -63,9 +63,6 @@ export function ScenarioCompare() {
 
   const fmt = (v: number) => formatCurrency(v, settings.currency);
 
-  const diffClass = (v: number) => (v >= 0 ? 'text-emerald-800' : 'text-red-700');
-  const diffPrefix = (v: number) => (v >= 0 ? '+' : '');
-
   return (
     <div className="space-y-4">
       <div className="bg-paper rounded-none border-2 border-ink/15 p-4">

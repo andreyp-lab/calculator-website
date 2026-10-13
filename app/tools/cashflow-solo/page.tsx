@@ -32,7 +32,6 @@ import {
   TrendingUp,
   TrendingDown,
   AlertTriangle,
-  CheckCircle2,
   Plus,
   Trash2,
   ArrowLeft,

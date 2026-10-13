@@ -112,7 +112,7 @@ export function IndustryBenchmarks() {
 }
 
 function InsightCard({ insight }: { insight: BenchmarkInsight }) {
-  const { metricLabel, yourValue, benchmark, comparison, score, message } = insight;
+  const { metricLabel, yourValue, benchmark, score, message } = insight;
 
   const scoreColor =
     score >= 75 ? 'emerald' : score >= 50 ? 'amber' : 'red';

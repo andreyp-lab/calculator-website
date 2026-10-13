@@ -7,7 +7,7 @@
  *    דוגמה: 30% נטו 30 + 50% נטו 60 + 20% נטו 90
  */
 
-import type { PaymentTerms, PaymentTermInstallment } from './types';
+import type { PaymentTerms } from './types';
 
 export interface PaymentSchedule {
   monthOffset: number; // 0 = חודש החיוב, 1 = חודש הבא וכו'

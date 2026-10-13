@@ -12,7 +12,6 @@ import {
 } from '@/lib/tools/advanced-analytics';
 import { formatCurrency, formatPercent } from '@/lib/tools/format';
 import {
-  LineChart,
   Line,
   Area,
   ComposedChart,
@@ -22,11 +21,9 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  ReferenceLine,
 } from 'recharts';
 import {
   Activity,
-  Zap,
   Scale,
   Percent,
   TrendingUp,
@@ -307,7 +304,7 @@ export function AdvancedAnalytics() {
             <ResponsiveContainer width="100%" height={300}>
               <ComposedChart
                 data={[
-                  ...computed.monthly.map((m, i) => ({
+                  ...computed.monthly.map((m) => ({
                     month: m.monthName,
                     actual: m.income,
                     forecast: null as number | null,

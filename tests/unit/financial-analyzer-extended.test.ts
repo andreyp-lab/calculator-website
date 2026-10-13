@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateDuPont, compareDuPont } from '@/lib/tools/dupont-analyzer';
+import { calculateDuPont } from '@/lib/tools/dupont-analyzer';
 import { calculateAdvancedDSCR } from '@/lib/tools/dscr-advanced';
 import { calculateBreakEven, calculateWhatIf } from '@/lib/tools/break-even-analyzer';
 import { identifyRisks } from '@/lib/tools/risk-identifier';

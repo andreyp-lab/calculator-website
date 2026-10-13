@@ -9,9 +9,7 @@ import {
 } from '@/lib/tools/budget-engine';
 import { formatCurrency } from '@/lib/tools/format';
 import {
-  BarChart,
   Bar,
-  LineChart,
   Line,
   PieChart,
   Pie,
@@ -23,12 +21,10 @@ import {
   Legend,
   ResponsiveContainer,
   ComposedChart,
-  Area,
 } from 'recharts';
 import {
   ChartPie,
   TrendingUp,
-  BarChart3,
   ChartArea,
 } from 'lucide-react';
 import {

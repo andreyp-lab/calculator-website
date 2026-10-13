@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { getExpenseForMonth, calculateExpenseTotal } from '@/lib/tools/budget-engine';
+import { getExpenseForMonth } from '@/lib/tools/budget-engine';
 import { calculatePaymentSchedule } from '@/lib/tools/payment-terms';
-import type { ExpenseItem, IncomeItem } from '@/lib/tools/types';
+import type { ExpenseItem } from '@/lib/tools/types';
 
 describe('Inflation in budget engine', () => {
   const baseExpense: ExpenseItem = {

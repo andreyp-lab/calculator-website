@@ -11,7 +11,6 @@ import {
   ArrowLeft,
   CheckCircle2,
   Clock,
-  TrendingUp,
   LineChart,
   Lock,
   Database,

@@ -5,7 +5,7 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
-import type { ThreeStatementModel, AnnualStatements } from './types';
+import type { ThreeStatementModel } from './types';
 
 function fmt(v: number): string {
   return Math.round(v).toLocaleString('he-IL');

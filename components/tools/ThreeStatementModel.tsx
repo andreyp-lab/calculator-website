@@ -30,11 +30,8 @@ import type {
   AnnualPnL,
   AnnualBalanceSheet,
 } from '@/lib/tools/types';
-import { formatCurrency } from '@/lib/tools/format';
 import {
-  LineChart,
   Line,
-  BarChart,
   Bar,
   XAxis,
   YAxis,
@@ -43,7 +40,6 @@ import {
   Legend,
   ResponsiveContainer,
   ComposedChart,
-  Area,
 } from 'recharts';
 import {
   History,
@@ -97,7 +93,7 @@ export function ThreeStatementModelUI() {
     try {
       if (historical.length === 0 || historical[0].pnl.revenue === 0) return null;
       return buildThreeStatementModel(historical, assumptions);
-    } catch (e) {
+    } catch {
       return null;
     }
   }, [historical, assumptions]);

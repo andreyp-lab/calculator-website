@@ -65,8 +65,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
       ];
       updateTerms({ ...terms, installments: initialSplit });
     } else {
-      const { installments: _, ...rest } = terms;
-      updateTerms(rest);
+      updateTerms({ ...terms, installments: undefined });
     }
   }
 

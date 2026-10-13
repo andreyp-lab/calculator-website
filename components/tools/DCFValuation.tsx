@@ -11,26 +11,12 @@ import {
 } from '@/lib/tools/dcf-engine';
 import {
   buildThreeStatementModel,
-  defaultAssumptions,
-  createEmptyAnnualStatements,
-  recomputePnL,
-  recomputeBalanceSheet,
   convertBudgetToBaseYear,
   suggestAssumptions,
 } from '@/lib/tools/three-statement-model';
 import { useTools } from '@/lib/tools/ToolsContext';
-import type { DCFInput, ThreeStatementModel } from '@/lib/tools/types';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
-import { Gem, Upload, Calculator, AlertCircle } from 'lucide-react';
+import type { DCFInput } from '@/lib/tools/types';
+import { Gem, Upload, AlertCircle } from 'lucide-react';
 
 const STORAGE_KEY = 'dcf-valuation-v1';
 

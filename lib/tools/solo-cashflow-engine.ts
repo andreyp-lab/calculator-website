@@ -22,15 +22,6 @@ import type {
 // EXPAND RECURRING ITEMS
 // ============================================================
 
-/**
- * המר תאריך ISO ל-month index יחסי לתאריך התחלה.
- */
-function getMonthsBetween(start: string, end: string): number {
-  const s = new Date(start);
-  const e = new Date(end);
-  return (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
-}
-
 function addMonths(date: string, months: number): string {
   const d = new Date(`${date}T00:00:00Z`);
   const originalDay = d.getUTCDate();
