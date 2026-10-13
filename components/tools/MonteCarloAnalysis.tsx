@@ -267,7 +267,7 @@ export function MonteCarloAnalysis() {
             </ResponsiveContainer>
 
             <div className="mt-3 text-xs text-ink/70">
-              💡 P5 = "גרוע מ-95% מהתרחישים", P95 = "טוב מ-95%". טווח P5-P95 = "טווח אמון 90%".
+              💡 P5 = &quot;גרוע מ-95% מהתרחישים&quot;, P95 = &quot;טוב מ-95%&quot;. טווח P5-P95 = &quot;טווח אמון 90%&quot;.
             </div>
           </div>
         </div>
@@ -276,7 +276,7 @@ export function MonteCarloAnalysis() {
       {!result && !running && (
         <div className="bg-cream-2 border-2 border-ink/15 rounded-none p-6 text-center text-ink">
           <AlertCircle className="w-10 h-10 mx-auto mb-2 text-gold" />
-          <p className="text-sm">הזן נתוני בסיס ולחץ "הרץ סימולציה" כדי לראות התפלגות תוצאות.</p>
+          <p className="text-sm">הזן נתוני בסיס ולחץ &quot;הרץ סימולציה&quot; כדי לראות התפלגות תוצאות.</p>
         </div>
       )}
     </div>

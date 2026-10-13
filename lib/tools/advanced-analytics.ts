@@ -105,7 +105,7 @@ export function forecast(input: ForecastInput): ForecastResult {
     };
   }
 
-  let predicted: number[] = [];
+  const predicted: number[] = [];
 
   switch (method) {
     case 'moving-average': {

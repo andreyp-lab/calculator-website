@@ -143,7 +143,7 @@ export function AdvancedAnalytics() {
                     <span className="font-medium">{fmt(computed.breakEven.variableCosts)}</span>
                   </div>
                   <div className="flex justify-between pt-1 border-t border-ink/15 font-bold">
-                    <span>סה"כ עלויות:</span>
+                    <span>סה&quot;כ עלויות:</span>
                     <span>{fmt(computed.breakEven.totalCosts)}</span>
                   </div>
                 </div>

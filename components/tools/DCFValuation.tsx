@@ -136,8 +136,8 @@ export function DCFValuation() {
     result = valuateDCF(dcfInput);
     valuationRange = buildValuationRange(dcfInput, 1, 0.5);
     sensitivity = buildDCFSensitivityMatrix(dcfInput);
-  } catch (e: any) {
-    error = e.message;
+  } catch (e: unknown) {
+    error = e instanceof Error ? e.message : String(e);
   }
 
   function updateFCF(idx: number, value: number) {
@@ -333,7 +333,7 @@ export function DCFValuation() {
                     </div>
                   ))}
                   <div className="flex justify-between pt-1 border-t border-ink/15 font-bold">
-                    <span>סה"כ PV מפורש:</span>
+                    <span>סה&quot;כ PV מפורש:</span>
                     <span>{fmt(result.sumOfExplicitPV)}</span>
                   </div>
                 </div>

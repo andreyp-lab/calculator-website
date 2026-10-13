@@ -66,7 +66,7 @@ export async function Ticker() {
               <span className="absolute inline-flex h-full w-full animate-ping bg-gold-light opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 bg-gold-light" />
             </span>
-            // נתוני שוק
+            {'//'} נתוני שוק
           </span>
 
           {items.map((item, i) => (

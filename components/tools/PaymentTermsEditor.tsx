@@ -42,6 +42,8 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
   );
 
   useEffect(() => {
+    // Intentional: re-sync local draft when the parent value changes
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTerms(normalizeValue(value));
   }, [value]);
 
@@ -241,7 +243,7 @@ export function PaymentTermsEditor({ value, onChange, label, compact }: Props) {
               <AlertCircle className="w-3.5 h-3.5" />
             )}
             <span>
-              סה"כ: {totalPct.toFixed(1)}% {Math.abs(totalPct - 100) < 0.5 ? '✓' : '(נדרש 100%)'}
+              סה&quot;כ: {totalPct.toFixed(1)}% {Math.abs(totalPct - 100) < 0.5 ? '✓' : '(נדרש 100%)'}
             </span>
           </div>
         </div>

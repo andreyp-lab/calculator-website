@@ -250,7 +250,7 @@ export default function CashFlowSoloPage() {
               </div>
             ))}
             <div className="text-xs text-ink/70 text-left pt-2 border-t border-ink/15">
-              סה"כ פתיחה: {fmt(data.accounts.reduce((s, a) => s + a.balance, 0))}
+              סה&quot;כ פתיחה: {fmt(data.accounts.reduce((s, a) => s + a.balance, 0))}
             </div>
           </div>
         )}
@@ -351,7 +351,7 @@ export default function CashFlowSoloPage() {
                       cx="50%"
                       cy="50%"
                       outerRadius={90}
-                      label={(e: any) => {
+                      label={(e: { value: number }) => {
                         const total = incomePieData.reduce((s, d) => s + d.value, 0);
                         const pct = total > 0 ? (e.value / total) * 100 : 0;
                         return pct > 5 ? `${pct.toFixed(0)}%` : '';
@@ -383,7 +383,7 @@ export default function CashFlowSoloPage() {
                       cx="50%"
                       cy="50%"
                       outerRadius={90}
-                      label={(e: any) => {
+                      label={(e: { value: number }) => {
                         const total = expensePieData.reduce((s, d) => s + d.value, 0);
                         const pct = total > 0 ? (e.value / total) * 100 : 0;
                         return pct > 5 ? `${pct.toFixed(0)}%` : '';

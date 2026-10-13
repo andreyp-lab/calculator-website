@@ -29,13 +29,13 @@ export function GoalsTracker() {
   });
 
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState<Omit<Goal, 'id' | 'createdAt'>>({
+  const [form, setForm] = useState<Omit<Goal, 'id' | 'createdAt'>>(() => ({
     name: '',
     type: 'revenue',
     targetValue: 1000000,
     targetDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
     notes: '',
-  });
+  }));
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -258,7 +258,7 @@ function GoalCard({ progress, onRemove }: { progress: GoalProgress; onRemove: ()
       )}
 
       {goal.notes && (
-        <div className="mt-2 text-xs text-ink/70 italic">"{goal.notes}"</div>
+        <div className="mt-2 text-xs text-ink/70 italic">&quot;{goal.notes}&quot;</div>
       )}
     </div>
   );

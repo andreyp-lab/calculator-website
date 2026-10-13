@@ -108,6 +108,8 @@ export function ToolsProvider({ children }: { children: ReactNode }) {
 
   // Hydration: load from localStorage on client
   useEffect(() => {
+    // Intentional: load localStorage after mount to avoid SSR hydration mismatch
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setState(loadFromStorage());
     setHydrated(true);
   }, []);

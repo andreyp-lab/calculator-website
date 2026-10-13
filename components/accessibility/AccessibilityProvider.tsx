@@ -107,6 +107,8 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
       if (stored) {
         const parsed = JSON.parse(stored) as Partial<AccessibilitySettings>;
         const merged = { ...DEFAULT_SETTINGS, ...parsed };
+        // Intentional: read localStorage after mount to avoid SSR hydration mismatch
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSettings(merged);
         applyClassesToHtml(merged);
       }

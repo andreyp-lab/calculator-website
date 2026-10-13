@@ -249,7 +249,7 @@ function HistoricalDataTab({ historical, onAddYear, onRemoveYear, onUpdate }: Hi
     <div className="space-y-3">
       <div className="bg-cream-2 border border-ink/15 rounded-none p-3 text-sm text-ink">
         💡 הזן 1-3 שנים של נתוני עבר. ככל שיש יותר שנים, החיזוי יהיה מדויק יותר.
-        ערכים נגזרים (רווח גולמי, EBITDA, סה"כ נכסים) מחושבים אוטומטית.
+        ערכים נגזרים (רווח גולמי, EBITDA, סה&quot;כ נכסים) מחושבים אוטומטית.
       </div>
 
       <div className="flex gap-2">
