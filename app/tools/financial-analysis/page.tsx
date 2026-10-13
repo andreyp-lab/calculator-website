@@ -24,7 +24,6 @@ import {
   Droplets,
   Activity,
   GitCompare,
-  ChartBar,
 } from 'lucide-react';
 
 type Tab =

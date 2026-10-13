@@ -286,7 +286,7 @@ export function ExpenseManager() {
                 <th className="text-right px-3 py-2">סכום</th>
                 <th className="text-right px-3 py-2">תקופה</th>
                 <th className="text-right px-3 py-2">תנאי</th>
-                <th className="text-right px-3 py-2">סה"כ</th>
+                <th className="text-right px-3 py-2">סה&quot;כ</th>
                 <th className="text-center px-3 py-2 w-16"></th>
               </tr>
             </thead>
@@ -302,7 +302,7 @@ export function ExpenseManager() {
                     )}
                   </td>
                   <td className="px-3 py-2 text-xs text-ink/70">
-                    {HEBREW_MONTHS[exp.startMonth]} ({exp.duration} ח')
+                    {HEBREW_MONTHS[exp.startMonth]} ({exp.duration} ח&apos;)
                   </td>
                   <td className="px-3 py-2 text-xs text-ink/70">
                     {exp.paymentTerms === 0 ? 'מיידי' : `+${exp.paymentTerms}`}
@@ -327,7 +327,7 @@ export function ExpenseManager() {
             <tfoot className="bg-red-50 font-bold">
               <tr>
                 <td colSpan={4} className="px-3 py-2 text-right">
-                  סה"כ {EXPENSE_CATEGORY_LABELS[activeCategory]}:
+                  סה&quot;כ {EXPENSE_CATEGORY_LABELS[activeCategory]}:
                 </td>
                 <td className="px-3 py-2 text-red-700">
                   {formatCurrency(categoryTotal, settings.currency)}

@@ -11,7 +11,6 @@ import {
   ArrowLeft,
   CheckCircle2,
   Clock,
-  TrendingUp,
   LineChart,
   Lock,
   Database,
@@ -55,7 +54,7 @@ export default function StartPage() {
             <div>
               <div className="font-semibold text-ink">יש לך תרחיש קיים</div>
               <div className="text-sm text-ink/70">
-                "{scenario?.name}" - {scenario?.budget.income.length} הכנסות,{' '}
+                &quot;{scenario?.name}&quot; - {scenario?.budget.income.length} הכנסות,{' '}
                 {scenario?.budget.expenses.length} הוצאות
               </div>
             </div>

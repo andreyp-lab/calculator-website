@@ -18,7 +18,6 @@ export function calculateGoalProgress(
 ): GoalProgress {
   const today = new Date();
   const targetDate = new Date(goal.targetDate);
-  const now = monthly[0] ? new Date() : today;
 
   // ערך נוכחי לפי סוג היעד
   let currentValue = 0;

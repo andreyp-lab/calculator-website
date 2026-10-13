@@ -13,7 +13,7 @@ import { DebtRestructuring } from '@/components/tools/DebtRestructuring';
 import { ScenarioCompare } from '@/components/tools/ScenarioCompare';
 import { ExportImportBar } from '@/components/tools/ExportImportBar';
 import { BurnRateDashboard } from '@/components/tools/BurnRateDashboard';
-import { Wallet, Info, Flame } from 'lucide-react';
+import { Wallet, Info } from 'lucide-react';
 import Link from 'next/link';
 import { useTools } from '@/lib/tools/ToolsContext';
 import { useState } from 'react';

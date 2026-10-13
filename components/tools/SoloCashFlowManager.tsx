@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   type SoloCashFlowData,
   type SoloCashFlowItem,
   type SoloIncomeCategory,
   type SoloExpenseCategory,
-  type SoloItemType,
   type SoloRecurringFrequency,
 } from '@/lib/tools/types';
 import {
@@ -328,7 +327,7 @@ export function SoloCashFlowManager({ data, onChange }: Props) {
       {data.items.length === 0 ? (
         <div className="text-center py-8 text-ink/70">
           <Database className="w-12 h-12 mx-auto mb-2 opacity-30" />
-          <p>אין פריטים. לחץ "הוסף פריט" או "טען דוגמה".</p>
+          <p>אין פריטים. לחץ &quot;הוסף פריט&quot; או &quot;טען דוגמה&quot;.</p>
         </div>
       ) : (
         <div className="overflow-x-auto">

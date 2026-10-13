@@ -110,7 +110,7 @@ export default function BreakEvenPage() {
                 <strong>הפחתת עלות משתנה</strong> - משא ומתן עם ספקים, התייעלות בתהליך
               </li>
               <li>
-                <strong>הפחתת הוצאות קבועות</strong> - משכ"ד נמוך יותר, אאוטסורסינג, אוטומציה
+                <strong>הפחתת הוצאות קבועות</strong> - משכ&quot;ד נמוך יותר, אאוטסורסינג, אוטומציה
               </li>
               <li>
                 <strong>בנייה של מוצר/שירות עם תרומה גבוהה יותר</strong> (Upsell, Premium tier)
@@ -139,7 +139,7 @@ export default function BreakEvenPage() {
             <h2>דוגמה מלאה: מסעדה</h2>
             <div className="bg-cream-2 border border-ink/15 p-4 my-4 text-sm">
               <ul>
-                <li>הוצאות קבועות חודשיות: 80,000 ₪ (שכ"ד, משכורות, ביטוח, רישיונות)</li>
+                <li>הוצאות קבועות חודשיות: 80,000 ₪ (שכ&quot;ד, משכורות, ביטוח, רישיונות)</li>
                 <li>מחיר ארוחה ממוצעת: 120 ₪</li>
                 <li>עלות משתנה (אוכל + עמלות): 40 ₪</li>
                 <li>תרומה: 80 ₪</li>

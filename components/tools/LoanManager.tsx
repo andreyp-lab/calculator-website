@@ -264,7 +264,7 @@ export function LoanManager() {
       {/* רשימת הלוואות */}
       {budget.loans.length === 0 ? (
         <div className="text-center py-8 text-ink/70 text-sm">
-          אין הלוואות כרגע. לחץ "הוסף הלוואה" כדי להתחיל.
+          אין הלוואות כרגע. לחץ &quot;הוסף הלוואה&quot; כדי להתחיל.
           <p className="text-xs mt-1 text-ink/70">
             ההלוואות נכללות אוטומטית ב-P&L (ריבית) ובתזרים (תשלומים).
           </p>

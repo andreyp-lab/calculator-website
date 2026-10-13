@@ -243,7 +243,6 @@ export function analyzeBankCredit(input: BankCreditInput): BankCreditResult {
     companyName,
     revenue,
     ebitda,
-    totalAssets,
     totalEquity,
     fixedAssets,
     accountsReceivable,

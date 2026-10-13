@@ -178,7 +178,7 @@ export function CapTable() {
       {finalState && (
         <div className="grid md:grid-cols-3 gap-3">
           <div className="bg-cream-2 border-2 border-ink/15 p-3">
-            <div className="text-xs text-ink/70">סה"כ מניות (לאחר דילול)</div>
+            <div className="text-xs text-ink/70">סה&quot;כ מניות (לאחר דילול)</div>
             <div className="text-2xl font-bold text-gold">
               {fmt(finalState.totalShares)}
             </div>
@@ -413,7 +413,7 @@ export function CapTable() {
                   cx="50%"
                   cy="50%"
                   outerRadius={90}
-                  label={(e: any) => (e.value > 3 ? `${e.value.toFixed(0)}%` : '')}
+                  label={(e: { value: number }) => (e.value > 3 ? `${e.value.toFixed(0)}%` : '')}
                 >
                   {finalDistribution.map((d, i) => (
                     <Cell key={i} fill={d.color} />
@@ -479,7 +479,7 @@ export function CapTable() {
                   <th className="text-right p-2">בעל מניות</th>
                   <th className="text-center p-2">Liquidation Pref</th>
                   <th className="text-center p-2">Pro-Rata</th>
-                  <th className="text-center p-2 font-bold">סה"כ קבלה</th>
+                  <th className="text-center p-2 font-bold">סה&quot;כ קבלה</th>
                   <th className="text-center p-2">% מהיציאה</th>
                 </tr>
               </thead>
@@ -500,7 +500,7 @@ export function CapTable() {
               </tbody>
               <tfoot className="bg-amber-50 font-bold">
                 <tr>
-                  <td className="p-2">סה"כ</td>
+                  <td className="p-2">סה&quot;כ</td>
                   <td className="p-2 text-center">
                     {fmt(waterfall.payouts.reduce((s, p) => s + p.preferenceAmount, 0))}
                   </td>

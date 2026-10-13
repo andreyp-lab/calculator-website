@@ -15,7 +15,6 @@ import type {
   ForecastAssumptions,
   InputDistribution,
   MonteCarloResult,
-  DistributionType,
 } from './types';
 import { buildThreeStatementModel } from './three-statement-model';
 
@@ -144,7 +143,7 @@ export function runMonteCarlo(input: MonteCarloInput): MonteCarloResult {
         }
       }
       results.push(value);
-    } catch (e) {
+    } catch {
       // איטרציה שנכשלה - דלג
       continue;
     }

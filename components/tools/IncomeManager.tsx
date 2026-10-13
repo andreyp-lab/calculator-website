@@ -319,7 +319,7 @@ export function IncomeManager() {
       {budget.income.length === 0 ? (
         <div className="text-center py-8 text-ink/70">
           <TrendingUp className="w-12 h-12 mx-auto mb-2 opacity-30" />
-          <p>אין הכנסות עדיין. לחץ "הוסף הכנסה" כדי להתחיל.</p>
+          <p>אין הכנסות עדיין. לחץ &quot;הוסף הכנסה&quot; כדי להתחיל.</p>
         </div>
       ) : (
         <div className="overflow-x-auto">
@@ -331,7 +331,7 @@ export function IncomeManager() {
                 <th className="text-right px-3 py-2">תקופה</th>
                 <th className="text-right px-3 py-2">צמיחה</th>
                 <th className="text-right px-3 py-2">תנאי</th>
-                <th className="text-right px-3 py-2">סה"כ</th>
+                <th className="text-right px-3 py-2">סה&quot;כ</th>
                 <th className="text-center px-3 py-2 w-16">פעולות</th>
               </tr>
             </thead>
@@ -355,7 +355,7 @@ export function IncomeManager() {
                     </td>
                     <td className="px-3 py-2">{formatCurrency(inc.amount, settings.currency)}</td>
                     <td className="px-3 py-2 text-xs">
-                      {HEBREW_MONTHS[inc.startMonth]}–{inc.duration} ח'
+                      {HEBREW_MONTHS[inc.startMonth]}–{inc.duration} ח&apos;
                     </td>
                     <td className="px-3 py-2 text-xs">
                       {inc.growthPct > 0 ? `+${formatPercent(inc.growthPct, 1)}` : '—'}
@@ -381,7 +381,7 @@ export function IncomeManager() {
             <tfoot className="bg-emerald-50 font-bold">
               <tr>
                 <td colSpan={5} className="px-3 py-2">
-                  סה"כ הכנסות
+                  סה&quot;כ הכנסות
                 </td>
                 <td className="px-3 py-2 text-emerald-800">
                   {formatCurrency(totalIncome, settings.currency)}

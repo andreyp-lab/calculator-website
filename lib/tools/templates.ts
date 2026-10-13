@@ -13,7 +13,6 @@ import type {
   BudgetTemplate,
   BudgetData,
   Industry,
-  ForecastAssumptions,
 } from './types';
 
 /** עוזר ליצירת ID */

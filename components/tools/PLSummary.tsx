@@ -35,7 +35,7 @@ export function PLSummary() {
       <div className="p-5 space-y-3">
         {/* הכנסות */}
         <div className="flex justify-between items-center py-2 bg-green-50 rounded-none px-3 border-r-4 border-green-500">
-          <span className="font-medium text-ink">סה"כ הכנסות</span>
+          <span className="font-medium text-ink">סה&quot;כ הכנסות</span>
           <span className="font-bold text-green-700 text-lg">{fmt(totals.income)}</span>
         </div>
 

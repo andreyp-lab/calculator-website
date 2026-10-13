@@ -2,7 +2,7 @@
  * Storage layer - שמירה ב-localStorage עם תרחישים מרובים
  */
 
-import { Scenario, BudgetData, CashFlowData, PeriodSettings, BalanceSheetData } from './types';
+import { Scenario } from './types';
 import { createEmptyBudget, createDefaultSettings } from './budget-engine';
 import { createEmptyCashFlow } from './cashflow-engine';
 import { createEmptyBalanceSheet } from './financial-analyzer';

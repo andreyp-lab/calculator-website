@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
 import { restructureDebt } from '@/lib/tools/cashflow-engine';
-import { calculateLoan } from '@/lib/tools/budget-engine';
 import { formatCurrency } from '@/lib/tools/format';
 import { RefreshCw, ArrowLeftRight, Calculator } from 'lucide-react';
 
@@ -13,13 +12,10 @@ export function DebtRestructuring() {
   const [newTermMonths, setNewTermMonths] = useState(120);
   const [newRate, setNewRate] = useState<number | ''>('');
 
-  if (!budget || !settings) return null;
-
-  const loan = budget.loans.find((l) => l.id === selectedLoanId);
+  const loan = budget?.loans.find((l) => l.id === selectedLoanId);
 
   const result = useMemo(() => {
     if (!loan) return null;
-    const calc = calculateLoan(loan);
     const remainingMonths = loan.termMonths;
     return restructureDebt(
       loan.amount,
@@ -29,6 +25,8 @@ export function DebtRestructuring() {
       newRate === '' ? loan.annualRate : Number(newRate),
     );
   }, [loan, newTermMonths, newRate]);
+
+  if (!budget || !settings) return null;
 
   function applyRestructure() {
     if (!loan || !result || !settings) return;

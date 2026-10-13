@@ -121,7 +121,7 @@ export function TemplatesLibrary() {
           >
             <h3 className="font-bold text-lg mb-2">החלפת תקציב נוכחי?</h3>
             <p className="text-sm text-ink/70 mb-3">
-              פעולה זו <strong>תחליף את התקציב הנוכחי</strong> בתבנית "{confirmTemplate.name}".
+              פעולה זו <strong>תחליף את התקציב הנוכחי</strong> בתבנית &quot;{confirmTemplate.name}&quot;.
             </p>
 
             <div className="bg-amber-50 border border-amber-200 rounded-none p-2 text-xs text-amber-900 mb-4">

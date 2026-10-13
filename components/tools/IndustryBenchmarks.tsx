@@ -53,7 +53,7 @@ export function IndustryBenchmarks() {
         <div className="bg-ink text-cream p-4">
           <h3 className="font-bold flex items-center gap-2">
             <Trophy className="w-5 h-5" />
-            השוואה לבנצ'מרק ענפי
+            השוואה לבנצ&apos;מרק ענפי
           </h3>
           <p className="text-xs text-cream/70">
             מקור: {benchmark.source} • {benchmark.asOfYear}
@@ -112,7 +112,7 @@ export function IndustryBenchmarks() {
 }
 
 function InsightCard({ insight }: { insight: BenchmarkInsight }) {
-  const { metricLabel, yourValue, benchmark, comparison, score, message } = insight;
+  const { metricLabel, yourValue, benchmark, score, message } = insight;
 
   const scoreColor =
     score >= 75 ? 'emerald' : score >= 50 ? 'amber' : 'red';
@@ -155,7 +155,7 @@ function InsightCard({ insight }: { insight: BenchmarkInsight }) {
 
       <div className="flex items-baseline gap-2 mb-3">
         <span className="text-2xl font-bold text-ink">{formatValue(yourValue)}</span>
-        <span className="text-xs text-ink/70">בנצ'מרק חציון: {formatValue(benchmark.median)}</span>
+        <span className="text-xs text-ink/70">בנצ&apos;מרק חציון: {formatValue(benchmark.median)}</span>
       </div>
 
       {/* Spectrum bar */}

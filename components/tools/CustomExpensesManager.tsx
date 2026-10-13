@@ -132,7 +132,7 @@ export function CustomExpensesManager() {
       {cashFlow.customExpenses.length > 0 && (
         <div className="bg-cream-2 border border-ink/15 p-2 mb-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-ink/70">סה"כ הוצאות:</span>
+            <span className="text-ink/70">סה&quot;כ הוצאות:</span>
             <span className="font-bold text-ink">{fmt(total)}</span>
           </div>
         </div>

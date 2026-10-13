@@ -58,7 +58,7 @@ export function BankAccountsManager() {
       {cashFlow.accounts.length > 0 && (
         <div className="bg-cream-2 border border-ink/15 rounded-none p-2 mb-3">
           <div className="flex justify-between text-sm">
-            <span className="text-ink/70">סה"כ יתרות בנק:</span>
+            <span className="text-ink/70">סה&quot;כ יתרות בנק:</span>
             <span className="font-bold text-ink">{fmt(totalBalance)}</span>
           </div>
         </div>

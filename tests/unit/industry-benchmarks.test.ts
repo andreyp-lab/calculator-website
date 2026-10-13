@@ -4,6 +4,7 @@ import {
   compareToBenchmark,
   compareCompanyToBenchmark,
   calculateOverallScore,
+  type BenchmarkInsight,
 } from '@/lib/tools/industry-benchmarks';
 
 describe('industry-benchmarks engine', () => {
@@ -63,9 +64,9 @@ describe('industry-benchmarks engine', () => {
 
     it('calculates average', () => {
       const insights = [
-        { score: 80 } as any,
-        { score: 60 } as any,
-        { score: 100 } as any,
+        { score: 80 } as unknown as BenchmarkInsight,
+        { score: 60 } as unknown as BenchmarkInsight,
+        { score: 100 } as unknown as BenchmarkInsight,
       ];
       expect(calculateOverallScore(insights)).toBe(80);
     });

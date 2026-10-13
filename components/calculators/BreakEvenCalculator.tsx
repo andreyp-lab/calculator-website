@@ -39,7 +39,7 @@ export function BreakEvenCalculator() {
               className="w-full px-3 py-2 border border-ink/15 rounded-none focus:ring-2 focus:ring-gold text-lg"
             />
             <p className="text-xs text-ink/70 mt-1">
-              שכ"ד, משכורות קבועות, ביטוחים, רואה חשבון, תוכנות, וכו'
+              שכ&quot;ד, משכורות קבועות, ביטוחים, רואה חשבון, תוכנות, וכו&apos;
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">

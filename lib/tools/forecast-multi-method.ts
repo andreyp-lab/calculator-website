@@ -212,15 +212,15 @@ function calculateConfidenceIntervals(
 ): MultiMethodForecastResult['confidenceIntervals'] {
   const zScores = { high: 1.645, medium: 1.282, low: 1.036 };
 
-  const buildInterval = (z: number): ConfidenceInterval => ({
+  const buildInterval = (): ConfidenceInterval => ({
     upper: [],
     lower: [],
   });
 
   const intervals = {
-    high: buildInterval(zScores.high),
-    medium: buildInterval(zScores.medium),
-    low: buildInterval(zScores.low),
+    high: buildInterval(),
+    medium: buildInterval(),
+    low: buildInterval(),
   };
 
   forecast.forEach((value, idx) => {

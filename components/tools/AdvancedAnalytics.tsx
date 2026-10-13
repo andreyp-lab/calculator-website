@@ -12,7 +12,6 @@ import {
 } from '@/lib/tools/advanced-analytics';
 import { formatCurrency, formatPercent } from '@/lib/tools/format';
 import {
-  LineChart,
   Line,
   Area,
   ComposedChart,
@@ -22,11 +21,9 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  ReferenceLine,
 } from 'recharts';
 import {
   Activity,
-  Zap,
   Scale,
   Percent,
   TrendingUp,
@@ -143,7 +140,7 @@ export function AdvancedAnalytics() {
                     <span className="font-medium">{fmt(computed.breakEven.variableCosts)}</span>
                   </div>
                   <div className="flex justify-between pt-1 border-t border-ink/15 font-bold">
-                    <span>סה"כ עלויות:</span>
+                    <span>סה&quot;כ עלויות:</span>
                     <span>{fmt(computed.breakEven.totalCosts)}</span>
                   </div>
                 </div>
@@ -307,7 +304,7 @@ export function AdvancedAnalytics() {
             <ResponsiveContainer width="100%" height={300}>
               <ComposedChart
                 data={[
-                  ...computed.monthly.map((m, i) => ({
+                  ...computed.monthly.map((m) => ({
                     month: m.monthName,
                     actual: m.income,
                     forecast: null as number | null,

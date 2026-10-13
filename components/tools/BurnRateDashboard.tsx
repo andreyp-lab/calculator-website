@@ -2,12 +2,9 @@
 
 import { useMemo } from 'react';
 import { useTools } from '@/lib/tools/ToolsContext';
-import { calculateAllMonths } from '@/lib/tools/budget-engine';
 import { calculateCashFlow } from '@/lib/tools/cashflow-engine';
 import type { BurnRateMetrics, MonthlyCashFlow } from '@/lib/tools/types';
 import {
-  LineChart,
-  Line,
   AreaChart,
   Area,
   XAxis,

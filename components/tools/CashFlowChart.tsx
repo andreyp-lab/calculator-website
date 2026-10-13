@@ -17,7 +17,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
-import { LineChart as ChartIcon, BarChart3 } from 'lucide-react';
+import { LineChart as ChartIcon } from 'lucide-react';
 import { useState } from 'react';
 
 type ChartView = 'balance' | 'flow';
