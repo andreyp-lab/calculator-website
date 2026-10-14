@@ -58,6 +58,12 @@ const calculators = [
     available: true,
   },
   {
+    title: 'שעות נוספות',
+    description: 'שיעורי 125% ו־150%, חישוב שכר שעתי ודוגמה מחושבת לבדיקת התלוש',
+    href: '/employee-rights/overtime',
+    available: true,
+  },
+  {
     title: 'בדיקת דמי מחלה',
     description: 'שיעורי תשלום, יתרה בתלוש ותנאי היעדרות בשל מחלת בן משפחה',
     href: '/employee-rights/sick-pay',
@@ -135,6 +141,12 @@ const comparisonRows = [
     href: '/employee-rights/unemployment-benefits',
     when: 'פוטרתם או התפטרתם ונרשמתם בלשכת התעסוקה',
     input: 'גיל + שכר אחרון',
+  },
+  {
+    calc: 'שעות נוספות',
+    href: '/employee-rights/overtime',
+    when: 'עבדתם מעבר ליום או לשבוע העבודה או בשבת, ורוצים לבדוק את התלוש',
+    input: 'שכר שעתי או חודשי + מספר שעות נוספות',
   },
   {
     calc: 'דמי מחלה',
