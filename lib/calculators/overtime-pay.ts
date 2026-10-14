@@ -58,3 +58,97 @@ export function calculateOvertimeDay(hourlyWage: number, overtimeHours: number):
 export function calculateRestDayPay(hourlyWage: number, hours: number): number {
   return positive(hourlyWage) * positive(hours) * OVERTIME_RATES.restDay;
 }
+
+/** עיגול לאגורה, כפי שמוצג בשורות תלוש. */
+export function roundAgorot(value: number): number {
+  return Math.round((value + Number.EPSILON) * 100) / 100;
+}
+
+export interface Shift {
+  /** סך שעות העבודה במשמרת */
+  hours: number;
+  /** משמרת שנעשתה במנוחה השבועית (שבת): כל השעות ב-150% */
+  restDay?: boolean;
+}
+
+export interface ShiftBreakdown {
+  regularHours: number;
+  hoursAt125: number;
+  hoursAt150: number;
+  restDayHours: number;
+}
+
+/**
+ * פירוק משמרת בודדת לפי שעות רגילות / 125% / 150% / מנוחה שבועית.
+ * שעה נוספת = שעה מעל יום העבודה הרגיל (ברירת מחדל 8 שעות). נבדק לפי יום בלבד — לא לפי שבוע.
+ */
+export function splitShift(shift: Shift, regularDayHours: number = 8): ShiftBreakdown {
+  const hours = positive(shift.hours);
+  if (shift.restDay) {
+    return { regularHours: 0, hoursAt125: 0, hoursAt150: 0, restDayHours: hours };
+  }
+  const regularHours = Math.min(hours, positive(regularDayHours));
+  const overtime = hours - regularHours;
+  return {
+    regularHours,
+    hoursAt125: Math.min(overtime, 2),
+    hoursAt150: Math.max(0, overtime - 2),
+    restDayHours: 0,
+  };
+}
+
+export interface MonthlyPayLine {
+  label: string;
+  hours: number;
+  /** מקדם מהשכר הרגיל (1.25 / 1.5) */
+  rate: number;
+  /** סכום ברוטו מעוגל לאגורה */
+  amount: number;
+}
+
+export interface MonthlyShiftsResult {
+  hourlyWage: number;
+  baseSalary: number;
+  lines: MonthlyPayLine[];
+  /** סך התוספת מהשעות הנוספות ומעבודה במנוחה, כסכום שורות התלוש המעוגלות */
+  extraPay: number;
+  /** שכר חודשי ברוטו: שכר בסיס + תוספות */
+  totalGross: number;
+}
+
+/**
+ * שכר חודשי ברוטו לעובד בשכר חודשי עם משמרות.
+ * שכר הבסיס מכסה את השעות הרגילות; כל שעה נוספת או שעת מנוחה שבועית משולמת בנוסף, בשיעורה המלא
+ * (125% / 150% מהשכר השעתי — לא רק התוספת). השורות מחושבות לפי שיעור, כמו בתלוש, ומעוגלות לאגורה.
+ */
+export function calculateMonthlyShifts(input: {
+  monthlyWage: number;
+  shifts: Shift[];
+  regularDayHours?: number;
+  monthlyHours?: number;
+}): MonthlyShiftsResult {
+  const baseSalary = positive(input.monthlyWage);
+  const hourlyWage = hourlyWageFromMonthly(baseSalary, input.monthlyHours);
+
+  let hours125 = 0;
+  let hours150 = 0;
+  let hoursRest = 0;
+  for (const shift of input.shifts) {
+    const split = splitShift(shift, input.regularDayHours);
+    hours125 += split.hoursAt125;
+    hours150 += split.hoursAt150;
+    hoursRest += split.restDayHours;
+  }
+
+  const candidates: MonthlyPayLine[] = [
+    { label: 'שעות נוספות 125%', hours: hours125, rate: OVERTIME_RATES.firstTwoHours, amount: 0 },
+    { label: 'שעות נוספות 150%', hours: hours150, rate: OVERTIME_RATES.afterTwoHours, amount: 0 },
+    { label: 'עבודה במנוחה שבועית 150%', hours: hoursRest, rate: OVERTIME_RATES.restDay, amount: 0 },
+  ];
+  const lines = candidates
+    .filter((line) => line.hours > 0)
+    .map((line) => ({ ...line, amount: roundAgorot(hourlyWage * line.hours * line.rate) }));
+
+  const extraPay = roundAgorot(lines.reduce((sum, line) => sum + line.amount, 0));
+  return { hourlyWage, baseSalary, lines, extraPay, totalGross: roundAgorot(baseSalary + extraPay) };
+}

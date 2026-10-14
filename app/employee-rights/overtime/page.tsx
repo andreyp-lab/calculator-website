@@ -6,8 +6,10 @@ import {
   OVERTIME_RATES,
   MONTHLY_HOURS_5_DAY_WEEK,
   calculateOvertimeDay,
+  calculateMonthlyShifts,
   calculateRestDayPay,
   hourlyWageFromMonthly,
+  splitShift,
 } from '@/lib/calculators/overtime-pay';
 
 export const metadata: Metadata = {
@@ -25,6 +27,21 @@ const EXAMPLE_ROWS = [1, 2, 3, 4].map((hours) => ({
   ...calculateOvertimeDay(EXAMPLE_HOURLY, hours),
 }));
 const EXAMPLE_REST_DAY_8H = calculateRestDayPay(EXAMPLE_HOURLY, 8);
+
+// חודש לדוגמה עם משמרות. הכול מחושב מהמנוע; אין מספרים מוקלדים בטבלאות.
+const REGULAR_DAY_HOURS = 8;
+const SHIFT_GROUPS = [
+  { label: 'משמרת רגילה', count: 18, shift: { hours: 8 } },
+  { label: 'משמרת ארוכה', count: 3, shift: { hours: 10 } },
+  { label: 'משמרת ארוכה מאוד', count: 1, shift: { hours: 11 } },
+  { label: 'משמרת שבת', count: 1, shift: { hours: 8, restDay: true } },
+].map((group) => ({ ...group, split: splitShift(group.shift, REGULAR_DAY_HOURS) }));
+const MONTH = calculateMonthlyShifts({
+  monthlyWage: EXAMPLE_MONTHLY_WAGE,
+  shifts: SHIFT_GROUPS.flatMap((g) => Array.from({ length: g.count }, () => g.shift)),
+  regularDayHours: REGULAR_DAY_HOURS,
+});
+const MONTH_SHIFT_COUNT = SHIFT_GROUPS.reduce((sum, g) => sum + g.count, 0);
 
 const pct = (rate: number) => `${Math.round(rate * 100)}%`;
 const money = (value: number) =>
@@ -165,6 +182,92 @@ export default function OvertimePage() {
             השבת. עבודה בשעות האלה דורשת היתר, ועליה משלמים לפחות {PCT_REST} מהשכר הרגיל לכל שעה,
             או נותנים שעות מנוחה במקום התשלום. באותה דוגמה, 8 שעות עבודה בשבת הן {money(EXAMPLE_REST_DAY_8H)}{' '}
             ברוטו ({money(EXAMPLE_HOURLY)} × 8 × {OVERTIME_RATES.restDay}).
+          </p>
+
+          <h2>דוגמה מלאה: חודש עבודה עם משמרות</h2>
+          <p>
+            עובד בשכר חודשי של {money(EXAMPLE_MONTHLY_WAGE)} ברוטו עבד בחודש מסוים {MONTH_SHIFT_COUNT} משמרות.
+            ההנחה בדוגמה: יום העבודה הרגיל הוא {REGULAR_DAY_HOURS} שעות, והבדיקה נעשית לפי יום. במקום עבודה
+            שבו יום העבודה הרגיל ארוך או קצר מזה, החלוקה לשעות נוספות תהיה אחרת.
+          </p>
+          <p>
+            שלב ראשון: מפרקים כל משמרת. השכר החודשי כבר מכסה את השעות הרגילות, ולכן משלמים בנוסף רק על
+            השעות שמעבר ליום הרגיל ועל עבודה בשבת.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+              <thead className="bg-cream-2">
+                <tr className="text-right">
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">סוג משמרת</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">כמות</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">שעות במשמרת</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">רגילות</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">ב־{PCT_FIRST}</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">ב־{PCT_AFTER}</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">מנוחה שבועית ({PCT_REST})</th>
+                </tr>
+              </thead>
+              <tbody className="text-ink/70">
+                {SHIFT_GROUPS.map((group) => (
+                  <tr key={group.label}>
+                    <td className="p-3 border-b font-medium text-ink">{group.label}</td>
+                    <td className="p-3 border-b">{group.count}</td>
+                    <td className="p-3 border-b">{group.shift.hours}</td>
+                    <td className="p-3 border-b">{group.split.regularHours}</td>
+                    <td className="p-3 border-b">{group.split.hoursAt125}</td>
+                    <td className="p-3 border-b">{group.split.hoursAt150}</td>
+                    <td className="p-3 border-b">{group.split.restDayHours}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p>
+            שלב שני: מסכמים את השעות לפי שיעור, כמו שורות בתלוש. המשמרת של 11 שעות תורמת 2 שעות ב־{PCT_FIRST}
+            ושעה אחת ב־{PCT_AFTER}. כל שורה מעוגלת לאגורה. השכר השעתי הוא {money(MONTH.hourlyWage)}.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-ink/15 rounded-none overflow-hidden">
+              <thead className="bg-cream-2">
+                <tr className="text-right">
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">שורה בתלוש</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">שעות</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">חישוב</th>
+                  <th className="p-3 font-bold text-ink border-b border-ink/15">סכום ברוטו</th>
+                </tr>
+              </thead>
+              <tbody className="text-ink/70">
+                <tr>
+                  <td className="p-3 border-b font-medium text-ink">שכר חודשי</td>
+                  <td className="p-3 border-b">—</td>
+                  <td className="p-3 border-b">שכר קבוע</td>
+                  <td className="p-3 border-b font-bold text-ink">{money(MONTH.baseSalary)}</td>
+                </tr>
+                {MONTH.lines.map((line) => (
+                  <tr key={line.label}>
+                    <td className="p-3 border-b font-medium text-ink">{line.label}</td>
+                    <td className="p-3 border-b">{line.hours}</td>
+                    <td className="p-3 border-b">
+                      {line.hours} × {money(MONTH.hourlyWage)} × {line.rate}
+                    </td>
+                    <td className="p-3 border-b font-bold text-ink">{money(line.amount)}</td>
+                  </tr>
+                ))}
+                <tr className="bg-cream-2/50">
+                  <td className="p-3 border-b font-bold text-ink">סה״כ ברוטו לחודש</td>
+                  <td className="p-3 border-b" />
+                  <td className="p-3 border-b">
+                    {money(MONTH.baseSalary)} + {money(MONTH.extraPay)}
+                  </td>
+                  <td className="p-3 border-b font-bold text-ink">{money(MONTH.totalGross)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            שימו לב: על שעה נוספת לא משלמים רק את התוספת. השעות האלה לא נכללות בשכר החודשי, ולכן הן
+            משולמות במלואן ב־{PCT_FIRST} או ב־{PCT_AFTER} מהשכר השעתי. הסכום כאן הוא ברוטו: מס הכנסה,
+            ביטוח לאומי והפרשות ינוכו ממנו כמו משאר השכר.
           </p>
 
           <h2>רשימת בדיקה לתלוש</h2>
