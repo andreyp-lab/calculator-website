@@ -18,9 +18,13 @@ const heebo = Heebo({
   subsets: ["hebrew", "latin"],
 });
 
+// גופן ה-mono משמש רק לכותרות-גג קטנות (eyebrows), לא לתוכן ה-LCP.
+// בלי preload הוא לא מתחרה על רוחב הפס עם ה-CSS והגופנים של הכותרת והטקסט
+// בטעינה הראשונה; display: swap (ברירת המחדל) מציג בינתיים גופן מערכת.
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 // כותרות serif בסגנון FinSchool האדיטוריאלי
