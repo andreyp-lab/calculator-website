@@ -914,6 +914,16 @@ export default function OpeningBusinessPage() {
               { href: '/self-employed/withholding-tax', label: 'אישור ניכוי מס במקור וניהול ספרים' },
               { href: '/self-employed/employee-and-self-employed', label: 'שכיר ועצמאי במקביל' },
               { href: '/self-employed/business-finance', label: 'התנהלות פיננסית לעצמאים' },
+              { href: '/business-start/open-vat-file', label: 'פתיחת תיק במע״מ — שלב אחר שלב' },
+              { href: '/business-start/open-income-tax-file', label: 'פתיחת תיק במס הכנסה' },
+              { href: '/business-start/register-national-insurance', label: 'רישום עצמאי בביטוח הלאומי' },
+              { href: '/business-start/open-withholding-file', label: 'מתי פותחים תיק ניכויים?' },
+              { href: '/business-start/bookkeeping-method', label: 'בחירת שיטת ניהול ספרים' },
+              { href: '/business-start/business-license', label: 'בדיקת הצורך ברישיון עסק' },
+              { href: '/business-start/business-bank-account', label: 'חשבון בנק לפעילות העסק' },
+              { href: '/business-start/partnership', label: 'פתיחת שותפות' },
+              { href: '/business-start/pricing-first-service', label: 'תמחור השירות הראשון' },
+              { href: '/business-start/first-year-tax-calendar', label: 'לוח מס לשנה הראשונה' },
             ].map((c) => (
               <Link
                 key={c.href}

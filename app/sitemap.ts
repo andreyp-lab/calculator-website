@@ -11,6 +11,42 @@ const SITE_URL = 'https://cheshbonai.co.il';
 const CONTENT_UPDATED = new Date('2026-09-29');
 // רענון תוכן ייעודי לעמודים שהורחבו ב-12.6 (בלוק בידול) — סיגנל סריקה-מחדש אמיתי
 const FRESH_2026_06_12 = new Date('2026-06-12');
+const CONTENT_WAVE_2026_10_24 = new Date('2026-10-24');
+
+const WORK_GRANT_GUIDES = [
+  'amount',
+  'application',
+  'status',
+  'self-employed',
+  'single-parent',
+  'couples',
+] as const;
+
+const BUSINESS_START_GUIDES = [
+  'partnership',
+  'open-vat-file',
+  'open-income-tax-file',
+  'register-national-insurance',
+  'business-bank-account',
+  'bookkeeping-method',
+  'business-license',
+  'pricing-first-service',
+  'first-year-tax-calendar',
+  'open-withholding-file',
+] as const;
+
+const MORTGAGE_GUIDES = [
+  'prepayment-fee',
+  'refinance-cost',
+  'pre-approval',
+  'repayment-ratio',
+  'financing-percentage',
+  'spitzer-vs-equal-principal',
+  'prime-track',
+  'fixed-unlinked',
+  'index-linked',
+  'uniform-baskets',
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = CONTENT_UPDATED;
@@ -51,7 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/guides', 'weekly', 0.85),
     make('/tools', 'weekly', 0.90),
     make('/business', 'weekly', 0.90, new Date('2026-09-29')), // hub: כמה עולה להקים עסק
-    ...BUSINESS_TYPES.map((b) => make(`/business/${b.slug}`, 'monthly', 0.85, new Date('2026-09-29'))),
+    ...BUSINESS_TYPES.map((b) => make(`/business/${b.slug}`, 'monthly', 0.85, CONTENT_WAVE_2026_10_24)),
     make('/business/profit-and-loss-guide', 'monthly', 0.88, new Date('2026-10-02')),
     make('/business/working-capital-guide', 'monthly', 0.88, new Date('2026-10-02')),
     make('/business/business-credit-preparation', 'monthly', 0.86, new Date('2026-10-02')),
@@ -87,12 +123,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/annual-leave', 'monthly', 0.85),
     make('/employee-rights/annual-bonus', 'monthly', 0.85),
     make('/employee-rights/sick-pay', 'monthly', 0.85),
-    make('/employee-rights/overtime', 'monthly', 0.85, new Date('2026-10-13')),
+    make('/employee-rights/overtime', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
     make('/employee-rights/work-grant', 'monthly', 0.90, new Date('2026-10-02')),
     // כוונת "בדיקת זכאות" (~261 חשיפות/חודש) — URL ייעודי, לא טאב בתוך דף המענק.
     make('/employee-rights/work-grant/eligibility', 'monthly', 0.90, new Date('2026-07-30')),
     // כוונת "מענק עבודה שנים קודמות / רטרואקטיבית" — כולל תיקון מיתוס 6 השנים (החוק: שנתיים בלבד).
     make('/employee-rights/work-grant/retroactive', 'monthly', 0.85, new Date('2026-07-30')),
+    ...WORK_GRANT_GUIDES.map((slug) =>
+      make(`/employee-rights/work-grant/${slug}`, 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    ),
 
     // ===== מחשבונים: עצמאיים =====
     make('/self-employed/opening-business', 'monthly', 0.92, new Date('2026-10-01')), // רענון מדריך הרישום והקישוריות
@@ -114,6 +153,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed/withholding-tax', 'monthly', 0.85, new Date('2026-10-01')),
     make('/self-employed/business-setup-cost', 'monthly', 0.9, new Date('2026-10-02')),
     make('/self-employed/employee-and-self-employed', 'monthly', 0.9, new Date('2026-10-01')),
+    ...BUSINESS_START_GUIDES.map((slug) =>
+      make(`/business-start/${slug}`, 'monthly', 0.8, CONTENT_WAVE_2026_10_24),
+    ),
 
     // ===== מחשבונים: נדל"ן =====
     make('/real-estate/mortgage', 'weekly', 0.95),
@@ -121,6 +163,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate/purchase-tax', 'monthly', 0.90),
     make('/real-estate/capital-gains-tax', 'monthly', 0.90),
     make('/real-estate/rental-income-tax', 'monthly', 0.9), // מדריך מיסוי שכר דירה (pillar)
+    ...MORTGAGE_GUIDES.map((slug) =>
+      make(`/real-estate/mortgage/guide/${slug}`, 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    ),
 
     // ===== מחשבונים: השקעות =====
     make('/investments/compound-interest', 'monthly', 0.95, new Date('2026-09-28')),
@@ -167,7 +212,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== בלוג =====
     make('/blog', 'weekly', 0.85),
-    ...blogEntries, // 44 פוסטי בלוג מתוך registry
+    ...blogEntries, // נגזר אוטומטית מכל הפוסטים ב-registry
 
     // ===== דפי השוואה =====
     make('/compare', 'monthly', 0.75, new Date('2026-10-01')),

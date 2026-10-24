@@ -1,15 +1,28 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { BUSINESS_TYPES, getBusinessType } from '@/lib/data/business-setup/business-types';
+import { BUSINESS_GUIDE_SECTION_IDS, BUSINESS_TYPES, getBusinessType, type BusinessGuideSectionId } from '@/lib/data/business-setup/business-types';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
 import { CourseCTA } from '@/components/marketing/CourseCTA';
+import { FAQSchema } from '@/components/seo/FAQSchema';
 
 interface PageProps {
   params: Promise<{ type: string }>;
 }
+
+export const dynamicParams = false;
+
+const SECTION_TITLES: Record<BusinessGuideSectionId, string> = {
+  businessModel: 'מודל פעילות והצעת ערך',
+  infrastructure: 'ציוד, תשתית ומקום',
+  compliance: 'בדיקות רישוי וביטוח',
+  operations: 'כוח אדם ותפעול',
+  runningCosts: 'הוצאות שוטפות',
+  viability: 'מדדי כדאיות ונקודת איזון',
+  risks: 'סיכונים ותוכנית גיבוי',
+};
 
 const QUESTIONS: Record<string, string[]> = {
   'pilates-studio': [
@@ -134,15 +147,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function BusinessGuidePage({ params }: PageProps) {
   const business = getBusinessType((await params).type);
   if (!business) notFound();
-  const questions = QUESTIONS[business.slug];
+  const questions = QUESTIONS[business.slug] ?? [];
+  const relatedBusinesses = BUSINESS_TYPES
+    .filter((item) => item.slug !== business.slug && item.category === business.category)
+    .slice(0, 6);
+  const pagePath = `/business/${business.slug}`;
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `תכנון הקמת ${business.name}`,
+    description: business.quickAnswer,
+    inLanguage: 'he-IL',
+    datePublished: '2026-09-29',
+    dateModified: '2026-10-24',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://cheshbonai.co.il${pagePath}` },
+    author: { '@type': 'Person', name: 'אנדרי פלטונוב', jobTitle: 'רואה חשבון' },
+    publisher: { '@type': 'Organization', name: 'חשבונאי', url: 'https://cheshbonai.co.il' },
+  };
 
   return (
     <main className="min-h-screen bg-cream" dir="rtl">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <BreadcrumbSchema items={[
         { name: 'דף הבית', url: '/' },
         { name: 'מדריכי הקמת עסק', url: '/business' },
         { name: business.name, url: '/business/' + business.slug },
       ]} />
+      <FAQSchema items={[...business.faq]} />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <Breadcrumbs items={[
           { label: 'דף הבית', href: '/' },
@@ -153,18 +184,32 @@ export default async function BusinessGuidePage({ params }: PageProps) {
         <header className="my-8 border-b border-ink/15 pb-6">
           <p className="mb-3 font-mono text-xs text-gold">✦ מדריך תכנון · {business.category}</p>
           <h1 className="mb-4 text-3xl font-bold text-ink md:text-4xl">תכנון הקמת {business.name}</h1>
-          <p className="text-lg leading-relaxed text-ink/75">
-            עלות ההקמה תלויה במקום, בהיקף הפעילות, בציוד ובספקים שתבחרו.
-            השאלות כאן יעזרו להכין רשימת בדיקה לפני בקשת הצעות מחיר ובניית תקציב.
-          </p>
+          <p className="text-lg leading-relaxed text-ink/75">{business.quickAnswer}</p>
         </header>
 
-        <section className="mb-10 border-r-4 border-gold bg-cream-2 p-6">
-          <h2 className="mb-4 text-xl font-bold text-ink">מה לבדוק במיוחד בעסק הזה?</h2>
-          <ul className="list-disc space-y-3 pr-5 leading-relaxed text-ink/80">
-            {questions.map((question) => <li key={question}>{question}</li>)}
-          </ul>
+        <section className="mb-10 border-r-4 border-gold bg-cream-2 p-6" aria-labelledby="quick-answer-title">
+          <h2 id="quick-answer-title" className="mb-3 text-xl font-bold text-ink">תשובה מהירה</h2>
+          <p className="leading-relaxed text-ink/80">{business.quickAnswer}</p>
         </section>
+
+        <div className="mb-10 grid gap-5">
+          {BUSINESS_GUIDE_SECTION_IDS.map((sectionId, index) => (
+            <section key={sectionId} className="border border-ink/15 bg-paper p-5 md:p-6" aria-labelledby={`${sectionId}-title`}>
+              <p className="mb-2 font-mono text-xs text-gold">0{index + 1}</p>
+              <h2 id={`${sectionId}-title`} className="mb-3 text-xl font-bold text-ink">{SECTION_TITLES[sectionId]}</h2>
+              <p className="leading-relaxed text-ink/80">{business.sections[sectionId]}</p>
+            </section>
+          ))}
+        </div>
+
+        {questions.length > 0 && (
+          <section className="mb-10 border-r-4 border-gold bg-cream-2 p-6">
+            <h2 className="mb-4 text-xl font-bold text-ink">שאלות פתיחה ייחודיות לעסק</h2>
+            <ul className="list-disc space-y-3 pr-5 leading-relaxed text-ink/80">
+              {questions.map((question) => <li key={question}>{question}</li>)}
+            </ul>
+          </section>
+        )}
 
         <section className="mb-10">
           <h2 className="mb-4 text-xl font-bold text-ink">רשימת בדיקה לתקציב הראשוני</h2>
@@ -191,28 +236,40 @@ export default async function BusinessGuidePage({ params }: PageProps) {
         />
 
         <section className="mb-10">
-          <h2 className="mb-4 text-xl font-bold text-ink">להמשך בדיקה</h2>
+          <h2 className="mb-4 text-xl font-bold text-ink">כלים ומדריכים רלוונטיים</h2>
           <ul className="list-disc space-y-2 pr-5 text-gold">
-            <li><Link href="/self-employed/opening-business" className="underline">מדריך פתיחת עסק</Link></li>
-            <li><Link href="/self-employed/business-finance" className="underline">מדריך ניהול כספים לעסק קטן</Link></li>
-            <li><Link href="/business/profit-and-loss-guide" className="underline">איך לקרוא דוח רווח והפסד</Link></li>
-            <li><Link href="/business/working-capital-guide" className="underline">הון חוזר לעסק קטן</Link></li>
-            <li><Link href="/business/business-credit-preparation" className="underline">הכנה לבקשת אשראי עסקי</Link></li>
-            <li><Link href="/tools/loan-eligibility" className="underline">מידע על מסלולי מימון</Link></li>
+            {business.relatedLinks.map((link) => <li key={link.href}><Link href={link.href} className="underline">{link.label}</Link></li>)}
           </ul>
+        </section>
+
+        <section className="mb-10" aria-labelledby="faq-title">
+          <h2 id="faq-title" className="mb-4 text-xl font-bold text-ink">שאלות נפוצות על הקמת {business.name}</h2>
+          <div className="space-y-3">
+            {business.faq.map((item) => (
+              <details key={item.question} className="border border-ink/15 bg-paper p-5">
+                <summary className="cursor-pointer font-bold text-ink">{item.question}</summary>
+                <p className="mt-3 leading-relaxed text-ink/75">{item.answer}</p>
+              </details>
+            ))}
+          </div>
         </section>
 
         <section className="mb-10">
           <h2 className="mb-4 text-xl font-bold text-ink">מדריכים לסוגי עסקים נוספים</h2>
           <div className="flex flex-wrap gap-2">
-            {BUSINESS_TYPES.filter((item) => item.slug !== business.slug).map((item) => (
+            {relatedBusinesses.map((item) => (
               <Link key={item.slug} href={'/business/' + item.slug} className="border border-ink/15 bg-paper px-3 py-2 text-sm text-ink hover:border-gold">
                 {item.name}
               </Link>
             ))}
           </div>
+          {relatedBusinesses.length === 0 && <p className="text-ink/70">בעמוד המרכזי תוכלו להשוות למודלים עסקיים נוספים.</p>}
           <Link href="/business" className="mt-5 inline-block text-gold underline">לכל מדריכי הקמת העסק</Link>
         </section>
+
+        <aside className="mb-10 border-r-4 border-gold bg-cream-2 p-5 text-sm leading-relaxed text-ink/75">
+          <strong className="text-ink">הבהרה:</strong> המידע הוא כלי תכנון כללי בלבד ואינו ייעוץ מס, ייעוץ משפטי, ייעוץ רישוי או המלצה עסקית. דרישות רישוי, ביטוח ומיסוי משתנות לפי הפעילות, הנכס והרשות המקומית; לפני התחייבות או פתיחת תיק יש לבדוק את המקרה עם הרשות ובעל המקצוע המתאים.
+        </aside>
 
         <AuthorBox />
       </div>

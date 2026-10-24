@@ -54,7 +54,7 @@ export function calculateOvertimeDay(hourlyWage: number, overtimeHours: number):
   return { hoursAt125, hoursAt150, totalPay, regularPay, premium: totalPay - regularPay };
 }
 
-/** תשלום עבודה במנוחה השבועית: לפחות 150% מהשכר הרגיל לכל שעה (או מנוחה חלופית — לא מחושבת כאן). */
+/** תשלום עבודה במנוחה השבועית: לפחות 150% מהשכר הרגיל לכל שעה. מנוחת פיצוי אינה מחושבת כאן. */
 export function calculateRestDayPay(hourlyWage: number, hours: number): number {
   return positive(hourlyWage) * positive(hours) * OVERTIME_RATES.restDay;
 }

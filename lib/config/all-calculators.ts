@@ -195,17 +195,6 @@ export const allCalculators: CalculatorEntry[] = [
     icon: '🏠',
     keywords: ['שכירות', 'קנייה', 'דירה', 'משכנתא', 'rent vs buy'],
   },
-  {
-    id: 'compare-leasing-buying',
-    title: 'ליסינג vs קנייה (רכב)',
-    href: '/vehicles/leasing-vs-buying',
-    category: 'דפי השוואה',
-    categoryHref: '/compare',
-    description: 'רכב - איזה אופן רכישה משתלם',
-    icon: '🚗',
-    keywords: ['ליסינג', 'רכב', 'קנייה', 'מימון', 'רכב חברה'],
-  },
-
   // נדל"ן ומשכנתא
   {
     id: 'mortgage',

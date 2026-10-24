@@ -22,6 +22,12 @@ export default function WorkGrantPage() {
       related={[
         { href: '/employee-rights/work-grant/eligibility', label: 'על בדיקת הזכאות' },
         { href: '/employee-rights/work-grant/retroactive', label: 'הגשה על שנים קודמות' },
+        { href: '/employee-rights/work-grant/amount', label: 'איך נקבע סכום המענק' },
+        { href: '/employee-rights/work-grant/application', label: 'איך מגישים בקשה' },
+        { href: '/employee-rights/work-grant/status', label: 'בדיקת סטטוס הבקשה' },
+        { href: '/employee-rights/work-grant/self-employed', label: 'מענק עבודה לעצמאים' },
+        { href: '/employee-rights/work-grant/single-parent', label: 'מענק להורה יחיד' },
+        { href: '/employee-rights/work-grant/couples', label: 'השפעת הכנסת בני זוג' },
       ]}
     />
   );

@@ -29,6 +29,14 @@ export default function MortgagePage() {
       <h2>מגבלות והנחות</h2>
       <p>מגבלות שיעור המימון, יחס ההחזר וחלוקת המסלולים נקבעות בהוראת בנק ישראל וחלות לפי מאפייני הבקשה. קבלת מימון כפופה לבדיקה ולאישור הבנק. אל תסתמכו על שיעור תשואה צפוי מהשקעות כדי להכריע אם לקחת משכנתא גדולה יותר; תשואה עתידית אינה מובטחת ועלות החוב תלויה בתנאי ההסכם.</p>
       <p>לעיון בהסבר הרשמי על מסלולים, ריבית פריים ואישורים עקרוניים: <a href="https://www.boi.org.il/information/bank-paymnts/financial-education/%D7%94%D7%A8%D7%A4%D7%95%D7%A8%D7%9E%D7%94-%D7%9C%D7%94%D7%92%D7%91%D7%A8%D7%AA-%D7%A9%D7%A7%D7%99%D7%A4%D7%95%D7%AA-%D7%94%D7%9E%D7%99%D7%93%D7%A2-%D7%95%D7%94%D7%AA%D7%97%D7%A8%D7%95%D7%AA-%D7%91%D7%9E%D7%A9%D7%9B%D7%A0%D7%AA%D7%90%D7%95%D7%AA/" target="_blank" rel="noopener noreferrer">מדריך בנק ישראל למשכנתאות</a>. להשוואת חלופות אפשר להיעזר גם ב<Link href="/real-estate/mortgage-optimizer">מדריך השוואת התמהילים</Link>.</p>
+      <h2>מדריכים לבדיקת המשכנתא</h2>
+      <ul>
+        <li><Link href="/real-estate/mortgage/guide/pre-approval">אישור עקרוני למשכנתא</Link> ו<Link href="/real-estate/mortgage/guide/uniform-baskets">השוואת הסלים האחידים</Link></li>
+        <li><Link href="/real-estate/mortgage/guide/financing-percentage">שיעור מימון</Link> ו<Link href="/real-estate/mortgage/guide/repayment-ratio">יחס החזר מהכנסה</Link></li>
+        <li><Link href="/real-estate/mortgage/guide/spitzer-vs-equal-principal">שפיצר מול קרן שווה</Link></li>
+        <li><Link href="/real-estate/mortgage/guide/prime-track">מסלול פריים</Link>, <Link href="/real-estate/mortgage/guide/fixed-unlinked">קבועה לא צמודה</Link> ו<Link href="/real-estate/mortgage/guide/index-linked">מסלול צמוד מדד</Link></li>
+        <li><Link href="/real-estate/mortgage/guide/prepayment-fee">עמלת פירעון מוקדם</Link> ו<Link href="/real-estate/mortgage/guide/refinance-cost">עלויות מחזור משכנתא</Link></li>
+      </ul>
     </>}
   />;
 }
