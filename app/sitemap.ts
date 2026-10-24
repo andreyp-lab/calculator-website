@@ -122,6 +122,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/personal-tax/degree-tax-credit', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/personal-tax/locality-tax-credit', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/personal-tax/new-immigrant-tax-benefits', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/personal-tax/foreign-income', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/personal-tax/crypto-tax', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
 
     // ===== מחשבונים: זכויות עובד =====
     make('/employee-rights/severance', 'monthly', 0.95),
@@ -179,6 +181,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate/purchase-tax', 'monthly', 0.90),
     make('/real-estate/capital-gains-tax', 'monthly', 0.90),
     make('/real-estate/rental-income-tax', 'monthly', 0.9), // מדריך מיסוי שכר דירה (pillar)
+    make('/real-estate/betterment-levy', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/real-estate/sale-costs', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     ...MORTGAGE_GUIDES.map((slug) =>
       make(`/real-estate/mortgage/guide/${slug}`, 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     ),
@@ -217,6 +221,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/pension/pension-gap', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/pension/management-fees', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/pension/default-funds', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/pension/pension-tax-exemption', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
 
     // ===== כלים מקצועיים =====
     make('/tools/unified', 'monthly', 0.90),

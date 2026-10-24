@@ -1,5 +1,5 @@
 {
-  "version": "2.2.5",
+  "version": "2.2.6",
   "site": "https://cheshbonai.co.il",
   "created_at": "2026-10-24",
   "implementation": {
@@ -10,8 +10,9 @@
     "second_wave_completed": 12,
     "third_wave_completed": 11,
     "fourth_wave_completed": 8,
-    "completed_new_pages": 81,
-    "remaining_new_pages": 43,
+    "fifth_wave_completed": 5,
+    "completed_new_pages": 86,
+    "remaining_new_pages": 38,
     "first_wave_breakdown": {
       "business_industries": 24,
       "business_start": 10,
@@ -19,7 +20,8 @@
       "work_grant_guides": 6,
       "verified_salaried_rights_tax_guides": 12,
       "verified_salaried_pension_savings_guides": 11,
-      "verified_self_employed_pension_vehicle_guides": 8
+      "verified_self_employed_pension_vehicle_guides": 8,
+      "verified_tax_pension_real_estate_guides": 5
     }
   },
   "seed_keyword": "מיסוי וזכויות פיננסיות בישראל",
@@ -235,7 +237,7 @@
       "keyword": "מס על הכנסות מחו״ל",
       "intent": "Informational",
       "template": "explainer",
-      "status": "planned",
+      "status": "implemented",
       "action": "new",
       "wave": 4,
       "wordCount": 1500,
@@ -250,7 +252,7 @@
       "keyword": "מס קריפטו ישראל",
       "intent": "Informational",
       "template": "ultimate-guide",
-      "status": "planned",
+      "status": "implemented",
       "action": "new",
       "wave": 4,
       "wordCount": 1500,
@@ -1585,7 +1587,7 @@
       "keyword": "היטל השבחה",
       "intent": "Informational",
       "template": "explainer",
-      "status": "planned",
+      "status": "implemented",
       "action": "new",
       "wave": 3,
       "wordCount": 1500,
@@ -1600,7 +1602,7 @@
       "keyword": "עלויות מכירת דירה",
       "intent": "Informational",
       "template": "how-to",
-      "status": "planned",
+      "status": "implemented",
       "action": "new",
       "wave": 4,
       "wordCount": 1500,
@@ -1960,7 +1962,7 @@
       "keyword": "קיבוע זכויות",
       "intent": "Informational",
       "template": "how-to",
-      "status": "planned",
+      "status": "implemented",
       "action": "new",
       "wave": 2,
       "wordCount": 1500,

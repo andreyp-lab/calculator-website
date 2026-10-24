@@ -50,6 +50,20 @@ const calculators = [
     available: true,
     badge: undefined as string | undefined,
   },
+  {
+    title: 'היטל השבחה במכירת נכס',
+    description: 'מתי בודקים חבות, אילו מסמכי תכנון ושומה אוספים ומתי נדרש שמאי או עורך דין',
+    href: '/real-estate/betterment-levy',
+    available: true,
+    badge: undefined as string | undefined,
+  },
+  {
+    title: 'עלויות מכירת דירה',
+    description: 'צ׳קליסט למסמכים, מסים, יתרת משכנתא ושירותים מקצועיים לפני חישוב הנטו מהמכירה',
+    href: '/real-estate/sale-costs',
+    available: true,
+    badge: undefined as string | undefined,
+  },
 ];
 
 const comparisonRows = [

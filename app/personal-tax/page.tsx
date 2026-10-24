@@ -73,6 +73,18 @@ const calculators = [
     href: '/personal-tax/new-immigrant-tax-benefits',
     available: true,
   },
+  {
+    title: 'הכנסות מחו״ל לתושב ישראל',
+    description: 'מיפוי מקור ההכנסה, מס זר, טפסים ואסמכתאות לפני הכנת הדוח השנתי',
+    href: '/personal-tax/foreign-income',
+    available: true,
+  },
+  {
+    title: 'מיסוי מטבעות דיגיטליים',
+    description: 'תיעוד פעולות, עלות, תמורה והמרות לקראת בדיקה ודיווח לרשות המסים',
+    href: '/personal-tax/crypto-tax',
+    available: true,
+  },
 ];
 
 const calculatorComparison = [

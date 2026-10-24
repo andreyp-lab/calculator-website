@@ -64,6 +64,7 @@ export default function PensionPage() {
             ['/pension/pension-gap', 'איך בודקים פער פנסיוני?', 'מיפוי חסכונות, הפקדות ואומדן הקצבה בלי להבטיח תוצאה עתידית'],
             ['/pension/management-fees', 'דמי ניהול בפנסיה', 'איך קוראים את הדוח ומשווים הצעות בכלי הרשמי'],
             ['/pension/default-funds', 'קרנות פנסיה נבחרות', 'כללי ההליך הרשמי, דמי הניהול והמקרים שבהם מעסיק מצרף עובד'],
+            ['/pension/pension-tax-exemption', 'קיבוע זכויות ופטור ממס על קצבה', 'טופס 161ד, נתוני פרישה והבחירות שצריך לבדוק לפני הגשה'],
           ].map(([href, title, description]) => (
             <Link key={href} href={href} className="border border-ink/15 bg-cream-2 p-5 hover:border-gold">
               <h3 className="font-bold">{title}</h3>
