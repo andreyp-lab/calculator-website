@@ -7,12 +7,15 @@
     "planned_new_pages_in_matrix": 83,
     "supplementary_new_pages": 41,
     "first_wave_completed": 50,
-    "remaining_new_pages": 74,
+    "second_wave_completed": 12,
+    "completed_new_pages": 62,
+    "remaining_new_pages": 62,
     "first_wave_breakdown": {
       "business_industries": 24,
       "business_start": 10,
       "mortgage_guides": 10,
-      "work_grant_guides": 6
+      "work_grant_guides": 6,
+      "verified_salaried_rights_tax_guides": 12
     }
   },
   "seed_keyword": "מיסוי וזכויות פיננסיות בישראל",

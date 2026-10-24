@@ -49,6 +49,30 @@ const calculators = [
     href: '/personal-tax/work-value',
     available: true,
   },
+  {
+    title: 'זיכוי מס על תרומות',
+    description: 'בדיקת מוסד, קבלות ומימוש הזיכוי לפי שירות רשות המסים',
+    href: '/personal-tax/donations-tax-credit',
+    available: true,
+  },
+  {
+    title: 'זיכוי מס לתואר ולימודי מקצוע',
+    description: 'שנת סיום, אישור זכאות, טופס 119 ומסלול המימוש המתאים',
+    href: '/personal-tax/degree-tax-credit',
+    available: true,
+  },
+  {
+    title: 'זיכוי מס לתושבי יישובים',
+    description: 'אישור תושבות, טופס 1312א ובדיקת היישוב ברשימה הרשמית',
+    href: '/personal-tax/locality-tax-credit',
+    available: true,
+  },
+  {
+    title: 'הטבות מס לעולים חדשים',
+    description: 'מיפוי סוג ההכנסה, שנות הזכאות והמסמכים לפני פנייה לרשות המסים',
+    href: '/personal-tax/new-immigrant-tax-benefits',
+    available: true,
+  },
 ];
 
 const calculatorComparison = [

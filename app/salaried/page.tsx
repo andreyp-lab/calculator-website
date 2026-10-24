@@ -84,6 +84,30 @@ const TAX_AND_SALARY: Calc[] = [
     href: '/salaried/payslip-guide',
     icon: Receipt,
   },
+  {
+    title: 'רכיבי שכר בתלוש',
+    description: 'מדריך לבדיקת שכר יסוד, תוספות, החזרים וניכויים מול מסמכי ההעסקה.',
+    href: '/salaried/salary-components',
+    icon: Receipt,
+  },
+  {
+    title: 'טופס 106',
+    description: 'איך מקבלים את האישור השנתי, בודקים את שדותיו ומשתמשים בו בבדיקת מס.',
+    href: '/salaried/form-106',
+    icon: Receipt,
+  },
+  {
+    title: 'עבודה בשתי עבודות',
+    description: 'סדר עבודה לתיאום מס ולבדיקה נפרדת של תיאום דמי ביטוח.',
+    href: '/salaried/two-jobs',
+    icon: Briefcase,
+  },
+  {
+    title: 'מתחילים עבודה חדשה',
+    description: 'מסמכי קליטה, טופס 101, פנסיה ובקרת המשכורת הראשונה.',
+    href: '/salaried/starting-new-job',
+    icon: Briefcase,
+  },
 ];
 
 const RIGHTS: Calc[] = [

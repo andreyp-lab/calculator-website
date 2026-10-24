@@ -81,6 +81,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ===== Hubs קטגוריות =====
     make('/salaried', 'weekly', 0.95),
     make('/salaried/payslip-guide', 'monthly', 0.9), // מדריך קריאת תלוש (pillar)
+    make('/salaried/salary-components', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/salaried/form-106', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/salaried/two-jobs', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/salaried/starting-new-job', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/self-employed', 'weekly', 0.95, new Date('2026-10-01')),
     make('/loans', 'weekly', 0.95),
     make('/topics', 'weekly', 0.85),
@@ -111,6 +115,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/personal-tax/income-tax', 'monthly', 0.90),
     make('/personal-tax/tax-credits', 'monthly', 0.90),
     make('/personal-tax/work-value', 'monthly', 0.85),
+    make('/personal-tax/donations-tax-credit', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/personal-tax/degree-tax-credit', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/personal-tax/locality-tax-credit', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/personal-tax/new-immigrant-tax-benefits', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
 
     // ===== מחשבונים: זכויות עובד =====
     make('/employee-rights/severance', 'monthly', 0.95),
@@ -124,6 +132,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/annual-bonus', 'monthly', 0.85),
     make('/employee-rights/sick-pay', 'monthly', 0.85),
     make('/employee-rights/overtime', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/employee-rights/section-14', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/employee-rights/notice-period', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/employee-rights/resignation-as-dismissal', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/employee-rights/delayed-wages', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
     make('/employee-rights/work-grant', 'monthly', 0.90, new Date('2026-10-02')),
     // כוונת "בדיקת זכאות" (~261 חשיפות/חודש) — URL ייעודי, לא טאב בתוך דף המענק.
     make('/employee-rights/work-grant/eligibility', 'monthly', 0.90, new Date('2026-07-30')),

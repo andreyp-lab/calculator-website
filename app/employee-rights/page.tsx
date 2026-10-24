@@ -87,6 +87,30 @@ const calculators = [
     href: '/employee-rights/work-grant',
     available: true,
   },
+  {
+    title: 'סעיף 14 והכספים בקופה',
+    description: 'איך בודקים תחולה, הפקדות והשלמת פיצויים בלי להסיק מסקנה מהיתרה בלבד',
+    href: '/employee-rights/section-14',
+    available: true,
+  },
+  {
+    title: 'הודעה מוקדמת',
+    description: 'תקופות לעובד חודשי ושעתי, חלף הודעה והמסמכים שכדאי לשמור',
+    href: '/employee-rights/notice-period',
+    available: true,
+  },
+  {
+    title: 'התפטרות בדין מפוטר',
+    description: 'עילות, תיעוד, התראה ואפשרות תיקון לפני בדיקת זכאות לפיצויים',
+    href: '/employee-rights/resignation-as-dismissal',
+    available: true,
+  },
+  {
+    title: 'הלנת שכר',
+    description: 'איך מתעדים מועד תשלום, בודקים את הרישומים ומבררים מסלול אכיפה',
+    href: '/employee-rights/delayed-wages',
+    available: true,
+  },
 ];
 
 const faqItems = [
