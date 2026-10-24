@@ -108,6 +108,24 @@ const TAX_AND_SALARY: Calc[] = [
     href: '/salaried/starting-new-job',
     icon: Briefcase,
   },
+  {
+    title: 'החלפת עבודה באמצע השנה',
+    description: 'מסמכי המעסיק הקודם, טופס 101, תיאום מס ובקרה שנתית.',
+    href: '/salaried/job-change-tax',
+    icon: Briefcase,
+  },
+  {
+    title: 'חל״ת, מס ודמי ביטוח',
+    description: 'ספירת חודשים קלנדריים מלאים, דיווח לביטוח לאומי ובדיקת שנת המס.',
+    href: '/salaried/unpaid-leave-tax',
+    icon: Calendar,
+  },
+  {
+    title: 'החזר הוצאות נסיעה לעבודה',
+    description: 'איך בודקים זכאות, ימי עבודה בפועל, הסעה ותשלום בתלוש.',
+    href: '/salaried/travel-reimbursement',
+    icon: Receipt,
+  },
 ];
 
 const RIGHTS: Calc[] = [

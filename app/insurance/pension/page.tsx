@@ -51,6 +51,23 @@ export default function PensionPage() {
         <Link href="/investments/retirement" className="font-semibold text-gold underline underline-offset-4">תכנון חיסכון לפרישה</Link>
         <Link href="/self-employed/mandatory-pension" className="font-semibold text-gold underline underline-offset-4">כללי פנסיה חובה לעצמאים</Link>
       </div>
+
+      <section className="mt-10 border-t border-ink/15 pt-8">
+        <h2 className="mb-4 text-2xl font-bold">מדריכים משלימים לשכירים ולפורשים</h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {[
+            ['/pension/mandatory-employee', 'פנסיה חובה לשכירים', 'שיעורי בסיס, תחילת זכאות ובדיקת קליטת ההפקדות'],
+            ['/pension/retirement-age', 'גיל פרישה בישראל', 'הבדלים בין גיל פרישה, פרישת חובה וקצבת אזרח ותיק'],
+            ['/pension/job-change-continuity', 'רציפות פנסיונית במעבר עבודה', 'הפקדות, ארכת ביטוח ומסמכים למעסיק החדש'],
+            ['/pension/inactive-fund', 'קרן פנסיה לא פעילה', 'איתור החשבון, דוחות ובדיקת כיסויים לפני פעולה'],
+          ].map(([href, title, description]) => (
+            <Link key={href} href={href} className="border border-ink/15 bg-cream-2 p-5 hover:border-gold">
+              <h3 className="font-bold">{title}</h3>
+              <p className="mt-1 text-sm text-ink/70">{description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

@@ -34,6 +34,34 @@ const calculators = [
     available: true,
     icon: '🏦',
   },
+  {
+    title: 'קרן חירום',
+    description: 'שיטה לבניית יעד אישי לפי הוצאות, נזילות וסיכונים — בלי יעד אוניברסלי מומצא',
+    href: '/savings/emergency-fund',
+    available: true,
+    icon: '🛟',
+  },
+  {
+    title: 'קופות להוצאות צפויות',
+    description: 'תכנון הוצאות שנתיות ויעדים נפרדים כדי לצמצם הפתעות בתקציב',
+    href: '/savings/sinking-funds',
+    available: true,
+    icon: '🗂️',
+  },
+  {
+    title: 'פיקדון בנקאי',
+    description: 'מה לבדוק בריבית, נזילות, תחנות יציאה ומיסוי לפני השוואת הצעות',
+    href: '/savings/bank-deposit',
+    available: true,
+    icon: '🏦',
+  },
+  {
+    title: 'חשבון חיסכון',
+    description: 'איך לקרוא את תנאי החשבון ולהשוות אותו לפיקדון לפי צורך ונזילות',
+    href: '/savings/savings-account',
+    available: true,
+    icon: '💰',
+  },
 ];
 
 const faqItems = [

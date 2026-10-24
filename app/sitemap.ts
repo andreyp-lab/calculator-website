@@ -85,6 +85,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/salaried/form-106', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
     make('/salaried/two-jobs', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
     make('/salaried/starting-new-job', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/salaried/job-change-tax', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/salaried/unpaid-leave-tax', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/salaried/travel-reimbursement', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/self-employed', 'weekly', 0.95, new Date('2026-10-01')),
     make('/loans', 'weekly', 0.95),
     make('/topics', 'weekly', 0.85),
@@ -188,6 +191,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: חיסכון / הלוואות =====
     make('/savings/family-budget', 'monthly', 0.90),
+    make('/savings/emergency-fund', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/savings/sinking-funds', 'monthly', 0.80, CONTENT_WAVE_2026_10_24),
+    make('/savings/bank-deposit', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/savings/savings-account', 'monthly', 0.80, CONTENT_WAVE_2026_10_24),
     make('/savings/loan-repayment', 'monthly', 0.90),
     make('/savings/personal-loan', 'monthly', 0.90),
 
@@ -198,6 +205,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ===== מחשבונים: ביטוחים =====
     make('/insurance/pension', 'monthly', 0.90, new Date('2026-09-28')),
+    make('/pension/mandatory-employee', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/pension/retirement-age', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
+    make('/pension/job-change-continuity', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/pension/inactive-fund', 'monthly', 0.80, CONTENT_WAVE_2026_10_24),
 
     // ===== כלים מקצועיים =====
     make('/tools/unified', 'monthly', 0.90),

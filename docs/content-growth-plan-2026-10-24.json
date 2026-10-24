@@ -8,14 +8,16 @@
     "supplementary_new_pages": 41,
     "first_wave_completed": 50,
     "second_wave_completed": 12,
-    "completed_new_pages": 62,
-    "remaining_new_pages": 62,
+    "third_wave_completed": 11,
+    "completed_new_pages": 73,
+    "remaining_new_pages": 51,
     "first_wave_breakdown": {
       "business_industries": 24,
       "business_start": 10,
       "mortgage_guides": 10,
       "work_grant_guides": 6,
-      "verified_salaried_rights_tax_guides": 12
+      "verified_salaried_rights_tax_guides": 12,
+      "verified_salaried_pension_savings_guides": 11
     }
   },
   "seed_keyword": "מיסוי וזכויות פיננסיות בישראל",
@@ -171,8 +173,8 @@
       "keyword": "זיכוי מס תרומות",
       "intent": "Informational",
       "template": "how-to",
-      "status": "planned",
-      "action": "new",
+      "status": "existing",
+      "action": "refresh",
       "wave": 3,
       "wordCount": 1500,
       "volume": 0,
@@ -481,13 +483,13 @@
       "role": "spoke"
     },
     {
-      "url": "/salaried/bonus-tax",
+      "url": "/employee-rights/annual-bonus",
       "title": "מס על בונוס שנתי: איך מחושב הנטו",
       "keyword": "מס על בונוס",
       "intent": "Informational",
       "template": "explainer",
-      "status": "planned",
-      "action": "new",
+      "status": "existing",
+      "action": "refresh",
       "wave": 3,
       "wordCount": 1500,
       "volume": 0,
@@ -2358,7 +2360,7 @@
         {
           "name": "שכר משתנה",
           "posts": [
-            "/salaried/bonus-tax",
+            "/employee-rights/annual-bonus",
             "/salaried/commission-pay",
             "/salaried/stock-compensation",
             "/salaried/salary-negotiation-total-compensation"
@@ -3399,7 +3401,7 @@
         "anchor": "מס על מתנות לעובדים"
       },
       {
-        "to": "/salaried/bonus-tax",
+        "to": "/employee-rights/annual-bonus",
         "type": "mandatory",
         "anchor": "מס על בונוס"
       },
@@ -3657,7 +3659,7 @@
         "anchor": "מס על מתנות לעובדים"
       },
       {
-        "to": "/salaried/bonus-tax",
+        "to": "/employee-rights/annual-bonus",
         "type": "optional",
         "anchor": "מס על בונוס"
       }
@@ -3743,7 +3745,7 @@
         "anchor": "השוואת הצעות שכר"
       }
     ],
-    "/salaried/bonus-tax": [
+    "/employee-rights/annual-bonus": [
       {
         "to": "/salaried",
         "type": "mandatory",
@@ -3777,7 +3779,7 @@
         "anchor": "זכויות שכר לשכיר"
       },
       {
-        "to": "/salaried/bonus-tax",
+        "to": "/employee-rights/annual-bonus",
         "type": "recommended",
         "anchor": "מס על בונוס"
       },
@@ -3804,7 +3806,7 @@
         "anchor": "זכויות שכר לשכיר"
       },
       {
-        "to": "/salaried/bonus-tax",
+        "to": "/employee-rights/annual-bonus",
         "type": "recommended",
         "anchor": "מס על בונוס"
       },
@@ -3831,7 +3833,7 @@
         "anchor": "זכויות שכר לשכיר"
       },
       {
-        "to": "/salaried/bonus-tax",
+        "to": "/employee-rights/annual-bonus",
         "type": "recommended",
         "anchor": "מס על בונוס"
       },
@@ -7473,7 +7475,7 @@
         "/salaried/job-change-tax",
         "/salaried/starting-new-job",
         "/salaried/travel-reimbursement",
-        "/salaried/bonus-tax",
+        "/employee-rights/annual-bonus",
         "/self-employed/annual-report-checklist",
         "/business-start/partnership",
         "/business-start/business-bank-account",
