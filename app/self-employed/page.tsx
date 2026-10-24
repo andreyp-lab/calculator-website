@@ -141,6 +141,13 @@ const calculators = [
     available: true,
   },
   {
+    stage: 'tax',
+    title: 'סגירת עסק עצמאי — מדריך מעשי',
+    description: 'איך פונים בנפרד למס הכנסה, למע״מ ולביטוח לאומי ואיך עוקבים אחר אישורי הסגירה',
+    href: '/self-employed/close-business',
+    available: true,
+  },
+  {
     stage: 'growth',
     title: 'כלי לתכנון יעד הכנסה לשעת חיוב',
     description: 'חלוקת יעד הכנסות בשעות חיוב צפויות, לאחר איסוף עלויות ובדיקת מס אישית',

@@ -33,6 +33,27 @@ const calculators = [
     available: true,
     icon: '🚙',
   },
+  {
+    title: 'הוצאות רכב לעצמאי',
+    description: 'ההבדל בין הוצאה בפועל, כללי מס הכנסה ומס תשומות במע״מ',
+    href: '/vehicles/self-employed-car-expenses',
+    available: true,
+    icon: '🧾',
+  },
+  {
+    title: 'מיסוי ליסינג לעסק',
+    description: 'מה בודקים בחוזה, ברישום ההוצאה ובחשבונית לפני דיווח למס הכנסה ולמע״מ',
+    href: '/vehicles/business-lease-tax',
+    available: true,
+    icon: '📄',
+  },
+  {
+    title: 'יומן נסיעות לרכב עסקי',
+    description: 'איזה תיעוד שוטף מסייע לבסס את נתוני הרכב והנסיעות בדיווח',
+    href: '/vehicles/mileage-log',
+    available: true,
+    icon: '📍',
+  },
 ];
 
 const faqItems = [

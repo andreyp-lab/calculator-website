@@ -60,6 +60,10 @@ export default function PensionPage() {
             ['/pension/retirement-age', 'גיל פרישה בישראל', 'הבדלים בין גיל פרישה, פרישת חובה וקצבת אזרח ותיק'],
             ['/pension/job-change-continuity', 'רציפות פנסיונית במעבר עבודה', 'הפקדות, ארכת ביטוח ומסמכים למעסיק החדש'],
             ['/pension/inactive-fund', 'קרן פנסיה לא פעילה', 'איתור החשבון, דוחות ובדיקת כיסויים לפני פעולה'],
+            ['/pension/insurance-cover', 'כיסוי ביטוחי בקרן פנסיה', 'שאירים, נכות ובדיקת הכיסוי בדוח ובתקנון הקרן'],
+            ['/pension/pension-gap', 'איך בודקים פער פנסיוני?', 'מיפוי חסכונות, הפקדות ואומדן הקצבה בלי להבטיח תוצאה עתידית'],
+            ['/pension/management-fees', 'דמי ניהול בפנסיה', 'איך קוראים את הדוח ומשווים הצעות בכלי הרשמי'],
+            ['/pension/default-funds', 'קרנות פנסיה נבחרות', 'כללי ההליך הרשמי, דמי הניהול והמקרים שבהם מעסיק מצרף עובד'],
           ].map(([href, title, description]) => (
             <Link key={href} href={href} className="border border-ink/15 bg-cream-2 p-5 hover:border-gold">
               <h3 className="font-bold">{title}</h3>

@@ -168,6 +168,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/self-employed/withholding-tax', 'monthly', 0.85, new Date('2026-10-01')),
     make('/self-employed/business-setup-cost', 'monthly', 0.9, new Date('2026-10-02')),
     make('/self-employed/employee-and-self-employed', 'monthly', 0.9, new Date('2026-10-01')),
+    make('/self-employed/close-business', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     ...BUSINESS_START_GUIDES.map((slug) =>
       make(`/business-start/${slug}`, 'monthly', 0.8, CONTENT_WAVE_2026_10_24),
     ),
@@ -202,6 +203,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/vehicles/leasing-vs-buying', 'monthly', 0.95),
     make('/vehicles/fuel-cost', 'monthly', 0.90, new Date('2026-10-02')),
     make('/vehicles/company-car-benefit', 'monthly', 0.90),
+    make('/vehicles/self-employed-car-expenses', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/vehicles/business-lease-tax', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/vehicles/mileage-log', 'monthly', 0.78, CONTENT_WAVE_2026_10_24),
 
     // ===== מחשבונים: ביטוחים =====
     make('/insurance/pension', 'monthly', 0.90, new Date('2026-09-28')),
@@ -209,6 +213,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/pension/retirement-age', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
     make('/pension/job-change-continuity', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/pension/inactive-fund', 'monthly', 0.80, CONTENT_WAVE_2026_10_24),
+    make('/pension/insurance-cover', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/pension/pension-gap', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/pension/management-fees', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/pension/default-funds', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
 
     // ===== כלים מקצועיים =====
     make('/tools/unified', 'monthly', 0.90),
