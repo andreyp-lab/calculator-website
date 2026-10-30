@@ -1,5 +1,5 @@
 {
-  "version": "2.2.6",
+  "version": "2.2.7",
   "site": "https://cheshbonai.co.il",
   "created_at": "2026-10-24",
   "implementation": {
@@ -11,8 +11,9 @@
     "third_wave_completed": 11,
     "fourth_wave_completed": 8,
     "fifth_wave_completed": 5,
-    "completed_new_pages": 86,
-    "remaining_new_pages": 38,
+    "sixth_wave_completed": 7,
+    "completed_new_pages": 93,
+    "remaining_new_pages": 31,
     "first_wave_breakdown": {
       "business_industries": 24,
       "business_start": 10,
@@ -21,7 +22,8 @@
       "verified_salaried_rights_tax_guides": 12,
       "verified_salaried_pension_savings_guides": 11,
       "verified_self_employed_pension_vehicle_guides": 8,
-      "verified_tax_pension_real_estate_guides": 5
+      "verified_tax_pension_real_estate_guides": 5,
+      "verified_savings_vehicle_guides": 7
     }
   },
   "seed_keyword": "מיסוי וזכויות פיננסיות בישראל",

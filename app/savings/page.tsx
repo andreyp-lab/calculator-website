@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/savings' },
   title: 'חיסכון ותקציב משפחתי — מחשבון ומדריכים',
   description:
-    'כלים לניהול כספים משפחתי: תקציב לפי כלל 50/30/20, חישוב החזר הלוואה ומדריך להשוואת הצעות להלוואה אישית.',
+    'כלים לניהול כספים משפחתי: תקציב, הלוואות, פיקדון מול קרן כספית, חיסכון לכל ילד וקרן השתלמות לשכיר.',
 };
 
 const calculators = [
@@ -61,6 +61,34 @@ const calculators = [
     href: '/savings/savings-account',
     available: true,
     icon: '💰',
+  },
+  {
+    title: 'קרן כספית',
+    description: 'איך לקרוא את מסמכי הקרן, לבדוק נזילות, עלויות ומס — ללא דירוג מוצרים',
+    href: '/savings/money-market-fund',
+    available: true,
+    icon: '📄',
+  },
+  {
+    title: 'פיקדון מול קרן כספית',
+    description: 'מסגרת להשוואת ריבית, אומדן תשואה, מועדי יציאה ועלויות באותו אופק זמן',
+    href: '/savings/deposit-vs-money-market-fund',
+    available: true,
+    icon: '⚖️',
+  },
+  {
+    title: 'חיסכון לכל ילד',
+    description: 'בחירת מסלול, הכפלת הפקדה, מעבר בין גופים ומשיכת הכספים לפי הכללים',
+    href: '/savings/child-savings',
+    available: true,
+    icon: '👶',
+  },
+  {
+    title: 'קרן השתלמות לשכיר',
+    description: 'מה לבדוק בהסכם העבודה, בתלוש, בתקרת השכר ובהשוואת דמי ניהול',
+    href: '/savings/education-fund-employee',
+    available: true,
+    icon: '🎓',
   },
 ];
 

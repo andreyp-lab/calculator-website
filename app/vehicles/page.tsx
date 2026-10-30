@@ -54,6 +54,27 @@ const calculators = [
     available: true,
     icon: '📍',
   },
+  {
+    title: 'רכב חדש או יד שנייה',
+    description: 'בדיקת היסטוריה, אחריות, רישוי, קריאות חוזרות ועלות שימוש לפני החלטה',
+    href: '/vehicles/new-vs-used',
+    available: true,
+    icon: '🔍',
+  },
+  {
+    title: 'ירידת ערך רכב',
+    description: 'איך לתעד מחיר קנייה, מצב, נסועה והיסטוריית בעלות בלי להסתמך על אחוז ממוצע',
+    href: '/vehicles/depreciation',
+    available: true,
+    icon: '📉',
+  },
+  {
+    title: 'עלות תחזוקת רכב',
+    description: 'בניית תקציב אישי לרישוי, ביטוח, טיפולים ותיקונים מתוך מסמכים והצעות',
+    href: '/vehicles/maintenance-cost',
+    available: true,
+    icon: '🔧',
+  },
 ];
 
 const faqItems = [

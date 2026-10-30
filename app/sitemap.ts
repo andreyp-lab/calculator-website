@@ -12,6 +12,7 @@ const CONTENT_UPDATED = new Date('2026-09-29');
 // רענון תוכן ייעודי לעמודים שהורחבו ב-12.6 (בלוק בידול) — סיגנל סריקה-מחדש אמיתי
 const FRESH_2026_06_12 = new Date('2026-06-12');
 const CONTENT_WAVE_2026_10_24 = new Date('2026-10-24');
+const CONTENT_WAVE_2026_10_30 = new Date('2026-10-30');
 
 const WORK_GRANT_GUIDES = [
   'amount',
@@ -200,6 +201,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/savings/sinking-funds', 'monthly', 0.80, CONTENT_WAVE_2026_10_24),
     make('/savings/bank-deposit', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/savings/savings-account', 'monthly', 0.80, CONTENT_WAVE_2026_10_24),
+    make('/savings/money-market-fund', 'monthly', 0.82, CONTENT_WAVE_2026_10_30),
+    make('/savings/deposit-vs-money-market-fund', 'monthly', 0.84, CONTENT_WAVE_2026_10_30),
+    make('/savings/child-savings', 'monthly', 0.82, CONTENT_WAVE_2026_10_30),
+    make('/savings/education-fund-employee', 'monthly', 0.82, CONTENT_WAVE_2026_10_30),
     make('/savings/loan-repayment', 'monthly', 0.90),
     make('/savings/personal-loan', 'monthly', 0.90),
 
@@ -210,6 +215,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/vehicles/self-employed-car-expenses', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/vehicles/business-lease-tax', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/vehicles/mileage-log', 'monthly', 0.78, CONTENT_WAVE_2026_10_24),
+    make('/vehicles/new-vs-used', 'monthly', 0.82, CONTENT_WAVE_2026_10_30),
+    make('/vehicles/depreciation', 'monthly', 0.80, CONTENT_WAVE_2026_10_30),
+    make('/vehicles/maintenance-cost', 'monthly', 0.80, CONTENT_WAVE_2026_10_30),
 
     // ===== מחשבונים: ביטוחים =====
     make('/insurance/pension', 'monthly', 0.90, new Date('2026-09-28')),
