@@ -34,7 +34,7 @@ export function WorkValueCalculator() {
         <h2 className="text-xl font-bold text-ink">פרטים פיננסיים</h2>
 
         <div className="bg-cream-2 p-4 rounded-none space-y-3">
-          <h4 className="font-semibold text-ink text-sm">💼 הכנסות מעבודה</h4>
+          <h3 className="font-semibold text-ink text-sm">💼 הכנסות מעבודה</h3>
           <div>
             <label htmlFor="workvaluecalculator-816662" className="block text-xs font-medium text-ink/70 mb-1">
               שכר נטו חודשי צפוי (₪) — לפי תלוש או בדיקה אישית
@@ -69,9 +69,9 @@ export function WorkValueCalculator() {
         </div>
 
         <div className="bg-amber-50 p-4 rounded-none space-y-3">
-          <h4 className="font-semibold text-ink text-sm">
+          <h3 className="font-semibold text-ink text-sm">
             💰 קצבה / הכנסה אלטרנטיבית (אם לא תעבד)
-          </h4>
+          </h3>
           <input
             type="number"
             value={input.alternativeBenefit}
@@ -82,7 +82,7 @@ export function WorkValueCalculator() {
         </div>
 
         <div className="bg-red-50 p-4 rounded-none space-y-3">
-          <h4 className="font-semibold text-ink text-sm">🚗 הוצאות עבודה (₪/חודש)</h4>
+          <h3 className="font-semibold text-ink text-sm">🚗 הוצאות עבודה (₪/חודש)</h3>
           <div className="grid grid-cols-2 gap-3">
             <NumField label="נסיעות" value={input.commutingCost} onChange={(v) => update('commutingCost', v)} />
             <NumField
@@ -109,7 +109,7 @@ export function WorkValueCalculator() {
         </div>
 
         <div className="bg-emerald-50 p-4 rounded-none space-y-3">
-          <h4 className="font-semibold text-ink text-sm">🎁 הטבות מעסיק (₪/חודש)</h4>
+          <h3 className="font-semibold text-ink text-sm">🎁 הטבות מעסיק (₪/חודש)</h3>
           <div className="grid grid-cols-2 gap-3">
             <NumField
               label="הפרשת מעסיק לפנסיה"

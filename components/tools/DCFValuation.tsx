@@ -154,10 +154,10 @@ export function DCFValuation() {
       {/* Header */}
       <div className="bg-paper border-2 border-ink/15 shadow-sm overflow-hidden">
         <div className="bg-ink text-cream p-4">
-          <h3 className="font-bold flex items-center gap-2">
+          <h2 className="font-bold flex items-center gap-2">
             <Gem className="w-5 h-5" />
             הערכת שווי DCF (Discounted Cash Flow)
-          </h3>
+          </h2>
           <p className="text-xs text-cream/70">
             נכוס תזרימי מזומנים חופשיים → Enterprise Value → Equity Value
           </p>
@@ -310,7 +310,7 @@ export function DCFValuation() {
           <div className="p-4 space-y-2 text-sm">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <h5 className="font-semibold mb-1">PV של FCFs מפורשים</h5>
+                <h3 className="font-semibold mb-1">PV של FCFs מפורשים</h3>
                 <div className="space-y-1">
                   {result.pvOfExplicitCashFlows.map((pv, i) => (
                     <div key={i} className="flex justify-between text-xs">
@@ -325,7 +325,7 @@ export function DCFValuation() {
                 </div>
               </div>
               <div>
-                <h5 className="font-semibold mb-1">Terminal Value</h5>
+                <h3 className="font-semibold mb-1">Terminal Value</h3>
                 <div className="space-y-1 text-xs">
                   <div className="flex justify-between">
                     <span>TV (גולמי):</span>

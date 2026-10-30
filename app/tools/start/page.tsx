@@ -70,6 +70,7 @@ export default function StartPage() {
       )}
 
       {/* === 4 PRIMARY PATHS === */}
+      <h2 className="text-2xl font-bold text-ink mb-5">בחרו את מסלול העבודה המתאים</h2>
       <div className="grid md:grid-cols-2 gap-5 mb-8">
         {/* Path 1: Wizard - For beginners */}
         <PathCard

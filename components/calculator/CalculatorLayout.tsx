@@ -99,7 +99,7 @@ export function CalculatorLayout({
 
         {/* Content */}
         {content && (
-          <section className="prose prose-lg max-w-none mb-12 text-ink leading-relaxed">
+          <section className="prose guide-copy min-w-0 mb-12 text-ink">
             {content}
           </section>
         )}

@@ -384,7 +384,7 @@ export function SalaryNetGrossCalculator() {
 
           {/* פירוט ניכויים */}
           <div className="bg-paper border border-ink/15 rounded-none p-4 space-y-1.5 text-sm">
-            <h4 className="font-bold text-ink mb-3">פירוט ניכויים</h4>
+            <h3 className="font-bold text-ink mb-3">פירוט ניכויים</h3>
             <Row label="ברוטו" value={formatCurrency(r.grossSalary)} bold />
             <Row label={`מס הכנסה (${r.effectiveTaxRate.toFixed(1)}% בפועל)`} value={`-${formatCurrency(r.incomeTax)}`} color="red" />
             <Row label="ב.ל. + בריאות" value={`-${formatCurrency(r.socialSecurity)}`} color="amber" />

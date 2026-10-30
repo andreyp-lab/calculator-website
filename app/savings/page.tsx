@@ -138,6 +138,7 @@ export default function SavingsPage() {
           ניהול תקציב משפחתי, חישוב החזרי הלוואה ותכנון חיסכון — הכל במקום אחד, חינם
         </p>
 
+        <h2 className="text-2xl font-bold text-ink mb-5">כלי חיסכון, הלוואות ותקציב</h2>
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) => (
             <Link

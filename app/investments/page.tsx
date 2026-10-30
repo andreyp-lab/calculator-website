@@ -94,6 +94,7 @@ export default function InvestmentsPage() {
           </p>
         </section>
 
+        <h2 className="text-2xl font-bold text-ink mb-5">מחשבונים ומדריכי השקעה</h2>
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
             calc.available ? (

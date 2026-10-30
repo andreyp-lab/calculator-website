@@ -37,7 +37,7 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold-light mb-2">
                 ✦ כלי מעשי
               </p>
-              <h3 className="font-serif text-lg text-cream mb-1">רוצים להמשיך לבדיקה מעשית?</h3>
+              <h2 className="font-serif text-lg text-cream mb-1">רוצים להמשיך לבדיקה מעשית?</h2>
               <p className="text-sm text-cream/65 mb-4 leading-relaxed">
                 עברו לכלי או למדריך הרלוונטי, בדקו את ההנחות והשוו את התוצאה למסמכים האישיים שלכם.
               </p>
@@ -56,10 +56,10 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
       {/* מאמרים קשורים */}
       {related.length > 0 && (
         <div>
-          <h3 className="text-xl text-ink mb-1 flex items-center gap-2">
+          <h2 className="text-xl text-ink mb-1 flex items-center gap-2">
             <span className="text-gold">✦</span>
             מאמרים נוספים שיעניינו אותך
-          </h3>
+          </h2>
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-5">
             קריאה נוספת
           </p>
@@ -73,9 +73,9 @@ export function BlogPostFooter({ slug }: BlogPostFooterProps) {
                 <div className="font-mono text-xs uppercase tracking-[0.14em] text-gold mb-2">
                   {p.category}
                 </div>
-                <h4 className="font-serif text-base text-ink mb-1.5 leading-snug group-hover:text-ink-mid transition">
+                <h3 className="font-serif text-base text-ink mb-1.5 leading-snug group-hover:text-ink-mid transition">
                   {p.title}
-                </h4>
+                </h3>
                 <p className="text-xs text-ink/70 line-clamp-2 leading-relaxed">{p.description}</p>
                 <div className="mt-3 text-xs text-ink/70">{p.readTime}</div>
               </Link>

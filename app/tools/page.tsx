@@ -106,6 +106,7 @@ export default function ToolsLandingPage() {
       </div>
 
       {/* Why FinCalc - 3 columns */}
+      <h2 className="text-2xl font-bold text-ink mb-5">למה לעבוד עם מרכז הכלים?</h2>
       <div className="grid md:grid-cols-3 gap-4 mb-10">
         <FeatureCard
           icon={TrendingUp}

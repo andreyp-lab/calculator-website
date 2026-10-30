@@ -209,7 +209,7 @@ export default function CashFlowSoloPage() {
       {/* Bank Accounts */}
       <div className="bg-paper border-2 border-ink/15 p-4 mb-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-ink">חשבונות בנק (יתרת פתיחה)</h3>
+          <h2 className="font-semibold text-ink">חשבונות בנק (יתרת פתיחה)</h2>
           <button
             onClick={addAccount}
             className="px-2 py-1 bg-ink text-cream text-xs flex items-center gap-1 hover:bg-ink-deep"

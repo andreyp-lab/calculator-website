@@ -83,6 +83,7 @@ export default function ComparePage() {
         </p>
       </div>
 
+      <h2 className="text-2xl font-bold text-ink mb-6">מדריכי השוואה</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {COMPARISONS.map((c) => (
           <Link

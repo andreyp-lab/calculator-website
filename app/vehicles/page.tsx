@@ -116,6 +116,7 @@ export default function VehiclesPage() {
           והאם משתלם יותר ליסינג פרטי או קניית רכב.
         </p>
 
+        <h2 className="text-2xl font-bold text-ink mb-5">מחשבוני רכב ומדריכים</h2>
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
             calc.available ? (

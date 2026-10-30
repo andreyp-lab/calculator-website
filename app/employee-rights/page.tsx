@@ -256,6 +256,7 @@ export default function EmployeeRightsPage() {
           </div>
         </Link>
 
+        <h2 className="text-2xl font-bold text-ink mb-5">כלים ומדריכים לזכויות עובדים</h2>
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
             calc.available ? (

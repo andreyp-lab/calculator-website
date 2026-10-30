@@ -20,7 +20,12 @@ export default function CompoundInterestPage() {
       ]}
       lastUpdated="2026-09-28"
       pageUrl="/investments/compound-interest"
-      calculator={<CompoundInterestCalculator />}
+      calculator={
+        <section aria-labelledby="compound-interest-inputs">
+          <h2 id="compound-interest-inputs" className="sr-only">פרטי החישוב</h2>
+          <CompoundInterestCalculator />
+        </section>
+      }
       quickAnswer={
         <p>
           ריבית דריבית פירושה שתשואה על הקרן והסכומים שנצברו משפיעה גם על התקופות הבאות.

@@ -130,10 +130,10 @@ export function ThreeStatementModelUI() {
       {/* Header + tabs */}
       <div className="bg-paper rounded-none border-2 border-ink/15 p-3 shadow-sm">
         <div className="flex items-center justify-between mb-3 gap-2 flex-wrap">
-          <h3 className="font-bold text-ink flex items-center gap-2">
+          <h2 className="font-bold text-ink flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-gold" />
             מודל תלת-דוחות (P&L + מאזן + תזרים)
-          </h3>
+          </h2>
           <div className="flex items-center gap-2 flex-wrap">
             {budget && settings && (
               <button
@@ -306,7 +306,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
     <div className="bg-paper rounded-none border-2 border-ink/15 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between p-3 bg-cream-2 border-b border-ink/15">
         <div className="flex items-center gap-3">
-          <h4 className="font-bold text-ink">שנת {statements.year}</h4>
+          <h3 className="font-bold text-ink">שנת {statements.year}</h3>
           <div className="flex gap-1">
             <button
               onClick={() => setSection('pnl')}
@@ -363,7 +363,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
         {section === 'bs' && (
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h5 className="font-semibold text-ink mb-2 text-sm">נכסים</h5>
+              <h4 className="font-semibold text-ink mb-2 text-sm">נכסים</h4>
               <div className="space-y-2 text-sm">
                 <NumberField label="מזומן ושווי מזומן" value={statements.balanceSheet.cash} onChange={(v) => updateBS('cash', v)} />
                 <NumberField label="לקוחות (AR)" value={statements.balanceSheet.accountsReceivable} onChange={(v) => updateBS('accountsReceivable', v)} />
@@ -376,7 +376,7 @@ function YearEditor({ statements, canRemove, onRemove, onUpdate }: YearEditorPro
               </div>
             </div>
             <div>
-              <h5 className="font-semibold text-ink mb-2 text-sm">התחייבויות + הון</h5>
+              <h4 className="font-semibold text-ink mb-2 text-sm">התחייבויות + הון</h4>
               <div className="space-y-2 text-sm">
                 <NumberField label="ספקים (AP)" value={statements.balanceSheet.accountsPayable} onChange={(v) => updateBS('accountsPayable', v)} />
                 <NumberField label="חוב לזמן קצר" value={statements.balanceSheet.shortTermDebt} onChange={(v) => updateBS('shortTermDebt', v)} />
@@ -486,7 +486,7 @@ function AssumptionsTab({
       {/* Growth & Margins */}
       <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="font-semibold text-ink">צמיחה ומרווחים (% לשנה)</h4>
+          <h3 className="font-semibold text-ink">צמיחה ומרווחים (% לשנה)</h3>
         </div>
         <div className="space-y-3">
           <ArrayField
@@ -524,7 +524,7 @@ function AssumptionsTab({
 
       {/* Working Capital */}
       <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
-        <h4 className="font-semibold text-ink mb-3">הון חוזר (ימים)</h4>
+        <h3 className="font-semibold text-ink mb-3">הון חוזר (ימים)</h3>
         <div className="grid md:grid-cols-3 gap-3">
           <SimpleField
             label="DSO - ימי גבייה"
@@ -546,7 +546,7 @@ function AssumptionsTab({
 
       {/* Capital & Tax */}
       <div className="bg-paper rounded-none border-2 border-ink/15 p-4 shadow-sm">
-        <h4 className="font-semibold text-ink mb-3">הון, מס וריבית</h4>
+        <h3 className="font-semibold text-ink mb-3">הון, מס וריבית</h3>
         <div className="grid md:grid-cols-2 gap-3 mb-3">
           <SimpleField label="ריבית אפקטיבית %" value={assumptions.effectiveInterestRate} onChange={(v) => update({ effectiveInterestRate: v })} />
           <SimpleField label="שיעור מס אפקטיבי %" value={assumptions.effectiveTaxRate} onChange={(v) => update({ effectiveTaxRate: v })} />

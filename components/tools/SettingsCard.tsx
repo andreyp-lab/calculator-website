@@ -25,7 +25,7 @@ export function SettingsCard() {
     <div className="bg-white rounded-lg border-2 border-gray-200 p-5 mb-4 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
         <SettingsIcon className="w-5 h-5 text-gray-700" />
-        <h3 className="font-semibold text-gray-900">הגדרות תקופה</h3>
+        <h2 className="font-semibold text-gray-900">הגדרות תקופה</h2>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

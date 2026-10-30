@@ -139,38 +139,204 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-/* Opt-in long-form guide typography. Direct children keep tables, navigation,
-   and independently styled callouts unchanged. No typography plugin required. */
+/* ============================================================
+   Long-form reading system
+
+   The project intentionally does not install @tailwindcss/typography, while
+   many editorial pages use the conventional `prose` class. These rules are
+   therefore the single, site-wide source of truth for readable guides on
+   mobile and desktop. `guide-copy` remains as a backwards-compatible alias.
+   ============================================================ */
+.prose,
 .guide-copy {
+  width: 100%;
+  max-width: 74ch !important;
+  margin-inline: auto;
+  color: var(--color-ink);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
   line-height: 1.85;
+  text-wrap: pretty;
 }
-.guide-copy > h2 {
-  margin-block: 2.5rem 1rem;
-  font-size: 1.5rem;
-  font-weight: 700;
+
+.prose :where(h2),
+.guide-copy :where(h2) {
+  margin-block: 3rem 1rem;
+  padding-block-end: 0.55rem;
+  border-block-end: 1px solid color-mix(in srgb, var(--color-ink) 16%, transparent);
+  color: var(--color-ink);
+  font-size: clamp(1.5rem, 1.28rem + 0.8vw, 2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  text-wrap: balance;
+  scroll-margin-top: 7rem;
+}
+
+.prose :where(h3),
+.guide-copy :where(h3) {
+  margin-block: 2rem 0.75rem;
+  color: var(--color-ink);
+  font-size: clamp(1.2rem, 1.1rem + 0.45vw, 1.5rem);
+  font-weight: 750;
   line-height: 1.4;
+  text-wrap: balance;
+  scroll-margin-top: 7rem;
 }
-.guide-copy > h3 {
-  margin-block: 1.75rem 0.75rem;
-  font-size: 1.25rem;
+
+.prose :where(h4),
+.guide-copy :where(h4) {
+  margin-block: 1.5rem 0.6rem;
+  color: var(--color-ink);
+  font-size: 1.1em;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.45;
 }
-.guide-copy > p,
-.guide-copy > ul,
-.guide-copy > ol {
+
+.prose :where(p, ul, ol, blockquote),
+.guide-copy :where(p, ul, ol, blockquote) {
   margin-block: 1rem;
 }
-.guide-copy > ul,
-.guide-copy > ol {
-  padding-inline-start: 1.5rem;
+
+.prose :where(p),
+.guide-copy :where(p) {
+  max-width: 72ch;
 }
-.guide-copy > ul { list-style: disc; }
-.guide-copy > ol { list-style: decimal; }
-.guide-copy > :is(ul, ol) > li { margin-block: 0.5rem; }
-.guide-copy > :is(p, ul, ol) a {
+
+.prose :where(ul, ol),
+.guide-copy :where(ul, ol) {
+  padding-inline-start: 1.55rem;
+}
+
+.prose :where(ul),
+.guide-copy :where(ul) {
+  list-style: disc;
+}
+
+.prose :where(ol),
+.guide-copy :where(ol) {
+  list-style: decimal;
+}
+
+.prose :where(li),
+.guide-copy :where(li) {
+  margin-block: 0.45rem;
+  padding-inline-start: 0.25rem;
+}
+
+.prose :where(a),
+.guide-copy :where(a) {
+  color: var(--color-gold-2);
+  font-weight: 600;
   text-decoration: underline;
+  text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+.prose :where(blockquote),
+.guide-copy :where(blockquote) {
+  padding: 0.9rem 1.1rem;
+  border-inline-start: 4px solid var(--color-gold);
+  background: var(--color-paper);
+}
+
+/* Editorial tables remain genuine tables. On narrow screens they receive a
+   deliberate minimum width and scroll inside their existing wrapper instead
+   of crushing every cell into a one-word column. */
+.prose :where(.overflow-x-auto),
+.guide-copy :where(.overflow-x-auto) {
+  margin-block: 1.5rem;
+  padding-block-end: 0.65rem;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose :where(table),
+.guide-copy :where(table) {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  background: var(--color-paper);
+  font-size: 0.94em;
+  line-height: 1.6;
+  text-align: start;
+}
+
+.prose :where(caption),
+.guide-copy :where(caption) {
+  margin-block-end: 0.65rem;
+  color: color-mix(in srgb, var(--color-ink) 72%, transparent);
+  font-weight: 700;
+  text-align: start;
+}
+
+.prose :where(thead),
+.guide-copy :where(thead) {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.prose :where(th, td),
+.guide-copy :where(th, td) {
+  min-width: 10rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+  vertical-align: top;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.prose :where(th),
+.guide-copy :where(th) {
+  font-weight: 750;
+}
+
+.prose :where(tbody tr:nth-child(even)),
+.guide-copy :where(tbody tr:nth-child(even)) {
+  background: color-mix(in srgb, var(--color-cream-2) 62%, transparent);
+}
+
+.answer-box {
+  font-size: clamp(1rem, 0.97rem + 0.16vw, 1.1rem);
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+.answer-box > :first-child { margin-block-start: 0; }
+.answer-box > :last-child { margin-block-end: 0; }
+
+@media (max-width: 640px) {
+  .prose,
+  .guide-copy {
+    max-width: none !important;
+    font-size: 1rem;
+    line-height: 1.78;
+  }
+
+  .prose :where(h2),
+  .guide-copy :where(h2) {
+    margin-block-start: 2.5rem;
+    font-size: 1.5rem;
+  }
+
+  .prose :where(h3),
+  .guide-copy :where(h3) {
+    margin-block-start: 1.75rem;
+    font-size: 1.25rem;
+  }
+
+  .prose :where(.overflow-x-auto),
+  .guide-copy :where(.overflow-x-auto) {
+    margin-inline: -0.5rem;
+    padding-inline: 0.5rem;
+  }
+
+  .prose :where(table),
+  .guide-copy :where(table) {
+    min-width: 34rem;
+  }
 }
 
 @layer base {

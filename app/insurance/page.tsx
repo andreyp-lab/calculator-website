@@ -68,6 +68,7 @@ export default function InsurancePage() {
           </p>
         </section>
 
+        <h2 className="text-2xl font-bold text-ink mb-5">מדריכי ביטוח ופנסיה</h2>
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) => (
               <Link

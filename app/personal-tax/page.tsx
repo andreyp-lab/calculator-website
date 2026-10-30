@@ -211,6 +211,7 @@ export default function PersonalTaxPage() {
           </span>
         </Link>
 
+        <h2 className="text-2xl font-bold text-ink mb-5">מחשבוני מס ומדריכים</h2>
         <div className="grid md:grid-cols-2 gap-4">
           {calculators.map((calc) =>
             calc.available ? (
