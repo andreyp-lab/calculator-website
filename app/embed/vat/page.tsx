@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import { VatBasicCalculator } from '@/components/calculators/VatBasicCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון הוספה וחילוץ מע"מ — גרסה להטמעה',
   description: 'חישוב הוספה או חילוץ מע"מ בסיסי בשיעור 18%; הגרסה להטמעה של חשבונאי.',
   robots: { index: false, follow: true },
   alternates: { canonical: '/self-employed/vat' },
-};
+});
 
 // Hide the site chrome (Ticker/Header/Footer from the root layout) plus the
 // floating accessibility widget so the iframe shows only the calculator.

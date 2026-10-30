@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft } from 'lucide-react';
@@ -5,12 +6,12 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
 import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/savings' },
   title: 'חיסכון ותקציב משפחתי — מחשבון ומדריכים',
   description:
     'כלים לניהול כספים משפחתי: תקציב, הלוואות, פיקדון מול קרן כספית, חיסכון לכל ילד וקרן השתלמות לשכיר.',
-};
+});
 
 const calculators = [
   {

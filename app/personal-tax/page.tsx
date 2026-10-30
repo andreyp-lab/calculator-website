@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator } from 'lucide-react';
@@ -5,12 +6,12 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
 import { TAX_BRACKETS_2026, CREDIT_POINT_2026, SURTAX_2026 } from '@/lib/constants/tax-2026';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/personal-tax' },
   title: 'שכר ומס הכנסה 2026 — אומדנים ומדריכים רשמיים',
   description:
     'אומדני שכר ומס לשנת 2026, לצד מדריכים וקישורים לבדיקת נקודות זיכוי והחזרי מס ברשות המסים. נקודת זיכוי שווה עד 242 ₪ לחודש.',
-};
+});
 
 const calculators = [
   {

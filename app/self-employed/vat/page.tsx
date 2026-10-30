@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -8,11 +9,11 @@ const VAT_REPORT = 'https://www.gov.il/he/service/reporting-or-payment-of-vat-re
 const INVOICE_ISRAEL = 'https://www.gov.il/he/pages/minisite-israel-invoice-200324';
 const EXEMPT_REGISTRATION = 'https://www.gov.il/he/service/request-open-exempt-dealer-via-internet';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון מע״מ 2026 — הוספה וחילוץ בשיעור 18%',
   description: 'חישוב חשבוני של הוספה וחילוץ מע״מ בשיעור הרגיל; מידע רשמי על דיווח, עוסק פטור ומספרי הקצאה.',
   alternates: { canonical: '/self-employed/vat' },
-};
+});
 
 export default function VatPage() {
   return (

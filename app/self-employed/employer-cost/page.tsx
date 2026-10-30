@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -5,11 +6,11 @@ const INSURANCE_RATES = 'https://www.btl.gov.il/Insurance/Rates/Pages/%D7%9C%D7%
 const LABOR_RIGHTS = 'https://www.gov.il/he/departments/ministry_of_labor';
 const VACATION_LAW = 'https://www.btl.gov.il/Laws1/02_0082_000000.pdf';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'עלות מעסיק 2026 — רכיבי העלות לבדיקה',
   description: 'מדריך לבדיקת עלות העסקת עובד: שכר, דמי ביטוח, הפרשות, הבראה ותנאים נוספים. הכינו נתוני שכר אישיים לפני אומדן.',
   alternates: { canonical: '/self-employed/employer-cost' },
-};
+});
 
 export default function EmployerCostPage() {
   return (

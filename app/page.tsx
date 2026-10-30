@@ -1,15 +1,16 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { AllCalculatorsGrid } from '@/components/home/AllCalculatorsGrid';
 import { HeroSalaryCalc } from '@/components/home/HeroSalaryCalc';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבונים ומדריכים פיננסיים חינם בעברית',
   description:
     'כלים ומדריכים פיננסיים בעברית לשכר, מסים, זכויות עובדים, עצמאים, משכנתא והשקעות. גישה חופשית לכלים ולמידע.',
   alternates: { canonical: '/' },
-};
+});
 
 // ============================================================
 // 7 קטגוריות ראשיות — שם וקישור פנימי

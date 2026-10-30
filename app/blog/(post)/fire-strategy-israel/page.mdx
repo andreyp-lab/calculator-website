@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/fire-strategy-israel' },
   title: 'FIRE בישראל — איך בוחנים פרישה מוקדמת',
   description: 'מה צריך לבדוק בתכנון פרישה מוקדמת: הוצאות, חסכונות, קצבאות, מס וסיכון השקעה.',
-};
+});
 
 # FIRE בישראל: איך בוחנים פרישה מוקדמת
 

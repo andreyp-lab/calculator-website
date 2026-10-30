@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/business-budget-planning-2026' },
   title: 'איך בונים תקציב לעסק קטן ומעדכנים אותו',
   description: 'שיטת עבודה לתקציב הכנסות, הוצאות ותזרים: בניית הנחות, השוואת תכנון לביצוע ועדכון התחזית.',
-};
+});
 
 # איך בונים תקציב לעסק קטן ומעדכנים אותו
 

@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/refinance-cost';
-export const metadata: Metadata = { title: 'עלות מחזור משכנתא: איך משווים עלות מלאה', description: 'מה כוללת עלות מחזור משכנתא, אילו מסמכים מבקשים ואיך משווים תזרים קיים לחדש בלי להסתפק בהחזר הראשון.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'עלות מחזור משכנתא: איך משווים עלות מלאה', description: 'מה כוללת עלות מחזור משכנתא, אילו מסמכים מבקשים ואיך משווים תזרים קיים לחדש בלי להסתפק בהחזר הראשון.', alternates: { canonical: PATH } });
 
 export default function RefinanceCostPage() {
   return <MortgageGuideArticle path={PATH} title="עלות מחזור משכנתא: כך בונים השוואה מלאה" eyebrow="מחזור משכנתא"

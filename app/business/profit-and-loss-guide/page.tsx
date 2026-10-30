@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -9,7 +10,7 @@ const PAGE_PATH = '/business/profit-and-loss-guide';
 const SITE_URL = 'https://cheshbonai.co.il';
 const PUBLISHED_AT = '2026-10-02';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'דוח רווח והפסד לעסק — מדריך קריאה ובנייה | חשבונאי' },
   description:
     'מדריך שמרני לדוח רווח והפסד לעסק: מבנה הדוח, דוגמה מספרית שקופה, ההבדל מתזרים מזומנים והצלבה לדיווח השנתי.',
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     url: PAGE_PATH,
     images: ['/opengraph-image'],
   },
-};
+});
 
 const officialSources = [
   {

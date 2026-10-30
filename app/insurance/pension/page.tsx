@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'פנסיה לקראת פרישה — בדיקת קצבה, דוח ומסלול',
   description:
     'מה משפיע על קצבת הפנסיה, היכן בודקים את הצבירה והמקדם האישי, ואיך בוחנים תשואות ודמי ניהול ממקור רשמי.',
   alternates: { canonical: '/insurance/pension' },
-};
+});
 
 export default function PensionPage() {
   return (

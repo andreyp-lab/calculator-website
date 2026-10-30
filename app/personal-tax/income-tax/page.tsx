@@ -1,15 +1,16 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { IncomeTaxCalculator } from '@/components/calculators/IncomeTaxCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'מחשבון מס הכנסה 2026 — מדרגות המס ואומדן נטו' },
   description:
     'מחשבון מס הכנסה מקצועי לשכירים לפי מדרגות 2026 (כולל ריווח), נקודות זיכוי, ביטוח לאומי ובריאות. כולל חישוב מס יסף ודוגמאות מפורטות. חשב עכשיו בחינם.',
   alternates: { canonical: '/personal-tax/income-tax' },
-};
+});
 
 const faqItems = [
   {

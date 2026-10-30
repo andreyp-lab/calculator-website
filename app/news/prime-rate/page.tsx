@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ExternalLink, Calendar, TrendingDown, Home } from 'lucide-react';
@@ -8,7 +9,7 @@ import { PrimeRateChart } from './PrimeRateChart';
 
 export const revalidate = 21600; // ISR: 6 שעות
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'ריבית פריים עדכנית 2026 — ריבית בנק ישראל ומשכנתא',
   description: `ריבית פריים נוכחית: ${MACRO_DATA.primeRate.value}%. ריבית בנק ישראל: ${MACRO_DATA.primeRate.boiBaseRate}%. גרף היסטורי, ההחלטה הבאה של בנק ישראל ומשמעות לנוטלי משכנתא.`,
   keywords: [
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     description: `ריבית בנק ישראל: ${MACRO_DATA.primeRate.boiBaseRate}% | עודכן: ${formatHebrewDate(MACRO_DATA.primeRate.lastUpdated)}`,
     url: 'https://cheshbonai.co.il/news/prime-rate',
   },
-};
+});
 
 const datasetSchema = {
   '@context': 'https://schema.org',

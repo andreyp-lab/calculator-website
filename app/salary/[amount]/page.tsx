@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { FAQ } from '@/components/calculator/FAQ';
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     data.withPension.netSalary,
   )} ₪ עם פנסיה 6% (תושב עם 2.25 נקודות זיכוי, לפני זיכוי אפשרי על הפקדת פנסיה). אומדן לפי מדרגות 2026.`;
 
-  return {
+  return withPageSocialMetadata({
     title,
     description,
     alternates: { canonical: `/salary/${amount}` },
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: 'he_IL',
       images: ['/opengraph-image'],
     },
-  };
+  });
 }
 
 export default async function SalaryAmountPage({ params }: PageProps) {

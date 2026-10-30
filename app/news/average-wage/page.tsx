@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -6,11 +7,11 @@ import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 
 const { monthly, reportPeriod, sourceUrl } = MACRO_DATA.averageWage;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'השכר הממוצע לפי חוק הביטוח הלאומי 2026',
   description: `השכר הממוצע לפי סעיף 2 לחוק הביטוח הלאומי בשנת 2026: ₪${monthly.toLocaleString('he-IL')} לחודש. הסבר ומקור רשמי.`,
   alternates: { canonical: 'https://cheshbonai.co.il/news/average-wage' },
-};
+});
 
 export default function AverageWagePage() {
   return (

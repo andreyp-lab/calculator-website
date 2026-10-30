@@ -1,15 +1,16 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 const PENSION_GUIDE = 'https://www.gov.il/he/pages/independent-must-pension';
 const DEPOSIT_REPORT = 'https://www.gov.il/he/service/pension-deposit-report';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'פנסיה חובה לעצמאים — כללי ההפקדה ובדיקה אישית',
   description:
     'שיעורי חובת ההפקדה לפנסיה לעצמאים, מצבים הדורשים בדיקה אישית, והפניה למידע ולדיווח הרשמיים.',
   alternates: { canonical: '/self-employed/mandatory-pension' },
-};
+});
 
 export default function MandatoryPensionPage() {
   return (

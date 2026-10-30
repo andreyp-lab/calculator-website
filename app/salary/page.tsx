@@ -1,14 +1,15 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { SALARY_PAGE_AMOUNTS } from '@/lib/data/salary-pages';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'טבלת ברוטו נטו לפי שכר — 6,500 עד 40,000 ₪',
   description:
     'בחרו שכר ברוטו חודשי וקבלו אומדן נטו מפורט לשנת 2026. כל עמוד מחושב מאותו מנוע שכר וכולל מס, ביטוח לאומי ופנסיה לפי ההנחות המוצגות.',
   alternates: { canonical: '/salary' },
-};
+});
 
 const salaryGroups = [
   { label: 'עד 10,000 ₪', amounts: SALARY_PAGE_AMOUNTS.filter((amount) => amount <= 10_000) },

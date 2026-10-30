@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'בדיקת פיצויי פיטורים — גרסה להטמעה',
   description: 'בדיקת הזכאות לפיצויי פיטורים דורשת שכר קובע, תקופות העסקה ונתוני הפקדות; הסבר וקישור למקורות הרשמיים.',
   robots: { index: false, follow: true },
   alternates: { canonical: '/employee-rights/severance' },
-};
+});
 
 // Hide the site chrome (Ticker/Header/Footer from the root layout) plus the
 // floating accessibility widget so the iframe shows only the calculator.

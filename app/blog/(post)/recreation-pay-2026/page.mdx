@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   title: 'דמי הבראה 2026: כמה ימים ואיזה תעריף חל?',
   description: 'הסבר בסיסי על דמי הבראה, ותק והיקף משרה, עם קישור לצווי ההרחבה הרשמיים.',
   alternates: { canonical: '/blog/recreation-pay-2026' },
-};
+});
 
 # דמי הבראה: מה צריך לבדוק?
 

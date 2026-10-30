@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'דמי לידה 2026 — זכאות וחישוב רשמי בביטוח הלאומי',
   description: 'דמי לידה בשנת 2026: תקופות זכאות, תקרה יומית וקישור לחישוב האישי של הביטוח הלאומי.',
   alternates: { canonical: '/employee-rights/maternity-benefits' },
-};
+});
 
 export default function MaternityBenefitsPage() {
   return (

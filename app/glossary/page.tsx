@@ -1,14 +1,16 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GlossaryClient } from './GlossaryClient';
 import { ALL_TERMS, HEBREW_ALPHABET } from '@/lib/data/glossary';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מילון מונחים פיננסי 2026 — כל המונחים בעברית פשוטה',
   description:
     `מילון מונחים פיננסיים: ${ALL_TERMS.length} מושגים מעולם המס, ההשקעות, המשכנתאות והעצמאיים, עם הגדרות וקישורים למידע נוסף.`,
   alternates: { canonical: '/glossary' },
   openGraph: {
+    url: '/glossary',
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'מילון מונחים פיננסי 2026 — כל המונחים בעברית פשוטה',
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'he_IL',
   },
-};
+});
 
 
 export default function GlossaryPage() {

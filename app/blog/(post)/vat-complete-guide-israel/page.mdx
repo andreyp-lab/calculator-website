@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/vat-complete-guide-israel' },
   title: 'מע״מ בישראל 2026: שיעור, עוסק פטור וניכוי תשומות',
   description: 'שיעור מע״מ 2026, תקרת עוסק פטור, חישוב הוספה וחילוץ, דיווח תקופתי וכללי ניכוי מס תשומות וחשבוניות ישראל.',
-};
+});
 
 # מע״מ בישראל 2026: מה צריך לדעת עוסק
 

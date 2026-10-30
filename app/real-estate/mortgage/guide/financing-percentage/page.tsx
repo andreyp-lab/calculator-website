@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/financing-percentage';
-export const metadata: Metadata = { title: 'אחוז מימון במשכנתא: LTV, הון עצמי ומגבלות', description: 'מדריך לשיעור מימון במשכנתא לפי הוראה 329: דירה יחידה, חליפית והשקעה, שווי נכס ושמאות.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'אחוז מימון במשכנתא: LTV, הון עצמי ומגבלות', description: 'מדריך לשיעור מימון במשכנתא לפי הוראה 329: דירה יחידה, חליפית והשקעה, שווי נכס ושמאות.', alternates: { canonical: PATH } });
 
 export default function FinancingPercentagePage() {
   return <MortgageGuideArticle path={PATH} title="אחוז מימון במשכנתא: איך מחשבים LTV ומה מגביל אותו" eyebrow="שיעור מימון"

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -26,7 +27,7 @@ const PENSION_OBLIGATION =
 const PENSION_TAX_BENEFITS =
   'https://www.gov.il/BlobFolder/generalpage/pensions-forms/he/files_pensions-forms_tax-benefits-fund-independent.pdf';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'שכיר ועצמאי במקביל: פתיחת עסק, מס וביטוח לאומי',
   description:
     'מדריך מעשי לשכיר שפותח עסק: מה נחשב למחזור, איך מרכזים שכר ורווח בדוח השנתי, מה מעדכנים בביטוח לאומי ואילו מסמכים שומרים.',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     locale: 'he_IL',
     url: PAGE_PATH,
   },
-};
+});
 
 // Illustrative bookkeeping inputs, not a personalized tax or net-pay calculation.
 const EXAMPLE = { salary: 180000, turnover: 60000, expenses: 15000 };

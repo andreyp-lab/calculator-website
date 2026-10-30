@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/pre-approval';
-export const metadata: Metadata = { title: 'אישור עקרוני למשכנתא: מה הוא כולל ואיך משווים', description: 'מדריך לקריאת אישור עקרוני למשכנתא: תוקף, סלים אחידים, תחזיות, מסמכים וסייגים לפני חתימה.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'אישור עקרוני למשכנתא: מה הוא כולל ואיך משווים', description: 'מדריך לקריאת אישור עקרוני למשכנתא: תוקף, סלים אחידים, תחזיות, מסמכים וסייגים לפני חתימה.', alternates: { canonical: PATH } });
 
 export default function PreApprovalPage() {
   return <MortgageGuideArticle path={PATH} title="אישור עקרוני למשכנתא: מה הוא אומר — ומה לא" eyebrow="אישור עקרוני"
@@ -42,6 +43,7 @@ export default function PreApprovalPage() {
       { label: 'הוראה 451 — נהלים למתן הלוואות לדיור', href: 'https://boi.org.il/roles/supervisionregulation/nbt/nbt451/', note: 'הוראת הפיקוח המסדירה אישור עקרוני והליכי הלוואה.' },
     ]}
     related={[
+      { label: 'בניית תקציב לדירה ראשונה', href: '/real-estate/first-home-budget' },
       { label: 'מחשבון משכנתא', href: '/real-estate/mortgage' }, { label: 'הסלים האחידים', href: '/real-estate/mortgage/guide/uniform-baskets' },
       { label: 'שיעור מימון', href: '/real-estate/mortgage/guide/financing-percentage' }, { label: 'יחס החזר', href: '/real-estate/mortgage/guide/repayment-ratio' },
       { label: 'מסלול פריים', href: '/real-estate/mortgage/guide/prime-track' }, { label: 'השוואת תמהילים', href: '/real-estate/mortgage-optimizer' },

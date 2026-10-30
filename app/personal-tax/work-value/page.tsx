@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { WorkValueCalculator } from '@/components/calculators/WorkValueCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'השוואת הכנסה מעבודה להכנסה חלופית',
   description: 'השוואה כספית לפי שכר נטו צפוי, הוצאות עבודה, הטבות והכנסה חלופית שמזינים באופן אישי.',
   alternates: { canonical: '/personal-tax/work-value' },
-};
+});
 
 export default function WorkValuePage() {
   return (

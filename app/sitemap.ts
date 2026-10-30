@@ -83,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/salaried', 'weekly', 0.95),
     make('/salaried/payslip-guide', 'monthly', 0.9), // מדריך קריאת תלוש (pillar)
     make('/salaried/salary-components', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/salaried/salary-negotiation-total-compensation', 'monthly', 0.82, CONTENT_WAVE_2026_10_30),
     make('/salaried/form-106', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
     make('/salaried/two-jobs', 'monthly', 0.85, CONTENT_WAVE_2026_10_24),
     make('/salaried/starting-new-job', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
@@ -184,6 +185,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate/rental-income-tax', 'monthly', 0.9), // מדריך מיסוי שכר דירה (pillar)
     make('/real-estate/betterment-levy', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     make('/real-estate/sale-costs', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
+    make('/real-estate/first-home-budget', 'monthly', 0.82, CONTENT_WAVE_2026_10_30),
     ...MORTGAGE_GUIDES.map((slug) =>
       make(`/real-estate/mortgage/guide/${slug}`, 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
     ),

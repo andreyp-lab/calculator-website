@@ -30,7 +30,6 @@ export function BlogArticleSchema() {
     },
     inLanguage: 'he-IL',
     articleSection: post.category,
-    timeRequired: post.readTime,
     author: {
       '@type': 'Person',
       name: 'אנדרי פלטונוב',

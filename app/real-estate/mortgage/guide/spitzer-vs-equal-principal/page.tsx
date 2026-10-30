@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/spitzer-vs-equal-principal';
-export const metadata: Metadata = { title: 'שפיצר מול קרן שווה: הבדלים בלוח משכנתא', description: 'השוואה בין לוח שפיצר לקרן שווה: החזר ראשון, ירידת קרן, ריבית, הצמדה ואיך להשוות באותם תנאים.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'שפיצר מול קרן שווה: הבדלים בלוח משכנתא', description: 'השוואה בין לוח שפיצר לקרן שווה: החזר ראשון, ירידת קרן, ריבית, הצמדה ואיך להשוות באותם תנאים.', alternates: { canonical: PATH } });
 
 export default function SpitzerVsEqualPrincipalPage() {
   return <MortgageGuideArticle path={PATH} title="שפיצר מול קרן שווה: מה משתנה בלוח הסילוקין" eyebrow="שיטות החזר"

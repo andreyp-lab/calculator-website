@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -84,11 +85,11 @@ const faqItems = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${title} | חשבונאי` }, description,
   alternates: { canonical: url },
-  openGraph: { title, description, url, type: 'article', locale: 'he_IL', modifiedTime: checkedAt },
-};
+  openGraph: { images: ['/opengraph-image'], title, description, url, type: 'article', locale: 'he_IL', modifiedTime: checkedAt },
+});
 
 export default function CryptoTaxPage() {
   const structuredData = [

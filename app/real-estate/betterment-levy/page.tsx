@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -16,12 +17,12 @@ const sources = {
   assessment: 'https://www.gov.il/he/service/real_estate_selfshuma',
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: TITLE,
   description: 'מה בודקים בהיטל השבחה לפני מכירת נכס: מקור החיוב, שיעור הבסיס, שומה, מסמכים ומסלולי בירור. מקורות רשמיים שנבדקו ב־24.10.2026.',
   alternates: { canonical: PATH },
   openGraph: { title: TITLE, type: 'article', locale: 'he_IL', url: PATH, images: ['/opengraph-image'] },
-};
+});
 
 const faq = [
   {

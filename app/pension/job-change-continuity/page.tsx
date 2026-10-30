@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: URL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, type: 'article', locale: 'he_IL' },
+  openGraph: { images: ['/opengraph-image'], title: TITLE, description: DESCRIPTION, url: URL, type: 'article', locale: 'he_IL' },
   twitter: { card: 'summary_large_image', title: TITLE, description: DESCRIPTION },
 };
 

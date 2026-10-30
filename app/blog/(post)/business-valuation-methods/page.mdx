@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/business-valuation-methods' },
   title: 'הערכת שווי עסק: תזרים, עסקאות השוואה ונכסים',
   description: 'מה ההבדל בין גישת הכנסה, גישת שוק וגישת עלות, אילו נתונים דרושים ומדוע הנחות היוון ומכפילים תלויות בעסקה.',
-};
+});
 
 # הערכת שווי עסק: אילו שיטות קיימות?
 

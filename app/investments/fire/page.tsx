@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'FIRE ופרישה מוקדמת — איך בוחנים תוכנית אישית',
   description: 'בדיקת הוצאות, מקורות הכנסה וסיכונים בתכנון פרישה מוקדמת, עם הפניות למקורות רשמיים בישראל.',
   alternates: { canonical: '/investments/fire' },
-};
+});
 
 export default function FirePage() {
   return (

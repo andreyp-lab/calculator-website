@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/electric-vs-gasoline-car' },
   title: 'רכב חשמלי מול בנזין: כך משווים עלות בעלות',
   description: 'רשימת נתונים ונוסחאות להשוואת מחיר רכישה, אנרגיה, ביטוח, מימון וירידת ערך של דגמי רכב מסוימים.',
-};
+});
 
 # רכב חשמלי מול בנזין: השוואה לפי הדגמים שלכם
 

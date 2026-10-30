@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { DisclaimerBox } from '@/components/calculator/DisclaimerBox';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'נקודות זיכוי ממס הכנסה — בדיקה אישית',
   description: 'שווי נקודת זיכוי בשנת 2026 וקישור לסימולטור הרשמי לחישוב הזכאות לפי מצב משפחתי.',
   alternates: { canonical: '/personal-tax/tax-credits' },
-};
+});
 
 export default function TaxCreditsPage() {
   return <main dir="rtl" className="mx-auto max-w-4xl px-5 py-12 text-ink">

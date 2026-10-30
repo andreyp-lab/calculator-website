@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -14,7 +15,7 @@ import {
 
 const SITE_URL = 'https://cheshbonai.co.il';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/course' },
   title: 'בית הספר הפיננסי FinSchool — קורסים לניהול כספי העסק',
   description:
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
       'קורסים על מע״מ ומס לעצמאים, ניהול כספים לבעלי עסקים ו-Claude AI לאנשי כספים. בחרו את המסלול המתאים לכם ועיינו בתנאי כל קורס.',
     url: '/course',
   },
-};
+});
 
 /** בונה קישור חיצוני עם UTM אחיד לפי פורמט הקמפיין. */
 function utm(

@@ -87,6 +87,7 @@ const faqItems = [
 ];
 
 const relatedLinks = [
+  { href: '/salaried/salary-negotiation-total-compensation', label: 'השוואת חבילות שכר לפני קבלת הצעה' },
   { href: '/salaried/payslip-guide', label: 'קריאת תלוש משכורת לפי חלקיו' },
   { href: '/personal-tax/salary-net-gross', label: 'מחשבון שכר ברוטו ונטו' },
   { href: '/employee-rights/overtime', label: 'בדיקת רכיב שעות נוספות' },

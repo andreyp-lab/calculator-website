@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -6,12 +7,13 @@ import { AuthorBox } from '@/components/calculator/AuthorBox';
 const PAGE_PATH = '/salaried/payslip-guide';
 const SITE_URL = 'https://cheshbonai.co.il';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'איך קוראים תלוש משכורת 2026 — המדריך המלא',
   description:
     'תלוש המשכורת מבלבל אותך? מדריך מלא לקריאת תלוש 2026: ברוטו מול נטו, ניכויי חובה (מס, ב.ל. 12.17%, פנסיה), נקודות זיכוי, הפרשות מעסיק וטעויות שכדאי לבדוק.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    url: '/salaried/payslip-guide',
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'איך קוראים תלוש משכורת 2026 — המדריך המלא',
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'he_IL',
   },
-};
+});
 
 const faqItems = [
   {

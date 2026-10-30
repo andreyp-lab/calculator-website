@@ -1,14 +1,15 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { BreakEvenCalculator } from '@/components/calculators/BreakEvenCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון נקודת איזון 2026 – כמה למכור כדי לכסות הוצאות',
   description:
     'חשב כמה יחידות או שירותים אתה חייב למכור בחודש כדי לכסות הוצאות קבועות. כולל תרומה ליחידה, מרווח ביטחון ויחידות לרווח מטרה. כלי חינמי ומיידי לכל בעל עסק.',
   alternates: { canonical: '/tools/break-even' },
-};
+});
 
 const faqItems = [
   {

@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'בונוס שנתי: בדיקת מס וניכויים',
   description: 'היכן לבדוק ניכוי מס על בונוס ותשלום נוסף בדמי ביטוח לפי נתוני השכר האישיים.',
   alternates: { canonical: '/employee-rights/annual-bonus' },
-};
+});
 
 const incomeTax = 'https://www.gov.il/he/service/income-tax-calculator';
 const refund = 'https://www.gov.il/he/service/itc135';

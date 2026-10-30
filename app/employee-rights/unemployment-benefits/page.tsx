@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'טבלת דמי אבטלה לפי גיל 2026 — ימים וסכום',
   description: 'טבלת ימי אבטלה מרביים לפי גיל ומספר תלויים, והפניה למחשבון הסכום הרשמי של הביטוח הלאומי.',
   alternates: { canonical: '/employee-rights/unemployment-benefits' },
-};
+});
 
 export default function UnemploymentBenefitsPage() {
   return (

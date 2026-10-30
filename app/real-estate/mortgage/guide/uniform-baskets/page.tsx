@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/uniform-baskets';
-export const metadata: Metadata = { title: 'הסלים האחידים במשכנתא: הרכב ואופן השוואה', description: 'מהם שלושת הסלים האחידים באישור עקרוני, מה הם כוללים ואיך להשתמש בהם להשוואה בין בנקים.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'הסלים האחידים במשכנתא: הרכב ואופן השוואה', description: 'מהם שלושת הסלים האחידים באישור עקרוני, מה הם כוללים ואיך להשתמש בהם להשוואה בין בנקים.', alternates: { canonical: PATH } });
 
 export default function UniformBasketsPage() {
   return <MortgageGuideArticle path={PATH} title="הסלים האחידים במשכנתא: כלי להשוואה, לא המלצה" eyebrow="רפורמת השקיפות"

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -16,12 +17,12 @@ const SOURCES = [
   { id: 'expenses', title: 'תקנות מס הכנסה (ניכוי הוצאות רכב), התשנ״ה–1995', url: 'https://www.btl.gov.il/Laws1/02_0103_100052.pdf', note: 'הגדרת הוצאות החזקת רכב כוללת דמי שכירות; ההכרה כפופה לסוג הרכב ולהוראה החלה.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${TITLE} | חשבונאי` },
   description: DESCRIPTION,
   alternates: { canonical: PAGE_PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', locale: 'he_IL', modifiedTime: UPDATED },
-};
+  openGraph: { images: ['/opengraph-image'], title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', locale: 'he_IL', modifiedTime: UPDATED },
+});
 
 const sections = [
   {

@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מענק עבודה לשנים קודמות — מועדי הגשה',
   description: 'בדקו ברשות המסים אילו שנות זכאות פתוחות להגשה ואת המועד החל על כל שנה.',
   alternates: { canonical: '/employee-rights/work-grant/retroactive' },
-};
+});
 
 export default function RetroactiveWorkGrantPage() {
   return (

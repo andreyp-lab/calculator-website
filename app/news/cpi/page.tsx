@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -6,11 +7,11 @@ import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 
 const { annualRate, lastUpdated, sourceUrl } = MACRO_DATA.inflation;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'אינפלציה בישראל — שיעור שנתי',
   description: `שיעור האינפלציה השנתי: ${annualRate}% נכון לאימות ב-${formatHebrewDate(lastUpdated)}. מקור וקישור לנתון הרשמי.`,
   alternates: { canonical: 'https://cheshbonai.co.il/news/cpi' },
-};
+});
 
 export default function CpiPage() {
   const purchasingPower = 100_000 / (1 + annualRate / 100);

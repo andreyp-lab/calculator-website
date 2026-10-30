@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CompoundInterestCalculator } from '@/components/calculators/CompoundInterestCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון ריבית דריבית — השוואת תרחישי חיסכון',
   description: 'בדקו כיצד הפקדות, משך זמן והנחות תשואה ואינפלציה משפיעים על סכום חיסכון תיאורטי.',
   alternates: { canonical: '/investments/compound-interest' },
-};
+});
 
 export default function CompoundInterestPage() {
   return (

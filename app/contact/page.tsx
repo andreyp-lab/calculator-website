@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { SITE_INFO } from '@/lib/config/site-info';
+import { SITE_INFO, withPageSocialMetadata } from '@/lib/config/site-info';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   // הערה: ה-template ב-root layout מוסיף "| חשבונאי" — לא לכלול את המותג כאן (כפילות)
   title: 'צור קשר',
   description:
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: 'צרו קשר עם צוות חשבונאי בדוא״ל.',
     url: '/contact',
   },
-};
+});
 
 export default function Contact() {
   return (

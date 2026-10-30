@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -10,12 +11,12 @@ const OFFICIAL_APPLICATION = 'https://www.gov.il/he/service/submitting-an-online
 const OFFICIAL_GUIDE =
   'https://www.gov.il/BlobFolder/generalpage/income-tax-guide-knowyourright/he/Guides_IncomeTax_da-2025.pdf';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מענק עבודה לשני בני זוג עובדים: מי מגיש ומה משפיע',
   description:
     'כאשר שני בני הזוג עובדים: האם כל אחד מגיש, איך הכנסת בן הזוג משפיעה, אילו נתונים מכינים ואיך בודקים סכום ברשות המסים.',
   alternates: { canonical: PAGE_PATH },
-};
+});
 
 const faqs = [
   {

@@ -1,14 +1,15 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
 const ifrsUrl = 'https://www.ifrs.org/content/dam/ifrs/supporting-implementation/ifrs-13/education-ifrs-13-eng.pdf';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'הערכת שווי עסק — שיטות, נתונים ומגבלות',
   description: 'מדריך לבדיקת שווי עסק: היוון תזרים מזומנים והשוואה לעסקאות דומות, אילו נתונים יש לאסוף ומדוע מכפיל ענפי כללי אינו שווי עסקה.',
   alternates: { canonical: '/tools/business-valuation' },
-};
+});
 
 export default function BusinessValuationPage() {
   return (

@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/mortgage-refinance-when-and-how' },
   title: 'מחזור משכנתא: בדיקת הצעות, יתרה ועלויות',
   description: 'איך בודקים אם מחזור משכנתא מתאים: יתרת תשלומים, הצעה חדשה, עמלות פירעון, הצמדה וסיכון.',
-};
+});
 
 # מחזור משכנתא: איך בודקים אם ההצעה החדשה משפרת את מצבכם?
 

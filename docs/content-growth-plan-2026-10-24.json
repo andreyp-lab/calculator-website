@@ -1,5 +1,5 @@
 {
-  "version": "2.2.7",
+  "version": "2.2.8",
   "site": "https://cheshbonai.co.il",
   "created_at": "2026-10-24",
   "implementation": {
@@ -12,8 +12,9 @@
     "fourth_wave_completed": 8,
     "fifth_wave_completed": 5,
     "sixth_wave_completed": 7,
-    "completed_new_pages": 93,
-    "remaining_new_pages": 31,
+    "seventh_wave_completed": 2,
+    "completed_new_pages": 95,
+    "remaining_new_pages": 29,
     "first_wave_breakdown": {
       "business_industries": 24,
       "business_start": 10,
@@ -23,7 +24,8 @@
       "verified_salaried_pension_savings_guides": 11,
       "verified_self_employed_pension_vehicle_guides": 8,
       "verified_tax_pension_real_estate_guides": 5,
-      "verified_savings_vehicle_guides": 7
+      "verified_savings_vehicle_guides": 7,
+      "verified_budget_salary_decision_guides": 2
     }
   },
   "seed_keyword": "מיסוי וזכויות פיננסיות בישראל",
@@ -539,7 +541,7 @@
       "keyword": "השוואת הצעות שכר",
       "intent": "Commercial",
       "template": "comparison",
-      "status": "planned",
+      "status": "implemented",
       "action": "new",
       "wave": 4,
       "wordCount": 1700,
@@ -1754,7 +1756,7 @@
       "keyword": "כמה כסף צריך לדירה ראשונה",
       "intent": "Informational",
       "template": "how-to",
-      "status": "planned",
+      "status": "implemented",
       "action": "new",
       "wave": 3,
       "wordCount": 1500,

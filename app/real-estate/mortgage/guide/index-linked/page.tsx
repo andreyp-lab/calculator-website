@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/index-linked';
-export const metadata: Metadata = { title: 'משכנתא צמודת מדד: איך ההצמדה משפיעה', description: 'איך פועל מסלול צמוד למדד המחירים, מה קורה לקרן ולהחזר ואיך משווים למסלול לא צמוד.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'משכנתא צמודת מדד: איך ההצמדה משפיעה', description: 'איך פועל מסלול צמוד למדד המחירים, מה קורה לקרן ולהחזר ואיך משווים למסלול לא צמוד.', alternates: { canonical: PATH } });
 
 export default function IndexLinkedPage() {
   return <MortgageGuideArticle path={PATH} title="משכנתא צמודת מדד: השפעת המדד על הקרן וההחזר" eyebrow="הצמדה למדד"

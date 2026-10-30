@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator, BookOpen } from 'lucide-react';
@@ -7,14 +8,21 @@ import { DisclaimerBox } from '@/components/calculator/DisclaimerBox';
 import { PURCHASE_TAX_2026 } from '@/lib/constants/tax-2026';
 import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/real-estate' },
   title: 'כלים ומדריכים למשכנתא, מס רכישה ומס שבח',
   description:
     'כלי משכנתא ומס רכישה, מדריך מיסוי שכירות והפניה לשומה עצמית של מס שבח ברשות המסים.',
-};
+});
 
 const calculators = [
+  {
+    title: 'תקציב לדירה ראשונה',
+    description: 'מיפוי הון עצמי, הוצאות רכישה ולוח תשלומים לפני התחייבות',
+    href: '/real-estate/first-home-budget',
+    available: true,
+    badge: undefined as string | undefined,
+  },
   {
     title: 'מחשבון משכנתא',
     description: 'אומדן למסלול אחד בריבית קבועה, בשיטת שפיצר או קרן שווה',

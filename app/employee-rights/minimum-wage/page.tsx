@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MINIMUM_WAGE_2026 } from '@/lib/constants/tax-2026';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'שכר מינימום 2026 — תעריפים רשמיים',
   description: 'שכר מינימום חודשי ושעתי החל באפריל 2026, לפי פרסום הביטוח הלאומי.',
   alternates: { canonical: '/employee-rights/minimum-wage' },
-};
+});
 
 export default function MinimumWagePage() {
   return (

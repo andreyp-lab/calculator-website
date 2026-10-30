@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/repayment-ratio';
-export const metadata: Metadata = { title: 'יחס החזר מהכנסה במשכנתא: חישוב ומגבלה', description: 'איך בנק מחשב יחס החזר מהכנסה, מה נכנס להכנסה ולהוצאות ומה קובעת הוראה 329 שפורסמה ב־30.06.2026.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'יחס החזר מהכנסה במשכנתא: חישוב ומגבלה', description: 'איך בנק מחשב יחס החזר מהכנסה, מה נכנס להכנסה ולהוצאות ומה קובעת הוראה 329 שפורסמה ב־30.06.2026.', alternates: { canonical: PATH } });
 
 export default function RepaymentRatioPage() {
   return <MortgageGuideArticle path={PATH} title="יחס החזר מהכנסה במשכנתא: איך הבנק מסתכל על המספר" eyebrow="יכולת החזר"

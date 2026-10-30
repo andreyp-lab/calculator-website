@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -18,12 +19,13 @@ const LICENSED_REGISTRATION = 'https://www.gov.il/he/service/vat-821';
 const NATIONAL_INSURANCE_REGISTRATION =
   'https://www.btl.gov.il/Insurance/National%20Insurance/type_list/Self_Employed/Pages/howtoregister.aspx';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'פתיחת עסק עצמאי ב-2026: עוסק פטור או מורשה' },
   description:
     'איך לפתוח עוסק פטור או עוסק מורשה ב-2026: בחירת סיווג, מסמכים, רישום במע״מ, מס הכנסה וביטוח לאומי, תקרת המחזור וצ׳קליסט מעשי.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    url: '/self-employed/opening-business',
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'פתיחת עסק עצמאי ב-2026: עוסק פטור או מורשה',
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'he_IL',
   },
-};
+});
 
 const faqItems = [
   {

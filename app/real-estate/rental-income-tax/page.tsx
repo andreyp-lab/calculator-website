@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -6,12 +7,13 @@ import { AuthorBox } from '@/components/calculator/AuthorBox';
 const PAGE_PATH = '/real-estate/rental-income-tax';
 const SITE_URL = 'https://cheshbonai.co.il';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מיסוי שכר דירה 2026 — פטור, מסלול 10% ומדרגות מס',
   description:
     'איך בודקים את מסלולי המס על הכנסה מהשכרת דירת מגורים בישראל ב-2026? תקרת פטור, מסלול 10% ומסלול רגיל, בכפוף לתנאי הזכאות.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    url: '/real-estate/rental-income-tax',
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'מיסוי שכר דירה 2026 — פטור, מסלול 10% ומדרגות מס',
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'he_IL',
   },
-};
+});
 
 const faqItems = [
   {

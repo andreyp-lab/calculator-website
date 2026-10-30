@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -10,12 +11,13 @@ import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 const PAGE_PATH = '/self-employed/business-finance';
 const SITE_URL = 'https://cheshbonai.co.il';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'ניהול כספים לעסק קטן 2026 — המדריך המלא',
   description:
     'ניהול כספים לעסק קטן ב-2026: הפרדת חשבון עסקי-פרטי, איך לנהל תזרים מזומנים בעסק קטן (תחזית 13 שבועות), תכנון מס ומקדמות, דוח רווח והפסד פשוט ומתי לשכור רו"ח.',
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    url: '/self-employed/business-finance',
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'ניהול כספים לעסק קטן 2026 — המדריך המלא',
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'he_IL',
   },
-};
+});
 
 const faqItems = [
   {

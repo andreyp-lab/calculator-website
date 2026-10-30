@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/company-vs-self-employed-ultimate-guide' },
   title: 'חברה בע"מ או עוסק מורשה — איך בוחנים את מבנה העסק?',
   description: 'השוואת שיקולי מס, משיכות, עלויות ניהול ואחריות לפני בחירה בין פעילות כיחיד לבין חברה. אין סף רווח אחיד שמתאים לכל עסק.',
-};
+});
 
 # חברה בע"מ או עוסק מורשה — איך בוחנים את הבחירה?
 

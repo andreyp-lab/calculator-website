@@ -146,9 +146,11 @@
    many editorial pages use the conventional `prose` class. These rules are
    therefore the single, site-wide source of truth for readable guides on
    mobile and desktop. `guide-copy` remains as a backwards-compatible alias.
+   Exclude both `.not-prose` and its descendants so component utilities keep
+   control of callouts, navigation, and other independently styled content.
    ============================================================ */
-.prose,
-.guide-copy {
+.prose:not(:where(.not-prose, .not-prose *)),
+.guide-copy:not(:where(.not-prose, .not-prose *)) {
   width: 100%;
   max-width: 74ch !important;
   margin-inline: auto;
@@ -158,8 +160,8 @@
   text-wrap: pretty;
 }
 
-.prose :where(h2),
-.guide-copy :where(h2) {
+.prose :where(h2):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(h2):not(:where(.not-prose, .not-prose *)) {
   margin-block: 3rem 1rem;
   padding-block-end: 0.55rem;
   border-block-end: 1px solid color-mix(in srgb, var(--color-ink) 16%, transparent);
@@ -171,8 +173,8 @@
   scroll-margin-top: 7rem;
 }
 
-.prose :where(h3),
-.guide-copy :where(h3) {
+.prose :where(h3):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(h3):not(:where(.not-prose, .not-prose *)) {
   margin-block: 2rem 0.75rem;
   color: var(--color-ink);
   font-size: clamp(1.2rem, 1.1rem + 0.45vw, 1.5rem);
@@ -182,8 +184,8 @@
   scroll-margin-top: 7rem;
 }
 
-.prose :where(h4),
-.guide-copy :where(h4) {
+.prose :where(h4):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(h4):not(:where(.not-prose, .not-prose *)) {
   margin-block: 1.5rem 0.6rem;
   color: var(--color-ink);
   font-size: 1.1em;
@@ -191,39 +193,39 @@
   line-height: 1.45;
 }
 
-.prose :where(p, ul, ol, blockquote),
-.guide-copy :where(p, ul, ol, blockquote) {
+.prose :where(p, ul, ol, blockquote):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(p, ul, ol, blockquote):not(:where(.not-prose, .not-prose *)) {
   margin-block: 1rem;
 }
 
-.prose :where(p),
-.guide-copy :where(p) {
+.prose :where(p):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(p):not(:where(.not-prose, .not-prose *)) {
   max-width: 72ch;
 }
 
-.prose :where(ul, ol),
-.guide-copy :where(ul, ol) {
+.prose :where(ul, ol):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(ul, ol):not(:where(.not-prose, .not-prose *)) {
   padding-inline-start: 1.55rem;
 }
 
-.prose :where(ul),
-.guide-copy :where(ul) {
+.prose :where(ul):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(ul):not(:where(.not-prose, .not-prose *)) {
   list-style: disc;
 }
 
-.prose :where(ol),
-.guide-copy :where(ol) {
+.prose :where(ol):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(ol):not(:where(.not-prose, .not-prose *)) {
   list-style: decimal;
 }
 
-.prose :where(li),
-.guide-copy :where(li) {
+.prose :where(li):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(li):not(:where(.not-prose, .not-prose *)) {
   margin-block: 0.45rem;
   padding-inline-start: 0.25rem;
 }
 
-.prose :where(a),
-.guide-copy :where(a) {
+.prose :where(a):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(a):not(:where(.not-prose, .not-prose *)) {
   color: var(--color-gold-2);
   font-weight: 600;
   text-decoration: underline;
@@ -232,8 +234,8 @@
   overflow-wrap: anywhere;
 }
 
-.prose :where(blockquote),
-.guide-copy :where(blockquote) {
+.prose :where(blockquote):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(blockquote):not(:where(.not-prose, .not-prose *)) {
   padding: 0.9rem 1.1rem;
   border-inline-start: 4px solid var(--color-gold);
   background: var(--color-paper);
@@ -242,8 +244,8 @@
 /* Editorial tables remain genuine tables. On narrow screens they receive a
    deliberate minimum width and scroll inside their existing wrapper instead
    of crushing every cell into a one-word column. */
-.prose :where(.overflow-x-auto),
-.guide-copy :where(.overflow-x-auto) {
+.prose :where(.overflow-x-auto):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(.overflow-x-auto):not(:where(.not-prose, .not-prose *)) {
   margin-block: 1.5rem;
   padding-block-end: 0.65rem;
   overscroll-behavior-inline: contain;
@@ -251,8 +253,8 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.prose :where(table),
-.guide-copy :where(table) {
+.prose :where(table):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(table):not(:where(.not-prose, .not-prose *)) {
   width: 100%;
   min-width: 36rem;
   border-collapse: collapse;
@@ -263,22 +265,22 @@
   text-align: start;
 }
 
-.prose :where(caption),
-.guide-copy :where(caption) {
+.prose :where(caption):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(caption):not(:where(.not-prose, .not-prose *)) {
   margin-block-end: 0.65rem;
   color: color-mix(in srgb, var(--color-ink) 72%, transparent);
   font-weight: 700;
   text-align: start;
 }
 
-.prose :where(thead),
-.guide-copy :where(thead) {
+.prose :where(thead, thead th, thead td):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(thead, thead th, thead td):not(:where(.not-prose, .not-prose *)) {
   background: var(--color-ink);
   color: var(--color-cream);
 }
 
-.prose :where(th, td),
-.guide-copy :where(th, td) {
+.prose :where(th, td):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(th, td):not(:where(.not-prose, .not-prose *)) {
   min-width: 10rem;
   padding: 0.8rem 0.9rem;
   border: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
@@ -288,13 +290,13 @@
   overflow-wrap: normal;
 }
 
-.prose :where(th),
-.guide-copy :where(th) {
+.prose :where(th):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(th):not(:where(.not-prose, .not-prose *)) {
   font-weight: 750;
 }
 
-.prose :where(tbody tr:nth-child(even)),
-.guide-copy :where(tbody tr:nth-child(even)) {
+.prose :where(tbody tr:nth-child(even)):not(:where(.not-prose, .not-prose *)),
+.guide-copy :where(tbody tr:nth-child(even)):not(:where(.not-prose, .not-prose *)) {
   background: color-mix(in srgb, var(--color-cream-2) 62%, transparent);
 }
 
@@ -308,35 +310,48 @@
 .answer-box > :last-child { margin-block-end: 0; }
 
 @media (max-width: 640px) {
-  .prose,
-  .guide-copy {
+  .prose:not(:where(.not-prose, .not-prose *)),
+  .guide-copy:not(:where(.not-prose, .not-prose *)) {
     max-width: none !important;
     font-size: 1rem;
     line-height: 1.78;
   }
 
-  .prose :where(h2),
-  .guide-copy :where(h2) {
+  .prose :where(h2):not(:where(.not-prose, .not-prose *)),
+  .guide-copy :where(h2):not(:where(.not-prose, .not-prose *)) {
     margin-block-start: 2.5rem;
     font-size: 1.5rem;
   }
 
-  .prose :where(h3),
-  .guide-copy :where(h3) {
+  .prose :where(h3):not(:where(.not-prose, .not-prose *)),
+  .guide-copy :where(h3):not(:where(.not-prose, .not-prose *)) {
     margin-block-start: 1.75rem;
     font-size: 1.25rem;
   }
 
-  .prose :where(.overflow-x-auto),
-  .guide-copy :where(.overflow-x-auto) {
+  .prose :where(.overflow-x-auto):not(:where(.not-prose, .not-prose *)),
+  .guide-copy :where(.overflow-x-auto):not(:where(.not-prose, .not-prose *)) {
     margin-inline: -0.5rem;
     padding-inline: 0.5rem;
   }
 
-  .prose :where(table),
-  .guide-copy :where(table) {
+  .prose :where(table):not(:where(.not-prose, .not-prose *)),
+  .guide-copy :where(table):not(:where(.not-prose, .not-prose *)) {
     min-width: 34rem;
   }
+}
+
+/* A few legacy editorial tables have no scroll wrapper. Contain their cells
+   on the table itself; wrapped tables retain native table layout. Keep this
+   after the mobile rules so the minimum width cannot widen the page. */
+.prose :where(table):not(:where(.not-prose, .not-prose *, .overflow-x-auto *, .overflow-x-scroll *)),
+.guide-copy :where(table):not(:where(.not-prose, .not-prose *, .overflow-x-auto *, .overflow-x-scroll *)) {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 @layer base {

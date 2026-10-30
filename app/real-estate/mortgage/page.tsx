@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MortgageCalculator } from '@/components/calculators/MortgageCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון משכנתא 2026 — שפיצר וקרן שווה',
   description: 'אומדן החזר למסלול אחד בריבית קבועה שהוזנה, בשיטת שפיצר או קרן שווה. השוו לתנאי ההצעה שקיבלתם מהבנק.',
   alternates: { canonical: '/real-estate/mortgage' },
-};
+});
 
 export default function MortgagePage() {
   return <CalculatorLayout

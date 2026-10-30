@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'חברה בע"מ או עוסק מורשה — השוואת שיקולים',
   description:
     'מדריך לבחירת מבנה עסקי לפי רווח, משיכות, דיווחים ועלויות. אין סף הכנסה אחיד או חישוב מס שמכריע לבדו.',
   alternates: { canonical: '/self-employed/corporation-vs-individual' },
-};
+});
 
 export default function CorporationVsIndividualPage() {
   return (

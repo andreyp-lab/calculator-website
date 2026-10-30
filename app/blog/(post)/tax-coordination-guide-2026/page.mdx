@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/tax-coordination-guide-2026' },
   title: 'תיאום מס 2026: מתי עושים ואיך מגישים',
   description: 'מדריך לתיאום מס לשכירים ולבעלי עסק זעיר דרך השירות המקוון של רשות המסים, עם הסבר על הכנסות נוספות והחזר מס.',
-};
+});
 
 # תיאום מס 2026: מדריך מעשי
 

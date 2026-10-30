@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -35,7 +36,7 @@ const MIXED_EXPENSE_EXAMPLE_BUSINESS_SHARE =
 
 const formatAmount = (amount: number) => amount.toLocaleString('he-IL');
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'הוצאות מוכרות לעצמאי: מס הכנסה, מע״מ ותיעוד | חשבונאי' },
   description:
     'מדריך מעשי להוצאות מוכרות לעצמאי: ההבדל בין מס הכנסה למע״מ, הוצאה מעורבת, פחת, עבודה מהבית, רכב, תוכנה, מסמכים וטעויות נפוצות.',
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     locale: 'he_IL',
     images: ['/opengraph-image'],
   },
-};
+});
 
 const faqItems = [
   {

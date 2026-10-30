@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'שכיר או עצמאי — מה כדאי להשוות לפני שמחליטים?',
   description:
     'השוואה בין עבודה כשכיר לעבודה כעצמאי: הכנסה נטו, הפרשות, זכויות, הוצאות עסקיות וסיכונים. ההחלטה תלויה בנתונים האישיים.',
   alternates: { canonical: '/compare/employee-vs-self-employed' },
-};
+});
 
 const rows = [
   ['בסיס ההשוואה', 'שכר וחלק המעסיק בעלויות העסקה', 'הכנסות פחות הוצאות עסקיות, מסים ועלויות ניהול'],

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -6,11 +7,11 @@ import { FAQ } from '@/components/calculator/FAQ';
 const comparisonUrl = 'https://www.boi.org.il/information/bank-paymnts/financial-education/campaigns/boi-equator/loans/';
 const questionsUrl = 'https://www.boi.org.il/media/t0ad2hij/%D7%91%D7%93%D7%A8%D7%9A-%D7%9C%D7%A7%D7%97%D7%AA-%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94.pdf';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'הלוואה אישית — השוואת עלויות ותנאים' },
   description: 'מה בודקים לפני הלוואה אישית: ריבית, עלות כוללת, עמלות, הצמדה ויכולת החזר. קישורים להשוואת ריביות באתר בנק ישראל.',
   alternates: { canonical: '/savings/personal-loan' },
-};
+});
 
 export default function Page() {
   return (

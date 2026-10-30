@@ -1,14 +1,15 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
 const fundUrl = 'https://govextra.gov.il/mof-gloans/homepage/';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'הלוואה בערבות המדינה לעסק — בדיקת מסלולים ותנאים' },
   description: 'איך בודקים מסלול ותנאי בקשה להלוואה בערבות המדינה? קישור לקרן הרשמית והסבר אילו פרטים ומסמכים לבדוק לפני ההגשה.',
   alternates: { canonical: '/tools/loan-eligibility' },
-};
+});
 
 export default function LoanEligibilityPage() {
   return (

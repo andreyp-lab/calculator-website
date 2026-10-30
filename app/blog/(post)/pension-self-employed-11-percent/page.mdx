@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/pension-self-employed-11-percent' },
   title: 'פנסיה לעצמאי 2026: איך בודקים חובת הפקדה והטבת מס',
   description: 'הבדל בין שיעורי חובת ההפקדה לפנסיה, ניכוי מההכנסה וזיכוי ממס. נתונים ומקורות רשמיים לחישוב אישי.',
-};
+});
 
 # פנסיה לעצמאי 2026: איך בודקים חובת הפקדה והטבת מס
 

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -15,12 +16,12 @@ const SOURCES = [
   { id: 'annual-form', title: 'רשות המסים — טופס 1320 לשנת המס 2025', url: 'https://www.gov.il/BlobFolder/service/reporting-and-payment-2025-annual-tax-report-for-individuals/he/Service_Pages_Income_tax_annual-report-2026_1320-2025-ACC.pdf', note: 'חלק ג: פרטי הרכב, חודשי השימוש וקריאת מונה בתחילת השנה או השימוש ובסופם. זהו טופס 2025; יש לבדוק את טופס שנת הדיווח בפועל.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${TITLE} | חשבונאי` },
   description: DESCRIPTION,
   alternates: { canonical: PAGE_PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', locale: 'he_IL', modifiedTime: UPDATED },
-};
+  openGraph: { images: ['/opengraph-image'], title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', locale: 'he_IL', modifiedTime: UPDATED },
+});
 
 const sections = [
   {

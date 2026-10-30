@@ -90,6 +90,7 @@ const faqItems = [
 ];
 
 const relatedLinks = [
+  { href: '/salaried/salary-negotiation-total-compensation', label: 'השוואת הצעות לפי חבילת התגמול המלאה' },
   { href: '/salaried/salary-components', label: 'פירוט חבילת השכר לפני חתימה' },
   { href: '/salaried/payslip-guide', label: 'מדריך לקריאת המשכורת הראשונה' },
   { href: '/personal-tax/salary-net-gross', label: 'אומדן שכר נטו לפי הנחות אישיות' },

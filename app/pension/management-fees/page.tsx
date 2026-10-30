@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -21,10 +22,10 @@ const faqs = [
   { question: 'האם הצעה זולה יותר מחייבת לעבור קרן?', answer: 'השוואת דמי ניהול היא בדיקה של תנאי עלות בלבד. החלטה על שינוי דורשת בחינת כיסוי, זכויות ותנאים אישיים עם בעל מקצוע מתאים. העמוד אינו ממליץ על קרן, מוצר, מסלול או העברה.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: TITLE, description: DESCRIPTION, alternates: { canonical: URL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, type: 'article', locale: 'he_IL' },
-};
+  openGraph: { images: ['/opengraph-image'], title: TITLE, description: DESCRIPTION, url: URL, type: 'article', locale: 'he_IL' },
+});
 
 export default function PensionManagementFeesPage() {
   const schema = {

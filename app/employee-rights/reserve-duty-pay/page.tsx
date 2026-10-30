@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'תגמולי מילואים — חישוב רשמי בביטוח הלאומי',
   description: 'בדיקת תגמולי מילואים לפי הכנסה וימי שירות במחשבון הביטוח הלאומי.',
   alternates: { canonical: '/employee-rights/reserve-duty-pay' },
-};
+});
 
 export default function ReserveDutyPayPage() {
   return (

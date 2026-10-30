@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { VerifiedPurchaseTaxCalculator } from '@/components/calculators/VerifiedPurchaseTaxCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מס רכישה 2026 — מדרגות ומחשבון',
   description: 'אומדן מס רכישה לדירה יחידה, דירה נוספת ולעולה הזכאי לדירה יחידה לפי הוראת רשות המסים 1/2026.',
   alternates: { canonical: '/real-estate/purchase-tax' },
-};
+});
 
 export default function PurchaseTaxPage() {
   return <main dir="rtl" className="mx-auto max-w-4xl px-5 py-12 text-ink">

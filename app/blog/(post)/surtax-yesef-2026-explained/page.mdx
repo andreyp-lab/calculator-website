@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/surtax-yesef-2026-explained' },
   title: 'מס יסף 2026: שיעור 3% ומס נוסף על הכנסה הונית',
   description: 'מתי בודקים מס יסף על הכנסה חייבת גבוהה, מהו המס הנוסף על הכנסה ממקור הוני, ואילו מקורות רשמיים קובעים את החישוב.',
-};
+});
 
 # מס יסף 2026: מה צריך לבדוק
 

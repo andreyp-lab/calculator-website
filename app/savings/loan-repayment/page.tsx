@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -6,11 +7,11 @@ import { BasicLoanCalculator } from './BasicLoanCalculator';
 
 const bankOfIsraelUrl = 'https://www.boi.org.il/information/bank-paymnts/financial-education/';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון החזר הלוואה — תשלום חודשי ועלות ריבית',
   description: 'חשבו החזר חודשי ועלות ריבית להלוואה בריבית קבועה לא צמודה. הבינו כיצד להשוות הצעות והיכן לבדוק עמלות ותנאי פירעון מוקדם.',
   alternates: { canonical: '/savings/loan-repayment' },
-};
+});
 
 export default function LoanRepaymentPage() {
   return (

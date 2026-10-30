@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -21,10 +22,10 @@ const faqs = [
   { question: 'האם מוסיפים לדוח הפנסיה קצבת אזרח ותיק אוטומטית?', answer: 'הזכאות בביטוח הלאומי נבדקת בנפרד. השתמשו במחשבון הרשמי לפי הנתונים האישיים וקראו את מגבלותיו. הביטוח הלאומי מבהיר שהזכאות נקבעת בידי פקיד הסניף; אין לראות בתוצאת המחשבון אישור לתשלום.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: TITLE, description: DESCRIPTION, alternates: { canonical: URL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, type: 'article', locale: 'he_IL' },
-};
+  openGraph: { images: ['/opengraph-image'], title: TITLE, description: DESCRIPTION, url: URL, type: 'article', locale: 'he_IL' },
+});
 
 export default function PensionGapPage() {
   const schema = {

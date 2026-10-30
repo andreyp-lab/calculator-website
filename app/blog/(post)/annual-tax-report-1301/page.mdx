@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/annual-tax-report-1301' },
   title: 'דוח שנתי למס הכנסה ליחיד: מי מגיש ומה להכין',
   description: 'בדיקת חובת הגשת דוח שנתי, הכנת מסמכי הכנסה והוצאות, מקדמות וניכוי במקור, ומעבר לשירות הרשמי של רשות המסים.',
-};
+});
 
 # דוח שנתי למס הכנסה ליחיד: מי מגיש ומה להכין
 

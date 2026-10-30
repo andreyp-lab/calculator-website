@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 /**
  * site-info.ts
  * -------------
@@ -38,3 +40,39 @@ export const SITE_INFO = {
     location: 'ארצות הברית (US)',
   },
 } as const;
+
+/** Fill missing social fields from a page's own metadata, preserving explicit
+ * values and null blocks without guessing a URL for a shared layout. */
+export function withPageSocialMetadata(metadata: Metadata): Metadata {
+  const pageTitle = metadata.title;
+  const title = typeof pageTitle === 'string'
+    ? pageTitle
+    : pageTitle && ('absolute' in pageTitle ? pageTitle.absolute : pageTitle.default);
+  const canonical = metadata.alternates?.canonical;
+  if (!title || !canonical) return metadata;
+
+  const url = typeof canonical === 'string' || canonical instanceof URL
+    ? canonical
+    : canonical.url;
+
+  return {
+    ...metadata,
+    openGraph: metadata.openGraph === null ? null : {
+      title,
+      description: metadata.description ?? undefined,
+      url,
+      type: 'website',
+      locale: 'he_IL',
+      siteName: 'חשבונאי',
+      images: ['/opengraph-image'],
+      ...metadata.openGraph,
+    },
+    twitter: metadata.twitter === null ? null : {
+      card: 'summary_large_image',
+      title,
+      description: metadata.description ?? undefined,
+      images: ['/opengraph-image'],
+      ...metadata.twitter,
+    },
+  };
+}

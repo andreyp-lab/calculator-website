@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import {
@@ -16,7 +17,7 @@ import {
 } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/salaried' },
   title: 'שכירים - מחשבונים והחזר מס',
   description:
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     'דמי מחלה',
     'חופשה שנתית',
   ],
-};
+});
 
 interface Calc {
   title: string;
@@ -45,6 +46,12 @@ interface Calc {
 }
 
 const TAX_AND_SALARY: Calc[] = [
+  {
+    title: 'השוואת הצעות שכר',
+    description: 'השוואת שכר קבוע, בונוסים, הפקדות ותנאי עבודה לפני החלטה.',
+    href: '/salaried/salary-negotiation-total-compensation',
+    icon: Briefcase,
+  },
   {
     title: '🌟 סימולטור החזר מס',
     description:

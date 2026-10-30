@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/leasing-vs-buying-vs-cash-decision' },
   title: 'ליסינג, הלוואה או מזומן לרכב: מה צריך להשוות?',
   description: 'מדריך לאיסוף תנאי חוזה, מימון, נסועה, הוצאות שימוש ושווי מכירה לפני בחירת דרך החזקת רכב.',
-};
+});
 
 # ליסינג, הלוואה או קנייה במזומן: השוואה לפי הצעות כתובות
 

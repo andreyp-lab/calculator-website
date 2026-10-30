@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/reserve-duty-pay-iron-swords-2026' },
   title: 'תגמולי מילואים 2026 — חישוב התגמול ובדיקת הטבות',
   description: 'איך הביטוח הלאומי מחשב תגמולי מילואים, מהן התקרות ואיך בודקים מענקים לפי מסלול הזכאות.',
-};
+});
 
 # תגמולי מילואים 2026 — חישוב התגמול ובדיקת הטבות
 

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, RefreshCw, TrendingUp, DollarSign, Users } from 'lucide-react';
@@ -6,7 +7,7 @@ import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 
 export const revalidate = 21600; // ISR: 6 שעות
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'עדכוני שוק ונתונים כלכליים 2026 — ריבית, מדד ושכר',
   description:
     'ריבית פריים, שיעור אינפלציה שנתי והשכר הממוצע לפי חוק הביטוח הלאומי — נתונים שנבדקו ידנית וקישור למקורות הרשמיים.',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     description: 'ריבית פריים, אינפלציה ושכר ממוצע — תאריך אימות וקישור למקורות.',
     url: 'https://cheshbonai.co.il/news',
   },
-};
+});
 
 const cards = [
   {

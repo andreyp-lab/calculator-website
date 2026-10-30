@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -16,12 +17,12 @@ const sources = {
   interest: 'https://www.boi.org.il/information/interestrates/mortgage/',
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: TITLE,
   description: 'איך מרכזים את תשלומי מכירת הדירה לפי מסמכים: סכום, מקבל, מועד וסטטוס. ללא מחירי שוק משוערים או הבטחת הכרה במס. נבדק ב־24.10.2026.',
   alternates: { canonical: PATH },
   openGraph: { title: TITLE, type: 'article', locale: 'he_IL', url: PATH, images: ['/opengraph-image'] },
-};
+});
 
 const faq = [
   {

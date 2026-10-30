@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'שווי שימוש ברכב צמוד — בדיקה לפי דגם ברשות המסים',
   description: 'בדקו את שווי השימוש החודשי של רכב מעסיק בסימולטור הרשמי לפי דגם ושנת רישום, ואת השפעתו על השכר.',
   alternates: { canonical: '/vehicles/company-car-benefit' },
-};
+});
 
 const official = 'https://www.gov.il/he/service/itc-mm_usecar10';
 

@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/severance-pay-complete-guide' },
   title: 'פיצויי פיטורים: זכאות, חישוב וטופס 161',
   description: 'איך בודקים זכאות לפיצויי פיטורים, הפקדות לרכיב הפיצויים, סעיף 14 ומיסוי הפרישה מול משרד העבודה ורשות המסים.',
-};
+});
 
 # פיצויי פיטורים: איך בודקים מה מגיע
 

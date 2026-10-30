@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -5,12 +6,12 @@ import { SalaryNetGrossCalculator } from '@/components/calculators/SalaryNetGros
 import { FAQ } from '@/components/calculator/FAQ';
 import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון ברוטו נטו 2026 — אומדן שכר חודשי',
   description:
     'אומדן ברוטו לנטו, נטו לברוטו ועלות מעסיק לפי מדרגות מס ודמי ביטוח. בדקו את התוצאה מול תלוש השכר והסימולטור הרשמי.',
   alternates: { canonical: '/personal-tax/salary-net-gross' },
-};
+});
 
 const faqItems = [
   {

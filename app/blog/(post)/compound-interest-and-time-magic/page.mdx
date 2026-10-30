@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/compound-interest-and-time-magic' },
   title: 'ריבית דריבית — איך זמן והפקדות משנים תרחיש',
   description: 'הנוסחה של ריבית דריבית, ההבדל בין סכום נומינלי לריאלי והדרך לקרוא תרחיש חיסכון.',
-};
+});
 
 # ריבית דריבית: איך זמן והפקדות משנים תרחיש
 

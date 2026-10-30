@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -5,11 +6,11 @@ import { FuelCostCalculator } from '@/components/calculators/FuelCostCalculator'
 import { FUEL_PRICES_2026 } from '@/lib/calculators/vehicles';
 import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון דלק 2026 — עלות נסיעה לק״מ',
   description: 'מחשבון דלק ועלות נסיעה: הזינו קילומטרים, צריכה ומחיר בפועל לקבלת אומדן חודשי ושנתי לבנזין, סולר או חשמל.',
   alternates: { canonical: '/vehicles/fuel-cost' },
-};
+});
 
 export default function FuelCostPage() {
   return <CalculatorLayout

@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'כמה נשאר לעצמאי? בדיקת מחזור, הוצאות, מס והפקדות',
   description: 'דרך לבדיקת הכנסה פנויה של עצמאי לפי נתוני העסק, השומה, דמי ביטוח, מע״מ והפקדות, בלי להניח אחוז הכרה אחיד לכל הוצאה.',
   alternates: { canonical: '/self-employed/net' },
-};
+});
 
 const faqItems = [
   {

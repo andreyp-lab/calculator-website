@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/compare' },
   title: 'מדריכי השוואה פיננסית — תעסוקה, דיור ורכב',
   description:
     'מדריכים וכלים לבדיקת החלטות פיננסיות לפי הנתונים והתנאים האישיים שלכם.',
-};
+});
 
 const COMPARISONS = [
   {

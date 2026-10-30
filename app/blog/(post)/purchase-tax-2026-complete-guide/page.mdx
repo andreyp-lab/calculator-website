@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/purchase-tax-2026-complete-guide' },
   title: 'מס רכישה 2026 — מדרגות לדירה יחידה, נוספת ולעולים',
   description: 'מדרגות מס רכישה לשנת 2026 על בסיס הוראת רשות המסים 1/2026, והפניה לסימולטור הרשמי למקרים אישיים.',
-};
+});
 
 # מס רכישה בשנת 2026
 

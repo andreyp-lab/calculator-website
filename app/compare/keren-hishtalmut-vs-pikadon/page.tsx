@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -7,11 +8,11 @@ const taxGuide = 'https://www.gov.il/BlobFolder/generalpage/income-tax-guide-kno
 const fundGuide = 'https://www.gov.il/he/pages/training-fund';
 const depositComparison = 'https://www.boi.org.il/information/bank-paymnts/financial-education/campaigns/boi-equator/deposit/';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'קרן השתלמות מול פיקדון — מס, נזילות וסיכון',
   description: 'השוואה בין קרן השתלמות לפיקדון בנקאי לפי תנאי משיכה, מיסוי, עלויות ורמת סיכון, עם מקורות רשמיים וללא הנחת תשואה מובטחת.',
   alternates: { canonical: '/compare/keren-hishtalmut-vs-pikadon' },
-};
+});
 
 export default function KerenHishtalmutVsPikadonPage() {
   return (

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -49,12 +50,13 @@ const sources = {
   },
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${TITLE} | חשבונאי` },
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
   authors: [{ name: 'אנדרי פלטונוב' }],
   openGraph: {
+    images: ['/opengraph-image'],
     title: TITLE,
     description: DESCRIPTION,
     url: PAGE_URL,
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
     publishedTime: CHECKED_AT,
     modifiedTime: CHECKED_AT,
   },
-};
+});
 
 const faqItems = [
   {

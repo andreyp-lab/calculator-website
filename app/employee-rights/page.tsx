@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator, BookOpen } from 'lucide-react';
@@ -8,11 +9,11 @@ import {
   RECREATION_PAY_2026,
 } from '@/lib/constants/tax-2026';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/employee-rights' },
   title: { absolute: 'זכויות עובדים 2026 — מידע, אומדנים ובדיקה רשמית' },
   description: 'מידע וכלים לבדיקת זכויות עובדים בישראל: פיצויי פיטורים, חופשה, הבראה, אבטלה, מחלה ומילואים, עם הפניות למקורות רשמיים.',
-};
+});
 
 const calculators = [
   {

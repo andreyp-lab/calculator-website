@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -5,12 +6,12 @@ const TAX_BOOKLET = 'https://www.gov.il/BlobFolder/generalpage/income-tax-monthl
 const CLOSE_COMPANIES = 'https://www.gov.il/he/pages/191025-faq-taxation-of-profits';
 const DIVIDEND_REPORT = 'https://www.gov.il/he/service/itc804';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'דיבידנד או משכורת לבעל חברה — מה צריך לבדוק?',
   description:
     'בחירת דרך משיכה מחברה תלויה בשכר, בדיבידנד, בחובות החברה ובנתונים האישיים. מדריך להכנת הנתונים ולבדיקת כללי המס העדכניים.',
   alternates: { canonical: '/self-employed/dividend-vs-salary' },
-};
+});
 
 export default function DividendVsSalaryPage() {
   return (

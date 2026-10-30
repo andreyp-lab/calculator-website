@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/pension-deduction-self-employed-2026' },
   title: 'הפקדות לפנסיה לעצמאי: חובת הפקדה והטבות מס',
   description: 'איך להבחין בין חובת הפקדה לפנסיה לבין ניכוי וזיכוי ממס, אילו נתונים להכין והיכן בודקים את התקרות הרלוונטיות.',
-};
+});
 
 # הפקדות לפנסיה לעצמאי: חובה והטבות מס
 

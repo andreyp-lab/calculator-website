@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   title: 'בדיקות להפחתת מס כחוק: נקודות זיכוי, תיאום והחזר',
   description: 'שירותים רשמיים לבדיקת נקודות זיכוי, תיאום מס, החזר מס ותרומות מוכרות. הזכאות תלויה בנתונים האישיים.',
   alternates: { canonical: '/blog/tax-reduction-25-legal-ways' },
-};
+});
 
 # בדיקות להפחתת מס כחוק
 

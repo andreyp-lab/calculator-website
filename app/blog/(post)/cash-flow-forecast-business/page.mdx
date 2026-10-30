@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/cash-flow-forecast-business' },
   title: 'תחזית תזרים מזומנים לעסק: איך בונים ומעדכנים',
   description: 'בניית תחזית תקבולים ותשלומים לפי מועדים, הבחנה בין רווח למזומן ועדכון חודשי של תרחישים.',
-};
+});
 
 # תחזית תזרים מזומנים לעסק
 

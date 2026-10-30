@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/fixed-unlinked';
-export const metadata: Metadata = { title: 'ריבית קבועה לא צמודה: איך מסלול קל״צ עובד', description: 'מדריך למסלול ריבית קבועה לא צמודה: ודאות בתשלום, עלות, לוח סילוקין ופירעון מוקדם.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'ריבית קבועה לא צמודה: איך מסלול קל״צ עובד', description: 'מדריך למסלול ריבית קבועה לא צמודה: ודאות בתשלום, עלות, לוח סילוקין ופירעון מוקדם.', alternates: { canonical: PATH } });
 
 export default function FixedUnlinkedPage() {
   return <MortgageGuideArticle path={PATH} title="ריבית קבועה לא צמודה: איך לקרוא מסלול קל״צ" eyebrow="קבועה לא צמודה"

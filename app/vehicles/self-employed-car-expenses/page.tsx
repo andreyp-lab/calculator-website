@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -16,12 +17,12 @@ const SOURCES = [
   { id: 'vat-law', title: 'חוק מס ערך מוסף, התשל״ו–1975', url: 'https://www.btl.gov.il/Laws1/00_0022_000000.pdf', note: 'סעיפים 38 ו־41: מסמך כדין ושימוש בעסקה חייבת, בכפוף להגבלות ולהוראות הדין העדכניות.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${TITLE} | חשבונאי` },
   description: DESCRIPTION,
   alternates: { canonical: PAGE_PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', locale: 'he_IL', modifiedTime: UPDATED },
-};
+  openGraph: { images: ['/opengraph-image'], title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', locale: 'he_IL', modifiedTime: UPDATED },
+});
 
 const sections = [
   {

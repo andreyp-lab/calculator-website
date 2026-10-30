@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MortgageCalculator } from '@/components/calculators/MortgageCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'שכירות מול קניית דירה — מדריך להשוואת ההחלטה',
   description: 'אילו נתונים צריך לבדוק כשמשווים שכירות לקניית דירה: תזרים, משכנתא, מס רכישה, תחזוקה, הון עצמי וסיכונים.',
   alternates: { canonical: '/compare/rent-vs-buy' },
-};
+});
 
 export default function RentVsBuyComparePage() {
   return <CalculatorLayout

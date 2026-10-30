@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -8,12 +9,12 @@ const PAGE_PATH = '/employee-rights/work-grant/application';
 const OFFICIAL_APPLICATION = 'https://www.gov.il/he/service/submitting-an-online-claim-for-job-grant';
 const OFFICIAL_STATUS = 'https://www.gov.il/he/service/check-status-for-job-grant';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'הגשת בקשה למענק עבודה: מדריך שלב אחר שלב',
   description:
     'איך מגישים בקשה למענק עבודה באינטרנט או בדואר, מה להכין, מה לשמור ואיך ממשיכים למעקב בשירות הרשמי של רשות המסים.',
   alternates: { canonical: PAGE_PATH },
-};
+});
 
 const faqs = [
   {

@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'מדריכים פיננסיים מקיפים 2026 — מסים, משכנתא וזכויות עובדים' },
   description:
     'מדריכים בנושאי מסים, משכנתא, זכויות עובדים ותלוש שכר, עם הסברים וקישורים לכלים רלוונטיים.',
   alternates: { canonical: '/guides' },
-};
+});
 
 const guides = [
   {

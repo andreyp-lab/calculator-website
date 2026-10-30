@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/vehicle-tco-guide' },
   title: 'עלות החזקת רכב: אילו הוצאות צריך לכלול?',
   description: 'מדריך לבדיקת עלות רכב לאורך תקופת ההחזקה לפי הצעות רכישה, מימון, אנרגיה, ביטוח, תחזוקה ומכירה.',
-};
+});
 
 # עלות החזקת רכב: מעבר למחיר הרכישה
 

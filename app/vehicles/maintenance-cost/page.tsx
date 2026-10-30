@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -19,12 +20,12 @@ const faqs = [
   { question: 'האם לקבוע מרווח טיפולים זהה לכל הרכבים?', answer: 'לצורך התקציב בקשו את תוכנית הטיפולים של הדגם והגרסה המסוימים ואת פרטי הטיפול הקרוב. אין במדריך מרווח אחיד בקילומטרים או בזמן, ואין מחיר קבוע להחלפת חלקים.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${title} | חשבונאי` },
   description,
   alternates: { canonical: PAGE_PATH },
-  openGraph: { title, description, type: 'article', locale: 'he_IL', url: PAGE_PATH, publishedTime: UPDATED, modifiedTime: UPDATED },
-};
+  openGraph: { images: ['/opengraph-image'], title, description, type: 'article', locale: 'he_IL', url: PAGE_PATH, publishedTime: UPDATED, modifiedTime: UPDATED },
+});
 
 export default function MaintenanceCostPage() {
   const articleSchema = {

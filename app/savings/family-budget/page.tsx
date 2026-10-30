@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'תקציב משפחתי — איך מרכזים הכנסות והוצאות' },
   description: 'מדריך קצר לבניית תקציב משפחתי חודשי: הכנסה נטו, הוצאות, חובות וחיסכון. כלל 50/30/20 הוא נקודת פתיחה ולא דירוג פיננסי.',
   alternates: { canonical: '/savings/family-budget' },
-};
+});
 
 export default function FamilyBudgetPage() {
   return (

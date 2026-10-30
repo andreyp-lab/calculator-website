@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'השוואת תמהילי משכנתא — מה לבדוק בהצעות הבנקים',
   description: 'איך משווים הצעות משכנתא, מסלולים, הצמדה, ריביות ועמלות על בסיס אישור עקרוני ונתוני בנק ישראל.',
   alternates: { canonical: '/real-estate/mortgage-optimizer' },
-};
+});
 
 export default function MortgageOptimizerPage() {
   return <CalculatorLayout

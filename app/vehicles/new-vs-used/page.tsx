@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -19,12 +20,12 @@ const faqs = [
   { question: 'איזה מסמך לבקש כשמבטיחים אחריות?', answer: 'בקשו את נוסח האחריות החל על הרכב המסוים: זהות נותן האחריות, מועד תחילתה, תוקפה, מגבלות, חריגים ותהליך פנייה. אלה שאלות לבירור ההצעה, ולא קביעה של זכאות משפטית או של תקופת אחריות אחידה.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${title} | חשבונאי` },
   description,
   alternates: { canonical: PAGE_PATH },
-  openGraph: { title, description, type: 'article', locale: 'he_IL', url: PAGE_PATH, publishedTime: UPDATED, modifiedTime: UPDATED },
-};
+  openGraph: { images: ['/opengraph-image'], title, description, type: 'article', locale: 'he_IL', url: PAGE_PATH, publishedTime: UPDATED, modifiedTime: UPDATED },
+});
 
 export default function NewVsUsedPage() {
   const articleSchema = {

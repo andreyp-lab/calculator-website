@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import { SalaryNetGrossCalculator } from '@/components/calculators/SalaryNetGrossCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון ברוטו-נטו — גרסה להטמעה',
   description: 'גרסה להטמעה (embed) של מחשבון הברוטו-נטו של חשבונאי.',
   robots: { index: false, follow: true },
   alternates: { canonical: '/personal-tax/salary-net-gross' },
-};
+});
 
 // Hide the site chrome (Ticker/Header/Footer from the root layout) plus the
 // floating accessibility widget so the iframe shows only the calculator.

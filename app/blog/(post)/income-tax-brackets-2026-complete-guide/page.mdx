@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/income-tax-brackets-2026-complete-guide' },
   title: 'מדרגות מס הכנסה 2026: איך קוראים את הלוח הרשמי',
   description: 'מדרגות מס הכנסה להכנסה מיגיעה אישית בשנת 2026, ריווח שתי מדרגות המס והבדיקה האישית של זיכויים ומס יסף.',
-};
+});
 
 # מדרגות מס הכנסה 2026: איך קוראים את הלוח הרשמי
 

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { VatExtractCalculator } from '@/components/calculators/VatExtractCalculator';
@@ -17,16 +18,17 @@ const exampleAdd = addVat(1000); // 1,000 נטו → ברוטו
 const exampleExtract = extractVat(exampleAdd.gross); // חילוץ חזרה
 const exampleOdd = extractVat(500); // דוגמת אגורות
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: `מחשבון חילוץ מע"מ ${RATE_PCT}% — סכום לפני מע"מ`,
   description: `מחשבון חילוץ מע"מ: הזינו סכום כולל מע"מ וקבלו מיד את הסכום לפני מע"מ ואת רכיב המע"מ (${RATE_PCT}%). כולל הוספת מע"מ, נוסחה ודוגמה מחושבת.`,
   alternates: { canonical: '/tools/vat-extract' },
   openGraph: {
+    url: '/tools/vat-extract',
     title: `מחשבון חילוץ מע"מ ${RATE_PCT}%`,
     description: `חילוץ מע"מ מסכום כולל: חלוקה ב-${DIVISOR} נותנת את הסכום לפני מע"מ. מחשבון מיידי בשני הכיוונים.`,
     images: ['/opengraph-image'],
   },
-};
+});
 
 const faqItems = [
   {

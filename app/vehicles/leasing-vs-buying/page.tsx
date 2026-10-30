@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'ליסינג, הלוואה או קנייה במזומן — השוואת עלויות רכב',
   description: 'מה לבדוק בהצעות ליסינג, מימון וקנייה: תשלומים, שווי מכירה, ביטוח, קילומטראז׳ והשלכות מס שתלויות ברכב ובעסק.',
   alternates: { canonical: '/vehicles/leasing-vs-buying' },
-};
+});
 
 export default function LeasingVsBuyingPage() {
   return (

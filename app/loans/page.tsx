@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MACRO_DATA, formatHebrewDate } from '@/lib/data/macroeconomic-data';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'הלוואות ומשכנתאות — השוואת החזר, ריבית והצעות',
   description: 'כלים ומדריכים לבדיקת החזר הלוואה, תמהיל משכנתא, מיחזור וכושר החזר לפי הנתונים שהוזנו וההצעות שקיבלתם.',
   alternates: { canonical: '/loans' },
-};
+});
 
 const tools = [
   { href: '/real-estate/mortgage', title: 'אומדן החזר משכנתא', description: 'חישוב לפי סכום, תקופה וריבית שתזינו. השוו את התוצאה לאישור העקרוני.' },

@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'זכויות עובדים בישראל — נקודות בדיקה ומקורות רשמיים',
   description: 'שכר מינימום, מילואים, אבטלה ומענק עבודה: הפניות לבדיקת הזכויות והסכומים האישיים במקורות הרשמיים.',
   alternates: { canonical: '/guides/employee-rights-complete-guide' },
-};
+});
 
 const rights = [
   { title: 'שכר מינימום', href: '/employee-rights/minimum-wage', detail: 'מ־1 באפריל 2026: 6,443.85 ₪ לחודש ו־35.40 ₪ לשעה לפי בסיס 182 שעות.', source: 'https://www.btl.gov.il/Mediniyut/GeneralData/Pages/%D7%A9%D7%9B%D7%A8%20%D7%9E%D7%99%D7%A0%D7%99%D7%9E%D7%95%D7%9D.aspx' },

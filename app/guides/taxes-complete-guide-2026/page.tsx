@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -18,12 +19,13 @@ const SURTAX_THRESHOLD = SURTAX_2026.annualThreshold.toLocaleString('he-IL'); //
 const VAT_PCT = VAT_2026.standard * 100; // 18
 const CREDIT_POINT_MONTHLY = CREDIT_POINT_2026.monthly; // 242
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'כל המסים בישראל 2026 - המדריך השלם',
   description:
     'מדריך מקיף לכל המסים בישראל 2026: מס הכנסה, ב.ל., מע"מ, מס שבח, מס רכישה ומס יסף. מדרגות, פטורים, הטבות וניכויים לשכיר ועצמאי. חשב עכשיו עם המחשבונים.',
   alternates: { canonical: '/guides/taxes-complete-guide-2026' },
   openGraph: {
+    url: '/guides/taxes-complete-guide-2026',
     // OG image לא מתפשט מ-app/opengraph-image.tsx לדפים שמגדירים openGraph משלהם.
     images: ['/opengraph-image'],
     title: 'כל המסים בישראל 2026 - המדריך השלם',
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'he_IL',
   },
-};
+});
 
 const tocItems = [
   { id: 'why', label: 'למה זה חשוב?' },

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -8,12 +9,12 @@ const PAGE_PATH = '/employee-rights/work-grant/status';
 const OFFICIAL_STATUS = 'https://www.gov.il/he/service/check-status-for-job-grant';
 const OFFICIAL_APPLICATION = 'https://www.gov.il/he/service/submitting-an-online-claim-for-job-grant';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'בדיקת סטטוס מענק עבודה: כך עוקבים אחרי הבקשה',
   description:
     'איך בודקים סטטוס של בקשה למענק עבודה, אילו פרטים נדרשים, כמה זמן נמשכת הבדיקה ומה עושים כשחסר מספר תביעה או מסמך.',
   alternates: { canonical: PAGE_PATH },
-};
+});
 
 const faqs = [
   {

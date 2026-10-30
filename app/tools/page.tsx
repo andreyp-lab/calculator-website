@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import {
@@ -14,12 +15,12 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/tools' },
   title: 'מערכת פיננסית לבעלי עסקים 2026 - תקציב, תזרים, DCF ועוד',
   description:
     'כלי תכנון פיננסי לעסק: תקציב, תזרים, ניתוח דוחות ותרחישים. עברית מלאה וללא הרשמה.',
-};
+});
 
 interface Tool {
   href: string;

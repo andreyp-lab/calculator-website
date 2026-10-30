@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from './MortgageGuideArticle';
 
@@ -5,11 +6,11 @@ const PATH = '/real-estate/mortgage/guide/prepayment-fee';
 const BOI_ORDER = 'https://www.boi.org.il/media/qy5cow0l/116.pdf';
 const BOI_RATES = 'https://www.boi.org.il/information/interestrates/mortgage/';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'עמלת פירעון מוקדם במשכנתא: מה בודקים לפני סילוק',
   description: 'מדריך לבדיקת עמלת פירעון מוקדם: רכיבי העמלה, הודעה מראש, מסלולים, דף הסבר ואישור מהבנק — בלי לנחש את הסכום.',
   alternates: { canonical: PATH },
-};
+});
 
 export default function PrepaymentFeePage() {
   return <MortgageGuideArticle

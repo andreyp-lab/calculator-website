@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ALL_TERMS, getTermBySlug, getRelatedTerms } from '@/lib/data/glossary';
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const wordCount = cleanDef.split(/\s+/).filter(Boolean).length;
   const isThin = wordCount < 60;
 
-  return {
+  return withPageSocialMetadata({
     // absolute: בלי זה סיומת המותג מה-template בשורש דוחפת חלק מהמונחים מעבר ל-65 תווים.
     title: { absolute: `${term.term} – מה זה? הסבר והגדרה | מילון פיננסי 2026` },
     description,
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'article',
       locale: 'he_IL',
     },
-  };
+  });
 }
 
 export default async function GlossaryTermPage({ params }: PageProps) {

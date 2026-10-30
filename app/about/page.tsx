@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Image from 'next/image';
 
 const SITE_URL = 'https://cheshbonai.co.il';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/about' },
   title: 'אודות — אנדרי פלטונוב, רו״ח וסמנכ״ל כספים',
   description:
@@ -15,7 +16,7 @@ export const metadata = {
       'חשבונאי נבנה על ידי אנדרי פלטונוב — רו״ח וסמנכ״ל כספים עם 15+ שנות ניסיון. כלים ומדריכים פיננסיים בעברית.',
     url: '/about',
   },
-};
+});
 
 const personSchema = {
   '@context': 'https://schema.org',

@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/employee-rights-israel-2026' },
   title: 'זכויות עובדים בישראל 2026: בדיקה לפי תלוש ותנאי העסקה',
   description: 'מדריך לבדיקת שכר מינימום, חופשה, מחלה, הבראה, פנסיה ופיצויים מול מקורות רשמיים. הזכאות האישית תלויה בוותק, היקף משרה והסדרי העבודה.',
-};
+});
 
 # זכויות עובדים בישראל: מה לבדוק בתלוש ב־2026
 

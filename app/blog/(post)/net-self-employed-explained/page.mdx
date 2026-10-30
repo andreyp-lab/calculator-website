@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/net-self-employed-explained' },
   title: 'כמה כסף נשאר ביד לעצמאי? איך בודקים נטו בשנת 2026',
   description: 'מהמחזור לתזרים הפנוי: ההבדל בין מע״מ, הוצאות, מס הכנסה, ביטוח לאומי והפקדות לחיסכון, והיכן בודקים חבות אישית.',
-};
+});
 
 # כמה כסף נשאר ביד לעצמאי? איך בודקים נטו בשנת 2026
 

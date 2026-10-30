@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/ltv-mortgage-rates-secret' },
   title: 'שיעור מימון במשכנתא: תקרות, חישוב והשוואת הצעות',
   description: 'איך מחשבים LTV, מהן תקרות המימון של בנק ישראל לפי סוג דירה, ואיך בודקים את השפעת ההון העצמי מול הצעות ריבית אמיתיות.',
-};
+});
 
 # שיעור מימון במשכנתא: מה אפשר לדעת לפני שמבקשים הצעה?
 

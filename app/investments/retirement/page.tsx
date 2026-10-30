@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'תכנון פרישה — מקורות הכנסה, הוצאות וקצבאות',
   description: 'מדריך למיפוי הכנסה והוצאות לקראת פרישה עם הפניות לדוח הפנסיוני, ביטוח לאומי ורשות המסים.',
   alternates: { canonical: '/investments/retirement' },
-};
+});
 
 export default function RetirementPage() {
   return (

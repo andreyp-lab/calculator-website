@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מס רווח הון על השקעות — בדיקת סוג הכנסה ודיווח',
   description: 'מה לבדוק לפני חישוב מס על ניירות ערך, ריבית ודיבידנד: סוג הכנסה, ניכוי במקור, הפסדים וזכאות אישית.',
   alternates: { canonical: '/investments/capital-gains-tax' },
-};
+});
 
 export default function CapitalGainsTaxPage() {
   return (

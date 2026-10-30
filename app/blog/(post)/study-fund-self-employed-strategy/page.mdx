@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/study-fund-self-employed-strategy' },
   title: 'קרן השתלמות לעצמאי 2026: ניכוי, פטור ונזילות',
   description: 'ההבדל בין ניכוי הפקדה מהכנסה לבין פטור אפשרי ממס על רווחי הקרן, אילו תקרות לבדוק ומה משמעות מועד המשיכה.',
-};
+});
 
 # קרן השתלמות לעצמאי 2026: ניכוי, פטור ונזילות
 

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import {
@@ -9,12 +10,12 @@ import {
 } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/topics' },
   title: { absolute: 'כלים ומדריכים לפי נושא — נדל״ן, רכב, ביטוח והשקעות' },
   description:
     'כלים ומדריכים על נדל״ן, חיסכון, השקעות, פנסיה ורכב, בגישה חופשית וללא הרשמה.',
-};
+});
 
 interface Group {
   id: string;

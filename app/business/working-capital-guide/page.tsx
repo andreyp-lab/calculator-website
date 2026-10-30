@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -9,7 +10,7 @@ const PAGE_PATH = '/business/working-capital-guide';
 const SITE_URL = 'https://cheshbonai.co.il';
 const PUBLISHED_AT = '2026-10-02';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'הון חוזר בעסק — חישוב, ניתוח וניהול תזרים | חשבונאי' },
   description:
     'מדריך שמרני להון חוזר: נוסחת החישוב, סיווג נכסים והתחייבויות שוטפים, מחזור המרת מזומן ודוגמאות מספריות שקופות.',
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     url: PAGE_PATH,
     images: ['/opengraph-image'],
   },
-};
+});
 
 const sources = [
   {

@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'ביטוח לאומי לעצמאי 2026 — שיעורים וחישוב רשמי',
   description: 'שיעורי דמי הביטוח והבריאות לעצמאי ב-2026, אופן בדיקת בסיס החיוב וקישור למחשבון הרשמי של הביטוח הלאומי.',
   alternates: { canonical: '/self-employed/social-security' },
-};
+});
 
 const faqItems = [
   {

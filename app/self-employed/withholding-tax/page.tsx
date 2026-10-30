@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -12,7 +13,7 @@ const SOURCES = {
   guide: 'https://www.gov.il/BlobFolder/generalpage/income-tax-guide-knowyourright/he/Guides_IncomeTax_da-2025.pdf',
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'ניכוי מס במקור ואישור ניהול ספרים — מדריך לעצמאי',
   description: 'הלקוח ביקש אישור ניכוי מס במקור וניהול ספרים? כך בודקים ומדפיסים אישורים, מבקשים הקטנה ומתאימים תשלום שנוכה ממנו מס למסמכי העסק.',
   alternates: { canonical: PAGE_PATH },
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     url: PAGE_PATH,
     images: ['/opengraph-image'],
   },
-};
+});
 
 // Illustrative reconciliation only: not a statutory rate or a tax estimate.
 const EXAMPLE = { totalDue: 5000, withheldByCustomer: 250 };

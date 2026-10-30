@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BUSINESS_GUIDE_SECTION_IDS, BUSINESS_TYPES, getBusinessType, type BusinessGuideSectionId } from '@/lib/data/business-setup/business-types';
@@ -136,12 +137,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!business) return { title: 'עמוד לא נמצא' };
   const title = 'תכנון הקמת ' + business.name + ' — שאלות לפני פתיחה';
   const description = 'מדריך תכנון להקמת ' + business.name + ': שאלות על פעילות, מקום, ציוד, ספקים והוצאות שיש לברר מול בעלי מקצוע והצעות מחיר.';
-  return {
+  return withPageSocialMetadata({
     title: { absolute: title },
     description,
     alternates: { canonical: '/business/' + business.slug },
     openGraph: { title, description, url: '/business/' + business.slug, type: 'article', locale: 'he_IL', images: ['/opengraph-image'] },
-  };
+  });
 }
 
 export default async function BusinessGuidePage({ params }: PageProps) {

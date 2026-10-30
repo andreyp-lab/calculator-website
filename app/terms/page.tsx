@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { SITE_INFO } from '@/lib/config/site-info';
+import { SITE_INFO, withPageSocialMetadata } from '@/lib/config/site-info';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/terms' },
   title: 'תנאי שימוש',
   description: 'תנאי השימוש של cheshbonai.co.il - כתב ויתור פיננסי מקיף, הגבלת אחריות, קניין רוחני.',
-};
+});
 
 export default function TermsPage() {
   return (

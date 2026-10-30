@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'דמי מחלה — שיעורי תשלום ובדיקת יתרה',
   description: 'בדקו ימי מחלה צבורים, שיעורי תשלום ותנאי היעדרות בשל מחלת בן משפחה לפי מידע משרד העבודה והחוק.',
   alternates: { canonical: '/employee-rights/sick-pay' },
-};
+});
 
 const faqItems = [
   {

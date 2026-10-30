@@ -1,14 +1,15 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { blogPosts, getAllCategories } from '@/content/blog/registry';
 import { BlogExplorer } from '@/components/blog/BlogExplorer';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog' },
   title: 'בלוג פיננסי — מיסוי, עצמאים וזכויות עובדים 2026',
   description:
     'מאמרים מקצועיים מקיפים על מס הכנסה, החזרי מס, פיצויי פיטורין, חברה בע"מ vs עוסק, מע"מ, זכויות עובדים והפחתת מס - מעודכן 2026.',
-};
+});
 
 export default function BlogPage() {
   // מיון: featured קודם, ואז לפי תאריך יורד

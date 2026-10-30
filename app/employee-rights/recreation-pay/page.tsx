@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { VerifiedRecreationPayCalculator } from '@/components/calculators/VerifiedRecreationPayCalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'דמי הבראה 2026 — אומדן בסיסי לפי ותק והיקף משרה',
   description: 'אומדן ברוטו לדמי הבראה במגזר הפרטי לפי הצו הכללי; תעריפים ענפיים וציבוריים דורשים בדיקת ההסכם החל.',
   alternates: { canonical: '/employee-rights/recreation-pay' },
-};
+});
 
 export default function RecreationPayPage() {
   return (

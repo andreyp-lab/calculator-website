@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/salary-net-2026-complete-guide' },
   title: 'שכר נטו 2026: אילו נתונים משנים את התלוש',
   description: 'מדריך להבנת מס הכנסה, ביטוח לאומי, דמי בריאות והפקדות עובד לפני הערכת שכר נטו מברוטו.',
-};
+});
 
 # שכר נטו 2026: מה בודקים בתלוש
 

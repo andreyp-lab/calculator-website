@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -12,12 +13,12 @@ import {
   splitShift,
 } from '@/lib/calculators/overtime-pay';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'שעות נוספות — איך מחשבים 125% ו־150% בתלוש',
   description:
     'מה נחשב שעה נוספת, איך מחשבים שכר שעתי משכר חודשי, וכמה משלמים על כל שעה נוספת ועל עבודה בשבת — עם דוגמה מחושבת ורשימת בדיקה לתלוש.',
   alternates: { canonical: '/employee-rights/overtime' },
-};
+});
 
 // כל המספרים בדוגמה מחושבים כאן מהמנוע ולא מוקלדים ידנית — כך הטקסט והטבלה לא יכולים להתפצל.
 const EXAMPLE_MONTHLY_WAGE = 12_000;

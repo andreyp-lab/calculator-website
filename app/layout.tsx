@@ -74,12 +74,8 @@ export const metadata: Metadata = {
   // any canonical declared at the root layout cascades to every child page that doesn't
   // explicitly override it — which causes Google to see "I'm the homepage" on every
   // sub-page and deindex all of them. Each page.tsx must declare its own canonical.
-  alternates: {
-    languages: {
-      "he-IL": "https://cheshbonai.co.il",
-      "x-default": "https://cheshbonai.co.il",
-    },
-  },
+  // The site has one language. Do not inherit homepage hreflang URLs on
+  // unrelated articles: language alternates must refer to equivalent pages.
   openGraph: {
     type: "website",
     locale: "he_IL",

@@ -1,15 +1,16 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator } from 'lucide-react';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/investments' },
   title: 'השקעות וחיסכון — מחשבונים ומדריכי פרישה',
   description:
     'כלים לתרחישי ריבית דריבית ותשואה לצד מדריכים לבדיקת פנסיה ופרישה מוקדמת.',
-};
+});
 
 const calculators = [
   {

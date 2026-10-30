@@ -15,6 +15,7 @@ export interface CalcLink {
 /** רשימת כל המחשבונים העיקריים, מקובצים לפי תחום. */
 export const CALCULATORS: CalcLink[] = [
   // מסים אישיים / שכירים
+  { path: '/salaried/salary-negotiation-total-compensation', label: 'השוואת הצעות שכר', group: 'tax' },
   { path: '/personal-tax/salary-net-gross', label: 'שכר נטו / ברוטו', group: 'tax' },
   { path: '/personal-tax/income-tax', label: 'מס הכנסה', group: 'tax' },
   { path: '/personal-tax/tax-refund', label: 'החזר מס', group: 'tax' },
@@ -55,6 +56,7 @@ export const CALCULATORS: CalcLink[] = [
   { path: '/self-employed/employee-and-self-employed', label: 'שכיר + עצמאי', group: 'self-employed' },
   { path: '/compare/osek-patur-vs-murshe', label: 'עוסק פטור מול עוסק מורשה', group: 'self-employed' },
   // נדל"ן ומשכנתאות
+  { path: '/real-estate/first-home-budget', label: 'תקציב לדירה ראשונה', group: 'real-estate' },
   { path: '/real-estate/mortgage', label: 'מחשבון משכנתא', group: 'real-estate' },
   { path: '/real-estate/mortgage-optimizer', label: 'מדריך השוואת תמהילים', group: 'real-estate' },
   { path: '/real-estate/purchase-tax', label: 'מס רכישה', group: 'real-estate' },
@@ -83,7 +85,7 @@ export const CALCULATORS: CalcLink[] = [
 /** קשרים ידניים חוצי-קבוצה ברמת רלוונטיות גבוהה. */
 const CURATED: Record<string, string[]> = {
   '/employee-rights/salary-deductions': ['/personal-tax/salary-net-gross', '/personal-tax/tax-credits', '/personal-tax/income-tax', '/insurance/pension'],
-  '/personal-tax/salary-net-gross': ['/personal-tax/income-tax', '/personal-tax/tax-refund', '/self-employed/employee-and-self-employed', '/employee-rights/severance'],
+  '/personal-tax/salary-net-gross': ['/personal-tax/income-tax', '/personal-tax/tax-refund', '/salaried/salary-negotiation-total-compensation', '/employee-rights/severance'],
   '/personal-tax/income-tax': ['/personal-tax/salary-net-gross', '/personal-tax/tax-credits', '/personal-tax/tax-refund', '/self-employed/net'],
   '/self-employed/net': ['/self-employed/social-security', '/self-employed/vat', '/self-employed/tax-advances', '/self-employed/employee-and-self-employed'],
   '/self-employed/allowed-expenses': ['/self-employed/invoices', '/self-employed/year-end-tax-simulator', '/self-employed/net', '/self-employed/vat'],
@@ -94,8 +96,10 @@ const CURATED: Record<string, string[]> = {
   '/self-employed/vat-threshold': ['/self-employed/vat', '/self-employed/allowed-expenses', '/self-employed/net', '/self-employed/social-security'],
   '/self-employed/vat': ['/self-employed/vat-threshold', '/self-employed/tax-advances', '/self-employed/net', '/self-employed/social-security'],
   '/self-employed/employee-and-self-employed': ['/personal-tax/salary-net-gross', '/self-employed/net', '/self-employed/social-security', '/self-employed/tax-advances'],
-  '/real-estate/mortgage': ['/real-estate/mortgage-optimizer', '/real-estate/purchase-tax', '/savings/loan-repayment', '/real-estate/capital-gains-tax'],
-  '/real-estate/purchase-tax': ['/real-estate/mortgage', '/real-estate/capital-gains-tax', '/real-estate/mortgage-optimizer'],
+  '/real-estate/mortgage': ['/real-estate/mortgage-optimizer', '/real-estate/purchase-tax', '/savings/loan-repayment', '/real-estate/first-home-budget'],
+  '/real-estate/purchase-tax': ['/real-estate/mortgage', '/real-estate/capital-gains-tax', '/real-estate/mortgage-optimizer', '/real-estate/first-home-budget'],
+  '/salaried/salary-negotiation-total-compensation': ['/personal-tax/salary-net-gross', '/personal-tax/income-tax', '/employee-rights/annual-bonus', '/insurance/pension'],
+  '/real-estate/first-home-budget': ['/real-estate/mortgage', '/real-estate/purchase-tax', '/savings/family-budget', '/real-estate/mortgage-optimizer'],
   '/employee-rights/severance': ['/employee-rights/recreation-pay', '/employee-rights/annual-leave', '/personal-tax/salary-net-gross', '/insurance/pension'],
   '/vehicles/leasing-vs-buying': ['/compare/leasing-mimuni-vs-tifuli', '/vehicles/fuel-cost', '/vehicles/company-car-benefit', '/self-employed/employer-cost'],
   // קישור אשכול הקמת-עסק מהדפים הנסרקים ביותר (GSC, יולי 2026) — פתרון לבעיית ה-discovery

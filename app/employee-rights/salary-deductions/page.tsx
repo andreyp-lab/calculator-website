@@ -1,15 +1,16 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { SalaryDeductionsCalculator } from '@/components/calculators/SalaryDeductionsCalculator';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון ניכויים ממשכורת 2026 — מה מנכים ולמה',
   description:
     'מחשבון ניכויים ממשכורת 2026: פירוט שורה-שורה של כל מה שיורד מהברוטו — מס הכנסה, ביטוח לאומי, דמי בריאות ופנסיה. כמה נשאר נטו.',
   alternates: { canonical: '/employee-rights/salary-deductions' },
-};
+});
 
 const faqItems = [
   {

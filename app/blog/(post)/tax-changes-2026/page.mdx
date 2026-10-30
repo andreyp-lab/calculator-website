@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/tax-changes-2026' },
   title: 'שינוי מדרגות מס הכנסה ב־2026: מה רווח ומה צריך לבדוק',
   description: 'ריווח מדרגות המס בשיעורי 20% ו־31% בשנת 2026, חישוב לפי הכנסה חייבת ובדיקת נקודות זיכוי במקורות רשות המסים.',
-};
+});
 
 # ריווח מדרגות מס הכנסה בשנת 2026
 

@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/bituach-leumi-self-employed-deep-dive' },
   title: 'ביטוח לאומי לעצמאי 2026: שיעורים, בסיס חיוב וניכוי למס',
   description: 'מדריך לבדיקת דמי ביטוח לאומי ובריאות לעצמאים: מדרגות 2026, בסיס החיוב, ניכוי 52% מדמי ביטוח לאומי בלבד והסימולטור הרשמי.',
-};
+});
 
 # ביטוח לאומי לעצמאי 2026: איך בודקים את החיוב
 

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
@@ -5,11 +6,11 @@ import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 
 const sourceUrl = 'https://www.btl.gov.il/HaravotBarzel1/Pages/default.aspx';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'סיוע בעקבות מלחמת חרבות ברזל — מידע ומקורות רשמיים',
   description: 'מידע כללי על מסלולי סיוע ותגמולי מילואים בעקבות אירועי אוקטובר 2023, וקישורים למקור הרשמי לבדיקת תנאי זכאות מעודכנים.',
   alternates: { canonical: 'https://cheshbonai.co.il/news/iron-swords' },
-};
+});
 
 export default function IronSwordsPage() {
   return (

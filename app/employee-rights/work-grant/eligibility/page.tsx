@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'זכאות למענק עבודה — בדיקה רשמית',
   description: 'בדקו זכאות למענק עבודה לפי שנת המס, הכנסה ומצב משפחתי ברשות המסים.',
   alternates: { canonical: '/employee-rights/work-grant/eligibility' },
-};
+});
 
 export default function WorkGrantEligibilityPage() {
   return (

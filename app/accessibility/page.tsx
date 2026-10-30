@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { SITE_INFO } from '@/lib/config/site-info';
+import { SITE_INFO, withPageSocialMetadata } from '@/lib/config/site-info';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/accessibility' },
   title: 'הצהרת נגישות',
   description: 'הצהרת הנגישות של cheshbonai.co.il - תקן ישראלי 5568, WCAG 2.0 AA, חוק שוויון זכויות לאנשים עם מוגבלות.',
-};
+});
 
 export default function AccessibilityPage() {
   return (

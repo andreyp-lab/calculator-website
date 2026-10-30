@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'שווי לקוח (CLV) — נתונים, חישוב ומגבלות',
   description: 'מדריך לחישוב שווי לקוח ועלות גיוס: איך בוחרים תקופת מדידה, מחשבים רווח גולמי ומפרשים את התוצאה בלי בנצ׳מארק אחיד.',
   alternates: { canonical: '/tools/customer-lifetime-value' },
-};
+});
 
 export default function CLVPage() {
   return (

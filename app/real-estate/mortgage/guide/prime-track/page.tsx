@@ -1,8 +1,9 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { MortgageGuideArticle } from '../prepayment-fee/MortgageGuideArticle';
 
 const PATH = '/real-estate/mortgage/guide/prime-track';
-export const metadata: Metadata = { title: 'מסלול פריים במשכנתא: עוגן, מרווח וסיכון', description: 'איך פועל מסלול פריים, מהו המרווח, כיצד שינוי ריבית בנק ישראל משפיע ומה מגבלת הריבית המשתנה.', alternates: { canonical: PATH } };
+export const metadata: Metadata = withPageSocialMetadata({ title: 'מסלול פריים במשכנתא: עוגן, מרווח וסיכון', description: 'איך פועל מסלול פריים, מהו המרווח, כיצד שינוי ריבית בנק ישראל משפיע ומה מגבלת הריבית המשתנה.', alternates: { canonical: PATH } });
 
 export default function PrimeTrackPage() {
   return <MortgageGuideArticle path={PATH} title="מסלול פריים במשכנתא: מה משתנה ומה נשאר קבוע" eyebrow="מסלול פריים"

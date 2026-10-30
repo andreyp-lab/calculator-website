@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -19,12 +20,12 @@ const faqs = [
   { question: 'מה עושים כשאין תוצאה מתאימה במאגר?', answer: 'משאירים את שדה השווי כמידע חסר ומבקשים הערכה פרטנית או הצעות כתובות. אפשר לשמור נתון של דגם קרוב כחומר לבדיקה, אך יש לסמן את ההבדלים ולא להציג אותו כשווי שנבדק לרכב שלכם.' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `${title} | חשבונאי` },
   description,
   alternates: { canonical: PAGE_PATH },
-  openGraph: { title, description, type: 'article', locale: 'he_IL', url: PAGE_PATH, publishedTime: UPDATED, modifiedTime: UPDATED },
-};
+  openGraph: { images: ['/opengraph-image'], title, description, type: 'article', locale: 'he_IL', url: PAGE_PATH, publishedTime: UPDATED, modifiedTime: UPDATED },
+});
 
 export default function DepreciationPage() {
   const articleSchema = {

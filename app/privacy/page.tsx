@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { SITE_INFO } from '@/lib/config/site-info';
+import { SITE_INFO, withPageSocialMetadata } from '@/lib/config/site-info';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/privacy' },
   title: 'מדיניות פרטיות',
   description: 'מדיניות הפרטיות של cheshbonai.co.il: נתוני שימוש, Google Analytics, Vercel Analytics, אחסון וקישורים לקורסים.',
-};
+});
 
 export default function PrivacyPage() {
   return (

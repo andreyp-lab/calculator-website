@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'ליסינג מימוני מול תפעולי — מדריך להשוואת הצעות',
   description: 'מה לבדוק בחוזי ליסינג מימוני ותפעולי: תשלומים, שירותים, קילומטראז׳, תנאי סיום והשלכות מס לפי נסיבות העסקה.',
   alternates: { canonical: '/compare/leasing-mimuni-vs-tifuli' },
-};
+});
 
 export default function LeasingMimuniVsTifuliPage() {
   return <CalculatorLayout

@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'חופשה שנתית — זכאות, צבירה ופדיון',
   description: 'מה לבדוק בתלוש ובפנקס החופשה: ותק, ימי עבודה בפועל, שבוע העבודה ויתרה. קישורים להנחיות משרד העבודה ולחוק חופשה שנתית.',
   alternates: { canonical: '/employee-rights/annual-leave' },
-};
+});
 
 const faqItems = [
   {

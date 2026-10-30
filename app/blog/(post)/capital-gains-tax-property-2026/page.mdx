@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   title: 'מס שבח במכירת דירה: בדיקה נכונה לפני עסקה',
   description: 'מתי יש לבדוק פטור, חישוב לינארי, הוצאות והשפעת מועד הרכישה במחשבון רשות המסים.',
   alternates: { canonical: '/blog/capital-gains-tax-property-2026' },
-};
+});
 
 # מס שבח במכירת דירה: בדיקה נכונה לפני עסקה
 

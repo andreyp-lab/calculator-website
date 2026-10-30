@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 import { DisclaimerBox } from '@/components/calculator/DisclaimerBox';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/tax-refund-complete-guide-2026' },
   title: 'החזר מס לשכירים: בדיקת זכאות והגשת בקשה',
   description: 'איך בודקים אם נוכה מס ביתר, אילו מסמכים צריך, ומהו שירות ההגשה הרשמי של רשות המסים לשכירים.',
-};
+});
 
 # החזר מס לשכירים: בדיקה והגשה
 

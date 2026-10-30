@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/tax-advances-self-employed-survival' },
   title: 'מקדמות מס הכנסה לעצמאי 2026: דיווח, תשלום ועדכון',
   description: 'איך לבדוק דרישת מקדמות, לדווח ולשלם לרשות המסים, לבקש הקטנה בטופס 2216א׳ ולהיערך לבירור המס בדוח השנתי.',
-};
+});
 
 # מקדמות מס הכנסה לעצמאי: מה בודקים בשנת 2026
 

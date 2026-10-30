@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
@@ -12,18 +13,19 @@ const licensedRegistration = 'https://www.gov.il/he/service/vat-821';
 const officialGuide =
   'https://www.gov.il/BlobFolder/generalpage/income-tax-guide-knowyourright/he/Guides_IncomeTax_da-2025.pdf';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: `תקרת עוסק פטור 2026: ${threshold} ₪ ומה עושים בחריגה` },
   description: `תקרת עוסק פטור ב-2026 היא ${threshold} ₪ במחזור עסקאות. מה נכלל במחזור, איך לעקוב במהלך השנה ומה עושים כשמתקרבים לתקרה או עוברים אותה.`,
   alternates: { canonical: PAGE_PATH },
   openGraph: {
+    url: '/self-employed/vat-threshold',
     images: ['/opengraph-image'],
     title: `תקרת עוסק פטור 2026: ${threshold} ₪`,
     description: 'מדריך מעשי למעקב אחר מחזור העסקאות ולבדיקת שינוי סיווג במע״מ.',
     type: 'article',
     locale: 'he_IL',
   },
-};
+});
 
 const faqItems = [
   {

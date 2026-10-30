@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מדריך למשכנתא בישראל 2026 — מסלולים, מגבלות והשוואת הצעות',
   description: 'מה לבדוק לפני לקיחת משכנתא: שיעור מימון, יכולת החזר, מסלולי ריבית, אישור עקרוני, פירעון מוקדם ומיחזור.',
   alternates: { canonical: '/guides/mortgage-complete-guide-2026' },
-};
+});
 
 const bankOfIsraelGuide = 'https://www.boi.org.il/information/bank-paymnts/financial-education/%D7%94%D7%A8%D7%A4%D7%95%D7%A8%D7%9E%D7%94-%D7%9C%D7%94%D7%92%D7%91%D7%A8%D7%AA-%D7%A9%D7%A7%D7%99%D7%A4%D7%95%D7%AA-%D7%94%D7%9E%D7%99%D7%93%D7%A2-%D7%95%D7%94%D7%AA%D7%97%D7%A8%D7%95%D7%AA-%D7%91%D7%9E%D7%A9%D7%9B%D7%A0%D7%AA%D7%90%D7%95%D7%AA/';
 

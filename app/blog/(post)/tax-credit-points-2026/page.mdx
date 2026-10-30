@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/tax-credit-points-2026' },
   title: 'נקודות זיכוי 2026 — איך בודקים זכאות אישית',
   description: 'שווי נקודת זיכוי וקישורים לשירותי רשות המסים לבדיקת זכאות ומס.',
-};
+});
 
 # נקודות זיכוי במס הכנסה לשנת 2026
 

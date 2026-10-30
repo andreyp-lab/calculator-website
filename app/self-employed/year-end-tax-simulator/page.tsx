@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'סוף שנת מס לעצמאי — הכנת הנתונים ובדיקת החבות',
   description: 'רשימת נתונים להכנת הדוח השנתי ולבדיקת מקדמות, ביטוח לאומי והפקדות מול המקורות הרשמיים.',
   alternates: { canonical: '/self-employed/year-end-tax-simulator' },
-};
+});
 
 const faqItems = [
   {

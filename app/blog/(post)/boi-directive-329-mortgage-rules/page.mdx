@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/boi-directive-329-mortgage-rules' },
   title: { absolute: 'הוראת בנק ישראל 329 — מגבלת הריבית המשתנה במשכנתא' },
   description: 'לפי הוראה 329 העדכנית, לכל היותר 66.66% מן ההלוואה לדיור יכולים להיות בריבית משתנה. הסבר ודוגמאות.',
-};
+});
 
 # הוראת בנק ישראל 329: כמה פריים אפשר לקחת במשכנתא?
 

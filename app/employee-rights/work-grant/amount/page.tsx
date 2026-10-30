@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
@@ -9,12 +10,12 @@ const OFFICIAL_SIMULATOR = 'https://www.gov.il/he/service/check-eligibility-for-
 const OFFICIAL_GUIDE =
   'https://www.gov.il/BlobFolder/generalpage/income-tax-guide-knowyourright/he/Guides_IncomeTax_da-2025.pdf';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'סכום מענק עבודה: איך מחשבים וכיצד בודקים',
   description:
     'איך נקבע סכום מענק עבודה, אילו הכנסות משפיעות עליו ולמה אין סכום אחיד. הסבר לשנת הזכאות 2025 והפניה לסימולטור הרשמי.',
   alternates: { canonical: PAGE_PATH },
-};
+});
 
 const faqs = [
   {

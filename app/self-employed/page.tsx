@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator, LayoutDashboard, Wallet, TrendingUp, BarChart3, LineChart, Target } from 'lucide-react';
@@ -14,11 +15,11 @@ const businessTools = [
   { href: '/tools/forecast', icon: LineChart, title: 'חיזוי פיננסי לעסק', description: 'תחזיות הכנסה ותרחישים' },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/self-employed' },
   title: 'כלים ומדריכים לעצמאים ועסקים 2026 - מע"מ, ביטוח לאומי ומס',
   description: 'כלים ומדריכים לעצמאים ופרילנסרים: מע״מ, ביטוח לאומי, מקדמות מס הכנסה, תזרים ותמחור שעה, עם הפניות לחישוב אישי במקורות הרשמיים.',
-};
+});
 
 const calculators = [
   {

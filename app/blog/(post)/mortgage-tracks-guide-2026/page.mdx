@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/mortgage-tracks-guide-2026' },
   title: 'מסלולי משכנתא: פריים, קבועה וצמודת מדד',
   description: 'מה משתנה בכל מסלול משכנתא, אילו נתונים יש לבקש מהבנק ואיך להשוות הצעות.',
-};
+});
 
 # מסלולי משכנתא: מה לבדוק לפני בחירת תמהיל?
 

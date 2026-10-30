@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft, Calculator } from 'lucide-react';
@@ -5,11 +6,11 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
 import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/vehicles' },
   title: 'מחשבוני רכב 2026 — שווי שימוש, עלות דלק וליסינג פרטי',
   description: 'בדקו שווי שימוש ברכב צמוד לפי דגם ברשות המסים, חשבו עלות נסיעה ועיינו במדריך להשוואת הצעות ליסינג וקנייה.',
-};
+});
 
 const calculators = [
   {

@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/company-car-tax-2026' },
   title: 'שווי שימוש ברכב מעסיק: בדיקה לפי דגם ושכר',
   description: 'איך בודקים את שווי השימוש לרכב צמוד בסימולטור הרשמי, ומה צריך להשוות בין רכב מעסיק לרכב פרטי.',
-};
+});
 
 # שווי שימוש ברכב מעסיק: בדיקה לפי דגם
 

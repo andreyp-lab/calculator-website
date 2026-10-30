@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'סימולטור מענק עבודה — בדיקה רשמית',
   description: 'בדיקת זכאות ומענק עבודה לפי שנת המס והמצב האישי בשירות הרשמי של רשות המסים.',
   alternates: { canonical: '/employee-rights/work-grant' },
-};
+});
 
 export default function WorkGrantPage() {
   return (

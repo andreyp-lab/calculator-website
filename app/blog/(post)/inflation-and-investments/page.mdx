@@ -1,10 +1,11 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { BlogPostFooter } from '@/components/blog/BlogPostFooter';
 
-export const metadata = {
+export const metadata = withPageSocialMetadata({
   alternates: { canonical: '/blog/inflation-and-investments' },
   title: 'אינפלציה והשקעות — בדיקת כוח קנייה ותשואה ריאלית',
   description: 'איך משווים ערך כסף ותשואת השקעה לאורך זמן בעזרת מדד המחירים לצרכן ומחשבון הלמ״ס.',
-};
+});
 
 # אינפלציה והשקעות: איך בודקים את כוח הקנייה
 

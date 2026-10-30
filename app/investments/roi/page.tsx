@@ -1,12 +1,13 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { ROICalculator } from '@/components/calculators/ROICalculator';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מחשבון ROI — רווח ביחס לעלות השקעה',
   description: 'חשבו רווח או הפסד ביחס לעלות שהזנתם, עם שיעור שנתי שקול לתקופה ומגבלות החישוב.',
   alternates: { canonical: '/investments/roi' },
-};
+});
 
 export default function ROIPage() {
   return (

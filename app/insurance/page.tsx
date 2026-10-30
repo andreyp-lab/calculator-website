@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { ArrowLeft } from 'lucide-react';
@@ -5,11 +6,11 @@ import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { FAQ } from '@/components/calculator/FAQ';
 import { PENSION_CONSTANTS_2026 } from '@/lib/calculators/pension';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   alternates: { canonical: '/insurance' },
   title: 'ביטוחים ופנסיה — כלים ומדריכים',
   description: 'מידע לבדיקת הפנסיה בדוח האישי, מסלול הפרישה ודמי הניהול, לצד כלים לתכנון פיננסי.',
-};
+});
 
 const calculators = [
   {

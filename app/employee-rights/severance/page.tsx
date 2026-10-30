@@ -1,13 +1,14 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'פיצויי פיטורים — בדיקת זכאות, סעיף 14 ומיסוי',
   description: 'מה לבדוק בסיום עבודה: שכר קובע, יתרת רכיב הפיצויים, תחולת סעיף 14, טופס 161 ואפשרויות המס. קישורים להנחיות משרד העבודה ורשות המסים.',
   alternates: { canonical: '/employee-rights/severance' },
-};
+});
 
 const faqItems = [
   {

@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BUSINESS_TYPES } from '@/lib/data/business-setup/business-types';
@@ -22,12 +23,12 @@ const FINANCE_GUIDES = [
   },
 ] as const;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: { absolute: 'הקמת עסק — מדריכים לתכנון לפי סוג פעילות' },
   description:
     'מדריכים לתכנון פתיחת עסק לפי סוג פעילות: ציוד, מקום, ספקים, הוצאות שוטפות ושאלות שיש לברר לפני קבלת הצעות מחיר.',
   alternates: { canonical: '/business' },
-};
+});
 
 export default function BusinessHubPage() {
   return (

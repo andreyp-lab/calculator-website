@@ -1,11 +1,12 @@
+import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: 'מס שבח במכירת מקרקעין — חישוב עצמי ברשות המסים',
   description: 'מס שבח תלוי במועדי העסקה, בשווי, בהוצאות ובזכאות לפטור. קישור לשומה העצמית הרשמית של רשות המסים.',
   alternates: { canonical: '/real-estate/capital-gains-tax' },
-};
+});
 
 export default function CapitalGainsTaxPage() {
   return (
