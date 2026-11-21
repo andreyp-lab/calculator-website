@@ -1,6 +1,8 @@
 import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
+import { LaborRightsCalculator } from '@/components/calculators/LaborRightsCalculator';
+
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: 'טבלת דמי אבטלה לפי גיל 2026 — ימים וסכום',
@@ -21,6 +23,7 @@ export default function UnemploymentBenefitsPage() {
         'מועד ההתייצבות בשירות התעסוקה והכנסות נוספות בתקופת האבטלה.',
       ]}
     >
+      <LaborRightsCalculator section="unemployment" />
       <section className="mt-10" aria-labelledby="unemployment-days-heading">
         <h2 id="unemployment-days-heading" className="mb-4 text-2xl font-bold">מספר ימי האבטלה המרבי לפי גיל ותלויים</h2>
         <p className="mb-4 leading-relaxed">הטבלה מציגה את המכסה המרבית שמפרסם הביטוח הלאומי. היא אינה קובעת זכאות אישית, ומספר הימים בפועל תלוי גם בתקופת האכשרה, בהתייצבות ובתביעות קודמות.</p>

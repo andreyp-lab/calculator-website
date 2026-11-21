@@ -7,9 +7,9 @@ import { FAQ } from '@/components/calculator/FAQ';
 import { EmbedCodeBox } from '@/components/marketing/EmbedCodeBox';
 
 export const metadata: Metadata = withPageSocialMetadata({
-  title: 'מחשבון ברוטו נטו 2026 — אומדן שכר חודשי',
+  title: 'מחשבון ברוטו נטו 2026 — חישוב שכר נטו משכר ברוטו (עם פירוט ניכויים)',
   description:
-    'אומדן ברוטו לנטו, נטו לברוטו ועלות מעסיק לפי מדרגות מס ודמי ביטוח. בדקו את התוצאה מול תלוש השכר והסימולטור הרשמי.',
+    'חשבו נטו מברוטו (וגם ברוטו מנטו) לפי מדרגות מס 2026, נקודות זיכוי, ביטוח לאומי ובריאות ופנסיה, כולל עלות מעסיק. הזינו שכר וקבלו פירוט תלוש.',
   alternates: { canonical: '/personal-tax/salary-net-gross' },
 });
 

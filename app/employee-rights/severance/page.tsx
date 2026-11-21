@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
+import { LaborRightsCalculator } from '@/components/calculators/LaborRightsCalculator';
+
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: 'פיצויי פיטורים — בדיקת זכאות, סעיף 14 ומיסוי',
@@ -44,6 +46,7 @@ export default function SeverancePage() {
           גם מס על מענקי פרישה נבחן לפי טופס 161 והנתונים האישיים.
         </p>
       }
+      calculator={<LaborRightsCalculator section="severance" />}
       content={
         <>
           <h2>אילו נתונים להכין?</h2>

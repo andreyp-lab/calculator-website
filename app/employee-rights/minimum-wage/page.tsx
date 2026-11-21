@@ -1,6 +1,8 @@
 import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { LaborRightsCalculator } from '@/components/calculators/LaborRightsCalculator';
+
 import { MINIMUM_WAGE_2026 } from '@/lib/constants/tax-2026';
 
 export const metadata: Metadata = withPageSocialMetadata({
@@ -20,6 +22,7 @@ export default function MinimumWagePage() {
         החל ב־1 באפריל 2026, שכר המינימום למשרה מלאה הוא {MINIMUM_WAGE_2026.monthly.toLocaleString('he-IL')} ₪ לחודש.
         התעריף השעתי לפי 182 שעות בחודש הוא {MINIMUM_WAGE_2026.hourly182.toFixed(2)} ₪.
       </p>
+      <LaborRightsCalculator section="minwage" />
       <div className="border-r-4 border-gold bg-cream-2 p-6 leading-relaxed">
         <h2 className="mb-3 text-xl font-bold">בדקו את התעריף המתאים לכם</h2>
         <p className="mb-4">עבודה חלקית, נוער, ענפים שחלים עליהם צווי הרחבה ורכיבי שכר שונים דורשים בדיקה לפי הנסיבות. אין להסיק משכר ברוטו על נטו אישי ללא נתוני מס והפרשות.</p>

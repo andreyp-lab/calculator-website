@@ -240,6 +240,53 @@ export const CHILDREN_ALLOWANCE_2026 = {
   fifthAndAbove: 173,
 } as const;
 
+// תוספת קצבת ילדים לילד שלישי ורביעי (₪ לחודש) להורה המקבל הבטחת הכנסה, מזונות, או קצבת זקנה/שאירים עם השלמת הכנסה
+// מקור: btl.gov.il/benefits/children/Pages/שיעורי הקצבה.aspx — בתוקף מ-1.1.2026, נקרא ב-20.11.2026
+export const CHILDREN_ALLOWANCE_SUPPLEMENT_2026 = {
+  thirdAndFourthChild: 113,
+} as const;
+
+// ============================================================
+// חיסכון לכל ילד 2026
+// מקור: btl.gov.il/benefits/children/HisahoLayeled/Pages/sum.aspx — בתוקף מ-1.1.2026
+// ============================================================
+export const CHILD_SAVINGS_2026 = {
+  monthlyDeposit: 58, // ₪ לחודש, הפקדת ביטוח לאומי עד גיל 18
+  parentTopUpMonthly: 58, // ₪ לחודש — השלמה אופציונלית של ההורים מקצבת הילדים
+} as const;
+
+// ============================================================
+// מענק לידה 2026 (₪ חד־פעמי) — לפי מספר הילדים במשפחה כולל הנולד
+// מקור: btl.gov.il/benefits/maternity/maanakleda/Pages/ShiurMaanakLeda.aspx — בתוקף מ-1.1.2026
+// ============================================================
+export const BIRTH_GRANT_2026 = {
+  firstChild: 2_103,
+  secondChild: 946,
+  thirdChildAndAbove: 631,
+  twins: 10_514,
+  triplets: 15_771,
+  eachAdditionalBeyondTriplets: 5_257,
+} as const;
+
+// ============================================================
+// דמי לידה 2026
+// מקור: btl.gov.il/benefits/maternity/Childbirth_Allowance — סכום מרבי בתוקף מ-1.1.2026
+// הסכום המינימלי לא אומת ולכן אינו מוגדר כאן.
+// ============================================================
+export const MATERNITY_ALLOWANCE_2026 = {
+  maxDaily: 1_752.33, // ₪ ליום
+  fullEntitlementDays: 105, // 15 שבועות
+  partialEntitlementDays: 56, // 8 שבועות
+  // אכשרה: חודשי עבודה ששולמו בהם דמי ביטוח לפני הפסקת העבודה
+  fullQualifying: [
+    { monthsRequired: 10, withinMonths: 14 },
+    { monthsRequired: 15, withinMonths: 22 },
+  ],
+  partialQualifying: { monthsRequired: 6, withinMonths: 14 },
+  averagingDays3Months: 90,
+  averagingDays6Months: 180,
+} as const;
+
 // ============================================================
 // סיכום קבועים מרכזיים
 // ============================================================

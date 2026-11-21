@@ -80,6 +80,7 @@ const faqItems = [
 ];
 const relatedLinks = [
   ['/savings', 'מרכז חיסכון ומשפחה'],
+  ['/employee-rights/child-allowance', 'קצבת ילדים ומענק לידה — מחשבון'],
   ['/savings/family-budget', 'שילוב ההפקדות בתקציב המשפחתי'],
   ['/savings/sinking-funds', 'תכנון כסף להוצאה עתידית'],
   ['/savings/bank-deposit', 'בדיקת תנאים של פיקדון פרטי'],

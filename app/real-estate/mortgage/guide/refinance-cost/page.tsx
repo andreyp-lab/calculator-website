@@ -43,7 +43,7 @@ export default function RefinanceCostPage() {
       { label: 'הנחיות לשיפור תהליכי מחזור', href: 'https://www.boi.org.il/publications/pressreleases/19-07-23/', note: 'הודעת בנק ישראל מ־19.07.2023 על העברת מסמכים והודעה מוקדמת.' },
     ]}
     related={[
-      { label: 'מחשבון משכנתא', href: '/real-estate/mortgage' }, { label: 'עמלת פירעון מוקדם', href: '/real-estate/mortgage/guide/prepayment-fee' },
+      { label: 'מחשבון מחזור משכנתא', href: '/real-estate/refinance-calculator' }, { label: 'מחשבון משכנתא', href: '/real-estate/mortgage' }, { label: 'עמלת פירעון מוקדם', href: '/real-estate/mortgage/guide/prepayment-fee' },
       { label: 'אישור עקרוני', href: '/real-estate/mortgage/guide/pre-approval' }, { label: 'מסלול קבוע לא צמוד', href: '/real-estate/mortgage/guide/fixed-unlinked' },
       { label: 'מסלול צמוד מדד', href: '/real-estate/mortgage/guide/index-linked' }, { label: 'השוואת תמהילים', href: '/real-estate/mortgage-optimizer' },
     ]} />;

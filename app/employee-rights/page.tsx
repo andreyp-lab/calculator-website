@@ -35,6 +35,30 @@ const calculators = [
     available: true,
   },
   {
+    title: 'מחשבון דמי חגים',
+    description: 'זכאות וסכום דמי חגים לעובד שעתי או יומי',
+    href: '/employee-rights/holiday-pay',
+    available: true,
+  },
+  {
+    title: 'מחשבון ותק תעסוקתי',
+    description: 'ותק בשנים וחודשים והזכויות שנגזרות ממנו',
+    href: '/employee-rights/seniority',
+    available: true,
+  },
+  {
+    title: 'מחשבון שעות עבודה',
+    description: 'שעות נטו אחרי הפסקות, חציית חצות ושעות נוספות',
+    href: '/employee-rights/work-hours',
+    available: true,
+  },
+  {
+    title: 'קצבת ילדים ומענק לידה',
+    description: 'מחשבון קצבת ילדים לפי סדר הילד, מענק לידה ואומדן דמי לידה — סכומי 2026',
+    href: '/employee-rights/child-allowance',
+    available: true,
+  },
+  {
     title: 'בדיקת דמי לידה',
     description: 'הסבר וקישור למחשבון דמי הלידה הרשמי של הביטוח הלאומי',
     href: '/employee-rights/maternity-benefits',

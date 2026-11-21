@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQSchema } from '@/components/seo/FAQSchema';
+import { ArnonaCalculator } from '@/components/calculators/ArnonaCalculator';
 
 const PATH = '/real-estate/first-home-budget';
 const SITE = 'https://cheshbonai.co.il';
@@ -65,6 +66,7 @@ export default function FirstHomeBudgetPage() {
               <tr><th scope="row">שירותים מקצועיים</th><td>מה כלול ומה מחויב בנפרד</td><td>הצעת השירות ומועד התשלום</td></tr>
               <tr><th scope="row">בירור מס רכישה</th><td>סכום שנבדק לפי פרטי העסקה</td><td>מסמך הבדיקה והנחותיו</td></tr>
               <tr><th scope="row">שיפוץ, מעבר וריהוט</th><td>מה נדרש לכניסה ומה אפשר לדחות</td><td>הצעות ספקים ותנאי התשלום</td></tr>
+              <tr><th scope="row">ארנונה חודשית בדירה החדשה</th><td>סכום לפי עיר, אזור, סוג בניין ושטח</td><td>חשבון הארנונה של המוכר או הצו של העירייה</td></tr>
               <tr><th scope="row">יתרה ששומרים בצד</th><td>כסף שאינו מוקצה לרכישה</td><td>התקציב האישי לאחר המעבר</td></tr>
             </tbody>
           </table>
@@ -74,6 +76,11 @@ export default function FirstHomeBudgetPage() {
         <h2 id="timing-example">דוגמה להמחשה: הכסף מספיק, אבל מגיע מאוחר</h2>
         <p>נניח שלמשפחה יש חיסכון שמיועד לתשלום עבור הדירה, אך לפי הבירור שלה הוא יהיה זמין אחרי המועד שנכתב בטיוטת החוזה. גם אם הסכומים הכוללים מסתדרים, בטבלת התאריכים יופיע פער. זהו תרחיש לימודי ללא מספרים, ולא קביעה לגבי תנאי חיסכון או עסקה מסוימת.</p>
         <p>סמנו את הפער לפני החתימה והעבירו לבירור את מועד התשלום, מועד שחרור החיסכון ותנאי העמדת המשכנתא. לפי <a href={sources[1].href}>הסבר בנק ישראל</a>, תנאי האישור העקרוני כפופים לאימות הנתונים שנמסרו, ולהערכת השמאי עשויה להיות משמעות לשיעור המימון. ראו גם <Link href="/real-estate/mortgage/guide/pre-approval">איך קוראים אישור עקרוני</Link>.</p>
+
+        <h2 id="arnona">ארנונה: הוצאה קבועה שמתחילה עם הכניסה לדירה</h2>
+        <p>את הארנונה משלמים החל מהמעבר, ולכן כדאי לחשב אותה לפני הרכישה ולהכניס אותה לתקציב החודשי. בחרו את העיר, האזור, סוג הבניין והשטח לפי צו הארנונה 2026 של העירייה. פירוט נוסף: <Link href="/real-estate/arnona">מחשבון ארנונה למגורים</Link>.</p>
+        <ArnonaCalculator heading="ארנונה חודשית בדירה החדשה" />
+        <p>לצד הארנונה חשבו גם חשמל ומים בדירה החדשה ב<Link href="/savings/utility-bills">מחשבון חשבון חשמל ומים</Link>.</p>
 
         <h2 id="after-moving">בודקים גם את החודש שאחרי המעבר</h2>
         <p>עדכנו את <Link href="/savings/family-budget">התקציב המשפחתי</Link> בהוצאות הדיור החדשות ובהתחייבויות שכבר קיימות. באישור העקרוני מוצגים ההחזר הראשון, ההחזר הגבוה הצפוי וסך התשלומים החזוי, כפי שמפרט בנק ישראל. השוו אותם למרווח בתקציב, וזכרו שהתחזיות אינן הבטחה להוצאה בפועל.</p>

@@ -6,6 +6,7 @@ export const navigation = {
     { label: '🏗️ הקמת עסק', href: '/business' },
     { label: '🏠 הלוואות', href: '/loans' },
     { label: '🚀 כלים עסקיים', href: '/tools' },
+    { label: '🧮 מחשבונים יומיומיים', href: '/calc' },
     { label: '📝 בלוג', href: '/blog' },
     { label: '📖 מדריכים', href: '/guides' },
   ],

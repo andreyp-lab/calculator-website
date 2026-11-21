@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { MortgageCalculator } from '@/components/calculators/MortgageCalculator';
+import { ArnonaCalculator } from '@/components/calculators/ArnonaCalculator';
+import { FinanceExtraCalculator } from '@/components/calculators/FinanceExtraCalculator';
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: 'שכירות מול קניית דירה — מדריך להשוואת ההחלטה',
@@ -28,17 +30,24 @@ export default function RentVsBuyComparePage() {
       <MortgageCalculator />
     </section>}
     content={<>
+      <h2>השוואה מחושבת</h2>
+      <p>הזינו את הנתונים שלכם וראו את ההון בסוף התקופה בקנייה מול שכירות והשקעה. התוצאה רגישה להנחות; נסו כמה תרחישים. גרסה מלאה: <Link href="/real-estate/rent-vs-buy-calculator">מחשבון שכירות מול קנייה</Link>.</p>
+      <FinanceExtraCalculator section="rentbuy" />
       <h2>נתונים שצריך לאסוף</h2>
       <table>
         <thead><tr><th>נתון</th><th>שכירות</th><th>קנייה</th></tr></thead>
         <tbody>
           <tr><td>תשלום שוטף</td><td>דמי שכירות ותנאי עדכון בחוזה</td><td>החזרי משכנתא לפי האישור העקרוני, ביטוחים ותשלומים שוטפים</td></tr>
           <tr><td>תשלום ראשוני</td><td>פיקדון ועלויות מעבר לפי החוזה</td><td>הון עצמי, מס רכישה אם חל ועלויות עסקה</td></tr>
+          <tr><td>ארנונה</td><td>לרוב משולמת על ידי השוכר, לפי החוזה</td><td>משולמת על ידי הבעלים או המחזיק בדירה</td></tr>
           <tr><td>תחזוקה</td><td>חלוקת האחריות לתיקונים לפי החוזה</td><td>תחזוקת בעלים ותיקונים צפויים</td></tr>
           <tr><td>בסוף התקופה</td><td>התשלומים ששולמו וההון שנותר להשקעה</td><td>שווי מכירה אפשרי בניכוי יתרת הלוואה ועלויות מכירה</td></tr>
         </tbody>
       </table>
       <p>בדקו את המחירים והתנאים בפועל לדירות דומות ובאותה שכונה. תשלום המשכנתא כולל החזר קרן וריבית; אין להשוות את מלוא התשלום לדמי שכירות כאילו כולו הוצאה שאינה יוצרת הון. מנגד, שווי מכירה עתידי או תשואת השקעה חלופית אינם מובטחים.</p>
+      <h2>ארנונה: הוצאה בשני הצדדים</h2>
+      <p>ארנונה משולמת בשכירות ובקנייה כאחד, ולכן אינה מבדילה בין החלופות, אך היא חלק מההוצאה החודשית הכוללת ויש להכניס אותה לשני התרחישים. חשבו אותה לפי העיר, האזור והשטח של הדירה.</p>
+      <ArnonaCalculator heading="ארנונה חודשית בדירה" />
       <h2>איך בונים תרחישים?</h2>
       <ol>
         <li>קבעו תקופת השוואה שמתאימה לתוכניות האישיות שלכם.</li>

@@ -50,6 +50,7 @@ export default function CapitalGainsTaxPage() {
         <p><a href="https://www.gov.il/BlobFolder/generalpage/income-tax-monthly-deductions-booklet/he/generalInformation_income-tax-monthly-deductions-booklet_monthly-deductions-booklet-2026.pdf" target="_blank" rel="noopener noreferrer" className="text-gold underline">לוח הניכויים לשנת 2026 ↗</a></p>
       </section>
       <div className="mt-10 flex flex-wrap gap-5">
+        <Link href="/investments/securities-tax" className="font-semibold text-gold underline underline-offset-4">מחשבון מס על ניירות ערך</Link>
         <Link href="/investments/roi" className="font-semibold text-gold underline underline-offset-4">חישוב ROI לפי נתונים שהוזנו</Link>
         <Link href="/investments/compound-interest" className="font-semibold text-gold underline underline-offset-4">תרחישי ריבית דריבית</Link>
       </div>

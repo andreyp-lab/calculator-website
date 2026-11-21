@@ -149,7 +149,7 @@ export default function CryptoTaxPage() {
         </section>
         <nav aria-label="להמשך הבדיקה" className="space-y-3 leading-8">
           <h2 className="text-2xl font-bold">להמשך הבדיקה</h2>
-          <p>למבנה ההגשה ראו <Link href="/blog/annual-tax-report-1301" className="text-gold underline">מדריך הדוח השנתי</Link>. <Link href="/investments/capital-gains-tax" className="text-gold underline">כלי מס רווחי ההון</Link> אינו תחליף לחישוב עסקאות קריפטו. אם יש גם הכנסות אחרות מחוץ לישראל, ראו <Link href="/personal-tax/foreign-income" className="text-gold underline">הכנת נתוני הכנסות חוץ</Link> ובדקו את סיווגן בנפרד.</p>
+          <p>להמרת שווי במטבע חוץ לשקלים ראו את <Link href="/investments/currency-converter" className="text-gold underline">ממיר המטבעות</Link>. למבנה ההגשה ראו <Link href="/blog/annual-tax-report-1301" className="text-gold underline">מדריך הדוח השנתי</Link>. <Link href="/investments/capital-gains-tax" className="text-gold underline">כלי מס רווחי ההון</Link> אינו תחליף לחישוב עסקאות קריפטו. אם יש גם הכנסות אחרות מחוץ לישראל, ראו <Link href="/personal-tax/foreign-income" className="text-gold underline">הכנת נתוני הכנסות חוץ</Link> ובדקו את סיווגן בנפרד.</p>
         </nav>
         <p className="text-sm leading-7 text-ink/70">אחריות עריכת התוכן: מערכת חשבונאי. פרטי בעל האתר וזהותו המקצועית מופיעים להלן; אין בכך אישור לבדיקה פרטנית של נסיבות הקורא.</p>
         <AuthorBox bio="אנדרי פלטונוב, רואה חשבון וסמנכ״ל כספים, בעל אתר חשבונאי. המידע בעמוד נערך בידי המערכת על בסיס המקורות הרשמיים המקושרים ואינו חוות דעת על נסיבות אישיות." />

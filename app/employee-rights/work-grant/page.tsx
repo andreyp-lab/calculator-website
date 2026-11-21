@@ -1,10 +1,12 @@
 import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
+import { BenefitsCalculator } from '@/components/calculators/BenefitsCalculator';
+
 
 export const metadata: Metadata = withPageSocialMetadata({
-  title: 'סימולטור מענק עבודה — בדיקה רשמית',
-  description: 'בדיקת זכאות ומענק עבודה לפי שנת המס והמצב האישי בשירות הרשמי של רשות המסים.',
+  title: 'מענק עבודה — בדיקת זכאות וסימולטור רשמי (שנת המס 2025)',
+  description: 'בדיקת זכאות למענק עבודה לפי הכנסה, גיל וילדים, טבלת טווחי ההכנסה המזכים וקישור לסימולטור הרשמי של רשות המסים לחישוב הסכום.',
   alternates: { canonical: '/employee-rights/work-grant' },
 });
 
@@ -30,6 +32,8 @@ export default function WorkGrantPage() {
         { href: '/employee-rights/work-grant/single-parent', label: 'מענק להורה יחיד' },
         { href: '/employee-rights/work-grant/couples', label: 'השפעת הכנסת בני זוג' },
       ]}
-    />
+    >
+      <BenefitsCalculator section="workgrant" />
+    </OfficialBenefitPage>
   );
 }

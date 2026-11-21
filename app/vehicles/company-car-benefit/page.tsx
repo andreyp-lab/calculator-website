@@ -2,10 +2,12 @@ import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
+import { BenefitsCalculator } from '@/components/calculators/BenefitsCalculator';
+
 
 export const metadata: Metadata = withPageSocialMetadata({
-  title: 'שווי שימוש ברכב צמוד — בדיקה לפי דגם ברשות המסים',
-  description: 'בדקו את שווי השימוש החודשי של רכב מעסיק בסימולטור הרשמי לפי דגם ושנת רישום, ואת השפעתו על השכר.',
+  title: 'מחשבון שווי שימוש ברכב צמוד 2026 — טבלה והשפעה על התלוש',
+  description: 'חשבו שווי שימוש חודשי לרכב חברה לפי מחיר, שנת רישום והנעה (היברידי, פלאג-אין, חשמלי), וראו כמה זה מקטין את הנטו בתלוש. לפי לוח העזר של רשות המסים 2026.',
   alternates: { canonical: '/vehicles/company-car-benefit' },
 });
 
@@ -20,7 +22,7 @@ export default function Page() {
       breadcrumbs={[{ label: 'דף הבית', href: '/' }, { label: 'רכב', href: '/vehicles' }, { label: 'שווי שימוש ברכב' }]}
       lastUpdated="2026-09-28"
       quickAnswer={<p>רכב צמוד העומד לרשות העובד לשימוש פרטי יוצר שווי שימוש שנזקף לשכר. <a href={official} target="_blank" rel="noopener noreferrer">בדקו את סכום הזקיפה לפי דגם הרכב ושנתו ברשות המסים</a>; סכום הזקיפה אינו המס עצמו.</p>}
-      calculator={<div className="p-6 border border-ink/20 bg-paper"><p>לבדיקת שווי שימוש אישי, הזינו את פרטי הרכב במערכת רשות המסים.</p><a className="inline-block mt-4 text-gold underline" href={official} target="_blank" rel="noopener noreferrer">פתיחת הסימולטור הרשמי</a></div>}
+      calculator={<BenefitsCalculator section="companycar" />}
       content={<>
         <h2>איך בודקים את הסכום?</h2>
         <p>הזינו בסימולטור רשות המסים את פרטי הרכב כפי שהם מופיעים ברישיון. לרכב שנרשם החל מ־1 בינואר 2010, השווי מבוסס על מחיר הרכב כשהיה חדש; לכלי רכב מוקדמים יותר חלות טבלאות שנתיות. הפחתות לפי סוג ההנעה ותקרות תלויות בדין הרלוונטי ובנתוני הרכב, ולכן יש להסתמך על התוצאה הרשמית.</p>

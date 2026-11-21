@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
+import { LaborRightsCalculator } from '@/components/calculators/LaborRightsCalculator';
+
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: 'דמי מחלה — שיעורי תשלום ובדיקת יתרה',
@@ -45,6 +47,7 @@ export default function Page() {
           השכר, ימי ההיעדרות, היתרה ובהסכם החל.
         </p>
       }
+      calculator={<LaborRightsCalculator section="sick" />}
       content={
         <>
           <h2>מה לבדוק בתלוש ובאישור המחלה?</h2>

@@ -24,6 +24,13 @@ export const metadata: Metadata = withPageSocialMetadata({
 const calculators = [
   {
     stage: 'start',
+    title: 'עוסק פטור מול מורשה — מחשבון השוואה',
+    description: 'נטו בכיס בשני המעמדות לפי הכנסה, הוצאות וסוג הלקוחות',
+    href: '/self-employed/osek-comparison',
+    available: true,
+  },
+  {
+    stage: 'start',
     title: 'בעל עסק זעיר או עוסק פטור — מה ההבדל?',
     description: 'מסלול במס הכנסה מול סיווג במע״מ, והמצבים שבהם אפשר להיות בשניהם במקביל',
     href: '/compare/esek-zeir-vs-osek-patur',

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
+import { LaborRightsCalculator } from '@/components/calculators/LaborRightsCalculator';
+
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 
@@ -67,6 +69,7 @@ export default function NoticePeriodPage() {
         <aside aria-label="הבהרה משפטית" className="mb-8 border border-ink/15 p-5 text-sm leading-relaxed">
           המידע כללי ואינו ייעוץ משפטי או ייעוץ מס. אין בו הוראה להתפטר, להיעדר מהעבודה, לבצע ניכוי משכר או לקבוע זכאות אישית. תנאי חוזה, הסכם קיבוצי, הגנות מיוחדות וחריגים מצריכים בדיקה משפטית. לא מוצג בעמוד אישור של עורך דין.
         </aside>
+        <LaborRightsCalculator section="notice" />
         <div className="prose prose-lg max-w-none leading-relaxed text-ink">
           <h2>לפני שסופרים: מהי צורת השכר?</h2>
           <p>החוק מבחין בין ״עובד במשכורת״ לבין ״עובד בשכר״. ההבחנה מתייחסת לבסיס התשלום, ולא רק לתדירות שבה הכסף נכנס לחשבון. עובד המקבל שכר לפי שעה עשוי לקבל העברה מדי חודש, בלי להפוך בשל כך לעובד במשכורת חודשית. בדקו את החוזה ואת פירוט בסיס השכר בתלוש; <a href={sources[2].url}>המסמך המשפטי של משרד העבודה</a> מסביר את הקשר בין צורת השכר לוותק לצורך הודעה מוקדמת.</p>

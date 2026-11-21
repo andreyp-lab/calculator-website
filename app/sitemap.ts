@@ -3,6 +3,8 @@ import { blogPosts } from '@/content/blog/registry';
 import { ALL_TERMS } from '@/lib/data/glossary';
 import { BUSINESS_TYPES } from '@/lib/data/business-setup/business-types';
 import { SALARY_PAGE_AMOUNTS } from '@/lib/data/salary-pages';
+import { EVERYDAY_PAGES } from '@/lib/data/everyday-pages';
+import { ARNONA_CITY_PAGES } from '@/lib/data/arnona-city-pages';
 
 const SITE_URL = 'https://cheshbonai.co.il';
 
@@ -131,6 +133,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/employee-rights/severance', 'monthly', 0.95),
     make('/employee-rights/salary-deductions', 'weekly', 0.95, new Date('2026-07-01')), // מחשבון ניכויים ממשכורת (חדש)
     make('/employee-rights/maternity-benefits', 'monthly', 0.90),
+    make('/employee-rights/child-allowance', 'monthly', 0.90, new Date('2026-11-20')),
+    make('/employee-rights/holiday-pay', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/employee-rights/seniority', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/employee-rights/work-hours', 'monthly', 0.80, new Date('2026-11-20')),
+    make('/personal-tax/national-insurance', 'monthly', 0.90, new Date('2026-11-20')),
     make('/employee-rights/unemployment-benefits', 'monthly', 0.90, new Date('2026-10-02')),
     make('/employee-rights/reserve-duty-pay', 'monthly', 0.90),
     make('/employee-rights/minimum-wage', 'monthly', 0.90),
@@ -181,6 +188,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/real-estate/mortgage', 'weekly', 0.95),
     make('/real-estate/mortgage-optimizer', 'weekly', 0.98), // הדגל
     make('/real-estate/purchase-tax', 'monthly', 0.90),
+    make('/real-estate/arnona', 'monthly', 0.90, new Date('2026-11-20')),
+    ...ARNONA_CITY_PAGES.map((c) => make(`/real-estate/arnona/${c.slug}`, 'monthly', 0.80, new Date('2026-11-20'))),
+    make('/real-estate/arnona-business', 'monthly', 0.85, new Date('2026-11-20')),
     make('/real-estate/capital-gains-tax', 'monthly', 0.90),
     make('/real-estate/rental-income-tax', 'monthly', 0.9), // מדריך מיסוי שכר דירה (pillar)
     make('/real-estate/betterment-levy', 'monthly', 0.82, CONTENT_WAVE_2026_10_24),
@@ -209,6 +219,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/savings/education-fund-employee', 'monthly', 0.82, CONTENT_WAVE_2026_10_30),
     make('/savings/loan-repayment', 'monthly', 0.90),
     make('/savings/personal-loan', 'monthly', 0.90),
+    make('/savings/overdraft', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/investments/currency-converter', 'daily', 0.80, new Date('2026-11-20')),
+    make('/savings/cpi-linkage', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/savings/utility-bills', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/investments/securities-tax', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/real-estate/arnona-discount', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/savings/loan-methods', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/savings/debt-payoff', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/savings/savings-goal', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/real-estate/rental-yield', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/self-employed/osek-comparison', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/real-estate/rental-tax-calculator', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/investments/study-fund-calculator', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/real-estate/rent-vs-buy-calculator', 'monthly', 0.85, new Date('2026-11-20')),
+    make('/real-estate/refinance-calculator', 'monthly', 0.85, new Date('2026-11-20')),
 
     // ===== מחשבונים: רכב =====
     make('/vehicles/leasing-vs-buying', 'monthly', 0.95),
@@ -255,6 +280,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     make('/news/cpi', 'weekly', 0.80),
     make('/news/average-wage', 'monthly', 0.75),
     make('/news/iron-swords', 'weekly', 0.80),
+
+    // ===== מחשבונים יומיומיים (נגזר אוטומטית) =====
+    make('/calc', 'monthly', 0.7, new Date('2026-11-20')),
+    ...EVERYDAY_PAGES.map((p) => make(`/calc/${p.slug}`, 'monthly', 0.7, new Date('2026-11-20'))),
 
     // ===== בלוג =====
     make('/blog', 'weekly', 0.85),

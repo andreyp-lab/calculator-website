@@ -1,6 +1,7 @@
 import { withPageSocialMetadata } from '@/lib/config/site-info';
 import type { Metadata } from 'next';
 import { OfficialBenefitPage } from '@/components/verification/OfficialBenefitPage';
+import { FamilyBenefitsCalculator } from '@/components/calculators/FamilyBenefitsCalculator';
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: 'דמי לידה 2026 — זכאות וחישוב רשמי בביטוח הלאומי',
@@ -20,7 +21,12 @@ export default function MaternityBenefitsPage() {
         'שכר בשלושת ובששת החודשים המלאים שלפני הפסקת העבודה; לעצמאית גם נתוני מקדמות ושומות.',
         'נתוני לידה מרובת עוברים או אשפוז, אם רלוונטיים, ובדיקת תנאי ההארכה בנפרד.',
       ]}
-      related={[{ href: '/blog/maternity-benefits-complete-guide-2026', label: 'מדריך דמי לידה' }]}
-    />
+      related={[
+        { href: '/blog/maternity-benefits-complete-guide-2026', label: 'מדריך דמי לידה' },
+        { href: '/employee-rights/child-allowance', label: 'קצבת ילדים ומענק לידה' },
+      ]}
+    >
+      <FamilyBenefitsCalculator sections={['maternity', 'birth']} />
+    </OfficialBenefitPage>
   );
 }

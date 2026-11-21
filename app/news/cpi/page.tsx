@@ -29,6 +29,7 @@ export default function CpiPage() {
           <p>אם שיעור האינפלציה השנתי יישאר {annualRate}%, כוח הקנייה של ₪100,000 שלא צברו ריבית יהיה שווה בעוד שנה לכ־₪{Math.round(purchasingPower).toLocaleString('he-IL')} במונחי היום. זו דוגמה מותנית, לא תחזית.</p>
           <p>לנתוני המדד החודשיים, ערך המדד ומועדי פרסום חדשים, בדקו את <a className="underline text-gold" href={sourceUrl} target="_blank" rel="noopener noreferrer">המקור הרשמי</a>.</p>
           <div className="flex gap-3 flex-wrap pt-4">
+            <Link className="bg-ink text-cream px-4 py-2" href="/savings/cpi-linkage">מחשבון הצמדה למדד</Link>
             <Link className="bg-ink text-cream px-4 py-2" href="/investments/compound-interest">מחשבון ריבית דריבית</Link>
             <Link className="border border-ink/20 px-4 py-2" href="/real-estate/mortgage">מחשבון משכנתא</Link>
           </div>

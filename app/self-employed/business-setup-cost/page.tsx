@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
+import { ArnonaBusinessCalculator } from '@/components/calculators/ArnonaBusinessCalculator';
+import { calculateArnona } from '@/lib/calculators/arnona';
+import { ARNONA_BUSINESS_CITIES, businessRate } from '@/lib/data/arnona-business-rates';
 
 const PAGE_PATH = '/self-employed/business-setup-cost';
 const SITE_URL = 'https://cheshbonai.co.il';
@@ -63,6 +66,16 @@ const HOME_SERVICE_EXAMPLE = {
   reserveMonths: 3,
 };
 
+// הארנונה בדוגמת המקום מחושבת ממנוע הארנונה ומצו 2026, לא מוקלדת: משרד/חנות של 60 מ"ר
+// באזור 2 בתל אביב-יפו. כך המספר בדוגמה לא יכול להיתפצל מהצו.
+const ARNONA_EXAMPLE_AREA = 60;
+const ARNONA_EXAMPLE_CITY = ARNONA_BUSINESS_CITIES.find((c) => c.id === 'tel-aviv-business-2026')!;
+const ARNONA_EXAMPLE_USE = ARNONA_EXAMPLE_CITY.uses.find((u) => u.id === 'office-retail')!;
+const ARNONA_EXAMPLE = calculateArnona({
+  areaSqm: ARNONA_EXAMPLE_AREA,
+  zone: businessRate(ARNONA_EXAMPLE_USE, 'z2')!,
+})!;
+
 const PREMISES_EXAMPLE = {
   oneTime: [
     { label: 'פיקדון ושכירות מראש', amount: 24000, note: 'קלט המחשה לתנאי חוזה' },
@@ -73,7 +86,11 @@ const PREMISES_EXAMPLE = {
   ] satisfies BudgetItem[],
   monthly: [
     { label: 'שכירות', amount: 8000, note: 'קלט המחשה לפי חוזה' },
-    { label: 'ארנונה ודמי ניהול', amount: 2000, note: 'קלט המחשה בלבד' },
+    {
+      label: 'ארנונה',
+      amount: Math.round(ARNONA_EXAMPLE.monthly),
+      note: `מחושב מצו הארנונה 2026: ${ARNONA_EXAMPLE_AREA} מ״ר, משרד/חנות באזור 2 בתל אביב-יפו`,
+    },
     { label: 'חשמל, מים ותקשורת', amount: 1800, note: 'קלט המחשה בלבד' },
     { label: 'הנהלת חשבונות וליווי', amount: 800, note: 'קלט המחשה להצעת מחיר' },
     { label: 'תוכנות וסליקה', amount: 600, note: 'קלט המחשה בלבד' },
@@ -287,7 +304,7 @@ export default function BusinessSetupCostPage() {
               <li><strong>הנהלת חשבונות ודוחות:</strong> מספר מסמכים, עובדים, מלאי, סניפים וסוג הישות.</li>
               <li><strong>ביטוח:</strong> תחום מקצועי, מקום, ציוד, אחריות כלפי לקוחות ועובדים.</li>
               <li><strong>סליקה ותוכנה:</strong> דמי מנוי, עמלות, הקמה, חיבור והפקת מסמכים.</li>
-              <li><strong>מקום עסק:</strong> פיקדון, התאמות, ארנונה, דמי ניהול והחזרת המושכר.</li>
+              <li><strong>מקום עסק:</strong> פיקדון, התאמות, ארנונה, דמי ניהול והחזרת המושכר. את הארנונה אפשר לחשב לפי עיר ואזור במחשבון שבהמשך העמוד.</li>
               <li><strong>רישוי ותכנון:</strong> רק אחרי שזוהו פריט הרישוי, הרשות ונותני האישור.</li>
             </ul>
             <p>
@@ -339,6 +356,14 @@ export default function BusinessSetupCostPage() {
               אחרי בניית התקציב אפשר לבדוק את ההשפעה באמצעות{' '}
               <Link href="/tools/break-even">מחשבון נקודת האיזון</Link>.
             </p>
+
+            <h2 id="arnona-calculator" className="scroll-mt-40">חישוב הארנונה של העסק שלכם</h2>
+            <p>
+              שורת הארנונה בדוגמה 2 מחושבת מצו הארנונה 2026 של תל אביב-יפו. כדי לקבל את הסכום לעסק שלכם,
+              בחרו עיר, סוג שימוש, אזור ושטח. אפשר לראות את הפירוט המלא בעמוד{' '}
+              <Link href="/real-estate/arnona-business">ארנונה לעסקים</Link>.
+            </p>
+            <ArnonaBusinessCalculator heading="ארנונה חודשית לעסק עם מקום" />
 
             <h2 id="checklist" className="scroll-mt-40">צ׳קליסט לפני שמוציאים כסף</h2>
             <ol>

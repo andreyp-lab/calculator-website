@@ -141,7 +141,7 @@ export default function ForeignIncomePage() {
         </section>
         <nav aria-label="להמשך הבדיקה" className="space-y-3 leading-8">
           <h2 className="text-2xl font-bold">להמשך הבדיקה</h2>
-          <p>להכנת ההגשה עצמה ראו <Link href="/blog/annual-tax-report-1301" className="text-gold underline">מדריך הדוח השנתי</Link>. לבירור מעמד מיוחד ראו <Link href="/personal-tax/new-immigrant-tax-benefits" className="text-gold underline">הטבות מס לעולים</Link>. <Link href="/personal-tax/tax-return-full" className="text-gold underline">התחשיב השנתי באתר</Link> מוגבל למקורות ולשנים המפורטים בו ואינו פותר שאלות תושבות ואמנה.</p>
+          <p>להמרת סכומים במטבע חוץ לשקלים לפי שער יציג ראו את <Link href="/investments/currency-converter" className="text-gold underline">ממיר המטבעות</Link>. להכנת ההגשה עצמה ראו <Link href="/blog/annual-tax-report-1301" className="text-gold underline">מדריך הדוח השנתי</Link>. לבירור מעמד מיוחד ראו <Link href="/personal-tax/new-immigrant-tax-benefits" className="text-gold underline">הטבות מס לעולים</Link>. <Link href="/personal-tax/tax-return-full" className="text-gold underline">התחשיב השנתי באתר</Link> מוגבל למקורות ולשנים המפורטים בו ואינו פותר שאלות תושבות ואמנה.</p>
         </nav>
         <p className="text-sm leading-7 text-ink/70">אחריות עריכת התוכן: מערכת חשבונאי. פרטי בעל האתר וזהותו המקצועית מופיעים להלן; אין בכך אישור לבדיקה פרטנית של נסיבות הקורא.</p>
         <AuthorBox bio="אנדרי פלטונוב, רואה חשבון וסמנכ״ל כספים, בעל אתר חשבונאי. המידע בעמוד נערך בידי המערכת על בסיס המקורות הרשמיים המקושרים ואינו חוות דעת על נסיבות אישיות." />

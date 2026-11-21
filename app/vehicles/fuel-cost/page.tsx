@@ -7,8 +7,8 @@ import { FUEL_PRICES_2026 } from '@/lib/calculators/vehicles';
 import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 
 export const metadata: Metadata = withPageSocialMetadata({
-  title: 'מחשבון דלק 2026 — עלות נסיעה לק״מ',
-  description: 'מחשבון דלק ועלות נסיעה: הזינו קילומטרים, צריכה ומחיר בפועל לקבלת אומדן חודשי ושנתי לבנזין, סולר או חשמל.',
+  title: 'מחשבון דלק — עלות נסיעה וצריכת דלק לק״מ ול־100 ק״מ (2026)',
+  description: 'חשבו כמה עולה נסיעה ואיך מחשבים צריכת דלק: הזינו ק״מ, צריכה (ק״מ לליטר) ומחיר ליטר וקבלו עלות לנסיעה, לק״מ, לחודש ולשנה. בנזין, סולר וחשמל.',
   alternates: { canonical: '/vehicles/fuel-cost' },
 });
 

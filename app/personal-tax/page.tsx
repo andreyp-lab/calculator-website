@@ -21,6 +21,12 @@ const calculators = [
     available: true,
   },
   {
+    title: 'מחשבון ביטוח לאומי ודמי בריאות',
+    description: 'דמי ביטוח לאומי ובריאות לשכיר ולעצמאי לפי הכנסה, בשיעור מופחת ומלא',
+    href: '/personal-tax/national-insurance',
+    available: true,
+  },
+  {
     title: 'מחשבון מס הכנסה לשכיר',
     description: 'אומדן מס לפי מדרגות 2026, נקודות זיכוי וביטוח לאומי בהנחות המחשבון.',
     href: '/personal-tax/income-tax',

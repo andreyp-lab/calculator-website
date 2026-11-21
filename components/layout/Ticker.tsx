@@ -1,56 +1,24 @@
 import { MACRO_DATA } from '@/lib/data/macroeconomic-data';
 import { MINIMUM_WAGE_2026 } from '@/lib/constants/tax-2026';
+import { getExchangeRates } from '@/lib/data/exchange-rates';
 
 /**
  * רצועת טיקר מאקרו עליונה — סגנון FinSchool אדיטוריאלי.
  * רקע ink-deep, טקסט cream, מפרידי ✦ זהב.
  *
- * שער הדולר נמשך **חי** משער היציג של בנק ישראל (PublicApi), עם ISR:
- * Next.js שומר במטמון ומרענן כל 6 שעות. אם ה-API נכשל — fallback ל-API חינמי,
- * ואז לערך ברירת מחדל. שאר הנתונים מנוהלים מרכזית ומתעדכנים ידנית.
+ * שער הדולר נמשך **חי** דרך `getExchangeRates` (שער יציג של בנק ישראל, גיבוי open.er-api), עם ISR של 6 שעות.
+ * אם שני המקורות נכשלים הדולר מושמט. שאר הנתונים מנוהלים מרכזית ומתעדכנים ידנית.
  */
 
-const USD_ILS_FALLBACK = 2.93; // אם כל ה-APIs נכשלים
-
-const REVALIDATE_SECONDS = 21600; // 6 שעות
-
-async function fetchUsdIls(): Promise<number> {
-  // 1) בנק ישראל — שער יציג רשמי
-  try {
-    const res = await fetch('https://boi.org.il/PublicApi/GetExchangeRate?key=USD', {
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
-    if (res.ok) {
-      const data = await res.json();
-      const rate = Number(data?.currentExchangeRate);
-      if (rate > 0 && rate < 100) return rate;
-    }
-  } catch {
-    /* נופל ל-fallback */
-  }
-  // 2) fallback חינמי ללא מפתח
-  try {
-    const res = await fetch('https://open.er-api.com/v6/latest/USD', {
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
-    if (res.ok) {
-      const data = await res.json();
-      const rate = Number(data?.rates?.ILS);
-      if (rate > 0 && rate < 100) return rate;
-    }
-  } catch {
-    /* נופל לברירת מחדל */
-  }
-  return USD_ILS_FALLBACK;
-}
-
 export async function Ticker() {
-  const usdIls = await fetchUsdIls();
+  // שער חי משותף (בנק ישראל, גיבוי open.er-api). אם שני המקורות נכשלים — הדולר לא מוצג במקום להציג שער ישן.
+  const rates = await getExchangeRates();
+  const usdIls = rates?.ilsPerUnit.USD ?? null;
 
   const minWage = Math.round(MINIMUM_WAGE_2026.monthly).toLocaleString('he-IL');
 
   const items: { label: string; value: string }[] = [
-    { label: 'דולר', value: `₪${usdIls.toFixed(2)}` },
+    ...(usdIls ? [{ label: 'דולר', value: `₪${usdIls.toFixed(2)}` }] : []),
     { label: 'פריים', value: `${MACRO_DATA.primeRate.value.toFixed(2)}%` },
     { label: 'אינפלציה שנתית', value: `${MACRO_DATA.inflation.annualRate.toFixed(1)}%` },
     { label: 'שכר מינ׳', value: `₪${minWage}` },

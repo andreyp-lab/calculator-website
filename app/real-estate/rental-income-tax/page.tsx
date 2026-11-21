@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/calculator/Breadcrumbs';
 import { AuthorBox } from '@/components/calculator/AuthorBox';
+import { FinanceExtraCalculator } from '@/components/calculators/FinanceExtraCalculator';
 
 const PAGE_PATH = '/real-estate/rental-income-tax';
 const SITE_URL = 'https://cheshbonai.co.il';
@@ -118,6 +119,8 @@ export default function RentalIncomeTaxPage() {
           </p>
           <p className="text-sm text-ink/70 mt-3">נכתב על ידי אנדרי פלטונוב, רו&quot;ח · עודכן ל-2026</p>
         </header>
+
+        <FinanceExtraCalculator section="rentax" />
 
         <div className="prose prose-lg max-w-none text-ink leading-relaxed">
           <h2>3 מסלולי המס על שכר דירה למגורים</h2>

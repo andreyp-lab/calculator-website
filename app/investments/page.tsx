@@ -21,11 +21,32 @@ const calculators = [
     icon: '📈',
   },
   {
+    title: 'מס רווחי הון על ניירות ערך',
+    description: '25% על רווח ריאלי, 30% בעל מניות מהותי, 15% נומינלי ומס יסף',
+    href: '/investments/securities-tax',
+    available: true,
+    icon: '📊',
+  },
+  {
+    title: 'מחשבון קרן השתלמות',
+    description: 'צבירה, הטבת מס לעצמאי ובדיקת תקרת הפקדה',
+    href: '/investments/study-fund-calculator',
+    available: true,
+    icon: '🎓',
+  },
+  {
     title: 'מחשבון ROI',
     description: 'חשב רווח ביחס לעלות ושיעור שנתי שקול לתקופה',
     href: '/investments/roi',
     available: true,
     icon: '💹',
+  },
+  {
+    title: 'ממיר מטבעות',
+    description: 'המרת מטבע לפי שער יציג חי, כולל עמלה ושער אפקטיבי',
+    href: '/investments/currency-converter',
+    available: true,
+    icon: '💱',
   },
   {
     title: 'מדריך תכנון פרישה',

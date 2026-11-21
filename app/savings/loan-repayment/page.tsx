@@ -32,7 +32,7 @@ export default function LoanRepaymentPage() {
           <li>בדקו במסמכי ההצעה גם עמלות, הצמדה, ביטוח, ריבית משתנה ותנאי פירעון מוקדם. הם אינם נכללים בחישוב כאן.</li>
           <li>השוו את הסכום שתקבלו בפועל, את לוח התשלומים ואת העלות הכוללת בהתאם להסכם, ולא רק את ההחזר הראשון.</li>
         </ul>
-        <p>למידע נוסף על השוואת תנאים ראו את <Link href="/savings/personal-loan">המדריך להלוואה אישית</Link> ואת <a href={bankOfIsraelUrl} target="_blank" rel="noopener noreferrer">המידע לציבור של בנק ישראל</a>.</p>
+        <p>במינוס בחשבון? ראו את <Link href="/savings/overdraft">מחשבון המינוס</Link> שמשווה גם להלוואה. למידע נוסף על השוואת תנאים ראו את <Link href="/savings/personal-loan">המדריך להלוואה אישית</Link> ואת <a href={bankOfIsraelUrl} target="_blank" rel="noopener noreferrer">המידע לציבור של בנק ישראל</a>.</p>
       </>}
       faq={<FAQ items={[
         { question: 'האם המחשבון מציג את העלות הכוללת של כל הלוואה?', answer: 'לא. הוא מניח ריבית קבועה, ללא הצמדה וללא עמלות או ביטוח. בהצעה בפועל יש לבדוק את כל תזרימי התשלום והחיובים הנוספים.' },

@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { FAQ } from '@/components/calculator/FAQ';
+import { LaborRightsCalculator } from '@/components/calculators/LaborRightsCalculator';
+
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: 'חופשה שנתית — זכאות, צבירה ופדיון',
@@ -44,6 +46,7 @@ export default function Page() {
           משרד העבודה; אין נוסחה אחידה של שכר חודשי חלקי 21.67 שמתאימה לכל עובד.
         </p>
       }
+      calculator={<LaborRightsCalculator section="leave" />}
       content={
         <>
           <h2>מה לבדוק לפני חישוב?</h2>

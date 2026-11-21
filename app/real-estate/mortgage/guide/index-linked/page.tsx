@@ -44,7 +44,7 @@ export default function IndexLinkedPage() {
       { label: 'צו פירעון מוקדם של הלוואה לדיור', href: 'https://www.boi.org.il/media/qy5cow0l/116.pdf', note: 'הגדרת הסכום הנפרע וכללי עמלות.' },
     ]}
     related={[
-      { label: 'מחשבון משכנתא', href: '/real-estate/mortgage' }, { label: 'קבועה לא צמודה', href: '/real-estate/mortgage/guide/fixed-unlinked' },
+      { label: 'מחשבון משכנתא', href: '/real-estate/mortgage' }, { label: 'מחשבון הצמדה למדד', href: '/savings/cpi-linkage' }, { label: 'קבועה לא צמודה', href: '/real-estate/mortgage/guide/fixed-unlinked' },
       { label: 'מסלול פריים', href: '/real-estate/mortgage/guide/prime-track' }, { label: 'עמלת פירעון מוקדם', href: '/real-estate/mortgage/guide/prepayment-fee' },
       { label: 'שפיצר מול קרן שווה', href: '/real-estate/mortgage/guide/spitzer-vs-equal-principal' }, { label: 'הסלים האחידים', href: '/real-estate/mortgage/guide/uniform-baskets' },
     ]} />;
